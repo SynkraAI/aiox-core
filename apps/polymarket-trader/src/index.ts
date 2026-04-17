@@ -147,12 +147,15 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   }
 
   // Auto-Trader: the brain that makes it all trade autonomously
+  const synthWeightEnv = Number(process.env.SYNTH_WEIGHT);
+  const synthWeight = Number.isFinite(synthWeightEnv) ? synthWeightEnv : 0.3;
   const autoTrader = new AutoTrader(client, risk, brier, crowdBias, adaptiveVolume, {
     pollIntervalMs: finalConfig.pollIntervalMs,
     enabledVerticals: finalConfig.enabledVerticals,
     marketsPerScan: unlimitedMode ? 100 : 50,
     minEdge: finalConfig.riskLimits.minEdge,
     maxResolutionHours: Number(process.env.MAX_RESOLUTION_HOURS) || 0,
+    synthWeight,
   });
 
   // Connect paper trader to auto-trader for position resolution
@@ -172,6 +175,8 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   // Multi-platform: connect Kalshi + Crypto for expanded market discovery
   const kalshi = new KalshiClient();
   autoTrader.setKalshiClient(kalshi);
+  // P1 hybrid refactor: share Kalshi client with paper trader for resolution
+  paper.setKalshiClient(kalshi);
   const crypto = new CryptoPriceClient();
   autoTrader.setCryptoClient(crypto);
   logger.info('🌐 Multi-platform enabled: Polymarket + Kalshi + Crypto (BTC/ETH/SOL)');

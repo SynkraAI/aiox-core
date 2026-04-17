@@ -5,10 +5,13 @@
  * D4: 30 days mandatory paper trading before real capital.
  */
 
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import { eventBus } from '../engine/event-bus.js';
 import { ExperienceStore } from '../learning/experience-store.js';
 import { RiskEngine } from '../engine/risk-engine.js';
 import type { PolymarketClient } from '../integrations/polymarket-client.js';
+import type { KalshiClient } from '../integrations/kalshi-client.js';
 import type { TradeSignal, TradeExperience, Side } from '../types/index.js';
 
 interface PaperPosition {
@@ -24,17 +27,52 @@ interface PaperPosition {
 export class PaperTrader {
   private positions: Map<string, PaperPosition> = new Map();
   private client: PolymarketClient;
+  private kalshi: KalshiClient | null = null;
   private store: ExperienceStore;
   private risk: RiskEngine;
   private startedAt: Date;
   private tradeCount = 0;
+  private positionsFile: string;
 
   constructor(client: PolymarketClient, store: ExperienceStore, risk: RiskEngine) {
     this.client = client;
     this.store = store;
     this.risk = risk;
     this.startedAt = new Date();
+    this.positionsFile = join(process.cwd(), 'data', 'open-positions.json');
+    this.loadPositions();
     this.wireEvents();
+  }
+
+  /** Connect Kalshi client for cross-platform position resolution (P1 of hybrid refactor). */
+  setKalshiClient(kalshi: KalshiClient): void {
+    this.kalshi = kalshi;
+  }
+
+  /** Load persisted positions from disk (survives restarts). */
+  private loadPositions(): void {
+    try {
+      if (!existsSync(this.positionsFile)) return;
+      const raw = JSON.parse(readFileSync(this.positionsFile, 'utf-8')) as PaperPosition[];
+      for (const p of raw) {
+        p.enteredAt = new Date(p.enteredAt);
+        p.signal.timestamp = new Date(p.signal.timestamp);
+        this.positions.set(p.marketId, p);
+      }
+      if (raw.length > 0) {
+        console.log(`[PaperTrader] Restored ${raw.length} open positions from disk`);
+      }
+    } catch (err) {
+      console.error(`[PaperTrader] Failed to load positions: ${err instanceof Error ? err.message : err}`);
+    }
+  }
+
+  /** Persist open positions to disk. */
+  private savePositions(): void {
+    try {
+      const data = [...this.positions.values()];
+      writeFileSync(this.positionsFile, JSON.stringify(data, null, 2));
+    } catch { /* non-critical — positions still in memory */ }
   }
 
   private wireEvents(): void {
@@ -107,7 +145,7 @@ export class PaperTrader {
       marketId: signal.marketId,
       vertical: signal.vertical,
       strategy: signal.strategy,
-      marketQuestion: signal.reasoning,
+      marketQuestion: signal.marketQuestion || signal.reasoning,
       signalConfidence: signal.confidence,
       modelProbability: signal.modelProbability,
       marketProbability: signal.marketProbability,
@@ -126,7 +164,13 @@ export class PaperTrader {
       exitPrice: 0,
       pnl: 0,
       lesson: '',
-      tags: ['paper-trade', `exec-${executionMode}`],
+      // P4 hybrid refactor: tag source as real|synth so gate can filter honestly.
+      // Synth markets are always prefixed `synth-*` in auto-trader; everything else is real.
+      tags: [
+        'paper-trade',
+        `exec-${executionMode}`,
+        signal.marketId.startsWith('synth-') ? 'source:synth' : 'source:real',
+      ],
       similarPastTrades: [],
       metadata: {
         paperTrade: true,
@@ -134,6 +178,7 @@ export class PaperTrader {
         executionMode,
         orderbookSpread: orderBook?.spread ?? null,
         orderbookMidpoint: orderBook?.midpoint ?? null,
+        source: signal.marketId.startsWith('synth-') ? 'synth' : 'real',
       },
     };
 
@@ -147,6 +192,7 @@ export class PaperTrader {
       enteredAt: new Date(),
       signal,
     });
+    this.savePositions();
 
     // Record to Procedural Memory (after position tracked)
     this.store.record(experience);
@@ -201,6 +247,7 @@ export class PaperTrader {
     });
 
     this.positions.delete(marketId);
+    this.savePositions();
   }
 
   getStatus(): {
@@ -231,31 +278,59 @@ export class PaperTrader {
   /**
    * Check open positions against Gamma API for resolved markets.
    * Called periodically by the auto-trader to settle paper positions.
+   *
+   * P1 of hybrid refactor: now also resolves Kalshi positions (marketId starts with `kalshi:`).
+   * Synthetic markets (`synth-*`) are resolved elsewhere by AutoTrader.resolveSyntheticPositions.
    */
   async resolveOpenPositions(): Promise<number> {
     if (this.positions.size === 0) return 0;
 
-    const marketIds = [...this.positions.keys()];
+    const allIds = [...this.positions.keys()];
+    const polyIds = allIds.filter(id => !id.startsWith('kalshi:') && !id.startsWith('synth-'));
+    const kalshiIds = allIds.filter(id => id.startsWith('kalshi:'));
     let resolved = 0;
 
-    try {
-      const resolvedMarkets = await this.client.getResolvedMarkets(marketIds);
-
-      for (const market of resolvedMarkets) {
-        // outcomePrices: YES=1.0 means YES won, NO=1.0 means NO won
-        const yesWon = market.tokens.yes.price >= 0.99;
-        const noWon = market.tokens.no.price >= 0.99;
-
-        if (!yesWon && !noWon) continue; // Not fully resolved yet
-
-        const outcome: 'YES' | 'NO' = yesWon ? 'YES' : 'NO';
-        this.resolvePosition(market.id, outcome);
-        resolved++;
-        console.log(`[PaperTrader] Resolved ${market.id}: ${outcome} won — "${market.question.slice(0, 60)}"`);
+    // Polymarket branch
+    if (polyIds.length > 0) {
+      try {
+        const resolvedMarkets = await this.client.getResolvedMarkets(polyIds);
+        for (const market of resolvedMarkets) {
+          const yesWon = market.tokens.yes.price >= 0.99;
+          const noWon = market.tokens.no.price >= 0.99;
+          if (!yesWon && !noWon) continue;
+          const outcome: 'YES' | 'NO' = yesWon ? 'YES' : 'NO';
+          this.resolvePosition(market.id, outcome);
+          resolved++;
+          console.log(`[PaperTrader] Resolved Polymarket ${market.id}: ${outcome} won — "${market.question.slice(0, 60)}"`);
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        console.error(`[PaperTrader] Polymarket resolution check error: ${msg}`);
       }
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error(`[PaperTrader] Resolution check error: ${msg}`);
+    }
+
+    // Kalshi branch (P1 hybrid refactor)
+    if (this.kalshi && kalshiIds.length > 0) {
+      for (const marketId of kalshiIds) {
+        try {
+          const ticker = marketId.substring('kalshi:'.length);
+          const km = await this.kalshi.getMarket(ticker);
+          if (!km) continue;
+          // Kalshi settled markets expose yes/no prices at 0 or 1 in parseMarket
+          const yesWon = km.tokens.yes.price >= 0.99;
+          const noWon = km.tokens.no.price >= 0.99;
+          // Also treat `closed` status as settled (parseMarket sets closed=true for settled)
+          if (!km.closed && !yesWon && !noWon) continue;
+          if (!yesWon && !noWon) continue;
+          const outcome: 'YES' | 'NO' = yesWon ? 'YES' : 'NO';
+          this.resolvePosition(marketId, outcome);
+          resolved++;
+          console.log(`[PaperTrader] Resolved Kalshi ${ticker}: ${outcome} won — "${km.question.slice(0, 60)}"`);
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          console.error(`[PaperTrader] Kalshi resolution error for ${marketId}: ${msg}`);
+        }
+      }
     }
 
     return resolved;
