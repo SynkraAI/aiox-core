@@ -147,6 +147,7 @@ aios-core/*.map
 apps/*
 !apps/polymarket-trader/
 !apps/tocks-lp/
+!apps/tocks-website/
 
 # External projects (separate repositories)
 aios-guide-app/
@@ -391,3 +392,6 @@ build/
 # AIOX Local (AIOX)
 .aiox-core/local/
 .aiox/install-log.txt
+
+# Local Netlify folder
+.netlify
