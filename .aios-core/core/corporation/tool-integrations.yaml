@@ -540,7 +540,7 @@ design:
       - comment-management
       - version-history
     departments: [design]
-    agents: [ux-design-expert, dev]
+    agents: [ux-design-expert, design-lead, ui-designer, design-systems-engineer, motion-designer, dev]
     free_tier:
       rate_limit: "Undocumented; generally generous"
       notes: "Free plan includes 3 Figma files; API access included"
@@ -561,11 +561,121 @@ design:
       - ai-background-removal
       - responsive-image-generation
     departments: [design, engineering]
-    agents: [ux-design-expert, dev]
+    agents: [ux-design-expert, ui-designer, design-systems-engineer, dev]
     free_tier:
       rate_limit: "25 credits/month (~25K transformations)"
       notes: "Free tier includes 25GB storage and 25GB bandwidth"
     priority: medium
+
+  # ---------------------------------------------------------------------------
+  # Design Squad AI Tools (added Task #5 — design-squad integration block)
+  # Consumers mirror declarations in .aios-core/development/agents/*.md and
+  # the consumer table in .claude/rules/mcp-usage.md. Legacy `ux-design-expert`
+  # is retained as consumer (not deprecated until Task #7).
+  # ---------------------------------------------------------------------------
+
+  stitch:
+    name: "Google Stitch MCP"
+    type: mcp-server
+    description: "AI UI prototyping — generates interactive HTML/CSS/JS from text prompts"
+    auth_method: oauth2
+    auth_env_var: STITCH_GCLOUD_AUTH
+    base_url: "stdio://@_davideast/stitch-mcp"
+    capabilities:
+      - ui-prototype-generation
+      - html-css-js-scaffolding
+      - text-to-screen
+      - rapid-wireframing
+      - design-reference-output
+    departments: [design]
+    agents: [design-lead, ui-designer, ux-designer, ux-design-expert, design-systems-engineer]
+    free_tier:
+      rate_limit: "Subject to Stitch (labs.google) quota"
+      notes: "Requires gcloud auth; stdio proxy via @_davideast/stitch-mcp"
+    priority: high
+
+  nano-banana-2:
+    name: "Nano Banana 2 MCP"
+    type: mcp-server
+    description: "AI image generation via Gemini 3.1 Flash — hero images, mockups, illustrations"
+    auth_method: token
+    auth_env_var: GEMINI_API_KEY
+    base_url: "stdio://nano-banana-2"
+    capabilities:
+      - text-to-image-generation
+      - image-editing
+      - iterative-continue-editing
+      - configuration-status
+      - last-image-info
+    departments: [design]
+    agents: [design-lead, ui-designer, ux-design-expert, design-systems-engineer]
+    free_tier:
+      rate_limit: "Subject to Gemini API quota"
+      notes: "5 tools: generate_image, edit_image, continue_editing, get_configuration_status, get_last_image_info"
+    priority: high
+
+  ui-ux-pro-max:
+    name: "UI/UX Pro Max Skill"
+    type: cli
+    description: "Design intelligence skill — 67 styles, 161 palettes, 57 fonts, 99 UX guidelines, design system generation"
+    auth_method: none
+    command: "python3 .claude/skills/ui-ux-pro-max/src/ui-ux-pro-max/scripts/search.py"
+    install: "Bundled in .claude/skills/ui-ux-pro-max"
+    capabilities:
+      - style-recommendations
+      - palette-search
+      - typography-search
+      - ux-guideline-lookup
+      - landing-pattern-lookup
+      - design-system-generation
+    departments: [design]
+    agents: [design-lead, ui-designer, ux-designer, motion-designer, design-systems-engineer, ux-researcher, ux-writer, ux-design-expert]
+    free_tier:
+      rate_limit: "Unlimited (local skill)"
+      notes: "Data-backed recommendations; domains: product, style, typography, color, landing, chart, ux"
+    priority: high
+
+  21st-dev-magic:
+    name: "21st.dev Magic MCP"
+    type: mcp-server
+    description: "AI UI component generation from natural language (like v0) — produces polished components matching project code style"
+    auth_method: token
+    auth_env_var: TWENTY_FIRST_API_KEY
+    base_url: "stdio://@21st-dev/magic"
+    capabilities:
+      - ui-component-generation
+      - natural-language-to-component
+      - code-style-matching
+      - polished-component-output
+    departments: [design, engineering]
+    agents: [ui-designer, ux-design-expert, design-systems-engineer]
+    free_tier:
+      rate_limit: "Subject to 21st.dev quota"
+      notes: "Tool: /ui {description}; integrates with project code style"
+    priority: medium
+
+  mcp-design-studio:
+    name: "MCP Design Studio"
+    type: mcp-server
+    description: "Unified design MCP suite — 24 tools across figma, iconify, contrast, fonts, unsplash, color, tokens, studio_status"
+    auth_method: token
+    auth_env_var: MCP_DESIGN_STUDIO_TOKEN
+    base_url: "stdio://mcp-design-studio"
+    capabilities:
+      - figma-file-access
+      - iconify-search
+      - contrast-checking
+      - font-research
+      - unsplash-mood-boards
+      - color-palette-generation
+      - design-token-management
+      - studio-status
+    departments: [design]
+    agents: [design-lead, ui-designer, design-systems-engineer, ux-design-expert]
+    free_tier:
+      rate_limit: "Subject to underlying providers (Figma, Iconify, Unsplash, Google Fonts)"
+      notes: "24 tools bundled: figma (5), iconify (3), contrast (2), fonts (3), unsplash (3), color (4), tokens (3), studio_status (1)"
+    priority: high
 
 # =============================================================================
 # DATA & ANALYTICS TOOLS
