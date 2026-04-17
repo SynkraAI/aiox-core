@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-04-15T00:38:55.777Z"
+generated_at: "2026-04-17T12:51:51.743Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1717
 files:
@@ -521,9 +521,9 @@ files:
     type: core
     size: 20728
   - path: core/corporation/org-config.yaml
-    hash: sha256:70e6840d8974e8defd8cb3dcc7a33ca03daf6367f3c55f771675dc3b8a7538a9
+    hash: sha256:2dce6f891f8b84e79c6c9df76e1650f4617eb9937b194e1359e06c2a65b869e2
     type: core
-    size: 56240
+    size: 60505
   - path: core/corporation/org-engine.js
     hash: sha256:4b1aaa2fe6f9fa95eac902a9cb816c9f21371c4128c4df7cf0295c24f58b7999
     type: core
@@ -1609,9 +1609,9 @@ files:
     type: data
     size: 210
   - path: data/entity-registry.yaml
-    hash: sha256:9931006ba6fcc845f5fd8afa6be9459b188adf07fc27774f3222d197ac6eefe0
+    hash: sha256:be633e4a01e541871c23ede32d9d2c9d380867e6c3be597136d133413d240d5d
     type: data
-    size: 949847
+    size: 947077
   - path: data/experience-store.json
     hash: sha256:d986e63086d1573be30e44c2cf1948b740f1ec86c86c1dd7e944cdba40271f00
     type: data
@@ -1621,9 +1621,9 @@ files:
     type: data
     size: 1032
   - path: data/jarvis-mind-clone-index.json
-    hash: sha256:cd2fb30986ec2ddb3382c5e5c47a296c04ba4dce53488e35af407c34b8ebb428
+    hash: sha256:0746711449657227c4f5001a7cc5e12dc0a3e396666c14ee53ba0dfc7e3d90a5
     type: data
-    size: 365410
+    size: 365432
   - path: data/jarvis-mind-clone-map.yaml
     hash: sha256:d404e07f7de09951ca2770cb073e315b3d8f7dd93295c3f21fad04f17ab5e7b0
     type: data

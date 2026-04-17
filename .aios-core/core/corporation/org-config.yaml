@@ -9,8 +9,8 @@
 # Updated: 2026-03-14
 # =============================================================================
 
-version: "1.0.0"
-updated_at: "2026-03-14T00:00:00Z"
+version: "1.2.0"
+updated_at: "2026-04-07T00:00:00Z"
 
 # Feature flags
 enabled: true
@@ -78,8 +78,15 @@ departments:
   design:
     name: "Design"
     icon: "palette"
-    head: ux-design-expert
-    description: "User experience, visual design, and design leadership"
+    head: design-lead
+    description: "User experience, visual design, motion, design systems, UX writing, and creative leadership"
+    sub_departments:
+      - ux-research
+      - ui-design
+      - ux-design
+      - motion-design
+      - design-systems
+      - ux-writing
 
   data:
     name: "Data & Analytics"
@@ -195,6 +202,16 @@ departments:
     icon: "server"
     head: kelsey-hightower
     description: "Cloud infrastructure, platform engineering, observability, and reliability"
+
+  trading:
+    name: "Trading & Prediction Markets"
+    icon: "chart-line"
+    head: philip-tetlock
+    description: "Prediction markets, forecasting, trading strategy, and quantitative analysis"
+    sub_departments:
+      - forecasting
+      - market-making
+      - crypto-markets
 
 # =====================================================
 # AGENT ROSTER
@@ -382,14 +399,214 @@ agents:
     description: "Market research, deep analysis, competitive intelligence"
     reports_to: aios-master
 
-  # Design L3 (core)
+  # Design L3 (core) — Design Squad
+  design-lead:
+    level: L3
+    department: design
+    type: core
+    title: "Creative Director & Design Squad Lead"
+    description: "Design squad orchestration, creative direction, design reviews"
+    reports_to: aios-master
+    mind_clones_merged: [don-norman, dieter-rams, john-maeda, julie-zhuo]
+    tools:
+      - mcp-design-studio
+      - stitch
+      - nano-banana-2
+      - ui-ux-pro-max
+    skills:
+      - brainstorming
+      - brand-guidelines
+      - ui-ux-pro-max
+      # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
+      # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
+
   ux-design-expert:
     level: L3
     department: design
     type: core
-    title: "VP of Design"
+    title: "VP of Design (Legacy — see design-lead)"
     description: "UX/UI design, user research, design systems"
-    reports_to: aios-master
+    reports_to: design-lead
+
+  ux-researcher:
+    level: L2
+    department: design
+    type: core
+    title: "UX Research Lead"
+    description: "User research, behavioral science, personas, journey maps, usability"
+    reports_to: design-lead
+    mind_clones_merged: [nir-eyal, daniel-kahneman, teresa-torres, bj-fogg]
+    tools:
+      - unsplash
+      - contrast
+      - fonts
+    skills:
+      - brainstorming
+      - ui-ux-pro-max
+      # no held skills: research domain — banner/brand skills not applicable here
+
+  ui-designer:
+    level: L2
+    department: design
+    type: core
+    title: "Visual Interface Designer"
+    description: "Components, design tokens, typography, color systems, atomic design"
+    reports_to: design-lead
+    mind_clones_merged: [vitaly-friedman, erik-spiekermann, refika-anadol, dieter-rams]
+    tools:
+      # MCP Design Studio — 24 tools
+      - figma_get_file
+      - figma_get_components
+      - figma_get_styles
+      - figma_get_variables
+      - figma_get_images
+      - iconify_search
+      - iconify_get_svg
+      - iconify_collections
+      - contrast_check
+      - contrast_suggest
+      - fonts_search
+      - fonts_info
+      - fonts_css
+      - unsplash_search
+      - unsplash_photo
+      - unsplash_random
+      - color_palette
+      - color_harmony
+      - color_convert
+      - color_shades
+      - tokens_validate
+      - tokens_transform
+      - tokens_diff
+      - studio_status
+      # Google Stitch MCP
+      - stitch
+      # Nano Banana 2 MCP
+      - generate_image
+      - edit_image
+      - continue_editing
+      - get_last_image_info
+      # UI/UX Pro Max
+      - ui-ux-pro-max
+    skills:
+      - theme-factory
+      - canvas-design
+      - web-artifacts-builder
+      - frontend-design
+      - ui-ux-pro-max
+      # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
+      # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
+
+  ux-designer:
+    level: L2
+    department: design
+    type: core
+    title: "Experience Designer"
+    description: "Information architecture, user flows, wireframes, interaction patterns"
+    reports_to: design-lead
+    mind_clones_merged: [don-norman, julie-zhuo, val-head, rafael-calvo]
+    tools:
+      # Figma (5)
+      - figma_get_file
+      - figma_get_components
+      - figma_get_styles
+      - figma_get_images
+      - figma_get_variables
+      # Contrast (2)
+      - contrast_check
+      - contrast_suggest
+      # Fonts (3)
+      - fonts_search
+      - fonts_info
+      - fonts_css
+      # Iconify (3)
+      - iconify_search
+      - iconify_get_svg
+      - iconify_collections
+      # Google Stitch MCP
+      - stitch
+      # Nano Banana 2 MCP
+      - generate_image
+      - edit_image
+      - continue_editing
+      # UI/UX Pro Max
+      - ui-ux-pro-max
+    skills:
+      - brainstorming
+      - web-artifacts-builder
+      - ui-ux-pro-max
+      # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
+      # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
+
+  motion-designer:
+    level: L2
+    department: design
+    type: core
+    title: "Motion Designer"
+    description: "Micro-interactions, transitions, animation specs, motion tokens"
+    reports_to: design-lead
+    mind_clones_merged: [val-head, refika-anadol]
+    tools:
+      # Figma (5)
+      - figma_get_file
+      - figma_get_components
+      - figma_get_styles
+      - figma_get_images
+      - figma_get_variables
+      # Color (4)
+      - color_convert
+      - color_harmony
+      - color_palette
+      - color_shades
+      # Tokens (3)
+      - tokens_validate
+      - tokens_transform
+      - tokens_diff
+    skills:
+      - video-editing
+      - fal-ai-media
+      # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
+      # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
+
+  design-systems-engineer:
+    level: L2
+    department: design
+    type: core
+    title: "Design System Engineer"
+    description: "Token pipeline, Storybook, Figma-code bridge, visual regression, CI/CD"
+    reports_to: design-lead
+    mind_clones_merged: [vitaly-friedman, sarah-drasner]
+    tools:
+      - mcp-design-studio
+      - stitch
+      - nano-banana-2
+    skills:
+      - design-system
+      - frontend-patterns
+      - ui-ux-pro-max
+      # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
+      # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
+
+  ux-writer:
+    level: L2
+    department: design
+    type: core
+    title: "UX Writer & Content Strategist"
+    description: "Microcopy, tone of voice, labels, error messages, onboarding text"
+    reports_to: design-lead
+    mind_clones_merged: [ann-handley, joanna-wiebe, donald-miller, seth-godin]
+    tools:
+      - fonts_search # Search Google Fonts for typography decisions
+      - fonts_info # Get font details and metadata
+      - fonts_css # Generate font CSS
+      - contrast_check # Check color contrast for text readability
+      - contrast_suggest # Suggest accessible color combinations
+    skills:
+      - brainstorming
+      - web-artifacts-builder
+      - brand-guidelines
+      # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
+      # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
 
   # Security L3
   daniel-miessler:
@@ -859,6 +1076,28 @@ agents:
     reports_to: alison-darcy
     source: mega_brain
 
+  christian-dunker:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Clinical Psychology — CRP Brazil"
+    description: "Clinical psychology, digital mental health, CRP ethics, instrument validation, Brazilian context"
+    reports_to: alison-darcy
+    source: conclave_decision
+    created: "2026-03-25"
+    justification: "Conclave Serenity AI — mandatory clone for pt-BR clinical validation"
+
+  patricia-peck:
+    level: L2
+    department: legal
+    type: mind_clone
+    title: "Senior LGPD & Digital Law — Brazil"
+    description: "LGPD compliance, privacy policy, terms of use, health data regulation, ANPD, CFP"
+    reports_to: heather-meeker
+    source: conclave_decision
+    created: "2026-03-25"
+    justification: "Conclave Serenity AI — mandatory clone for Brazilian data protection"
+
   # --- Customer Success L3 (promoted) ---
   lincoln-murphy:
     level: L3
@@ -1270,6 +1509,36 @@ agents:
     reports_to: bruce-schneier
     source: knowledge_base
 
+  liran-tal:
+    level: L2
+    department: security
+    type: mind_clone
+    title: "Senior Node.js Security & Supply Chain"
+    description: "Node.js security, OWASP, dependency audits, supply chain security"
+    reports_to: bruce-schneier
+    source: knowledge_base
+    created: "2026-04-02"
+
+  sam-newman:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Microservices Architecture"
+    description: "Microservices, service decomposition, API design, evolutionary architecture"
+    reports_to: architect
+    source: knowledge_base
+    created: "2026-04-02"
+
+  mitchell-hashimoto:
+    level: L2
+    department: platform
+    type: mind_clone
+    title: "Senior Infrastructure Architecture"
+    description: "Terraform, Vault, infrastructure-as-code, secrets management"
+    reports_to: kelsey-hightower
+    source: knowledge_base
+    created: "2026-04-02"
+
   # --- NEW: Customer Success L2 ---
   jason-lemkin:
     level: L2
@@ -1352,3 +1621,598 @@ agents:
     title: "SOP Extractor"
     description: "Standard operating procedure extraction tool"
     reports_to: aios-master
+
+  # =====================================================
+  # EXPANSION 2026-03-30 — Conclave Selection (38 new)
+  # Story: SQUAD-1 / Conclave Specialist Selection
+  # =====================================================
+
+  # --- TIER 1: CRITICAL (14) ---
+
+  harrison-chase:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior AI Agent Architecture"
+    description: "LangChain/LangGraph creator, multi-agent orchestration, ReAct patterns"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  jerry-liu:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior RAG & Knowledge Systems"
+    description: "LlamaIndex creator, RAG pipelines, knowledge graphs, vector search"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  brad-frost:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Design Systems Architecture"
+    description: "Atomic Design creator, Pattern Lab, design system methodology"
+    reports_to: ux-design-expert
+    source: knowledge_base
+    created: "2026-03-30"
+
+  larry-kim:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Paid Media & PPC"
+    description: "WordStream founder, Google/Meta Ads optimization, Quality Score"
+    reports_to: seth-godin
+    source: knowledge_base
+    created: "2026-03-30"
+    tools:
+      - google-ads-api
+      - meta-ads-api
+
+  martin-kleppmann:
+    level: L2
+    department: data
+    type: mind_clone
+    title: "Senior Distributed Data Systems"
+    description: "DDIA author, distributed systems, event sourcing, stream processing"
+    reports_to: data-engineer
+    source: knowledge_base
+    created: "2026-03-30"
+
+  nicole-forsgren:
+    level: L2
+    department: operations
+    type: mind_clone
+    title: "Senior Developer Productivity"
+    description: "DORA/SPACE creator, delivery performance metrics, quality culture"
+    reports_to: qa
+    source: knowledge_base
+    created: "2026-03-30"
+
+  addy-osmani:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Web Performance"
+    description: "Google Chrome lead, Core Web Vitals, PRPL pattern, image optimization"
+    reports_to: architect
+    source: knowledge_base
+    created: "2026-03-30"
+
+  alexander-osterwalder:
+    level: L2
+    department: research
+    type: mind_clone
+    title: "Senior Business Model Design"
+    description: "Business Model Canvas creator, Value Proposition Design, Strategyzer"
+    reports_to: analyst
+    source: knowledge_base
+    created: "2026-03-30"
+
+  cathy-pearl:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Conversational UX"
+    description: "VP UX Google Assistant, voice interfaces, dialogue design"
+    reports_to: ux-design-expert
+    source: knowledge_base
+    created: "2026-03-30"
+
+  alan-nichol:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior Conversational AI"
+    description: "Rasa co-founder/CTO, dialogue management, NLU pipelines"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  ann-cavoukian:
+    level: L2
+    department: security
+    type: mind_clone
+    title: "Senior Privacy Engineering"
+    description: "Privacy by Design creator (7 Principles), GDPR/LGPD foundation"
+    reports_to: bruce-schneier
+    source: knowledge_base
+    created: "2026-03-30"
+
+  timnit-gebru:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior AI Ethics"
+    description: "DAIR Institute founder, Gender Shades, Model Cards, Datasheets"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  eric-topol:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior AI + Medicine"
+    description: "Deep Medicine author, AI-augmented healthcare, clinical AI"
+    reports_to: alison-darcy
+    source: knowledge_base
+    created: "2026-03-30"
+
+  dan-abramov:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior React Architecture"
+    description: "React core team, Overreacted blog, Server Components, state management"
+    reports_to: architect
+    source: knowledge_base
+    created: "2026-03-30"
+
+  # --- TIER 2: HIGH PRIORITY (24) ---
+
+  guillermo-rauch:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Next.js & Edge Computing"
+    description: "Next.js creator, CEO Vercel, ISR, Edge Functions, DX"
+    reports_to: architect
+    source: knowledge_base
+    created: "2026-03-30"
+
+  brendan-gregg:
+    level: L2
+    department: platform
+    type: mind_clone
+    title: "Senior Performance Engineering"
+    description: "Flame graphs creator, USE Method, Netflix perf lead, BPF"
+    reports_to: kelsey-hightower
+    source: knowledge_base
+    created: "2026-03-30"
+
+  niall-murphy:
+    level: L2
+    department: platform
+    type: mind_clone
+    title: "Senior Site Reliability Engineering"
+    description: "Google SRE Book editor, SLO/SLI design, error budgets"
+    reports_to: kelsey-hightower
+    source: knowledge_base
+    created: "2026-03-30"
+
+  wes-bush:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Product-Led Growth"
+    description: "PLG book author, ProductLed System, Time-to-Value, Bowling Alley"
+    reports_to: seth-godin
+    source: knowledge_base
+    created: "2026-03-30"
+
+  dave-snowden:
+    level: L2
+    department: research
+    type: mind_clone
+    title: "Senior Knowledge Management & Complexity"
+    description: "Cynefin Framework creator, SenseMaker, narrative-based KM"
+    reports_to: analyst
+    source: knowledge_base
+    created: "2026-03-30"
+
+  john-kindervag:
+    level: L2
+    department: security
+    type: mind_clone
+    title: "Senior Zero Trust Architecture"
+    description: "Zero Trust creator, microsegmentation, Protect Surfaces"
+    reports_to: bruce-schneier
+    source: knowledge_base
+    created: "2026-03-30"
+
+  kat-holmes:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Inclusive Design & Accessibility"
+    description: "Microsoft Inclusive Design lead, Mismatch, Persona Spectrum"
+    reports_to: ux-design-expert
+    source: knowledge_base
+    created: "2026-03-30"
+
+  edward-tufte:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Data Visualization"
+    description: "Data visualization master, data-ink ratio, small multiples, sparklines"
+    reports_to: ux-design-expert
+    source: knowledge_base
+    created: "2026-03-30"
+
+  casey-rosenthal:
+    level: L2
+    department: platform
+    type: mind_clone
+    title: "Senior Chaos Engineering"
+    description: "Netflix Chaos Engineering pioneer, GameDays, resilience testing"
+    reports_to: kelsey-hightower
+    source: knowledge_base
+    created: "2026-03-30"
+
+  swyx:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior AI Engineering"
+    description: "AI Engineer concept creator, Latent Space podcast, Third Age of JS"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  jay-abraham:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Strategic Partnerships"
+    description: "$9.4B+ generated, Strategy of Preeminence, joint ventures, revenue multiplication"
+    reports_to: alex-hormozi
+    source: knowledge_base
+    created: "2026-03-30"
+
+  rob-walling:
+    level: L2
+    department: finance
+    type: mind_clone
+    title: "Senior Bootstrapping & SaaS"
+    description: "MicroConf founder, TinySeed, Stair-Step Approach, SaaS Playbook"
+    reports_to: aswath-damodaran
+    source: knowledge_base
+    created: "2026-03-30"
+
+  lilian-weng:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior AI Product & Research"
+    description: "Ex-VP Research OpenAI, Applied AI Research, LLM scaling, AI Safety"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  marty-neumeier:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Brand Strategy"
+    description: "Brand Gap, Zag, brand commitment scale, naming"
+    reports_to: seth-godin
+    source: knowledge_base
+    created: "2026-03-30"
+
+  darren-murph:
+    level: L2
+    department: people
+    type: mind_clone
+    title: "Senior Remote & Distributed Teams"
+    description: "GitLab Head of Remote, All-Remote Framework, Handbook-First"
+    reports_to: adam-grant
+    source: knowledge_base
+    created: "2026-03-30"
+
+  steve-blank:
+    level: L2
+    department: research
+    type: mind_clone
+    title: "Senior Customer Development & Venture Building"
+    description: "Customer Development creator, Lean LaunchPad, padrinho do Lean Startup"
+    reports_to: analyst
+    source: knowledge_base
+    created: "2026-03-30"
+
+  abby-covert:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Information Architecture"
+    description: "How to Make Sense of Any Mess, IA heuristics, taxonomy design"
+    reports_to: ux-design-expert
+    source: knowledge_base
+    created: "2026-03-30"
+
+  amy-edmondson:
+    level: L2
+    department: people
+    type: mind_clone
+    title: "Senior Psychological Safety"
+    description: "Fearless Organization, Thinkers50 #1, teaming, learning culture"
+    reports_to: adam-grant
+    source: knowledge_base
+    created: "2026-03-30"
+
+  jez-humble:
+    level: L2
+    department: operations
+    type: mind_clone
+    title: "Senior Continuous Delivery"
+    description: "CD book author, Accelerate co-author, deployment pipelines, lean enterprise"
+    reports_to: devops
+    source: knowledge_base
+    created: "2026-03-30"
+
+  jim-fan:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior Embodied AI & GPU Computing"
+    description: "NVIDIA Director of AI, GR00T, Voyager, foundation models for robotics"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    created: "2026-03-30"
+
+  brad-feld:
+    level: L2
+    department: finance
+    type: mind_clone
+    title: "Senior VC & Fundraising"
+    description: "Foundry Group co-founder, Techstars, Venture Deals book, Give First"
+    reports_to: aswath-damodaran
+    source: knowledge_base
+    created: "2026-03-30"
+
+  markus-winand:
+    level: L2
+    department: data
+    type: mind_clone
+    title: "Senior SQL Performance"
+    description: "SQL Performance Explained, Use The Index Luke, query optimization"
+    reports_to: data-engineer
+    source: knowledge_base
+    created: "2026-03-30"
+
+  joe-reis:
+    level: L2
+    department: data
+    type: mind_clone
+    title: "Senior Data Engineering Lifecycle"
+    description: "Fundamentals of Data Engineering author, DataOps, data pipelines"
+    reports_to: data-engineer
+    source: knowledge_base
+    created: "2026-03-30"
+
+  yu-kai-chou:
+    level: L2
+    department: behavioral_science
+    type: mind_clone
+    title: "Senior Gamification"
+    description: "Octalysis Framework creator, 8 Core Drives, engagement design"
+    reports_to: bj-fogg
+    source: knowledge_base
+    created: "2026-03-30"
+
+  # --- ORPHAN REGISTRATION (02/Abr/2026) ---
+  # Agents with clone files but missing from org-config
+
+  craig-kerstiens:
+    level: L2
+    department: data
+    type: mind_clone
+    title: "Senior PostgreSQL Operations"
+    description: "PostgreSQL at scale, extensions, performance tuning"
+    reports_to: data-engineer
+    source: knowledge_base
+    created: "2026-04-02"
+
+  paul-copplestone:
+    level: L2
+    department: data
+    type: mind_clone
+    title: "Senior Postgres-First Platform Architecture"
+    description: "Supabase platform, RLS, Auth, Postgres-first design"
+    reports_to: data-engineer
+    source: knowledge_base
+    created: "2026-04-02"
+
+  ryan-dahl:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Runtime Architecture"
+    description: "Node.js creator, Deno, event-driven runtime design"
+    reports_to: architect
+    source: knowledge_base
+    created: "2026-04-02"
+
+  kent-c-dodds:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Testing & React Quality"
+    description: "Testing Trophy, React Testing Library, component design, accessibility"
+    reports_to: qa
+    source: knowledge_base
+    created: "2026-04-02"
+
+  matt-pocock:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior TypeScript Engineering"
+    description: "Advanced TypeScript, generics, type-level programming"
+    reports_to: architect
+    source: knowledge_base
+    created: "2026-04-02"
+
+  # val-head-2: REMOVED — duplicate of val-head, consolidated 2026-04-07 (Pedro Valerio audit)
+
+  adriana-dallari:
+    level: L2
+    department: legal
+    type: mind_clone
+    title: "Senior Direito Sanitario & Regulacao em Saude"
+    description: "Direito sanitario brasileiro, regulacao saude, ANVISA, CFM"
+    reports_to: heather-meeker
+    source: knowledge_base
+    created: "2026-04-02"
+
+  erik-nymanczuk:
+    level: L2
+    department: legal
+    type: mind_clone
+    title: "Senior Direito Digital em Saude & LGPD"
+    description: "Direito digital em saude, compliance LGPD para dados de saude"
+    reports_to: heather-meeker
+    source: knowledge_base
+    created: "2026-04-02"
+
+  joanna-wiebe:
+    level: L2
+    department: content
+    type: mind_clone
+    title: "Senior Conversion Copywriting"
+    description: "Conversion copywriting, voice-of-customer, A/B copy testing"
+    reports_to: ann-handley
+    source: knowledge_base
+    created: "2026-04-02"
+
+  peep-laja:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior CRO & B2B Messaging"
+    description: "Conversion rate optimization, B2B messaging strategy, experimentation"
+    reports_to: seth-godin
+    source: knowledge_base
+    created: "2026-04-02"
+
+  rafael-calvo:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Positive Computing & Wellbeing Technology"
+    description: "Positive computing, wellbeing-supportive tech, affective computing"
+    reports_to: alison-darcy
+    source: knowledge_base
+    created: "2026-04-02"
+
+  # =====================================================
+  # TRADING SQUAD (2026-04-07) — Prediction Markets
+  # 9 agents: 3 Tier 1 (L3), 3 Tier 2 (L2), 3 Tier 3 (L1)
+  # =====================================================
+
+  # --- Tier 1: L3 (VP-level) ---
+  philip-tetlock:
+    level: L3
+    department: trading
+    type: mind_clone
+    title: "VP of Forecasting"
+    description: "Superforecasting, calibration, Good Judgment Project, geopolitical prediction"
+    reports_to: aios-master
+    source: mega_brain
+    created: "2026-04-07"
+
+  nate-silver:
+    level: L3
+    department: trading
+    type: mind_clone
+    title: "VP of Statistical Modeling"
+    description: "FiveThirtyEight, election forecasting, sports analytics, signal vs noise"
+    reports_to: philip-tetlock
+    source: mega_brain
+    created: "2026-04-07"
+
+  robin-hanson:
+    level: L3
+    department: trading
+    type: mind_clone
+    title: "VP of Prediction Markets Theory"
+    description: "Futarchy, prediction market design, Age of Em, contrarian economics"
+    reports_to: philip-tetlock
+    source: mega_brain
+    created: "2026-04-07"
+
+  # --- Tier 2: L2 (Senior) ---
+  domer-polymarket:
+    level: L2
+    department: trading
+    type: mind_clone
+    title: "Senior Market Maker"
+    description: "Polymarket whale, market making, liquidity provision, order flow"
+    reports_to: philip-tetlock
+    source: knowledge_base
+    created: "2026-04-07"
+
+  scott-alexander:
+    level: L2
+    department: trading
+    type: mind_clone
+    title: "Senior Bayesian Analyst"
+    description: "ACX predictions, Bayesian reasoning, rationalist forecasting, base rates"
+    reports_to: philip-tetlock
+    source: mega_brain
+    created: "2026-04-07"
+
+  luana-lopes-lara:
+    level: L2
+    department: trading
+    type: mind_clone
+    title: "Senior Crypto Prediction Markets"
+    description: "Crypto prediction markets, DeFi betting, cross-platform arbitrage"
+    reports_to: philip-tetlock
+    source: knowledge_base
+    created: "2026-04-07"
+
+  # --- Tier 3: L1 (Operator) ---
+  theo-polymarket:
+    level: L1
+    department: trading
+    type: mind_clone
+    title: "Polymarket Strategist"
+    description: "Polymarket strategies, event contract trading, market microstructure"
+    reports_to: domer-polymarket
+    source: knowledge_base
+    created: "2026-04-07"
+
+  gcr-crypto:
+    level: L1
+    department: trading
+    type: mind_clone
+    title: "Crypto Markets Operator"
+    description: "Crypto markets, DeFi protocols, on-chain analysis, token economics"
+    reports_to: luana-lopes-lara
+    source: knowledge_base
+    created: "2026-04-07"
+
+  danijel-overtime:
+    level: L1
+    department: trading
+    type: mind_clone
+    title: "Sports Prediction Operator"
+    description: "Sports prediction markets, Overtime protocol, sports analytics"
+    reports_to: nate-silver
+    source: knowledge_base
+    created: "2026-04-07"
