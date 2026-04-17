@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* ========================================
+   Tocks Custom — Gilded Noir Design System
+   ======================================== */
+
+:root {
+  /* Colors */
+  --background: #0B0B0F;
+  --surface: #1A1A1E;
+  --surface-hover: #2A2A2E;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A0A0A0;
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #E5C65C;
+  --accent-gold-deep: #8A6F3A;
+  --accent-ivory: #F5F0E6;
+
+  /* WhatsApp gold -- dessaturado para harmonizar com noir (SQUAD session 4) */
+  --whatsapp-gold: #C4A65E;
+  --whatsapp-gold-hover: #D4B66F;
+
+  /* Focus ring (SQUAD: full gold, nao /40 -- WCAG 2.2 AA >= 3:1) */
+  --focus-border: var(--accent-gold);
+  --ring-focus-offset: 2px;
+  --ring-swatch-active: var(--accent-gold);
+
+  /* Editorial tracking tokens */
+  --tracking-editorial: 0.2em;
+  --tracking-extreme: 0.3em;
+
+  /* Spacing */
+  --section-gap: 8rem;
+  --container-max: 1280px;
+  --container-padding: 1.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-hover: var(--accent-gold-hover);
+  --color-accent-gold-deep: var(--accent-gold-deep);
+  --color-accent-ivory: var(--accent-ivory);
+  --color-whatsapp-gold: var(--whatsapp-gold);
+  --color-whatsapp-gold-hover: var(--whatsapp-gold-hover);
+  --color-focus-border: var(--accent-gold);
+  --tracking-editorial: var(--tracking-editorial);
+  --tracking-extreme: var(--tracking-extreme);
+  --font-body: var(--font-inter);
+  --font-heading: var(--font-cormorant-garamond);
+  --font-display: var(--font-montserrat);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-gold);
+  color: var(--background);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold-deep);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Focus styles -- WCAG 2.2 AA (SQUAD: full gold, no /40) */
+*:focus-visible {
+  outline: 2px solid var(--focus-border);
+  outline-offset: var(--ring-focus-offset);
+}
+
+/* Typography Utilities */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-hover) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold line separator */
+.gold-separator {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+/* Container utility */
+.container-custom {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Section spacing */
+.section-padding {
+  padding-block: var(--section-gap);
+}
+
+/* Smooth image loading */
+img {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Placeholder shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.placeholder-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--surface-hover) 50%,
+    var(--surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Hero LCP elements -- CSS-only fade-up (replaces framer-motion on H1+label).
+   Perf optimization S-7.3 post-QA. UX-design-expert ratified verbatim. */
+@keyframes fade-up-hero {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.hero-h1, .hero-label {
+  animation: fade-up-hero 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+.hero-subtitle {
+  animation: fade-up-hero 600ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+  will-change: opacity, transform;
+}
+.hero-ctas {
+  animation: fade-up-hero 600ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both;
+  will-change: opacity, transform;
+}
+
+/* Scroll indicator -- replaces framer-motion motion.div with delay:2s, duration:1s.
+   Perf Patch #2b S-7.3: removes last framer-motion consumer from / -> chunk drops. */
+@keyframes fade-in-scroll {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.hero-scroll-indicator {
+  animation: fade-in-scroll 1s ease-out 2s both;
+  will-change: opacity;
+}
