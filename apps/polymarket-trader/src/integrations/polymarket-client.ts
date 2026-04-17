@@ -24,18 +24,34 @@ export class PolymarketClient {
 
   // ─── Market Discovery (Gamma API) ────────────────────
 
-  async getMarkets(params?: { active?: boolean; closed?: boolean; limit?: number }): Promise<Market[]> {
+  /** Rotating offset for market discovery — ensures different markets each scan. */
+  private marketOffset = 0;
+
+  async getMarkets(params?: { active?: boolean; closed?: boolean; limit?: number; offset?: number }): Promise<Market[]> {
     const searchParams = new URLSearchParams();
     // Default: only open markets (active=true, closed=false)
     searchParams.set('active', String(params?.active ?? true));
     searchParams.set('closed', String(params?.closed ?? false));
-    if (params?.limit) searchParams.set('limit', String(params.limit));
+    const limit = params?.limit ?? 100;
+    searchParams.set('limit', String(limit));
+
+    // Rotate offset to discover new markets each scan
+    const offset = params?.offset ?? this.marketOffset;
+    if (offset > 0) searchParams.set('offset', String(offset));
+
+    // Advance offset for next call; reset when we've gone far enough
+    this.marketOffset += limit;
+    if (this.marketOffset > 500) this.marketOffset = 0;
 
     const url = `${POLYMARKET_API.gamma}/markets?${searchParams}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Gamma API error: ${response.status}`);
 
     const data = await response.json() as Array<Record<string, unknown>>;
+
+    // If we got fewer results than limit, reset offset (we've hit the end)
+    if (data.length < limit) this.marketOffset = 0;
+
     const now = Date.now();
     return data
       .map((d) => this.parseMarket(d))

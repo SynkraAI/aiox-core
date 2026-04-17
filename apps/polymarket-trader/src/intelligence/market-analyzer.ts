@@ -661,7 +661,8 @@ Respond with ONLY a JSON object (no markdown, no explanation outside JSON):
 
       const side = parsed.side === 'YES' ? 'YES' as const : 'NO' as const;
       const marketProb = side === 'YES' ? market.tokens.yes.price : market.tokens.no.price;
-      const edge = Math.abs(probability - marketProb);
+      const rawEdge = Math.abs(probability - marketProb);
+      const edge = Math.min(rawEdge, 0.25); // Cap edge at 25% — no real market has 77% edge
 
       return {
         probability,

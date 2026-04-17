@@ -34,7 +34,7 @@ const DEFAULT_CONFIG: StrategyScorerConfig = {
   maxEdgeNorm: 0.20,
   maxSignalAgeMs: 5 * 60 * 1000,
   deduplicationWindowMs: 60 * 60 * 1000,
-  minComposite: 0,
+  minComposite: 0.30, // Reject low-quality signals (edge*0.4 + confidence*0.3 + liquidity*0.2 + recency*0.1)
 };
 
 export class StrategyScorer {

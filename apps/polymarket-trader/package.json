@@ -17,7 +17,11 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint src/ tests/ --ext .ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "scan": "tsx src/scripts/scan-once.ts",
+    "scan:resolve": "tsx src/scripts/scan-once.ts --resolve",
+    "trade": "tsx src/scripts/execute-trade.ts",
+    "notify": "tsx src/scripts/notify-telegram.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.85.0",

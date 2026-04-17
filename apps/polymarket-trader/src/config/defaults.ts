@@ -37,7 +37,7 @@ export const PAPER_UNLIMITED_RISK_LIMITS: RiskLimits = {
 export const DEFAULT_CONFIG: TradingConfig = {
   mode: 'paper',
   riskLimits: DEFAULT_RISK_LIMITS,
-  enabledVerticals: ['weather', 'crypto'],   // UltraPlan v2 D16: 2 verticals max until proven profitable
+  enabledVerticals: ['weather', 'crypto', 'politics', 'sports', 'pop_culture', 'finance', 'science'],  // All verticals — paper mode needs max data
   enabledStrategies: ['weather_model', 'crypto_sentiment'],  // UltraPlan v2: disabled 6 unproven strategies
   driftMonitorEnabled: true,     // D9: Auto-learning Layer 0
   aceEvolutionEnabled: true,
@@ -53,15 +53,16 @@ export const PAPER_UNLIMITED_CONFIG: TradingConfig = {
   mode: 'paper',
   riskLimits: {
     ...PAPER_UNLIMITED_RISK_LIMITS,
-    minEdge: 0.05,                  // 5% min edge (not 1% noise)
+    minEdge: 0.02,                  // 2% min edge — aggressive learning in paper mode
     kellyFraction: 0.05,            // Kelly 5% (Damodaran: startup sizing)
+    minLiquidity: 1000,             // $1K — include thinner markets for data
   },
-  enabledVerticals: ['weather', 'crypto'],   // UltraPlan v2 D16: 2 verticals max
-  enabledStrategies: ['weather_model', 'crypto_sentiment'],  // Only proven strategies
+  enabledVerticals: ['weather', 'crypto', 'politics', 'sports', 'pop_culture', 'finance', 'science'],  // ALL 7 verticals — paper mode needs max data
+  enabledStrategies: ['weather_model', 'crypto_sentiment', 'politics_model', 'sports_model', 'info_arb'],  // All strategies active for learning
   driftMonitorEnabled: true,
   aceEvolutionEnabled: true,
   telegramAlerts: false,
-  pollIntervalMs: 60_000,       // 1 min — balanced scanning (not 15s noise)
+  pollIntervalMs: 30_000,       // 30s — aggressive scanning for paper learning
 };
 
 export const KALSHI_API = {

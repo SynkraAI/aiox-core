@@ -101,14 +101,14 @@ export class NotificationManager {
 
     eventBus.on('signal:approved', (signal: TradeSignal) => {
       void this.send(
-        `\u2705 ${escapeMarkdownV2('Signal APPROVED:')} \`${signal.side}\` $${signal.suggestedSize.toFixed(2)} on \`${signal.marketId.slice(0, 16)}\``,
+        `\u2705 ${escapeMarkdownV2('Signal APPROVED:')} \`${signal.side}\` \`$${signal.suggestedSize.toFixed(2)}\` on \`${signal.marketId.slice(0, 16)}\``,
         'info',
       );
     });
 
     eventBus.on('order:filled', (data: { marketId?: string; side?: string; size?: number }) => {
       void this.send(
-        `\u{1F4B0} ${escapeMarkdownV2('Order FILLED:')} \`${data.side ?? '?'}\` $${(data.size ?? 0).toFixed(2)} on \`${(data.marketId ?? '?').slice(0, 16)}\``,
+        `\u{1F4B0} ${escapeMarkdownV2('Order FILLED:')} \`${data.side ?? '?'}\` \`$${(data.size ?? 0).toFixed(2)}\` on \`${(data.marketId ?? '?').slice(0, 16)}\``,
         'info',
       );
     });
@@ -145,7 +145,7 @@ export class NotificationManager {
 
     eventBus.on('whale:activity-detected', (data: { walletLabel?: string; marketId?: string; side?: string; size?: number }) => {
       void this.send(
-        `\u{1F40B} ${escapeMarkdownV2('Whale:')} \`${data.walletLabel}\` ${data.side} $${(data.size ?? 0).toFixed(0)} on \`${(data.marketId ?? '?').slice(0, 16)}\``,
+        `\u{1F40B} ${escapeMarkdownV2('Whale:')} \`${data.walletLabel}\` ${escapeMarkdownV2(data.side ?? '?')} \`$${(data.size ?? 0).toFixed(0)}\` on \`${(data.marketId ?? '?').slice(0, 16)}\``,
         'normal',
       );
     });

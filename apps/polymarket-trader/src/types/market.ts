@@ -76,6 +76,7 @@ export interface Position {
 
 export interface TradeSignal {
   marketId: string;
+  marketQuestion?: string;
   vertical: Vertical;
   strategy: StrategyId;
   side: Side;

@@ -172,36 +172,15 @@ export class CrossPlatformArbStrategy {
   // -------------------------------------------------------------------------
 
   /**
-   * Check a single market for intra-market arb.
+   * Intra-market arb: DISABLED.
    *
-   * If YES + NO < $1.00, buying both sides guarantees profit.
-   * (YES + NO > $1.00 means selling both, which is rare and harder to
-   *  execute -- we skip that case for now.)
+   * YES + NO < $1.00 is NOT free arbitrage — it's the spread/vig.
+   * Buying both sides at market prices just pays the spread.
+   * Real intra-market arb requires simultaneous limit orders on both sides
+   * with execution guarantees that paper trading can't simulate.
    */
-  checkIntraMarketArb(market: Market): ArbOpportunity | null {
-    if (!market.active || market.closed) return null;
-
-    const yesPrice = market.tokens.yes.price;
-    const noPrice = market.tokens.no.price;
-    const totalCost = yesPrice + noPrice;
-
-    // Only profitable if total cost < payout after fees
-    if (totalCost >= BINARY_PAYOUT) return null;
-
-    const profitPercent = calculateProfitPercent(totalCost, BINARY_PAYOUT);
-    if (profitPercent < this.config.minArbPercent) return null;
-
-    return {
-      type: 'intra_market',
-      markets: [market.id],
-      buyLeg: { marketId: market.id, side: 'YES', price: yesPrice },
-      sellLeg: { marketId: market.id, side: 'NO', price: noPrice },
-      totalCost,
-      guaranteedPayout: BINARY_PAYOUT,
-      profitPercent,
-      confidence: this.calculateConfidence(profitPercent, 'intra_market'),
-      detectedAt: new Date(),
-    };
+  checkIntraMarketArb(_market: Market): ArbOpportunity | null {
+    return null;
   }
 
   // -------------------------------------------------------------------------
@@ -224,7 +203,7 @@ export class CrossPlatformArbStrategy {
     const entities1 = extractEntities(market1.question);
     const entities2 = extractEntities(market2.question);
     const overlap = entityOverlap(entities1, entities2);
-    if (overlap < 0.70) return null;
+    if (overlap < 0.90) return null; // Require near-identical questions for cross-market arb
 
     // 2. Check end date proximity
     if (!endDatesClose(market1.endDate, market2.endDate)) return null;
@@ -440,9 +419,9 @@ export class CrossPlatformArbStrategy {
   private calculateConfidence(profitPercent: number, type: ArbType): number {
     let baseConfidence: number;
     if (type === 'intra_market') {
-      baseConfidence = 0.95;
+      baseConfidence = 0; // disabled
     } else if (type === 'cross_market') {
-      baseConfidence = 0.70;
+      baseConfidence = 0.50; // reduced — cross-market has resolution risk
     } else {
       // cross_platform — highest execution risk
       baseConfidence = CROSS_PLATFORM_BASE_CONFIDENCE;

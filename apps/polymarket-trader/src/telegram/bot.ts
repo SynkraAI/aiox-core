@@ -383,7 +383,19 @@ export class TradingBot {
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({})) as { description?: string };
-        console.error(`[TelegramBot] sendMessage failed: ${response.status} ${errData.description ?? ''}`);
+        const desc = errData.description ?? '';
+        console.error(`[TelegramBot] sendMessage failed: ${response.status} ${desc}`);
+
+        // Fallback: if MarkdownV2 parse fails, retry as plain text
+        if (desc.includes("can't parse entities")) {
+          const plainBody = { chat_id: this.config.chatId, text: text.replace(/\\([_*\[\]()~`>#+\-=|{}.!\\])/g, '$1') };
+          await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(plainBody),
+            signal: AbortSignal.timeout(10_000),
+          }).catch(() => {});
+        }
       }
     } catch (err) {
       console.error('[TelegramBot] sendMessage error:', err instanceof Error ? err.message : err);
