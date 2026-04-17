@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-04-17T13:00:43.222Z"
+generated_at: "2026-04-17T13:06:57.574Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1717
+file_count: 1718
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -1609,7 +1609,7 @@ files:
     type: data
     size: 210
   - path: data/entity-registry.yaml
-    hash: sha256:4e1cf712a455a69c1546d0986433957f3d076d457628011fe8cb8e1af2599a96
+    hash: sha256:fc2bd2c31572c2252f0d675ea92210a1181a0586eec3d57973de13ad66efcce6
     type: data
     size: 947643
   - path: data/experience-store.json
@@ -1953,9 +1953,9 @@ files:
     type: agent
     size: 43801
   - path: development/agents/design-lead.md
-    hash: sha256:548e94a838a182127916b7ddc314476c00e7142892ad073f0dd359ac8b475f43
+    hash: sha256:348914f6ffa52ec457b5a72ba000e0ad4705c03493183eb0ca8f949ac484ad67
     type: agent
-    size: 18632
+    size: 20879
   - path: development/agents/design-systems-engineer.md
     hash: sha256:724e82a8de1ad7f3aece031c2b7ab433ae7da03a22fdd3d4c8132833cbcd683b
     type: agent
@@ -3508,6 +3508,10 @@ files:
     hash: sha256:f586b31cf0b16ce3e9ed3c4c89d5803b99276ca426c0ff706d13199cf8f6d509
     type: task
     size: 3118
+  - path: development/tasks/design-consult-mind-clones.md
+    hash: sha256:5d2b1f53b9e2d910d16b009c3d52c30a83d5bacdd81022e2880190afbe463bad
+    type: task
+    size: 12289
   - path: development/tasks/design-critique-session-workflow.md
     hash: sha256:b7ffac30a50656de9eb3da09017d4d3bf3c96d887a758c6aa3a9622b6b2aa932
     type: task

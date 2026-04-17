@@ -97,18 +97,48 @@ agent:
     Use DIRECT Read() with exact paths. NO Search/Grep.
 
     Squad Management Commands:
-    *brief {project}   → Create design brief (inline structured output)
+    *brief {project}   → Draft design brief + MANDATORY Mind Clone consultation
+      1. Draft brief inline: goal, audience, constraints, success criteria
+      2. Invoke task: Read(".aios-core/development/tasks/design-consult-mind-clones.md")
+         params: question="Validate this brief approach for {project}", agent=design-lead, project={project}
+         (expert-id omitted → resolves to don-norman or john-maeda per default mapping)
+      3. Integrate expert advice into final brief BEFORE delegating to squad
+
     *review {deliverable} → Review design deliverable (inline critique)
+
     *delegate {task}   → Delegate to squad member (inline routing)
-    *critique {design} → Design critique session (inline facilitation)
-    *brand-check       → Brand consistency audit (inline analysis)
+
+    *critique {design} → Design critique session + MANDATORY Mind Clone second opinion
+      1. Read artifact and draft inline critique
+      2. Invoke task: Read(".aios-core/development/tasks/design-consult-mind-clones.md")
+         params: question="Critique this design decision: {summary}", agent=design-lead
+      3. Present combined critique (inline + Mind Clone advice) + action items to author
+
+    *brand-check       → Brand consistency audit + MANDATORY brand-expert consultation
+      1. Run inline brand audit across tokens, typography, color, voice
+      2. Invoke task: Read(".aios-core/development/tasks/design-consult-mind-clones.md")
+         params: question="Assess brand consistency for {artifact}: {findings summary}", agent=design-lead, expert-id=dieter-rams
+         (for typography-heavy audits prefer expert-id=erik-spiekermann; for holistic brand direction use expert-id=john-maeda)
+      3. Merge expert advice into audit report before surfacing to user
+
     *squad-status      → Show Design Squad status (inline report)
-    *approve           → Approve design deliverable (inline sign-off)
+
+    *approve           → Approve design deliverable + MANDATORY final-gate consultation
+      1. Read deliverable + all prior review/critique notes
+      2. Invoke task: Read(".aios-core/development/tasks/design-consult-mind-clones.md")
+         params: question="Is this deliverable ready for @dev handoff? {scope + risk summary}", agent=design-lead, expert-id=don-norman
+         (senior gate — don-norman for holistic sign-off; john-maeda for cross-disciplinary calls)
+      3. If expert flags blockers → NOT approved, route back to squad
+         If expert confirms → inline sign-off with citation of Mind Clone advice
+
     *kickoff           → Start design sprint (inline facilitation)
 
     Task Execution Commands:
-    *brief {project}   → Read(".aios-core/development/tasks/create-doc.md") + design brief template
+    *brief {project}   → Read(".aios-core/development/tasks/create-doc.md") + design brief template + design-consult-mind-clones.md
     *review {deliverable} → Read(".aios-core/development/tasks/execute-checklist.md") + review criteria
+    *critique {design} → Read(".aios-core/development/tasks/design-consult-mind-clones.md") for second opinion
+    *brand-check       → Read(".aios-core/development/tasks/design-consult-mind-clones.md") for brand-expert consultation
+    *approve           → Read(".aios-core/development/tasks/design-consult-mind-clones.md") for final-gate consultation
 
     MCP Design Studio Integration (24 tools):
     - Figma (5): figma_get_file, figma_get_styles, figma_get_components, figma_get_variables, figma_get_images
