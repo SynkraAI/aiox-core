@@ -369,7 +369,7 @@ agents:
     type: mind_clone
     title: "VP of Product Design"
     description: "Design management, design critique, team building"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   john-maeda:
@@ -378,7 +378,7 @@ agents:
     type: mind_clone
     title: "VP of Design & Technology"
     description: "Simplicity, computational design, design leadership"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   # Data L3
@@ -420,13 +420,19 @@ agents:
       # banner-design: held — orphan deps (ckm:ai-artist/ai-multimodal/chrome-devtools missing from public catalog)
       # ckm:brand: held — redundant with @anthropics/brand-guidelines; choose winner post-validation
 
+  # DEPRECATED — frozen legacy; see design-lead for successor
   ux-design-expert:
     level: L3
     department: design
-    type: core
+    type: deprecated
     title: "VP of Design (Legacy — see design-lead)"
     description: "UX/UI design, user research, design systems"
     reports_to: design-lead
+    deprecation:
+      since: "2026-04-07"
+      successor: design-lead
+      migration: "Reports previously assigned to ux-design-expert now point to design-lead (7-agent squad). See .aios-core/core/corporation/org-config.yaml for the new hierarchy."
+      status: "frozen — accepting no new work; kept available for historical interop"
 
   ux-researcher:
     level: L2
@@ -1241,7 +1247,7 @@ agents:
     type: mind_clone
     title: "Senior Industrial Design Philosophy"
     description: "10 principles of good design, functionalism, less-but-better"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   erik-spiekermann:
@@ -1250,7 +1256,7 @@ agents:
     type: mind_clone
     title: "Senior Typography & Brand"
     description: "Typography, brand identity, information design"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   tobias-van-schneider:
@@ -1259,7 +1265,7 @@ agents:
     type: mind_clone
     title: "Senior Product Design"
     description: "Product design, side projects, design entrepreneurship"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   val-head:
@@ -1268,7 +1274,7 @@ agents:
     type: mind_clone
     title: "Senior Motion Design"
     description: "UI animation, motion design, interactive design"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   vitaly-friedman:
@@ -1277,7 +1283,7 @@ agents:
     type: mind_clone
     title: "Senior Web Design Standards"
     description: "Web design patterns, accessibility, Smashing Magazine"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   refika-anadol:
@@ -1286,7 +1292,7 @@ agents:
     type: mind_clone
     title: "Senior AI Art & Data Visualization"
     description: "AI art, data sculpture, immersive media"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: mega_brain
 
   oli-gardner:
@@ -1655,7 +1661,7 @@ agents:
     type: mind_clone
     title: "Senior Design Systems Architecture"
     description: "Atomic Design creator, Pattern Lab, design system methodology"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: knowledge_base
     created: "2026-03-30"
 
@@ -1718,7 +1724,7 @@ agents:
     type: mind_clone
     title: "Senior Conversational UX"
     description: "VP UX Google Assistant, voice interfaces, dialogue design"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: knowledge_base
     created: "2026-03-30"
 
@@ -1840,7 +1846,7 @@ agents:
     type: mind_clone
     title: "Senior Inclusive Design & Accessibility"
     description: "Microsoft Inclusive Design lead, Mismatch, Persona Spectrum"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: knowledge_base
     created: "2026-03-30"
 
@@ -1850,7 +1856,7 @@ agents:
     type: mind_clone
     title: "Senior Data Visualization"
     description: "Data visualization master, data-ink ratio, small multiples, sparklines"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: knowledge_base
     created: "2026-03-30"
 
@@ -1940,7 +1946,7 @@ agents:
     type: mind_clone
     title: "Senior Information Architecture"
     description: "How to Make Sense of Any Mess, IA heuristics, taxonomy design"
-    reports_to: ux-design-expert
+    reports_to: design-lead
     source: knowledge_base
     created: "2026-03-30"
 
