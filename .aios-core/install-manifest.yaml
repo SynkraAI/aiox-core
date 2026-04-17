@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-04-17T13:16:07.788Z"
+generated_at: "2026-04-17T13:32:57.622Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1718
+file_count: 1720
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -1609,13 +1609,17 @@ files:
     type: data
     size: 210
   - path: data/entity-registry.yaml
-    hash: sha256:6f6723db2c0038727f861f12a4252a1d4116b8e66fcc8dfb2ccbcc239cba78b7
+    hash: sha256:97c6554a5f675b1eb811eb2d568c126b72a9dbc59335e87e88b8ffd443baa4fa
     type: data
     size: 949125
   - path: data/experience-store.json
     hash: sha256:d986e63086d1573be30e44c2cf1948b740f1ec86c86c1dd7e944cdba40271f00
     type: data
     size: 8371
+  - path: data/handoffs-schema.md
+    hash: sha256:c4b804084db5f5f8d56c201a7385b7a85abfc0da188391f202167b6a41a830e3
+    type: data
+    size: 7610
   - path: data/health-check-cache.json
     hash: sha256:c539cb030cc763ba6dfee7c3c8dbcba53feb83bbd2f58d0b66fc2b7d075dab45
     type: data
@@ -2465,9 +2469,9 @@ files:
     type: agent
     size: 24582
   - path: development/agents/ui-designer.md
-    hash: sha256:01557329536163d8d10a0735fe1820fdeb4efb7f712921f5a10bdffc04ffc750
+    hash: sha256:bc1fc5b124a8eaf85ffcdaaf2faa90a37911b0812e0f6023aa4a4fd76aa3bb20
     type: agent
-    size: 18163
+    size: 20053
   - path: development/agents/uncle-bob-martin.md
     hash: sha256:9d81d7249073abdd0a277bfc2c3e634ce29266e179e969e6ee7b4ce7b8ecf505
     type: agent
@@ -5020,6 +5024,10 @@ files:
     hash: sha256:478c846a3a001018f85ec8de19b947303d66e79bd0eea4da24a9f439c1023985
     type: task
     size: 4111
+  - path: development/tasks/write-handoff.md
+    hash: sha256:855b730ae2c9d409f2033aedbf1d7d9a147c374b718d9ea43f2f014ced2c84fa
+    type: task
+    size: 11400
   - path: development/tasks/write-sales-copy-workflow.md
     hash: sha256:9737578618a874faaaeea29f8b68d43751460362ac5fa90638903e744ebac8e2
     type: task

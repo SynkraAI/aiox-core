@@ -233,18 +233,61 @@ dependencies:
 workflow:
   visual_design_flow:
     description: 'Complete visual design workflow from brand to responsive specs'
+    # Tail-step: at the end of each phase, invoke the write-handoff task
+    # (see .aios-core/development/tasks/write-handoff.md) so the next agent's
+    # activation STEP 5.5 can surface a workflow-aware suggestion.
     phases:
       phase_1_brand:
         commands: ['*palette {brand}', '*typography {project}', '*brand-guide {project}']
         output: 'Color palette, typography system, brand guide'
+        handoff:
+          task: write-handoff
+          params:
+            from_agent: ui-designer
+            last_command: '*brand-guide'
+            metadata:
+              workflow: visual_design_flow
+              phase: phase_1_brand
+            deliverables: 'derive from phase output (palette, typography, brand guide artifacts)'
+            next_suggestions:
+              - command: '*layout'
+                reason: 'Brand foundations set — proceed to page layout composition'
+              - command: '*mockup'
+                reason: 'Brand tokens ready — can begin high-fidelity mockups'
 
       phase_2_layout:
         commands: ['*layout {page}', '*mockup {screen}', '*icon-set {style}']
         output: 'Page layouts, high-fidelity mockups, icon set'
+        handoff:
+          task: write-handoff
+          params:
+            from_agent: ui-designer
+            last_command: '*mockup'
+            metadata:
+              workflow: visual_design_flow
+              phase: phase_2_layout
+            deliverables: 'derive from phase output (layouts, mockups, icons)'
+            next_suggestions:
+              - command: '*responsive'
+                reason: 'Mockups approved — generate breakpoint specifications'
+              - command: '*visual-qa'
+                reason: 'Spot-check consistency before responsive expansion'
 
       phase_3_responsive:
         commands: ['*responsive {screen}', '*visual-qa {design}']
         output: 'Responsive specs, visual QA report'
+        handoff:
+          task: write-handoff
+          params:
+            from_agent: ui-designer
+            last_command: '*visual-qa'
+            metadata:
+              workflow: visual_design_flow
+              phase: phase_3_responsive
+            deliverables: 'derive from phase output (responsive specs, QA report)'
+            next_suggestions:
+              - command: '*develop'
+                reason: 'Visual work complete — hand off to @dev for implementation'
 
 state_management:
   single_source: '.state.yaml'
