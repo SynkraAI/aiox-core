@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-04-17T12:51:51.743Z"
+generated_at: "2026-04-17T13:00:43.222Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1717
 files:
@@ -1609,9 +1609,9 @@ files:
     type: data
     size: 210
   - path: data/entity-registry.yaml
-    hash: sha256:be633e4a01e541871c23ede32d9d2c9d380867e6c3be597136d133413d240d5d
+    hash: sha256:4e1cf712a455a69c1546d0986433957f3d076d457628011fe8cb8e1af2599a96
     type: data
-    size: 947077
+    size: 947643
   - path: data/experience-store.json
     hash: sha256:d986e63086d1573be30e44c2cf1948b740f1ec86c86c1dd7e944cdba40271f00
     type: data
@@ -2465,9 +2465,9 @@ files:
     type: agent
     size: 24582
   - path: development/agents/ui-designer.md
-    hash: sha256:0e308547be4c536332ec677e3bb66c942146d6a3f695b19cd3e1462e47bf2c6b
+    hash: sha256:01557329536163d8d10a0735fe1820fdeb4efb7f712921f5a10bdffc04ffc750
     type: agent
-    size: 16870
+    size: 18163
   - path: development/agents/uncle-bob-martin.md
     hash: sha256:9d81d7249073abdd0a277bfc2c3e634ce29266e179e969e6ee7b4ce7b8ecf505
     type: agent

@@ -91,11 +91,31 @@ agent:
     COMMAND-TO-TASK MAPPING (TOKEN OPTIMIZATION):
     Use DIRECT Read() with exact paths. NO Search/Grep.
 
-    Visual Design Commands:
-    *mockup       → Create high-fidelity mockup for specified screen
-    *palette      → Generate color palette with accessibility checks
-    *typography   → Define typography system with scale and pairing
-    *layout       → Design page layout with grid and spacing
+    Visual Design Commands — ACTIVATORS (concrete tool invocation):
+
+    *mockup {description}  → Rapid high-fidelity UI screen generation
+      1. Primary: invoke `mcp__stitch__generate_screen_from_text` with an
+         expanded prompt (brief context + brand tokens from current palette/typography)
+      2. Fallback (static PNG / visual composition): use skill `canvas-design`
+      3. Refined React component: use skill `web-artifacts-builder`
+
+    *palette {brand-or-context}  → Color palette generation + WCAG validation
+      1. Run CLI:
+         python3 .claude/skills/ui-ux-pro-max/src/ui-ux-pro-max/scripts/search.py "{query}" --domain color
+      2. Apply to target artifact via skill `theme-factory`
+      3. Validate contrast WCAG AA (min 4.5:1 for body text, 3:1 for large text)
+
+    *typography {brand-or-context}  → Font pairing system
+      1. Run CLI:
+         python3 .claude/skills/ui-ux-pro-max/src/ui-ux-pro-max/scripts/search.py "{query}" --domain font
+      2. Apply pairings consistently via skill `theme-factory`
+
+    *layout {page-or-screen}  → Layout composition + grid system
+      1. Run CLI:
+         python3 .claude/skills/ui-ux-pro-max/src/ui-ux-pro-max/scripts/search.py "{query}" --domain layout
+      2. Materialize as HTML/React artifact via skill `web-artifacts-builder`
+      3. For exploratory wireframe: use `mcp__stitch__generate_screen_from_text`
+
     *icon-set     → Design or find icon set matching style
     *brand-guide  → Create comprehensive brand guide
     *visual-qa    → Visual QA review for design consistency
@@ -195,6 +215,8 @@ dependencies:
     - tokens_transform
     - tokens_diff
     - studio_status         # Studio (1)
+    # 21st-dev Magic MCP — AI UI Component Generation (like v0). Tool: /ui {description}
+    - 21st-dev-magic        # UI component generation from natural language matching project code style
     # Google Stitch MCP — AI UI Prototyping
     - stitch               # Generates interactive HTML/CSS/JS prototypes from text prompts
     # Nano Banana 2 MCP — AI Image Generation (Gemini 3.1 Flash)
