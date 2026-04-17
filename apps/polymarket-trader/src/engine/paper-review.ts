@@ -14,9 +14,22 @@ export class PaperTradingReviewer {
   /**
    * Analyze an array of settled trades and produce a full review report.
    * Trades with outcome === 'PENDING' are excluded.
+   *
+   * P4 hybrid refactor: `options.realOnly` filters to trades tagged `source:real`.
+   * Synthetic (crypto) trades are NOT edge-evidence for Go/No-Go — they're LLM
+   * telemetry. The Go/No-Go gate must evaluate only real-market performance.
    */
-  analyze(trades: TradeExperience[]): PaperReviewReport {
-    const settled = trades.filter(t => t.outcome !== 'PENDING');
+  analyze(trades: TradeExperience[], options?: { realOnly?: boolean }): PaperReviewReport {
+    let settled = trades.filter(t => t.outcome !== 'PENDING');
+    if (options?.realOnly) {
+      settled = settled.filter(t => {
+        const source = (t.metadata as Record<string, unknown>)?.source;
+        if (source === 'real') return true;
+        if (source === 'synth') return false;
+        // Legacy trades without source tag — infer from marketId prefix.
+        return !t.marketId.startsWith('synth-');
+      });
+    }
 
     if (settled.length === 0) {
       return this.emptyReport();

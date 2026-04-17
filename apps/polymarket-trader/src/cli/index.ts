@@ -476,18 +476,20 @@ async function cmdReview(): Promise<void> {
 }
 
 async function cmdGate(): Promise<void> {
-  console.log(sectionHeader('GO/NO-GO GATE'));
+  console.log(sectionHeader('GO/NO-GO GATE — REAL MARKETS ONLY (hybrid refactor P4)'));
   try {
     const { GoNoGoGate } = await import('../engine/go-nogo-gate.js');
     const { PaperTradingReviewer } = await import('../engine/paper-review.js');
     const system = await getSystem();
 
-    // Build review report first
+    // Build review report — REAL markets only for Go/No-Go decision.
+    // Synth trades are LLM calibration telemetry; they do NOT prove edge in prediction markets.
     const reviewer = new PaperTradingReviewer();
-    const trades = system.store.getRecent(10000);
-    const report = reviewer.analyze(trades);
+    const allTrades = system.store.getRecent(10000);
+    const report = reviewer.analyze(allTrades, { realOnly: true });
+    const synthReport = reviewer.analyze(allTrades); // all trades for context
 
-    // Evaluate gate
+    // Evaluate gate on real-only report
     const gate = new GoNoGoGate();
     const riskState = system.risk.getState();
     const driftHealthy = system.drift.isHealthy();
@@ -496,6 +498,8 @@ async function cmdGate(): Promise<void> {
     console.log(keyValue('Recommendation', statusColor(result.recommendation)));
     console.log(keyValue('Score', `${result.score}/100`));
     console.log(keyValue('Passed', result.passed ? colorize('YES', 'green') : colorize('NO', 'red')));
+    console.log(keyValue('Real trades used', `${report.totalTrades}`));
+    console.log(keyValue('Synth trades (telemetry only)', `${synthReport.totalTrades - report.totalTrades}`));
     console.log('');
 
     const headers = ['Criterion', 'Required', 'Actual', 'Result'];
@@ -507,6 +511,11 @@ async function cmdGate(): Promise<void> {
     ]);
 
     console.log(formatTable(headers, rows, ['left', 'right', 'right', 'left']));
+
+    console.log('');
+    console.log(sectionHeader('SYNTH TELEMETRY (informational only — NOT gate input)'));
+    console.log(keyValue('Total synth trades', `${synthReport.totalTrades - report.totalTrades}`));
+    console.log('  Use this for LLM calibration / drift diagnostics, not Go/No-Go.');
   } catch {
     console.log('\n  Go/No-Go gate module not available yet.');
     console.log('  Paper trading must complete before gate evaluation.');
