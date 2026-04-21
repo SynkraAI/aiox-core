@@ -20,14 +20,14 @@ describe('CLAUDE.md Ownership Annotations', () => {
     expect(content).toContain('<!-- PROJECT-CUSTOMIZED:');
   });
 
-  test('annotation count matches expected sections (9 framework + 6 project = 15 total)', () => {
+  test('annotation count matches expected sections (9 framework + 7 project = 16 total)', () => {
     const frameworkMatches = content.match(/<!-- FRAMEWORK-OWNED:/g) || [];
     const projectMatches = content.match(/<!-- PROJECT-CUSTOMIZED:/g) || [];
 
     // 9 FRAMEWORK-OWNED: Constitution, Language, CLI First, Estrutura, Boundary, Agentes, Story-Driven, Otimizacao, MCP
     expect(frameworkMatches.length).toBe(9);
-    // 6 PROJECT-CUSTOMIZED: Padroes, Testes, Git, Comandos, Debug, Tool Selection (TOK-2)
-    expect(projectMatches.length).toBe(6);
+    // 7 PROJECT-CUSTOMIZED: Padroes, Testes, Git, Comandos, Tool Selection (TOK-2), Debug, Common Commands
+    expect(projectMatches.length).toBe(7);
   });
 
   test('framework-owned sections appear before project-customized sections', () => {

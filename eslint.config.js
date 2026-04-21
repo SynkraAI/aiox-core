@@ -22,6 +22,8 @@ module.exports = [
       '**/.next/**',
       // Dashboard has its own ESLint config
       'apps/dashboard/**',
+      // Test project with separate lint config
+      'projeto-one/**',
       '**/.aiox-core/_legacy-v4.31.0/**',
       '**/web-bundles/**',
       '**/*.min.js',

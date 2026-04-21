@@ -1,0 +1,43 @@
+ainda falta algo para AIOX Hybrid Memory Architecture estar operante em nosso projeto?
+
+● Searched for 4 patterns, read 2 files (ctrl+o to expand)
+
+● Diagnóstico direto. O serviço está construído mas não está conectado aos outros apps:
+
+  O que falta para ser operante
+
+  BUILT (aiox-auditor ✅)          NÃO CONECTADO ❌
+  ──────────────────────────────────────────────────
+  /memory/store                   llm-router não chama
+  /memory/search                  llm-router não consulta
+  /swarm/lock                     nenhum agente usa
+  /audit (cron)                   nenhum hook dispara
+
+  3 gaps críticos (em ordem de impacto):
+
+  1. LLM Router não consulta memória antes de rotear (GAP PRINCIPAL)
+  router.js vai direto: score → provider. Deveria ir: score → /memory/search → injeta contexto →
+  provider. Sem isso, o sistema nunca reutiliza o que já sabe — o objetivo central da Epic 3 não
+  funciona.
+
+  2. LLM Router não armazena respostas bem-sucedidas automaticamente
+  Após uma resposta de Claude/Haiku, deveria chamar POST /memory/store com o par task→response.
+  Atualmente só usa o Qdrant cache da Story 2.1 (collection diferente, sem metadados de solução).
+
+  3. Nexus Orchestrator não faz pre-check de memória
+  decomposer.js vai direto ao Ollama. Deveria: "já orquestrei algo similar? consulta /memory/search"
+  antes de gastar tokens decompondo do zero.
+
+  ---
+  O que pode esperar:
+
+  - Dashboard mostrando status do auditor (cosmético)
+  - Hooks git post-commit (nice-to-have)
+  - Workspace drafts/scratchpad (v2)
+
+  ---
+  Para implementar os 3 gaps: preciso integrar o llm-router com o aiox-auditor via HTTP (ou módulo
+  shared). Quer que eu proceda? É rápido — são basicamente 3 arquivos novos + modificação no router.js
+  e decomposer.js.
+
+Ação:*nexus Create a log of the AIOX Hybrid Memory Architecture task and resolve the 3 gaps sequentially, one at a time, and let me know when you're ready.*yolo

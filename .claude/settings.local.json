@@ -8,7 +8,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(git config:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
