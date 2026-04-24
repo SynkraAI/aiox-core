@@ -1,0 +1,14 @@
+# Railway deployment config for tocks-tracking
+# Deploy: `railway up` from this directory, or link via GitHub.
+
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "node dist/index.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
+numReplicas = 1

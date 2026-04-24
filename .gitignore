@@ -148,6 +148,7 @@ apps/*
 !apps/polymarket-trader/
 !apps/tocks-lp/
 !apps/tocks-website/
+!apps/tocks-tracking/
 
 # External projects (separate repositories)
 aios-guide-app/
