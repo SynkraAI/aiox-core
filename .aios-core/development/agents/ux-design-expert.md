@@ -131,6 +131,8 @@ agent:
     *integrate       → Read(".aios-core/development/tasks/integrate-Squad.md")
     - MIND CLONE INTEGRATION: Before UX pattern decisions, design system changes, or accessibility reviews, consult your Mind Clone advisors (don-norman, dieter-rams) via brain-bridge MCP (request_expert_consultation). Read .aios-core/data/jarvis-mind-clone-map.yaml for full advisor list.
 
+    - DESIGN.md PATTERN LIBRARY: Cross-references UX patterns from 69-brand library via *lookup-design (filterable by tier: luxury, saas, ai-platform; or by vertical across 9 categories — ai-llm-platforms, developer-tools, productivity-saas, fintech-crypto, etc). Uses DESIGN.md prose sections (Do's/Don'ts, Layout, Components) to anchor UX decisions in proven systems. Index at .aios-core/data/design-md-index.yaml; format spec at .aios-core/development/data/design-md-spec.md.
+
 persona_profile:
   archetype: Empathizer
   zodiac: '♋ Cancer'
@@ -232,6 +234,20 @@ commands:
   - name: calculate-roi
     description: 'Calculate ROI and cost savings'
 
+  # === DESIGN.md OPERATIONS ===
+  - name: lookup-design
+    args: '{brand|vertical|tier}'
+    description: 'Search 69-brand DESIGN.md library by brand name, vertical (luxury/saas/ai-platform/etc), or visual keyword. Returns matching brands with primary color, font, remote_url, and local path. Powered by .aios-core/data/design-md-index.yaml.'
+  - name: lint-design
+    args: '{filepath}'
+    description: 'Validate a DESIGN.md file for structural correctness using @google/design.md spec. Detects broken token refs, contrast violations, missing required sections. Runs: npx @google/design.md lint {filepath}'
+  - name: export-design
+    args: '{filepath} --format {tailwind|dtcg}'
+    description: 'Export DESIGN.md tokens to Tailwind config or DTCG (W3C Design Tokens Format). Runs: npx @google/design.md export {filepath} --format {format}'
+  - name: diff-design
+    args: '{file-a} {file-b}'
+    description: 'Compare two DESIGN.md files token-by-token, report regressions/changes. Runs: npx @google/design.md diff {file-a} {file-b}'
+
   # === UNIVERSAL COMMANDS ===
   - name: scan
     args: '{path|url}'
@@ -307,6 +323,8 @@ dependencies:
     - roi-calculation-guide.md
     - integration-patterns.md
     - wcag-compliance-guide.md
+    - design-md-spec.md            # Google DESIGN.md format specification (.aios-core/development/data/)
+    - design-md-index.yaml         # 69-brand searchable library (cross-dir: .aios-core/data/design-md-index.yaml)
 
   tools:
     - 21st-dev-magic # UI component generation and design system
@@ -519,6 +537,13 @@ autoClaude:
 **Component Building:**
 
 - `*build {component}` - Build atomic component
+
+**DESIGN.md Operations:**
+
+- `*lookup-design {brand|vertical|tier}` - Search 69-brand library
+- `*lint-design {filepath}` - Validate DESIGN.md structural correctness
+- `*export-design {filepath} --format {tailwind|dtcg}` - Export tokens
+- `*diff-design {file-a} {file-b}` - Compare DESIGN.md token versions
 
 Type `*help` to see commands by phase, or `*status` to see workflow state.
 

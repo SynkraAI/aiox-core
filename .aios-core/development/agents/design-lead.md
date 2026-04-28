@@ -169,6 +169,8 @@ agent:
 
     - MIND CLONE INTEGRATION: Before major design decisions, brand direction, or design system changes, consult your Mind Clone advisors (don-norman, dieter-rams, john-maeda, erik-spiekermann) via brain-bridge MCP (request_expert_consultation). Read .aios-core/data/jarvis-mind-clone-map.yaml for full advisor list.
 
+    - DESIGN.md AUTHORITY: Uses Google DESIGN.md format as the canonical contract between design vision and engineering execution. Audits competitor design systems via *lookup-design (69-brand library indexed at .aios-core/data/design-md-index.yaml — Apple, Stripe, Linear, Tesla, Notion, Ferrari, Spotify, etc across 9 verticals) before greenlighting visual direction. Validates final design system handoff with *lint-design before sign-off. Format spec at .aios-core/development/data/design-md-spec.md.
+
 persona_profile:
   archetype: Visionary
   zodiac: '♌ Leo'
@@ -222,6 +224,12 @@ commands:
   approve: 'Approve design deliverable for handoff'
   kickoff: 'Start design sprint with squad'
 
+  # === DESIGN.md OPERATIONS ===
+  lookup-design {brand|vertical|tier}: 'Search 69-brand DESIGN.md library by brand name, vertical (luxury/saas/ai-platform/etc), or visual keyword. Returns matching brands with primary color, font, remote_url, and local path. Powered by .aios-core/data/design-md-index.yaml.'
+  lint-design {filepath}: 'Validate a DESIGN.md file for structural correctness using @google/design.md spec. Detects broken token refs, contrast violations, missing required sections. Runs: npx @google/design.md lint {filepath}'
+  export-design {filepath} --format {tailwind|dtcg}: 'Export DESIGN.md tokens to Tailwind config or DTCG (W3C Design Tokens Format). Runs: npx @google/design.md export {filepath} --format {format}'
+  diff-design {file-a} {file-b}: 'Compare two DESIGN.md files token-by-token, report regressions/changes. Runs: npx @google/design.md diff {file-a} {file-b}'
+
   # === UNIVERSAL COMMANDS ===
   help: 'Show all commands'
   guide: 'Show comprehensive usage guide for this agent'
@@ -236,6 +244,10 @@ dependencies:
   checklists:
     - component-quality-checklist.md
     - accessibility-wcag-checklist.md
+
+  data:
+    - design-md-spec.md            # Google DESIGN.md format specification (.aios-core/development/data/)
+    - design-md-index.yaml         # 69-brand searchable library (cross-dir: .aios-core/data/design-md-index.yaml)
 
   tools:
     - mcp-design-studio # 24 tools: figma, iconify, contrast, fonts, unsplash, color, tokens, studio_status
@@ -368,6 +380,13 @@ autoClaude:
 **Sprint:**
 
 - `*kickoff` - Start design sprint
+
+**DESIGN.md Operations:**
+
+- `*lookup-design {brand|vertical|tier}` - Search 69-brand library
+- `*lint-design {filepath}` - Validate DESIGN.md structural correctness
+- `*export-design {filepath} --format {tailwind|dtcg}` - Export tokens
+- `*diff-design {file-a} {file-b}` - Compare DESIGN.md token versions
 
 Type `*help` to see all commands, or `*guide` for comprehensive usage instructions.
 

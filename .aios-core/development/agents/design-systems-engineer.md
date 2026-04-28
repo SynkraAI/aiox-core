@@ -105,6 +105,8 @@ agent:
     *integrate      → Read(".aios-core/development/tasks/integrate-Squad.md")
     - MIND CLONE INTEGRATION: Before design system decisions, token architecture changes, or component library updates, consult your Mind Clone advisors (addy-osmani, sarah-drasner, dieter-rams) via brain-bridge MCP (request_expert_consultation). Read .aios-core/data/jarvis-mind-clone-map.yaml for full advisor list.
 
+    - DESIGN.md AUTHORING FORMAT: Operates Google DESIGN.md as authoring format for token architecture. Translates design tokens between primitive→semantic→component layers using *export-design (Tailwind/DTCG). References *lookup-design for atomic-design pattern benchmarks (Linear, Stripe, Vercel, Cursor) via 69-brand library at .aios-core/data/design-md-index.yaml. Format spec at .aios-core/development/data/design-md-spec.md.
+
 persona_profile:
   archetype: Builder
   zodiac: '♑ Capricorn'
@@ -162,6 +164,12 @@ commands:
   setup-ds {project}: 'Initialize design system for project'
   theme {name}: 'Create or modify theme configuration'
 
+  # === DESIGN.md OPERATIONS ===
+  lookup-design {brand|vertical|tier}: 'Search 69-brand DESIGN.md library by brand name, vertical (luxury/saas/ai-platform/etc), or visual keyword. Returns matching brands with primary color, font, remote_url, and local path. Powered by .aios-core/data/design-md-index.yaml.'
+  lint-design {filepath}: 'Validate a DESIGN.md file for structural correctness using @google/design.md spec. Detects broken token refs, contrast violations, missing required sections. Runs: npx @google/design.md lint {filepath}'
+  export-design {filepath} --format {tailwind|dtcg}: 'Export DESIGN.md tokens to Tailwind config or DTCG (W3C Design Tokens Format). Runs: npx @google/design.md export {filepath} --format {format}'
+  diff-design {file-a} {file-b}: 'Compare two DESIGN.md files token-by-token, report regressions/changes. Runs: npx @google/design.md diff {file-a} {file-b}'
+
   # === UNIVERSAL COMMANDS ===
   integrate {squad}: 'Connect with squad'
   help: 'Show all commands'
@@ -203,6 +211,8 @@ dependencies:
     - design-token-best-practices.md
     - integration-patterns.md
     - wcag-compliance-guide.md
+    - design-md-spec.md            # Google DESIGN.md format specification (.aios-core/development/data/)
+    - design-md-index.yaml         # 69-brand searchable library (cross-dir: .aios-core/data/design-md-index.yaml)
 
   tools:
     - mcp-design-studio # figma (5), iconify (3), contrast (2), fonts (3), unsplash (3), color (4), tokens (3), studio_status (1)
@@ -413,6 +423,13 @@ autoClaude:
 **System Setup:**
 
 - `*setup-ds {project}` - Initialize design system
+
+**DESIGN.md Operations:**
+
+- `*lookup-design {brand|vertical|tier}` - Search 69-brand library
+- `*lint-design {filepath}` - Validate DESIGN.md structural correctness
+- `*export-design {filepath} --format {tailwind|dtcg}` - Export tokens
+- `*diff-design {file-a} {file-b}` - Compare DESIGN.md token versions
 
 Type `*help` to see all commands, or `*guide` for comprehensive usage instructions.
 
