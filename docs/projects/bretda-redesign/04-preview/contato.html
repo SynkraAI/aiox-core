@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Bretda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="./index.html" class="nav-logo" aria-label="Bretda">
+      <img src="./assets/BRETDA-White.svg" alt="Bretda">
+    </a>
+    <ul class="nav-items">
+      <li><a href="./colecao.html">Coleção</a></li>
+      <li><a href="./produto.html">Configurador</a></li>
+      <li><a href="./atelier.html">Atelier</a></li>
+      <li><a href="./contato.html" class="active">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="t-label overline" style="color: var(--color-accent); margin-bottom: var(--space-component);">Contato</div>
+    <h1>Receba uma proposta em até 24 horas.</h1>
+    <p class="lede">Conte-nos sobre o ambiente. Respondemos com madeiras sugeridas, render 3D personalizado e prazo de entrega.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="contact-grid">
+
+      <form class="contact-form" onsubmit="event.preventDefault();">
+        <div>
+          <label for="nome" class="input-label">Nome completo</label>
+          <input id="nome" type="text" class="input-text" placeholder="Como devemos chamá-lo?">
+        </div>
+        <div>
+          <label for="email" class="input-label">Email</label>
+          <input id="email" type="email" class="input-text" placeholder="seu@email.com">
+        </div>
+        <div>
+          <label for="whatsapp" class="input-label">WhatsApp (opcional)</label>
+          <input id="whatsapp" type="tel" class="input-text" placeholder="+55 47 0000-0000">
+        </div>
+        <div>
+          <label for="msg" class="input-label">Conte sobre o ambiente</label>
+          <textarea id="msg" class="textarea-text" placeholder="Tamanho da sala, estilo de mobiliário, prazo, modelo de interesse..."></textarea>
+        </div>
+        <div style="margin-top: var(--space-component);">
+          <button type="submit" class="btn-primary">
+            Receber proposta em 24h
+            <span class="arrow">&rarr;</span>
+          </button>
+        </div>
+      </form>
+
+      <aside class="contact-aside">
+        <h3>Atelier</h3>
+        <p>Rua das Marcenarias, 000<br>Centro &mdash; Blumenau, SC<br>Visitas com agendamento.</p>
+
+        <div class="contact-divider"></div>
+
+        <h3>Direto</h3>
+        <p><a href="#" class="btn-text" style="display: inline-flex;">WhatsApp &rarr;</a></p>
+        <p><a href="mailto:contato@bretda.com.br">contato@bretda.com.br</a></p>
+        <p>+55 47 0000-0000</p>
+
+        <div class="contact-divider"></div>
+
+        <h3>Redes</h3>
+        <p><a href="#" class="btn-text" style="display: inline-flex;">Instagram &rarr;</a></p>
+        <p><a href="#" class="btn-text" style="display: inline-flex;">Pinterest &rarr;</a></p>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="./assets/BRETDA-White-Single.svg" alt="Bretda">
+        <p>Atelier de mesas artesanais. Blumenau, Santa Catarina.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="./colecao.html">Coleção</a></li>
+          <li><a href="./produto.html">Configurador</a></li>
+          <li><a href="./atelier.html">Atelier</a></li>
+          <li><a href="./contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="./contato.html">Blumenau, SC</a></li>
+          <li><a href="./contato.html">contato@bretda.com.br</a></li>
+          <li><a href="./contato.html">+55 47 0000-0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Bretda &middot; CNPJ 00.000.000/0001-00 &middot; Blumenau, SC</div>
+      <div><a href="#">Política de Privacidade (LGPD)</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="preview-badge">Preview Phase 4 &middot; contato.html</div>
+
+</body>
+</html>

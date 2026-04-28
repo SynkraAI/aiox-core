@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Guide — Bretda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="./index.html" class="nav-logo" aria-label="Bretda">
+      <img src="./assets/BRETDA-White.svg" alt="Bretda">
+    </a>
+    <ul class="nav-items">
+      <li><a href="./colecao.html">Coleção</a></li>
+      <li><a href="./produto.html">Configurador</a></li>
+      <li><a href="./atelier.html">Atelier</a></li>
+      <li><a href="./contato.html">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="t-label" style="color: var(--color-accent); margin-bottom: var(--space-component);">Sistema</div>
+    <h1>Style Guide</h1>
+    <p class="lede">Tokens canônicos do sistema Bretda. Tudo aqui é mapeado 1:1 do <code style="font-family:ui-monospace,monospace;">DESIGN.md</code>.</p>
+  </div>
+</header>
+
+<!-- COLORS -->
+<section class="sg-section">
+  <div class="sg-section-inner">
+    <h2 class="t-headline-lg sg-title">Cores</h2>
+    <div class="sg-grid">
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #2A2B26;"></div>
+        <div class="sg-color-meta">
+          <strong>Canvas</strong>
+          <span class="sg-color-hex">#2A2B26</span>
+          <p>Fundo. Charcoal quente.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #353630;"></div>
+        <div class="sg-color-meta">
+          <strong>Surface Raised</strong>
+          <span class="sg-color-hex">#353630</span>
+          <p>Cards e bandas elevadas.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #3E3F38;"></div>
+        <div class="sg-color-meta">
+          <strong>Surface Overlay</strong>
+          <span class="sg-color-hex">#3E3F38</span>
+          <p>Hover, formulários.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #FEF7F2;"></div>
+        <div class="sg-color-meta">
+          <strong>Text Primary</strong>
+          <span class="sg-color-hex">#FEF7F2</span>
+          <p>Cream — corpo e títulos.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #B4B5AC;"></div>
+        <div class="sg-color-meta">
+          <strong>Text Secondary</strong>
+          <span class="sg-color-hex">#B4B5AC</span>
+          <p>Captions, metadata.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #B0B1AA;"></div>
+        <div class="sg-color-meta">
+          <strong>Text Muted</strong>
+          <span class="sg-color-hex">#B0B1AA</span>
+          <p>Legal, micro-print.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #4A4B44;"></div>
+        <div class="sg-color-meta">
+          <strong>Border Subtle</strong>
+          <span class="sg-color-hex">#4A4B44</span>
+          <p>Hairlines, separadores.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #C9A961;"></div>
+        <div class="sg-color-meta">
+          <strong>Accent</strong>
+          <span class="sg-color-hex">#C9A961</span>
+          <p>Champagne. Uma vez por viewport.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #B8985A;"></div>
+        <div class="sg-color-meta">
+          <strong>Accent Hover</strong>
+          <span class="sg-color-hex">#B8985A</span>
+          <p>CTA pressed/hover.</p>
+        </div>
+      </div>
+
+      <div class="sg-color">
+        <div class="sg-color-chip" style="background: #25D366;"></div>
+        <div class="sg-color-meta">
+          <strong>Channel WhatsApp</strong>
+          <span class="sg-color-hex">#25D366</span>
+          <p>FAB icon ONLY. Proibido em chrome.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="sg-section">
+  <div class="sg-section-inner">
+    <h2 class="t-headline-lg sg-title">Tipografia</h2>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>display</strong>Cormorant 56px / 1.05 / -0.01em / 400</div>
+      <div class="t-display">Cada peça nasce em Blumenau.</div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>headline-lg</strong>Cormorant 36px / 1.15 / -0.005em / 400</div>
+      <div class="t-headline-lg">Opal — Sinuca artesanal</div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>headline-md</strong>Cormorant 24px / 1.25 / 0 / 400</div>
+      <div class="t-headline-md">Personalize a sua mesa</div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>lede</strong>Raleway 18px / 1.55 / 0 / 400</div>
+      <div class="t-lede">Cada modelo nasce de uma combinação única de madeira nobre, metal e feltro.</div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>body-md</strong>Raleway 16px / 1.6 / 0 / 400</div>
+      <div class="t-body">A Opal é a peça inaugural da coleção: tampo em freijó brasileiro de fibra fechada, base esculpida em ângulos retos, ferragens em latão escovado.</div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>label-overline</strong>Raleway 13px / 1 / 0.12em / 600 (uppercase)</div>
+      <div class="t-label">Coleção &middot; Configurador &middot; Atelier</div>
+    </div>
+
+    <div class="sg-type-row">
+      <div class="sg-type-meta"><strong>caption</strong>Raleway 12px / 1.4 / 0 / 400</div>
+      <div class="t-caption">Aurora — Sinuca artesanal &middot; nogueira + latão</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section class="sg-section">
+  <div class="sg-section-inner">
+    <h2 class="t-headline-lg sg-title">Espaçamento</h2>
+
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 1px; height: 16px;"></div><div class="sg-spacing-meta"><strong>hairline</strong>1px &middot; 0.0625rem &middot; bordas</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 8px; height: 16px;"></div><div class="sg-spacing-meta"><strong>inline</strong>8px &middot; 0.5rem &middot; entre elementos inline</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 24px; height: 16px;"></div><div class="sg-spacing-meta"><strong>component</strong>24px &middot; 1.5rem &middot; entre componentes</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 24px; height: 16px;"></div><div class="sg-spacing-meta"><strong>gutter</strong>24px &middot; 1.5rem &middot; grid gutter</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 32px; height: 16px;"></div><div class="sg-spacing-meta"><strong>margin</strong>32px &middot; 2rem &middot; outer margin</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 64px; height: 16px;"></div><div class="sg-spacing-meta"><strong>block</strong>64px &middot; 4rem &middot; entre blocks</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 80px; height: 16px;"></div><div class="sg-spacing-meta"><strong>section-mobile</strong>80px &middot; 5rem &middot; mobile</div></div>
+    <div class="sg-spacing-row"><div class="sg-spacing-block" style="width: 120px; height: 16px;"></div><div class="sg-spacing-meta"><strong>section</strong>120px &middot; 7.5rem &middot; desktop</div></div>
+  </div>
+</section>
+
+<!-- ROUNDED -->
+<section class="sg-section">
+  <div class="sg-section-inner">
+    <h2 class="t-headline-lg sg-title">Cantos arredondados</h2>
+    <div class="sg-radius-row">
+      <div class="sg-radius">
+        <div class="sg-radius-chip" style="border-radius: 0;"></div>
+        <div class="sg-radius-meta">none &middot; 0px<br>cards, imagens</div>
+      </div>
+      <div class="sg-radius">
+        <div class="sg-radius-chip" style="border-radius: 2px;"></div>
+        <div class="sg-radius-meta">sm &middot; 2px<br>botões, inputs</div>
+      </div>
+      <div class="sg-radius">
+        <div class="sg-radius-chip" style="border-radius: 4px;"></div>
+        <div class="sg-radius-meta">md &middot; 4px<br>(reservado)</div>
+      </div>
+      <div class="sg-radius">
+        <div class="sg-radius-chip" style="border-radius: 8px;"></div>
+        <div class="sg-radius-meta">lg &middot; 8px<br>(reservado)</div>
+      </div>
+      <div class="sg-radius">
+        <div class="sg-radius-chip" style="border-radius: 9999px;"></div>
+        <div class="sg-radius-meta">full &middot; 9999px<br>WhatsApp FAB</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="sg-section">
+  <div class="sg-section-inner">
+    <h2 class="t-headline-lg sg-title">Componentes</h2>
+
+    <div class="sg-component-block">
+      <div class="sg-component-label">Buttons</div>
+      <div class="sg-component-row">
+        <a href="#" class="btn-primary">Configurar a sua <span class="arrow">&rarr;</span></a>
+        <a href="#" class="btn-secondary">Ver coleção</a>
+        <a href="#" class="btn-text">Conheça o atelier &rarr;</a>
+      </div>
+    </div>
+
+    <div class="sg-component-block">
+      <div class="sg-component-label">Form fields</div>
+      <div style="max-width: 480px;">
+        <label class="input-label">Nome completo</label>
+        <input type="text" class="input-text" placeholder="Como devemos chamá-lo?">
+      </div>
+      <div style="max-width: 480px; margin-top: var(--space-component);">
+        <label class="input-label">Mensagem</label>
+        <textarea class="textarea-text" placeholder="Conte sobre o ambiente..."></textarea>
+      </div>
+    </div>
+
+    <div class="sg-component-block">
+      <div class="sg-component-label">Filter pills</div>
+      <div class="filter-pills" style="margin-bottom: 0;">
+        <button class="filter-pill active">Todas</button>
+        <button class="filter-pill">Sinuca</button>
+        <button class="filter-pill">Pebolim</button>
+        <button class="filter-pill">Tênis de Mesa</button>
+      </div>
+    </div>
+
+    <div class="sg-component-block">
+      <div class="sg-component-label">Product card</div>
+      <div style="max-width: 320px;">
+        <a href="#" class="product-card">
+          <div class="product-card-image"><img src="./assets/Opal_01.png" alt="Opal"></div>
+          <div class="product-card-caption">
+            <div class="product-card-name">Opal</div>
+            <div class="product-card-subline">Freijó &middot; latão escovado</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sg-component-block">
+      <div class="sg-component-label">Nav item</div>
+      <div class="nav-items" style="display: flex;">
+        <a href="#" class="active">Coleção</a>
+        <a href="#">Configurador</a>
+        <a href="#">Atelier</a>
+        <a href="#">Contato</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="./assets/BRETDA-White-Single.svg" alt="Bretda">
+        <p>Atelier de mesas artesanais. Blumenau, Santa Catarina.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="./colecao.html">Coleção</a></li>
+          <li><a href="./produto.html">Configurador</a></li>
+          <li><a href="./atelier.html">Atelier</a></li>
+          <li><a href="./contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sistema</h4>
+        <ul>
+          <li><a href="./style-guide.html">Style guide</a></li>
+          <li><a href="./comparison.html">Antes vs Depois</a></li>
+          <li><a href="./hero-variants.html">Hero variants</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Bretda &middot; CNPJ 00.000.000/0001-00 &middot; Blumenau, SC</div>
+      <div><a href="#">Política de Privacidade (LGPD)</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="preview-badge">Preview Phase 4 &middot; style-guide.html</div>
+
+</body>
+</html>

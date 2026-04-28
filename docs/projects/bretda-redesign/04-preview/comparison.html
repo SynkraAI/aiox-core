@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antes vs Depois — Bretda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="./index.html" class="nav-logo" aria-label="Bretda">
+      <img src="./assets/BRETDA-White.svg" alt="Bretda">
+    </a>
+    <ul class="nav-items">
+      <li><a href="./colecao.html">Coleção</a></li>
+      <li><a href="./produto.html">Configurador</a></li>
+      <li><a href="./atelier.html">Atelier</a></li>
+      <li><a href="./contato.html">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="t-label" style="color: var(--color-accent); margin-bottom: var(--space-component);">Análise</div>
+    <h1>Bretda — Antes vs Depois</h1>
+    <p class="lede">Cinco decisões que separam o site atual da próxima versão. Cada uma é uma escolha consciente, justificada no conclave de design.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="container">
+
+    <div class="cmp-row">
+      <div class="cmp-label">
+        <span class="num">1</span>
+        <span class="name">Hero</span>
+      </div>
+      <div class="cmp-cell before">
+        <div class="cmp-tag">Atual</div>
+        <h3>Cognitive overload acima da dobra</h3>
+        <p>32 palavras antes da dobra. Gradient pesado <code style="font-family:ui-monospace,monospace;">from-black/80</code> escurece o produto. Dois CTAs disputam atenção. PriceHint A/B + scroll indicator com pulse.</p>
+        <div class="mock">
+          [overline] BRETDA — ITAJAÍ, BRASIL<br>
+          [H1] ELEVANDO O ENTRETENIMENTO<br>
+          [H1] PARA UM PATAMAR DE LUXO<br>
+          [sub] Mesas artesanais que transformam...<br>
+          [btn primary] [btn secondary] [pulse↓]
+        </div>
+      </div>
+      <div class="cmp-cell after">
+        <div class="cmp-tag">Proposto</div>
+        <h3>Uma legenda. Um botão. O objeto.</h3>
+        <p>8 palavras. Gradiente <code style="font-family:ui-monospace,monospace;">canvas/40</code> sussurro. Caption mixed-case sem H1. Um único CTA champagne.</p>
+        <div class="mock" style="background: var(--color-canvas); color: var(--color-text-primary); font-family: var(--font-display); font-style: italic; padding: 28px;">
+          Opal — Sinuca artesanal<br>
+          <span style="color: var(--color-accent); font-family: var(--font-body); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; font-style: normal;">[ Configurar a sua → ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cmp-label">
+        <span class="num">2</span>
+        <span class="name">Navegação</span>
+      </div>
+      <div class="cmp-cell before">
+        <div class="cmp-tag">Atual</div>
+        <h3>Mistura categoria com persona</h3>
+        <p>5+ items incluindo "Para Arquitetos" — violação de Norman: persona não é content type. CTA "Solicitar Projeto" no nav redundante.</p>
+        <div class="mock">Mesas &middot; Sobre &middot; Para Arquitetos &middot; Contato &middot; [BTN: Solicitar Projeto]</div>
+      </div>
+      <div class="cmp-cell after">
+        <div class="cmp-tag">Proposto</div>
+        <h3>Quatro substantivos. Um propósito.</h3>
+        <p>Coleção &middot; Configurador &middot; Atelier &middot; Contato. Sem CTA no nav. O configurador é o diferenciador — surface no nav.</p>
+        <div class="mock" style="font-family: var(--font-body); color: var(--color-text-primary);">Coleção &middot; Configurador &middot; Atelier &middot; Contato</div>
+      </div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cmp-label">
+        <span class="num">3</span>
+        <span class="name">Stats Section</span>
+      </div>
+      <div class="cmp-cell before">
+        <div class="cmp-tag">Atual — DELETAR</div>
+        <h3>"100+ mesas entregues / 15+ anos"</h3>
+        <p>Linguagem de relatório trimestral B2B. Luxo não se quantifica. Cassina não conta peças vendidas; Hermès não exibe anos de existência.</p>
+        <div class="mock">
+          ┌─────┬─────┬─────┐<br>
+          │100+ │ 15+ │ 5★  │<br>
+          │mesas│anos │NPS  │<br>
+          └─────┴─────┴─────┘
+        </div>
+      </div>
+      <div class="cmp-cell after">
+        <div class="cmp-tag">Proposto</div>
+        <h3>Seção apagada. Inteira.</h3>
+        <p>O luxo é silencioso. Confiança vem do objeto, não de números. A página inteira foi removida — não relocada, não reescrita. Apagada.</p>
+        <div class="mock" style="text-align: center; font-style: italic; padding: 32px;">
+          (vazio &mdash; espaço respirável)
+        </div>
+      </div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cmp-label">
+        <span class="num">4</span>
+        <span class="name">CTAs</span>
+      </div>
+      <div class="cmp-cell before">
+        <div class="cmp-tag">Atual</div>
+        <h3>Sete CTAs redundantes</h3>
+        <p>"Solicitar Projeto" (nav) + Hero CTA1 + Hero CTA2 + WhatsApp FAB + WhatsApp inline em produto + Footer CTA + CTASection. Norman doors em cascata.</p>
+        <div class="mock">[BTN] [BTN] [BTN] [BTN] [BTN] [BTN] [BTN]</div>
+      </div>
+      <div class="cmp-cell after">
+        <div class="cmp-tag">Proposto</div>
+        <h3>Um CTA primário por viewport</h3>
+        <p>Hero: 1. Produto: 1. Atelier: 1 (text-link). Contato: form estruturado. WhatsApp degradado a FAB. Champagne aparece uma vez por scroll.</p>
+        <div class="mock"><span style="color: var(--color-accent); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; font-size: 11px;">[ Configurar a sua → ]</span></div>
+      </div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cmp-label">
+        <span class="num">5</span>
+        <span class="name">Tipografia</span>
+      </div>
+      <div class="cmp-cell before">
+        <div class="cmp-tag">Atual</div>
+        <h3>Cormorant violentado</h3>
+        <p>Cormorant em <code style="font-family:ui-monospace,monospace;">uppercase + tracking 0.08em + weight 700</code> em hero, atelier e footer. A serif perde hairlines. 24+ valores arbitrários <code style="font-family:ui-monospace,monospace;">text-[Npx]</code>.</p>
+        <div class="mock" style="font-family: 'Cormorant Garamond', serif; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; font-size: 18px; color: var(--color-text-secondary);">ELEVANDO O ENTRETENIMENTO</div>
+      </div>
+      <div class="cmp-cell after">
+        <div class="cmp-tag">Proposto</div>
+        <h3>Cormorant, mixed-case, ≤600</h3>
+        <p>Mixed case sempre. Tracking ≤ 0. Weight 400-600 apenas. Escala de 7 passos colapsa os 24+ arbitrários. A serif faz o trabalho — o sistema sai do caminho.</p>
+        <div class="mock" style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 24px; letter-spacing: 0; color: var(--color-text-primary);">Cada peça nasce em Blumenau.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section-raised">
+  <div class="container-narrow" style="text-align: center;">
+    <div class="t-label" style="color: var(--color-accent); margin-bottom: var(--space-component);">Resumo</div>
+    <h2 class="t-display" style="margin-bottom: var(--space-block);">Menos elementos. Mais decisão.</h2>
+    <p class="t-lede" style="line-height: 1.7;">Cada deleção é uma escolha sustentada por evidência: 4 audits, 5-clone conclave, 14 não-negociáveis. O site novo não tem mais features — tem mais discernimento.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="./assets/BRETDA-White-Single.svg" alt="Bretda">
+        <p>Atelier de mesas artesanais. Blumenau, Santa Catarina.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="./colecao.html">Coleção</a></li>
+          <li><a href="./produto.html">Configurador</a></li>
+          <li><a href="./atelier.html">Atelier</a></li>
+          <li><a href="./contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sistema</h4>
+        <ul>
+          <li><a href="./style-guide.html">Style guide</a></li>
+          <li><a href="./comparison.html">Antes vs Depois</a></li>
+          <li><a href="./hero-variants.html">Hero variants</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Bretda &middot; CNPJ 00.000.000/0001-00 &middot; Blumenau, SC</div>
+      <div><a href="#">Política de Privacidade (LGPD)</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="preview-badge">Preview Phase 4 &middot; comparison.html</div>
+
+</body>
+</html>

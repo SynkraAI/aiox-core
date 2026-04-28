@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Variants — Bretda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+<style>
+  .v-a-bg { background-image: url("./assets/Opal_Ambiente_01.jpg"); }
+  .v-b-bg {
+    background:
+      radial-gradient(ellipse 50% 40% at 50% 55%, rgba(201,169,97,0.12) 0%, rgba(0,0,0,0) 70%),
+      #0F0F0D;
+  }
+  .v-b-product {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -45%);
+    width: min(60%, 720px);
+    filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
+  }
+  .v-c-bg {
+    background:
+      linear-gradient(135deg, rgba(42,43,38,0.95) 0%, rgba(53,54,48,0.95) 100%),
+      url("./assets/Opal_Ambiente_03.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .v-c-frame {
+    position: absolute;
+    inset: 80px;
+    border: 1px dashed var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--color-text-muted);
+    text-align: center;
+    gap: 12px;
+  }
+  .v-c-icon {
+    width: 64px; height: 64px;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="./index.html" class="nav-logo" aria-label="Bretda">
+      <img src="./assets/BRETDA-White.svg" alt="Bretda">
+    </a>
+    <ul class="nav-items">
+      <li><a href="./colecao.html">Coleção</a></li>
+      <li><a href="./produto.html">Configurador</a></li>
+      <li><a href="./atelier.html">Atelier</a></li>
+      <li><a href="./contato.html">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="t-label" style="color: var(--color-accent); margin-bottom: var(--space-component);">Decisão</div>
+    <h1>Hero — três caminhos</h1>
+    <p class="lede">Três tratamentos para o primeiro viewport. Mesma legenda, mesmo CTA, atmosferas distintas. Escolha um.</p>
+  </div>
+</header>
+
+<!-- VARIANT A — Lifestyle -->
+<div class="variant-block">
+  <div class="variant-hero">
+    <div class="variant-label-tag">Variant A &middot; Lifestyle</div>
+    <div class="variant-bg v-a-bg"></div>
+    <div class="variant-overlay lifestyle"></div>
+    <div class="variant-content">
+      <div class="variant-cap">Opal &mdash; Sinuca artesanal</div>
+      <a href="#" class="btn-primary">Configurar a sua <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+<div class="variant-desc">
+  <div class="variant-desc-inner">
+    <div class="variant-desc-label">Quando funciona</div>
+    <div class="variant-desc-text">
+      <p>JPG lifestyle ambiente real. Gradient sussurro <code style="font-family:ui-monospace,monospace;">canvas/40</code>. Caption bottom-left, CTA bottom-right.</p>
+      <p style="margin-top: 12px; color: var(--color-text-muted);">Funciona quando há foto de showroom luxuoso disponível. Atmosfera Cassina/B&amp;B Italia. Risco: depende da qualidade do JPG; o produto pode ler como "decoração" e não "objeto".</p>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT B — Spotlight Museum -->
+<div class="variant-block">
+  <div class="variant-hero">
+    <div class="variant-label-tag">Variant B &middot; Spotlight Museum</div>
+    <div class="variant-bg v-b-bg"></div>
+    <img class="v-b-product" src="./assets/Opal_01.png" alt="Opal isolated">
+    <div class="variant-content centered">
+      <div class="variant-cap large t-display" style="text-align: center; margin-bottom: var(--space-component);">Opal.</div>
+      <div class="variant-cap" style="font-family: var(--font-body); font-size: var(--text-label); font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--space-block);">Sinuca artesanal &middot; Bretda</div>
+      <a href="#" class="btn-primary">Configurar a sua <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+<div class="variant-desc">
+  <div class="variant-desc-inner">
+    <div class="variant-desc-label">Quando funciona</div>
+    <div class="variant-desc-text">
+      <p>PNG isolado em fundo quase-preto, spotlight champagne radial, peça flutuante centralizada.</p>
+      <p style="margin-top: 12px; color: var(--color-text-muted);">Atmosfera Ferrari museum, 11 Ravens, Bugatti. O objeto é o argumento — sem competir com decoração de sala. Risco: pode ler como "showroom de SaaS premium" se não tiver textura cinematográfica suficiente.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT C — Video Placeholder -->
+<div class="variant-block">
+  <div class="variant-hero">
+    <div class="variant-label-tag">Variant C &middot; Video</div>
+    <div class="variant-bg v-c-bg"></div>
+    <div class="variant-overlay lifestyle"></div>
+    <div class="v-c-frame">
+      <div class="v-c-icon">&#9658;</div>
+      <div class="t-label" style="color: var(--color-accent);">Slot de vídeo</div>
+      <div class="t-caption" style="max-width: 40ch; line-height: 1.6;">[ Video Hero — full-bleed autoplay 60s loop, golden hour Opal em mansão, 1080p H.264, sem áudio, object-cover ]</div>
+    </div>
+    <div class="variant-content">
+      <div class="variant-cap">Opal &mdash; Sinuca artesanal</div>
+      <a href="#" class="btn-primary">Configurar a sua <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+<div class="variant-desc">
+  <div class="variant-desc-inner">
+    <div class="variant-desc-label">Quando funciona</div>
+    <div class="variant-desc-text">
+      <p>Vídeo cinematográfico autoplay loop muted. 60s, golden hour, mansão real. Caption + CTA mantém a discrição editorial.</p>
+      <p style="margin-top: 12px; color: var(--color-text-muted);">Padrão 11 Ravens, Bugatti, Hermès Maison. Maior leverage de luxo — mas requer produção de vídeo real (custo + tempo Sprint 2). Variant A serve como ponte até o vídeo ficar pronto.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PICK BLOCK -->
+<div class="pick-block">
+  <div class="t-label" style="color: var(--color-accent); margin-bottom: var(--space-component);">Decisão</div>
+  <h3 class="t-headline-lg" style="margin-bottom: var(--space-component);">Qual hero leva o site novo?</h3>
+  <p class="t-body" style="color: var(--color-text-secondary); max-width: 56ch; margin: 0 auto;">Marque a sua escolha em <code style="font-family:ui-monospace,monospace;">DECISIONS.md</code> &mdash; secção Hero, item "Hero variant preference".</p>
+  <div class="pick-row">
+    <button class="pick-btn">Variant A</button>
+    <button class="pick-btn">Variant B</button>
+    <button class="pick-btn">Variant C</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="./assets/BRETDA-White-Single.svg" alt="Bretda">
+        <p>Atelier de mesas artesanais. Blumenau, Santa Catarina.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="./colecao.html">Coleção</a></li>
+          <li><a href="./produto.html">Configurador</a></li>
+          <li><a href="./atelier.html">Atelier</a></li>
+          <li><a href="./contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sistema</h4>
+        <ul>
+          <li><a href="./style-guide.html">Style guide</a></li>
+          <li><a href="./comparison.html">Antes vs Depois</a></li>
+          <li><a href="./hero-variants.html">Hero variants</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Bretda &middot; CNPJ 00.000.000/0001-00 &middot; Blumenau, SC</div>
+      <div><a href="#">Política de Privacidade (LGPD)</a></div>
+    </div>
+  </div>
+</footer>
+
+<section style="padding: var(--space-section) var(--space-margin); background: var(--color-canvas); border-top: 1px solid var(--color-border-subtle);">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: var(--space-section-mobile);">
+      <div style="font: var(--font-label-overline); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent); margin-bottom: var(--space-component);">AI-Generated Hero Concepts</div>
+      <h2 style="font: var(--font-headline-lg); color: var(--color-text-primary); margin-bottom: var(--space-component);">5 atmosferas geradas via Flux Pro / Schnell</h2>
+      <p style="font: var(--font-body-md); color: var(--color-text-secondary); max-width: 720px; margin: 0 auto;">Conceitos cinematográficos AI da Opal em diferentes ambientes. Use estas como referência de mood e composição para a produção real (3D-render-stills + AI environment compositing).</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: var(--space-block); margin-bottom: var(--space-block);">
+      <figure style="margin: 0;">
+        <img src="./assets/mockups/bretda-hero-V1-mansion-sunset-2026-04-27-01.png" alt="V1 Mansion Sunset" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--rounded-md);">
+        <figcaption style="margin-top: var(--space-component); display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font: var(--font-headline-md); color: var(--color-text-primary);">V1 — Mansion Sunset ⭐</span>
+          <span style="font: var(--font-caption); color: var(--color-text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Brazilian luxury · Golden hour</span>
+        </figcaption>
+        <p style="font: var(--font-body-sm); color: var(--color-text-secondary); margin-top: var(--space-inline);">Modernist mansion + palmeiras + infinity pool. Z-base visível. Captura o lifestyle target perfeitamente.</p>
+      </figure>
+
+      <figure style="margin: 0;">
+        <img src="./assets/mockups/bretda-hero-V4-isolated-dramatic-2026-04-27-01.png" alt="V4 Isolated Dramatic" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--rounded-md); background: #000;">
+        <figcaption style="margin-top: var(--space-component); display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font: var(--font-headline-md); color: var(--color-text-primary);">V4 — Isolated Dramatic ⭐⭐</span>
+          <span style="font: var(--font-caption); color: var(--color-text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Ferrari museum · Single light</span>
+        </figcaption>
+        <p style="font: var(--font-body-sm); color: var(--color-text-secondary); margin-top: var(--space-inline);">Z-base mais fiel. Top-light dramático, museum piece feel. Ferrari pre-2023 reference exata.</p>
+      </figure>
+
+      <figure style="margin: 0;">
+        <img src="./assets/mockups/bretda-hero-V2-penthouse-night-2026-04-27-01.png" alt="V2 Penthouse Night" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--rounded-md);">
+        <figcaption style="margin-top: var(--space-component); display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font: var(--font-headline-md); color: var(--color-text-primary);">V2 — Penthouse Night</span>
+          <span style="font: var(--font-caption); color: var(--color-text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">City lights · Warm</span>
+        </figcaption>
+        <p style="font: var(--font-body-sm); color: var(--color-text-secondary); margin-top: var(--space-inline);">Mood São Paulo nighttime. Base AI-rendered fica triangular, não Z. Atmosfera ok, fidelidade do produto comprometida.</p>
+      </figure>
+
+      <figure style="margin: 0;">
+        <img src="./assets/mockups/bretda-hero-V3-atelier-craft-2026-04-27-01.png" alt="V3 Atelier Craft" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--rounded-md);">
+        <figcaption style="margin-top: var(--space-component); display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font: var(--font-headline-md); color: var(--color-text-primary);">V3 — Atelier Craft</span>
+          <span style="font: var(--font-caption); color: var(--color-text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Marcenaria · Chiaroscuro</span>
+        </figcaption>
+        <p style="font: var(--font-body-sm); color: var(--color-text-secondary); margin-top: var(--space-inline);">Mood marcenaria, dust particles. Base saiu retangular, perdeu o Z. Útil pra banda Atelier, não pro hero.</p>
+      </figure>
+
+      <figure style="margin: 0; grid-column: 1/-1; max-width: 720px; justify-self: center;">
+        <img src="./assets/mockups/bretda-hero-V5-macro-detail-2026-04-27-01.png" alt="V5 Macro Detail" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--rounded-md);">
+        <figcaption style="margin-top: var(--space-component); display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font: var(--font-headline-md); color: var(--color-text-primary);">V5 — Macro Detail</span>
+          <span style="font: var(--font-caption); color: var(--color-text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Felt · Balls · Cue</span>
+        </figcaption>
+        <p style="font: var(--font-body-sm); color: var(--color-text-secondary); margin-top: var(--space-inline);">Detalhe macro pra usar entre seções como "money shot" textural. Bokeh dramático, golden warm.</p>
+      </figure>
+    </div>
+
+    <div style="background: var(--color-surface-raised); padding: var(--space-block); border-radius: var(--rounded-md); border: 1px solid var(--color-border-subtle);">
+      <div style="font: var(--font-label-overline); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-component);">Honestidade técnica</div>
+      <p style="font: var(--font-body-md); color: var(--color-text-secondary); margin: 0;">AI lutou pra replicar a base Z origami específica da Opal — V1 e V4 ficaram fiéis, V2/V3 perderam a forma. Pra produção: <strong style="color: var(--color-text-primary);">3D-stills do GLB existente</strong> ganham em fidelidade do produto, AI ganha em <strong style="color: var(--color-text-primary);">ambientes/atmosfera</strong>. Caminho recomendado: hero compositing híbrido (3D + AI background).</p>
+    </div>
+  </div>
+</section>
+
+<div class="preview-badge">Preview Phase 4 &middot; hero-variants.html</div>
+
+</body>
+</html>
