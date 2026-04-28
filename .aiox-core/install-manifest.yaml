@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-11T15:04:09.395Z"
+generated_at: "2026-04-28T14:40:37.486Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1090
+file_count: 1092
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -2956,10 +2956,18 @@ files:
     hash: sha256:1b72ae317c81c01ed1d6d518d64cf18fdecb9d408ab45dba6ad45cb39c6e3a1d
     type: script
     size: 40724
+  - path: infrastructure/scripts/codex-skills-sync/bootstrap.js
+    hash: sha256:56f4518586591d809cda89183e1af3b05c4e4c7369df992e7fdd7214ea5c6072
+    type: script
+    size: 22355
   - path: infrastructure/scripts/codex-skills-sync/index.js
     hash: sha256:a7a3c97374c34a900acad13498f61f8a40517574480354218e349d1e1d3931a4
     type: script
     size: 5246
+  - path: infrastructure/scripts/codex-skills-sync/README.md
+    hash: sha256:908f02e6b36e2bd5ec706427992955b411bb70db7b1e34b00d4845fe0fc9337a
+    type: script
+    size: 3737
   - path: infrastructure/scripts/codex-skills-sync/validate.js
     hash: sha256:0fbc1baff25f20e3a37d3e4be51d146a75254d5ed638b3438d9f1bf0e587c997
     type: script

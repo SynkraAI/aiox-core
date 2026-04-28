@@ -75,6 +75,8 @@
     "validate:gemini-integration": "node .aiox-core/infrastructure/scripts/validate-gemini-integration.js",
     "sync:skills:codex": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js",
     "sync:skills:codex:global": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js --global --global-only",
+    "setup:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js",
+    "setup:codex-skills:dry": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js --dry-run",
     "validate:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict",
     "validate:paths": "node .aiox-core/infrastructure/scripts/validate-paths.js",
     "validate:parity": "node .aiox-core/infrastructure/scripts/validate-parity.js",
