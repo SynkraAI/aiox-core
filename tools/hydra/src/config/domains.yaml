@@ -34,3 +34,7 @@ domains:
   legal:
     keywords: ["LGPD", "GDPR", "compliance", "IP", "trademark", "copyright", "regulacao", "privacidade"]
     projects: ["serenity-ai", "aios"]
+
+  design-systems:
+    keywords: ["DESIGN.md", "design system", "design tokens", "Figma", "Stitch", "design.md", "atomic design", "component library", "UI kit", "design language", "visual identity", "typography scale", "color palette", "tailwind config", "DTCG"]
+    projects: ["aios", "tocks", "bretda", "kr-interiores", "low-ticket-10k", "serenity-ai"]

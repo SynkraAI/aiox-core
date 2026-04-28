@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-04-17T22:57:11.277Z"
+generated_at: "2026-04-28T17:13:08.640Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1093
+file_count: 1159
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -1152,14 +1152,22 @@ files:
     hash: sha256:bd170b28092614e866e40195fc3358601791f8c934229a844ebd8edce0868fed
     type: data
     size: 34083
+  - path: data/design-md-index.yaml
+    hash: sha256:a695e8cbea3d34b383c7b3903dbc6289e4d6dd9efb92647527489a37972eb684
+    type: data
+    size: 27393
   - path: data/dream-reports/scheduler.log
     hash: sha256:fb378f73cf46e681c9fa673f1b1729e12fe037f6307fa84862144c581af916d0
     type: data
     size: 210
   - path: data/entity-registry.yaml
-    hash: sha256:ea74dcfc63ecf501fec2436a449e56a5779f800ced6dbbf384194d6ad294877e
+    hash: sha256:95baf03adc14c6b3257662d2592573029cda2a5161c8bf8eb7176410757f2cf0
     type: data
-    size: 953700
+    size: 954685
+  - path: data/gates/PR-1-foundation-tokens.yaml
+    hash: sha256:5e0daabee8fe3428e804cabeb87e70e9c859406f2317a060125d4a57e7d916b1
+    type: data
+    size: 13628
   - path: data/handoffs-schema.md
     hash: sha256:c4b804084db5f5f8d56c201a7385b7a85abfc0da188391f202167b6a41a830e3
     type: data
@@ -1273,13 +1281,13 @@ files:
     type: agent
     size: 23027
   - path: development/agents/design-lead.md
-    hash: sha256:348914f6ffa52ec457b5a72ba000e0ad4705c03493183eb0ca8f949ac484ad67
+    hash: sha256:a94019dc6ebd1d1d8a85cc9a1aeed92fa4faa90f7ad475c5cd6a9ce70886158c
     type: agent
-    size: 20879
+    size: 22821
   - path: development/agents/design-systems-engineer.md
-    hash: sha256:724e82a8de1ad7f3aece031c2b7ab433ae7da03a22fdd3d4c8132833cbcd683b
+    hash: sha256:705924b3539703a74f4cdec2171343a9efd55e408ba530b94b37ccef90cfa292
     type: agent
-    size: 19684
+    size: 21545
   - path: development/agents/dev.md
     hash: sha256:994d1015878d4deec3ee1b0f14cfa9ff6ffcf60ee1f83abe969daaa01b95b4db
     type: agent
@@ -1381,21 +1389,21 @@ files:
     type: agent
     size: 24582
   - path: development/agents/ui-designer.md
-    hash: sha256:bc1fc5b124a8eaf85ffcdaaf2faa90a37911b0812e0f6023aa4a4fd76aa3bb20
+    hash: sha256:b2dd37185c2c2a6a2c6cd18135adcaac48f34beb3f34dcc294433b1ca0f369cf
     type: agent
-    size: 20053
+    size: 21902
   - path: development/agents/uncle-bob-martin.md
     hash: sha256:9d81d7249073abdd0a277bfc2c3e634ce29266e179e969e6ee7b4ce7b8ecf505
     type: agent
     size: 24859
   - path: development/agents/ux-design-expert.md
-    hash: sha256:1333884281849b3c1dbb836d04ab83b34c4a2f7f7fb43021bc9899344aeda54e
+    hash: sha256:d1da4892fc0b34f0a3dbbb5da2d1d6b7047c408d4499a8ae4bdd4054bd09f7da
     type: agent
-    size: 23845
+    size: 25896
   - path: development/agents/ux-designer.md
-    hash: sha256:f51d79b0e6696bed6a95e28090e3fdca550d5e376934489f2fa89f8383ca9443
+    hash: sha256:aecdb9ece6544702d65b1cfcb7fa9d972567d2f7465ab92709dd75e435a143a3
     type: agent
-    size: 16115
+    size: 17941
   - path: development/agents/warren-buffett.md
     hash: sha256:ed0bd1cba235ce1a7c58e73e4f292d8a0b2b33b63f3f5c540a317a67bce8ab1e
     type: agent
@@ -1428,6 +1436,258 @@ files:
     hash: sha256:4aef9a7efc9673cc284ac819d7276fc58c5f954a1a41e092df97b9a05d2c092f
     type: data
     size: 16853
+  - path: development/data/design-md-library/CONTRIBUTING.md
+    hash: sha256:240100c7f1b7924066a35e6328d1e19c30d82d859346eeb09186cfef21806e79
+    type: data
+    size: 937
+  - path: development/data/design-md-library/design-md/airbnb/README.md
+    hash: sha256:c2aec65a40059add97707875968181a46c6bd4548e5210f5e68f74b8ab6cf9de
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/airtable/README.md
+    hash: sha256:09c4233119968df9fae0de07de037a68a4414a98e3842172f158b2b1a3808915
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/apple/README.md
+    hash: sha256:6e42cde879791b62dffab3b43575b0ef957c0072e9f080d0ca5c790643b15208
+    type: data
+    size: 114
+  - path: development/data/design-md-library/design-md/bmw/README.md
+    hash: sha256:425e64ae4b4fc7c01afa249cf33ad50b2bb06c2b1b8f3a3f136894c6377b5c35
+    type: data
+    size: 110
+  - path: development/data/design-md-library/design-md/cal/README.md
+    hash: sha256:1cb3ac2cf13cfd05cfabf5874528ed549044b5e9eb4e8de2d8693b7ddcf8be30
+    type: data
+    size: 110
+  - path: development/data/design-md-library/design-md/claude/README.md
+    hash: sha256:3a9dca099083e06a1937dc56717fb9139f49c112a013fb3d7c4399e39d537a9a
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/clay/README.md
+    hash: sha256:e44beb1bd58f28c6a57cfd47ee193ca6f33d34bc1692fd49f6336f8a11e66d82
+    type: data
+    size: 112
+  - path: development/data/design-md-library/design-md/clickhouse/README.md
+    hash: sha256:4f6debdce6b7f4b00b1289e20c124ecaab7992217256b79c5cb506e70fd847a0
+    type: data
+    size: 124
+  - path: development/data/design-md-library/design-md/cohere/README.md
+    hash: sha256:9bb5a9d923ab465ed527df50287411e6d6fb36b5dd6b7e94ff0fb8e94faf3b80
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/coinbase/README.md
+    hash: sha256:4524c69f8311f8ee8a0e8d61f293fe810cfc96779f104d6aba0f1da8ce2b9251
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/composio/README.md
+    hash: sha256:ac2f8c0819108e8ddb2446280334603e523efa72bb6ee38f014d49e1bc208631
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/cursor/README.md
+    hash: sha256:c2ff9050e5487a7672875c478bad985fb757abbb20d664daf62f24b091d515cd
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/elevenlabs/README.md
+    hash: sha256:44784fb31d71fa3888776a47ac5c41ab3724406b23866aaa42b8f7bbc4d727cb
+    type: data
+    size: 124
+  - path: development/data/design-md-library/design-md/expo/README.md
+    hash: sha256:0fe349e0ffc53c12f135beb4566c1886be964cc0990dfd21422ab8622e81aa6c
+    type: data
+    size: 112
+  - path: development/data/design-md-library/design-md/ferrari/README.md
+    hash: sha256:516c4208d509a19620645b15a48b1dc63d5b5b9ced6405306093467f389b5480
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/figma/README.md
+    hash: sha256:1dd65468a31a6f4c4f4c7cad8212607d3ef1db72fd5775c72af9e5f62d8b9849
+    type: data
+    size: 114
+  - path: development/data/design-md-library/design-md/framer/README.md
+    hash: sha256:876b6ba72c59b437c3e130812908b2a0a60d98e9b438a8989ac8363acda4e2dd
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/hashicorp/README.md
+    hash: sha256:5fb38a5e778a76cff7b8833df8f76da5ec2c5095e084f263284f33b22cbd8c1a
+    type: data
+    size: 122
+  - path: development/data/design-md-library/design-md/ibm/README.md
+    hash: sha256:7d68e769fd8e6f4f05fc7dafba3ec2748a800b9a3d3e41272f16d3489de3b086
+    type: data
+    size: 110
+  - path: development/data/design-md-library/design-md/intercom/README.md
+    hash: sha256:da6368a17612be8061ca55d901f6e17c744709b13060616a2ca455a177d4d3b0
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/kraken/README.md
+    hash: sha256:66943eb3d5dee6b2c3f737d5d02d836b99e7377b56ec42770866715a35a9dda8
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/lamborghini/README.md
+    hash: sha256:2e61aaead5732c50799d8264341c7e933cce28d7b3e2b99a637aef783dcc5b48
+    type: data
+    size: 126
+  - path: development/data/design-md-library/design-md/linear.app/README.md
+    hash: sha256:23f3395f16ed954d9031ec39067d8d96917c9bea0d2f78fd73b880392e63b512
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/lovable/README.md
+    hash: sha256:aadca914496397377b7608a1d8ac4048878342e290e9c916b23230c06594fd8f
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/minimax/README.md
+    hash: sha256:9881519a344fb8c0ed44f4c61f179315c4df736dde6e46fcad0a9182fc6f8811
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/mintlify/README.md
+    hash: sha256:dbfdaf96f6a9bc65f593a19344effcc4108b7ebd1c053b7ea16c97b0e76a2a10
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/miro/README.md
+    hash: sha256:9ca6a05493a7bee232eeadca8bcfd2491f1309d1650d6ad595c48a3f17c234b6
+    type: data
+    size: 112
+  - path: development/data/design-md-library/design-md/mistral.ai/README.md
+    hash: sha256:f68b8a7b9a0b1606253c19b53c146dae9b95d10fea300055621850841f16c535
+    type: data
+    size: 124
+  - path: development/data/design-md-library/design-md/mongodb/README.md
+    hash: sha256:34626e4d42eada720f864bd9b5922eadadb6c3a7cac39b0a72851af842f8cc1c
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/notion/README.md
+    hash: sha256:7b919807d2ee23c811b793d110b5932e83210d6fe4421c7ee366570098346365
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/nvidia/README.md
+    hash: sha256:2ff4080794ac07bd6d3d64bc0d099da8484094f902b127b684d14453584ce9f1
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/ollama/README.md
+    hash: sha256:773e15592274585d0aa2f4d9a772c9ad98129e4486178e72767aca78f162eca8
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/opencode.ai/README.md
+    hash: sha256:d0947a96a6fcfd5645b79eafbf810f205027fad34b257ca68dae910621e52487
+    type: data
+    size: 126
+  - path: development/data/design-md-library/design-md/pinterest/README.md
+    hash: sha256:03b7023604ba6e80f6ede2042f36e340c65ca00b21e5b6578dfe118e35b2a885
+    type: data
+    size: 122
+  - path: development/data/design-md-library/design-md/posthog/README.md
+    hash: sha256:259adcb506ee17854f90bc8250a2895af4bc86fd4ca7d23ebc2ade71de157c54
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/raycast/README.md
+    hash: sha256:81bc56505df1b84e19d00a1e1acef26b10f4f6967d2da911aca23cd231559016
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/renault/README.md
+    hash: sha256:8b1a804a6bf227512d1867d9cbf8fda663c7093ccedd96e736a65f291305af98
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/replicate/README.md
+    hash: sha256:5e6f5a694d1bbbcc6bd7bc4d4aeaab0291f3d05f59544a75df759cc4c930dcdf
+    type: data
+    size: 122
+  - path: development/data/design-md-library/design-md/resend/README.md
+    hash: sha256:2f33d7b59b44c0c0d00975d6efaac4281842591b3009e87aa7f09377a2538a4f
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/revolut/README.md
+    hash: sha256:f161aeafc11da900697ea0ba5a39efb3c2d25009c4cde5bd78e93c53732262ce
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/runwayml/README.md
+    hash: sha256:6e1a88ee458985a2cc0cb1fda276ce5ca66b5581cb2ed7a30f09cf16e1907861
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/sanity/README.md
+    hash: sha256:6338f6ec6d8c48bc2a2bb73318a5a0dbdfa4253ea529c9e36488f1a13def7d1e
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/semrush/README.md
+    hash: sha256:a690831bf92d7f053fe5ebc2a5e2fab65a47ca75362dde73b559e37c23af12aa
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/sentry/README.md
+    hash: sha256:3ec881357ceeb79a4c83a9fa2cfbdcf84d0179f135eba638de240eebeff8a127
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/spacex/README.md
+    hash: sha256:6c0161c5edecd2c63aae7c016687c1f1351fa1e69a864682d2ebecd2cfa79580
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/spotify/README.md
+    hash: sha256:4e9d66fe074cee986e5651776cc8d6aa4e6c8d91b69d5405a4aa0e464688c85d
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/stripe/README.md
+    hash: sha256:509dfb359d27e240b5158012c55b3666789013e6a63847ec0625393b89441b04
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/supabase/README.md
+    hash: sha256:48584353e2b866cca85bcbfd6fd696d949793b06586f7f7d83a2ffb146fc2261
+    type: data
+    size: 120
+  - path: development/data/design-md-library/design-md/superhuman/README.md
+    hash: sha256:ff90b3596bf01675ae46f92d8a340952edac76138f6c1c9e243f4c66d72223fd
+    type: data
+    size: 124
+  - path: development/data/design-md-library/design-md/tesla/README.md
+    hash: sha256:530b5d60381a5a4a22951ea7cafb7fb5ff68752fbce842e8267f3c0e56304c05
+    type: data
+    size: 114
+  - path: development/data/design-md-library/design-md/together.ai/README.md
+    hash: sha256:d90bb234c312a536c798f14c8dcd62c8734ce78e97e5176cb2296e0a80e73f2a
+    type: data
+    size: 126
+  - path: development/data/design-md-library/design-md/uber/README.md
+    hash: sha256:3a04e35b58e17a6e9cee960d5be9a36da7c0de1149e917be2356e9331625d927
+    type: data
+    size: 112
+  - path: development/data/design-md-library/design-md/vercel/README.md
+    hash: sha256:41fa72833346dedd876b7174d644441e0c05106274144c0f5857833535638003
+    type: data
+    size: 116
+  - path: development/data/design-md-library/design-md/voltagent/README.md
+    hash: sha256:020efda3338479af7955e22f00fe80513a3e5d5cbdee91cd0a1052a31b9be1a0
+    type: data
+    size: 122
+  - path: development/data/design-md-library/design-md/warp/README.md
+    hash: sha256:adceef2d274daf82b31abda6c07fd6f65ef4e91ee6ac80551ecea68468030a40
+    type: data
+    size: 112
+  - path: development/data/design-md-library/design-md/webflow/README.md
+    hash: sha256:89b74e84bd1db28a58e9f7a405e9a9c5def032960aafc00839e9dac018b345ed
+    type: data
+    size: 118
+  - path: development/data/design-md-library/design-md/wise/README.md
+    hash: sha256:ad431c1c918ebcf10f55684812a103e2045dffa3cd85fcc83f1355bfd5c2a1ad
+    type: data
+    size: 112
+  - path: development/data/design-md-library/design-md/x.ai/README.md
+    hash: sha256:7d6de234ce4b289a2b5c344ec804021b21a611c0a4c67a2b55c5a5536bdfcc2b
+    type: data
+    size: 111
+  - path: development/data/design-md-library/design-md/zapier/README.md
+    hash: sha256:92df2b7bfd44f42e1e3e3e81dff800ab647c57994139357722021e769c567f3e
+    type: data
+    size: 116
+  - path: development/data/design-md-library/LICENSE
+    hash: sha256:6d4bdc9a9cf30e7beb593475fdcdbf29f981ea6bd7923f202866145409f87b44
+    type: data
+    size: 1087
+  - path: development/data/design-md-library/README.md
+    hash: sha256:57fb546e85d1d0a6c395d7394abc3afeb9bada57fa91d3abf0c51341a3e5aaff
+    type: data
+    size: 13517
+  - path: development/data/design-md-spec.md
+    hash: sha256:7e428c83e4ba1e0157fa8939d4c1c493d867fc01cf02ab1cc1515c14c25424e1
+    type: data
+    size: 14272
   - path: development/data/quality-dimensions-framework.md
     hash: sha256:df9fe53c4920e27ee34efafcfda9d9b16d42be509d598a686ea65cfc85d82ea8
     type: data
@@ -1484,6 +1744,10 @@ files:
     hash: sha256:2e6b1e434f3f5e2e1d1f1aec994c3fb56efccf7baacb4f188e769b13dabe03de
     type: script
     size: 11536
+  - path: development/scripts/build-design-md-index.js
+    hash: sha256:1b922cb3411d68766bdc1f7262c9c4b26058bb785fb370124eb18636b54dde81
+    type: script
+    size: 14899
   - path: development/scripts/code-quality-improver.js
     hash: sha256:acdfea90590a2d0d566e720540a8aad4a360cd531c58ad4e67cc4126522b7455
     type: script

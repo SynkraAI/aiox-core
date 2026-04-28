@@ -1,0 +1,799 @@
+version: 1
+generated_at: "2026-04-27T21:47:11.472Z"
+upstream:
+  repo: "VoltAgent/awesome-design-md"
+  url: "https://github.com/VoltAgent/awesome-design-md"
+  cloned_to: "design-md-library/"
+spec_reference:
+  package: "@google/design.md"
+  version: 0.1.1
+  spec_file: ".aios-core/development/data/design-md-spec.md"
+  cli: "npx @google/design.md (lint|diff|export|spec)"
+notes:
+  - "Upstream repo migrated DESIGN.md content off-repo to https://getdesign.md/{id}/design-md."
+  - "Brand entries with non-null path have a stub README in the local clone; full DESIGN.md must be fetched from remote_url."
+  - "primary_color and primary_font are heuristic inferences from taglines, not authoritative. For exact tokens fetch remote_url."
+total_brands: 69
+locally_cloned: 59
+parse_failures: []
+verticals:
+  ai-llm-platforms:
+    description: "AI & LLM platforms with conversational/agentic UX"
+    brands:
+      - id: claude
+        name: Claude
+        path: "design-md-library/design-md/claude/"
+        remote_url: "https://getdesign.md/claude/design-md"
+        primary_color: "#CC785C"
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Anthropic's AI assistant. Warm terracotta accent, clean editorial layout"
+        keywords:
+          - editorial
+          - ai
+          - red
+      - id: cohere
+        name: Cohere
+        path: "design-md-library/design-md/cohere/"
+        remote_url: "https://getdesign.md/cohere/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Enterprise AI platform. Vibrant gradients, data-rich dashboard aesthetic"
+        keywords:
+          - gradient
+          - ai
+          - "data-rich"
+          - enterprise
+      - id: elevenlabs
+        name: ElevenLabs
+        path: "design-md-library/design-md/elevenlabs/"
+        remote_url: "https://getdesign.md/elevenlabs/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "AI voice platform. Dark cinematic UI, audio-waveform aesthetics"
+        keywords:
+          - dark
+          - cinematic
+          - ai
+      - id: minimax
+        name: Minimax
+        path: "design-md-library/design-md/minimax/"
+        remote_url: "https://getdesign.md/minimax/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: AI model provider. Bold dark interface with neon accents
+        keywords:
+          - dark
+          - ai
+      - id: mistral.ai
+        name: Mistral AI
+        path: "design-md-library/design-md/mistral.ai/"
+        remote_url: "https://getdesign.md/mistral.ai/design-md"
+        primary_color: "#7C3AED"
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Open-weight LLM provider. French-engineered minimalism, purple-toned"
+        keywords:
+          - minimal
+          - ai
+          - purple
+      - id: ollama
+        name: Ollama
+        path: "design-md-library/design-md/ollama/"
+        remote_url: "https://getdesign.md/ollama/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Run LLMs locally. Terminal-first, monochrome simplicity"
+        keywords:
+          - monochrome
+          - ai
+          - terminal
+      - id: opencode.ai
+        name: OpenCode AI
+        path: "design-md-library/design-md/opencode.ai/"
+        remote_url: "https://getdesign.md/opencode.ai/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "AI coding platform. Developer-centric dark theme"
+        keywords:
+          - dark
+          - developer
+          - ai
+      - id: replicate
+        name: Replicate
+        path: "design-md-library/design-md/replicate/"
+        remote_url: "https://getdesign.md/replicate/design-md"
+        primary_color: "#FFFFFF"
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Run ML models via API. Clean white canvas, code-forward"
+        keywords: []
+      - id: runwayml
+        name: RunwayML
+        path: "design-md-library/design-md/runwayml/"
+        remote_url: "https://getdesign.md/runwayml/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "AI video generation. Cinematic dark UI, media-rich layout"
+        keywords:
+          - dark
+          - cinematic
+          - ai
+      - id: together.ai
+        name: Together AI
+        path: "design-md-library/design-md/together.ai/"
+        remote_url: "https://getdesign.md/together.ai/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Open-source AI infrastructure. Technical, blueprint-style design"
+        keywords:
+          - ai
+      - id: voltagent
+        name: VoltAgent
+        path: "design-md-library/design-md/voltagent/"
+        remote_url: "https://getdesign.md/voltagent/design-md"
+        primary_color: "#10B981"
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "AI agent framework. Void-black canvas, emerald accent, terminal-native"
+        keywords:
+          - ai
+          - green
+          - terminal
+      - id: x.ai
+        name: xAI
+        path: "design-md-library/design-md/x.ai/"
+        remote_url: "https://getdesign.md/x.ai/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: "ai-platform"
+        tagline: "Elon Musk's AI lab. Stark monochrome, futuristic minimalism"
+        keywords:
+          - minimal
+          - monochrome
+          - ai
+  developer-tools-ides:
+    description: "IDEs, code editors, and developer-facing platforms"
+    brands:
+      - id: cursor
+        name: Cursor
+        path: "design-md-library/design-md/cursor/"
+        remote_url: "https://getdesign.md/cursor/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "AI-first code editor. Sleek dark interface, gradient accents"
+        keywords:
+          - dark
+          - gradient
+          - ai
+      - id: expo
+        name: Expo
+        path: "design-md-library/design-md/expo/"
+        remote_url: "https://getdesign.md/expo/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "React Native platform. Dark theme, tight letter-spacing, code-centric"
+        keywords:
+          - dark
+      - id: lovable
+        name: Lovable
+        path: "design-md-library/design-md/lovable/"
+        remote_url: "https://getdesign.md/lovable/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "AI full-stack builder. Playful gradients, friendly dev aesthetic"
+        keywords:
+          - gradient
+          - ai
+      - id: raycast
+        name: Raycast
+        path: "design-md-library/design-md/raycast/"
+        remote_url: "https://getdesign.md/raycast/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "Productivity launcher. Sleek dark chrome, vibrant gradient accents"
+        keywords:
+          - dark
+          - gradient
+      - id: superhuman
+        name: Superhuman
+        path: "design-md-library/design-md/superhuman/"
+        remote_url: "https://getdesign.md/superhuman/design-md"
+        primary_color: "#7C3AED"
+        primary_font: ~
+        tier: saas
+        tagline: "Fast email client. Premium dark UI, keyboard-first, purple glow"
+        keywords:
+          - dark
+          - luxury
+          - purple
+      - id: vercel
+        name: Vercel
+        path: "design-md-library/design-md/vercel/"
+        remote_url: "https://getdesign.md/vercel/design-md"
+        primary_color: "#000000"
+        primary_font: Geist
+        tier: saas
+        tagline: "Frontend deployment platform. Black and white precision, Geist font"
+        keywords: []
+      - id: warp
+        name: Warp
+        path: "design-md-library/design-md/warp/"
+        remote_url: "https://getdesign.md/warp/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "Modern terminal. Dark IDE-like interface, block-based command UI"
+        keywords:
+          - dark
+          - terminal
+  backend-database-devops:
+    description: "Backend, database, and DevOps infrastructure tools"
+    brands:
+      - id: clickhouse
+        name: ClickHouse
+        path: "design-md-library/design-md/clickhouse/"
+        remote_url: "https://getdesign.md/clickhouse/design-md"
+        primary_color: "#FACC15"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Fast analytics database. Yellow-accented, technical documentation style"
+        keywords:
+          - yellow
+      - id: composio
+        name: Composio
+        path: "design-md-library/design-md/composio/"
+        remote_url: "https://getdesign.md/composio/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: Tool integration platform. Modern dark with colorful integration icons
+        keywords:
+          - dark
+      - id: hashicorp
+        name: HashiCorp
+        path: "design-md-library/design-md/hashicorp/"
+        remote_url: "https://getdesign.md/hashicorp/design-md"
+        primary_color: "#000000"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Infrastructure automation. Enterprise-clean, black and white"
+        keywords:
+          - enterprise
+      - id: mongodb
+        name: MongoDB
+        path: "design-md-library/design-md/mongodb/"
+        remote_url: "https://getdesign.md/mongodb/design-md"
+        primary_color: "#22C55E"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Document database. Green leaf branding, developer documentation focus"
+        keywords:
+          - developer
+          - green
+      - id: posthog
+        name: PostHog
+        path: "design-md-library/design-md/posthog/"
+        remote_url: "https://getdesign.md/posthog/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: enterprise
+        tagline: "Product analytics. Playful hedgehog branding, developer-friendly dark UI"
+        keywords:
+          - dark
+          - developer
+      - id: sanity
+        name: Sanity
+        path: "design-md-library/design-md/sanity/"
+        remote_url: "https://getdesign.md/sanity/design-md"
+        primary_color: "#E53935"
+        primary_font: ~
+        tier: saas
+        tagline: "Headless CMS. Red accent, content-first editorial layout"
+        keywords:
+          - editorial
+          - red
+      - id: sentry
+        name: Sentry
+        path: "design-md-library/design-md/sentry/"
+        remote_url: "https://getdesign.md/sentry/design-md"
+        primary_color: "#7C3AED"
+        primary_font: ~
+        tier: saas
+        tagline: "Error monitoring. Dark dashboard, data-dense, pink-purple accent"
+        keywords:
+          - dark
+          - "data-rich"
+          - purple
+      - id: supabase
+        name: Supabase
+        path: "design-md-library/design-md/supabase/"
+        remote_url: "https://getdesign.md/supabase/design-md"
+        primary_color: "#10B981"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Open-source Firebase alternative. Dark emerald theme, code-first"
+        keywords:
+          - dark
+          - green
+  productivity-saas:
+    description: Productivity and SaaS workspace applications
+    brands:
+      - id: cal
+        name: Cal.com
+        path: "design-md-library/design-md/cal/"
+        remote_url: "https://getdesign.md/cal/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "Open-source scheduling. Clean neutral UI, developer-oriented simplicity"
+        keywords:
+          - developer
+      - id: intercom
+        name: Intercom
+        path: "design-md-library/design-md/intercom/"
+        remote_url: "https://getdesign.md/intercom/design-md"
+        primary_color: "#2563EB"
+        primary_font: ~
+        tier: saas
+        tagline: "Customer messaging. Friendly blue palette, conversational UI patterns"
+        keywords:
+          - blue
+          - conversational
+      - id: linear.app
+        name: Linear
+        path: "design-md-library/design-md/linear.app/"
+        remote_url: "https://getdesign.md/linear.app/design-md"
+        primary_color: "#7C3AED"
+        primary_font: ~
+        tier: saas
+        tagline: "Project management for engineers. Ultra-minimal, precise, purple accent"
+        keywords:
+          - minimal
+          - purple
+      - id: mintlify
+        name: Mintlify
+        path: "design-md-library/design-md/mintlify/"
+        remote_url: "https://getdesign.md/mintlify/design-md"
+        primary_color: "#22C55E"
+        primary_font: ~
+        tier: saas
+        tagline: "Documentation platform. Clean, green-accented, reading-optimized"
+        keywords:
+          - green
+      - id: notion
+        name: Notion
+        path: "design-md-library/design-md/notion/"
+        remote_url: "https://getdesign.md/notion/design-md"
+        primary_color: ~
+        primary_font: serif (custom)
+        tier: saas
+        tagline: "All-in-one workspace. Warm minimalism, serif headings, soft surfaces"
+        keywords:
+          - minimal
+          - serif
+      - id: resend
+        name: Resend
+        path: "design-md-library/design-md/resend/"
+        remote_url: "https://getdesign.md/resend/design-md"
+        primary_color: ~
+        primary_font: monospace
+        tier: saas
+        tagline: "Email API for developers. Minimal dark theme, monospace accents"
+        keywords:
+          - dark
+          - minimal
+          - developer
+          - monospace
+      - id: zapier
+        name: Zapier
+        path: "design-md-library/design-md/zapier/"
+        remote_url: "https://getdesign.md/zapier/design-md"
+        primary_color: "#F97316"
+        primary_font: ~
+        tier: saas
+        tagline: "Automation platform. Warm orange, friendly illustration-driven"
+        keywords:
+          - orange
+          - illustration
+  design-creative-tools:
+    description: "Design tools, creative platforms, and visual builders"
+    brands:
+      - id: airtable
+        name: Airtable
+        path: "design-md-library/design-md/airtable/"
+        remote_url: "https://getdesign.md/airtable/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "Spreadsheet-database hybrid. Colorful, friendly, structured data aesthetic"
+        keywords: []
+      - id: clay
+        name: Clay
+        path: "design-md-library/design-md/clay/"
+        remote_url: "https://getdesign.md/clay/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "Creative agency. Organic shapes, soft gradients, art-directed layout"
+        keywords:
+          - gradient
+      - id: figma
+        name: Figma
+        path: "design-md-library/design-md/figma/"
+        remote_url: "https://getdesign.md/figma/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: saas
+        tagline: "Collaborative design tool. Vibrant multi-color, playful yet professional"
+        keywords: []
+      - id: framer
+        name: Framer
+        path: "design-md-library/design-md/framer/"
+        remote_url: "https://getdesign.md/framer/design-md"
+        primary_color: "#2563EB"
+        primary_font: ~
+        tier: saas
+        tagline: "Website builder. Bold black and blue, motion-first, design-forward"
+        keywords:
+          - blue
+          - motion
+      - id: miro
+        name: Miro
+        path: "design-md-library/design-md/miro/"
+        remote_url: "https://getdesign.md/miro/design-md"
+        primary_color: "#FACC15"
+        primary_font: ~
+        tier: saas
+        tagline: "Visual collaboration. Bright yellow accent, infinite canvas aesthetic"
+        keywords:
+          - yellow
+      - id: webflow
+        name: Webflow
+        path: "design-md-library/design-md/webflow/"
+        remote_url: "https://getdesign.md/webflow/design-md"
+        primary_color: "#2563EB"
+        primary_font: ~
+        tier: saas
+        tagline: "Visual web builder. Blue-accented, polished marketing site aesthetic"
+        keywords:
+          - blue
+  fintech-crypto:
+    description: "Financial technology, banking, and cryptocurrency platforms"
+    brands:
+      - id: binance
+        name: Binance
+        path: ~
+        remote_url: "https://getdesign.md/binance/design-md"
+        primary_color: "#F0B90B"
+        primary_font: ~
+        tier: fintech
+        tagline: "Crypto exchange. Bold Binance Yellow on monochrome, trading-floor urgency"
+        keywords:
+          - monochrome
+          - fintech
+          - yellow
+      - id: coinbase
+        name: Coinbase
+        path: "design-md-library/design-md/coinbase/"
+        remote_url: "https://getdesign.md/coinbase/design-md"
+        primary_color: "#2563EB"
+        primary_font: ~
+        tier: fintech
+        tagline: "Crypto exchange. Clean blue identity, trust-focused, institutional feel"
+        keywords:
+          - fintech
+          - blue
+      - id: kraken
+        name: Kraken
+        path: "design-md-library/design-md/kraken/"
+        remote_url: "https://getdesign.md/kraken/design-md"
+        primary_color: "#7C3AED"
+        primary_font: ~
+        tier: fintech
+        tagline: "Crypto trading platform. Purple-accented dark UI, data-dense dashboards"
+        keywords:
+          - dark
+          - fintech
+          - "data-rich"
+          - purple
+      - id: mastercard
+        name: Mastercard
+        path: ~
+        remote_url: "https://getdesign.md/mastercard/design-md"
+        primary_color: "#F5F0E1"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Global payments network. Warm cream canvas, orbital pill shapes, editorial warmth"
+        keywords:
+          - editorial
+      - id: revolut
+        name: Revolut
+        path: "design-md-library/design-md/revolut/"
+        remote_url: "https://getdesign.md/revolut/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: fintech
+        tagline: "Digital banking. Sleek dark interface, gradient cards, fintech precision"
+        keywords:
+          - dark
+          - gradient
+          - fintech
+      - id: stripe
+        name: Stripe
+        path: "design-md-library/design-md/stripe/"
+        remote_url: "https://getdesign.md/stripe/design-md"
+        primary_color: "#7C3AED"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Payment infrastructure. Signature purple gradients, weight-300 elegance"
+        keywords:
+          - gradient
+          - fintech
+          - purple
+      - id: wise
+        name: Wise
+        path: "design-md-library/design-md/wise/"
+        remote_url: "https://getdesign.md/wise/design-md"
+        primary_color: "#00C853"
+        primary_font: ~
+        tier: fintech
+        tagline: "International money transfer. Bright green accent, friendly and clear"
+        keywords:
+          - green
+  ecommerce-retail:
+    description: "E-commerce platforms and retail brand experiences"
+    brands:
+      - id: airbnb
+        name: Airbnb
+        path: "design-md-library/design-md/airbnb/"
+        remote_url: "https://getdesign.md/airbnb/design-md"
+        primary_color: "#FF5A5F"
+        primary_font: ~
+        tier: consumer
+        tagline: "Travel marketplace. Warm coral accent, photography-driven, rounded UI"
+        keywords:
+          - photography
+          - red
+      - id: meta
+        name: Meta
+        path: ~
+        remote_url: "https://getdesign.md/meta/design-md"
+        primary_color: "#1877F2"
+        primary_font: ~
+        tier: consumer
+        tagline: "Tech retail store. Photography-first, binary light/dark surfaces, Meta Blue CTAs"
+        keywords:
+          - dark
+          - photography
+          - blue
+      - id: nike
+        name: Nike
+        path: ~
+        remote_url: "https://getdesign.md/nike/design-md"
+        primary_color: ~
+        primary_font: Futura
+        tier: luxury
+        tagline: "Athletic retail. Monochrome UI, massive uppercase Futura, full-bleed photography"
+        keywords:
+          - monochrome
+          - photography
+      - id: shopify
+        name: Shopify
+        path: ~
+        remote_url: "https://getdesign.md/shopify/design-md"
+        primary_color: "#39FF14"
+        primary_font: ~
+        tier: consumer
+        tagline: "E-commerce platform. Dark-first cinematic, neon green accent, ultra-light display type"
+        keywords:
+          - dark
+          - cinematic
+          - green
+      - id: starbucks
+        name: Starbucks
+        path: ~
+        remote_url: "https://getdesign.md/starbucks/design-md"
+        primary_color: "#F5F0E1"
+        primary_font: SoDoSans
+        tier: luxury
+        tagline: "Coffee retail flagship. Four-tier earth-green system, warm cream canvas, proprietary SoDoSans typography"
+        keywords:
+          - green
+  media-consumer-tech:
+    description: "Media outlets, consumer electronics, and entertainment"
+    brands:
+      - id: apple
+        name: Apple
+        path: "design-md-library/design-md/apple/"
+        remote_url: "https://getdesign.md/apple/design-md"
+        primary_color: "#FFFFFF"
+        primary_font: SF Pro
+        tier: luxury
+        tagline: "Consumer electronics. Premium white space, SF Pro, cinematic imagery"
+        keywords:
+          - cinematic
+          - luxury
+      - id: ibm
+        name: IBM
+        path: "design-md-library/design-md/ibm/"
+        remote_url: "https://getdesign.md/ibm/design-md"
+        primary_color: "#2563EB"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Enterprise technology. Carbon design system, structured blue palette"
+        keywords:
+          - blue
+          - enterprise
+      - id: nvidia
+        name: NVIDIA
+        path: "design-md-library/design-md/nvidia/"
+        remote_url: "https://getdesign.md/nvidia/design-md"
+        primary_color: "#22C55E"
+        primary_font: ~
+        tier: enterprise
+        tagline: "GPU computing. Green-black energy, technical power aesthetic"
+        keywords:
+          - green
+      - id: pinterest
+        name: Pinterest
+        path: "design-md-library/design-md/pinterest/"
+        remote_url: "https://getdesign.md/pinterest/design-md"
+        primary_color: "#E53935"
+        primary_font: ~
+        tier: consumer
+        tagline: "Visual discovery platform. Red accent, masonry grid, image-first"
+        keywords:
+          - red
+      - id: playstation
+        name: PlayStation
+        path: ~
+        remote_url: "https://getdesign.md/playstation/design-md"
+        primary_color: "#00D9FF"
+        primary_font: ~
+        tier: consumer
+        tagline: "Gaming console retail. Three-surface channel layout, cyan hover-scale interaction"
+        keywords: []
+      - id: spacex
+        name: SpaceX
+        path: "design-md-library/design-md/spacex/"
+        remote_url: "https://getdesign.md/spacex/design-md"
+        primary_color: "#000000"
+        primary_font: ~
+        tier: enterprise
+        tagline: "Space technology. Stark black and white, full-bleed imagery, futuristic"
+        keywords:
+          - minimal
+      - id: spotify
+        name: Spotify
+        path: "design-md-library/design-md/spotify/"
+        remote_url: "https://getdesign.md/spotify/design-md"
+        primary_color: "#22C55E"
+        primary_font: ~
+        tier: consumer
+        tagline: "Music streaming. Vibrant green on dark, bold type, album-art-driven"
+        keywords:
+          - dark
+          - green
+      - id: theverge
+        name: The Verge
+        path: ~
+        remote_url: "https://getdesign.md/theverge/design-md"
+        primary_color: "#A6F3CC"
+        primary_font: Manuka
+        tier: consumer
+        tagline: "Tech editorial media. Acid-mint and ultraviolet accents, Manuka display type"
+        keywords:
+          - editorial
+          - purple
+      - id: uber
+        name: Uber
+        path: "design-md-library/design-md/uber/"
+        remote_url: "https://getdesign.md/uber/design-md"
+        primary_color: "#000000"
+        primary_font: ~
+        tier: consumer
+        tagline: "Mobility platform. Bold black and white, tight type, urban energy"
+        keywords: []
+      - id: vodafone
+        name: Vodafone
+        path: ~
+        remote_url: "https://getdesign.md/vodafone/design-md"
+        primary_color: "#E60000"
+        primary_font: ~
+        tier: consumer
+        tagline: "Global telecom brand. Monumental uppercase display, Vodafone Red chapter bands"
+        keywords:
+          - luxury
+          - red
+      - id: wired
+        name: WIRED
+        path: ~
+        remote_url: "https://getdesign.md/wired/design-md"
+        primary_color: "#2563EB"
+        primary_font: serif (custom)
+        tier: consumer
+        tagline: "Tech magazine. Paper-white broadsheet density, custom serif, ink-blue links"
+        keywords:
+          - serif
+          - blue
+  automotive:
+    description: "Luxury and mass-market automotive brand experiences"
+    brands:
+      - id: bmw
+        name: BMW
+        path: "design-md-library/design-md/bmw/"
+        remote_url: "https://getdesign.md/bmw/design-md"
+        primary_color: ~
+        primary_font: ~
+        tier: luxury
+        tagline: "Luxury automotive. Dark premium surfaces, precise German engineering aesthetic"
+        keywords:
+          - dark
+          - luxury
+      - id: bugatti
+        name: Bugatti
+        path: ~
+        remote_url: "https://getdesign.md/bugatti/design-md"
+        primary_color: "#000000"
+        primary_font: ~
+        tier: luxury
+        tagline: "Luxury hypercar. Cinema-black canvas, monochrome austerity, monumental display type"
+        keywords:
+          - luxury
+          - monochrome
+      - id: ferrari
+        name: Ferrari
+        path: "design-md-library/design-md/ferrari/"
+        remote_url: "https://getdesign.md/ferrari/design-md"
+        primary_color: "#FF2800"
+        primary_font: ~
+        tier: luxury
+        tagline: "Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness"
+        keywords:
+          - editorial
+          - luxury
+          - red
+      - id: lamborghini
+        name: Lamborghini
+        path: "design-md-library/design-md/lamborghini/"
+        remote_url: "https://getdesign.md/lamborghini/design-md"
+        primary_color: "#D4AF37"
+        primary_font: LamboType
+        tier: luxury
+        tagline: "Luxury automotive. True black cathedral, gold accent, LamboType custom Neo-Grotesk"
+        keywords:
+          - luxury
+          - yellow
+      - id: renault
+        name: Renault
+        path: "design-md-library/design-md/renault/"
+        remote_url: "https://getdesign.md/renault/design-md"
+        primary_color: ~
+        primary_font: NouvelR
+        tier: consumer
+        tagline: "French automotive. Vivid aurora gradients, NouvelR proprietary typeface, zero-radius buttons"
+        keywords:
+          - gradient
+      - id: tesla
+        name: Tesla
+        path: "design-md-library/design-md/tesla/"
+        remote_url: "https://getdesign.md/tesla/design-md"
+        primary_color: ~
+        primary_font: Universal Sans
+        tier: luxury
+        tagline: "Electric vehicles. Radical subtraction, cinematic full-viewport photography, Universal Sans"
+        keywords:
+          - cinematic
+          - photography

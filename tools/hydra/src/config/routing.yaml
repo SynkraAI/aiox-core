@@ -22,6 +22,19 @@ routing:
     engenharia:
       - martin-fowler
       - simon-willison
+    # Design Systems (added 27/Apr/2026) — drives AIOS design squad
+    # Mind clones routed when content matches DESIGN.md / design-system topics
+    design-systems:
+      - dieter-rams           # industrial design philosophy
+      - brad-frost            # atomic design / design systems
+      - vitaly-friedman       # Smashing Magazine, design quality
+      - val-head              # motion design
+      - don-norman            # UX principles
+      - julie-zhuo            # product design leadership
+      - tobias-van-schneider  # visual design
+      - erik-spiekermann      # typography
+      - john-maeda            # computational design
+      - kat-holmes            # inclusive design
 
   # Bridge publisher config
   bridge:

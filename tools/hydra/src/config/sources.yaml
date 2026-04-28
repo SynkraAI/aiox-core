@@ -471,6 +471,30 @@ sources:
       frequency: "weekly"
       domains: ["ai-ml", "engenharia"]
 
+    # === DESIGN SYSTEMS — DESIGN.md ecosystem (added 27/Apr/2026) ===
+    # Powers AIOS design squad agents (design-lead, ui-designer, ux-designer,
+    # ux-design-expert, design-systems-engineer) — see jarvis-integration rule.
+
+    - name: "Google Labs DESIGN.md"
+      type: "releases"
+      repo: "google-labs-code/design.md"
+      branch: "main"
+      paths: ["README.md", "docs/"]
+      frequency: "weekly"
+      domains: ["design-systems", "engenharia"]
+      authority: 5
+      tier: "S"
+
+    - name: "Awesome DESIGN.md"
+      type: "awesome-list"
+      repo: "VoltAgent/awesome-design-md"
+      branch: "main"
+      paths: ["design-md/", "README.md"]
+      frequency: "weekly"
+      domains: ["design-systems"]
+      authority: 4
+      tier: "A"
+
     # === AWESOME LISTS — Curadoria por projeto ===
 
     # AI/ML (Serenity, AIOS, HYDRA)
