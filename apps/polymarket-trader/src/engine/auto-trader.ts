@@ -5,6 +5,8 @@
  * This is the "brain" that makes the bot actually trade autonomously.
  */
 
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { eventBus } from './event-bus.js';
 import type { RiskEngine } from './risk-engine.js';
 import type { PolymarketClient } from '../integrations/polymarket-client.js';
@@ -17,8 +19,9 @@ import { MarketAnalyzer } from '../intelligence/market-analyzer.js';
 import { CrossPlatformArbStrategy } from '../strategies/cross-platform-arb.js';
 import type { KnowledgeStore } from '../intelligence/knowledge-store.js';
 import type { KalshiClient } from '../integrations/kalshi-client.js';
-import type { CryptoPriceClient } from '../integrations/crypto-price-client.js';
+// PM-PIVOT-1: CryptoPriceClient deletado, synth eliminado
 import type { AceEvolver } from '../learning/ace-evolver.js';
+import { selectMarkets } from './market-selector.js';
 import type { Market, TradeSignal, Vertical } from '../types/index.js';
 
 export interface AutoTraderConfig {
@@ -30,14 +33,12 @@ export interface AutoTraderConfig {
   marketsPerScan: number;
   /** Minimum edge to generate signal */
   minEdge: number;
-  /** Max hours until market resolves (0 = no limit). Training mode: set to 24 for fast feedback. */
+  /** Max hours until market resolves (0 = no limit). PM-PIVOT-1: default 168h (7d) — capital morto > 7d. */
   maxResolutionHours: number;
-  /**
-   * Hybrid refactor P3: target weight of synthetic markets in eligible pool (0-1).
-   * When real (Polymarket/Kalshi) supply is healthy, synth is down-sampled to this ratio.
-   * If real supply is thin (< 1-synthWeight * target), synth fills the gap up to target.
-   */
-  synthWeight?: number;
+  /** Minimum liquidity for a market to be eligible. */
+  minLiquidity?: number;
+  /** Max markets to send to LLM per scan (batch size). */
+  llmBatchSize?: number;
 }
 
 /** Blacklisted market entry with expiry. */
@@ -68,7 +69,7 @@ export class AutoTrader {
   private marketAnalyzer: MarketAnalyzer | null = null;
   private knowledgeStore: KnowledgeStore | null = null;
   private kalshiClient: KalshiClient | null = null;
-  private cryptoClient: CryptoPriceClient | null = null;
+  // PM-PIVOT-1: cryptoClient (synth) removido — bot agora opera apenas Polymarket/Kalshi reais
   private config: AutoTraderConfig;
 
   // Market blacklist — skip markets analyzed without edge for TTL period
@@ -85,6 +86,9 @@ export class AutoTrader {
   private signalCount = 0;
   private blacklistHits = 0;
   private arbSignals = 0;
+  // PM-PIVOT-1 Fase 0: heartbeat tracking
+  private lastTradeTs: number | null = null;
+  private heartbeatPath: string = join(process.cwd(), 'data', 'heartbeat.json');
 
   constructor(
     client: PolymarketClient,
@@ -118,10 +122,7 @@ export class AutoTrader {
     this.kalshiClient = kalshi;
   }
 
-  /** Connect crypto price client for synthetic crypto markets. */
-  setCryptoClient(crypto: CryptoPriceClient): void {
-    this.cryptoClient = crypto;
-  }
+  // PM-PIVOT-1: setCryptoClient removido — synth deletado, capital morto > 7d
 
   /** Connect knowledge store for domain-informed heuristic trading. */
   setKnowledgeStore(knowledge: KnowledgeStore): void {
@@ -174,61 +175,9 @@ export class AutoTrader {
     });
   }
 
-  /**
-   * Resolve expired synthetic crypto positions using the exact endTime close price.
-   *
-   * P2 hybrid refactor BUG-3 fix: was `cryptoClient.getPrice(symbol)` — returned current
-   * spot at cron time (minutes after actual endTime, leaking short-term drift). Now uses
-   * `getPriceAtTime(symbol, endTime)` to fetch the hourly close at the exact settlement bar.
-   */
-  private async resolveSyntheticPositions(): Promise<void> {
-    if (!this.cryptoClient || !this.paperTrader) return;
-
-    const positions = this.paperTrader.getOpenPositions();
-    const synthPositions = positions.filter(p => p.marketId.startsWith('synth-'));
-    if (synthPositions.length === 0) return;
-
-    for (const pos of synthPositions) {
-      // Parse synthetic market info from signal
-      const signal = pos.signal;
-      if (!signal) continue;
-
-      // Check if market has expired
-      const question = signal.marketQuestion || '';
-      const match = question.match(/in (\d+)h\?$/);
-      if (!match) continue;
-
-      const enteredAt = new Date(pos.enteredAt).getTime();
-      const hoursStr = match[1];
-      const endTime = enteredAt + parseInt(hoursStr) * 60 * 60 * 1000;
-      if (Date.now() < endTime) continue; // Not yet expired
-
-      // Determine coin and target from marketId: synth-bitcoin-above-85000-24h-...
-      const parts = pos.marketId.split('-');
-      if (parts.length < 5) continue;
-      const coinSlug = parts[1]; // bitcoin, ethereum, solana
-      const direction = parts[2]; // above, below
-      const targetPrice = parseFloat(parts[3]);
-
-      const symbolMap: Record<string, string> = { bitcoin: 'BTCUSDT', ethereum: 'ETHUSDT', solana: 'SOLUSDT', dogecoin: 'DOGEUSDT', avalanche: 'AVAXUSDT', chainlink: 'LINKUSDT' };
-      const symbol = symbolMap[coinSlug];
-      if (!symbol) continue;
-
-      // P2 BUG-3: fetch close price at the exact endTime bar, not current spot.
-      const endTimePrice = await this.cryptoClient.getPriceAtTime(symbol, endTime);
-      if (endTimePrice <= 0) {
-        // Bar not yet closed or fetch failed — skip, retry next cron cycle.
-        continue;
-      }
-
-      const outcome: 'YES' | 'NO' = direction === 'above'
-        ? (endTimePrice >= targetPrice ? 'YES' : 'NO')
-        : (endTimePrice <= targetPrice ? 'YES' : 'NO');
-
-      this.paperTrader.resolvePosition(pos.marketId, outcome);
-      console.log(`[AutoTrader] CRYPTO RESOLVED: ${question.slice(0, 60)} → ${outcome} (endTimePrice=$${endTimePrice.toFixed(2)}, target=$${targetPrice})`);
-    }
-  }
+  // PM-PIVOT-1: resolveSyntheticPositions deletado.
+  // Stale synth positions em open-positions.json ficam intactas — user decide via `pm-trader cleanup-stale`.
+  // PaperTrader.resolveOpenPositions() ignora marketId.startsWith('synth-') (legacy paths).
 
   /** Check if market is blacklisted (and clean expired entries). */
   private isBlacklisted(marketId: string): boolean {
@@ -260,12 +209,11 @@ export class AutoTrader {
     }, this.config.pollIntervalMs);
 
     // Resolution check every 5 minutes — settle closed markets
+    // PM-PIVOT-1: synth deletado; resolveSyntheticPositions removido. Paper trader resolve PM/Kalshi reais.
     if (this.paperTrader) {
       void this.paperTrader.resolveOpenPositions();
-      void this.resolveSyntheticPositions();
       this.resolveHandle = setInterval(() => {
         void this.paperTrader?.resolveOpenPositions();
-        void this.resolveSyntheticPositions();
       }, 5 * 60 * 1000);
     }
 
@@ -293,9 +241,11 @@ export class AutoTrader {
 
     this.scanCount++;
     this.adaptiveVolume.recordScan();
+    let signalsThisScan = 0;
+    let eligibleCount = 0;
 
     try {
-      // 1. Fetch active markets (Polymarket + Kalshi)
+      // 1. Fetch active markets (Polymarket + Kalshi). PM-PIVOT-1: synth deletado.
       const polyMarkets = await this.client.getMarkets({
         active: true,
         limit: this.config.marketsPerScan,
@@ -310,101 +260,44 @@ export class AutoTrader {
         }
       }
 
-      let cryptoMarkets: Market[] = [];
-      if (this.cryptoClient) {
-        try {
-          cryptoMarkets = await this.cryptoClient.generateMarkets();
-        } catch {
-          // Crypto generation failed — continue without
-        }
+      const markets = [...polyMarkets, ...kalshiMarkets];
+      if (markets.length === 0) {
+        this.writeHeartbeat({ eligibleReal: 0, signals: 0 });
+        return;
       }
 
-      const markets = [...polyMarkets, ...kalshiMarkets, ...cryptoMarkets];
-      if (markets.length === 0) return;
-
-      // 2. Filter by enabled verticals, Brier halts, positions, blacklist, and meme filter
+      // 2. Coarse pre-filter: verticals, Brier halts, open positions, blacklist, meme filter
       const openPositionIds = new Set(
         this.paperTrader?.getOpenPositions().map(p => p.marketId) ?? [],
       );
-      const now = Date.now();
-      const MIN_HOURS_BEFORE_EVENT = 2; // Allow markets resolving in 2h+ (was 24h — too restrictive)
-      const SHORT_TERM_DAYS = 14;       // Markets resolving within 14 days = short-term (priority)
-      const maxResHours = this.config.maxResolutionHours || 0;
       const MEME_PATTERNS = ['before gta vi', 'before gta 6', 'jesus christ', 'second coming', 'alien', 'ufo disclosure'];
-      // P1 BUG-5 fix: markets without endDate from Polymarket/Kalshi are acceptable if liquidity is real.
-      // Threshold conservative — below it, odds are low-signal dust.
-      const NO_ENDDATE_LIQUIDITY_THRESHOLD = 1000;
-      const eligible = markets.filter(m => {
+      const preFiltered = markets.filter(m => {
         if (!this.config.enabledVerticals.includes(m.vertical)) return false;
         if (this.brier.isVerticalHalted(m.vertical)) return false;
         if (openPositionIds.has(m.id)) return false;
         if (this.isBlacklisted(m.id)) return false;
-        // Skip meme/entertainment markets — no real edge, LLM hallucinates on these
         const qLower = (m.question || '').toLowerCase();
         if (MEME_PATTERNS.some(p => qLower.includes(p))) return false;
         if (!m.question || m.question.trim().length === 0) return false;
-        if (m.endDate) {
-          const hoursLeft = (new Date(m.endDate).getTime() - now) / (1000 * 60 * 60);
-          // Reject markets that already happened or resolve within 2h (too close to settle)
-          if (hoursLeft < MIN_HOURS_BEFORE_EVENT) return false;
-          // Training mode: reject markets that resolve too far in the future
-          if (maxResHours > 0 && hoursLeft > maxResHours) return false;
-        } else {
-          // No endDate: accept for real prediction markets (Polymarket/Kalshi) that have real liquidity.
-          // Synthetic markets always have endDate, so this branch only fires for real platforms.
-          const isRealPlatform = m.id.startsWith('kalshi:') || !m.id.startsWith('synth-');
-          if (!isRealPlatform) return false;
-          if ((m.liquidity || 0) < NO_ENDDATE_LIQUIDITY_THRESHOLD) return false;
-        }
         return true;
       });
 
-      // P3 hybrid refactor: balance synth vs real in eligible pool.
-      // Target: synthWeight (default 0.3) fraction of eligible is synth, rest real.
-      // If real supply is thin, synth backfills up to target; if real is abundant, synth is capped.
-      const synthWeight = Math.max(0, Math.min(1, this.config.synthWeight ?? 0.3));
-      const eligibleReal = eligible.filter(m => !m.id.startsWith('synth-'));
-      const eligibleSynth = eligible.filter(m => m.id.startsWith('synth-'));
-      const targetPool = this.config.marketsPerScan || eligible.length;
-      const targetReal = Math.round(targetPool * (1 - synthWeight));
-      const targetSynth = Math.round(targetPool * synthWeight);
-      let balancedReal = eligibleReal;
-      let balancedSynth = eligibleSynth;
-      if (eligibleReal.length >= targetReal) {
-        // Real supply healthy — cap synth at target
-        balancedSynth = eligibleSynth.slice(0, targetSynth);
-      } else {
-        // Real supply thin — let synth backfill up to the full pool target
-        const shortfall = targetReal - eligibleReal.length;
-        balancedSynth = eligibleSynth.slice(0, targetSynth + shortfall);
-      }
-      const balanced = [...balancedReal, ...balancedSynth];
-
-      // Sort: short-term markets FIRST (faster feedback loop), then by volume
-      balanced.sort((a, b) => {
-        const aDays = a.endDate ? (new Date(a.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
-        const bDays = b.endDate ? (new Date(b.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
-        const aShort = aDays <= SHORT_TERM_DAYS ? 0 : 1;
-        const bShort = bDays <= SHORT_TERM_DAYS ? 0 : 1;
-        if (aShort !== bShort) return aShort - bShort; // short-term first
-        return (b.volume * b.liquidity) - (a.volume * a.liquidity); // then by volume×liquidity
+      // 3. PM-PIVOT-1: MarketSelector — single source of truth for tradeable real markets.
+      // Real-only (Polymarket+Kalshi), endDate ≤ maxResolutionHours, sorted by volume×liquidity.
+      const maxResHours = this.config.maxResolutionHours > 0 ? this.config.maxResolutionHours : 168;
+      const minLiq = this.config.minLiquidity ?? 100;
+      const batchLimit = this.config.llmBatchSize ?? this.config.marketsPerScan ?? 30;
+      const eligible = selectMarkets(preFiltered, {
+        maxResolutionHours: maxResHours,
+        minLiquidity: minLiq,
+        batchLimit,
       });
+      eligibleCount = eligible.length;
 
-      // Replace `eligible` with balanced for all downstream processing
-      eligible.length = 0;
-      eligible.push(...balanced);
-
-      const shortCount = eligible.filter(m => {
-        const d = m.endDate ? (new Date(m.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
-        return d <= SHORT_TERM_DAYS;
-      }).length;
-      const modeTag = maxResHours > 0 ? ` [TRAINING ≤${maxResHours}h]` : '';
       const srcParts = [`PM:${polyMarkets.length}`];
       if (kalshiMarkets.length > 0) srcParts.push(`KA:${kalshiMarkets.length}`);
-      if (cryptoMarkets.length > 0) srcParts.push(`CR:${cryptoMarkets.length}`);
-      const kalshiTag = srcParts.length > 1 ? ` [${srcParts.join('+')}]` : '';
-      const ratioTag = ` [R:${balancedReal.length}/S:${balancedSynth.length}]`;
-      console.log(`[AutoTrader] Scan #${this.scanCount}: ${markets.length} fetched${kalshiTag}, ${eligible.length} eligible${ratioTag} (${shortCount} short-term), ${this.blacklist.size} blacklisted${modeTag}`);
+      const srcTag = srcParts.length > 1 ? ` [${srcParts.join('+')}]` : ` [${srcParts[0]}]`;
+      console.log(`[AutoTrader] Scan #${this.scanCount}: ${markets.length} fetched${srcTag}, ${eligible.length} eligible (≤${maxResHours}h, liq≥$${minLiq}), ${this.blacklist.size} blacklisted`);
 
       // 3. Complete-set & cross-market arb scan (structural edge)
       const arbs = this.arbStrategy.scanForArbitrage(eligible);
@@ -423,6 +316,7 @@ export class AutoTrader {
         const volumeCheck = this.adaptiveVolume.shouldTrade(signal.edge, signal.suggestedSize * signal.edge);
         if (volumeCheck.shouldTrade) {
           this.emitSignal(signal);
+          signalsThisScan++;
         }
       }
 
@@ -435,6 +329,7 @@ export class AutoTrader {
           const volumeCheck = this.adaptiveVolume.shouldTrade(signal.edge, signal.suggestedSize * signal.edge);
           if (volumeCheck.shouldTrade) {
             this.emitSignal(signal);
+            signalsThisScan++;
           }
           // Blacklist analyzed markets to avoid re-analyzing next scan
           this.blacklistMarket(signal.marketId, 'llm_analyzed');
@@ -466,12 +361,16 @@ export class AutoTrader {
           if (!volumeCheck.shouldTrade) continue;
 
           this.emitSignal(signal);
+          signalsThisScan++;
         }
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       console.error(`[AutoTrader] Scan error: ${msg}`);
       eventBus.emit('system:error', { component: 'auto-trader', error: msg });
+    } finally {
+      // PM-PIVOT-1: heartbeat after every scan, success or error.
+      this.writeHeartbeat({ eligibleReal: eligibleCount, signals: signalsThisScan });
     }
   }
 
@@ -643,8 +542,29 @@ export class AutoTrader {
     if (openPositionIds.has(signal.marketId)) return;
 
     this.signalCount++;
+    this.lastTradeTs = Date.now();
     console.log(`[AutoTrader] Signal #${this.signalCount}: ${signal.vertical} ${signal.side} edge=${(signal.edge*100).toFixed(1)}% size=$${signal.suggestedSize}`);
     eventBus.emit('signal:detected', signal);
+  }
+
+  /**
+   * PM-PIVOT-1 Fase 0: write heartbeat snapshot after each scan.
+   * Watchdog (scripts/watchdog.ps1) reads this file every 5min — alerts if stale > 10min.
+   * Non-fatal: heartbeat failure does NOT abort the scan loop.
+   */
+  private writeHeartbeat(extra: { eligibleReal: number; signals: number }): void {
+    try {
+      const payload = {
+        ts: Date.now(),
+        scanCount: this.scanCount,
+        eligibleReal: extra.eligibleReal,
+        signals: extra.signals,
+        lastTradeTs: this.lastTradeTs,
+      };
+      writeFileSync(this.heartbeatPath, JSON.stringify(payload, null, 2));
+    } catch {
+      // Heartbeat is observability — never crash the bot if disk write fails.
+    }
   }
 
   getStats() {

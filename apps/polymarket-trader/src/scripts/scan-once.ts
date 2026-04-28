@@ -9,6 +9,7 @@
  * Usage: npx tsx src/scripts/scan-once.ts [--resolve] [--limit N]
  */
 
+import '../dns-override.js'; // MUST be first — bypass ISP DNS filtering for polymarket/kalshi
 import { readFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 

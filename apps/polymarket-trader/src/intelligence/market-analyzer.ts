@@ -13,8 +13,11 @@
  * - VLLM_HOST responds → vLLM
  */
 
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import Anthropic from '@anthropic-ai/sdk';
 import { eventBus } from '../engine/event-bus.js';
+import { selectMarkets } from '../engine/market-selector.js';
 import type { PolymarketClient } from '../integrations/polymarket-client.js';
 import type { ExperienceStore } from '../learning/experience-store.js';
 import type { KnowledgeStore } from './knowledge-store.js';
@@ -139,16 +142,80 @@ class CalibrationTracker {
 // Budget Controller (Claude only — local is free)
 // ---------------------------------------------------------------------------
 
-class BudgetController {
+/**
+ * BudgetController — tracks daily LLM spend, persists across restarts.
+ *
+ * PM-PIVOT-1 (Conclave Ng — bot morreu por OpenAI budget esgotado):
+ *   - Persisted to data/llm-budget.json so restart not reset spend mid-day.
+ *   - Resets at midnight LOCAL time.
+ *   - Warns once at 80%, once at 100% (then pauses LLM, fallback heuristic).
+ *
+ * `now()` is injected for tests (mocking Date is messy in vitest module-level).
+ */
+export class BudgetController {
   private dailySpend = 0;
-  private lastResetDate = new Date().toDateString();
+  private lastResetDate: string;
   private dailyLimit: number;
   private callCount = 0;
+  private warned80 = false;
+  private warned100 = false;
+  private statePath: string;
+  private now: () => number;
 
-  constructor(dailyLimitUsd: number) {
+  constructor(dailyLimitUsd: number, statePath?: string, nowFn?: () => number) {
     this.dailyLimit = dailyLimitUsd;
+    this.now = nowFn ?? (() => Date.now());
+    this.statePath = statePath ?? join(process.cwd(), 'data', 'llm-budget.json');
+    this.lastResetDate = new Date(this.now()).toDateString();
+    this.loadState();
   }
 
+  /** Load persisted state from disk (silent fallback to defaults if missing/corrupt). */
+  private loadState(): void {
+    try {
+      if (!existsSync(this.statePath)) return;
+      const raw = JSON.parse(readFileSync(this.statePath, 'utf-8')) as {
+        dailySpend?: number;
+        lastResetDate?: string;
+        callCount?: number;
+        warned80?: boolean;
+        warned100?: boolean;
+      };
+      const todayStr = new Date(this.now()).toDateString();
+      if (raw.lastResetDate === todayStr) {
+        this.dailySpend = Number(raw.dailySpend) || 0;
+        this.callCount = Number(raw.callCount) || 0;
+        this.warned80 = Boolean(raw.warned80);
+        this.warned100 = Boolean(raw.warned100);
+      } else {
+        // Different day on disk — start fresh, persist new lastResetDate
+        this.lastResetDate = todayStr;
+        this.persistState();
+      }
+    } catch {
+      // Corrupt or unreadable — defaults are safe
+    }
+  }
+
+  /** Persist state to disk. Non-fatal — never throws. */
+  private persistState(): void {
+    try {
+      writeFileSync(
+        this.statePath,
+        JSON.stringify({
+          dailySpend: this.dailySpend,
+          lastResetDate: this.lastResetDate,
+          callCount: this.callCount,
+          warned80: this.warned80,
+          warned100: this.warned100,
+        }, null, 2),
+      );
+    } catch {
+      // Disk write failed — in-memory state still authoritative
+    }
+  }
+
+  /** True if there's headroom under the cap (or local provider). */
   canSpend(isLocal: boolean): boolean {
     if (isLocal) return true; // Local models are free
     this.resetIfNewDay();
@@ -156,18 +223,36 @@ class BudgetController {
   }
 
   recordSpend(inputTokens: number, outputTokens: number): void {
+    this.resetIfNewDay();
     const cost = inputTokens * COST_PER_INPUT_TOKEN + outputTokens * COST_PER_OUTPUT_TOKEN;
     this.dailySpend += cost;
     this.callCount++;
+    this.checkWarnings();
+    this.persistState();
+  }
+
+  private checkWarnings(): void {
+    const pct = this.dailyLimit > 0 ? this.dailySpend / this.dailyLimit : 0;
+    if (!this.warned80 && pct >= 0.80) {
+      this.warned80 = true;
+      console.warn(`[BudgetController] ⚠️  80% of daily LLM budget consumed: $${this.dailySpend.toFixed(4)} / $${this.dailyLimit.toFixed(2)}`);
+    }
+    if (!this.warned100 && pct >= 1.0) {
+      this.warned100 = true;
+      console.warn(`[BudgetController] 🛑 100% of daily LLM budget consumed: $${this.dailySpend.toFixed(4)} / $${this.dailyLimit.toFixed(2)} — pausing LLM until midnight, falling back to heuristic.`);
+    }
   }
 
   private resetIfNewDay(): void {
-    const today = new Date().toDateString();
+    const today = new Date(this.now()).toDateString();
     if (today !== this.lastResetDate) {
       console.log(`[BudgetController] Daily reset. Yesterday: $${this.dailySpend.toFixed(4)} (${this.callCount} calls)`);
       this.dailySpend = 0;
       this.callCount = 0;
+      this.warned80 = false;
+      this.warned100 = false;
       this.lastResetDate = today;
+      this.persistState();
     }
   }
 
@@ -178,6 +263,107 @@ class BudgetController {
       remaining: this.dailyLimit - this.dailySpend,
       callCount: this.callCount,
     };
+  }
+}
+
+// ---------------------------------------------------------------------------
+// OpenAIBudgetTracker — PM-PIVOT-1 (AC 5, 17)
+// ---------------------------------------------------------------------------
+//
+// Public, test-facing budget gate. Lives alongside BudgetController (legacy/internal).
+// API per story contract:
+//   constructor(opts: { thresholdUsd: number; statePath?: string; clock?: () => Date })
+//   load(): Promise<void>           — restore state from disk + reset if date rolled over
+//   recordSpend(usd): Promise<void> — increment + persist + auto-reset
+//   isPaused(): boolean             — true when dailySpend >= thresholdUsd (auto-resets first)
+//   getDailySpend(): number
+//   getLastResetDate(): string      — YYYY-MM-DD local TZ
+//
+// State file shape:
+//   { "dailySpend": number, "lastResetDate": "YYYY-MM-DD" }
+
+export interface OpenAIBudgetTrackerOptions {
+  thresholdUsd: number;
+  statePath?: string;
+  clock?: () => Date;
+}
+
+function formatYmd(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
+}
+
+export class OpenAIBudgetTracker {
+  private thresholdUsd: number;
+  private statePath: string;
+  private clock: () => Date;
+  private dailySpend = 0;
+  private lastResetDate: string;
+
+  constructor(opts: OpenAIBudgetTrackerOptions) {
+    this.thresholdUsd = opts.thresholdUsd;
+    this.statePath = opts.statePath ?? join(process.cwd(), 'data', 'llm-budget.json');
+    this.clock = opts.clock ?? (() => new Date());
+    this.lastResetDate = formatYmd(this.clock());
+  }
+
+  /** Restore from disk and auto-reset if calendar day changed. */
+  async load(): Promise<void> {
+    try {
+      if (existsSync(this.statePath)) {
+        const raw = JSON.parse(readFileSync(this.statePath, 'utf-8')) as {
+          dailySpend?: number;
+          lastResetDate?: string;
+        };
+        if (typeof raw.dailySpend === 'number') this.dailySpend = raw.dailySpend;
+        if (typeof raw.lastResetDate === 'string') this.lastResetDate = raw.lastResetDate;
+      }
+    } catch {
+      // corrupt or unreadable — start fresh
+    }
+    this.maybeReset();
+  }
+
+  /** Reset spend if today's date no longer matches the persisted lastResetDate. */
+  private maybeReset(): void {
+    const today = formatYmd(this.clock());
+    if (today !== this.lastResetDate) {
+      this.dailySpend = 0;
+      this.lastResetDate = today;
+      this.persist();
+    }
+  }
+
+  private persist(): void {
+    try {
+      writeFileSync(
+        this.statePath,
+        JSON.stringify({ dailySpend: this.dailySpend, lastResetDate: this.lastResetDate }, null, 2),
+      );
+    } catch {
+      // disk failure is non-fatal — in-memory state is authoritative for the running process
+    }
+  }
+
+  async recordSpend(usd: number): Promise<void> {
+    this.maybeReset();
+    this.dailySpend += usd;
+    this.persist();
+  }
+
+  isPaused(): boolean {
+    this.maybeReset();
+    return this.dailySpend >= this.thresholdUsd;
+  }
+
+  getDailySpend(): number {
+    return this.dailySpend;
+  }
+
+  getLastResetDate(): string {
+    return this.lastResetDate;
   }
 }
 
@@ -193,6 +379,9 @@ export class MarketAnalyzer {
   private provider: LLMProvider = 'none';
   private calibration: CalibrationTracker;
   private budget: BudgetController;
+  // PM-PIVOT-1: OpenAI-specific persistent budget gate (separate from the legacy in-memory BudgetController).
+  private openaiBudget: OpenAIBudgetTracker;
+  private openaiBudgetReady = false;
   private analysisCount = 0;
 
   constructor(
@@ -205,6 +394,7 @@ export class MarketAnalyzer {
     this.config = { ...DEFAULT_CONFIG, ...config };
     this.calibration = new CalibrationTracker();
     this.budget = new BudgetController(this.config.dailyBudgetUsd);
+    this.openaiBudget = new OpenAIBudgetTracker({ thresholdUsd: this.config.dailyBudgetUsd });
 
     eventBus.on('position:closed', (position) => {
       // Use actual market resolution (price-based), not PnL direction
@@ -212,6 +402,13 @@ export class MarketAnalyzer {
       const outcome: 'YES' | 'NO' = yesPrice >= 0.99 ? 'YES' : 'NO';
       this.calibration.recordOutcome(position.marketId, outcome);
     });
+  }
+
+  /** Lazy-load persistent OpenAI budget once per process. */
+  private async ensureOpenAIBudgetLoaded(): Promise<void> {
+    if (this.openaiBudgetReady) return;
+    await this.openaiBudget.load();
+    this.openaiBudgetReady = true;
   }
 
   /** Connect the knowledge store for context-augmented analysis. */
@@ -301,25 +498,22 @@ export class MarketAnalyzer {
     return this.provider;
   }
 
-  /** Pre-filter markets to top candidates. Prioritizes short-term markets for faster feedback. */
+  /**
+   * Pre-filter markets to top candidates.
+   * PM-PIVOT-1: delegates to selectMarkets() for source-of-truth real-only filtering,
+   * then applies analyzer-specific volume + price-band gates.
+   */
   preFilter(markets: Market[]): Market[] {
     const minVol = this.config.minVolumeForAnalysis;
-    const minLiq = this.config.minLiquidityForAnalysis;
-    const now = Date.now();
-    const SHORT_TERM_DAYS = 14;
-    return markets
+    const maxResHours = Number(process.env.MAX_RESOLUTION_HOURS) || 168;
+    const tradeable = selectMarkets(markets, {
+      maxResolutionHours: maxResHours,
+      minLiquidity: this.config.minLiquidityForAnalysis,
+      batchLimit: Number.MAX_SAFE_INTEGER, // analyzer applies its own batch slice below
+    });
+    return tradeable
       .filter(m => m.volume >= minVol)
-      .filter(m => m.liquidity >= minLiq)
       .filter(m => m.tokens.yes.price > 0.05 && m.tokens.yes.price < 0.95)
-      .sort((a, b) => {
-        // Short-term markets first (resolve within 14 days)
-        const aDays = a.endDate ? (new Date(a.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
-        const bDays = b.endDate ? (new Date(b.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
-        const aShort = aDays <= SHORT_TERM_DAYS ? 0 : 1;
-        const bShort = bDays <= SHORT_TERM_DAYS ? 0 : 1;
-        if (aShort !== bShort) return aShort - bShort;
-        return (b.volume * b.liquidity) - (a.volume * a.liquidity);
-      })
       .slice(0, this.config.maxMarketsPerScan);
   }
 
@@ -333,6 +527,15 @@ export class MarketAnalyzer {
     if (!this.budget.canSpend(isLocal)) {
       console.log('[MarketAnalyzer] Daily budget exhausted — skipping');
       return null;
+    }
+
+    // PM-PIVOT-1: persistent OpenAI budget gate (Conclave Ng — bot morreu por budget esgotado)
+    if (this.provider === 'openai' || this.provider === 'claude') {
+      await this.ensureOpenAIBudgetLoaded();
+      if (this.openaiBudget.isPaused()) {
+        console.warn(`[MarketAnalyzer] OpenAI budget cap reached ($${this.openaiBudget.getDailySpend().toFixed(4)}) — pausing LLM, falling back to heuristic.`);
+        return null;
+      }
     }
 
     try {
@@ -411,6 +614,11 @@ export class MarketAnalyzer {
       response.usage?.input_tokens ?? 0,
       response.usage?.output_tokens ?? 0,
     );
+    // PM-PIVOT-1: mirror to persistent tracker for restart-safe budget enforcement.
+    const inTok = response.usage?.input_tokens ?? 0;
+    const outTok = response.usage?.output_tokens ?? 0;
+    const cost = inTok * COST_PER_INPUT_TOKEN + outTok * COST_PER_OUTPUT_TOKEN;
+    void this.openaiBudget.recordSpend(cost);
 
     const firstBlock = response.content?.[0];
     return firstBlock && firstBlock.type === 'text' ? firstBlock.text : '';
@@ -449,6 +657,11 @@ export class MarketAnalyzer {
 
     if (data.usage) {
       this.budget.recordSpend(data.usage.prompt_tokens, data.usage.completion_tokens);
+      // PM-PIVOT-1: also feed persistent OpenAI tracker (~Haiku-equivalent token cost approximation —
+      // for OpenAI, prompt = $0.15/M, completion = $0.60/M for gpt-4o-mini). Use a conservative blend.
+      const cost = data.usage.prompt_tokens * (0.15 / 1_000_000)
+                 + data.usage.completion_tokens * (0.60 / 1_000_000);
+      void this.openaiBudget.recordSpend(cost);
     }
 
     return data.choices?.[0]?.message?.content ?? '';

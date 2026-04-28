@@ -13,6 +13,7 @@
  * - CLI: Command interface (Constitution Art. I)
  */
 
+import './dns-override.js'; // MUST be first — bypass ISP DNS filtering for polymarket/kalshi
 import { join } from 'path';
 import { existsSync, mkdirSync, readFileSync } from 'fs';
 
@@ -48,7 +49,7 @@ import { StrategyScorer } from './engine/strategy-scorer.js';
 import { MarketAnalyzer } from './intelligence/market-analyzer.js';
 import { KnowledgeStore } from './intelligence/knowledge-store.js';
 import { KalshiClient } from './integrations/kalshi-client.js';
-import { CryptoPriceClient } from './integrations/crypto-price-client.js';
+// PM-PIVOT-1: CryptoPriceClient deletado, synth eliminado
 import { AceEvolver } from './learning/ace-evolver.js';
 import { DEFAULT_CONFIG, PAPER_UNLIMITED_CONFIG } from './config/defaults.js';
 import type { TradingConfig } from './types/index.js';
@@ -146,16 +147,17 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     logger.info(`📚 Knowledge base loaded: ${kbLoaded} documents`);
   }
 
-  // Auto-Trader: the brain that makes it all trade autonomously
-  const synthWeightEnv = Number(process.env.SYNTH_WEIGHT);
-  const synthWeight = Number.isFinite(synthWeightEnv) ? synthWeightEnv : 0.3;
+  // Auto-Trader: the brain that makes it all trade autonomously.
+  // PM-PIVOT-1: synth deletado; default maxResolutionHours = 168 (7d).
+  const llmBatchSize = Number(process.env.LLM_BATCH_SIZE) || 5;
   const autoTrader = new AutoTrader(client, risk, brier, crowdBias, adaptiveVolume, {
     pollIntervalMs: finalConfig.pollIntervalMs,
     enabledVerticals: finalConfig.enabledVerticals,
     marketsPerScan: unlimitedMode ? 100 : 50,
     minEdge: finalConfig.riskLimits.minEdge,
-    maxResolutionHours: Number(process.env.MAX_RESOLUTION_HOURS) || 0,
-    synthWeight,
+    maxResolutionHours: Number(process.env.MAX_RESOLUTION_HOURS) || 168,
+    minLiquidity: 100,
+    llmBatchSize,
   });
 
   // Connect paper trader to auto-trader for position resolution
@@ -172,14 +174,13 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     autoTrader.setKnowledgeStore(knowledge);
   }
 
-  // Multi-platform: connect Kalshi + Crypto for expanded market discovery
+  // Multi-platform: connect Kalshi for expanded market discovery.
+  // PM-PIVOT-1: synth (CryptoPriceClient) deletado — capital morto > 7d, real-only.
   const kalshi = new KalshiClient();
   autoTrader.setKalshiClient(kalshi);
   // P1 hybrid refactor: share Kalshi client with paper trader for resolution
   paper.setKalshiClient(kalshi);
-  const crypto = new CryptoPriceClient();
-  autoTrader.setCryptoClient(crypto);
-  logger.info('🌐 Multi-platform enabled: Polymarket + Kalshi + Crypto (BTC/ETH/SOL)');
+  logger.info('🌐 Real-only mode: Polymarket + Kalshi (synth deletado em PM-PIVOT-1)');
 
   // Fase 2: LLM-in-the-Loop — auto-detect best available provider
   const analyzer = new MarketAnalyzer(client, store, {
@@ -194,7 +195,8 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     maxMarketsPerScan: unlimitedMode ? 30 : 10,
     minVolumeForAnalysis: unlimitedMode ? 1000 : 5000,
     minLiquidityForAnalysis: unlimitedMode ? 500 : 2000,
-    dailyBudgetUsd: parseFloat(process.env.LLM_DAILY_BUDGET || '5'),
+    // PM-PIVOT-1: OPENAI_DAILY_BUDGET_USD has priority (Conclave Ng — bot morreu por budget esgotado)
+    dailyBudgetUsd: parseFloat(process.env.OPENAI_DAILY_BUDGET_USD || process.env.LLM_DAILY_BUDGET || '5'),
   });
 
   // Connect knowledge to analyzer

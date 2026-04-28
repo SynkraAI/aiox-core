@@ -2,14 +2,25 @@
 
 ## Why
 
-Post-mortem 10/Abr/2026: bot process (PID 7208) died silently; no one noticed for ~46h; 268 synthetic positions expired unresolved. Manual resolution created misleading WR of 94.4% (which the 16/Abr audit later proved was a data-leak artifact).
+- **10/Abr/2026:** bot process (PID 7208) died silently; no one noticed for ~46h; 268 synthetic positions expired unresolved. Manual resolution created misleading WR of 94.4% (which the 16/Abr audit later proved was a data-leak artifact).
+- **25/Abr/2026:** bot died again — OpenAI daily budget esgotou silenciosamente, processo finalizou, auto-start (Windows Startup folder) não recuperou. ~9 dias offline antes de detecção manual.
 
-**Lesson:** a long-running trading bot MUST have a supervisor that:
+**Lesson (Conclave Ng — PM-PIVOT-1):** a long-running trading bot MUST have a supervisor that:
 1. Detects crashes and restarts automatically.
 2. Writes crash logs to disk for forensics.
-3. Emits an alert (Telegram or heartbeat file) when it restarts.
+3. Emits an alert (Telegram or heartbeat file) when it freezes (alive but stuck).
+4. Caps OpenAI spend per day so a billing surprise doesn't kill the loop.
 
-This playbook documents two supported supervisors on Windows. Pick ONE.
+The supervisor stack has TWO complementary layers:
+
+| Layer | Role | Files |
+|-------|------|-------|
+| **Service wrapper** | Restarts the process if it crashes. | NSSM (preferred Windows) / PM2 / Startup folder |
+| **Watchdog** | Detects zombie / frozen state via heartbeat. | `scripts/watchdog.ps1` + Task Scheduler |
+| **Budget guard** | Pauses LLM if daily OpenAI spend ≥ cap. | `BudgetController` in `market-analyzer.ts` |
+
+The watchdog is REQUIRED — a crashed-but-restarted process can still freeze. The
+heartbeat (`data/heartbeat.json`, written every scan) is the only authoritative liveness signal.
 
 ---
 
@@ -128,19 +139,66 @@ Service logs: Event Viewer → Windows Logs → Application (filter source Polym
 
 ---
 
-## Heartbeat & Crash Alerts
+## Option C — NSSM + Watchdog (recommended, PM-PIVOT-1)
 
-Regardless of supervisor choice, add a heartbeat file write every 60s inside the bot loop so an external watcher (or cron script) can detect freezes (where the PID is alive but the loop is stuck).
+The combo enabled by PM-PIVOT-1. NSSM owns the process lifecycle; the watchdog detects freezes.
 
-Suggested — add to `auto-trader.ts` scan loop (NOT in this refactor, flag for follow-up):
+### Install NSSM service
 
-```ts
-import { writeFileSync } from 'fs';
-// Inside scanAndTrade() after success:
-writeFileSync('data/heartbeat.txt', new Date().toISOString());
+See `playbooks/nssm-install.md` for full instructions. Quick path:
+
+```cmd
+cd D:\AIOS\apps\polymarket-trader\scripts
+install-nssm-service.bat        :: requires NSSM in PATH
+nssm start PolymarketBot
 ```
 
-Then a 5-min cron (PowerShell scheduled task) reads `heartbeat.txt`; if > 10 min old, sends Telegram alert.
+### Install watchdog (Windows Task Scheduler)
+
+```cmd
+cd D:\AIOS\apps\polymarket-trader\scripts
+install-watchdog-task.bat       :: every 5 min, hidden window
+```
+
+Verify task installed:
+```cmd
+schtasks /Query /TN PolymarketBotWatchdog /V /FO LIST
+```
+
+Manual fire (no need to wait 5 min):
+```cmd
+schtasks /Run /TN PolymarketBotWatchdog
+```
+
+### What the watchdog does
+
+`scripts/watchdog.ps1`:
+1. Reads `data/heartbeat.json` — JSON written by `auto-trader.ts::scanAndTrade()` after every poll.
+2. If `now - heartbeat.ts > 10 min`, sends Telegram via `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` from `.env`.
+3. Appends every tick to `data/watchdog.log` (forensics — second-tier monitoring even if Telegram is down).
+
+Heartbeat schema:
+```json
+{
+  "ts": 1714200000000,
+  "scanCount": 1234,
+  "eligibleReal": 18,
+  "signals": 2,
+  "lastTradeTs": 1714199100000
+}
+```
+
+### Budget Guard
+
+`OPENAI_DAILY_BUDGET_USD=5` in `.env` caps daily spend. When reached:
+- LLM is paused (returns no signals)
+- Bot falls back to heuristic trader
+- State persisted in `data/llm-budget.json` so a restart mid-day doesn't reset the spend counter
+- Resets at local midnight
+
+Budget controller logs warnings at 80% and 100% — watch the bot stdout.
+
+---
 
 ---
 

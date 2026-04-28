@@ -6,9 +6,11 @@
  * Hand-rolled process.argv parsing (no commander/yargs).
  */
 
+import '../dns-override.js'; // MUST be first — bypass ISP DNS filtering for polymarket/kalshi
 // Load .env file (zero dependencies — native Node.js)
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import * as readline from 'readline';
 try {
   const envPath = join(process.cwd(), '.env');
   const envContent = readFileSync(envPath, 'utf-8');
@@ -753,6 +755,112 @@ async function cmdGas(): Promise<void> {
   }
 }
 
+// ---------------------------------------------------------------------------
+// PM-PIVOT-1: cleanup-stale — list legacy synth/old positions and prompt for delete.
+// ---------------------------------------------------------------------------
+
+interface StoredPosition {
+  marketId: string;
+  enteredAt: string;
+  side: string;
+  size: number;
+  entryPrice: number;
+  signal?: { marketQuestion?: string };
+  [k: string]: unknown;
+}
+
+async function cmdCleanupStale(flags: Record<string, string | boolean>): Promise<void> {
+  const positionsPath = join(process.cwd(), 'data', 'open-positions.json');
+  console.log(sectionHeader('CLEANUP STALE POSITIONS (PM-PIVOT-1)'));
+  if (!existsSync(positionsPath)) {
+    console.log(`\n  No positions file at ${positionsPath} — nothing to clean.`);
+    return;
+  }
+
+  let positions: StoredPosition[];
+  try {
+    positions = JSON.parse(readFileSync(positionsPath, 'utf-8')) as StoredPosition[];
+  } catch (err) {
+    console.error(`  Failed to parse ${positionsPath}: ${err instanceof Error ? err.message : err}`);
+    return;
+  }
+
+  // PM-PIVOT-1: stale = synth-* (deleted) OR enteredAt > 7d ago.
+  const STALE_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
+  const now = Date.now();
+  const stale = positions.filter(p => {
+    if (p.marketId.startsWith('synth-')) return true;
+    const enteredMs = new Date(p.enteredAt).getTime();
+    if (!Number.isFinite(enteredMs)) return false;
+    return (now - enteredMs) > STALE_THRESHOLD_MS;
+  });
+
+  if (stale.length === 0) {
+    console.log(`\n  No stale positions found (${positions.length} total open).`);
+    return;
+  }
+
+  console.log(keyValue('Total positions', `${positions.length}`));
+  console.log(keyValue('Stale candidates', colorize(`${stale.length}`, 'yellow')));
+  console.log('');
+
+  // Show first 20 for sanity
+  const preview = stale.slice(0, 20);
+  const headers = ['MarketId', 'Question', 'Side', 'Size', 'Entered'];
+  const rows = preview.map(p => [
+    p.marketId.slice(0, 36),
+    (p.signal?.marketQuestion || '').slice(0, 40),
+    p.side,
+    formatCurrency(p.size),
+    formatDate(new Date(p.enteredAt)),
+  ]);
+  console.log(formatTable(headers, rows, ['left', 'left', 'left', 'right', 'left']));
+  if (stale.length > preview.length) {
+    console.log(`  ... and ${stale.length - preview.length} more`);
+  }
+  console.log('');
+
+  const yes = flags['yes'] === true || flags['confirm'] === true;
+  let proceed = yes;
+  if (!proceed) {
+    proceed = await promptYesNo(`Remove ${stale.length} stale position(s) from open-positions.json? [y/N]: `);
+  }
+
+  if (!proceed) {
+    console.log(colorize('  Aborted — no changes made.', 'dim'));
+    return;
+  }
+
+  // Backup first
+  const backupPath = `${positionsPath}.bak.cleanup-${new Date().toISOString().slice(0, 10)}`;
+  try {
+    writeFileSync(backupPath, JSON.stringify(positions, null, 2));
+    console.log(keyValue('Backup', backupPath));
+  } catch (err) {
+    console.error(`  Backup failed: ${err instanceof Error ? err.message : err}`);
+    console.error('  Aborting cleanup to avoid data loss.');
+    return;
+  }
+
+  const staleIds = new Set(stale.map(p => p.marketId));
+  const remaining = positions.filter(p => !staleIds.has(p.marketId));
+  writeFileSync(positionsPath, JSON.stringify(remaining, null, 2));
+
+  console.log('');
+  console.log(keyValue('Removed', colorize(`${stale.length}`, 'green')));
+  console.log(keyValue('Remaining', `${remaining.length}`));
+}
+
+function promptYesNo(question: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    rl.question(question, (answer) => {
+      rl.close();
+      resolve(/^y(es)?$/i.test(answer.trim()));
+    });
+  });
+}
+
 function cmdHelp(): void {
   const unlimited = process.env.PAPER_UNLIMITED === 'true' || process.env.PAPER_UNLIMITED === '1';
   console.log(`
@@ -784,6 +892,7 @@ ${colorize('COMMANDS', 'cyan')}
                                    Telegram bot control
   ${colorize('dashboard', 'bold')}  [--port 3737]             Web dashboard (observability)
   ${colorize('config', 'bold')}                           Show configuration
+  ${colorize('cleanup-stale', 'bold')} [--yes]              List & remove stale (>7d or synth-*) open positions
   ${colorize('version', 'bold')}                          Version info
   ${colorize('help', 'bold')}                             This help text
 
@@ -820,6 +929,7 @@ const COMMANDS: Record<string, (args: ParsedArgs) => Promise<void> | void> = {
   dashboard:  (a) => cmdDashboard(a.flags),
   config:     () => cmdConfig(),
   version:    () => cmdVersion(),
+  'cleanup-stale': (a) => cmdCleanupStale(a.flags),
   help:       () => cmdHelp(),
 };
 
