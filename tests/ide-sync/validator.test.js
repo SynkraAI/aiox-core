@@ -141,6 +141,19 @@ describe('validator', () => {
       expect(result.orphaned[0].filename).toBe('orphan.mdc');
     });
 
+    it('should detect orphaned files in nested Kimi skill directories', () => {
+      fs.ensureDirSync(path.join(targetDir, 'aios-dev'));
+      fs.ensureDirSync(path.join(targetDir, 'aios-qa'));
+      fs.writeFileSync(path.join(targetDir, 'aios-dev', 'SKILL.md'), 'content');
+      fs.writeFileSync(path.join(targetDir, 'aios-qa', 'SKILL.md'), 'orphan');
+
+      const expected = [{ filename: path.join('aios-dev', 'SKILL.md'), content: 'content' }];
+      const result = validateIdeSync(expected, targetDir, {}, 'kimi-skill');
+
+      expect(result.orphaned).toHaveLength(1);
+      expect(result.orphaned[0].filename).toBe(path.join('aios-qa', 'SKILL.md'));
+    });
+
     it('should not count redirect files as orphaned', () => {
       fs.writeFileSync(path.join(targetDir, 'agent.md'), 'content');
       fs.writeFileSync(path.join(targetDir, 'aiox-developer.md'), 'redirect');

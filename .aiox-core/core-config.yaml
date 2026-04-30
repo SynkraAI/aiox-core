@@ -334,6 +334,12 @@ ideSync:
       enabled: true
       path: .antigravity/rules/agents
       format: cursor-style
+    kimi:
+      enabled: true
+      path: .kimi/skills
+      format: kimi-skill
+      fallbackSources:
+        - .codex/agents
   redirects: {}
   validation:
     strictMode: true

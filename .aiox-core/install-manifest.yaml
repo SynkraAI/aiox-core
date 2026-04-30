@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T21:53:10.067Z"
+generated_at: "2026-05-07T23:37:33.663Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1103
+file_count: 1104
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -181,9 +181,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:9ddfc19a58ca25ca628925ec2ba2afab720c89d80817dfc2e0b03c3fcfcfecc2
+    hash: sha256:5dd27ca77427053fd1c6a272287018e5d3d2cae9f36add26fe33adf2fde8e868
     type: config
-    size: 11368
+    size: 11495
   - path: core/code-intel/code-intel-client.js
     hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
@@ -3133,13 +3133,13 @@ files:
     type: script
     size: 5534
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:a7aadbec210e0b5d9c96d187104c8378d097ae6ffb88356614d0ed723298d2ac
+    hash: sha256:2fbcfe20ece516bfd54af707e36ec4191186c49b63febd85184e729788d17dbd
     type: script
-    size: 17278
+    size: 18187
   - path: infrastructure/scripts/ide-sync/README.md
-    hash: sha256:5e88ac0d9d73dee28538c09af86093cb8ddeba1e9d62e993a16d03218b4bc62d
+    hash: sha256:d4dd100db52a0f4a092466668ebb8c321c901720bd726dba9371da9f9cc8a583
     type: script
-    size: 5405
+    size: 5574
   - path: infrastructure/scripts/ide-sync/redirect-generator.js
     hash: sha256:5bebf478e331716b4fb42d624076eb2570c90c4aa829427c700995d6b9ec361e
     type: script
@@ -3160,10 +3160,14 @@ files:
     hash: sha256:6d365be4a55e2f5ced316a0efbfa50fb925562f3e145d47a86c57a2c685343ac
     type: script
     size: 5693
-  - path: infrastructure/scripts/ide-sync/validator.js
-    hash: sha256:29d87e56562627e841c10369644dbb275d8b2a9fd2e366756d25a6d05a1f786d
+  - path: infrastructure/scripts/ide-sync/transformers/kimi.js
+    hash: sha256:f8fea101a9de1efc4a6a0f18111afeb5ede105ffd9485700867c98dee94a47a1
     type: script
-    size: 7429
+    size: 11695
+  - path: infrastructure/scripts/ide-sync/validator.js
+    hash: sha256:4f01ed419d5175e15959add2d31e19559dac12c231175cffc1967fbe37183fe2
+    type: script
+    size: 8134
   - path: infrastructure/scripts/improvement-engine.js
     hash: sha256:4fed61115f4148eb6b8c42ebd9d5b05732695ab1b4343e2466383baf4883d58d
     type: script

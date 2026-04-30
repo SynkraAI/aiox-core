@@ -140,6 +140,7 @@ Each IDE has a specific format for agent files:
 | GitHub Copilot | Full markdown with YAML | `.md`   |
 | Cursor      | Condensed MDC rules     | `.mdc`    |
 | Antigravity | Cursor-style            | `.md`     |
+| Kimi        | Skill directory         | `SKILL.md` |
 
 Platform-specific checks:
 
@@ -181,7 +182,9 @@ alwaysApply: false
 └── transformers/
     ├── claude-code.js       # Claude Code format
     ├── cursor.js            # Cursor format
-    └── antigravity.js       # Antigravity format
+    ├── antigravity.js       # Antigravity format
+    ├── github-copilot.js    # GitHub Copilot format
+    └── kimi.js              # Kimi skill format
 ```
 
 ## Performance

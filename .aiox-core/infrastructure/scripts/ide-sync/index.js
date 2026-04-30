@@ -31,6 +31,7 @@ const claudeCodeTransformer = require('./transformers/claude-code');
 const cursorTransformer = require('./transformers/cursor');
 const antigravityTransformer = require('./transformers/antigravity');
 const githubCopilotTransformer = require('./transformers/github-copilot');
+const kimiTransformer = require('./transformers/kimi');
 
 // ANSI colors for output
 const colors = {
@@ -88,6 +89,12 @@ function loadConfig(projectRoot) {
         path: '.antigravity/rules/agents',
         format: 'cursor-style',
       },
+      kimi: {
+        enabled: true,
+        path: '.kimi/skills',
+        format: 'kimi-skill',
+        fallbackSources: ['.codex/agents'],
+      },
     },
     redirects: {
       'aiox-developer': 'aiox-master',
@@ -129,6 +136,7 @@ function getTransformer(format) {
     'condensed-rules': cursorTransformer,
     'cursor-style': antigravityTransformer,
     'github-copilot': githubCopilotTransformer,
+    'kimi-skill': kimiTransformer,
   };
 
   return transformers[format] || claudeCodeTransformer;
@@ -194,7 +202,18 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
     try {
       const content = transformPrimaryContent(transformer, agent, ideName);
       const filename = transformer.getFilename(agent);
-      const targetPath = path.join(result.targetDir, filename);
+
+      // Kimi format uses subdirectories per skill: <skill-id>/SKILL.md
+      let targetPath;
+      if (ideConfig.format === 'kimi-skill' && transformer.getDirname) {
+        const skillDir = path.join(result.targetDir, transformer.getDirname(agent));
+        targetPath = path.join(skillDir, filename);
+        if (!options.dryRun) {
+          fs.ensureDirSync(skillDir);
+        }
+      } else {
+        targetPath = path.join(result.targetDir, filename);
+      }
 
       if (!options.dryRun) {
         fs.writeFileSync(targetPath, content, 'utf8');
@@ -409,7 +428,11 @@ async function commandValidate(options) {
       try {
         const content = transformPrimaryContent(transformer, agent, ideName);
         const filename = transformer.getFilename(agent);
-        expectedFiles.push({ filename, content });
+        // Kimi format stores each skill in <skill-id>/SKILL.md — record nested path
+        const relPath = ideConfig.format === 'kimi-skill' && transformer.getDirname
+          ? path.join(transformer.getDirname(agent), filename)
+          : filename;
+        expectedFiles.push({ filename: relPath, content });
       } catch (error) {
         // Skip agents that fail to transform
       }
