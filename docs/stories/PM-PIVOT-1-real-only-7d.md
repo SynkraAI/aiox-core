@@ -186,6 +186,36 @@ quality_gate_tools: ["vitest", "tsc --noEmit", "eslint"]
 
 ### Constraint cumprida: bot NÃO foi religado.
 
+### Deploy 30/Abr (Dex — heuristic-only paper mode, all 5 verticals)
+
+**Trigger**: BACKTEST-3 TIER2 verdict = STOP (Haiku 4.5 piora forecasts vs heurística em 4/5 verticais). User decisão: rodar heurística pura, todos verticais, paper mode, observar 30d.
+
+**Mudanças mínimas**:
+1. `src/intelligence/market-analyzer.ts:initialize()` — early-return `provider='none'` quando `DISABLE_LLM=true|1`. Backtest scripts (`replay-llm.ts`) usam SDK direto, não passam por essa initialize, então não afetados.
+2. `.env` — adicionado `DISABLE_LLM=true` (preserva `LLM_PROVIDER=anthropic` + `ANTHROPIC_*` para backtest).
+
+**Verificações pre-deploy** (Dex):
+- `tsc --noEmit` → 0 errors
+- `vitest run` → 963 passed / 4 failed (mesmas 4 baselines em `cross-platform-arb.test.ts` — confirmado pré-existente em HEAD pré-edit)
+- DNS sanity: `node scripts/test-dns.ts` → HTTP 200, mercados reais retornados (undici dispatcher 1.1.1.1 ok)
+- `data/trades.db` é JSON (ExperienceStore) — 467 open positions restored from disk
+
+**Runtime status** (5min smoke):
+- Bot launched via `scripts/start-bot.bat` (NSSM not installed; UAC elevation prompt cancelled in autonomous shell — NSSM service install é follow-up manual)
+- PID 23032 alive desde 14:22:55 BRT
+- LLM kill-switch confirmado em log: `[MarketAnalyzer] DISABLE_LLM=true — runtime LLM disabled, falling back to heuristic-only mode`
+- 7 scans em ~4min, 0 errors em `bot-error.log`
+- Heartbeat updating (~30s)
+- 7/7 verticals enabled (weather, crypto, politics, sports, pop_culture, finance, science)
+- Real-only mode: `🌐 Polymarket + Kalshi (synth deletado)`
+- 0 eligible ≤168h markets em 7 scans — esperado: amostragem `gamma-api/markets?active=true&limit=50` mostrou 42/50 com endDate >7d, 8/50 já expirados, 0/50 dentro de 7d. Distribuição PM é dominada por horizon longo (politics 2028 etc.). Bot rotaciona offset, vai descobrir mercados curtos ao varrer.
+- Watchdog Task Scheduler instalado (`PolymarketBotWatchdog`, /MO 5)
+
+**Follow-ups pós-deploy**:
+- NSSM install manual (admin shell): `scripts/install-nssm-service.bat` — autonomous shell não pode aceitar UAC
+- Watchdog `$PSScriptRoot` empty bug quando invocado via `-File` — workaround: task usa `-AppRoot` explicit
+- 5min observation window confirmou bot estável; user pode monitorar via `tail -f data/bot.log`
+
 ## Dev Notes
 
 ### Constraints

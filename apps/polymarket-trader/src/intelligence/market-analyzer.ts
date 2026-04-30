@@ -419,8 +419,20 @@ export class MarketAnalyzer {
   /**
    * Detect and initialize the best available LLM provider.
    * Must be called before analyzeMarket().
+   *
+   * PM-PIVOT-1 Deploy 30/Abr: DISABLE_LLM=true short-circuits all detection
+   * and forces heuristic-only mode (BACKTEST-3 TIER2 verdict: Haiku 4.5 piora forecasts
+   * vs heurística em 4/5 verticais). Backtest scripts (replay-llm.ts) ainda usam o SDK
+   * direto, então ANTHROPIC_* vars permanecem no .env — DISABLE_LLM só afeta o runtime.
    */
   async initialize(): Promise<LLMProvider> {
+    // PM-PIVOT-1 Deploy 30/Abr: runtime LLM kill-switch
+    if (process.env.DISABLE_LLM === 'true' || process.env.DISABLE_LLM === '1') {
+      this.provider = 'none';
+      console.log('[MarketAnalyzer] DISABLE_LLM=true — runtime LLM disabled, falling back to heuristic-only mode');
+      return this.provider;
+    }
+
     // Forced provider via config or env
     const forced = (this.config.provider || process.env.LLM_PROVIDER || '') as LLMProvider;
     if (forced && forced !== 'none') {
