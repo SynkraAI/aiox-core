@@ -1,6 +1,20 @@
 node_modules/
 dist/
-data/
 *.db
 .env
 .env.*
+
+# data/ is mostly runtime artifacts; ignore by default but keep the schema DDL.
+data/*
+!data/backtest/
+data/backtest/*
+!data/backtest/schema.sql
+!data/backtest/INGEST-REPORT.md
+!data/backtest/TIER1-RESULTS.md
+!data/backtest/TIER2-RESULTS.md
+!data/backtest/.checkpoints/
+data/backtest/.checkpoints/*
+!data/backtest/.checkpoints/.gitkeep
+
+# Kalshi private key — NEVER commit
+.secrets/
