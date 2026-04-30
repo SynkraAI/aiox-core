@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "ShapeAI",
+    "slug": "shapeai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "scheme": "shapeai",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0A"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.shapeai.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "O ShapeAI usa a câmera para capturar fotos de análise corporal.",
+        "NSPhotoLibraryUsageDescription": "O ShapeAI acessa sua biblioteca de fotos para análise corporal."
+      }
+    },
+    "android": {
+      "package": "com.shapeai.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0A0A0A"
+      },
+      "permissions": ["android.permission.CAMERA"],
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "O ShapeAI usa a câmera para capturar fotos de análise corporal."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
