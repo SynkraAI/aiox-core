@@ -67,7 +67,7 @@ export default function PaywallScreen() {
       router.replace('/(app)')
     } catch (err: unknown) {
       const code = (err as { code?: string }).code
-      if (code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED) return
+      if (code === PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR) return
       Alert.alert('Erro na compra', 'Não foi possível processar a compra. Tente novamente.')
     } finally {
       setIsLoading(false)

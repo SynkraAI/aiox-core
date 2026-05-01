@@ -48,7 +48,7 @@ export default function CameraScreen() {
     if (!photo) return
 
     // Validação real de tamanho via expo-file-system
-    const info = await FileSystem.getInfoAsync(photo.uri, { size: true })
+    const info = await FileSystem.getInfoAsync(photo.uri)
     const fileSize = (info as FileSystem.FileInfo & { size?: number }).size
     if (fileSize && fileSize > MAX_FILE_SIZE_BYTES) {
       Alert.alert('Foto muito grande', 'Cada foto deve ter no máximo 10 MB. Tente novamente.')

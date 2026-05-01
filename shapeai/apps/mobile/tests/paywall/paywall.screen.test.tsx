@@ -9,7 +9,7 @@ jest.mock('../../src/services/purchases.service', () => ({
   getOfferings: jest.fn().mockResolvedValue({ current: null }),
   purchasePackage: jest.fn(),
   restorePurchases: jest.fn(),
-  PURCHASES_ERROR_CODE: { PURCHASE_CANCELLED: 'purchaseCancelled' },
+  PURCHASES_ERROR_CODE: { PURCHASE_CANCELLED_ERROR: 'purchaseCancelled' },
 }))
 
 jest.mock('../../src/hooks/useSubscription', () => ({

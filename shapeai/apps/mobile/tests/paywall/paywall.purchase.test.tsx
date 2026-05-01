@@ -17,7 +17,7 @@ jest.mock('../../src/services/purchases.service', () => ({
   }),
   purchasePackage: jest.fn(),
   restorePurchases: jest.fn(),
-  PURCHASES_ERROR_CODE: { PURCHASE_CANCELLED: 'purchaseCancelled' },
+  PURCHASES_ERROR_CODE: { PURCHASE_CANCELLED_ERROR: 'purchaseCancelled' },
 }))
 
 jest.mock('../../src/hooks/useSubscription', () => ({
@@ -53,7 +53,7 @@ describe('PaywallScreen — fluxo de compra', () => {
   })
 
   it('cancela silenciosamente quando erro é PURCHASE_CANCELLED', async () => {
-    const cancelErr = Object.assign(new Error('cancelled'), { code: PURCHASES_ERROR_CODE.PURCHASE_CANCELLED })
+    const cancelErr = Object.assign(new Error('cancelled'), { code: PURCHASES_ERROR_CODE.PURCHASE_CANCELLED_ERROR })
     mockPurchase.mockRejectedValueOnce(cancelErr)
 
     const { getByTestId } = render(<PaywallScreen />)
