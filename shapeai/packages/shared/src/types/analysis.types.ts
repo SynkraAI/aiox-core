@@ -73,6 +73,15 @@ export interface WorkoutPlan {
   generated_at: string
 }
 
+export interface AnalysisSummary {
+  id: string
+  status: AnalysisStatus
+  scores: BodyScores | null
+  created_at: string
+  completed_at: string | null
+  top_development_areas: string[]
+}
+
 export interface AnalysisResult {
   id: string
   status: 'completed'

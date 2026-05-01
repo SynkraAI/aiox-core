@@ -127,19 +127,36 @@ export async function analysesRoutes(app: FastifyInstance) {
     }
   )
 
-  // GET /analyses — histórico paginado
-  app.get('/analyses', { preHandler: requireAuth }, async (request, reply) => {
-    const userId = request.authUser.id
-    const { rows } = await pool.query(
-      `SELECT id, status, scores, created_at, completed_at
-       FROM analyses
-       WHERE user_id = $1
-       ORDER BY created_at DESC
-       LIMIT 20`,
-      [userId]
-    )
-    return reply.send({ analyses: rows })
-  })
+  // GET /analyses — histórico paginado com top_development_areas
+  app.get<{ Querystring: { limit?: string; offset?: string } }>(
+    '/analyses',
+    { preHandler: requireAuth },
+    async (request, reply) => {
+      const userId = request.authUser.id
+      const limit = Math.min(parseInt(request.query.limit ?? '10', 10), 50)
+      const offset = parseInt(request.query.offset ?? '0', 10)
+
+      const { rows } = await pool.query(
+        `SELECT
+           a.id, a.status, a.scores, a.created_at, a.completed_at,
+           COALESCE(
+             (SELECT jsonb_agg(elem->>'title')
+              FROM jsonb_array_elements(r.development_areas) WITH ORDINALITY AS t(elem, ord)
+              WHERE ord <= 2),
+             '[]'::jsonb
+           ) AS top_development_areas
+         FROM analyses a
+         LEFT JOIN reports r ON r.analysis_id = a.id
+         WHERE a.user_id = $1
+         ORDER BY a.created_at DESC
+         LIMIT $2 OFFSET $3`,
+        [userId, limit + 1, offset]
+      )
+
+      const has_more = rows.length > limit
+      return reply.send({ analyses: rows.slice(0, limit), has_more })
+    }
+  )
 
   // POST /internal/analyses/:id/complete — callback do ai-engine
   app.post<{ Params: { id: string }; Body: {

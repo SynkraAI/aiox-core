@@ -1,5 +1,6 @@
 import { apiGet, apiPost } from './api.client'
 import type { ReportSection } from '../components/report/ReportSectionCard'
+import type { AnalysisSummary } from '@shapeai/shared'
 
 export interface StartAnalysisResponse {
   analysis_id: string
@@ -49,6 +50,12 @@ export interface AnalysisResult {
     weeks: WorkoutWeek[]
   }
   completed_at: string
+}
+
+export async function listAnalyses(page: number = 1): Promise<{ analyses: AnalysisSummary[]; has_more: boolean }> {
+  const limit = 10
+  const offset = (page - 1) * limit
+  return apiGet(`/analyses?limit=${limit}&offset=${offset}`)
 }
 
 export async function getAnalysisResult(analysisId: string): Promise<AnalysisResult> {
