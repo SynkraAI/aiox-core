@@ -2,6 +2,23 @@
  * Polymarket API client wrapper.
  * Abstracts Gamma (market discovery) + CLOB (trading) + Data (history) APIs.
  * Uses official @polymarket/clob-client when available, REST fallback otherwise.
+ *
+ * ─────────────────────────────────────────────────────────────────────────
+ * Category filter (PM-FILTER-1, 2026-04-30, Dex)
+ * ─────────────────────────────────────────────────────────────────────────
+ * Set env `PM_CATEGORIES=sports,weather,crypto` (slugs, comma-separated) to
+ * restrict fetch to short-horizon verticals. Empty/unset → no filter (legacy).
+ *
+ * Mechanism: Gamma `/markets?tag_id=<id>` with `order=startDate&ascending=false`.
+ *  - Slug → id resolved lazily once via `/tags/slug/<slug>` (cached in-memory).
+ *  - Order param flips the page from "long-tail 2028 closed markets" (default
+ *    Gamma behavior — what was hosing us at 0 eligibles in 2697 scans) to the
+ *    freshest-started markets, which is where short-horizon (≤168h) lives.
+ *
+ * Verified canonical IDs (2026-04-30 spot check):
+ *    sports=1, crypto=21, weather=84, politics=2
+ * Endpoint reference: https://gamma-api.polymarket.com/tags/slug/<slug>
+ * ─────────────────────────────────────────────────────────────────────────
  */
 
 import { POLYMARKET_API } from '../config/defaults.js';
@@ -27,12 +44,116 @@ export class PolymarketClient {
   /** Rotating offset for market discovery — ensures different markets each scan. */
   private marketOffset = 0;
 
+  /** PM-FILTER-1: slug → tag_id cache (resolved lazily). */
+  private tagIdCache: Map<string, number> | null = null;
+  /** PM-FILTER-1: log the resolved IDs once on first successful fetch. */
+  private filterLogged = false;
+
+  /** Read+parse PM_CATEGORIES env var. Empty array = no filter. */
+  private getCategorySlugs(): string[] {
+    const raw = (process.env.PM_CATEGORIES ?? '').trim();
+    if (!raw) return [];
+    return raw
+      .split(',')
+      .map(s => s.trim().toLowerCase())
+      .filter(Boolean);
+  }
+
+  /** Resolve a category slug to its Polymarket tag_id via /tags/slug/<slug>. */
+  private async resolveTagId(slug: string): Promise<number | null> {
+    if (!this.tagIdCache) this.tagIdCache = new Map();
+    const cached = this.tagIdCache.get(slug);
+    if (cached !== undefined) return cached;
+    try {
+      const r = await fetch(`${POLYMARKET_API.gamma}/tags/slug/${encodeURIComponent(slug)}`);
+      if (!r.ok) return null;
+      const j = await r.json() as { id?: string | number };
+      const id = j?.id != null ? Number(j.id) : null;
+      if (id != null && Number.isFinite(id)) {
+        this.tagIdCache.set(slug, id);
+        return id;
+      }
+    } catch { /* swallow — fall through */ }
+    return null;
+  }
+
+  /** Fetch one page from Gamma /markets with given query string. */
+  private async fetchMarketsPage(searchParams: URLSearchParams): Promise<Array<Record<string, unknown>>> {
+    const url = `${POLYMARKET_API.gamma}/markets?${searchParams}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Gamma API error: ${response.status}`);
+    return await response.json() as Array<Record<string, unknown>>;
+  }
+
   async getMarkets(params?: { active?: boolean; closed?: boolean; limit?: number; offset?: number }): Promise<Market[]> {
-    const searchParams = new URLSearchParams();
-    // Default: only open markets (active=true, closed=false)
-    searchParams.set('active', String(params?.active ?? true));
-    searchParams.set('closed', String(params?.closed ?? false));
     const limit = params?.limit ?? 100;
+    const active = params?.active ?? true;
+    const closed = params?.closed ?? false;
+
+    const slugs = this.getCategorySlugs();
+
+    // ── PM-FILTER-1: category-restricted multi-fetch ────────────────────
+    if (slugs.length > 0) {
+      // Resolve slug → tag_id (cached after first call)
+      const resolved: Array<{ slug: string; id: number }> = [];
+      for (const s of slugs) {
+        const id = await this.resolveTagId(s);
+        if (id != null) resolved.push({ slug: s, id });
+      }
+
+      if (resolved.length === 0) {
+        // Couldn't resolve any tags → fall back to no-filter behavior so we
+        // don't return zero markets (and starve the bot) due to a typo'd slug.
+        console.warn('[PolymarketClient] PM_CATEGORIES set but no tag_ids resolved — falling back to unfiltered fetch');
+      } else {
+        if (!this.filterLogged) {
+          const ids = resolved.map(r => `${r.slug}=${r.id}`).join(',');
+            console.log(`[PolymarketClient] PM_CATEGORIES=${slugs.join(',')} → tag_ids=[${ids}]`);
+        }
+
+        // Split limit budget evenly across categories (round up — small overshoot ok)
+        const perCat = Math.max(10, Math.ceil(limit / resolved.length));
+        const merged = new Map<string, Record<string, unknown>>();
+
+        for (const cat of resolved) {
+          const sp = new URLSearchParams();
+          sp.set('active', String(active));
+          sp.set('closed', String(closed));
+          sp.set('limit', String(perCat));
+          sp.set('tag_id', String(cat.id));
+          // Freshest-started markets first → these are the short-horizon ones.
+          // Gamma default (endDate asc) returns long-closed/expired markets at top.
+          sp.set('order', 'startDate');
+          sp.set('ascending', 'false');
+
+          try {
+            const page = await this.fetchMarketsPage(sp);
+            for (const raw of page) {
+              const id = String(raw.id ?? raw.condition_id ?? '');
+              if (id && !merged.has(id)) merged.set(id, raw);
+            }
+          } catch (err) {
+                console.warn(`[PolymarketClient] tag_id=${cat.id} (${cat.slug}) fetch failed: ${err instanceof Error ? err.message : err}`);
+          }
+        }
+
+        if (!this.filterLogged) {
+            console.log(`[PolymarketClient] fetched ${merged.size} unique markets across ${resolved.length} categories`);
+          this.filterLogged = true;
+        }
+
+        const now = Date.now();
+        return Array.from(merged.values())
+          .map((d) => this.parseMarket(d))
+          .filter(m => m.tokens.yes.tokenId !== '')
+          .filter(m => !m.endDate || new Date(m.endDate).getTime() > now);
+      }
+    }
+
+    // ── Legacy path (no PM_CATEGORIES set) ──────────────────────────────
+    const searchParams = new URLSearchParams();
+    searchParams.set('active', String(active));
+    searchParams.set('closed', String(closed));
     searchParams.set('limit', String(limit));
 
     // Rotate offset to discover new markets each scan
@@ -43,11 +164,7 @@ export class PolymarketClient {
     this.marketOffset += limit;
     if (this.marketOffset > 500) this.marketOffset = 0;
 
-    const url = `${POLYMARKET_API.gamma}/markets?${searchParams}`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Gamma API error: ${response.status}`);
-
-    const data = await response.json() as Array<Record<string, unknown>>;
+    const data = await this.fetchMarketsPage(searchParams);
 
     // If we got fewer results than limit, reset offset (we've hit the end)
     if (data.length < limit) this.marketOffset = 0;
