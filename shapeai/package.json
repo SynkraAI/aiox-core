@@ -14,6 +14,12 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck"
   },
+  "overrides": {
+    "react": "19.1.0",
+    "react-native-purchases": {
+      "react": "19.1.0"
+    }
+  },
   "devDependencies": {
     "react-test-renderer": "19.2.5",
     "turbo": "^2.3.3",

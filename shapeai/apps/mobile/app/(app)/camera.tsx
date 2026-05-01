@@ -94,7 +94,7 @@ export default function CameraScreen() {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Erro desconhecido'
       if (msg === 'SUBSCRIPTION_REQUIRED') {
-        Alert.alert('Assinatura necessária', 'Você já usou sua análise gratuita. Assine para continuar.')
+        router.push('/(app)/paywall')
       } else {
         Alert.alert('Erro', `Falha ao processar: ${msg}`)
       }

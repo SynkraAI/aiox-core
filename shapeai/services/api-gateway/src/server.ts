@@ -5,6 +5,7 @@ import cors from '@fastify/cors'
 import rateLimit from '@fastify/rate-limit'
 import { analysesRoutes } from './routes/analyses'
 import { profileRoutes } from './routes/profile'
+import { subscriptionRoutes } from './routes/subscription'
 
 const app = Fastify({ logger: true })
 
@@ -29,6 +30,7 @@ async function bootstrap() {
 
   await app.register(profileRoutes)
   await app.register(analysesRoutes)
+  await app.register(subscriptionRoutes)
 
   const port = parseInt(process.env.PORT ?? '3000', 10)
   await app.listen({ port, host: '0.0.0.0' })

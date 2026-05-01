@@ -1,5 +1,10 @@
 import { renderHook, act } from '@testing-library/react-native'
 
+jest.mock('../../src/services/purchases.service', () => ({
+  purchasesLogIn: jest.fn().mockResolvedValue(undefined),
+  purchasesLogOut: jest.fn().mockResolvedValue(undefined),
+}))
+
 jest.mock('../../src/services/supabase.client', () => ({
   supabase: {
     auth: {

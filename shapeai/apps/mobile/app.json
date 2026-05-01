@@ -27,7 +27,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0A0A0A"
       },
-      "permissions": ["android.permission.CAMERA"],
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
       "edgeToEdgeEnabled": true
     },
     "web": {
@@ -42,7 +44,8 @@
         {
           "cameraPermission": "O ShapeAI usa a câmera para capturar fotos de análise corporal."
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

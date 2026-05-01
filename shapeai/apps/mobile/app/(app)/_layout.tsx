@@ -32,6 +32,10 @@ export default function AppLayout() {
         name="analysis"
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name="paywall"
+        options={{ href: null }}
+      />
     </Tabs>
   )
 }
