@@ -3,9 +3,12 @@ import Fastify from 'fastify'
 import fjwt from '@fastify/jwt'
 import cors from '@fastify/cors'
 import rateLimit from '@fastify/rate-limit'
+import cron from 'node-cron'
 import { analysesRoutes } from './routes/analyses'
 import { profileRoutes } from './routes/profile'
 import { subscriptionRoutes } from './routes/subscription'
+import { pushTokensRoutes } from './routes/push-tokens'
+import { sendReanalysisNotifications } from './services/notification.service'
 
 const app = Fastify({ logger: true })
 
@@ -31,6 +34,20 @@ async function bootstrap() {
   await app.register(profileRoutes)
   await app.register(analysesRoutes)
   await app.register(subscriptionRoutes)
+  await app.register(pushTokensRoutes)
+
+  app.post('/internal/notifications/trigger', async (_req, reply) => {
+    sendReanalysisNotifications().catch((err) =>
+      console.error('[manual trigger] notification job failed:', err)
+    )
+    return reply.send({ ok: true, message: 'Notification job triggered' })
+  })
+
+  cron.schedule('0 9 * * *', () => {
+    sendReanalysisNotifications().catch((err) =>
+      console.error('[cron] notification job failed:', err)
+    )
+  })
 
   const port = parseInt(process.env.PORT ?? '3000', 10)
   await app.listen({ port, host: '0.0.0.0' })

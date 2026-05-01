@@ -45,7 +45,15 @@
           "cameraPermission": "O ShapeAI usa a câmera para capturar fotos de análise corporal."
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#4CAF50",
+          "sounds": []
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

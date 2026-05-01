@@ -40,6 +40,10 @@ export default function AppLayout() {
         name="compare"
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name="profile"
+        options={{ href: null }}
+      />
     </Tabs>
   )
 }

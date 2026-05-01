@@ -31,3 +31,17 @@ export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
   }
   return res.json()
 }
+
+export async function apiPatch<T>(path: string, body?: unknown): Promise<T> {
+  const headers = await getAuthHeaders()
+  const res = await fetch(`${API_URL}${path}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...headers },
+    body: body !== undefined ? JSON.stringify(body) : undefined,
+  })
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}))
+    throw new Error(data.error ?? `HTTP ${res.status}`)
+  }
+  return res.json()
+}

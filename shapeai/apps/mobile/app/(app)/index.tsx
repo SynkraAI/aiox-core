@@ -23,6 +23,10 @@ export default function HomeScreen() {
         <Text style={styles.buttonText}>Nova Análise 📷</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity style={styles.secondary} onPress={() => router.push('/(app)/profile')} testID="btn-configuracoes">
+        <Text style={styles.secondaryText}>⚙️ Configurações</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.secondary} onPress={signOut}>
         <Text style={styles.secondaryText}>Sair</Text>
       </TouchableOpacity>
