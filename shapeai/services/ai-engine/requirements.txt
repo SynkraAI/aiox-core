@@ -1,12 +1,12 @@
 fastapi==0.115.5
 uvicorn==0.32.1
-mediapipe==0.10.14
+mediapipe==0.10.35
 anthropic==0.40.0
 boto3==1.35.73
-psycopg2-binary==2.9.10
+psycopg2-binary>=2.9.10
 requests==2.32.3
-pillow==11.0.0
-numpy==1.26.4
+pillow>=10.0.0
+numpy>=1.26.4
 httpx==0.27.2
 python-dotenv==1.0.1
 pytest==8.3.3
