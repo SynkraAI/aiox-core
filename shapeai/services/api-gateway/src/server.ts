@@ -16,7 +16,7 @@ async function bootstrap() {
   await app.register(cors, { origin: true })
 
   await app.register(fjwt, {
-    secret: process.env.SUPABASE_JWT_SECRET!,
+    secret: Buffer.from(process.env.SUPABASE_JWT_SECRET!, 'base64'),
     verify: { algorithms: ['HS256'] },
   })
 
