@@ -126,12 +126,16 @@ persona:
 # All commands require * prefix when used (e.g., *help)
 commands:
   - name: help
+    visibility: [full, quick, key]
     description: 'Show all available commands with descriptions'
   - name: kb
+    visibility: [full, quick, key]
     description: 'Toggle KB mode (loads AIOX Method knowledge)'
   - name: status
+    visibility: [full, quick, key]
     description: 'Show current context and progress'
   - name: guide
+    visibility: [full, quick, key]
     description: 'Show comprehensive usage guide for this agent'
   - name: yolo
     visibility: [full]
@@ -139,8 +143,10 @@ commands:
   - name: exit
     description: 'Exit agent mode'
   - name: create
+    visibility: [full, quick, key]
     description: 'Create new AIOX component (agent, task, workflow, template, checklist)'
   - name: modify
+    visibility: [full, quick, key]
     description: 'Modify existing AIOX component'
   - name: update-manifest
     description: 'Update team manifest'
@@ -155,11 +161,11 @@ commands:
   - name: validate-workflow
     args: '{name|path} [--strict] [--all]'
     description: 'Validate workflow YAML structure, agents, artifacts, and logic'
-    visibility: full
+    visibility: [full]
   - name: run-workflow
     args: '{name} [start|continue|status|skip|abort] [--mode=guided|engine]'
     description: 'Workflow execution: guided (persona-switch) or engine (real subagent spawning)'
-    visibility: full
+    visibility: [full]
   - name: analyze-framework
     description: 'Analyze framework structure and patterns'
   - name: list-components
@@ -167,6 +173,7 @@ commands:
   - name: test-memory
     description: 'Test memory layer connection'
   - name: task
+    visibility: [full, quick, key]
     description: 'Execute specific task (or list available)'
   - name: execute-checklist
     args: '{checklist}'
@@ -175,9 +182,11 @@ commands:
   # Workflow & Planning (Consolidated - Story 6.1.2.3)
   - name: workflow
     args: '{name} [--mode=guided|engine]'
+    visibility: [full, quick, key]
     description: 'Start workflow (guided=manual, engine=real subagent spawning)'
   - name: plan
     args: '[create|status|update] [id]'
+    visibility: [full, quick, key]
     description: 'Workflow planning (default: create)'
 
   # Document Operations
@@ -413,9 +422,9 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 **Delegated responsibilities (Story 6.1.2.3):**
 
 - **Epic/Story creation** → @pm (*create-epic, *create-story)
-- **Brainstorming** → @analyst (\*brainstorm)
-- **Test suite creation** → @qa (\*create-suite)
-- **AI prompt generation** → @architect (\*generate-ai-prompt)
+- **Brainstorming** → @analyst (`*brainstorm`)
+- **Test suite creation** → @qa (`*create-suite`)
+- **AI prompt generation** → @architect (`*generate-ai-prompt`)
 
 **When to use specialized agents:**
 
@@ -450,7 +459,7 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 
 ### Typical Workflow
 
-1. **Framework dev** → `*create-agent`, `*create-task`, `*create-workflow`
+1. **Framework dev** → `*create agent`, `*create task`, `*create workflow`
 2. **IDS check** → Before creating, `*ids check {intent}` checks for existing artifacts
 3. **Task execution** → `*task {task}` to run any task directly
 4. **Workflow** → `*workflow {name}` for multi-step processes

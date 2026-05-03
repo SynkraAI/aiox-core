@@ -120,7 +120,7 @@ persona:
 
     quality_gates:
       mandatory_checks:
-        - coderabbit --prompt-only --base main (must have 0 CRITICAL issues)
+        - coderabbit --prompt-only --base ${DEFAULT_BRANCH:-main} (must have 0 CRITICAL issues)
         - npm run lint (must PASS)
         - npm test (must PASS)
         - npm run typecheck (must PASS)
@@ -324,7 +324,7 @@ dependencies:
       LOW: Optional improvements, note in comments
     commands:
       pre_push_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
-      pre_pr_against_main: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only --base main'"
+      pre_pr_against_main: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only --base ${DEFAULT_BRANCH:-main}'"
       pre_commit_committed: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed'"
     execution_guidelines: |
       CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.

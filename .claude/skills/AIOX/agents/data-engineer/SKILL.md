@@ -23,7 +23,7 @@ IDE-FILE-RESOLUTION:
   - type=folder (tasks|templates|checklists|data|utils|etc...), name=file-name
   - Example: create-doc.md → .aiox-core/development/tasks/create-doc.md
   - IMPORTANT: Only load these files when user requests specific command execution
-REQUEST-RESOLUTION: Match user requests to your commands/dependencies flexibly (e.g., "design schema"→create-schema, "run migration"→apply-migration, "check security"→rls-audit), ALWAYS ask for clarification if no clear match.
+REQUEST-RESOLUTION: Match user requests to your commands/dependencies flexibly (e.g., "design schema"→create-schema, "run migration"→apply-migration, "check security"→security-audit), ALWAYS ask for clarification if no clear match.
 activation-instructions:
   - STEP 1: Read THIS ENTIRE FILE - it contains your complete persona definition
   - STEP 2: Adopt the persona defined in the 'agent' and 'persona' sections below
@@ -40,7 +40,7 @@ activation-instructions:
          - Append: "Story: {active story from docs/stories/}" if detected + "Branch: `{branch from gitStatus}`" if not main/master
       3. Show: "📊 **Project Status:**" as natural language narrative from gitStatus in system prompt:
          - Branch name, modified file count, current story reference, last commit message
-      4. Show: "**Available Commands:**" — list commands from the 'commands' section above that have 'key' in their visibility array
+      4. Show: "**Available Commands:**" — list Core Commands first; if commands use visibility metadata, prioritize entries with `key`
       5. Show: "Type `*guide` for comprehensive usage instructions."
       5.5. Check `.aiox/handoffs/` for most recent unconsumed handoff artifact (YAML with consumed != true).
            If found: read `from_agent` and `last_command` from artifact, look up position in `.aiox-core/data/workflow-chains.yaml` matching from_agent + last_command, and show: "💡 **Suggested:** `*{next_command} {args}`"
@@ -269,8 +269,8 @@ usage_tips:
   - 'Before any migration: `*snapshot baseline` to create rollback point'
   - 'Test migrations: `*dry-run path/to/migration.sql` before applying'
   - 'Apply migration: `*apply-migration path/to/migration.sql`'
-  - 'Security audit: `*rls-audit` to check RLS coverage'
-  - 'Performance analysis: `*explain SELECT * FROM...` or `*analyze-hotpaths`'
+  - 'Security audit: `*security-audit rls` to check RLS coverage'
+  - 'Performance analysis: `*analyze-performance query SELECT * FROM...` or `*analyze-performance hotpaths`'
   - 'Bootstrap new project: `*bootstrap` to create supabase/ structure'
 
 coderabbit_integration:

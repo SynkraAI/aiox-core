@@ -389,6 +389,33 @@ describe('ide-sync check', () => {
     const result = await ideSyncCheck.run(mockContext);
     expect(result.status).toBe('WARN');
   });
+
+  it('should WARN when counts match but agent identities mismatch', async () => {
+    fs.existsSync.mockReturnValue(true);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('pm')];
+      if (p.includes('.claude/commands')) return ['dev.md', 'qa.md'];
+      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      return [];
+    });
+
+    const result = await ideSyncCheck.run(mockContext);
+    expect(result.status).toBe('WARN');
+    expect(result.message).toContain('missing: qa');
+    expect(result.message).toContain('extra: pm');
+  });
+
+  it('should FAIL when Claude directories cannot be read', async () => {
+    fs.existsSync.mockReturnValue(true);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      throw new Error('permission denied');
+    });
+
+    const result = await ideSyncCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+    expect(result.message).toContain('permission denied');
+  });
 });
 
 // === INS-4.8: New checks ===
@@ -448,6 +475,19 @@ describe('skills-count check', () => {
     fs.existsSync.mockReturnValue(false);
     const result = await skillsCountCheck.run(mockContext);
     expect(result.status).toBe('FAIL');
+  });
+
+  it('should FAIL when skills directory cannot be read', async () => {
+    fs.existsSync.mockReturnValue(true);
+    fs.readdirSync.mockImplementation(() => {
+      const error = new Error('permission denied');
+      error.code = 'EACCES';
+      throw error;
+    });
+
+    const result = await skillsCountCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+    expect(result.message).toContain('permission denied');
   });
 });
 

@@ -62,8 +62,19 @@ function validateSkillContent(content, expected) {
 }
 
 function extractGeneratedSquadSource(content) {
-  const match = String(content || '').match(/`(squads\/[^`]+\/agents\/[^`]+\.md)`/);
-  return match ? match[1] : '';
+  const value = String(content || '');
+  const patterns = [
+    /`(squads\/[^`]+\/agents\/[^`]+\.md)`/,
+    /<!--\s*Source:\s*(squads\/[^>\s]+\/agents\/[^>\s]+\.md)\s*-->/,
+    /<!--\s*(squads\/[^>\s]+\/agents\/[^>\s]+\.md)\s*-->/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = value.match(pattern);
+    if (match) return match[1];
+  }
+
+  return '';
 }
 
 function isGeneratedSquadSkill(content, projectRoot) {

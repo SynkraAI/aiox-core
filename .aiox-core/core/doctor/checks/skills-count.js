@@ -21,8 +21,9 @@ function countSkillFiles(dir) {
 
   try {
     entries = fs.readdirSync(dir, { withFileTypes: true });
-  } catch {
-    return 0;
+  } catch (error) {
+    if (error && error.code === 'ENOENT') return 0;
+    throw new Error(`Cannot read skills directory "${dir}": ${error.message}`);
   }
 
   for (const entry of entries) {
@@ -42,8 +43,9 @@ function countAgentSkillFiles(agentSkillsDir) {
 
   try {
     entries = fs.readdirSync(agentSkillsDir, { withFileTypes: true });
-  } catch {
-    return 0;
+  } catch (error) {
+    if (error && error.code === 'ENOENT') return 0;
+    throw new Error(`Cannot read AIOX agent skills directory "${agentSkillsDir}": ${error.message}`);
   }
 
   return entries.filter((entry) => (
@@ -56,8 +58,9 @@ function countSourceAgents(sourceAgentsDir) {
 
   try {
     entries = fs.readdirSync(sourceAgentsDir, { withFileTypes: true });
-  } catch {
-    return 0;
+  } catch (error) {
+    if (error && error.code === 'ENOENT') return 0;
+    throw new Error(`Cannot read source agents directory "${sourceAgentsDir}": ${error.message}`);
   }
 
   return entries.filter((entry) => entry.isFile() && entry.name.endsWith('.md')).length;
@@ -77,9 +80,21 @@ async function run(context) {
     };
   }
 
-  const count = countSkillFiles(skillsDir);
-  const agentSkillCount = countAgentSkillFiles(agentSkillsDir);
-  const sourceAgentCount = countSourceAgents(sourceAgentsDir);
+  let count;
+  let agentSkillCount;
+  let sourceAgentCount;
+  try {
+    count = countSkillFiles(skillsDir);
+    agentSkillCount = countAgentSkillFiles(agentSkillsDir);
+    sourceAgentCount = countSourceAgents(sourceAgentsDir);
+  } catch (error) {
+    return {
+      check: name,
+      status: 'FAIL',
+      message: error.message,
+      fixCommand: 'npx aiox-core install --force',
+    };
+  }
 
   if (count === 0) {
     return {

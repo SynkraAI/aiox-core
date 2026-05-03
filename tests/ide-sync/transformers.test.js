@@ -110,6 +110,16 @@ describe('IDE Transformers', () => {
       expect(result).toContain('Compatibility Activation');
     });
 
+    it('should use parsed sourcePath when generating Claude artifacts', () => {
+      const customSource = {
+        ...sampleAgent,
+        sourcePath: 'custom/agents/dev.md',
+      };
+
+      expect(claudeCode.transformCommand(customSource)).toContain('Source: custom/agents/dev.md');
+      expect(claudeCode.transformSkill(customSource)).toContain('Source: custom/agents/dev.md');
+    });
+
     it('should return correct Claude skill relative path', () => {
       expect(claudeCode.getSkillRelativePath(sampleAgent)).toBe('AIOX/agents/dev/SKILL.md');
     });

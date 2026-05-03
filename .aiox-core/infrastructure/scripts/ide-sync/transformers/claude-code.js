@@ -8,6 +8,25 @@
 
 const path = require('path');
 
+function normalizePath(value) {
+  return String(value || '').split(path.sep).join('/');
+}
+
+function getSourcePath(agentData) {
+  if (agentData.sourcePath) {
+    return normalizePath(agentData.sourcePath);
+  }
+
+  if (agentData.path) {
+    const relative = path.relative(process.cwd(), agentData.path);
+    if (relative && !relative.startsWith('..') && !path.isAbsolute(relative)) {
+      return normalizePath(relative);
+    }
+  }
+
+  return `.aiox-core/development/agents/${agentData.filename}`;
+}
+
 /**
  * Transform agent data to Claude Code format
  * For Claude Code, we use the full original file (identity transform)
@@ -15,12 +34,13 @@ const path = require('path');
  * @returns {string} - Transformed content
  */
 function transform(agentData) {
+  const sourcePath = getSourcePath(agentData);
   // Claude Code uses the full original file
   if (agentData.raw) {
     // Add sync footer if not present
-    const syncFooter = `\n---\n*AIOX Agent - Synced from .aiox-core/development/agents/${agentData.filename}*\n`;
+    const syncFooter = `\n---\n*AIOX Agent - Synced from ${sourcePath}*\n`;
 
-    if (!agentData.raw.includes('Synced from .aiox-core/development/agents/')) {
+    if (!agentData.raw.includes(`Synced from ${sourcePath}`)) {
       return agentData.raw.trimEnd() + syncFooter;
     }
     return agentData.raw;
@@ -38,7 +58,7 @@ function transform(agentData) {
  */
 function transformCommand(agentData) {
   const agent = agentData.agent || {};
-  const sourcePath = `.aiox-core/development/agents/${agentData.filename}`;
+  const sourcePath = getSourcePath(agentData);
   const skillPath = `.claude/skills/${getSkillRelativePath(agentData)}`;
   const name = agent.name || agentData.id;
   const title = agent.title || 'AIOX Agent';
@@ -79,6 +99,7 @@ When this command is invoked:
 function generateMinimalContent(agentData) {
   const agent = agentData.agent || {};
   const persona = agentData.persona_profile || {};
+  const sourcePath = getSourcePath(agentData);
 
   const icon = agent.icon || '🤖';
   const name = agent.name || agentData.id;
@@ -105,7 +126,7 @@ ${icon} **${name}** - ${title}
 
   content += `
 ---
-*AIOX Agent - Synced from .aiox-core/development/agents/${agentData.filename}*
+*AIOX Agent - Synced from ${sourcePath}*
 `;
 
   return content;
@@ -166,7 +187,7 @@ function getSkillRelativePath(agentData) {
  * @returns {string} - Skill content
  */
 function transformSkill(agentData) {
-  const sourcePath = `.aiox-core/development/agents/${agentData.filename}`;
+  const sourcePath = getSourcePath(agentData);
   const name = `aiox-${agentData.id}`;
   const description = buildSkillDescription(agentData);
   const sourceContent = agentData.raw ? agentData.raw.trimEnd() : generateMinimalContent(agentData).trimEnd();
@@ -200,5 +221,6 @@ module.exports = {
   transformSkill,
   getFilename,
   getSkillRelativePath,
+  getSourcePath,
   format: 'full-markdown-yaml',
 };

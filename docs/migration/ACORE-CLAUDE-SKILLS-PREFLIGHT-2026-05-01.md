@@ -13,7 +13,7 @@ O escopo inicial é restrito aos 12 agentes core AIOX. Superfícies Claude de co
 
 | Item | Valor |
 |------|-------|
-| Repo | `/Users/rafaelcosta/Projects/AIOX/aiox-core` |
+| Repo | `<repo-root>/aiox-core` |
 | Branch | `feat/story-123.9-codex-skills-bootstrap` |
 | HEAD | `94842cd0` |
 | Mudanças pré-existentes | `.aiox-core/data/entity-registry.yaml`, `.claude/settings.local.json` |
