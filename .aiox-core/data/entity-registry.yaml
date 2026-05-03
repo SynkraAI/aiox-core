@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-03-11T00:48:55.982Z'
-  entityCount: 745
+  lastUpdated: '2026-05-03T04:45:51.786Z'
+  entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -10705,10 +10705,15 @@ entities:
       path: .aiox-core/core/doctor/checks/core-config.js
       layer: L1
       type: module
-      purpose: Entity at .aiox-core/core/doctor/checks/core-config.js
+      purpose: Core MCPs - no API keys required
       keywords:
         - core
         - config
+        - boundary
+        - mapping
+        - framework-project
+        - separation
+        - (epic
       usedBy: []
       dependencies: []
       externalDeps: []
@@ -10718,8 +10723,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:53ddc48091f64805c100d08fb8cac5d1b4d74e844c8cfcde122f881a428b650b
-      lastVerified: '2026-03-11T00:48:55.891Z'
+      checksum: sha256:08471a9bf736776c15e72695f373fc3a203caf139412d3ec5c78a977796c1208
+      lastVerified: '2026-05-03T04:45:51.782Z'
     entity-registry:
       path: .aiox-core/core/doctor/checks/entity-registry.js
       layer: L1
@@ -10814,8 +10819,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:0941feb55b6dc5d3afde7e4e9ef11afbc1d9781197c9e52630056fab1c1ebea2
-      lastVerified: '2026-03-11T00:48:55.892Z'
+      checksum: sha256:23e539427649908662e50fcecf027399dc4e8628c26beee37248303d5f937545
+      lastVerified: '2026-05-03T04:45:51.783Z'
     node-version:
       path: .aiox-core/core/doctor/checks/node-version.js
       layer: L1
@@ -10910,8 +10915,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:0b6a19fca1765904c31a33caeeefacbe76df4641154f2f93a8300b4cacce34b8
-      lastVerified: '2026-03-11T00:48:55.893Z'
+      checksum: sha256:b4bff53da931fde111e6586ef6904706192a19b9b08c98361a19cc7a08e1731b
+      lastVerified: '2026-05-03T04:45:51.783Z'
     json:
       path: .aiox-core/core/doctor/formatters/json.js
       layer: L1
@@ -16109,8 +16114,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:3b4e996c2597966fad966d1b2beaecdbda003f6529c41687dfe419d62a319ec6
-      lastVerified: '2026-03-11T00:48:55.953Z'
+      checksum: sha256:0174d5e5e38eb8aa5aaa0a44d87f0f8dda623a24f318855c1e50e9d04f7596d6
+      lastVerified: '2026-05-03T04:45:51.784Z'
     validate-codex-integration:
       path: .aiox-core/infrastructure/scripts/validate-codex-integration.js
       layer: L2
@@ -16314,12 +16319,9 @@ entities:
       path: .aiox-core/infrastructure/scripts/codex-skills-sync/index.js
       layer: L2
       type: script
-      purpose: ${description}
+      purpose: Entity at .aiox-core/infrastructure/scripts/ide-sync/index.js
       keywords:
         - index
-        - aiox
-        - ${title}
-        - activator
       usedBy:
         - creation-helper
         - dev-helper
@@ -16330,6 +16332,13 @@ entities:
         - validate
       dependencies:
         - agent-parser
+        - redirect-generator
+        - validator
+        - gemini-commands
+        - claude-code
+        - cursor
+        - antigravity
+        - github-copilot
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -16337,8 +16346,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:a7a3c97374c34a900acad13498f61f8a40517574480354218e349d1e1d3931a4
-      lastVerified: '2026-03-11T00:48:55.955Z'
+      checksum: sha256:ad2dd20d6513b7401f6d48727ca5ea5f4cdf22d8b37877bd7fe84bc4814698e2
+      lastVerified: '2026-05-03T04:45:51.784Z'
     validate:
       path: .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js
       layer: L2
@@ -16358,8 +16367,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:0fbc1baff25f20e3a37d3e4be51d146a75254d5ed638b3438d9f1bf0e587c997
-      lastVerified: '2026-03-11T00:48:55.955Z'
+      checksum: sha256:3d585ec0c62285c8aa4448cf4d48b4cf4990673186030c50d46851f5bc077fb2
+      lastVerified: '2026-05-03T04:45:51.784Z'
     brownfield-analyzer:
       path: .aiox-core/infrastructure/scripts/documentation-integrity/brownfield-analyzer.js
       layer: L2
@@ -16534,7 +16543,8 @@ entities:
       keywords:
         - gemini
         - commands
-      usedBy: []
+      usedBy:
+        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16554,6 +16564,7 @@ entities:
         - redirect
         - generator
       usedBy:
+        - index
         - validator
       dependencies: []
       externalDeps: []
@@ -16572,7 +16583,8 @@ entities:
       purpose: '{'
       keywords:
         - validator
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - redirect-generator
       externalDeps: []
@@ -16612,7 +16624,8 @@ entities:
       purpose: Entity at .aiox-core/infrastructure/scripts/ide-sync/transformers/antigravity.js
       keywords:
         - antigravity
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - agent-parser
       externalDeps: []
@@ -16628,11 +16641,12 @@ entities:
       path: .aiox-core/infrastructure/scripts/ide-sync/transformers/claude-code.js
       layer: L2
       type: script
-      purpose: Entity at .aiox-core/infrastructure/scripts/ide-sync/transformers/claude-code.js
+      purpose: ${quoteYamlString(description)}
       keywords:
         - claude
         - code
-      usedBy: []
+      usedBy:
+        - index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16641,8 +16655,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:82eea7091a8bdc89f9067dd420b535574c9bdb2dee8c616eda99758069328a84
-      lastVerified: '2026-03-11T00:48:55.957Z'
+      checksum: sha256:ca02f8d1c9fb90b07d119b44e4acd3b9b299e73d878287074acabb2b079b2002
+      lastVerified: '2026-05-03T04:45:51.784Z'
     cursor:
       path: .aiox-core/infrastructure/scripts/ide-sync/transformers/cursor.js
       layer: L2
@@ -16650,7 +16664,8 @@ entities:
       purpose: Entity at .aiox-core/infrastructure/scripts/ide-sync/transformers/cursor.js
       keywords:
         - cursor
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - agent-parser
       externalDeps: []
@@ -16670,7 +16685,8 @@ entities:
       keywords:
         - github
         - copilot
-      usedBy: []
+      usedBy:
+        - index
       dependencies:
         - agent-parser
       externalDeps: []
@@ -16682,6 +16698,23 @@ entities:
         extensionPoints: []
       checksum: sha256:6d365be4a55e2f5ced316a0efbfa50fb925562f3e145d47a86c57a2c685343ac
       lastVerified: '2026-03-11T00:48:55.957Z'
+    bootstrap:
+      path: .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js
+      layer: L2
+      type: script
+      purpose: '* - Generate `.codex/skills/aiox-*` for each core AIOX agent in'
+      keywords:
+        - bootstrap
+        - ${title}
+        - activator
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.7
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:56f4518586591d809cda89183e1af3b05c4e4c7369df992e7fdd7214ea5c6072
+      lastVerified: '2026-04-28T14:41:07.296Z'
   infra-tools:
     README:
       path: .aiox-core/infrastructure/tools/README.md
