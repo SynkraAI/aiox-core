@@ -8,6 +8,7 @@ interface ProfileBody {
   biological_sex: 'M' | 'F'
   primary_goal: 'hypertrophy' | 'fat_loss' | 'conditioning'
   notifications_enabled: boolean
+  coach_persona: 'rafael' | 'marina' | 'bruno'
 }
 
 export async function profileRoutes(app: FastifyInstance) {

@@ -14,6 +14,7 @@ export interface UserProfile {
   weight_kg: number
   biological_sex: 'M' | 'F'
   primary_goal: 'hypertrophy' | 'fat_loss' | 'conditioning'
+  coach_persona: 'rafael' | 'marina' | 'bruno'
   updated_at: string
 }
 

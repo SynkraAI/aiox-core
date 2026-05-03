@@ -1,10 +1,10 @@
 import 'dotenv/config'
 import Fastify from 'fastify'
-import fjwt from '@fastify/jwt'
 import cors from '@fastify/cors'
 import rateLimit from '@fastify/rate-limit'
 import cron from 'node-cron'
 import { analysesRoutes } from './routes/analyses'
+import { chatRoutes } from './routes/chat'
 import { profileRoutes } from './routes/profile'
 import { subscriptionRoutes } from './routes/subscription'
 import { pushTokensRoutes } from './routes/push-tokens'
@@ -14,11 +14,6 @@ const app = Fastify({ logger: true })
 
 async function bootstrap() {
   await app.register(cors, { origin: true })
-
-  await app.register(fjwt, {
-    secret: Buffer.from(process.env.SUPABASE_JWT_SECRET!, 'base64'),
-    verify: { algorithms: ['HS256'] },
-  })
 
   await app.register(rateLimit, {
     global: true,
@@ -33,6 +28,7 @@ async function bootstrap() {
 
   await app.register(profileRoutes)
   await app.register(analysesRoutes)
+  await app.register(chatRoutes)
   await app.register(subscriptionRoutes)
   await app.register(pushTokensRoutes)
 
