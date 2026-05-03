@@ -1,8 +1,8 @@
 /**
  * Doctor Check: IDE Sync
  *
- * Validates agents in .claude/commands/AIOX/agents/ match
- * .aiox-core/development/agents/ (count and names).
+ * Validates Claude agent skills and legacy command files match
+ * .aiox-core/development/agents/ during the skills-first transition.
  *
  * @module aiox-core/doctor/checks/ide-sync
  * @story INS-4.1
@@ -15,7 +15,8 @@ const name = 'ide-sync';
 
 async function run(context) {
   const agentsSourceDir = path.join(context.projectRoot, '.aiox-core', 'development', 'agents');
-  const agentsIdeDir = path.join(context.projectRoot, '.claude', 'commands', 'AIOX', 'agents');
+  const agentsCommandDir = path.join(context.projectRoot, '.claude', 'commands', 'AIOX', 'agents');
+  const agentsSkillDir = path.join(context.projectRoot, '.claude', 'skills', 'AIOX', 'agents');
 
   if (!fs.existsSync(agentsSourceDir)) {
     return {
@@ -26,16 +27,7 @@ async function run(context) {
     };
   }
 
-  if (!fs.existsSync(agentsIdeDir)) {
-    return {
-      check: name,
-      status: 'WARN',
-      message: 'IDE agents directory not found (.claude/commands/AIOX/agents/)',
-      fixCommand: 'npx aiox-core install --force',
-    };
-  }
-
-  let sourceAgents, ideFiles;
+  let sourceAgents;
   try {
     sourceAgents = fs.readdirSync(agentsSourceDir)
       .filter((f) => f.endsWith('.md'))
@@ -49,27 +41,35 @@ async function run(context) {
     };
   }
 
-  try {
-    ideFiles = fs.readdirSync(agentsIdeDir)
-      .filter((f) => f.endsWith('.md'));
-  } catch (_err) {
+  const commandAgents = fs.existsSync(agentsCommandDir)
+    ? fs.readdirSync(agentsCommandDir)
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => f.replace('.md', ''))
+    : [];
+  const skillAgents = fs.existsSync(agentsSkillDir)
+    ? fs.readdirSync(agentsSkillDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(agentsSkillDir, entry.name, 'SKILL.md')))
+      .map((entry) => entry.name)
+    : [];
+
+  const sourceCount = sourceAgents.length;
+  const commandCount = commandAgents.length;
+  const skillCount = skillAgents.length;
+
+  if (skillCount !== sourceCount) {
     return {
       check: name,
       status: 'WARN',
-      message: 'Cannot read IDE agents directory',
+      message: `Claude skills have ${skillCount} agents, source has ${sourceCount}`,
       fixCommand: 'npx aiox-core install --force',
     };
   }
 
-  const ideAgents = ideFiles.map((f) => f.replace('.md', ''));
-  const sourceCount = sourceAgents.length;
-  const ideCount = ideAgents.length;
-
-  if (sourceCount === ideCount) {
+  if (commandCount === sourceCount) {
     return {
       check: name,
       status: 'PASS',
-      message: `${ideCount}/${sourceCount} agents synced`,
+      message: `${skillCount}/${sourceCount} Claude skills synced; ${commandCount}/${sourceCount} legacy commands synced`,
       fixCommand: null,
     };
   }
@@ -77,7 +77,7 @@ async function run(context) {
   return {
     check: name,
     status: 'WARN',
-    message: `IDE has ${ideCount} agents, source has ${sourceCount}`,
+    message: `${skillCount}/${sourceCount} Claude skills synced; legacy commands have ${commandCount}/${sourceCount}`,
     fixCommand: 'npx aiox-core install --force',
   };
 }

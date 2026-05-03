@@ -342,6 +342,11 @@ synapse-package.zip
 # ============================================
 scripts/glue/
 .claude/skills/
+!.claude/skills/
+!.claude/skills/AIOX/
+!.claude/skills/AIOX/agents/
+!.claude/skills/AIOX/agents/*/
+!.claude/skills/AIOX/agents/*/SKILL.md
 !.claude/hooks/
 .claude/templates/
 .claude/agents/
