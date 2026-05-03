@@ -24,12 +24,20 @@ async function getAuthHeaders(): Promise<Record<string, string>> {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
-export async function sendChatMessage(message: string): Promise<ChatResponse | ChatLimitError> {
+export interface HistoryEntry {
+  role: 'user' | 'assistant'
+  content: string
+}
+
+export async function sendChatMessage(
+  message: string,
+  history?: HistoryEntry[]
+): Promise<ChatResponse | ChatLimitError> {
   const headers = await getAuthHeaders()
   const res = await fetch(`${API_URL}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...headers },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, history }),
   })
 
   const data = await res.json()

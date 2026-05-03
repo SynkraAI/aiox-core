@@ -125,14 +125,16 @@ function buildUserContext(
   return lines.join('\n')
 }
 
+type HistoryEntry = { role: 'user' | 'assistant'; content: string }
+
 export async function chatRoutes(app: FastifyInstance) {
-  app.post<{ Body: { message: string } }>(
+  app.post<{ Body: { message: string; history?: HistoryEntry[] } }>(
     '/chat',
     { preHandler: requireAuth },
     async (request, reply) => {
       const userId = request.authUser.id
       const isPro = request.authUser.subscription_status === 'pro'
-      const { message } = request.body
+      const { message, history } = request.body
 
       if (!message?.trim()) {
         return reply.status(400).send({ error: 'Message is required' })
@@ -181,6 +183,13 @@ export async function chatRoutes(app: FastifyInstance) {
       const systemPrompt = PERSONA_SYSTEM_PROMPTS[persona] ?? PERSONA_SYSTEM_PROMPTS.rafael
       const contextText = buildUserContext(profile, analysis)
 
+      // Build messages: cap history at last 20 entries to keep tokens reasonable
+      const priorMessages: HistoryEntry[] = (history ?? []).slice(-20)
+      const allMessages: HistoryEntry[] = [
+        ...priorMessages,
+        { role: 'user', content: message.trim() },
+      ]
+
       // Call Claude API
       const claudeRes = await axios.post(
         'https://api.anthropic.com/v1/messages',
@@ -188,7 +197,7 @@ export async function chatRoutes(app: FastifyInstance) {
           model: 'claude-sonnet-4-6',
           max_tokens: 1024,
           system: `${systemPrompt}\n\n${contextText}`,
-          messages: [{ role: 'user', content: message.trim() }],
+          messages: allMessages,
         },
         {
           headers: {

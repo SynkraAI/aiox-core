@@ -15,7 +15,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { router, useFocusEffect } from 'expo-router'
 import { getUserProfile } from '../../src/services/profile.service'
 import { sendChatMessage, getChatUsage } from '../../src/services/chat.service'
-import type { ChatUsage, ChatResponse, ChatLimitError } from '../../src/services/chat.service'
+import type { ChatUsage, ChatResponse, ChatLimitError, HistoryEntry } from '../../src/services/chat.service'
 import type { UserProfile } from '@shapeai/shared'
 
 interface Message {
@@ -87,7 +87,13 @@ export default function CoachScreen() {
     setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 80)
 
     try {
-      const result = await sendChatMessage(messageText)
+      // Convert current messages to Claude history format (exclude the one just added)
+      const history: HistoryEntry[] = messages.map((m) => ({
+        role: m.role === 'user' ? 'user' : 'assistant',
+        content: m.text,
+      }))
+
+      const result = await sendChatMessage(messageText, history)
 
       if ('type' in result) {
         const limitErr = result as ChatLimitError
