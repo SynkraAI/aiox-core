@@ -164,6 +164,31 @@ commands:
       expect(result.error).toBe('No YAML block found');
     });
 
+    it('should not expose absolute sourcePath values', () => {
+      const agentContent = `# test
+
+\`\`\`yaml
+agent:
+  name: TestAgent
+  id: test
+\`\`\`
+`;
+      const filePath = path.join(tempDir, 'absolute-source.md');
+      fs.writeFileSync(filePath, agentContent);
+
+      const relativeSpy = jest
+        .spyOn(path, 'relative')
+        .mockReturnValue(path.resolve(tempDir, 'external.md'));
+
+      try {
+        const result = parseAgentFile(filePath);
+        expect(result.error).toBeNull();
+        expect(result.sourcePath).toBeNull();
+      } finally {
+        relativeSpy.mockRestore();
+      }
+    });
+
     it('should handle non-existent file', () => {
       const result = parseAgentFile(path.join(tempDir, 'nonexistent.md'));
       expect(result.error).not.toBeNull();

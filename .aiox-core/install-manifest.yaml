@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-05-03T05:38:51.109Z"
+generated_at: "2026-05-03T05:43:10.693Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1092
 files:
@@ -1377,9 +1377,9 @@ files:
     type: agent
     size: 1376
   - path: development/agents/qa.md
-    hash: sha256:0d2deb4247ddb4e26717f2eb555eb086cab61b7ac2f14099f2fc03e1d8d1dc04
+    hash: sha256:cf4a8f473067a9d2909072215bce7b13917c779442e6f858681bd8b9f0b0c3c0
     type: agent
-    size: 19053
+    size: 18776
   - path: development/agents/qa/MEMORY.md
     hash: sha256:eec482f057d09635940e9a46bdd6cbb677af12dc4deed64bf71196d551b93abf
     type: agent
@@ -3085,9 +3085,9 @@ files:
     type: script
     size: 38453
   - path: infrastructure/scripts/ide-sync/agent-parser.js
-    hash: sha256:a819760b64d347a86a07562c2117fd2685338f70da9739a47d3d34d406d3165e
+    hash: sha256:f1ed4d0e6dda1a616efb0cb31157fe36063cf9481c19ee7b4bada26cb12e0e80
     type: script
-    size: 9057
+    size: 9097
   - path: infrastructure/scripts/ide-sync/gemini-commands.js
     hash: sha256:ba02b21af0d485b14d6e248b6d5644090646dc792f78eac515d17b88680d8549
     type: script

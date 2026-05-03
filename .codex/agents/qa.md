@@ -259,12 +259,6 @@ dependencies:
       severity_filter:
         - CRITICAL
         - HIGH
-      behavior:
-        CRITICAL: request_fix # Advisory QA requests fixes; does not edit code
-        HIGH: request_fix # Advisory QA requests fixes; does not edit code
-        MEDIUM: document_as_debt # Create tech debt issue
-        LOW: ignore # Note in review, no action
-
     severity_handling:
       CRITICAL: Block story completion, must fix immediately
       HIGH: Report in QA gate, recommend fix before merge
