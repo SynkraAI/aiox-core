@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
   SafeAreaView,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router'
+import { router, useFocusEffect } from 'expo-router'
 import { getUserProfile } from '../../src/services/profile.service'
 import { sendChatMessage, getChatUsage } from '../../src/services/chat.service'
 import type { ChatUsage, ChatResponse, ChatLimitError } from '../../src/services/chat.service'
@@ -47,9 +47,12 @@ export default function CoachScreen() {
   const [coachName, setCoachName] = useState('Rafael')
   const scrollRef = useRef<ScrollView>(null)
 
-  useEffect(() => {
-    loadInitialData()
-  }, [])
+  // Reload profile/usage every time this tab gets focus (persona may have changed)
+  useFocusEffect(
+    useCallback(() => {
+      loadInitialData()
+    }, [])
+  )
 
   async function loadInitialData() {
     const [profileResult, usageResult] = await Promise.allSettled([
