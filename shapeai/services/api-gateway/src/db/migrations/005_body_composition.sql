@@ -1,0 +1,1 @@
+ALTER TABLE reports ADD COLUMN IF NOT EXISTS body_composition JSONB;

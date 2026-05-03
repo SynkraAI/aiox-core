@@ -95,7 +95,7 @@ export async function analysesRoutes(app: FastifyInstance) {
       const { rows } = await pool.query(
         `SELECT
            a.id, a.status, a.scores, a.created_at, a.completed_at,
-           r.highlights, r.development_areas,
+           r.highlights, r.development_areas, r.body_composition,
            wp.weeks AS workout_weeks
          FROM analyses a
          LEFT JOIN reports r ON r.analysis_id = a.id
@@ -121,6 +121,9 @@ export async function analysesRoutes(app: FastifyInstance) {
           development_areas: row.development_areas,
         }
         response.workout_plan = { weeks: row.workout_weeks }
+        if (row.body_composition) {
+          response.body_composition = row.body_composition
+        }
       }
 
       return reply.send(response)
@@ -217,16 +220,17 @@ Análise recente: ${JSON.stringify(a2.scores)}`
     scores: Record<string, number>
     report: { highlights: unknown[]; development_areas: unknown[] }
     workout_plan: { weeks: unknown[] }
+    body_composition?: Record<string, unknown>
   } }>(
     '/internal/analyses/:id/complete',
     async (request, reply) => {
-      const secret = request.headers['x-internal-secret']
-      if (secret !== process.env.INTERNAL_SECRET) {
+      const secret = (request.headers['x-internal-secret'] as string) ?? ''
+      if (secret !== (process.env.INTERNAL_SECRET ?? '')) {
         return reply.status(401).send({ error: 'Unauthorized' })
       }
 
       const { id } = request.params
-      const { scores, report, workout_plan } = request.body
+      const { scores, report, workout_plan, body_composition } = request.body
 
       // Busca análise e user_id
       const { rows: analysisRows } = await pool.query<{ user_id: string }>(
@@ -241,19 +245,21 @@ Análise recente: ${JSON.stringify(a2.scores)}`
       await pool.query(
         `UPDATE analyses
          SET status = 'completed', scores = $1, completed_at = NOW(),
-             photo_front_url = NULL, photo_back_url = NULL, photos_deleted_at = NOW()
+             photo_front_url = NULL, photo_side_url = NULL, photo_back_url = NULL, photos_deleted_at = NOW()
          WHERE id = $2`,
         [JSON.stringify(scores), id]
       )
 
       // Insere relatório
       await pool.query(
-        `INSERT INTO reports (analysis_id, highlights, development_areas)
-         VALUES ($1, $2, $3)
+        `INSERT INTO reports (analysis_id, highlights, development_areas, body_composition)
+         VALUES ($1, $2, $3, $4)
          ON CONFLICT (analysis_id) DO UPDATE
            SET highlights = EXCLUDED.highlights,
-               development_areas = EXCLUDED.development_areas`,
-        [id, JSON.stringify(report.highlights), JSON.stringify(report.development_areas)]
+               development_areas = EXCLUDED.development_areas,
+               body_composition = EXCLUDED.body_composition`,
+        [id, JSON.stringify(report.highlights), JSON.stringify(report.development_areas),
+         body_composition ? JSON.stringify(body_composition) : null]
       )
 
       // Insere plano de treino

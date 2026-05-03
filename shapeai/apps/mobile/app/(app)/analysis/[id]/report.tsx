@@ -9,8 +9,70 @@ import {
 } from 'react-native'
 import { useLocalSearchParams, router } from 'expo-router'
 import Svg, { Circle, Text as SvgText } from 'react-native-svg'
-import { getAnalysisResult, AnalysisResult, BodyScores } from '../../../../src/services/analysis.service'
+import { getAnalysisResult, AnalysisResult, BodyScores, BodyComposition } from '../../../../src/services/analysis.service'
 import ReportSectionCard from '../../../../src/components/report/ReportSectionCard'
+
+const FAT_CATEGORY_LABEL: Record<string, string> = {
+  muito_magro: 'Muito magro',
+  magro: 'Magro',
+  atlético: 'Atlético',
+  médio: 'Médio',
+  acima_media: 'Acima da média',
+  obeso: 'Obeso',
+}
+
+const BODY_TYPE_LABEL: Record<string, string> = {
+  ectomorfo: 'Ectomorfo',
+  mesomorfo: 'Mesomorfo',
+  endomorfo: 'Endomorfo',
+  misto: 'Misto',
+}
+
+function BodyCompositionCard({ data }: { data: BodyComposition }) {
+  return (
+    <View style={bcStyles.card}>
+      <Text style={bcStyles.title}>Composição Corporal</Text>
+      <View style={bcStyles.grid}>
+        <View style={bcStyles.stat}>
+          <Text style={bcStyles.statValue}>{data.body_fat_estimate.toFixed(1)}%</Text>
+          <Text style={bcStyles.statLabel}>Gordura corporal</Text>
+        </View>
+        <View style={bcStyles.stat}>
+          <Text style={bcStyles.statValue}>{FAT_CATEGORY_LABEL[data.body_fat_category] ?? data.body_fat_category}</Text>
+          <Text style={bcStyles.statLabel}>Categoria</Text>
+        </View>
+        <View style={bcStyles.stat}>
+          <Text style={bcStyles.statValue}>{BODY_TYPE_LABEL[data.body_type] ?? data.body_type}</Text>
+          <Text style={bcStyles.statLabel}>Biotipo</Text>
+        </View>
+        <View style={bcStyles.stat}>
+          <Text style={bcStyles.statValue}>{data.fat_distribution}</Text>
+          <Text style={bcStyles.statLabel}>Distribuição de gordura</Text>
+        </View>
+      </View>
+      {data.fat_areas.length > 0 && (
+        <View style={bcStyles.tagRow}>
+          <Text style={bcStyles.tagLabel}>Gordura localizada:</Text>
+          <View style={bcStyles.tags}>
+            {data.fat_areas.map((area) => (
+              <View key={area} style={bcStyles.tag}>
+                <Text style={bcStyles.tagText}>{area}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      )}
+      {data.proportional_notes ? (
+        <Text style={bcStyles.notes}>{data.proportional_notes}</Text>
+      ) : null}
+      {data.overall_assessment ? (
+        <View style={bcStyles.assessmentBox}>
+          <Text style={bcStyles.assessmentText}>"{data.overall_assessment}"</Text>
+        </View>
+      ) : null}
+    </View>
+  )
+}
 
 function calculateOverallScore(scores: BodyScores): number {
   const values = Object.values(scores) as number[]
@@ -111,6 +173,10 @@ export default function ReportScreen() {
         <ScoreGauge score={overallScore} />
       </View>
 
+      {analysis.body_composition && (
+        <BodyCompositionCard data={analysis.body_composition} />
+      )}
+
       <Text style={styles.sectionTitle}>✅ Destaques</Text>
       {highlights.map((section, i) => (
         <ReportSectionCard key={i} section={section} variant="highlight" />
@@ -167,4 +233,42 @@ const styles = StyleSheet.create({
     borderColor: '#1E1E1E',
   },
   disclaimerText: { color: '#555', fontSize: 12, lineHeight: 18, textAlign: 'center' },
+})
+
+const bcStyles = StyleSheet.create({
+  card: {
+    backgroundColor: '#111',
+    borderRadius: 14,
+    padding: 18,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#222',
+    gap: 14,
+  },
+  title: { color: '#888', fontSize: 11, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+  stat: {
+    flex: 1,
+    minWidth: '45%',
+    backgroundColor: '#1A1A1A',
+    borderRadius: 10,
+    padding: 12,
+    alignItems: 'center',
+  },
+  statValue: { color: '#fff', fontSize: 16, fontWeight: '700', marginBottom: 2, textAlign: 'center' },
+  statLabel: { color: '#666', fontSize: 11, textAlign: 'center' },
+  tagRow: { gap: 6 },
+  tagLabel: { color: '#888', fontSize: 12 },
+  tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  tag: { backgroundColor: '#2A1A00', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: '#FF9800' },
+  tagText: { color: '#FF9800', fontSize: 12 },
+  notes: { color: '#aaa', fontSize: 13, lineHeight: 20, fontStyle: 'italic' },
+  assessmentBox: {
+    backgroundColor: '#0D1F0D',
+    borderRadius: 10,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: '#2E5E2E',
+  },
+  assessmentText: { color: '#4CAF50', fontSize: 13, lineHeight: 20, fontStyle: 'italic' },
 })

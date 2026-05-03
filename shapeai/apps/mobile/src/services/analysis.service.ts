@@ -38,6 +38,18 @@ export interface WorkoutWeek {
   sessions: WorkoutSession[]
 }
 
+export interface BodyComposition {
+  body_fat_estimate: number
+  body_fat_category: string
+  fat_distribution: string
+  fat_areas: string[]
+  muscle_highlights: string[]
+  muscle_deficits: string[]
+  proportional_notes: string
+  body_type: string
+  overall_assessment: string
+}
+
 export interface AnalysisResult {
   id: string
   status: 'completed'
@@ -49,6 +61,7 @@ export interface AnalysisResult {
   workout_plan: {
     weeks: WorkoutWeek[]
   }
+  body_composition?: BodyComposition
   completed_at: string
 }
 
@@ -67,16 +80,23 @@ export async function startAnalysis(): Promise<StartAnalysisResponse> {
 }
 
 export async function uploadPhoto(presignedUrl: string, photoUri: string): Promise<void> {
-  const response = await fetch(photoUri)
-  const blob = await response.blob()
-
-  const upload = await fetch(presignedUrl, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'image/jpeg' },
-    body: blob,
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open('PUT', presignedUrl)
+    xhr.setRequestHeader('Content-Type', 'image/jpeg')
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4) return
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve()
+      } else {
+        reject(new Error(`S3 upload failed: HTTP ${xhr.status}`))
+      }
+    }
+    xhr.onerror = () => reject(new Error('Upload failed: network error'))
+    // React Native XHR suporta envio direto de file URI
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    xhr.send({ uri: photoUri, type: 'image/jpeg', name: 'photo.jpg' } as any)
   })
-
-  if (!upload.ok) throw new Error(`S3 upload failed: HTTP ${upload.status}`)
 }
 
 export async function triggerProcessing(analysisId: string): Promise<void> {
