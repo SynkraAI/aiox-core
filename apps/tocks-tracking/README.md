@@ -1,5 +1,18 @@
 # Tocks Tracking
 
+## Status: PARKED (2026-05-04)
+
+This app is NOT deployed. Its `/api/capture-gclid` endpoint has been superseded by
+`apps/tocks-sales-ai` (verified at `apps/tocks-sales-ai/src/integrations/tray-webhook.ts`
+line 116 — `router.post('/api/capture-gclid', handleCaptureGclid(deps))`). Restoration:
+~20 min (follow `docs/runbooks/tocks-tracking-deploy.md`, remove DEPRECATED header first).
+Do not delete this app — it is retained as a fallback. Last known-good standalone state:
+fork commit `6c2bc08c`.
+
+See: `STORY-TOCKS-PARK-TRACKING` and `STORY-TOCKS-CAPI-D++` for the D++ migration rationale.
+
+---
+
 Standalone Google Ads offline conversion uploader + Tray webhook receiver for `tockscustom.com.br`.
 
 Extracted from `@tocks/sales-ai` for isolated deploy — no BullMQ, Redis, Claude, or WhatsApp deps. Just Express + Supabase + Google Ads REST.

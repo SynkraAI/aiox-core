@@ -1,5 +1,11 @@
 # Runbook — Deploy `tocks-tracking` (Handoff Opção B)
 
+> [!WARNING]
+> DEPRECATED as of 2026-05-04
+> Reason: tocks-tracking functionality absorbed by tocks-sales-ai via D++ (STORY-TOCKS-CAPI-D++).
+> Do NOT deploy this runbook. See apps/tocks-tracking/README.md for restoration ETA.
+> Last known-good standalone state: fork commit `6c2bc08c` (pre-park snapshot).
+
 **Status:** Pronto pra executar via dashboards (Railway / Supabase / Cloudflare)
 **Tempo estimado:** 15-20 minutos
 **Autor:** Gage (devops) — sessão autônoma 23/Abr 2026 pré-viagem
@@ -300,8 +306,8 @@ Quando expirar:
 
 Preenchido após commit:
 
-- **Commit SHA local:** `<preenchido após git commit — ver final deste doc>`
-- **Branch:** `main` (local — NÃO pushed)
+- **Commit SHA local:** `6c2bc08c07cbdfc90e3febcc1cd44416016e15c7` (short: `6c2bc08c`)
+- **Branch:** `main` (local — NÃO pushed; main diverge 36 ahead / 65 behind origin/main)
 - **Arquivos no commit:**
   - `.gitignore` (linha 151: `!apps/tocks-tracking/`)
   - `apps/tocks-tracking/**` (app extraído: 17 arquivos src + Dockerfile + railway.toml + migration + tests + README + .env.example + .gitignore interno)
