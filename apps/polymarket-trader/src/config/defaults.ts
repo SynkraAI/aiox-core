@@ -57,8 +57,8 @@ export const PAPER_UNLIMITED_CONFIG: TradingConfig = {
     kellyFraction: 0.05,            // Kelly 5% (Damodaran: startup sizing)
     minLiquidity: 1000,             // $1K — include thinner markets for data
   },
-  enabledVerticals: ['weather', 'crypto', 'politics', 'sports', 'pop_culture', 'finance', 'science'],  // ALL 7 verticals — paper mode needs max data
-  enabledStrategies: ['weather_model', 'crypto_sentiment', 'politics_model', 'sports_model', 'info_arb'],  // All strategies active for learning
+  enabledVerticals: ['weather'],  // BACKTEST-1 verdict (29/Abr): weather is the ONLY vertical with statistically significant edge (PF 1.415, N=3838). Other verticals empate com mid-price baseline. Squad pivot 04/Mai (15-day deadline).
+  enabledStrategies: ['weather_model', 'info_arb'],  // Weather only — drop crypto/politics/sports models per backtest FAIL
   driftMonitorEnabled: true,
   aceEvolutionEnabled: true,
   telegramAlerts: false,

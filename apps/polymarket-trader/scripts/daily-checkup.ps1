@@ -272,7 +272,12 @@ $tgIcon = switch ($status) {
     'NO_HEARTBEAT' { 'NO_HB' }
     default { $status }
 }
-$summary = "Polymarket [$tgIcon] $dateCell`nscans=$scansCell signals=$signalsCell trades=$tradesOpened24h resolved=$resolvedCell pnl=$pnlCell open=$openPositions`nverticais=$($snapshot.verticals)"
+# 15-day deadline countdown (Squad verdict 04/Mai/2026): kill project if no edge by 19/Mai
+$deadline = [DateTime]'2026-05-19'
+$daysLeft = [int]($deadline - (Get-Date).Date).TotalDays
+$countdownLine = if ($daysLeft -gt 0) { "D-$daysLeft (deadline 19/Mai)" } elseif ($daysLeft -eq 0) { "D-DAY (deadline TODAY)" } else { "POST-DEADLINE ($([math]::Abs($daysLeft))d over)" }
+
+$summary = "Polymarket [$tgIcon] $dateCell  $countdownLine`nscans=$scansCell signals=$signalsCell trades=$tradesOpened24h resolved=$resolvedCell pnl=$pnlCell open=$openPositions`nverticais=$($snapshot.verticals)"
 if ($alertReason) {
     $summary += "`nALERT: $alertReason"
 }

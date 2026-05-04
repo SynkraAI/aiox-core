@@ -321,7 +321,11 @@ export class AutoTrader {
       }
 
       // 5. Main strategy: LLM-first if available, fallback to heuristic
-      if (this.marketAnalyzer) {
+      // BUG FIX 04/Mai (15-day plan): when DISABLE_LLM=true, marketAnalyzer exists but provider='none'.
+      // Old check `if (this.marketAnalyzer)` was truthy → LLM path returned [] → heuristic never ran.
+      // Bot was effectively cego há ~5 dias (zero signals em 9k+ scans).
+      const hasActiveLLM = this.marketAnalyzer && this.marketAnalyzer.getProvider() !== 'none';
+      if (hasActiveLLM) {
         // Fase 2: Claude analyzes top candidates
         const bankroll = this.risk.getState().bankroll;
         const llmSignals = await this.marketAnalyzer.analyzeMarkets(eligible, bankroll);
@@ -471,9 +475,11 @@ export class AutoTrader {
 
     // ── Composite edge: use MAX of signals, not sum (they aren't additive) ──
     const rawEdge = Math.max(mismatchSignal, liquidityStress, midRangeEdge, knowledgeEdge);
-    // Use ACE-evolved minEdge if available, otherwise fall back to config
-    const aceParams = this.aceEvolver?.getPromptVersion('info_arb' as any)?.parameters;
-    const effectiveMinEdge = aceParams?.minEdge ?? this.config.minEdge;
+    // BUG FIX 04/Mai (15-day plan): ACE-evolved minEdge inflated to 0.08 after 1158
+    // crypto-dominated trades, blocking weather signals (max signal=0.02). Backtest
+    // PF 1.415 used static 0.02. Force config.minEdge until weather has 50+ trades
+    // to seed ACE evolution from clean weather-only data.
+    const effectiveMinEdge = this.config.minEdge;
     if (rawEdge < effectiveMinEdge) return null;
 
     // ── Determine side: bet on the underdog (contrarian) ──
