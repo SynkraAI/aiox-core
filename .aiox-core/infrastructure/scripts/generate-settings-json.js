@@ -243,11 +243,36 @@ function writeSettingsJson(projectRoot, permissions) {
   }
 
   const updated = { ...existing };
+  const existingPermissions =
+    existing && existing.permissions && typeof existing.permissions === 'object'
+      ? existing.permissions
+      : {};
+  const generatedPermissionsEmpty =
+    permissions.allow.length === 0 && permissions.deny.length === 0;
 
-  if (permissions.deny.length > 0 || permissions.allow.length > 0) {
-    updated.permissions = permissions;
+  if (generatedPermissionsEmpty) {
+    if (Object.keys(existingPermissions).length > 0) {
+      updated.permissions = existingPermissions;
+    } else {
+      delete updated.permissions;
+    }
   } else {
-    delete updated.permissions;
+    const mergedAllow = Array.from(
+      new Set([...(Array.isArray(existingPermissions.allow) ? existingPermissions.allow : []), ...permissions.allow]),
+    );
+    const mergedDeny = Array.from(
+      new Set([...(Array.isArray(existingPermissions.deny) ? existingPermissions.deny : []), ...permissions.deny]),
+    );
+
+    if (mergedDeny.length > 0 || mergedAllow.length > 0) {
+      updated.permissions = {
+        ...existingPermissions,
+        allow: mergedAllow,
+        deny: mergedDeny,
+      };
+    } else {
+      delete updated.permissions;
+    }
   }
 
   const newContent = JSON.stringify(updated, null, 2) + '\n';

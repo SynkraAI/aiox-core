@@ -122,6 +122,7 @@ ide_sync_system:
     claude-code:
       enabled: true
       path: ".claude/commands/AIOX/agents"
+      skillsPath: ".claude/skills"
       format: "full-markdown-yaml"
     codex:
       enabled: true

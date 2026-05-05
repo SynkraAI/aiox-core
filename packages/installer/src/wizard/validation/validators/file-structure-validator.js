@@ -15,6 +15,7 @@ const fs = require('fs');
  * @param {string} fileContext.env - .env file path
  * @param {string} fileContext.coreConfig - core-config.yaml path
  * @param {string} fileContext.mcpConfig - .mcp.json path
+ * @param {Array<string>} fileContext.skillDirs - Skill directories expected after install
  * @returns {Promise<Object>} Validation result
  */
 async function validateFiles(fileContext = {}) {
@@ -46,6 +47,31 @@ async function validateFiles(fileContext = {}) {
             message: `IDE config file missing: ${configPath}`,
             file: configPath,
             code: 'FILE_MISSING',
+          });
+        }
+      }
+    }
+
+    if (fileContext.skillDirs && fileContext.skillDirs.length > 0) {
+      for (const skillDir of fileContext.skillDirs) {
+        const exists = fs.existsSync(skillDir);
+        const isDirectory = exists ? fs.statSync(skillDir).isDirectory() : false;
+        const check = {
+          component: 'Skills',
+          file: skillDir,
+          status: exists && isDirectory ? 'success' : 'failed',
+          message: exists && isDirectory ? 'Directory exists' : 'Directory missing',
+        };
+
+        results.checks.push(check);
+
+        if (!exists || !isDirectory) {
+          results.success = false;
+          results.errors.push({
+            severity: 'high',
+            message: `Expected skill directory missing: ${skillDir}`,
+            file: skillDir,
+            code: 'SKILL_DIR_MISSING',
           });
         }
       }

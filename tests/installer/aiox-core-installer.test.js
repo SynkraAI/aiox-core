@@ -9,6 +9,8 @@ const fs = require('fs-extra');
 const os = require('os');
 
 const {
+  installAioxCore,
+  copyDirectoryWithRootReplacement,
   generateFileHashes,
   generateVersionJson,
 } = require('../../packages/installer/src/installer/aiox-core-installer');
@@ -169,6 +171,55 @@ describe('AIOX Core Installer - Version Tracking', () => {
       expect(Object.keys(result.fileHashes)).toHaveLength(2);
       expect(result.fileHashes['agents/dev.md']).toBeDefined();
       expect(result.fileHashes['config.yaml']).toBeDefined();
+    });
+  });
+
+  describe('brownfield preservation', () => {
+    it('should keep nested relative paths when copying directories', async () => {
+      const sourceDir = path.join(tempDir, 'source', 'development');
+      const destDir = path.join(tempDir, 'target', '.aiox-core', 'development');
+
+      await fs.ensureDir(path.join(sourceDir, 'agents'));
+      await fs.writeFile(path.join(sourceDir, 'agents', 'dev.md'), '# Dev');
+
+      const copied = await copyDirectoryWithRootReplacement(sourceDir, destDir, null, {
+        baseDir: destDir,
+      });
+
+      expect(copied).toContain('agents/dev.md');
+    });
+
+    it('should preserve agent MEMORY.md during brownfield install', async () => {
+      const sourceDir = path.join(tempDir, 'package-source');
+      const targetDir = path.join(tempDir, 'project');
+      const existingMemoryPath = path.join(
+        targetDir,
+        '.aiox-core',
+        'development',
+        'agents',
+        'dev',
+        'MEMORY.md',
+      );
+
+      await fs.ensureDir(path.join(sourceDir, 'development', 'agents', 'dev'));
+      await fs.writeFile(
+        path.join(sourceDir, 'development', 'agents', 'dev', 'MEMORY.md'),
+        'framework memory',
+        'utf8',
+      );
+
+      await fs.ensureDir(path.dirname(existingMemoryPath));
+      await fs.writeFile(existingMemoryPath, 'custom project memory', 'utf8');
+
+      const result = await installAioxCore({
+        targetDir,
+        sourceDir,
+        projectType: 'brownfield',
+        packageVersion: '9.9.9',
+      });
+
+      expect(result.success).toBe(true);
+      expect(await fs.readFile(existingMemoryPath, 'utf8')).toBe('custom project memory');
     });
   });
 });

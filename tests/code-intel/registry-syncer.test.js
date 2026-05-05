@@ -115,7 +115,7 @@ describe('RegistrySyncer', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         expect.stringContaining('.tmp'),
         expect.any(String),
-        'utf8'
+        'utf8',
       );
       expect(fs.renameSync).toHaveBeenCalled();
     });
@@ -160,7 +160,7 @@ describe('RegistrySyncer', () => {
       const result = await syncer.syncEntity(
         { id: 'test-entity', category: 'tasks', data: entities.tasks['test-entity'] },
         entities,
-        true
+        true,
       );
 
       expect(result).toBe(true);
@@ -280,11 +280,11 @@ describe('RegistrySyncer', () => {
       await syncer.syncEntity(
         { id: 'test-entity', category: 'tasks', data: entities.tasks['test-entity'] },
         entities,
-        true
+        true,
       );
 
       expect(entities.tasks['test-entity'].codeIntelMetadata.callerCount).toBe(
-        entities.tasks['test-entity'].usedBy.length
+        entities.tasks['test-entity'].usedBy.length,
       );
     });
 
@@ -318,7 +318,7 @@ describe('RegistrySyncer', () => {
       expect(stats.aborted).toBe(true);
       expect(stats.processed).toBe(0);
       expect(logger).toHaveBeenCalledWith(
-        expect.stringContaining('No code intelligence provider available')
+        expect.stringContaining('No code intelligence provider available'),
       );
       // Registry should NOT be written
       expect(fs.writeFileSync).not.toHaveBeenCalled();
@@ -424,7 +424,7 @@ describe('RegistrySyncer', () => {
       // renameSync should be called to replace original
       expect(fs.renameSync).toHaveBeenCalledWith(
         expect.stringContaining('.tmp'),
-        '/mock/entity-registry.yaml'
+        '/mock/entity-registry.yaml',
       );
     });
 

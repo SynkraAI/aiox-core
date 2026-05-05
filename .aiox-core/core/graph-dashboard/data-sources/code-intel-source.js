@@ -161,7 +161,7 @@ class CodeIntelSource {
         Object.entries(deps.dependencies).map(([key, val]) => ({
           id: key,
           ...((typeof val === 'object' && val) || {}),
-        }))
+        })),
       );
     }
 

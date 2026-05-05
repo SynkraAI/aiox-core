@@ -118,7 +118,7 @@ const checks = [
           (rule) =>
             typeof rule === 'string'
               ? rule.includes('.env')
-              : rule.pattern && rule.pattern.includes('.env')
+              : rule.pattern && rule.pattern.includes('.env'),
         );
       } catch {
         return false;
@@ -130,7 +130,7 @@ const checks = [
 let totalScore = 0;
 let maxScore = 0;
 
-console.log(`\nClaude Code Setup Validation`);
+console.log('\nClaude Code Setup Validation');
 console.log(`Project: ${projectPath}`);
 console.log(`${'='.repeat(60)}\n`);
 

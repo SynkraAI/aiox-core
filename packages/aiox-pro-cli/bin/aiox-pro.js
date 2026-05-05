@@ -3,11 +3,12 @@
 /**
  * aiox-pro CLI
  *
- * Thin CLI wrapper for @aiox-fullstack/pro.
+ * Thin CLI wrapper for AIOX Pro packages.
  * Provides a clean npx interface: npx aiox-pro install
  *
  * Commands:
- *   install             Install @aiox-fullstack/pro in the current project
+ *   install             Install AIOX Pro in the current project
+ *   update              Update AIOX Pro and re-sync assets
  *   activate --key X    Activate a license key
  *   deactivate          Deactivate the current license
  *   status              Show license status
@@ -22,7 +23,9 @@ const path = require('path');
 const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
-const PRO_PACKAGE = '@aiox-fullstack/pro';
+const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
+const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
+const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);
@@ -42,8 +45,11 @@ function run(cmd, options = {}) {
 
 function isProInstalled() {
   try {
-    const pkgPath = path.join(process.cwd(), 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
-    return fs.existsSync(pkgPath);
+    return PRO_PACKAGES.some((packageName) => {
+      const scopeDir = packageName.split('/')[0];
+      const packageJson = path.join(process.cwd(), 'node_modules', scopeDir, 'pro', 'package.json');
+      return fs.existsSync(packageJson);
+    });
   } catch {
     return false;
   }
@@ -133,7 +139,8 @@ Usage:
   npx aiox-pro <command> [options]
 
 Commands:
-  install              Install ${PRO_PACKAGE} in the current project
+  install              Install AIOX Pro in the current project
+  update               Update AIOX Pro and re-sync assets
   install --wizard     Install and run the setup wizard
   setup, wizard        Run Pro setup wizard (license gate + scaffold + verify)
   activate --key KEY   Activate a license key
@@ -147,6 +154,7 @@ Commands:
 
 Examples:
   npx aiox-pro install
+  npx aiox-pro update
   npx aiox-pro setup
   npx aiox-pro wizard --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
@@ -158,16 +166,27 @@ Documentation: https://synkra.ai/pro/docs
 }
 
 function installPro() {
-  console.log(`\nInstalling ${PRO_PACKAGE}...\n`);
+  console.log('\nInstalling AIOX Pro...\n');
 
-  const exitCode = run(`npm install ${PRO_PACKAGE}`);
+  let installedPackage = null;
 
-  if (exitCode !== 0) {
-    console.error(`\nFailed to install ${PRO_PACKAGE}`);
+  for (const packageName of PRO_PACKAGES) {
+    console.log(`Trying ${packageName}...`);
+    const exitCode = run(`npm install ${packageName}`);
+    if (exitCode === 0) {
+      installedPackage = packageName;
+      break;
+    }
+    console.log('');
+  }
+
+  if (!installedPackage) {
+    console.error('\nFailed to install AIOX Pro.');
+    console.error(`Tried: ${PRO_PACKAGES.join(', ')}`);
     process.exit(1);
   }
 
-  console.log(`\n✅ ${PRO_PACKAGE} installed successfully!\n`);
+  console.log(`\n✅ ${installedPackage} installed successfully!\n`);
   console.log('Next steps:');
   console.log('  npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX');
   console.log('  npx aiox-pro status');
@@ -218,8 +237,9 @@ switch (command) {
   case 'status':
   case 'features':
   case 'validate':
+  case 'update':
     if (!isProInstalled()) {
-      console.error(`${PRO_PACKAGE} is not installed.`);
+      console.error('AIOX Pro is not installed.');
       console.error('Run first: npx aiox-pro install\n');
       process.exit(1);
     }

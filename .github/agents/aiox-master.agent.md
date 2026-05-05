@@ -29,12 +29,11 @@ Use `*` prefix for commands:
 - `*kb` - Toggle KB mode (loads AIOX Method knowledge)
 - `*status` - Show current context and progress
 - `*guide` - Show comprehensive usage guide for this agent
-- `*exit` - Exit agent mode
 - `*create` - Create new AIOX component (agent, task, workflow, template, checklist)
 - `*modify` - Modify existing AIOX component
-- `*update-manifest` - Update team manifest
-- `*validate-component` - Validate component security and standards
-- `*deprecate-component` - Deprecate component with migration path
+- `*task` - Execute specific task (or list available)
+- `*workflow` - Start workflow (guided=manual, engine=real subagent spawning)
+- `*plan` - Workflow planning (default: create)
 
 ## Collaboration
 

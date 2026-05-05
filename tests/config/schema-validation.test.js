@@ -69,12 +69,17 @@ describe('schema-validation — enriched schemas', () => {
       expect(schema.additionalProperties).toBe(false);
     });
 
+    test('ide sync target schema accepts skillsPath for skills-first IDEs', () => {
+      const targetSchema = schema.properties.ide_sync_system.properties.targets.additionalProperties;
+      expect(targetSchema.properties).toHaveProperty('skillsPath');
+    });
+
     test('validates real framework-config.yaml without errors', () => {
       const data = loadYaml('framework-config.yaml');
       const validate = ajv.compile(schema);
       const isValid = validate(data);
       if (!isValid) {
-        // eslint-disable-next-line no-console
+         
         console.log('Validation errors:', validate.errors);
       }
       expect(isValid).toBe(true);
@@ -141,7 +146,7 @@ describe('schema-validation — enriched schemas', () => {
       const validate = ajv.compile(schema);
       const isValid = validate(data);
       if (!isValid) {
-        // eslint-disable-next-line no-console
+         
         console.log('Validation errors:', validate.errors);
       }
       expect(isValid).toBe(true);
@@ -191,7 +196,7 @@ describe('schema-validation — enriched schemas', () => {
       const isValid = validate(data);
       expect(isValid).toBe(false);
       const fieldError = validate.errors.find(
-        (e) => e.instancePath === '/boundary/frameworkProtection'
+        (e) => e.instancePath === '/boundary/frameworkProtection',
       );
       expect(fieldError).toBeDefined();
       expect(fieldError.message).toContain('boolean');
@@ -207,7 +212,7 @@ describe('schema-validation — enriched schemas', () => {
       const isValid = validate(data);
       expect(isValid).toBe(false);
       expect(
-        validate.errors.some((e) => e.params?.missingProperty === 'frameworkProtection')
+        validate.errors.some((e) => e.params?.missingProperty === 'frameworkProtection'),
       ).toBe(true);
     });
   });

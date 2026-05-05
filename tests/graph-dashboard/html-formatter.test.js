@@ -139,7 +139,7 @@ describe('html-formatter', () => {
   describe('_sanitize', () => {
     it('should escape HTML special characters', () => {
       expect(_sanitize('<script>alert("xss")</script>')).toBe(
-        '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+        '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;',
       );
     });
 
@@ -429,7 +429,7 @@ describe('html-formatter', () => {
         if (style.colorOverride !== null) {
           expect(
             style.colorOverride === THEME.text.tertiary ||
-            style.colorOverride === THEME.text.muted
+            style.colorOverride === THEME.text.muted,
           ).toBe(true);
         }
       }

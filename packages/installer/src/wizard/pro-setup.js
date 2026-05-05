@@ -57,12 +57,12 @@ class InlineLicenseClient {
    */
   _request(method, urlPath, body, headers = {}) {
     return new Promise((resolve, reject) => {
-      const https = require('https');
       const url = new URL(urlPath, this.baseUrl);
+      const transport = url.protocol === 'http:' ? require('http') : require('https');
 
       const options = {
         hostname: url.hostname,
-        port: url.port || 443,
+        port: url.port || (url.protocol === 'http:' ? 80 : 443),
         path: url.pathname + url.search,
         method,
         headers: {
@@ -73,7 +73,7 @@ class InlineLicenseClient {
         timeout: 15000,
       };
 
-      const req = https.request(options, (res) => {
+      const req = transport.request(options, (res) => {
         let data = '';
         res.on('data', (chunk) => { data += chunk; });
         res.on('end', () => {
@@ -135,10 +135,19 @@ class InlineLicenseClient {
    * Login with email and password.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<{sessionToken: string, emailVerified: boolean}>}
+   * @returns {Promise<{accessToken: string, sessionToken: string, emailVerified: boolean}>}
    */
   async login(email, password) {
-    return this._request('POST', '/api/v1/auth/login', { email, password });
+    return this._request('POST', '/api/v1/auth/login', { email, password })
+      .then((result) => {
+        const accessToken = result.accessToken || result.sessionToken;
+        return {
+          ...result,
+          accessToken,
+          // Backward-compatible alias for existing wizard flows.
+          sessionToken: accessToken,
+        };
+      });
   }
 
   /**
@@ -160,11 +169,17 @@ class InlineLicenseClient {
    */
   async activateByAuth(token, machineId, version) {
     return this._request('POST', '/api/v1/auth/activate-pro', {
+      accessToken: token,
       machineId,
       version,
+      aioxCoreVersion: version,
     }, {
+      // Preserve legacy compatibility with older server deployments.
       Authorization: `Bearer ${token}`,
-    });
+    }).then((result) => ({
+      ...result,
+      key: result.key || result.licenseKey,
+    }));
   }
 
   /**
@@ -184,13 +199,32 @@ class InlineLicenseClient {
 
   /**
    * Check if user's email has been verified.
-   * @param {string} sessionToken - Session token
+   * @param {string} accessToken - Session token
    * @returns {Promise<{verified: boolean}>}
    */
-  async checkEmailVerified(sessionToken) {
-    return this._request('GET', '/api/v1/auth/email-verified', null, {
-      Authorization: `Bearer ${sessionToken}`,
-    });
+  async checkEmailVerified(accessToken) {
+    try {
+      const result = await this._request('POST', '/api/v1/auth/verify-status', {
+        accessToken,
+      });
+      return {
+        ...result,
+        verified: result.verified ?? result.emailVerified,
+      };
+    } catch (error) {
+      // Older server versions used GET /email-verified with bearer auth.
+      if (!error.message || !error.message.includes('HTTP 404')) {
+        throw error;
+      }
+
+      const result = await this._request('GET', '/api/v1/auth/email-verified', null, {
+        Authorization: `Bearer ${accessToken}`,
+      });
+      return {
+        ...result,
+        verified: result.verified ?? result.emailVerified,
+      };
+    }
   }
 
   /**
@@ -331,29 +365,55 @@ function showStep(current, total, label) {
  */
 function loadProModule(moduleName) {
   const path = require('path');
+  const tryRequire = (requestPath) => {
+    try {
+      return require(requestPath);
+    } catch (error) {
+      if (
+        error?.code === 'MODULE_NOT_FOUND'
+        && typeof error.message === 'string'
+        && error.message.includes(requestPath)
+      ) {
+        return null;
+      }
+      throw error;
+    }
+  };
 
   // 1. Framework-dev mode (cloned repo with pro/ submodule)
-  try {
-    return require(`../../../../pro/license/${moduleName}`);
-  } catch { /* not available */ }
+  const frameworkPath = `../../../../pro/license/${moduleName}`;
+  const frameworkModule = tryRequire(frameworkPath);
+  if (frameworkModule) {
+    return frameworkModule;
+  }
 
-  // 2. @aiox-fullstack/pro package (works when aiox-core is a local dependency)
-  try {
-    return require(`@aiox-fullstack/pro/license/${moduleName}`);
-  } catch { /* not available */ }
+  // 2. npm packages — try canonical then fallback
+  const npmScopes = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+  for (const scope of npmScopes) {
+    const requestPath = `${scope}/license/${moduleName}`;
+    const loadedModule = tryRequire(requestPath);
+    if (loadedModule) {
+      return loadedModule;
+    }
+  }
 
   // 3. aiox-core in node_modules (brownfield upgrade from >= v4.2.15)
-  try {
-    const absPath = path.join(process.cwd(), 'node_modules', 'aiox-core', 'pro', 'license', moduleName);
-    return require(absPath);
-  } catch { /* not available */ }
+  const aioxCorePath = path.join(process.cwd(), 'node_modules', 'aiox-core', 'pro', 'license', moduleName);
+  const aioxCoreModule = tryRequire(aioxCorePath);
+  if (aioxCoreModule) {
+    return aioxCoreModule;
+  }
 
-  // 4. @aiox-fullstack/pro in user project (npx context — require resolves from
+  // 4. npm package in user project via absolute path (npx context — require resolves from
   //    temp dir, so we need absolute path to where bootstrap installed the package)
-  try {
-    const absPath = path.join(process.cwd(), 'node_modules', '@aiox-fullstack', 'pro', 'license', moduleName);
-    return require(absPath);
-  } catch { /* not available */ }
+  const absScopeDirs = ['@aiox-fullstack', '@aios-fullstack'];
+  for (const scopeDir of absScopeDirs) {
+    const absPath = path.join(process.cwd(), 'node_modules', scopeDir, 'pro', 'license', moduleName);
+    const loadedModule = tryRequire(absPath);
+    if (loadedModule) {
+      return loadedModule;
+    }
+  }
 
   return null;
 }
@@ -379,6 +439,57 @@ function loadFeatureGate() {
 }
 
 /**
+ * Try to load the license cache helpers via lazy import.
+ * Attempts multiple resolution paths for framework-dev, greenfield, and brownfield.
+ *
+ * @returns {{ writeLicenseCache: Function }|null} License cache helpers or null
+ */
+function loadLicenseCache() {
+  return loadProModule('license-cache');
+}
+
+/**
+ * Generate a deterministic machine identifier compatible with the Pro runtime.
+ *
+ * Mirrors pro/license/license-crypto.js so licenses activated during install use
+ * the same seat fingerprint that later validation/deactivation expects.
+ *
+ * @returns {string} SHA-256 machine fingerprint (64 hex chars)
+ */
+function generateMachineId() {
+  const licenseCryptoModule = loadProModule('license-crypto');
+  if (licenseCryptoModule && typeof licenseCryptoModule.generateMachineId === 'function') {
+    return licenseCryptoModule.generateMachineId();
+  }
+
+  const crypto = require('crypto');
+  const os = require('os');
+  const components = [];
+
+  components.push(os.hostname());
+
+  const cpus = os.cpus();
+  if (cpus.length > 0) {
+    components.push(cpus[0].model);
+  }
+
+  const networkInterfaces = os.networkInterfaces();
+  for (const [, interfaces] of Object.entries(networkInterfaces)) {
+    for (const iface of interfaces || []) {
+      if (!iface.internal && iface.mac && iface.mac !== '00:00:00:00:00:00') {
+        components.push(iface.mac);
+        break;
+      }
+    }
+    if (components.length > 2) {
+      break;
+    }
+  }
+
+  return crypto.createHash('sha256').update(components.join('|')).digest('hex');
+}
+
+/**
  * Get a license API client instance.
  *
  * Prefers the full LicenseApiClient from @aiox-fullstack/pro when available.
@@ -387,7 +498,9 @@ function loadFeatureGate() {
  * @returns {Object} Client instance with isOnline, checkEmail, login, signup, activateByAuth
  */
 function getLicenseClient() {
-  const loader = module.exports._testing ? module.exports._testing.loadLicenseApi : loadLicenseApi;
+  const loader = module.exports._testing && module.exports._testing.loadLicenseApi
+    ? module.exports._testing.loadLicenseApi
+    : loadLicenseApi;
   const licenseModule = loader();
 
   if (licenseModule) {
@@ -410,6 +523,149 @@ function loadProScaffolder() {
   } catch {
     return null;
   }
+}
+
+/**
+ * Persist the activated license locally so post-install Pro commands can recognize it.
+ *
+ * @param {string} targetDir - Project root directory
+ * @param {Object} licenseResult - Successful result from stepLicenseGate()
+ * @returns {{ success: boolean, error?: string }} Cache write result
+ */
+function persistLicenseCache(targetDir, licenseResult) {
+  const loader = module.exports._testing && module.exports._testing.loadLicenseCache
+    ? module.exports._testing.loadLicenseCache
+    : loadLicenseCache;
+  const cacheModule = loader();
+
+  if (!cacheModule || typeof cacheModule.writeLicenseCache !== 'function') {
+    return { success: false, error: 'License cache module not available.' };
+  }
+
+  const activationResult = licenseResult && licenseResult.activationResult ? licenseResult.activationResult : {};
+  const key = activationResult.key || licenseResult.key;
+
+  if (!key || key === 'existing') {
+    return { success: false, error: 'Activated license key not available for local cache persistence.' };
+  }
+
+  return cacheModule.writeLicenseCache({
+    key,
+    activatedAt: activationResult.activatedAt || new Date().toISOString(),
+    expiresAt: activationResult.expiresAt,
+    features: Array.isArray(activationResult.features) ? activationResult.features : [],
+    seats: activationResult.seats || { used: 1, max: 1 },
+    cacheValidDays: activationResult.cacheValidDays,
+    gracePeriodDays: activationResult.gracePeriodDays,
+  }, targetDir);
+}
+
+/**
+ * Ensure auth-based activations are also recognized by the standard key-validation flow.
+ *
+ * Some backends may return a valid license key from auth activation before the legacy
+ * key-validation endpoint recognizes the current machine. In that case, normalize state by
+ * replaying a key activation with the same machine fingerprint.
+ *
+ * @param {Object} client - License client
+ * @param {Object} activationResult - Result returned by activateByAuth()
+ * @param {string} machineId - Machine fingerprint
+ * @param {string} aioxCoreVersion - Current aiox-core version
+ * @returns {Promise<Object>} Activation result safe for cache persistence + `aiox pro validate`
+ */
+async function ensureKeyValidationParity(client, activationResult, machineId, aioxCoreVersion) {
+  if (!activationResult || !activationResult.key || typeof client?.activate !== 'function') {
+    return activationResult;
+  }
+
+  const mergeActivation = (normalized) => ({
+    ...activationResult,
+    key: normalized.key || activationResult.key,
+    features: normalized.features || activationResult.features,
+    seats: normalized.seats || activationResult.seats,
+    expiresAt: normalized.expiresAt || activationResult.expiresAt,
+    cacheValidDays: normalized.cacheValidDays || activationResult.cacheValidDays,
+    gracePeriodDays: normalized.gracePeriodDays || activationResult.gracePeriodDays,
+    activatedAt: normalized.activatedAt || activationResult.activatedAt,
+  });
+
+  if (typeof client.validate === 'function') {
+    try {
+      const validationResult = await client.validate(activationResult.key, machineId);
+      if (validationResult && validationResult.valid !== false) {
+        return mergeActivation(validationResult);
+      }
+    } catch (error) {
+      if (!['MACHINE_NOT_ACTIVATED', 'NOT_ACTIVATED'].includes(error.code)) {
+        throw error;
+      }
+    }
+  }
+
+  try {
+    const normalizedActivation = await client.activate(
+      activationResult.key,
+      machineId,
+      aioxCoreVersion,
+    );
+    return mergeActivation(normalizedActivation);
+  } catch (error) {
+    if (['ALREADY_ACTIVATED', 'MACHINE_ALREADY_ACTIVATED'].includes(error.code)) {
+      return activationResult;
+    }
+    throw error;
+  }
+}
+
+/**
+ * Resolve the Pro content source directory.
+ *
+ * Priority:
+ * 1. Bundled pro/ content in the aiox-core checkout or package
+ * 2. Auto-initialize the git submodule when running from a source checkout
+ * 3. Installed @aiox-fullstack/pro package in the target project
+ *
+ * @param {string} targetDir - Project root directory
+ * @returns {{proSourceDir: string|null, bootstrapError?: string}} Resolution result
+ */
+function resolveProSourceDir(targetDir) {
+  const path = require('path');
+  const fs = require('fs');
+  const { execFileSync } = require('child_process');
+
+  const repoRoot = path.resolve(__dirname, '..', '..', '..', '..');
+  const bundledProDir = path.join(repoRoot, 'pro');
+  const npmProDir = path.join(targetDir, 'node_modules', '@aiox-fullstack', 'pro');
+  const bundledSquadsDir = path.join(bundledProDir, 'squads');
+  const gitmodulesPath = path.join(repoRoot, '.gitmodules');
+
+  if (fs.existsSync(bundledSquadsDir)) {
+    return { proSourceDir: bundledProDir };
+  }
+
+  if (fs.existsSync(gitmodulesPath) && fs.existsSync(bundledProDir)) {
+    try {
+      execFileSync('git', ['submodule', 'update', '--init', '--recursive', 'pro'], {
+        cwd: repoRoot,
+        stdio: 'ignore',
+      });
+
+      if (fs.existsSync(bundledSquadsDir)) {
+        return { proSourceDir: bundledProDir };
+      }
+    } catch (error) {
+      return {
+        proSourceDir: null,
+        bootstrapError: error.message || 'git submodule update failed',
+      };
+    }
+  }
+
+  if (fs.existsSync(npmProDir)) {
+    return { proSourceDir: npmProDir };
+  }
+
+  return { proSourceDir: null };
 }
 
 /**
@@ -557,8 +813,8 @@ async function stepLicenseGateWithEmail() {
   try {
     checkResult = await client.checkEmail(trimmedEmail);
   } catch (checkError) {
-    checkSpinner.fail(tf('proVerificationFailed', { message: checkError.message }));
-    return { success: false, error: checkError.message };
+    checkSpinner.info(t('proBuyerCheckUnavailable'));
+    return fallbackAuthWithoutBuyerCheck(client, trimmedEmail);
   }
 
   // Step 2a: NOT a buyer → stop
@@ -581,6 +837,83 @@ async function stepLicenseGateWithEmail() {
   checkSpinner.succeed(t('proAccessConfirmedCreate'));
   // Flow 4: New account → Create account flow
   return createAccountFlow(client, trimmedEmail);
+}
+
+/**
+ * Fallback interactive auth flow when buyer/account pre-check is unavailable.
+ *
+ * Prompts for a password, attempts login first, then falls back to signup if no account exists.
+ * If the account already exists but the first password is wrong, hands control to the normal
+ * login retry flow so the user still gets multiple attempts.
+ *
+ * @param {object} client - LicenseApiClient instance
+ * @param {string} email - User email
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function fallbackAuthWithoutBuyerCheck(client, email) {
+  const inquirer = require('inquirer');
+
+  const { password } = await inquirer.prompt([
+    {
+      type: 'password',
+      name: 'password',
+      message: colors.primary(t('proPasswordLabel')),
+      mask: '*',
+      validate: (input) => {
+        if (!input || input.length < MIN_PASSWORD_LENGTH) {
+          return tf('proPasswordMin', { min: MIN_PASSWORD_LENGTH });
+        }
+        return true;
+      },
+    },
+  ]);
+
+  const spinner = createSpinner(t('proAuthenticating'));
+  spinner.start();
+
+  let sessionToken;
+  let emailVerified;
+
+  try {
+    const loginResult = await client.login(email, password);
+    sessionToken = loginResult.sessionToken;
+    emailVerified = loginResult.emailVerified;
+    spinner.succeed(t('proAuthSuccess'));
+  } catch (loginError) {
+    if (loginError.code !== 'INVALID_CREDENTIALS') {
+      spinner.fail(tf('proAuthFailed', { message: loginError.message }));
+      return { success: false, error: loginError.message };
+    }
+
+    spinner.info(t('proLoginFailedSignup'));
+    try {
+      await client.signup(email, password);
+      showSuccess(t('proAccountCreatedVerify'));
+
+      const loginAfterSignup = await client.login(email, password);
+      sessionToken = loginAfterSignup.sessionToken;
+      emailVerified = loginAfterSignup.emailVerified;
+    } catch (signupError) {
+      if (signupError.code === 'EMAIL_ALREADY_REGISTERED') {
+        showInfo(t('proAccountExists'));
+        return loginWithRetry(client, email);
+      }
+      return { success: false, error: signupError.message };
+    }
+  }
+
+  if (!sessionToken) {
+    return { success: false, error: t('proAuthFailedShort') };
+  }
+
+  if (!emailVerified) {
+    const verifyResult = await waitForEmailVerification(client, sessionToken, email);
+    if (!verifyResult.success) {
+      return verifyResult;
+    }
+  }
+
+  return activateProByAuth(client, sessionToken);
 }
 
 /**
@@ -984,14 +1317,8 @@ async function activateProByAuth(client, sessionToken) {
   spinner.start();
 
   try {
-    // Generate machine fingerprint
-    const os = require('os');
-    const crypto = require('crypto');
-    const machineId = crypto
-      .createHash('sha256')
-      .update(`${os.hostname()}-${os.platform()}-${os.arch()}`)
-      .digest('hex')
-      .substring(0, 32);
+    // Generate machine fingerprint compatible with the Pro runtime
+    const machineId = generateMachineId();
 
     // Read aiox-core version
     let aioxCoreVersion = 'unknown';
@@ -1005,7 +1332,13 @@ async function activateProByAuth(client, sessionToken) {
       // Keep 'unknown'
     }
 
-    const activationResult = await client.activateByAuth(sessionToken, machineId, aioxCoreVersion);
+    const authActivationResult = await client.activateByAuth(sessionToken, machineId, aioxCoreVersion);
+    const activationResult = await ensureKeyValidationParity(
+      client,
+      authActivationResult,
+      machineId,
+      aioxCoreVersion,
+    );
 
     spinner.succeed(tf('proSubscriptionConfirmed', { key: maskLicenseKey(activationResult.key) }));
     return { success: true, key: activationResult.key, activationResult };
@@ -1126,14 +1459,8 @@ async function validateKeyWithApi(key) {
       };
     }
 
-    // Generate a simple machine fingerprint
-    const os = require('os');
-    const crypto = require('crypto');
-    const machineId = crypto
-      .createHash('sha256')
-      .update(`${os.hostname()}-${os.platform()}-${os.arch()}`)
-      .digest('hex')
-      .substring(0, 32);
+    // Generate machine fingerprint compatible with the Pro runtime
+    const machineId = generateMachineId();
 
     // Read aiox-core version
     let aioxCoreVersion = 'unknown';
@@ -1188,24 +1515,12 @@ async function validateKeyWithApi(key) {
 async function stepInstallScaffold(targetDir, options = {}) {
   showStep(2, 3, t('proContentInstallation'));
 
-  const path = require('path');
-  const fs = require('fs');
+  const { proSourceDir, bootstrapError } = resolveProSourceDir(targetDir);
 
-  // Resolve pro source directory from multiple locations:
-  // 1. Bundled in aiox-core package (pro/ submodule — npx and local dev)
-  // 2. @aiox-fullstack/pro in node_modules (legacy brownfield)
-  const bundledProDir = path.resolve(__dirname, '..', '..', '..', '..', 'pro');
-  const npmProDir = path.join(targetDir, 'node_modules', '@aiox-fullstack', 'pro');
-
-  let proSourceDir;
-  if (fs.existsSync(bundledProDir) && fs.existsSync(path.join(bundledProDir, 'squads'))) {
-    proSourceDir = bundledProDir;
-  } else if (fs.existsSync(npmProDir)) {
-    proSourceDir = npmProDir;
-  } else {
+  if (!proSourceDir) {
     return {
       success: false,
-      error: t('proPackageNotFound'),
+      error: bootstrapError ? `${t('proPackageNotFound')} ${bootstrapError}` : t('proPackageNotFound'),
     };
   }
 
@@ -1379,6 +1694,13 @@ async function runProWizard(options = {}) {
 
   result.licenseValidated = true;
 
+  const cachePersistResult = persistLicenseCache(targetDir, licenseResult);
+  if (!cachePersistResult.success) {
+    result.error = tf('proLicenseCacheFailed', { message: cachePersistResult.error });
+    showError(result.error);
+    return result;
+  }
+
   // Step 2: Install/Scaffold
   const scaffoldResult = await stepInstallScaffold(targetDir, {
     force: options.force,
@@ -1418,6 +1740,7 @@ module.exports = {
     activateProByAuth,
     loginWithRetry,
     createAccountFlow,
+    fallbackAuthWithoutBuyerCheck,
     stepLicenseGateCI,
     stepLicenseGateWithKey,
     stepLicenseGateWithKeyInteractive,
@@ -1425,9 +1748,14 @@ module.exports = {
     loadProModule,
     loadLicenseApi,
     loadFeatureGate,
+    loadLicenseCache,
     loadProScaffolder,
     getLicenseClient,
+    resolveProSourceDir,
     InlineLicenseClient,
+    generateMachineId,
+    persistLicenseCache,
+    ensureKeyValidationParity,
     LICENSE_SERVER_URL,
     MAX_RETRIES,
     LICENSE_KEY_PATTERN,

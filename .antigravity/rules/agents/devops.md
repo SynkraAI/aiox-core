@@ -17,6 +17,14 @@
 - `*cleanup` - Identify and remove stale branches/files
 - `*triage-issues` - Analyze open GitHub issues, classify, prioritize, recommend next
 - `*resolve-issue` - Investigate and resolve a GitHub issue end-to-end
+- `*pro-access-grant` - Grant or restore AIOX Pro access with API validation and optional guided installer validation
+- `*pro-check-access` - Check AIOX Pro buyer entitlement and account existence via check-email
+- `*pro-request-reset` - Trigger the password reset email flow for an AIOX Pro account
+- `*pro-resend-verification` - Resend the AIOX Pro email verification link
+- `*pro-reset-password` - Reset an AIOX Pro password administratively and validate login
+- `*pro-validate-login` - Validate AIOX Pro login and return auth health signals
+- `*pro-verify-status` - Check AIOX Pro email verification status for an access token
+- `*pro-activate` - Call activate-pro directly to validate or restore AIOX Pro activation
 - `*health-check` - Run unified health diagnostic (aiox doctor --json + governance interpretation)
 - `*sync-registry` - Sync entity registry (incremental, --full rebuild, or --heal integrity)
 - `*check-docs` - Verify documentation links integrity (broken, incorrect markings)
@@ -38,6 +46,14 @@
 - `*cleanup` - Identify and remove stale branches/files
 - `*triage-issues` - Analyze open GitHub issues, classify, prioritize, recommend next
 - `*resolve-issue` - Investigate and resolve a GitHub issue end-to-end
+- `*pro-access-grant` - Grant or restore AIOX Pro access with API validation and optional guided installer validation
+- `*pro-check-access` - Check AIOX Pro buyer entitlement and account existence via check-email
+- `*pro-request-reset` - Trigger the password reset email flow for an AIOX Pro account
+- `*pro-resend-verification` - Resend the AIOX Pro email verification link
+- `*pro-reset-password` - Reset an AIOX Pro password administratively and validate login
+- `*pro-validate-login` - Validate AIOX Pro login and return auth health signals
+- `*pro-verify-status` - Check AIOX Pro email verification status for an access token
+- `*pro-activate` - Call activate-pro directly to validate or restore AIOX Pro activation
 - `*init-project-status` - Initialize dynamic project status tracking (Story 6.1.2.4)
 - `*environment-bootstrap` - Complete environment setup for new projects (CLIs, auth, Git/GitHub)
 - `*setup-github` - Configure DevOps infrastructure for user projects (workflows, CodeRabbit, branch protection, secrets) [Story 5.10]

@@ -31,15 +31,50 @@ const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const PRO_PACKAGE_PATH = path.join(PRO_DIR, 'package.json');
 
 /**
- * Check if the AIOX Pro submodule is available.
+ * Canonical npm package name (future, after org rename).
+ */
+const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
+
+/**
+ * Fallback npm package name (active until org rename).
+ */
+const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
+
+/**
+ * Resolve the installed npm Pro package path.
+ * Tries canonical name first, then fallback.
  *
- * Detection is based on the existence of pro/package.json.
- * An empty pro/ directory (uninitialized submodule) returns false.
+ * @returns {{ packagePath: string, packageName: string } | null}
+ */
+function resolveNpmProPackage() {
+  const candidates = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
+
+  for (const packageName of candidates) {
+    try {
+      const pkgJson = require.resolve(`${packageName}/package.json`, {
+        paths: [process.cwd()],
+      });
+      return { packagePath: path.dirname(pkgJson), packageName };
+    } catch {
+      // try next package
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Check if the AIOX Pro is available via any source.
  *
- * @returns {boolean} true if pro/package.json exists
+ * Detection priority:
+ * 1. npm package (canonical @aiox-fullstack/pro or fallback @aios-fullstack/pro)
+ * 2. pro/ submodule directory
+ *
+ * @returns {boolean} true if Pro is available
  */
 function isProAvailable() {
   try {
+    if (resolveNpmProPackage()) return true;
     return fs.existsSync(PRO_PACKAGE_PATH);
   } catch {
     return false;
@@ -47,58 +82,99 @@ function isProAvailable() {
 }
 
 /**
- * Safely load a module from the pro/ directory.
+ * Safely load a module from the pro package.
  *
- * Returns null if:
- * - Pro submodule is not available
- * - The requested module does not exist
- * - The module throws during loading
+ * Resolution order:
+ * 1. npm package (canonical or fallback)
+ * 2. pro/ submodule directory
  *
  * @param {string} moduleName - Relative path within pro/ (e.g., 'squads/squad-creator-pro')
  * @returns {*|null} The loaded module or null
  */
 function loadProModule(moduleName) {
-  if (!isProAvailable()) {
-    return null;
+  // 1. Try npm package
+  const npmPro = resolveNpmProPackage();
+  if (npmPro) {
+    try {
+      return require(path.join(npmPro.packagePath, moduleName));
+    } catch { /* fall through */ }
   }
 
-  try {
-    const modulePath = path.join(PRO_DIR, moduleName);
-    return require(modulePath);
-  } catch {
-    return null;
+  // 2. Try submodule
+  if (fs.existsSync(PRO_PACKAGE_PATH)) {
+    try {
+      return require(path.join(PRO_DIR, moduleName));
+    } catch { /* not available */ }
   }
+
+  return null;
 }
 
 /**
  * Get the version of the installed AIOX Pro package.
  *
- * @returns {string|null} The version string (e.g., '0.1.0') or null if not available
+ * @returns {string|null} The version string (e.g., '0.3.0') or null if not available
  */
 function getProVersion() {
-  if (!isProAvailable()) {
-    return null;
+  // 1. Try npm package
+  const npmPro = resolveNpmProPackage();
+  if (npmPro) {
+    try {
+      const packageData = JSON.parse(fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8'));
+      return packageData.version || null;
+    } catch { /* fall through */ }
   }
 
-  try {
-    const packageData = JSON.parse(fs.readFileSync(PRO_PACKAGE_PATH, 'utf8'));
-    return packageData.version || null;
-  } catch {
-    return null;
+  // 2. Try submodule
+  if (fs.existsSync(PRO_PACKAGE_PATH)) {
+    try {
+      const packageData = JSON.parse(fs.readFileSync(PRO_PACKAGE_PATH, 'utf8'));
+      return packageData.version || null;
+    } catch { /* not available */ }
   }
+
+  return null;
 }
 
 /**
  * Get metadata about the AIOX Pro installation.
  *
- * @returns {{ available: boolean, version: string|null, path: string }} Pro status info
+ * @returns {{ available: boolean, version: string|null, path: string, source: string, packageName: string|null }} Pro status info
  */
 function getProInfo() {
-  const available = isProAvailable();
+  const npmPro = resolveNpmProPackage();
+  if (npmPro) {
+    try {
+      const packageData = JSON.parse(fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8'));
+      return {
+        available: true,
+        version: packageData.version || null,
+        path: npmPro.packagePath,
+        source: 'npm',
+        packageName: npmPro.packageName,
+      };
+    } catch { /* fall through */ }
+  }
+
+  if (fs.existsSync(PRO_PACKAGE_PATH)) {
+    try {
+      const packageData = JSON.parse(fs.readFileSync(PRO_PACKAGE_PATH, 'utf8'));
+      return {
+        available: true,
+        version: packageData.version || null,
+        path: PRO_DIR,
+        source: 'submodule',
+        packageName: null,
+      };
+    } catch { /* fall through */ }
+  }
+
   return {
-    available,
-    version: available ? getProVersion() : null,
+    available: false,
+    version: null,
     path: PRO_DIR,
+    source: 'none',
+    packageName: null,
   };
 }
 
@@ -107,6 +183,9 @@ module.exports = {
   loadProModule,
   getProVersion,
   getProInfo,
+  resolveNpmProPackage,
+  PRO_PACKAGE_CANONICAL,
+  PRO_PACKAGE_FALLBACK,
   // Exported for testing
   _PRO_DIR: PRO_DIR,
   _PRO_PACKAGE_PATH: PRO_PACKAGE_PATH,

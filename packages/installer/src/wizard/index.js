@@ -22,7 +22,13 @@ const {
 const { setLanguage, t } = require('./i18n');
 const yaml = require('js-yaml');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
-const { generateIDEConfigs, showSuccessSummary, copySkillFiles, copyExtraCommandFiles } = require('./ide-config-generator');
+const {
+  generateIDEConfigs,
+  showSuccessSummary,
+  copySkillFiles,
+  generateCodexSkills,
+  copyExtraCommandFiles,
+} = require('./ide-config-generator');
 const {
   configureEnvironment,
 } = require('../config/configure-environment');
@@ -30,6 +36,7 @@ const {
   installDependencies,
 } = require('../installer/dependency-installer');
 const { commandSync, commandValidate } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/index');
+const { syncSkills: syncCodexSkills } = require('../../../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
 const {
   installAioxCore,
   hasPackageJson,
@@ -329,12 +336,43 @@ async function runWizard(options = {}) {
       }
     }
 
+    if (options.dryRun) {
+      const preview = {
+        dryRun: true,
+        projectType: answers.projectType,
+        selectedIDEs: answers.selectedIDEs || [],
+        selectedTechPreset: answers.selectedTechPreset || 'none',
+        steps: [
+          'install-aiox-core',
+          'generate-ide-configs',
+          'generate-boundary-rules',
+          'copy-skills-and-commands',
+          'run-ide-sync',
+          'bootstrap-entity-registry',
+          'configure-environment',
+          'install-dependencies',
+          'validate-installation',
+        ],
+      };
+
+      if (!options.quiet) {
+        console.log('\n🧪 Dry run mode');
+        console.log('   No files will be modified.');
+        console.log(`   Project type: ${preview.projectType}`);
+        console.log(`   IDEs: ${preview.selectedIDEs.length > 0 ? preview.selectedIDEs.join(', ') : 'none'}`);
+        console.log(`   Tech preset: ${preview.selectedTechPreset}`);
+      }
+
+      return preview;
+    }
+
     // Story 1.4: Install AIOX core framework (agents, tasks, workflows, templates)
     console.log('\n📦 Installing AIOX core framework...');
     let aioxCoreResult = null;
     try {
       aioxCoreResult = await installAioxCore({
         targetDir: process.cwd(),
+        projectType: answers.projectType || 'greenfield',
         onProgress: (_status) => {
           // Silent progress - spinner handles feedback
         },
@@ -522,6 +560,24 @@ async function runWizard(options = {}) {
       answers.skillsCopied = 0;
     }
 
+    // Local-first Codex flow: generate project-local /skills activators automatically
+    if ((answers.selectedIDEs || []).includes('codex')) {
+      console.log('\n🧠 Generating Codex skills...');
+      try {
+        const codexSkillsResult = generateCodexSkills(process.cwd());
+        if (codexSkillsResult.skipped) {
+          console.log('   ℹ️  Codex skills: canonical agent source not found (skipped)');
+        } else {
+          console.log(`✅ Codex skills: ${codexSkillsResult.count} generated`);
+        }
+        answers.codexSkillsGenerated = codexSkillsResult.count;
+        answers.codexSkillsSkipped = codexSkillsResult.skipped;
+      } catch (error) {
+        console.warn(`⚠️  Codex skills generation failed: ${error.message}`);
+        answers.codexSkillsGenerated = 0;
+      }
+    }
+
     // Story INS-4.3: Copy extra commands (Gap #12)
     console.log('\n📋 Copying extra commands...');
     try {
@@ -554,7 +610,7 @@ async function runWizard(options = {}) {
       try {
         await commandValidate({ quiet: true });
         answers.ideSyncValidation = 'pass';
-      } catch (validateError) {
+      } catch (_validateError) {
         answers.ideSyncValidation = 'drift';
       } finally {
         console.log = _origLog;
@@ -568,6 +624,23 @@ async function runWizard(options = {}) {
       answers.ideSyncValidation = 'skipped';
     } finally {
       process.chdir(savedCwd);
+    }
+
+    // ACORE-SKILLS.7: Generate Codex local skills in installed projects.
+    console.log('\n🧩 Running Codex skills sync...');
+    try {
+      const codexSkillsResult = syncCodexSkills({
+        sourceDir: path.join(targetProjectRoot, '.aiox-core', 'development', 'agents'),
+        localSkillsDir: path.join(targetProjectRoot, '.codex', 'skills'),
+        dryRun: false,
+      });
+      answers.codexSkillsStatus = 'synced';
+      answers.codexSkillsGenerated = codexSkillsResult.generated;
+      console.log(`✅ Codex skills: ${codexSkillsResult.generated} generated`);
+    } catch (codexSkillsError) {
+      console.warn(`⚠️  Codex skills sync failed: ${codexSkillsError.message} — run 'npm run sync:skills:codex' post-install`);
+      answers.codexSkillsStatus = 'failed';
+      answers.codexSkillsGenerated = 0;
     }
 
     // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
@@ -722,38 +795,44 @@ async function runWizard(options = {}) {
           console.error(`  ${depsResult.errorMessage}`);
           console.error(`  Solution: ${depsResult.solution}`);
 
-          // Ask user if they want to retry
-          const { retryDeps } = await inquirer.prompt([
-            {
-              type: 'confirm',
-              name: 'retryDeps',
-              message: 'Retry dependency installation?',
-              default: true,
-            },
-          ]);
-
-          if (retryDeps) {
-            // Recursive retry with exponential backoff (built into installDependencies)
-            const retryResult = await installDependencies({
-              packageManager: answers.packageManager,
-              projectPath: projectPath,
-            });
-
-            if (retryResult.success) {
-              console.log(`\n✅ Dependencies installed with ${retryResult.packageManager}!`);
-              answers.depsInstalled = true;
-              answers.depsResult = retryResult;
-            } else {
-              console.log(
-                '\n⚠️  Installation still failed. You can run `npm install` manually later.',
-              );
-              answers.depsInstalled = false;
-              answers.depsResult = retryResult;
-            }
-          } else {
-            console.log('\n⚠️  Skipping dependency installation. Run manually with `npm install`.');
+          if (options.quiet || options.ci || process.env.CI === '1') {
             answers.depsInstalled = false;
             answers.depsResult = depsResult;
+            console.log('\n⚠️  Skipping dependency retry in non-interactive mode.');
+          } else {
+            // Ask user if they want to retry
+            const { retryDeps } = await inquirer.prompt([
+              {
+                type: 'confirm',
+                name: 'retryDeps',
+                message: 'Retry dependency installation?',
+                default: true,
+              },
+            ]);
+
+            if (retryDeps) {
+              // Recursive retry with exponential backoff (built into installDependencies)
+              const retryResult = await installDependencies({
+                packageManager: answers.packageManager,
+                projectPath: projectPath,
+              });
+
+              if (retryResult.success) {
+                console.log(`\n✅ Dependencies installed with ${retryResult.packageManager}!`);
+                answers.depsInstalled = true;
+                answers.depsResult = retryResult;
+              } else {
+                console.log(
+                  '\n⚠️  Installation still failed. You can run `npm install` manually later.',
+                );
+                answers.depsInstalled = false;
+                answers.depsResult = retryResult;
+              }
+            } else {
+              console.log('\n⚠️  Skipping dependency installation. Run manually with `npm install`.');
+              answers.depsInstalled = false;
+              answers.depsResult = depsResult;
+            }
           }
         }
       } catch (error) {
@@ -910,6 +989,14 @@ async function runWizard(options = {}) {
     console.log('\n🔍 Validating installation...\n');
 
     try {
+      const expectedSkillDirs = [];
+      if ((answers.selectedIDEs || []).includes('claude-code')) {
+        expectedSkillDirs.push('.claude/skills');
+      }
+      if ((answers.selectedIDEs || []).includes('codex')) {
+        expectedSkillDirs.push(path.join('.codex', 'skills'));
+      }
+
       const validation = await validateInstallation(
         {
           files: {
@@ -917,6 +1004,7 @@ async function runWizard(options = {}) {
             env: '.env',
             coreConfig: '.aiox-core/core-config.yaml',
             mcpConfig: '.mcp.json',
+            skillDirs: expectedSkillDirs,
           },
           configs: {
             env: answers.envResult,

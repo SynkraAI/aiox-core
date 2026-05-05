@@ -259,12 +259,6 @@ dependencies:
       severity_filter:
         - CRITICAL
         - HIGH
-      behavior:
-        CRITICAL: auto_fix # Auto-fix (3 attempts max)
-        HIGH: auto_fix # Auto-fix (3 attempts max)
-        MEDIUM: document_as_debt # Create tech debt issue
-        LOW: ignore # Note in review, no action
-
     severity_handling:
       CRITICAL: Block story completion, must fix immediately
       HIGH: Report in QA gate, recommend fix before merge
@@ -278,7 +272,7 @@ dependencies:
       max_iterations = 3
 
       WHILE iteration < max_iterations:
-        1. Run: wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+        1. Run: wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base ${DEFAULT_BRANCH:-main}'
         2. Parse output for all severity levels
 
         critical_issues = filter(output, severity == "CRITICAL")
@@ -292,8 +286,8 @@ dependencies:
           - BREAK (ready to approve)
 
         IF CRITICAL or HIGH issues found:
-          - Attempt auto-fix for each CRITICAL issue
-          - Attempt auto-fix for each HIGH issue
+          - Request a fix for each CRITICAL issue
+          - Request a fix for each HIGH issue
           - iteration++
           - CONTINUE loop
 
@@ -305,7 +299,7 @@ dependencies:
 
     commands:
       qa_pre_review_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
-      qa_story_review_committed: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base main'"
+      qa_story_review_committed: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base ${DEFAULT_BRANCH:-main}'"
     execution_guidelines: |
       CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
 
@@ -316,7 +310,7 @@ dependencies:
 
       **Timeout:** 30 minutes (1800000ms) - Full review may take longer
 
-      **Self-Healing:** Max 3 iterations for CRITICAL and HIGH issues
+      **Self-Healing:** Max 3 advisory request iterations for CRITICAL and HIGH issues
 
       **Error Handling:**
       - If "coderabbit: command not found" → verify wsl_config.installation_path

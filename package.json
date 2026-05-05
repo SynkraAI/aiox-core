@@ -18,6 +18,8 @@
     "packages/",
     ".aiox-core/",
     ".claude/CLAUDE.md",
+    ".claude/commands/",
+    ".claude/skills/",
     ".claude/rules/",
     ".claude/hooks/",
     "pro/license/",
@@ -43,11 +45,16 @@
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:e2e:installed-skills": "node scripts/e2e/installed-skills-smoke.js",
     "test:health-check": "mocha tests/health-check/**/*.test.js --timeout 30000",
     "lint": "eslint . --cache --cache-location .eslintcache",
     "typecheck": "tsc --noEmit",
@@ -75,7 +82,10 @@
     "validate:gemini-integration": "node .aiox-core/infrastructure/scripts/validate-gemini-integration.js",
     "sync:skills:codex": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js",
     "sync:skills:codex:global": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js --global --global-only",
+    "setup:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js",
+    "setup:codex-skills:dry": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js --dry-run",
     "validate:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict",
+    "repair:agent-references": "node .aiox-core/infrastructure/scripts/repair-agent-references.js",
     "validate:paths": "node .aiox-core/infrastructure/scripts/validate-paths.js",
     "validate:parity": "node .aiox-core/infrastructure/scripts/validate-parity.js",
     "validate:semantic-lint": "node scripts/semantic-lint.js",
