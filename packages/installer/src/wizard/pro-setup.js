@@ -812,7 +812,7 @@ async function stepLicenseGateWithEmail() {
   let checkResult;
   try {
     checkResult = await client.checkEmail(trimmedEmail);
-  } catch (checkError) {
+  } catch (_checkError) {
     checkSpinner.info(t('proBuyerCheckUnavailable'));
     return fallbackAuthWithoutBuyerCheck(client, trimmedEmail);
   }
