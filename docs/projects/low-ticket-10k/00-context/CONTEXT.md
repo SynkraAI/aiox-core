@@ -89,19 +89,25 @@ Funil low-ticket de prompts AI ("Copie. Cole. Cobre.") R$10-30 com order bump R$
 
 ## 9. Current State Snapshot
 
-**Last updated:** 2026-05-01
+**Last updated:** 2026-05-05
 **LP redesign LIVE:** hero "Copie. Cole. Cobre." Fraunces + demo papel + 2 fotos reais user
-**4 deploys Netlify** (30/Abr) — pain swap C1-A + solution swap foco.png
 **View rate:** 5.9% → 71% pós-redesign
-**Active blockers:**
-- 🔴 9 objetos Meta PAUSED — após restart CC (token resolvido), validar overview + 9 update_status SEQUENCIAIS (não paralelo!)
-- 🔴 3 decisões pendentes user pra subir order bump R$17:
-  1. Caveat #2 (4× rápida)
-  2. #5 (10 prompts dup?)
-  3. Upsell B/E vs C
-- 🟡 AD05 PAUSED
 
-**Trigger retomada:** "vamos subir bump"
+**🔴 PIVOT 05/Mai: Meta Ads → Email Marketing**
+- Decisão user 05/Mai: pausar Meta + usar email marketing
+- Meta camp `6986644457499` PAUSED 05/Mai (era única ACTIVE, 7d spend R$233, 0 purchases, 1 IC)
+- Razão: ROAS efetivo zero em 7d
+- **Squad pendente:** copy-chief deve construir estratégia email (não disparado ainda)
+
+**Active blockers:**
+- 🔴 4 perguntas críticas user antes de squad email rodar:
+  1. **Lista:** Kiwify customers (quente)? Leads LP (morna)? Zero (precisa lead magnet)?
+  2. **Tool:** ActiveCampaign / RD Station / Mailchimp / Resend / ConvertKit?
+  3. **Oferta:** mesma R$10-30 + bump R$17 + upsell SCV-3 R$147?
+  4. **Métrica/timeline:** quando avaliar email > Meta? Substituir totalmente ou paralelo?
+- 🟡 3 decisões pendentes order bump (caveat #2, #5, upsell B/E vs C) — talvez mover pra email sequence
+
+**Trigger retomada:** "responde perguntas email" / "dispara copy-chief vorza email"
 
 ---
 
