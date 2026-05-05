@@ -241,7 +241,15 @@ describe('SynapseEngine', () => {
     });
 
     test('should instantiate available layers', () => {
+      // The engine must always load the core bracket layers and may also load
+      // optional layers when they exist in the repository/runtime.
       expect(engine.layers.length).toBeGreaterThanOrEqual(3);
+    });
+
+    test('should remain resilient as optional layer availability evolves', () => {
+      // Optional layers may exist or not depending on the current Synapse
+      // rollout. The constructor should never instantiate more than L0-L7.
+      expect(engine.layers.length).toBeLessThanOrEqual(8);
     });
 
     test('should only instantiate known pipeline layers', () => {

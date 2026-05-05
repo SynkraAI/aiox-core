@@ -12,6 +12,7 @@ const {
   validateConfigContent,
   generateTemplateVariables,
   generateIDEConfigs,
+  generateCodexSkills,
   linkGeminiExtension,
 } = require('../../../packages/installer/src/wizard/ide-config-generator');
 
@@ -323,6 +324,42 @@ describe('IDE Config Generator', () => {
     it('should skip when extension directory does not exist', async () => {
       const result = await linkGeminiExtension(testDir);
       expect(result).toEqual({ status: 'skipped', reason: 'extension-dir-not-found' });
+    });
+  });
+
+  describe('generateCodexSkills', () => {
+    const testDir = path.join(__dirname, '..', '..', '..', '.test-temp-codex-skills');
+
+    beforeEach(async () => {
+      await fs.ensureDir(path.join(testDir, '.aiox-core', 'development', 'agents'));
+      await fs.copy(
+        path.join(process.cwd(), '.aiox-core', 'development', 'agents'),
+        path.join(testDir, '.aiox-core', 'development', 'agents'),
+      );
+    });
+
+    afterEach(async () => {
+      await fs.remove(testDir);
+    });
+
+    it('should generate local Codex skills from canonical agents', async () => {
+      const result = generateCodexSkills(testDir);
+
+      expect(result.skipped).toBe(false);
+      expect(result.count).toBeGreaterThan(0);
+
+      const skillPath = path.join(testDir, '.codex', 'skills', 'aiox-architect', 'SKILL.md');
+      expect(await fs.pathExists(skillPath)).toBe(true);
+
+      const content = await fs.readFile(skillPath, 'utf8');
+      expect(content).toContain('name: aiox-architect');
+      expect(content).toContain('Activation Protocol');
+    });
+
+    it('should skip when canonical agent source is not present', () => {
+      const emptyDir = path.join(testDir, 'missing-source');
+      const result = generateCodexSkills(emptyDir);
+      expect(result).toEqual({ count: 0, skipped: true });
     });
   });
 });

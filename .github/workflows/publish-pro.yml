@@ -117,7 +117,7 @@ jobs:
             ### Installation
 
             \`\`\`bash
-            npm install @aiox-fullstack/pro
+            npx aiox-pro install
             aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
             \`\`\`
 

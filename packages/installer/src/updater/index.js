@@ -22,6 +22,91 @@ const https = require('https');
 const { execSync } = require('child_process');
 const { hashFile, hashesMatch } = require('../installer/file-hasher');
 const { PostInstallValidator, formatReport: formatValidationReport } = require('../installer/post-install-validator');
+const {
+  loadSourceManifest,
+  loadInstalledManifest,
+  generateUpgradeReport,
+  applyUpgrade,
+  updateInstalledManifest,
+} = require('../installer/brownfield-upgrader');
+
+function manifestToInstalledManifest(manifest) {
+  if (!manifest || !Array.isArray(manifest.files)) {
+    return null;
+  }
+
+  return {
+    installed_version: manifest.version || 'unknown',
+    files: manifest.files
+      .filter((entry) => entry && entry.path && entry.hash)
+      .map((entry) => ({
+        path: entry.path,
+        hash: entry.hash,
+        type: entry.type,
+        modified_by_user: false,
+      })),
+  };
+}
+
+function extractManifestFileHashes(manifest) {
+  if (!manifest || !Array.isArray(manifest.files)) {
+    return {};
+  }
+
+  const fileHashes = {};
+  for (const entry of manifest.files) {
+    if (entry && entry.path && entry.hash) {
+      fileHashes[entry.path] = entry.hash;
+    }
+  }
+
+  return fileHashes;
+}
+
+function selectInstalledManifest(projectManifest, packageManifest) {
+  if (!projectManifest) {
+    return packageManifest;
+  }
+
+  if (!packageManifest) {
+    return projectManifest;
+  }
+
+  const projectFiles = Array.isArray(projectManifest.files) ? projectManifest.files : [];
+  const packageFiles = Array.isArray(packageManifest.files) ? packageManifest.files : [];
+
+  if (packageFiles.length === 0) {
+    return projectManifest;
+  }
+
+  if (projectFiles.length === 0) {
+    return packageManifest;
+  }
+
+  const mergedFiles = new Map();
+
+  for (const entry of packageFiles) {
+    if (entry && entry.path) {
+      mergedFiles.set(entry.path, entry);
+    }
+  }
+
+  for (const entry of projectFiles) {
+    if (entry && entry.path && !mergedFiles.has(entry.path)) {
+      mergedFiles.set(entry.path, entry);
+    }
+  }
+
+  return {
+    ...projectManifest,
+    installed_version:
+      packageManifest.installed_version ||
+      packageManifest.version ||
+      projectManifest.installed_version ||
+      projectManifest.version,
+    files: Array.from(mergedFiles.values()),
+  };
+}
 
 /**
  * Update status types
@@ -78,6 +163,8 @@ class AIOXUpdater {
     this.versionInfo = null;
     this.changelog = null;
     this.backupDir = null;
+    this.lastSourcePackageRoot = null;
+    this.lastSourceManifest = null;
   }
 
   /**
@@ -467,15 +554,21 @@ class AIOXUpdater {
       }
 
       result.filesUpdated = updateApplied.filesUpdated;
-      result.filesPreserved = customizations.customized.length;
+      result.filesPreserved = updateApplied.filesSkipped?.length || customizations.customized.length;
+      this.lastSourcePackageRoot = updateApplied.sourcePackageRoot || this.lastSourcePackageRoot;
+      this.lastSourceManifest = updateApplied.sourceManifest || this.lastSourceManifest;
 
       // Update version.json
       onProgress('finalizing', 'Updating version info...');
-      await this.updateVersionInfo(checkResult.latest);
+      await this.updateVersionInfo(checkResult.latest, {
+        fileHashes: extractManifestFileHashes(this.lastSourceManifest),
+      });
 
       // Validate installation after update
       onProgress('validating', 'Validating installation...');
-      const validationResult = await this.validateAfterUpdate();
+      const validationResult = await this.validateAfterUpdate({
+        sourceDir: this.lastSourcePackageRoot,
+      });
       result.validationPassed = validationResult.success;
       result.integrityScore = validationResult.integrityScore;
 
@@ -525,6 +618,7 @@ class AIOXUpdater {
     const filesToBackup = [
       'version.json',
       'install-manifest.yaml',
+      'install-manifest.yaml.minisig',
     ];
 
     for (const file of filesToBackup) {
@@ -586,6 +680,9 @@ class AIOXUpdater {
     };
 
     try {
+      const previousPackageRoot = path.join(this.projectRoot, 'node_modules', 'aiox-core');
+      const previousSourceManifest = loadSourceManifest(path.join(previousPackageRoot, '.aiox-core'));
+
       // Use npm to update the package
       const cmd = `npm install aiox-core@${targetVersion} --save-exact`;
       this.log(`Running: ${cmd}`);
@@ -596,11 +693,54 @@ class AIOXUpdater {
         timeout: 120000, // 2 minutes
       });
 
-      result.success = true;
-      result.filesUpdated = 1; // At least package updated
+      const sourcePackageRoot = path.join(this.projectRoot, 'node_modules', 'aiox-core');
+      const sourceAioxCore = path.join(sourcePackageRoot, '.aiox-core');
+      const sourceManifest = loadSourceManifest(sourceAioxCore);
 
-      // TODO: Copy new files from node_modules to .aiox-core
-      // preserving customizedFiles
+      if (!sourceManifest) {
+        result.error = 'Updated package does not contain install-manifest.yaml';
+        return result;
+      }
+
+      const installedManifest = selectInstalledManifest(
+        loadInstalledManifest(this.projectRoot),
+        manifestToInstalledManifest(previousSourceManifest),
+      );
+      const report = generateUpgradeReport(sourceManifest, installedManifest, this.projectRoot);
+      const applyResult = await applyUpgrade(report, sourceAioxCore, this.projectRoot, {
+        includeModified: true,
+      });
+
+      if (!applyResult.success) {
+        result.error = applyResult.errors.map((entry) => `${entry.path}: ${entry.error}`).join('; ');
+        return result;
+      }
+
+      await fs.copy(
+        path.join(sourceAioxCore, 'install-manifest.yaml'),
+        path.join(this.aioxCoreDir, 'install-manifest.yaml'),
+        { overwrite: true },
+      );
+
+      const sourceSignaturePath = path.join(sourceAioxCore, 'install-manifest.yaml.minisig');
+      const targetSignaturePath = path.join(this.aioxCoreDir, 'install-manifest.yaml.minisig');
+      if (await fs.pathExists(sourceSignaturePath)) {
+        await fs.copy(
+          sourceSignaturePath,
+          targetSignaturePath,
+          { overwrite: true },
+        );
+      } else if (await fs.pathExists(targetSignaturePath)) {
+        await fs.remove(targetSignaturePath);
+      }
+
+      updateInstalledManifest(this.projectRoot, sourceManifest, `aiox-core@${targetVersion}`);
+
+      result.success = true;
+      result.filesUpdated = applyResult.filesInstalled.length;
+      result.filesSkipped = applyResult.filesSkipped;
+      result.sourceManifest = sourceManifest;
+      result.sourcePackageRoot = sourcePackageRoot;
 
       return result;
     } catch (error) {
@@ -615,7 +755,7 @@ class AIOXUpdater {
    * @param {string} newVersion - New version
    * @returns {Promise<void>}
    */
-  async updateVersionInfo(newVersion) {
+  async updateVersionInfo(newVersion, options = {}) {
     const versionJsonPath = path.join(this.aioxCoreDir, 'version.json');
 
     const versionInfo = {
@@ -623,7 +763,7 @@ class AIOXUpdater {
       installedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       mode: this.versionInfo?.mode || 'project-development',
-      fileHashes: {}, // Will be populated by file copy
+      fileHashes: options.fileHashes || {},
     };
 
     await fs.writeJson(versionJsonPath, versionInfo, { spaces: 2 });
@@ -646,7 +786,7 @@ class AIOXUpdater {
     };
 
     try {
-      const validator = new PostInstallValidator(this.projectRoot, null, {
+      const validator = new PostInstallValidator(this.projectRoot, options.sourceDir || null, {
         verifyHashes: true,
         detectExtras: false,
         verbose: options.verbose || this.options.verbose,
@@ -809,4 +949,5 @@ module.exports = {
   FileAction,
   formatCheckResult,
   formatUpdateResult,
+  selectInstalledManifest,
 };

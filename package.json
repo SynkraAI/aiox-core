@@ -18,6 +18,8 @@
     "packages/",
     ".aiox-core/",
     ".claude/CLAUDE.md",
+    ".claude/commands/",
+    ".claude/skills/",
     ".claude/rules/",
     ".claude/hooks/",
     "pro/license/",
@@ -43,6 +45,10 @@
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
     "test": "jest",
@@ -79,6 +85,7 @@
     "setup:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js",
     "setup:codex-skills:dry": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js --dry-run",
     "validate:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict",
+    "repair:agent-references": "node .aiox-core/infrastructure/scripts/repair-agent-references.js",
     "validate:paths": "node .aiox-core/infrastructure/scripts/validate-paths.js",
     "validate:parity": "node .aiox-core/infrastructure/scripts/validate-parity.js",
     "validate:semantic-lint": "node scripts/semantic-lint.js",

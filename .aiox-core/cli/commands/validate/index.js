@@ -62,6 +62,7 @@ function createValidateCommand() {
     .option('-d, --dry-run', 'Preview repairs without applying (use with --repair)')
     .option('--detailed', 'Show detailed file list')
     .option('--no-hash', 'Skip hash verification (faster)')
+    .option('--no-signature', 'Skip manifest signature verification (insecure; recovery only)')
     .option('--extras', 'Detect extra files not in manifest')
     .option('-v, --verbose', 'Enable verbose output')
     .option('--json', 'Output results as JSON')
@@ -213,6 +214,7 @@ async function runValidation(options) {
   // Create validator instance
   const validator = new PostInstallValidator(projectRoot, sourceDir, {
     verifyHashes: options.hash !== false,
+    requireSignature: options.signature !== false,
     detectExtras: options.extras === true,
     verbose: options.verbose === true,
     onProgress: options.json

@@ -7,6 +7,7 @@ const path = require('path');
 const {
   syncSkills,
   buildSkillContent,
+  getLegacySkillId,
 } = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
 
 describe('Codex Skills Sync', () => {
@@ -88,5 +89,10 @@ describe('Codex Skills Sync', () => {
     expect(content.startsWith('---')).toBe(true);
     expect(content).toContain('name: aiox-dev');
     expect(content).toContain('`*help` - Show commands');
+  });
+
+  it('derives legacy aliases for migrated core agents', () => {
+    expect(getLegacySkillId('dev')).toBe('aios-dev');
+    expect(getLegacySkillId('aiox-master')).toBe('aios-master');
   });
 });

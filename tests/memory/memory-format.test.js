@@ -7,7 +7,7 @@ const AGENTS_DIR = path.join(__dirname, '..', '..', '.aiox-core', 'development',
 
 const AGENT_IDS = [
   'dev', 'qa', 'devops', 'architect', 'po', 'pm',
-  'analyst', 'sm', 'data-engineer', 'ux'
+  'analyst', 'sm', 'data-engineer', 'ux',
 ];
 
 describe('MEMORY.md Structured Format', () => {

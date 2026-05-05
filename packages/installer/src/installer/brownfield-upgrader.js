@@ -53,10 +53,38 @@ function loadManifest(basePath, manifestName = 'install-manifest.yaml') {
  * @returns {Object|null} - Installed manifest or null if not found
  */
 function loadInstalledManifest(targetDir) {
-  return loadManifest(
+  const installedManifest = loadManifest(
     path.join(targetDir, '.aiox-core'),
     '.installed-manifest.yaml',
   );
+
+  if (installedManifest) {
+    return installedManifest;
+  }
+
+  const versionJsonPath = path.join(targetDir, '.aiox-core', 'version.json');
+  if (!fs.existsSync(versionJsonPath)) {
+    return null;
+  }
+
+  try {
+    const versionInfo = fs.readJsonSync(versionJsonPath);
+    if (!versionInfo || !versionInfo.version || !versionInfo.fileHashes) {
+      return null;
+    }
+
+    return {
+      installed_version: versionInfo.version,
+      files: Object.entries(versionInfo.fileHashes).map(([filePath, hash]) => ({
+        path: filePath,
+        hash,
+        modified_by_user: false,
+      })),
+    };
+  } catch (error) {
+    console.warn(`Error loading version.json from ${versionJsonPath}:`, error.message);
+    return null;
+  }
 }
 
 /**
@@ -150,13 +178,42 @@ function generateUpgradeReport(sourceManifest, installedManifest, targetDir) {
     const absolutePath = path.join(aioxCoreDir, filePath);
 
     if (!installedEntry) {
-      // New file in source
-      report.newFiles.push({
-        path: filePath,
-        type: sourceEntry.type,
-        hash: sourceEntry.hash,
-        size: sourceEntry.size,
-      });
+      // File is not tracked by the installed manifest.
+      // In older releases some files existed on disk without being recorded
+      // in version metadata. Preserve those local files instead of
+      // overwriting them as "new" framework files.
+      if (fs.existsSync(absolutePath)) {
+        try {
+          const currentHash = `sha256:${hashFile(absolutePath)}`;
+          if (hashesMatch(currentHash, sourceEntry.hash)) {
+            report.unchangedFiles++;
+          } else {
+            report.userModifiedFiles.push({
+              path: filePath,
+              type: sourceEntry.type,
+              sourceHash: sourceEntry.hash,
+              installedHash: null,
+              reason: 'Local file exists but is not tracked by installed manifest',
+            });
+          }
+        } catch {
+          report.userModifiedFiles.push({
+            path: filePath,
+            type: sourceEntry.type,
+            sourceHash: sourceEntry.hash,
+            installedHash: null,
+            reason: 'Local file exists but could not be hashed',
+          });
+        }
+      } else {
+        // New file in source
+        report.newFiles.push({
+          path: filePath,
+          type: sourceEntry.type,
+          hash: sourceEntry.hash,
+          size: sourceEntry.size,
+        });
+      }
     } else if (!hashesMatch(sourceEntry.hash, installedEntry.hash)) {
       // File changed in source
       // Check if user modified the local copy
@@ -287,7 +344,7 @@ async function applyUpgrade(report, sourceDir, targetDir, options = {}) {
             result.mergeWarnings = result.mergeWarnings || [];
             for (const conflict of conflicts) {
               result.mergeWarnings.push(
-                `core-config.yaml: ${conflict.identifier} — ${conflict.reason}`
+                `core-config.yaml: ${conflict.identifier} — ${conflict.reason}`,
               );
             }
           }

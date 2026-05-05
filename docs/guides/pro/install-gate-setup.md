@@ -19,14 +19,14 @@ Comprar Licenca → Instalar → Ativar → Usar Features Pro
 | Pacote | Tipo | Proposito |
 |--------|------|-----------|
 | `aiox-pro` | CLI (1.8 KB) | Comandos de instalacao e gerenciamento |
-| `@aiox-fullstack/pro` | Core (10 MB) | Features premium (squads, memory, metrics, integrations) |
+| `@aiox-fullstack/pro` | Core (10 MB) | Nome canônico do pacote premium (com fallback legado durante a transição) |
 
 ---
 
 ## Instalacao Rapida
 
 ```bash
-# Instalar AIOX Pro (instala @aiox-fullstack/pro automaticamente)
+# Instalar AIOX Pro (instala o pacote Pro compatível automaticamente)
 npx aiox-pro install
 
 # Ativar sua licenca
@@ -51,12 +51,18 @@ npx aiox-pro status
 npx aiox-pro install
 ```
 
-Isso executa `npm install @aiox-fullstack/pro` no seu projeto.
+Isso instala o pacote Pro compatível no seu projeto, priorizando o nome canônico e caindo para o legado quando necessário.
 
-**Alternativa** (instalacao manual):
+**Alternativa** (instalação manual):
 
 ```bash
-npm install @aiox-fullstack/pro
+npm install @aiox-fullstack/pro@latest
+```
+
+Depois da instalação manual, rode o bootstrap do conteúdo Pro no projeto:
+
+```bash
+npx aiox-pro install
 ```
 
 ### Passo 2: Ativar Licenca
@@ -88,7 +94,7 @@ npx aiox-pro features
 
 | Comando | Descricao |
 |---------|-----------|
-| `npx aiox-pro install` | Instala `@aiox-fullstack/pro` no projeto |
+| `npx aiox-pro install` | Instala o pacote AIOX Pro compatível no projeto |
 | `npx aiox-pro activate --key KEY` | Ativa uma chave de licenca |
 | `npx aiox-pro status` | Mostra status da licenca atual |
 | `npx aiox-pro features` | Lista todas as features pro e disponibilidade |

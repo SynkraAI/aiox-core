@@ -46,6 +46,7 @@ Esta pasta contém a documentação detalhada de todos os workflows do AIOX, inc
 | **Spec** | Spec Pipeline | Pipeline de especificação | [spec-pipeline-workflow.md](./spec-pipeline-workflow.md) |
 | **Design** | Design System | Construção de design system | [design-system-build-quality-workflow.md](./design-system-build-quality-workflow.md) |
 | **Git** | Auto Worktree | Gestão automática de worktrees | [auto-worktree-workflow.md](./auto-worktree-workflow.md) |
+| **Operations** | Pro Access Grant | Concessao e validacao de acesso AIOX Pro | [pro-access-grant-workflow.md](./pro-access-grant-workflow.md) |
 
 ---
 

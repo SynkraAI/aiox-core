@@ -12,17 +12,17 @@ const path = require('path');
 
 const WIZARD_PATH = path.join(__dirname, '..', '..', 'src', 'wizard', 'index.js');
 const POPULATE_SCRIPT = path.join(
-  __dirname, '..', '..', '..', '..', '.aiox-core', 'development', 'scripts', 'populate-entity-registry.js'
+  __dirname, '..', '..', '..', '..', '.aiox-core', 'development', 'scripts', 'populate-entity-registry.js',
 );
 const DOCTOR_CHECK = path.join(
-  __dirname, '..', '..', '..', '..', '.aiox-core', 'core', 'doctor', 'checks', 'entity-registry.js'
+  __dirname, '..', '..', '..', '..', '.aiox-core', 'core', 'doctor', 'checks', 'entity-registry.js',
 );
 const REGISTRY_PATH = path.join(
-  __dirname, '..', '..', '..', '..', '.aiox-core', 'data', 'entity-registry.yaml'
+  __dirname, '..', '..', '..', '..', '.aiox-core', 'data', 'entity-registry.yaml',
 );
 const PRE_PUSH_HOOK = path.join(__dirname, '..', '..', '..', '..', '.husky', 'pre-push');
 const IDS_PRE_PUSH = path.join(
-  __dirname, '..', '..', '..', '..', '.aiox-core', 'hooks', 'ids-pre-push.js'
+  __dirname, '..', '..', '..', '..', '.aiox-core', 'hooks', 'ids-pre-push.js',
 );
 
 describe('Entity Registry Bootstrap (Story INS-4.6)', () => {

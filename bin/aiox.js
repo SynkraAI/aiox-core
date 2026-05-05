@@ -8,8 +8,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const { execSync } = require('child_process');
-
 // Read package.json for version
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -349,6 +347,37 @@ async function runUpdate() {
       console.log(formatUpdateResult(result, { colors: true }));
 
       if (!result.success && result.error !== 'Already up to date') {
+        process.exit(1);
+      }
+    }
+
+    // --include-pro: also update Pro after core (Story 122.5)
+    if (updateArgs.includes('--include-pro')) {
+      try {
+        const proUpdaterPath = path.join(__dirname, '..', '.aiox-core', 'core', 'pro', 'pro-updater');
+        const { updatePro, formatUpdateResult: formatProResult } = require(proUpdaterPath);
+
+        console.log('\n🔄 Updating AIOX Pro...\n');
+
+        const proResult = await updatePro(process.cwd(), {
+          check: isCheck,
+          dryRun: isDryRun,
+          force: isForce,
+          onProgress: (phase, message) => {
+            if (isVerbose) console.log(`[pro:${phase}] ${message}`);
+          },
+        });
+
+        console.log(formatProResult(proResult));
+
+        if (!proResult.success) {
+          process.exit(1);
+        }
+      } catch (proError) {
+        console.error(`❌ Pro update failed: ${proError.message}`);
+        if (proError.stack) {
+          console.error(proError.stack);
+        }
         process.exit(1);
       }
     }

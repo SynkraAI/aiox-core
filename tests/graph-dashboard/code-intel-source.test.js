@@ -71,7 +71,7 @@ describe('CodeIntelSource', () => {
         expect.arrayContaining([
           expect.objectContaining({ from: 'task-a', to: 'task-b', type: 'depends' }),
           expect.objectContaining({ from: 'dev', to: 'task-a', type: 'depends' }),
-        ])
+        ]),
       );
     });
 
@@ -126,7 +126,7 @@ describe('CodeIntelSource', () => {
 
       expect(result.nodes).toHaveLength(2);
       expect(result.edges).toEqual(
-        expect.arrayContaining([expect.objectContaining({ from: 'a', to: 'b' })])
+        expect.arrayContaining([expect.objectContaining({ from: 'a', to: 'b' })]),
       );
     });
 
@@ -158,10 +158,10 @@ describe('CodeIntelSource', () => {
         expect.arrayContaining([
           expect.objectContaining({ id: 'mod-x' }),
           expect.objectContaining({ id: 'mod-y' }),
-        ])
+        ]),
       );
       expect(result.edges).toEqual(
-        expect.arrayContaining([expect.objectContaining({ from: 'mod-x', to: 'mod-y' })])
+        expect.arrayContaining([expect.objectContaining({ from: 'mod-x', to: 'mod-y' })]),
       );
     });
   });

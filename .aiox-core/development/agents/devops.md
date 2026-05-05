@@ -175,6 +175,38 @@ commands:
     visibility: [full, quick, key]
     args: '{issue_number}'
     description: 'Investigate and resolve a GitHub issue end-to-end'
+  - name: pro-access-grant
+    visibility: [full, quick, key]
+    args: '{email} {password} [--reset-password] [--skip-guided-validation]'
+    description: 'Grant or restore AIOX Pro access with API validation and optional guided installer validation'
+  - name: pro-check-access
+    visibility: [full, quick, key]
+    args: '{email}'
+    description: 'Check AIOX Pro buyer entitlement and account existence via check-email'
+  - name: pro-request-reset
+    visibility: [full, quick, key]
+    args: '{email}'
+    description: 'Trigger the password reset email flow for an AIOX Pro account'
+  - name: pro-resend-verification
+    visibility: [full, quick, key]
+    args: '{email}'
+    description: 'Resend the AIOX Pro email verification link'
+  - name: pro-reset-password
+    visibility: [full, quick, key]
+    args: '{email} {new_password}'
+    description: 'Reset an AIOX Pro password administratively and validate login'
+  - name: pro-validate-login
+    visibility: [full, quick, key]
+    args: '{email} {password}'
+    description: 'Validate AIOX Pro login and return auth health signals'
+  - name: pro-verify-status
+    visibility: [full, quick, key]
+    args: '{access_token}'
+    description: 'Check AIOX Pro email verification status for an access token'
+  - name: pro-activate
+    visibility: [full, quick, key]
+    args: '{access_token} [machine_id] [version]'
+    description: 'Call activate-pro directly to validate or restore AIOX Pro activation'
   - name: init-project-status
     visibility: [full]
     description: 'Initialize dynamic project status tracking (Story 6.1.2.4)'
@@ -272,6 +304,14 @@ dependencies:
     # GitHub Issues Management
     - triage-github-issues.md
     - resolve-github-issue.md
+    - devops-pro-access-grant.md
+    - devops-pro-check-access.md
+    - devops-pro-request-reset.md
+    - devops-pro-resend-verification.md
+    - devops-pro-reset-password.md
+    - devops-pro-validate-login.md
+    - devops-pro-verify-status.md
+    - devops-pro-activate.md
     # Worktree Management (Story 1.3-1.4)
     - create-worktree.md
     - list-worktrees.md
@@ -461,6 +501,14 @@ autoClaude:
 
 - `*triage-issues` - Analyze and prioritize open issues
 - `*resolve-issue {number}` - Investigate and resolve an issue end-to-end
+- `*pro-access-grant {email} {password}` - Grant or restore AIOX Pro access
+- `*pro-check-access {email}` - Check buyer + account state
+- `*pro-request-reset {email}` - Send reset email
+- `*pro-resend-verification {email}` - Resend verification email
+- `*pro-reset-password {email} {new_password}` - Reset password administratively
+- `*pro-validate-login {email} {password}` - Validate login and token issue
+- `*pro-verify-status {access_token}` - Check verification status
+- `*pro-activate {access_token}` - Validate or restore activation
 
 **Quality & Push:**
 
@@ -506,6 +554,8 @@ Type `*help` to see all commands.
 - Release management and versioning
 - Repository cleanup
 - Environment health diagnostics (`*health-check`)
+- AIOX Pro access grant and recovery (`*pro-access-grant`)
+- AIOX Pro point actions (`*pro-check-access`, `*pro-request-reset`, `*pro-resend-verification`, `*pro-reset-password`, `*pro-validate-login`, `*pro-verify-status`, `*pro-activate`)
 
 ### Prerequisites
 
