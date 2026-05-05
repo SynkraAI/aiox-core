@@ -12,6 +12,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const ora = require('ora');
 const { hashFile } = require('./file-hasher');
+const { loadSourceManifest, updateInstalledManifest } = require('./brownfield-upgrader');
 
 /**
  * Get the path to the source .aiox-core directory in the package
@@ -69,6 +70,59 @@ const ROOT_FILES_TO_COPY = [
   'user-guide.md',
   'working-in-the-brownfield.md',
 ];
+
+const BROWNFIELD_PRESERVE_PATTERNS = [
+  /^core-config\.yaml$/,
+  /^development\/agents\/[^/]+\/MEMORY\.md$/,
+];
+
+function isBrownfieldProjectType(projectType = '') {
+  const normalized = String(projectType).toLowerCase();
+  return normalized === 'brownfield' || normalized === 'existing_aiox' || normalized === 'existing-aiox';
+}
+
+function shouldPreserveExistingFile(relativePath, options = {}) {
+  if (!options.preserveExisting) {
+    return false;
+  }
+
+  return BROWNFIELD_PRESERVE_PATTERNS.some((pattern) => pattern.test(relativePath));
+}
+
+function extractManifestFileHashes(manifest) {
+  if (!manifest || !Array.isArray(manifest.files)) {
+    return {};
+  }
+
+  const fileHashes = {};
+  for (const entry of manifest.files) {
+    if (entry && entry.path && entry.hash) {
+      fileHashes[entry.path] = entry.hash;
+    }
+  }
+
+  return fileHashes;
+}
+
+async function copyManifestArtifacts(sourceDir, targetAioxCore) {
+  const manifestPath = path.join(sourceDir, 'install-manifest.yaml');
+  const signaturePath = manifestPath + '.minisig';
+  const targetSignaturePath = path.join(targetAioxCore, 'install-manifest.yaml.minisig');
+
+  if (await fs.pathExists(manifestPath)) {
+    await fs.copy(manifestPath, path.join(targetAioxCore, 'install-manifest.yaml'), {
+      overwrite: true,
+    });
+  }
+
+  if (await fs.pathExists(signaturePath)) {
+    await fs.copy(signaturePath, targetSignaturePath, {
+      overwrite: true,
+    });
+  } else if (await fs.pathExists(targetSignaturePath)) {
+    await fs.remove(targetSignaturePath);
+  }
+}
 
 /**
  * Replace {root} placeholder in file content
@@ -128,9 +182,10 @@ async function generateVersionJson(options) {
     version,
     installedFiles,
     mode = 'project-development',
+    fileHashes: providedFileHashes = null,
   } = options;
 
-  const fileHashes = await generateFileHashes(targetAioxCore, installedFiles);
+  const fileHashes = providedFileHashes || await generateFileHashes(targetAioxCore, installedFiles);
 
   const versionJson = {
     version,
@@ -153,8 +208,14 @@ async function generateVersionJson(options) {
  * @param {boolean} replaceRoot - Whether to replace {root} placeholders
  * @returns {Promise<boolean>} Success status
  */
-async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = true) {
+async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = true, options = {}) {
   try {
+    if (options.relativePath && shouldPreserveExistingFile(options.relativePath, options)) {
+      if (await fs.pathExists(destPath)) {
+        return { copied: false, preserved: true, relativePath: options.relativePath };
+      }
+    }
+
     await fs.ensureDir(path.dirname(destPath));
 
     // Check if file needs {root} replacement (.md, .yaml, .yml)
@@ -169,10 +230,10 @@ async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = t
       await fs.copy(sourcePath, destPath);
     }
 
-    return true;
+    return { copied: true, preserved: false, relativePath: options.relativePath || null };
   } catch (error) {
     console.error(`Failed to copy ${sourcePath}: ${error.message}`);
-    return false;
+    return { copied: false, preserved: false, relativePath: options.relativePath || null };
   }
 }
 
@@ -183,7 +244,7 @@ async function copyFileWithRootReplacement(sourcePath, destPath, replaceRoot = t
  * @param {Function} onProgress - Progress callback
  * @returns {Promise<string[]>} List of copied files (relative paths)
  */
-async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress = null) {
+async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress = null, options = {}) {
   const copiedFiles = [];
 
   if (!await fs.pathExists(sourceDir)) {
@@ -205,15 +266,28 @@ async function copyDirectoryWithRootReplacement(sourceDir, destDir, onProgress =
     }
 
     if (item.isDirectory()) {
-      const subFiles = await copyDirectoryWithRootReplacement(sourcePath, destPath, onProgress);
+      const subFiles = await copyDirectoryWithRootReplacement(sourcePath, destPath, onProgress, {
+        ...options,
+        baseDir: options.baseDir || destDir,
+      });
       copiedFiles.push(...subFiles);
     } else {
-      const success = await copyFileWithRootReplacement(sourcePath, destPath);
-      if (success) {
-        copiedFiles.push(path.relative(destDir, destPath));
+      const baseDir = options.baseDir || destDir;
+      const relativePath = path.relative(baseDir, destPath).replace(/\\/g, '/');
+      const fullRelativePath = options.pathPrefix
+        ? path.posix.join(options.pathPrefix, relativePath)
+        : relativePath;
+      const result = await copyFileWithRootReplacement(sourcePath, destPath, true, {
+        ...options,
+        relativePath: fullRelativePath,
+      });
+      if (result.copied) {
+        copiedFiles.push(relativePath);
         if (onProgress) {
           onProgress({ file: item.name, copied: true });
         }
+      } else if (result.preserved && onProgress) {
+        onProgress({ file: item.name, copied: false, preserved: true });
       }
     }
   }
@@ -237,6 +311,9 @@ async function installAioxCore(options = {}) {
   const {
     targetDir = process.cwd(),
     onProgress = null,
+    projectType = 'greenfield',
+    sourceDir: providedSourceDir = null,
+    packageVersion: providedPackageVersion = null,
   } = options;
 
   const result = {
@@ -249,8 +326,9 @@ async function installAioxCore(options = {}) {
   const spinner = ora('Installing AIOX core framework...').start();
 
   try {
-    const sourceDir = getAioxCoreSourcePath();
+    const sourceDir = providedSourceDir || getAioxCoreSourcePath();
     const targetAioxCore = path.join(targetDir, '.aiox-core');
+    const preserveExisting = isBrownfieldProjectType(projectType);
 
     // Check if source exists
     if (!await fs.pathExists(sourceDir)) {
@@ -272,6 +350,11 @@ async function installAioxCore(options = {}) {
           folderSource,
           folderDest,
           onProgress,
+          {
+            baseDir: folderDest,
+            pathPrefix: folder,
+            preserveExisting,
+          },
         );
 
         if (copiedFiles.length > 0) {
@@ -288,28 +371,37 @@ async function installAioxCore(options = {}) {
 
       if (await fs.pathExists(fileSource)) {
         spinner.text = `Copying ${file}...`;
-        const success = await copyFileWithRootReplacement(fileSource, fileDest);
-        if (success) {
+        const relativePath = file;
+        const copyResult = await copyFileWithRootReplacement(fileSource, fileDest, true, {
+          relativePath,
+          preserveExisting,
+        });
+        if (copyResult.copied) {
           result.installedFiles.push(file);
         }
       }
     }
 
-    // Create install manifest
-    spinner.text = 'Creating installation manifest...';
-    const packageVersion = require('../../../../package.json').version;
-    const manifest = {
-      version: packageVersion,
-      installed_at: new Date().toISOString(),
-      install_type: 'full',
-      files: result.installedFiles,
-    };
+    const sourceManifest = loadSourceManifest(sourceDir);
+    const manifestFileHashes = extractManifestFileHashes(sourceManifest);
+    const packageVersion = providedPackageVersion || require('../../../../package.json').version;
 
-    await fs.writeFile(
-      path.join(targetAioxCore, 'install-manifest.yaml'),
-      require('js-yaml').dump(manifest),
-      'utf8',
-    );
+    spinner.text = 'Copying installation manifest...';
+    await copyManifestArtifacts(sourceDir, targetAioxCore);
+    if (!sourceManifest) {
+      const manifest = {
+        version: packageVersion,
+        installed_at: new Date().toISOString(),
+        install_type: 'full',
+        files: result.installedFiles,
+      };
+
+      await fs.writeFile(
+        path.join(targetAioxCore, 'install-manifest.yaml'),
+        require('js-yaml').dump(manifest),
+        'utf8',
+      );
+    }
 
     // Story 7.2: Create version.json with file hashes for update tracking
     spinner.text = 'Generating version tracking info...';
@@ -318,8 +410,13 @@ async function installAioxCore(options = {}) {
       version: packageVersion,
       installedFiles: result.installedFiles,
       mode: 'project-development',
+      fileHashes: Object.keys(manifestFileHashes).length > 0 ? manifestFileHashes : null,
     });
     result.versionInfo = versionInfo;
+
+    if (sourceManifest) {
+      updateInstalledManifest(targetDir, sourceManifest, `aiox-core@${packageVersion}`);
+    }
 
     // BUG-2 fix (INS-1): Install .aiox-core dependencies after copy
     // The copied .aiox-core/package.json has dependencies (js-yaml, execa, etc.)

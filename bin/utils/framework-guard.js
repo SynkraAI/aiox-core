@@ -44,8 +44,10 @@ const FALLBACK_EXCEPTIONS = [
  * @returns {RegExp}
  */
 function globToRegex(glob) {
+  const placeholder = '\u0000';
+
   // 1. Replace ** with placeholder before processing
-  let pattern = glob.replace(/\*\*/g, '\u0000');
+  let pattern = glob.replace(/\*\*/g, placeholder);
 
   // 2. Escape all regex-special chars (dots, plus, etc.) — but NOT * or placeholder
   pattern = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
@@ -54,8 +56,7 @@ function globToRegex(glob) {
   pattern = pattern.replace(/\*/g, '[^/]+');
 
   // 4. Restore ** placeholder to any-depth matcher
-  // eslint-disable-next-line no-control-regex
-  pattern = pattern.replace(/\u0000/g, '.+');
+  pattern = pattern.split(placeholder).join('.+');
 
   // If pattern ends with .+ (was **), match prefix
   if (glob.endsWith('**')) {

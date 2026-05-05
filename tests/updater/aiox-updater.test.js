@@ -8,7 +8,13 @@ const path = require('path');
 const fs = require('fs-extra');
 const os = require('os');
 
-const { AIOXUpdater, UpdateStatus, formatCheckResult, formatUpdateResult } = require('../../packages/installer/src/updater');
+const {
+  AIOXUpdater,
+  UpdateStatus,
+  formatCheckResult,
+  formatUpdateResult,
+  selectInstalledManifest,
+} = require('../../packages/installer/src/updater');
 
 describe('AIOXUpdater', () => {
   let tempDir;
@@ -189,6 +195,18 @@ describe('AIOXUpdater', () => {
       const backupVersionJson = path.join(updater.backupDir, 'version.json');
       expect(fs.existsSync(backupVersionJson)).toBe(true);
     });
+
+    it('should backup manifest signature when present', async () => {
+      await fs.writeFile(
+        path.join(tempDir, '.aiox-core', 'install-manifest.yaml.minisig'),
+        'signature',
+        'utf8',
+      );
+
+      await updater.createBackup();
+
+      expect(fs.existsSync(path.join(updater.backupDir, 'install-manifest.yaml.minisig'))).toBe(true);
+    });
   });
 
   describe('rollback', () => {
@@ -234,6 +252,59 @@ describe('AIOXUpdater', () => {
       expect(versionJson.version).toBe('2.0.0');
       expect(versionJson.updatedAt).toBeDefined();
     });
+
+    it('should persist provided file hashes', async () => {
+      await updater.updateVersionInfo('2.0.0', {
+        fileHashes: {
+          'development/agents/dev.md': 'sha256:abc123',
+        },
+      });
+
+      const versionJson = await fs.readJson(path.join(tempDir, '.aiox-core', 'version.json'));
+      expect(versionJson.fileHashes).toEqual({
+        'development/agents/dev.md': 'sha256:abc123',
+      });
+    });
+  });
+
+  describe('selectInstalledManifest', () => {
+    it('should prefer the more complete package manifest while keeping project-only entries', () => {
+      const projectManifest = {
+        installed_version: '5.0.4',
+        files: [
+          { path: 'core-config.yaml', hash: 'sha256:project-core' },
+          { path: 'project-only.md', hash: 'sha256:project-only' },
+        ],
+      };
+      const packageManifest = {
+        installed_version: '5.0.4',
+        files: [
+          { path: 'core-config.yaml', hash: 'sha256:package-core' },
+          { path: 'development/agents/dev/MEMORY.md', hash: 'sha256:memory' },
+        ],
+      };
+
+      const selected = selectInstalledManifest(projectManifest, packageManifest);
+
+      expect(selected.installed_version).toBe('5.0.4');
+      expect(selected.files).toEqual(
+        expect.arrayContaining([
+          { path: 'core-config.yaml', hash: 'sha256:package-core' },
+          { path: 'development/agents/dev/MEMORY.md', hash: 'sha256:memory' },
+          { path: 'project-only.md', hash: 'sha256:project-only' },
+        ]),
+      );
+    });
+
+    it('should fall back when one manifest is missing', () => {
+      const projectManifest = {
+        installed_version: '5.0.4',
+        files: [{ path: 'core-config.yaml', hash: 'sha256:project-core' }],
+      };
+
+      expect(selectInstalledManifest(projectManifest, null)).toBe(projectManifest);
+      expect(selectInstalledManifest(null, projectManifest)).toBe(projectManifest);
+    });
   });
 
   describe('update (dry-run)', () => {
@@ -242,6 +313,58 @@ describe('AIOXUpdater', () => {
 
       // Should succeed with dryRun flag
       expect(result.dryRun).toBe(true);
+    });
+  });
+
+  describe('update execution', () => {
+    it('should validate against the updated package source and persist manifest hashes', async () => {
+      jest.spyOn(updater, 'checkForUpdates').mockResolvedValue({
+        hasUpdate: true,
+        installed: '1.0.0',
+        latest: '1.1.0',
+      });
+      jest.spyOn(updater, 'createBackup').mockResolvedValue();
+      jest.spyOn(updater, 'detectCustomizations').mockResolvedValue({
+        customized: ['development/agents/dev/MEMORY.md'],
+      });
+
+      const sourceManifest = {
+        version: '1.1.0',
+        files: [
+          {
+            path: 'development/agents/dev.md',
+            hash: 'sha256:newhash',
+          },
+        ],
+      };
+
+      jest.spyOn(updater, 'applyUpdate').mockResolvedValue({
+        success: true,
+        filesUpdated: 3,
+        filesSkipped: [{ path: 'development/agents/dev/MEMORY.md' }],
+        sourcePackageRoot: '/tmp/aiox-package',
+        sourceManifest,
+      });
+      const updateVersionInfoSpy = jest.spyOn(updater, 'updateVersionInfo').mockResolvedValue();
+      const validateSpy = jest.spyOn(updater, 'validateAfterUpdate').mockResolvedValue({
+        success: true,
+        integrityScore: 100,
+      });
+      jest.spyOn(updater, 'cleanupBackup').mockResolvedValue();
+
+      const result = await updater.update();
+
+      expect(updateVersionInfoSpy).toHaveBeenCalledWith('1.1.0', {
+        fileHashes: {
+          'development/agents/dev.md': 'sha256:newhash',
+        },
+      });
+      expect(validateSpy).toHaveBeenCalledWith({
+        sourceDir: '/tmp/aiox-package',
+      });
+      expect(result.success).toBe(true);
+      expect(result.filesUpdated).toBe(3);
+      expect(result.filesPreserved).toBe(1);
     });
   });
 });

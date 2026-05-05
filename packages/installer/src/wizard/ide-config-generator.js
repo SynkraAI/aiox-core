@@ -84,7 +84,11 @@ async function backupFile(filePath) {
 async function promptFileExists(filePath, options = {}) {
   const { projectType, forceMerge, noMerge } = options;
   const canMerge = !noMerge && hasMergeStrategy(filePath);
-  const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_AIOX';
+  const normalizedProjectType = String(projectType || '').toLowerCase();
+  const isBrownfield =
+    normalizedProjectType === 'brownfield' ||
+    normalizedProjectType === 'existing_aiox' ||
+    normalizedProjectType === 'existing-aiox';
 
   // If force merge is set and merge is available, return merge directly
   if (forceMerge && canMerge) {

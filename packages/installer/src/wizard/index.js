@@ -335,12 +335,43 @@ async function runWizard(options = {}) {
       }
     }
 
+    if (options.dryRun) {
+      const preview = {
+        dryRun: true,
+        projectType: answers.projectType,
+        selectedIDEs: answers.selectedIDEs || [],
+        selectedTechPreset: answers.selectedTechPreset || 'none',
+        steps: [
+          'install-aiox-core',
+          'generate-ide-configs',
+          'generate-boundary-rules',
+          'copy-skills-and-commands',
+          'run-ide-sync',
+          'bootstrap-entity-registry',
+          'configure-environment',
+          'install-dependencies',
+          'validate-installation',
+        ],
+      };
+
+      if (!options.quiet) {
+        console.log('\n🧪 Dry run mode');
+        console.log('   No files will be modified.');
+        console.log(`   Project type: ${preview.projectType}`);
+        console.log(`   IDEs: ${preview.selectedIDEs.length > 0 ? preview.selectedIDEs.join(', ') : 'none'}`);
+        console.log(`   Tech preset: ${preview.selectedTechPreset}`);
+      }
+
+      return preview;
+    }
+
     // Story 1.4: Install AIOX core framework (agents, tasks, workflows, templates)
     console.log('\n📦 Installing AIOX core framework...');
     let aioxCoreResult = null;
     try {
       aioxCoreResult = await installAioxCore({
         targetDir: process.cwd(),
+        projectType: answers.projectType || 'greenfield',
         onProgress: (_status) => {
           // Silent progress - spinner handles feedback
         },

@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-05-05T22:42:16.112Z"
+generated_at: "2026-05-05T22:47:52.620Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1100
 files:
@@ -117,9 +117,9 @@ files:
     type: cli
     size: 5320
   - path: cli/commands/validate/index.js
-    hash: sha256:b49dcd35424f753f4fedc96c8e1070f716a1f3cb3357baa5b7377d60b5f75cad
+    hash: sha256:dcf19f1b4a46e562812c5c718783e88f9ac8ef0bf51f27eb1a6d31c7081fafdf
     type: cli
-    size: 12893
+    size: 13040
   - path: cli/commands/workers/formatters/info-formatter.js
     hash: sha256:11c17e16be0b7d09ba8949497e0887bb20996966d266454aa2bb5dfc9d9d91b8
     type: cli
@@ -3093,9 +3093,9 @@ files:
     type: script
     size: 18899
   - path: infrastructure/scripts/generate-settings-json.js
-    hash: sha256:bb4c6f664eb06622fd78eb455c0a74ee29ecee5fe47b4a7fcb2de8a89119ff5a
+    hash: sha256:dc5b8803825ed749080925d7c17ece39b33a7faf3b02d08a445e8cc7408048a1
     type: script
-    size: 8292
+    size: 9159
   - path: infrastructure/scripts/git-config-detector.js
     hash: sha256:52ed96d98fc6f9e83671d7d27f78dcff4f2475f3b8e339dc31922f6b2814ad78
     type: script

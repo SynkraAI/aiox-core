@@ -273,7 +273,7 @@ describe('generate-settings-json', () => {
       }
     });
 
-    test('frameworkProtection false preserves user settings and removes permissions', () => {
+    test('frameworkProtection false preserves user settings and existing permissions', () => {
       const tmpDir = createTempProject(
         {
           frameworkProtection: false,
@@ -289,7 +289,7 @@ describe('generate-settings-json', () => {
         const parsed = JSON.parse(content);
 
         expect(parsed.language).toBe('pt');
-        expect(parsed.permissions).toBeUndefined();
+        expect(parsed.permissions).toEqual({ deny: ['old-rule'], allow: [] });
       } finally {
         cleanupTempProject(tmpDir);
       }
