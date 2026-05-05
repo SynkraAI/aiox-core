@@ -294,7 +294,7 @@ workflow:
         output: 'tokens.yaml, design system structure, migration plan'
 
       phase_4_build:
-        commands: ['*build {atom}', '*compose {molecule}', '*extend {variant}']
+        commands: ['*build {component}', '*compose {molecule}', '*extend {component}']
         output: 'Production-ready components (TypeScript, tests, docs)'
 
       phase_5_quality:

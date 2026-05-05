@@ -7,6 +7,8 @@ const path = require('path');
 const { parseAllAgents } = require('../ide-sync/agent-parser');
 const { getSkillId } = require('./index');
 
+const GENERATED_MARKER = '<!-- AIOX-CODEX-LOCAL-SKILLS: generated -->';
+
 function getDefaultOptions() {
   const projectRoot = process.cwd();
   return {
@@ -59,6 +61,35 @@ function validateSkillContent(content, expected) {
   return issues;
 }
 
+function extractGeneratedSquadSource(content) {
+  const value = String(content || '');
+  const patterns = [
+    /`(squads\/[^`]+\/agents\/[^`]+\.md)`/,
+    /<!--\s*Source:\s*(squads\/[^>\s]+\/agents\/[^>\s]+\.md)\s*-->/,
+    /<!--\s*(squads\/[^>\s]+\/agents\/[^>\s]+\.md)\s*-->/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = value.match(pattern);
+    if (match) return match[1];
+  }
+
+  return '';
+}
+
+function isGeneratedSquadSkill(content, projectRoot) {
+  if (!String(content || '').includes(GENERATED_MARKER)) {
+    return false;
+  }
+
+  const sourcePath = extractGeneratedSquadSource(content);
+  if (!sourcePath) {
+    return false;
+  }
+
+  return fs.existsSync(path.join(projectRoot, sourcePath));
+}
+
 function validateCodexSkills(options = {}) {
   const resolved = { ...getDefaultOptions(), ...options };
   const errors = [];
@@ -66,7 +97,7 @@ function validateCodexSkills(options = {}) {
 
   if (!fs.existsSync(resolved.skillsDir)) {
     errors.push(`Skills directory not found: ${resolved.skillsDir}`);
-    return { ok: false, checked: 0, expected: 0, errors, warnings, missing: [], orphaned: [] };
+    return { ok: false, checked: 0, expected: 0, errors, warnings, missing: [], orphaned: [], ignored: [] };
   }
 
   const agents = parseAllAgents(resolved.sourceDir).filter(isParsableAgent);
@@ -100,12 +131,26 @@ function validateCodexSkills(options = {}) {
 
   const expectedIds = new Set(expected.map(item => item.skillId));
   const orphaned = [];
+  const ignored = [];
   if (resolved.strict) {
     const dirs = fs.readdirSync(resolved.skillsDir, { withFileTypes: true })
       .filter(entry => entry.isDirectory() && entry.name.startsWith('aiox-'))
       .map(entry => entry.name);
     for (const dir of dirs) {
       if (!expectedIds.has(dir)) {
+        const skillPath = path.join(resolved.skillsDir, dir, 'SKILL.md');
+        let content = '';
+        try {
+          content = fs.readFileSync(skillPath, 'utf8');
+        } catch (_error) {
+          content = '';
+        }
+
+        if (isGeneratedSquadSkill(content, resolved.projectRoot)) {
+          ignored.push(dir);
+          continue;
+        }
+
         orphaned.push(dir);
         errors.push(`Orphaned skill directory: ${path.join(path.relative(resolved.projectRoot, resolved.skillsDir), dir)}`);
       }
@@ -124,6 +169,7 @@ function validateCodexSkills(options = {}) {
     warnings,
     missing,
     orphaned,
+    ignored,
   };
 }
 
@@ -167,6 +213,8 @@ if (require.main === module) {
 module.exports = {
   validateCodexSkills,
   validateSkillContent,
+  extractGeneratedSquadSource,
+  isGeneratedSquadSkill,
   parseArgs,
   getDefaultOptions,
 };

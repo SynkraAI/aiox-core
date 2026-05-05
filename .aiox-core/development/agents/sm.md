@@ -224,14 +224,14 @@ Type `*help` to see all commands.
 
 ## Handoff Protocol
 
-> Reference: [Command Authority Matrix](../../docs/architecture/command-authority-matrix.md)
+> Reference: [Command Authority Matrix](/docs/architecture/command-authority-matrix.md)
 
 **Commands I delegate:**
 
 | Request | Delegate To | Command |
 |---------|-------------|---------|
-| Push to remote | @devops | `*push` |
-| Create PR | @devops | `*create-pr` |
+| Push to remote | @github-devops | `*push` |
+| Create PR | @github-devops | `*create-pr` |
 | Course correction | @aiox-master | `*correct-course` |
 
 **Commands I receive from:**

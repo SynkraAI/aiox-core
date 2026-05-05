@@ -87,4 +87,72 @@ describe('Codex Skills Validator', () => {
     expect(result.ok).toBe(false);
     expect(result.orphaned).toContain('aiox-legacy');
   });
+
+  it('ignores generated squad chief skills that point to an existing squad source', () => {
+    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    const sourcePath = path.join(tmpRoot, 'squads', 'demo-squad', 'agents', 'demo-chief.md');
+    fs.mkdirSync(path.dirname(sourcePath), { recursive: true });
+    fs.writeFileSync(sourcePath, '# demo chief', 'utf8');
+
+    const squadSkillPath = path.join(skillsDir, 'aiox-demo-chief');
+    fs.mkdirSync(squadSkillPath, { recursive: true });
+    fs.writeFileSync(
+      path.join(squadSkillPath, 'SKILL.md'),
+      [
+        '---',
+        'name: aiox-demo-chief',
+        'description: "Generated squad chief skill"',
+        '---',
+        '',
+        '<!-- AIOX-CODEX-LOCAL-SKILLS: generated -->',
+        '',
+        'Load `squads/demo-squad/agents/demo-chief.md` before adopting this skill.',
+      ].join('\n'),
+      'utf8',
+    );
+
+    const result = validateCodexSkills({
+      projectRoot: tmpRoot,
+      sourceDir,
+      skillsDir,
+      strict: true,
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.ignored).toContain('aiox-demo-chief');
+    expect(result.orphaned).not.toContain('aiox-demo-chief');
+  });
+
+  it('ignores generated squad chief skills with an HTML source comment', () => {
+    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    const sourcePath = path.join(tmpRoot, 'squads', 'demo-squad', 'agents', 'demo-chief.md');
+    fs.mkdirSync(path.dirname(sourcePath), { recursive: true });
+    fs.writeFileSync(sourcePath, '# demo chief', 'utf8');
+
+    const squadSkillPath = path.join(skillsDir, 'aiox-demo-chief');
+    fs.mkdirSync(squadSkillPath, { recursive: true });
+    fs.writeFileSync(
+      path.join(squadSkillPath, 'SKILL.md'),
+      [
+        '---',
+        'name: aiox-demo-chief',
+        'description: "Generated squad chief skill"',
+        '---',
+        '',
+        '<!-- AIOX-CODEX-LOCAL-SKILLS: generated -->',
+        '<!-- Source: squads/demo-squad/agents/demo-chief.md -->',
+      ].join('\n'),
+      'utf8',
+    );
+
+    const result = validateCodexSkills({
+      projectRoot: tmpRoot,
+      sourceDir,
+      skillsDir,
+      strict: true,
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.ignored).toContain('aiox-demo-chief');
+  });
 });

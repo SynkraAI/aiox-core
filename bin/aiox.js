@@ -20,6 +20,16 @@ const command = args[0];
 
 // Helper: Run initialization wizard
 async function runWizard(options = {}) {
+  if (options.force || options.yes || options.ci) {
+    process.env.AIOX_INSTALL_FORCE = '1';
+  }
+  if (options.quiet || options.ci) {
+    process.env.AIOX_INSTALL_QUIET = '1';
+  }
+  if (options.dryRun) {
+    process.env.AIOX_INSTALL_DRY_RUN = '1';
+  }
+
   // Use the v4 wizard from packages/installer/src/wizard/index.js
   const wizardPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'wizard', 'index.js');
 
@@ -640,8 +650,11 @@ Install AIOX in the current directory.
 
 Options:
   --force      Overwrite existing AIOX installation
+  --yes, -y    Accept safe defaults and overwrite existing AIOX installation
+  --ci         Non-interactive CI mode (--quiet --force)
   --quiet      Minimal output (no banner, no prompts) - ideal for CI/CD
   --dry-run    Simulate installation without modifying files
+  --ide <ide>  Configure a specific IDE during quiet/CI install
   --merge      Auto-merge existing config files (brownfield mode)
   --no-merge   Disable merge option, use legacy overwrite behavior
   -h, --help   Show this help message
@@ -669,6 +682,9 @@ Examples:
 
   # Silent install for CI/CD
   npx aiox-core install --quiet --force
+
+  # Explicit CI install with Claude Code files materialized
+  npx aiox-core install --ci --yes --ide claude-code
 
   # Preview what would be installed
   npx aiox-core install --dry-run
@@ -841,12 +857,18 @@ async function main() {
         showInstallHelp();
         break;
       }
+      const isCi = installArgs.includes('--ci');
+      const isYes = installArgs.includes('--yes') || installArgs.includes('-y');
+      const ideIndex = installArgs.indexOf('--ide');
       const installOptions = {
-        force: installArgs.includes('--force'),
-        quiet: installArgs.includes('--quiet'),
+        force: installArgs.includes('--force') || isYes || isCi,
+        yes: isYes,
+        ci: isCi,
+        quiet: installArgs.includes('--quiet') || isCi,
         dryRun: installArgs.includes('--dry-run'),
         forceMerge: installArgs.includes('--merge'),
         noMerge: installArgs.includes('--no-merge'),
+        ide: ideIndex >= 0 ? installArgs[ideIndex + 1] : null,
       };
       if (!installOptions.quiet) {
         console.log('AIOX-FullStack Installation\n');

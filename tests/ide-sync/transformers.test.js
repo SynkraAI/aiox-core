@@ -92,6 +92,38 @@ describe('IDE Transformers', () => {
       expect(claudeCode.getFilename(sampleAgent)).toBe('dev.md');
     });
 
+    it('should generate Claude skill sidecar content', () => {
+      const result = claudeCode.transformSkill(sampleAgent);
+      expect(result).toContain('name: aiox-dev');
+      expect(result).toContain('user-invocable: true');
+      expect(result).toContain('activation_type: pipeline');
+      expect(result).toContain('ACORE-CLAUDE-AGENT-SKILL: generated');
+      expect(result).toContain('Source: .aiox-core/development/agents/dev.md');
+      expect(result).toContain('# dev');
+    });
+
+    it('should generate Claude legacy command shim content', () => {
+      const result = claudeCode.transformCommand(sampleAgent);
+      expect(result).toContain('ACORE-CLAUDE-AGENT-COMMAND: legacy-shim');
+      expect(result).toContain('Canonical Skill: .claude/skills/AIOX/agents/dev/SKILL.md');
+      expect(result).toContain('Source: .aiox-core/development/agents/dev.md');
+      expect(result).toContain('Compatibility Activation');
+    });
+
+    it('should use parsed sourcePath when generating Claude artifacts', () => {
+      const customSource = {
+        ...sampleAgent,
+        sourcePath: 'custom/agents/dev.md',
+      };
+
+      expect(claudeCode.transformCommand(customSource)).toContain('Source: custom/agents/dev.md');
+      expect(claudeCode.transformSkill(customSource)).toContain('Source: custom/agents/dev.md');
+    });
+
+    it('should return correct Claude skill relative path', () => {
+      expect(claudeCode.getSkillRelativePath(sampleAgent)).toBe('AIOX/agents/dev/SKILL.md');
+    });
+
     it('should have correct format identifier', () => {
       expect(claudeCode.format).toBe('full-markdown-yaml');
     });

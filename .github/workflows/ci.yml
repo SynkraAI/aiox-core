@@ -573,57 +573,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Pack aiox-core
-        run: npm pack
-
-      - name: Create brownfield test project
-        run: |
-          mkdir -p /tmp/brownfield-test
-          cd /tmp/brownfield-test
-          npm init -y
-
-      - name: Install aiox-core in brownfield project
-        run: |
-          cd /tmp/brownfield-test
-          TARBALL=$(ls ${{ github.workspace }}/aiox-core-*.tgz)
-          npm install "$TARBALL"
-
-      - name: Verify .aiox-core dependencies installable
-        run: |
-          cd /tmp/brownfield-test
-          AIOX_CORE_DIR="node_modules/aiox-core/.aiox-core"
-          if [ -f "$AIOX_CORE_DIR/package.json" ]; then
-            cd "$AIOX_CORE_DIR"
-            npm install --production --ignore-scripts
-            echo "✅ .aiox-core dependencies installed successfully"
-          else
-            echo "⚠️ .aiox-core/package.json not found in installed package"
-            exit 1
-          fi
-
-      - name: Verify key modules resolvable
-        run: |
-          cd /tmp/brownfield-test
-          AIOX_NODE_MODULES="node_modules/aiox-core/.aiox-core/node_modules"
-          MISSING=0
-
-          for pkg in fast-glob fs-extra js-yaml semver ajv tar chalk; do
-            if [ -d "$AIOX_NODE_MODULES/$pkg" ]; then
-              echo "✅ $pkg found in .aiox-core/node_modules/"
-            else
-              echo "❌ $pkg MISSING from .aiox-core/node_modules/"
-              MISSING=1
-            fi
-          done
-
-          if [ "$MISSING" -eq 1 ]; then
-            echo ""
-            echo "FAIL: Some required modules are missing"
-            exit 1
-          fi
-
-          echo ""
-          echo "✅ All key modules resolvable in brownfield context"
+      - name: Run installed project skills E2E
+        run: npm run test:e2e:installed-skills
 
   # Installer smoke test - ensures correct wizard is being used (Story 6.1.4)
   installer-smoke-test:
