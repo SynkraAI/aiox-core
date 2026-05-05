@@ -1,6 +1,11 @@
 /**
  * Unit tests for pro-setup.js email auth flow (PRO-11)
  *
+ * Most describes run unconditionally. The `pro-setup machine id compatibility`
+ * describe requires `pro/license/license-crypto` and skips when the pro/
+ * submodule is not initialized (CI deliberately omits per ADR-PRO-001 /
+ * Story PRO-5 AC-7; real pro-integration runs in pro-integration.yml).
+ *
  * @see Story PRO-11 - Email Authentication & Buyer-Based Pro Activation
  * @see AC-7 - Backward compatibility with license key
  */
@@ -8,7 +13,15 @@
 'use strict';
 
 const proSetup = require('../../packages/installer/src/wizard/pro-setup');
-const { generateMachineId: generateRuntimeMachineId } = require('../../pro/license/license-crypto');
+
+let generateRuntimeMachineId;
+try {
+  ({ generateMachineId: generateRuntimeMachineId } = require('../../pro/license/license-crypto'));
+} catch {
+  // pro/ submodule not available — `pro-setup machine id compatibility` skips
+}
+
+const isProAvailable = !!generateRuntimeMachineId;
 
 describe('pro-setup auth constants', () => {
   it('should export EMAIL_PATTERN', () => {
@@ -204,7 +217,7 @@ describe('pro-setup interactive email fallback', () => {
   });
 });
 
-describe('pro-setup machine id compatibility', () => {
+(isProAvailable ? describe : describe.skip)('pro-setup machine id compatibility', () => {
   it('should generate a 64-char machine id for backend requests', () => {
     const machineId = proSetup._testing.generateMachineId();
 
