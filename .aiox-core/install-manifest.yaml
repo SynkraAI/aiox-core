@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-11T20:15:06.396Z"
+generated_at: "2026-05-05T22:31:55.669Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1091
+file_count: 1092
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -2961,13 +2961,13 @@ files:
     type: script
     size: 40724
   - path: infrastructure/scripts/codex-skills-sync/index.js
-    hash: sha256:a7a3c97374c34a900acad13498f61f8a40517574480354218e349d1e1d3931a4
+    hash: sha256:e587b49a997e7fab5a12441a63663fb882b9daced606d274cf365dfb04aaf10d
     type: script
-    size: 5246
+    size: 5474
   - path: infrastructure/scripts/codex-skills-sync/validate.js
-    hash: sha256:0fbc1baff25f20e3a37d3e4be51d146a75254d5ed638b3438d9f1bf0e587c997
+    hash: sha256:591ce1dc3d4a7de883d05677eb29fedf0b8b46bfe977390248731de38043e32c
     type: script
-    size: 4572
+    size: 5111
   - path: infrastructure/scripts/collect-tool-usage.js
     hash: sha256:8a739b79182dc41e28b7e02aeb9ec1dde5ec49f3ca534399acc59711b3b92bbf
     type: script
@@ -3089,9 +3089,9 @@ files:
     type: script
     size: 5534
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:2f48896307b1fc3839f13169cab554c0a9a34f9d0e3961f1ccc07a2bbfaebdb2
+    hash: sha256:34377b67d0099aa68611ecff15b5fbe7d0073b86acf16edea0fa4a87ff51d6e4
     type: script
-    size: 14906
+    size: 14929
   - path: infrastructure/scripts/ide-sync/README.md
     hash: sha256:c18c2563b2ca64580a4814edd3c20a79c96f33fa8b953ee02206ef0faad53d35
     type: script
@@ -3252,6 +3252,10 @@ files:
     hash: sha256:118d4cdbc64cf3238065f2fb98958305ae81e1384bc68f5a6c7b768f1232cd1e
     type: script
     size: 34686
+  - path: infrastructure/scripts/repair-agent-references.js
+    hash: sha256:63b5f580b783d5098c3ab3d8da11af9871306b3a1fc0f986f25c813eb4c4dd75
+    type: script
+    size: 7200
   - path: infrastructure/scripts/repository-detector.js
     hash: sha256:10ffca7f57d24d3729c71a9104a154500a3c72328d67884e26e38d22199af332
     type: script

@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { parseAllAgents } = require('../ide-sync/agent-parser');
-const { getSkillId } = require('./index');
+const { getSkillId, getLegacySkillId } = require('./index');
 
 function getDefaultOptions() {
   const projectRoot = process.cwd();
@@ -14,6 +14,7 @@ function getDefaultOptions() {
     sourceDir: path.join(projectRoot, '.aiox-core', 'development', 'agents'),
     skillsDir: path.join(projectRoot, '.codex', 'skills'),
     strict: false,
+    allowOrphaned: false,
     quiet: false,
     json: false,
   };
@@ -74,6 +75,7 @@ function validateCodexSkills(options = {}) {
     agentId: agent.id,
     filename: agent.filename,
     skillId: getSkillId(agent.id),
+    legacySkillId: getLegacySkillId(agent.id),
   }));
 
   const missing = [];
@@ -99,13 +101,23 @@ function validateCodexSkills(options = {}) {
   }
 
   const expectedIds = new Set(expected.map(item => item.skillId));
+  const legacyIds = new Set(expected.map(item => item.legacySkillId));
   const orphaned = [];
+  const legacy = [];
   if (resolved.strict) {
     const dirs = fs.readdirSync(resolved.skillsDir, { withFileTypes: true })
-      .filter(entry => entry.isDirectory() && entry.name.startsWith('aiox-'))
+      .filter(entry => entry.isDirectory() && (entry.name.startsWith('aiox-') || entry.name.startsWith('aios-')))
       .map(entry => entry.name);
     for (const dir of dirs) {
-      if (!expectedIds.has(dir)) {
+      if (legacyIds.has(dir)) {
+        legacy.push(dir);
+        errors.push(`Legacy skill alias directory: ${path.join(path.relative(resolved.projectRoot, resolved.skillsDir), dir)}`);
+        continue;
+      }
+      if (dir.startsWith('aiox-') && !expectedIds.has(dir)) {
+        if (resolved.allowOrphaned) {
+          continue;
+        }
         orphaned.push(dir);
         errors.push(`Orphaned skill directory: ${path.join(path.relative(resolved.projectRoot, resolved.skillsDir), dir)}`);
       }
@@ -124,6 +136,7 @@ function validateCodexSkills(options = {}) {
     warnings,
     missing,
     orphaned,
+    legacy,
   };
 }
 

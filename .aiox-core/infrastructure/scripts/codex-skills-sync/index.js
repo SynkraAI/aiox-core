@@ -43,6 +43,13 @@ function getSkillId(agentId) {
   return `aiox-${id}`;
 }
 
+function getLegacySkillId(agentId) {
+  const id = String(agentId || '').trim();
+  if (!id) return 'aios-unknown';
+  if (id.startsWith('aiox-')) return id.replace(/^aiox-/, 'aios-');
+  return `aios-${id}`;
+}
+
 function buildSkillContent(agentData) {
   const agent = agentData.agent || {};
   const name = agent.name || agentData.id;
@@ -179,4 +186,5 @@ module.exports = {
   parseArgs,
   getCodexHome,
   getSkillId,
+  getLegacySkillId,
 };

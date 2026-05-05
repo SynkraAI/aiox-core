@@ -211,7 +211,7 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
  * @param {object} options - Command options
  */
 async function commandSync(options) {
-  const projectRoot = process.cwd();
+  const projectRoot = options.projectRoot || process.cwd();
   const config = loadConfig(projectRoot);
 
   if (!config.enabled) {
