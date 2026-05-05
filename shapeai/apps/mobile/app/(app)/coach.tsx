@@ -124,11 +124,14 @@ export default function CoachScreen() {
         }
         if (resp.persona) setCoachName(PERSONA_NAMES[resp.persona] ?? coachName)
       }
-    } catch {
+    } catch (err: unknown) {
+      const isOverload = (err as Error)?.message === 'CLAUDE_UNAVAILABLE'
       const errMsg: Message = {
         id: `e-${Date.now()}`,
         role: 'coach',
-        text: 'Não consegui processar sua mensagem. Verifique sua conexão e tente novamente.',
+        text: isOverload
+          ? 'O servidor está sobrecarregado agora. Aguarde alguns segundos e tente novamente.'
+          : 'Não consegui processar sua mensagem. Verifique sua conexão e tente novamente.',
       }
       setMessages((prev) => [...prev, errMsg])
     } finally {

@@ -110,6 +110,7 @@ export const MUSCLE_EMOJI: Record<string, string> = {
   abs: '🎯',
   traps: '🔝',
   lats: '🔙',
+  shoulders: '🏔️',
 }
 
 export function formatRest(seconds: number): string {
@@ -129,6 +130,6 @@ export function calculateOverallScore(scores: BodyScores): number {
   return scores.overall_score ?? Math.round(
     (scores.quadriceps + scores.glutes + scores.calves +
      scores.biceps + scores.triceps + scores.chest +
-     scores.abs + scores.traps + scores.lats) / 9
+     scores.abs + scores.traps + scores.lats + (scores.shoulders ?? 0)) / 10
   )
 }

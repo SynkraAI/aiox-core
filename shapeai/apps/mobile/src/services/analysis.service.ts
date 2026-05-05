@@ -32,6 +32,7 @@ export interface MuscleScores {
   abs: MuscleScore
   traps: MuscleScore
   lats: MuscleScore
+  shoulders: MuscleScore
 }
 
 export interface BodyScores {
@@ -70,6 +71,7 @@ export interface BodyComposition {
   strengths_summary: string
   weaknesses_summary: string
   overall_assessment: string
+  vision_analyzed?: boolean
 }
 
 export interface AnalysisResult {

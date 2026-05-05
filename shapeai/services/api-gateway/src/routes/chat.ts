@@ -124,16 +124,16 @@ function buildUserContext(
 
     if (workoutWeeks?.length) {
       const DAY_NAME: Record<number, string> = { 1: 'Segunda', 2: 'Terça', 3: 'Quarta', 4: 'Quinta', 5: 'Sexta', 6: 'Sábado', 7: 'Domingo' }
-      lines.push(`Plano de treino: ${workoutWeeks.length} semanas. Semana 1:`)
+      lines.push(`Plano de treino: ${workoutWeeks.length} semanas. Semana 1 (resumo):`)
       const week1 = workoutWeeks[0]
       for (const session of week1.sessions) {
         const day = DAY_NAME[session.day] ?? `Dia ${session.day}`
         const groups = session.muscle_groups.join(', ')
-        lines.push(`  ${day} (${groups}):`)
-        for (const ex of session.exercises) {
-          const note = ex.notes ? ` — ${ex.notes}` : ''
-          lines.push(`    • ${ex.name}: ${ex.sets}x${ex.reps}, ${ex.rest_seconds}s descanso${note}`)
-        }
+        // Limita a 4 exercícios por sessão para manter o prompt compacto
+        const exList = session.exercises.slice(0, 4)
+          .map((ex) => `${ex.name} ${ex.sets}x${ex.reps}`)
+          .join(', ')
+        lines.push(`  ${day} (${groups}): ${exList}`)
       }
     }
   } else {
@@ -210,24 +210,39 @@ export async function chatRoutes(app: FastifyInstance) {
       ]
 
       // Call Claude API
-      const claudeRes = await axios.post(
-        'https://api.anthropic.com/v1/messages',
-        {
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1024,
-          system: `${systemPrompt}\n\n${contextText}`,
-          messages: allMessages,
-        },
-        {
-          headers: {
-            'x-api-key': process.env.ANTHROPIC_API_KEY ?? '',
-            'anthropic-version': '2023-06-01',
-            'content-type': 'application/json',
+      let replyText: string
+      try {
+        const claudeRes = await axios.post(
+          'https://api.anthropic.com/v1/messages',
+          {
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 1024,
+            system: `${systemPrompt}\n\n${contextText}`,
+            messages: allMessages,
           },
-        }
-      )
+          {
+            headers: {
+              'x-api-key': process.env.ANTHROPIC_API_KEY ?? '',
+              'anthropic-version': '2023-06-01',
+              'content-type': 'application/json',
+            },
+            timeout: 30_000,
+          }
+        )
+        replyText = claudeRes.data.content[0].text
+      } catch (err: unknown) {
+        const status = (err as { response?: { status?: number } })?.response?.status
+        const errData = (err as { response?: { data?: unknown } })?.response?.data
+        app.log.error({ status, errData }, 'Claude API error in /chat')
 
-      const replyText: string = claudeRes.data.content[0].text
+        if (status === 529) {
+          return reply.status(503).send({ error: 'CLAUDE_OVERLOADED' })
+        }
+        if (status === 429) {
+          return reply.status(503).send({ error: 'CLAUDE_RATE_LIMIT' })
+        }
+        return reply.status(503).send({ error: 'CLAUDE_UNAVAILABLE' })
+      }
 
       // Increment usage counter (atomic upsert)
       const { rows: newUsageRows } = await pool.query<{ message_count: string }>(

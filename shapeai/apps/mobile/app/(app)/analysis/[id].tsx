@@ -4,10 +4,13 @@ import { useLocalSearchParams, router } from 'expo-router'
 import { pollAnalysis } from '../../../src/services/analysis.service'
 
 const STEPS = [
-  'Analisando composição corporal...',
-  'Pontuando grupos musculares...',
-  'Gerando relatório personalizado...',
-  'Criando plano de treino...',
+  'IA analisando suas fotos...',
+  'Mapeando grupos musculares...',
+  'Identificando pontos fortes...',
+  'Detectando áreas a melhorar...',
+  'Calculando seu score...',
+  'Criando seu plano de treino...',
+  'Finalizando relatório...',
 ]
 
 export default function AnalysisLoadingScreen() {

@@ -47,7 +47,11 @@ export async function sendChatMessage(
   }
 
   if (!res.ok) {
-    throw new Error((data as { error?: string }).error ?? `HTTP ${res.status}`)
+    const errCode = (data as { error?: string }).error ?? ''
+    if (errCode === 'CLAUDE_OVERLOADED' || errCode === 'CLAUDE_RATE_LIMIT' || errCode === 'CLAUDE_UNAVAILABLE') {
+      throw new Error('CLAUDE_UNAVAILABLE')
+    }
+    throw new Error(errCode || `HTTP ${res.status}`)
   }
 
   return data as ChatResponse

@@ -9,14 +9,26 @@ logger = logging.getLogger(__name__)
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 SYSTEM_PROMPT = (
-    "Você é um personal trainer especializado em prescrição de treinos. "
+    "Você é um personal trainer especializado em prescrição de treinos.\n"
     "Gere um plano de treino de 4 semanas baseado nos scores de composição corporal.\n\n"
-    'O JSON de resposta deve ter o campo "weeks": array de WorkoutWeek.\n'
-    "Cada WorkoutWeek: { week_number (1-4), sessions: WorkoutSession[] }\n"
-    "Cada WorkoutSession: { day (1-7), muscle_groups: string[], exercises: Exercise[] }\n"
-    "Cada Exercise: { name: string, sets: number, reps: string, rest_seconds: number, notes?: string }\n\n"
-    "Regras: exatamente 3 sessões/semana (dias 1, 3, 5). Máximo 4 exercícios por sessão. "
-    "Priorize grupos com scores baixos. Responda SOMENTE com JSON válido, sem markdown."
+    "Estrutura JSON obrigatória:\n"
+    '{ "weeks": [ { "week_number": 1, "sessions": [ WorkoutSession ] } ] }\n\n'
+    "WorkoutSession:\n"
+    '{ "day": <"Segunda"|"Terça"|"Quarta"|"Quinta"|"Sexta"|"Sábado">,\n'
+    '  "focus": <nome do treino, ex: "Peito + Tríceps">,\n'
+    '  "muscle_groups": <string[]>,\n'
+    '  "exercises": <Exercise[]> }\n\n'
+    "Exercise:\n"
+    '{ "name": <string>, "muscle_group": <string>, "sets": <number>, "reps": <string>, "rest_seconds": <number>, "note": <string|null> }\n\n'
+    "Regras:\n"
+    "- 5 sessões por semana: Segunda, Terça, Quarta, Quinta e Sexta\n"
+    "- 5 a 6 exercícios por sessão\n"
+    "- Use splits: Segunda='Peito + Tríceps' | Terça='Bíceps + Costas' | Quarta='Pernas' | Quinta='Ombros + Trapézio'\n"
+    "- Sexta: dedique ao grupo muscular com MENOR score na análise (ex: se glúteos=28, Sexta='Glúteos + Posterior'). Use o score mais baixo dos fornecidos para decidir.\n"
+    "- Semana 1: volume moderado | Semanas 2-3: volume crescente | Semana 4: deload\n"
+    "- Variação obrigatória: troque pelo menos 2 exercícios por sessão a cada semana (ex: Semana 1 usa Supino reto, Semana 2 substitui por Supino inclinado). Nunca repita a lista idêntica de exercícios entre semanas.\n"
+    "- Priorize grupos com scores mais baixos\n"
+    "- Responda SOMENTE com JSON válido, sem markdown."
 )
 
 
@@ -33,53 +45,142 @@ def _validate_plan(data: dict) -> WorkoutPlan:
     return WorkoutPlan(weeks=data["weeks"])
 
 
-_EXERCISES_BY_GROUP = {
+_EXERCISES_BY_GROUP: dict[str, list[list[dict]]] = {
     "shoulders": [
-        {"name": "Desenvolvimento com halteres", "sets": 4, "reps": "10-12", "rest_seconds": 90},
-        {"name": "Elevação lateral", "sets": 3, "reps": "12-15", "rest_seconds": 60},
+        [{"name": "Desenvolvimento com halteres", "muscle_group": "shoulders", "sets": 4, "reps": "10-12", "rest_seconds": 90, "note": None},
+         {"name": "Elevação lateral", "muscle_group": "shoulders", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Desenvolvimento na máquina", "muscle_group": "shoulders", "sets": 4, "reps": "10-12", "rest_seconds": 90, "note": None},
+         {"name": "Elevação frontal", "muscle_group": "shoulders", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Desenvolvimento Arnold", "muscle_group": "shoulders", "sets": 4, "reps": "10-12", "rest_seconds": 90, "note": None},
+         {"name": "Remada alta", "muscle_group": "shoulders", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Desenvolvimento com barra", "muscle_group": "shoulders", "sets": 4, "reps": "8-10", "rest_seconds": 90, "note": None},
+         {"name": "Elevação lateral inclinada", "muscle_group": "shoulders", "sets": 3, "reps": "15", "rest_seconds": 60, "note": None}],
     ],
     "chest": [
-        {"name": "Supino reto", "sets": 4, "reps": "8-10", "rest_seconds": 120},
-        {"name": "Crucifixo", "sets": 3, "reps": "12-15", "rest_seconds": 60},
+        [{"name": "Supino reto", "muscle_group": "chest", "sets": 4, "reps": "8-10", "rest_seconds": 120, "note": None},
+         {"name": "Crucifixo", "muscle_group": "chest", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Supino inclinado", "muscle_group": "chest", "sets": 4, "reps": "8-10", "rest_seconds": 120, "note": None},
+         {"name": "Crossover", "muscle_group": "chest", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Supino declinado", "muscle_group": "chest", "sets": 4, "reps": "8-10", "rest_seconds": 120, "note": None},
+         {"name": "Pullover", "muscle_group": "chest", "sets": 3, "reps": "12", "rest_seconds": 60, "note": None}],
+        [{"name": "Supino com halteres", "muscle_group": "chest", "sets": 4, "reps": "10-12", "rest_seconds": 90, "note": None},
+         {"name": "Crucifixo inclinado", "muscle_group": "chest", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
     ],
     "back": [
-        {"name": "Remada curvada", "sets": 4, "reps": "8-10", "rest_seconds": 120},
-        {"name": "Puxada na frente", "sets": 3, "reps": "10-12", "rest_seconds": 90},
+        [{"name": "Remada curvada", "muscle_group": "lats", "sets": 4, "reps": "8-10", "rest_seconds": 120, "note": None},
+         {"name": "Puxada na frente", "muscle_group": "lats", "sets": 3, "reps": "10-12", "rest_seconds": 90, "note": None}],
+        [{"name": "Remada unilateral", "muscle_group": "lats", "sets": 4, "reps": "10-12", "rest_seconds": 90, "note": None},
+         {"name": "Puxada atrás", "muscle_group": "lats", "sets": 3, "reps": "10-12", "rest_seconds": 90, "note": None}],
+        [{"name": "Remada na máquina", "muscle_group": "lats", "sets": 4, "reps": "10-12", "rest_seconds": 90, "note": None},
+         {"name": "Puxada com triângulo", "muscle_group": "lats", "sets": 3, "reps": "12", "rest_seconds": 90, "note": None}],
+        [{"name": "Levantamento terra", "muscle_group": "lats", "sets": 4, "reps": "6-8", "rest_seconds": 150, "note": None},
+         {"name": "Puxada na frente", "muscle_group": "lats", "sets": 3, "reps": "10-12", "rest_seconds": 90, "note": None}],
     ],
     "arms": [
-        {"name": "Rosca direta", "sets": 3, "reps": "12-15", "rest_seconds": 60},
-        {"name": "Tríceps testa", "sets": 3, "reps": "12-15", "rest_seconds": 60},
+        [{"name": "Rosca direta", "muscle_group": "biceps", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None},
+         {"name": "Tríceps testa", "muscle_group": "triceps", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Rosca martelo", "muscle_group": "biceps", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None},
+         {"name": "Tríceps corda", "muscle_group": "triceps", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Rosca concentrada", "muscle_group": "biceps", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None},
+         {"name": "Tríceps francês", "muscle_group": "triceps", "sets": 3, "reps": "12-15", "rest_seconds": 60, "note": None}],
+        [{"name": "Rosca 21", "muscle_group": "biceps", "sets": 3, "reps": "21", "rest_seconds": 75, "note": None},
+         {"name": "Mergulho no banco", "muscle_group": "triceps", "sets": 3, "reps": "15", "rest_seconds": 60, "note": None}],
     ],
     "core": [
-        {"name": "Prancha abdominal", "sets": 3, "reps": "40s", "rest_seconds": 45},
-        {"name": "Abdominal infra", "sets": 3, "reps": "15", "rest_seconds": 45},
+        [{"name": "Prancha abdominal", "muscle_group": "abs", "sets": 3, "reps": "40s", "rest_seconds": 45, "note": None},
+         {"name": "Abdominal infra", "muscle_group": "abs", "sets": 3, "reps": "15", "rest_seconds": 45, "note": None}],
+        [{"name": "Abdominal crunch", "muscle_group": "abs", "sets": 3, "reps": "20", "rest_seconds": 45, "note": None},
+         {"name": "Prancha lateral", "muscle_group": "abs", "sets": 3, "reps": "30s", "rest_seconds": 45, "note": None}],
+        [{"name": "Elevação de pernas", "muscle_group": "abs", "sets": 3, "reps": "15", "rest_seconds": 45, "note": None},
+         {"name": "Abdominal oblíquo", "muscle_group": "abs", "sets": 3, "reps": "20", "rest_seconds": 45, "note": None}],
+        [{"name": "Abdominal na roda", "muscle_group": "abs", "sets": 3, "reps": "12", "rest_seconds": 60, "note": None},
+         {"name": "Mountain climber", "muscle_group": "abs", "sets": 3, "reps": "30s", "rest_seconds": 45, "note": None}],
     ],
     "legs": [
-        {"name": "Agachamento livre", "sets": 4, "reps": "10-12", "rest_seconds": 120},
-        {"name": "Leg press", "sets": 3, "reps": "12-15", "rest_seconds": 90},
+        [{"name": "Agachamento livre", "muscle_group": "quadriceps", "sets": 4, "reps": "10-12", "rest_seconds": 120, "note": None},
+         {"name": "Leg press", "muscle_group": "quadriceps", "sets": 3, "reps": "12-15", "rest_seconds": 90, "note": None},
+         {"name": "Cadeira extensora", "muscle_group": "quadriceps", "sets": 3, "reps": "15", "rest_seconds": 60, "note": None}],
+        [{"name": "Agachamento sumô", "muscle_group": "glutes", "sets": 4, "reps": "12", "rest_seconds": 120, "note": None},
+         {"name": "Cadeira abdutora", "muscle_group": "glutes", "sets": 3, "reps": "15", "rest_seconds": 60, "note": None},
+         {"name": "Panturrilha em pé", "muscle_group": "calves", "sets": 4, "reps": "15-20", "rest_seconds": 60, "note": None}],
+        [{"name": "Hack squat", "muscle_group": "quadriceps", "sets": 4, "reps": "10-12", "rest_seconds": 120, "note": None},
+         {"name": "Stiff", "muscle_group": "glutes", "sets": 3, "reps": "12", "rest_seconds": 90, "note": None},
+         {"name": "Panturrilha sentado", "muscle_group": "calves", "sets": 4, "reps": "15-20", "rest_seconds": 60, "note": None}],
+        [{"name": "Avanço", "muscle_group": "quadriceps", "sets": 3, "reps": "12 cada", "rest_seconds": 90, "note": None},
+         {"name": "Cadeira flexora", "muscle_group": "glutes", "sets": 3, "reps": "15", "rest_seconds": 60, "note": None},
+         {"name": "Leg press 45°", "muscle_group": "quadriceps", "sets": 3, "reps": "15", "rest_seconds": 90, "note": None}],
     ],
+    "posterior": [
+        [{"name": "Stiff com barra", "muscle_group": "glutes", "sets": 4, "reps": "10-12", "rest_seconds": 120, "note": None},
+         {"name": "Cadeira flexora", "muscle_group": "glutes", "sets": 3, "reps": "12-15", "rest_seconds": 90, "note": None},
+         {"name": "Glúteo no cabo", "muscle_group": "glutes", "sets": 3, "reps": "15 cada", "rest_seconds": 60, "note": None},
+         {"name": "Panturrilha em pé", "muscle_group": "calves", "sets": 4, "reps": "15-20", "rest_seconds": 60, "note": None}],
+        [{"name": "Levantamento terra romeno", "muscle_group": "glutes", "sets": 4, "reps": "10-12", "rest_seconds": 120, "note": None},
+         {"name": "Agachamento búlgaro", "muscle_group": "glutes", "sets": 3, "reps": "12 cada", "rest_seconds": 90, "note": None},
+         {"name": "Abdução no cabo", "muscle_group": "glutes", "sets": 3, "reps": "15 cada", "rest_seconds": 60, "note": None},
+         {"name": "Panturrilha sentado", "muscle_group": "calves", "sets": 4, "reps": "15-20", "rest_seconds": 60, "note": None}],
+        [{"name": "Hip thrust", "muscle_group": "glutes", "sets": 4, "reps": "12", "rest_seconds": 90, "note": None},
+         {"name": "Stiff unilateral", "muscle_group": "glutes", "sets": 3, "reps": "12 cada", "rest_seconds": 90, "note": None},
+         {"name": "Cadeira abdutora", "muscle_group": "glutes", "sets": 3, "reps": "15", "rest_seconds": 60, "note": None},
+         {"name": "Panturrilha no leg press", "muscle_group": "calves", "sets": 4, "reps": "20", "rest_seconds": 60, "note": None}],
+        [{"name": "Agachamento sumô com halter", "muscle_group": "glutes", "sets": 4, "reps": "12", "rest_seconds": 90, "note": None},
+         {"name": "Mesa flexora", "muscle_group": "glutes", "sets": 3, "reps": "12-15", "rest_seconds": 90, "note": None},
+         {"name": "Glúteo quatro apoios", "muscle_group": "glutes", "sets": 3, "reps": "15 cada", "rest_seconds": 60, "note": None},
+         {"name": "Panturrilha em pé", "muscle_group": "calves", "sets": 4, "reps": "15-20", "rest_seconds": 60, "note": None}],
+    ],
+}
+
+_SPLITS_BASE = [
+    {"day": "Segunda", "focus": "Peito + Tríceps",   "groups": ["chest", "arms"]},
+    {"day": "Terça",   "focus": "Bíceps + Costas",   "groups": ["arms", "back"]},
+    {"day": "Quarta",  "focus": "Pernas",             "groups": ["legs"]},
+    {"day": "Quinta",  "focus": "Ombros + Trapézio", "groups": ["shoulders"]},
+]
+
+_WEAK_GROUP_MAP = {
+    "quadriceps": {"focus": "Pernas (Foco Quadríceps)",  "groups": ["legs"]},
+    "glutes":     {"focus": "Glúteos + Posterior",       "groups": ["posterior"]},
+    "calves":     {"focus": "Pernas (Foco Panturrilha)", "groups": ["legs"]},
+    "biceps":     {"focus": "Bíceps + Costas",           "groups": ["arms", "back"]},
+    "triceps":    {"focus": "Peito + Tríceps",           "groups": ["chest", "arms"]},
+    "chest":      {"focus": "Peito + Tríceps",           "groups": ["chest", "arms"]},
+    "abs":        {"focus": "Abdômen + Core",            "groups": ["core"]},
+    "traps":      {"focus": "Ombros + Trapézio",         "groups": ["shoulders"]},
+    "lats":       {"focus": "Bíceps + Costas",           "groups": ["arms", "back"]},
+    "shoulders":  {"focus": "Ombros + Trapézio",         "groups": ["shoulders"]},
 }
 
 
 def _fallback_plan(scores: dict) -> WorkoutPlan:
-    """Rule-based 4-week plan prioritizing groups with lowest scores."""
-    priority = sorted(scores.items(), key=lambda x: x[1])
-    top3 = [k for k, _ in priority[:3] if k in _EXERCISES_BY_GROUP]
-    rest3 = [k for k, _ in priority[3:] if k in _EXERCISES_BY_GROUP]
+    """Rule-based 4-week plan with exercise variation and weakest-group Friday."""
+    # Detecta grupo mais fraco excluindo métricas não musculares
+    _SKIP = {"overall_score", "body_fat_estimate_pct"}
+    muscle_scores = {k: v for k, v in scores.items() if k not in _SKIP and isinstance(v, (int, float))}
+    weakest = min(muscle_scores, key=lambda k: muscle_scores[k]) if muscle_scores else "glutes"
+    friday = _WEAK_GROUP_MAP.get(weakest, {"focus": "Glúteos + Posterior", "groups": ["posterior"]})
 
-    def session(day: int, groups: list) -> dict:
-        exercises = []
-        for g in groups:
-            exercises.extend(_EXERCISES_BY_GROUP.get(g, []))
-        return {"day": day, "muscle_groups": groups, "exercises": exercises}
+    splits = _SPLITS_BASE + [{"day": "Sexta", **friday}]
 
-    base_week = [
-        session(1, top3[:2] if len(top3) >= 2 else top3),
-        session(3, top3[2:] + rest3[:1] if top3[2:] else rest3[:2]),
-        session(5, rest3[1:3] if len(rest3) >= 2 else rest3),
+    def session(split: dict, week_idx: int) -> dict:
+        exercises: list[dict] = []
+        for g in split["groups"]:
+            pool = _EXERCISES_BY_GROUP.get(g, [])
+            if not pool:
+                continue
+            exercises.extend(pool[week_idx % len(pool)])
+            if len(exercises) < 5:
+                exercises.extend(pool[(week_idx + 1) % len(pool)])
+        return {
+            "day": split["day"],
+            "focus": split["focus"],
+            "muscle_groups": split["groups"],
+            "exercises": exercises[:6],
+        }
+
+    weeks = [
+        {"week_number": w, "sessions": [session(s, w - 1) for s in splits]}
+        for w in range(1, 5)
     ]
-
-    weeks = [{"week_number": w, "sessions": base_week} for w in range(1, 5)]
     return WorkoutPlan(weeks=weeks)
 
 
@@ -121,6 +222,7 @@ def generate_workout_plan(scores: dict, body_composition: dict, profile: dict) -
         raw = raw.removeprefix("```json").removeprefix("```").removesuffix("```").strip()
         data = json.loads(raw)
         return _validate_plan(data)
-    except (anthropic.BadRequestError, anthropic.AuthenticationError, anthropic.PermissionDeniedError) as exc:
-        logger.warning("[plan_generator] Claude unavailable (%s), using rule-based fallback", exc)
+    except (anthropic.APIError, json.JSONDecodeError, Exception) as exc:
+        logger.warning("[plan_generator] Claude unavailable (%s: %s), using rule-based fallback",
+                       type(exc).__name__, exc)
         return _fallback_plan(scores)

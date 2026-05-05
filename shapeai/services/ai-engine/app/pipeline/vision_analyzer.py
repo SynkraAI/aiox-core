@@ -34,12 +34,13 @@ Estrutura obrigatória:
     "chest":      { "score": <int 0-100>, "note": <string> },
     "abs":        { "score": <int 0-100>, "note": <string> },
     "traps":      { "score": <int 0-100>, "note": <string> },
-    "lats":       { "score": <int 0-100>, "note": <string> }
+    "lats":       { "score": <int 0-100>, "note": <string> },
+    "shoulders":  { "score": <int 0-100>, "note": <string> }
   },
   "overall_score": <int 0-100: média ponderada de todos os grupos>,
   "strengths_summary": <string: 2-3 frases sobre os pontos mais fortes do físico>,
   "weaknesses_summary": <string: 2-3 frases sobre as principais áreas a desenvolver>,
-  "overall_assessment": <string: avaliação geral em tom de coach profissional, 2-3 frases motivadoras>
+  "overall_assessment": <string: avaliação direta em 2 frases curtas, linguagem simples para leigo, sem jargão técnico, tom de coach acessível>
 }
 
 Critérios de score muscular (0-100):
@@ -48,6 +49,13 @@ Critérios de score muscular (0-100):
 - 51-70: desenvolvimento moderado, dentro da média
 - 71-85: bem desenvolvido, boa volumetria e definição
 - 86-100: excelente, nível avançado/atlético
+
+Regras de distribuição dos scores — CRÍTICO:
+- Use a escala completa. Scores clustered entre 50-65 para todos os grupos indicam avaliação imprecisa.
+- Sempre haverá grupos mais fortes e mais fracos — reflita isso nos números.
+- O grupo mais forte do físico deve receber score ≥ 70. O mais fraco deve receber score ≤ 45.
+- A diferença entre o maior e o menor score deve ser de no mínimo 25 pontos.
+- Se o físico for genuinamente equilibrado, ainda assim diferencie: o melhor grupo fica mais próximo de 75, o pior mais próximo de 45.
 
 Regras para as notas:
 - Seja específico: mencione volumetria, definição, inserções visíveis, cobertura de gordura quando relevante
@@ -71,6 +79,7 @@ class MuscleScores(TypedDict):
     abs: MuscleScore
     traps: MuscleScore
     lats: MuscleScore
+    shoulders: MuscleScore
 
 
 class BodyComposition(TypedDict):
@@ -84,11 +93,12 @@ class BodyComposition(TypedDict):
     strengths_summary: str
     weaknesses_summary: str
     overall_assessment: str
+    vision_analyzed: bool
 
 
 _NEUTRAL_MUSCLE: MuscleScore = {"score": 50, "note": "Análise visual não disponível para este grupo."}
 
-_MUSCLE_KEYS = ("quadriceps", "glutes", "calves", "biceps", "triceps", "chest", "abs", "traps", "lats")
+_MUSCLE_KEYS = ("quadriceps", "glutes", "calves", "biceps", "triceps", "chest", "abs", "traps", "lats", "shoulders")
 
 
 def _resize_image(image_bytes: bytes, max_px: int = MAX_IMAGE_PX) -> bytes:
@@ -143,6 +153,7 @@ def _fallback_composition(profile: dict) -> BodyComposition:
         strengths_summary="Análise visual não disponível. Dados baseados no perfil.",
         weaknesses_summary="Para uma análise completa, envie novas fotos com boa iluminação e fundo neutro.",
         overall_assessment="Continue focado no seu objetivo. Com dados visuais limitados, mantenha consistência e progressão.",
+        vision_analyzed=False,
     )
 
 
@@ -217,9 +228,10 @@ def analyze_body_vision(
             strengths_summary=str(data.get("strengths_summary", "")),
             weaknesses_summary=str(data.get("weaknesses_summary", "")),
             overall_assessment=str(data.get("overall_assessment", "")),
+            vision_analyzed=True,
         )
 
-    except (anthropic.BadRequestError, anthropic.AuthenticationError,
-            anthropic.PermissionDeniedError, json.JSONDecodeError) as exc:
-        logger.warning("[vision_analyzer] Vision unavailable (%s), using fallback", exc)
-        return _fallback_composition(profile)
+    except (anthropic.APIError, json.JSONDecodeError, Exception) as exc:
+        logger.error("[vision_analyzer] Vision failed (%s: %s), propagating",
+                     type(exc).__name__, exc)
+        raise

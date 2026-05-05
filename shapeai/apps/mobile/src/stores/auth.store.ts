@@ -17,12 +17,12 @@ export const useAuthStore = create<AuthState>((set) => ({
   isLoading: true,
 
   initialize: () => {
-    supabase.auth.getSession().then(({ data }) => {
-      set({ session: data.session, isLoading: false })
-    })
+    supabase.auth.getSession()
+      .then(({ data }) => set({ session: data.session, isLoading: false }))
+      .catch(() => set({ isLoading: false }))
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      set({ session })
+      set({ session, isLoading: false })
     })
 
     return () => subscription.unsubscribe()
@@ -30,20 +30,30 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   signIn: async (email: string, password: string) => {
     set({ isLoading: true })
-    const { error, data } = await supabase.auth.signInWithPassword({ email, password })
-    set({ isLoading: false })
-    if (error) return mapAuthError(error.message)
-    if (data.user) purchasesLogIn(data.user.id).catch(() => {})
-    return null
+    try {
+      const { error, data } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) return mapAuthError(error.message)
+      if (data.user) purchasesLogIn(data.user.id).catch(() => {})
+      return null
+    } catch {
+      return 'Erro de conexão. Verifique sua internet e tente novamente.'
+    } finally {
+      set({ isLoading: false })
+    }
   },
 
   signUp: async (email: string, password: string) => {
     set({ isLoading: true })
-    const { error, data } = await supabase.auth.signUp({ email, password })
-    set({ isLoading: false })
-    if (error) return mapAuthError(error.message)
-    if (data.user) purchasesLogIn(data.user.id).catch(() => {})
-    return null
+    try {
+      const { error, data } = await supabase.auth.signUp({ email, password })
+      if (error) return mapAuthError(error.message)
+      if (data.user) purchasesLogIn(data.user.id).catch(() => {})
+      return null
+    } catch {
+      return 'Erro de conexão. Verifique sua internet e tente novamente.'
+    } finally {
+      set({ isLoading: false })
+    }
   },
 
   signOut: async () => {
@@ -61,8 +71,15 @@ const AUTH_ERROR_MAP: Record<string, string> = {
   'Unable to validate email address: invalid format': 'Formato de email inválido.',
   'For security purposes, you can only request this once every 60 seconds':
     'Aguarde 60 segundos antes de tentar novamente.',
+  'Signups not allowed for this instance': 'Cadastro temporariamente desabilitado.',
+  'signup_disabled': 'Cadastro temporariamente desabilitado.',
+  'Anonymous sign-ins are disabled': 'Cadastro temporariamente desabilitado.',
 }
 
 function mapAuthError(message: string): string {
-  return AUTH_ERROR_MAP[message] ?? 'Ocorreu um erro. Tente novamente.'
+  // Tenta match exato, depois parcial, depois retorna o erro original para diagnóstico
+  if (AUTH_ERROR_MAP[message]) return AUTH_ERROR_MAP[message]
+  const partialKey = Object.keys(AUTH_ERROR_MAP).find((k) => message.includes(k))
+  if (partialKey) return AUTH_ERROR_MAP[partialKey]
+  return message // mostra o erro real do Supabase em vez de mensagem genérica
 }

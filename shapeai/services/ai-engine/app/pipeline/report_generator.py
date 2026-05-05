@@ -13,6 +13,7 @@ MUSCLE_LABELS: dict[str, str] = {
     "abs": "Abdômen",
     "traps": "Trapézio",
     "lats": "Dorsal",
+    "shoulders": "Ombros",
 }
 
 

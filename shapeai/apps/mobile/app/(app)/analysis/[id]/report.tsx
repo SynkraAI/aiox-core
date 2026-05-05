@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import {
   View,
   Text,
@@ -6,10 +6,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native'
 import { useLocalSearchParams, router } from 'expo-router'
 import Svg, { Circle, Text as SvgText } from 'react-native-svg'
 import { getAnalysisResult, AnalysisResult, BodyComposition, MuscleScores } from '../../../../src/services/analysis.service'
+import ReportSectionCard, { ReportSection } from '../../../../src/components/report/ReportSectionCard'
+
+const { width: SCREEN_W } = Dimensions.get('window')
 
 const FAT_CATEGORY_LABEL: Record<string, string> = {
   muito_magro: 'Muito magro',
@@ -37,37 +41,70 @@ const MUSCLE_LABEL: Record<string, string> = {
   abs: 'Abdômen',
   traps: 'Trapézio',
   lats: 'Dorsal',
+  shoulders: 'Ombros',
 }
 
-const MUSCLE_ORDER = ['chest', 'lats', 'traps', 'biceps', 'triceps', 'abs', 'quadriceps', 'glutes', 'calves']
+const MUSCLE_GROUPS = [
+  { label: 'Tronco', keys: ['chest', 'lats', 'traps', 'abs', 'shoulders'] },
+  { label: 'Braços', keys: ['biceps', 'triceps'] },
+  { label: 'Pernas', keys: ['quadriceps', 'glutes', 'calves'] },
+]
+
+const TABS = ['Resultado', 'Insights', 'Músculos']
+
+function scoreColor(score: number) {
+  if (score >= 70) return '#4CAF50'
+  if (score >= 50) return '#FF9800'
+  return '#F44336'
+}
+
+function scoreLabel(score: number) {
+  if (score >= 80) return 'Elite'
+  if (score >= 65) return 'Intermediário'
+  if (score >= 50) return 'Em progresso'
+  return 'Iniciante'
+}
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+}
 
 function ScoreGauge({ score }: { score: number }) {
-  const radius = 60
-  const strokeWidth = 12
+  const radius = 72
+  const strokeWidth = 14
   const circumference = 2 * Math.PI * radius
   const filled = circumference * (score / 100)
   const size = (radius + strokeWidth) * 2
+  const cx = size / 2
+  const cy = size / 2
+  const color = scoreColor(score)
 
   return (
     <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <Circle cx={size / 2} cy={size / 2} r={radius} stroke="#1E1E1E" strokeWidth={strokeWidth} fill="none" />
+      <Circle cx={cx} cy={cy} r={radius} stroke="#1A1A1A" strokeWidth={strokeWidth} fill="none" />
       <Circle
-        cx={size / 2} cy={size / 2} r={radius}
-        stroke="#4CAF50" strokeWidth={strokeWidth} fill="none"
+        cx={cx} cy={cy} r={radius}
+        stroke={color} strokeWidth={strokeWidth} fill="none"
         strokeDasharray={`${filled} ${circumference - filled}`}
         strokeLinecap="round"
-        rotation="-90" origin={`${size / 2}, ${size / 2}`}
+        rotation="-90" origin={`${cx}, ${cy}`}
       />
-      <SvgText x={size / 2} y={size / 2} textAnchor="middle" dy="0.3em"
-        fontSize="28" fontWeight="bold" fill="#fff">
+      <SvgText x={cx} y={cy + 5} textAnchor="middle" fontSize="36" fontWeight="bold" fill="#fff">
         {score}
+      </SvgText>
+      <SvgText x={cx} y={cy + 30} textAnchor="middle" fontSize="11" fontWeight="600" fill="#555" letterSpacing="2">
+        PTS
       </SvgText>
     </Svg>
   )
 }
 
 function ScoreBar({ score }: { score: number }) {
-  const color = score >= 70 ? '#4CAF50' : score >= 50 ? '#FF9800' : '#F44336'
+  const color = scoreColor(score)
   return (
     <View style={barStyles.track}>
       <View style={[barStyles.fill, { width: `${score}%` as `${number}%`, backgroundColor: color }]} />
@@ -75,75 +112,164 @@ function ScoreBar({ score }: { score: number }) {
   )
 }
 
-function BodyCompositionCard({ data }: { data: BodyComposition }) {
+function HeroCard({ score, date }: { score: number; date: string }) {
+  const color = scoreColor(score)
   return (
-    <View style={s.card}>
-      <Text style={s.cardTitle}>Composição Corporal</Text>
-      <View style={s.grid}>
-        <View style={s.stat}>
-          <Text style={s.statValue}>{data.body_fat_estimate.toFixed(1)}%</Text>
-          <Text style={s.statLabel}>Gordura corporal</Text>
-        </View>
-        <View style={s.stat}>
-          <Text style={s.statValue}>{FAT_CATEGORY_LABEL[data.body_fat_category] ?? data.body_fat_category}</Text>
-          <Text style={s.statLabel}>Categoria</Text>
-        </View>
-        <View style={s.stat}>
-          <Text style={s.statValue}>{BODY_TYPE_LABEL[data.body_type] ?? data.body_type}</Text>
-          <Text style={s.statLabel}>Biotipo</Text>
-        </View>
-        <View style={s.stat}>
-          <Text style={s.statValue}>{data.fat_distribution}</Text>
-          <Text style={s.statLabel}>Distribuição</Text>
-        </View>
+    <View style={s.heroCard}>
+      <View style={s.heroTop}>
+        <Text style={s.heroTitle}>Score de Shape</Text>
+        <Text style={s.heroDate}>{formatDate(date)}</Text>
       </View>
-      {data.fat_areas.length > 0 && (
-        <View style={s.tagRow}>
-          <Text style={s.tagLabel}>Gordura localizada:</Text>
-          <View style={s.tags}>
-            {data.fat_areas.map((area) => (
-              <View key={area} style={s.tag}>
-                <Text style={s.tagText}>{area}</Text>
-              </View>
-            ))}
-          </View>
+      <View style={s.heroGauge}>
+        <ScoreGauge score={score} />
+      </View>
+      <View style={[s.levelBadge, { borderColor: color + '55' }]}>
+        <View style={[s.levelDot, { backgroundColor: color }]} />
+        <Text style={[s.levelText, { color }]}>{scoreLabel(score)}</Text>
+      </View>
+      <Text style={s.heroContext}>Baseado em 9 grupos musculares</Text>
+    </View>
+  )
+}
+
+function AssessmentCard({ text }: { text: string }) {
+  return (
+    <View style={s.assessmentCard}>
+      <Text style={s.assessmentLabel}>Avaliação do especialista</Text>
+      <Text style={s.assessmentText}>{text}</Text>
+    </View>
+  )
+}
+
+function CompactBodyComp({ data }: { data: BodyComposition }) {
+  const fatColor = data.body_fat_estimate >= 25
+    ? '#FF9800'
+    : data.body_fat_estimate >= 12
+    ? '#4CAF50'
+    : '#64B5F6'
+
+  return (
+    <View style={s.compactCard}>
+      <View style={s.compactTile}>
+        <Text style={[s.compactValue, { color: fatColor }]}>{data.body_fat_estimate.toFixed(1)}%</Text>
+        <Text style={s.compactLabel}>Gordura</Text>
+      </View>
+      <View style={s.compactDivider} />
+      <View style={s.compactTile}>
+        <Text style={s.compactValue}>{FAT_CATEGORY_LABEL[data.body_fat_category] ?? data.body_fat_category}</Text>
+        <Text style={s.compactLabel}>Categoria</Text>
+      </View>
+      <View style={s.compactDivider} />
+      <View style={s.compactTile}>
+        <Text style={s.compactValue}>{BODY_TYPE_LABEL[data.body_type] ?? data.body_type}</Text>
+        <Text style={s.compactLabel}>Biotipo</Text>
+      </View>
+    </View>
+  )
+}
+
+function FocusTip({ text }: { text: string }) {
+  return (
+    <View style={s.focusCard}>
+      <Text style={s.focusLabel}>Foco recomendado</Text>
+      <Text style={s.focusText}>{text}</Text>
+    </View>
+  )
+}
+
+function InsightsTab({ highlights, devAreas, focusTip }: { highlights: ReportSection[]; devAreas: ReportSection[]; focusTip?: string }) {
+  return (
+    <ScrollView style={{ width: SCREEN_W }} contentContainerStyle={s.tabContent}>
+      {highlights.length > 0 && (
+        <View style={s.section}>
+          <Text style={s.sectionTitle}>Pontos Fortes</Text>
+          {highlights.map((item, i) => (
+            <ReportSectionCard key={i} section={item} variant="highlight" />
+          ))}
         </View>
       )}
-    </View>
+      {devAreas.length > 0 && (
+        <View style={s.section}>
+          <Text style={s.sectionTitle}>A Desenvolver</Text>
+          {devAreas.map((item, i) => (
+            <ReportSectionCard key={i} section={item} variant="development" />
+          ))}
+        </View>
+      )}
+      {focusTip ? <FocusTip text={focusTip} /> : null}
+    </ScrollView>
   )
 }
 
-function SummaryCard({ title, text, variant }: { title: string; text: string; variant: 'strength' | 'weakness' }) {
-  const isStrength = variant === 'strength'
-  return (
-    <View style={[s.summaryCard, isStrength ? s.summaryStrength : s.summaryWeakness]}>
-      <Text style={[s.summaryTitle, isStrength ? s.summaryTitleGreen : s.summaryTitleOrange]}>
-        {title}
-      </Text>
-      <Text style={s.summaryText}>{text}</Text>
-    </View>
-  )
-}
+function MuscleRanking({ muscle_scores }: { muscle_scores: MuscleScores }) {
+  const sorted = (Object.entries(muscle_scores) as [keyof MuscleScores, { score: number }][])
+    .filter(([, data]) => data)
+    .map(([key, data]) => ({ key, score: data.score }))
+    .sort((a, b) => b.score - a.score)
 
-function MuscleBreakdown({ muscle_scores }: { muscle_scores: MuscleScores }) {
+  const top3 = sorted.slice(0, 3)
+  const bottom3 = [...sorted].reverse().slice(0, 3)
+
   return (
-    <View style={s.card}>
-      <Text style={s.cardTitle}>Pontuação Muscular</Text>
-      {MUSCLE_ORDER.map((key) => {
-        const data = muscle_scores[key as keyof MuscleScores]
-        if (!data) return null
-        return (
-          <View key={key} style={s.muscleRow}>
-            <View style={s.muscleHeader}>
-              <Text style={s.muscleName}>{MUSCLE_LABEL[key] ?? key}</Text>
-              <Text style={s.muscleScore}>{data.score}</Text>
-            </View>
-            <ScoreBar score={data.score} />
-            {data.note ? <Text style={s.muscleNote}>{data.note}</Text> : null}
+    <View style={s.rankingCard}>
+      <View style={s.rankingCol}>
+        <Text style={[s.rankingTitle, { color: '#4CAF50' }]}>Mais fortes</Text>
+        {top3.map(({ key, score }) => (
+          <View key={key} style={s.rankingRow}>
+            <View style={[s.rankingDot, { backgroundColor: '#4CAF50' }]} />
+            <Text style={s.rankingName}>{MUSCLE_LABEL[key] ?? key}</Text>
+            <Text style={[s.rankingScore, { color: '#4CAF50' }]}>{score}</Text>
           </View>
-        )
-      })}
+        ))}
+      </View>
+      <View style={s.rankingDivider} />
+      <View style={s.rankingCol}>
+        <Text style={[s.rankingTitle, { color: '#F44336' }]}>A trabalhar</Text>
+        {bottom3.map(({ key, score }) => (
+          <View key={key} style={s.rankingRow}>
+            <View style={[s.rankingDot, { backgroundColor: '#F44336' }]} />
+            <Text style={s.rankingName}>{MUSCLE_LABEL[key] ?? key}</Text>
+            <Text style={[s.rankingScore, { color: '#F44336' }]}>{score}</Text>
+          </View>
+        ))}
+      </View>
     </View>
+  )
+}
+
+function MusclesTab({ muscle_scores }: { muscle_scores: MuscleScores }) {
+  return (
+    <ScrollView style={{ width: SCREEN_W }} contentContainerStyle={s.tabContent}>
+      <MuscleRanking muscle_scores={muscle_scores} />
+      <View style={s.section}>
+        <Text style={s.sectionTitle}>Todos os grupos</Text>
+        {MUSCLE_GROUPS.map((group, gi) => {
+          const rows = group.keys
+            .map((key) => ({ key, data: muscle_scores[key as keyof MuscleScores] }))
+            .filter((r) => r.data)
+          if (rows.length === 0) return null
+          return (
+            <View key={group.label} style={gi > 0 ? s.muscleGroupGap : undefined}>
+              <Text style={s.muscleGroupLabel}>{group.label}</Text>
+              {rows.map(({ key, data }) => {
+                const color = scoreColor(data!.score)
+                return (
+                  <View key={key} style={s.muscleRow}>
+                    <View style={s.muscleHeader}>
+                      <Text style={s.muscleName}>{MUSCLE_LABEL[key] ?? key}</Text>
+                      <View style={[s.scoreChip, { borderColor: color + '66', backgroundColor: color + '18' }]}>
+                        <Text style={[s.scoreChipText, { color }]}>{data!.score}</Text>
+                      </View>
+                    </View>
+                    <ScoreBar score={data!.score} />
+                  </View>
+                )
+              })}
+            </View>
+          )
+        })}
+      </View>
+    </ScrollView>
   )
 }
 
@@ -152,6 +278,8 @@ export default function ReportScreen() {
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [currentPage, setCurrentPage] = useState(0)
+  const pagerRef = useRef<ScrollView>(null)
 
   useEffect(() => {
     if (!id) return
@@ -174,11 +302,17 @@ export default function ReportScreen() {
   }
 
   const bc = analysis.body_composition
-  const overallScore = bc?.overall_score ?? analysis.scores.overall_score ?? 50
+  const overallScore = analysis.scores.overall_score ?? 50
+  const highlights: ReportSection[] = analysis.report?.highlights ?? []
+  const devAreas: ReportSection[] = analysis.report?.development_areas ?? []
+
+  function goToTab(index: number) {
+    pagerRef.current?.scrollTo({ x: index * SCREEN_W, animated: true })
+    setCurrentPage(index)
+  }
 
   return (
-    <ScrollView style={s.scroll} contentContainerStyle={s.content}>
-      {/* Header */}
+    <View style={s.container}>
       <View style={s.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Text style={s.backBtn}>← Voltar</Text>
@@ -188,105 +322,251 @@ export default function ReportScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Score geral */}
-      <View style={s.gaugeContainer}>
-        <Text style={s.gaugeLabel}>Score Geral</Text>
-        <ScoreGauge score={overallScore} />
-        {bc?.overall_assessment ? (
-          <Text style={s.assessment}>"{bc.overall_assessment}"</Text>
-        ) : null}
+      <View style={s.tabBar}>
+        {TABS.map((tab, i) => (
+          <TouchableOpacity key={tab} style={s.tabItem} onPress={() => goToTab(i)}>
+            <Text style={[s.tabLabel, currentPage === i && s.tabLabelActive]}>{tab}</Text>
+            {currentPage === i && <View style={s.tabUnderline} />}
+          </TouchableOpacity>
+        ))}
       </View>
 
-      {/* Composição corporal */}
-      {bc && <BodyCompositionCard data={bc} />}
-
-      {/* Resumos de pontos fortes/fracos */}
-      {bc?.strengths_summary ? (
-        <SummaryCard title="Pontos Fortes" text={bc.strengths_summary} variant="strength" />
-      ) : null}
-      {bc?.weaknesses_summary ? (
-        <SummaryCard title="Pontos a Desenvolver" text={bc.weaknesses_summary} variant="weakness" />
-      ) : null}
-
-      {/* Breakdown muscular */}
-      {bc?.muscle_scores && <MuscleBreakdown muscle_scores={bc.muscle_scores} />}
-
-      {/* Plano de treino */}
-      <TouchableOpacity
-        style={s.workoutButton}
-        onPress={() => router.push(`/(app)/analysis/${id}/workout`)}
+      <ScrollView
+        ref={pagerRef}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={(e) => {
+          const page = Math.round(e.nativeEvent.contentOffset.x / SCREEN_W)
+          setCurrentPage(page)
+        }}
+        style={s.pager}
       >
-        <Text style={s.workoutButtonText}>Ver Plano de Treino →</Text>
-      </TouchableOpacity>
+        {/* Aba 1 — Resultado */}
+        <ScrollView style={{ width: SCREEN_W }} contentContainerStyle={s.tabContent}>
+          <HeroCard score={overallScore} date={analysis.completed_at} />
+          {bc?.overall_assessment ? <AssessmentCard text={bc.overall_assessment} /> : null}
+          {bc ? <CompactBodyComp data={bc} /> : null}
+          <TouchableOpacity
+            style={s.workoutButton}
+            onPress={() => router.push(`/(app)/analysis/${id}/workout`)}
+          >
+            <Text style={s.workoutButtonText}>Ver Plano de Treino</Text>
+            <Text style={s.workoutButtonArrow}>→</Text>
+          </TouchableOpacity>
+          <Text style={s.disclaimerText}>
+            Estimativa baseada em análise visual. Consulte um profissional de saúde antes de iniciar qualquer programa de exercícios.
+          </Text>
+        </ScrollView>
 
-      <View style={s.disclaimer}>
-        <Text style={s.disclaimerText}>
-          Este relatório é uma estimativa baseada em análise visual e não substitui avaliação
-          profissional de saúde. Consulte um profissional antes de iniciar qualquer programa de exercícios.
-        </Text>
-      </View>
-    </ScrollView>
+        {/* Aba 2 — Insights */}
+        <InsightsTab highlights={highlights} devAreas={devAreas} focusTip={bc?.weaknesses_summary} />
+
+        {/* Aba 3 — Músculos */}
+        {bc?.muscle_scores
+          ? <MusclesTab muscle_scores={bc.muscle_scores} />
+          : <View style={{ width: SCREEN_W }} />
+        }
+      </ScrollView>
+    </View>
   )
 }
 
 const s = StyleSheet.create({
-  scroll: { flex: 1, backgroundColor: '#0A0A0A' },
-  content: { padding: 24, paddingBottom: 48 },
+  container: { flex: 1, backgroundColor: '#0A0A0A' },
   center: { flex: 1, backgroundColor: '#0A0A0A', justifyContent: 'center', alignItems: 'center' },
-  errorText: { color: '#888', fontSize: 16, textAlign: 'center' },
+  errorText: { color: '#666', fontSize: 16, textAlign: 'center' },
 
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 12,
+  },
   backBtn: { color: '#4CAF50', fontSize: 16, fontWeight: '600' },
-  historyBtn: { color: '#888', fontSize: 14 },
+  historyBtn: { color: '#555', fontSize: 14 },
 
-  gaugeContainer: { alignItems: 'center', marginBottom: 28, gap: 12 },
-  gaugeLabel: { color: '#888', fontSize: 14 },
-  assessment: { color: '#4CAF50', fontSize: 13, fontStyle: 'italic', textAlign: 'center', paddingHorizontal: 8, lineHeight: 20 },
+  tabBar: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#1A1A1A',
+    marginHorizontal: 20,
+  },
+  tabItem: { flex: 1, alignItems: 'center', paddingBottom: 10 },
+  tabLabel: { color: '#444', fontSize: 13, fontWeight: '600' },
+  tabLabelActive: { color: '#fff' },
+  tabUnderline: { position: 'absolute', bottom: 0, height: 2, width: '60%', backgroundColor: '#4CAF50', borderRadius: 1 },
 
-  card: {
+  pager: { flex: 1 },
+  tabContent: { padding: 20, paddingBottom: 52 },
+
+  // Hero
+  heroCard: {
     backgroundColor: '#111',
-    borderRadius: 14,
-    padding: 18,
-    marginBottom: 16,
+    borderRadius: 20,
+    padding: 28,
+    alignItems: 'center',
+    marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#222',
+    borderColor: '#1E1E1E',
     gap: 14,
   },
-  cardTitle: { color: '#888', fontSize: 11, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 },
+  heroTop: { alignItems: 'center', gap: 4 },
+  heroTitle: { color: '#bbb', fontSize: 16, fontWeight: '700', letterSpacing: 0.3 },
+  heroDate: { color: '#444', fontSize: 12, letterSpacing: 0.5 },
+  heroGauge: { marginVertical: 4 },
+  levelBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    borderWidth: 1,
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 5,
+  },
+  levelDot: { width: 6, height: 6, borderRadius: 3 },
+  levelText: { fontSize: 13, fontWeight: '600' },
+  heroContext: { color: '#333', fontSize: 12, letterSpacing: 0.3 },
 
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  stat: { flex: 1, minWidth: '45%', backgroundColor: '#1A1A1A', borderRadius: 10, padding: 12, alignItems: 'center' },
-  statValue: { color: '#fff', fontSize: 16, fontWeight: '700', marginBottom: 2, textAlign: 'center' },
-  statLabel: { color: '#666', fontSize: 11, textAlign: 'center' },
+  // Assessment
+  assessmentCard: {
+    backgroundColor: '#111',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#1E1E1E',
+    gap: 10,
+  },
+  assessmentLabel: {
+    color: '#444',
+    fontSize: 10,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+  },
+  assessmentText: { color: '#ccc', fontSize: 15, lineHeight: 24 },
 
-  tagRow: { gap: 6 },
-  tagLabel: { color: '#888', fontSize: 12 },
-  tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  tag: { backgroundColor: '#2A1A00', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: '#FF9800' },
-  tagText: { color: '#FF9800', fontSize: 12 },
+  // Compact body comp
+  compactCard: {
+    flexDirection: 'row',
+    backgroundColor: '#111',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#1E1E1E',
+  },
+  compactTile: { flex: 1, alignItems: 'center', gap: 4 },
+  compactValue: { color: '#e0e0e0', fontSize: 14, fontWeight: '700', textAlign: 'center' },
+  compactLabel: { color: '#444', fontSize: 10, letterSpacing: 0.3 },
+  compactDivider: { width: 1, backgroundColor: '#1E1E1E', marginVertical: 4 },
 
-  summaryCard: { borderRadius: 14, padding: 16, marginBottom: 16, borderWidth: 1 },
-  summaryStrength: { backgroundColor: '#0D1F0D', borderColor: '#2E5E2E' },
-  summaryWeakness: { backgroundColor: '#1F1200', borderColor: '#5E3A00' },
-  summaryTitle: { fontSize: 13, fontWeight: '700', marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.5 },
-  summaryTitleGreen: { color: '#4CAF50' },
-  summaryTitleOrange: { color: '#FF9800' },
-  summaryText: { color: '#ccc', fontSize: 14, lineHeight: 21 },
+  // Sections (Insights + Muscles tabs)
+  section: {
+    backgroundColor: '#111',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#1E1E1E',
+    gap: 14,
+  },
+  sectionTitle: {
+    color: '#444',
+    fontSize: 10,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+  },
 
-  muscleRow: { gap: 6, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: '#1A1A1A' },
+  // Focus tip
+  focusCard: {
+    backgroundColor: '#0E1A0E',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#1E3A1E',
+    gap: 10,
+  },
+  focusLabel: {
+    color: '#4CAF50',
+    fontSize: 10,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1.5,
+  },
+  focusText: { color: '#bbb', fontSize: 14, lineHeight: 22 },
+
+  // Muscle ranking
+  rankingCard: {
+    flexDirection: 'row',
+    backgroundColor: '#111',
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#1E1E1E',
+    gap: 12,
+  },
+  rankingCol: { flex: 1, gap: 10 },
+  rankingTitle: { fontSize: 10, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 2 },
+  rankingRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  rankingDot: { width: 6, height: 6, borderRadius: 3 },
+  rankingName: { flex: 1, color: '#ccc', fontSize: 13 },
+  rankingScore: { fontSize: 13, fontWeight: '700' },
+  rankingDivider: { width: 1, backgroundColor: '#1E1E1E' },
+
+  // Muscle breakdown
+  muscleGroupGap: { marginTop: 16 },
+  muscleGroupLabel: {
+    color: '#333',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    marginBottom: 8,
+  },
+  muscleRow: { gap: 6, marginBottom: 10 },
   muscleHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  muscleName: { color: '#fff', fontSize: 14, fontWeight: '600' },
-  muscleScore: { color: '#4CAF50', fontSize: 15, fontWeight: '700' },
-  muscleNote: { color: '#666', fontSize: 12, lineHeight: 18 },
+  muscleName: { color: '#ccc', fontSize: 14, fontWeight: '500' },
+  scoreChip: {
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+  },
+  scoreChipText: { fontSize: 13, fontWeight: '700' },
 
-  workoutButton: { backgroundColor: '#4CAF50', borderRadius: 12, padding: 16, alignItems: 'center', marginTop: 8, marginBottom: 24 },
-  workoutButtonText: { color: '#fff', fontSize: 16, fontWeight: '700' },
+  // CTA
+  workoutButton: {
+    backgroundColor: '#0E1E0E',
+    borderRadius: 14,
+    padding: 18,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#254025',
+    gap: 8,
+  },
+  workoutButtonText: { color: '#4CAF50', fontSize: 16, fontWeight: '700' },
+  workoutButtonArrow: { color: '#4CAF50', fontSize: 18 },
 
-  disclaimer: { backgroundColor: '#111', borderRadius: 10, padding: 16, borderWidth: 1, borderColor: '#1E1E1E' },
-  disclaimerText: { color: '#555', fontSize: 12, lineHeight: 18, textAlign: 'center' },
+  disclaimerText: {
+    color: '#2A2A2A',
+    fontSize: 11,
+    lineHeight: 17,
+    textAlign: 'center',
+  },
 })
 
 const barStyles = StyleSheet.create({
-  track: { height: 6, backgroundColor: '#1E1E1E', borderRadius: 3, overflow: 'hidden' },
-  fill: { height: 6, borderRadius: 3 },
+  track: { height: 8, backgroundColor: '#1A1A1A', borderRadius: 4, overflow: 'hidden' },
+  fill: { height: 8, borderRadius: 4 },
 })

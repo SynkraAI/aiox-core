@@ -17,10 +17,13 @@ def get_analysis(analysis_id: str) -> Optional[dict]:
         with conn.cursor() as cur:
             cur.execute(
                 """SELECT a.id, a.user_id, a.status,
-                          a.photo_front_url, a.photo_back_url,
-                          u.goal, u.sex, u.age, u.height_cm, u.weight_kg
+                          a.photo_front_url, a.photo_side_url, a.photo_back_url,
+                          p.biological_sex AS sex,
+                          p.primary_goal   AS goal,
+                          p.height_cm,
+                          p.weight_kg
                    FROM analyses a
-                   JOIN users u ON u.id = a.user_id
+                   LEFT JOIN user_profiles p ON p.user_id = a.user_id
                    WHERE a.id = %s""",
                 (analysis_id,),
             )
@@ -35,6 +38,7 @@ def mark_photos_deleted(analysis_id: str) -> None:
             cur.execute(
                 """UPDATE analyses
                    SET photo_front_url = NULL,
+                       photo_side_url  = NULL,
                        photo_back_url  = NULL,
                        photos_deleted_at = NOW()
                    WHERE id = %s""",
