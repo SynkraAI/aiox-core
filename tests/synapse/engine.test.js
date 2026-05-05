@@ -251,6 +251,12 @@ describe('SynapseEngine', () => {
       // rollout. The constructor should never instantiate more than L0-L7.
       expect(engine.layers.length).toBeLessThanOrEqual(8);
     });
+
+    test('should only instantiate known pipeline layers', () => {
+      const layerIds = engine.layers.map(layer => layer.layer);
+      expect(layerIds).toEqual(expect.arrayContaining([0, 1, 2]));
+      expect(layerIds.every(layerId => layerId >= 0 && layerId <= 7)).toBe(true);
+    });
   });
 
   describe('process() — basic pipeline', () => {

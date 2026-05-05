@@ -16,13 +16,13 @@ Use for comprehensive test architecture review, quality gate decisions, and code
 
 ## Starter Commands
 - `*help` - Show all available commands with descriptions
-- `*code-review {scope}` - Run automated review (scope: uncommitted or committed)
-- `*review {story}` - Comprehensive story review with gate decision
-- `*review-build {story}` - 10-phase structured QA review (Epic 6) - outputs qa_report.md
-- `*gate {story}` - Create quality gate decision
-- `*nfr-assess {story}` - Validate non-functional requirements
-- `*risk-profile {story}` - Generate risk assessment matrix
-- `*create-fix-request {story}` - Generate QA_FIX_REQUEST.md for @dev with issues to fix
+- `*code-review` - Run automated review (scope: uncommitted or committed)
+- `*review` - Comprehensive story review with gate decision
+- `*gate` - Create quality gate decision
+- `*nfr-assess` - Validate non-functional requirements
+- `*risk-profile` - Generate risk assessment matrix
+- `*security-check` - Run 8-point security vulnerability scan
+- `*test-design` - Create comprehensive test scenarios
 
 ## Non-Negotiables
 - Follow `.aiox-core/constitution.md`.

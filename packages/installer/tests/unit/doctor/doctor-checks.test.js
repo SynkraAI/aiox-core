@@ -35,8 +35,20 @@ const mockContext = {
   options: { fix: false, json: false, dryRun: false, quiet: false },
 };
 
+const dirEntry = (name) => ({
+  name,
+  isDirectory: () => true,
+  isFile: () => false,
+});
+
+const fileEntry = (name) => ({
+  name,
+  isDirectory: () => false,
+  isFile: () => true,
+});
+
 beforeEach(() => {
-  jest.clearAllMocks();
+  jest.resetAllMocks();
 });
 
 describe('node-version check', () => {
@@ -355,8 +367,10 @@ describe('ide-sync check', () => {
   it('should PASS when counts match', async () => {
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
-      if (p.includes('commands')) return ['dev.md', 'qa.md'];
-      return ['dev.md', 'qa.md'];
+      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('qa')];
+      if (p.includes('.claude/commands')) return ['dev.md', 'qa.md'];
+      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      return [];
     });
 
     const result = await ideSyncCheck.run(mockContext);
@@ -366,12 +380,41 @@ describe('ide-sync check', () => {
   it('should WARN when counts mismatch', async () => {
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
+      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('qa')];
       if (p.includes('commands')) return ['dev.md', 'qa.md', 'pm.md'];
-      return ['dev.md', 'qa.md'];
+      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      return [];
     });
 
     const result = await ideSyncCheck.run(mockContext);
     expect(result.status).toBe('WARN');
+  });
+
+  it('should WARN when counts match but agent identities mismatch', async () => {
+    fs.existsSync.mockReturnValue(true);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('pm')];
+      if (p.includes('.claude/commands')) return ['dev.md', 'qa.md'];
+      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      return [];
+    });
+
+    const result = await ideSyncCheck.run(mockContext);
+    expect(result.status).toBe('WARN');
+    expect(result.message).toContain('missing: qa');
+    expect(result.message).toContain('extra: pm');
+  });
+
+  it('should FAIL when Claude directories cannot be read', async () => {
+    fs.existsSync.mockReturnValue(true);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      throw new Error('permission denied');
+    });
+
+    const result = await ideSyncCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+    expect(result.message).toContain('permission denied');
   });
 });
 
@@ -380,12 +423,13 @@ describe('ide-sync check', () => {
 describe('skills-count check', () => {
   it('should PASS when >=7 skills directories with SKILL.md', async () => {
     fs.existsSync.mockReturnValue(true);
-    const dirs = Array.from({ length: 8 }, (_, i) => ({
-      name: `skill-${i}`,
-      isDirectory: () => true,
-      isFile: () => false,
-    }));
-    fs.readdirSync.mockReturnValue(dirs);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.endsWith(path.join('.claude', 'skills'))) {
+        return Array.from({ length: 8 }, (_, i) => dirEntry(`skill-${i}`));
+      }
+      if (p.includes(`${path.sep}skill-`)) return [fileEntry('SKILL.md')];
+      return [];
+    });
 
     const result = await skillsCountCheck.run(mockContext);
     expect(result.check).toBe('skills-count');
@@ -399,12 +443,13 @@ describe('skills-count check', () => {
       if (p.includes('SKILL.md')) return true;
       return true;
     });
-    const dirs = Array.from({ length: 3 }, (_, i) => ({
-      name: `skill-${i}`,
-      isDirectory: () => true,
-      isFile: () => false,
-    }));
-    fs.readdirSync.mockReturnValue(dirs);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.endsWith(path.join('.claude', 'skills'))) {
+        return Array.from({ length: 3 }, (_, i) => dirEntry(`skill-${i}`));
+      }
+      if (p.includes(`${path.sep}skill-`)) return [fileEntry('SKILL.md')];
+      return [];
+    });
 
     const result = await skillsCountCheck.run(mockContext);
     expect(result.status).toBe('WARN');
@@ -416,8 +461,10 @@ describe('skills-count check', () => {
       if (p.includes('SKILL.md')) return false;
       return true;
     });
-    const dirs = [{ name: 'empty', isDirectory: () => true, isFile: () => false }];
-    fs.readdirSync.mockReturnValue(dirs);
+    fs.readdirSync.mockImplementation((p) => {
+      if (p.endsWith(path.join('.claude', 'skills'))) return [dirEntry('empty')];
+      return [];
+    });
 
     const result = await skillsCountCheck.run(mockContext);
     expect(result.status).toBe('FAIL');
@@ -428,6 +475,19 @@ describe('skills-count check', () => {
     fs.existsSync.mockReturnValue(false);
     const result = await skillsCountCheck.run(mockContext);
     expect(result.status).toBe('FAIL');
+  });
+
+  it('should FAIL when skills directory cannot be read', async () => {
+    fs.existsSync.mockReturnValue(true);
+    fs.readdirSync.mockImplementation(() => {
+      const error = new Error('permission denied');
+      error.code = 'EACCES';
+      throw error;
+    });
+
+    const result = await skillsCountCheck.run(mockContext);
+    expect(result.status).toBe('FAIL');
+    expect(result.message).toContain('permission denied');
   });
 });
 

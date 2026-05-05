@@ -69,6 +69,11 @@ describe('schema-validation — enriched schemas', () => {
       expect(schema.additionalProperties).toBe(false);
     });
 
+    test('ide sync target schema accepts skillsPath for skills-first IDEs', () => {
+      const targetSchema = schema.properties.ide_sync_system.properties.targets.additionalProperties;
+      expect(targetSchema.properties).toHaveProperty('skillsPath');
+    });
+
     test('validates real framework-config.yaml without errors', () => {
       const data = loadYaml('framework-config.yaml');
       const validate = ajv.compile(schema);

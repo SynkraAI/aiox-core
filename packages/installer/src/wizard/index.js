@@ -36,6 +36,7 @@ const {
   installDependencies,
 } = require('../installer/dependency-installer');
 const { commandSync, commandValidate } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/index');
+const { syncSkills: syncCodexSkills } = require('../../../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
 const {
   installAioxCore,
   hasPackageJson,
@@ -625,6 +626,23 @@ async function runWizard(options = {}) {
       process.chdir(savedCwd);
     }
 
+    // ACORE-SKILLS.7: Generate Codex local skills in installed projects.
+    console.log('\n🧩 Running Codex skills sync...');
+    try {
+      const codexSkillsResult = syncCodexSkills({
+        sourceDir: path.join(targetProjectRoot, '.aiox-core', 'development', 'agents'),
+        localSkillsDir: path.join(targetProjectRoot, '.codex', 'skills'),
+        dryRun: false,
+      });
+      answers.codexSkillsStatus = 'synced';
+      answers.codexSkillsGenerated = codexSkillsResult.generated;
+      console.log(`✅ Codex skills: ${codexSkillsResult.generated} generated`);
+    } catch (codexSkillsError) {
+      console.warn(`⚠️  Codex skills sync failed: ${codexSkillsError.message} — run 'npm run sync:skills:codex' post-install`);
+      answers.codexSkillsStatus = 'failed';
+      answers.codexSkillsGenerated = 0;
+    }
+
     // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
     // Story INS-4.12: Fix module resolution + bootstrap timing
     // Bootstrap runs AFTER .aiox-core deps are installed (aiox-core-installer.js:324-345)
@@ -777,38 +795,44 @@ async function runWizard(options = {}) {
           console.error(`  ${depsResult.errorMessage}`);
           console.error(`  Solution: ${depsResult.solution}`);
 
-          // Ask user if they want to retry
-          const { retryDeps } = await inquirer.prompt([
-            {
-              type: 'confirm',
-              name: 'retryDeps',
-              message: 'Retry dependency installation?',
-              default: true,
-            },
-          ]);
-
-          if (retryDeps) {
-            // Recursive retry with exponential backoff (built into installDependencies)
-            const retryResult = await installDependencies({
-              packageManager: answers.packageManager,
-              projectPath: projectPath,
-            });
-
-            if (retryResult.success) {
-              console.log(`\n✅ Dependencies installed with ${retryResult.packageManager}!`);
-              answers.depsInstalled = true;
-              answers.depsResult = retryResult;
-            } else {
-              console.log(
-                '\n⚠️  Installation still failed. You can run `npm install` manually later.',
-              );
-              answers.depsInstalled = false;
-              answers.depsResult = retryResult;
-            }
-          } else {
-            console.log('\n⚠️  Skipping dependency installation. Run manually with `npm install`.');
+          if (options.quiet || options.ci || process.env.CI === '1') {
             answers.depsInstalled = false;
             answers.depsResult = depsResult;
+            console.log('\n⚠️  Skipping dependency retry in non-interactive mode.');
+          } else {
+            // Ask user if they want to retry
+            const { retryDeps } = await inquirer.prompt([
+              {
+                type: 'confirm',
+                name: 'retryDeps',
+                message: 'Retry dependency installation?',
+                default: true,
+              },
+            ]);
+
+            if (retryDeps) {
+              // Recursive retry with exponential backoff (built into installDependencies)
+              const retryResult = await installDependencies({
+                packageManager: answers.packageManager,
+                projectPath: projectPath,
+              });
+
+              if (retryResult.success) {
+                console.log(`\n✅ Dependencies installed with ${retryResult.packageManager}!`);
+                answers.depsInstalled = true;
+                answers.depsResult = retryResult;
+              } else {
+                console.log(
+                  '\n⚠️  Installation still failed. You can run `npm install` manually later.',
+                );
+                answers.depsInstalled = false;
+                answers.depsResult = retryResult;
+              }
+            } else {
+              console.log('\n⚠️  Skipping dependency installation. Run manually with `npm install`.');
+              answers.depsInstalled = false;
+              answers.depsResult = depsResult;
+            }
           }
         }
       } catch (error) {
