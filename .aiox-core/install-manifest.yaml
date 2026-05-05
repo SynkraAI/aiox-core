@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-28T14:34:49.346Z"
+generated_at: "2026-05-05T11:39:30.266Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1091
 files:
@@ -101,9 +101,9 @@ files:
     type: cli
     size: 12326
   - path: cli/commands/pro/buyer.js
-    hash: sha256:ed972e1b46873fd4d5de12ab7b4e0fe1b7e7df6ec47f49cc1a3f7ec59c1a770a
+    hash: sha256:e52a15ccdbfef9071535a0bc725c9448ac5d9a563ff7b12708f9a73f508304be
     type: cli
-    size: 10945
+    size: 11375
   - path: cli/commands/pro/index.js
     hash: sha256:f3382f226d7da791e294a5c6a2deb0cda7dcefb2825519da301fec7dd3cc1290
     type: cli

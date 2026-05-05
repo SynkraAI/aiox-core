@@ -286,13 +286,24 @@ async function validateBatchAction(options) {
 // aiox pro buyer register — Wave 2 stub (hidden until endpoint exists)
 // ---------------------------------------------------------------------------
 
-async function registerAction() {
-  process.stderr.write(
-    '\nOperação `register` pendente (Wave 2 da Story 123.8).\n' +
-    'Depende do endpoint POST /api/v1/admin/buyers/register no repo aiox-license-server,\n' +
-    'que ainda não foi implementado.\n\n' +
-    'Acompanhe em docs/stories/epic-123/STORY-123.8-cohort-buyer-cli-migration.md\n',
-  );
+async function registerAction(options = {}) {
+  if (options.json) {
+    process.stdout.write(
+      JSON.stringify({
+        status: 'pending_wave_2',
+        message: '`register` pendente (Wave 2 da Story 123.8).',
+        reason: 'Endpoint POST /api/v1/admin/buyers/register em aiox-license-server ainda não foi implementado.',
+        story: 'docs/stories/epic-123/STORY-123.8-cohort-buyer-cli-migration.md',
+      }) + '\n',
+    );
+  } else {
+    process.stderr.write(
+      '\nOperação `register` pendente (Wave 2 da Story 123.8).\n' +
+      'Depende do endpoint POST /api/v1/admin/buyers/register no repo aiox-license-server,\n' +
+      'que ainda não foi implementado.\n\n' +
+      'Acompanhe em docs/stories/epic-123/STORY-123.8-cohort-buyer-cli-migration.md\n',
+    );
+  }
   process.exit(2);
 }
 

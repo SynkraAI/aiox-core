@@ -172,9 +172,23 @@ describe('Story 123.8 — buyer CLI internals', () => {
 
 // ---------------------------------------------------------------------------
 // End-to-end subprocess integration (AC1, AC2, AC10)
+//
+// These tests spawn the CLI which calls into pro/license/license-api.js.
+// pro/ submodule is intentionally NOT checked out in ci.yml (see ADR-PRO-001,
+// Story PRO-5 AC-7); real integration runs in pro-integration.yml. We detect
+// pro availability and skip when absent so ci.yml stays green.
 // ---------------------------------------------------------------------------
 
-describe('Story 123.8 — buyer CLI subprocess E2E', () => {
+const isProSubmoduleAvailable = (() => {
+  try {
+    require.resolve(path.resolve(__dirname, '..', '..', 'pro', 'license', 'license-api.js'));
+    return true;
+  } catch {
+    return false;
+  }
+})();
+
+(isProSubmoduleAvailable ? describe : describe.skip)('Story 123.8 — buyer CLI subprocess E2E', () => {
   let server;
   let serverUrl;
 

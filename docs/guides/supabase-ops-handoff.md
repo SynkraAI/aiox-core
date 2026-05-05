@@ -239,11 +239,14 @@ Regra prática:
 Toda task deve seguir esta ordem, mesmo quando parecer óbvio o que está errado:
 
 1. `check-email`
-2. `auth admin` por e-mail
-3. `buyers` por e-mail
-4. `login` se houver senha
+2. `login` se houver senha (read-only, classifica auth rapidamente)
+3. `auth admin` por e-mail
+4. `buyers` por e-mail
 5. `buyer_validations` apenas se houver dúvida de cache/estado intermediário
-6. `licenses` e `activations` apenas se o problema incluir ativação/licença/máquina
+6. `licenses` por `customer_email` apenas se o problema incluir licença
+7. `activations` apenas se o problema incluir máquina/seat
+
+> Esta ordem é a mesma da seção [Better Triage Order In Practice](#better-triage-order-in-practice) abaixo — única lista canônica. `check-email + login` classifica a maioria dos casos sem write.
 
 Justificativa:
 

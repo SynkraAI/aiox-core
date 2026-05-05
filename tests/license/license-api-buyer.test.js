@@ -3,6 +3,10 @@
  *
  * Covers validateBuyer() which wraps POST /api/v1/auth/check-email.
  *
+ * Requires pro/ submodule. Tests skip gracefully in CI where the submodule
+ * is intentionally not initialized (see ADR-PRO-001, Story PRO-5 AC-7,
+ * .github/workflows/ci.yml). Real pro-integration runs in pro-integration.yml.
+ *
  * @see Story 123.8 — Cohort Buyer CLI Migration
  * @see AC1, AC2, AC7, AC10
  */
@@ -10,10 +14,19 @@
 'use strict';
 
 const http = require('http');
-const { LicenseApiClient } = require('../../pro/license/license-api');
-const { AuthError } = require('../../pro/license/errors');
 
-describe('license-api buyer methods (Story 123.8 — Wave 1)', () => {
+let LicenseApiClient;
+let AuthError;
+try {
+  ({ LicenseApiClient } = require('../../pro/license/license-api'));
+  ({ AuthError } = require('../../pro/license/errors'));
+} catch {
+  // pro/ submodule not available (CI environment) — describe.skip below
+}
+
+const isProAvailable = !!LicenseApiClient;
+
+(isProAvailable ? describe : describe.skip)('license-api buyer methods (Story 123.8 — Wave 1)', () => {
   let server;
   let serverUrl;
 
