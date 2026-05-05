@@ -22,6 +22,7 @@ const { Command } = require('commander');
 const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
+const { createBuyerCommand } = require('./buyer');
 
 // BUG-6 fix (INS-1): Dynamic licensePath resolution
 // In framework-dev: __dirname = aiox-core/.aiox-core/cli/commands/pro → ../../../../pro/license
@@ -827,6 +828,9 @@ function createProCommand() {
     .option('--include-core', 'Also update aiox-core')
     .option('--skip-scaffold', 'Skip re-scaffolding assets after update')
     .action(updateAction);
+
+  // aiox pro buyer — Cohort admin operations (Story 123.8)
+  proCmd.addCommand(createBuyerCommand());
 
   return proCmd;
 }
