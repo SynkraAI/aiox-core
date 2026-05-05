@@ -54,6 +54,7 @@ function globToRegex(glob) {
   pattern = pattern.replace(/\*/g, '[^/]+');
 
   // 4. Restore ** placeholder to any-depth matcher
+  // eslint-disable-next-line no-control-regex
   pattern = pattern.replace(/\u0000/g, '.+');
 
   // If pattern ends with .+ (was **), match prefix

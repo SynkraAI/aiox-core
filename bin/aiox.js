@@ -8,8 +8,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const { execSync } = require('child_process');
-
 // Read package.json for version
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));

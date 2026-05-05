@@ -87,7 +87,7 @@ describe('Layer Preservation — Registry Healer (AC: 6)', () => {
     expect(healerContent).toContain('orphaned-usedBy');
 
     // The healer should NOT have any code that strips or deletes the 'layer' field
-    expect(healerContent).not.toContain("delete entity.layer");
+    expect(healerContent).not.toContain('delete entity.layer');
     expect(healerContent).not.toContain("delete entity['layer']");
   });
 

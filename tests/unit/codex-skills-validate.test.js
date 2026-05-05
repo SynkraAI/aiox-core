@@ -87,4 +87,22 @@ describe('Codex Skills Validator', () => {
     expect(result.ok).toBe(false);
     expect(result.orphaned).toContain('aiox-legacy');
   });
+
+  it('fails in strict mode when a legacy aios-* alias dir exists for a core agent', () => {
+    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    const legacyPath = path.join(skillsDir, 'aios-dev');
+    fs.mkdirSync(legacyPath, { recursive: true });
+    fs.writeFileSync(path.join(legacyPath, 'SKILL.md'), '# legacy', 'utf8');
+
+    const result = validateCodexSkills({
+      projectRoot: tmpRoot,
+      sourceDir,
+      skillsDir,
+      strict: true,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.legacy).toContain('aios-dev');
+    expect(result.errors.some(error => error.includes('Legacy skill alias directory'))).toBe(true);
+  });
 });

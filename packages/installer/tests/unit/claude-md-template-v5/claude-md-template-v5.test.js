@@ -10,7 +10,7 @@ const {
 
 const TEMPLATE_PATH = path.join(
   __dirname, '..', '..', '..', '..', '..', '.aiox-core',
-  'product', 'templates', 'ide-rules', 'claude-rules.md'
+  'product', 'templates', 'ide-rules', 'claude-rules.md',
 );
 
 describe('CLAUDE.md Template v5 (Story INS-4.4)', () => {

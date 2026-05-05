@@ -217,19 +217,19 @@ cp hook/synapse-engine.cjs <your-project>/.claude/hooks/
 
 Add to \`.claude/settings.local.json\`:
 
-\`\`\`json
+~~~json
 {
   "hooks": {
     "UserPromptSubmit": [
       {
         "type": "command",
-        "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/synapse-engine.cjs\"",
+        "command": "node \\"$CLAUDE_PROJECT_DIR/.claude/hooks/synapse-engine.cjs\\"",
         "timeout": 10
       }
     ]
   }
 }
-\`\`\`
+~~~
 
 ### 4. Copy Runtime Domains
 

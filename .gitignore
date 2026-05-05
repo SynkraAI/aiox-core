@@ -347,6 +347,7 @@ scripts/glue/
 .claude/agents/
 .claude/agent-memory/
 .claude/setup/
+.agents/
 docs/guides/aiox-workflows/
 
 # Local Gemini project rules generated/managed per workspace

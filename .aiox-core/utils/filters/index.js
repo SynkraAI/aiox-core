@@ -112,7 +112,7 @@ function applyFilter(toolName, input, overrideConfig, registryPath) {
         filter_type: 'field',
       };
 
-    default:
+    default: {
       // Unknown filter type — pass through
       const serialized = typeof input === 'string' ? input : JSON.stringify(input, null, 2);
       return {
@@ -122,6 +122,7 @@ function applyFilter(toolName, input, overrideConfig, registryPath) {
         reduction_pct: 0,
         filter_type: 'unknown',
       };
+    }
   }
 }
 
