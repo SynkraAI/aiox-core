@@ -240,6 +240,17 @@ ids_hooks:
     action: 'FrameworkGovernor.postRegister(filePath, metadata)'
     mode: automatic
     description: 'Auto-register new entities in the IDS Entity Registry after creation'
+  pre_proposal:
+    trigger: '*propose-modification | *create | *modify | when agent is about to suggest an architectural/strategic approach'
+    action: 'grep -ri "{intent_keywords}" .out-of-scope/'
+    mode: advisory
+    description: 'Check rejection knowledge base before proposing approach — surfaces past dead-ends with reasoning. If match found, present to user and ask if "Trigger to revisit" conditions are met. Pattern adopted from mattpocock/skills 05/Mai/2026.'
+
+# Project Context Loading (Pocock-style, adopted 05/Mai/2026)
+project_context_loading:
+  trigger: 'When user mentions a project (bretda, tocks, polymarket, vorza, low-ticket-10k, tcc-enfermagem, etc.) OR when working in docs/projects/{project}/'
+  action: 'Read docs/projects/{project}/00-context/CONTEXT.md FIRST'
+  description: 'Load project-specific glossary, IDs, constraints, and known dead-ends BEFORE proposing or implementing. Reduces re-explanation tokens and prevents naming drift cross-session.'
 
 security:
   authorization:
