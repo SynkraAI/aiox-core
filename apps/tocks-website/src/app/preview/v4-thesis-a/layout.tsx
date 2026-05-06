@@ -14,9 +14,9 @@ import localFont from 'next/font/local'
 
 const libreCaslon = localFont({
   src: [
-    { path: '../../../../../public/fonts/libre-caslon-text/LibreCaslonText-Regular.ttf', weight: '400', style: 'normal' },
-    { path: '../../../../../public/fonts/libre-caslon-text/LibreCaslonText-Italic.ttf', weight: '400', style: 'italic' },
-    { path: '../../../../../public/fonts/libre-caslon-text/LibreCaslonText-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../../../../public/fonts/libre-caslon-text/LibreCaslonText-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../../../../public/fonts/libre-caslon-text/LibreCaslonText-Italic.ttf', weight: '400', style: 'italic' },
+    { path: '../../../../public/fonts/libre-caslon-text/LibreCaslonText-Bold.ttf', weight: '700', style: 'normal' },
   ],
   variable: '--font-thesis-a-display',
   display: 'swap',
@@ -24,10 +24,10 @@ const libreCaslon = localFont({
 
 const poppins = localFont({
   src: [
-    { path: '../../../../../public/fonts/poppins/Poppins-Regular.ttf', weight: '400', style: 'normal' },
-    { path: '../../../../../public/fonts/poppins/Poppins-Medium.ttf', weight: '500', style: 'normal' },
-    { path: '../../../../../public/fonts/poppins/Poppins-SemiBold.ttf', weight: '600', style: 'normal' },
-    { path: '../../../../../public/fonts/poppins/Poppins-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../../../../public/fonts/poppins/Poppins-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../../../../public/fonts/poppins/Poppins-Medium.ttf', weight: '500', style: 'normal' },
+    { path: '../../../../public/fonts/poppins/Poppins-SemiBold.ttf', weight: '600', style: 'normal' },
+    { path: '../../../../public/fonts/poppins/Poppins-Bold.ttf', weight: '700', style: 'normal' },
   ],
   variable: '--font-thesis-a-sans',
   display: 'swap',
