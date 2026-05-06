@@ -1,0 +1,39 @@
+name: AIOS Core - CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x] # Atualizado: Removido Node 18 (EOL), adicionado Node 22 (LTS)
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Linter (Quality Gate)
+      run: npm run lint --if-present
+
+    - name: Run Unit Tests (SimulatedLLM Mode)
+      run: npm test
+      env:
+        CI: true
