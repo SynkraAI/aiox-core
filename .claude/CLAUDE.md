@@ -74,6 +74,7 @@ Arquivos em `.claude/rules/` — carregados automaticamente:
 | `story-lifecycle.md` | Status flow, checklists de validação e QA gate |
 | `ids-principles.md` | REUSE > ADAPT > CREATE + verification gates G1–G6 |
 | `agent-handoff.md` | Regras de handoff entre agentes |
+| `handoff-consolidation.md` | Consolida handoffs em RUN-LOG.md ao atingir 5+ por pipeline |
 | `agent-memory-imports.md` | Imports de memória por agente |
 | `mcp-usage.md` | Uso de MCP tools |
 | `tool-examples.md` | Exemplos de uso das tools |
