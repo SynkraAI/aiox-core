@@ -18,6 +18,7 @@ const fs = require('fs').promises;
 const yaml = require('js-yaml');
 const {
   UnifiedActivationPipeline,
+  LOADER_TIERS,
 } = require('../../.aiox-core/development/scripts/unified-activation-pipeline');
 
 // Mock pro-detector for testing different scenarios
@@ -30,10 +31,12 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
   // Store original env to restore after tests
   const originalPipelineTimeout = process.env.AIOX_PIPELINE_TIMEOUT;
+  const originalCriticalLoaderTimeout = LOADER_TIERS.critical.timeout;
 
   beforeEach(() => {
-    // Increase pipeline timeout so tests don't fail under heavy load (full suite)
+    // Increase activation budgets so full-suite IO contention does not turn no-Pro into fallback.
     process.env.AIOX_PIPELINE_TIMEOUT = '5000';
+    LOADER_TIERS.critical.timeout = 500;
     pipeline = new UnifiedActivationPipeline(testProjectRoot);
     jest.clearAllMocks();
   });
@@ -45,6 +48,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     } else {
       delete process.env.AIOX_PIPELINE_TIMEOUT;
     }
+    LOADER_TIERS.critical.timeout = originalCriticalLoaderTimeout;
 
     // Cleanup test data
     try {
@@ -76,7 +80,9 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       expect(result.greeting).toBeDefined();
       expect(result.context).toBeDefined();
       expect(result.context.memories).toEqual([]);
-      expect(typeof result.fallback).toBe('boolean');
+      // Missing Pro disables memory enrichment only; it is not an activation fallback.
+      expect(result.quality).not.toBe('fallback');
+      expect(result.fallback).toBe(false);
     });
 
     it('should not throw errors when pro is unavailable', async () => {

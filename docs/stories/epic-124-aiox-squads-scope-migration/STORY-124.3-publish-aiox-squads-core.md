@@ -45,6 +45,7 @@ Epic 124 Decisão 2: target version `5.1.0` (continuidade — bump minor sinaliz
 - [x] Update `scripts/e2e/installed-skills-smoke.js` para resolver package install path a partir de `package.json` (`node_modules/@aiox-squads/core`)
 - [x] Harden `bin/utils/validate-publish.js` para contar arquivos via `npm pack --dry-run --json` e evitar timeout flaky sob Jest
 - [x] Stabilize full-suite QA timing gates que bloquearam validação local sob Jest paralelo
+- [x] Registrar `CHANGELOG.md` para `@aiox-squads/core@5.1.0` com continuidade de `aiox-core@5.0.7`
 - [x] Run `npm pack` localmente — validar tarball contém arquivos corretos
 - [x] Run `npm run test:e2e:installed-skills` contra tarball local (sanity check)
 - [x] Commit: `chore(release): prepare @aiox-squads/core publish [Story 124.3]`
@@ -56,6 +57,7 @@ Epic 124 Decisão 2: target version `5.1.0` (continuidade — bump minor sinaliz
 
 - Comandos: `npm version 5.1.0`, `npm publish --access public`
 - Pre-publish validation: `npm pack && npm install -g ./aiox-squads-core-5.1.0.tgz`
+- Pós-merge publisher: confirmar que `npm view @aiox-squads/core version --json` retorna `5.1.0` após publish.
 - Evidência local 2026-05-06:
   - `npm pack` gerou `aiox-squads-core-5.1.0.tgz` com name `@aiox-squads/core` e version `5.1.0`.
   - Smoke install em prefixo temporário retornou `aiox-core --version` = `5.1.0`.
@@ -63,14 +65,18 @@ Epic 124 Decisão 2: target version `5.1.0` (continuidade — bump minor sinaliz
   - `validate-publish.js` foi ajustado para usar saída JSON do npm pack e timeout configurável de 300s por default; o gate continua validando submodule Pro, file count e dependências `.aiox-core`.
   - Full-suite QA expôs thresholds de tempo frágeis sob concorrência local; budgets/timeout de testes foram relaxados sem alterar comportamento runtime.
   - AC7 foi deferido formalmente para Story 124.7: `.github/workflows/npm-publish.yml` ainda referencia `aiox-core` e `secrets.NPM_TOKEN` no fluxo legado de publicação.
-  - `npm test` completo passou em 2026-05-06: 310 suites passadas, 11 skipped, 7797 tests passados, 149 skipped, 0 falhas, 63.895s.
+  - `npm test` completo passou em 2026-05-06: 310 suites passadas, 11 skipped, 7792 tests passados, 149 skipped, 0 falhas, 42.973s.
   - Gates finais 2026-05-06: `npx prettier --check ...` PASS; `git diff --check` PASS; `npm run validate:publish` PASS (4157 files); `npm run test:e2e:installed-skills` PASS; `npm run typecheck` PASS; `npm run lint` PASS com 76 warnings `comma-dangle` (0 errors).
+  - Perf-budget consolidation continua como débito de teste separado; esta story só estabiliza os gates necessários para publish prep.
 
 ## File List
 
 - [docs/stories/epic-124-aiox-squads-scope-migration/STORY-124.3-publish-aiox-squads-core.md](./STORY-124.3-publish-aiox-squads-core.md)
 - [package.json](../../../package.json) — name + version change
 - [README.md](../../../README.md) — migration note
+- [CHANGELOG.md](../../../CHANGELOG.md) — release entry `5.1.0`
+- [.aiox-core/install-manifest.yaml](../../../.aiox-core/install-manifest.yaml) — regenerated install manifest for `v5.1.0`
+- [.aiox-core/data/entity-registry.yaml](../../../.aiox-core/data/entity-registry.yaml) — registry checksum refresh for touched framework script
 - [scripts/e2e/installed-skills-smoke.js](../../../scripts/e2e/installed-skills-smoke.js) — scoped install path support
 - [bin/utils/validate-publish.js](../../../bin/utils/validate-publish.js) — resilient npm pack file-count check
 - [tests/cli/validate-publish.test.js](../../../tests/cli/validate-publish.test.js) — formatting-tolerant source assertion

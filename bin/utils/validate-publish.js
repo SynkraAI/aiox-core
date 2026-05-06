@@ -23,10 +23,15 @@ const PROJECT_ROOT = path.join(__dirname, '..', '..');
 const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const CRITICAL_FILE = path.join(PRO_DIR, 'license', 'license-api.js');
 const MIN_FILE_COUNT = 50;
-const PACK_TIMEOUT_MS = Number.parseInt(
-  process.env.AIOX_VALIDATE_PUBLISH_PACK_TIMEOUT_MS || '300000',
+const DEFAULT_PACK_TIMEOUT_MS = 300000;
+const parsedPackTimeoutMs = Number.parseInt(
+  process.env.AIOX_VALIDATE_PUBLISH_PACK_TIMEOUT_MS || '',
   10
 );
+const PACK_TIMEOUT_MS =
+  Number.isFinite(parsedPackTimeoutMs) && parsedPackTimeoutMs > 0
+    ? parsedPackTimeoutMs
+    : DEFAULT_PACK_TIMEOUT_MS;
 const PACK_MAX_BUFFER = 1024 * 1024 * 20;
 
 // CI environments may not have access to the private pro submodule
@@ -43,7 +48,7 @@ function countPackedFiles(packOutput) {
       return firstPackage.files.length;
     }
   } catch (_err) {
-    // Fall back to parsing legacy npm notice output below.
+    // Older npm versions may emit notice lines instead of valid JSON; parse that legacy output.
   }
 
   return packOutput

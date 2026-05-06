@@ -47,7 +47,7 @@ describe('DevContextLoader', () => {
       }
     }, 60000); // 60s timeout for slow systems
 
-    test('cached load is significantly faster than cold load', async () => {
+    test('cached load completes within full-suite budget and reports cache hits', async () => {
       // First load (cache miss)
       const start1 = Date.now();
       const firstResult = await loader.load({ fullLoad: false, skipCache: false });

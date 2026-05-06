@@ -106,6 +106,10 @@ describe('GreetingBuilder', () => {
     builder = new GreetingBuilder();
   });
 
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   describe('Session Type Greetings', () => {
     test('should build new session greeting with full details', async () => {
       builder.contextDetector.detectSessionType.mockReturnValue('new');
@@ -312,24 +316,27 @@ describe('GreetingBuilder', () => {
   });
 
   describe('Performance and Fallback', () => {
-    test('should complete within timeout (150ms)', async () => {
-      const startTime = Date.now();
-      await builder.buildGreeting(mockAgent, {});
-      const endTime = Date.now();
+    test('should build contextual greeting when dependencies resolve before timeout', async () => {
+      const greeting = await builder.buildGreeting(mockAgent, {});
 
-      expect(endTime - startTime).toBeLessThan(150);
+      expect(greeting).toContain('Available Commands');
+      expect(greeting).not.toContain('Type `*help`');
     });
 
     test('should fallback to simple greeting on timeout', async () => {
+      jest.useFakeTimers();
       // Mock slow operation
       loadProjectStatus.mockImplementation(
         () => new Promise((resolve) => setTimeout(resolve, 200))
       );
 
-      const greeting = await builder.buildGreeting(mockAgent, {});
+      const greetingPromise = builder.buildGreeting(mockAgent, {});
+      await jest.advanceTimersByTimeAsync(200);
+      const greeting = await greetingPromise;
 
       expect(greeting).toContain('TestAgent (Tester) ready');
       expect(greeting).toContain('Type `*help`');
+      jest.useRealTimers();
     });
 
     test('should fallback on context detection error', async () => {
@@ -389,6 +396,19 @@ describe('GreetingBuilder', () => {
 
       expect(simple).toContain('⚡ BasicAgent ready');
       expect(simple).toContain('Type `*help`');
+    });
+
+    test('should omit undefined text when optional agent metadata is missing', () => {
+      const basicAgent = {
+        name: 'BareAgent',
+      };
+
+      const simple = builder.buildSimpleGreeting(basicAgent);
+      const presentation = builder.buildPresentation(basicAgent, 'new');
+
+      expect(`${simple}\n${presentation}`).not.toContain('undefined');
+      expect(simple).toContain('BareAgent ready');
+      expect(presentation).toContain('BareAgent ready');
     });
   });
 

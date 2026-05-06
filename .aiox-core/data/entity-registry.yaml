@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-03-11T00:48:55.982Z'
+  lastUpdated: '2026-05-06T20:38:53.204Z'
   entityCount: 745
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -7233,6 +7233,7 @@ entities:
         - workflow-navigator
         - greeting-preference-manager
         - project-status-loader
+        - permissions
         - config-resolver
         - validate-user-profile
         - session-state
@@ -7245,8 +7246,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:6f7aad3bd400c77463af5665cec45e0256350671a113d2fcad83a6adfa5dbbac
-      lastVerified: '2026-03-11T00:48:55.861Z'
+      checksum: sha256:dd0c50dc690a44fdddd9cf8adde609ea0ef2aa6916a78b9fcc971195ddff5656
+      lastVerified: '2026-05-06T20:38:53.200Z'
     greeting-config-cli:
       path: .aiox-core/development/scripts/greeting-config-cli.js
       layer: L2

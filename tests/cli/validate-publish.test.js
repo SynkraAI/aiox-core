@@ -13,7 +13,8 @@ const { execSync } = require('child_process');
 
 const SCRIPT_PATH = path.join(__dirname, '..', '..', 'bin', 'utils', 'validate-publish.js');
 
-jest.setTimeout(180000);
+// The behavioral test shells out with a 330s pack timeout; keep Jest's outer budget higher.
+jest.setTimeout(360000);
 
 describe('Publish Safety Gate (Story INS-4.10)', () => {
   let scriptSource;

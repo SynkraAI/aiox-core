@@ -34,8 +34,33 @@ try {
 /**
  * License server base URL (same source of truth as license-api.js CONFIG.BASE_URL).
  */
-const LICENSE_SERVER_URL =
-  process.env.AIOX_LICENSE_API_URL || 'https://aiox-license-server.vercel.app';
+const DEFAULT_LICENSE_SERVER_URL = 'https://aiox-license-server.vercel.app';
+
+function isLocalLicenseHost(hostname) {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+}
+
+function resolveLicenseServerUrl(rawUrl = DEFAULT_LICENSE_SERVER_URL) {
+  const candidate = rawUrl || DEFAULT_LICENSE_SERVER_URL;
+  let url;
+
+  try {
+    url = new URL(candidate);
+  } catch (error) {
+    throw new Error(`Invalid AIOX_LICENSE_API_URL "${candidate}": ${error.message}`);
+  }
+
+  const isAllowedLocalHttp = url.protocol === 'http:' && isLocalLicenseHost(url.hostname);
+  if (url.protocol !== 'https:' && !isAllowedLocalHttp) {
+    throw new Error('AIOX_LICENSE_API_URL must use https://, except for localhost development.');
+  }
+
+  url.hash = '';
+  return url.toString().replace(/\/$/, '');
+}
+
+const LICENSE_SERVER_URL = resolveLicenseServerUrl(process.env.AIOX_LICENSE_API_URL);
+const PASSWORD_RESET_URL = new URL('/reset-password', LICENSE_SERVER_URL).toString();
 
 /**
  * Inline License Client — lightweight HTTP client for pre-bootstrap license checks.
@@ -569,6 +594,10 @@ function persistLicenseCache(targetDir, licenseResult) {
     licenseResult && licenseResult.activationResult ? licenseResult.activationResult : {};
   const key = activationResult.key || licenseResult.key;
 
+  if (key === 'existing' && (activationResult.reactivation || licenseResult.reactivation)) {
+    return { success: true };
+  }
+
   if (!key || key === 'existing') {
     return {
       success: false,
@@ -1031,14 +1060,10 @@ async function loginWithRetry(client, email) {
           spinner.fail(
             `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`
           );
-          showInfo(
-            'Forgot your password? Visit https://aiox-license-server.vercel.app/reset-password'
-          );
+          showInfo(`Forgot your password? Visit ${PASSWORD_RESET_URL}`);
         } else {
           spinner.fail('Maximum login attempts reached.');
-          showInfo(
-            'Forgot your password? Visit https://aiox-license-server.vercel.app/reset-password'
-          );
+          showInfo(`Forgot your password? Visit ${PASSWORD_RESET_URL}`);
           showInfo('Or open an issue: https://github.com/SynkraAI/aiox-core/issues');
           return { success: false, error: 'Maximum login attempts reached.' };
         }
@@ -1802,8 +1827,10 @@ module.exports = {
     InlineLicenseClient,
     generateMachineId,
     persistLicenseCache,
+    resolveLicenseServerUrl,
     ensureKeyValidationParity,
     LICENSE_SERVER_URL,
+    PASSWORD_RESET_URL,
     MAX_RETRIES,
     LICENSE_KEY_PATTERN,
     EMAIL_PATTERN,

@@ -161,7 +161,7 @@ aiox-core -> published, currently 5.0.7 in registry
 @aiox-squads/core -> 404
 ```
 
-Important: reconcile the local root `package.json` version with the npm-published `aiox-core@5.0.7` before publishing `@aiox-squads/core@5.1.0`.
+Important: `@aiox-squads/core@5.1.0` is the continuity publish after the last legacy registry version, `aiox-core@5.0.7`. Confirm the local root `package.json` remains `@aiox-squads/core` at `5.1.0` before publishing.
 
 ### Story 124.4 - `@aiox-squads/pro`
 

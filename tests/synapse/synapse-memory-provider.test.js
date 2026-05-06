@@ -268,6 +268,11 @@ describe('SynapseMemoryProvider', () => {
 // =============================================================================
 
 describe('module exports', () => {
+  beforeAll(() => {
+    ({ SynapseMemoryProvider, AGENT_SECTOR_PREFERENCES, BRACKET_CONFIG, DEFAULT_SECTORS } =
+      loadProviderModule());
+  });
+
   test('BRACKET_CONFIG has MODERATE, DEPLETED, CRITICAL', () => {
     expect(BRACKET_CONFIG).toHaveProperty('MODERATE');
     expect(BRACKET_CONFIG).toHaveProperty('DEPLETED');

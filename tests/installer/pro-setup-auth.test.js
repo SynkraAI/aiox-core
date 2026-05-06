@@ -204,7 +204,8 @@ describe('pro-setup interactive email fallback', () => {
       LicenseApiClient: jest.fn().mockReturnValue(mockClient),
     });
 
-    inquirer.prompt = jest.fn()
+    inquirer.prompt = jest
+      .fn()
       .mockResolvedValueOnce({ email: 'buyer@example.com' })
       .mockResolvedValueOnce({ password: 'Password123' });
 
@@ -296,7 +297,7 @@ describe('pro-setup interactive email fallback', () => {
     expect(client.activate).toHaveBeenCalledWith(
       'PRO-ABCD-1234-5678-WXYZ',
       observedMachineId,
-      expect.any(String),
+      expect.any(String)
     );
     expect(result.activationResult.features).toEqual(['pro.squads.*', 'pro.memory.*']);
   });
@@ -354,15 +355,32 @@ describe('pro-setup license cache persistence', () => {
     });
 
     expect(result).toEqual({ success: true });
-    expect(writeLicenseCache).toHaveBeenCalledWith({
-      key: 'PRO-ABCD-1234-5678-WXYZ',
-      activatedAt: '2026-04-15T12:00:00.000Z',
-      expiresAt: '2027-04-15T12:00:00.000Z',
-      features: ['pro.squads.*'],
-      seats: { used: 1, max: 3 },
-      cacheValidDays: 30,
-      gracePeriodDays: 7,
-    }, '/tmp/aiox-pro-target');
+    expect(writeLicenseCache).toHaveBeenCalledWith(
+      {
+        key: 'PRO-ABCD-1234-5678-WXYZ',
+        activatedAt: '2026-04-15T12:00:00.000Z',
+        expiresAt: '2027-04-15T12:00:00.000Z',
+        features: ['pro.squads.*'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      },
+      '/tmp/aiox-pro-target'
+    );
+  });
+
+  it('should accept existing license sentinel for reactivation without rewriting cache', () => {
+    const writeLicenseCache = jest.fn();
+    proSetup._testing.loadLicenseCache = () => ({ writeLicenseCache });
+
+    const result = proSetup._testing.persistLicenseCache('/tmp/aiox-pro-target', {
+      success: true,
+      key: 'existing',
+      activationResult: { reactivation: true },
+    });
+
+    expect(result).toEqual({ success: true });
+    expect(writeLicenseCache).not.toHaveBeenCalled();
   });
 
   it('should fail when no concrete license key is available to persist', () => {
@@ -372,7 +390,7 @@ describe('pro-setup license cache persistence', () => {
     const result = proSetup._testing.persistLicenseCache('/tmp/aiox-pro-target', {
       success: true,
       key: 'existing',
-      activationResult: { reactivation: true },
+      activationResult: {},
     });
 
     expect(result.success).toBe(false);
@@ -426,11 +444,13 @@ describe('InlineLicenseClient current auth contract', () => {
         });
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          accessToken: 'live-access-token',
-          refreshToken: 'refresh-token',
-          emailVerified: true,
-        }));
+        res.end(
+          JSON.stringify({
+            accessToken: 'live-access-token',
+            refreshToken: 'refresh-token',
+            emailVerified: true,
+          })
+        );
       });
     });
 
@@ -452,10 +472,12 @@ describe('InlineLicenseClient current auth contract', () => {
       req.on('end', () => {
         expect(JSON.parse(body)).toEqual({ accessToken: 'live-access-token' });
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          email: 'user@example.com',
-          emailVerified: true,
-        }));
+        res.end(
+          JSON.stringify({
+            email: 'user@example.com',
+            emailVerified: true,
+          })
+        );
       });
     });
 
@@ -481,11 +503,13 @@ describe('InlineLicenseClient current auth contract', () => {
         expect(parsed.aioxCoreVersion).toBe('4.1.0');
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          activated: true,
-          licenseKey: 'PRO-ABCD-1234-EFGH-5678',
-          features: ['pro'],
-        }));
+        res.end(
+          JSON.stringify({
+            activated: true,
+            licenseKey: 'PRO-ABCD-1234-EFGH-5678',
+            features: ['pro'],
+          })
+        );
       });
     });
 
@@ -541,7 +565,7 @@ describe('resolveProSourceDir', () => {
       expect.objectContaining({
         cwd: path.resolve(__dirname, '../..'),
         stdio: 'ignore',
-      }),
+      })
     );
     expect(result).toEqual({ proSourceDir: bundledProDir });
   });

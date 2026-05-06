@@ -71,10 +71,11 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
 
   async function processExpectingAgent(agentId, prompt) {
     const session = makeSession(agentId);
+    let localEngine = engine;
     let lastResult;
 
     for (let attempt = 0; attempt < 3; attempt += 1) {
-      lastResult = await engine.process(prompt, session);
+      lastResult = await localEngine.process(prompt, session);
       if (lastResult.xml.includes(agentSection(agentId))) {
         return lastResult;
       }
@@ -87,7 +88,9 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
         return lastResult;
       }
 
-      engine = new SynapseEngine(SYNAPSE_DIR, { manifest, devmode: false });
+      if (attempt < 2) {
+        localEngine = new SynapseEngine(SYNAPSE_DIR, { manifest, devmode: false });
+      }
       await new Promise((resolve) => setTimeout(resolve, 0));
     }
 

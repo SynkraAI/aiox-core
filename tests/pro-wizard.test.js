@@ -380,6 +380,16 @@ describe('Lazy Import', () => {
 // ─── API Offline / Error Handling ────────────────────────────────────────────
 
 describe('API Error Handling', () => {
+  let originalLoadLicenseApi;
+
+  beforeEach(() => {
+    originalLoadLicenseApi = proSetup._testing.loadLicenseApi;
+  });
+
+  afterEach(() => {
+    proSetup._testing.loadLicenseApi = originalLoadLicenseApi;
+  });
+
   test('validateKeyWithApi handles missing license module gracefully', async () => {
     // When loadLicenseApi returns null (module not installed),
     // getLicenseClient() falls back to InlineLicenseClient which

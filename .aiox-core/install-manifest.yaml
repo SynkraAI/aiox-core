@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.0.3
-generated_at: "2026-05-05T23:14:42.150Z"
+version: 5.1.0
+generated_at: "2026-05-06T20:40:55.664Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -1229,9 +1229,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:cc1bf74d3ef4e90b7a396d5b77259e540b2f9bd4a5b4b1da4977fe49ae83525d
+    hash: sha256:f68f91ac1131a1f55dd932390015efec2da528bbe33769a63af9b0fcb2ddc27b
     type: data
-    size: 521869
+    size: 521891
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1549,9 +1549,9 @@ files:
     type: script
     size: 11874
   - path: development/scripts/greeting-builder.js
-    hash: sha256:6f7aad3bd400c77463af5665cec45e0256350671a113d2fcad83a6adfa5dbbac
+    hash: sha256:dd0c50dc690a44fdddd9cf8adde609ea0ef2aa6916a78b9fcc971195ddff5656
     type: script
-    size: 50229
+    size: 50642
   - path: development/scripts/greeting-config-cli.js
     hash: sha256:c6e5c4dac08349b17cae64562311a5c2fab8d7c29bc96d86cbe2b43846312b3d
     type: script

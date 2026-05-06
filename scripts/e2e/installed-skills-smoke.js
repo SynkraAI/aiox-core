@@ -21,6 +21,11 @@ const packageInstallRelativePath = path.join('node_modules', ...rootPackageJson.
 const { getSkillId } = require(
   path.join(repoRoot, '.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index')
 );
+function parseTimeoutEnv(name, fallbackMs) {
+  const parsed = Number.parseInt(process.env[name] || '', 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallbackMs;
+}
+
 const verbose = process.env.AIOX_E2E_VERBOSE === '1';
 const keepTemp = process.env.AIOX_E2E_KEEP_TEMP === '1';
 const agentSet = (process.env.AIOX_E2E_AGENT_SET || 'dev,qa,aiox-master')
@@ -35,11 +40,6 @@ const packDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pack-'));
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-installed-skills-'));
 const projectRoot = path.join(tempRoot, 'project');
 const requiredCorePackages = ['fast-glob', 'fs-extra', 'js-yaml', 'semver', 'ajv', 'tar', 'chalk'];
-
-function parseTimeoutEnv(name, fallbackMs) {
-  const parsed = Number.parseInt(process.env[name] || '', 10);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallbackMs;
-}
 
 function log(message) {
   console.log(`[installed-skills-e2e] ${message}`);

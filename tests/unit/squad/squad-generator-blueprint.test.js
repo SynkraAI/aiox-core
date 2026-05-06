@@ -518,6 +518,7 @@ describe('SquadGenerator Blueprint Methods', () => {
 
   describe('Performance', () => {
     const isCI = process.env.CI === 'true';
+    // Local budgets catch obvious regressions; CI allows slower shared runners.
     const loadThreshold = isCI ? 500 : 150;
     const validateThreshold = isCI ? 200 : 20;
     const generateThreshold = isCI ? 5000 : 1000;

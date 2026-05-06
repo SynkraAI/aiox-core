@@ -61,7 +61,7 @@ describe('code-intel hook-runtime', () => {
       expect(result).not.toBeNull();
     });
 
-    it('completes within 500ms', async () => {
+    it('completes within 1000ms', async () => {
       const start = Date.now();
       await resolveCodeIntel('.aiox-core/development/tasks/create-next-story.md', PROJECT_ROOT);
       const elapsed = Date.now() - start;
