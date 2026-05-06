@@ -24,8 +24,6 @@ const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
 const PRO_PACKAGE = '@aiox-squads/pro';
-const PRO_PACKAGE_FALLBACKS = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
-const PRO_PACKAGES = [PRO_PACKAGE, ...PRO_PACKAGE_FALLBACKS];
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);
@@ -45,11 +43,14 @@ function run(cmd, options = {}) {
 
 function isProInstalled() {
   try {
-    return PRO_PACKAGES.some((packageName) => {
-      const scopeDir = packageName.split('/')[0];
-      const packageJson = path.join(process.cwd(), 'node_modules', scopeDir, 'pro', 'package.json');
-      return fs.existsSync(packageJson);
-    });
+    const packageJson = path.join(
+      process.cwd(),
+      'node_modules',
+      '@aiox-squads',
+      'pro',
+      'package.json'
+    );
+    return fs.existsSync(packageJson);
   } catch {
     return false;
   }

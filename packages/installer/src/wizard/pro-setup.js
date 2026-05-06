@@ -419,14 +419,11 @@ function loadProModule(moduleName) {
     return frameworkModule;
   }
 
-  // 2. npm packages — try canonical then fallback
-  const npmScopes = ['@aiox-squads/pro', '@aiox-fullstack/pro', '@aios-fullstack/pro'];
-  for (const scope of npmScopes) {
-    const requestPath = `${scope}/license/${moduleName}`;
-    const loadedModule = tryRequire(requestPath);
-    if (loadedModule) {
-      return loadedModule;
-    }
+  // 2. npm package
+  const requestPath = `@aiox-squads/pro/license/${moduleName}`;
+  const loadedPackageModule = tryRequire(requestPath);
+  if (loadedPackageModule) {
+    return loadedPackageModule;
   }
 
   // 3. aiox-core in node_modules (brownfield upgrade from >= v4.2.15)
@@ -445,20 +442,17 @@ function loadProModule(moduleName) {
 
   // 4. npm package in user project via absolute path (npx context — require resolves from
   //    temp dir, so we need absolute path to where bootstrap installed the package)
-  const absScopeDirs = ['@aiox-squads', '@aiox-fullstack', '@aios-fullstack'];
-  for (const scopeDir of absScopeDirs) {
-    const absPath = path.join(
-      process.cwd(),
-      'node_modules',
-      scopeDir,
-      'pro',
-      'license',
-      moduleName
-    );
-    const loadedModule = tryRequire(absPath);
-    if (loadedModule) {
-      return loadedModule;
-    }
+  const absPath = path.join(
+    process.cwd(),
+    'node_modules',
+    '@aiox-squads',
+    'pro',
+    'license',
+    moduleName
+  );
+  const loadedModule = tryRequire(absPath);
+  if (loadedModule) {
+    return loadedModule;
   }
 
   return null;
@@ -694,11 +688,7 @@ function resolveProSourceDir(targetDir) {
 
   const repoRoot = path.resolve(__dirname, '..', '..', '..', '..');
   const bundledProDir = path.join(repoRoot, 'pro');
-  const npmProDirs = [
-    path.join(targetDir, 'node_modules', '@aiox-squads', 'pro'),
-    path.join(targetDir, 'node_modules', '@aiox-fullstack', 'pro'),
-    path.join(targetDir, 'node_modules', '@aios-fullstack', 'pro'),
-  ];
+  const npmProDir = path.join(targetDir, 'node_modules', '@aiox-squads', 'pro');
   const bundledSquadsDir = path.join(bundledProDir, 'squads');
   const gitmodulesPath = path.join(repoRoot, '.gitmodules');
 
@@ -724,10 +714,8 @@ function resolveProSourceDir(targetDir) {
     }
   }
 
-  for (const npmProDir of npmProDirs) {
-    if (fs.existsSync(npmProDir)) {
-      return { proSourceDir: npmProDir };
-    }
+  if (fs.existsSync(npmProDir)) {
+    return { proSourceDir: npmProDir };
   }
 
   return { proSourceDir: null };

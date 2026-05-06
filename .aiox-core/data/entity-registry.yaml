@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-06T20:38:53.204Z'
-  entityCount: 745
+  lastUpdated: '2026-05-06T22:00:40.773Z'
+  entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -7214,8 +7214,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cb3abc56f9c001a80f18766d949b0d8916eb91d4644c0ee2d642ac62a03a73d3
-      lastVerified: '2026-03-11T00:48:55.861Z'
+      checksum: sha256:ca880db21647162725bbc5bcd4a01613ad2cc4911aa829a9b9242a05bb62283a
+      lastVerified: '2026-05-06T22:00:40.770Z'
     greeting-builder:
       path: .aiox-core/development/scripts/greeting-builder.js
       layer: L2
@@ -12779,6 +12779,22 @@ entities:
         extensionPoints: []
       checksum: sha256:dd025894f8f0d3bd22a147dbc0debef8b83e96f3c59483653404b3cd5a01d5aa
       lastVerified: '2026-03-11T00:48:55.903Z'
+    pro-updater:
+      path: .aiox-core/core/pro/pro-updater.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/pro/pro-updater.js
+      keywords:
+        - pro
+        - updater
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:fda773c03475739476be29afc8edf6f21a068d3228a4b902b5044c71dfa1a195
+      lastVerified: '2026-05-06T22:00:40.769Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md
