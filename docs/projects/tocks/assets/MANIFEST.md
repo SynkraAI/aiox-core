@@ -139,28 +139,60 @@ Thesis A/B/C reports flagaram que `/produtos/vertice/` e `/produtos/elipse/` usa
 2. **Promover** photos curated da Linha Premium pros heroes da v4
 3. **Substituir** product photos com filter por sources reais sem manipulação extra
 
-### Skara — decisão 06/Mai
+### Skara — RESOLVIDO 06/Mai (CNPJ antigo Tocks)
 
-Recomendação subagent: **SEPARATE site** (skara.com.br), confiança MEDIUM-HIGH.
-Razão principal: papelaria DOCX + 16×10 catálogo configurador-heavy = B2B/contratual; clash com editorial-luxury Tocks v4 (≤4 cores, 200px headlines, narrativa).
+User confirmou: **Skara é o CNPJ antigo da Tocks**. Não é sub-brand, não é sister company. É a Tocks de antes do rebrand pra Tocks Custom.
 
-Ação: NÃO bloquear escolha de thesis v4 por causa de Skara. Stub page 30min se necessário; defer real Skara app pós-launch Tocks v4.
+**Implicação dos assets na master library:**
+- `Identidade Visual/Skara/Logos/` — legacy histórico, não usar em produto novo
+- `Identidade Visual/Skara/Papelaria/` — versões antigas dos timbrados (versões atuais em `Identidade Visual/Tocks/Documentos - Papel Timbrado/`)
+- `Fotos/Opções de acabamento Skara/Madeiras/` (10) + `Tecidos/` (16) — **CATÁLOGO OFICIAL TOCKS CUSTOM HOJE**, confirmado por cross-validation com páginas de produto Vértice/Elipse em tockscustom.com.br
 
-**Pergunta crítica pendente user:** Skara é (a) sub-brand mesmo CNPJ Tocks Custom, (b) sister company separada, (c) brand pra canal B2B/projeto-fechado vs Tocks DTC?
+Esta pasta seria mais bem-nomeada como `Opções de acabamento Tocks/` mas preservamos o nome `Skara` pra rastreabilidade histórica.
 
-Detalhes completos: `docs/projects/tocks/v4-fantastic/research/skara-decision-06mai.md`
+Decisão completa em `docs/projects/tocks/v4-fantastic/research/skara-decision-06mai.md`.
 
-### Mapeamento Vértice/Elipse — 06/Mai
+### Vértice/Elipse — REVERTIDO 06/Mai
 
-| Nome canon thesis | Real model master-drive | Razão |
-|---|---|---|
-| **Vértice** | **Mesa de Bilhar Gabe Madeira Maciça** | "geometria angular em madeira maciça" → A-frame trestle wood |
-| **Elipse** | **Mesa de Bilhar Aparato Alto Padrão** | "base curva contínua" → wave-form continuous base (match exato) |
+**Round 2 (mistake):** mapeei Vértice→Gabe e Elipse→Aparato achando que "Vértice/Elipse" eram nomes inventados pelos squads. ERRADO.
 
-Photos promovidas pra `/apps/tocks-website/public/produtos/{vertice,elipse}/`:
-- Backup placeholder antigos em `/public/produtos/_legacy-placeholder/`
-- Vértice: hero (Gabe-003 outdoor twilight), lifestyle (Gabe-001 indoor pool), gallery-02 (Gabe-000 cutout), gallery-04 (Gabe-001)
-- Elipse: hero (Aparato-001 black wave on marble), detail-base (Aparato-002 white wave), lifestyle (Aparato-002)
+**Round 3 (correção):** Vértice e Elipse SÃO modelos REAIS da **Linha Original** Tocks Custom (confirmado em tockscustom.com.br):
+- Mesa de Bilhar **Vértice** — R$ 15.900 — `/linha-original/mesa-de-bilhar-vertice` — base em madeira maciça com recorte arqueado, bordas cromadas
+- Mesa de Bilhar **Elipse** — R$ 19.900 — `/linha-original/mesa-de-bilhar-elipse` — formato elíptico, pernas estriadas cilíndricas, detalhes dourados
+
+Photos canônicas restauradas em `/public/produtos/{vertice,elipse}/`:
+- `vertice/`: 5 photos squad já tinha (`hero.jpg, gallery-01..05.jpg, lifestyle.jpg, _page-reference.png`) — eram as oficiais Tocks Custom o tempo todo
+- `elipse/`: 7 photos squad (`hero.jpg, gallery-01..05.jpg, alt-3-4.jpg, detail-base.jpg, lifestyle.jpg, _page-reference.png`) — idem
+
+Photos Gabe e Aparato promovidas pra **suas próprias pastas**:
+- `/public/produtos/gabe/` (3 photos: Gabe-000 cutout, Gabe-001 ambient, Gabe-003 twilight) — Mesa de Bilhar Gabe Madeira Maciça (Linha Premium R$ 14.990)
+- `/public/produtos/aparato/` (2 photos: Aparato-001 black wave, Aparato-002 white wave) — Mesa de Bilhar Aparato Alto Padrão (Linha Premium R$ 26.900)
+
+### Catálogo completo Tocks Custom — cross-reference 06/Mai
+
+| Modelo | Linha (site) | Preço | Photos master? |
+|---|---|---|---|
+| Mesa de Bilhar **Ark** | Original | R$ 13.990 | ❌ (necessário download) |
+| Mesa de Bilhar **Curve** | Original | R$ 17.900 | ❌ |
+| Mesa de Bilhar **Vértice** | Original | R$ 15.900 | ✅ /produtos/vertice/ |
+| Mesa de Bilhar **Elipse** | Original | R$ 19.900 | ✅ /produtos/elipse/ |
+| Mesa de Bilhar **Gabe Madeira Maciça** | Premium | R$ 14.990 | ✅ /produtos/gabe/ + master |
+| Mesa de Bilhar **Tenro Luxo** | Premium | R$ 12.990 | ✅ master |
+| Mesa de Bilhar **Aparato Alto Padrão** | Premium | R$ 26.900 | ✅ /produtos/aparato/ + master |
+| Mesa de Bilhar **Elemento Personalizada** | Premium | R$ 13.990 | ✅ master |
+| Mesa de Sinuca **Nobus Premium** | Premium | R$ 14.990 | ✅ master |
+| Mesa de Sinuca **Harley Moderna** | Premium | R$ 19.990 | ✅ master |
+| Mesa de Sinuca **Rustic Madeira Maciça** | Premium | R$ 14.990 | ✅ master |
+| Mesa de Sinuca e Jantar **Mônaco Premium** | Premium | R$ 12.990 | ✅ master (best-covered, 9 fotos) |
+| Mesa de Sinuca e Jantar **Master Madeira Maciça** | Premium | R$ 10.990 | ✅ master |
+| Mesa de Pebolim **Rustic** | Pebolim | R$ 10.990 | ❌ |
+| Mesa de Pebolim **Nobus** | Pebolim | R$ 10.990 | ❌ |
+
+**Modelos no master library MAS não visíveis no site (descontinuados ou não-listados):** Modern Inox Premium, Berlin Alto Padrão, Contemporânea Premium, Modern Premium, Dubai. Decisão: arquivar como histórico, não usar em v4 a menos que user confirme ainda à venda.
+
+**Acabamentos (catálogo oficial Tocks Custom, confirmado por cross-validation):**
+- 10 madeiras: Carvalho Branco Linheiro, Ébano Linheiro, Freijó, Goiabão Escuro, Itaúba, Wengue, Canelão, Marupá, Cerejeira, Angelin
+- 16 tecidos: códigos 102, 10391, 1431, 1459, 14891, 1549, 191801, 21223, 24724, 2699, 26921, 2759, 284, 3001, 309, 310
 
 ### Fontes oficiais aplicadas — 06/Mai
 
