@@ -22,7 +22,30 @@ sla_d_plus_plus: 2026-05-07 (D-1 a partir de hoje)
 
 **Estado das campanhas Google:** 1 ativa (`TOCKS_Search_Alta-Intencao` R$ 75/d), 16 PAUSED (PMAX, Shopping, ORN, EB legacy).
 
-## Action 1 — Deploy D++ (PR #645) [USER ACTION REQUIRED]
+## Action 1 — Deploy D++ (PR #645) [USER ACTION: pedir merge ao owner]
+
+**Update 06/Mai 23h: 4 fixes CodeRabbit aplicados + main merged into branch + pushed.**
+
+- Commit novo: `96f6edd9 fix(tocks-capi): address CodeRabbit review — try/catch + sanitize source_url`
+- Push: lorDofPicanha/aiox-core (fork) — PR #645 head atualizado
+- TypeScript check: PASS
+- 4 issues CodeRabbit endereçadas:
+  1. `capture-gclid.ts`: try/catch wrap em sha256 Promise.all + sanitize source_url (origin+pathname only)
+  2. `fbq.ts`: try/catch wraps em fbqTrack + fbqTrackCustom
+  3. `gtag.ts`: try/catch wraps em setUserData + gtagEvent
+- main branch merged (era BEHIND, agora caught up)
+
+**Bloqueadores remanescentes (não-Orion):**
+- `lorDofPicanha` não tem write access em SynkraAI/aiox-core → não consegue mergear
+- `lorDofPicanha` não é Vercel team Member → preview deploy continua "Authorization required"
+- 2 reviewers humanos requested: `Pedrovaleriolopez`, `oalanicolas` — aguarda aprovação deles
+
+**Ação user (você):**
+1. Pedir pra owner SynkraAI org (ou Pedro/Alan) revisar + aprovar + mergear PR #645
+2. OU pedir upgrade de permissões (write em SynkraAI + Vercel Member)
+3. Após merge → main → Vercel auto-deploys production → tracking volta
+
+**Production deploy NÃO precisa do "Authorization required" do Vercel.** Esse erro é só pra previews de contributors externos. Production deploy roda automaticamente em todo merge pra main da equipe trusted.
 
 **Status:** PR `feat/tocks-capi-d-plus-plus` OPEN no `SynkraAI/aiox-core` desde 04/Mai. Não atualizado há 2 dias.
 
