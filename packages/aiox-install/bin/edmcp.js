@@ -10,7 +10,7 @@
  *   edmcp add <name/url>    # Add MCP from repository
  *   edmcp remove <name>     # Remove MCP
  *
- * @package @synkra/aiox-install
+ * @package @aiox-squads/aiox-install
  */
 
 'use strict';
