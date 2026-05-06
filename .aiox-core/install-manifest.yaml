@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.0.3
-generated_at: "2026-05-05T23:14:42.150Z"
+version: 5.0.8
+generated_at: "2026-05-06T19:40:38.959Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -1689,9 +1689,9 @@ files:
     type: script
     size: 17607
   - path: development/scripts/unified-activation-pipeline.js
-    hash: sha256:de2d4a10b01da32d31c1f810feed429804da6869bb958d5a5ebe626589d0a2f6
+    hash: sha256:6910a7f6b0cef65a0886e0b29bbcb0ee401ca4fb444eb255a7a368cb67327aa7
     type: script
-    size: 30125
+    size: 30996
   - path: development/scripts/usage-tracker.js
     hash: sha256:6057623755bf0ee1d9e0fb36740fc41914a5f8ca8ad994d40edec260e273744b
     type: script

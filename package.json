@@ -1,6 +1,6 @@
 {
   "name": "aiox-core",
-  "version": "5.0.3",
+  "version": "5.0.8",
   "description": "Synkra AIOX: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
     "aiox": "bin/aiox.js",
@@ -113,6 +113,7 @@
     "handlebars": "^4.7.8",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
+    "node-machine-id": "^1.1.12",
     "ora": "^5.4.1",
     "picocolors": "^1.1.1",
     "proper-lockfile": "^4.1.2",

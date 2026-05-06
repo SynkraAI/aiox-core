@@ -188,6 +188,54 @@ jobs:
           fail_ci_if_error: false
         continue-on-error: true
 
+  pro-machine-id-stability:
+    name: Pro Machine ID Stability (${{ matrix.os }})
+    needs: changes
+    if: ${{ needs.changes.outputs.tests == 'true' || needs.changes.outputs.config == 'true' }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Detect Pro submodule availability
+        id: pro
+        shell: pwsh
+        run: |
+          if (Test-Path "pro/license/license-crypto.js") {
+            "available=true" >> $env:GITHUB_OUTPUT
+          } else {
+            "available=false" >> $env:GITHUB_OUTPUT
+            Write-Host "pro/ submodule is not available with the default CI token."
+            Write-Host "Cross-platform Pro runtime validation runs in the aiox-pro CI matrix."
+          }
+
+      - name: Run machine ID stability tests
+        if: steps.pro.outputs.available == 'true'
+        run: npx jest --runTestsByPath tests/license/machine-id-stability.test.js --runInBand --testPathIgnorePatterns=/node_modules/
+
+      - name: Record private submodule skip
+        if: steps.pro.outputs.available != 'true'
+        shell: pwsh
+        run: |
+          Write-Host "Skipping aiox-core Pro machine ID job because pro/ is private in default-token CI."
+          Write-Host "See https://github.com/SynkraAI/aiox-pro/pull/11 for the cross-platform Pro runtime matrix."
+
   story-validation:
     name: Story Checkbox Validation
     needs: changes

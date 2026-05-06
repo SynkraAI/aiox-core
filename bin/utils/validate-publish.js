@@ -23,6 +23,7 @@ const PROJECT_ROOT = path.join(__dirname, '..', '..');
 const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const CRITICAL_FILE = path.join(PRO_DIR, 'license', 'license-api.js');
 const MIN_FILE_COUNT = 50;
+const PACK_DRY_RUN_TIMEOUT_MS = 120000;
 
 // CI environments may not have access to the private pro submodule
 const IS_CI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
@@ -75,7 +76,7 @@ try {
   const packOutput = execSync('npm pack --dry-run 2>&1', {
     encoding: 'utf8',
     cwd: PROJECT_ROOT,
-    timeout: 30000,
+    timeout: PACK_DRY_RUN_TIMEOUT_MS,
   });
   // npm pack --dry-run outputs lines starting with "npm notice" for each file
   const fileLines = packOutput.split('\n').filter(line =>
