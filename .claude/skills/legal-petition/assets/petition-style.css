@@ -1,0 +1,153 @@
+/*
+ * Legal Petition CSS - Brazilian Court Format
+ *
+ * Paper: A4 (210mm x 297mm)
+ * Font: Times New Roman, 12pt
+ * Line spacing: 1.5
+ * Margins: Top/Right/Bottom 2.5cm, Left 3cm
+ * Text: Justified
+ * Page numbers: Bottom center
+ */
+
+@page {
+    size: a4;
+    margin: 2.5cm 2.5cm 2.5cm 3cm;
+    @bottom-center {
+        content: counter(page);
+        font-size: 10pt;
+        font-family: 'Times New Roman', Times, serif;
+    }
+}
+
+html {
+    color: #000;
+    background-color: #fff;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    text-align: justify;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main title - Court address */
+h1 {
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 24pt;
+    line-height: 1.4;
+}
+
+/* Section headers - DOS FATOS, DO DIREITO, etc. */
+h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20pt;
+    margin-bottom: 12pt;
+    break-after: avoid;
+}
+
+/* Subsection headers */
+h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 16pt;
+    margin-bottom: 8pt;
+    break-after: avoid;
+}
+
+/* Sub-subsection headers */
+h4 {
+    font-size: 12pt;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+    break-after: avoid;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 6pt;
+    text-indent: 0;
+}
+
+/* Legal citations (blockquote) */
+blockquote {
+    margin-left: 2cm;
+    margin-right: 1cm;
+    font-style: italic;
+    font-size: 11pt;
+    border-left: none;
+    padding-left: 0;
+}
+
+/* Tables - calculations, evidence lists */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10pt 0;
+    font-size: 10pt;
+    break-inside: avoid;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 4pt 6pt;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+/* Bold and italic */
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+/* Horizontal rules (section separators) */
+hr {
+    border: none;
+    border-top: 1px solid #999;
+    margin: 20pt 0;
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 1cm;
+    margin-bottom: 6pt;
+}
+
+li {
+    margin-bottom: 3pt;
+}
+
+/* Prevent page breaks inside important elements */
+h2 + h3,
+h3 + p,
+h3 + table {
+    break-before: avoid;
+}
+
+/* Signature block */
+.signature-block {
+    break-before: avoid;
+}
