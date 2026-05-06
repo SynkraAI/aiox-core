@@ -8,6 +8,9 @@
  * @migrated INS-4.11 AC9 - Moved to open-source, removed feature gate
  */
 
+const fs = require('fs');
+const path = require('path');
+
 jest.setTimeout(10000);
 
 let mockQueryMemories;
@@ -20,11 +23,18 @@ function loadProviderModule() {
   jest.resetModules();
   mockQueryMemories = jest.fn(() => Promise.resolve([]));
 
-  jest.doMock('../../pro/memory/memory-loader', () => ({
+  const mockFactory = () => ({
     MemoryLoader: jest.fn().mockImplementation(() => ({
       queryMemories: mockQueryMemories,
     })),
-  }), { virtual: true });
+  });
+  const memoryLoaderExists = fs.existsSync(path.join(__dirname, '../../pro/memory/memory-loader.js'));
+
+  if (memoryLoaderExists) {
+    jest.doMock('../../pro/memory/memory-loader', mockFactory);
+  } else {
+    jest.doMock('../../pro/memory/memory-loader', mockFactory, { virtual: true });
+  }
 
   let loadedModule;
   jest.isolateModules(() => {

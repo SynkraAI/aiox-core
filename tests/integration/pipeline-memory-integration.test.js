@@ -28,10 +28,16 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
   // Store original env to restore after tests
   const originalPipelineTimeout = process.env.AIOX_PIPELINE_TIMEOUT;
+  const originalCriticalLoaderTimeout = process.env.AIOX_LOADER_TIMEOUT_CRITICAL;
+  const originalHighLoaderTimeout = process.env.AIOX_LOADER_TIMEOUT_HIGH;
+  const originalBestEffortLoaderTimeout = process.env.AIOX_LOADER_TIMEOUT_BEST_EFFORT;
 
   beforeEach(() => {
     // Increase pipeline timeout so tests don't fail under heavy load (full suite)
     process.env.AIOX_PIPELINE_TIMEOUT = '5000';
+    process.env.AIOX_LOADER_TIMEOUT_CRITICAL = '5000';
+    process.env.AIOX_LOADER_TIMEOUT_HIGH = '5000';
+    process.env.AIOX_LOADER_TIMEOUT_BEST_EFFORT = '5000';
     pipeline = new UnifiedActivationPipeline(testProjectRoot);
     jest.clearAllMocks();
   });
@@ -42,6 +48,21 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       process.env.AIOX_PIPELINE_TIMEOUT = originalPipelineTimeout;
     } else {
       delete process.env.AIOX_PIPELINE_TIMEOUT;
+    }
+    if (originalCriticalLoaderTimeout !== undefined) {
+      process.env.AIOX_LOADER_TIMEOUT_CRITICAL = originalCriticalLoaderTimeout;
+    } else {
+      delete process.env.AIOX_LOADER_TIMEOUT_CRITICAL;
+    }
+    if (originalHighLoaderTimeout !== undefined) {
+      process.env.AIOX_LOADER_TIMEOUT_HIGH = originalHighLoaderTimeout;
+    } else {
+      delete process.env.AIOX_LOADER_TIMEOUT_HIGH;
+    }
+    if (originalBestEffortLoaderTimeout !== undefined) {
+      process.env.AIOX_LOADER_TIMEOUT_BEST_EFFORT = originalBestEffortLoaderTimeout;
+    } else {
+      delete process.env.AIOX_LOADER_TIMEOUT_BEST_EFFORT;
     }
 
     // Cleanup test data

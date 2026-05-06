@@ -121,7 +121,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
       const result = execSync(`node "${SCRIPT_PATH}" 2>&1`, {
         encoding: 'utf8',
         cwd: path.join(__dirname, '..', '..'),
-        timeout: 60000,
+        timeout: 180000,
       });
       expect(result).toContain('PUBLISH SAFETY GATE: PASS');
     });

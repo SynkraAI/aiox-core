@@ -188,6 +188,36 @@ jobs:
           fail_ci_if_error: false
         continue-on-error: true
 
+  pro-machine-id-stability:
+    name: Pro Machine ID Stability (${{ matrix.os }})
+    needs: changes
+    if: ${{ needs.changes.outputs.tests == 'true' || needs.changes.outputs.config == 'true' }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout code with Pro submodule
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run machine ID stability tests
+        run: npx jest --runTestsByPath tests/license/machine-id-stability.test.js --runInBand --testPathIgnorePatterns=/node_modules/
+
   story-validation:
     name: Story Checkbox Validation
     needs: changes

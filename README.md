@@ -614,6 +614,12 @@ O **AIOX Pro** é o módulo premium do AIOX, oferecendo funcionalidades avançad
 npx aiox-pro install
 ```
 
+### Atualização 5.0.4
+
+O AIOX Pro agora usa o UUID nativo do sistema operacional para gerar `machineId`, preservando o hash SHA-256 e evitando consumo extra de assentos quando o macOS, VPNs ou redes Wi-Fi alteram o MAC/interface ativa.
+
+Caches locais de licença criados pelo algoritmo antigo são migrados automaticamente na próxima leitura. A janela de fallback legacy é de 90 dias; depois disso, instalações antigas precisam reativar online.
+
 ### Features Premium
 
 - **Squads Avançados** - Squads especializados com capacidades expandidas
