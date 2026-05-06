@@ -1,0 +1,39 @@
+name: weekly-content-planning
+description: Planejamento semanal de conteudo (segunda-feira)
+trigger: /mkt-weekly-plan
+frequency: weekly
+
+steps:
+  - name: review-previous-week
+    agent: data-analyst
+    action: "*weekly-report"
+    output: relatorio da semana anterior
+
+  - name: trend-research
+    agent: content-strategist
+    action: "*trend-research"
+    output: trends relevantes
+
+  - name: strategic-direction
+    agent: growth-cmo
+    action: "*plan-week"
+    input: relatorio + trends + metas
+    output: temas e prioridades
+    dependency:
+      - review-previous-week
+      - trend-research
+
+  - name: calendar-creation
+    agent: content-strategist
+    action: "*calendar"
+    input: temas aprovados
+    output: calendario 7 dias x 2 plataformas
+    dependency: strategic-direction
+
+  - name: cmo-approval
+    agent: growth-cmo
+    gate: cmo-approval
+    dependency: calendar-creation
+
+human_touchpoints: 1
+estimated_time: "30-40 min"

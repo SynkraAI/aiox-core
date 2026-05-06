@@ -1,0 +1,57 @@
+name: daily-content-creation
+description: Workflow de criacao de conteudo diario para Instagram + LinkedIn
+trigger: /mkt-daily-content
+frequency: daily
+
+steps:
+  - name: ideation
+    agent: content-strategist
+    action: "*ideate"
+    output: 3 angulos de conteudo
+
+  - name: cmo-approval
+    agent: growth-cmo
+    action: "*review"
+    gate: cmo-approval
+    dependency: ideation
+
+  - name: copywriting
+    agent: lead-copywriter
+    action: "*delegate-copy"
+    output: copy do conteudo
+    dependency: cmo-approval
+
+  - name: production
+    agent: content-producer
+    action: formato especifico (*instagram-carousel, *linkedin-post, etc)
+    output: conteudo formatado
+    dependency: copywriting
+
+  - name: design
+    agent: visual-designer
+    action: "*carousel-art ou *post-art"
+    output: specs visuais
+    dependency: production
+
+  - name: quality-check
+    checklists:
+      - content-quality
+      - brand-consistency
+    dependency: design
+
+  - name: human-approval
+    gate: before_publication
+    dependency: quality-check
+
+  - name: schedule
+    agent: distribution-manager
+    action: "*schedule"
+    dependency: human-approval
+
+  - name: log
+    agent: data-analyst
+    action: registrar publicacao
+    dependency: schedule
+
+human_touchpoints: 2
+estimated_time: "15-20 min"

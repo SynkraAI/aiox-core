@@ -1,0 +1,111 @@
+# ============================================================
+# WORKFLOW: design-genesis-full
+# Squad: lpage-genesis
+# Pipeline completo de criacao de Landing Page
+# ============================================================
+
+name: design-genesis-full
+description: "Pipeline completo de criacao de LP (brief > design > build > QA > deploy)"
+trigger: /lpage-create
+frequency: on-demand
+priority: 1
+
+steps:
+  - name: receive-brief
+    agent: genesis-director
+    action: "*create-lp"
+    input:
+      brief: "descricao do produto/servico"
+      copy: "copy completa ou brief para gerar"
+      reference_urls: "URLs de referencia visual"
+    output: "pipeline plan + agent assignments"
+
+  - name: visual-concepts
+    agent: visual-crafter
+    action: "*generate-concept"
+    input: "brief + reference_urls"
+    output: "moodboard + extracted palette + concept images"
+    dependency: receive-brief
+
+  - name: design-system
+    agent: design-architect
+    action: "*setup-design-system"
+    input: "brand info + visual concepts + tokens existentes"
+    output: "design-tokens.yaml + tailwind.config.ts + base components"
+    dependency: visual-concepts
+
+  - name: design-approval
+    gate: design_system_approval
+    action: "Preview design system + Go/No-Go"
+    dependency: design-system
+
+  - name: template-selection
+    agent: template-engineer
+    action: "*create-template"
+    input: "brief type + design system"
+    output: "template configurado"
+    dependency: design-approval
+
+  - name: page-assembly
+    agent: page-assembler
+    action: "*assemble-page"
+    input: "copy + template + design tokens + images"
+    output: "landing-page.tsx + landing-page.html"
+    dependency:
+      - template-selection
+      - design-approval
+
+  - name: animations
+    agent: animation-designer
+    action: "*apply-motion"
+    input: "assembled page + animation presets"
+    output: "page com animacoes Framer Motion"
+    dependency: page-assembly
+
+  - name: visual-qa
+    agent: visual-reviewer
+    action: "*evaluate"
+    input: "page URL/HTML + design tokens"
+    output: "screenshots + qa-report + score"
+    dependency: animations
+    checklists:
+      - design-quality
+      - responsive-mobile
+      - accessibility-wcag
+
+  - name: performance-check
+    agent: deploy-pilot
+    action: "*audit-performance"
+    input: "page URL"
+    output: "lighthouse report + CWV scores"
+    dependency: visual-qa
+    checklists:
+      - performance-standards
+      - seo-technical
+
+  - name: human-review
+    gate: landing_page_review
+    action: "Preview final + Go/No-Go"
+    dependency: performance-check
+
+  - name: deploy
+    agent: deploy-pilot
+    action: "*deploy"
+    gate: deploy_authorization
+    input: "build output + site name"
+    output: "deploy URL + SSL status"
+    dependency: human-review
+    checklists:
+      - deploy-readiness
+
+  - name: delivery
+    output:
+      - landing-page.tsx
+      - landing-page.html
+      - design-tokens.yaml
+      - qa-report.md
+      - lighthouse-report.json
+      - deploy_url
+
+human_touchpoints: 3
+estimated_time: "15-25 min"

@@ -1,0 +1,602 @@
+# ============================================
+# Workflow: Landing Page WordPress + Elementor
+# ============================================
+# Squad: marketing-growth (extended)
+# Version: 1.0.0
+# Created: 2026-02-08
+# Priority: 1 (Substitui landing-page-full para projetos WP)
+# Estimated Time: 90-120 min
+# Human Touchpoints: 3
+# ============================================
+
+name: landing-page-wordpress-elementor
+version: 1.0.0
+description: >
+  Workflow especializado para criacao de landing pages de alta conversao
+  publicadas em WordPress com Elementor. Integra Copy Squad (Tier System),
+  UX/Design Expert, Landing Page Architect e Conversion Optimizer em um
+  pipeline com 3 aprovacoes humanas e 8 checklists de qualidade.
+
+  DIFERENCIAL vs landing-page-full:
+  - Output final e Elementor-native (JSON + widgets), nao HTML puro
+  - Inclui @ux-design-expert (Uma) para design system e acessibilidade
+  - Copy feita por especialista selecionado (Halbert/Brown/Kennedy)
+  - Publicacao automatizada via WordPress REST API
+  - Suporte a A/B testing com paginas duplicadas
+  - Checklist LGPD integrado
+
+trigger: "/mkt-lp-wordpress"
+frequency: on-demand
+priority: 1
+
+# ============================================
+# AGENTES ENVOLVIDOS
+# ============================================
+agents:
+  coordinator: growth-cmo
+  copy_bridge: lead-copywriter
+  copy_specialists:
+    landing_page: gary-halbert        # Storytelling + emotional urgency
+    unique_mechanism: todd-brown       # Diferenciacao em mercado saturado
+    urgency_scarcity: dan-kennedy     # NO B.S. urgency
+    diagnosis: eugene-schwartz        # Awareness + Sophistication (TIER 0)
+    audit: claude-hopkins             # Scientific audit
+    validation_tool: sugarman-check   # 30 Triggers (quality gate)
+  ux_designer: ux-design-expert       # Uma - Design System + Accessibility
+  page_architect: landing-page-architect
+  visual_designer: visual-designer
+  cro_specialist: conversion-optimizer
+  qa_checklist:
+    - content-quality
+    - brand-consistency
+    - accessibility-wcag
+    - mobile-first
+    - conversion-elements
+    - seo-basics
+    - legal-lgpd
+    - human-approval-gate
+
+# ============================================
+# DEPENDENCIAS
+# ============================================
+dependencies:
+  squads:
+    - copy                            # Elite Copywriting Squad
+  wordpress:
+    min_version: "5.6"                # Application Passwords
+    plugins_required:
+      - elementor                     # Page builder
+    plugins_recommended:
+      - elementor-pro                 # Advanced widgets
+      - yoast-seo                     # SEO meta
+      - litespeed-cache               # Performance
+    api: "REST API v2 (/wp-json/wp/v2/)"
+    auth: "Application Passwords"
+    template: "elementor_canvas"      # Blank page template
+
+# ============================================
+# INPUTS OBRIGATORIOS
+# ============================================
+inputs:
+  required:
+    - name: project_briefing
+      description: "Briefing do projeto (produto, avatar, mercado, objetivo)"
+      type: text
+    - name: wordpress_url
+      description: "URL do site WordPress (ex: mentoriaelevar.com.br)"
+      type: url
+    - name: wordpress_credentials
+      description: "Username + Application Password"
+      type: credentials
+    - name: brand_reference
+      description: "URL da pagina existente OU brand guide (cores, fontes, fotos)"
+      type: url_or_file
+  optional:
+    - name: existing_page_id
+      description: "ID da pagina existente para clonar design"
+      type: number
+    - name: copy_approved
+      description: "Copy ja aprovado (pula fases 1-3)"
+      type: file
+    - name: design_tokens
+      description: "Design tokens existentes (pula fase 4)"
+      type: file
+
+# ============================================
+# FASES DO WORKFLOW (7 Fases, 15 Steps)
+# ============================================
+phases:
+
+  # ==========================================
+  # FASE 1: DIAGNOSTICO & ESTRATEGIA
+  # Tempo: 15-20 min
+  # ==========================================
+  phase_1_diagnosis:
+    name: "Diagnostico & Estrategia"
+    estimated_time: "15-20 min"
+    steps:
+
+      - id: "1.1"
+        name: "briefing-estrategico"
+        agent: growth-cmo
+        action: "*briefing"
+        input: project_briefing
+        output:
+          - strategic-brief.md
+        description: >
+          CMO analisa o briefing, define objetivo da LP, avatar,
+          metricas de sucesso e restricoes. Define tambem se a LP
+          e para trafego frio, morno ou quente.
+
+      - id: "1.2"
+        name: "diagnostico-schwartz"
+        agent: lead-copywriter
+        action: "*brief-copy-chief --tier0"
+        input: strategic-brief.md
+        output:
+          - schwartz-diagnosis.md
+        dependency: ["1.1"]
+        description: >
+          Aciona @eugene-schwartz (Tier 0) para diagnostico obrigatorio:
+          - Nivel de Awareness (1-5)
+          - Market Sophistication (1-5)
+          - Desejo dominante
+          - Temperatura do trafego
+          Resultado define QUAL copywriter sera acionado na Fase 2.
+
+      - id: "1.3"
+        name: "selecao-copywriter"
+        agent: lead-copywriter
+        action: "*select-expert"
+        input: schwartz-diagnosis.md
+        output:
+          - copywriter-selection.md
+        dependency: ["1.2"]
+        description: >
+          Lead Copywriter seleciona o especialista ideal baseado no
+          diagnostico. Para landing pages, o padrao e:
+          - Solution Aware + Mercado Saturado: @todd-brown (Unique Mechanism)
+          - Problem Aware: @gary-halbert (Storytelling + Emotion)
+          - Most Aware: @dan-kennedy (Urgency + Deal)
+          Pode selecionar COMBO (ex: Halbert headline + Brown mechanism).
+
+  # ==========================================
+  # FASE 2: COPY CREATION
+  # Tempo: 20-30 min
+  # ==========================================
+  phase_2_copy:
+    name: "Criacao de Copy"
+    estimated_time: "20-30 min"
+    skip_if: "copy_approved provided"
+    steps:
+
+      - id: "2.1"
+        name: "criacao-copy-completa"
+        agent: lead-copywriter
+        action: "*delegate-copy --type sales-page"
+        input:
+          - strategic-brief.md
+          - schwartz-diagnosis.md
+          - copywriter-selection.md
+        output:
+          - landing-page-copy.md
+        dependency: ["1.3"]
+        description: >
+          Copywriter selecionado cria a copy completa seguindo a estrutura:
+          1. Headline (80% do sucesso - Halbert)
+          2. Sub-headline com prova embutida
+          3. Problema + Agitacao (dor pessoal)
+          4. Historia de origem (storytelling)
+          5. Mecanismo unico (diferenciacao)
+          6. Prova social (depoimentos com numeros)
+          7. Para quem e / Para quem NAO e
+          8. Offer stack (nucleo + bonus)
+          9. Investimento + ancoragem ROI
+          10. Garantia
+          11. FAQ (objecoes reais)
+          12. CTA final
+
+      - id: "2.2"
+        name: "validacao-sugarman"
+        agent: lead-copywriter
+        action: "*sugarman-check"
+        input: landing-page-copy.md
+        output:
+          - sugarman-score.md
+        dependency: ["2.1"]
+        quality_gate:
+          minimum_score: 20
+          ideal_score: 25
+          action_if_fail: "Revisar copy ate atingir score minimo"
+        description: >
+          Aplica 30 Psychological Triggers de Joe Sugarman.
+          Score minimo: 20/30 (STRONG). Abaixo disso, copy volta
+          para revisao com indicacao de triggers faltantes.
+
+      - id: "2.3"
+        name: "aprovacao-copy"
+        type: human_gate
+        gate: copy_approval
+        input:
+          - landing-page-copy.md
+          - sugarman-score.md
+        description: >
+          GATE HUMANO #1: Cliente revisa e aprova a copy antes
+          de prosseguir para design. Pode solicitar ajustes.
+          So avanca com aprovacao explicita.
+
+  # ==========================================
+  # FASE 3: UX RESEARCH & DESIGN SYSTEM
+  # Tempo: 15-20 min
+  # ==========================================
+  phase_3_ux_design:
+    name: "UX Research & Design System"
+    estimated_time: "15-20 min"
+    parallel_with: "phase_2_copy"
+    steps:
+
+      - id: "3.1"
+        name: "scan-site-existente"
+        agent: ux-design-expert
+        action: "*scan {brand_reference}"
+        input: brand_reference
+        output:
+          - brand-audit.md
+        dependency: ["1.1"]
+        description: >
+          Uma (@ux-design-expert) escaneia o site/pagina existente
+          e extrai: paleta de cores, tipografia, espacamentos, componentes
+          visuais, fotos, icones. Identifica padrao visual da marca.
+
+      - id: "3.2"
+        name: "design-tokens"
+        agent: ux-design-expert
+        action: "*tokenize"
+        input: brand-audit.md
+        output:
+          - design-tokens.yaml
+        dependency: ["3.1"]
+        description: >
+          Gera design tokens formais:
+          - Cores (primary, secondary, accent, neutrals)
+          - Tipografia (heading, body, caption, CTA)
+          - Espacamentos (grid 4px)
+          - Breakpoints (mobile 375, tablet 768, desktop 1200)
+          - Sombras, bordas, border-radius
+          - Componentes reutilizaveis (botoes, cards, badges)
+
+      - id: "3.3"
+        name: "wireframe-ux"
+        agent: ux-design-expert
+        action: "*wireframe high"
+        input:
+          - landing-page-copy.md
+          - design-tokens.yaml
+        output:
+          - wireframe.md
+        dependency: ["2.3", "3.2"]
+        description: >
+          Wireframe de alta fidelidade combinando copy aprovada com
+          design tokens. Define hierarquia visual, blocos, grid,
+          espacamento entre secoes, posicionamento de CTAs, breakpoints.
+          Segue principios de Atomic Design (Brad Frost).
+
+  # ==========================================
+  # FASE 4: CONSTRUCAO VISUAL
+  # Tempo: 20-25 min
+  # ==========================================
+  phase_4_build:
+    name: "Construcao Visual"
+    estimated_time: "20-25 min"
+    steps:
+
+      - id: "4.1"
+        name: "design-visual"
+        agent: visual-designer
+        action: "*lp-design"
+        input:
+          - wireframe.md
+          - design-tokens.yaml
+          - landing-page-copy.md
+        output:
+          - visual-spec.md
+        dependency: ["3.3"]
+        description: >
+          Visual Designer transforma wireframe em especificacao visual
+          completa: cores aplicadas, tipografia renderizada, componentes
+          estilizados, estados de hover, versao mobile e desktop.
+          Output inclui specs para cada secao com CSS exato.
+
+      - id: "4.2"
+        name: "build-elementor"
+        agent: landing-page-architect
+        action: "*html-css --platform elementor"
+        input:
+          - wireframe.md
+          - visual-spec.md
+          - landing-page-copy.md
+          - design-tokens.yaml
+        output:
+          - elementor-page.json
+          - elementor-widgets.json
+          - fallback-html.html
+        dependency: ["4.1"]
+        description: >
+          Landing Page Architect constroi a pagina no formato Elementor:
+          - elementor-page.json: Estrutura completa de sections/columns/widgets
+          - elementor-widgets.json: Configuracao individual dos widgets
+          - fallback-html.html: HTML/CSS puro como fallback
+
+          Todos os widgets usam classes e estilos do design-tokens.
+          Template: elementor_canvas (pagina limpa, sem header/footer do tema).
+
+          REGRAS ELEMENTOR:
+          - Usar containers (nao sections legacy)
+          - Widgets nativos: heading, text-editor, image, button, icon-list,
+            testimonial-carousel, accordion, image-box, rating
+          - Inline CSS para estilos customizados
+          - Responsive: controles por breakpoint (mobile/tablet/desktop)
+          - Imagens: usar URLs do media library do WordPress
+
+      - id: "4.3"
+        name: "responsive-accessibility-check"
+        agent: ux-design-expert
+        action: "*responsive-check && *a11y-check"
+        input:
+          - fallback-html.html
+          - elementor-page.json
+        output:
+          - responsive-report.md
+          - a11y-report.md
+        dependency: ["4.2"]
+        checklists:
+          - accessibility-wcag
+          - mobile-first
+        description: >
+          Uma valida:
+          - WCAG 2.1 AA compliance (contraste, alt text, font sizes)
+          - Mobile-first responsiveness (375px, 768px, 1200px)
+          - Touch targets (min 44x44px)
+          - Line-height, font-size, espacamento
+
+  # ==========================================
+  # FASE 5: OTIMIZACAO DE CONVERSAO
+  # Tempo: 10-15 min
+  # ==========================================
+  phase_5_optimization:
+    name: "Otimizacao de Conversao"
+    estimated_time: "10-15 min"
+    steps:
+
+      - id: "5.1"
+        name: "audit-cro"
+        agent: conversion-optimizer
+        action: "*audit-cro"
+        input:
+          - fallback-html.html
+          - landing-page-copy.md
+          - sugarman-score.md
+        output:
+          - cro-report.md
+        dependency: ["4.3"]
+        checklists:
+          - conversion-elements
+          - seo-basics
+          - legal-lgpd
+        description: >
+          Conversion Optimizer audita a pagina completa:
+          - Above-the-fold test (5 segundos)
+          - CTA visibility e copy
+          - Proof stack sufficiency
+          - Urgency/scarcity authenticity
+          - Form friction analysis
+          - SEO basics (title, meta, h1, alt)
+          - LGPD compliance (cookies, privacidade, CNPJ)
+          - Recomendacoes priorizadas (PIE framework)
+
+      - id: "5.2"
+        name: "hopkins-audit"
+        agent: lead-copywriter
+        action: "*audit-copy --hopkins"
+        input:
+          - landing-page-copy.md
+          - cro-report.md
+        output:
+          - hopkins-audit.md
+        dependency: ["5.1"]
+        description: >
+          Auditoria cientifica de Claude Hopkins:
+          - Cada claim tem prova?
+          - Headlines testavel?
+          - Copy mensuravel?
+          - Call-to-action claro?
+          Resultado pode gerar ajustes finais na copy.
+
+  # ==========================================
+  # FASE 6: REVISAO & APROVACAO
+  # Tempo: 10-15 min
+  # ==========================================
+  phase_6_review:
+    name: "Revisao & Aprovacao"
+    estimated_time: "10-15 min"
+    steps:
+
+      - id: "6.1"
+        name: "revisao-cmo"
+        agent: growth-cmo
+        action: "*review --final"
+        input:
+          - landing-page-copy.md
+          - wireframe.md
+          - visual-spec.md
+          - cro-report.md
+          - a11y-report.md
+          - hopkins-audit.md
+          - sugarman-score.md
+        output:
+          - final-review.md
+        dependency: ["5.2"]
+        gate: cmo_approval
+        description: >
+          CMO faz revisao final consolidando todos os reports.
+          Pode solicitar ajustes ou aprovar para publicacao.
+
+      - id: "6.2"
+        name: "aprovacao-humana-final"
+        type: human_gate
+        gate: landing_page_launch
+        input:
+          - final-review.md
+          - fallback-html.html
+          - "Preview URL (WordPress draft)"
+        description: >
+          GATE HUMANO #2: Cliente visualiza a pagina final no WordPress
+          (preview do rascunho) e aprova ou solicita ajustes.
+          So avanca para publicacao com aprovacao explicita.
+
+  # ==========================================
+  # FASE 7: PUBLICACAO WORDPRESS
+  # Tempo: 5-10 min
+  # ==========================================
+  phase_7_deploy:
+    name: "Publicacao WordPress"
+    estimated_time: "5-10 min"
+    steps:
+
+      - id: "7.1"
+        name: "publicar-rascunho"
+        agent: landing-page-architect
+        action: "*deploy-wordpress --draft"
+        input:
+          - elementor-page.json
+          - wordpress_url
+          - wordpress_credentials
+        output:
+          - wordpress-draft-url
+          - wordpress-page-id
+        dependency: ["6.2"]
+        description: >
+          Publica a pagina como RASCUNHO no WordPress via REST API:
+          1. POST /wp-json/wp/v2/pages (status: draft)
+          2. Set template: elementor_canvas
+          3. Set _elementor_data (JSON structure)
+          4. Set _elementor_edit_mode: builder
+          5. Set _elementor_page_settings
+          Pagina fica acessivel apenas via wp-admin preview.
+
+      - id: "7.2"
+        name: "preview-e-aprovacao"
+        type: human_gate
+        gate: final_deploy
+        input:
+          - wordpress-draft-url
+        description: >
+          GATE HUMANO #3: Cliente acessa o WordPress, abre a pagina
+          no Elementor, visualiza o resultado final renderizado.
+          Pode fazer ajustes manuais no Elementor se desejar.
+          Aprovacao final para ir ao ar.
+
+      - id: "7.3"
+        name: "publicar-live"
+        agent: landing-page-architect
+        action: "*deploy-wordpress --publish"
+        input:
+          - wordpress-page-id
+        output:
+          - live-url
+        dependency: ["7.2"]
+        description: >
+          Altera status da pagina de draft para publish.
+          Se for homepage: altera Settings > Reading > Front Page.
+          Limpa cache do LiteSpeed.
+          Pagina fica live no dominio.
+
+      - id: "7.4"
+        name: "backup-e-registro"
+        agent: landing-page-architect
+        action: "*backup-page"
+        output:
+          - backup-page.json
+          - deploy-log.md
+        dependency: ["7.3"]
+        description: >
+          Salva backup completo da pagina publicada (JSON + HTML).
+          Registra log de deploy com timestamp, versao, responsavel.
+
+# ============================================
+# OUTPUTS FINAIS
+# ============================================
+outputs:
+  documents:
+    - strategic-brief.md
+    - schwartz-diagnosis.md
+    - landing-page-copy.md
+    - sugarman-score.md
+  design:
+    - brand-audit.md
+    - design-tokens.yaml
+    - wireframe.md
+    - visual-spec.md
+  build:
+    - elementor-page.json
+    - fallback-html.html
+  quality:
+    - responsive-report.md
+    - a11y-report.md
+    - cro-report.md
+    - hopkins-audit.md
+  deploy:
+    - backup-page.json
+    - deploy-log.md
+    - live-url
+
+# ============================================
+# QUALITY GATES
+# ============================================
+quality_gates:
+  sugarman_minimum: 20
+  wcag_level: "AA"
+  mobile_first: true
+  contrast_ratio: 4.5
+  min_font_size: "16px"
+  lgpd_compliant: true
+  cro_score_minimum: 200  # de 300
+
+# ============================================
+# HUMAN TOUCHPOINTS (3)
+# ============================================
+human_touchpoints:
+  - gate: copy_approval
+    phase: 2
+    step: "2.3"
+    description: "Aprovacao da copy antes do design"
+  - gate: landing_page_launch
+    phase: 6
+    step: "6.2"
+    description: "Aprovacao da pagina completa (preview)"
+  - gate: final_deploy
+    phase: 7
+    step: "7.2"
+    description: "Aprovacao final no WordPress antes de publicar"
+
+# ============================================
+# ROLLBACK PLAN
+# ============================================
+rollback:
+  strategy: "instant"
+  method: "WordPress API: swap page_on_front back to previous page ID"
+  backup_location: "./backup/"
+  max_rollback_time: "10 seconds"
+
+# ============================================
+# A/B TESTING (OPCIONAL)
+# ============================================
+ab_testing:
+  enabled: false
+  method: "Criar pagina duplicada com variantes (headline, CTA, hero image)"
+  variants:
+    - headline
+    - cta_text
+    - hero_image
+    - offer_stack_order
+  tracking: "UTM parameters + Google Analytics events"

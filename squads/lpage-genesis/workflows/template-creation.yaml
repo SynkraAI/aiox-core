@@ -1,0 +1,44 @@
+# ============================================================
+# WORKFLOW: template-creation
+# Squad: lpage-genesis
+# Criar novo template reutilizavel de LP
+# ============================================================
+
+name: template-creation
+description: "Criar novo template reutilizavel de LP"
+trigger: /lpage-new-template
+frequency: on-demand
+priority: 4
+
+steps:
+  - name: define-structure
+    agent: template-engineer
+    action: "*create-template"
+    input:
+      template_type: "tipo do template"
+      sections: "lista de secoes"
+    output: "template structure + config"
+
+  - name: apply-design
+    agent: design-architect
+    action: "*build-component"
+    input: "template structure + design tokens"
+    output: "template com design system aplicado"
+    dependency: define-structure
+
+  - name: add-animations
+    agent: animation-designer
+    action: "*apply-motion"
+    input: "template + animation presets"
+    output: "template com animacoes"
+    dependency: apply-design
+
+  - name: test-template
+    agent: visual-reviewer
+    action: "*evaluate"
+    input: "template com dados dummy"
+    output: "qa report + screenshots"
+    dependency: add-animations
+
+human_touchpoints: 0
+estimated_time: "30-60 min"

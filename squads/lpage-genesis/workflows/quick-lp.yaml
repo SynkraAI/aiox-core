@@ -1,0 +1,39 @@
+# ============================================================
+# WORKFLOW: quick-lp
+# Squad: lpage-genesis
+# Fast track - template existente > assemble > deploy
+# ============================================================
+
+name: quick-lp
+description: "Fast track - brief + template existente > assemble > deploy"
+trigger: /lpage-quick
+frequency: on-demand
+priority: 2
+
+steps:
+  - name: receive-brief
+    agent: genesis-director
+    action: "*quick-lp"
+    input:
+      brief: "descricao curta"
+      copy: "copy completa"
+      template_name: "nome do template existente"
+    output: "template selecionado + plan"
+
+  - name: quick-assembly
+    agent: page-assembler
+    action: "*assemble-quick"
+    input: "brief + copy + template"
+    output: "landing-page.html (deploy ready)"
+    dependency: receive-brief
+
+  - name: quick-deploy
+    agent: deploy-pilot
+    action: "*deploy"
+    gate: deploy_authorization
+    input: "build output"
+    output: "deploy URL"
+    dependency: quick-assembly
+
+human_touchpoints: 1
+estimated_time: "5-10 min"

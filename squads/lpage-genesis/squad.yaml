@@ -1,0 +1,235 @@
+# ============================================
+# LPage Genesis v1.0 - Landing Page Production Squad
+# ============================================
+# Version: 1.0.0
+# Command: /lpage
+# Independence: 100% Self-Contained (Copy Squad via dependency)
+# Author: Andre Oliver
+# License: MIT
+# Created: 2026-02-10
+# ============================================
+
+name: lpage-genesis
+version: 1.0.0
+short-title: "Landing Page Production Squad"
+description: >
+  Squad de producao de landing pages com design system AI-driven.
+
+  - 8 agentes especializados (Director > Deploy)
+  - 15 tasks automatizadas
+  - 5 workflows principais
+  - Pipeline completo: visual concept > design system > templates > producao > deploy
+  - Integra com Copy Squad (copy), Marketing Growth (briefs)
+  - MCP: Playwright (visual QA) + Netlify (deploy automatizado)
+
+author: "Andre Oliver"
+license: MIT
+
+# ============================================
+# AIOS Compatibility
+# ============================================
+aios:
+  minVersion: "4.0.0"
+  type: squad
+  compatible_with: "AIOS-FULLSTACK v4+"
+
+requires:
+  node: ">=18.0.0"
+  aios: ">=4.0.0"
+
+# ============================================
+# Squad Components (Task-First Architecture)
+# ============================================
+components:
+  # Agents (8)
+  agents:
+    - genesis-director.md
+    - design-architect.md
+    - visual-crafter.md
+    - page-assembler.md
+    - template-engineer.md
+    - animation-designer.md
+    - visual-reviewer.md
+    - deploy-pilot.md
+
+  # Tasks (15)
+  tasks:
+    # Foundation (4)
+    - setup-design-system.md
+    - create-design-tokens.md
+    - build-component.md
+    - generate-visual-concept.md
+
+    # Production (5)
+    - create-lp-template.md
+    - assemble-landing-page.md
+    - assemble-quick-lp.md
+    - create-animation-set.md
+    - create-responsive-styles.md
+
+    # Quality (3)
+    - visual-qa-review.md
+    - audit-design-consistency.md
+    - performance-audit.md
+
+    # Delivery (2)
+    - deploy-to-netlify.md
+    - configure-mcp-servers.md
+
+  # Workflows (5)
+  workflows:
+    - design-genesis-full.yaml
+    - quick-lp.yaml
+    - design-system-setup.yaml
+    - template-creation.yaml
+    - visual-qa-loop.yaml
+
+  # Checklists (6)
+  checklists:
+    - design-quality.md
+    - performance-standards.md
+    - accessibility-wcag.md
+    - responsive-mobile.md
+    - seo-technical.md
+    - deploy-readiness.md
+
+  # Templates (5)
+  templates:
+    - lp-sales-long.md
+    - lp-webinar.md
+    - lp-lead-magnet.md
+    - lp-mini-sales.md
+    - lp-waitlist.md
+
+  tools: []
+  scripts: []
+
+# ============================================
+# Configuration
+# ============================================
+config:
+  extends: extend
+
+  coding-standards: config/coding-standards.md
+  tech-stack: config/tech-stack.md
+  source-tree: config/source-tree.md
+
+  hierarchy:
+    enabled: true
+    coordinator: genesis-director
+    structure:
+      tier0_orchestration:
+        name: "Orquestracao & Pipeline"
+        agents: [genesis-director]
+      tier1_foundation:
+        name: "Design System & Visual Concepts"
+        agents: [design-architect, visual-crafter]
+      tier2_production:
+        name: "Producao de Landing Pages"
+        agents: [page-assembler, template-engineer, animation-designer]
+      tier3_quality:
+        name: "Visual QA & Revisao"
+        agents: [visual-reviewer]
+      tier4_delivery:
+        name: "Deploy & Performance"
+        agents: [deploy-pilot]
+
+  human_in_the_loop:
+    enabled: true
+    gates:
+      - design_system_approval
+      - landing_page_review
+      - deploy_authorization
+
+  copy_squad_integration:
+    enabled: true
+    path: "../copy/"
+    bridge_agent: "page-assembler"
+    access_level: "full"
+
+  marketing_growth_integration:
+    enabled: true
+    path: "../marketing-growth/"
+    receives_from: "growth-cmo"
+    provides_to: "landing-page-architect"
+
+  # MCP Integrations
+  mcps:
+    playwright:
+      purpose: "Visual QA - screenshots, browser automation"
+      used_by: [visual-reviewer]
+    netlify:
+      purpose: "Automated deploy, site management"
+      used_by: [deploy-pilot]
+
+  # External Tools
+  external_tools:
+    google_stitch:
+      purpose: "AI UI design generation"
+      free_tier: "350 generations/month"
+      used_by: [visual-crafter]
+    nano_banana_pro:
+      purpose: "AI image generation via Gemini 3"
+      used_by: [visual-crafter]
+    lighthouse:
+      purpose: "Performance auditing (CLI)"
+      used_by: [deploy-pilot]
+
+# ============================================
+# Tags para Discovery
+# ============================================
+tags:
+  - landing-page
+  - design-system
+  - visual-qa
+  - deploy
+  - tailwind
+  - react
+  - framer-motion
+  - atomic-design
+  - performance
+  - accessibility
+  - netlify
+  - playwright
+
+# ============================================
+# Slash Command Prefix
+# ============================================
+slashPrefix: lpage
+
+# ============================================
+# Dependencies
+# ============================================
+dependencies:
+  node:
+    - react
+    - typescript
+    - tailwindcss
+    - class-variance-authority
+    - framer-motion
+    - "@radix-ui/react-*"
+    - tailwind-merge
+    - lucide-react
+  squads:
+    - copy
+
+# ============================================
+# Metadata
+# ============================================
+metadata:
+  created: "2026-02-10"
+  project: "Glowapp--IA"
+  primary_use_case: "Producao completa de landing pages com design system AI-driven"
+  priority_workflow: "design-genesis-full"
+  design_blueprint: "../.designs/lpage-genesis-design.yaml"
+
+  changelog:
+    - version: "1.0.0"
+      date: "2026-02-10"
+      changes:
+        - "Initial release"
+        - "8 agents + 15 tasks + 5 workflows"
+        - "Copy Squad integration via page-assembler"
+        - "Playwright MCP visual QA"
+        - "Netlify MCP automated deploy"
+        - "Design system AI-driven (OKLCH + Atomic Design + CVA)"

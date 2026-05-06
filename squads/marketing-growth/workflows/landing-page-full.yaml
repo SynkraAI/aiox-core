@@ -1,0 +1,88 @@
+name: landing-page-full
+description: Criacao de landing page completa (copy + design + HTML/CSS)
+trigger: /mkt-landing-page
+frequency: on-demand
+priority: 1
+
+steps:
+  - name: strategic-briefing
+    agent: growth-cmo
+    action: "*briefing"
+    input:
+      produto: nome do produto/servico
+      preco: valor
+      avatar: descricao do publico-alvo
+      objetivo: venda | captura | webinar | evento
+    output: briefing estrategico completo
+
+  - name: copy-diagnosis
+    agent: lead-copywriter
+    action: "*brief-copy-chief"
+    input: briefing estrategico
+    output: diagnostico (awareness + sophistication + copywriter selecionado)
+    dependency: strategic-briefing
+
+  - name: copy-creation
+    agent: lead-copywriter
+    action: Copy Chief Tier System (via ../copy/)
+    input: diagnostico + briefing
+    output: copy completa (hero, problem, solution, how-it-works, benefits, social-proof, offer, guarantee, faq, cta)
+    dependency: copy-diagnosis
+
+  - name: page-structure
+    agent: landing-page-architect
+    action: "*wireframe"
+    input: copy completa + briefing
+    output: wireframe.md + prd.md
+    dependency: copy-creation
+
+  - name: design-system
+    agent: visual-designer
+    action: "*design-system"
+    input: brand-guide (se existir) ou scan de referencia
+    output: design tokens
+    dependency: strategic-briefing
+
+  - name: page-build
+    agent: landing-page-architect
+    action: "*html-css"
+    input: wireframe + copy + design tokens
+    output: index.html (HTML/CSS responsivo mobile-first)
+    dependency:
+      - page-structure
+      - design-system
+
+  - name: cro-optimization
+    agent: conversion-optimizer
+    action: "*audit-cro"
+    input: HTML/CSS da pagina
+    output: pagina otimizada + sugestoes A/B
+    dependency: page-build
+    checklists:
+      - conversion-elements
+      - mobile-first
+      - seo-basics
+      - accessibility-wcag
+
+  - name: cmo-review
+    agent: growth-cmo
+    action: "*review"
+    gate: cmo-approval
+    dependency: cro-optimization
+
+  - name: human-approval
+    gate: landing_page_launch
+    action: Preview final + Go/No-Go
+    dependency: cmo-review
+
+  - name: delivery
+    output:
+      - wireframe.md
+      - copy-completa.md
+      - index.html
+      - prd.md
+      - ab-test-plan.md
+      - design-tokens.yaml
+
+human_touchpoints: 2
+estimated_time: "45-60 min"

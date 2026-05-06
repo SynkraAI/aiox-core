@@ -1,0 +1,43 @@
+name: voice-clone-setup
+description: Setup de voice clone pessoal
+trigger: /mkt-setup-voice
+frequency: one-time
+
+steps:
+  - name: collect-samples
+    action: Coletar 5-10 textos do usuario
+    output: corpus de analise
+
+  - name: analyze-voice
+    agent: lead-copywriter
+    action: Analisar padroes de escrita
+    output: vocabulario, estrutura, tom, expressoes, ritmo
+    dependency: collect-samples
+
+  - name: create-voice-guide
+    agent: content-producer
+    output: data/voice-clone/voice-guide.md
+    dependency: analyze-voice
+
+  - name: create-writing-style
+    agent: content-producer
+    output: data/voice-clone/writing-style.md
+    dependency: analyze-voice
+
+  - name: validation-test
+    action: Gerar 3 textos-teste com o clone
+    dependency:
+      - create-voice-guide
+      - create-writing-style
+
+  - name: human-approval
+    gate: voice_clone_validation
+    action: Usuario compara textos com sua voz real
+    dependency: validation-test
+
+  - name: activate
+    action: Ativar voice_clone.enabled no config.yaml
+    dependency: human-approval
+
+human_touchpoints: 1
+estimated_time: "20-30 min"

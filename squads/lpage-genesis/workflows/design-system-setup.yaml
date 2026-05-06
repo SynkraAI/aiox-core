@@ -1,0 +1,56 @@
+# ============================================================
+# WORKFLOW: design-system-setup
+# Squad: lpage-genesis
+# Setup unico do design system completo
+# ============================================================
+
+name: design-system-setup
+description: "Setup unico do design system completo (tokens > Tailwind > components > templates)"
+trigger: /lpage-setup-design
+frequency: one-time
+priority: 3
+
+steps:
+  - name: extract-references
+    agent: visual-crafter
+    action: "*extract-reference"
+    input:
+      reference_urls: "URLs de referencia"
+      brand_info: "cores, tipografia, estilo"
+    output: "extracted palette + design analysis"
+
+  - name: create-tokens
+    agent: design-architect
+    action: "*create-tokens"
+    input: "brand info + extracted palette"
+    output: "design-tokens.yaml (W3C DTCG)"
+    dependency: extract-references
+
+  - name: generate-tailwind
+    agent: design-architect
+    action: "*export-tailwind"
+    input: "design-tokens.yaml"
+    output: "tailwind.config.ts + variables.css"
+    dependency: create-tokens
+
+  - name: build-base-components
+    agent: design-architect
+    action: "*build-component"
+    input: "tokens + component list (atoms)"
+    output: "src/components/atoms/ (Button, Input, Heading, Text, Badge)"
+    dependency: generate-tailwind
+
+  - name: create-base-templates
+    agent: template-engineer
+    action: "*create-template"
+    input: "design system + 5 template types"
+    output: "5 templates base (sales-long, webinar, lead-magnet, mini-sales, waitlist)"
+    dependency: build-base-components
+
+  - name: design-approval
+    gate: design_system_approval
+    action: "Review completo do design system"
+    dependency: create-base-templates
+
+human_touchpoints: 1
+estimated_time: "4-6 hours (one-time)"

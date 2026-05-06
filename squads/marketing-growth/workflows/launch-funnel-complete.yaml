@@ -1,0 +1,86 @@
+name: launch-funnel-complete
+description: Funil de lancamento completo (LP + 19 emails + assets)
+trigger: /mkt-launch-funnel
+frequency: on-demand
+
+phases:
+  phase1_diagnostic:
+    name: "Diagnostico & Estrategia"
+    steps:
+      - name: market-analysis
+        agent: data-analyst
+        action: "*segment"
+      - name: strategy
+        agent: growth-cmo
+        action: "*plan-campaign"
+
+  phase2_copy:
+    name: "Producao de Copy"
+    dependency: phase1_diagnostic
+    steps:
+      - name: landing-page-copy
+        agent: lead-copywriter
+        action: bridge Copy Squad - LP principal
+      - name: pre-launch-emails
+        agent: lead-copywriter
+        action: bridge Copy Squad - 7 emails antecipacao
+      - name: cart-open-emails
+        agent: lead-copywriter
+        action: bridge Copy Squad - 5 emails conversao
+      - name: last-day-emails
+        agent: lead-copywriter
+        action: bridge Copy Squad - 3 emails urgencia
+      - name: recovery-emails
+        agent: lead-copywriter
+        action: bridge Copy Squad - 4 emails recuperacao
+
+  phase3_assets:
+    name: "Assets Visuais & Paginas"
+    dependency: phase2_copy
+    steps:
+      - name: main-landing-page
+        agent: landing-page-architect
+        action: "*create-lp"
+      - name: thank-you-page
+        agent: landing-page-architect
+        action: "*create-thank-you"
+      - name: visual-assets
+        agent: visual-designer
+
+  phase4_validation:
+    name: "Validacao & Otimizacao"
+    dependency: phase3_assets
+    steps:
+      - name: cro-audit
+        agent: conversion-optimizer
+        action: "*audit-cro"
+      - name: quality-gates
+        checklists:
+          - conversion-elements
+          - mobile-first
+          - seo-basics
+          - legal-lgpd
+      - name: cmo-review
+        agent: growth-cmo
+        gate: cmo-approval
+
+  phase5_deploy:
+    name: "Deploy & Configuracao"
+    dependency: phase4_validation
+    steps:
+      - name: human-approval
+        gate: launch_funnel_deploy
+      - name: setup-automation
+        agent: distribution-manager
+      - name: final-delivery
+        output:
+          - LP principal (HTML/CSS)
+          - Thank-you page
+          - 19 emails (subject + body)
+          - Assets visuais
+          - Fluxo de automacao
+          - Timeline do lancamento
+
+total_assets: "LP + 19 emails + thank-you + assets"
+human_touchpoints: 2
+estimated_time: "90-120 min"

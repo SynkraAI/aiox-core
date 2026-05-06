@@ -1,0 +1,265 @@
+# ============================================
+# Marketing Growth v1.0 - Marketing Growth System Squad
+# ============================================
+# Version: 1.0.0
+# Command: /mkt
+# Independence: 100% Self-Contained (Copy via dependency)
+# Author: Synkra AIOS Community
+# License: MIT
+# Created: 2026-02-05
+# ============================================
+
+name: marketing-growth
+version: 1.0.0
+short-title: "Marketing Growth System Squad"
+description: >
+  Sistema completo de marketing que integra conteudo, landing pages e funis.
+
+  - 9 agentes especializados (CMO > Distribution)
+  - 20 tasks automatizadas
+  - 5 workflows principais
+  - Integracao com Copy Squad (../copy/) para copywriting
+  - Foco em Instagram + LinkedIn
+  - Landing Pages como prioridade #1
+
+author: "Synkra AIOS Community"
+license: MIT
+
+# ============================================
+# AIOS Compatibility
+# ============================================
+aios:
+  minVersion: "4.0.0"
+  type: squad
+  compatible_with: "AIOS-FULLSTACK v4+"
+
+requires:
+  node: ">=18.0.0"
+  aios: ">=4.0.0"
+
+# ============================================
+# Squad Components (Task-First Architecture)
+# ============================================
+components:
+  # Agents (9)
+  agents:
+    - growth-cmo.md
+    - content-strategist.md
+    - lead-copywriter.md
+    - content-producer.md
+    - visual-designer.md
+    - landing-page-architect.md
+    - data-analyst.md
+    - conversion-optimizer.md
+    - distribution-manager.md
+
+  # Tasks (20)
+  tasks:
+    # Content Creation (8)
+    - create-daily-content.md
+    - create-weekly-plan.md
+    - create-instagram-carousel.md
+    - create-instagram-reel-script.md
+    - create-linkedin-post.md
+    - create-linkedin-article.md
+    - create-content-calendar.md
+    - create-email-nurture.md
+
+    # Landing Pages (4)
+    - create-landing-page.md
+    - create-lead-magnet-page.md
+    - audit-landing-page.md
+    - ab-test-landing-page.md
+
+    # Funnel (1)
+    - create-launch-funnel.md
+
+    # Analysis & Optimization (3)
+    - audit-content-performance.md
+    - optimize-conversion.md
+    - analyze-weekly-metrics.md
+
+    # Setup (2)
+    - setup-voice-clone.md
+    - scan-design-system.md
+
+    # Distribution (2)
+    - schedule-publication.md
+    - generate-campaign-report.md
+
+  # Workflows (6)
+  workflows:
+    - daily-content-creation.yaml
+    - weekly-content-planning.yaml
+    - landing-page-full.yaml
+    - landing-page-wordpress-elementor.yaml  # NEW: Specialized WP+Elementor
+    - voice-clone-setup.yaml
+    - launch-funnel-complete.yaml
+
+  # Checklists (8)
+  checklists:
+    - content-quality.md
+    - brand-consistency.md
+    - accessibility-wcag.md
+    - mobile-first.md
+    - conversion-elements.md
+    - seo-basics.md
+    - legal-lgpd.md
+    - human-approval-gate.md
+
+  # Templates (10)
+  templates:
+    - instagram-carousel.md
+    - instagram-reel-script.md
+    - linkedin-post.md
+    - linkedin-article.md
+    - landing-page-long.md
+    - landing-page-short.md
+    - email-nurture-sequence.md
+    - email-launch-sequence.md
+    - weekly-metrics-report.md
+    - content-calendar.md
+
+  tools: []
+
+  scripts:
+    - integrations/instagram-api.md
+    - integrations/linkedin-api.md
+
+# ============================================
+# Configuration
+# ============================================
+config:
+  extends: extend
+
+  hierarchy:
+    enabled: true
+    coordinator: growth-cmo
+    structure:
+      tier1_strategy:
+        name: "Estrategia & Coordenacao"
+        agents: [growth-cmo, content-strategist]
+      tier2_production:
+        name: "Producao de Conteudo"
+        agents: [lead-copywriter, content-producer]
+      tier3_design:
+        name: "Design & Visual"
+        agents: [visual-designer, landing-page-architect]
+      tier4_data:
+        name: "Dados & Otimizacao"
+        agents: [data-analyst, conversion-optimizer]
+      tier5_distribution:
+        name: "Distribuicao"
+        agents: [distribution-manager]
+
+  platforms:
+    instagram:
+      enabled: true
+      formats: [carousel, reel, story, post]
+      api_integration: false  # Ativar manualmente
+    linkedin:
+      enabled: true
+      formats: [post, article, carousel]
+      api_integration: false  # Ativar manualmente
+
+  human_in_the_loop:
+    enabled: true
+    gates:
+      - before_publication
+      - landing_page_launch
+      - launch_funnel_deploy
+      - voice_clone_validation
+
+  copy_squad_integration:
+    enabled: true
+    path: "../copy/"
+    bridge_agent: "lead-copywriter"
+    access_level: "full"
+    tier_system: true
+
+  # External AIOS agents integrated into workflows
+  external_agents:
+    ux-design-expert:
+      source: ".aios-core/development/agents/ux-design-expert.md"
+      used_in: ["landing-page-wordpress-elementor"]
+      role: "Design system, wireframes, accessibility"
+
+  # WordPress + Elementor integration
+  wordpress_integration:
+    enabled: true
+    api: "REST API v2"
+    auth: "Application Passwords"
+    page_template: "elementor_canvas"
+    deploy_workflow: "landing-page-wordpress-elementor"
+
+  voice_clone:
+    enabled: false  # Ativar apos setup
+    mmos_path: null
+    fallback: "brand-guide-tone"
+
+# ============================================
+# Tags para Discovery
+# ============================================
+tags:
+  - marketing
+  - content-creation
+  - landing-pages
+  - instagram
+  - linkedin
+  - conversion
+  - copywriting
+  - design-system
+  - growth
+  - funnel
+  - wordpress
+  - elementor
+  - ux-design
+
+# ============================================
+# Slash Command Prefix
+# ============================================
+slashPrefix: mkt
+
+# ============================================
+# Dependencies
+# ============================================
+dependencies:
+  node: []
+  squads:
+    - copy  # Elite Copywriting Squad
+
+# ============================================
+# Scripts
+# ============================================
+scripts:
+  integrations:
+    - integrations/instagram-api.md
+    - integrations/linkedin-api.md
+  validation: []
+
+# ============================================
+# MMOS Integration (Preparado)
+# ============================================
+mmos_integration:
+  enabled: false
+  mind_mapping: {}
+
+# ============================================
+# Metadata
+# ============================================
+metadata:
+  created: "2026-02-05"
+  project: "Glowapp--IA"
+  primary_use_case: "Marketing de conteudo completo com landing pages e funis"
+  priority_workflow: "landing-page-full"
+  platforms: [instagram, linkedin]
+
+  changelog:
+    - version: "1.0.0"
+      date: "2026-02-05"
+      changes:
+        - "Initial release"
+        - "9 agents + 20 tasks + 5 workflows"
+        - "Copy Squad integration via bridge"
+        - "Landing Page Full workflow"
+        - "Instagram + LinkedIn focus"

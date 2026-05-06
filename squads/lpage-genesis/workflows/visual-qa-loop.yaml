@@ -1,0 +1,52 @@
+# ============================================================
+# WORKFLOW: visual-qa-loop
+# Squad: lpage-genesis
+# Ciclo iterativo de QA visual com auto-correcao
+# ============================================================
+
+name: visual-qa-loop
+description: "Ciclo iterativo de QA visual (screenshot > avaliar > feedback > iterar > aprovar)"
+trigger: /lpage-qa
+frequency: on-demand
+priority: 5
+
+steps:
+  - name: capture-screenshots
+    agent: visual-reviewer
+    action: "*screenshot"
+    input:
+      page_url: "URL ou HTML da LP"
+      viewports: [375, 393, 820, 1440, 1920]
+    output: "screenshots em 5 viewports"
+
+  - name: evaluate-design
+    agent: visual-reviewer
+    action: "*evaluate"
+    input: "screenshots + design-tokens.yaml"
+    output: "score (0-100) + feedback detalhado"
+    dependency: capture-screenshots
+
+  - name: apply-fixes
+    agent: page-assembler
+    action: "*apply-feedback"
+    input: "feedback do visual-reviewer"
+    output: "pagina corrigida"
+    dependency: evaluate-design
+    condition: "score < 85"
+
+  - name: re-evaluate
+    agent: visual-reviewer
+    action: "*evaluate"
+    input: "pagina corrigida"
+    output: "novo score + feedback"
+    dependency: apply-fixes
+    max_iterations: 3
+
+  - name: escalate-to-human
+    gate: landing_page_review
+    action: "Escalonar para revisao humana se 3 iteracoes sem aprovacao"
+    dependency: re-evaluate
+    condition: "iterations >= 3 AND score < 85"
+
+human_touchpoints: 0-1
+estimated_time: "5-15 min"
