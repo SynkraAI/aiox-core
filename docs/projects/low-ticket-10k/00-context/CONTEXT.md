@@ -93,21 +93,34 @@ Funil low-ticket de prompts AI ("Copie. Cole. Cobre.") R$10-30 com order bump R$
 **LP redesign LIVE:** hero "Copie. Cole. Cobre." Fraunces + demo papel + 2 fotos reais user
 **View rate:** 5.9% → 71% pós-redesign
 
-**🔴 PIVOT 05/Mai: Meta Ads → Email Marketing**
-- Decisão user 05/Mai: pausar Meta + usar email marketing
-- Meta camp `6986644457499` PAUSED 05/Mai (era única ACTIVE, 7d spend R$233, 0 purchases, 1 IC)
-- Razão: ROAS efetivo zero em 7d
-- **Squad pendente:** copy-chief deve construir estratégia email (não disparado ainda)
+**🟡 PIVOT 05/Mai: Meta Ads → Email Marketing — STRATEGY READY**
+- Decisão user 05/Mai noite: pausar Meta + email marketing autopilot
+- Meta camp `6986644457499` PAUSED 05/Mai (7d R$233 / 0 purchases / 1 IC = ROAS 0)
+- Autopilot rodou 3 squads paralelos (~30min): copy-chief + aios-analyst + aios-dev
+- 17 arquivos entregues em `email-marketing-pivot/` (~245KB)
+- **Stack confirmado:** Resend + Supabase + Netlify/Vercel function + domain `mail.vorza.com.br`
+- **Tool decision:** Resend free tier 3k/mo, $20-45 em escala
+- **Warm-up:** 4 semanas obrigatório antes de blast
 
-**Active blockers:**
-- 🔴 4 perguntas críticas user antes de squad email rodar:
-  1. **Lista:** Kiwify customers (quente)? Leads LP (morna)? Zero (precisa lead magnet)?
-  2. **Tool:** ActiveCampaign / RD Station / Mailchimp / Resend / ConvertKit?
-  3. **Oferta:** mesma R$10-30 + bump R$17 + upsell SCV-3 R$147?
-  4. **Métrica/timeline:** quando avaliar email > Meta? Substituir totalmente ou paralelo?
-- 🟡 3 decisões pendentes order bump (caveat #2, #5, upsell B/E vs C) — talvez mover pra email sequence
+**🔴 Conclave dissidente (3/5 mind clones contra pivot direto):**
+- Hormozi+Brunson+Godin recomendam VALIDAR oferta primeiro via 5 entrevistas (R$10 gift card retargeting)
+- "Email não salva oferta perdedora — só amplifica oferta vencedora"
+- 7d Meta com 0 purchases + LP view rate 71% sugere problema = OFERTA, não canal
 
-**Trigger retomada:** "responde perguntas email" / "dispara copy-chief vorza email"
+**Active blockers (manhã 06/Mai):**
+- 🔴 User triagem 4 opções (A/B/C/D) — ler `email-marketing-pivot/README.md`
+  - **A** Validar oferta (5 entrevistas) — recomendação 3/5 conclave
+  - **B** Email + Meta paralelo (recomendação analyst, default Orion) — breakeven dia 24-28
+  - **C** Híbrido sequencial (entrevistas semana 1 + email se canal-problem confirmado)
+  - **D** Pivot oferta primeiro (refazer R$27 + bump + value stack)
+- 🟡 Realismo financeiro: mês 1-3 ROAS 0.22-0.64× (email é construção de ATIVO)
+
+**Trigger retomada:**
+- `vai com opção A vorza` (entrevistas)
+- `vai com opção B vorza` (deploy email)
+- `vai com opção C vorza` (híbrido)
+- `vai com opção D vorza` (refazer oferta)
+- `status vorza email` (resumo)
 
 ---
 
