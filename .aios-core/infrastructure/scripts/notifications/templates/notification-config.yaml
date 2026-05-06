@@ -1,0 +1,42 @@
+# AIOS Notification System Configuration
+# Manage with: *notification [on|off|test|config|status]
+# Location: ~/.aios/notifications/config.yaml
+#
+# This file controls when and how Claude Code plays sounds
+# to alert you when human input is needed.
+
+enabled: true
+
+# Minimum milliseconds between notifications (prevents spam)
+cooldown_ms: 2000
+
+# Claude Code hook events that trigger a notification
+# Available: permission_prompt, elicitation_dialog, idle_prompt
+events:
+  - permission_prompt
+  - elicitation_dialog
+
+# Sound configuration
+sound:
+  # Preset: beep | ping | glass | hero | purr
+  preset: ping
+
+  # Windows-specific (PowerShell [console]::beep)
+  windows:
+    frequency: 1000   # Hz (200-5000)
+    duration: 500     # ms
+
+  # macOS-specific (afplay system sounds)
+  macos:
+    # Available: Ping | Glass | Hero | Purr | Pop | Basso | Blow | Bottle
+    #            Frog | Funk | Morse | Submarine | Tink
+    sound_name: Ping
+
+  # Linux-specific (paplay / PulseAudio)
+  linux:
+    sound_file: /usr/share/sounds/freedesktop/stereo/message.oga
+    # Fallback if paplay not available: bell = terminal bell (printf '\a')
+    fallback: bell
+
+# Max time (ms) to wait for sound command to finish
+timeout_ms: 3000
