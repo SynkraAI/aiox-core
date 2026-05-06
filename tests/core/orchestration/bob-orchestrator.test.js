@@ -1011,4 +1011,393 @@ describe('BobOrchestrator', () => {
       });
     });
   });
+
+  // ==========================================
+  // Deep coverage: _resolveStoryPath
+  // ==========================================
+
+  describe('_resolveStoryPath', () => {
+    it('should find story in active directory', async () => {
+      // Given
+      const storyDir = path.join(TEST_PROJECT_ROOT, 'docs/stories/active');
+      await fs.mkdir(storyDir, { recursive: true });
+      await fs.writeFile(path.join(storyDir, '12.5.story.md'), '# Story');
+
+      // When
+      const result = orchestrator._resolveStoryPath('12.5');
+
+      // Then
+      expect(result).toBe(path.join(storyDir, '12.5.story.md'));
+    });
+
+    it('should find story in root stories directory', async () => {
+      // Given
+      const storyDir = path.join(TEST_PROJECT_ROOT, 'docs/stories');
+      await fs.mkdir(storyDir, { recursive: true });
+      await fs.writeFile(path.join(storyDir, '12.5.story.md'), '# Story');
+
+      // When
+      const result = orchestrator._resolveStoryPath('12.5');
+
+      // Then
+      expect(result).toBe(path.join(storyDir, '12.5.story.md'));
+    });
+
+    it('should normalize story ID by removing prefix and suffix', async () => {
+      // Given
+      const storyDir = path.join(TEST_PROJECT_ROOT, 'docs/stories/active');
+      await fs.mkdir(storyDir, { recursive: true });
+      await fs.writeFile(path.join(storyDir, '12.5.story.md'), '# Story');
+
+      // When
+      const result = orchestrator._resolveStoryPath('story-12.5');
+
+      // Then
+      expect(result).toContain('12.5.story.md');
+    });
+
+    it('should return active path as fallback for non-existent story', () => {
+      // When
+      const result = orchestrator._resolveStoryPath('99.99');
+
+      // Then
+      expect(result).toContain('docs/stories/active');
+      expect(result).toContain('99.99.story.md');
+    });
+  });
+
+  // ==========================================
+  // Deep coverage: brownfield delegation
+  // ==========================================
+
+  describe('handleBrownfieldDecision', () => {
+    it('should delegate accepted decision to brownfieldHandler', async () => {
+      // Given
+      const mockResult = { action: 'analysis_started', data: { phases: 3 } };
+      orchestrator.brownfieldHandler.handleUserDecision = jest.fn().mockResolvedValue(mockResult);
+
+      // When
+      const result = await orchestrator.handleBrownfieldDecision(true, { userGoal: 'analyze' });
+
+      // Then
+      expect(orchestrator.brownfieldHandler.handleUserDecision).toHaveBeenCalledWith(true, { userGoal: 'analyze' });
+      expect(result).toEqual(mockResult);
+    });
+
+    it('should delegate declined decision to brownfieldHandler', async () => {
+      // Given
+      const mockResult = { action: 'skipped', data: {} };
+      orchestrator.brownfieldHandler.handleUserDecision = jest.fn().mockResolvedValue(mockResult);
+
+      // When
+      const result = await orchestrator.handleBrownfieldDecision(false);
+
+      // Then
+      expect(orchestrator.brownfieldHandler.handleUserDecision).toHaveBeenCalledWith(false, {});
+      expect(result).toEqual(mockResult);
+    });
+  });
+
+  describe('handleBrownfieldPhaseFailure', () => {
+    it('should delegate retry action to brownfieldHandler', async () => {
+      // Given
+      const mockResult = { action: 'phase_retried', phase: 'discovery' };
+      orchestrator.brownfieldHandler.handlePhaseFailureAction = jest.fn().mockResolvedValue(mockResult);
+
+      // When
+      const result = await orchestrator.handleBrownfieldPhaseFailure('discovery', 'retry');
+
+      // Then
+      expect(orchestrator.brownfieldHandler.handlePhaseFailureAction).toHaveBeenCalledWith('discovery', 'retry', {});
+      expect(result).toEqual(mockResult);
+    });
+
+    it('should pass context to brownfieldHandler', async () => {
+      // Given
+      const ctx = { errorDetails: 'timeout' };
+      orchestrator.brownfieldHandler.handlePhaseFailureAction = jest.fn().mockResolvedValue({});
+
+      // When
+      await orchestrator.handleBrownfieldPhaseFailure('analysis', 'skip', ctx);
+
+      // Then
+      expect(orchestrator.brownfieldHandler.handlePhaseFailureAction).toHaveBeenCalledWith('analysis', 'skip', ctx);
+    });
+  });
+
+  describe('handlePostDiscoveryChoice', () => {
+    it('should delegate resolve_debts choice', async () => {
+      // Given
+      const mockResult = { action: 'debt_resolution_started' };
+      orchestrator.brownfieldHandler.handle = jest.fn().mockResolvedValue(mockResult);
+
+      // When
+      const result = await orchestrator.handlePostDiscoveryChoice('resolve_debts');
+
+      // Then
+      expect(orchestrator.brownfieldHandler.handle).toHaveBeenCalledWith({ postDiscoveryChoice: 'resolve_debts' });
+      expect(result).toEqual(mockResult);
+    });
+
+    it('should merge context with postDiscoveryChoice', async () => {
+      // Given
+      const ctx = { priority: 'high' };
+      orchestrator.brownfieldHandler.handle = jest.fn().mockResolvedValue({});
+
+      // When
+      await orchestrator.handlePostDiscoveryChoice('add_feature', ctx);
+
+      // Then
+      expect(orchestrator.brownfieldHandler.handle).toHaveBeenCalledWith({
+        priority: 'high',
+        postDiscoveryChoice: 'add_feature',
+      });
+    });
+  });
+
+  // ==========================================
+  // Deep coverage: greenfield delegation
+  // ==========================================
+
+  describe('handleGreenfieldSurfaceDecision', () => {
+    it('should delegate GO decision to greenfieldHandler', async () => {
+      // Given
+      const mockResult = { action: 'phase_started', phase: 2 };
+      orchestrator.greenfieldHandler.handleSurfaceDecision = jest.fn().mockResolvedValue(mockResult);
+
+      // When
+      const result = await orchestrator.handleGreenfieldSurfaceDecision('GO', 2);
+
+      // Then
+      expect(orchestrator.greenfieldHandler.handleSurfaceDecision).toHaveBeenCalledWith('GO', 2, {});
+      expect(result).toEqual(mockResult);
+    });
+
+    it('should pass context to greenfieldHandler', async () => {
+      // Given
+      const ctx = { feedback: 'looks good' };
+      orchestrator.greenfieldHandler.handleSurfaceDecision = jest.fn().mockResolvedValue({});
+
+      // When
+      await orchestrator.handleGreenfieldSurfaceDecision('PAUSE', 3, ctx);
+
+      // Then
+      expect(orchestrator.greenfieldHandler.handleSurfaceDecision).toHaveBeenCalledWith('PAUSE', 3, ctx);
+    });
+  });
+
+  describe('handleGreenfieldPhaseFailure', () => {
+    it('should delegate retry action to greenfieldHandler', async () => {
+      // Given
+      const mockResult = { action: 'phase_retried' };
+      orchestrator.greenfieldHandler.handlePhaseFailureAction = jest.fn().mockResolvedValue(mockResult);
+
+      // When
+      const result = await orchestrator.handleGreenfieldPhaseFailure('init', 'retry');
+
+      // Then
+      expect(orchestrator.greenfieldHandler.handlePhaseFailureAction).toHaveBeenCalledWith('init', 'retry', {});
+      expect(result).toEqual(mockResult);
+    });
+
+    it('should delegate abort action with context', async () => {
+      // Given
+      const ctx = { reason: 'user cancelled' };
+      orchestrator.greenfieldHandler.handlePhaseFailureAction = jest.fn().mockResolvedValue({ action: 'aborted' });
+
+      // When
+      const result = await orchestrator.handleGreenfieldPhaseFailure('scaffold', 'abort', ctx);
+
+      // Then
+      expect(orchestrator.greenfieldHandler.handlePhaseFailureAction).toHaveBeenCalledWith('scaffold', 'abort', ctx);
+      expect(result.action).toBe('aborted');
+    });
+  });
+
+  // ==========================================
+  // Deep coverage: _routeByState unknown state
+  // ==========================================
+
+  describe('_routeByState', () => {
+    it('should return unknown_state for invalid state', async () => {
+      // When
+      const result = await orchestrator._routeByState('INVALID_STATE', {});
+
+      // Then
+      expect(result.action).toBe('unknown_state');
+      expect(result.error).toContain('INVALID_STATE');
+    });
+  });
+
+  // ==========================================
+  // Deep coverage: elapsed time formatting
+  // ==========================================
+
+  describe('_checkExistingSession edge cases', () => {
+    it('should format elapsed time as hours', async () => {
+      // Given - session updated 5 hours ago
+      const fiveHoursAgo = new Date();
+      fiveHoursAgo.setHours(fiveHoursAgo.getHours() - 5);
+
+      const mockSessionState = {
+        session_state: {
+          version: '1.1',
+          last_updated: fiveHoursAgo.toISOString(),
+          epic: { id: '12', title: 'Test' },
+          progress: { current_story: '12.1' },
+          workflow: { current_phase: 'development' },
+        },
+      };
+
+      orchestrator.sessionState.exists = jest.fn().mockResolvedValue(true);
+      orchestrator.sessionState.loadSessionState = jest.fn().mockResolvedValue(mockSessionState);
+      orchestrator.sessionState.detectCrash = jest.fn().mockResolvedValue({ isCrash: false });
+      orchestrator.sessionState.getResumeSummary = jest.fn().mockReturnValue('');
+
+      // When
+      const result = await orchestrator._checkExistingSession();
+
+      // Then
+      expect(result.elapsedString).toBe('5 horas');
+    });
+
+    it('should use singular form for 1 day', async () => {
+      // Given
+      const oneDayAgo = new Date();
+      oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+
+      const mockSessionState = {
+        session_state: {
+          version: '1.1',
+          last_updated: oneDayAgo.toISOString(),
+          epic: { id: '12', title: 'Test' },
+          progress: { current_story: '12.1' },
+          workflow: { current_phase: 'qa' },
+        },
+      };
+
+      orchestrator.sessionState.exists = jest.fn().mockResolvedValue(true);
+      orchestrator.sessionState.loadSessionState = jest.fn().mockResolvedValue(mockSessionState);
+      orchestrator.sessionState.detectCrash = jest.fn().mockResolvedValue({ isCrash: false });
+      orchestrator.sessionState.getResumeSummary = jest.fn().mockReturnValue('');
+
+      // When
+      const result = await orchestrator._checkExistingSession();
+
+      // Then
+      expect(result.elapsedString).toBe('1 dia');
+    });
+
+    it('should use singular form for 1 hour', async () => {
+      // Given
+      const oneHourAgo = new Date();
+      oneHourAgo.setMinutes(oneHourAgo.getMinutes() - 90);
+
+      const mockSessionState = {
+        session_state: {
+          version: '1.1',
+          last_updated: oneHourAgo.toISOString(),
+          epic: { id: '12', title: 'Test' },
+          progress: { current_story: '12.1' },
+          workflow: { current_phase: 'development' },
+        },
+      };
+
+      orchestrator.sessionState.exists = jest.fn().mockResolvedValue(true);
+      orchestrator.sessionState.loadSessionState = jest.fn().mockResolvedValue(mockSessionState);
+      orchestrator.sessionState.detectCrash = jest.fn().mockResolvedValue({ isCrash: false });
+      orchestrator.sessionState.getResumeSummary = jest.fn().mockReturnValue('');
+
+      // When
+      const result = await orchestrator._checkExistingSession();
+
+      // Then
+      expect(result.elapsedString).toBe('1 hora');
+    });
+
+    it('should return hasSession false when loadSessionState returns null', async () => {
+      // Given
+      orchestrator.sessionState.exists = jest.fn().mockResolvedValue(true);
+      orchestrator.sessionState.loadSessionState = jest.fn().mockResolvedValue(null);
+
+      // When
+      const result = await orchestrator._checkExistingSession();
+
+      // Then
+      expect(result.hasSession).toBe(false);
+    });
+
+    it('should handle missing epic/progress/workflow fields gracefully', async () => {
+      // Given
+      const mockSessionState = {
+        session_state: {
+          version: '1.1',
+          last_updated: new Date().toISOString(),
+        },
+      };
+
+      orchestrator.sessionState.exists = jest.fn().mockResolvedValue(true);
+      orchestrator.sessionState.loadSessionState = jest.fn().mockResolvedValue(mockSessionState);
+      orchestrator.sessionState.detectCrash = jest.fn().mockResolvedValue({ isCrash: false });
+      orchestrator.sessionState.getResumeSummary = jest.fn().mockReturnValue('');
+
+      // When
+      const result = await orchestrator._checkExistingSession();
+
+      // Then
+      expect(result.hasSession).toBe(true);
+      expect(result.epicTitle).toBe('Unknown Epic');
+      expect(result.currentStory).toBe('N/A');
+      expect(result.currentPhase).toBe('N/A');
+    });
+  });
+
+  // ==========================================
+  // Deep coverage: constructor edge cases
+  // ==========================================
+
+  describe('constructor edge cases', () => {
+    it('should accept debug option', () => {
+      // When
+      const orch = new BobOrchestrator(TEST_PROJECT_ROOT, { debug: true });
+
+      // Then
+      expect(orch.options.debug).toBe(true);
+    });
+
+    it('should initialize brownfieldHandler', () => {
+      // Then
+      expect(orchestrator.brownfieldHandler).toBeDefined();
+      expect(orchestrator.brownfieldHandler.handle).toBeDefined();
+    });
+
+    it('should initialize greenfieldHandler', () => {
+      // Then
+      expect(orchestrator.greenfieldHandler).toBeDefined();
+    });
+
+    it('should initialize observabilityPanel', () => {
+      // Then
+      expect(orchestrator.observabilityPanel).toBeDefined();
+      expect(orchestrator.observabilityPanel.start).toBeDefined();
+      expect(orchestrator.observabilityPanel.stop).toBeDefined();
+    });
+
+    it('should initialize bobStatusWriter', () => {
+      // Then
+      expect(orchestrator.bobStatusWriter).toBeDefined();
+      expect(orchestrator.bobStatusWriter.initialize).toBeDefined();
+    });
+
+    it('should initialize dashboardEmitter', () => {
+      // Then
+      expect(orchestrator.dashboardEmitter).toBeDefined();
+      expect(orchestrator.dashboardEmitter.emit).toBeDefined();
+    });
+
+    it('should initialize messageFormatter', () => {
+      // Then
+      expect(orchestrator.messageFormatter).toBeDefined();
+    });
+  });
 });
