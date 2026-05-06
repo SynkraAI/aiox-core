@@ -77,6 +77,35 @@ describe('AIOXUpdater', () => {
       expect(version.mode).toBe('project-development');
     });
 
+    it('should read version from namespaced package fallback', async () => {
+      await fs.remove(path.join(tempDir, '.aiox-core', 'version.json'));
+      await fs.ensureDir(path.join(tempDir, 'node_modules', '@aiox-squads', 'core'));
+      await fs.writeJson(
+        path.join(tempDir, 'node_modules', '@aiox-squads', 'core', 'package.json'),
+        {
+          name: '@aiox-squads/core',
+          version: '5.1.0',
+        }
+      );
+
+      const version = await updater.getInstalledVersion();
+
+      expect(version).toEqual({ version: '5.1.0', installedAt: null, mode: 'unknown' });
+    });
+
+    it('should keep legacy package fallback for brownfield installs', async () => {
+      await fs.remove(path.join(tempDir, '.aiox-core', 'version.json'));
+      await fs.ensureDir(path.join(tempDir, 'node_modules', 'aiox-core'));
+      await fs.writeJson(path.join(tempDir, 'node_modules', 'aiox-core', 'package.json'), {
+        name: 'aiox-core',
+        version: '5.0.7',
+      });
+
+      const version = await updater.getInstalledVersion();
+
+      expect(version).toEqual({ version: '5.0.7', installedAt: null, mode: 'unknown' });
+    });
+
     it('should return null if version.json not found', async () => {
       await fs.remove(path.join(tempDir, '.aiox-core', 'version.json'));
       const version = await updater.getInstalledVersion();
@@ -200,12 +229,14 @@ describe('AIOXUpdater', () => {
       await fs.writeFile(
         path.join(tempDir, '.aiox-core', 'install-manifest.yaml.minisig'),
         'signature',
-        'utf8',
+        'utf8'
       );
 
       await updater.createBackup();
 
-      expect(fs.existsSync(path.join(updater.backupDir, 'install-manifest.yaml.minisig'))).toBe(true);
+      expect(fs.existsSync(path.join(updater.backupDir, 'install-manifest.yaml.minisig'))).toBe(
+        true
+      );
     });
   });
 
@@ -292,7 +323,7 @@ describe('AIOXUpdater', () => {
           { path: 'core-config.yaml', hash: 'sha256:package-core' },
           { path: 'development/agents/dev/MEMORY.md', hash: 'sha256:memory' },
           { path: 'project-only.md', hash: 'sha256:project-only' },
-        ]),
+        ])
       );
     });
 

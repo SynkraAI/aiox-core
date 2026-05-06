@@ -16,7 +16,10 @@
 const path = require('path');
 const fs = require('fs').promises;
 const yaml = require('js-yaml');
-const { UnifiedActivationPipeline } = require('../../.aiox-core/development/scripts/unified-activation-pipeline');
+const {
+  UnifiedActivationPipeline,
+  LOADER_TIERS,
+} = require('../../.aiox-core/development/scripts/unified-activation-pipeline');
 
 // Mock pro-detector for testing different scenarios
 jest.mock('../../bin/utils/pro-detector');
@@ -28,10 +31,12 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
 
   // Store original env to restore after tests
   const originalPipelineTimeout = process.env.AIOX_PIPELINE_TIMEOUT;
+  const originalCriticalLoaderTimeout = LOADER_TIERS.critical.timeout;
 
   beforeEach(() => {
-    // Increase pipeline timeout so tests don't fail under heavy load (full suite)
+    // Increase activation budgets so full-suite IO contention does not turn no-Pro into fallback.
     process.env.AIOX_PIPELINE_TIMEOUT = '5000';
+    LOADER_TIERS.critical.timeout = 500;
     pipeline = new UnifiedActivationPipeline(testProjectRoot);
     jest.clearAllMocks();
   });
@@ -43,6 +48,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     } else {
       delete process.env.AIOX_PIPELINE_TIMEOUT;
     }
+    LOADER_TIERS.critical.timeout = originalCriticalLoaderTimeout;
 
     // Cleanup test data
     try {
@@ -74,6 +80,8 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       expect(result.greeting).toBeDefined();
       expect(result.context).toBeDefined();
       expect(result.context.memories).toEqual([]);
+      // Missing Pro disables memory enrichment only; it is not an activation fallback.
+      expect(result.quality).not.toBe('fallback');
       expect(result.fallback).toBe(false);
     });
 
@@ -172,7 +180,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         constructor() {}
         async loadForAgent(agentId, options) {
           // Add small delay to simulate real async operation (for metrics.duration test)
-          await new Promise(resolve => setTimeout(resolve, 10));
+          await new Promise((resolve) => setTimeout(resolve, 10));
 
           return {
             memories: mockMemories,
@@ -328,9 +336,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
           ];
 
           // Filter to only agent's own + shared
-          const memories = allMemories.filter(m =>
-            m.agent === agentId || m.agent === 'shared',
-          );
+          const memories = allMemories.filter((m) => m.agent === agentId || m.agent === 'shared');
 
           return {
             memories,
@@ -353,7 +359,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     it('should only return dev + shared memories for dev agent', async () => {
       const result = await pipeline.activate('dev');
 
-      const agents = result.context.memories.map(m => m.agent);
+      const agents = result.context.memories.map((m) => m.agent);
       expect(agents).toContain('dev');
       expect(agents).toContain('shared');
       expect(agents).not.toContain('qa');
@@ -362,7 +368,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
     it('should only return qa + shared memories for qa agent', async () => {
       const result = await pipeline.activate('qa');
 
-      const agents = result.context.memories.map(m => m.agent);
+      const agents = result.context.memories.map((m) => m.agent);
       expect(agents).toContain('qa');
       expect(agents).toContain('shared');
       expect(agents).not.toContain('dev');
@@ -372,8 +378,8 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
       const devResult = await pipeline.activate('dev');
       const qaResult = await pipeline.activate('qa');
 
-      const devAgents = devResult.context.memories.map(m => m.agent);
-      const qaAgents = qaResult.context.memories.map(m => m.agent);
+      const devAgents = devResult.context.memories.map((m) => m.agent);
+      const qaAgents = qaResult.context.memories.map((m) => m.agent);
 
       // Dev should not see QA memories
       expect(devAgents).not.toContain('qa');
@@ -443,7 +449,7 @@ describe('UnifiedActivationPipeline Memory Integration (MIS-6)', () => {
         constructor() {}
         async loadForAgent() {
           // Simulate slow load that exceeds _profileLoader timeout (500ms)
-          await new Promise(resolve => {
+          await new Promise((resolve) => {
             slowTimer = setTimeout(resolve, 600);
           });
           return { memories: [], metadata: {} };

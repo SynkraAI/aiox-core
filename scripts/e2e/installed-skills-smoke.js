@@ -16,20 +16,26 @@ const os = require('os');
 const path = require('path');
 
 const repoRoot = path.resolve(__dirname, '..', '..');
-const { getSkillId } = require(path.join(
-  repoRoot,
-  '.aiox-core',
-  'infrastructure',
-  'scripts',
-  'codex-skills-sync',
-  'index',
-));
+const rootPackageJson = require(path.join(repoRoot, 'package.json'));
+const packageInstallRelativePath = path.join('node_modules', ...rootPackageJson.name.split('/'));
+const { getSkillId } = require(
+  path.join(repoRoot, '.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index')
+);
+function parseTimeoutEnv(name, fallbackMs) {
+  const parsed = Number.parseInt(process.env[name] || '', 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallbackMs;
+}
+
 const verbose = process.env.AIOX_E2E_VERBOSE === '1';
 const keepTemp = process.env.AIOX_E2E_KEEP_TEMP === '1';
 const agentSet = (process.env.AIOX_E2E_AGENT_SET || 'dev,qa,aiox-master')
   .split(',')
   .map((agent) => agent.trim())
   .filter(Boolean);
+const defaultCommandTimeoutMs = parseTimeoutEnv('AIOX_E2E_COMMAND_TIMEOUT_MS', 120000);
+const npmInstallTimeoutMs = parseTimeoutEnv('AIOX_E2E_NPM_INSTALL_TIMEOUT_MS', 420000);
+const npmInstallFlags = ['--no-audit', '--fund=false'];
+const npxBin = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
 const packDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pack-'));
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-installed-skills-'));
@@ -58,7 +64,7 @@ function run(command, args, options = {}) {
     cwd,
     env,
     encoding: 'utf8',
-    timeout: options.timeout || 120000,
+    timeout: options.timeout || defaultCommandTimeoutMs,
     maxBuffer: 1024 * 1024 * 20,
   });
 
@@ -72,14 +78,17 @@ function run(command, args, options = {}) {
   if (result.status !== 0) {
     fail(
       `Command failed (${result.status}): ${label}`,
-      [
-        result.stdout && `STDOUT:\n${result.stdout}`,
-        result.stderr && `STDERR:\n${result.stderr}`,
-      ].filter(Boolean).join('\n\n'),
+      [result.stdout && `STDOUT:\n${result.stdout}`, result.stderr && `STDERR:\n${result.stderr}`]
+        .filter(Boolean)
+        .join('\n\n')
     );
   }
 
   return result.stdout || '';
+}
+
+function runInstalledCli(args, options = {}) {
+  return run(npxBin, ['--no-install', 'aiox-core', ...args], options);
 }
 
 function assertPathExists(relativePath, type = 'any') {
@@ -169,24 +178,33 @@ async function main() {
   run('npm', ['init', '-y'], { cwd: projectRoot });
 
   log('Installing packed aiox-core tarball');
-  run('npm', ['install', tarballPath], { cwd: projectRoot, timeout: 180000 });
+  run('npm', ['install', tarballPath, ...npmInstallFlags], {
+    cwd: projectRoot,
+    timeout: npmInstallTimeoutMs,
+  });
 
-  const cliPath = path.join(projectRoot, 'node_modules', 'aiox-core', 'bin', 'aiox.js');
-  const packagedCoreDir = path.join(projectRoot, 'node_modules', 'aiox-core', '.aiox-core');
-  assertPathExists(path.join('node_modules', 'aiox-core', 'bin', 'aiox.js'), 'file');
+  const cliPath = path.join(
+    projectRoot,
+    'node_modules',
+    '.bin',
+    `aiox-core${process.platform === 'win32' ? '.cmd' : ''}`
+  );
+  const packagedCoreDir = path.join(projectRoot, packageInstallRelativePath, '.aiox-core');
+  assertPathExists(path.join(packageInstallRelativePath, 'bin', 'aiox.js'), 'file');
+  assertPathExists(path.join('node_modules', '.bin', path.basename(cliPath)), 'file');
 
   log('Validating packaged .aiox-core dependencies');
   assertAbsolutePathExists(path.join(packagedCoreDir, 'package.json'), 'file');
-  run('npm', ['install', '--production', '--ignore-scripts'], {
+  run('npm', ['install', '--omit=dev', '--ignore-scripts', ...npmInstallFlags], {
     cwd: packagedCoreDir,
-    timeout: 180000,
+    timeout: npmInstallTimeoutMs,
   });
   for (const packageName of requiredCorePackages) {
     assertAbsolutePathExists(path.join(packagedCoreDir, 'node_modules', packageName), 'dir');
   }
 
   log('Running installed aiox install in CI mode');
-  run('node', [cliPath, 'install', '--ci', '--yes', '--ide', 'claude-code'], {
+  runInstalledCli(['install', '--ci', '--yes', '--ide', 'claude-code'], {
     cwd: projectRoot,
     timeout: 240000,
     env: {
@@ -195,6 +213,8 @@ async function main() {
       AIOX_INSTALL_QUIET: '1',
     },
   });
+  // TODO(Story 124.7): add a hermetic `aiox update` smoke once the scoped
+  // package can be resolved from the publish workflow or a local registry.
 
   log('Validating installed skill and agent artifacts');
   assertPathExists('.aiox-core', 'dir');
@@ -214,7 +234,11 @@ async function main() {
 
     const claudeSkillContent = assertNoSourceRepoLeak(claudeSkill);
     assertContains(claudeSkillContent, 'activation_type: pipeline', claudeSkill);
-    assertContains(claudeSkillContent, `Source: .aiox-core/development/agents/${agent}.md`, claudeSkill);
+    assertContains(
+      claudeSkillContent,
+      `Source: .aiox-core/development/agents/${agent}.md`,
+      claudeSkill
+    );
 
     const codexAgentContent = assertNoSourceRepoLeak(codexAgent);
     assertContains(codexAgentContent, `id: ${agent}`, codexAgent);
@@ -225,7 +249,13 @@ async function main() {
   }
 
   log(`Activating installed agents: ${agentSet.join(', ')}`);
-  const greetingScript = path.join(projectRoot, '.aiox-core', 'development', 'scripts', 'generate-greeting.js');
+  const greetingScript = path.join(
+    projectRoot,
+    '.aiox-core',
+    'development',
+    'scripts',
+    'generate-greeting.js'
+  );
   assertPathExists('.aiox-core/development/scripts/generate-greeting.js', 'file');
 
   for (const agent of agentSet) {
@@ -239,7 +269,7 @@ async function main() {
   }
 
   log('Running installed doctor --json');
-  const doctorOutput = run('node', [cliPath, 'doctor', '--json'], {
+  const doctorOutput = runInstalledCli(['doctor', '--json'], {
     cwd: projectRoot,
     timeout: 120000,
   });
@@ -255,7 +285,9 @@ main()
   .catch((error) => {
     console.error(`\n[installed-skills-e2e] FAIL: ${error.message}`);
     if (!keepTemp) {
-      console.error('[installed-skills-e2e] Re-run with AIOX_E2E_KEEP_TEMP=1 to preserve temp files.');
+      console.error(
+        '[installed-skills-e2e] Re-run with AIOX_E2E_KEEP_TEMP=1 to preserve temp files.'
+      );
     } else {
       console.error(`[installed-skills-e2e] Temp root preserved: ${tempRoot}`);
     }
