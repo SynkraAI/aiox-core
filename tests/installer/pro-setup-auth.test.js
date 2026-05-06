@@ -525,7 +525,8 @@ describe('resolveProSourceDir', () => {
   const bundledProDir = path.resolve(__dirname, '../../pro');
   const bundledSquadsDir = path.join(bundledProDir, 'squads');
   const gitmodulesPath = path.resolve(__dirname, '../../.gitmodules');
-  const npmProDir = path.join('/tmp/aiox-project', 'node_modules', '@aiox-fullstack', 'pro');
+  const npmProDir = path.join('/tmp/aiox-project', 'node_modules', '@aiox-squads', 'pro');
+  const legacyNpmProDir = path.join('/tmp/aiox-project', 'node_modules', '@aiox-fullstack', 'pro');
 
   afterEach(() => {
     jest.restoreAllMocks();
@@ -570,12 +571,20 @@ describe('resolveProSourceDir', () => {
     expect(result).toEqual({ proSourceDir: bundledProDir });
   });
 
-  it('falls back to target node_modules pro package when bundled content is unavailable', () => {
+  it('falls back to target node_modules @aiox-squads/pro when bundled content is unavailable', () => {
     jest.spyOn(fs, 'existsSync').mockImplementation((target) => target === npmProDir);
 
     const result = proSetup._testing.resolveProSourceDir('/tmp/aiox-project');
 
     expect(result).toEqual({ proSourceDir: npmProDir });
+  });
+
+  it('keeps legacy pro package fallback for brownfield installs', () => {
+    jest.spyOn(fs, 'existsSync').mockImplementation((target) => target === legacyNpmProDir);
+
+    const result = proSetup._testing.resolveProSourceDir('/tmp/aiox-project');
+
+    expect(result).toEqual({ proSourceDir: legacyNpmProDir });
   });
 
   it('returns bootstrapError when git submodule initialization fails', () => {

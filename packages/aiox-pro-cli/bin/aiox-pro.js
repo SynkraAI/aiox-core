@@ -23,9 +23,9 @@ const path = require('path');
 const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
-const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
-const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
-const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
+const PRO_PACKAGE = '@aiox-squads/pro';
+const PRO_PACKAGE_FALLBACKS = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+const PRO_PACKAGES = [PRO_PACKAGE, ...PRO_PACKAGE_FALLBACKS];
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);
@@ -74,8 +74,8 @@ function findAioxCli() {
 function delegateToAiox(subcommand) {
   const aiox = findAioxCli();
   if (!aiox) {
-    console.error('aiox-core CLI not found.');
-    console.error('Install it first: npm install aiox-core');
+    console.error('AIOX Core CLI not found.');
+    console.error('Install it first: npm install @aiox-squads/core');
     process.exit(1);
   }
 
@@ -107,7 +107,11 @@ function runProWizard(key) {
   // Lazy import to avoid requiring installer when not needed
   let proSetup;
   try {
-    proSetup = require('../../installer/src/wizard/pro-setup');
+    try {
+      proSetup = require('@aiox-squads/installer/pro-setup');
+    } catch {
+      proSetup = require('../../installer/src/wizard/pro-setup');
+    }
   } catch {
     console.error('Pro wizard module not found.');
     console.error('Ensure aiox-core installer is available.\n');
@@ -119,14 +123,17 @@ function runProWizard(key) {
     options.key = key;
   }
 
-  proSetup.runProWizard(options).then((result) => {
-    if (!result.success) {
+  proSetup
+    .runProWizard(options)
+    .then((result) => {
+      if (!result.success) {
+        process.exit(1);
+      }
+    })
+    .catch((err) => {
+      console.error(`\n  Wizard failed: ${err.message}\n`);
       process.exit(1);
-    }
-  }).catch((err) => {
-    console.error(`\n  Wizard failed: ${err.message}\n`);
-    process.exit(1);
-  });
+    });
 }
 
 // ─── Commands ───────────────────────────────────────────────────────────────
@@ -170,19 +177,15 @@ function installPro() {
 
   let installedPackage = null;
 
-  for (const packageName of PRO_PACKAGES) {
-    console.log(`Trying ${packageName}...`);
-    const exitCode = run(`npm install ${packageName}`);
-    if (exitCode === 0) {
-      installedPackage = packageName;
-      break;
-    }
-    console.log('');
+  console.log(`Installing ${PRO_PACKAGE}...`);
+  const exitCode = run(`npm install ${PRO_PACKAGE}`);
+  if (exitCode === 0) {
+    installedPackage = PRO_PACKAGE;
   }
 
   if (!installedPackage) {
     console.error('\nFailed to install AIOX Pro.');
-    console.error(`Tried: ${PRO_PACKAGES.join(', ')}`);
+    console.error(`Tried: ${PRO_PACKAGE}`);
     process.exit(1);
   }
 

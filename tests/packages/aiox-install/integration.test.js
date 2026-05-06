@@ -24,7 +24,7 @@ describe('Integration - Task 8.3: Local NPX Execution', () => {
       const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
 
       // Then
-      expect(pkgJson.name).toBe('@synkra/aiox-install');
+      expect(pkgJson.name).toBe('@aiox-squads/aiox-install');
       expect(pkgJson.bin).toBeDefined();
       expect(pkgJson.bin['aiox-install']).toBe('./bin/aiox-install.js');
       expect(pkgJson.bin['edmcp']).toBe('./bin/edmcp.js');

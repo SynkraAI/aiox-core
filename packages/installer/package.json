@@ -1,10 +1,16 @@
 {
-  "name": "@aiox/installer",
-  "version": "3.2.1",
+  "name": "@aiox-squads/installer",
+  "version": "3.3.0",
   "description": "AIOX Installer - Automated setup wizard for AIOX projects (greenfield & brownfield)",
   "main": "src/index.js",
   "bin": {
     "aiox-installer": "./src/index.js"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./pro-setup": "./src/wizard/pro-setup.js",
+    "./pro-scaffolder": "./src/pro/pro-scaffolder.js",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "test": "jest",
@@ -36,4 +42,3 @@
     "jest": "^30.2.0"
   }
 }
-
