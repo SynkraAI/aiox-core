@@ -1,0 +1,132 @@
+---
+workflow:
+  name: Multi-Chat Epic Orchestration
+  id: nav-wf-003
+  description: Setup parallel execution of epic across multiple Claude Code chats
+  version: 1.0.0
+  executor: "@navigator"
+
+metadata:
+  author: Navigator Squad
+  created: 2026-02-15
+  tags:
+    - orchestration
+    - multi-chat
+    - epic
+    - parallel
+
+veto_conditions:
+  step_1_load_epic:
+    - "Epic file does not exist at provided path → BLOCK (provide valid epic file path)"
+    - "Epic file has no stories listed → BLOCK (empty epic cannot be orchestrated)"
+  step_2_analyze_dependencies:
+    - "Fewer than 3 stories in epic → BLOCK (orchestration overkill for < 3 stories, use sequential)"
+    - "Circular dependency detected in story graph → BLOCK (resolve circular deps first)"
+  step_4_generate_prompts:
+    - "Wave assignment is empty (0 waves) → BLOCK (dependency analysis failed)"
+    - "No coordinator agent available → BLOCK (multi-chat requires coordinator role)"
+
+steps:
+  - id: 1
+    name: Load Epic Stories
+    task: manual-input
+    executor: human
+    description: "Provide epic ID or path to epic file"
+    inputs:
+      - epic_id
+    outputs:
+      - epic_data
+      - stories_list
+    on_success: next
+
+  - id: 2
+    name: Analyze Dependencies
+    task: nav-orchestrate
+    executor: "@navigator"
+    inputs:
+      - epic_data
+      - stories_list
+    outputs:
+      - waves
+      - coordinator_prompt
+      - dev_prompts
+    on_success: next
+
+  - id: 3
+    name: Review Wave Assignments
+    task: manual-verification
+    executor: human
+    description: |
+      Review story assignments to waves:
+
+      Wave 1 (Can start immediately):
+      {waves[0]}
+
+      Wave 2 (Dependencies on Wave 1):
+      {waves[1]}
+
+      Wave 3 (Dependencies on Wave 2):
+      {waves[2]}
+
+      Adjust if needed before proceeding.
+    on_success: next
+    on_skip: next
+
+  - id: 4
+    name: Generate Chat Prompts
+    task: nav-orchestrate
+    executor: "@navigator"
+    inputs:
+      - waves
+      - epic_data
+    outputs:
+      - chat_1_prompt  # Coordinator
+      - chat_2_prompt  # Dev Wave 1
+      - chat_3_prompt  # Dev Wave 2
+      - chat_4_prompt  # Dev Wave 3
+    on_success: next
+
+  - id: 5
+    name: Display Prompts
+    task: manual-display
+    executor: human
+    description: |
+      Open 4 Claude Code chats and paste these prompts:
+
+      === CHAT 1: Coordinator (@sm) ===
+      {chat_1_prompt}
+
+      === CHAT 2: Dev Wave 1 ===
+      {chat_2_prompt}
+
+      === CHAT 3: Dev Wave 2 ===
+      {chat_3_prompt}
+
+      === CHAT 4: Dev Wave 3 ===
+      {chat_4_prompt}
+
+      Execution order:
+      1. Start Chat 2 (Wave 1) immediately
+      2. Wait for Chat 1 approval before Wave 2
+      3. Wait for Chat 1 approval before Wave 3
+      4. Chat 1 does final merge
+
+    on_success: complete
+
+completion:
+  message: |
+    🎭 Multi-chat orchestration ready!
+
+    Chats configured: 4 (1 coordinator + 3 dev waves)
+    Stories total: {stories_list.length}
+
+    Coordinator will manage:
+    - Wave approvals
+    - Conflict resolution
+    - Final merge
+
+  next_actions:
+    - command: "Open 4 Claude Code chats"
+      description: "Paste prompts from above"
+    - command: "*status-report"
+      description: "Track overall epic progress"
