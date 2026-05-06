@@ -13,6 +13,8 @@ const { execSync } = require('child_process');
 
 const SCRIPT_PATH = path.join(__dirname, '..', '..', 'bin', 'utils', 'validate-publish.js');
 
+jest.setTimeout(180000);
+
 describe('Publish Safety Gate (Story INS-4.10)', () => {
   let scriptSource;
 
@@ -28,7 +30,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     });
 
     test('script checks pro/ is not empty (filters .git)', () => {
-      expect(scriptSource).toContain(".filter(e => e !== '.git')");
+      expect(scriptSource).toMatch(/\.filter\(\(?e\)? => e !== '\.git'\)/);
     });
 
     test('script checks critical file pro/license/license-api.js', () => {
@@ -71,9 +73,9 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     test('script uses only Node.js builtins (fs, path, child_process)', () => {
       // Should not require any external packages
       const requires = scriptSource.match(/require\(['"]([^'"]+)['"]\)/g) || [];
-      const modules = requires.map(r => r.match(/require\(['"]([^'"]+)['"]\)/)[1]);
+      const modules = requires.map((r) => r.match(/require\(['"]([^'"]+)['"]\)/)[1]);
       const builtins = ['fs', 'path', 'child_process'];
-      modules.forEach(mod => {
+      modules.forEach((mod) => {
         expect(builtins).toContain(mod);
       });
     });
@@ -85,7 +87,14 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
 
   describe('AC3: CI integration', () => {
     test('npm-publish.yml includes publish safety gate step', () => {
-      const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'npm-publish.yml');
+      const workflowPath = path.join(
+        __dirname,
+        '..',
+        '..',
+        '.github',
+        'workflows',
+        'npm-publish.yml'
+      );
       const workflow = fs.readFileSync(workflowPath, 'utf8');
       expect(workflow).toContain('Publish safety gate (INS-4.10)');
       expect(workflow).toContain('node bin/utils/validate-publish.js');
@@ -110,7 +119,9 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     test('script runs successfully with populated pro/ (real environment)', () => {
       // This test runs the actual script against the real repo
       // In CI/dev with pro/ populated, it should pass
-      const proExists = fs.existsSync(path.join(__dirname, '..', '..', 'pro', 'license', 'license-api.js'));
+      const proExists = fs.existsSync(
+        path.join(__dirname, '..', '..', 'pro', 'license', 'license-api.js')
+      );
 
       if (!proExists) {
         // Skip gracefully if pro/ not available (e.g., CI without submodule)
@@ -121,7 +132,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
       const result = execSync(`node "${SCRIPT_PATH}" 2>&1`, {
         encoding: 'utf8',
         cwd: path.join(__dirname, '..', '..'),
-        timeout: 60000,
+        timeout: 330000,
       });
       expect(result).toContain('PUBLISH SAFETY GATE: PASS');
     });

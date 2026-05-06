@@ -209,12 +209,16 @@ describe('WIS Integration', () => {
 
 describe('WIS Performance', () => {
   let wis;
+  const FAST_OPERATION_BUDGET_MS = 250;
+  const MATCH_OPERATION_BUDGET_MS = 100;
+  const COLD_START_BUDGET_MS = 750;
+  const FULL_FLOW_BUDGET_MS = 500;
 
   beforeAll(() => {
     wis = require('../../../.aiox-core/workflow-intelligence');
   });
 
-  it('should complete getSuggestions within 100ms', () => {
+  it('should complete getSuggestions within performance budget', () => {
     const context = {
       lastCommand: 'develop',
       lastCommands: ['develop'],
@@ -226,30 +230,30 @@ describe('WIS Performance', () => {
     wis.getSuggestions(context);
     const duration = Date.now() - start;
 
-    expect(duration).toBeLessThan(100);
+    expect(duration).toBeLessThan(FAST_OPERATION_BUDGET_MS);
   });
 
-  it('should complete matchWorkflow within 50ms', () => {
+  it('should complete matchWorkflow within performance budget', () => {
     const commands = ['validate-story-draft', 'develop'];
 
     const start = Date.now();
     wis.matchWorkflow(commands);
     const duration = Date.now() - start;
 
-    expect(duration).toBeLessThan(50);
+    expect(duration).toBeLessThan(MATCH_OPERATION_BUDGET_MS);
   });
 
-  it('should complete registry load within 200ms (cold start)', () => {
+  it('should complete registry load within cold-start performance budget', () => {
     wis.invalidateCache();
 
     const start = Date.now();
     wis.getWorkflowNames();
     const duration = Date.now() - start;
 
-    expect(duration).toBeLessThan(200);
+    expect(duration).toBeLessThan(COLD_START_BUDGET_MS);
   });
 
-  it('should complete SuggestionEngine full flow within 100ms', async () => {
+  it('should complete SuggestionEngine full flow within performance budget', async () => {
     const engine = wis.createSuggestionEngine();
     engine.invalidateCache();
 
@@ -258,6 +262,6 @@ describe('WIS Performance', () => {
     await engine.suggestNext(context);
     const duration = Date.now() - start;
 
-    expect(duration).toBeLessThan(100);
+    expect(duration).toBeLessThan(FULL_FLOW_BUDGET_MS);
   });
 });

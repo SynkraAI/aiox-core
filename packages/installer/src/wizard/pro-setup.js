@@ -34,7 +34,8 @@ try {
 /**
  * License server base URL (same source of truth as license-api.js CONFIG.BASE_URL).
  */
-const LICENSE_SERVER_URL = process.env.AIOX_LICENSE_API_URL || 'https://aiox-license-server.vercel.app';
+const LICENSE_SERVER_URL =
+  process.env.AIOX_LICENSE_API_URL || 'https://aiox-license-server.vercel.app';
 
 /**
  * Inline License Client — lightweight HTTP client for pre-bootstrap license checks.
@@ -75,7 +76,9 @@ class InlineLicenseClient {
 
       const req = transport.request(options, (res) => {
         let data = '';
-        res.on('data', (chunk) => { data += chunk; });
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
         res.on('end', () => {
           try {
             const parsed = JSON.parse(data);
@@ -138,16 +141,15 @@ class InlineLicenseClient {
    * @returns {Promise<{accessToken: string, sessionToken: string, emailVerified: boolean}>}
    */
   async login(email, password) {
-    return this._request('POST', '/api/v1/auth/login', { email, password })
-      .then((result) => {
-        const accessToken = result.accessToken || result.sessionToken;
-        return {
-          ...result,
-          accessToken,
-          // Backward-compatible alias for existing wizard flows.
-          sessionToken: accessToken,
-        };
-      });
+    return this._request('POST', '/api/v1/auth/login', { email, password }).then((result) => {
+      const accessToken = result.accessToken || result.sessionToken;
+      return {
+        ...result,
+        accessToken,
+        // Backward-compatible alias for existing wizard flows.
+        sessionToken: accessToken,
+      };
+    });
   }
 
   /**
@@ -168,15 +170,20 @@ class InlineLicenseClient {
    * @returns {Promise<Object>} Activation result
    */
   async activateByAuth(token, machineId, version) {
-    return this._request('POST', '/api/v1/auth/activate-pro', {
-      accessToken: token,
-      machineId,
-      version,
-      aioxCoreVersion: version,
-    }, {
-      // Preserve legacy compatibility with older server deployments.
-      Authorization: `Bearer ${token}`,
-    }).then((result) => ({
+    return this._request(
+      'POST',
+      '/api/v1/auth/activate-pro',
+      {
+        accessToken: token,
+        machineId,
+        version,
+        aioxCoreVersion: version,
+      },
+      {
+        // Preserve legacy compatibility with older server deployments.
+        Authorization: `Bearer ${token}`,
+      }
+    ).then((result) => ({
       ...result,
       key: result.key || result.licenseKey,
     }));
@@ -370,9 +377,9 @@ function loadProModule(moduleName) {
       return require(requestPath);
     } catch (error) {
       if (
-        error?.code === 'MODULE_NOT_FOUND'
-        && typeof error.message === 'string'
-        && error.message.includes(requestPath)
+        error?.code === 'MODULE_NOT_FOUND' &&
+        typeof error.message === 'string' &&
+        error.message.includes(requestPath)
       ) {
         return null;
       }
@@ -398,7 +405,14 @@ function loadProModule(moduleName) {
   }
 
   // 3. aiox-core in node_modules (brownfield upgrade from >= v4.2.15)
-  const aioxCorePath = path.join(process.cwd(), 'node_modules', 'aiox-core', 'pro', 'license', moduleName);
+  const aioxCorePath = path.join(
+    process.cwd(),
+    'node_modules',
+    'aiox-core',
+    'pro',
+    'license',
+    moduleName
+  );
   const aioxCoreModule = tryRequire(aioxCorePath);
   if (aioxCoreModule) {
     return aioxCoreModule;
@@ -408,7 +422,14 @@ function loadProModule(moduleName) {
   //    temp dir, so we need absolute path to where bootstrap installed the package)
   const absScopeDirs = ['@aiox-fullstack', '@aios-fullstack'];
   for (const scopeDir of absScopeDirs) {
-    const absPath = path.join(process.cwd(), 'node_modules', scopeDir, 'pro', 'license', moduleName);
+    const absPath = path.join(
+      process.cwd(),
+      'node_modules',
+      scopeDir,
+      'pro',
+      'license',
+      moduleName
+    );
     const loadedModule = tryRequire(absPath);
     if (loadedModule) {
       return loadedModule;
@@ -498,9 +519,10 @@ function generateMachineId() {
  * @returns {Object} Client instance with isOnline, checkEmail, login, signup, activateByAuth
  */
 function getLicenseClient() {
-  const loader = module.exports._testing && module.exports._testing.loadLicenseApi
-    ? module.exports._testing.loadLicenseApi
-    : loadLicenseApi;
+  const loader =
+    module.exports._testing && module.exports._testing.loadLicenseApi
+      ? module.exports._testing.loadLicenseApi
+      : loadLicenseApi;
   const licenseModule = loader();
 
   if (licenseModule) {
@@ -533,31 +555,39 @@ function loadProScaffolder() {
  * @returns {{ success: boolean, error?: string }} Cache write result
  */
 function persistLicenseCache(targetDir, licenseResult) {
-  const loader = module.exports._testing && module.exports._testing.loadLicenseCache
-    ? module.exports._testing.loadLicenseCache
-    : loadLicenseCache;
+  const loader =
+    module.exports._testing && module.exports._testing.loadLicenseCache
+      ? module.exports._testing.loadLicenseCache
+      : loadLicenseCache;
   const cacheModule = loader();
 
   if (!cacheModule || typeof cacheModule.writeLicenseCache !== 'function') {
     return { success: false, error: 'License cache module not available.' };
   }
 
-  const activationResult = licenseResult && licenseResult.activationResult ? licenseResult.activationResult : {};
+  const activationResult =
+    licenseResult && licenseResult.activationResult ? licenseResult.activationResult : {};
   const key = activationResult.key || licenseResult.key;
 
   if (!key || key === 'existing') {
-    return { success: false, error: 'Activated license key not available for local cache persistence.' };
+    return {
+      success: false,
+      error: 'Activated license key not available for local cache persistence.',
+    };
   }
 
-  return cacheModule.writeLicenseCache({
-    key,
-    activatedAt: activationResult.activatedAt || new Date().toISOString(),
-    expiresAt: activationResult.expiresAt,
-    features: Array.isArray(activationResult.features) ? activationResult.features : [],
-    seats: activationResult.seats || { used: 1, max: 1 },
-    cacheValidDays: activationResult.cacheValidDays,
-    gracePeriodDays: activationResult.gracePeriodDays,
-  }, targetDir);
+  return cacheModule.writeLicenseCache(
+    {
+      key,
+      activatedAt: activationResult.activatedAt || new Date().toISOString(),
+      expiresAt: activationResult.expiresAt,
+      features: Array.isArray(activationResult.features) ? activationResult.features : [],
+      seats: activationResult.seats || { used: 1, max: 1 },
+      cacheValidDays: activationResult.cacheValidDays,
+      gracePeriodDays: activationResult.gracePeriodDays,
+    },
+    targetDir
+  );
 }
 
 /**
@@ -606,7 +636,7 @@ async function ensureKeyValidationParity(client, activationResult, machineId, ai
     const normalizedActivation = await client.activate(
       activationResult.key,
       machineId,
-      aioxCoreVersion,
+      aioxCoreVersion
     );
     return mergeActivation(normalizedActivation);
   } catch (error) {
@@ -951,7 +981,11 @@ async function loginWithRetry(client, email) {
 
       // Wait for email verification if needed
       if (!loginResult.emailVerified) {
-        const verifyResult = await waitForEmailVerification(client, loginResult.sessionToken, email);
+        const verifyResult = await waitForEmailVerification(
+          client,
+          loginResult.sessionToken,
+          email
+        );
         if (!verifyResult.success) {
           return verifyResult;
         }
@@ -972,7 +1006,11 @@ async function loginWithRetry(client, email) {
             const retryLogin = await client.login(email, password);
             showSuccess(t('proEmailVerified'));
             if (!retryLogin.emailVerified) {
-              const verifyResult = await waitForEmailVerification(client, retryLogin.sessionToken, email);
+              const verifyResult = await waitForEmailVerification(
+                client,
+                retryLogin.sessionToken,
+                email
+              );
               if (!verifyResult.success) return verifyResult;
             }
             return activateProByAuth(client, retryLogin.sessionToken);
@@ -990,11 +1028,17 @@ async function loginWithRetry(client, email) {
       } else if (loginError.code === 'INVALID_CREDENTIALS') {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
-          spinner.fail(`Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`);
-          showInfo('Forgot your password? Visit https://aiox-license-server.vercel.app/reset-password');
+          spinner.fail(
+            `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`
+          );
+          showInfo(
+            'Forgot your password? Visit https://aiox-license-server.vercel.app/reset-password'
+          );
         } else {
           spinner.fail('Maximum login attempts reached.');
-          showInfo('Forgot your password? Visit https://aiox-license-server.vercel.app/reset-password');
+          showInfo(
+            'Forgot your password? Visit https://aiox-license-server.vercel.app/reset-password'
+          );
           showInfo('Or open an issue: https://github.com/SynkraAI/aiox-core/issues');
           return { success: false, error: 'Maximum login attempts reached.' };
         }
@@ -1332,12 +1376,16 @@ async function activateProByAuth(client, sessionToken) {
       // Keep 'unknown'
     }
 
-    const authActivationResult = await client.activateByAuth(sessionToken, machineId, aioxCoreVersion);
+    const authActivationResult = await client.activateByAuth(
+      sessionToken,
+      machineId,
+      aioxCoreVersion
+    );
     const activationResult = await ensureKeyValidationParity(
       client,
       authActivationResult,
       machineId,
-      aioxCoreVersion,
+      aioxCoreVersion
     );
 
     spinner.succeed(tf('proSubscriptionConfirmed', { key: maskLicenseKey(activationResult.key) }));
@@ -1510,17 +1558,22 @@ async function validateKeyWithApi(key) {
  *
  * @param {string} targetDir - Project root directory
  * @param {Object} [options={}] - Options
+ * @param {string} [options.proSourceDir] - Optional explicit Pro source directory
  * @returns {Promise<Object>} Result with { success, scaffoldResult }
  */
 async function stepInstallScaffold(targetDir, options = {}) {
   showStep(2, 3, t('proContentInstallation'));
 
-  const { proSourceDir, bootstrapError } = resolveProSourceDir(targetDir);
+  const { proSourceDir, bootstrapError } = options.proSourceDir
+    ? { proSourceDir: options.proSourceDir }
+    : resolveProSourceDir(targetDir);
 
   if (!proSourceDir) {
     return {
       success: false,
-      error: bootstrapError ? `${t('proPackageNotFound')} ${bootstrapError}` : t('proPackageNotFound'),
+      error: bootstrapError
+        ? `${t('proPackageNotFound')} ${bootstrapError}`
+        : t('proPackageNotFound'),
     };
   }
 
@@ -1591,19 +1644,13 @@ async function stepVerify(scaffoldResult) {
 
     // Categorize files
     result.squads = files.filter((f) => f.startsWith('squads/'));
-    result.configs = files.filter(
-      (f) => f.endsWith('.yaml') || f.endsWith('.json'),
-    );
+    result.configs = files.filter((f) => f.endsWith('.yaml') || f.endsWith('.json'));
 
     showInfo(tf('proFilesInstalled', { count: files.length }));
 
     if (result.squads.length > 0) {
       // Extract unique squad names
-      const squadNames = [...new Set(
-        result.squads
-          .map((f) => f.split('/')[1])
-          .filter(Boolean),
-      )];
+      const squadNames = [...new Set(result.squads.map((f) => f.split('/')[1]).filter(Boolean))];
       showSuccess(tf('proSquads', { names: squadNames.join(', ') }));
     }
 

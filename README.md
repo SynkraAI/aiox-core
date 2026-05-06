@@ -2,7 +2,7 @@
 
 > 🌍 [English](README.en.md) | **[Português](README.md)**
 
-[![Versão NPM](https://img.shields.io/npm/v/aiox-core.svg)](https://www.npmjs.com/package/aiox-core)
+[![Versão NPM](https://img.shields.io/npm/v/@aiox-squads/core.svg)](https://www.npmjs.com/package/@aiox-squads/core)
 [![Licença: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Versão Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 [![CI](https://github.com/SynkraAI/aiox-core/actions/workflows/ci.yml/badge.svg)](https://github.com/SynkraAI/aiox-core/actions/workflows/ci.yml)
@@ -16,11 +16,14 @@
 >
 > **Devolvendo às pessoas o poder de criar** — Framework open source de orquestração de IA que devolve o controle a quem tem coragem de construir. Agentes especializados, workflows e experiência CLI First para qualquer domínio.
 
+> **Novo namespace npm:** `@aiox-squads/core` é o sucessor de `aiox-core` sem scope. O conteúdo é o mesmo framework AIOX; o novo namespace reflete a consolidação dos squads sob `@aiox-squads/*`. Os comandos de CLI, incluindo `aiox-core`, permanecem preservados durante a transição.
+
 ## Comece Aqui (10 Min)
 
 Se é sua primeira vez no AIOX, siga este caminho linear:
 
 1. Instale em um projeto novo ou existente:
+
 ```bash
 # novo projeto
 npx aiox-core init meu-projeto
@@ -29,29 +32,31 @@ npx aiox-core init meu-projeto
 cd seu-projeto
 npx aiox-core install
 ```
+
 2. Escolha sua IDE/CLI e o caminho de ativação:
+
 - Claude Code: `/agent-name`
 - Gemini CLI: `/aiox-menu` → `/aiox-<agent>`
 - Codex CLI: `/skills` → `aiox-<agent-id>`
 - Cursor/Copilot/AntiGravity: siga os limites e workarounds em `docs/ide-integration.md`
+
 3. Ative 1 agente e confirme o greeting.
 4. Rode 1 comando inicial (`*help` ou equivalente) para validar first-value.
 
 Definição de first-value (binária): ativação de agente + greeting válido + comando inicial com output útil em <= 10 minutos.
 
-
 ## Compatibilidade de Hooks por IDE (Realidade AIOX 4.2)
 
 Muitos recursos avançados do AIOX dependem de eventos de ciclo de vida (hooks). A tabela abaixo mostra a paridade real entre IDEs/plataformas:
 
-| IDE/CLI | Paridade de Hooks vs Claude | Impacto Prático |
-| --- | --- | --- |
-| Claude Code | Completa (referência) | Automação máxima de contexto, guardrails e auditoria |
-| Gemini CLI | Alta (eventos nativos) | Cobertura forte de automações pre/post tool e sessão |
-| Codex CLI | Parcial/limitada | Parte das automações depende de `AGENTS.md`, `/skills`, MCP e fluxo operacional |
-| Cursor | Sem lifecycle hooks equivalentes | Menor automação de pre/post tool; foco em regras, MCP e fluxo do agente |
+| IDE/CLI        | Paridade de Hooks vs Claude      | Impacto Prático                                                                       |
+| -------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
+| Claude Code    | Completa (referência)            | Automação máxima de contexto, guardrails e auditoria                                  |
+| Gemini CLI     | Alta (eventos nativos)           | Cobertura forte de automações pre/post tool e sessão                                  |
+| Codex CLI      | Parcial/limitada                 | Parte das automações depende de `AGENTS.md`, `/skills`, MCP e fluxo operacional       |
+| Cursor         | Sem lifecycle hooks equivalentes | Menor automação de pre/post tool; foco em regras, MCP e fluxo do agente               |
 | GitHub Copilot | Sem lifecycle hooks equivalentes | Menor automação de sessão/tooling; foco em instruções de repositório + MCP no VS Code |
-| AntiGravity | Workflow-based (não hook-based) | Integração por workflows, não por eventos de hook equivalentes ao Claude |
+| AntiGravity    | Workflow-based (não hook-based)  | Integração por workflows, não por eventos de hook equivalentes ao Claude              |
 
 Impactos e mitigação detalhados: `docs/ide-integration.md`.
 
@@ -711,18 +716,18 @@ Veja também:
 
 ## 📄 Legal
 
-| Documento             | English                                     | Português                             |
-| --------------------- | ------------------------------------------- | ------------------------------------- |
-| **Licença**           | [MIT License](LICENSE)                      | -                                     |
-| **Modelo de Licença** | [Core vs Pro](docs/legal/license-clarification.md) | -                               |
-| **Privacidade**       | [Privacy Policy](docs/legal/privacy.md)     | -                                     |
-| **Termos de Uso**     | [Terms of Use](docs/legal/terms.md)         | -                                     |
-| **Código de Conduta** | [Code of Conduct](CODE_OF_CONDUCT.md)       | [PT-BR](docs/pt/code-of-conduct.md)   |
-| **Contribuição**      | [Contributing](CONTRIBUTING.md)             | [PT-BR](docs/pt/contributing.md)      |
-| **Segurança**         | [Security](docs/security.md)                | [PT-BR](docs/pt/security.md)          |
-| **Comunidade**        | [Community](docs/community.md)              | [PT-BR](docs/pt/community.md)         |
-| **Roadmap**           | [Roadmap](docs/roadmap.md)                  | [PT-BR](docs/pt/roadmap.md)           |
-| **Changelog**         | [Version History](CHANGELOG.md)             | -                                     |
+| Documento             | English                                            | Português                           |
+| --------------------- | -------------------------------------------------- | ----------------------------------- |
+| **Licença**           | [MIT License](LICENSE)                             | -                                   |
+| **Modelo de Licença** | [Core vs Pro](docs/legal/license-clarification.md) | -                                   |
+| **Privacidade**       | [Privacy Policy](docs/legal/privacy.md)            | -                                   |
+| **Termos de Uso**     | [Terms of Use](docs/legal/terms.md)                | -                                   |
+| **Código de Conduta** | [Code of Conduct](CODE_OF_CONDUCT.md)              | [PT-BR](docs/pt/code-of-conduct.md) |
+| **Contribuição**      | [Contributing](CONTRIBUTING.md)                    | [PT-BR](docs/pt/contributing.md)    |
+| **Segurança**         | [Security](docs/security.md)                       | [PT-BR](docs/pt/security.md)        |
+| **Comunidade**        | [Community](docs/community.md)                     | [PT-BR](docs/pt/community.md)       |
+| **Roadmap**           | [Roadmap](docs/roadmap.md)                         | [PT-BR](docs/pt/roadmap.md)         |
+| **Changelog**         | [Version History](CHANGELOG.md)                    | -                                   |
 
 ## Contribuidores
 
