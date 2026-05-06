@@ -399,3 +399,11 @@ build/
 
 # External knowledge bases — cloned from upstream, do not commit
 **/design-md-library/
+
+# Tocks asset library — large binaries (~1.4 GB photos, videos, PSDs, fonts)
+# Keep MANIFEST.md and SVG vector logos in git; ignore everything else
+docs/projects/tocks/assets/**
+!docs/projects/tocks/assets/
+!docs/projects/tocks/assets/MANIFEST.md
+!docs/projects/tocks/assets/**/
+!docs/projects/tocks/assets/**/*.svg
