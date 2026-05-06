@@ -420,11 +420,59 @@ Gate: CONCERNS → qa.qaLocation/gates/{epic}.{story}-{slug}.yml
 - Always update story with gate reference
 - Clear, actionable findings
 
+## Post-Gate Status Update (MANDATORY)
+
+**Reference:** `.claude/rules/story-lifecycle.md` — Status transitions are @qa responsibility during QA gate.
+
+**This step MUST be executed before presenting results to user.**
+
+### IF verdict is PASS or CONCERNS:
+
+0. **Pre-check (blocking):**
+   - If current Status is not `**InReview**`, HALT and log: "Cannot apply PASS/CONCERNS transition: expected InReview, found {current status}."
+   - If Change Log section is missing, HALT and request user to restore template structure.
+1. **Update story Status field** in the story file: change `**InReview**` to `**Done**`
+2. **Add Change Log entry:**
+   ```text
+   | {today's date} | {next version} | QA Gate {PASS|CONCERNS} — Status: InReview → Done | @qa |
+   ```
+3. **Log:** "✅ Story status updated: InReview → Done"
+
+### IF verdict is FAIL:
+
+0. **Pre-check (blocking):**
+   - If current Status is not `**InReview**`, HALT and log: "Cannot apply FAIL transition: expected InReview, found {current status}."
+   - If Change Log section is missing, HALT and request user to restore template structure.
+1. **Update story Status field** in the story file: change `**InReview**` to `**InProgress**`
+2. **Add Change Log entry:**
+   ```text
+   | {today's date} | {next version} | QA Gate FAIL — Status: InReview → InProgress — {reason} | @qa |
+   ```
+3. **Log:** "❌ Story returned to InProgress — fixes required"
+
+### IF verdict is WAIVED:
+
+0. **Pre-check (blocking):**
+   - If current Status is not `**InReview**`, HALT and log: "Cannot apply WAIVED transition: expected InReview, found {current status}."
+   - If Change Log section is missing, HALT and request user to restore template structure.
+1. **Update story Status field** in the story file: change `**InReview**` to `**Done**`
+2. **Add Change Log entry:**
+   ```text
+   | {today's date} | {next version} | QA Gate WAIVED — Status: InReview → Done — {waiver reason} | @qa |
+   ```
+3. **Log:** "⚠️ Story status updated: InReview → Done (waived)"
+
+### Rationale
+
+Status transitions defined in `story-lifecycle.md` are advisory (contextual rules). This step makes them imperative (procedural), ensuring agents always execute the transition as part of the workflow rather than relying on contextual rule awareness.
+
+---
+
 ## Handoff
 next_agent: @devops
 next_command: *push
-condition: QA gate verdict is PASS
+condition: QA gate verdict is PASS or CONCERNS (status updated to Done)
 alternatives:
-  - agent: @dev, command: *apply-qa-fixes, condition: QA gate verdict is FAIL or CONCERNS
-  - agent: @po, command: *close-story {story-id}, condition: QA gate verdict is WAIVED
- 
+  - agent: @po, command: *review-concerns {story-id}, condition: QA gate verdict is CONCERNS (status updated to Done, has non-blocking issues)
+  - agent: @dev, command: *apply-qa-fixes, condition: QA gate verdict is FAIL (status updated to InProgress)
+  - agent: @po, command: *close-story {story-id}, condition: QA gate verdict is WAIVED (status updated to Done)
