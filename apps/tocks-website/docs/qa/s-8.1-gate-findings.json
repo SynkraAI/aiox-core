@@ -1,0 +1,304 @@
+{
+  "timestamp": "2026-04-17T16:07:02.024Z",
+  "storyId": "S-8.1",
+  "ac7_reduced_motion": {
+    "pages": [
+      {
+        "url": "/",
+        "elementsChecked": 211,
+        "offendersCount": 0,
+        "offenders": [],
+        "heroCount": 5,
+        "heroStatus": [
+          {
+            "selector": ".hero-h1",
+            "present": true,
+            "animationName": "none",
+            "animationDuration": "0s",
+            "opacity": "1",
+            "transform": "none"
+          },
+          {
+            "selector": ".hero-label",
+            "present": true,
+            "animationName": "none",
+            "animationDuration": "0s",
+            "opacity": "1",
+            "transform": "none"
+          },
+          {
+            "selector": ".hero-subtitle",
+            "present": true,
+            "animationName": "none",
+            "animationDuration": "0s",
+            "opacity": "1",
+            "transform": "none"
+          },
+          {
+            "selector": ".hero-ctas",
+            "present": true,
+            "animationName": "none",
+            "animationDuration": "0s",
+            "opacity": "1",
+            "transform": "none"
+          },
+          {
+            "selector": ".hero-scroll-indicator",
+            "present": true,
+            "animationName": "none",
+            "animationDuration": "0s",
+            "opacity": "1",
+            "transform": "none"
+          }
+        ]
+      },
+      {
+        "url": "/colecao",
+        "elementsChecked": 226,
+        "offendersCount": 0,
+        "offenders": [],
+        "heroCount": 0,
+        "heroStatus": [
+          {
+            "selector": ".hero-h1",
+            "present": false
+          },
+          {
+            "selector": ".hero-label",
+            "present": false
+          },
+          {
+            "selector": ".hero-subtitle",
+            "present": false
+          },
+          {
+            "selector": ".hero-ctas",
+            "present": false
+          },
+          {
+            "selector": ".hero-scroll-indicator",
+            "present": false
+          }
+        ]
+      },
+      {
+        "url": "/colecao/tenro-luxo",
+        "elementsChecked": 299,
+        "offendersCount": 0,
+        "offenders": [],
+        "heroCount": 0,
+        "heroStatus": [
+          {
+            "selector": ".hero-h1",
+            "present": false
+          },
+          {
+            "selector": ".hero-label",
+            "present": false
+          },
+          {
+            "selector": ".hero-subtitle",
+            "present": false
+          },
+          {
+            "selector": ".hero-ctas",
+            "present": false
+          },
+          {
+            "selector": ".hero-scroll-indicator",
+            "present": false
+          }
+        ]
+      },
+      {
+        "url": "/atelier",
+        "elementsChecked": 195,
+        "offendersCount": 0,
+        "offenders": [],
+        "heroCount": 0,
+        "heroStatus": [
+          {
+            "selector": ".hero-h1",
+            "present": false
+          },
+          {
+            "selector": ".hero-label",
+            "present": false
+          },
+          {
+            "selector": ".hero-subtitle",
+            "present": false
+          },
+          {
+            "selector": ".hero-ctas",
+            "present": false
+          },
+          {
+            "selector": ".hero-scroll-indicator",
+            "present": false
+          }
+        ]
+      },
+      {
+        "url": "/contato",
+        "elementsChecked": 181,
+        "offendersCount": 0,
+        "offenders": [],
+        "heroCount": 0,
+        "heroStatus": [
+          {
+            "selector": ".hero-h1",
+            "present": false
+          },
+          {
+            "selector": ".hero-label",
+            "present": false
+          },
+          {
+            "selector": ".hero-subtitle",
+            "present": false
+          },
+          {
+            "selector": ".hero-ctas",
+            "present": false
+          },
+          {
+            "selector": ".hero-scroll-indicator",
+            "present": false
+          }
+        ]
+      }
+    ]
+  },
+  "ac8_visual": {
+    "capturedTo": "docs/qa/s-8.1-after",
+    "files": [
+      "home-hero.png",
+      "home-full.png",
+      "product-page.png",
+      "colecao-grid.png",
+      "cta-button.png",
+      "atelier-full.png",
+      "contato.png"
+    ],
+    "approvedShifts": {
+      "--surface-hover": {
+        "from": "#2A2A2E",
+        "to": "#24242A",
+        "delta": "~6-point darker hover",
+        "intent": "spec 05 §5.1 noir-elevated"
+      },
+      "--accent-ivory": {
+        "from": "#F5F0E6",
+        "to": "#EDE6D2",
+        "delta": "~12-point warmer tint",
+        "intent": "spec 05 §5.1 bone-warm alias"
+      }
+    }
+  },
+  "ac10_lighthouse": {
+    "runs": [
+      {
+        "name": "home",
+        "url": "http://localhost:3000/",
+        "performance": 97,
+        "accessibility": 98,
+        "best-practices": 100,
+        "seo": 100
+      },
+      {
+        "name": "product",
+        "url": "http://localhost:3000/colecao/tenro-luxo",
+        "performance": 92,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100
+      }
+    ]
+  },
+  "wcag_runtime": {
+    "pairs": [
+      {
+        "pair": "text-primary / noir-mid",
+        "fg": "#fafafa",
+        "bg": "#0b0b0f",
+        "spec_ratio": 18.8,
+        "threshold": 4.5,
+        "measured": 18.82089603416232,
+        "delta_vs_spec": "0.02",
+        "pass_AA_text": true,
+        "pass_AA_nontext": true
+      },
+      {
+        "pair": "gold-500 / noir-mid",
+        "fg": "#d4af37",
+        "bg": "#0b0b0f",
+        "spec_ratio": 9.03,
+        "threshold": 4.5,
+        "measured": 9.342002656247166,
+        "delta_vs_spec": "0.31",
+        "pass_AA_text": true,
+        "pass_AA_nontext": true
+      },
+      {
+        "pair": "bone-ink / bone-paper",
+        "fg": "#1a1812",
+        "bg": "#f5f0e6",
+        "spec_ratio": 15.2,
+        "threshold": 4.5,
+        "measured": 15.624947971162289,
+        "delta_vs_spec": "0.42",
+        "pass_AA_text": true,
+        "pass_AA_nontext": true
+      },
+      {
+        "pair": "gold-500 / bone-paper",
+        "fg": "#d4af37",
+        "bg": "#f5f0e6",
+        "spec_ratio": 2.37,
+        "threshold": 4.5,
+        "expected": "FAIL — non-text only per Rule 1",
+        "measured": 1.8514037280831566,
+        "delta_vs_spec": "-0.52",
+        "pass_AA_text": false,
+        "pass_AA_nontext": false
+      },
+      {
+        "pair": "text-secondary / noir-mid",
+        "fg": "#a0a0a0",
+        "bg": "#0b0b0f",
+        "spec_ratio": 7.11,
+        "threshold": 4.5,
+        "measured": 7.512329511626722,
+        "delta_vs_spec": "0.40",
+        "pass_AA_text": true,
+        "pass_AA_nontext": true
+      },
+      {
+        "pair": "body color / body bg (runtime DOM)",
+        "fg": "#FAFAFA",
+        "bg": "#0B0B0F",
+        "measured": 18.82089603416232,
+        "threshold": 4.5,
+        "pass_AA_text": true
+      }
+    ]
+  },
+  "tokens_runtime": {
+    "values": {
+      "--noir-deep": "#050508",
+      "--noir-mid": "#0B0B0F",
+      "--noir-surface": "#1A1A1E",
+      "--noir-elevated": "#24242A",
+      "--bone-paper": "#F5F0E6",
+      "--bone-warm": "#EDE6D2",
+      "--bone-ink": "#1A1812",
+      "--gold-500": "#D4AF37",
+      "--gold-700": "#8A6F3A",
+      "--accent-ivory": "#EDE6D2",
+      "--surface-hover": "#24242A"
+    },
+    "mismatches": []
+  },
+  "errors": []
+}

@@ -1,0 +1,178 @@
+{
+  "timestamp": "2026-04-17T17:38:43.749Z",
+  "axe": {
+    "home": {
+      "route": "home",
+      "url": "/",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 21,
+      "incompleteCount": 1
+    },
+    "colecao": {
+      "route": "colecao",
+      "url": "/colecao",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 18,
+      "incompleteCount": 1
+    },
+    "product-tenro-luxo": {
+      "route": "product-tenro-luxo",
+      "url": "/colecao/tenro-luxo",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 26,
+      "incompleteCount": 2
+    },
+    "atelier": {
+      "route": "atelier",
+      "url": "/atelier",
+      "severity": {
+        "critical": 0,
+        "serious": 17,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 17,
+      "seriousViolations": [
+        {
+          "rule": "color-contrast",
+          "target": ".h-20 > .inline-block[aria-label=\"Tocks Custom - Pagina inicial\"][href=\"/\"] > .tracking-\\[0\\.25em\\].-mt-1.text-\\[10px\\]",
+          "html": "<span class=\"block font-display text-[10px] font-medium uppercase tracking-[0.25em] text-[var(--accent-gold)] -mt-1\">Custom</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.83 (foreground color: #d4af37, background color: #f4efe5, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"colecao\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/colecao\">Colecao</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .text-\\[var\\(--accent-gold\\)\\].transition-colors[href$=\"atelier\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--accent-gold)]\" href=\"/atelier\">Atelier</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.83 (foreground color: #d4af37, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"projetos\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/projetos\">Projetos</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"blog\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/blog\">Blog</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"contato\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/contato\">Contato</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(1) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">MT</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(2) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">PA</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(3) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">BA</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(4) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">RO</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(5) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">SC</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(6) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">RS</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(7) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">SP</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(8) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">MG</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".md\\:col-span-7 > .group.flex-col.gap-3 > .text-\\[var\\(--text-primary\\)\\].leading-\\[1\\.6\\].text-sm",
+          "html": "<p class=\"font-body text-sm leading-[1.6] text-[var(--text-secondary)] text-[var(--text-primary)]\">Corte seco, sem emenda visível.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.3 (foreground color: #a0a0a0, background color: #f5f0e6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".md\\:col-span-5 > .group.flex-col.gap-3 > .text-\\[var\\(--text-primary\\)\\].leading-\\[1\\.6\\].text-sm",
+          "html": "<p class=\"font-body text-sm leading-[1.6] text-[var(--text-secondary)] text-[var(--text-primary)]\">Encaixes macho-e-fêmea, sem prego aparente.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.3 (foreground color: #a0a0a0, background color: #f5f0e6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".mt-10.max-w-xl.opacity-60",
+          "html": "<p class=\"font-body text-sm text-[var(--bone-ink)] opacity-60 mt-10 max-w-xl\">Cada peça recebe quatro camadas de verniz aplicadas à mão, com lixa d’água entre demãos. O último polimento é feito com ce",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        }
+      ],
+      "passCount": 21,
+      "incompleteCount": 1
+    },
+    "contato": {
+      "route": "contato",
+      "url": "/contato",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 26,
+      "incompleteCount": 1
+    }
+  }
+}

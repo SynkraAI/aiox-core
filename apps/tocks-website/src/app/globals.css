@@ -1,0 +1,482 @@
+@import "tailwindcss";
+
+/* ========================================
+   Tocks Custom — Gilded Noir v2 Design System
+   S-8.1 Foundation v2 (Nova ratified)
+   Noir 3-shade + Bone layer + Gold 5-step + Fraunces/Inter/Space Grotesk
+   ======================================== */
+
+:root {
+  /* === COLOR: NOIR 3-shade === */
+  --noir-deep: #050508;       /* hero backdrop, loading, footer cinematic */
+  --noir-mid:  #0B0B0F;       /* ALIAS --background — page default */
+  --noir-surface: #1A1A1E;    /* ALIAS --surface — cards, modal */
+  --noir-elevated: #24242A;   /* hover surfaces */
+
+  /* === COLOR: BONE layer (novo — respiro humano editorial) === */
+  --bone-paper: #F5F0E6;      /* Atelier longform bg, editorial quotes */
+  --bone-warm:  #EDE6D2;      /* surfaces editorial, sidebar provenance */
+  --bone-ink:   #1A1812;      /* text sobre bone — contraste 15.2:1 */
+  --bone-rule:  #D9CFBA;      /* hairlines sobre bone */
+
+  /* === COLOR: GOLD 5-step === */
+  --gold-100: #F4E8B8;        /* glow text-shadow, icons on noir-deep */
+  --gold-300: #E5C65C;        /* ALIAS --accent-gold-hover */
+  --gold-500: #D4AF37;        /* ALIAS --accent-gold — default */
+  --gold-700: #8A6F3A;        /* ALIAS --accent-gold-deep — rules, borders */
+  --gold-900: #4A3A1E;        /* shadow-gold in cinematic-shadow */
+
+  /* === COLOR: STATUS (semantic, mantido) === */
+  --whatsapp-gold: #C4A65E;
+  --whatsapp-gold-hover: #D4B66F;
+  --focus-border: var(--gold-500);
+
+  /* === TYPOGRAPHY v2 (Spiekermann target) === */
+  /* Headlines: 'Fraunces' (serif editorial com ligaduras + opsz + SOFT axes)
+     Body:      'Inter' (MANTIDO)
+     Display:   'Space Grotesk' (grotesk editorial, substitui Montserrat)
+     Font vars provided by next/font/google in src/lib/fonts.ts */
+  --font-heading: var(--font-fraunces);
+  --font-body:    var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+
+  /* Modular scale — fourth ratio 1.333, base 18px */
+  --text-xs:    0.75rem;      /* 12px — labels, folio */
+  --text-sm:    0.875rem;     /* 14px — caption */
+  --text-base:  1.125rem;     /* 18px — body */
+  --text-lg:    1.5rem;       /* 24px — lead */
+  --text-xl:    2rem;         /* 32px — H3 */
+  --text-2xl:   2.667rem;     /* 42.67px — H2 */
+  --text-3xl:   3.556rem;     /* 56.89px — H1 */
+  --text-display: 4.742rem;   /* 75.87px — hero H1 */
+
+  /* Leading */
+  --leading-tight:   1.1;     /* display */
+  --leading-snug:    1.2;     /* headings */
+  --leading-normal:  1.4;     /* body */
+  --leading-relaxed: 1.6;     /* longform atelier */
+
+  /* Tracking (kept + new) */
+  --tracking-editorial: 0.2em;
+  --tracking-extreme:   0.3em;
+  --tracking-headline:  -0.02em;  /* negative tracking em H1 serif */
+  --tracking-display:   -0.03em;  /* display editorial */
+
+  /* === TEXTURE layer (novo) === */
+  --texture-paper-grain:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="2"/><feColorMatrix values="0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0.06 0"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+
+  /* === SHADOW cinematic === */
+  --shadow-cinematic:
+    0 32px 64px -16px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(212, 175, 55, 0.08);
+  --shadow-ambient:
+    0 8px 32px -8px rgba(0, 0, 0, 0.5);
+  --shadow-gold-inset:
+    inset 0 0 0 1px rgba(212, 175, 55, 0.15);
+
+  /* === SPACING (mantido + expandido) === */
+  --section-gap: 8rem;
+  --section-gap-editorial: 12rem;    /* atelier longform */
+  --container-max: 1280px;
+  --container-max-editorial: 960px;  /* atelier longform narrow */
+  --container-padding: 1.5rem;
+  --rhythm: 0.5rem;
+
+  /* === LEGACY ALIASES (back-compat while migrating — do NOT remove, Fase 7 depends) === */
+  --background: var(--noir-mid);
+  --surface: var(--noir-surface);
+  --surface-hover: var(--noir-elevated);
+  --text-primary: #FAFAFA;
+  --text-secondary: #A0A0A0;
+  --accent-gold: var(--gold-500);
+  --accent-gold-hover: var(--gold-300);
+  --accent-gold-deep: var(--gold-700);
+  --accent-ivory: var(--bone-warm);
+  --ring-focus-offset: 2px;
+  --ring-swatch-active: var(--gold-500);
+}
+
+@theme inline {
+  /* Legacy aliases — MANTIDOS (componentes Fase 7 consomem estes nomes) */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-hover: var(--accent-gold-hover);
+  --color-accent-gold-deep: var(--accent-gold-deep);
+  --color-accent-ivory: var(--accent-ivory);
+  --color-whatsapp-gold: var(--whatsapp-gold);
+  --color-whatsapp-gold-hover: var(--whatsapp-gold-hover);
+  --color-focus-border: var(--accent-gold);
+
+  /* Tokens v2 — Tailwind v4 expose new palette (noir/bone/gold scales) */
+  --color-noir-deep: var(--noir-deep);
+  --color-noir-mid: var(--noir-mid);
+  --color-noir-surface: var(--noir-surface);
+  --color-noir-elevated: var(--noir-elevated);
+  --color-bone-paper: var(--bone-paper);
+  --color-bone-warm: var(--bone-warm);
+  --color-bone-ink: var(--bone-ink);
+  --color-bone-rule: var(--bone-rule);
+  --color-gold-100: var(--gold-100);
+  --color-gold-300: var(--gold-300);
+  --color-gold-500: var(--gold-500);
+  --color-gold-700: var(--gold-700);
+  --color-gold-900: var(--gold-900);
+
+  /* Tracking (kept + new) */
+  --tracking-editorial: var(--tracking-editorial);
+  --tracking-extreme: var(--tracking-extreme);
+  --tracking-headline: var(--tracking-headline);
+  --tracking-display: var(--tracking-display);
+
+  /* Fonts v2 — Fraunces/Inter/Space Grotesk */
+  --font-body: var(--font-inter);
+  --font-heading: var(--font-fraunces);
+  --font-display: var(--font-space-grotesk);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-gold);
+  color: var(--background);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold-deep);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Focus styles -- WCAG 2.2 AA (SQUAD: full gold, no /40) */
+*:focus-visible {
+  outline: 2px solid var(--focus-border);
+  outline-offset: var(--ring-focus-offset);
+}
+
+/* Typography Utilities */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-hover) 50%, var(--accent-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold line separator */
+.gold-separator {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+/* ========================================
+   Editorial utilities v2 (S-8.1 — spec 05 §5.3)
+   Consumed by S-8.2 hero, S-8.3 provenance, S-8.4 atelier longform
+   ======================================== */
+
+/* Paper grain texture overlay — use em seções editoriais sobre bone */
+.texture-paper {
+  position: relative;
+}
+.texture-paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--texture-paper-grain);
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Cinematic shadow para hero video container + product hero cards */
+.shadow-cinematic { box-shadow: var(--shadow-cinematic); }
+.shadow-ambient   { box-shadow: var(--shadow-ambient); }
+
+/* Editorial containers */
+.container-editorial {
+  max-width: var(--container-max-editorial);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Editorial section gap */
+.section-padding-editorial { padding-block: var(--section-gap-editorial); }
+
+/* Serif H1 com negative tracking (Spiekermann) */
+.heading-display {
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  font-weight: 300;        /* Fraunces opsz 300 em display size */
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+}
+
+/* Bone surface section */
+.section-bone {
+  background-color: var(--bone-paper);
+  color: var(--bone-ink);
+}
+
+/* Container utility (legacy, mantido) */
+.container-custom {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Section spacing (legacy, mantido) */
+.section-padding {
+  padding-block: var(--section-gap);
+}
+
+/* Smooth image loading */
+img {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Placeholder shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.placeholder-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--surface-hover) 50%,
+    var(--surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ========================================
+   Classe 1 — Hero entrance (LCP-safe) — S-8.5b AC-1
+   Substitui bloco fade-up-hero anterior (S-8.1) por 4 keyframes diferenciados
+   per spec 06 §6.3. H1 zero delay (LCP protegido), subtitle 250ms, CTAs 550ms,
+   scroll indicator 1500ms (below fold). Easing ease-out-expo (0.16,1,0.3,1).
+   Patch #2c ao final do arquivo neutraliza sob prefers-reduced-motion: reduce.
+   ======================================== */
+@keyframes entrance-fade-up-tight {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes entrance-fade-up-medium {
+  from { opacity: 0; transform: translate3d(0, 32px, 0) scale(0.99); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes entrance-fade-up-relaxed {
+  from { opacity: 0; transform: translate3d(0, 20px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes entrance-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.hero-h1, .hero-label {
+  animation: entrance-fade-up-tight 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+.hero-subtitle {
+  animation: entrance-fade-up-medium 800ms cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
+  will-change: opacity, transform;
+}
+.hero-ctas {
+  animation: entrance-fade-up-relaxed 700ms cubic-bezier(0.16, 1, 0.3, 1) 550ms both;
+  will-change: opacity, transform;
+}
+.hero-scroll-indicator {
+  animation: entrance-fade-in 1800ms ease-out 1500ms both;
+  will-change: opacity;
+}
+
+/* ========================================
+   S-8.5 Motion System v2 — spec `docs/design/elevation-awwwards/06-motion-system-spec.md`
+   Classes 2-5 (Classe 1 hero entrance lives above, owned by S-8.2 parallel work).
+   Principles: compositor-only (transform + opacity), scarcity-of-motion,
+   differentiated easings (expo/quartic/cubic), no scroll-jack.
+   Patch #2c override block at end of file neutralizes all motion under
+   prefers-reduced-motion: reduce.
+   ======================================== */
+
+/* --- Classe 2 — Product reveal (scroll-triggered) -------------------------
+   Base CSS for IntersectionObserver-driven reveal. Elements start hidden at
+   translate3d(0, 24px, 0) and animate in when consumer toggles `.is-revealed`.
+   Hook wiring (`useReveal`) is S-8.5 hook territory — not in this surgical
+   scope. Class is utility-available now; no elements wired yet. */
+@keyframes product-reveal {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.product-reveal-target {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  will-change: opacity, transform;
+}
+.product-reveal-target.is-revealed {
+  animation: product-reveal 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.product-reveal-target.delay-1 { animation-delay: 80ms; }
+.product-reveal-target.delay-2 { animation-delay: 160ms; }
+.product-reveal-target.delay-3 { animation-delay: 240ms; }
+
+/* --- Classe 3 — Scroll storytelling (Atelier longform chapters) -----------
+   FIX-2b (Nova ratified, Epic 8 gate): Chapters are legible at first paint —
+   content is NOT gated by GSAP activation. Base state is fully visible
+   (opacity 1, transform none) so axe pre-scroll passes AA and screen-reader
+   users with motion-on never experience a 0.3-opacity content state. GSAP
+   hook remains wired (`useChapterScroll` toggles `.is-active`) as additive
+   enhancement for future subtle emphasis (e.g. will-change lift) — it no
+   longer acts as a content gate. Easing preserved for potential additive
+   transitions. Patch #2c below still neutralizes under reduced-motion. */
+.chapter-target {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 900ms cubic-bezier(0.65, 0, 0.35, 1),
+    transform 900ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.chapter-target.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* --- Classe 4 — Micro-interaction (hover/focus/click) ---------------------
+   Standard 200ms cubic-bezier(0.4, 0, 0.2, 1) helper for CTAs, links, swatches,
+   form fields. Transitions transform/opacity/color/background/border only —
+   compositor-safe. Apply via className="micro-interact" on interactive atoms. */
+.micro-interact {
+  transition:
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Classe 4 — Product card masked reveal (S-8.5b AC-6) -----------------
+   Substitui group-hover:scale-105 duration-700 Tailwind por scale(1.03) +
+   700ms quartic easing per spec 6.4 (menos que 1.05, mais luxury).
+   Consumer: product-card.tsx (root = .product-card, image container = .product-card-image). */
+.product-card-image {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.product-card:hover .product-card-image {
+  transform: scale(1.03);
+}
+.product-card-chevron {
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.product-card:hover .product-card-chevron {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* --- Showcase (S-8.5 minimal) — gold separator draw-in --------------------
+   `.gold-separator` consumers opt-in with `gold-separator-draw` modifier
+   (added in page-layout.tsx). CSS-only first-paint animation: horizontal
+   scale-x from 0 to 1 with inside-out origin, ease-out-expo. No logic,
+   no observer — same class of behavior as hero fade-up. */
+@keyframes gold-separator-draw {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+.gold-separator-draw {
+  transform-origin: center;
+  animation: gold-separator-draw 900ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+  will-change: transform, opacity;
+}
+
+/* --- Classe 5 — Page transition (Next 16 View Transitions API) ------------
+   Approach A (CSS-only root). Browser animates entire root on route change
+   in Chromium. Safari/Firefox fall back to instant nav (silent degradation).
+   Enabled via `experimental.viewTransition: true` in next.config.ts. */
+::view-transition-old(root) {
+  animation: 300ms cubic-bezier(0.83, 0, 0.17, 1) both fade-out-slight;
+}
+::view-transition-new(root) {
+  animation: 400ms cubic-bezier(0.83, 0, 0.17, 1) both fade-in-up-slight;
+}
+@keyframes fade-out-slight {
+  to { opacity: 0; transform: translate3d(0, -8px, 0); }
+}
+@keyframes fade-in-up-slight {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* ========================================
+   WCAG 2.2 AA — Prefers Reduced Motion
+   Patch #2c (Sessão 19 Val-head blocker resolution — S-8.1)
+   Must remain at end of file so !important rules override all prior animations.
+   S-8.5 extension: view-transition pseudo-elements (separate animation
+   origin — not covered by universal `*` selector) + explicit class neutralize.
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Hero entrance: skip fade-up, materialize immediately */
+  .hero-h1, .hero-label, .hero-subtitle, .hero-ctas, .hero-scroll-indicator {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* S-8.5 motion classes 2-4: land at final state immediately */
+  .product-reveal-target,
+  .product-reveal-target.is-revealed,
+  .chapter-target,
+  .chapter-target.is-active,
+  .gold-separator-draw {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* S-8.5 Classe 5: view transitions (AC-9, per Next 16 docs).
+     Pseudo-elements live outside the `*` cascade — override explicitly. */
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

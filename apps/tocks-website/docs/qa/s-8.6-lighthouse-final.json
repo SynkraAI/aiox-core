@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-04-17T17:38:43.749Z",
+  "lighthouse": [
+    {
+      "name": "home",
+      "url": "/",
+      "performance": 85,
+      "accessibility": 98,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 2489.6612999999998,
+      "LCP_display": "2.5 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 475,
+      "TBT_display": "480 ms"
+    },
+    {
+      "name": "colecao",
+      "url": "/colecao",
+      "performance": 96,
+      "accessibility": 98,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 2730.2683,
+      "LCP_display": "2.7 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 64.00000000000023,
+      "TBT_display": "60 ms"
+    },
+    {
+      "name": "product-tenro-luxo",
+      "url": "/colecao/tenro-luxo",
+      "performance": 92,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 100,
+      "LCP_ms": 2765.8008,
+      "LCP_display": "2.8 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 232.99999999999977,
+      "TBT_display": "230 ms"
+    },
+    {
+      "name": "atelier",
+      "url": "/atelier",
+      "performance": 96,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 2728.1836000000003,
+      "LCP_display": "2.7 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 69.99999999999977,
+      "TBT_display": "70 ms"
+    },
+    {
+      "name": "contato",
+      "url": "/contato",
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 3158.9348,
+      "LCP_display": "3.2 s",
+      "CLS": 0.003164,
+      "CLS_display": "0.003",
+      "TBT_ms": 53.5,
+      "TBT_display": "50 ms"
+    }
+  ]
+}

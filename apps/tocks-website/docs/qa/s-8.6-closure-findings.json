@@ -1,0 +1,490 @@
+{
+  "timestamp": "2026-04-17T17:38:43.749Z",
+  "kind": "s-8.6-closure-gate",
+  "stories": [
+    "S-8.1",
+    "S-8.2",
+    "S-8.3",
+    "S-8.4",
+    "S-8.5a",
+    "S-8.5b",
+    "S-8.6"
+  ],
+  "axe": {
+    "home": {
+      "route": "home",
+      "url": "/",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 21,
+      "incompleteCount": 1
+    },
+    "colecao": {
+      "route": "colecao",
+      "url": "/colecao",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 18,
+      "incompleteCount": 1
+    },
+    "product-tenro-luxo": {
+      "route": "product-tenro-luxo",
+      "url": "/colecao/tenro-luxo",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 26,
+      "incompleteCount": 2
+    },
+    "atelier": {
+      "route": "atelier",
+      "url": "/atelier",
+      "severity": {
+        "critical": 0,
+        "serious": 17,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 17,
+      "seriousViolations": [
+        {
+          "rule": "color-contrast",
+          "target": ".h-20 > .inline-block[aria-label=\"Tocks Custom - Pagina inicial\"][href=\"/\"] > .tracking-\\[0\\.25em\\].-mt-1.text-\\[10px\\]",
+          "html": "<span class=\"block font-display text-[10px] font-medium uppercase tracking-[0.25em] text-[var(--accent-gold)] -mt-1\">Custom</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.83 (foreground color: #d4af37, background color: #f4efe5, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"colecao\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/colecao\">Colecao</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .text-\\[var\\(--accent-gold\\)\\].transition-colors[href$=\"atelier\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--accent-gold)]\" href=\"/atelier\">Atelier</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.83 (foreground color: #d4af37, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"projetos\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/projetos\">Projetos</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"blog\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/blog\">Blog</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".lg\\:flex > .hover\\:text-\\[var\\(--text-primary\\)\\].transition-colors[href$=\"contato\"]",
+          "html": "<a class=\"font-display text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-300 text-[var(--text-secondary)] hover:text-[var(--text-primary)]\" href=\"/contato\">Contato</a>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.28 (foreground color: #a0a0a0, background color: #f4efe5, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(1) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">MT</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(2) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">PA</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(3) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">BA</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(4) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">RO</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(5) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">SC</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(6) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">RS</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(7) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">SP</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": "li:nth-child(8) > .opacity-60.font-body.text-\\[var\\(--bone-ink\\)\\]",
+          "html": "<span class=\"font-body text-xs text-[var(--bone-ink)] opacity-60\">MG</span>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".md\\:col-span-7 > .group.flex-col.gap-3 > .text-\\[var\\(--text-primary\\)\\].leading-\\[1\\.6\\].text-sm",
+          "html": "<p class=\"font-body text-sm leading-[1.6] text-[var(--text-secondary)] text-[var(--text-primary)]\">Corte seco, sem emenda visível.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.3 (foreground color: #a0a0a0, background color: #f5f0e6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".md\\:col-span-5 > .group.flex-col.gap-3 > .text-\\[var\\(--text-primary\\)\\].leading-\\[1\\.6\\].text-sm",
+          "html": "<p class=\"font-body text-sm leading-[1.6] text-[var(--text-secondary)] text-[var(--text-primary)]\">Encaixes macho-e-fêmea, sem prego aparente.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.3 (foreground color: #a0a0a0, background color: #f5f0e6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "rule": "color-contrast",
+          "target": ".mt-10.max-w-xl.opacity-60",
+          "html": "<p class=\"font-body text-sm text-[var(--bone-ink)] opacity-60 mt-10 max-w-xl\">Cada peça recebe quatro camadas de verniz aplicadas à mão, com lixa d’água entre demãos. O último polimento é feito com ce",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.46 (foreground color: #726e67, background color: #f5f0e6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        }
+      ],
+      "passCount": 21,
+      "incompleteCount": 1
+    },
+    "contato": {
+      "route": "contato",
+      "url": "/contato",
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "totalViolations": 0,
+      "seriousViolations": [],
+      "passCount": 26,
+      "incompleteCount": 1
+    }
+  },
+  "lighthouse": [
+    {
+      "name": "home",
+      "url": "/",
+      "performance": 85,
+      "accessibility": 98,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 2489.6612999999998,
+      "LCP_display": "2.5 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 475,
+      "TBT_display": "480 ms"
+    },
+    {
+      "name": "colecao",
+      "url": "/colecao",
+      "performance": 96,
+      "accessibility": 98,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 2730.2683,
+      "LCP_display": "2.7 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 64.00000000000023,
+      "TBT_display": "60 ms"
+    },
+    {
+      "name": "product-tenro-luxo",
+      "url": "/colecao/tenro-luxo",
+      "performance": 92,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 100,
+      "LCP_ms": 2765.8008,
+      "LCP_display": "2.8 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 232.99999999999977,
+      "TBT_display": "230 ms"
+    },
+    {
+      "name": "atelier",
+      "url": "/atelier",
+      "performance": 96,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 2728.1836000000003,
+      "LCP_display": "2.7 s",
+      "CLS": 0,
+      "CLS_display": "0",
+      "TBT_ms": 69.99999999999977,
+      "TBT_display": "70 ms"
+    },
+    {
+      "name": "contato",
+      "url": "/contato",
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "LCP_ms": 3158.9348,
+      "LCP_display": "3.2 s",
+      "CLS": 0.003164,
+      "CLS_display": "0.003",
+      "TBT_ms": 53.5,
+      "TBT_display": "50 ms"
+    }
+  ],
+  "reducedMotion": {
+    "home": {
+      "route": "home",
+      "sampledCount": 13,
+      "offenderCount": 0,
+      "offenders": [],
+      "viewTransitionAnims": []
+    },
+    "colecao": {
+      "route": "colecao",
+      "sampledCount": 10,
+      "offenderCount": 0,
+      "offenders": [],
+      "viewTransitionAnims": []
+    },
+    "product-tenro-luxo": {
+      "route": "product-tenro-luxo",
+      "sampledCount": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "viewTransitionAnims": []
+    },
+    "atelier": {
+      "route": "atelier",
+      "sampledCount": 5,
+      "offenderCount": 0,
+      "offenders": [],
+      "viewTransitionAnims": []
+    },
+    "contato": {
+      "route": "contato",
+      "sampledCount": 0,
+      "offenderCount": 0,
+      "offenders": [],
+      "viewTransitionAnims": []
+    }
+  },
+  "viewTransitions": {},
+  "errors": [],
+  "scarcity": {
+    "home": {
+      "route": "home",
+      "samples": [
+        {
+          "scrollY": 0,
+          "total_getAnimations": 12,
+          "running_motion_system": 2,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 2
+        },
+        {
+          "scrollY": 400,
+          "total_getAnimations": 19,
+          "running_motion_system": 2,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 2
+        },
+        {
+          "scrollY": 800,
+          "total_getAnimations": 23,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 1200,
+          "total_getAnimations": 23,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 1600,
+          "total_getAnimations": 23,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 2000,
+          "total_getAnimations": 23,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 2400,
+          "total_getAnimations": 16,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 2800,
+          "total_getAnimations": 16,
+          "running_motion_system": 3,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 3
+        }
+      ],
+      "maxSimultaneous": 5,
+      "verdict": "FAIL (max=5)"
+    },
+    "colecao": {
+      "route": "colecao",
+      "samples": [
+        {
+          "scrollY": 0,
+          "total_getAnimations": 12,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 400,
+          "total_getAnimations": 22,
+          "running_motion_system": 3,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 3
+        },
+        {
+          "scrollY": 800,
+          "total_getAnimations": 22,
+          "running_motion_system": 3,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 3
+        },
+        {
+          "scrollY": 1200,
+          "total_getAnimations": 24,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 1600,
+          "total_getAnimations": 24,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 2000,
+          "total_getAnimations": 17,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 2400,
+          "total_getAnimations": 17,
+          "running_motion_system": 5,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 5
+        },
+        {
+          "scrollY": 2800,
+          "total_getAnimations": 17,
+          "running_motion_system": 3,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 3
+        }
+      ],
+      "maxSimultaneous": 5,
+      "verdict": "FAIL (max=5)"
+    },
+    "atelier": {
+      "route": "atelier",
+      "samples": [
+        {
+          "scrollY": 0,
+          "total_getAnimations": 7,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 400,
+          "total_getAnimations": 14,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 800,
+          "total_getAnimations": 15,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 1200,
+          "total_getAnimations": 16,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 1600,
+          "total_getAnimations": 16,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 2000,
+          "total_getAnimations": 17,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 2400,
+          "total_getAnimations": 10,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        },
+        {
+          "scrollY": 2800,
+          "total_getAnimations": 10,
+          "running_motion_system": 0,
+          "chapter_transitions_inflight": 0,
+          "simultaneous": 0
+        }
+      ],
+      "maxSimultaneous": 0,
+      "verdict": "PASS"
+    }
+  }
+}

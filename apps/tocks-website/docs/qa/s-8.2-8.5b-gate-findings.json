@@ -1,0 +1,890 @@
+{
+  "timestamp": "2026-04-17T16:45:21.036Z",
+  "storyIds": [
+    "S-8.2",
+    "S-8.3",
+    "S-8.4",
+    "S-8.5b"
+  ],
+  "axe": {
+    "home": {
+      "url": "/",
+      "violations": [],
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    "colecao": {
+      "url": "/colecao",
+      "violations": [],
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    "product": {
+      "url": "/colecao/tenro-luxo",
+      "violations": [],
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    "atelier": {
+      "url": "/atelier",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodeCount": 48,
+          "firstTarget": ".h-20 > .inline-block[aria-label=\"Tocks Custom - Pagina inicial\"][href=\"/\"] > .tracking-\\[0\\.25em\\].-mt-1.text-\\[10px\\]",
+          "firstHtml": "<span class=\"block font-display text-[10px] font-medium uppercase tracking-[0.25em] text-[var(--accent-gold)] -mt-1\">Custom</span>"
+        }
+      ],
+      "severity": {
+        "critical": 0,
+        "serious": 48,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    "contato": {
+      "url": "/contato",
+      "violations": [],
+      "severity": {
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    }
+  },
+  "lighthouse": {
+    "runs": [
+      {
+        "name": "home",
+        "url": "http://localhost:3000/",
+        "performance": 92,
+        "accessibility": 98,
+        "best-practices": 100,
+        "seo": 100,
+        "LCP_ms": 3312.2174000000005,
+        "LCP_display": "3.3 s",
+        "CLS": 0,
+        "CLS_display": "0",
+        "TBT_ms": 49.5,
+        "FCP_ms": 762.2174
+      },
+      {
+        "name": "atelier",
+        "url": "http://localhost:3000/atelier",
+        "performance": 92,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100,
+        "LCP_ms": 3308.3647,
+        "LCP_display": "3.3 s",
+        "CLS": 0,
+        "CLS_display": "0",
+        "TBT_ms": 54,
+        "FCP_ms": 773.18235
+      },
+      {
+        "name": "product",
+        "url": "http://localhost:3000/colecao/tenro-luxo",
+        "performance": 92,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100,
+        "LCP_ms": 3160.5998999999997,
+        "LCP_display": "3.2 s",
+        "CLS": 0,
+        "CLS_display": "0",
+        "TBT_ms": 149,
+        "FCP_ms": 1212.5999
+      }
+    ]
+  },
+  "s_8_2_hero": {
+    "normalMode": {
+      "videoPresent": false,
+      "videoAutoplay": null,
+      "videoMuted": null,
+      "videoLoop": null,
+      "videoPlaysInline": null,
+      "videoPreload": null,
+      "videoPoster": null,
+      "videoAriaHidden": null,
+      "posterPresent": true,
+      "posterSrc": "/_next/image?url=%2Fimages%2Fhero-poster.jpg&w=3840&q=75",
+      "posterAlt": "Ateliê Tocks -- mesa de autor em madeira maciça, chiaroscuro editorial",
+      "posterFetchPriority": "high",
+      "heroH1Classes": "font-heading text-6xl md:text-7xl lg:text-[96px] font-semibold leading-[0.95] text-[var(--text-primary)] hero-h1 heading-display mb-8 max-w-3xl",
+      "heroH1Styles": {
+        "fontFamily": "Fraunces, \"Fraunces Fallback\"",
+        "fontWeight": "300",
+        "fontSize": "75.872px",
+        "letterSpacing": "-2.27616px",
+        "textContent": "Cada mesa, uma obra. Cada detalhe, uma assinatura."
+      }
+    },
+    "reducedMotionMode": {
+      "videoPresent": false,
+      "posterPresent": true,
+      "posterSrc": "/_next/image?url=%2Fimages%2Fhero-poster.jpg&w=3840&q=75"
+    },
+    "acChecks": {
+      "AC-1 video renders when sources present": "SKIP — no videoSrc provided (placeholder period), poster-only path active",
+      "AC-2 poster present with fetchPriority high": "PASS",
+      "AC-7 reduced-motion → video not mounted": "PASS",
+      "AC-8 video aria-hidden (when present)": "N/A",
+      "AC-6 .heading-display on H1": "PASS"
+    }
+  },
+  "s_8_3_provenance": {
+    "presence": {
+      "found": true,
+      "fourBlocksLabels": {
+        "hasOrigin": true,
+        "hasCriacao": true,
+        "hasSerie": true,
+        "hasDimensoes": true
+      },
+      "bounds": {
+        "top": 1567.203125,
+        "bottom": 2039.078125,
+        "width": 912
+      }
+    },
+    "tufte": {
+      "violations": []
+    },
+    "responsive": {
+      "mobile": {
+        "viewport": {
+          "name": "mobile",
+          "width": 375,
+          "height": 667
+        },
+        "layout": {
+          "gridTemplateColumns": "327px",
+          "childrenCount": 4,
+          "uniqueRowTops": 4
+        }
+      },
+      "tablet": {
+        "viewport": {
+          "name": "tablet",
+          "width": 768,
+          "height": 1024
+        },
+        "layout": {
+          "gridTemplateColumns": "336px 336px",
+          "childrenCount": 4,
+          "uniqueRowTops": 3
+        }
+      },
+      "desktop": {
+        "viewport": {
+          "name": "desktop",
+          "width": 1280,
+          "height": 800
+        },
+        "layout": {
+          "gridTemplateColumns": "192px 192px 192px 192px",
+          "childrenCount": 4,
+          "uniqueRowTops": 2
+        }
+      }
+    },
+    "acChecks": {
+      "AC-3 4 blocks present": "PASS",
+      "AC-7 card on product page": "PASS",
+      "AC-9 mobile single-column (1fr)": "PASS",
+      "Tufte gold-on-bone text rule": "PASS"
+    }
+  },
+  "s_8_4_atelier": {
+    "atelier": {
+      "found": true,
+      "chapterTargetCount": 5,
+      "chapterInfo": [
+        {
+          "index": 0,
+          "heading": "Desde 2008, madeira e autoria.",
+          "top": 8,
+          "bottom": 1226,
+          "bg": "rgb(245, 240, 230)",
+          "className": "chapter-target section-bone section-padding-editorial is-active"
+        },
+        {
+          "index": 1,
+          "heading": "Começa pela árvore.",
+          "top": 1266,
+          "bottom": 2306,
+          "bg": "rgb(245, 240, 230)",
+          "className": "chapter-target section-bone section-padding-editorial"
+        },
+        {
+          "index": 2,
+          "heading": "Cada milímetro é decisão.",
+          "top": 2306,
+          "bottom": 3790,
+          "bg": "rgb(245, 240, 230)",
+          "className": "chapter-target section-bone section-padding-editorial"
+        },
+        {
+          "index": 3,
+          "heading": "O último gesto é manual.",
+          "top": 3790,
+          "bottom": 4659,
+          "bg": "rgb(245, 240, 230)",
+          "className": "chapter-target section-bone section-padding-editorial"
+        },
+        {
+          "index": 4,
+          "heading": "Transporte especializado. Montagem no local.",
+          "top": 4659,
+          "bottom": 5779,
+          "bg": "rgb(11, 11, 15)",
+          "className": "chapter-target section-padding-editorial"
+        }
+      ],
+      "isColofonLast": true,
+      "lastSectionClass": "section-bone texture-paper",
+      "copyV2Hit": true,
+      "bilharInEarlyBody": false,
+      "h2Texts": [
+        "Começa pela árvore.",
+        "Cada milímetro é decisão.",
+        "O último gesto é manual.",
+        "Transporte especializado. Montagem no local."
+      ]
+    },
+    "bgTransition": {
+      "lastChapterTarget": {
+        "index": 4,
+        "heading": "Transporte especializado. Montagem no local.",
+        "top": 4659,
+        "bottom": 5779,
+        "bg": "rgb(11, 11, 15)",
+        "className": "chapter-target section-padding-editorial"
+      },
+      "lastSectionClass": "section-bone texture-paper",
+      "intent": "entrega noir-mid → colofon bone transition"
+    },
+    "responsive": {
+      "mobile": {
+        "viewport": {
+          "name": "mobile",
+          "width": 375,
+          "height": 667
+        },
+        "layout": {
+          "madeiraGridCols": "327px"
+        }
+      },
+      "tablet": {
+        "viewport": {
+          "name": "tablet",
+          "width": 768,
+          "height": 1024
+        },
+        "layout": {
+          "madeiraGridCols": "28.7969px 28.7969px 28.7969px 28.7969px 28.7969px 28.7969px 28.7969px 28.7969px 28.7969px 28.7969px"
+        }
+      },
+      "desktop": {
+        "viewport": {
+          "name": "desktop",
+          "width": 1280,
+          "height": 800
+        },
+        "layout": {
+          "madeiraGridCols": "48px 48px 48px 48px 48px 48px 48px 48px 48px 48px"
+        }
+      }
+    },
+    "acChecks": {
+      "AC-1 6 chapter templates rendered": "PASS (5 chapter-target + 1 static colofon)",
+      "AC-11 copy v2 headline \"Desde 2008, madeira e autoria\" present": "PASS",
+      "No \"bilhar\" in hero/lead area": "PASS",
+      "AC-12 responsive stack on mobile": "PASS"
+    }
+  },
+  "s_8_5b_reduced_motion_audit": {
+    "hero": {
+      "label": "hero entrance",
+      "checked": 5,
+      "offenders": 0,
+      "offenderItems": []
+    },
+    "productReveal": {
+      "label": "product reveal",
+      "checked": 5,
+      "offenders": 0,
+      "offenderItems": []
+    },
+    "chapterScroll": {
+      "label": "chapter scroll",
+      "checked": 5,
+      "offenders": 0,
+      "offenderItems": []
+    },
+    "productCardHover": {
+      "label": "product-card-image hover",
+      "checked": 3,
+      "offenders": 0,
+      "offenderItems": []
+    },
+    "rawAudit": {
+      "hero": [
+        {
+          "selector": ".hero-h1",
+          "present": true,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "selector": ".hero-label",
+          "present": true,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "selector": ".hero-subtitle",
+          "present": true,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "selector": ".hero-ctas",
+          "present": true,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "selector": ".hero-scroll-indicator",
+          "present": true,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "opacity": "1",
+          "transform": "none"
+        }
+      ],
+      "productReveal": [
+        {
+          "index": 0,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsRevealed": true
+        },
+        {
+          "index": 1,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsRevealed": true
+        },
+        {
+          "index": 2,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsRevealed": true
+        },
+        {
+          "index": 3,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsRevealed": false
+        },
+        {
+          "index": 4,
+          "animationName": "none",
+          "animationDuration": "0s",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsRevealed": false
+        }
+      ],
+      "chapterScroll": [
+        {
+          "index": 0,
+          "animationName": "none",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsActive": true
+        },
+        {
+          "index": 1,
+          "animationName": "none",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsActive": false
+        },
+        {
+          "index": 2,
+          "animationName": "none",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsActive": false
+        },
+        {
+          "index": 3,
+          "animationName": "none",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsActive": false
+        },
+        {
+          "index": 4,
+          "animationName": "none",
+          "transitionDuration": "0s",
+          "opacity": "1",
+          "transform": "none",
+          "hasIsActive": false
+        }
+      ],
+      "productCardHover": [
+        {
+          "index": 0,
+          "transitionDuration": "1e-05s",
+          "transform": "none"
+        },
+        {
+          "index": 1,
+          "transitionDuration": "1e-05s",
+          "transform": "none"
+        },
+        {
+          "index": 2,
+          "transitionDuration": "1e-05s",
+          "transform": "none"
+        }
+      ]
+    }
+  },
+  "s_8_5b_scarcity": {
+    "samples": [
+      {
+        "scrollY": 0,
+        "running": 8,
+        "total": 12,
+        "snapshots": [
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          }
+        ]
+      },
+      {
+        "scrollY": 400,
+        "running": 18,
+        "total": 22,
+        "snapshots": [
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          }
+        ]
+      },
+      {
+        "scrollY": 800,
+        "running": 18,
+        "total": 22,
+        "snapshots": [
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          }
+        ]
+      },
+      {
+        "scrollY": 1200,
+        "running": 20,
+        "total": 24,
+        "snapshots": [
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "elTag": "HEADER",
+            "elClass": "fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-[var(--background"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          }
+        ]
+      },
+      {
+        "scrollY": 1600,
+        "running": 13,
+        "total": 17,
+        "snapshots": [
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          }
+        ]
+      },
+      {
+        "scrollY": 2000,
+        "running": 10,
+        "total": 17,
+        "snapshots": [
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          }
+        ]
+      },
+      {
+        "scrollY": 2400,
+        "running": 10,
+        "total": 17,
+        "snapshots": [
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          },
+          {
+            "animName": "product-reveal",
+            "elTag": "A",
+            "elClass": "product-card product-reveal-target block bg-[var(--surface)] rounded-[8px] overf"
+          },
+          {
+            "animName": "shimmer",
+            "elTag": "DIV",
+            "elClass": "relative w-full rounded-[4px] overflow-hidden placeholder-shimmer "
+          }
+        ]
+      }
+    ],
+    "maxSimultaneous": 20,
+    "verdict": "FAIL (max=20 > 3)"
+  },
+  "s_8_5b_gsap_bundle": {
+    "home": {
+      "url": "/",
+      "expectGSAP": false,
+      "gsapRequestCount": 0,
+      "requests": [],
+      "verdict": "PASS (no GSAP on home as expected)"
+    },
+    "atelier": {
+      "url": "/atelier",
+      "expectGSAP": true,
+      "gsapRequestCount": 0,
+      "requests": [],
+      "verdict": "CHECK (no GSAP fetched — chunk may be inlined)"
+    }
+  },
+  "errors": []
+}

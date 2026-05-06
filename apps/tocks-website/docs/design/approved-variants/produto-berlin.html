@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&amp;family=Inter:wght@400;500&amp;family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#0B0B0F",
+                        surface: "#1A1A1E",
+                        primary: "#D4AF37",
+                        "primary-hover": "#E5C65C",
+                        "primary-deep": "#8A6F3A",
+                        ivory: "#F5F0E6",
+                        "text-primary": "#FAFAFA",
+                        "text-secondary": "#A0A0A0",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Cormorant Garamond", "serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Montserrat", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background text-text-primary font-body;
+            }
+        }
+        .swatch-active {
+            @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
+        }
+        .swatch-hover:hover {
+            @apply scale-110 transition-transform duration-300;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary">
+<nav class="fixed top-0 w-full z-50 bg-[#0B0B0F]/90 backdrop-blur-md border-b border-[#8A6F3A]/30 flex justify-between items-center px-10 py-6 max-w-full mx-auto">
+<div class="text-2xl font-serif text-[#D4AF37] tracking-tighter font-headline uppercase font-bold">TOCKS CUSTOM</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-label text-xs uppercase tracking-widest text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1" href="#">Atelier</a>
+<a class="font-label text-xs uppercase tracking-widest text-[#FAFAFA] hover:text-[#E5C65C] transition-colors" href="#">Mesas</a>
+<a class="font-label text-xs uppercase tracking-widest text-[#FAFAFA] hover:text-[#E5C65C] transition-colors" href="#">Acessórios</a>
+<a class="font-label text-xs uppercase tracking-widest text-[#FAFAFA] hover:text-[#E5C65C] transition-colors" href="#">Sobre</a>
+</div>
+<button class="bg-[#D4AF37] text-[#0B0B0F] px-6 py-2 font-label text-xs font-bold uppercase tracking-widest hover:bg-[#E5C65C] transition-all duration-300">
+            WhatsApp
+        </button>
+</nav>
+<main class="pt-32 pb-20">
+<div class="max-w-7xl mx-auto px-6 mb-12">
+<nav class="flex items-center space-x-4 font-label text-[10px] tracking-widest uppercase">
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">Coleção</a>
+<span class="text-primary-deep text-lg">/</span>
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">Mesas de Bilhar</a>
+<span class="text-primary-deep text-lg">/</span>
+<span class="text-text-primary">Mesa Berlin</span>
+</nav>
+</div>
+<section class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[55%_45%] gap-16 mb-24">
+<div class="space-y-6">
+<div class="aspect-[4/3] w-full overflow-hidden bg-surface border border-primary-deep/20">
+<img alt="Mesa Berlin Billiard Table" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUW-37aLmzJ2mhIMOOOc0jAsZM3w-yNlTfhmCOUx4a_-_VXfV1AfwaB5ZqHW0d4uzOwJIexD71-9XYqWTlMcYPXY4VtIB_TxdQjjUL8fUX00yelvOV5UYdxhTm5b8rN9GzeXffbJ0hGHAR-7yAkQyyR8ABWYPM-0k9LP81_cAjsYVfX3HVk2tTKj7LMDi-cwiLrqSEOqkV_vMp5fLAiXLIDKromauSBVbgOhh-gbezj5EzEysVwtoBhNO5UlmuNv_hkD1-dUDs14Md"/>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 border-2 border-primary bg-surface overflow-hidden cursor-pointer">
+<img alt="Detail 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8NqKQ-oAvmfQ_0Cy_FN6w5InvLwSlPVt4wmuHtH7Zf1tLcmwcSC14xJff6jv0fQjdKwqk5D-iVpUW935fvPO-IqRTrlPAked-dWURUT4Ml7VuhDLsIJJghnQnzFkbcplUO_EI7IZJ9afQpAalNJ3APXQqcHWg7E_yWdkM0DNvmKqfczLflO2iFnHVBbOf1Y6TGIrfjMUjhEf_hRhNIWdrA29YRVz5MuxzGBN6NoiNS-Ov3L3k5I2DjeKhfFuo7xGInlM9PSvJhvNp"/>
+</div>
+<div class="w-16 h-16 border border-primary-deep/30 bg-surface overflow-hidden cursor-pointer hover:border-primary-hover transition-colors">
+<img alt="Detail 2" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuSiEa8-Jtcie58Pu9U-v5R8RZlA5rPeg9myo4evGB1_f7K0h7O_thzLID_AOZwmk0jVwh1M0O97kZ5tsW6Os3JlCPSF8XwNAaF166vUiRuvfxyzC0h3RcPK37cjcPYIqys-7oIi0JUISlJOB1_VJgTZv1_vQGuSEp3AglK-qwSj486l7Q7tEzPHxmZcwWzeRxgh8dbfqmGHCmsh4SapdT31X-pTkd9gJCyW-mHD9wVAjxnD7mMrJI9sUmi5SKgPxH6UFKZ58WA--C"/>
+</div>
+<div class="w-16 h-16 border border-primary-deep/30 bg-surface overflow-hidden cursor-pointer hover:border-primary-hover transition-colors">
+<img alt="Detail 3" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Dip7-jzn_psMvbctR5K7vo7XCII0cLpKqVctjoHF_3kWYO41-tjyQOLoR07UVj_xh2LU-S8e6gkOhpBPeyyphR-Mj5Ze3iHrzZJFOUqiQAAdDmuwkbh2EPULzkiuxuzHtCbRk8jsPIBM9kGNvkFe2t8-wNMF0eri3_gXxIkp137tKQ88Ad4BSbm19rFbwVr2uz3K2L8F_xWelnhHv5IVhWFqmQRPaY7kqx6VWKSG3nW6xietwgbYwbYwjaJodAhnzrwW27c9nPVf"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="inline-block self-start px-3 py-1 bg-ivory text-background font-label text-[10px] font-bold tracking-[0.2em] mb-4">SOB MEDIDA</span>
+<h1 class="text-6xl font-headline font-bold text-text-primary mb-6 leading-tight">Mesa Berlin</h1>
+<div class="w-full h-[1px] bg-primary/30 mb-8"></div>
+<p class="text-text-secondary font-body leading-relaxed mb-8 text-lg">
+                    A Mesa Berlin é uma peça de vanguarda que redefine o conceito de luxo contemporâneo. Com linhas minimalistas e estrutura robusta, cada unidade é numerada e produzida em nosso atelier sob o mais rigoroso padrão de marcenaria fina.
+                </p>
+<div class="flex items-center gap-6 mb-8 text-text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">handyman</span>
+<span class="font-label text-[10px] uppercase tracking-widest">Processo Atelier</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+<span class="font-label text-[10px] uppercase tracking-widest">Selo de Qualidade</span>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-surface border-y border-primary-deep/20 mb-24">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-4xl font-headline font-bold text-text-primary mb-12 text-center uppercase tracking-tight">Especificações da Peça</h2>
+<div class="max-w-3xl mx-auto">
+<div class="grid grid-cols-2 py-5 border-b border-primary/20">
+<span class="font-label text-xs uppercase tracking-widest text-primary font-bold">Dimensões</span>
+<span class="font-body text-text-primary">2.50m x 1.40m (Área de jogo oficial)</span>
+</div>
+<div class="grid grid-cols-2 py-5 border-b border-primary/20">
+<span class="font-label text-xs uppercase tracking-widest text-primary font-bold">Peso Total</span>
+<span class="font-body text-text-primary">Aproximadamente 450kg</span>
+</div>
+<div class="grid grid-cols-2 py-5 border-b border-primary/20">
+<span class="font-label text-xs uppercase tracking-widest text-primary font-bold">Estrutura</span>
+<span class="font-body text-text-primary">Madeira maciça de alta densidade selecionada</span>
+</div>
+<div class="grid grid-cols-2 py-5 border-b border-primary/20">
+<span class="font-label text-xs uppercase tracking-widest text-primary font-bold">Superfície</span>
+<span class="font-body text-text-primary">Ardósia polida de 40mm com nivelamento micrométrico</span>
+</div>
+<div class="grid grid-cols-2 py-5">
+<span class="font-label text-xs uppercase tracking-widest text-primary font-bold">Tecido</span>
+<span class="font-body text-text-primary">Tecelagem profissional Simonis 860 original</span>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-7xl mx-auto px-6 mb-24">
+<div class="text-center mb-12">
+<span class="font-label text-[10px] text-primary uppercase tracking-[0.3em] block mb-2">Configuração Personalizada</span>
+<h2 class="text-4xl font-headline font-bold text-text-primary mb-4">Personalize sua peça</h2>
+<div class="inline-flex items-center gap-2 px-4 py-1 border border-primary/30 rounded-full font-label text-[10px] text-primary uppercase tracking-widest">
+                    Etapa 1 de 7
+                </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+<div>
+<h3 class="font-label text-xs uppercase tracking-[0.2em] text-text-secondary mb-10">1. Acabamento em Madeira</h3>
+<div class="flex flex-wrap gap-6">
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-14 h-14 rounded-full bg-[#3D2B1F] swatch-active swatch-hover relative"></div>
+<span class="font-label text-[9px] uppercase tracking-widest text-text-secondary group-hover:text-primary transition-colors">Carvalho Europeu</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-14 h-14 rounded-full bg-[#6E4E37] border border-primary/20 swatch-hover"></div>
+<span class="font-label text-[9px] uppercase tracking-widest text-text-secondary">Nogueira Americana</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-14 h-14 rounded-full bg-[#B08D57] border border-primary/20 swatch-hover"></div>
+<span class="font-label text-[9px] uppercase tracking-widest text-text-secondary">Freijó Selecionado</span>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="w-14 h-14 rounded-full bg-[#1A1A1A] border border-primary/20 swatch-hover"></div>
+<span class="font-label text-[9px] uppercase tracking-widest text-text-secondary">Ébano Matte</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-label text-xs uppercase tracking-[0.2em] text-text-secondary mb-10">2. Feltro Simonis 860</h3>
+<div class="grid grid-cols-6 gap-3">
+<div class="w-8 h-8 rounded-full bg-[#1B4D3E] border border-white/5 swatch-hover cursor-pointer" title="Verde Simonis"></div>
+<div class="w-8 h-8 rounded-full bg-[#2C3E50] border border-white/5 swatch-hover cursor-pointer swatch-active" title="Royal Blue"></div>
+<div class="w-8 h-8 rounded-full bg-[#C0392B] border border-white/5 swatch-hover cursor-pointer" title="Burgundy"></div>
+<div class="w-8 h-8 rounded-full bg-[#34495E] border border-white/5 swatch-hover cursor-pointer" title="Slate Grey"></div>
+<div class="w-8 h-8 rounded-full bg-[#000000] border border-white/5 swatch-hover cursor-pointer" title="Black"></div>
+<div class="w-8 h-8 rounded-full bg-[#7F8C8D] border border-white/5 swatch-hover cursor-pointer" title="Camel"></div>
+<div class="w-8 h-8 rounded-full bg-[#27AE60] border border-white/5 swatch-hover cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-[#16A085] border border-white/5 swatch-hover cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-[#2980B9] border border-white/5 swatch-hover cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-[#8E44AD] border border-white/5 swatch-hover cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-[#D35400] border border-white/5 swatch-hover cursor-pointer"></div>
+<div class="w-8 h-8 rounded-full bg-[#F39C12] border border-white/5 swatch-hover cursor-pointer"></div>
+</div>
+<span class="block mt-4 font-label text-[9px] uppercase tracking-widest text-primary text-center">Feltro Simonis 860 - Royal Blue selecionado</span>
+</div>
+<div>
+<h3 class="font-label text-xs uppercase tracking-[0.2em] text-text-secondary mb-10">3. Dimensões</h3>
+<div class="flex flex-col gap-3">
+<button class="w-full py-3 px-6 bg-primary text-background font-label text-[10px] font-bold uppercase tracking-[0.2em]">Oficial (2.50m x 1.40m)</button>
+<button class="w-full py-3 px-6 border border-primary/30 text-text-secondary font-label text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary hover:border-primary transition-all">Semi-oficial (2.20m x 1.20m)</button>
+<button class="w-full py-3 px-6 border border-primary/30 text-text-secondary font-label text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary hover:border-primary transition-all">Snooker (2.84m x 1.42m)</button>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-7xl mx-auto px-6 mb-32">
+<div class="flex flex-col items-center py-16 border-t border-primary/20 bg-surface/30">
+<div class="text-center mb-10">
+<span class="font-label text-xs text-text-secondary uppercase tracking-[0.3em] block mb-2">Investimento Estimado</span>
+<span class="text-5xl font-headline text-primary font-bold">A partir de R$ 18.900</span>
+</div>
+<div class="flex flex-col sm:flex-row gap-6 w-full max-w-2xl">
+<button class="flex-1 bg-primary text-background px-10 py-5 font-label text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary-hover transition-all duration-300 shadow-2xl shadow-primary/10">
+                        SOLICITAR ORÇAMENTO
+                    </button>
+<button class="flex items-center justify-center gap-3 px-10 py-5 border border-primary text-primary font-label text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-lg">chat</span>
+                        WHATSAPP ATELIER
+                    </button>
+</div>
+</div>
+</section>
+<section class="max-w-7xl mx-auto px-6 mb-32">
+<h2 class="text-3xl font-headline font-bold text-text-primary mb-12 text-center">Processo Atelier: A Anatomia da Peça</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="aspect-square bg-surface overflow-hidden group">
+<img alt="Macro Madeira" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8NqKQ-oAvmfQ_0Cy_FN6w5InvLwSlPVt4wmuHtH7Zf1tLcmwcSC14xJff6jv0fQjdKwqk5D-iVpUW935fvPO-IqRTrlPAked-dWURUT4Ml7VuhDLsIJJghnQnzFkbcplUO_EI7IZJ9afQpAalNJ3APXQqcHWg7E_yWdkM0DNvmKqfczLflO2iFnHVBbOf1Y6TGIrfjMUjhEf_hRhNIWdrA29YRVz5MuxzGBN6NoiNS-Ov3L3k5I2DjeKhfFuo7xGInlM9PSvJhvNp"/>
+</div>
+<div class="aspect-square bg-surface overflow-hidden group">
+<img alt="Macro Ardósia" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Dip7-jzn_psMvbctR5K7vo7XCII0cLpKqVctjoHF_3kWYO41-tjyQOLoR07UVj_xh2LU-S8e6gkOhpBPeyyphR-Mj5Ze3iHrzZJFOUqiQAAdDmuwkbh2EPULzkiuxuzHtCbRk8jsPIBM9kGNvkFe2t8-wNMF0eri3_gXxIkp137tKQ88Ad4BSbm19rFbwVr2uz3K2L8F_xWelnhHv5IVhWFqmQRPaY7kqx6VWKSG3nW6xietwgbYwbYwjaJodAhnzrwW27c9nPVf"/>
+</div>
+<div class="aspect-square bg-surface overflow-hidden group">
+<img alt="Mestre Marceneiro" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZfvD5ruwQXarUT6Wm5GPlOB0QHGP8kw1KcwKTDB8BzlPnV-qqHGGUfzpd0L8R1HJOdlw1UVcTb7uJohnHEAGv0cRmLCSHz7aGsO5wBDmpt_GiINvahh6NSZs1iPTCugmQlLfN081LeFONtbfdhvFCyy7_UBbwMZacY8QPP_my_dsPTFi_QuizdI-YxU8IlFRCmA4h1VDdAqDqOolgCXije2xZwUQGwwU8ZTMvawKvFSfgIQaTcmrFhsnMyZsPTOaAK_BzqyLXV9AW"/>
+</div>
+<div class="aspect-square bg-surface overflow-hidden group">
+<img alt="Acabamento Final" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDys0sJG6ZiNv8M5IGvdJfJ9LqOU9DpJeGtmM2OVr_ibQ_8OZRHs-84gCLmnBB9FxFceLh7FgjdURskc66pSoTi6nk7lQku55NZXtGsUVJVlhHdvEpkrsOkS7Ok7Pg2zULUzh26LZ-7zSlAsz4spmz8WbZXifCSh8U8zFzFrLvMZx1LGpMyDJ8Cui7mKi2QBLl4l1KF1N-HSE-T1EehIuOpgAwKKGrSTj29UxS241jqp0vEf3NSfXo0VbowU3uRbia6ASuidLefebNy"/>
+</div>
+</div>
+</section>
+<section class="mt-32 max-w-7xl mx-auto px-6">
+<h3 class="text-2xl font-headline font-bold text-text-primary mb-12 border-l-2 border-primary pl-6 uppercase tracking-widest">Outras Peças da Coleção</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group bg-surface border border-transparent hover:border-primary/20 transition-all duration-500 overflow-hidden">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Mesa Milan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3b3-D-edJaaPCVFtcPR6zZtD_G5n5tZpJVhIu2QlNfbUoiY21V_TAn5ventnaWs3wvYF7U4C_JQD8r3Icjv6qIqAg0b531GXpjMrhZE_uB3YsY5sSdYCm3bnqr5Go9Dh65bT5E3Jv03Gn6Q1m5d67ylVb0n7ivm53WIqw4wGTq_M29ESYRn4FkSuFsFF9Hj0nY1oCJvyVVb05w4SJiCc-jWtbxRbSfo30jFR2uL3WBiP9NXfU2UK4EFfgCX3d6Y2mHTpj-YwjuGSu"/>
+</div>
+<div class="p-8">
+<h4 class="text-2xl font-headline text-text-primary mb-2">Mesa Milan</h4>
+<span class="font-label text-[10px] text-primary uppercase tracking-widest block mb-6">Elegância Europeia</span>
+<a class="inline-block font-label text-[10px] font-bold uppercase tracking-widest text-text-secondary border-b border-primary/40 pb-1 hover:text-primary hover:border-primary transition-all" href="#">Explorar Peça</a>
+</div>
+</div>
+<div class="group bg-surface border border-transparent hover:border-primary/20 transition-all duration-500 overflow-hidden">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Mesa London" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwsQuyZ3PHv1xWcVLKFh0OglqiryRsyJpjjjWe9iwPNUZPjwpfLpZ66nLk_7HkvZIbwSgkYIZcCQ-AbENxBZXyJjVzTMvUOFev8cSB4aLsS8yiWHqgihQPxwHqKia0CWIuHk93IE6rYiroxTZhQd-CSMEShWJhfG6E4imk1palnlg19Ah6eqCqy1IOfFirejpBPDBsxAVrjwxa80S3YluiuWhBd6illdihhBkjwer48Z5nHEt5IIArSGz5GcNQJZ1TGlTv0OHbkuBo"/>
+</div>
+<div class="p-8">
+<h4 class="text-2xl font-headline text-text-primary mb-2">Mesa London</h4>
+<span class="font-label text-[10px] text-primary uppercase tracking-widest block mb-6">Herança Clássica</span>
+<a class="inline-block font-label text-[10px] font-bold uppercase tracking-widest text-text-secondary border-b border-primary/40 pb-1 hover:text-primary hover:border-primary transition-all" href="#">Explorar Peça</a>
+</div>
+</div>
+<div class="group bg-surface border border-transparent hover:border-primary/20 transition-all duration-500 overflow-hidden">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Mesa Vienna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfvwlQh1_L-_1yJ2kHGkacrQjX-zDY-wqyNFkdLnH19GKs9Ox39yFLdmFNhl06oDQJJNBkIhPsAF8Xrgulya5L5lbZwP31y91J-aMF0SOqc-zgyR856XUEQUF6czvUjdlLxLtQecjTtlJ_GhtUNMABmytjuSnpogenBY623uXZjN56u0Fp9gusHOmF-gC7NaSM1xmFbhYjAy8JME-aGyQZs7BgGPTQo_uxdNPfznxzkT26CtME_y_yiUhb-2Bcxe1R1CYPbs3z9NOW"/>
+</div>
+<div class="p-8">
+<h4 class="text-2xl font-headline text-text-primary mb-2">Mesa Vienna</h4>
+<span class="font-label text-[10px] text-primary uppercase tracking-widest block mb-6">Vanguarda Minimalista</span>
+<a class="inline-block font-label text-[10px] font-bold uppercase tracking-widest text-text-secondary border-b border-primary/40 pb-1 hover:text-primary hover:border-primary transition-all" href="#">Explorar Peça</a>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-32 px-6">
+<div class="max-w-7xl mx-auto bg-gradient-to-br from-[#1a1a1e] to-[#0b0b0f] p-16 text-center border border-primary/20 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-5xl font-headline font-bold mb-6 text-text-primary">Inicie seu projeto sob medida</h2>
+<p class="font-body text-lg mb-10 max-w-2xl mx-auto text-text-secondary">Conecte-se com nosso atelier para desenvolver uma peça que harmonize perfeitamente com seu espaço.</p>
+<button class="bg-primary text-background px-12 py-5 font-label text-sm font-bold uppercase tracking-[0.2em] hover:bg-primary-hover transition-all duration-300">SOLICITAR CONSULTA NO ATELIER</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#0B0B0F] w-full border-t border-[#8A6F3A]/30">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 py-20 px-16">
+<div class="col-span-1">
+<div class="text-3xl font-serif text-[#D4AF37] mb-8 font-headline uppercase font-bold tracking-tighter">TOCKS CUSTOM</div>
+<p class="text-[#A0A0A0] font-body text-sm leading-relaxed italic">Artesanato de elite em Itajaí, SC. Redefinindo o luxo através do bilhar sob medida.</p>
+</div>
+<div>
+<h5 class="font-label text-xs uppercase tracking-widest text-[#D4AF37] mb-8">Coleções</h5>
+<ul class="space-y-4 text-sm font-label text-[10px] tracking-widest">
+<li><a class="text-[#A0A0A0] hover:text-[#FAFAFA] transition-colors" href="#">Mesa Berlin</a></li>
+<li><a class="text-[#A0A0A0] hover:text-[#FAFAFA] transition-colors" href="#">Mesa London</a></li>
+<li><a class="text-[#A0A0A0] hover:text-[#FAFAFA] transition-colors" href="#">Mesa Milan</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label text-xs uppercase tracking-widest text-[#D4AF37] mb-8">Atendimento</h5>
+<ul class="space-y-4 text-sm font-label text-[10px] tracking-widest">
+<li><a class="text-[#A0A0A0] hover:text-[#FAFAFA] transition-colors" href="#">Processo de Criação</a></li>
+<li><a class="text-[#A0A0A0] hover:text-[#FAFAFA] transition-colors" href="#">Agendar Visita</a></li>
+<li><a class="text-[#A0A0A0] hover:text-[#FAFAFA] transition-colors" href="#">Políticas de Peças</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label text-xs uppercase tracking-widest text-[#D4AF37] mb-8">Atelier</h5>
+<p class="text-[#A0A0A0] font-body text-sm mb-4">Itajaí, Santa Catarina<br/>Brasil</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#D4AF37] cursor-pointer hover:text-white transition-colors">share</span>
+<span class="material-symbols-outlined text-[#D4AF37] cursor-pointer hover:text-white transition-colors">mail</span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-16 py-8 border-t border-[#8A6F3A]/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-[#A0A0A0]">© 2024 TOCKS CUSTOM. ARTESANATO DE ELITE.</span>
+<div class="flex gap-8">
+<a class="font-label text-[10px] uppercase tracking-widest text-[#A0A0A0] hover:text-[#D4AF37]" href="#">Termos de Uso</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#A0A0A0] hover:text-[#D4AF37]" href="#">Privacidade</a>
+</div>
+</div>
+</footer>
+<a class="fixed bottom-8 right-8 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition-transform" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
+</svg>
+</a>
+
+</body></html>
