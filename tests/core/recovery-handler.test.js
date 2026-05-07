@@ -204,6 +204,19 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(history[3][0].error).toBe('Specific error');
     });
 
+    it('should return cloned attempt history', async () => {
+      await handler.handleEpicFailure(3, new Error('Specific error'), {
+        approach: 'custom approach',
+      });
+
+      const history = handler.getAttemptHistory();
+      history[3].push({ fake: true });
+      history[3][0].approach = 'mutated approach';
+
+      expect(handler.getAttemptCount(3)).toBe(1);
+      expect(handler.getAttemptHistory()[3][0].approach).toBe('custom approach');
+    });
+
     it('should get logs for specific epic', async () => {
       await handler.handleEpicFailure(3, new Error('Epic 3 error'));
       await handler.handleEpicFailure(4, new Error('Epic 4 error'));
@@ -222,6 +235,13 @@ describe('Recovery Handler (Story 0.5)', () => {
 
       handler.resetAttempts(3);
       expect(handler.getAttemptCount(3)).toBe(0);
+    });
+
+    it('should reject invalid epic numbers for public attempt APIs', () => {
+      expect(() => handler.getAttemptCount(null)).toThrow(TypeError);
+      expect(() => handler.canRetry(undefined)).toThrow(TypeError);
+      expect(() => handler.resetAttempts(-1)).toThrow(TypeError);
+      expect(() => handler.getEpicLogs(1.5)).toThrow(TypeError);
     });
 
     it('should clear all state', async () => {

@@ -673,11 +673,14 @@ class RecoveryHandler extends EventEmitter {
    *
    * @param {number} epicNum - Epic number to filter logs for.
    * @returns {Array<{timestamp: string, level: string, message: string}>} Filtered log entries.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    *
    * @example
    * const epic4Logs = recoveryHandler.getEpicLogs(4);
    */
   getEpicLogs(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return this.logs.filter(
       (log) => log.message.includes(`Epic ${epicNum}`) || log.message.includes(`epic-${epicNum}`),
     );
@@ -686,13 +689,18 @@ class RecoveryHandler extends EventEmitter {
   /**
    * Gets attempt history for all epics.
    *
-   * Returns a shallow copy of the internal attempts map, keyed by epic number,
-   * with each value containing attempt records.
+   * Returns cloned attempt arrays to prevent callers from mutating internal
+   * recovery state.
    *
    * @returns {Object<number, Array>} Map of epic numbers to attempt records.
    */
   getAttemptHistory() {
-    return { ...this.attempts };
+    return Object.fromEntries(
+      Object.entries(this.attempts).map(([epicNum, attempts]) => [
+        epicNum,
+        attempts.map((attempt) => this._cloneAttempt(attempt)),
+      ]),
+    );
   }
 
   /**
@@ -700,8 +708,11 @@ class RecoveryHandler extends EventEmitter {
    *
    * @param {number} epicNum - Epic number to inspect.
    * @returns {number} Number of recovery attempts made for the epic.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   getAttemptCount(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return (this.attempts[epicNum] || []).length;
   }
 
@@ -710,6 +721,7 @@ class RecoveryHandler extends EventEmitter {
    *
    * @param {number} epicNum - Epic number to inspect.
    * @returns {boolean} True if the epic attempt count is below maxRetries.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    *
    * @example
    * if (recoveryHandler.canRetry(4)) {
@@ -728,10 +740,41 @@ class RecoveryHandler extends EventEmitter {
    *
    * @param {number} epicNum - Epic number to reset.
    * @returns {void}
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   resetAttempts(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     this.attempts[epicNum] = [];
     this._log(`Reset attempts for Epic ${epicNum}`, 'info');
+  }
+
+  /**
+   * Validates an epic number argument.
+   *
+   * @param {number} epicNum - Epic number to validate.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
+   * @private
+   */
+  _assertValidEpicNum(epicNum) {
+    if (typeof epicNum !== 'number' || !Number.isInteger(epicNum) || epicNum < 0) {
+      throw new TypeError(`epicNum must be a non-negative integer, got: ${JSON.stringify(epicNum)}`);
+    }
+  }
+
+  /**
+   * Clones an attempt record for safe external access.
+   *
+   * @param {Object} attempt - Attempt record.
+   * @returns {Object} Cloned attempt record.
+   * @private
+   */
+  _cloneAttempt(attempt) {
+    if (typeof structuredClone === 'function') {
+      return structuredClone(attempt);
+    }
+
+    return JSON.parse(JSON.stringify(attempt));
   }
 
   /**

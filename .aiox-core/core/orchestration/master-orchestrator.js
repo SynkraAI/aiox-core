@@ -941,7 +941,11 @@ class MasterOrchestrator extends EventEmitter {
    * @returns {Promise<void>}
    */
   async startDashboard() {
-    await this.dashboardIntegration.start();
+    try {
+      await this.dashboardIntegration.start();
+    } catch (error) {
+      this._log(`Dashboard start failed (non-blocking): ${error.message}`, { level: 'warn' });
+    }
   }
 
   /**

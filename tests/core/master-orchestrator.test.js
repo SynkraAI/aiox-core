@@ -433,6 +433,16 @@ describe('MasterOrchestrator', () => {
     });
   });
 
+  describe('Dashboard Integration', () => {
+    it('should not throw when dashboard start fails', async () => {
+      orchestrator.dashboardIntegration.start = jest
+        .fn()
+        .mockRejectedValue(new Error('dashboard unavailable'));
+
+      await expect(orchestrator.startDashboard()).resolves.toBeUndefined();
+    });
+  });
+
   describe('Progress Tracking', () => {
     it('should calculate progress percentage', async () => {
       await orchestrator.initialize();

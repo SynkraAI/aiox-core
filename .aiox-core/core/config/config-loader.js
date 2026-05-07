@@ -8,6 +8,8 @@
  * - Agent config:      const { AgentConfigLoader } = require('./agent-config-loader');
  *                      const loader = new AgentConfigLoader(agentId);
  *                      const config = await loader.load(coreConfig);
+ * - Single section:    const config = await loadConfigSections([sectionName]);
+ *                      const section = config[sectionName];
  *
  * AIOX Config Loader with Lazy Loading
  *

@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T19:55:39.252Z"
+generated_at: "2026-05-07T20:19:07.382Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -245,9 +245,9 @@ files:
     type: core
     size: 5039
   - path: core/config/config-loader.js
-    hash: sha256:e70385b1173a6d1e4f4354b6afd88896986a82699d5e0fb779eb5abfcc446e6d
+    hash: sha256:05c8cfa5fe8c0bd659ac65791e5b551767e581a465cad6bb42a9c0a31847e4b4
     type: core
-    size: 10631
+    size: 10772
   - path: core/config/config-resolver.js
     hash: sha256:3b29df6954cec440debef87cb4e4e7610c94dc74e562d32c74b8ec57d893213b
     type: core
@@ -905,9 +905,9 @@ files:
     type: core
     size: 9382
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:39ce48a0caa7657ce06a0549374c067f80a2fa516f1e7a311f44e0d9966c9e85
+    hash: sha256:29b69047fe780751ae89f6c593cb835254e2e8a536f5581473f474115deec496
     type: core
-    size: 56733
+    size: 56868
   - path: core/orchestration/message-formatter.js
     hash: sha256:b7413c04fa22db1c5fc2f5c2aa47bb8ca0374e079894a44df21b733da6c258ae
     type: core
@@ -917,9 +917,9 @@ files:
     type: core
     size: 5820
   - path: core/orchestration/recovery-handler.js
-    hash: sha256:a70f23fe9424c2cba4ed554bf0b0ee4687349af960eadb8ee752d45ff5b7cea7
+    hash: sha256:36bf239d2d47caf6fbc33a6b4e884af63654e8a0cc524d9fdffea0c3a8a0146d
     type: core
-    size: 25872
+    size: 27171
   - path: core/orchestration/session-state.js
     hash: sha256:70d511bf6a03e8cacefcec0065a4727cfb380471c89762bb291840968f55b44b
     type: core
