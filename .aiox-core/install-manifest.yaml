@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.13
-generated_at: "2026-05-07T16:42:59.200Z"
+version: 5.1.14
+generated_at: "2026-05-07T17:06:48.504Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -241,9 +241,9 @@ files:
     type: core
     size: 10891
   - path: core/config/config-cache.js
-    hash: sha256:b659dfae25865c732555d71abcb1939db908684586d0a06b699d3176077e486e
+    hash: sha256:9f3c3f90f574d5f49dd94592ab28109465d025b3a740d8639ab781c2560c12ab
     type: core
-    size: 4928
+    size: 5039
   - path: core/config/config-loader.js
     hash: sha256:bbc6a9e57e9db7a74ae63c901b199f8b8a79eb093f23a280b6420d1aa5f7f813
     type: core
@@ -3033,9 +3033,9 @@ files:
     type: script
     size: 7803
   - path: infrastructure/scripts/config-cache.js
-    hash: sha256:6264ae77eef1e98de62d9f6478becadf6a6692ca88027666dbf5a1e2399c844a
+    hash: sha256:363383dbf90df90d69b8ba769db4f9749b0ae91b4fe95ee15be633941906f8a2
     type: script
-    size: 7697
+    size: 7808
   - path: infrastructure/scripts/config-loader.js
     hash: sha256:8f9489f7c57e775bfbb750761d9714505d5df3938b664cbbdf6701f9e18e240b
     type: script
