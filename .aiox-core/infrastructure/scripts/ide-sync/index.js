@@ -432,6 +432,7 @@ async function commandValidate(options) {
     ideConfigs[ideName] = {
       expectedFiles,
       targetDir: path.join(projectRoot, ideConfig.path),
+      format: ideConfig.format,
     };
 
     // Gemini CLI command launcher files are synced under .gemini/commands/*.toml

@@ -43,18 +43,20 @@ describe('Wizard IDE Flow Integration', () => {
       // Now includes config file + agent files (16+ files)
       expect(result.files.length).toBeGreaterThanOrEqual(1);
 
-      // Verify config file exists (now in .cursor/rules.md)
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      // Verify config file exists in Cursor MDC rules format
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       expect(await fs.pathExists(configPath)).toBe(true);
 
       // Verify agent folder was created with agents
-      const agentFolder = path.join(testDir, '.cursor', 'rules');
+      const agentFolder = path.join(testDir, '.cursor', 'rules', 'agents');
       expect(await fs.pathExists(agentFolder)).toBe(true);
+      expect(await fs.pathExists(path.join(agentFolder, 'dev.mdc'))).toBe(true);
 
       // Verify content has AIOX branding
       const content = await fs.readFile(configPath, 'utf8');
       expect(content).toContain('Synkra AIOX');
       expect(content).toContain('Development Rules');
+      expect(content).toContain('alwaysApply: true');
     });
 
     it('should complete flow for multiple IDEs', async () => {
@@ -73,14 +75,14 @@ describe('Wizard IDE Flow Integration', () => {
       expect(result.files.length).toBeGreaterThanOrEqual(3);
 
       // Verify all config files exist
-      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules.md'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules.md'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.github', 'copilot-instructions.md'))).toBe(
         true,
       );
 
       // Verify agent folders were created
-      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules', 'agents'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOX', 'agents'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.github', 'agents'))).toBe(true);
     });
@@ -167,10 +169,14 @@ describe('Wizard IDE Flow Integration', () => {
 
       expect(result.success).toBe(true);
 
-      // Check Cursor content (now in .cursor/rules.md)
-      const cursorContent = await fs.readFile(path.join(testDir, '.cursor', 'rules.md'), 'utf8');
+      // Check Cursor content
+      const cursorContent = await fs.readFile(
+        path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc'),
+        'utf8',
+      );
       expect(cursorContent).toContain('Synkra AIOX');
       expect(cursorContent).toContain('Story-Driven Development');
+      expect(cursorContent).toContain('alwaysApply: true');
 
       // Check Gemini content
       const geminiContent = await fs.readFile(path.join(testDir, '.gemini', 'rules.md'), 'utf8');
@@ -254,7 +260,10 @@ describe('Wizard IDE Flow Integration', () => {
       expect(result.files.length).toBeGreaterThanOrEqual(3);
 
       // All formats should be text (markdown)
-      const cursorContent = await fs.readFile(path.join(testDir, '.cursor', 'rules.md'), 'utf8');
+      const cursorContent = await fs.readFile(
+        path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc'),
+        'utf8',
+      );
       expect(typeof cursorContent).toBe('string');
 
       const copilotContent = await fs.readFile(
@@ -283,13 +292,14 @@ describe('Wizard IDE Flow Integration', () => {
         projectRoot: testDir,
       });
 
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       const content = await fs.readFile(configPath, 'utf8');
 
       // Template should be generated with AIOX content
       expect(content).toContain('Synkra AIOX');
       expect(content).toContain('Development Rules');
       expect(content).toContain('Story-Driven Development');
+      expect(content).toContain('alwaysApply: true');
       expect(content).not.toContain('{{'); // No uninterpolated variables
     });
 
@@ -302,7 +312,7 @@ describe('Wizard IDE Flow Integration', () => {
 
       expect(result.success).toBe(true);
 
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       const content = await fs.readFile(configPath, 'utf8');
 
       // Template should be generated without errors

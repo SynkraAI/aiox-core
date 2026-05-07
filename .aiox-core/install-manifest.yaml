@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.14
-generated_at: "2026-05-07T17:06:48.504Z"
+version: 5.1.15
+generated_at: "2026-05-07T18:54:14.793Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -3133,17 +3133,17 @@ files:
     type: script
     size: 5534
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:a5269ff6d99103d389a6b3b923a7678ccfde3d7cd30debbc1fe0f5bd0bf9d7c1
+    hash: sha256:a7aadbec210e0b5d9c96d187104c8378d097ae6ffb88356614d0ed723298d2ac
     type: script
-    size: 17246
+    size: 17278
   - path: infrastructure/scripts/ide-sync/README.md
-    hash: sha256:c18c2563b2ca64580a4814edd3c20a79c96f33fa8b953ee02206ef0faad53d35
+    hash: sha256:5e88ac0d9d73dee28538c09af86093cb8ddeba1e9d62e993a16d03218b4bc62d
     type: script
-    size: 5313
+    size: 5405
   - path: infrastructure/scripts/ide-sync/redirect-generator.js
-    hash: sha256:89ead2308414418e83fb66f591abddabd7137d87b57adca129fa57d119780b2a
+    hash: sha256:5bebf478e331716b4fb42d624076eb2570c90c4aa829427c700995d6b9ec361e
     type: script
-    size: 4213
+    size: 5675
   - path: infrastructure/scripts/ide-sync/transformers/antigravity.js
     hash: sha256:e00910c008c8547a1943f79c676d0a4c0d014b638fc15c8a68e2574d6949744b
     type: script
@@ -3153,17 +3153,17 @@ files:
     type: script
     size: 6272
   - path: infrastructure/scripts/ide-sync/transformers/cursor.js
-    hash: sha256:c24d24e4bec477c3b75340aeac08c5a4a2780001eec9c25e6b00d4f0af53d4f0
+    hash: sha256:9a38f664747ea71472585d4f8c3e52b844dc75a39a526f5873e6bf97370a4723
     type: script
-    size: 2427
+    size: 2967
   - path: infrastructure/scripts/ide-sync/transformers/github-copilot.js
     hash: sha256:6d365be4a55e2f5ced316a0efbfa50fb925562f3e145d47a86c57a2c685343ac
     type: script
     size: 5693
   - path: infrastructure/scripts/ide-sync/validator.js
-    hash: sha256:356c78125db7f88d14f4e521808e96593d729291c3d7a1c36cb02f78b4aef8fc
+    hash: sha256:29d87e56562627e841c10369644dbb275d8b2a9fd2e366756d25a6d05a1f786d
     type: script
-    size: 7316
+    size: 7429
   - path: infrastructure/scripts/improvement-engine.js
     hash: sha256:4fed61115f4148eb6b8c42ebd9d5b05732695ab1b4343e2466383baf4883d58d
     type: script
@@ -3917,9 +3917,9 @@ files:
     type: template
     size: 3101
   - path: product/templates/ide-rules/cursor-rules.md
-    hash: sha256:40c5a75ec40a9d2da713336ced608eb4606bf7e76fe9b34827e888ed27903464
+    hash: sha256:ea607f2b6a089afccbcaaec3b1197b5396c4446e76a689a51867a78bceda09b2
     type: template
-    size: 3071
+    size: 3172
   - path: product/templates/ide-rules/gemini-rules.md
     hash: sha256:20f687384c4deb909e9171f8e83f40b962a9cc717755b62d88db285316b2188a
     type: template

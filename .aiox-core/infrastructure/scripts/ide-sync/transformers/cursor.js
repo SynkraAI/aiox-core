@@ -2,11 +2,23 @@
  * Cursor Transformer - Condensed rules format
  * @story 6.19 - IDE Command Auto-Sync System
  *
- * Format: Condensed markdown with icon, title, quick commands
- * Target: .cursor/rules/agents/*.md
+ * Format: Cursor MDC rule with frontmatter, icon, title, quick commands
+ * Target: .cursor/rules/agents/*.mdc
  */
 
 const { getVisibleCommands, normalizeCommands } = require('../agent-parser');
+
+function escapeFrontmatterString(value) {
+  return String(value || '')
+    .replace(/\r?\n/g, ' ')
+    .replace(/'/g, "''")
+    .trim();
+}
+
+function toMdcFilename(filename, fallbackId = 'agent') {
+  const baseName = String(filename || `${fallbackId}.md`).replace(/\.md$/i, '');
+  return `${baseName}.mdc`;
+}
 
 /**
  * Transform agent data to Cursor format
@@ -22,6 +34,7 @@ function transform(agentData) {
   const title = agent.title || 'AIOX Agent';
   const whenToUse = agent.whenToUse || 'Use this agent for specific tasks';
   const archetype = persona.archetype || '';
+  const description = escapeFrontmatterString(`AIOX agent @${agentData.id} - ${title}`);
 
   // Get quick visibility commands (normalized to consistent format)
   const allCommands = normalizeCommands(agentData.commands || []);
@@ -29,7 +42,12 @@ function transform(agentData) {
   const keyCommands = getVisibleCommands(allCommands, 'key');
 
   // Build content
-  let content = `# ${name} (@${agentData.id})
+  let content = `---
+description: '${description}'
+alwaysApply: false
+---
+
+# ${name} (@${agentData.id})
 
 ${icon} **${title}**${archetype ? ` | ${archetype}` : ''}
 
@@ -84,11 +102,13 @@ ${agentData.sections.collaboration}
  * @returns {string} - Target filename
  */
 function getFilename(agentData) {
-  return agentData.filename;
+  return toMdcFilename(agentData.filename, agentData.id);
 }
 
 module.exports = {
   transform,
   getFilename,
+  toMdcFilename,
+  escapeFrontmatterString,
   format: 'condensed-rules',
 };
