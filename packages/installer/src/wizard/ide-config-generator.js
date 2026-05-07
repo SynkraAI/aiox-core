@@ -22,6 +22,24 @@ function loadCodexSkillsSync() {
   return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index');
 }
 
+function escapeMdcFrontmatterString(value) {
+  return String(value || '')
+    .replace(/\r?\n/g, ' ')
+    .replace(/'/g, "''")
+    .trim();
+}
+
+function createCursorMdcFallbackContent(agentName, rawContent) {
+  const safeAgentName = escapeMdcFrontmatterString(agentName || 'agent');
+
+  return `---
+description: 'AIOX agent @${safeAgentName}'
+alwaysApply: false
+---
+
+${rawContent}`;
+}
+
 /**
  * Render template with variables
  * @param {string} template - Template string
@@ -241,6 +259,7 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
 
   // Check if this is AntiGravity - needs workflow files instead of direct copy
   const isAntiGravity = ideConfig && ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
+  const isCursor = ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.cursor');
 
   for (const file of agentFiles) {
     const sourcePath = path.join(sourceDir, file);
@@ -262,6 +281,38 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
         const agentTargetPath = path.join(agentsDir, file);
         await fs.copy(sourcePath, agentTargetPath);
         copiedFiles.push(agentTargetPath);
+      } else if (isCursor) {
+        // Cursor: generate .mdc project rules with frontmatter instead of raw agent markdown.
+        try {
+          const agentParser = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'agent-parser',
+          );
+          const cursorTransformer = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'transformers',
+            'cursor',
+          );
+          const agentData = agentParser.parseAgentFile(sourcePath);
+          const content = cursorTransformer.transform(agentData);
+          const filename = cursorTransformer.getFilename(agentData);
+          const targetPath = path.join(targetDir, filename);
+          await fs.writeFile(targetPath, content, 'utf8');
+          copiedFiles.push(targetPath);
+        } catch (transformError) {
+          const targetPath = path.join(targetDir, `${agentName}.mdc`);
+          const rawContent = await fs.readFile(sourcePath, 'utf8');
+          const fallbackContent = createCursorMdcFallbackContent(agentName, rawContent);
+          await fs.writeFile(targetPath, fallbackContent, 'utf8');
+          copiedFiles.push(targetPath);
+          console.warn(`Cursor transform fallback used for ${file}: ${transformError.message}`);
+        }
       } else if (ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.github')) {
         // GitHub Copilot: apply transformer for .agent.md format with YAML frontmatter
         try {
@@ -427,7 +478,7 @@ async function createAntiGravityConfigJson(projectRoot, ideConfig) {
  *
  * @example
  * const result = await generateIDEConfigs(['cursor', 'github-copilot'], wizardState);
- * console.log(result.files); // ['.cursorrules', '.github/copilot-instructions.md']
+ * console.log(result.files); // ['.cursor/rules/aiox-global.mdc', '.github/copilot-instructions.md']
  */
 async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
   const projectRoot = options.projectRoot || process.cwd();
@@ -1312,6 +1363,7 @@ module.exports = {
   copyClaudeNativeAgentsFolder,
   shouldCopyProHooks,
   createClaudeSettingsLocal,
+  createCursorMdcFallbackContent,
   copySkillFiles,
   generateCodexSkills,
   copyExtraCommandFiles,

@@ -13,6 +13,7 @@ const {
   generateTemplateVariables,
   generateIDEConfigs,
   generateCodexSkills,
+  createCursorMdcFallbackContent,
   linkGeminiExtension,
   HOOK_EVENT_MAP,
 } = require('../../../packages/installer/src/wizard/ide-config-generator');
@@ -57,6 +58,15 @@ describe('IDE Config Generator', () => {
       const result = renderTemplate(template, variables);
 
       expect(result).toBe('Hello {{name}}!');
+    });
+  });
+
+  describe('createCursorMdcFallbackContent', () => {
+    it('should wrap raw agent markdown in valid Cursor MDC frontmatter', () => {
+      const result = createCursorMdcFallbackContent("dev'ops\nlead", '# Raw agent');
+
+      expect(result).toMatch(/^---\ndescription: 'AIOX agent @dev''ops lead'\nalwaysApply: false\n---/);
+      expect(result).toContain('# Raw agent');
     });
   });
 
@@ -165,13 +175,17 @@ describe('IDE Config Generator', () => {
       // Now includes config file + agent files
       expect(result.files.length).toBeGreaterThanOrEqual(1);
 
-      // v2.1: Cursor uses .cursor/rules.md (not .cursorrules)
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      // Cursor uses project rules in .mdc format.
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       expect(await fs.pathExists(configPath)).toBe(true);
 
       // Agent folder should also exist
-      const agentFolder = path.join(testDir, '.cursor', 'rules');
+      const agentFolder = path.join(testDir, '.cursor', 'rules', 'agents');
       expect(await fs.pathExists(agentFolder)).toBe(true);
+      expect(await fs.pathExists(path.join(agentFolder, 'dev.mdc'))).toBe(true);
+
+      const agentContent = await fs.readFile(path.join(agentFolder, 'dev.mdc'), 'utf8');
+      expect(agentContent).toContain('alwaysApply: false');
     });
 
     it('should create config files for multiple IDEs', async () => {
@@ -186,12 +200,12 @@ describe('IDE Config Generator', () => {
       // Now includes config files + agent files for each IDE
       expect(result.files.length).toBeGreaterThanOrEqual(2);
 
-      // v2.1: Cursor and Gemini use directory-based rules files
-      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules.md'))).toBe(true);
+      // Cursor and Gemini use directory-based rules files
+      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules.md'))).toBe(true);
 
       // Agent folders should also exist
-      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules', 'agents'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOX', 'agents'))).toBe(true);
     });
 
@@ -243,14 +257,15 @@ describe('IDE Config Generator', () => {
         projectRoot: testDir,
       });
 
-      // v2.1: Cursor uses .cursor/rules.md (not .cursorrules)
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      // Cursor uses .cursor/rules/aiox-global.mdc.
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       const content = await fs.readFile(configPath, 'utf8');
 
       // v2.1 templates use static content from .aiox-core/templates/ide-rules/
       // They contain Synkra AIOX standard rules
       expect(content).toContain('Synkra AIOX');
       expect(content).toContain('Development Rules');
+      expect(content).toContain('alwaysApply: true');
     });
 
     it('should create github-copilot config in .github directory', async () => {
