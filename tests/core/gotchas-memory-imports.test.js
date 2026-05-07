@@ -66,4 +66,41 @@ describe('GotchasMemory named export consumers', () => {
       warnSpy.mockRestore();
     }
   });
+
+  it('exposes a load error when GotchasMemory named export is not constructible', () => {
+    const previousDebug = process.env.AIOX_DEBUG;
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    process.env.AIOX_DEBUG = 'true';
+    jest.resetModules();
+    jest.doMock(gotchasMemoryModulePath, () => ({ GotchasMemory: {} }));
+
+    try {
+      jest.isolateModules(() => {
+        const InvalidIdeationEngine = requireFromRoot('.aiox-core/core/ideation/ideation-engine');
+        const { ContextInjector: InvalidContextInjector } = requireFromRoot('.aiox-core/core/execution/context-injector');
+        const { SubagentDispatcher: InvalidSubagentDispatcher } = requireFromRoot(
+          '.aiox-core/core/execution/subagent-dispatcher',
+        );
+
+        expect(new InvalidIdeationEngine().gotchasMemory).toBeNull();
+        expect(new InvalidContextInjector().gotchasMemory).toBeNull();
+        expect(new InvalidSubagentDispatcher().gotchasMemory).toBeNull();
+        expect(InvalidIdeationEngine.gotchasMemoryLoadError.message).toContain('to be constructible; got object');
+        expect(InvalidContextInjector.gotchasMemoryLoadError.message).toContain('to be constructible; got object');
+        expect(InvalidSubagentDispatcher.gotchasMemoryLoadError.message).toContain('to be constructible; got object');
+      });
+
+      expect(warnSpy).toHaveBeenCalledTimes(3);
+    } finally {
+      jest.dontMock(gotchasMemoryModulePath);
+      jest.resetModules();
+      if (typeof previousDebug === 'undefined') {
+        delete process.env.AIOX_DEBUG;
+      } else {
+        process.env.AIOX_DEBUG = previousDebug;
+      }
+      warnSpy.mockRestore();
+    }
+  });
 });

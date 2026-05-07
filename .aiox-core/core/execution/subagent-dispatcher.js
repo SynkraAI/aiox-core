@@ -34,6 +34,11 @@ try {
   if (!gotchasMemoryModule || typeof gotchasMemoryModule.GotchasMemory === 'undefined') {
     throw new Error(`Missing named export GotchasMemory from ${GOTCHAS_MEMORY_MODULE}`);
   }
+  if (typeof gotchasMemoryModule.GotchasMemory !== 'function') {
+    throw new Error(
+      `Expected GotchasMemory from ${GOTCHAS_MEMORY_MODULE} to be constructible; got ${typeof gotchasMemoryModule.GotchasMemory}`,
+    );
+  }
   GotchasMemory = gotchasMemoryModule.GotchasMemory;
 } catch (error) {
   gotchasMemoryLoadError = error;

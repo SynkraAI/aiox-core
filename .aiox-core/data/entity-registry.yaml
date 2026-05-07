@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-07T14:19:31.369Z'
+  lastUpdated: '2026-05-07T14:31:05.482Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -8743,8 +8743,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:9c7efd0e3a9a81bbe9e001a4d53334cabefa36398ebfcaed8bfcc2535cf4ff5d
-      lastVerified: '2026-05-07T14:19:31.364Z'
+      checksum: sha256:7654f6e6c3d555f3963369e71edf84b15c0fdec53bd161800b71782f78275244
+      lastVerified: '2026-05-07T14:31:05.474Z'
     parallel-executor:
       path: .aiox-core/core/execution/parallel-executor.js
       layer: L1
@@ -8866,8 +8866,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:9c3704e9e4a17023961818cc7079ec59975ed6d3720f9f9e35bb19294696afd5
-      lastVerified: '2026-05-07T14:19:31.366Z'
+      checksum: sha256:a69a03b714a39c8daf59ce2bcfb03cc6168f25e1fab07a754bd0ac7c3a91109b
+      lastVerified: '2026-05-07T14:31:05.478Z'
     wave-executor:
       path: .aiox-core/core/execution/wave-executor.js
       layer: L1
@@ -9034,8 +9034,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f3068525b1a775a70cb7e9fff6fb7e5defe810821c20f55ba7e85e342e9f9b3f
-      lastVerified: '2026-05-07T14:19:31.366Z'
+      checksum: sha256:a154a0ce92f6b39b358529a030025b9709e0e4e2b85f6af02bd474e15c1aeb83
+      lastVerified: '2026-05-07T14:31:05.479Z'
     circuit-breaker:
       path: .aiox-core/core/ids/circuit-breaker.js
       layer: L1
