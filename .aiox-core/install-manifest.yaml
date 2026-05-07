@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.7
-generated_at: "2026-05-07T13:26:26.223Z"
+version: 5.1.8
+generated_at: "2026-05-07T13:48:07.546Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -413,9 +413,9 @@ files:
     type: core
     size: 48976
   - path: core/execution/context-injector.js
-    hash: sha256:a183255eb4831f701086f23f371f94a9ce10c46ea18c8369ec0fd756777f042f
+    hash: sha256:bde5e934593deec8e0aab342b4f5af3c747ec48eda3293352a0496d2e3d461cb
     type: core
-    size: 14860
+    size: 14866
   - path: core/execution/parallel-executor.js
     hash: sha256:46870e5c8ff8db3ee0386e477d427cc98eeb008f630818b093a9524b410590ae
     type: core
@@ -437,9 +437,9 @@ files:
     type: core
     size: 51556
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:7affbc04de9be2bc53427670009a885f0b35e1cc183f82c2e044abf9611344b6
+    hash: sha256:2454e1f1c5d55d933bdb22e0c3b44d9c7254bffd43e3097ae410385e44132ec5
     type: core
-    size: 25738
+    size: 25744
   - path: core/execution/wave-executor.js
     hash: sha256:4e2324edb37ae0729062b5ac029f2891e050e7efd3a48d0f4a1dc4f227a6716b
     type: core
@@ -693,9 +693,9 @@ files:
     type: core
     size: 7755
   - path: core/ideation/ideation-engine.js
-    hash: sha256:d9108fa47ed7a9131703739befb214b97d5b8e546faf1b49d8ae9d083756c589
+    hash: sha256:0022cd3c1e9f834be277718ef7edb3378950b568a1a85e24df5ed8a55873098b
     type: core
-    size: 22865
+    size: 22871
   - path: core/ids/circuit-breaker.js
     hash: sha256:63be126f2e0d320daa60cb5b68b21df93cad4c19d1f959e06a6ac776213f8eba
     type: core
@@ -1229,9 +1229,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:39bacf2f05602f8cfa709b67062d5c9bfc1cac232ee68038e14f711ce060499a
+    hash: sha256:3ae6f9e68b8d109f063f656cbcceeec92219d3154f6d01318188a1ac683d88aa
     type: data
-    size: 522429
+    size: 522523
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data

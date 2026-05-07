@@ -28,7 +28,7 @@ try {
   MemoryQuery = null;
 }
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
+  ({ GotchasMemory } = require('../memory/gotchas-memory'));
 } catch {
   GotchasMemory = null;
 }
