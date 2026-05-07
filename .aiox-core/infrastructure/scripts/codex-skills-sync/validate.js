@@ -200,10 +200,10 @@ function runSkillSelfTests(options = {}) {
     if (canRoundtripSkillPayload) {
       const payload = createSkillToolSelfTestPayload(declaredSkillId);
       const target = normalizeSkillToolTarget(payload);
-      if (target !== item.skillId) {
-        errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);
-      } else if (!expectedIds.has(target)) {
+      if (!expectedIds.has(target)) {
         errors.push(`self-test Skill payload target is not a generated skill: ${target || '<empty>'}`);
+      } else if (target !== item.skillId) {
+        errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);
       }
     }
 
