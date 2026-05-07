@@ -15,7 +15,7 @@ const path = require('path');
 const fs = require('fs');
 
 const { YamlMerger } = require(path.join(
-  __dirname, '..', '..', '..', 'src', 'merger', 'strategies', 'yaml-merger.js'
+  __dirname, '..', '..', '..', 'src', 'merger', 'strategies', 'yaml-merger.js',
 ));
 
 describe('YamlMerger (Story INS-4.7)', () => {
@@ -54,7 +54,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
   describe('AC1: Strategy registration', () => {
     test('.yaml extension registered in strategies/index.js', () => {
       const { hasMergeStrategy, getMergeStrategy } = require(path.join(
-        __dirname, '..', '..', '..', 'src', 'merger', 'strategies', 'index.js'
+        __dirname, '..', '..', '..', 'src', 'merger', 'strategies', 'index.js',
       ));
 
       expect(hasMergeStrategy('config.yaml')).toBe(true);
@@ -64,7 +64,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
 
     test('.yml extension also registered', () => {
       const { hasMergeStrategy } = require(path.join(
-        __dirname, '..', '..', '..', 'src', 'merger', 'strategies', 'index.js'
+        __dirname, '..', '..', '..', 'src', 'merger', 'strategies', 'index.js',
       ));
 
       expect(hasMergeStrategy('config.yml')).toBe(true);
@@ -72,7 +72,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
 
     test('YamlMerger exported from merger/index.js', () => {
       const mergerModule = require(path.join(
-        __dirname, '..', '..', '..', 'src', 'merger', 'index.js'
+        __dirname, '..', '..', '..', 'src', 'merger', 'index.js',
       ));
 
       expect(mergerModule.YamlMerger).toBeDefined();
@@ -91,7 +91,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
       expect(result.stats.added).toBeGreaterThanOrEqual(1);
 
       const addedChange = result.changes.find(
-        c => c.type === 'added' && c.identifier === 'newFeature'
+        c => c.type === 'added' && c.identifier === 'newFeature',
       );
       expect(addedChange).toBeDefined();
     });
@@ -107,7 +107,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
       expect(result.stats.preserved).toBeGreaterThanOrEqual(1);
 
       const preservedChange = result.changes.find(
-        c => c.type === 'preserved' && c.identifier === 'key'
+        c => c.type === 'preserved' && c.identifier === 'key',
       );
       expect(preservedChange).toBeDefined();
     });
@@ -123,7 +123,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
       expect(result.stats.conflicts).toBeGreaterThanOrEqual(1);
 
       const conflictChange = result.changes.find(
-        c => c.type === 'conflict' && c.identifier === 'setting'
+        c => c.type === 'conflict' && c.identifier === 'setting',
       );
       expect(conflictChange).toBeDefined();
       expect(conflictChange.reason).toContain('Keeping user value');
@@ -139,7 +139,7 @@ describe('YamlMerger (Story INS-4.7)', () => {
       expect(merged.legacyKey).toBe('old-value');
 
       const deprecatedChange = result.changes.find(
-        c => c.type === 'conflict' && c.identifier === 'legacyKey'
+        c => c.type === 'conflict' && c.identifier === 'legacyKey',
       );
       expect(deprecatedChange).toBeDefined();
       expect(deprecatedChange.reason).toContain('Deprecated');
@@ -294,7 +294,7 @@ describe('Brownfield Upgrader Integration (Story INS-4.7)', () => {
   test('brownfield-upgrader imports YamlMerger', () => {
     const upgraderSource = fs.readFileSync(
       path.join(__dirname, '..', '..', '..', 'src', 'installer', 'brownfield-upgrader.js'),
-      'utf8'
+      'utf8',
     );
     expect(upgraderSource).toContain('YamlMerger');
     expect(upgraderSource).toContain('yaml-merger.js');
@@ -303,7 +303,7 @@ describe('Brownfield Upgrader Integration (Story INS-4.7)', () => {
   test('upgrader has core-config.yaml merge exception in userModifiedFiles loop', () => {
     const upgraderSource = fs.readFileSync(
       path.join(__dirname, '..', '..', '..', 'src', 'installer', 'brownfield-upgrader.js'),
-      'utf8'
+      'utf8',
     );
     expect(upgraderSource).toContain("file.path.endsWith('core-config.yaml')");
     expect(upgraderSource).toContain('merger.merge(sourceContent, targetContent)');
@@ -313,7 +313,7 @@ describe('Brownfield Upgrader Integration (Story INS-4.7)', () => {
   test('upgrader still skips non-yaml user-modified files', () => {
     const upgraderSource = fs.readFileSync(
       path.join(__dirname, '..', '..', '..', 'src', 'installer', 'brownfield-upgrader.js'),
-      'utf8'
+      'utf8',
     );
     expect(upgraderSource).toContain('User modified - preserving local changes');
   });

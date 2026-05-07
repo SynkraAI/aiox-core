@@ -117,6 +117,43 @@ describe('File Structure Validator', () => {
       expect(ideChecks.every((c) => c.status === 'success')).toBe(true);
     });
 
+    it('should validate expected skill directories', async () => {
+      fs.existsSync.mockReturnValue(true);
+      fs.statSync.mockReturnValue({ isDirectory: () => true });
+
+      const fileContext = {
+        skillDirs: ['.claude/skills', '.codex/skills'],
+      };
+
+      const result = await validateFiles(fileContext);
+
+      const skillChecks = result.checks.filter((c) => c.component === 'Skills');
+      expect(skillChecks).toHaveLength(2);
+      expect(skillChecks.every((c) => c.status === 'success')).toBe(true);
+    });
+
+    it('should fail when an expected skill directory is missing', async () => {
+      fs.existsSync.mockImplementation((path) => path !== '.codex/skills');
+      fs.statSync.mockReturnValue({ isDirectory: () => true });
+
+      const fileContext = {
+        skillDirs: ['.claude/skills', '.codex/skills'],
+      };
+
+      const result = await validateFiles(fileContext);
+
+      expect(result.success).toBe(false);
+      expect(result.errors).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            severity: 'high',
+            code: 'SKILL_DIR_MISSING',
+            file: '.codex/skills',
+          }),
+        ]),
+      );
+    });
+
     it('should handle validation errors gracefully', async () => {
       // Given
       fs.existsSync.mockImplementation(() => {

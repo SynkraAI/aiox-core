@@ -9,6 +9,9 @@ const fs = require('fs-extra');
 const os = require('os');
 
 const {
+  installAioxCore,
+  ensureProjectNodeModulesLink,
+  copyDirectoryWithRootReplacement,
   generateFileHashes,
   generateVersionJson,
 } = require('../../packages/installer/src/installer/aiox-core-installer');
@@ -169,6 +172,100 @@ describe('AIOX Core Installer - Version Tracking', () => {
       expect(Object.keys(result.fileHashes)).toHaveLength(2);
       expect(result.fileHashes['agents/dev.md']).toBeDefined();
       expect(result.fileHashes['config.yaml']).toBeDefined();
+    });
+  });
+
+  describe('brownfield preservation', () => {
+    it('should keep nested relative paths when copying directories', async () => {
+      const sourceDir = path.join(tempDir, 'source', 'development');
+      const destDir = path.join(tempDir, 'target', '.aiox-core', 'development');
+
+      await fs.ensureDir(path.join(sourceDir, 'agents'));
+      await fs.writeFile(path.join(sourceDir, 'agents', 'dev.md'), '# Dev');
+
+      const copied = await copyDirectoryWithRootReplacement(sourceDir, destDir, null, {
+        baseDir: destDir,
+      });
+
+      expect(copied).toContain('agents/dev.md');
+    });
+
+    it('should preserve agent MEMORY.md during brownfield install', async () => {
+      const sourceDir = path.join(tempDir, 'package-source');
+      const targetDir = path.join(tempDir, 'project');
+      const existingMemoryPath = path.join(
+        targetDir,
+        '.aiox-core',
+        'development',
+        'agents',
+        'dev',
+        'MEMORY.md',
+      );
+
+      await fs.ensureDir(path.join(sourceDir, 'development', 'agents', 'dev'));
+      await fs.writeFile(
+        path.join(sourceDir, 'development', 'agents', 'dev', 'MEMORY.md'),
+        'framework memory',
+        'utf8',
+      );
+
+      await fs.ensureDir(path.dirname(existingMemoryPath));
+      await fs.writeFile(existingMemoryPath, 'custom project memory', 'utf8');
+
+      const result = await installAioxCore({
+        targetDir,
+        sourceDir,
+        projectType: 'brownfield',
+        packageVersion: '9.9.9',
+      });
+
+      expect(result.success).toBe(true);
+      expect(await fs.readFile(existingMemoryPath, 'utf8')).toBe('custom project memory');
+    });
+  });
+
+  describe('ensureProjectNodeModulesLink', () => {
+    it('should link project node_modules to .aiox-core dependencies when absent', async () => {
+      const frameworkNodeModules = path.join(tempDir, '.aiox-core', 'node_modules');
+      await fs.ensureDir(path.join(frameworkNodeModules, 'js-yaml'));
+      await fs.writeFile(
+        path.join(frameworkNodeModules, 'js-yaml', 'index.js'),
+        'module.exports = { ok: true };\n',
+      );
+
+      const result = await ensureProjectNodeModulesLink({ targetDir: tempDir });
+
+      expect(result.success).toBe(true);
+      expect(result.linked).toBe(true);
+      expect(await fs.pathExists(path.join(tempDir, 'node_modules'))).toBe(true);
+      expect(await fs.realpath(path.join(tempDir, 'node_modules'))).toBe(
+        await fs.realpath(frameworkNodeModules),
+      );
+
+      const resolved = require.resolve('js-yaml', {
+        paths: [path.join(tempDir, 'squads', 'example', 'scripts')],
+      });
+      expect(resolved).toContain(path.join('js-yaml', 'index.js'));
+    });
+
+    it('should not overwrite an existing project node_modules directory', async () => {
+      await fs.ensureDir(path.join(tempDir, 'node_modules', 'existing-package'));
+      await fs.ensureDir(path.join(tempDir, '.aiox-core', 'node_modules', 'js-yaml'));
+
+      const result = await ensureProjectNodeModulesLink({ targetDir: tempDir });
+
+      expect(result.success).toBe(true);
+      expect(result.linked).toBe(false);
+      expect(result.reason).toBe('project-node-modules-exists');
+      expect(await fs.pathExists(path.join(tempDir, 'node_modules', 'existing-package'))).toBe(true);
+    });
+
+    it('should report missing .aiox-core dependencies without throwing', async () => {
+      const result = await ensureProjectNodeModulesLink({ targetDir: tempDir });
+
+      expect(result.success).toBe(false);
+      expect(result.linked).toBe(false);
+      expect(result.reason).toBe('framework-node-modules-missing');
     });
   });
 });

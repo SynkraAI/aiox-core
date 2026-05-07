@@ -3,11 +3,12 @@
 /**
  * aiox-pro CLI
  *
- * Thin CLI wrapper for @aiox-fullstack/pro.
+ * Thin CLI wrapper for AIOX Pro packages.
  * Provides a clean npx interface: npx aiox-pro install
  *
  * Commands:
- *   install             Install @aiox-fullstack/pro in the current project
+ *   install             Install AIOX Pro in the current project
+ *   update              Update AIOX Pro and re-sync assets
  *   activate --key X    Activate a license key
  *   deactivate          Deactivate the current license
  *   status              Show license status
@@ -22,7 +23,7 @@ const path = require('path');
 const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
-const PRO_PACKAGE = '@aiox-fullstack/pro';
+const PRO_PACKAGE = '@aiox-squads/pro';
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);
@@ -42,8 +43,14 @@ function run(cmd, options = {}) {
 
 function isProInstalled() {
   try {
-    const pkgPath = path.join(process.cwd(), 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
-    return fs.existsSync(pkgPath);
+    const packageJson = path.join(
+      process.cwd(),
+      'node_modules',
+      '@aiox-squads',
+      'pro',
+      'package.json'
+    );
+    return fs.existsSync(packageJson);
   } catch {
     return false;
   }
@@ -68,8 +75,8 @@ function findAioxCli() {
 function delegateToAiox(subcommand) {
   const aiox = findAioxCli();
   if (!aiox) {
-    console.error('aiox-core CLI not found.');
-    console.error('Install it first: npm install aiox-core');
+    console.error('AIOX Core CLI not found.');
+    console.error('Install it first: npm install @aiox-squads/core');
     process.exit(1);
   }
 
@@ -101,7 +108,11 @@ function runProWizard(key) {
   // Lazy import to avoid requiring installer when not needed
   let proSetup;
   try {
-    proSetup = require('../../installer/src/wizard/pro-setup');
+    try {
+      proSetup = require('@aiox-squads/installer/pro-setup');
+    } catch {
+      proSetup = require('../../installer/src/wizard/pro-setup');
+    }
   } catch {
     console.error('Pro wizard module not found.');
     console.error('Ensure aiox-core installer is available.\n');
@@ -113,14 +124,17 @@ function runProWizard(key) {
     options.key = key;
   }
 
-  proSetup.runProWizard(options).then((result) => {
-    if (!result.success) {
+  proSetup
+    .runProWizard(options)
+    .then((result) => {
+      if (!result.success) {
+        process.exit(1);
+      }
+    })
+    .catch((err) => {
+      console.error(`\n  Wizard failed: ${err.message}\n`);
       process.exit(1);
-    }
-  }).catch((err) => {
-    console.error(`\n  Wizard failed: ${err.message}\n`);
-    process.exit(1);
-  });
+    });
 }
 
 // ─── Commands ───────────────────────────────────────────────────────────────
@@ -133,7 +147,8 @@ Usage:
   npx aiox-pro <command> [options]
 
 Commands:
-  install              Install ${PRO_PACKAGE} in the current project
+  install              Install AIOX Pro in the current project
+  update               Update AIOX Pro and re-sync assets
   install --wizard     Install and run the setup wizard
   setup, wizard        Run Pro setup wizard (license gate + scaffold + verify)
   activate --key KEY   Activate a license key
@@ -147,6 +162,7 @@ Commands:
 
 Examples:
   npx aiox-pro install
+  npx aiox-pro update
   npx aiox-pro setup
   npx aiox-pro wizard --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
@@ -158,16 +174,23 @@ Documentation: https://synkra.ai/pro/docs
 }
 
 function installPro() {
-  console.log(`\nInstalling ${PRO_PACKAGE}...\n`);
+  console.log('\nInstalling AIOX Pro...\n');
 
+  let installedPackage = null;
+
+  console.log(`Installing ${PRO_PACKAGE}...`);
   const exitCode = run(`npm install ${PRO_PACKAGE}`);
+  if (exitCode === 0) {
+    installedPackage = PRO_PACKAGE;
+  }
 
-  if (exitCode !== 0) {
-    console.error(`\nFailed to install ${PRO_PACKAGE}`);
+  if (!installedPackage) {
+    console.error('\nFailed to install AIOX Pro.');
+    console.error(`Tried: ${PRO_PACKAGE}`);
     process.exit(1);
   }
 
-  console.log(`\n✅ ${PRO_PACKAGE} installed successfully!\n`);
+  console.log(`\n✅ ${installedPackage} installed successfully!\n`);
   console.log('Next steps:');
   console.log('  npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX');
   console.log('  npx aiox-pro status');
@@ -218,8 +241,9 @@ switch (command) {
   case 'status':
   case 'features':
   case 'validate':
+  case 'update':
     if (!isProInstalled()) {
-      console.error(`${PRO_PACKAGE} is not installed.`);
+      console.error('AIOX Pro is not installed.');
       console.error('Run first: npx aiox-pro install\n');
       process.exit(1);
     }

@@ -5,50 +5,77 @@
  * lookup by id/domain/severity/tag, healable checks, stats, and clear.
  */
 
-const { BaseCheck, CheckSeverity, CheckDomain } = require('../../../.aiox-core/core/health-check/base-check');
+const BUILT_IN_CHECK_MODULES = [
+  '../../../.aiox-core/core/health-check/checks/project',
+  '../../../.aiox-core/core/health-check/checks/local',
+  '../../../.aiox-core/core/health-check/checks/repository',
+  '../../../.aiox-core/core/health-check/checks/deployment',
+  '../../../.aiox-core/core/health-check/checks/services',
+];
 
-// Mock the built-in check modules to prevent loading real files
-jest.mock('../../../.aiox-core/core/health-check/checks/project', () => ({}), { virtual: true });
-jest.mock('../../../.aiox-core/core/health-check/checks/local', () => ({}), { virtual: true });
-jest.mock('../../../.aiox-core/core/health-check/checks/repository', () => ({}), { virtual: true });
-jest.mock('../../../.aiox-core/core/health-check/checks/deployment', () => ({}), { virtual: true });
-jest.mock('../../../.aiox-core/core/health-check/checks/services', () => ({}), { virtual: true });
+function loadFreshRegistryModules() {
+  jest.resetModules();
 
-const CheckRegistry = require('../../../.aiox-core/core/health-check/check-registry');
-
-// Test check subclasses
-class ProjectCheck extends BaseCheck {
-  constructor(id, opts = {}) {
-    super({
-      id,
-      name: opts.name || `Check ${id}`,
-      domain: CheckDomain.PROJECT,
-      severity: opts.severity || CheckSeverity.MEDIUM,
-      healingTier: opts.healingTier || 0,
-      tags: opts.tags || [],
-    });
+  for (const modulePath of BUILT_IN_CHECK_MODULES) {
+    jest.doMock(modulePath, () => ({}), { virtual: true });
   }
-  async execute() { return this.pass('ok'); }
-}
 
-class LocalCheck extends BaseCheck {
-  constructor(id, opts = {}) {
-    super({
-      id,
-      name: opts.name || `Check ${id}`,
-      domain: CheckDomain.LOCAL,
-      severity: opts.severity || CheckSeverity.LOW,
-      healingTier: opts.healingTier || 0,
-      tags: opts.tags || [],
-    });
-  }
-  async execute() { return this.pass('ok'); }
+  let loadedModules;
+  jest.isolateModules(() => {
+    const baseCheck = require('../../../.aiox-core/core/health-check/base-check');
+    const CheckRegistry = require('../../../.aiox-core/core/health-check/check-registry');
+    loadedModules = { ...baseCheck, CheckRegistry };
+  });
+
+  return loadedModules;
 }
 
 describe('check-registry', () => {
+  let BaseCheck;
+  let CheckSeverity;
+  let CheckDomain;
+  let CheckRegistry;
+  let ProjectCheck;
+  let LocalCheck;
   let registry;
 
   beforeEach(() => {
+    ({ BaseCheck, CheckSeverity, CheckDomain, CheckRegistry } = loadFreshRegistryModules());
+
+    ProjectCheck = class extends BaseCheck {
+      constructor(id, opts = {}) {
+        super({
+          id,
+          name: opts.name || `Check ${id}`,
+          domain: CheckDomain.PROJECT,
+          severity: opts.severity || CheckSeverity.MEDIUM,
+          healingTier: opts.healingTier || 0,
+          tags: opts.tags || [],
+        });
+      }
+
+      async execute() {
+        return this.pass('ok');
+      }
+    };
+
+    LocalCheck = class extends BaseCheck {
+      constructor(id, opts = {}) {
+        super({
+          id,
+          name: opts.name || `Check ${id}`,
+          domain: CheckDomain.LOCAL,
+          severity: opts.severity || CheckSeverity.LOW,
+          healingTier: opts.healingTier || 0,
+          tags: opts.tags || [],
+        });
+      }
+
+      async execute() {
+        return this.pass('ok');
+      }
+    };
+
     registry = new CheckRegistry();
   });
 
@@ -68,7 +95,7 @@ describe('check-registry', () => {
 
     test('throws for duplicate id', () => {
       registry.register(new ProjectCheck('dup'));
-      expect(() => registry.register(new ProjectCheck('dup'))).toThrow("already registered");
+      expect(() => registry.register(new ProjectCheck('dup'))).toThrow('already registered');
     });
 
     test('indexes check by domain', () => {

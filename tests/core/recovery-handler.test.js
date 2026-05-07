@@ -122,6 +122,17 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(result.strategy).toBe(RecoveryStrategy.ESCALATE_TO_HUMAN);
       expect(result.escalated).toBe(true);
     });
+
+    it('should reject invalid epic numbers before mutating attempts', async () => {
+      await expect(handler.handleEpicFailure(null, new Error('Invalid epic'))).rejects.toThrow(
+        TypeError,
+      );
+      await expect(handler.handleEpicFailure(1n, new Error('Invalid epic'))).rejects.toThrow(
+        'got: 1',
+      );
+
+      expect(Object.keys(handler.getAttemptHistory())).toHaveLength(0);
+    });
   });
 
   describe('Max Retries (AC5)', () => {
@@ -204,6 +215,60 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(history[3][0].error).toBe('Specific error');
     });
 
+    it('should return cloned attempt history', async () => {
+      await handler.handleEpicFailure(3, new Error('Specific error'), {
+        approach: 'custom approach',
+      });
+
+      const history = handler.getAttemptHistory();
+      history[3].push({ fake: true });
+      history[3][0].approach = 'mutated approach';
+
+      expect(handler.getAttemptCount(3)).toBe(1);
+      expect(handler.getAttemptHistory()[3][0].approach).toBe('custom approach');
+    });
+
+    it('should return data-only attempt history for non-JSON context values', async () => {
+      const circular = {};
+      circular.self = circular;
+      const cause = new Error('Cause failure');
+      cause.code = 'ECAUSE';
+      const contextError = new Error('Context failure');
+      contextError.cause = cause;
+      contextError.code = 'ECONTEXT';
+      contextError.details = new Map([['attempt', 3n]]);
+      contextError.status = 500;
+
+      await handler.handleEpicFailure(3, new Error('Specific error'), {
+        circular,
+        error: contextError,
+        map: new Map([['attempt', 1n]]),
+        maybe: undefined,
+        set: new Set([2n]),
+      });
+
+      const history = handler.getAttemptHistory();
+      const context = history['3'][0].context;
+
+      expect(context.circular.self).toBe('[Circular]');
+      expect(context.error).toMatchObject({
+        name: 'Error',
+        message: 'Context failure',
+        cause: {
+          code: 'ECAUSE',
+          message: 'Cause failure',
+          name: 'Error',
+        },
+        code: 'ECONTEXT',
+        details: [['attempt', '3']],
+        status: 500,
+      });
+      expect(context.map).toEqual([['attempt', '1']]);
+      expect(Object.prototype.hasOwnProperty.call(context, 'maybe')).toBe(true);
+      expect(context.maybe).toBeUndefined();
+      expect(context.set).toEqual(['2']);
+    });
+
     it('should get logs for specific epic', async () => {
       await handler.handleEpicFailure(3, new Error('Epic 3 error'));
       await handler.handleEpicFailure(4, new Error('Epic 4 error'));
@@ -222,6 +287,14 @@ describe('Recovery Handler (Story 0.5)', () => {
 
       handler.resetAttempts(3);
       expect(handler.getAttemptCount(3)).toBe(0);
+    });
+
+    it('should reject invalid epic numbers for public attempt APIs', () => {
+      expect(() => handler.getAttemptCount(null)).toThrow(TypeError);
+      expect(() => handler.canRetry(undefined)).toThrow(TypeError);
+      expect(() => handler.resetAttempts(-1)).toThrow(TypeError);
+      expect(() => handler.getEpicLogs(1.5)).toThrow(TypeError);
+      expect(() => handler.getAttemptCount(1n)).toThrow('got: 1');
     });
 
     it('should clear all state', async () => {

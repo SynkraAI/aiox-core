@@ -50,7 +50,7 @@ class LayerProcessor {
    * @param {object[]} context.previousLayers - Results from previous layers
    * @returns {{ rules: string[], metadata: object } | null} Rules and metadata, or null to skip
    */
-  process(context) {
+  process(_context) {
     throw new Error(`${this.name}: process() must be implemented by subclass`);
   }
 

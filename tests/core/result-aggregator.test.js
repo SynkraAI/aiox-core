@@ -43,6 +43,13 @@ describe('ResultAggregator', () => {
       expect(ra.maxHistory).toBe(10);
     });
 
+    test('preserves falsy but intentional config values', () => {
+      const ra = new ResultAggregator({ rootPath: '', reportDir: '', maxHistory: 0 });
+      expect(ra.rootPath).toBe('');
+      expect(ra.reportDir).toBe('');
+      expect(ra.maxHistory).toBe(0);
+    });
+
     test('extends EventEmitter', () => {
       const ra = new ResultAggregator();
       expect(typeof ra.on).toBe('function');
@@ -145,12 +152,63 @@ describe('ResultAggregator', () => {
       expect(ra.history.length).toBe(1);
     });
 
+    test('preserves wave zero and other falsy task values', async () => {
+      const ra = new ResultAggregator({ rootPath: tmpDir });
+      const result = await ra.aggregate({
+        waveIndex: 0,
+        startedAt: '',
+        results: [
+          {
+            taskId: 't0',
+            agentId: '',
+            success: true,
+            duration: 0,
+            output: '',
+            result: { output: 'fallback should not be used' },
+            filesModified: [],
+          },
+        ],
+      });
+
+      expect(result.waveIndex).toBe(0);
+      expect(result.startedAt).toBe('');
+      expect(result.tasks[0]).toMatchObject({
+        agentId: '',
+        duration: 0,
+        output: '',
+        filesModified: [],
+      });
+    });
+
+    test('falls back safely when filesModified is not an array', async () => {
+      const ra = new ResultAggregator({ rootPath: tmpDir });
+      const result = await ra.aggregate({
+        waveIndex: 1,
+        results: [
+          {
+            taskId: 't1',
+            success: true,
+            filesModified: false,
+            output: 'Created `src/app.js`',
+          },
+        ],
+      });
+
+      expect(result.tasks[0].filesModified).toEqual(['src/app.js']);
+    });
+
     test('trims history to maxHistory', async () => {
       const ra = new ResultAggregator({ rootPath: tmpDir, maxHistory: 2 });
       await ra.aggregate({ waveIndex: 1, results: [] });
       await ra.aggregate({ waveIndex: 2, results: [] });
       await ra.aggregate({ waveIndex: 3, results: [] });
       expect(ra.history.length).toBe(2);
+    });
+
+    test('allows maxHistory zero without retaining entries', async () => {
+      const ra = new ResultAggregator({ rootPath: tmpDir, maxHistory: 0 });
+      await ra.aggregate({ waveIndex: 1, results: [] });
+      expect(ra.history.length).toBe(0);
     });
   });
 
@@ -303,6 +361,30 @@ describe('ResultAggregator', () => {
       expect(fs.existsSync(reportPath)).toBe(true);
       expect(fs.existsSync(reportPath.replace('.json', '.md'))).toBe(true);
     });
+
+    test('uses wave zero in default report filename', async () => {
+      const reportDir = path.join(tmpDir, 'plan');
+      const ra = new ResultAggregator({ reportDir });
+      const agg = {
+        waveIndex: 0,
+        completedAt: new Date().toISOString(),
+        tasks: [],
+        conflicts: [],
+        warnings: [],
+        metrics: {
+          totalTasks: 0,
+          successful: 0,
+          failed: 0,
+          successRate: 100,
+          totalDuration: 0,
+          conflictCount: 0,
+          filesModified: 0,
+        },
+      };
+
+      const reportPath = await ra.generateReport(agg);
+      expect(path.basename(reportPath)).toBe('wave-results-0.json');
+    });
   });
 
   // ── formatMarkdown ────────────────────────────────────────────────────
@@ -334,6 +416,33 @@ describe('ResultAggregator', () => {
       const md = ra.formatMarkdown(agg);
       expect(md).toContain('Conflicts');
       expect(md).toContain('app.js');
+    });
+
+    test('renders zero metrics instead of falling back to alternate labels', () => {
+      const ra = new ResultAggregator();
+      const agg = {
+        completedAt: new Date().toISOString(),
+        tasks: [{ taskId: 't0', agentId: '@dev', success: true, duration: 0 }],
+        conflicts: [],
+        warnings: [],
+        metrics: {
+          totalTasks: 1,
+          successful: 1,
+          failed: 0,
+          successRate: 0,
+          overallSuccessRate: 99,
+          totalDuration: 0,
+          conflictCount: 0,
+          totalConflicts: 12,
+          filesModified: 0,
+        },
+      };
+
+      const md = ra.formatMarkdown(agg);
+      expect(md).toContain('> **Success Rate:** 0%');
+      expect(md).toContain('| Conflicts | 0 |');
+      expect(md).toContain('| Files Modified | 0 |');
+      expect(md).toContain('| t0 | @dev | ✅ | 0s |');
     });
   });
 

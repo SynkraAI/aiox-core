@@ -10,6 +10,13 @@
  * - State detection from successful command completion
  * - Pre-populated command templates
  * - Numbered list formatting for user selection
+ *
+ * Lifecycle scope:
+ * - Active helper for command suggestions and contextual greetings.
+ * - Does not own persisted workflow/story state.
+ * - Use session-state.js for new persistent epic/story lifecycle state.
+ *
+ * @see .aiox-core/core/orchestration/session-state.js
  */
 
 const fs = require('fs');

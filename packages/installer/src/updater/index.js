@@ -19,9 +19,116 @@
 const fs = require('fs-extra');
 const path = require('path');
 const https = require('https');
-const { execSync } = require('child_process');
-const { hashFile, hashesMatch } = require('../installer/file-hasher');
-const { PostInstallValidator, formatReport: formatValidationReport } = require('../installer/post-install-validator');
+const { execFileSync } = require('child_process');
+const installerDir = path.join(__dirname, '..', 'installer');
+const { hashFile, hashesMatch } = require(path.join(installerDir, 'file-hasher'));
+const { PostInstallValidator, formatReport: formatValidationReport } = require(
+  path.join(installerDir, 'post-install-validator')
+);
+const {
+  loadSourceManifest,
+  loadInstalledManifest,
+  generateUpgradeReport,
+  applyUpgrade,
+  updateInstalledManifest,
+} = require(path.join(installerDir, 'brownfield-upgrader'));
+
+const CORE_PACKAGE_NAME = '@aiox-squads/core';
+const LEGACY_CORE_PACKAGE_NAMES = ['aiox-core', '@synkra/aiox-core'];
+const CORE_PACKAGE_CANDIDATES = [CORE_PACKAGE_NAME, ...LEGACY_CORE_PACKAGE_NAMES];
+
+function getPackageRoot(projectRoot, packageName) {
+  return path.join(projectRoot, 'node_modules', ...packageName.split('/'));
+}
+
+function findInstalledCorePackageRoot(projectRoot) {
+  return findInstalledCorePackage(projectRoot)?.packageRoot || null;
+}
+
+function findInstalledCorePackage(projectRoot) {
+  return CORE_PACKAGE_CANDIDATES.map((packageName) => ({
+    packageName,
+    packageRoot: getPackageRoot(projectRoot, packageName),
+  })).find(({ packageRoot }) => fs.existsSync(path.join(packageRoot, 'package.json')));
+}
+
+function manifestToInstalledManifest(manifest) {
+  if (!manifest || !Array.isArray(manifest.files)) {
+    return null;
+  }
+
+  return {
+    installed_version: manifest.version || 'unknown',
+    files: manifest.files
+      .filter((entry) => entry && entry.path && entry.hash)
+      .map((entry) => ({
+        path: entry.path,
+        hash: entry.hash,
+        type: entry.type,
+        modified_by_user: false,
+      })),
+  };
+}
+
+function extractManifestFileHashes(manifest) {
+  if (!manifest || !Array.isArray(manifest.files)) {
+    return {};
+  }
+
+  const fileHashes = {};
+  for (const entry of manifest.files) {
+    if (entry && entry.path && entry.hash) {
+      fileHashes[entry.path] = entry.hash;
+    }
+  }
+
+  return fileHashes;
+}
+
+function selectInstalledManifest(projectManifest, packageManifest) {
+  if (!projectManifest) {
+    return packageManifest;
+  }
+
+  if (!packageManifest) {
+    return projectManifest;
+  }
+
+  const projectFiles = Array.isArray(projectManifest.files) ? projectManifest.files : [];
+  const packageFiles = Array.isArray(packageManifest.files) ? packageManifest.files : [];
+
+  if (packageFiles.length === 0) {
+    return projectManifest;
+  }
+
+  if (projectFiles.length === 0) {
+    return packageManifest;
+  }
+
+  const mergedFiles = new Map();
+
+  for (const entry of packageFiles) {
+    if (entry && entry.path) {
+      mergedFiles.set(entry.path, entry);
+    }
+  }
+
+  for (const entry of projectFiles) {
+    if (entry && entry.path && !mergedFiles.has(entry.path)) {
+      mergedFiles.set(entry.path, entry);
+    }
+  }
+
+  return {
+    ...projectManifest,
+    installed_version:
+      packageManifest.installed_version ||
+      packageManifest.version ||
+      projectManifest.installed_version ||
+      projectManifest.version,
+    files: Array.from(mergedFiles.values()),
+  };
+}
 
 /**
  * Update status types
@@ -78,6 +185,8 @@ class AIOXUpdater {
     this.versionInfo = null;
     this.changelog = null;
     this.backupDir = null;
+    this.lastSourcePackageRoot = null;
+    this.lastSourceManifest = null;
   }
 
   /**
@@ -118,7 +227,7 @@ class AIOXUpdater {
         if (!isOnline) {
           result.error = 'You appear to be offline. Please check your internet connection.';
         } else {
-          result.error = 'Package aiox-core not found on npm registry. This may be a local development installation.';
+          result.error = `Package ${CORE_PACKAGE_NAME} not found on npm registry. This may be a local development installation.`;
         }
         return result;
       }
@@ -165,8 +274,9 @@ class AIOXUpdater {
     }
 
     // Fallback to package.json
-    const packageJsonPath = path.join(this.projectRoot, 'node_modules', 'aiox-core', 'package.json');
-    if (fs.existsSync(packageJsonPath)) {
+    const packageRoot = findInstalledCorePackageRoot(this.projectRoot);
+    if (packageRoot) {
+      const packageJsonPath = path.join(packageRoot, 'package.json');
       try {
         const pkg = await fs.readJson(packageJsonPath);
         return { version: pkg.version, installedAt: null, mode: 'unknown' };
@@ -180,7 +290,7 @@ class AIOXUpdater {
     if (fs.existsSync(localPackageJsonPath)) {
       try {
         const pkg = await fs.readJson(localPackageJsonPath);
-        if (pkg.name === '@synkra/aiox-core' || pkg.name === 'aiox-core') {
+        if (CORE_PACKAGE_CANDIDATES.includes(pkg.name)) {
           return { version: pkg.version, installedAt: null, mode: 'framework-development' };
         }
       } catch (error) {
@@ -199,7 +309,7 @@ class AIOXUpdater {
   async getLatestVersion() {
     return new Promise((resolve) => {
       const request = https.get(
-        'https://registry.npmjs.org/aiox-core/latest',
+        `https://registry.npmjs.org/${encodeURIComponent(CORE_PACKAGE_NAME)}/latest`,
         { timeout: this.options.timeout },
         (res) => {
           let data = '';
@@ -216,7 +326,7 @@ class AIOXUpdater {
               resolve(null);
             }
           });
-        },
+        }
       );
 
       request.on('error', (error) => {
@@ -239,13 +349,9 @@ class AIOXUpdater {
    */
   async checkConnectivity() {
     return new Promise((resolve) => {
-      const request = https.get(
-        'https://registry.npmjs.org/',
-        { timeout: 5000 },
-        (res) => {
-          resolve(res.statusCode === 200);
-        },
-      );
+      const request = https.get('https://registry.npmjs.org/', { timeout: 5000 }, (res) => {
+        resolve(res.statusCode === 200);
+      });
 
       request.on('error', () => resolve(false));
       request.on('timeout', () => {
@@ -467,15 +573,22 @@ class AIOXUpdater {
       }
 
       result.filesUpdated = updateApplied.filesUpdated;
-      result.filesPreserved = customizations.customized.length;
+      result.filesPreserved =
+        updateApplied.filesSkipped?.length ?? customizations.customized.length;
+      this.lastSourcePackageRoot = updateApplied.sourcePackageRoot || this.lastSourcePackageRoot;
+      this.lastSourceManifest = updateApplied.sourceManifest || this.lastSourceManifest;
 
       // Update version.json
       onProgress('finalizing', 'Updating version info...');
-      await this.updateVersionInfo(checkResult.latest);
+      await this.updateVersionInfo(checkResult.latest, {
+        fileHashes: extractManifestFileHashes(this.lastSourceManifest),
+      });
 
       // Validate installation after update
       onProgress('validating', 'Validating installation...');
-      const validationResult = await this.validateAfterUpdate();
+      const validationResult = await this.validateAfterUpdate({
+        sourceDir: this.lastSourcePackageRoot,
+      });
       result.validationPassed = validationResult.success;
       result.integrityScore = validationResult.integrityScore;
 
@@ -525,6 +638,7 @@ class AIOXUpdater {
     const filesToBackup = [
       'version.json',
       'install-manifest.yaml',
+      'install-manifest.yaml.minisig',
     ];
 
     for (const file of filesToBackup) {
@@ -586,21 +700,77 @@ class AIOXUpdater {
     };
 
     try {
-      // Use npm to update the package
-      const cmd = `npm install aiox-core@${targetVersion} --save-exact`;
-      this.log(`Running: ${cmd}`);
+      const previousCorePackage = findInstalledCorePackage(this.projectRoot);
+      const previousPackageRoot = previousCorePackage?.packageRoot || null;
+      const previousSourceManifest = previousPackageRoot
+        ? loadSourceManifest(path.join(previousPackageRoot, '.aiox-core'))
+        : null;
 
-      execSync(cmd, {
+      const npmOptions = {
         cwd: this.projectRoot,
         stdio: this.options.verbose ? 'inherit' : 'pipe',
         timeout: 120000, // 2 minutes
+      };
+
+      if (previousCorePackage && previousCorePackage.packageName !== CORE_PACKAGE_NAME) {
+        this.log(`Running: npm uninstall ${previousCorePackage.packageName}`);
+        execFileSync('npm', ['uninstall', previousCorePackage.packageName], npmOptions);
+      }
+
+      const packageSpecifier = `${CORE_PACKAGE_NAME}@${targetVersion}`;
+      this.log(`Running: npm install ${packageSpecifier} --save-exact`);
+      execFileSync('npm', ['install', packageSpecifier, '--save-exact'], npmOptions);
+
+      const sourcePackageRoot = getPackageRoot(this.projectRoot, CORE_PACKAGE_NAME);
+      const sourceAioxCore = path.join(sourcePackageRoot, '.aiox-core');
+      const sourceManifest = loadSourceManifest(sourceAioxCore);
+
+      if (!sourceManifest) {
+        result.error = 'Updated package does not contain install-manifest.yaml';
+        return result;
+      }
+
+      const installedManifest = selectInstalledManifest(
+        loadInstalledManifest(this.projectRoot),
+        manifestToInstalledManifest(previousSourceManifest)
+      );
+      const report = generateUpgradeReport(sourceManifest, installedManifest, this.projectRoot);
+      const applyResult = await applyUpgrade(report, sourceAioxCore, this.projectRoot, {
+        includeModified: true,
       });
 
-      result.success = true;
-      result.filesUpdated = 1; // At least package updated
+      if (!applyResult.success) {
+        result.error = applyResult.errors
+          .map((entry) => `${entry.path}: ${entry.error}`)
+          .join('; ');
+        return result;
+      }
 
-      // TODO: Copy new files from node_modules to .aiox-core
-      // preserving customizedFiles
+      await fs.copy(
+        path.join(sourceAioxCore, 'install-manifest.yaml'),
+        path.join(this.aioxCoreDir, 'install-manifest.yaml'),
+        { overwrite: true }
+      );
+
+      const sourceSignaturePath = path.join(sourceAioxCore, 'install-manifest.yaml.minisig');
+      const targetSignaturePath = path.join(this.aioxCoreDir, 'install-manifest.yaml.minisig');
+      if (await fs.pathExists(sourceSignaturePath)) {
+        await fs.copy(sourceSignaturePath, targetSignaturePath, { overwrite: true });
+      } else if (await fs.pathExists(targetSignaturePath)) {
+        await fs.remove(targetSignaturePath);
+      }
+
+      updateInstalledManifest(
+        this.projectRoot,
+        sourceManifest,
+        `${CORE_PACKAGE_NAME}@${targetVersion}`
+      );
+
+      result.success = true;
+      result.filesUpdated = applyResult.filesInstalled.length;
+      result.filesSkipped = applyResult.filesSkipped;
+      result.sourceManifest = sourceManifest;
+      result.sourcePackageRoot = sourcePackageRoot;
 
       return result;
     } catch (error) {
@@ -615,7 +785,7 @@ class AIOXUpdater {
    * @param {string} newVersion - New version
    * @returns {Promise<void>}
    */
-  async updateVersionInfo(newVersion) {
+  async updateVersionInfo(newVersion, options = {}) {
     const versionJsonPath = path.join(this.aioxCoreDir, 'version.json');
 
     const versionInfo = {
@@ -623,7 +793,7 @@ class AIOXUpdater {
       installedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       mode: this.versionInfo?.mode || 'project-development',
-      fileHashes: {}, // Will be populated by file copy
+      fileHashes: options.fileHashes || {},
     };
 
     await fs.writeJson(versionJsonPath, versionInfo, { spaces: 2 });
@@ -646,7 +816,7 @@ class AIOXUpdater {
     };
 
     try {
-      const validator = new PostInstallValidator(this.projectRoot, null, {
+      const validator = new PostInstallValidator(this.projectRoot, options.sourceDir || null, {
         verifyHashes: true,
         detectExtras: false,
         verbose: options.verbose || this.options.verbose,
@@ -711,7 +881,9 @@ function formatCheckResult(result, options = {}) {
   lines.push('');
 
   if (result.installed) {
-    lines.push(`📦 Current: ${c.cyan}v${result.installed}${c.reset}${result.installedAt ? ` ${c.dim}(installed ${result.installedAt})${c.reset}` : ''}`);
+    lines.push(
+      `📦 Current: ${c.cyan}v${result.installed}${c.reset}${result.installedAt ? ` ${c.dim}(installed ${result.installedAt})${c.reset}` : ''}`
+    );
   } else {
     lines.push(`📦 Current: ${c.red}Not installed${c.reset}`);
   }
@@ -809,4 +981,5 @@ module.exports = {
   FileAction,
   formatCheckResult,
   formatUpdateResult,
+  selectInstalledManifest,
 };

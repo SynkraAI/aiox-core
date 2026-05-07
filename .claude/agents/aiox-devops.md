@@ -18,6 +18,7 @@ skills:
   - synapse:manager
   - coderabbit-review
   - checklist-runner
+color: orange
 ---
 
 # AIOX DevOps - Autonomous Agent

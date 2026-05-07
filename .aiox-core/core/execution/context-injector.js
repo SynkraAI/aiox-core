@@ -14,15 +14,32 @@ const fs = require('fs');
 const path = require('path');
 
 // Import dependencies with fallbacks
+const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
 let MemoryQuery, GotchasMemory, SessionMemory;
+let gotchasMemoryLoadError = null;
 try {
   MemoryQuery = require('../memory/memory-query');
 } catch {
   MemoryQuery = null;
 }
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
-} catch {
+  const gotchasMemoryModule = require(GOTCHAS_MEMORY_MODULE);
+  if (!gotchasMemoryModule || typeof gotchasMemoryModule.GotchasMemory === 'undefined') {
+    throw new Error(`Missing named export GotchasMemory from ${GOTCHAS_MEMORY_MODULE}`);
+  }
+  if (typeof gotchasMemoryModule.GotchasMemory !== 'function') {
+    throw new Error(
+      `Expected GotchasMemory from ${GOTCHAS_MEMORY_MODULE} to be constructible; got ${typeof gotchasMemoryModule.GotchasMemory}`,
+    );
+  }
+  GotchasMemory = gotchasMemoryModule.GotchasMemory;
+} catch (error) {
+  gotchasMemoryLoadError = error;
+  if (process.env.AIOX_DEBUG) {
+    console.warn(
+      `[context-injector] Optional dependency '${GOTCHAS_MEMORY_MODULE}' failed to load: ${error.stack || error.message}`,
+    );
+  }
   GotchasMemory = null;
 }
 try {
@@ -534,3 +551,4 @@ class ContextInjector {
 
 module.exports = ContextInjector;
 module.exports.ContextInjector = ContextInjector;
+module.exports.gotchasMemoryLoadError = gotchasMemoryLoadError;

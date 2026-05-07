@@ -271,6 +271,7 @@ async function installDependencies(options = {}) {
         success: true,
         offlineMode: true,
         packageManager,
+        projectPath,
       };
     }
 
@@ -290,6 +291,7 @@ async function installDependencies(options = {}) {
       return {
         success: true,
         packageManager,
+        projectPath,
       };
     } else {
       spinner.fail('Installation failed');
@@ -300,6 +302,7 @@ async function installDependencies(options = {}) {
       return {
         success: false,
         packageManager,
+        projectPath,
         error: result.error,
         errorCategory: errorInfo.category,
         errorMessage: errorInfo.message,
@@ -315,6 +318,7 @@ async function installDependencies(options = {}) {
 
     return {
       success: false,
+      projectPath,
       error: error.message,
       errorCategory: errorInfo.category,
       errorMessage: errorInfo.message,

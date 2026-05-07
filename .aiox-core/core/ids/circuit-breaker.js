@@ -94,6 +94,11 @@ class CircuitBreaker {
    */
   recordFailure() {
     this._failureCount++;
+
+    if (this._state === STATE_OPEN) {
+      return;
+    }
+
     this._lastFailureTime = Date.now();
 
     if (this._state === STATE_HALF_OPEN) {

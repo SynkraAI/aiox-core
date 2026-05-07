@@ -4,23 +4,19 @@ description: |
   Master orchestrator for squad creation. Creates teams of AI agents specialized
   in any domain. Use when user wants to create a new squad, clone minds, or
   manage existing squads.
-
 model: opus
-
 tools:
   - Read
   - Grep
   - Glob
-  - Task
   - Write
   - Edit
   - Bash
   - WebSearch
   - WebFetch
-
 permissionMode: acceptEdits
-
 memory: project
+color: orange
 ---
 
 # 🎨 Squad Architect

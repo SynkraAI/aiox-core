@@ -17,6 +17,8 @@ const os = require('os');
 jest.setTimeout(15000);
 
 const HOOK_PATH = path.resolve(__dirname, '../../.claude/hooks/synapse-engine.cjs');
+const HOOK_SPAWN_PERFORMANCE_BUDGET_MS = 3000;
+const HOOK_MISSING_SYNAPSE_BUDGET_MS = 2200;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -36,8 +38,12 @@ function runHook(stdinData, timeout = 5000) {
     });
     let stdout = '';
     let stderr = '';
-    proc.stdout.on('data', (d) => { stdout += d; });
-    proc.stderr.on('data', (d) => { stderr += d; });
+    proc.stdout.on('data', (d) => {
+      stdout += d;
+    });
+    proc.stderr.on('data', (d) => {
+      stderr += d;
+    });
     proc.on('close', (code) => {
       resolve({ stdout, stderr, code: code || 0 });
     });
@@ -70,7 +76,9 @@ function createMockProject(opts = {}) {
   const engineDir = path.join(tmpDir, '.aiox-core', 'core', 'synapse');
   fs.mkdirSync(engineDir, { recursive: true });
 
-  const engineCode = opts.engineCode || `
+  const engineCode =
+    opts.engineCode ||
+    `
     class SynapseEngine {
       constructor(synapsePath) { this.synapsePath = synapsePath; }
       process(prompt, session) {
@@ -87,7 +95,9 @@ function createMockProject(opts = {}) {
   const sessionDir = path.join(engineDir, 'session');
   fs.mkdirSync(sessionDir, { recursive: true });
 
-  const sessionCode = opts.sessionCode || `
+  const sessionCode =
+    opts.sessionCode ||
+    `
     function loadSession(sessionId, sessionsDir) {
       return { prompt_count: 5 };
     }
@@ -253,7 +263,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
 
     test('exits silently when session-manager module is missing', async () => {
       tmpDir = createMockProject({
-        sessionCode: 'throw new Error(\'module broken\');',
+        sessionCode: "throw new Error('module broken');",
       });
       const input = buildInput(tmpDir);
       const { stdout, code } = await runHook(input);
@@ -284,7 +294,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       expect(output.hookSpecificOutput.hookEventName).toBe('UserPromptSubmit');
       expect(typeof output.hookSpecificOutput.additionalContext).toBe('string');
       expect(Object.keys(output)).toEqual(['hookSpecificOutput']);
-      expect(Object.keys(output.hookSpecificOutput)).toEqual(['hookEventName', 'additionalContext']);
+      expect(Object.keys(output.hookSpecificOutput)).toEqual([
+        'hookEventName',
+        'additionalContext',
+      ]);
     });
 
     test('additionalContext is empty string when engine returns no xml', async () => {
@@ -387,7 +400,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
   // ==========================================================================
 
   describe('performance', () => {
-    test('hook completes within 2000ms (including spawn overhead)', async () => {
+    test('hook completes within spawn performance budget', async () => {
       tmpDir = createMockProject();
       const input = buildInput(tmpDir);
       const start = Date.now();
@@ -395,11 +408,11 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       const elapsed = Date.now() - start;
 
       expect(code).toBe(0);
-      // Node.js spawn overhead ~50-500ms on Windows; hook logic itself <100ms
-      expect(elapsed).toBeLessThan(2000);
+      // Child process startup is measured here too and can spike under full Jest load.
+      expect(elapsed).toBeLessThan(HOOK_SPAWN_PERFORMANCE_BUDGET_MS);
     });
 
-    test('startup check (.synapse/ missing) completes within 1500ms', async () => {
+    test('startup check (.synapse/ missing) completes within performance budget', async () => {
       tmpDir = createMockProject({ noSynapse: true });
       const input = buildInput(tmpDir);
       const start = Date.now();
@@ -407,7 +420,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       const elapsed = Date.now() - start;
 
       // Fast-exit path: no dynamic requires loaded
-      expect(elapsed).toBeLessThan(1500);
+      expect(elapsed).toBeLessThan(HOOK_MISSING_SYNAPSE_BUDGET_MS);
     });
   });
 
@@ -448,8 +461,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       }
 
       const hookEntries = settings.hooks.UserPromptSubmit;
-      const synapseHook = hookEntries.find((entry) =>
-        entry.hooks && entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.cjs')),
+      const synapseHook = hookEntries.find(
+        (entry) =>
+          entry.hooks &&
+          entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.cjs'))
       );
       expect(synapseHook).toBeDefined();
     });
@@ -521,7 +536,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
 
       let captured = '';
-      process.stdout.write = (data) => { captured += data; return true; };
+      process.stdout.write = (data) => {
+        captured += data;
+        return true;
+      };
 
       try {
         const mainPromise = hookModule.main();
@@ -547,7 +565,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
 
       let captured = '';
-      process.stdout.write = (data) => { captured += data; return true; };
+      process.stdout.write = (data) => {
+        captured += data;
+        return true;
+      };
 
       try {
         const mainPromise = hookModule.main();
@@ -587,7 +608,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
 
       let captured = '';
-      process.stdout.write = (data) => { captured += data; return true; };
+      process.stdout.write = (data) => {
+        captured += data;
+        return true;
+      };
 
       try {
         const mainPromise = hookModule.main();

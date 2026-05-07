@@ -5,12 +5,15 @@
  * based on estimated token usage. Provides token budgets and layer filtering
  * per bracket for the SynapseEngine orchestrator.
  *
- * Pure arithmetic module — zero I/O, zero external dependencies.
+ * Reads model context window from core-config.yaml → models.registry.
  *
  * @module core/synapse/context/context-tracker
- * @version 1.0.0
+ * @version 1.1.0
  * @created Story SYN-3 - Context Bracket Tracker
  */
+
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Bracket definitions with thresholds and token budgets.
@@ -51,11 +54,87 @@ const XML_SAFETY_MULTIPLIER = 1.2;
 
 /**
  * Default configuration values.
+ * maxContext is the fallback when core-config.yaml is unavailable.
  */
-const DEFAULTS = {
+const DEFAULTS = Object.freeze({
   avgTokensPerPrompt: 1500,
   maxContext: 200000,
-};
+});
+
+/** Cache for model config by project root (read once per root per process). */
+const _modelConfigCache = new Map();
+
+function cloneModelConfig(config) {
+  return { ...config };
+}
+
+function cacheModelConfig(root, config) {
+  const cachedConfig = Object.freeze(cloneModelConfig(config));
+  _modelConfigCache.set(root, cachedConfig);
+  return cloneModelConfig(cachedConfig);
+}
+
+function isPositiveFiniteNumber(value) {
+  return Number.isFinite(value) && value > 0;
+}
+
+/**
+ * Resolve the project root used for model config lookup.
+ *
+ * @param {string|null} basePath - Optional project root override
+ * @returns {string}
+ */
+function resolveConfigRoot(basePath) {
+  return path.resolve(basePath || path.resolve(__dirname, '..', '..', '..', '..'));
+}
+
+/**
+ * Read model configuration from core-config.yaml → models section.
+ * Returns { contextWindow, avgTokensPerPrompt } for the active model.
+ * Falls back to DEFAULTS if config is missing or malformed.
+ *
+ * @param {string|null} [basePath=null] - Project root override (defaults to __dirname-based resolution)
+ * @returns {{ maxContext: number, avgTokensPerPrompt: number }}
+ */
+function getModelConfig(basePath = null) {
+  const root = resolveConfigRoot(basePath);
+  if (_modelConfigCache.has(root)) return cloneModelConfig(_modelConfigCache.get(root));
+
+  try {
+    const yaml = require('js-yaml');
+    let configPath = path.join(root, '.aios-core', 'core-config.yaml');
+    if (!fs.existsSync(configPath)) {
+      configPath = path.join(root, '.aiox-core', 'core-config.yaml');
+    }
+    if (!fs.existsSync(configPath)) {
+      return cacheModelConfig(root, DEFAULTS);
+    }
+
+    const config = yaml.load(fs.readFileSync(configPath, 'utf8'));
+    const models = config && config.models;
+    if (!models || !models.registry || !models.active) {
+      return cacheModelConfig(root, DEFAULTS);
+    }
+
+    const activeModel = models.registry[models.active];
+    if (!activeModel || !isPositiveFiniteNumber(activeModel.contextWindow)) {
+      return cacheModelConfig(root, DEFAULTS);
+    }
+
+    const modelConfig = {
+      maxContext: activeModel.contextWindow,
+      avgTokensPerPrompt: isPositiveFiniteNumber(activeModel.avgTokensPerPrompt)
+        ? activeModel.avgTokensPerPrompt
+        : DEFAULTS.avgTokensPerPrompt,
+    };
+    return cacheModelConfig(root, modelConfig);
+  } catch (err) {
+    if (process.env.DEBUG || process.env.AIOX_DEBUG) {
+      console.warn('[context-tracker] Failed to load model config, using defaults:', err.message);
+    }
+    return cacheModelConfig(root, DEFAULTS);
+  }
+}
 
 /**
  * Layer configurations per bracket.
@@ -101,16 +180,20 @@ function calculateBracket(contextPercent) {
  * Formula: 100 - ((promptCount * avgTokensPerPrompt) / maxContext * 100)
  * Result is clamped to 0-100 range.
  *
+ * Reads maxContext and avgTokensPerPrompt from core-config.yaml → models.registry
+ * for the active model. Options parameter can override for testing.
+ *
  * @param {number} promptCount - Number of prompts in current session
- * @param {Object} [options={}] - Configuration options
- * @param {number} [options.avgTokensPerPrompt=1500] - Average tokens per prompt
- * @param {number} [options.maxContext=200000] - Maximum context window size in tokens
+ * @param {Object} [options={}] - Configuration options (override config values)
+ * @param {number} [options.avgTokensPerPrompt] - Average tokens per prompt
+ * @param {number} [options.maxContext] - Maximum context window size in tokens
  * @returns {number} Percentage of context remaining (0.0 to 100.0)
  */
 function estimateContextPercent(promptCount, options = {}) {
+  const modelConfig = getModelConfig();
   const {
-    avgTokensPerPrompt = DEFAULTS.avgTokensPerPrompt,
-    maxContext = DEFAULTS.maxContext,
+    avgTokensPerPrompt = modelConfig.avgTokensPerPrompt,
+    maxContext = modelConfig.maxContext,
   } = options;
 
   if (typeof promptCount !== 'number' || isNaN(promptCount) || promptCount < 0) {
@@ -184,6 +267,19 @@ function needsMemoryHints(bracket) {
   return bracket === 'DEPLETED' || bracket === 'CRITICAL';
 }
 
+/**
+ * Reset the model config cache. Useful for tests or after config changes.
+ *
+ * @param {string|null} [basePath=null] - Optional project root override
+ */
+function resetModelConfigCache(basePath = null) {
+  if (basePath === null) {
+    _modelConfigCache.clear();
+    return;
+  }
+  _modelConfigCache.delete(resolveConfigRoot(basePath));
+}
+
 module.exports = {
   calculateBracket,
   estimateContextPercent,
@@ -191,6 +287,8 @@ module.exports = {
   getActiveLayers,
   needsHandoffWarning,
   needsMemoryHints,
+  getModelConfig,
+  resetModelConfigCache,
   BRACKETS,
   TOKEN_BUDGETS,
   DEFAULTS,

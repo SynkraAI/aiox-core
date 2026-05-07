@@ -22,7 +22,7 @@ const TEST_QUERIES = [
   { query: 'analyze code dependencies', expectedTool: 'code-graph', category: 'code-intelligence' },
   { query: 'code analysis intelligence', expectedTool: 'nogic', category: 'code-intelligence' },
   { query: 'look up library documentation', expectedTool: 'context7', category: 'documentation' },
-  { query: 'database query optimization', expectedTool: 'supabase', category: 'database' }
+  { query: 'database query optimization', expectedTool: 'supabase', category: 'database' },
 ];
 
 function parseKeywords(content) {

@@ -35,6 +35,11 @@ describe('getMergeStrategy', () => {
     expect(merger).toBeInstanceOf(MarkdownMerger);
   });
 
+  it('should return MarkdownMerger for Cursor .mdc files', () => {
+    const merger = getMergeStrategy('.cursor/rules/aiox-global.mdc');
+    expect(merger).toBeInstanceOf(MarkdownMerger);
+  });
+
   it('should return MarkdownMerger for README.md', () => {
     const merger = getMergeStrategy('README.md');
     expect(merger).toBeInstanceOf(MarkdownMerger);
@@ -70,6 +75,10 @@ describe('hasMergeStrategy', () => {
     expect(hasMergeStrategy('CLAUDE.md')).toBe(true);
   });
 
+  it('should return true for .mdc files', () => {
+    expect(hasMergeStrategy('.cursor/rules/aiox-global.mdc')).toBe(true);
+  });
+
   it('should return false for unsupported files', () => {
     expect(hasMergeStrategy('config.toml')).toBe(false);
   });
@@ -96,6 +105,11 @@ describe('getSupportedTypes', () => {
   it('should include .md in extensions', () => {
     const types = getSupportedTypes();
     expect(types.extensions).toContain('.md');
+  });
+
+  it('should include .mdc in extensions', () => {
+    const types = getSupportedTypes();
+    expect(types.extensions).toContain('.mdc');
   });
 
   it('should include .env in filenames', () => {
@@ -149,5 +163,46 @@ describe('ReplaceMerger', () => {
 
   it('should report canMerge as false', () => {
     expect(merger.canMerge('', '')).toBe(false);
+  });
+});
+
+describe('MarkdownMerger', () => {
+  let merger;
+
+  beforeEach(() => {
+    merger = new MarkdownMerger();
+  });
+
+  it('should preserve MDC frontmatter during legacy migrations', async () => {
+    const existing = `---
+description: 'Existing Cursor rule'
+alwaysApply: false
+---
+
+# Existing rule
+`;
+    const template = `<!-- AIOX-MANAGED-START: cursor-rule -->
+Generated Cursor rule content
+<!-- AIOX-MANAGED-END: cursor-rule -->
+`;
+
+    const result = await merger.merge(existing, template);
+
+    expect(result.content).toContain("description: 'Existing Cursor rule'");
+    expect(result.content).toMatch(/# Existing rule\n{2,}<!-- AIOX-MANAGED SECTIONS -->/);
+    expect(result.content).not.toContain('# Existing rule\n\n---\n\n<!-- AIOX-MANAGED SECTIONS -->');
+    expect(result.content.match(/^---$/gm)).toHaveLength(2);
+  });
+
+  it('should keep the legacy separator for markdown without frontmatter', async () => {
+    const existing = '# Existing rule\n';
+    const template = `<!-- AIOX-MANAGED-START: cursor-rule -->
+Generated Cursor rule content
+<!-- AIOX-MANAGED-END: cursor-rule -->
+`;
+
+    const result = await merger.merge(existing, template);
+
+    expect(result.content).toContain('# Existing rule\n\n---\n\n<!-- AIOX-MANAGED SECTIONS -->');
   });
 });

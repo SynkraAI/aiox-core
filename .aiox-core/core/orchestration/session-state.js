@@ -68,13 +68,21 @@ const ResumeOption = {
 };
 
 /**
- * Session State Manager class
+ * SessionState - Persistent session state manager.
+ *
+ * Stores Bob orchestration progress in docs/stories/.session-state.yaml so
+ * long-running epic/story work can resume after pauses, crashes, or terminal
+ * restarts. The manager also supports session-scoped overrides and migration
+ * from the legacy workflow-state format.
  */
 class SessionState {
   /**
-   * Creates a new SessionState instance
+   * Creates a new SessionState instance.
+   *
    * @param {string} projectRoot - Project root directory
-   * @param {Object} options - Options
+   * @param {Object} [options] - Options
+   * @param {boolean} [options.debug=false] - Enable debug logging
+   * @param {boolean} [options.autoMigrate=true] - Attempt migration from legacy workflow state on load
    */
   constructor(projectRoot, options = {}) {
     this.projectRoot = projectRoot;
@@ -221,9 +229,20 @@ class SessionState {
   }
 
   /**
-   * Updates the session state
+   * Updates selected sections of the session state.
+   *
+   * Supported update sections are progress, workflow, last_action,
+   * context_snapshot, and overrides. The method refreshes last_updated,
+   * regenerates resume instructions, and persists the updated state to disk.
+   *
    * @param {Object} updates - Fields to update
+   * @param {Object} [updates.progress] - Progress fields to merge
+   * @param {Object} [updates.workflow] - Workflow fields to merge
+   * @param {Object} [updates.last_action] - Last action fields to replace with a fresh timestamp
+   * @param {Object} [updates.context_snapshot] - Context snapshot fields to merge
+   * @param {Object} [updates.overrides] - Session override values to merge
    * @returns {Promise<Object>} Updated session state
+   * @throws {Error} If session state has not been initialized
    */
   async updateSessionState(updates) {
     if (!this.state) {
@@ -434,8 +453,14 @@ class SessionState {
   }
 
   /**
-   * Generates human-readable resume instructions
+   * Generates human-readable resume instructions.
+   *
    * @param {Object} context - Context for instructions
+   * @param {string|null} context.currentStory - Current story ID
+   * @param {number} context.storiesDone - Number of completed stories
+   * @param {number} context.totalStories - Total stories in the epic
+   * @param {string|null} context.lastPhase - Last recorded workflow phase
+   * @param {string|null} context.lastExecutor - Last executor agent
    * @returns {string} Resume instructions text
    */
   generateResumeInstructions(context) {

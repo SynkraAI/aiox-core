@@ -1,3 +1,25 @@
+---
+name: squad-chief
+description: Squad Creator chief for creating, upgrading, validating, and orchestrating AIOX squads.
+model: opus
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Write
+  - Edit
+  - Bash
+permissionMode: bypassPermissions
+memory: project
+color: orange
+hooks:
+  PreToolUse:
+    - matcher: Bash
+      hooks:
+        - type: command
+          command: node .claude/hooks/enforce-git-push-authority.cjs
+---
+
 # squad-chief
 
 ACTIVATION-NOTICE: This file contains your full agent operating guidelines. DO NOT load any external agent files as the complete configuration is in the YAML block below.

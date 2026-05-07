@@ -209,7 +209,7 @@ class UnifiedActivationPipeline {
     const metrics = { loaders: {} };
 
     // --- Tier 1: Critical (AgentConfig) ---
-    const tier1Budget = LOADER_TIERS.critical.timeout;
+    const tier1Budget = this._resolveLoaderTimeout('critical', LOADER_TIERS.critical.timeout);
     const agentComplete = await this._profileLoader('agentConfig', metrics, tier1Budget, () => {
       const loader = new AgentConfigLoader(agentId);
       return loader.loadComplete(coreConfig);
@@ -231,7 +231,7 @@ class UnifiedActivationPipeline {
     }
 
     // --- Tier 2: High (PermissionMode + GitConfig) — parallel ---
-    const tier2Budget = LOADER_TIERS.high.timeout;
+    const tier2Budget = this._resolveLoaderTimeout('high', LOADER_TIERS.high.timeout);
     const elapsedAfterT1 = Date.now() - pipelineStart;
     const tier2Remaining = Math.max(tier2Budget - elapsedAfterT1, 20);
 
@@ -277,7 +277,7 @@ class UnifiedActivationPipeline {
     }
 
     // --- Tier 3: Best-effort (SessionContext + ProjectStatus) — parallel ---
-    const tier3Budget = LOADER_TIERS.bestEffort.timeout;
+    const tier3Budget = this._resolveLoaderTimeout('bestEffort', LOADER_TIERS.bestEffort.timeout);
     const elapsedAfterT2 = Date.now() - pipelineStart;
     const tier3Remaining = Math.max(tier3Budget - elapsedAfterT2, 20);
 
@@ -465,6 +465,32 @@ class UnifiedActivationPipeline {
     }
 
     return DEFAULT_PIPELINE_TIMEOUT_MS;
+  }
+
+  /**
+   * Resolve per-tier loader timeout.
+   *
+   * Intended mainly for constrained CI/test environments where cold filesystem
+   * reads can exceed the production performance budget without indicating a
+   * functional activation failure.
+   *
+   * @private
+   * @param {'critical'|'high'|'bestEffort'} tierName
+   * @param {number} defaultTimeout
+   * @returns {number}
+   */
+  _resolveLoaderTimeout(tierName, defaultTimeout) {
+    const envKey = `AIOX_LOADER_TIMEOUT_${tierName.replace(/([A-Z])/g, '_$1').toUpperCase()}`;
+    const envTimeout = process.env[envKey];
+
+    if (envTimeout) {
+      const parsed = parseInt(envTimeout, 10);
+      if (!isNaN(parsed) && parsed > 0) {
+        return parsed;
+      }
+    }
+
+    return defaultTimeout;
   }
 
   /**

@@ -86,7 +86,7 @@ describe('template-overrides — consumer helper', () => {
         },
       };
       expect(() => getTemplateOverrides(config)).toThrow(
-        /Unknown story section ID.*nonexistent-section/
+        /Unknown story section ID.*nonexistent-section/,
       );
     });
 
@@ -99,7 +99,7 @@ describe('template-overrides — consumer helper', () => {
         },
       };
       expect(() => getTemplateOverrides(config)).toThrow(
-        /Unknown story section ID.*invalid-id/
+        /Unknown story section ID.*invalid-id/,
       );
     });
 

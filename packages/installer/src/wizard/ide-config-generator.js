@@ -16,6 +16,29 @@ const { spawnSync } = require('child_process');
 const { getIDEConfig } = require('../config/ide-configs');
 const { validateProjectName } = require('./validators');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
+const { requireAioxCoreModule, resolveAioxCorePath } = require('../utils/package-paths');
+
+function loadCodexSkillsSync() {
+  return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index');
+}
+
+function escapeMdcFrontmatterString(value) {
+  return String(value || '')
+    .replace(/\r?\n/g, ' ')
+    .replace(/'/g, "''")
+    .trim();
+}
+
+function createCursorMdcFallbackContent(agentName, rawContent) {
+  const safeAgentName = escapeMdcFrontmatterString(agentName || 'agent');
+
+  return `---
+description: 'AIOX agent @${safeAgentName}'
+alwaysApply: false
+---
+
+${rawContent}`;
+}
 
 /**
  * Render template with variables
@@ -83,7 +106,11 @@ async function backupFile(filePath) {
 async function promptFileExists(filePath, options = {}) {
   const { projectType, forceMerge, noMerge } = options;
   const canMerge = !noMerge && hasMergeStrategy(filePath);
-  const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_AIOX';
+  const normalizedProjectType = String(projectType || '').toLowerCase();
+  const isBrownfield =
+    normalizedProjectType === 'brownfield' ||
+    normalizedProjectType === 'existing_aiox' ||
+    normalizedProjectType === 'existing-aiox';
 
   // If force merge is set and merge is available, return merge directly
   if (forceMerge && canMerge) {
@@ -215,7 +242,7 @@ function generateTemplateVariables(wizardState) {
  */
 async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
   // v4: Agents are in development/agents/ (not root agents/)
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aiox-core', 'development', 'agents');
+  const sourceDir = resolveAioxCorePath('.aiox-core', 'development', 'agents');
   const targetDir = path.join(projectRoot, agentFolder);
   const copiedFiles = [];
 
@@ -232,6 +259,7 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
 
   // Check if this is AntiGravity - needs workflow files instead of direct copy
   const isAntiGravity = ideConfig && ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
+  const isCursor = ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.cursor');
 
   for (const file of agentFiles) {
     const sourcePath = path.join(sourceDir, file);
@@ -253,18 +281,63 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
         const agentTargetPath = path.join(agentsDir, file);
         await fs.copy(sourcePath, agentTargetPath);
         copiedFiles.push(agentTargetPath);
+      } else if (isCursor) {
+        // Cursor: generate .mdc project rules with frontmatter instead of raw agent markdown.
+        try {
+          const agentParser = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'agent-parser',
+          );
+          const cursorTransformer = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'transformers',
+            'cursor',
+          );
+          const agentData = agentParser.parseAgentFile(sourcePath);
+          const content = cursorTransformer.transform(agentData);
+          const filename = cursorTransformer.getFilename(agentData);
+          const targetPath = path.join(targetDir, filename);
+          await fs.writeFile(targetPath, content, 'utf8');
+          copiedFiles.push(targetPath);
+        } catch (transformError) {
+          const targetPath = path.join(targetDir, `${agentName}.mdc`);
+          const rawContent = await fs.readFile(sourcePath, 'utf8');
+          const fallbackContent = createCursorMdcFallbackContent(agentName, rawContent);
+          await fs.writeFile(targetPath, fallbackContent, 'utf8');
+          copiedFiles.push(targetPath);
+          console.warn(`Cursor transform fallback used for ${file}: ${transformError.message}`);
+        }
       } else if (ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.github')) {
         // GitHub Copilot: apply transformer for .agent.md format with YAML frontmatter
         try {
-          const agentParser = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/agent-parser');
-          const copilotTransformer = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/transformers/github-copilot');
+          const agentParser = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'agent-parser',
+          );
+          const copilotTransformer = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'transformers',
+            'github-copilot',
+          );
           const agentData = agentParser.parseAgentFile(sourcePath);
           const content = copilotTransformer.transform(agentData);
           const filename = copilotTransformer.getFilename(agentData);
           const targetPath = path.join(targetDir, filename);
           await fs.writeFile(targetPath, content, 'utf8');
           copiedFiles.push(targetPath);
-        } catch (transformError) {
+        } catch (_transformError) {
           // Fallback: copy raw file with .agent.md extension
           const targetPath = path.join(targetDir, `${agentName}.agent.md`);
           await fs.copy(sourcePath, targetPath);
@@ -288,7 +361,7 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
  * @returns {Promise<string[]>} List of copied files
  */
 async function copyClaudeRulesFolder(projectRoot) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.claude', 'rules');
+  const sourceDir = resolveAioxCorePath('.claude', 'rules');
   const targetDir = path.join(projectRoot, '.claude', 'rules');
   const copiedFiles = [];
 
@@ -405,7 +478,7 @@ async function createAntiGravityConfigJson(projectRoot, ideConfig) {
  *
  * @example
  * const result = await generateIDEConfigs(['cursor', 'github-copilot'], wizardState);
- * console.log(result.files); // ['.cursorrules', '.github/copilot-instructions.md']
+ * console.log(result.files); // ['.cursor/rules/aiox-global.mdc', '.github/copilot-instructions.md']
  */
 async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
   const projectRoot = options.projectRoot || process.cwd();
@@ -466,7 +539,7 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
         }
 
         // Load template from .aiox-core/product/templates/
-        const templatePath = path.join(__dirname, '..', '..', '..', '..', '.aiox-core', 'product', 'templates', ide.template);
+        const templatePath = resolveAioxCorePath('.aiox-core', 'product', 'templates', ide.template);
 
         if (!await fs.pathExists(templatePath)) {
           throw new Error(`Template file not found: ${ide.template}`);
@@ -526,6 +599,16 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
         // For Claude Code, also copy .claude/rules folder, hooks, and settings
         if (ideKey === 'claude-code') {
+          spinner.start('Copying Claude Code native subagents...');
+          const nativeAgentFiles = await copyClaudeNativeAgentsFolder(projectRoot);
+          createdFiles.push(...nativeAgentFiles);
+          if (nativeAgentFiles.length > 0) {
+            createdFolders.push(path.join(projectRoot, ide.nativeAgentFolder || '.claude/agents'));
+            spinner.succeed(`Copied ${nativeAgentFiles.length} native subagent file(s) to .claude/agents`);
+          } else {
+            spinner.info('No native subagent files to copy');
+          }
+
           spinner.start('Copying Claude Code rules...');
           const rulesFiles = await copyClaudeRulesFolder(projectRoot);
           createdFiles.push(...rulesFiles);
@@ -538,7 +621,7 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
           // BUG-3 fix (INS-1): Copy .claude/hooks/ folder (SYNAPSE engine + precompact)
           spinner.start('Copying Claude Code hooks...');
-          const hookFiles = await copyClaudeHooksFolder(projectRoot);
+          const hookFiles = await copyClaudeHooksFolder(projectRoot, wizardState);
           createdFiles.push(...hookFiles);
           if (hookFiles.length > 0) {
             createdFolders.push(path.join(projectRoot, '.claude', 'hooks'));
@@ -656,10 +739,11 @@ function showSuccessSummary(result) {
  * BUG-3 fix (INS-1): Copy .claude/hooks/ folder during installation
  * Only copies JS hooks that work without external dependencies (Python, etc.)
  * @param {string} projectRoot - Project root directory
+ * @param {Object} [wizardState={}] - Current wizard state
  * @returns {Promise<string[]>} List of copied files
  */
-async function copyClaudeHooksFolder(projectRoot) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.claude', 'hooks');
+async function copyClaudeHooksFolder(projectRoot, wizardState = {}) {
+  const sourceDir = resolveAioxCorePath('.claude', 'hooks');
   const targetDir = path.join(projectRoot, '.claude', 'hooks');
   const copiedFiles = [];
 
@@ -674,13 +758,18 @@ async function copyClaudeHooksFolder(projectRoot) {
 
   await fs.ensureDir(targetDir);
 
-  // Only copy JS hooks that work standalone (no Python/shell deps)
-  const HOOKS_TO_COPY = [
+  const HOOKS_FREE = [
     'synapse-engine.cjs',
     'code-intel-pretool.cjs',
-    'precompact-session-digest.cjs',
+    'enforce-git-push-authority.cjs',
     'README.md',
   ];
+  const HOOKS_PRO_ONLY = [
+    'precompact-session-digest.cjs',
+  ];
+  const HOOKS_TO_COPY = shouldCopyProHooks(wizardState)
+    ? [...HOOKS_FREE, ...HOOKS_PRO_ONLY]
+    : HOOKS_FREE;
 
   const files = await fs.readdir(sourceDir);
 
@@ -703,6 +792,31 @@ async function copyClaudeHooksFolder(projectRoot) {
 }
 
 /**
+ * Decide whether Pro-only hooks should be copied.
+ * Explicit wizard tier wins; otherwise fall back to runtime Pro detection.
+ * Supports wizardState.proTier as a legacy alias from older Pro setup state.
+ *
+ * @param {Object} [wizardState={}] - Current wizard state
+ * @returns {boolean} true when Pro-only hooks should be installed
+ */
+function shouldCopyProHooks(wizardState = {}) {
+  const tier = String(wizardState.tier || wizardState.proTier || '').toLowerCase();
+  if (tier === 'pro') return true;
+  if (['free', 'community', 'core'].includes(tier)) return false;
+
+  if (wizardState.pro && typeof wizardState.pro.enabled === 'boolean') {
+    return wizardState.pro.enabled;
+  }
+
+  try {
+    const { isProAvailable } = requireAioxCoreModule('bin', 'utils', 'pro-detector');
+    return isProAvailable();
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Hook event mapping: fileName → { event, matcher, timeout }
  * Maps each .cjs hook file to its correct Claude Code event.
  * Extensible: add new hooks here as they are created.
@@ -721,6 +835,11 @@ const HOOK_EVENT_MAP = {
     matcher: 'Write|Edit',
     timeout: 10,
   },
+  'enforce-git-push-authority.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Bash',
+    timeout: 10,
+  },
   'precompact-session-digest.cjs': {
     event: 'PreCompact',
     matcher: null,
@@ -734,6 +853,43 @@ const DEFAULT_HOOK_CONFIG = {
   matcher: null,
   timeout: 10,
 };
+
+async function copyClaudeNativeAgentsFolder(projectRoot) {
+  const sourceDir = resolveAioxCorePath('.claude', 'agents');
+  const targetDir = path.join(projectRoot, '.claude', 'agents');
+  const copiedFiles = [];
+
+  if (!await fs.pathExists(sourceDir)) {
+    return copiedFiles;
+  }
+
+  // Framework-dev mode: source and destination are the same checkout.
+  if (path.resolve(sourceDir) === path.resolve(targetDir)) {
+    return copiedFiles;
+  }
+
+  await fs.ensureDir(targetDir);
+
+  const files = await fs.readdir(sourceDir);
+  const agentFiles = files.filter(file =>
+    file.endsWith('.md') &&
+    !file.includes('.backup') &&
+    !file.startsWith('test-'),
+  );
+
+  for (const file of agentFiles) {
+    const sourcePath = path.join(sourceDir, file);
+    const targetPath = path.join(targetDir, file);
+    const stat = await fs.stat(sourcePath);
+
+    if (stat.isFile()) {
+      await fs.copy(sourcePath, targetPath, { overwrite: true });
+      copiedFiles.push(targetPath);
+    }
+  }
+
+  return copiedFiles;
+}
 
 /**
  * BUG-4 fix (INS-1) + MIS-3.1: Create .claude/settings.local.json with hook registration
@@ -841,7 +997,7 @@ async function createClaudeSettingsLocal(projectRoot) {
  * @returns {Promise<string[]>} List of copied files
  */
 async function copyGeminiHooksFolder(projectRoot) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aiox-core', 'hooks', 'gemini');
+  const sourceDir = resolveAioxCorePath('.aiox-core', 'hooks', 'gemini');
   const targetDir = path.join(projectRoot, '.gemini', 'hooks');
   const copiedFiles = [];
 
@@ -1062,7 +1218,7 @@ async function linkGeminiExtension(projectRoot) {
 async function copySkillFiles(projectRoot, _sourceRoot) {
   const sourceDir = _sourceRoot
     ? path.join(_sourceRoot, '.claude', 'skills')
-    : path.join(__dirname, '..', '..', '..', '..', '.claude', 'skills');
+    : resolveAioxCorePath('.claude', 'skills');
   const targetDir = path.join(projectRoot, '.claude', 'skills');
 
   if (!await fs.pathExists(sourceDir)) {
@@ -1091,6 +1247,36 @@ async function copySkillFiles(projectRoot, _sourceRoot) {
 }
 
 /**
+ * Generate project-local Codex skills from canonical agent definitions.
+ * This repo uses local-first Codex activation, so installed projects must
+ * include `.codex/skills` without requiring a manual post-install sync.
+ * @param {string} projectRoot - Project root directory
+ * @returns {{count: number, skipped: boolean}} Generation result
+ */
+function generateCodexSkills(projectRoot) {
+  const sourceDir = path.join(projectRoot, '.aiox-core', 'development', 'agents');
+  const localSkillsDir = path.join(projectRoot, '.codex', 'skills');
+
+  if (!fs.existsSync(sourceDir)) {
+    return { count: 0, skipped: true };
+  }
+
+  const { syncSkills } = loadCodexSkillsSync();
+  const result = syncSkills({
+    projectRoot,
+    sourceDir,
+    localSkillsDir,
+    dryRun: false,
+    quiet: true,
+  });
+
+  return {
+    count: result.generated || 0,
+    skipped: false,
+  };
+}
+
+/**
  * Copy extra .claude/commands/ files during installation (Story INS-4.3, Gap #12)
  * Uses an allowlist of distributable top-level directories to prevent leaking
  * private squads or project-specific content into installed projects.
@@ -1101,7 +1287,7 @@ async function copySkillFiles(projectRoot, _sourceRoot) {
 async function copyExtraCommandFiles(projectRoot, _sourceRoot) {
   const sourceDir = _sourceRoot
     ? path.join(_sourceRoot, '.claude', 'commands')
-    : path.join(__dirname, '..', '..', '..', '..', '.claude', 'commands');
+    : resolveAioxCorePath('.claude', 'commands');
   const targetDir = path.join(projectRoot, '.claude', 'commands');
 
   if (!await fs.pathExists(sourceDir)) {
@@ -1174,8 +1360,12 @@ module.exports = {
   promptFileExists,
   generateTemplateVariables,
   copyClaudeHooksFolder,
+  copyClaudeNativeAgentsFolder,
+  shouldCopyProHooks,
   createClaudeSettingsLocal,
+  createCursorMdcFallbackContent,
   copySkillFiles,
+  generateCodexSkills,
   copyExtraCommandFiles,
   copyGeminiHooksFolder,
   createGeminiSettings,

@@ -23,6 +23,16 @@ const PROJECT_ROOT = path.join(__dirname, '..', '..');
 const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const CRITICAL_FILE = path.join(PRO_DIR, 'license', 'license-api.js');
 const MIN_FILE_COUNT = 50;
+const DEFAULT_PACK_TIMEOUT_MS = 300000;
+const parsedPackTimeoutMs = Number.parseInt(
+  process.env.AIOX_VALIDATE_PUBLISH_PACK_TIMEOUT_MS || '',
+  10
+);
+const PACK_TIMEOUT_MS =
+  Number.isFinite(parsedPackTimeoutMs) && parsedPackTimeoutMs > 0
+    ? parsedPackTimeoutMs
+    : DEFAULT_PACK_TIMEOUT_MS;
+const PACK_MAX_BUFFER = 1024 * 1024 * 20;
 
 // CI environments may not have access to the private pro submodule
 const IS_CI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
@@ -30,22 +40,54 @@ const IS_CI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true'
 let passed = true;
 let fileCount = 0;
 
+function countPackedFiles(packOutput) {
+  try {
+    const parsed = JSON.parse(packOutput);
+    const firstPackage = Array.isArray(parsed) ? parsed[0] : parsed;
+    if (firstPackage && Array.isArray(firstPackage.files)) {
+      return firstPackage.files.length;
+    }
+  } catch (_err) {
+    // Older npm versions may emit notice lines instead of valid JSON; parse that legacy output.
+  }
+
+  return packOutput
+    .split('\n')
+    .filter(
+      (line) =>
+        line.includes('npm notice') &&
+        !line.includes('Tarball') &&
+        !line.includes('name:') &&
+        !line.includes('version:') &&
+        !line.includes('filename:') &&
+        !line.includes('package size:') &&
+        !line.includes('unpacked size:') &&
+        !line.includes('shasum:') &&
+        !line.includes('integrity:') &&
+        !line.includes('total files:')
+    ).length;
+}
+
 // Check 1: pro/ submodule populated
 console.log('--- Publish Safety Gate (INS-4.10) ---\n');
 
 if (!fs.existsSync(PRO_DIR)) {
   if (IS_CI) {
-    console.log('SKIP: pro/ directory not available (CI — private submodule requires separate access token)');
+    console.log(
+      'SKIP: pro/ directory not available (CI — private submodule requires separate access token)'
+    );
   } else {
     console.error('FAIL: pro/ directory does not exist.');
     console.error('  Fix: git submodule update --init pro');
     passed = false;
   }
 } else {
-  const entries = fs.readdirSync(PRO_DIR).filter(e => e !== '.git');
+  const entries = fs.readdirSync(PRO_DIR).filter((e) => e !== '.git');
   if (entries.length === 0) {
     if (IS_CI) {
-      console.log('SKIP: pro/ submodule empty (CI — private submodule requires separate access token)');
+      console.log(
+        'SKIP: pro/ submodule empty (CI — private submodule requires separate access token)'
+      );
     } else {
       console.error('FAIL: pro/ submodule not initialized (directory is empty).');
       console.error('  Fix: git submodule update --init pro');
@@ -72,19 +114,13 @@ if (!fs.existsSync(CRITICAL_FILE)) {
 
 // Check 3: File count threshold via npm pack --dry-run
 try {
-  const packOutput = execSync('npm pack --dry-run 2>&1', {
+  const packOutput = execSync('npm pack --dry-run --json', {
     encoding: 'utf8',
     cwd: PROJECT_ROOT,
-    timeout: 30000,
+    timeout: PACK_TIMEOUT_MS,
+    maxBuffer: PACK_MAX_BUFFER,
   });
-  // npm pack --dry-run outputs lines starting with "npm notice" for each file
-  const fileLines = packOutput.split('\n').filter(line =>
-    line.includes('npm notice') && !line.includes('Tarball') && !line.includes('name:') &&
-    !line.includes('version:') && !line.includes('filename:') && !line.includes('package size:') &&
-    !line.includes('unpacked size:') && !line.includes('shasum:') && !line.includes('integrity:') &&
-    !line.includes('total files:'),
-  );
-  fileCount = fileLines.length;
+  fileCount = countPackedFiles(packOutput);
 
   if (fileCount < MIN_FILE_COUNT) {
     console.error(`FAIL: Package has only ${fileCount} files, expected >= ${MIN_FILE_COUNT}.`);

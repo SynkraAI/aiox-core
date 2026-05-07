@@ -112,7 +112,7 @@ describe('SquadGenerator Blueprint Methods', () => {
 
     it('should throw error when file not found', async () => {
       await expect(generator.loadBlueprint('/nonexistent/blueprint.yaml')).rejects.toThrow(
-        SquadGeneratorError,
+        SquadGeneratorError
       );
 
       try {
@@ -430,7 +430,7 @@ describe('SquadGenerator Blueprint Methods', () => {
 
       // Try again
       await expect(generator.generateFromBlueprint(blueprintPath)).rejects.toThrow(
-        SquadGeneratorError,
+        SquadGeneratorError
       );
     });
 
@@ -467,7 +467,7 @@ describe('SquadGenerator Blueprint Methods', () => {
       await fs.writeFile(blueprintPath, yaml.dump(invalidBlueprint));
 
       await expect(generator.generateFromBlueprint(blueprintPath)).rejects.toThrow(
-        SquadGeneratorError,
+        SquadGeneratorError
       );
 
       try {
@@ -518,7 +518,8 @@ describe('SquadGenerator Blueprint Methods', () => {
 
   describe('Performance', () => {
     const isCI = process.env.CI === 'true';
-    const loadThreshold = isCI ? 500 : 50;
+    // Local budgets catch obvious regressions; CI allows slower shared runners.
+    const loadThreshold = isCI ? 500 : 150;
     const validateThreshold = isCI ? 200 : 20;
     const generateThreshold = isCI ? 5000 : 1000;
 

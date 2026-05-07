@@ -31,7 +31,22 @@ const MAX_RETRIES = 3;
 const LOCKS_DIR = '.aiox/locks';
 
 /**
- * LockManager - File-based locking with PID/TTL management
+ * File lock payload persisted to .aiox/locks.
+ *
+ * @typedef {Object} LockFile
+ * @property {number} pid - Process ID that created the lock
+ * @property {string} owner - Owner module or workflow identifier
+ * @property {string} created_at - ISO timestamp when the lock was created
+ * @property {number} ttl_seconds - Lock time-to-live in seconds
+ * @property {string} resource - Protected resource name
+ */
+
+/**
+ * LockManager - File-based locking with PID/TTL management.
+ *
+ * Provides cooperative mutual exclusion for Bob orchestration resources using
+ * YAML lock files, stale-lock cleanup, TTL expiration, and process liveness
+ * checks.
  */
 class LockManager {
   /**
@@ -228,9 +243,10 @@ class LockManager {
   }
 
   /**
-   * Reads and parses a lock file
+   * Reads and parses a lock file.
+   *
    * @param {string} lockPath - Path to lock file
-   * @returns {Promise<Object|null>} Lock data or null
+   * @returns {Promise<LockFile|null>} Lock data, or null when the file is absent or unreadable
    * @private
    */
   async _readLock(lockPath) {
@@ -243,8 +259,12 @@ class LockManager {
   }
 
   /**
-   * Checks if a lock is stale (TTL expired or PID dead)
-   * @param {Object} lock - Lock data
+   * Checks if a lock is stale.
+   *
+   * A lock is stale when its TTL has expired or its owning process ID is no
+   * longer alive.
+   *
+   * @param {LockFile|null} lock - Lock data
    * @returns {boolean} True if lock is stale
    * @private
    */

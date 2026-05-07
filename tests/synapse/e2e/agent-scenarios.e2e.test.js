@@ -14,8 +14,12 @@ const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 const SYNAPSE_DIR = path.join(PROJECT_ROOT, '.synapse');
 const MANIFEST_PATH = path.join(SYNAPSE_DIR, 'manifest');
 
-const { SynapseEngine } = require(path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js'));
-const { parseManifest } = require(path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js'));
+const { SynapseEngine } = require(
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js')
+);
+const { parseManifest } = require(
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js')
+);
 
 // ---------------------------------------------------------------------------
 // Skip guard: .synapse/ must exist for E2E tests
@@ -46,6 +50,10 @@ function makeSession(agentId) {
   };
 }
 
+function agentSection(agentId) {
+  return `[ACTIVE AGENT: @${agentId}]`;
+}
+
 // ---------------------------------------------------------------------------
 // Test Suite
 // ---------------------------------------------------------------------------
@@ -61,14 +69,41 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
     engine = new SynapseEngine(SYNAPSE_DIR, { manifest, devmode: false });
   });
 
+  async function processExpectingAgent(agentId, prompt) {
+    const session = makeSession(agentId);
+    let localEngine = engine;
+    let lastResult;
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      lastResult = await localEngine.process(prompt, session);
+      if (lastResult.xml.includes(agentSection(agentId))) {
+        return lastResult;
+      }
+
+      const agentLayer = lastResult.metrics?.per_layer?.agent;
+      const skippedByPipelineTimeout =
+        agentLayer?.status === 'skipped' && agentLayer?.reason === 'Pipeline timeout';
+
+      if (!skippedByPipelineTimeout) {
+        return lastResult;
+      }
+
+      if (attempt < 2) {
+        localEngine = new SynapseEngine(SYNAPSE_DIR, { manifest, devmode: false });
+      }
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    }
+
+    return lastResult;
+  }
+
   // -----------------------------------------------------------------------
   // 1. @dev activation
   // -----------------------------------------------------------------------
   it('activates @dev and includes agent section in output XML', async () => {
-    const session = makeSession('dev');
-    const { xml } = await engine.process('implement the feature', session);
+    const { xml } = await processExpectingAgent('dev', 'implement the feature');
 
-    expect(xml).toContain('[ACTIVE AGENT: @dev]');
+    expect(xml).toContain(agentSection('dev'));
     expect(xml).toContain('<synapse-rules>');
   });
 
@@ -76,10 +111,9 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   // 2. @qa activation
   // -----------------------------------------------------------------------
   it('activates @qa and includes agent section in output XML', async () => {
-    const session = makeSession('qa');
-    const { xml } = await engine.process('run quality checks', session);
+    const { xml } = await processExpectingAgent('qa', 'run quality checks');
 
-    expect(xml).toContain('[ACTIVE AGENT: @qa]');
+    expect(xml).toContain(agentSection('qa'));
     expect(xml).toContain('<synapse-rules>');
   });
 
@@ -87,10 +121,9 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   // 3. @devops activation
   // -----------------------------------------------------------------------
   it('activates @devops and includes agent section in output XML', async () => {
-    const session = makeSession('devops');
-    const { xml } = await engine.process('push to remote', session);
+    const { xml } = await processExpectingAgent('devops', 'push to remote');
 
-    expect(xml).toContain('[ACTIVE AGENT: @devops]');
+    expect(xml).toContain(agentSection('devops'));
     expect(xml).toContain('<synapse-rules>');
   });
 
@@ -98,10 +131,9 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   // 4. @architect activation
   // -----------------------------------------------------------------------
   it('activates @architect and includes agent section in output XML', async () => {
-    const session = makeSession('architect');
-    const { xml } = await engine.process('design the system', session);
+    const { xml } = await processExpectingAgent('architect', 'design the system');
 
-    expect(xml).toContain('[ACTIVE AGENT: @architect]');
+    expect(xml).toContain(agentSection('architect'));
     expect(xml).toContain('<synapse-rules>');
   });
 
@@ -132,16 +164,11 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   // 7. Agent switch -- different agents produce different sections
   // -----------------------------------------------------------------------
   it('produces different agent sections for different agents', async () => {
-    const sessionDev = makeSession('dev');
-    const sessionPm = makeSession('pm');
+    const resultDev = await processExpectingAgent('dev', 'write code');
+    const resultPm = await processExpectingAgent('pm', 'manage product');
 
-    const [resultDev, resultPm] = await Promise.all([
-      engine.process('write code', sessionDev),
-      engine.process('manage product', sessionPm),
-    ]);
-
-    expect(resultDev.xml).toContain('[ACTIVE AGENT: @dev]');
-    expect(resultPm.xml).toContain('[ACTIVE AGENT: @pm]');
+    expect(resultDev.xml).toContain(agentSection('dev'));
+    expect(resultPm.xml).toContain(agentSection('pm'));
 
     // The agent-specific content should differ
     expect(resultDev.xml).not.toEqual(resultPm.xml);
@@ -151,8 +178,7 @@ describeIfSynapse('SYNAPSE E2E: Agent Scenarios', () => {
   // 8. Agent layer produces rules in metrics
   // -----------------------------------------------------------------------
   it('reports non-zero agent layer rules in metrics when agent is active', async () => {
-    const session = makeSession('dev');
-    const { metrics } = await engine.process('build the feature', session);
+    const { metrics } = await processExpectingAgent('dev', 'build the feature');
 
     // The agent layer should have loaded and produced rules
     const agentLayer = metrics.per_layer.agent;

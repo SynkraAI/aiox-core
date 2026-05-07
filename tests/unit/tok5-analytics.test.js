@@ -14,7 +14,7 @@ const {
   validateEvent,
   pruneOldEntries,
   generateSampleData,
-  RETENTION_DAYS
+  RETENTION_DAYS,
 } = require('../../.aiox-core/infrastructure/scripts/collect-tool-usage');
 
 const {
@@ -22,7 +22,7 @@ const {
   generateRecommendations,
   generateReport,
   aggregateUsage,
-  DEFAULT_THRESHOLDS
+  DEFAULT_THRESHOLDS,
 } = require('../../.aiox-core/infrastructure/scripts/generate-optimization-report');
 
 // --- Helpers ---
@@ -33,7 +33,7 @@ function makeSession(id, events, daysAgo = 0) {
     session_id: id,
     timestamp: ts.toISOString(),
     event_count: events.length,
-    events
+    events,
   };
 }
 
@@ -108,7 +108,7 @@ describe('collect-tool-usage.js', () => {
     it('keeps sessions within retention window', () => {
       const sessions = [
         makeSession('recent', [makeEvent('Read', 1, 100, 50, 'test-session', 5)], 5),
-        makeSession('old', [makeEvent('Read', 1, 100, 50, 'test-session', 40)], 40)
+        makeSession('old', [makeEvent('Read', 1, 100, 50, 'test-session', 40)], 40),
       ];
       const { pruned, removed } = pruneOldEntries(sessions);
       expect(pruned).toHaveLength(1);
@@ -119,7 +119,7 @@ describe('collect-tool-usage.js', () => {
     it('returns empty for all-old sessions', () => {
       const sessions = [
         makeSession('old1', [makeEvent('Read', 1, 100, 50, 'test-session', 35)], 35),
-        makeSession('old2', [makeEvent('Read', 1, 100, 50, 'test-session', 60)], 60)
+        makeSession('old2', [makeEvent('Read', 1, 100, 50, 'test-session', 60)], 60),
       ];
       const { pruned, removed } = pruneOldEntries(sessions);
       expect(pruned).toHaveLength(0);
@@ -153,31 +153,31 @@ describe('generate-optimization-report.js', () => {
       Write: { tier: 1, tokenCost: 200 },
       Bash: { tier: 1, tokenCost: 300 },
       git: { tier: 2, tokenCost: 100 },
-      exa: { tier: 3, tokenCost: 500 }
-    }
+      exa: { tier: 3, tokenCost: 500 },
+    },
   };
 
   const mockBaseline = {
     frameworkOverhead: { totalEstimatedTokens: 26143 },
     workflows: {
       'Story Development Cycle (SDC)': {
-        median: { totalTokens: 188000 }
-      }
+        median: { totalTokens: 188000 },
+      },
     },
     comparison: {
       aioxActual: {
         overheadPercentOfTypicalSession: {
-          'Story Development Cycle (SDC)': 13.9
-        }
-      }
-    }
+          'Story Development Cycle (SDC)': 13.9,
+        },
+      },
+    },
   };
 
   describe('aggregateUsage', () => {
     it('aggregates tool stats across sessions', () => {
       const sessions = [
         makeSession('s1', [makeEvent('Read', 5, 1000, 500), makeEvent('Write', 3, 600, 300)]),
-        makeSession('s2', [makeEvent('Read', 8, 1600, 800)])
+        makeSession('s2', [makeEvent('Read', 8, 1600, 800)]),
       ];
       const { toolStats, sessionCount } = aggregateUsage(sessions);
       expect(sessionCount).toBe(2);
@@ -190,7 +190,7 @@ describe('generate-optimization-report.js', () => {
     it('calculates averages correctly', () => {
       const sessions = [
         makeSession('s1', [makeEvent('Read', 10, 2000, 1000)]),
-        makeSession('s2', [makeEvent('Read', 20, 4000, 2000)])
+        makeSession('s2', [makeEvent('Read', 20, 4000, 2000)]),
       ];
       const { toolStats } = aggregateUsage(sessions);
       expect(toolStats.Read.avg_invocations_per_session).toBe(15);
@@ -211,8 +211,8 @@ describe('generate-optimization-report.js', () => {
     it('calculates static overhead from registry tokenCost (C1 fix)', () => {
       const usageData = {
         sessions: [
-          makeSession('s1', [makeEvent('Read', 5, 1000, 500), makeEvent('Bash', 3, 900, 600)])
-        ]
+          makeSession('s1', [makeEvent('Read', 5, 1000, 500), makeEvent('Bash', 3, 900, 600)]),
+        ],
       };
       const result = compareBaseline(mockBaseline, usageData, mockRegistry);
       expect(result.available).toBe(true);
@@ -226,8 +226,8 @@ describe('generate-optimization-report.js', () => {
     it('uses fallback when no registry provided', () => {
       const usageData = {
         sessions: [
-          makeSession('s1', [makeEvent('Read', 5, 1000, 500)])
-        ]
+          makeSession('s1', [makeEvent('Read', 5, 1000, 500)]),
+        ],
       };
       const result = compareBaseline(mockBaseline, usageData, null);
       expect(result.available).toBe(true);
@@ -237,7 +237,7 @@ describe('generate-optimization-report.js', () => {
 
     it('includes dynamic_usage section', () => {
       const usageData = {
-        sessions: [makeSession('s1', [makeEvent('Read', 5, 1000, 500)])]
+        sessions: [makeSession('s1', [makeEvent('Read', 5, 1000, 500)])],
       };
       const result = compareBaseline(mockBaseline, usageData, mockRegistry);
       expect(result.dynamic_usage).toBeDefined();
@@ -248,7 +248,7 @@ describe('generate-optimization-report.js', () => {
     it('correctly assigns target status', () => {
       // With Read(200) only = 200 post-opt vs 26143 baseline = 99% reduction
       const usageData = {
-        sessions: [makeSession('s1', [makeEvent('Read', 1, 200, 100)])]
+        sessions: [makeSession('s1', [makeEvent('Read', 1, 200, 100)])],
       };
       const result = compareBaseline(mockBaseline, usageData, mockRegistry);
       expect(result.target_25_45_pct).toBe('ACHIEVED');
@@ -338,11 +338,11 @@ describe('generate-optimization-report.js', () => {
         available: true,
         absolute_reduction_tokens: 25000,
         percentage_reduction: 95.6,
-        target_25_45_pct: 'ACHIEVED'
+        target_25_45_pct: 'ACHIEVED',
       };
       const recs = [
         { action: 'promote', tool_name: 'git' },
-        { action: 'demote', tool_name: 'ffmpeg' }
+        { action: 'demote', tool_name: 'ffmpeg' },
       ];
       const usageData = { sessions: [makeSession('s1', [makeEvent('Read', 1, 100, 50)])] };
       const report = generateReport(comparison, recs, usageData, DEFAULT_THRESHOLDS);

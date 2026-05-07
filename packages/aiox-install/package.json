@@ -1,6 +1,6 @@
 {
-  "name": "@synkra/aiox-install",
-  "version": "1.0.0",
+  "name": "@aiox-squads/aiox-install",
+  "version": "1.1.0",
   "description": "NPX installer for AIOX - AI-Orchestrated System for Full Stack Development",
   "main": "src/installer.js",
   "bin": {

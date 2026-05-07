@@ -11,10 +11,32 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 // Import dependencies with fallbacks
+const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
 let GotchasMemory;
+let gotchasMemoryLoadError = null;
+
+function recordGotchasMemoryLoadError(error) {
+  gotchasMemoryLoadError = error;
+  if (process.env.AIOX_DEBUG) {
+    console.warn(
+      `[ideation-engine] Optional dependency '${GOTCHAS_MEMORY_MODULE}' failed to load: ${error.stack || error.message}`,
+    );
+  }
+}
+
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
-} catch {
+  const gotchasMemoryModule = require(GOTCHAS_MEMORY_MODULE);
+  if (!gotchasMemoryModule || typeof gotchasMemoryModule.GotchasMemory === 'undefined') {
+    throw new Error(`Missing named export GotchasMemory from ${GOTCHAS_MEMORY_MODULE}`);
+  }
+  if (typeof gotchasMemoryModule.GotchasMemory !== 'function') {
+    throw new Error(
+      `Expected GotchasMemory from ${GOTCHAS_MEMORY_MODULE} to be constructible; got ${typeof gotchasMemoryModule.GotchasMemory}`,
+    );
+  }
+  GotchasMemory = gotchasMemoryModule.GotchasMemory;
+} catch (error) {
+  recordGotchasMemoryLoadError(error);
   GotchasMemory = null;
 }
 
@@ -76,10 +98,10 @@ class IdeationEngine {
     let filtered = suggestions;
     if (this.gotchasMemory) {
       try {
-        const knownIssues = await this.gotchasMemory.getAll();
+        const knownIssues = await this.gotchasMemory.listGotchas();
         filtered = suggestions.filter((s) => !this.isKnownGotcha(s, knownIssues));
-      } catch {
-        // Ignore
+      } catch (error) {
+        console.warn('[IdeationEngine] Gotchas filtering failed:', error.message);
       }
     }
 
@@ -830,3 +852,4 @@ module.exports.SecurityAnalyzer = SecurityAnalyzer;
 module.exports.CodeQualityAnalyzer = CodeQualityAnalyzer;
 module.exports.UXAnalyzer = UXAnalyzer;
 module.exports.ArchitectureAnalyzer = ArchitectureAnalyzer;
+module.exports.gotchasMemoryLoadError = gotchasMemoryLoadError;

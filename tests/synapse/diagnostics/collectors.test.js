@@ -26,7 +26,7 @@ jest.mock(
     domainNameToFile: jest.fn((name) => name.toLowerCase().replace(/_/g, '-')),
     KNOWN_SUFFIXES: [],
     GLOBAL_KEYS: [],
-  })
+  }),
 );
 
 const { collectHookStatus } = require('../../../.aiox-core/core/synapse/diagnostics/collectors/hook-collector');
@@ -79,7 +79,7 @@ describe('hook-collector: collectHookStatus', () => {
     // Create the hook file so check 2 + 3 also pass
     writeFile(
       path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
-      'module.exports = {};'
+      'module.exports = {};',
     );
 
     const result = collectHookStatus(tmpDir);
@@ -118,7 +118,7 @@ describe('hook-collector: collectHookStatus', () => {
     });
     writeFile(
       path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
-      '// hook\nmodule.exports = {};'
+      '// hook\nmodule.exports = {};',
     );
 
     const result = collectHookStatus(tmpDir);
@@ -147,7 +147,7 @@ describe('hook-collector: collectHookStatus', () => {
     });
     writeFile(
       path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
-      'module.exports = {};'
+      'module.exports = {};',
     );
 
     const result = collectHookStatus(tmpDir);
@@ -178,7 +178,7 @@ describe('hook-collector: collectHookStatus', () => {
     });
     writeFile(
       path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
-      'module.exports = {};'
+      'module.exports = {};',
     );
 
     const result = collectHookStatus(tmpDir);
@@ -190,7 +190,7 @@ describe('hook-collector: collectHookStatus', () => {
   test('handles malformed JSON in settings.local.json', () => {
     writeFile(
       path.join(tmpDir, '.claude', 'settings.local.json'),
-      '{ invalid json'
+      '{ invalid json',
     );
 
     const result = collectHookStatus(tmpDir);

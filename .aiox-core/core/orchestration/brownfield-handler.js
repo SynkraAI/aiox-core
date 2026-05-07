@@ -72,16 +72,26 @@ const PhaseFailureAction = {
 // ═══════════════════════════════════════════════════════════════════════════════════
 
 /**
- * BrownfieldHandler - Manages first execution behavior for existing projects
+ * BrownfieldHandler - Manages first execution behavior for existing projects.
+ *
+ * Owns the brownfield discovery handshake, workflow execution, idempotent
+ * artifact writes, phase progress tracking, and post-discovery routing for
+ * projects that have code but do not yet have AIOX documentation.
  */
 class BrownfieldHandler extends EventEmitter {
   /**
+   * Creates a new BrownfieldHandler instance.
+   *
+   * Dependencies can be injected by BobOrchestrator or lazily loaded on demand
+   * to keep standalone tests lightweight.
+   *
    * @param {string} projectRoot - Project root path
    * @param {Object} [options] - Configuration options
    * @param {boolean} [options.debug=false] - Enable debug logging
    * @param {Object} [options.workflowExecutor] - WorkflowExecutor instance
    * @param {Object} [options.surfaceChecker] - SurfaceChecker instance
    * @param {Object} [options.sessionState] - SessionState instance
+   * @throws {Error} If projectRoot is missing or not a string.
    */
   constructor(projectRoot, options = {}) {
     super();
@@ -118,7 +128,9 @@ class BrownfieldHandler extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Get WorkflowExecutor instance
+   * Gets or lazily creates the WorkflowExecutor dependency.
+   *
+   * @returns {Object|null} WorkflowExecutor instance, or null when unavailable.
    * @private
    */
   _getWorkflowExecutor() {
@@ -136,7 +148,9 @@ class BrownfieldHandler extends EventEmitter {
   }
 
   /**
-   * Get SurfaceChecker instance
+   * Gets or lazily creates the SurfaceChecker dependency.
+   *
+   * @returns {Object|null} SurfaceChecker instance, or null when unavailable.
    * @private
    */
   _getSurfaceChecker() {
@@ -152,7 +166,9 @@ class BrownfieldHandler extends EventEmitter {
   }
 
   /**
-   * Get SessionState instance
+   * Gets or lazily creates the SessionState dependency.
+   *
+   * @returns {Object|null} SessionState instance, or null when unavailable.
    * @private
    */
   _getSessionState() {

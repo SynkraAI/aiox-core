@@ -1,6 +1,6 @@
 {
-  "name": "aiox-core",
-  "version": "5.0.3",
+  "name": "@aiox-squads/core",
+  "version": "5.1.15",
   "description": "Synkra AIOX: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
     "aiox": "bin/aiox.js",
@@ -18,6 +18,10 @@
     "packages/",
     ".aiox-core/",
     ".claude/CLAUDE.md",
+    ".claude/settings.json",
+    ".claude/agents/",
+    ".claude/commands/",
+    ".claude/skills/",
     ".claude/rules/",
     ".claude/hooks/",
     "pro/license/",
@@ -43,11 +47,18 @@
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    "./installer/aiox-core-installer": "./packages/installer/src/installer/aiox-core-installer.js",
+    "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
     "test": "jest",
+    "test:ci": "jest --runInBand --forceExit",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:e2e:installed-skills": "node scripts/e2e/installed-skills-smoke.js",
     "test:health-check": "mocha tests/health-check/**/*.test.js --timeout 30000",
     "lint": "eslint . --cache --cache-location .eslintcache",
     "typecheck": "tsc --noEmit",
@@ -75,7 +86,11 @@
     "validate:gemini-integration": "node .aiox-core/infrastructure/scripts/validate-gemini-integration.js",
     "sync:skills:codex": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js",
     "sync:skills:codex:global": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js --global --global-only",
+    "setup:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js",
+    "setup:codex-skills:dry": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js --dry-run",
     "validate:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict",
+    "validate:codex-skills:self-test": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict --self-test",
+    "repair:agent-references": "node .aiox-core/infrastructure/scripts/repair-agent-references.js",
     "validate:paths": "node .aiox-core/infrastructure/scripts/validate-paths.js",
     "validate:parity": "node .aiox-core/infrastructure/scripts/validate-parity.js",
     "validate:semantic-lint": "node scripts/semantic-lint.js",
@@ -103,6 +118,7 @@
     "handlebars": "^4.7.8",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
+    "node-machine-id": "^1.1.12",
     "ora": "^5.4.1",
     "picocolors": "^1.1.1",
     "proper-lockfile": "^4.1.2",

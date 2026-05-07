@@ -5,6 +5,18 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2026-05-06
+
+### Changed
+
+- Renamed the root package from `aiox-core` to `@aiox-squads/core`.
+- Preserved the `aiox-core` CLI command while moving npm installation to the `@aiox-squads` namespace.
+- Added publish validation for scoped package tarballs and installed-project skills smoke coverage.
+
+### Migration Notes
+
+- `@aiox-squads/core@5.1.0` is the successor publish for `aiox-core@5.0.7`; the version bump marks the namespace migration without a major runtime break.
+
 ## [4.2.11] - 2026-02-16
 
 ### Added

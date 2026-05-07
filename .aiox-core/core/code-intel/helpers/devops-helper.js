@@ -78,7 +78,6 @@ async function generateImpactSummary(files) {
     } catch { /* skip — partial result ok */ }
 
     const riskLevel = classifyRiskLevel(impact.blastRadius);
-    const fileCount = impact.references ? impact.references.length : 0;
     const topFiles = (impact.references || [])
       .map((r) => r.file || r.path || 'unknown')
       .slice(0, 10);

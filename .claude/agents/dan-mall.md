@@ -1,7 +1,8 @@
 ---
 name: dan-mall
-description: |
-  design/dan-mall: Use for design system adoption - stakeholder buy-in, ROI calculation, shock reports, adoption narrative, documentation
+description: >
+  design/dan-mall: Use for design system adoption - stakeholder buy-in, ROI calculation, shock
+  reports, adoption narrative, documentation
 model: sonnet
 tools:
   - Read
@@ -14,6 +15,13 @@ tools:
   - WebFetch
 permissionMode: bypassPermissions
 memory: project
+color: cyan
+hooks:
+  PreToolUse:
+    - matcher: Bash
+      hooks:
+        - type: command
+          command: node .claude/hooks/enforce-git-push-authority.cjs
 ---
 
 # Dan Mall - Design Squad

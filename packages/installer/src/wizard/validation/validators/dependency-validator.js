@@ -29,6 +29,7 @@ async function validateDependencies(depsContext = {}) {
     errors: [],
     warnings: [],
   };
+  const projectRoot = depsContext.projectPath || depsContext.targetDir || process.cwd();
 
   try {
     // Check if dependencies were installed (skip for greenfield with no deps defined)
@@ -43,8 +44,8 @@ async function validateDependencies(depsContext = {}) {
     }
 
     // Check node_modules existence
-    const nodeModulesPath = path.join(process.cwd(), 'node_modules');
-    const packageJsonPath = path.join(process.cwd(), 'package.json');
+    const nodeModulesPath = path.join(projectRoot, 'node_modules');
+    const packageJsonPath = path.join(projectRoot, 'package.json');
 
     // For greenfield projects, check if package.json has dependencies
     let hasDependencies = false;
@@ -92,13 +93,13 @@ async function validateDependencies(depsContext = {}) {
     });
 
     // Validate package.json integrity
-    await validatePackageJson(results);
+    await validatePackageJson(results, projectRoot);
 
-    // Check critical dependencies
-    await checkCriticalDependencies(results);
+    // Validate any explicit dependency contract supplied by the caller.
+    await checkRequiredDependencies(results, projectRoot, depsContext.requiredDependencies);
 
     // Run npm audit (non-blocking - warnings only)
-    await runSecurityAudit(results, depsContext.packageManager);
+    await runSecurityAudit(results, depsContext.packageManager, projectRoot);
 
     // Count installed packages
     await countInstalledPackages(results, nodeModulesPath);
@@ -121,8 +122,8 @@ async function validateDependencies(depsContext = {}) {
  * Validate package.json
  * @private
  */
-async function validatePackageJson(results) {
-  const packageJsonPath = 'package.json';
+async function validatePackageJson(results, projectRoot) {
+  const packageJsonPath = path.join(projectRoot, 'package.json');
 
   if (!fs.existsSync(packageJsonPath)) {
     results.errors.push({
@@ -165,22 +166,28 @@ async function validatePackageJson(results) {
 }
 
 /**
- * Check critical dependencies
+ * Check explicitly required dependencies for the target project.
+ *
+ * This validator is used against the installed project, not the installer
+ * workspace itself. A caller may provide a narrow manifest of packages that
+ * must exist after installation; when none is supplied we skip this check to
+ * avoid false warnings about the installer's own internal dependencies.
  * @private
  */
-async function checkCriticalDependencies(results) {
-  const criticalDeps = [
-    'inquirer',
-    'chalk',
-    'yaml',
-    'fs-extra',
-    '@clack/prompts',
-  ];
+async function checkRequiredDependencies(results, projectRoot, requiredDependencies = []) {
+  if (!Array.isArray(requiredDependencies) || requiredDependencies.length === 0) {
+    results.checks.push({
+      component: 'Dependency Contract',
+      status: 'skipped',
+      message: 'No explicit required dependency manifest provided',
+    });
+    return;
+  }
 
-  const nodeModulesPath = path.join(process.cwd(), 'node_modules');
+  const nodeModulesPath = path.join(projectRoot, 'node_modules');
   const missingDeps = [];
 
-  for (const dep of criticalDeps) {
+  for (const dep of requiredDependencies) {
     const depPath = path.join(nodeModulesPath, dep);
     if (!fs.existsSync(depPath)) {
       missingDeps.push(dep);
@@ -190,15 +197,15 @@ async function checkCriticalDependencies(results) {
   if (missingDeps.length > 0) {
     results.warnings.push({
       severity: 'high',
-      message: `Critical dependencies missing: ${missingDeps.join(', ')}`,
+      message: `Required dependencies missing: ${missingDeps.join(', ')}`,
       code: 'CRITICAL_DEPS_MISSING',
       solution: 'Re-run dependency installation',
     });
   } else {
     results.checks.push({
-      component: 'Critical Dependencies',
+      component: 'Dependency Contract',
       status: 'success',
-      message: `All ${criticalDeps.length} critical dependencies installed`,
+      message: `All ${requiredDependencies.length} required dependencies installed`,
     });
   }
 }
@@ -207,13 +214,13 @@ async function checkCriticalDependencies(results) {
  * Run security audit
  * @private
  */
-async function runSecurityAudit(results, packageManager = 'npm') {
+async function runSecurityAudit(results, packageManager = 'npm', projectRoot = process.cwd()) {
   try {
     const auditCommand = packageManager === 'yarn' ? 'yarn audit --json' : 'npm audit --json';
 
     const { stdout } = await execAsync(auditCommand, {
       timeout: 10000,
-      cwd: process.cwd(),
+      cwd: projectRoot,
     });
 
     let auditResults;

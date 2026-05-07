@@ -163,8 +163,11 @@ class RecoveryHandler extends EventEmitter {
    * @param {Error|string} error - Error that caused failure
    * @param {Object} [context={}] - Additional context
    * @returns {Promise<Object>} Recovery result
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   async handleEpicFailure(epicNum, error, context = {}) {
+    this._assertValidEpicNum(epicNum);
+
     const errorMessage = error instanceof Error ? error.message : String(error);
     const timestamp = new Date().toISOString();
 
@@ -656,52 +659,231 @@ class RecoveryHandler extends EventEmitter {
   }
 
   /**
-   * Get all logs (AC7)
+   * Gets all recovery logs (AC7).
+   *
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Copy of all log entries.
+   *
+   * @example
+   * const logs = recoveryHandler.getLogs();
+   * logs.forEach((log) => console.log(`[${log.level}] ${log.message}`));
    */
   getLogs() {
     return [...this.logs];
   }
 
   /**
-   * Get logs for specific epic
+   * Gets logs filtered by a specific epic number.
+   *
+   * @param {number} epicNum - Epic number to filter logs for.
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Filtered log entries.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
+   *
+   * @example
+   * const epic4Logs = recoveryHandler.getEpicLogs(4);
    */
   getEpicLogs(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return this.logs.filter(
       (log) => log.message.includes(`Epic ${epicNum}`) || log.message.includes(`epic-${epicNum}`),
     );
   }
 
   /**
-   * Get attempt history for all epics
+   * Gets attempt history for all epics.
+   *
+   * Returns deep-cloned attempt arrays to prevent callers from mutating internal
+   * recovery state. Epic number keys are stringified because JavaScript object
+   * keys are strings. Reference equality with internal state is intentionally
+   * not preserved. Attempt records are normalized through _cloneAttempt as
+   * data-only objects, so Error, Map, Set, BigInt, and circular context values
+   * are represented with stable serializable shapes.
+   *
+   * @returns {Object<string, Array>} Map of stringified epic numbers to attempt records.
    */
   getAttemptHistory() {
-    return { ...this.attempts };
+    return Object.fromEntries(
+      Object.entries(this.attempts).map(([epicNum, attempts]) => [
+        epicNum,
+        attempts.map((attempt) => this._cloneAttempt(attempt)),
+      ]),
+    );
   }
 
   /**
-   * Get attempt count for specific epic (AC5)
+   * Gets the recovery attempt count for a specific epic (AC5).
+   *
+   * @param {number} epicNum - Epic number to inspect.
+   * @returns {number} Number of recovery attempts made for the epic.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   getAttemptCount(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return (this.attempts[epicNum] || []).length;
   }
 
   /**
-   * Check if can retry (under max retries) (AC5)
+   * Checks whether an epic can still be retried (AC5).
+   *
+   * @param {number} epicNum - Epic number to inspect.
+   * @returns {boolean} True if the epic attempt count is below maxRetries.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
+   *
+   * @example
+   * if (recoveryHandler.canRetry(4)) {
+   *   await orchestrator.executeEpic(4);
+   * }
    */
   canRetry(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return this.getAttemptCount(epicNum) < this.maxRetries;
   }
 
   /**
-   * Reset attempts for an epic
+   * Resets all recovery attempts for a specific epic.
+   *
+   * Clears attempt history so the epic can be retried from scratch up to the
+   * configured maxRetries limit.
+   *
+   * @param {number} epicNum - Epic number to reset.
+   * @returns {void}
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   resetAttempts(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     this.attempts[epicNum] = [];
     this._log(`Reset attempts for Epic ${epicNum}`, 'info');
   }
 
   /**
-   * Clear all state
+   * Validates an epic number argument.
+   *
+   * @param {number} epicNum - Epic number to validate.
+   * @throws {TypeError} If epicNum is not a non-negative integer.
+   * @private
+   */
+  _assertValidEpicNum(epicNum) {
+    if (typeof epicNum !== 'number' || !Number.isInteger(epicNum) || epicNum < 0) {
+      throw new TypeError(`epicNum must be a non-negative integer, got: ${String(epicNum)}`);
+    }
+  }
+
+  /**
+   * Clones an attempt record for safe external access.
+   *
+   * Always returns a sanitized data-only representation so callers observe the
+   * same output shape across Node versions and runtime clone capabilities.
+   *
+   * @param {Object} attempt - Attempt record.
+   * @returns {Object} Cloned attempt record.
+   * @private
+   */
+  _cloneAttempt(attempt) {
+    return this._sanitizeValue(attempt);
+  }
+
+  /**
+   * Converts arbitrary values into stable data-only representations.
+   *
+   * @param {*} value - Value to sanitize.
+   * @param {WeakSet<object>} [seen=new WeakSet()] - Objects in the current path.
+   * @returns {*} Data-only representation that does not throw during cloning.
+   * @private
+   */
+  _sanitizeValue(value, seen = new WeakSet()) {
+    if (value === undefined || value === null) {
+      return value;
+    }
+
+    const valueType = typeof value;
+
+    if (valueType === 'bigint') {
+      return value.toString();
+    }
+
+    if (valueType === 'function' || valueType === 'symbol') {
+      return String(value);
+    }
+
+    if (valueType !== 'object') {
+      return value;
+    }
+
+    if (seen.has(value)) {
+      return '[Circular]';
+    }
+
+    if (value instanceof Error) {
+      const safeError = {
+        name: value.name,
+        message: value.message,
+        stack: value.stack,
+      };
+
+      seen.add(value);
+
+      try {
+        Object.getOwnPropertyNames(value).forEach((key) => {
+          if (key === 'name' || key === 'message' || key === 'stack') {
+            return;
+          }
+
+          try {
+            safeError[key] = this._sanitizeValue(value[key], seen);
+          } catch (error) {
+            safeError[key] = `[Unserializable: ${error.message}]`;
+          }
+        });
+
+        return safeError;
+      } finally {
+        seen.delete(value);
+      }
+    }
+
+    seen.add(value);
+
+    try {
+      if (value instanceof Map) {
+        return Array.from(value.entries()).map(([key, entryValue]) => [
+          this._sanitizeValue(key, seen),
+          this._sanitizeValue(entryValue, seen),
+        ]);
+      }
+
+      if (value instanceof Set) {
+        return Array.from(value.values()).map((entryValue) => this._sanitizeValue(entryValue, seen));
+      }
+
+      if (Array.isArray(value)) {
+        return value.map((entryValue) => this._sanitizeValue(entryValue, seen));
+      }
+
+      return Object.keys(value).reduce((safeValue, key) => {
+        try {
+          safeValue[key] = this._sanitizeValue(value[key], seen);
+        } catch (error) {
+          safeValue[key] = `[Unserializable: ${error.message}]`;
+        }
+        return safeValue;
+      }, {});
+    } catch (error) {
+      return `[Unserializable: ${error.message}]`;
+    } finally {
+      seen.delete(value);
+    }
+  }
+
+  /**
+   * Clears all internal recovery state.
+   *
+   * Resets attempts and logs, returning the recovery handler to its initial
+   * state for a fresh orchestration run.
+   *
+   * @returns {void}
    */
   clear() {
     this.attempts = {};

@@ -23,6 +23,23 @@
  * @property {string} reason - Reason for the decision
  */
 
+const RUNTIME_CONDITION_DEFAULTS = Object.freeze({
+  after_prd_creation: true,
+  architecture_changes_needed: true,
+  architecture_suggests_prd_changes: true,
+  based_on_classification: true,
+  documentation_inadequate: true,
+  epic_complete: true,
+  gate_approved: true,
+  major_enhancement_path: true,
+  po_checklist_issues: true,
+  qa_left_unchecked_items: true,
+  stories_remaining: true,
+  user_has_generated_ui: true,
+  user_wants_ai_generation: true,
+  user_wants_story_review: true,
+});
+
 /**
  * Evaluates workflow conditions based on detected tech stack
  */
@@ -36,6 +53,7 @@ class ConditionEvaluator {
     // Context for QA approval tracking (updated externally)
     this._qaApproved = false;
     this._phaseOutputs = {};
+    this._runtimeOverrides = new Map();
   }
 
   /**
@@ -55,6 +73,25 @@ class ConditionEvaluator {
   }
 
   /**
+   * Set a runtime-resolved condition value.
+   * @param {string} name - Condition name
+   * @param {boolean} value - Runtime condition value
+   */
+  setRuntimeCondition(name, value) {
+    this._runtimeOverrides.set(name, Boolean(value));
+  }
+
+  /**
+   * Set multiple runtime-resolved condition values.
+   * @param {Object} overrides - Map of condition names to values
+   */
+  setRuntimeConditions(overrides = {}) {
+    for (const [name, value] of Object.entries(overrides)) {
+      this.setRuntimeCondition(name, value);
+    }
+  }
+
+  /**
    * Evaluate a condition string
    * @param {string} condition - Condition like 'project_has_database'
    * @returns {boolean} Whether condition is met
@@ -63,6 +100,10 @@ class ConditionEvaluator {
     // Handle null/undefined conditions
     if (!condition) {
       return true;
+    }
+
+    if (this._runtimeOverrides.has(condition)) {
+      return this._runtimeOverrides.get(condition);
     }
 
     // Built-in condition evaluators
@@ -105,6 +146,10 @@ class ConditionEvaluator {
       return evaluator();
     }
 
+    if (Object.prototype.hasOwnProperty.call(RUNTIME_CONDITION_DEFAULTS, condition)) {
+      return RUNTIME_CONDITION_DEFAULTS[condition];
+    }
+
     // Handle negation first
     if (condition.startsWith('!')) {
       return !this.evaluate(condition.substring(1).trim());
@@ -145,9 +190,9 @@ class ConditionEvaluator {
       return this._evaluateDotNotation(condition);
     }
 
-    // Unknown condition - default to true (permissive)
+    // Unknown condition - fail safe so typos do not silently authorize execution.
     console.warn(`[ConditionEvaluator] Unknown condition: ${condition}`);
-    return true;
+    return false;
   }
 
   /**
@@ -336,6 +381,14 @@ class ConditionEvaluator {
       project_has_backend: 'No backend framework detected',
       supabase_configured: 'Supabase not configured or missing environment variables',
       qa_review_approved: 'QA review not yet approved',
+      user_wants_ai_generation: 'User did not request AI generation',
+      architecture_suggests_prd_changes: 'Architecture did not request PRD changes',
+      po_checklist_issues: 'PO checklist has no blocking issues',
+      user_has_generated_ui: 'No generated UI artifact was provided',
+      user_wants_story_review: 'User did not request story review',
+      qa_left_unchecked_items: 'QA did not leave unchecked items',
+      stories_remaining: 'No stories remaining',
+      epic_complete: 'Epic is not complete',
     };
 
     const reasons = failed.map((c) => explanations[c] || `Condition not met: ${c}`);

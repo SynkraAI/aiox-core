@@ -11,9 +11,15 @@ tools:
   - Write
   - Edit
   - Bash
-  - Task
 permissionMode: bypassPermissions
 memory: project
+color: green
+hooks:
+  PreToolUse:
+    - matcher: Bash
+      hooks:
+        - type: command
+          command: node .claude/hooks/enforce-git-push-authority.cjs
 ---
 
 # Design System (Brad Frost) - Autonomous Agent

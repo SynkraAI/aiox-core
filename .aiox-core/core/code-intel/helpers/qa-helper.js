@@ -7,14 +7,14 @@ const { getEnricher, getClient, isCodeIntelAvailable } = require('../index');
 const RISK_THRESHOLDS = {
   LOW_MAX: 4,       // 0-4 refs = LOW
   MEDIUM_MAX: 15,   // 5-15 refs = MEDIUM
-                     // >15 refs = HIGH
+  // >15 refs = HIGH
 };
 
 // Coverage status thresholds based on test reference count
 const COVERAGE_THRESHOLDS = {
   INDIRECT_MAX: 2,  // 1-2 test refs = INDIRECT
   MINIMAL_MAX: 5,   // 3-5 test refs = MINIMAL
-                     // >5 test refs = GOOD
+  // >5 test refs = GOOD
 };
 
 /**

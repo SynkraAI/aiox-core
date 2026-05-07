@@ -13,10 +13,6 @@
  * Reference: TOK-1.5 Baseline (docs/stories/epics/epic-token-optimization/story-TOK-1.5-baseline-metrics.md)
  */
 
-const fs = require('fs');
-const path = require('path');
-const yaml = require ? null : null; // yaml not required — we parse manually
-
 // --- Token estimation model ---
 // Based on tool-registry.yaml tokenCost and observed output patterns
 

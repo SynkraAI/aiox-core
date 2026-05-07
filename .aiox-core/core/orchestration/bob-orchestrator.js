@@ -71,14 +71,24 @@ const ProjectState = {
  */
 
 /**
- * BobOrchestrator — Main decision tree and orchestration entry point
+ * BobOrchestrator - Main decision tree and orchestration entry point.
+ *
+ * Coordinates Bob's project-state detection, session recovery, educational
+ * mode handling, workflow routing, and observability bridge without relying on
+ * LLM reasoning for routing decisions.
  */
 class BobOrchestrator {
   /**
-   * Creates a new BobOrchestrator instance
-   * @param {string} projectRoot - Project root directory
+   * Creates a new BobOrchestrator instance.
+   *
+   * Initializes all orchestration collaborators used by the Bob decision tree,
+   * including workflow execution, session state, file locks, lifecycle cleanup,
+   * brownfield and greenfield handlers, dashboard status, and message formatting.
+   *
+   * @param {string} projectRoot - Project root directory.
    * @param {Object} [options] - Orchestrator options
    * @param {boolean} [options.debug=false] - Enable debug logging
+   * @throws {Error} If projectRoot is missing or not a string.
    */
   constructor(projectRoot, options = {}) {
     if (!projectRoot || typeof projectRoot !== 'string') {
@@ -140,6 +150,12 @@ class BobOrchestrator {
 
   /**
    * Sets up observability panel callbacks (Story 12.6 - AC1, AC2, AC6-11)
+   *
+   * Wires workflow and handler lifecycle events into the CLI panel, status
+   * writer, and dashboard emitter. Callback failures are logged but never block
+   * orchestration progress.
+   *
+   * @returns {void}
    * @private
    */
   _setupObservabilityCallbacks() {
@@ -294,9 +310,7 @@ class BobOrchestrator {
    * - "desativa modo educativo", "desativa educativo", "modo educativo off", "educational mode off"
    *
    * @param {string} userInput - User input text
-   * @returns {Object|null} Toggle result or null if not a toggle command
-   * @returns {boolean} result.enable - Whether to enable educational mode
-   * @returns {string} result.command - Matched command
+   * @returns {{enable: boolean, command: string}|null} Toggle result, or null if not a toggle command.
    */
   _detectEducationalModeToggle(userInput) {
     if (!userInput || typeof userInput !== 'string') {
@@ -396,6 +410,7 @@ class BobOrchestrator {
 
   /**
    * Gets the persistence prompt for educational mode toggle (Story 12.7 - AC6)
+   *
    * @returns {string} Prompt message
    */
   getEducationalModePersistencePrompt() {
@@ -537,7 +552,10 @@ class BobOrchestrator {
   /**
    * Checks for existing session and builds formatted summary (Story 12.5 - AC1, AC2, AC4)
    *
-   * @returns {Promise<Object>} Session check result
+   * Loads the current session state, detects crash risk, computes elapsed time,
+   * and returns both machine-readable resume data and a user-facing summary.
+   *
+   * @returns {Promise<{hasSession: boolean, state?: Object, crashInfo?: Object, elapsedString?: string, formattedMessage?: string, summary?: Object, epicTitle?: string, currentStory?: string, currentPhase?: string}>} Session check result.
    * @private
    */
   async _checkExistingSession() {

@@ -200,7 +200,7 @@ describe('AC8: Helper Functions Return Real Data with RegistryProvider', () => {
       // Log for visibility
       for (const r of results) {
         const status = r.result !== null ? 'non-null' : 'NULL';
-        // eslint-disable-next-line no-console
+         
         console.log(`  ${r.name}: ${status}`);
       }
 

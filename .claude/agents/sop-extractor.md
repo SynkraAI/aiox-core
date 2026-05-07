@@ -3,17 +3,14 @@ name: sop-extractor
 description: |
   SOP extraction specialist. Extracts standard operating procedures
   from content, interviews, and documentation.
-
 model: sonnet
-
 tools:
   - Read
   - Grep
   - Write
-
 permissionMode: acceptEdits
-
 memory: project
+color: blue
 ---
 
 # 📋 @sop-extractor - SOP Extraction Specialist

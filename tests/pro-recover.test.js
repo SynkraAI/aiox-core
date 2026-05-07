@@ -204,7 +204,7 @@ describe('CLI alias reset-password', () => {
     // Verify the CLI entry point has reset-password as a case that calls recoverLicense
     const cliSource = require('fs').readFileSync(
       require('path').join(__dirname, '../packages/aiox-pro-cli/bin/aiox-pro.js'),
-      'utf-8'
+      'utf-8',
     );
     // Both cases should exist in the same switch block
     expect(cliSource).toContain("case 'recover':");
@@ -216,7 +216,7 @@ describe('CLI alias reset-password', () => {
   test('showHelp includes reset-password as alias for recover', () => {
     const cliSource = require('fs').readFileSync(
       require('path').join(__dirname, '../packages/aiox-pro-cli/bin/aiox-pro.js'),
-      'utf-8'
+      'utf-8',
     );
     expect(cliSource).toMatch(/reset-password\s+.*alias/i);
   });

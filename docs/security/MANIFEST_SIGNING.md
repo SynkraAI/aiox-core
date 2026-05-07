@@ -186,6 +186,17 @@ The signature blob encoding follows the minisign specification. For reference, t
 
 **Note**: Applications should use the verification module (`manifest-signature.js`) rather than parsing the signature format directly. The exact wire format is defined by the minisign specification and may vary in optional fields.
 
+## CLI Verification Modes
+
+The `aiox validate` command uses a compatibility-safe default:
+
+- If `.aiox-core/install-manifest.yaml.minisig` exists in the target or repair source, the signature is verified automatically.
+- If no `.minisig` was distributed with the package, validation continues without signature verification and still verifies file hashes.
+- Strict enforcement is available with `aiox validate --require-signature` or `AIOX_REQUIRE_SIGNATURE=1`.
+- Emergency recovery can explicitly bypass verification with `aiox validate --no-signature`.
+
+This keeps unsigned public packages installable while preserving an explicit strict mode for signed releases and controlled environments.
+
 ## Development Mode
 
 During development and testing, signature verification can be bypassed:
@@ -203,7 +214,7 @@ const validator = new PostInstallValidator(projectRoot, frameworkRoot, {
 - Tampered manifests will be accepted
 - The trust chain is broken
 
-This option exists **exclusively** for local development environments. Production builds **MUST** enforce signature verification (`requireSignature: true`). Any deployment with signature verification disabled should be considered insecure.
+This option exists **exclusively** for local development, recovery, and unsigned package compatibility. Production builds that distribute `.minisig` artifacts **MUST** enforce signature verification (`requireSignature: true`) or run `aiox validate --require-signature`. Any deployment with signature verification disabled should be considered unsigned.
 
 ## Verification Behavior
 
@@ -211,6 +222,8 @@ This option exists **exclusively** for local development environments. Productio
 | --------------------------------------- | ----------------- | ----------------- | --------------- |
 | Production (`requireSignature: true`)   | ERROR             | ERROR             | OK              |
 | Development (`requireSignature: false`) | WARN              | ERROR             | OK              |
+| CLI default, no `.minisig` distributed  | WARN              | ERROR             | OK              |
+| CLI default, `.minisig` present         | ERROR             | ERROR             | OK              |
 
 ## Troubleshooting
 
@@ -281,7 +294,7 @@ Loads and verifies a manifest file.
 **Parameters:**
 
 - `manifestPath` (string): Path to manifest file
-- `options.requireSignature` (boolean): Fail if signature missing (default: true)
+- `options.requireSignature` (boolean): Fail if signature missing (default: true for the library API; CLI default is resolved by `.minisig` presence or strict flags)
 
 **Returns:**
 

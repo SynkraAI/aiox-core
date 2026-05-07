@@ -155,6 +155,7 @@ acceptance-criteria:
 - **Tool:** workflow-state-manager
   - **Purpose:** Create and manage workflow state
   - **Source:** .aiox-core/development/scripts/workflow-state-manager.js
+  - **Lifecycle:** Deprecated for new story/epic lifecycle flows; use `.aiox-core/core/orchestration/session-state.js` outside legacy guided workflow execution
 
 - **Tool:** workflow-validator
   - **Purpose:** Validate workflow before starting
