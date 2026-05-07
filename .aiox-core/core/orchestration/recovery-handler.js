@@ -693,9 +693,10 @@ class RecoveryHandler extends EventEmitter {
    * Gets attempt history for all epics.
    *
    * Returns cloned attempt arrays to prevent callers from mutating internal
-   * recovery state.
+   * recovery state. Epic number keys are stringified because JavaScript object
+   * keys are strings.
    *
-   * @returns {Object<number, Array>} Map of epic numbers to attempt records.
+   * @returns {Object<string, Array>} Map of stringified epic numbers to attempt records.
    */
   getAttemptHistory() {
     return Object.fromEntries(
@@ -768,16 +769,146 @@ class RecoveryHandler extends EventEmitter {
   /**
    * Clones an attempt record for safe external access.
    *
+   * Uses structuredClone when available, falls back to JSON for simple data, and
+   * returns a sanitized data-only representation for non-serializable context.
+   *
    * @param {Object} attempt - Attempt record.
    * @returns {Object} Cloned attempt record.
    * @private
    */
   _cloneAttempt(attempt) {
     if (typeof structuredClone === 'function') {
-      return structuredClone(attempt);
+      try {
+        return structuredClone(attempt);
+      } catch (error) {
+        // Fall through to serializable/sanitized fallback for unsupported values.
+      }
     }
 
-    return JSON.parse(JSON.stringify(attempt));
+    if (!this._requiresSanitizedClone(attempt)) {
+      try {
+        return JSON.parse(JSON.stringify(attempt));
+      } catch (error) {
+        // Fall through to sanitized fallback if JSON cloning unexpectedly fails.
+      }
+    }
+
+    return this._sanitizeValue(attempt);
+  }
+
+  /**
+   * Checks if JSON cloning would lose data or throw for a value.
+   *
+   * @param {*} value - Value to inspect.
+   * @param {WeakSet<object>} [seen=new WeakSet()] - Objects in the current path.
+   * @returns {boolean} True when the value needs the sanitizer fallback.
+   * @private
+   */
+  _requiresSanitizedClone(value, seen = new WeakSet()) {
+    if (value === undefined) {
+      return true;
+    }
+
+    const valueType = typeof value;
+
+    if (valueType === 'bigint' || valueType === 'function' || valueType === 'symbol') {
+      return true;
+    }
+
+    if (value === null || valueType !== 'object') {
+      return false;
+    }
+
+    if (value instanceof Error || value instanceof Map || value instanceof Set) {
+      return true;
+    }
+
+    if (seen.has(value)) {
+      return true;
+    }
+
+    seen.add(value);
+
+    try {
+      const childValues = Array.isArray(value) ? value : Object.values(value);
+      return childValues.some((childValue) => this._requiresSanitizedClone(childValue, seen));
+    } catch (error) {
+      return true;
+    } finally {
+      seen.delete(value);
+    }
+  }
+
+  /**
+   * Converts arbitrary values into stable data-only representations.
+   *
+   * @param {*} value - Value to sanitize.
+   * @param {WeakSet<object>} [seen=new WeakSet()] - Objects in the current path.
+   * @returns {*} Data-only representation that does not throw during cloning.
+   * @private
+   */
+  _sanitizeValue(value, seen = new WeakSet()) {
+    if (value === undefined || value === null) {
+      return value;
+    }
+
+    const valueType = typeof value;
+
+    if (valueType === 'bigint') {
+      return value.toString();
+    }
+
+    if (valueType === 'function' || valueType === 'symbol') {
+      return String(value);
+    }
+
+    if (valueType !== 'object') {
+      return value;
+    }
+
+    if (seen.has(value)) {
+      return '[Circular]';
+    }
+
+    if (value instanceof Error) {
+      return {
+        name: value.name,
+        message: value.message,
+        stack: value.stack,
+      };
+    }
+
+    seen.add(value);
+
+    try {
+      if (value instanceof Map) {
+        return Array.from(value.entries()).map(([key, entryValue]) => [
+          this._sanitizeValue(key, seen),
+          this._sanitizeValue(entryValue, seen),
+        ]);
+      }
+
+      if (value instanceof Set) {
+        return Array.from(value.values()).map((entryValue) => this._sanitizeValue(entryValue, seen));
+      }
+
+      if (Array.isArray(value)) {
+        return value.map((entryValue) => this._sanitizeValue(entryValue, seen));
+      }
+
+      return Object.keys(value).reduce((safeValue, key) => {
+        try {
+          safeValue[key] = this._sanitizeValue(value[key], seen);
+        } catch (error) {
+          safeValue[key] = `[Unserializable: ${error.message}]`;
+        }
+        return safeValue;
+      }, {});
+    } catch (error) {
+      return `[Unserializable: ${error.message}]`;
+    } finally {
+      seen.delete(value);
+    }
   }
 
   /**

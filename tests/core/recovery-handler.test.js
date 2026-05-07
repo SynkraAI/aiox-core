@@ -228,6 +228,39 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(handler.getAttemptHistory()[3][0].approach).toBe('custom approach');
     });
 
+    it('should return sanitized attempt history when JSON cloning would lose data', async () => {
+      const originalStructuredClone = global.structuredClone;
+      global.structuredClone = undefined;
+
+      const circular = {};
+      circular.self = circular;
+
+      try {
+        await handler.handleEpicFailure(3, new Error('Specific error'), {
+          circular,
+          error: new Error('Context failure'),
+          map: new Map([['attempt', 1n]]),
+          maybe: undefined,
+          set: new Set([2n]),
+        });
+
+        const history = handler.getAttemptHistory();
+        const context = history['3'][0].context;
+
+        expect(context.circular.self).toBe('[Circular]');
+        expect(context.error).toMatchObject({
+          name: 'Error',
+          message: 'Context failure',
+        });
+        expect(context.map).toEqual([['attempt', '1']]);
+        expect(Object.prototype.hasOwnProperty.call(context, 'maybe')).toBe(true);
+        expect(context.maybe).toBeUndefined();
+        expect(context.set).toEqual(['2']);
+      } finally {
+        global.structuredClone = originalStructuredClone;
+      }
+    });
+
     it('should get logs for specific epic', async () => {
       await handler.handleEpicFailure(3, new Error('Epic 3 error'));
       await handler.handleEpicFailure(4, new Error('Epic 4 error'));
