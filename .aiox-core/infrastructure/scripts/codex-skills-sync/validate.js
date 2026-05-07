@@ -65,6 +65,9 @@ function validateSkillContent(content, expected) {
   return issues;
 }
 
+/**
+ * Parses a generated Codex skill frontmatter block without reading external files.
+ */
 function parseSkillFrontmatter(content) {
   const match = String(content || '').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   if (!match) {
@@ -79,6 +82,9 @@ function parseSkillFrontmatter(content) {
   }
 }
 
+/**
+ * Builds the deterministic Skill tool payload used by validator self-tests.
+ */
 function createSkillToolSelfTestPayload(skillId, prompt = 'AIOX skill self-test') {
   return {
     type: 'tool_use',
@@ -90,6 +96,9 @@ function createSkillToolSelfTestPayload(skillId, prompt = 'AIOX skill self-test'
   };
 }
 
+/**
+ * Extracts a skill id from the payload shapes used by Skill tool invocations.
+ */
 function normalizeSkillToolTarget(payload) {
   if (typeof payload === 'string') {
     return payload.trim().replace(/^\$/, '');
@@ -117,11 +126,17 @@ function normalizeSkillToolTarget(payload) {
   return target ? target.trim().replace(/^\$/, '') : '';
 }
 
+/**
+ * Finds the canonical AIOX agent path declared in a generated skill stub.
+ */
 function extractCanonicalAgentPath(content) {
   const match = String(content || '').match(/`(\.aiox-core\/development\/agents\/[^`]+\.md)`/);
   return match ? match[1] : '';
 }
 
+/**
+ * Runs structural self-tests for generated Codex skills without invoking live tools.
+ */
 function runSkillSelfTests(options = {}) {
   const resolved = {
     projectRoot: process.cwd(),
