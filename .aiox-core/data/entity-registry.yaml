@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-07T10:44:44.077Z'
+  lastUpdated: '2026-05-07T13:24:28.327Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -9053,8 +9053,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:1b35331ba71a6ce17869bab255e087fc540291243f9884fc21ed89f7efc122a4
-      lastVerified: '2026-03-11T00:48:55.879Z'
+      checksum: sha256:63be126f2e0d320daa60cb5b68b21df93cad4c19d1f959e06a6ac776213f8eba
+      lastVerified: '2026-05-07T13:24:28.323Z'
     framework-governor:
       path: .aiox-core/core/ids/framework-governor.js
       layer: L1

@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.6
-generated_at: "2026-05-07T12:43:37.364Z"
+version: 5.1.7
+generated_at: "2026-05-07T13:26:26.223Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -697,9 +697,9 @@ files:
     type: core
     size: 22865
   - path: core/ids/circuit-breaker.js
-    hash: sha256:1b35331ba71a6ce17869bab255e087fc540291243f9884fc21ed89f7efc122a4
+    hash: sha256:63be126f2e0d320daa60cb5b68b21df93cad4c19d1f959e06a6ac776213f8eba
     type: core
-    size: 4235
+    size: 4295
   - path: core/ids/framework-governor.js
     hash: sha256:ef7a3b7444a51f2f122c114c662b1db544d1c9e7833dc6f77dce30ac3a2005a2
     type: core
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:b79e4aa7eece851a30ad7b3598efc3033fd921f5b0b19dac5843a454ee8eec98
+    hash: sha256:39bacf2f05602f8cfa709b67062d5c9bfc1cac232ee68038e14f711ce060499a
     type: data
     size: 522429
   - path: data/learned-patterns.yaml
