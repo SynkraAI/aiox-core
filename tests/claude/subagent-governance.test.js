@@ -69,6 +69,26 @@ describe('Claude native subagent governance', () => {
     expect(preToolUse.some(entry => entry.matcher === 'Bash')).toBe(true);
   });
 
+  it('uses shell-neutral project hook commands in committed Claude settings', () => {
+    const settings = JSON.parse(fs.readFileSync(path.join(repoRoot, '.claude', 'settings.json'), 'utf8'));
+    const commands = Object.values(settings.hooks || {})
+      .flat()
+      .flatMap(entry => entry.hooks || [])
+      .map(hook => hook.command);
+
+    expect(commands).toEqual(expect.arrayContaining([
+      'node .claude/hooks/synapse-wrapper.cjs',
+      'node .claude/hooks/precompact-wrapper.cjs',
+      'node .claude/hooks/enforce-git-push-authority.cjs',
+    ]));
+
+    for (const command of commands) {
+      expect(command).not.toContain('CLAUDE_PROJECT_DIR');
+      expect(command).not.toContain('${');
+      expect(command).toMatch(/^node \.claude\/hooks\/[-a-z]+\.cjs$/);
+    }
+  });
+
   it('blocks remote GitHub operations outside devops and allows devops-tagged commands', () => {
     const blockedCommands = [
       'git push origin main',
