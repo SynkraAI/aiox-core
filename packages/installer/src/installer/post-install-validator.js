@@ -1095,6 +1095,7 @@ class PostInstallValidator {
       status,
       integrityScore,
       manifestVerified: this.manifestVerified,
+      signatureRequired: this.options.requireSignature,
       timestamp: new Date().toISOString(),
       duration: `${duration}ms`,
       manifest: this.manifest
@@ -1419,8 +1420,10 @@ function formatReport(report, options = {}) {
   // Signature status
   if (report.manifestVerified) {
     lines.push(`${c.green}✓${c.reset} Manifest signature: ${c.green}VERIFIED${c.reset}`);
-  } else {
+  } else if (report.signatureRequired) {
     lines.push(`${c.red}✗${c.reset} Manifest signature: ${c.red}NOT VERIFIED${c.reset}`);
+  } else {
+    lines.push(`${c.yellow}⚠${c.reset} Manifest signature: ${c.yellow}NOT REQUIRED${c.reset}`);
   }
 
   // Status

@@ -13,6 +13,7 @@
  *   aiox validate --repair           # Repair missing/corrupted files
  *   aiox validate --repair --dry-run # Preview repairs without applying
  *   aiox validate --detailed         # Show detailed file list
+ *   aiox validate --require-signature # Enforce signed manifests
  *   aiox validate --json             # Output as JSON
  */
 
@@ -63,6 +64,10 @@ function createValidateCommand() {
     .option('--detailed', 'Show detailed file list')
     .option('--no-hash', 'Skip hash verification (faster)')
     .option('--no-signature', 'Skip manifest signature verification (insecure; recovery only)')
+    .option(
+      '--require-signature',
+      'Fail when the manifest signature is missing (also enabled by AIOX_REQUIRE_SIGNATURE=1)',
+    )
     .option('--extras', 'Detect extra files not in manifest')
     .option('-v, --verbose', 'Enable verbose output')
     .option('--json', 'Output results as JSON')
@@ -85,6 +90,9 @@ Examples:
 
   ${chalk.dim('# Quick validation (skip hash check)')}
   $ aiox validate --no-hash
+
+  ${chalk.dim('# Strict validation (requires .minisig)')}
+  $ aiox validate --require-signature
 
   ${chalk.dim('# Output as JSON for CI/CD')}
   $ aiox validate --json
@@ -189,7 +197,7 @@ async function runValidation(options) {
     // Try to find source in common locations
     const possibleSources = [
       path.join(__dirname, '../../../../..'), // npm package root
-      path.join(projectRoot, 'node_modules/aiox-core'),
+      path.join(projectRoot, 'node_modules/@aiox-squads/core'),
       path.join(projectRoot, 'node_modules/aiox-core'),
     ];
 
@@ -200,6 +208,12 @@ async function runValidation(options) {
       }
     }
   }
+
+  const requireSignature = resolveSignatureRequirement({
+    options,
+    aioxCoreDir,
+    sourceDir,
+  });
 
   // Show spinner for non-JSON output (must be defined before validator for closure)
   let spinner = null;
@@ -214,7 +228,7 @@ async function runValidation(options) {
   // Create validator instance
   const validator = new PostInstallValidator(projectRoot, sourceDir, {
     verifyHashes: options.hash !== false,
-    requireSignature: options.signature !== false,
+    requireSignature,
     detectExtras: options.extras === true,
     verbose: options.verbose === true,
     onProgress: options.json
@@ -266,6 +280,7 @@ async function runValidation(options) {
         status: report.status,
         integrityScore: report.integrityScore,
         manifestVerified: report.manifestVerified,
+        signatureRequired: report.signatureRequired,
         timestamp: report.timestamp,
         duration: report.duration,
         manifest: report.manifest,
@@ -341,6 +356,54 @@ async function runValidation(options) {
 
     process.exit(ExitCode.ERROR);
   }
+}
+
+/**
+ * Resolve whether validate should require manifest signature verification.
+ *
+ * Default behavior verifies signatures automatically when a .minisig is
+ * present, but it does not hard-fail public packages that were distributed
+ * without the signature artifact. Strict mode remains available via
+ * --require-signature or AIOX_REQUIRE_SIGNATURE=1.
+ *
+ * @param {Object} params - Resolution params
+ * @param {Object} params.options - Commander options
+ * @param {string} params.aioxCoreDir - Installed .aiox-core directory
+ * @param {string|null} [params.sourceDir] - Source package directory
+ * @param {Object} [params.env] - Environment object for tests
+ * @returns {boolean} True when validation must require a valid signature
+ */
+function resolveSignatureRequirement({ options = {}, aioxCoreDir, sourceDir = null, env = process.env }) {
+  if (options.signature === false) {
+    return false;
+  }
+
+  if (options.requireSignature === true || isTruthyEnv(env.AIOX_REQUIRE_SIGNATURE)) {
+    return true;
+  }
+
+  const targetSignaturePath = path.join(aioxCoreDir, 'install-manifest.yaml.minisig');
+  if (fs.existsSync(targetSignaturePath)) {
+    return true;
+  }
+
+  if (sourceDir) {
+    const sourceSignaturePath = path.join(sourceDir, '.aiox-core', 'install-manifest.yaml.minisig');
+    if (fs.existsSync(sourceSignaturePath)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Interpret common truthy environment variable values.
+ * @param {string|undefined} value - Raw environment value
+ * @returns {boolean} True when the value enables the setting
+ */
+function isTruthyEnv(value) {
+  return ['1', 'true', 'yes', 'on'].includes(String(value || '').trim().toLowerCase());
 }
 
 /**
@@ -428,4 +491,5 @@ function truncatePath(filePath, maxLen) {
 
 module.exports = {
   createValidateCommand,
+  resolveSignatureRequirement,
 };

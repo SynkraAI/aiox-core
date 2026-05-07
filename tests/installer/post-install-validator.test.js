@@ -243,6 +243,7 @@ describe('PostInstallValidator Security Tests', () => {
 
       // Should succeed without signature in dev mode
       expect(report.manifestVerified).toBe(false);
+      expect(report.signatureRequired).toBe(false);
       expect(report.status).not.toBe('failed');
     });
   });
