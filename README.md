@@ -613,10 +613,13 @@ O **AIOX Pro** é o módulo premium do AIOX, oferecendo funcionalidades avançad
 
 > **Disponibilidade restrita:** O AIOX Pro está disponível exclusivamente para membros do **AIOX Cohort Advanced**. [Saiba mais sobre o programa](https://aioxsquad.ai).
 
+Para saber como acessar, ativar, recuperar conta e validar as squads Pro, consulte o [Guia de Acesso ao AIOX Pro](docs/guides/aiox-pro-access.md).
+
 ### Instalação
 
 ```bash
 npx aiox-pro install
+npx aiox-pro setup
 ```
 
 ### Identificação Estável de Máquina (>= 5.0.8)
