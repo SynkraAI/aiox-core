@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T21:43:49.303Z"
+generated_at: "2026-05-07T21:53:10.067Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:16fcaa219a4c1364337ae2d534494fe4f058570ba6f3db797e373d5cd0d7e672
+    hash: sha256:416ffc477206f2b75700a800a35b6af51269f73b3bbc9952a155b1f350089030
     type: data
     size: 522368
   - path: data/learned-patterns.yaml
@@ -3005,13 +3005,13 @@ files:
     type: script
     size: 5533
   - path: infrastructure/scripts/codex-skills-sync/README.md
-    hash: sha256:908f02e6b36e2bd5ec706427992955b411bb70db7b1e34b00d4845fe0fc9337a
+    hash: sha256:2e4366ccc31b617a9be8a8b19c0379e1fd3ae64c4d5cfbb4d233860f9db0f949
     type: script
-    size: 3737
+    size: 4072
   - path: infrastructure/scripts/codex-skills-sync/validate.js
-    hash: sha256:295ec61dab026ff087c685ad4244fbbca2b9a220c24703ea9d8b1e7a2ca23772
+    hash: sha256:5b8cb91ddcfda2b6b66328c12129e71665e4e1cb6f13b1792746e9d761d1ebcf
     type: script
-    size: 6366
+    size: 12185
   - path: infrastructure/scripts/collect-tool-usage.js
     hash: sha256:8a739b79182dc41e28b7e02aeb9ec1dde5ec49f3ca534399acc59711b3b92bbf
     type: script
