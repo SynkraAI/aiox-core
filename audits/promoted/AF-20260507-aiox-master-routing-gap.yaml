@@ -1,0 +1,60 @@
+audit_finding:
+  version: "1.0"
+  id: "AF-20260507-aiox-master-routing-gap"
+  date: "2026-05-07T18:30:00Z"
+  auditor: "@aiox-master (Orion)"
+  source_session: "Eliel diagnostic during Wave 1.A correction: 'sentimos falta do uso ativo dos squads como opção específica, sinto que ficamos preso ao framework'"
+
+  context:
+    project: "framework-level (cross-project)"
+    epic: "n/a"
+    triggered_by: |
+      Eliel observed that during Wave 1.A correction session:
+      - voice-clones squad was never auto-consulted (had to explicitly invoke)
+      - claude-code-mastery squad never invoked
+      - audience-engine squad never invoked despite 9 Públicos doctrine relevance
+      - db-inventory cross-project asset never consulted before migration writes
+      - sessions burning tokens re-discovering knowledge that exists in dedicated squads
+
+  finding:
+    summary: "@aiox-master agent has no triage.routing_matrix; never consults squads first even when topic matches their domain."
+    evidence:
+      - "aiox-core/.aiox-core/development/agents/aiox-master.md contains zero references to 'squad' or 'triage' or 'routing_matrix'"
+      - "claude-mastery-chief in aiox-core/squads/claude-code-mastery/ HAS triage.routing_matrix (proves the pattern is known but not adopted at framework root)"
+      - "Wave 1.A YOLO terminals wrote migration without consulting db-inventory because no triage suggested it"
+      - "Kira's parecer formal stated: 'vocês perderam tokens descobrindo o que já existia em db-inventory'"
+      - "Eliel quote: 'todos os plans criados cogitaram em nenhum momento a perfeita integração desses squads'"
+    impact_observed:
+      blast_radius: "critical"
+      affected_artifacts:
+        - "Every multi-domain task across every AIOX project"
+        - "Token economy of every Eliel session"
+        - "Voice-clones squad utilization (~0% auto-invocation rate)"
+        - "claude-code-mastery squad utilization (~0% from outside the squad itself)"
+      cost: |
+        Estimated 30-50% token waste per session due to context redundancy
+        and missed consultations. Compounds with every new epic.
+
+  framework_candidate: true
+  framework_candidate_rationale: |
+    This is THE framework-level concern. @aiox-master is the entry orchestrator
+    used by every project. Adding triage.routing_matrix at the framework root
+    propagates the fix to all consumers automatically.
+
+    The pattern is already proven in claude-mastery-chief (squad-internal
+    triage). Generalizing to cross-squad consultation is a natural extension.
+
+  references:
+    - kind: governance-doc
+      path: "aiox-core/governance/squad-activation-strategy.md"
+    - kind: existing-pattern-source
+      path: "aiox-core/squads/claude-code-mastery/agents/claude-mastery-chief.md"
+    - kind: voice-clone-finding
+      path: "business-ai-first/docs/decisions/ADR-DBOPS-V1-vocabulary-contract-failure.md (Kira section)"
+
+  proposed_disposition:
+    - "Add triage.routing_matrix block to all aiox-master.md instances (.aiox-core, .antigravity, .claude/commands, .codex, .cursor)"
+    - "Create aiox-core/.claude/rules/squad-activation.md with conditional consultation rules"
+    - "Create aiox-core/hooks/squad-suggestion-advisor.cjs (advisory, UserPromptSubmit hook)"
+    - "Document this pattern at aiox-core/governance/patterns/squad-activation.md"
+    - "Cross-pollination flow: project agents → squad masters via Evolution Pipeline"

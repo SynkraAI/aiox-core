@@ -1,0 +1,58 @@
+audit_finding:
+  version: "1.0"
+  id: "AF-20260507-vocabulary-contract-failure"
+  date: "2026-05-07T17:00:00Z"
+  auditor: "@aiox-master (Orion)"
+  source_session: "Wave 1.A correction in business-ai-first; voice-clone consultation with @fabio-akita, @lucas-montano, @context-engineer"
+
+  context:
+    project: "business-ai-first"
+    epic: "EPIC-MVP-CDM-CADASTRO"
+    triggered_by: |
+      DBOPS-V1 prod apply failed SQLSTATE 23514 against ~17,354 legacy rows
+      after PR was merged to master with green static CI but no pgTAP runtime
+      validation.
+
+  finding:
+    summary: "YOLO terminal can write a migration with invented vocabulary because no pre-flight forces dictionary lookup; framework lacks Vocabulary Contract pattern."
+    evidence:
+      - "DBOPS-V1 used humanized PT-BR vocabulary ('CNH - Primeira Habilitação') invented in YOLO session, never present in db-inventory or any source of truth"
+      - "5 vocabularies coexist in tox_exams domain: legacy slug, tx_* prefix, humanized invented, English drift, target English"
+      - "db-inventory/dictionary/ existed but was never read by the YOLO terminal that wrote V1"
+      - "Static CI (CodeRabbit + Vercel build) passed; runtime pgTAP never executed before PR merge (Docker Desktop off + cm_staff missing migration debt)"
+      - "Voice-clone parecer formal converged: root cause is missing data contract, not migration syntax"
+    impact_observed:
+      blast_radius: "high"
+      affected_artifacts:
+        - "DBOPS-V1 migration (REVERTED)"
+        - "Wave 1.A gate G0 (incorrectly marked passed)"
+        - "EPIC-MVP-CDM-CADASTRO timeline (Phase 2 + Phase 3 added)"
+      cost: |
+        ~80 minutes audit + correction session.
+        1 reverted migration + companion pgTAP test.
+        4 new deliverables to address root cause: ADR + 6 stories Phase 2 + framework proposals + this finding.
+
+  framework_candidate: true
+  framework_candidate_rationale: |
+    Any AIOX-based project that touches a database faces this risk. The fix is
+    structural and applies framework-wide:
+    1. Pre-flight hook forcing db-inventory consult before migration edits
+    2. Vocabulary Contract pattern (single YAML source generating SQL CHECK + Zod + TS + LLM context)
+    3. @aiox-master triage routing matrix to suggest db-inventory consult
+    4. Constitution amendment: Article VII (Vocabulary Contract)
+
+  references:
+    - kind: ADR
+      path: "business-ai-first/docs/decisions/ADR-DBOPS-V1-vocabulary-contract-failure.md"
+    - kind: hook
+      path: "business-ai-first/.claude/hooks/migration-dictionary-guard.cjs"
+    - kind: voice-clone-personas
+      path: "business-ai-first/squads/voice-clones/agents/{fabio-akita,lucas-montano}.md"
+    - kind: handoff-contract
+      path: "business-ai-first/.aiox/handoffs/handoff-2026-05-07-phase1-to-phase2-data-contract.yaml"
+
+  proposed_disposition:
+    - "Promote business-ai-first/.claude/hooks/migration-dictionary-guard.cjs → aiox-core/hooks/ as framework hook"
+    - "Add Article VII (Vocabulary Contract) to .aiox-core/constitution.md"
+    - "Document Vocabulary Contract pattern in aiox-core/governance/patterns/vocabulary-store.md"
+    - "Sister proposal: PROP-20260507-squad-routing-strategy"

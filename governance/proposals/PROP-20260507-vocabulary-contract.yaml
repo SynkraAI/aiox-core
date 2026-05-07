@@ -1,0 +1,77 @@
+framework_proposal:
+  version: "1.0"
+  id: "PROP-20260507-vocabulary-contract"
+  date: "2026-05-07T18:45:00Z"
+  proposer: "@aiox-master (Orion)"
+  source_finding: "AF-20260507-vocabulary-contract-failure"
+
+  target:
+    layer: "L1+L2"
+    artifact_type: "rule | hook | governance | constitution"
+    artifact_path: |
+      Multiple coordinated changes:
+      - aiox-core/.claude/rules/vocabulary-contract.md (NEW)
+      - aiox-core/hooks/migration-dictionary-guard.cjs (NEW — generalized from business-ai-first project copy)
+      - aiox-core/governance/patterns/vocabulary-store.md (NEW pattern doc, created on APPROVED)
+      - aiox-core/.aiox-core/constitution.md (MODIFY — add Article VII Vocabulary Contract)
+    operation: "create + modify"
+
+  generalization:
+    pattern_name: "Vocabulary Contract Store"
+    when_to_apply: |
+      Whenever a project has a domain enum or text[] column that satisfies AT LEAST 2 of:
+      1. Has multiple writers (UI form + RPC + scraper + manual SQL)
+      2. Has multiple consumer surfaces (DB CHECK + Zod + UI labels + LLM context + analytics)
+      3. Has historical drift (legacy values that don't match current convention)
+      4. Is consumed by LLMs in any prompt (system or user-facing)
+
+      The pattern: single canonical YAML source generating all consumer surfaces deterministically.
+    examples_from_other_domains:
+      - "Marketing: campaign_status (lead, qualified, converted, churned, expired) — same multi-writer, multi-surface profile"
+      - "Finance: payment_method enum, billing_responsible — analogous"
+      - "HR: employee_status, exit_reason — when HR squad activates"
+      - "Audience: 9 Públicos values (recurring, ex-customer, first-purchase, etc) — already has core/publicos/ structure but not formalized"
+
+  migration_path:
+    breaking_change: false
+    affected_consumers:
+      - "business-ai-first (already using project-local hook; will switch to framework version)"
+      - "any future AIOX project (gets the pattern by default)"
+    rollout_plan: |
+      1. PR to aiox-core adds: rule, hook, pattern doc, constitution amendment
+      2. business-ai-first pulls aiox-core update
+      3. business-ai-first/.claude/hooks/migration-dictionary-guard.cjs replaced by framework version
+         (or kept as project-specific override if customization needed)
+      4. business-ai-first .claude/settings.json updated to reference framework hook
+      5. ADR-DBOPS-V1-vocabulary-contract-failure.md cross-references the now-canonical framework pattern
+
+  deprecation_plan:
+    deprecates:
+      - "business-ai-first/.claude/hooks/migration-dictionary-guard.cjs (project-local copy)"
+    sunset_window: "Immediate after framework version pulled (project hook becomes legacy / removed)"
+
+  cost_benefit:
+    cost: |
+      Engineering: ~3-4h to generalize hook, write pattern doc, draft constitution amendment
+      Token: ~15K tokens for the docs + code
+      Complexity: low — additive changes only
+    benefit: |
+      Prevents the same failure mode in any future AIOX DB-touching project.
+      Closes Akita's "Article VII" gap (anti-vibecoding control).
+      Single source of truth for vocabulary = audit-friendly = LLM-friendly.
+      Estimated savings: 30-60min per future epic that touches a domain enum.
+    risk: |
+      low — additive changes; no existing behavior modified.
+      Adoption risk: projects might ignore the rule. Mitigation: hook is advisory but
+      visible in stderr + QA gates check PR descriptions for dictionary references.
+
+  approval:
+    eliel_decision: "APPROVED"
+    eliel_decision_at: "2026-05-07T19:15:00Z"
+    eliel_decision_rationale: "Aditivo, baixo risco, fecha gap do Akita (Article VII anti-vibecoding). Previne re-ocorrência da falha Wave 1.A em epics futuros. Custo 3-4h compensado pelo savings recorrente em qualquer projeto AIOX que toque domain enums."
+    revision_request: []
+
+  implementation:
+    pr_url: ""
+    merged_at: ""
+    distributed_to: []
