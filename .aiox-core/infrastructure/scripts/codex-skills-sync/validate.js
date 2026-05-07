@@ -165,9 +165,11 @@ function runSkillSelfTests(options = {}) {
     }
 
     const frontmatter = parseSkillFrontmatter(content);
+    let declaredSkillId = item.skillId;
     if (frontmatter.error) {
       errors.push(`self-test ${frontmatter.error}`);
     } else {
+      declaredSkillId = String(frontmatter.data.name || '').trim();
       if (frontmatter.data.name !== item.skillId) {
         errors.push(`self-test frontmatter name mismatch: expected "${item.skillId}"`);
       }
@@ -180,13 +182,19 @@ function runSkillSelfTests(options = {}) {
     if (!canonicalAgentPath) {
       errors.push('self-test missing canonical source path');
     } else {
+      const expectedCanonicalPath = `.aiox-core/development/agents/${item.filename}`;
+      if (canonicalAgentPath !== expectedCanonicalPath) {
+        errors.push(
+          `self-test canonical source path mismatch: expected "${expectedCanonicalPath}", got "${canonicalAgentPath}"`,
+        );
+      }
       const absoluteAgentPath = path.join(resolved.projectRoot, canonicalAgentPath);
       if (!fs.existsSync(absoluteAgentPath)) {
         errors.push(`self-test source file not found: ${canonicalAgentPath}`);
       }
     }
 
-    const payload = createSkillToolSelfTestPayload(item.skillId);
+    const payload = createSkillToolSelfTestPayload(declaredSkillId);
     const target = normalizeSkillToolTarget(payload);
     if (target !== item.skillId) {
       errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);

@@ -4,11 +4,17 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { syncSkills } = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
+const { syncSkills } = require(path.join(
+  process.cwd(),
+  '.aiox-core/infrastructure/scripts/codex-skills-sync/index',
+));
 const {
   validateCodexSkills,
   normalizeSkillToolTarget,
-} = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/validate');
+} = require(path.join(
+  process.cwd(),
+  '.aiox-core/infrastructure/scripts/codex-skills-sync/validate',
+));
 
 describe('Codex Skills Validator', () => {
   let tmpRoot;
@@ -77,7 +83,9 @@ describe('Codex Skills Validator', () => {
     });
 
     expect(result.ok).toBe(false);
-    expect(result.selfTests.find(test => test.skillId === 'aiox-dev').ok).toBe(false);
+    const devSelfTest = result.selfTests.find(test => test.skillId === 'aiox-dev');
+    expect(devSelfTest).toBeDefined();
+    expect(devSelfTest.ok).toBe(false);
     expect(result.errors.some(error => error.includes('self-test source file not found'))).toBe(true);
   });
 
