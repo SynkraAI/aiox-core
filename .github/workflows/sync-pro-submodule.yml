@@ -137,6 +137,7 @@ jobs:
           - Trigger: \`${GITHUB_WORKFLOW}\`
 
           This PR reconciles the \`pro\` submodule with the latest upstream state from \`SynkraAI/aiox-pro\`.
+          Expected npm package scope after Epic 124: \`@aiox-squads/pro\`.
           EOF
           )
 
