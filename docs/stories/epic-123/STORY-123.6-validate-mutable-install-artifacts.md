@@ -43,8 +43,8 @@ Fazer o validador distinguir arquivos de framework imutáveis de artefatos mutá
 ## File List
 
 - [docs/stories/epic-123/STORY-123.6-validate-mutable-install-artifacts.md](./STORY-123.6-validate-mutable-install-artifacts.md)
-- [.aiox-core/install-manifest.yaml](/Users/rafaelcosta/Projects/AIOX/aiox-core-pro-13-2/.aiox-core/install-manifest.yaml)
-- [package.json](/Users/rafaelcosta/Projects/AIOX/aiox-core-pro-13-2/package.json)
-- [package-lock.json](/Users/rafaelcosta/Projects/AIOX/aiox-core-pro-13-2/package-lock.json)
-- [packages/installer/src/installer/post-install-validator.js](/Users/rafaelcosta/Projects/AIOX/aiox-core-pro-13-2/packages/installer/src/installer/post-install-validator.js)
-- [tests/installer/post-install-validator.test.js](/Users/rafaelcosta/Projects/AIOX/aiox-core-pro-13-2/tests/installer/post-install-validator.test.js)
+- [.aiox-core/install-manifest.yaml](../../../.aiox-core/install-manifest.yaml)
+- [package.json](../../../package.json)
+- [package-lock.json](../../../package-lock.json)
+- [packages/installer/src/installer/post-install-validator.js](../../../packages/installer/src/installer/post-install-validator.js)
+- [tests/installer/post-install-validator.test.js](../../../tests/installer/post-install-validator.test.js)
