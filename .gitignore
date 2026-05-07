@@ -247,7 +247,9 @@ docs/handoffs/
 docs/requirements/
 docs/releases/
 docs/standards/
-docs/architecture/
+docs/architecture/*
+!docs/architecture/
+!docs/architecture/orchestration-hierarchy.md
 docs/agents/
 docs/private/
 

@@ -45,8 +45,8 @@
 | 21 | `task-identifier-resolver.js` | Resolves `{TODO: task identifier}` placeholders in 114 task files | `fs`, `path` | `install-manifest.yaml` | One-time migration tool | Low-use |
 | 22 | `validate-task-v2.js` | Validates task files against V2.0 specification (11 compliance rules) | `fs`, `path` | 9 files: `migrate-task-to-v2.js`, docs | @qa, @dev | No |
 | 23 | `migrate-task-to-v2.js` | Semi-automated V1.0 to V2.0 task migration helper | `fs`, `path` | 9 files: `validate-task-v2.js`, docs | @dev migration | Low-use |
-| 24 | `workflow-navigator.js` | Provides intelligent next-step command suggestions from workflow patterns | `fs`, `path`, `js-yaml` | 18 files: `greeting-builder.js`, tasks, docs | All (via greeting-builder) | No |
-| 25 | `workflow-state-manager.js` | File-based state persistence for guided workflow automation across sessions | `fs.promises`, `path`, `js-yaml` | 18 files: `run-workflow.md`, `run-workflow-engine.md`, tasks | @sm, @pm | No |
+| 24 | `workflow-navigator.js` | Active helper for next-step command suggestions from workflow patterns; does not own persisted state | `fs`, `path`, `js-yaml` | 18 files: `greeting-builder.js`, tasks, docs | All (via greeting-builder) | No |
+| 25 | `workflow-state-manager.js` | Deprecated compatibility helper for legacy guided workflow state; new story/epic lifecycle state uses `session-state.js` | `fs.promises`, `path`, `js-yaml` | Legacy `run-workflow`, `run-workflow-engine`, and `next` task compatibility | @sm, @pm | No |
 | 26 | `workflow-validator.js` | Validates workflow YAML files against AIOX conventions (9 checks) | `fs.promises`, `path`, `js-yaml` | 18 files: `validate-workflow.md`, `squad-validator.js`, tasks | @qa, @architect | No |
 | 27 | `verify-workflow-gaps.js` | Verification script for workflow gap fixes (GAP 1, 2, 3) | `fs`, `path`, `js-yaml` | 18 files: docs, `install-manifest.yaml` | Verification tool | Low-use |
 | 28 | `decision-context.js` | (See #13 above -- same file) | -- | -- | -- | -- |
