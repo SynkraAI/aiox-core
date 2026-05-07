@@ -15,15 +15,15 @@ class ResultAggregator extends EventEmitter {
     super();
 
     // Root path for reports
-    this.rootPath = config.rootPath || process.cwd();
-    this.reportDir = config.reportDir || path.join(this.rootPath, 'plan');
+    this.rootPath = config.rootPath ?? process.cwd();
+    this.reportDir = config.reportDir ?? path.join(this.rootPath, 'plan');
 
     // Conflict detection settings
     this.detectConflicts = config.detectConflicts !== false;
 
     // Aggregation history
     this.history = [];
-    this.maxHistory = config.maxHistory || 50;
+    this.maxHistory = config.maxHistory ?? 50;
   }
 
   /**
@@ -36,8 +36,8 @@ class ResultAggregator extends EventEmitter {
 
     const aggregation = {
       id: `agg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      waveIndex: waveResults.waveIndex || waveResults.wave,
-      startedAt: waveResults.startedAt || new Date().toISOString(),
+      waveIndex: waveResults.waveIndex ?? waveResults.wave,
+      startedAt: waveResults.startedAt ?? new Date().toISOString(),
       completedAt: new Date().toISOString(),
       tasks: [],
       conflicts: [],
@@ -50,11 +50,13 @@ class ResultAggregator extends EventEmitter {
     for (const result of results) {
       aggregation.tasks.push({
         taskId: result.taskId,
-        agentId: result.agentId || 'unknown',
+        agentId: result.agentId ?? 'unknown',
         success: result.success,
-        filesModified: result.filesModified || this.extractFilesFromOutput(result.output),
-        duration: result.duration || 0,
-        output: this.summarizeOutput(result.output || result.result?.output),
+        filesModified: Array.isArray(result.filesModified)
+          ? result.filesModified
+          : this.extractFilesFromOutput(result.output ?? result.result?.output),
+        duration: result.duration ?? 0,
+        output: this.summarizeOutput(result.output ?? result.result?.output),
         error: result.error,
       });
     }
@@ -366,7 +368,7 @@ class ResultAggregator extends EventEmitter {
    * @returns {Promise<string>} - Report file path
    */
   async generateReport(aggregation, filename = null) {
-    const reportName = filename || `wave-results-${aggregation.waveIndex || 'all'}.json`;
+    const reportName = filename || `wave-results-${aggregation.waveIndex ?? 'all'}.json`;
     const reportPath = path.join(this.reportDir, reportName);
 
     // Ensure directory exists
@@ -394,7 +396,7 @@ class ResultAggregator extends EventEmitter {
 
     let md = '# Wave Results Report\n\n';
     md += `> **Generated:** ${aggregation.completedAt}\n`;
-    md += `> **Success Rate:** ${metrics.successRate || metrics.overallSuccessRate}%\n\n`;
+    md += `> **Success Rate:** ${metrics.successRate ?? metrics.overallSuccessRate}%\n\n`;
 
     md += '## Summary\n\n';
     md += '| Metric | Value |\n';
@@ -403,8 +405,8 @@ class ResultAggregator extends EventEmitter {
     md += `| Successful | ${metrics.successful} |\n`;
     md += `| Failed | ${metrics.failed} |\n`;
     md += `| Duration | ${Math.round(metrics.totalDuration / 1000)}s |\n`;
-    md += `| Conflicts | ${metrics.conflictCount || metrics.totalConflicts || 0} |\n`;
-    md += `| Files Modified | ${metrics.filesModified || 'N/A'} |\n\n`;
+    md += `| Conflicts | ${metrics.conflictCount ?? metrics.totalConflicts ?? 0} |\n`;
+    md += `| Files Modified | ${metrics.filesModified ?? 'N/A'} |\n\n`;
 
     // Tasks section
     if (aggregation.tasks && aggregation.tasks.length > 0) {
@@ -414,7 +416,7 @@ class ResultAggregator extends EventEmitter {
 
       for (const task of aggregation.tasks) {
         const status = task.success ? '✅' : '❌';
-        const duration = task.duration ? `${Math.round(task.duration / 1000)}s` : '-';
+        const duration = task.duration != null ? `${Math.round(task.duration / 1000)}s` : '-';
         md += `| ${task.taskId} | ${task.agentId} | ${status} | ${duration} |\n`;
       }
       md += '\n';

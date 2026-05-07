@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-07T14:31:05.482Z'
+  lastUpdated: '2026-05-07T15:02:59.792Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -8822,8 +8822,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:fc662bbc649bf704a8f6e70d0203fab389c664a6b4b2932510f84c251ae26610
-      lastVerified: '2026-03-11T00:48:55.878Z'
+      checksum: sha256:bcd102ca46e74d61af151aa7877921807c9bf5aba45bfba73f9f5c8cf714d8e2
+      lastVerified: '2026-05-07T15:02:59.785Z'
     semantic-merge-engine:
       path: .aiox-core/core/execution/semantic-merge-engine.js
       layer: L1

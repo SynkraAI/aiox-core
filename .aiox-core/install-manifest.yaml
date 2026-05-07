@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.8
-generated_at: "2026-05-07T14:31:25.534Z"
+version: 5.1.9
+generated_at: "2026-05-07T15:10:49.402Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -429,9 +429,9 @@ files:
     type: core
     size: 9033
   - path: core/execution/result-aggregator.js
-    hash: sha256:fc662bbc649bf704a8f6e70d0203fab389c664a6b4b2932510f84c251ae26610
+    hash: sha256:bcd102ca46e74d61af151aa7877921807c9bf5aba45bfba73f9f5c8cf714d8e2
     type: core
-    size: 14553
+    size: 14643
   - path: core/execution/semantic-merge-engine.js
     hash: sha256:26f2a057407cf114a0611944960a8e6d58d93c5e03abe905489e6b699cb98a75
     type: core
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:277cd2b2973a8b33b7b512794106c6e5e8a5536ed8aecc3c269f7c8ae84c9cf0
+    hash: sha256:16fcaa219a4c1364337ae2d534494fe4f058570ba6f3db797e373d5cd0d7e672
     type: data
     size: 522368
   - path: data/learned-patterns.yaml
