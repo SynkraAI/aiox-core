@@ -6,7 +6,7 @@ See [`../evolution-pipeline.md`](../evolution-pipeline.md) for full pipeline.
 
 ## Layout
 
-```
+```text
 proposals/
 ├── README.md                              # this file
 ├── PROP-<YYYYMMDD>-<slug>.yaml            # active proposals (PENDING / APPROVED / NEEDS_REVISION)
@@ -17,8 +17,8 @@ proposals/
 ## Status of a proposal
 
 - **PENDING** — awaiting Eliel's review
-- **APPROVE** — Eliel signed; implementer can open PR in aiox-core
-- **REJECT** — Eliel declined; proposal moves to `archive/` with rationale
+- **APPROVED** — Eliel signed; implementer can open PR in aiox-core
+- **REJECTED** — Eliel declined; proposal moves to `archive/` with rationale
 - **NEEDS_REVISION** — Eliel requested changes; proposer addresses and resubmits
 
 ## Authority

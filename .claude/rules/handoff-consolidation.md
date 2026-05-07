@@ -99,7 +99,7 @@ The **most recent** handoff for an active pipeline stays as `handoff-{latest}.ya
 
 ## Example Structure (after consolidation)
 
-```
+```text
 .aiox/handoffs/
 ├── INDEX-meta-messaging-pipeline.md       (refs RUN-LOG)
 ├── handoff-2026-05-15-wave6-current.yaml  (latest, active)

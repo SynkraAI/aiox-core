@@ -3,7 +3,7 @@
 **Story ID:** 7.1.1  
 **Epic:** Epic-7 - Dashboard Workspace Integration  
 **Wave:** Wave 1 (Foundation)  
-**Status:** ✅ Done  
+**Status:** ⌛ In Progress
 **Priority:** 🔴 High  
 **Owner:** Architect (Aria) → Dev (Dex)  
 **Created:** 2026-05-05  
@@ -57,7 +57,7 @@ O dashboard observa dados do aiox-core via Supabase (read-only). Sem workspace h
 ## 🔗 Dependencies
 
 - `aiox-core` já configurado em `C:\dev\aiox-core\`
-- Bun instalado no sistema
+- Bun não instalado; npm usado como fallback
 - Credenciais Supabase disponíveis em `C:\dev\aiox-core\.env`
 
 ---

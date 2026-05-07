@@ -18,7 +18,7 @@ framework_proposal:
       - aiox-core/.claude/rules/squad-activation.md (NEW — operational rule synthesizing strategy)
       - aiox-core/hooks/squad-suggestion-advisor.cjs (NEW — UserPromptSubmit hook)
       - aiox-core/governance/squad-activation-strategy.md (ALREADY CREATED in this session — formalize via PR)
-      - aiox-core/governance/patterns/squad-activation.md (NEW pattern doc, created on APPROVE)
+      - aiox-core/governance/patterns/squad-activation.md (NEW pattern doc, created on APPROVED)
     operation: "modify + create"
 
   generalization:

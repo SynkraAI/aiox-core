@@ -8,8 +8,8 @@ See [`../evolution-pipeline.md`](../evolution-pipeline.md) for the promotion flo
 
 | Pattern | Source proposal | Status | Doc |
 |---|---|---|---|
-| Vocabulary Contract Store | `PROP-20260507-vocabulary-contract.yaml` (PENDING) | Proposed | (created on APPROVE) |
-| Squad Activation Routing | `PROP-20260507-squad-routing-strategy.yaml` (PENDING) | Proposed | [`../squad-activation-strategy.md`](../squad-activation-strategy.md) |
+| Vocabulary Contract Store | `PROP-20260507-vocabulary-contract.yaml` | APPROVED | (implementation pattern doc pending) |
+| Squad Activation Routing | `PROP-20260507-squad-routing-strategy.yaml` | APPROVED | [`../squad-activation-strategy.md`](../squad-activation-strategy.md) |
 
 ## Anatomy of a pattern document
 

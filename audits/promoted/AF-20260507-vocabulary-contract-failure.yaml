@@ -55,4 +55,4 @@ audit_finding:
     - "Promote business-ai-first/.claude/hooks/migration-dictionary-guard.cjs → aiox-core/hooks/ as framework hook"
     - "Add Article VII (Vocabulary Contract) to .aiox-core/constitution.md"
     - "Document Vocabulary Contract pattern in aiox-core/governance/patterns/vocabulary-store.md"
-    - "Sister proposal: AF-20260507-aiox-master-routing-gap"
+    - "Sister proposal: PROP-20260507-squad-routing-strategy"

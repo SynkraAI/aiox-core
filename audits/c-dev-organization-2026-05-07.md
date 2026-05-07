@@ -121,7 +121,7 @@ Cleanup blocker: each worktree may have an active Claude Code session — Eliel 
 
 ## Proposed target structure
 
-```
+```text
 C:/dev/
 ├── CLAUDE.md                    # workspace root config (keep)
 ├── .gitignore                   # workspace gitignore (keep)

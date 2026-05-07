@@ -4,7 +4,7 @@
 **Date:** 2026-05-07
 **Author:** @aiox-master (Orion)
 **Approval gate:** Eliel M. Alencar
-**Source finding:** [`AF-20260507-aiox-master-routing-gap`](../audits/promoted/AF-20260507-aiox-master-routing-gap.yaml) (to be created)
+**Source finding:** [`AF-20260507-aiox-master-routing-gap`](../audits/promoted/AF-20260507-aiox-master-routing-gap.yaml)
 
 ---
 
@@ -92,7 +92,7 @@ The matrix below extends `@aiox-master`'s YAML definition. It mirrors the patter
 
 ### Decision tree (pseudocode)
 
-```
+```text
 on user message:
   classify intent → category
   match keywords → squad_candidates[]
@@ -215,7 +215,7 @@ When a project-local agent (e.g., `@aiox-master` in `business-ai-first`) discove
 
 ### Flow
 
-```
+```text
 [business-ai-first agent learns X about Claude Code]
         ↓
    Writes AuditFinding (framework_candidate: true)

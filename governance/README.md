@@ -12,7 +12,7 @@ Governance documents for the AIOX framework. This is where the framework's **own
 
 ## Layout
 
-```
+```text
 governance/
 ├── README.md                       # this file
 ├── evolution-pipeline.md           # core pipeline spec

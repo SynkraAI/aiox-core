@@ -5,8 +5,8 @@
 #   1. Copy this file to aiox-core/governance/proposals/PROP-<YYYYMMDD>-<slug>.yaml
 #   2. Fill all fields. Reference source AuditFinding by ID.
 #   3. Submit to Eliel for approval.
-#   4. On APPROVE: implementer opens PR in aiox-core; fill implementation.* fields.
-#   5. On REJECT: move to proposals/archive/.
+#   4. On APPROVED: implementer opens PR in aiox-core; fill implementation.* fields.
+#   5. On REJECTED: move to proposals/archive/.
 #   6. On NEEDS_REVISION: address revision_request, resubmit.
 
 framework_proposal:
@@ -45,7 +45,7 @@ framework_proposal:
     risk: ""                          # low | medium | high — what could go wrong
 
   approval:
-    eliel_decision: "PENDING"         # PENDING | APPROVE | REJECT | NEEDS_REVISION
+    eliel_decision: "PENDING"         # PENDING | APPROVED | REJECTED | NEEDS_REVISION
     eliel_decision_at: null           # ISO 8601 timestamp when decided
     eliel_decision_rationale: ""      # reasoning, especially if reject or needs-revision
     revision_request: []              # filled if NEEDS_REVISION

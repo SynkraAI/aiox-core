@@ -12,7 +12,7 @@ framework_proposal:
       Multiple coordinated changes:
       - aiox-core/.claude/rules/vocabulary-contract.md (NEW)
       - aiox-core/hooks/migration-dictionary-guard.cjs (NEW — generalized from business-ai-first project copy)
-      - aiox-core/governance/patterns/vocabulary-store.md (NEW pattern doc, created on APPROVE)
+      - aiox-core/governance/patterns/vocabulary-store.md (NEW pattern doc, created on APPROVED)
       - aiox-core/.aiox-core/constitution.md (MODIFY — add Article VII Vocabulary Contract)
     operation: "create + modify"
 

@@ -12,7 +12,7 @@
 
 Define how the AIOX framework (`aiox-core`) evolves from real-world findings discovered in consumer projects (e.g., `business-ai-first`). The framework is not static — it grows via **audited evidence** from production usage. This document specifies the formal pipeline:
 
-```
+```text
 Project audit → Finding → Proposal → Eliel approval → aiox-core PR → Distribution
 ```
 
@@ -45,8 +45,8 @@ With this pipeline:
 
 ### Approver (Eliel — sole authority)
 - Reviews FrameworkProposal
-- Decides: APPROVE / REJECT / NEEDS_REVISION
-- If APPROVE: signs the proposal with `eliel_approval` field + timestamp
+- Decides: APPROVED / REJECTED / NEEDS_REVISION
+- If APPROVED: signs the proposal with `eliel_approval` field + timestamp
 - Approval triggers PR creation against `aiox-core`
 
 ### Implementer (@aiox-master + relevant specialist)
@@ -160,7 +160,7 @@ framework_proposal:
     risk: "<low|medium|high — what could go wrong>"
 
   approval:
-    eliel_decision: "PENDING|APPROVE|REJECT|NEEDS_REVISION"
+    eliel_decision: "PENDING|APPROVED|REJECTED|NEEDS_REVISION"
     eliel_decision_at: "<ISO-8601 or null>"
     eliel_decision_rationale: |
       <reasoning, especially if reject or needs-revision>
@@ -176,7 +176,7 @@ framework_proposal:
 
 ## Decision flow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. Project session discovers issue                          │
 │    (auditor agent or Eliel)                                 │
@@ -204,13 +204,13 @@ framework_proposal:
                                               ▼
                                    ┌─────────────────────┐
                                    │ 4. Eliel reviews     │
-                                   │    APPROVE / REJECT  │
+                                   │    APPROVED / REJECTED │
                                    │    / NEEDS_REVISION  │
                                    └──────────┬──────────┘
                                               │
                        ┌──────────────────────┼──────────────────────┐
                        │                      │                      │
-                     APPROVE              NEEDS_REVISION           REJECT
+                     APPROVED             NEEDS_REVISION           REJECTED
                        │                      │                      │
                        ▼                      ▼                      ▼
               ┌──────────────────┐    Loop back to        Document why,
@@ -351,7 +351,7 @@ framework_proposal:
     distributed_to: []
 ```
 
-This is the artifact Eliel reviews. On `APPROVE`, the PR opens in `aiox-core`.
+This is the artifact Eliel reviews. On `APPROVED`, the PR opens in `aiox-core`.
 
 ---
 
@@ -368,7 +368,7 @@ This is the artifact Eliel reviews. On `APPROVE`, the PR opens in `aiox-core`.
 
 ## Storage layout in aiox-core
 
-```
+```text
 aiox-core/
 ├── audits/
 │   ├── README.md                              # explains this folder
@@ -386,7 +386,7 @@ aiox-core/
 │   │   └── archive/                           # rejected or superseded proposals
 │   ├── patterns/
 │   │   ├── README.md                          # catalog of approved patterns
-│   │   └── vocabulary-store.md                # (created on first APPROVE)
+│   │   └── vocabulary-store.md                # (created on first APPROVED proposal)
 │   └── templates/
 │       ├── audit-finding-tmpl.yaml            # YAML template (extracted from this doc)
 │       └── framework-proposal-tmpl.yaml

@@ -6,7 +6,7 @@ See [`../governance/evolution-pipeline.md`](../governance/evolution-pipeline.md)
 
 ## Layout
 
-```
+```text
 audits/
 ├── README.md                              # this file
 ├── <audit-narrative>.md                   # human-readable audit reports (e.g., c-dev-organization-2026-05-07.md)
