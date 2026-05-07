@@ -3,9 +3,17 @@
  * @story 6.19 - IDE Command Auto-Sync System
  */
 
+const path = require('path');
+
 const claudeCode = require('../../.aiox-core/infrastructure/scripts/ide-sync/transformers/claude-code');
 const cursor = require('../../.aiox-core/infrastructure/scripts/ide-sync/transformers/cursor');
 const antigravity = require('../../.aiox-core/infrastructure/scripts/ide-sync/transformers/antigravity');
+const {
+  generateRedirect,
+  generateRedirectContent,
+  getRedirectFilenames,
+  sanitizeRedirectId,
+} = require('../../.aiox-core/infrastructure/scripts/ide-sync/redirect-generator');
 
 describe('IDE Transformers', () => {
   // Sample agent data for testing
@@ -139,6 +147,7 @@ describe('IDE Transformers', () => {
   describe('cursor transformer', () => {
     it('should generate condensed format', () => {
       const result = cursor.transform(sampleAgent);
+      expect(result).toMatch(/^---\ndescription: 'AIOX agent @dev - Full Stack Developer'\nalwaysApply: false\n---/);
       expect(result).toContain('# Dex (@dev)');
       expect(result).toContain('💻 **Full Stack Developer**');
       expect(result).toContain('Builder');
@@ -169,6 +178,36 @@ describe('IDE Transformers', () => {
 
     it('should have correct format identifier', () => {
       expect(cursor.format).toBe('condensed-rules');
+    });
+
+    it('should return Cursor .mdc filenames', () => {
+      expect(cursor.getFilename(sampleAgent)).toBe('dev.mdc');
+    });
+
+    it('should escape redirect frontmatter values for Cursor MDC files', () => {
+      const result = generateRedirectContent("old'agent\nname", "new'agent", 'condensed-rules');
+
+      expect(result).toContain("description: 'AIOX redirect from @old''agent name to @new''agent'");
+      expect(result).toMatch(/^---\ndescription: 'AIOX redirect/m);
+    });
+
+    it('should sanitize redirect filenames and keep paths inside target dir', () => {
+      const targetDir = path.join(process.cwd(), 'tmp-redirect-target');
+      const result = generateRedirect('../escape/agent', 'dev', targetDir, 'condensed-rules');
+
+      expect(sanitizeRedirectId('../escape/agent')).toBe('escape-agent');
+      expect(result.filename).toBe('escape-agent.mdc');
+      expect(result.path).toBe(path.resolve(targetDir, 'escape-agent.mdc'));
+      expect(path.relative(path.resolve(targetDir), result.path)).toBe('escape-agent.mdc');
+      expect(getRedirectFilenames({ '../escape/agent': 'dev' }, 'condensed-rules')).toEqual([
+        'escape-agent.mdc',
+      ]);
+    });
+
+    it('should reject redirect ids that cannot produce safe filenames', () => {
+      expect(() => generateRedirect('..', 'dev', process.cwd(), 'condensed-rules')).toThrow(
+        'Invalid redirect id'
+      );
     });
   });
 
@@ -219,10 +258,9 @@ describe('IDE Transformers', () => {
     });
 
     it('should return valid filename for all', () => {
-      for (const transformer of transformers) {
-        const filename = transformer.getFilename(sampleAgent);
-        expect(filename).toBe('dev.md');
-      }
+      expect(claudeCode.getFilename(sampleAgent)).toBe('dev.md');
+      expect(cursor.getFilename(sampleAgent)).toBe('dev.mdc');
+      expect(antigravity.getFilename(sampleAgent)).toBe('dev.md');
     });
 
     it('should have format property', () => {

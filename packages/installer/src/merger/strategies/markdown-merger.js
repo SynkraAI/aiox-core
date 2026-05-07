@@ -7,6 +7,16 @@ const { BaseMerger } = require('./base-merger.js');
 const { createMergeResult, createEmptyStats } = require('../types.js');
 const { parseMarkdownSections, hasAioxMarkers } = require('../parsers/markdown-section-parser.js');
 
+function startsWithYamlFrontmatter(content) {
+  const trimmed = String(content || '').trimStart();
+  if (!trimmed.startsWith('---\n') && !trimmed.startsWith('---\r\n')) {
+    return false;
+  }
+
+  const lines = trimmed.split(/\r?\n/);
+  return lines.slice(1).some(line => line.trim() === '---');
+}
+
 /**
  * Merge strategy for Markdown files (CLAUDE.md, rules.md).
  * Uses AIOX-MANAGED markers to identify sections that can be updated.
@@ -171,7 +181,7 @@ class MarkdownMerger extends BaseMerger {
 
     // Add separator and AIOX sections
     if (aioxSections.length > 0) {
-      merged += '\n---\n\n';
+      merged += startsWithYamlFrontmatter(merged) ? '\n\n' : '\n---\n\n';
       merged += '<!-- AIOX-MANAGED SECTIONS -->\n';
       merged += '<!-- These sections are managed by AIOX. Edit content between markers carefully. -->\n';
       merged += '<!-- Your custom content above will be preserved during updates. -->\n\n';

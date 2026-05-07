@@ -21,8 +21,9 @@ fileNameStrategies.set('.env', EnvMerger);
 fileNameStrategies.set('.env.local', EnvMerger);
 fileNameStrategies.set('.env.example', EnvMerger);
 
-// Markdown files
+// Markdown and Cursor MDC rule files
 strategies.set('.md', MarkdownMerger);
+strategies.set('.mdc', MarkdownMerger);
 
 // YAML files (Story INS-4.7)
 strategies.set('.yaml', YamlMerger);

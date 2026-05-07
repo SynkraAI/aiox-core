@@ -118,6 +118,43 @@ try {
   ensureProjectNodeModulesLink = null;
 }
 
+function escapeCursorMdcFrontmatterString(value) {
+  return String(value || '')
+    .replace(/\r?\n/g, ' ')
+    .replace(/'/g, "''")
+    .trim();
+}
+
+function createCursorMdcFallbackContent(agentName, rawContent) {
+  const safeAgentName = escapeCursorMdcFrontmatterString(agentName || 'agent');
+
+  return `---
+description: 'AIOX agent @${safeAgentName}'
+alwaysApply: false
+---
+
+${rawContent}`;
+}
+
+async function writeCursorMdcAgent(sourcePath, targetPath) {
+  try {
+    const agentParser = resolveAioxCoreModule('infrastructure/scripts/ide-sync/agent-parser');
+    const cursorTransformer = resolveAioxCoreModule('infrastructure/scripts/ide-sync/transformers/cursor');
+    const agentData = agentParser.parseAgentFile(sourcePath);
+    const content = cursorTransformer.transform(agentData);
+    await fse.writeFile(targetPath, content, 'utf8');
+  } catch (err) {
+    const agentName = path.basename(sourcePath, path.extname(sourcePath));
+    const rawContent = await fse.readFile(sourcePath, 'utf8');
+    const content = createCursorMdcFallbackContent(agentName, rawContent);
+    await fse.writeFile(targetPath, content, 'utf8');
+    console.warn(
+      chalk.yellow('⚠') +
+        ` Cursor MDC transform fallback used for ${path.basename(sourcePath)}: ${err.message}`
+    );
+  }
+}
+
 async function main() {
   console.clear();
 
@@ -582,7 +619,7 @@ async function main() {
 
     const ideRulesMap = {
       claude: { source: 'claude-rules.md', target: '.claude/CLAUDE.md' },
-      cursor: { source: 'cursor-rules.md', target: '.cursor/rules.md' },
+      cursor: { source: 'cursor-rules.md', target: '.cursor/rules/aiox-global.mdc' },
       gemini: { source: 'gemini-rules.md', target: '.gemini/rules.md' },
       'github-copilot': { source: 'copilot-rules.md', target: '.github/chatmodes/aiox-agent.md' },
       antigravity: { source: 'antigravity-rules.md', target: '.antigravity/rules.md' },
@@ -686,7 +723,6 @@ See .aiox-core/user-guide.md for complete documentation.
         context.projectRoot,
         '.cursor',
         'rules',
-        'AIOX',
         'agents'
       );
 
@@ -698,7 +734,7 @@ See .aiox-core/user-guide.md for complete documentation.
           const sourcePath = path.join(coreAgentsSource, agentFile);
           const targetFileName = agentFile.replace('.md', '.mdc');
           const targetPath = path.join(cursorRulesTarget, targetFileName);
-          await fse.copy(sourcePath, targetPath);
+          await writeCursorMdcAgent(sourcePath, targetPath);
         }
 
         console.log(
@@ -707,7 +743,7 @@ See .aiox-core/user-guide.md for complete documentation.
       }
 
       // Create AIOX README for Cursor
-      const cursorReadme = path.join(context.projectRoot, '.cursor', 'rules', 'AIOX', 'README.md');
+      const cursorReadme = path.join(context.projectRoot, '.cursor', 'rules', 'README.md');
       await fse.ensureDir(path.dirname(cursorReadme));
       await fse.writeFile(
         cursorReadme,
@@ -912,8 +948,8 @@ See .aiox-core/user-guide.md for complete documentation.
             context.projectRoot,
             '.cursor',
             'rules',
-            squad,
-            'agents'
+            'agents',
+            squad
           );
           await fse.ensureDir(cursorSquadTarget);
 
@@ -922,7 +958,7 @@ See .aiox-core/user-guide.md for complete documentation.
             const sourcePath = path.join(squadAgentsSource, agentFile);
             const targetFileName = agentFile.replace('.md', '.mdc');
             const targetPath = path.join(cursorSquadTarget, targetFileName);
-            await fse.copy(sourcePath, targetPath);
+            await writeCursorMdcAgent(sourcePath, targetPath);
           }
 
           console.log(chalk.green('  ✓') + ` Cursor ${squad} rules (${squadAgentFiles.length} agents)`);
@@ -931,7 +967,7 @@ See .aiox-core/user-guide.md for complete documentation.
           if (hasSquadReadme) {
             await fse.copy(
               squadReadmeSource,
-              path.join(context.projectRoot, '.cursor', 'rules', squad, 'README.md')
+              path.join(context.projectRoot, '.cursor', 'rules', 'agents', squad, 'README.md')
             );
           }
         }
@@ -1028,7 +1064,7 @@ See .aiox-core/user-guide.md for complete documentation.
 
   if (ides.includes('cursor')) {
     console.log('  ' + chalk.dim('.cursor/'));
-    console.log('    ' + chalk.dim('├─ rules.md') + '         - Main configuration');
+    console.log('    ' + chalk.dim('├─ rules/aiox-global.mdc') + ' - Main configuration');
     console.log('    ' + chalk.dim('└─ rules/'));
     console.log('      ' + chalk.dim('  ├─ AIOX/') + '         - Core agent rules');
     if (selectedSquads && selectedSquads.length > 0) {
