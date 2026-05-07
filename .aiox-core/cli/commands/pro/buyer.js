@@ -28,13 +28,9 @@ const path = require('path');
 //
 // Resolution order (matches pro/index.js and pro-setup.js):
 //   1. Bundled pro/ (framework-dev / npx context with submodule)
-//   2. npm canonical scope (@aiox-squads/pro)
-//   3. npm legacy scopes (@aiox-fullstack/pro, @aios-fullstack/pro)
-//   4. cwd node_modules under either scope
-const PRO_PACKAGE_CANONICAL = '@aiox-squads/pro';
-const PRO_PACKAGE_FALLBACK = '@aiox-fullstack/pro';
-const PRO_PACKAGE_LEGACY = '@aios-fullstack/pro';
-const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK, PRO_PACKAGE_LEGACY];
+//   2. npm package (@aiox-squads/pro)
+//   3. cwd node_modules under @aiox-squads/pro
+const PRO_PACKAGE = '@aiox-squads/pro';
 
 function resolveLicensePath() {
   const relativePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
@@ -42,27 +38,22 @@ function resolveLicensePath() {
     return relativePath;
   }
 
-  // Try canonical first, then fallback scope via require.resolve
-  for (const pkgName of PRO_PACKAGES) {
-    try {
-      const proPkg = require.resolve(`${pkgName}/package.json`);
-      const proDir = path.dirname(proPkg);
-      const npmPath = path.join(proDir, 'license');
-      if (fs.existsSync(npmPath)) {
-        return npmPath;
-      }
-    } catch {
-      // package not installed under this scope — try next
+  // Try package via require.resolve
+  try {
+    const proPkg = require.resolve(`${PRO_PACKAGE}/package.json`);
+    const proDir = path.dirname(proPkg);
+    const npmPath = path.join(proDir, 'license');
+    if (fs.existsSync(npmPath)) {
+      return npmPath;
     }
+  } catch {
+    // package not installed under this scope
   }
 
   // cwd fallback (when require.resolve doesn't see the package, e.g., npx context)
-  for (const pkgName of PRO_PACKAGES) {
-    const [scope, pkg] = pkgName.split('/');
-    const cwdPath = path.join(process.cwd(), 'node_modules', scope, pkg, 'license');
-    if (fs.existsSync(cwdPath)) {
-      return cwdPath;
-    }
+  const cwdPath = path.join(process.cwd(), 'node_modules', '@aiox-squads', 'pro', 'license');
+  if (fs.existsSync(cwdPath)) {
+    return cwdPath;
   }
 
   return relativePath;
@@ -76,8 +67,7 @@ function loadClient() {
     return licenseApi;
   } catch (error) {
     console.error('Erro: módulo AIOX Pro license não disponível.');
-    console.error(`Instale: npm install ${PRO_PACKAGE_CANONICAL}`);
-    console.error(`(ou fallback: npm install ${PRO_PACKAGE_FALLBACK} / ${PRO_PACKAGE_LEGACY})`);
+    console.error(`Instale: npm install ${PRO_PACKAGE}`);
     console.error(`Detalhe: ${error.message}`);
     process.exit(2);
   }
@@ -112,7 +102,8 @@ function classifyError(err) {
     };
   }
   if (code === 'AUTH_RATE_LIMITED' || code === 'RATE_LIMITED') {
-    const retry = err.details && err.details.retryAfter ? ` (retry em ${err.details.retryAfter}s)` : '';
+    const retry =
+      err.details && err.details.retryAfter ? ` (retry em ${err.details.retryAfter}s)` : '';
     return {
       exitCode: 2,
       message: `Rate limit atingido${retry}.`,
@@ -143,8 +134,8 @@ function emitValidateResult(payload, asJson) {
   const accountLabel = payload.hasAccount ? 'Sim' : 'Não';
   process.stdout.write(
     `\n${statusIcon} ${payload.email}\n` +
-    `   Buyer:      ${buyerLabel}\n` +
-    `   Account:    ${accountLabel}\n\n`,
+      `   Buyer:      ${buyerLabel}\n` +
+      `   Account:    ${accountLabel}\n\n`
   );
 }
 
@@ -174,11 +165,13 @@ async function validateAction(options) {
   } catch (err) {
     const classified = classifyError(err);
     if (asJson) {
-      process.stdout.write(`${JSON.stringify({
-        error: err && err.code ? err.code : 'UNKNOWN',
-        message: classified.message,
-        email,
-      })}\n`);
+      process.stdout.write(
+        `${JSON.stringify({
+          error: err && err.code ? err.code : 'UNKNOWN',
+          message: classified.message,
+          email,
+        })}\n`
+      );
     } else {
       process.stderr.write(`\nFalha: ${classified.message}\n`);
       if (classified.hint) {
@@ -230,7 +223,10 @@ async function validateBatchAction(options) {
   const filePath = options && options.file;
   const asJson = Boolean(options && options.json);
   const concurrencyRaw = options && options.concurrency ? Number(options.concurrency) : 5;
-  const concurrency = Math.max(1, Math.min(10, Number.isFinite(concurrencyRaw) ? concurrencyRaw : 5));
+  const concurrency = Math.max(
+    1,
+    Math.min(10, Number.isFinite(concurrencyRaw) ? concurrencyRaw : 5)
+  );
 
   if (!filePath || !fs.existsSync(filePath)) {
     const msg = filePath ? `Arquivo não encontrado: ${filePath}` : 'Erro: --file é obrigatório.';
@@ -247,7 +243,9 @@ async function validateBatchAction(options) {
     emails = parseEmailsFile(filePath);
   } catch (err) {
     if (asJson) {
-      process.stdout.write(`${JSON.stringify({ error: 'FILE_READ_ERROR', message: err.message })}\n`);
+      process.stdout.write(
+        `${JSON.stringify({ error: 'FILE_READ_ERROR', message: err.message })}\n`
+      );
     } else {
       process.stderr.write(`Falha ao ler arquivo: ${err.message}\n`);
     }
@@ -311,16 +309,17 @@ async function registerAction(options = {}) {
       JSON.stringify({
         status: 'pending_wave_2',
         message: '`register` pendente (Wave 2 da Story 123.8).',
-        reason: 'Endpoint POST /api/v1/admin/buyers/register em aiox-license-server ainda não foi implementado.',
+        reason:
+          'Endpoint POST /api/v1/admin/buyers/register em aiox-license-server ainda não foi implementado.',
         story: 'docs/stories/epic-123/STORY-123.8-cohort-buyer-cli-migration.md',
-      }) + '\n',
+      }) + '\n'
     );
   } else {
     process.stderr.write(
       '\nOperação `register` pendente (Wave 2 da Story 123.8).\n' +
-      'Depende do endpoint POST /api/v1/admin/buyers/register no repo aiox-license-server,\n' +
-      'que ainda não foi implementado.\n\n' +
-      'Acompanhe em docs/stories/epic-123/STORY-123.8-cohort-buyer-cli-migration.md\n',
+        'Depende do endpoint POST /api/v1/admin/buyers/register no repo aiox-license-server,\n' +
+        'que ainda não foi implementado.\n\n' +
+        'Acompanhe em docs/stories/epic-123/STORY-123.8-cohort-buyer-cli-migration.md\n'
     );
   }
   process.exit(2);
@@ -335,8 +334,9 @@ async function registerAction(options = {}) {
  * @returns {Command}
  */
 function createBuyerCommand() {
-  const cmd = new Command('buyer')
-    .description('Validar e gerenciar buyers AIOX Pro (Cohort admin)');
+  const cmd = new Command('buyer').description(
+    'Validar e gerenciar buyers AIOX Pro (Cohort admin)'
+  );
 
   cmd
     .command('validate')

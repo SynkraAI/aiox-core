@@ -1,13 +1,13 @@
 name: Publish to NPM
 # Story 6.1 - Added concurrency
-# Story 12.9 - Added @synkra/aiox-install package support
+# Story 124.7 - Publish @aiox-squads packages
 
 on:
   release:
     types: [published]
   push:
     tags:
-      - 'v*.*.*'  # Semantic version tags trigger publish
+      - 'v*.*.*' # Semantic version tags trigger publish
   workflow_dispatch:
     inputs:
       publish_mode:
@@ -20,18 +20,20 @@ on:
           - stable
           - beta
       packages:
-        description: 'Packages to publish (comma-separated, or "all")'
+        description: 'Package to publish, or "all"'
         required: false
         default: 'all'
         type: choice
         options:
           - all
-          - aiox-core
+          - core
           - aiox-install
+          - aiox-pro-cli
+          - installer
 
 concurrency:
   group: npm-publish-${{ github.ref }}
-  cancel-in-progress: false  # Never cancel publishing in progress
+  cancel-in-progress: false # Never cancel publishing in progress
 
 permissions:
   contents: read
@@ -71,7 +73,6 @@ jobs:
     outputs:
       version: ${{ steps.package-version.outputs.version }}
       packages: ${{ steps.detect-packages.outputs.packages }}
-      has_aiox_install: ${{ steps.detect-packages.outputs.has_aiox_install }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -98,22 +99,11 @@ jobs:
 
           # Default to all packages on release/tag events
           if [ -z "$SELECTED" ] || [ "$SELECTED" = "all" ]; then
-            PACKAGES="aiox-core"
-
-            # Add aiox-install if it exists
-            if [ -d "packages/aiox-install" ] && [ -f "packages/aiox-install/package.json" ]; then
-              PACKAGES="$PACKAGES,aiox-install"
-              echo "has_aiox_install=true" >> $GITHUB_OUTPUT
-            else
-              echo "has_aiox_install=false" >> $GITHUB_OUTPUT
-            fi
+            PACKAGES="core,aiox-install,aiox-pro-cli,installer"
+          elif [ "$SELECTED" = "aiox-core" ]; then
+            PACKAGES="core"
           else
             PACKAGES="$SELECTED"
-            if [ "$SELECTED" = "aiox-install" ]; then
-              echo "has_aiox_install=true" >> $GITHUB_OUTPUT
-            else
-              echo "has_aiox_install=false" >> $GITHUB_OUTPUT
-            fi
           fi
 
           echo "packages=$PACKAGES" >> $GITHUB_OUTPUT
@@ -128,7 +118,7 @@ jobs:
               echo '{"built": true}' > "$pkg/lib/build.json"
             fi
           done
-          
+
           echo "✅ Build preparation complete"
 
       - name: Create distribution archive
@@ -157,6 +147,7 @@ jobs:
 
   publish:
     needs: [test, build]
+    if: ${{ contains(needs.build.outputs.packages, 'core') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -193,10 +184,10 @@ jobs:
       - name: Publish safety gate (INS-4.10)
         run: node bin/utils/validate-publish.js
 
-      - name: Check if aiox-core should be published
+      - name: Check if core should be published
         id: should-publish
         run: |
-          PKG_NAME="aiox-core"
+          PKG_NAME=$(node -p "require('./package.json').name")
           VERSION="${{ needs.build.outputs.version }}"
 
           # Check if package exists in registry
@@ -208,41 +199,54 @@ jobs:
             echo "should_publish=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Publish aiox-core to NPM
+      - name: Publish core to NPM
         if: steps.should-publish.outputs.should_publish == 'true'
         run: |
           # Create npmrc for authentication
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN_AIOX_SQUADS }}" > .npmrc
 
           # Publish with appropriate tag
           npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
 
-          echo "✅ Published aiox-core@${{ needs.build.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
+          PKG_NAME=$(node -p "require('./package.json').name")
+          echo "✅ Published ${PKG_NAME}@${{ needs.build.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
 
       - name: Verify publication
         if: steps.should-publish.outputs.should_publish == 'true'
         run: |
           # Wait for npm registry to propagate (can take up to 60s)
+          PKG_NAME=$(node -p "require('./package.json').name")
           for i in 1 2 3 4 5 6; do
             sleep 15
-            if npm view "aiox-core@${{ needs.build.outputs.version }}" version > /dev/null 2>&1; then
-              echo "✅ Verified: aiox-core@${{ needs.build.outputs.version }} is available on NPM"
+            if npm view "${PKG_NAME}@${{ needs.build.outputs.version }}" version > /dev/null 2>&1; then
+              echo "✅ Verified: ${PKG_NAME}@${{ needs.build.outputs.version }} is available on NPM"
               exit 0
             fi
             echo "⏳ Waiting for npm registry propagation... (attempt $i/6)"
           done
 
-          echo "❌ Verification failed: aiox-core@${{ needs.build.outputs.version }} not found after 90s"
+          echo "❌ Verification failed: ${PKG_NAME}@${{ needs.build.outputs.version }} not found after 90s"
           exit 1
 
-  # Story 12.9 - Publish @synkra/aiox-install NPX package
-  publish-aiox-install:
+  publish_workspace_packages:
     needs: [test, build]
-    if: ${{ needs.build.outputs.has_aiox_install == 'true' }}
-    continue-on-error: true  # Don't block main publish if @synkra org not yet configured
+    if: ${{ contains(needs.build.outputs.packages, 'aiox-install') || contains(needs.build.outputs.packages, 'aiox-pro-cli') || contains(needs.build.outputs.packages, 'installer') }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - key: aiox-install
+            path: packages/aiox-install
+            smoke: npx --yes @aiox-squads/aiox-install --version
+          - key: aiox-pro-cli
+            path: packages/aiox-pro-cli
+            smoke: npx --yes @aiox-squads/aiox-pro-cli --help
+          - key: installer
+            path: packages/installer
+            smoke: npx --yes @aiox-squads/installer --help
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -254,18 +258,40 @@ jobs:
           cache: 'npm'
           registry-url: ${{ env.NPM_REGISTRY }}
 
-      - name: Install dependencies
-        working-directory: packages/aiox-install
-        run: npm ci --ignore-scripts
-
-      - name: Get aiox-install version
-        id: pkg-version
-        working-directory: packages/aiox-install
+      - name: Check selection
+        id: selection
         run: |
-          VERSION=$(node -p "require('./package.json').version")
+          SELECTED=",${{ needs.build.outputs.packages }},"
+          PACKAGE_KEY="${{ matrix.key }}"
+          if [[ "$SELECTED" == *",$PACKAGE_KEY,"* ]]; then
+            echo "selected=true" >> $GITHUB_OUTPUT
+          else
+            echo "selected=false" >> $GITHUB_OUTPUT
+            echo "Skipping ${PACKAGE_KEY}; selected packages: $SELECTED"
+          fi
+
+      - name: Install dependencies
+        if: steps.selection.outputs.selected == 'true'
+        run: npm ci
+        env:
+          HUSKY: '0'
+
+      - name: Get workspace package metadata
+        if: steps.selection.outputs.selected == 'true'
+        id: pkg
+        run: |
+          PACKAGE_JSON="./${{ matrix.path }}/package.json"
+          NAME=$(node -p "require('${PACKAGE_JSON}').name")
+          VERSION=$(node -p "require('${PACKAGE_JSON}').version")
+          echo "name=$NAME" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          if [[ "$NAME" != @aiox-squads/* ]]; then
+            echo "::error::Expected an @aiox-squads package name, got $NAME"
+            exit 1
+          fi
 
       - name: Set publishing tag
+        if: steps.selection.outputs.selected == 'true'
         id: publish-tag
         run: |
           if [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
@@ -277,10 +303,11 @@ jobs:
           fi
 
       - name: Check if already published
+        if: steps.selection.outputs.selected == 'true'
         id: should-publish
         run: |
-          PKG_NAME="@synkra/aiox-install"
-          VERSION="${{ steps.pkg-version.outputs.version }}"
+          PKG_NAME="${{ steps.pkg.outputs.name }}"
+          VERSION="${{ steps.pkg.outputs.version }}"
 
           if npm view "${PKG_NAME}@${VERSION}" version > /dev/null 2>&1; then
             echo "Version ${VERSION} already exists for ${PKG_NAME}"
@@ -290,49 +317,61 @@ jobs:
             echo "should_publish=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Publish @synkra/aiox-install
+      - name: Publish workspace package
         if: steps.should-publish.outputs.should_publish == 'true'
-        working-directory: packages/aiox-install
+        working-directory: ${{ matrix.path }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN_AIOX_SQUADS }}" > .npmrc
           npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
-          echo "✅ Published @synkra/aiox-install@${{ steps.pkg-version.outputs.version }}"
+          echo "✅ Published ${{ steps.pkg.outputs.name }}@${{ steps.pkg.outputs.version }}"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
 
       - name: Smoke test - verify npx works
         if: steps.should-publish.outputs.should_publish == 'true'
+        env:
+          SMOKE_COMMAND: ${{ matrix.smoke }}
         run: |
           # Wait for npm registry propagation
           for i in 1 2 3 4 5 6; do
             sleep 15
-            if npx @synkra/aiox-install --version 2>/dev/null; then
-              echo "✅ Smoke test passed: npx @synkra/aiox-install --version works"
+            if $SMOKE_COMMAND >/dev/null 2>&1; then
+              echo "✅ Smoke test passed: ${SMOKE_COMMAND} works"
               exit 0
             fi
             echo "⏳ Waiting for npm propagation... (attempt $i/6)"
           done
-          echo "⚠️ Smoke test timeout - package may need more time to propagate"
-          # Don't fail the build - propagation can take longer
+          echo "❌ Smoke test timeout for ${{ steps.pkg.outputs.name }}"
+          exit 1
 
   notify:
-    needs: [build, publish, publish-aiox-install]
+    needs: [build, publish, publish_workspace_packages]
     if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Notify completion
         run: |
+          if [ "${{ needs.publish.result }}" = "failure" ] || [ "${{ needs.publish_workspace_packages.result }}" = "failure" ]; then
+            echo "❌ Publishing failed"
+            exit 1
+          fi
+
+          if [ "${{ needs.publish.result }}" = "cancelled" ] || [ "${{ needs.publish_workspace_packages.result }}" = "cancelled" ]; then
+            echo "❌ Publishing was cancelled"
+            exit 1
+          fi
+
           PUBLISHED_PACKAGES=""
 
           if [ "${{ needs.publish.result }}" = "success" ]; then
-            PUBLISHED_PACKAGES="aiox-core"
+            PUBLISHED_PACKAGES="@aiox-squads/core"
           fi
 
-          if [ "${{ needs.publish-aiox-install.result }}" = "success" ]; then
+          if [ "${{ needs.publish_workspace_packages.result }}" = "success" ]; then
             if [ -n "$PUBLISHED_PACKAGES" ]; then
-              PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, @synkra/aiox-install"
+              PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, selected @aiox-squads workspace packages"
             else
-              PUBLISHED_PACKAGES="@synkra/aiox-install"
+              PUBLISHED_PACKAGES="selected @aiox-squads workspace packages"
             fi
           fi
 
@@ -340,7 +379,7 @@ jobs:
             echo "🎉 Successfully published to NPM:"
             echo "   Packages: $PUBLISHED_PACKAGES"
             echo "   Registry: ${{ env.NPM_REGISTRY }}"
-          elif [ "${{ needs.publish.result }}" = "skipped" ] && [ "${{ needs.publish-aiox-install.result }}" = "skipped" ]; then
+          elif [ "${{ needs.publish.result }}" = "skipped" ] && [ "${{ needs.publish_workspace_packages.result }}" = "skipped" ]; then
             echo "⏭️ No packages needed publishing (already up-to-date)"
           else
             echo "❌ Publishing failed"
@@ -348,8 +387,8 @@ jobs:
           fi
 
   create-release-notes:
-    needs: [build, publish, publish-aiox-install]
-    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish-aiox-install.result == 'success')
+    needs: [build, publish, publish_workspace_packages]
+    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish_workspace_packages.result == 'success')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -359,12 +398,6 @@ jobs:
 
       - name: Generate release notes
         run: |
-          # Check if aiox-install was published
-          AIOX_INSTALL_ROW=""
-          if [ "${{ needs.publish-aiox-install.result }}" = "success" ]; then
-            AIOX_INSTALL_ROW="| @synkra/aiox-install | [npmjs.com](https://www.npmjs.com/package/@synkra/aiox-install) | NPX Installer for AIOX |"
-          fi
-
           cat > release-notes.md << EOF
           # AIOX-Core v${{ needs.build.outputs.version }}
 
@@ -372,20 +405,22 @@ jobs:
 
           | Package | NPM Link | Description |
           |---------|----------|-------------|
-          | aiox-core | [npmjs.com](https://www.npmjs.com/package/aiox-core) | AI-Orchestrated System for Full Stack Development |
-          ${AIOX_INSTALL_ROW}
+          | @aiox-squads/core | [npmjs.com](https://www.npmjs.com/package/@aiox-squads/core) | AI-Orchestrated System for Full Stack Development |
+          | @aiox-squads/aiox-install | [npmjs.com](https://www.npmjs.com/package/@aiox-squads/aiox-install) | NPX Installer for AIOX |
+          | @aiox-squads/aiox-pro-cli | [npmjs.com](https://www.npmjs.com/package/@aiox-squads/aiox-pro-cli) | AIOX Pro CLI wrapper |
+          | @aiox-squads/installer | [npmjs.com](https://www.npmjs.com/package/@aiox-squads/installer) | AIOX installer package |
 
           ## 🚀 Installation
 
           \`\`\`bash
           # Quick install via NPX (recommended for new users)
-          npx @synkra/aiox-install
+          npx @aiox-squads/aiox-install
 
           # Or global installation
-          npm install -g aiox-core
+          npm install -g @aiox-squads/core
 
           # Or as project dependency
-          npm install aiox-core
+          npm install @aiox-squads/core
           \`\`\`
 
           ## 📋 What's New

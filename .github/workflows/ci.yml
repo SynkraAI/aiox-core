@@ -51,6 +51,7 @@ jobs:
               - 'tests/**'
               - 'jest.config.js'
             config:
+              - '.github/workflows/**'
               - 'package.json'
               - 'package-lock.json'
               - 'tsconfig.json'
@@ -95,6 +96,39 @@ jobs:
             exit 1
           }
           echo "✅ No critical vulnerabilities found"
+
+  package-name-validation:
+    name: Package Name Validation
+    needs: changes
+    if: ${{ needs.changes.outputs.code == 'true' || needs.changes.outputs.config == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate @aiox-squads package names
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const expected = {
+            'package.json': '@aiox-squads/core',
+            'packages/aiox-install/package.json': '@aiox-squads/aiox-install',
+            'packages/aiox-pro-cli/package.json': '@aiox-squads/aiox-pro-cli',
+            'packages/installer/package.json': '@aiox-squads/installer',
+          };
+
+          for (const [file, expectedName] of Object.entries(expected)) {
+            const manifest = JSON.parse(fs.readFileSync(file, 'utf8'));
+            if (manifest.name !== expectedName) {
+              console.error(`Expected ${file} name to be ${expectedName}, got ${manifest.name}`);
+              process.exit(1);
+            }
+            console.log(`✅ ${file}: ${manifest.name}`);
+          }
+          NODE
 
   lint:
     name: ESLint
@@ -366,7 +400,21 @@ jobs:
   validation-summary:
     name: Validation Summary
     runs-on: ubuntu-latest
-    needs: [changes, security-audit, lint, typecheck, test, story-validation, manifest-validation, ide-sync-validation, installer-smoke-test, compatibility-parity-gate, dependency-validation, brownfield-install-test]
+    needs:
+      [
+        changes,
+        security-audit,
+        lint,
+        typecheck,
+        test,
+        story-validation,
+        manifest-validation,
+        ide-sync-validation,
+        installer-smoke-test,
+        compatibility-parity-gate,
+        dependency-validation,
+        brownfield-install-test,
+      ]
     if: always()
 
     steps:

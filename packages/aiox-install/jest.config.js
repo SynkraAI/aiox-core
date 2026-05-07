@@ -1,15 +1,12 @@
 /**
- * Jest configuration for @synkra/aiox-install package
+ * Jest configuration for @aiox-squads/aiox-install package
  */
 
 module.exports = {
   testEnvironment: 'node',
   roots: ['../../tests/packages/aiox-install'],
   testMatch: ['**/*.test.js'],
-  collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-  ],
+  collectCoverageFrom: ['src/**/*.js', '!src/**/*.test.js'],
   coverageDirectory: '../../coverage/packages/aiox-install',
   coverageThreshold: {
     global: {
@@ -19,8 +16,6 @@ module.exports = {
       statements: 70,
     },
   },
-  modulePathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-  ],
+  modulePathIgnorePatterns: ['<rootDir>/node_modules/'],
   verbose: true,
 };

@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-07T00:08:59.095Z'
+  lastUpdated: '2026-05-07T07:53:00.000Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -7214,8 +7214,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cb3abc56f9c001a80f18766d949b0d8916eb91d4644c0ee2d642ac62a03a73d3
-      lastVerified: '2026-03-11T00:48:55.861Z'
+      checksum: sha256:ca880db21647162725bbc5bcd4a01613ad2cc4911aa829a9b9242a05bb62283a
+      lastVerified: '2026-05-06T22:00:40.770Z'
     greeting-builder:
       path: .aiox-core/development/scripts/greeting-builder.js
       layer: L2
@@ -12795,8 +12795,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:724682d68410d65fc144356cc59324000e433f8a3f2e582a0403ae81f1af911e
-      lastVerified: '2026-05-07T00:08:58.904Z'
+      checksum: sha256:8246c4c3997ddff6fcf51555fb840bbd4fcac3c294e5ed5fa2c8585a42d91029
+      lastVerified: '2026-05-07T07:53:00.000Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md

@@ -20,7 +20,11 @@ on:
       - 'pro'
       - 'tests/pro/**'
       - 'bin/utils/pro-detector.js'
+      - '.aiox-core/cli/commands/pro/**'
+      - '.aiox-core/core/pro/**'
       - '.github/workflows/pro-integration.yml'
+      - 'packages/aiox-pro-cli/**'
+      - 'packages/installer/src/wizard/pro-setup.js'
 
   pull_request:
     branches: [main]
@@ -28,7 +32,11 @@ on:
       - 'pro'
       - 'tests/pro/**'
       - 'bin/utils/pro-detector.js'
+      - '.aiox-core/cli/commands/pro/**'
+      - '.aiox-core/core/pro/**'
       - '.github/workflows/pro-integration.yml'
+      - 'packages/aiox-pro-cli/**'
+      - 'packages/installer/src/wizard/pro-setup.js'
 
   # Manual trigger for on-demand validation
   workflow_dispatch:
@@ -107,6 +115,17 @@ jobs:
           echo ""
           echo "=== Pro Contents ==="
           ls pro/
+
+      - name: Verify expected Pro package scope
+        if: steps.token-check.outputs.skip != 'true'
+        run: |
+          EXPECTED="@aiox-squads/pro"
+          ACTUAL=$(node -p "require('./pro/package.json').name")
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "::warning::Pro submodule package is $ACTUAL; expected $EXPECTED after Story 124.4 lands."
+          else
+            echo "✅ Pro package scope is $EXPECTED"
+          fi
 
       - name: Run core→pro integration tests
         if: steps.token-check.outputs.skip != 'true'

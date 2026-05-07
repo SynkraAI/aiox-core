@@ -2,7 +2,7 @@
  * Pro Content Scaffolder
  *
  * Copies premium content (squads, configs, feature registry) from
- * node_modules/@aiox-squads/pro/ (or a legacy Pro scope) into the user's project after
+ * node_modules/@aiox-squads/pro/ into the user's project after
  * license activation.
  *
  * @module packages/installer/src/pro/pro-scaffolder
@@ -19,9 +19,7 @@ const { hashFileAsync, hashFilesMatchAsync } = require('../installer/file-hasher
 /**
  * Directories excluded from scaffolding (private/internal squads).
  */
-const SCAFFOLD_EXCLUDES = [
-  'mmos-squad',
-];
+const SCAFFOLD_EXCLUDES = ['mmos-squad'];
 
 /**
  * Items to scaffold from pro package into user project.
@@ -55,7 +53,7 @@ const SCAFFOLD_ITEMS = [
  * Scaffold pro content into user project.
  *
  * @param {string} targetDir - Project root directory
- * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-squads/pro or legacy scopes)
+ * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-squads/pro, with legacy scopes supported by the resolver)
  * @param {Object} [options={}] - Scaffold options
  * @param {Function} [options.onProgress] - Progress callback ({item, status, message})
  * @param {boolean} [options.force=false] - Force overwrite even if content exists
@@ -78,9 +76,9 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
   const rollbackFiles = [];
 
   // Validate pro source exists
-  if (!await fs.pathExists(proSourceDir)) {
+  if (!(await fs.pathExists(proSourceDir))) {
     result.errors.push(
-      `Pro package not found at ${proSourceDir}. Run "npx aiox-pro install" or "aiox pro setup" first.`,
+      `Pro package not found at ${proSourceDir}. Run "npx aiox-pro install" or "aiox pro setup" first.`
     );
     return result;
   }
@@ -91,7 +89,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
       const destPath = path.join(targetDir, item.dest);
 
       // Check source exists
-      if (!await fs.pathExists(sourcePath)) {
+      if (!(await fs.pathExists(sourcePath))) {
         if (item.required) {
           throw new Error(`Required pro content not found: ${item.source}`);
         }
@@ -104,11 +102,19 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
       }
 
       if (item.type === 'directory') {
-        const copied = await scaffoldDirectory(sourcePath, destPath, { force, rollbackFiles, baseDir: targetDir });
+        const copied = await scaffoldDirectory(sourcePath, destPath, {
+          force,
+          rollbackFiles,
+          baseDir: targetDir,
+        });
         result.copiedFiles.push(...copied.copiedFiles);
         result.skippedFiles.push(...copied.skippedFiles);
       } else {
-        const copied = await scaffoldFile(sourcePath, destPath, { force, rollbackFiles, baseDir: targetDir });
+        const copied = await scaffoldFile(sourcePath, destPath, {
+          force,
+          rollbackFiles,
+          baseDir: targetDir,
+        });
         if (copied.skipped) {
           result.skippedFiles.push(copied.relativePath);
         } else {
@@ -117,14 +123,22 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
       }
 
       if (onProgress) {
-        onProgress({ item: item.source, status: 'done', message: `${item.description} scaffolded` });
+        onProgress({
+          item: item.source,
+          status: 'done',
+          message: `${item.description} scaffolded`,
+        });
       }
     }
 
     // Merge pro-config into core-config
     const merged = await mergeProConfig(targetDir);
     if (merged && onProgress) {
-      onProgress({ item: 'pro-config', status: 'done', message: 'Pro config merged into core-config.yaml' });
+      onProgress({
+        item: 'pro-config',
+        status: 'done',
+        message: 'Pro config merged into core-config.yaml',
+      });
     }
 
     // Install squad agent commands to IDEs
@@ -132,8 +146,11 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
     if (commandsResult.installed > 0) {
       result.copiedFiles.push(...commandsResult.files);
       if (onProgress) {
-        onProgress({ item: 'squad-commands', status: 'done',
-          message: `${commandsResult.installed} squad agent commands installed` });
+        onProgress({
+          item: 'squad-commands',
+          status: 'done',
+          message: `${commandsResult.installed} squad agent commands installed`,
+        });
       }
     }
 
@@ -150,7 +167,6 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
     rollbackFiles.push(path.join(targetDir, 'pro-installed-manifest.yaml'));
 
     result.success = true;
-
   } catch (error) {
     result.errors.push(error.message);
 
@@ -160,7 +176,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
       result.errors.push(`Rollback errors: ${rollbackResult.errors.join(', ')}`);
     }
     result.warnings.push(
-      `Scaffolding failed: ${error.message}. ${rollbackResult.removed} files cleaned up.`,
+      `Scaffolding failed: ${error.message}. ${rollbackResult.removed} files cleaned up.`
     );
   }
 
@@ -225,7 +241,7 @@ async function scaffoldFile(sourcePath, destPath, options = {}) {
   const relativePath = path.relative(base, destPath).replace(/\\/g, '/');
 
   // Idempotency check (AC5) — async to avoid blocking event loop
-  if (!force && await fs.pathExists(destPath)) {
+  if (!force && (await fs.pathExists(destPath))) {
     try {
       if (await hashFilesMatchAsync(sourcePath, destPath)) {
         // Identical — skip
@@ -363,7 +379,7 @@ async function mergeProConfig(targetDir) {
   const coreConfigPath = path.join(targetDir, '.aiox-core', 'core-config.yaml');
   const proConfigPath = path.join(targetDir, '.aiox-core', 'pro-config.yaml');
 
-  if (!await fs.pathExists(proConfigPath) || !await fs.pathExists(coreConfigPath)) {
+  if (!(await fs.pathExists(proConfigPath)) || !(await fs.pathExists(coreConfigPath))) {
     return false;
   }
 
@@ -371,7 +387,12 @@ async function mergeProConfig(targetDir) {
   const proConfig = yaml.load(await fs.readFile(proConfigPath, 'utf8')) || {};
 
   for (const [key, value] of Object.entries(proConfig)) {
-    if (coreConfig[key] && typeof coreConfig[key] === 'object' && typeof value === 'object' && !Array.isArray(value)) {
+    if (
+      coreConfig[key] &&
+      typeof coreConfig[key] === 'object' &&
+      typeof value === 'object' &&
+      !Array.isArray(value)
+    ) {
       coreConfig[key] = { ...coreConfig[key], ...value };
     } else {
       coreConfig[key] = value;
@@ -391,10 +412,13 @@ async function mergeProConfig(targetDir) {
  */
 async function installSquadCommands(targetDir) {
   const squadsDir = path.join(targetDir, 'squads');
-  if (!await fs.pathExists(squadsDir)) return { installed: 0, files: [] };
+  if (!(await fs.pathExists(squadsDir))) return { installed: 0, files: [] };
 
   const ideTargets = [
-    { check: path.join('.claude', 'commands'), dest: (squad) => path.join('.claude', 'commands', squad) },
+    {
+      check: path.join('.claude', 'commands'),
+      dest: (squad) => path.join('.claude', 'commands', squad),
+    },
     { check: path.join('.codex', 'agents'), dest: () => path.join('.codex', 'agents') },
     { check: path.join('.gemini', 'rules'), dest: (squad) => path.join('.gemini', 'rules', squad) },
     { check: path.join('.cursor', 'rules'), dest: () => path.join('.cursor', 'rules') },
@@ -414,19 +438,17 @@ async function installSquadCommands(targetDir) {
   for (const item of items) {
     if (!item.isDirectory()) continue;
     const agentsDir = path.join(squadsDir, item.name, 'agents');
-    if (!await fs.pathExists(agentsDir)) continue;
+    if (!(await fs.pathExists(agentsDir))) continue;
 
-    const agentFiles = (await fs.readdir(agentsDir))
-      .filter(f => f.endsWith('.md') && !f.startsWith('test-'));
+    const agentFiles = (await fs.readdir(agentsDir)).filter(
+      (f) => f.endsWith('.md') && !f.startsWith('test-')
+    );
 
     for (const ide of activeIDEs) {
       const destDir = path.join(targetDir, ide.dest(item.name));
       await fs.ensureDir(destDir);
       for (const agentFile of agentFiles) {
-        await fs.copy(
-          path.join(agentsDir, agentFile),
-          path.join(destDir, agentFile),
-        );
+        await fs.copy(path.join(agentsDir, agentFile), path.join(destDir, agentFile));
         files.push(path.relative(targetDir, path.join(destDir, agentFile)).replace(/\\/g, '/'));
       }
     }

@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.0
-generated_at: "2026-05-07T07:41:42.617Z"
+generated_at: "2026-05-07T08:02:17.787Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -101,13 +101,13 @@ files:
     type: cli
     size: 12326
   - path: cli/commands/pro/buyer.js
-    hash: sha256:b866132041f28ab473e5b9df41e636ded1ba96ae278de02b1233993ee527ada9
+    hash: sha256:d3c4a3d24c4b9e224787bbf3e47ac5d9c52d8c0e6abbe44750b00c60cace2c02
     type: cli
-    size: 12335
+    size: 11845
   - path: cli/commands/pro/index.js
-    hash: sha256:d22457253ad517114883d38e2d8ddc2de6257fd2f9222c299b56f55eb6ad2ba9
+    hash: sha256:ea8a505cd407580c2ae96bdd258a61c9dda264e3e9216768d4ac0588879e98e6
     type: cli
-    size: 26295
+    size: 24594
   - path: cli/commands/qa/index.js
     hash: sha256:3a9e30419a66e56781f9b5dcddc8f4dd0ed24dabf8fe8c3005cd26f5cb02558f
     type: cli
@@ -973,9 +973,9 @@ files:
     type: core
     size: 7193
   - path: core/pro/pro-updater.js
-    hash: sha256:724682d68410d65fc144356cc59324000e433f8a3f2e582a0403ae81f1af911e
+    hash: sha256:8246c4c3997ddff6fcf51555fb840bbd4fcac3c294e5ed5fa2c8585a42d91029
     type: core
-    size: 17722
+    size: 17812
   - path: core/quality-gates/base-layer.js
     hash: sha256:9a9a3921da08176b0bd44f338a59abc1f5107f3b1ee56571e840bf4e8ed233f4
     type: core
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:e6f6c9b9194319ccb794ba40d16fe458c15aa1df907f9f377683750d08d60280
+    hash: sha256:2968dcdf527e4f428298a6590ef91e4ed4fce6df6b46d2404f954537f6113a68
     type: data
     size: 522409
   - path: data/learned-patterns.yaml
@@ -1545,9 +1545,9 @@ files:
     type: script
     size: 3220
   - path: development/scripts/git-wrapper.js
-    hash: sha256:cb3abc56f9c001a80f18766d949b0d8916eb91d4644c0ee2d642ac62a03a73d3
+    hash: sha256:ca880db21647162725bbc5bcd4a01613ad2cc4911aa829a9b9242a05bb62283a
     type: script
-    size: 11874
+    size: 11864
   - path: development/scripts/greeting-builder.js
     hash: sha256:dd0c50dc690a44fdddd9cf8adde609ea0ef2aa6916a78b9fcc971195ddff5656
     type: script
