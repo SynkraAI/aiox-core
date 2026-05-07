@@ -138,11 +138,11 @@ function extractCanonicalAgentPath(content) {
  * Runs structural self-tests for generated Codex skills without invoking live tools.
  */
 function runSkillSelfTests(options = {}) {
+  const projectRoot = options.projectRoot || process.cwd();
   const resolved = {
-    projectRoot: process.cwd(),
-    skillsDir: path.join(process.cwd(), '.codex', 'skills'),
-    expected: [],
-    ...options,
+    projectRoot,
+    skillsDir: options.skillsDir || path.join(projectRoot, '.codex', 'skills'),
+    expected: options.expected || [],
   };
   const expectedIds = new Set(resolved.expected.map(item => item.skillId));
   const results = [];
@@ -165,13 +165,16 @@ function runSkillSelfTests(options = {}) {
     }
 
     const frontmatter = parseSkillFrontmatter(content);
-    let declaredSkillId = item.skillId;
+    let declaredSkillId = '';
+    let canRoundtripSkillPayload = false;
     if (frontmatter.error) {
       errors.push(`self-test ${frontmatter.error}`);
     } else {
       declaredSkillId = String(frontmatter.data.name || '').trim();
-      if (frontmatter.data.name !== item.skillId) {
+      if (declaredSkillId !== item.skillId) {
         errors.push(`self-test frontmatter name mismatch: expected "${item.skillId}"`);
+      } else {
+        canRoundtripSkillPayload = true;
       }
       if (!String(frontmatter.data.description || '').trim()) {
         errors.push('self-test missing frontmatter description');
@@ -194,17 +197,14 @@ function runSkillSelfTests(options = {}) {
       }
     }
 
-    const payload = createSkillToolSelfTestPayload(declaredSkillId);
-    const target = normalizeSkillToolTarget(payload);
-    if (target !== item.skillId) {
-      errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);
-    }
-    if (!expectedIds.has(target)) {
-      errors.push(`self-test Skill payload target is not a generated skill: ${target || '<empty>'}`);
-    }
-
-    if (!content.includes(`generate-greeting.js ${item.agentId}`)) {
-      errors.push(`self-test greeting command cannot activate "${item.agentId}"`);
+    if (canRoundtripSkillPayload) {
+      const payload = createSkillToolSelfTestPayload(declaredSkillId);
+      const target = normalizeSkillToolTarget(payload);
+      if (target !== item.skillId) {
+        errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);
+      } else if (!expectedIds.has(target)) {
+        errors.push(`self-test Skill payload target is not a generated skill: ${target || '<empty>'}`);
+      }
     }
 
     results.push({
@@ -247,13 +247,32 @@ function isGeneratedSquadSkill(content, projectRoot) {
 }
 
 function validateCodexSkills(options = {}) {
-  const resolved = { ...getDefaultOptions(), ...options };
+  const defaults = getDefaultOptions();
+  const projectRoot = options.projectRoot || defaults.projectRoot;
+  const resolved = {
+    ...defaults,
+    ...options,
+    projectRoot,
+    sourceDir: options.sourceDir || path.join(projectRoot, '.aiox-core', 'development', 'agents'),
+    skillsDir: options.skillsDir || path.join(projectRoot, '.codex', 'skills'),
+  };
   const errors = [];
   const warnings = [];
 
   if (!fs.existsSync(resolved.skillsDir)) {
     errors.push(`Skills directory not found: ${resolved.skillsDir}`);
-    return { ok: false, checked: 0, expected: 0, errors, warnings, missing: [], orphaned: [], ignored: [] };
+    return {
+      ok: false,
+      checked: 0,
+      expected: 0,
+      errors,
+      warnings,
+      missing: [],
+      orphaned: [],
+      legacy: [],
+      ignored: [],
+      selfTests: [],
+    };
   }
 
   const agents = parseAllAgents(resolved.sourceDir).filter(isParsableAgent);

@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-07T20:27:43.806Z'
+  lastUpdated: '2026-05-07T20:48:22.488Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -16376,8 +16376,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:83fcbbc19a52e5b95b491b06730b22787e2ae27416c27e1b5e2483a835e2f7f7
-      lastVerified: '2026-05-07T20:27:43.803Z'
+      checksum: sha256:377f52359075c546436f16c596c1e3ffdee61b4218269fc5013dc0e8f4f9da61
+      lastVerified: '2026-05-07T20:48:22.477Z'
     brownfield-analyzer:
       path: .aiox-core/infrastructure/scripts/documentation-integrity/brownfield-analyzer.js
       layer: L2
