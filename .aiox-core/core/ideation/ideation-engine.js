@@ -11,17 +11,27 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 // Import dependencies with fallbacks
+const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
 let GotchasMemory;
 let gotchasMemoryLoadError = null;
-try {
-  ({ GotchasMemory } = require('../memory/gotchas-memory'));
-} catch (error) {
+
+function recordGotchasMemoryLoadError(error) {
   gotchasMemoryLoadError = error;
   if (process.env.AIOX_DEBUG) {
     console.warn(
-      `[ideation-engine] Optional dependency '../memory/gotchas-memory' failed to load: ${error.stack || error.message}`,
+      `[ideation-engine] Optional dependency '${GOTCHAS_MEMORY_MODULE}' failed to load: ${error.stack || error.message}`,
     );
   }
+}
+
+try {
+  const gotchasMemoryModule = require(GOTCHAS_MEMORY_MODULE);
+  if (!gotchasMemoryModule || typeof gotchasMemoryModule.GotchasMemory === 'undefined') {
+    throw new Error(`Missing named export GotchasMemory from ${GOTCHAS_MEMORY_MODULE}`);
+  }
+  GotchasMemory = gotchasMemoryModule.GotchasMemory;
+} catch (error) {
+  recordGotchasMemoryLoadError(error);
   GotchasMemory = null;
 }
 

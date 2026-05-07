@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.8
-generated_at: "2026-05-07T14:05:20.227Z"
+generated_at: "2026-05-07T14:19:50.403Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -413,9 +413,9 @@ files:
     type: core
     size: 48976
   - path: core/execution/context-injector.js
-    hash: sha256:470e9e56992ce5bbb72e9ec97b52f224eabe8c7198c7a99230e1eb4543a9cd41
+    hash: sha256:9c7efd0e3a9a81bbe9e001a4d53334cabefa36398ebfcaed8bfcc2535cf4ff5d
     type: core
-    size: 15191
+    size: 15486
   - path: core/execution/parallel-executor.js
     hash: sha256:46870e5c8ff8db3ee0386e477d427cc98eeb008f630818b093a9524b410590ae
     type: core
@@ -437,9 +437,9 @@ files:
     type: core
     size: 51556
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:3877e7d8d2dcf6c411aea6505dfabcc5d1dc4b255aab16c0c5423967ff496be1
+    hash: sha256:9c3704e9e4a17023961818cc7079ec59975ed6d3720f9f9e35bb19294696afd5
     type: core
-    size: 26072
+    size: 26367
   - path: core/execution/wave-executor.js
     hash: sha256:4e2324edb37ae0729062b5ac029f2891e050e7efd3a48d0f4a1dc4f227a6716b
     type: core
@@ -693,9 +693,9 @@ files:
     type: core
     size: 7755
   - path: core/ideation/ideation-engine.js
-    hash: sha256:b44771e1b98104acfe05ee19066e6d9c6c394a6f1b6049b8da2bfee03bca551a
+    hash: sha256:f3068525b1a775a70cb7e9fff6fb7e5defe810821c20f55ba7e85e342e9f9b3f
     type: core
-    size: 23195
+    size: 23580
   - path: core/ids/circuit-breaker.js
     hash: sha256:63be126f2e0d320daa60cb5b68b21df93cad4c19d1f959e06a6ac776213f8eba
     type: core
@@ -1229,9 +1229,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:fc7d91ffa8963eca43edf0a46ded21e39ba1417ffe2d826285f1cfd89e56d629
+    hash: sha256:c694817064f922f7d2f03d4bac73300266b51fa20c09f7db940463c8be2c0cb5
     type: data
-    size: 522523
+    size: 522368
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data

@@ -14,6 +14,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Import dependencies with fallbacks
+const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
 let MemoryQuery, GotchasMemory, SessionMemory;
 let gotchasMemoryLoadError = null;
 try {
@@ -22,12 +23,16 @@ try {
   MemoryQuery = null;
 }
 try {
-  ({ GotchasMemory } = require('../memory/gotchas-memory'));
+  const gotchasMemoryModule = require(GOTCHAS_MEMORY_MODULE);
+  if (!gotchasMemoryModule || typeof gotchasMemoryModule.GotchasMemory === 'undefined') {
+    throw new Error(`Missing named export GotchasMemory from ${GOTCHAS_MEMORY_MODULE}`);
+  }
+  GotchasMemory = gotchasMemoryModule.GotchasMemory;
 } catch (error) {
   gotchasMemoryLoadError = error;
   if (process.env.AIOX_DEBUG) {
     console.warn(
-      `[context-injector] Optional dependency '../memory/gotchas-memory' failed to load: ${error.stack || error.message}`,
+      `[context-injector] Optional dependency '${GOTCHAS_MEMORY_MODULE}' failed to load: ${error.stack || error.message}`,
     );
   }
   GotchasMemory = null;

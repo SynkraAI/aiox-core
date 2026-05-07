@@ -9,6 +9,7 @@ const IdeationEngine = requireFromRoot('.aiox-core/core/ideation/ideation-engine
 const { ContextInjector } = requireFromRoot('.aiox-core/core/execution/context-injector');
 const { SubagentDispatcher } = requireFromRoot('.aiox-core/core/execution/subagent-dispatcher');
 const { GotchasMemory } = requireFromRoot('.aiox-core/core/memory/gotchas-memory');
+const gotchasMemoryModulePath = path.join(repoRoot, '.aiox-core/core/memory/gotchas-memory');
 
 describe('GotchasMemory named export consumers', () => {
   it('instantiates IdeationEngine with the default GotchasMemory dependency', () => {
@@ -27,5 +28,42 @@ describe('GotchasMemory named export consumers', () => {
     const dispatcher = new SubagentDispatcher();
 
     expect(dispatcher.gotchasMemory).toBeInstanceOf(GotchasMemory);
+  });
+
+  it('exposes a load error when GotchasMemory named export is missing', () => {
+    const previousDebug = process.env.AIOX_DEBUG;
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    process.env.AIOX_DEBUG = 'true';
+    jest.resetModules();
+    jest.doMock(gotchasMemoryModulePath, () => ({}));
+
+    try {
+      jest.isolateModules(() => {
+        const MissingIdeationEngine = requireFromRoot('.aiox-core/core/ideation/ideation-engine');
+        const { ContextInjector: MissingContextInjector } = requireFromRoot('.aiox-core/core/execution/context-injector');
+        const { SubagentDispatcher: MissingSubagentDispatcher } = requireFromRoot(
+          '.aiox-core/core/execution/subagent-dispatcher',
+        );
+
+        expect(new MissingIdeationEngine().gotchasMemory).toBeNull();
+        expect(new MissingContextInjector().gotchasMemory).toBeNull();
+        expect(new MissingSubagentDispatcher().gotchasMemory).toBeNull();
+        expect(MissingIdeationEngine.gotchasMemoryLoadError.message).toContain('Missing named export GotchasMemory');
+        expect(MissingContextInjector.gotchasMemoryLoadError.message).toContain('Missing named export GotchasMemory');
+        expect(MissingSubagentDispatcher.gotchasMemoryLoadError.message).toContain('Missing named export GotchasMemory');
+      });
+
+      expect(warnSpy).toHaveBeenCalledTimes(3);
+    } finally {
+      jest.dontMock(gotchasMemoryModulePath);
+      jest.resetModules();
+      if (typeof previousDebug === 'undefined') {
+        delete process.env.AIOX_DEBUG;
+      } else {
+        process.env.AIOX_DEBUG = previousDebug;
+      }
+      warnSpy.mockRestore();
+    }
   });
 });
