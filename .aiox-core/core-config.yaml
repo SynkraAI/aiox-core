@@ -386,4 +386,17 @@ boundary:
     - .aiox-core/core/config/schemas/**
     - .aiox-core/core/config/template-overrides.js
 
-# Memory Intelligence System (Epic MIS) configuration placeholder — MIS-2+
+# Context-tracker dynamic model registry (Issue #605).
+# Consumed by .aiox-core/core/synapse/context/context-tracker.js.
+models:
+  active: claude-sonnet-4-6
+  registry:
+    claude-opus-4-6:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 1500
+    claude-sonnet-4-6:
+      contextWindow: 200000
+      avgTokensPerPrompt: 1500
+    claude-haiku-4-5:
+      contextWindow: 200000
+      avgTokensPerPrompt: 1200

@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-06T22:00:40.773Z'
+  lastUpdated: '2026-05-07T07:53:00.000Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -7738,10 +7738,12 @@ entities:
         - context-loader
         - project-status-loader
         - git-config-detector
+        - permissions
         - greeting-preference-manager
         - context-detector
         - workflow-navigator
         - atomic-write
+        - pro-detector
       externalDeps: []
       plannedDeps:
         - permissions
@@ -7751,8 +7753,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:de2d4a10b01da32d31c1f810feed429804da6869bb958d5a5ebe626589d0a2f6
-      lastVerified: '2026-03-11T00:48:55.864Z'
+      checksum: sha256:6910a7f6b0cef65a0886e0b29bbcb0ee401ca4fb444eb255a7a368cb67327aa7
+      lastVerified: '2026-05-06T23:18:07.594Z'
     usage-tracker:
       path: .aiox-core/development/scripts/usage-tracker.js
       layer: L2
@@ -12793,8 +12795,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:fda773c03475739476be29afc8edf6f21a068d3228a4b902b5044c71dfa1a195
-      lastVerified: '2026-05-06T22:00:40.769Z'
+      checksum: sha256:8246c4c3997ddff6fcf51555fb840bbd4fcac3c294e5ed5fa2c8585a42d91029
+      lastVerified: '2026-05-07T07:53:00.000Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md

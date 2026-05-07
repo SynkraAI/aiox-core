@@ -22,7 +22,7 @@ const semver = require('semver');
 const { execSync } = require('child_process');
 
 const PRO_PACKAGE = '@aiox-squads/pro';
-const CORE_PACKAGES = ['@synkra/aiox-core', 'aiox-core'];
+const CORE_PACKAGES = ['@aiox-squads/core', '@synkra/aiox-core', 'aiox-core'];
 const DEPENDENCY_FIELDS = [
   'dependencies',
   'devDependencies',
@@ -31,7 +31,10 @@ const DEPENDENCY_FIELDS = [
 ];
 const CORE_PACKAGE_ROOT = path.resolve(__dirname, '..', '..', '..');
 const CORE_PACKAGE_REQUIRE = createRequire(path.join(CORE_PACKAGE_ROOT, 'package.json'));
-const INSTALLER_SCAFFOLDER_EXPORT = 'aiox-core/installer/pro-scaffolder';
+const INSTALLER_SCAFFOLDER_EXPORTS = [
+  '@aiox-squads/core/installer/pro-scaffolder',
+  'aiox-core/installer/pro-scaffolder',
+];
 
 /**
  * Detect which package manager the project uses.
@@ -253,7 +256,17 @@ function satisfiesPeer(installed, range) {
 }
 
 function loadInstallerScaffolder() {
-  return CORE_PACKAGE_REQUIRE(INSTALLER_SCAFFOLDER_EXPORT);
+  let lastError = null;
+
+  for (const exportPath of INSTALLER_SCAFFOLDER_EXPORTS) {
+    try {
+      return CORE_PACKAGE_REQUIRE(exportPath);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError;
 }
 
 async function applyScaffoldStep(projectRoot, proPath, result, onProgress, errorMessage) {

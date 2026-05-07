@@ -126,6 +126,7 @@ describe('pro-detector', () => {
         realFs.rmSync(tmpDir, { recursive: true, force: true });
       }
     });
+
   });
 
   describe('loadProModule()', () => {
