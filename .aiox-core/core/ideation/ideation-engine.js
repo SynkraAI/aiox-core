@@ -98,10 +98,10 @@ class IdeationEngine {
     let filtered = suggestions;
     if (this.gotchasMemory) {
       try {
-        const knownIssues = await this.gotchasMemory.getAll();
+        const knownIssues = await this.gotchasMemory.listGotchas();
         filtered = suggestions.filter((s) => !this.isKnownGotcha(s, knownIssues));
-      } catch {
-        // Ignore
+      } catch (error) {
+        console.warn('[IdeationEngine] Gotchas filtering failed:', error.message);
       }
     }
 
