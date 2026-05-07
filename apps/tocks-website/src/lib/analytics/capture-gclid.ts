@@ -91,10 +91,18 @@ export async function captureGclidAndCookies(
   if (!gclid && !cookies.fbp && !cookies.fbc) return false
 
   // Hash PII before it leaves the browser (Enhanced Conversions parity).
-  const [emailHash, phoneHash] = await Promise.all([
-    input.email ? sha256(input.email.trim().toLowerCase()) : Promise.resolve(null),
-    input.phone ? sha256(input.phone.replace(/\D+/g, '')) : Promise.resolve(null),
-  ])
+  // Wrap in try/catch — sha256 (Web Crypto) can throw on rare browsers/contexts;
+  // analytics must never break UX, so we degrade gracefully to null hashes.
+  let emailHash: string | null = null
+  let phoneHash: string | null = null
+  try {
+    ;[emailHash, phoneHash] = await Promise.all([
+      input.email ? sha256(input.email.trim().toLowerCase()) : Promise.resolve(null),
+      input.phone ? sha256(input.phone.replace(/\D+/g, '')) : Promise.resolve(null),
+    ])
+  } catch {
+    /* hash failure — proceed with null hashes (server tolerates missing PII) */
+  }
 
   // Build a payload-safe marker when no real gclid exists.
   const wireGclid = gclid ?? `nogclid_${Date.now()}_${cookies.fbp?.slice(-6) ?? 'na'}`
@@ -106,7 +114,9 @@ export async function captureGclidAndCookies(
   if (cookies.fbc) body.fbc = cookies.fbc
   try {
     body.session_id = window.sessionStorage.getItem('tocks_session_id') ?? ''
-    body.source_url = window.location.href.slice(0, 2048)
+    // Sanitize: strip query string + fragment to avoid forwarding sensitive
+    // URL data (auth tokens, PII params, internal flags). Only origin+pathname.
+    body.source_url = (window.location.origin + window.location.pathname).slice(0, 2048)
   } catch {
     /* ignore storage failures */
   }

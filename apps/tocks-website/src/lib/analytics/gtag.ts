@@ -32,15 +32,22 @@ export async function setUserData(input: UserDataInput): Promise<void> {
 
   const emailNorm = normalizeEmail(input.email ?? null)
   const phoneNorm = normalizePhone(input.phone ?? null)
-  const [emailHash, phoneHash] = await Promise.all([sha256(emailNorm), sha256(phoneNorm)])
 
-  const userData: Record<string, string> = {}
-  if (emailHash) userData.sha256_email_address = emailHash
-  if (phoneHash) userData.sha256_phone_number = phoneHash
+  // Hash + dispatch wrapped: sha256 (Web Crypto) and window.gtag are both
+  // third-party-ish surfaces that can throw. Analytics must never break UX.
+  try {
+    const [emailHash, phoneHash] = await Promise.all([sha256(emailNorm), sha256(phoneNorm)])
 
-  if (Object.keys(userData).length === 0) return
+    const userData: Record<string, string> = {}
+    if (emailHash) userData.sha256_email_address = emailHash
+    if (phoneHash) userData.sha256_phone_number = phoneHash
 
-  window.gtag('set', 'user_data', userData)
+    if (Object.keys(userData).length === 0) return
+
+    window.gtag('set', 'user_data', userData)
+  } catch {
+    /* hash or gtag exception — swallow */
+  }
 }
 
 /**
@@ -49,5 +56,9 @@ export async function setUserData(input: UserDataInput): Promise<void> {
 export function gtagEvent(eventName: string, params?: GtagEventParams): void {
   if (typeof window === 'undefined') return
   if (typeof window.gtag !== 'function') return
-  window.gtag('event', eventName, params ?? {})
+  try {
+    window.gtag('event', eventName, params ?? {})
+  } catch {
+    /* gtag exception — swallow */
+  }
 }

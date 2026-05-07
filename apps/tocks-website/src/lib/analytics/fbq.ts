@@ -26,17 +26,28 @@ export function fbqTrack(
 ): void {
   if (typeof window === 'undefined') return
   if (typeof window.fbq !== 'function') return
-  if (eventID) {
-    window.fbq('track', eventName, params ?? {}, { eventID })
-  } else {
-    window.fbq('track', eventName, params ?? {})
+  // Wrap third-party global call: window.fbq can throw if Pixel script is
+  // misbehaving (network failure, ad-blocker injection, version mismatch).
+  // Analytics must never break UX, so swallow.
+  try {
+    if (eventID) {
+      window.fbq('track', eventName, params ?? {}, { eventID })
+    } else {
+      window.fbq('track', eventName, params ?? {})
+    }
+  } catch {
+    /* Pixel exception — swallow */
   }
 }
 
 export function fbqTrackCustom(eventName: string, params?: FbqEventParams): void {
   if (typeof window === 'undefined') return
   if (typeof window.fbq !== 'function') return
-  window.fbq('trackCustom', eventName, params ?? {})
+  try {
+    window.fbq('trackCustom', eventName, params ?? {})
+  } catch {
+    /* Pixel exception — swallow */
+  }
 }
 
 /**
