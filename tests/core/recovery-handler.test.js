@@ -122,6 +122,14 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(result.strategy).toBe(RecoveryStrategy.ESCALATE_TO_HUMAN);
       expect(result.escalated).toBe(true);
     });
+
+    it('should reject invalid epic numbers before mutating attempts', async () => {
+      await expect(handler.handleEpicFailure(null, new Error('Invalid epic'))).rejects.toThrow(
+        TypeError,
+      );
+
+      expect(Object.keys(handler.getAttemptHistory())).toHaveLength(0);
+    });
   });
 
   describe('Max Retries (AC5)', () => {

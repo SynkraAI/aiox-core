@@ -163,8 +163,11 @@ class RecoveryHandler extends EventEmitter {
    * @param {Error|string} error - Error that caused failure
    * @param {Object} [context={}] - Additional context
    * @returns {Promise<Object>} Recovery result
+   * @throws {TypeError} If epicNum is not a non-negative integer.
    */
   async handleEpicFailure(epicNum, error, context = {}) {
+    this._assertValidEpicNum(epicNum);
+
     const errorMessage = error instanceof Error ? error.message : String(error);
     const timestamp = new Date().toISOString();
 
