@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-07T07:53:00.000Z'
+  lastUpdated: '2026-05-07T10:44:44.077Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -9734,6 +9734,7 @@ entities:
         - cli-commands
       dependencies:
         - tech-stack-detector
+        - executors
         - recovery-handler
         - gate-evaluator
         - agent-invoker
@@ -9746,8 +9747,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:61b874d74fae62e9307861b02b7505538f1c94362fe638fc3941b0665dcbbdf6
-      lastVerified: '2026-03-11T00:48:55.885Z'
+      checksum: sha256:61c988509c2edc03c1cd4dec333b284f7d15273f3e799c56950706a2e88f341b
+      lastVerified: '2026-05-07T10:44:44.074Z'
     message-formatter:
       path: .aiox-core/core/orchestration/message-formatter.js
       layer: L1

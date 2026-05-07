@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.1
-generated_at: "2026-05-07T10:20:29.036Z"
+version: 5.1.2
+generated_at: "2026-05-07T10:45:15.516Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -905,9 +905,9 @@ files:
     type: core
     size: 8663
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:61b874d74fae62e9307861b02b7505538f1c94362fe638fc3941b0665dcbbdf6
+    hash: sha256:61c988509c2edc03c1cd4dec333b284f7d15273f3e799c56950706a2e88f341b
     type: core
-    size: 54417
+    size: 54621
   - path: core/orchestration/message-formatter.js
     hash: sha256:b7413c04fa22db1c5fc2f5c2aa47bb8ca0374e079894a44df21b733da6c258ae
     type: core
@@ -1229,9 +1229,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:2968dcdf527e4f428298a6590ef91e4ed4fce6df6b46d2404f954537f6113a68
+    hash: sha256:b79e4aa7eece851a30ad7b3598efc3033fd921f5b0b19dac5843a454ee8eec98
     type: data
-    size: 522409
+    size: 522429
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data

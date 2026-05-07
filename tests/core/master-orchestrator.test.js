@@ -21,6 +21,25 @@ describe('MasterOrchestrator', () => {
   let tempDir;
   let orchestrator;
 
+  function snapshotOnDemandConfig() {
+    return Object.fromEntries(
+      Object.entries(EPIC_CONFIG).map(([num, cfg]) => [
+        num,
+        { had: Object.prototype.hasOwnProperty.call(cfg, 'onDemand'), value: cfg.onDemand },
+      ]),
+    );
+  }
+
+  function restoreOnDemandConfig(snapshot) {
+    for (const [num, original] of Object.entries(snapshot)) {
+      if (original.had) {
+        EPIC_CONFIG[num].onDemand = original.value;
+      } else {
+        delete EPIC_CONFIG[num].onDemand;
+      }
+    }
+  }
+
   beforeEach(async () => {
     // Create temp directory for tests
     tempDir = path.join(os.tmpdir(), `master-orchestrator-test-${Date.now()}`);
@@ -425,6 +444,68 @@ describe('MasterOrchestrator', () => {
 
       await orchestrator.executeEpic(4);
       expect(orchestrator.getProgressPercentage()).toBe(67); // 2 of 3
+    });
+
+    it('should return 0 when all epics are on-demand', async () => {
+      await orchestrator.initialize();
+
+      const originalConfig = snapshotOnDemandConfig();
+
+      try {
+        for (const cfg of Object.values(EPIC_CONFIG)) {
+          cfg.onDemand = true;
+        }
+
+        const progress = orchestrator.getProgressPercentage();
+
+        expect(progress).toBe(0);
+        expect(Number.isNaN(progress)).toBe(false);
+      } finally {
+        restoreOnDemandConfig(originalConfig);
+      }
+    });
+
+    it('should return 0 from saved state progress when all epics are on-demand', async () => {
+      await orchestrator.initialize();
+
+      const originalConfig = snapshotOnDemandConfig();
+
+      try {
+        for (const cfg of Object.values(EPIC_CONFIG)) {
+          cfg.onDemand = true;
+        }
+
+        const progress = orchestrator._calculateProgressFromState({
+          epics: {
+            3: { status: EpicStatus.COMPLETED },
+            5: { status: EpicStatus.COMPLETED },
+          },
+        });
+
+        expect(progress).toBe(0);
+        expect(Number.isNaN(progress)).toBe(false);
+      } finally {
+        restoreOnDemandConfig(originalConfig);
+      }
+    });
+
+    it('should ignore on-demand and unknown epics in progress calculation', async () => {
+      await orchestrator.initialize();
+      await orchestrator.executeEpic(3);
+      await orchestrator.executeEpic(5);
+
+      orchestrator.executionState.epics[999] = { status: EpicStatus.COMPLETED };
+
+      expect(orchestrator.getProgressPercentage()).toBe(33);
+      expect(
+        orchestrator._calculateProgressFromState({
+          epics: {
+            3: { status: EpicStatus.COMPLETED },
+            5: { status: EpicStatus.COMPLETED },
+            999: { status: EpicStatus.COMPLETED },
+          },
+        }),
+      ).toBe(33);
     });
 
     it('should return status summary', async () => {
