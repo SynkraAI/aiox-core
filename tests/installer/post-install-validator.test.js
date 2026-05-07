@@ -24,6 +24,7 @@ const {
   IssueType,
   Severity,
   SecurityLimits,
+  isProjectMutableManifestPath,
 } = require('../../packages/installer/src/installer/post-install-validator');
 
 describe('PostInstallValidator Security Tests', () => {
@@ -357,6 +358,72 @@ describe('PostInstallValidator Security Tests', () => {
       );
       expect(schemaIssue).toBeUndefined();
       expect(report.stats.validFiles).toBe(1);
+    });
+  });
+
+  describe('Project Mutable Install Artifacts', () => {
+    test('should classify only install-mutated manifest paths as project mutable', () => {
+      expect(isProjectMutableManifestPath('core-config.yaml')).toBe(true);
+      expect(isProjectMutableManifestPath('data/entity-registry.yaml')).toBe(true);
+      expect(isProjectMutableManifestPath('data/capability-detection.js')).toBe(false);
+      expect(isProjectMutableManifestPath('core/config.js')).toBe(false);
+    });
+
+    test('should not mark installer-mutated files as corrupted after content changes', async () => {
+      const manifest = `version: "1.0.0"
+files:
+  - path: core-config.yaml
+    hash: "sha256:${'a'.repeat(64)}"
+    size: 10
+  - path: data/entity-registry.yaml
+    hash: "sha256:${'b'.repeat(64)}"
+    size: 10`;
+
+      await fs.ensureDir(path.join(targetDir, '.aiox-core', 'data'));
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'install-manifest.yaml'), manifest);
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'core-config.yaml'), 'project:\n  name: generated\n');
+      await fs.writeFile(
+        path.join(targetDir, '.aiox-core', 'data', 'entity-registry.yaml'),
+        'metadata:\n  entityCount: 757\n  updatedAt: now\n',
+      );
+
+      const validator = new PostInstallValidator(targetDir, null, {
+        requireSignature: false,
+        verifyHashes: true,
+      });
+
+      const report = await validator.validate();
+
+      expect(report.status).toBe('success');
+      expect(report.stats.validFiles).toBe(2);
+      expect(report.stats.corruptedFiles).toBe(0);
+      expect(report.issues).toHaveLength(0);
+    });
+
+    test('should still report corruption for non-mutable manifest paths', async () => {
+      const manifest = `version: "1.0.0"
+files:
+  - path: data/capability-detection.js
+    hash: "sha256:${'c'.repeat(64)}"
+    size: 10`;
+
+      await fs.ensureDir(path.join(targetDir, '.aiox-core', 'data'));
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'install-manifest.yaml'), manifest);
+      await fs.writeFile(
+        path.join(targetDir, '.aiox-core', 'data', 'capability-detection.js'),
+        'module.exports = {};\n',
+      );
+
+      const validator = new PostInstallValidator(targetDir, null, {
+        requireSignature: false,
+        verifyHashes: true,
+      });
+
+      const report = await validator.validate();
+
+      expect(report.status).toBe('warning');
+      expect(report.stats.corruptedFiles).toBe(1);
+      expect(report.issues[0].type).toBe(IssueType.CORRUPTED_FILE);
     });
   });
 

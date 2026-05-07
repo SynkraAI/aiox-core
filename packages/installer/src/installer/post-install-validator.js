@@ -128,6 +128,11 @@ const ALLOWED_TYPE_VALUES = [
   'manifest',
 ];
 
+const PROJECT_MUTABLE_MANIFEST_PATHS = new Set([
+  'core-config.yaml',
+  'data/entity-registry.yaml',
+]);
+
 /**
  * Categorize a file path into its functional category
  * @param {string} filePath - Relative file path
@@ -167,6 +172,19 @@ function getSeverityForCategory(category) {
   };
 
   return severityMap[category] || Severity.LOW;
+}
+
+/**
+ * Determine whether a manifest path is expected to be mutated by install/bootstrap.
+ * These files still go through path/existence/symlink validation, but their content
+ * is project-local after install and must not be hash-compared to the package copy.
+ *
+ * @param {string} filePath - Relative file path from .aiox-core
+ * @returns {boolean} True when the file is project mutable
+ */
+function isProjectMutableManifestPath(filePath) {
+  const normalized = String(filePath || '').replace(/\\/g, '/');
+  return PROJECT_MUTABLE_MANIFEST_PATHS.has(normalized);
 }
 
 /**
@@ -787,6 +805,12 @@ class PostInstallValidator {
 
     result.exists = true;
 
+    if (isProjectMutableManifestPath(relativePath)) {
+      result.projectMutable = true;
+      this.stats.validFiles++;
+      return result;
+    }
+
     // SECURITY [H2]: In quick mode (no hash), size MUST be present
     if (!this.options.verifyHashes) {
       if (entry.size === null || entry.size === undefined) {
@@ -1077,6 +1101,8 @@ class PostInstallValidator {
     if (issuesBySeverity[Severity.CRITICAL].length > 0) {
       status = 'failed';
     } else if (
+      this.stats.missingFiles > 0 ||
+      this.stats.corruptedFiles > 0 ||
       issuesBySeverity[Severity.HIGH].length > 0 ||
       issuesBySeverity[Severity.MEDIUM].length > 0
     ) {
@@ -1521,5 +1547,6 @@ module.exports = {
   FileCategory,
   SecurityLimits,
   isPathContained,
+  isProjectMutableManifestPath,
   validateManifestEntry,
 };
