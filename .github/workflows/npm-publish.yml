@@ -209,6 +209,7 @@ jobs:
           npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
 
           PKG_NAME=$(node -p "require('./package.json').name")
+          npm access set status=public "${PKG_NAME}" --registry="${NPM_REGISTRY}"
           echo "✅ Published ${PKG_NAME}@${{ needs.build.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
@@ -240,13 +241,13 @@ jobs:
         include:
           - key: aiox-install
             path: packages/aiox-install
-            smoke: npx --yes @aiox-squads/aiox-install --version
+            smoke_args: --version
           - key: aiox-pro-cli
             path: packages/aiox-pro-cli
-            smoke: npx --yes @aiox-squads/aiox-pro-cli --help
+            smoke_args: --help
           - key: installer
             path: packages/installer
-            smoke: npx --yes @aiox-squads/installer --help
+            smoke_args: --help
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -323,6 +324,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN_AIOX_SQUADS }}" > .npmrc
           npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
+          npm access set status=public "${{ steps.pkg.outputs.name }}" --registry="${NPM_REGISTRY}"
           echo "✅ Published ${{ steps.pkg.outputs.name }}@${{ steps.pkg.outputs.version }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
@@ -330,14 +332,20 @@ jobs:
       - name: Smoke test - verify npx works
         if: steps.should-publish.outputs.should_publish == 'true'
         env:
-          SMOKE_COMMAND: ${{ matrix.smoke }}
+          PKG_SPEC: ${{ steps.pkg.outputs.name }}@${{ steps.pkg.outputs.version }}
+          SMOKE_ARGS: ${{ matrix.smoke_args }}
         run: |
           # Wait for npm registry propagation
           for i in 1 2 3 4 5 6; do
             sleep 15
-            if $SMOKE_COMMAND >/dev/null 2>&1; then
-              echo "✅ Smoke test passed: ${SMOKE_COMMAND} works"
-              exit 0
+            if npm view "${PKG_SPEC}" version > /dev/null 2>&1; then
+              SMOKE_DIR=$(mktemp -d)
+              if (cd "${SMOKE_DIR}" && npx --yes "${PKG_SPEC}" ${SMOKE_ARGS} >/dev/null 2>&1); then
+                rm -rf "${SMOKE_DIR}"
+                echo "✅ Smoke test passed: npx --yes ${PKG_SPEC} ${SMOKE_ARGS} works"
+                exit 0
+              fi
+              rm -rf "${SMOKE_DIR}"
             fi
             echo "⏳ Waiting for npm propagation... (attempt $i/6)"
           done

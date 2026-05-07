@@ -22,6 +22,7 @@ const {
 const { setLanguage, t } = require('./i18n');
 const yaml = require('js-yaml');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
+const { requireAioxCoreModule } = require('../utils/package-paths');
 const {
   generateIDEConfigs,
   showSuccessSummary,
@@ -35,8 +36,6 @@ const {
 const {
   installDependencies,
 } = require('../installer/dependency-installer');
-const { commandSync, commandValidate } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/index');
-const { syncSkills: syncCodexSkills } = require('../../../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
 const {
   installAioxCore,
   hasPackageJson,
@@ -46,10 +45,24 @@ const {
   displayValidationReport,
   provideTroubleshooting,
 } = require('./validation');
-const {
-  installLLMRouting,
-  isLLMRoutingInstalled,
-} = require('../../../../.aiox-core/infrastructure/scripts/llm-routing/install-llm-routing');
+
+function loadIdeSync() {
+  return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'ide-sync', 'index');
+}
+
+function loadCodexSkillsSync() {
+  return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index');
+}
+
+function loadLLMRoutingInstaller() {
+  return requireAioxCoreModule(
+    '.aiox-core',
+    'infrastructure',
+    'scripts',
+    'llm-routing',
+    'install-llm-routing',
+  );
+}
 
 // DISABLED: Legacy installation block superseded by squads flow (OSR-8)
 // /**
@@ -531,7 +544,12 @@ async function runWizard(options = {}) {
     // Story INS-4.3: Wire settings.json boundary generator after .aiox-core/ copy
     console.log('\n🔒 Generating boundary rules...');
     try {
-      const settingsGenerator = require('../../../../.aiox-core/infrastructure/scripts/generate-settings-json');
+      const settingsGenerator = requireAioxCoreModule(
+        '.aiox-core',
+        'infrastructure',
+        'scripts',
+        'generate-settings-json',
+      );
       settingsGenerator.generate(process.cwd());
       const settingsContent = await fse.readFile(path.join(process.cwd(), '.claude', 'settings.json'), 'utf8').catch(() => '{}');
       const settingsParsed = JSON.parse(settingsContent);
@@ -599,6 +617,7 @@ async function runWizard(options = {}) {
     const targetProjectRoot = process.cwd();
     const savedCwd = process.cwd();
     try {
+      const { commandSync, commandValidate } = loadIdeSync();
       process.chdir(targetProjectRoot);
       await commandSync({ quiet: true });
       answers.ideSyncStatus = 'synced';
@@ -629,6 +648,7 @@ async function runWizard(options = {}) {
     // ACORE-SKILLS.7: Generate Codex local skills in installed projects.
     console.log('\n🧩 Running Codex skills sync...');
     try {
+      const { syncSkills: syncCodexSkills } = loadCodexSkillsSync();
       const codexSkillsResult = syncCodexSkills({
         sourceDir: path.join(targetProjectRoot, '.aiox-core', 'development', 'agents'),
         localSkillsDir: path.join(targetProjectRoot, '.codex', 'skills'),
@@ -884,6 +904,11 @@ async function runWizard(options = {}) {
     // Story 6.7: LLM Routing Installation
     console.log('\nInstalling LLM Routing commands...');
     try {
+      const {
+        installLLMRouting,
+        isLLMRoutingInstalled,
+      } = loadLLMRoutingInstaller();
+
       // Check if already installed
       if (isLLMRoutingInstalled()) {
         console.log('   ℹ️  LLM Routing already installed');

@@ -15,8 +15,10 @@
 
 'use strict';
 
+const path = require('path');
 const { createSpinner, showSuccess, showError, showWarning, showInfo } = require('./feedback');
 const { colors, status } = require('../utils/aiox-colors');
+const { getAioxCoreVersion, resolveAioxCorePath } = require('../utils/package-paths');
 const { t, tf } = require('./i18n');
 
 /**
@@ -396,7 +398,6 @@ function showStep(current, total, label) {
  * @returns {Object|null} Loaded module or null
  */
 function loadProModule(moduleName) {
-  const path = require('path');
   const tryRequire = (requestPath) => {
     try {
       return require(requestPath);
@@ -412,11 +413,14 @@ function loadProModule(moduleName) {
     }
   };
 
-  // 1. Framework-dev mode (cloned repo with pro/ submodule)
-  const frameworkPath = `../../../../pro/license/${moduleName}`;
-  const frameworkModule = tryRequire(frameworkPath);
-  if (frameworkModule) {
-    return frameworkModule;
+  // 1. Core package root (framework-dev repo or @aiox-squads/core dependency)
+  try {
+    const frameworkModule = tryRequire(resolveAioxCorePath('pro', 'license', moduleName));
+    if (frameworkModule) {
+      return frameworkModule;
+    }
+  } catch {
+    // Fall through to standalone Pro package resolution.
   }
 
   // 2. npm package
@@ -1386,11 +1390,7 @@ async function activateProByAuth(client, sessionToken) {
     // Read aiox-core version
     let aioxCoreVersion = 'unknown';
     try {
-      const path = require('path');
-      const fs = require('fs');
-      const pkgPath = path.join(__dirname, '..', '..', '..', '..', 'package.json');
-      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-      aioxCoreVersion = pkg.version || 'unknown';
+      aioxCoreVersion = getAioxCoreVersion() || 'unknown';
     } catch {
       // Keep 'unknown'
     }
@@ -1532,11 +1532,7 @@ async function validateKeyWithApi(key) {
     // Read aiox-core version
     let aioxCoreVersion = 'unknown';
     try {
-      const path = require('path');
-      const fs = require('fs');
-      const pkgPath = path.join(__dirname, '..', '..', '..', '..', 'package.json');
-      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-      aioxCoreVersion = pkg.version || 'unknown';
+      aioxCoreVersion = getAioxCoreVersion() || 'unknown';
     } catch {
       // Keep 'unknown'
     }

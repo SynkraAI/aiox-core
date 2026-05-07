@@ -32,9 +32,13 @@ describe('IDE Sync Integration (Story INS-4.5)', () => {
   });
 
   describe('AC1: IDE sync called via adapter pattern', () => {
-    test('wizard imports commandSync and commandValidate from ide-sync', () => {
+    test('wizard loads commandSync and commandValidate from the core package resolver', () => {
+      expect(wizardSource).toContain('function loadIdeSync()');
       expect(wizardSource).toContain(
-        "const { commandSync, commandValidate } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/index')",
+        "return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'ide-sync', 'index')",
+      );
+      expect(wizardSource).toContain(
+        'const { commandSync, commandValidate } = loadIdeSync()',
       );
     });
 

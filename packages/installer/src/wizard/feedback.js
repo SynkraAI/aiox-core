@@ -9,6 +9,7 @@
 const ora = require('ora');
 const cliProgress = require('cli-progress');
 const { colors, status, headings } = require('../utils/aiox-colors');
+const { getAioxCoreVersion } = require('../utils/package-paths');
 const { t } = require('./i18n');
 
 /**
@@ -134,14 +135,9 @@ const BANNER = `
  * Show welcome banner
  */
 function showWelcome() {
-  // Get version from package.json
-  const path = require('path');
-  const fs = require('fs');
   let version = '2.1.0';
   try {
-    const pkgPath = path.join(__dirname, '..', '..', '..', '..', 'package.json');
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    version = pkg.version || version;
+    version = getAioxCoreVersion() || version;
   } catch (_e) {
     // Use default version
   }

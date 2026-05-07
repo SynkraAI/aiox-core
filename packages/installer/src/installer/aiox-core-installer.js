@@ -13,14 +13,14 @@ const path = require('path');
 const ora = require('ora');
 const { hashFile } = require('./file-hasher');
 const { loadSourceManifest, updateInstalledManifest } = require('./brownfield-upgrader');
+const { getAioxCoreVersion, resolveAioxCorePath } = require('../utils/package-paths');
 
 /**
  * Get the path to the source .aiox-core directory in the package
  * @returns {string} Absolute path to .aiox-core source
  */
 function getAioxCoreSourcePath() {
-  // Navigate from packages/installer/src/installer/ to project root/.aiox-core
-  return path.join(__dirname, '..', '..', '..', '..', '.aiox-core');
+  return resolveAioxCorePath('.aiox-core');
 }
 
 /**
@@ -384,7 +384,7 @@ async function installAioxCore(options = {}) {
 
     const sourceManifest = loadSourceManifest(sourceDir);
     const manifestFileHashes = extractManifestFileHashes(sourceManifest);
-    const packageVersion = providedPackageVersion || require('../../../../package.json').version;
+    const packageVersion = providedPackageVersion || getAioxCoreVersion();
 
     spinner.text = 'Copying installation manifest...';
     await copyManifestArtifacts(sourceDir, targetAioxCore);

@@ -16,7 +16,11 @@ const { spawnSync } = require('child_process');
 const { getIDEConfig } = require('../config/ide-configs');
 const { validateProjectName } = require('./validators');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
-const { syncSkills } = require('../../../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
+const { requireAioxCoreModule, resolveAioxCorePath } = require('../utils/package-paths');
+
+function loadCodexSkillsSync() {
+  return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index');
+}
 
 /**
  * Render template with variables
@@ -220,7 +224,7 @@ function generateTemplateVariables(wizardState) {
  */
 async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
   // v4: Agents are in development/agents/ (not root agents/)
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aiox-core', 'development', 'agents');
+  const sourceDir = resolveAioxCorePath('.aiox-core', 'development', 'agents');
   const targetDir = path.join(projectRoot, agentFolder);
   const copiedFiles = [];
 
@@ -261,8 +265,21 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
       } else if (ideConfig && ideConfig.agentFolder && ideConfig.agentFolder.includes('.github')) {
         // GitHub Copilot: apply transformer for .agent.md format with YAML frontmatter
         try {
-          const agentParser = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/agent-parser');
-          const copilotTransformer = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/transformers/github-copilot');
+          const agentParser = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'agent-parser',
+          );
+          const copilotTransformer = requireAioxCoreModule(
+            '.aiox-core',
+            'infrastructure',
+            'scripts',
+            'ide-sync',
+            'transformers',
+            'github-copilot',
+          );
           const agentData = agentParser.parseAgentFile(sourcePath);
           const content = copilotTransformer.transform(agentData);
           const filename = copilotTransformer.getFilename(agentData);
@@ -293,7 +310,7 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
  * @returns {Promise<string[]>} List of copied files
  */
 async function copyClaudeRulesFolder(projectRoot) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.claude', 'rules');
+  const sourceDir = resolveAioxCorePath('.claude', 'rules');
   const targetDir = path.join(projectRoot, '.claude', 'rules');
   const copiedFiles = [];
 
@@ -471,7 +488,7 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
         }
 
         // Load template from .aiox-core/product/templates/
-        const templatePath = path.join(__dirname, '..', '..', '..', '..', '.aiox-core', 'product', 'templates', ide.template);
+        const templatePath = resolveAioxCorePath('.aiox-core', 'product', 'templates', ide.template);
 
         if (!await fs.pathExists(templatePath)) {
           throw new Error(`Template file not found: ${ide.template}`);
@@ -665,7 +682,7 @@ function showSuccessSummary(result) {
  * @returns {Promise<string[]>} List of copied files
  */
 async function copyClaudeHooksFolder(projectRoot, wizardState = {}) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.claude', 'hooks');
+  const sourceDir = resolveAioxCorePath('.claude', 'hooks');
   const targetDir = path.join(projectRoot, '.claude', 'hooks');
   const copiedFiles = [];
 
@@ -730,7 +747,7 @@ function shouldCopyProHooks(wizardState = {}) {
   }
 
   try {
-    const { isProAvailable } = require('../../../../bin/utils/pro-detector');
+    const { isProAvailable } = requireAioxCoreModule('bin', 'utils', 'pro-detector');
     return isProAvailable();
   } catch {
     return false;
@@ -876,7 +893,7 @@ async function createClaudeSettingsLocal(projectRoot) {
  * @returns {Promise<string[]>} List of copied files
  */
 async function copyGeminiHooksFolder(projectRoot) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aiox-core', 'hooks', 'gemini');
+  const sourceDir = resolveAioxCorePath('.aiox-core', 'hooks', 'gemini');
   const targetDir = path.join(projectRoot, '.gemini', 'hooks');
   const copiedFiles = [];
 
@@ -1097,7 +1114,7 @@ async function linkGeminiExtension(projectRoot) {
 async function copySkillFiles(projectRoot, _sourceRoot) {
   const sourceDir = _sourceRoot
     ? path.join(_sourceRoot, '.claude', 'skills')
-    : path.join(__dirname, '..', '..', '..', '..', '.claude', 'skills');
+    : resolveAioxCorePath('.claude', 'skills');
   const targetDir = path.join(projectRoot, '.claude', 'skills');
 
   if (!await fs.pathExists(sourceDir)) {
@@ -1140,6 +1157,7 @@ function generateCodexSkills(projectRoot) {
     return { count: 0, skipped: true };
   }
 
+  const { syncSkills } = loadCodexSkillsSync();
   const result = syncSkills({
     projectRoot,
     sourceDir,
@@ -1165,7 +1183,7 @@ function generateCodexSkills(projectRoot) {
 async function copyExtraCommandFiles(projectRoot, _sourceRoot) {
   const sourceDir = _sourceRoot
     ? path.join(_sourceRoot, '.claude', 'commands')
-    : path.join(__dirname, '..', '..', '..', '..', '.claude', 'commands');
+    : resolveAioxCorePath('.claude', 'commands');
   const targetDir = path.join(projectRoot, '.claude', 'commands');
 
   if (!await fs.pathExists(sourceDir)) {
