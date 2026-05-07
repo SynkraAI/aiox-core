@@ -1,9 +1,14 @@
 'use strict';
 
-const IdeationEngine = require('../../.aiox-core/core/ideation/ideation-engine');
-const { ContextInjector } = require('../../.aiox-core/core/execution/context-injector');
-const { SubagentDispatcher } = require('../../.aiox-core/core/execution/subagent-dispatcher');
-const { GotchasMemory } = require('../../.aiox-core/core/memory/gotchas-memory');
+const path = require('path');
+
+const repoRoot = path.resolve(__dirname, '../..');
+const requireFromRoot = (modulePath) => require(path.join(repoRoot, modulePath));
+
+const IdeationEngine = requireFromRoot('.aiox-core/core/ideation/ideation-engine');
+const { ContextInjector } = requireFromRoot('.aiox-core/core/execution/context-injector');
+const { SubagentDispatcher } = requireFromRoot('.aiox-core/core/execution/subagent-dispatcher');
+const { GotchasMemory } = requireFromRoot('.aiox-core/core/memory/gotchas-memory');
 
 describe('GotchasMemory named export consumers', () => {
   it('instantiates IdeationEngine with the default GotchasMemory dependency', () => {

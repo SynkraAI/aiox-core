@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.8
-generated_at: "2026-05-07T13:48:07.546Z"
+generated_at: "2026-05-07T14:05:20.227Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -413,9 +413,9 @@ files:
     type: core
     size: 48976
   - path: core/execution/context-injector.js
-    hash: sha256:bde5e934593deec8e0aab342b4f5af3c747ec48eda3293352a0496d2e3d461cb
+    hash: sha256:470e9e56992ce5bbb72e9ec97b52f224eabe8c7198c7a99230e1eb4543a9cd41
     type: core
-    size: 14866
+    size: 15191
   - path: core/execution/parallel-executor.js
     hash: sha256:46870e5c8ff8db3ee0386e477d427cc98eeb008f630818b093a9524b410590ae
     type: core
@@ -437,9 +437,9 @@ files:
     type: core
     size: 51556
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:2454e1f1c5d55d933bdb22e0c3b44d9c7254bffd43e3097ae410385e44132ec5
+    hash: sha256:3877e7d8d2dcf6c411aea6505dfabcc5d1dc4b255aab16c0c5423967ff496be1
     type: core
-    size: 25744
+    size: 26072
   - path: core/execution/wave-executor.js
     hash: sha256:4e2324edb37ae0729062b5ac029f2891e050e7efd3a48d0f4a1dc4f227a6716b
     type: core
@@ -693,9 +693,9 @@ files:
     type: core
     size: 7755
   - path: core/ideation/ideation-engine.js
-    hash: sha256:0022cd3c1e9f834be277718ef7edb3378950b568a1a85e24df5ed8a55873098b
+    hash: sha256:b44771e1b98104acfe05ee19066e6d9c6c394a6f1b6049b8da2bfee03bca551a
     type: core
-    size: 22871
+    size: 23195
   - path: core/ids/circuit-breaker.js
     hash: sha256:63be126f2e0d320daa60cb5b68b21df93cad4c19d1f959e06a6ac776213f8eba
     type: core
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:3ae6f9e68b8d109f063f656cbcceeec92219d3154f6d01318188a1ac683d88aa
+    hash: sha256:fc7d91ffa8963eca43edf0a46ded21e39ba1417ffe2d826285f1cfd89e56d629
     type: data
     size: 522523
   - path: data/learned-patterns.yaml

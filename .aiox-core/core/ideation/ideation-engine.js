@@ -12,9 +12,16 @@ const { execSync } = require('child_process');
 
 // Import dependencies with fallbacks
 let GotchasMemory;
+let gotchasMemoryLoadError = null;
 try {
   ({ GotchasMemory } = require('../memory/gotchas-memory'));
-} catch {
+} catch (error) {
+  gotchasMemoryLoadError = error;
+  if (process.env.AIOX_DEBUG) {
+    console.warn(
+      `[ideation-engine] Optional dependency '../memory/gotchas-memory' failed to load: ${error.stack || error.message}`,
+    );
+  }
   GotchasMemory = null;
 }
 
@@ -830,3 +837,4 @@ module.exports.SecurityAnalyzer = SecurityAnalyzer;
 module.exports.CodeQualityAnalyzer = CodeQualityAnalyzer;
 module.exports.UXAnalyzer = UXAnalyzer;
 module.exports.ArchitectureAnalyzer = ArchitectureAnalyzer;
+module.exports.gotchasMemoryLoadError = gotchasMemoryLoadError;

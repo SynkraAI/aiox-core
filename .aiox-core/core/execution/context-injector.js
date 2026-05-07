@@ -15,6 +15,7 @@ const path = require('path');
 
 // Import dependencies with fallbacks
 let MemoryQuery, GotchasMemory, SessionMemory;
+let gotchasMemoryLoadError = null;
 try {
   MemoryQuery = require('../memory/memory-query');
 } catch {
@@ -22,7 +23,13 @@ try {
 }
 try {
   ({ GotchasMemory } = require('../memory/gotchas-memory'));
-} catch {
+} catch (error) {
+  gotchasMemoryLoadError = error;
+  if (process.env.AIOX_DEBUG) {
+    console.warn(
+      `[context-injector] Optional dependency '../memory/gotchas-memory' failed to load: ${error.stack || error.message}`,
+    );
+  }
   GotchasMemory = null;
 }
 try {
@@ -534,3 +541,4 @@ class ContextInjector {
 
 module.exports = ContextInjector;
 module.exports.ContextInjector = ContextInjector;
+module.exports.gotchasMemoryLoadError = gotchasMemoryLoadError;

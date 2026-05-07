@@ -22,6 +22,7 @@ try {
 
 // Import dependencies with fallbacks
 let MemoryQuery, GotchasMemory;
+let gotchasMemoryLoadError = null;
 try {
   MemoryQuery = require('../memory/memory-query');
 } catch {
@@ -29,7 +30,13 @@ try {
 }
 try {
   ({ GotchasMemory } = require('../memory/gotchas-memory'));
-} catch {
+} catch (error) {
+  gotchasMemoryLoadError = error;
+  if (process.env.AIOX_DEBUG) {
+    console.warn(
+      `[subagent-dispatcher] Optional dependency '../memory/gotchas-memory' failed to load: ${error.stack || error.message}`,
+    );
+  }
   GotchasMemory = null;
 }
 
@@ -844,3 +851,4 @@ class SubagentDispatcher extends EventEmitter {
 
 module.exports = SubagentDispatcher;
 module.exports.SubagentDispatcher = SubagentDispatcher;
+module.exports.gotchasMemoryLoadError = gotchasMemoryLoadError;
