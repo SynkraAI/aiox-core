@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 const { parseAllAgents } = require('../ide-sync/agent-parser');
 const { getSkillId, getLegacySkillId } = require('./index');
@@ -17,6 +18,7 @@ function getDefaultOptions() {
     skillsDir: path.join(projectRoot, '.codex', 'skills'),
     strict: false,
     allowOrphaned: false,
+    selfTest: false,
     quiet: false,
     json: false,
   };
@@ -28,6 +30,7 @@ function parseArgs(argv = process.argv.slice(2)) {
     strict: args.has('--strict'),
     quiet: args.has('--quiet') || args.has('-q'),
     json: args.has('--json'),
+    selfTest: args.has('--self-test'),
   };
 }
 
@@ -60,6 +63,135 @@ function validateSkillContent(content, expected) {
   }
 
   return issues;
+}
+
+function parseSkillFrontmatter(content) {
+  const match = String(content || '').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) {
+    return { data: null, error: 'missing YAML frontmatter' };
+  }
+
+  try {
+    const data = yaml.load(match[1]) || {};
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error: `invalid YAML frontmatter (${error.message})` };
+  }
+}
+
+function createSkillToolSelfTestPayload(skillId, prompt = 'AIOX skill self-test') {
+  return {
+    type: 'tool_use',
+    name: 'Skill',
+    input: {
+      skill: skillId,
+      prompt,
+    },
+  };
+}
+
+function normalizeSkillToolTarget(payload) {
+  if (typeof payload === 'string') {
+    return payload.trim().replace(/^\$/, '');
+  }
+
+  if (!payload || typeof payload !== 'object') {
+    return '';
+  }
+
+  const input = payload.input && typeof payload.input === 'object' ? payload.input : {};
+  const candidates = [
+    input.skill,
+    input.skillId,
+    input.skill_id,
+    input.name,
+    input.id,
+    payload.skill,
+    payload.skillId,
+    payload.skill_id,
+    payload.id,
+    payload.name && payload.name !== 'Skill' ? payload.name : '',
+  ];
+
+  const target = candidates.find((candidate) => typeof candidate === 'string' && candidate.trim());
+  return target ? target.trim().replace(/^\$/, '') : '';
+}
+
+function extractCanonicalAgentPath(content) {
+  const match = String(content || '').match(/`(\.aiox-core\/development\/agents\/[^`]+\.md)`/);
+  return match ? match[1] : '';
+}
+
+function runSkillSelfTests(options = {}) {
+  const resolved = {
+    projectRoot: process.cwd(),
+    skillsDir: path.join(process.cwd(), '.codex', 'skills'),
+    expected: [],
+    ...options,
+  };
+  const expectedIds = new Set(resolved.expected.map(item => item.skillId));
+  const results = [];
+
+  for (const item of resolved.expected) {
+    const skillPath = path.join(resolved.skillsDir, item.skillId, 'SKILL.md');
+    const relativeSkillPath = path.relative(resolved.projectRoot, skillPath);
+    const errors = [];
+
+    let content = '';
+    try {
+      content = fs.readFileSync(skillPath, 'utf8');
+    } catch (error) {
+      results.push({
+        skillId: item.skillId,
+        ok: false,
+        errors: [`self-test unable to read ${relativeSkillPath} (${error.message})`],
+      });
+      continue;
+    }
+
+    const frontmatter = parseSkillFrontmatter(content);
+    if (frontmatter.error) {
+      errors.push(`self-test ${frontmatter.error}`);
+    } else {
+      if (frontmatter.data.name !== item.skillId) {
+        errors.push(`self-test frontmatter name mismatch: expected "${item.skillId}"`);
+      }
+      if (!String(frontmatter.data.description || '').trim()) {
+        errors.push('self-test missing frontmatter description');
+      }
+    }
+
+    const canonicalAgentPath = extractCanonicalAgentPath(content);
+    if (!canonicalAgentPath) {
+      errors.push('self-test missing canonical source path');
+    } else {
+      const absoluteAgentPath = path.join(resolved.projectRoot, canonicalAgentPath);
+      if (!fs.existsSync(absoluteAgentPath)) {
+        errors.push(`self-test source file not found: ${canonicalAgentPath}`);
+      }
+    }
+
+    const payload = createSkillToolSelfTestPayload(item.skillId);
+    const target = normalizeSkillToolTarget(payload);
+    if (target !== item.skillId) {
+      errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);
+    }
+    if (!expectedIds.has(target)) {
+      errors.push(`self-test Skill payload target is not a generated skill: ${target || '<empty>'}`);
+    }
+
+    if (!content.includes(`generate-greeting.js ${item.agentId}`)) {
+      errors.push(`self-test greeting command cannot activate "${item.agentId}"`);
+    }
+
+    results.push({
+      skillId: item.skillId,
+      ok: errors.length === 0,
+      errors,
+    });
+  }
+
+  return results;
 }
 
 function extractGeneratedSquadSource(content) {
@@ -173,6 +305,20 @@ function validateCodexSkills(options = {}) {
     warnings.push('No parseable agents found in sourceDir');
   }
 
+  const selfTests = resolved.selfTest
+    ? runSkillSelfTests({
+      projectRoot: resolved.projectRoot,
+      skillsDir: resolved.skillsDir,
+      expected,
+    })
+    : [];
+
+  for (const test of selfTests) {
+    for (const error of test.errors) {
+      errors.push(`${test.skillId}: ${error}`);
+    }
+  }
+
   return {
     ok: errors.length === 0,
     checked: expected.length,
@@ -183,12 +329,16 @@ function validateCodexSkills(options = {}) {
     orphaned,
     legacy,
     ignored,
+    selfTests,
   };
 }
 
 function formatHumanReport(result) {
   if (result.ok) {
-    return `✅ Codex skills validation passed (${result.checked} skills checked)`;
+    const suffix = result.selfTests && result.selfTests.length > 0
+      ? `, ${result.selfTests.length} self-test(s) passed`
+      : '';
+    return `✅ Codex skills validation passed (${result.checked} skills checked${suffix})`;
   }
 
   const lines = [
@@ -226,6 +376,10 @@ if (require.main === module) {
 module.exports = {
   validateCodexSkills,
   validateSkillContent,
+  parseSkillFrontmatter,
+  createSkillToolSelfTestPayload,
+  normalizeSkillToolTarget,
+  runSkillSelfTests,
   extractGeneratedSquadSource,
   isGeneratedSquadSkill,
   parseArgs,

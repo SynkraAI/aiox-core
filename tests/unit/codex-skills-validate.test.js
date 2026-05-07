@@ -5,7 +5,10 @@ const os = require('os');
 const path = require('path');
 
 const { syncSkills } = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
-const { validateCodexSkills } = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/validate');
+const {
+  validateCodexSkills,
+  normalizeSkillToolTarget,
+} = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/validate');
 
 describe('Codex Skills Validator', () => {
   let tmpRoot;
@@ -37,6 +40,57 @@ describe('Codex Skills Validator', () => {
     expect(result.ok).toBe(true);
     expect(result.checked).toBe(expectedAgentCount);
     expect(result.errors).toEqual([]);
+  });
+
+  it('self-tests generated skills with simulated Skill tool payloads', () => {
+    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+
+    const result = validateCodexSkills({
+      projectRoot: process.cwd(),
+      sourceDir,
+      skillsDir,
+      strict: true,
+      selfTest: true,
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.selfTests).toHaveLength(expectedAgentCount);
+    expect(result.selfTests.every(test => test.ok)).toBe(true);
+  });
+
+  it('fails self-test when a skill source path cannot be resolved', () => {
+    syncSkills({ sourceDir, localSkillsDir: skillsDir, dryRun: false });
+    const target = path.join(skillsDir, 'aiox-dev', 'SKILL.md');
+    const original = fs.readFileSync(target, 'utf8');
+    fs.writeFileSync(
+      target,
+      original.replace('.aiox-core/development/agents/dev.md', '.aiox-core/development/agents/missing-dev.md'),
+      'utf8',
+    );
+
+    const result = validateCodexSkills({
+      projectRoot: process.cwd(),
+      sourceDir,
+      skillsDir,
+      strict: true,
+      selfTest: true,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.selfTests.find(test => test.skillId === 'aiox-dev').ok).toBe(false);
+    expect(result.errors.some(error => error.includes('self-test source file not found'))).toBe(true);
+  });
+
+  it('normalizes Skill tool invocation targets', () => {
+    expect(normalizeSkillToolTarget({
+      type: 'tool_use',
+      name: 'Skill',
+      input: {
+        skill: 'aiox-dev',
+        prompt: 'self-test',
+      },
+    })).toBe('aiox-dev');
+    expect(normalizeSkillToolTarget('$aiox-qa')).toBe('aiox-qa');
   });
 
   it('fails when a generated skill is missing', () => {

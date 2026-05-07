@@ -47,9 +47,11 @@ Used by CI and by the unified ide-sync pipeline. Does not generate squad-chief s
 
 ```
 npm run validate:codex-skills           # validate aiox-* skill / agent parity (strict)
+npm run validate:codex-skills:self-test # parity + deterministic Skill tool self-test
 ```
 
 Verifies that every core agent has a corresponding `.codex/skills/aiox-<id>/SKILL.md`. Squad-chief skills are out of scope for this validator.
+The self-test mode additionally simulates a Skill tool invocation for each generated skill and checks that the skill frontmatter, source-of-truth path, and greeting command can activate the target agent without requiring a live ping-pong tool call.
 
 ## Files generated
 
