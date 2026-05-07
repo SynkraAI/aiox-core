@@ -69,9 +69,11 @@ describe('schema-validation — enriched schemas', () => {
       expect(schema.additionalProperties).toBe(false);
     });
 
-    test('ide sync target schema accepts skillsPath for skills-first IDEs', () => {
+    test('ide sync target schema accepts skills-first IDE target options', () => {
       const targetSchema = schema.properties.ide_sync_system.properties.targets.additionalProperties;
       expect(targetSchema.properties).toHaveProperty('skillsPath');
+      expect(targetSchema.properties).toHaveProperty('fallbackSources');
+      expect(targetSchema.properties.format.enum).toContain('kimi-skill');
     });
 
     test('validates real framework-config.yaml without errors', () => {

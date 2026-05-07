@@ -117,7 +117,15 @@
               "enabled": { "type": "boolean" },
               "path": { "type": "string" },
               "skillsPath": { "type": "string" },
-              "format": { "type": "string", "enum": ["full-markdown-yaml", "condensed-rules", "cursor-style"] }
+              "fallbackSources": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Fallback source directories used when the primary IDE sync source has no matching definitions"
+              },
+              "format": {
+                "type": "string",
+                "enum": ["full-markdown-yaml", "condensed-rules", "cursor-style", "kimi-skill"]
+              }
             },
             "additionalProperties": false
           }

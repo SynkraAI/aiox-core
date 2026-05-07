@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T23:37:33.663Z"
+generated_at: "2026-05-07T23:49:01.680Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1104
 files:
@@ -265,9 +265,9 @@ files:
     type: core
     size: 8156
   - path: core/config/schemas/framework-config.schema.json
-    hash: sha256:900caf051d112c29e4c8faa296fb1d37a3e7160c50b6180d1c8f07950d0fbd68
+    hash: sha256:101ca2cddca9df4db30a8a4220fd3083a24f9ff30bc23df695d19e2f9382335d
     type: core
-    size: 5940
+    size: 6259
   - path: core/config/schemas/local-config.schema.json
     hash: sha256:0349e44aea7b3dfe051ce586eb201f25edab8a7ea6d054704034f877848aa43f
     type: core
