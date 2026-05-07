@@ -67,7 +67,7 @@ graph TD
 
 ## Migration Guidance
 
-When touching legacy guided workflow execution, keep changes narrow and preserve
+When touching legacy-guided workflow execution, keep changes narrow and preserve
 compatibility. Do not rename legacy state files unless the caller has an
 explicit migration path.
 
