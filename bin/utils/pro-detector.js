@@ -31,43 +31,30 @@ const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const PRO_PACKAGE_PATH = path.join(PRO_DIR, 'package.json');
 
 /**
- * Canonical npm package name (future, after org rename).
+ * Canonical npm package name.
  */
-const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
-
-/**
- * Fallback npm package name (active until org rename).
- */
-const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
+const PRO_PACKAGE_NAME = '@aiox-squads/pro';
 
 /**
  * Resolve the installed npm Pro package path.
- * Tries canonical name first, then fallback.
- *
  * @returns {{ packagePath: string, packageName: string } | null}
  */
 function resolveNpmProPackage() {
-  const candidates = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
-
-  for (const packageName of candidates) {
-    try {
-      const pkgJson = require.resolve(`${packageName}/package.json`, {
-        paths: [process.cwd()],
-      });
-      return { packagePath: path.dirname(pkgJson), packageName };
-    } catch {
-      // try next package
-    }
+  try {
+    const pkgJson = require.resolve(`${PRO_PACKAGE_NAME}/package.json`, {
+      paths: [process.cwd()],
+    });
+    return { packagePath: path.dirname(pkgJson), packageName: PRO_PACKAGE_NAME };
+  } catch {
+    return null;
   }
-
-  return null;
 }
 
 /**
  * Check if the AIOX Pro is available via any source.
  *
  * Detection priority:
- * 1. npm package (canonical @aiox-fullstack/pro or fallback @aios-fullstack/pro)
+ * 1. npm package (@aiox-squads/pro)
  * 2. pro/ submodule directory
  *
  * @returns {boolean} true if Pro is available
@@ -85,7 +72,7 @@ function isProAvailable() {
  * Safely load a module from the pro package.
  *
  * Resolution order:
- * 1. npm package (canonical or fallback)
+ * 1. npm package (@aiox-squads/pro)
  * 2. pro/ submodule directory
  *
  * @param {string} moduleName - Relative path within pro/ (e.g., 'squads/squad-creator-pro')
@@ -97,14 +84,18 @@ function loadProModule(moduleName) {
   if (npmPro) {
     try {
       return require(path.join(npmPro.packagePath, moduleName));
-    } catch { /* fall through */ }
+    } catch {
+      /* fall through */
+    }
   }
 
   // 2. Try submodule
   if (fs.existsSync(PRO_PACKAGE_PATH)) {
     try {
       return require(path.join(PRO_DIR, moduleName));
-    } catch { /* not available */ }
+    } catch {
+      /* not available */
+    }
   }
 
   return null;
@@ -120,9 +111,13 @@ function getProVersion() {
   const npmPro = resolveNpmProPackage();
   if (npmPro) {
     try {
-      const packageData = JSON.parse(fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8'));
+      const packageData = JSON.parse(
+        fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8')
+      );
       return packageData.version || null;
-    } catch { /* fall through */ }
+    } catch {
+      /* fall through */
+    }
   }
 
   // 2. Try submodule
@@ -130,7 +125,9 @@ function getProVersion() {
     try {
       const packageData = JSON.parse(fs.readFileSync(PRO_PACKAGE_PATH, 'utf8'));
       return packageData.version || null;
-    } catch { /* not available */ }
+    } catch {
+      /* not available */
+    }
   }
 
   return null;
@@ -145,7 +142,9 @@ function getProInfo() {
   const npmPro = resolveNpmProPackage();
   if (npmPro) {
     try {
-      const packageData = JSON.parse(fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8'));
+      const packageData = JSON.parse(
+        fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8')
+      );
       return {
         available: true,
         version: packageData.version || null,
@@ -153,7 +152,9 @@ function getProInfo() {
         source: 'npm',
         packageName: npmPro.packageName,
       };
-    } catch { /* fall through */ }
+    } catch {
+      /* fall through */
+    }
   }
 
   if (fs.existsSync(PRO_PACKAGE_PATH)) {
@@ -166,7 +167,9 @@ function getProInfo() {
         source: 'submodule',
         packageName: null,
       };
-    } catch { /* fall through */ }
+    } catch {
+      /* fall through */
+    }
   }
 
   return {
@@ -184,8 +187,7 @@ module.exports = {
   getProVersion,
   getProInfo,
   resolveNpmProPackage,
-  PRO_PACKAGE_CANONICAL,
-  PRO_PACKAGE_FALLBACK,
+  PRO_PACKAGE_NAME,
   // Exported for testing
   _PRO_DIR: PRO_DIR,
   _PRO_PACKAGE_PATH: PRO_PACKAGE_PATH,

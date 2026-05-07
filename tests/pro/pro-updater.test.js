@@ -139,7 +139,7 @@ describe('pro-updater', () => {
     it('should return null when the registry responds with a non-2xx status', async () => {
       mockRegistryResponse({ error: 'not found' }, 404);
 
-      await expect(fetchLatestFromNpm('@aiox-fullstack/pro')).resolves.toBeNull();
+      await expect(fetchLatestFromNpm('@aiox-squads/pro')).resolves.toBeNull();
     });
   });
 
@@ -149,9 +149,9 @@ describe('pro-updater', () => {
         throw new Error('ENOENT');
       });
 
-      await expect(updatePro('/tmp/missing-project', {}))
-        .rejects
-        .toThrow('updatePro(projectRoot): projectRoot does not exist or is not a directory');
+      await expect(updatePro('/tmp/missing-project', {})).rejects.toThrow(
+        'updatePro(projectRoot): projectRoot does not exist or is not a directory'
+      );
 
       expect(https.get).not.toHaveBeenCalled();
       expect(execSync).not.toHaveBeenCalled();
@@ -159,14 +159,19 @@ describe('pro-updater', () => {
 
     it('should use the detected scoped core package when includeCoreUpdate is requested in dry-run mode', async () => {
       const projectRoot = '/tmp/aiox-project';
-      const installedPackageJson = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
+      const installedPackageJson = path.join(
+        projectRoot,
+        'node_modules',
+        '@aiox-squads',
+        'pro',
+        'package.json'
+      );
       const packageJsonPath = path.join(projectRoot, 'package.json');
 
       fs.statSync.mockReturnValue({ isDirectory: () => true });
-      fs.existsSync.mockImplementation((targetPath) => (
-        targetPath === installedPackageJson
-        || targetPath === packageJsonPath
-      ));
+      fs.existsSync.mockImplementation(
+        (targetPath) => targetPath === installedPackageJson || targetPath === packageJsonPath
+      );
       fs.readFileSync.mockImplementation((targetPath) => {
         if (targetPath === installedPackageJson) {
           return JSON.stringify({ version: '0.3.0' });
@@ -192,25 +197,32 @@ describe('pro-updater', () => {
       const result = await updatePro(projectRoot, { dryRun: true, includeCoreUpdate: true });
 
       expect(result.success).toBe(true);
-      expect(result.actions).toEqual(expect.arrayContaining([
-        expect.objectContaining({
-          action: 'core_update',
-          status: 'dry_run',
-          command: 'npm install @synkra/aiox-core@latest',
-        }),
-      ]));
+      expect(result.actions).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            action: 'core_update',
+            status: 'dry_run',
+            command: 'npm install @synkra/aiox-core@latest',
+          }),
+        ])
+      );
     });
 
     it('should honor scoped aiox-core peer dependencies when checking compatibility', async () => {
       const projectRoot = '/tmp/aiox-project';
-      const installedPackageJson = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
+      const installedPackageJson = path.join(
+        projectRoot,
+        'node_modules',
+        '@aiox-squads',
+        'pro',
+        'package.json'
+      );
       const versionJsonPath = path.join(projectRoot, '.aiox-core', 'version.json');
 
       fs.statSync.mockReturnValue({ isDirectory: () => true });
-      fs.existsSync.mockImplementation((targetPath) => (
-        targetPath === installedPackageJson
-        || targetPath === versionJsonPath
-      ));
+      fs.existsSync.mockImplementation(
+        (targetPath) => targetPath === installedPackageJson || targetPath === versionJsonPath
+      );
       fs.readFileSync.mockImplementation((targetPath) => {
         if (targetPath === installedPackageJson) {
           return JSON.stringify({ version: '0.3.0' });
@@ -232,27 +244,34 @@ describe('pro-updater', () => {
 
       expect(result.success).toBe(false);
       expect(result.error).toContain('requires aiox-core >=6.0.0');
-      expect(result.actions).toEqual(expect.arrayContaining([
-        expect.objectContaining({
-          action: 'compat',
-          status: 'incompatible',
-          required: '>=6.0.0',
-          installed: '5.0.4',
-        }),
-      ]));
+      expect(result.actions).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            action: 'compat',
+            status: 'incompatible',
+            required: '>=6.0.0',
+            installed: '5.0.4',
+          }),
+        ])
+      );
     });
 
     it('should fail when the package update succeeds but re-scaffolding fails', async () => {
       const projectRoot = '/tmp/aiox-project';
-      const installedPackageJson = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
+      const installedPackageJson = path.join(
+        projectRoot,
+        'node_modules',
+        '@aiox-squads',
+        'pro',
+        'package.json'
+      );
       const versionJsonPath = path.join(projectRoot, '.aiox-core', 'version.json');
       const scaffolderPath = 'aiox-core/installer/pro-scaffolder';
 
       fs.statSync.mockReturnValue({ isDirectory: () => true });
-      fs.existsSync.mockImplementation((targetPath) => (
-        targetPath === installedPackageJson
-        || targetPath === versionJsonPath
-      ));
+      fs.existsSync.mockImplementation(
+        (targetPath) => targetPath === installedPackageJson || targetPath === versionJsonPath
+      );
       fs.readFileSync.mockImplementation((targetPath) => {
         if (targetPath === installedPackageJson) {
           return JSON.stringify({ version: '0.3.0' });
@@ -285,10 +304,12 @@ describe('pro-updater', () => {
 
       expect(result.success).toBe(false);
       expect(result.error).toContain('re-scaffolding failed');
-      expect(result.actions).toEqual(expect.arrayContaining([
-        expect.objectContaining({ action: 'update', status: 'done' }),
-        expect.objectContaining({ action: 'scaffold', status: 'failed' }),
-      ]));
+      expect(result.actions).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ action: 'update', status: 'done' }),
+          expect.objectContaining({ action: 'scaffold', status: 'failed' }),
+        ])
+      );
 
       jest.dontMock(scaffolderPath);
     });

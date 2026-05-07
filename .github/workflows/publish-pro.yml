@@ -1,4 +1,4 @@
-# GitHub Actions workflow for publishing @aiox-fullstack/pro to npm
+# GitHub Actions workflow for publishing @aiox-squads/pro to npm
 #
 # This workflow publishes the AIOX Pro package to the public npm registry.
 # Features are license-gated (activation required), not install-gated.
@@ -75,6 +75,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: true
 
       - name: Setup Node.js with npm registry
@@ -98,12 +99,21 @@ jobs:
           cd pro
           npm version ${{ github.event.inputs.version }} --no-git-tag-version
 
+      - name: Verify package metadata
+        run: |
+          cd pro
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          if [ "$PACKAGE_NAME" != "@aiox-squads/pro" ]; then
+            echo "::error::Expected pro/package.json name to be @aiox-squads/pro, got $PACKAGE_NAME"
+            exit 1
+          fi
+
       - name: Publish package
         run: |
           cd pro
           npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
 
       - name: Create release notes
         if: startsWith(github.ref, 'refs/tags/pro-v')
@@ -153,11 +163,11 @@ jobs:
           node-version: '20'
 
       - name: Verify package is accessible
-        run: npm view @aiox-fullstack/pro
+        run: npm view @aiox-squads/pro
 
       - name: Test installation
         run: |
           mkdir test-install && cd test-install
           npm init -y
-          npm install @aiox-fullstack/pro
+          npm install @aiox-squads/pro
           echo "✅ Package installed successfully"

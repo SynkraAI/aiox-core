@@ -1,5 +1,5 @@
 /**
- * Pro Updater — update @aiox-fullstack/pro (or fallback @aios-fullstack/pro)
+ * Pro Updater — update @aiox-squads/pro
  *
  * Handles:
  * - Detecting installed Pro version and source
@@ -21,9 +21,14 @@ const { createRequire } = require('module');
 const semver = require('semver');
 const { execSync } = require('child_process');
 
-const PRO_PACKAGES = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+const PRO_PACKAGE = '@aiox-squads/pro';
 const CORE_PACKAGES = ['@synkra/aiox-core', 'aiox-core'];
-const DEPENDENCY_FIELDS = ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies'];
+const DEPENDENCY_FIELDS = [
+  'dependencies',
+  'devDependencies',
+  'optionalDependencies',
+  'peerDependencies',
+];
 const CORE_PACKAGE_ROOT = path.resolve(__dirname, '..', '..', '..');
 const CORE_PACKAGE_REQUIRE = createRequire(path.join(CORE_PACKAGE_ROOT, 'package.json'));
 const INSTALLER_SCAFFOLDER_EXPORT = 'aiox-core/installer/pro-scaffolder';
@@ -59,7 +64,9 @@ function fetchLatestFromNpm(packageName, timeout = 15000) {
       }
 
       let data = '';
-      res.on('data', (c) => { data += c; });
+      res.on('data', (c) => {
+        data += c;
+      });
       res.on('end', () => {
         try {
           const json = JSON.parse(data);
@@ -74,7 +81,10 @@ function fetchLatestFromNpm(packageName, timeout = 15000) {
     });
 
     req.on('error', () => resolve(null));
-    req.on('timeout', () => { req.destroy(); resolve(null); });
+    req.on('timeout', () => {
+      req.destroy();
+      resolve(null);
+    });
   });
 }
 
@@ -84,18 +94,18 @@ function fetchLatestFromNpm(packageName, timeout = 15000) {
  * @returns {{ packageName:string, packagePath:string, version:string }|null}
  */
 function resolveInstalledPro(projectRoot) {
-  for (const pkg of PRO_PACKAGES) {
-    const scope = pkg.split('/')[0].replace('@', '');
-    const pkgPath = path.join(projectRoot, 'node_modules', `@${scope}`, 'pro');
-    const pkgJson = path.join(pkgPath, 'package.json');
+  const pkgPath = path.join(projectRoot, 'node_modules', '@aiox-squads', 'pro');
+  const pkgJson = path.join(pkgPath, 'package.json');
 
-    if (fs.existsSync(pkgJson)) {
-      try {
-        const data = JSON.parse(fs.readFileSync(pkgJson, 'utf8'));
-        return { packageName: pkg, packagePath: pkgPath, version: data.version || '0.0.0' };
-      } catch { /* corrupt, try next */ }
+  if (fs.existsSync(pkgJson)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(pkgJson, 'utf8'));
+      return { packageName: PRO_PACKAGE, packagePath: pkgPath, version: data.version || '0.0.0' };
+    } catch {
+      return null;
     }
   }
+
   return null;
 }
 
@@ -154,11 +164,15 @@ function assertValidProjectRoot(projectRoot) {
   try {
     stats = fs.statSync(resolvedProjectRoot);
   } catch {
-    throw new Error(`updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`);
+    throw new Error(
+      `updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`
+    );
   }
 
   if (!stats.isDirectory()) {
-    throw new Error(`updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`);
+    throw new Error(
+      `updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`
+    );
   }
 
   return resolvedProjectRoot;
@@ -177,7 +191,9 @@ function getCoreVersion(projectRoot) {
       if (versionInfo.version) {
         return versionInfo.version;
       }
-    } catch { /* skip */ }
+    } catch {
+      /* skip */
+    }
   }
 
   for (const packageName of CORE_PACKAGES) {
@@ -186,7 +202,9 @@ function getCoreVersion(projectRoot) {
       try {
         const data = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         return data.version || null;
-      } catch { /* skip */ }
+      } catch {
+        /* skip */
+      }
     }
   }
 
@@ -275,10 +293,14 @@ async function applyScaffoldStep(projectRoot, proPath, result, onProgress, error
 function buildInstallCmd(pm, packageName) {
   const spec = `${packageName}@latest`;
   switch (pm) {
-    case 'pnpm': return `pnpm add ${spec}`;
-    case 'yarn': return `yarn add ${spec}`;
-    case 'bun': return `bun add ${spec}`;
-    default: return `npm install ${spec}`;
+    case 'pnpm':
+      return `pnpm add ${spec}`;
+    case 'yarn':
+      return `yarn add ${spec}`;
+    case 'bun':
+      return `bun add ${spec}`;
+    default:
+      return `npm install ${spec}`;
   }
 }
 
@@ -365,7 +387,7 @@ async function updatePro(projectRoot, options = {}) {
         installed.packagePath,
         result,
         onProgress,
-        'AIOX Pro is up to date, but re-scaffolding failed.',
+        'AIOX Pro is up to date, but re-scaffolding failed.'
       );
       if (!scaffolded) {
         return result;
@@ -384,14 +406,19 @@ async function updatePro(projectRoot, options = {}) {
 
   // 5. Check compatibility with aiox-core
   const coreVersion = getCoreVersion(resolvedProjectRoot);
-  const requiredCore = CORE_PACKAGES
-    .map((packageName) => latest.peerDependencies?.[packageName])
-    .find(Boolean);
+  const requiredCore = CORE_PACKAGES.map(
+    (packageName) => latest.peerDependencies?.[packageName]
+  ).find(Boolean);
 
   if (requiredCore && coreVersion && !satisfiesPeer(coreVersion, requiredCore)) {
     if (!includeCoreUpdate) {
       result.error = `Pro ${latest.version} requires aiox-core ${requiredCore}, but ${coreVersion} is installed. Run: aiox pro update --include-core`;
-      result.actions.push({ action: 'compat', status: 'incompatible', required: requiredCore, installed: coreVersion });
+      result.actions.push({
+        action: 'compat',
+        status: 'incompatible',
+        required: requiredCore,
+        installed: coreVersion,
+      });
       return result;
     }
   }
@@ -403,10 +430,18 @@ async function updatePro(projectRoot, options = {}) {
 
   if (dryRun) {
     result.success = true;
-    result.actions.push({ action: 'update', status: 'dry_run', command: buildInstallCmd(pm, installed.packageName) });
+    result.actions.push({
+      action: 'update',
+      status: 'dry_run',
+      command: buildInstallCmd(pm, installed.packageName),
+    });
     if (includeCoreUpdate) {
       const corePackageName = detectCorePackageName(resolvedProjectRoot) || 'aiox-core';
-      result.actions.push({ action: 'core_update', status: 'dry_run', command: buildInstallCmd(pm, corePackageName) });
+      result.actions.push({
+        action: 'core_update',
+        status: 'dry_run',
+        command: buildInstallCmd(pm, corePackageName),
+      });
     }
     if (!skipScaffold) {
       result.actions.push({ action: 'scaffold', status: 'dry_run' });
@@ -435,7 +470,12 @@ async function updatePro(projectRoot, options = {}) {
   try {
     const cmd = buildInstallCmd(pm, installed.packageName);
     execSync(cmd, { cwd: resolvedProjectRoot, stdio: 'pipe', timeout: 120000 });
-    result.actions.push({ action: 'update', status: 'done', from: installed.version, to: latest.version });
+    result.actions.push({
+      action: 'update',
+      status: 'done',
+      from: installed.version,
+      to: latest.version,
+    });
   } catch (err) {
     result.error = `Failed to update ${installed.packageName}: ${err.message}`;
     result.actions.push({ action: 'update', status: 'failed', error: err.message });
@@ -456,7 +496,7 @@ async function updatePro(projectRoot, options = {}) {
       proPath,
       result,
       onProgress,
-      'AIOX Pro package updated, but re-scaffolding failed.',
+      'AIOX Pro package updated, but re-scaffolding failed.'
     );
     if (!scaffolded) {
       return result;
@@ -486,7 +526,13 @@ async function runScaffold(projectRoot, proSourceDir, onProgress) {
       },
     });
   } catch (err) {
-    return { success: false, errors: [err.message], copiedFiles: [], skippedFiles: [], warnings: [] };
+    return {
+      success: false,
+      errors: [err.message],
+      copiedFiles: [],
+      skippedFiles: [],
+      warnings: [],
+    };
   }
 }
 
@@ -503,7 +549,7 @@ function formatUpdateResult(result) {
     return lines.join('\n');
   }
 
-  const checkAction = result.actions.find(a => a.action === 'check');
+  const checkAction = result.actions.find((a) => a.action === 'check');
 
   if (checkAction?.status === 'up_to_date') {
     lines.push(`\n  ✅ AIOX Pro is up to date (v${result.previousVersion})`);
@@ -549,7 +595,7 @@ function formatUpdateResult(result) {
   }
 
   // Dry-run summary
-  const dryActions = result.actions.filter(a => a.status === 'dry_run');
+  const dryActions = result.actions.filter((a) => a.status === 'dry_run');
   if (dryActions.length > 0) {
     lines.push('\n  📋 Dry-run plan:');
     for (const a of dryActions) {
@@ -574,5 +620,5 @@ module.exports = {
   getCoreVersion,
   detectCorePackageName,
   satisfiesPeer,
-  PRO_PACKAGES,
+  PRO_PACKAGE,
 };
