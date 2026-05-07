@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.2
-generated_at: "2026-05-07T10:45:15.516Z"
+version: 5.1.3
+generated_at: "2026-05-07T10:57:49.732Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -1221,9 +1221,9 @@ files:
     type: data
     size: 10938
   - path: data/aiox-kb.md
-    hash: sha256:72c569d40b3c79a6235d571d901b87972dd72253b885b03b95b254f2dea05832
+    hash: sha256:958065f2d734189edf2868aae322114b16546502e213b9a948547af4e8c178f9
     type: data
-    size: 34235
+    size: 34306
   - path: data/capability-detection.js
     hash: sha256:317d1b51b5cda2e35ac6d468e33e05c0948e6d7f05f51d750d7ce6ff5a58535a
     type: data
@@ -1325,9 +1325,9 @@ files:
     type: development
     size: 5012
   - path: development/agents/aiox-master.md
-    hash: sha256:9a4cb19d885e13935ae464bbef0d9009feba21b6a14dcf75815de50901e3d065
+    hash: sha256:66175a22e6982e5c0f4123f84af8388eb0cfc81124b8e9ec8f44d502c4ca6cf8
     type: agent
-    size: 20397
+    size: 21023
   - path: development/agents/analyst.md
     hash: sha256:35150d764c6dc74bc02b61a4d613c9278e87ffb209403db23991339fdda4f8e2
     type: agent
