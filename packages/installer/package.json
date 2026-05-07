@@ -8,6 +8,7 @@
   },
   "exports": {
     ".": "./src/index.js",
+    "./aiox-core-installer": "./src/installer/aiox-core-installer.js",
     "./pro-setup": "./src/wizard/pro-setup.js",
     "./pro-scaffolder": "./src/pro/pro-scaffolder.js",
     "./package.json": "./package.json"

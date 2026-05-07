@@ -110,6 +110,14 @@ try {
   brownfieldUpgrader = null;
 }
 
+let ensureProjectNodeModulesLink;
+try {
+  ({ ensureProjectNodeModulesLink } = require('@aiox-squads/core/installer/aiox-core-installer'));
+} catch (_err) {
+  // Module may not be available in older installations
+  ensureProjectNodeModulesLink = null;
+}
+
 async function main() {
   console.clear();
 
@@ -519,21 +527,19 @@ async function main() {
     );
 
     // Ensure root squad scripts can resolve framework dependencies.
-    const projectNodeModules = path.join(context.projectRoot, 'node_modules');
-    const frameworkNodeModules = path.join(targetCoreDir, 'node_modules');
-    if (!fs.existsSync(projectNodeModules) && fs.existsSync(frameworkNodeModules)) {
-      try {
-        const linkTarget = process.platform === 'win32'
-          ? frameworkNodeModules
-          : path.relative(context.projectRoot, frameworkNodeModules);
-        const linkType = process.platform === 'win32' ? 'junction' : 'dir';
-        await fse.symlink(linkTarget || frameworkNodeModules, projectNodeModules, linkType);
+    if (ensureProjectNodeModulesLink) {
+      const linkResult = await ensureProjectNodeModulesLink({
+        targetDir: context.projectRoot,
+        targetAioxCore: targetCoreDir,
+      });
+      if (linkResult.linked) {
         console.log(chalk.green('✓') + ' node_modules linked to .aiox-core/node_modules');
-      } catch (symlinkError) {
+      } else if (!linkResult.success) {
         console.log(
           chalk.yellow('⚠') +
             ' Could not create node_modules symlink: ' +
-            symlinkError.message
+            linkResult.reason +
+            (linkResult.error ? ` (${linkResult.error})` : '')
         );
       }
     }

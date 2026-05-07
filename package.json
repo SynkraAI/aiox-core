@@ -47,6 +47,7 @@
     "LICENSE"
   ],
   "exports": {
+    "./installer/aiox-core-installer": "./packages/installer/src/installer/aiox-core-installer.js",
     "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
     "./package.json": "./package.json"
   },
