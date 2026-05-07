@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T18:54:14.793Z"
+generated_at: "2026-05-07T19:24:04.148Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -1713,13 +1713,13 @@ files:
     type: script
     size: 15887
   - path: development/scripts/workflow-navigator.js
-    hash: sha256:45bd9f0317b6a0b9e9577b5b26550f1b7fafec2c45c1b542a6947ffd69a70fec
+    hash: sha256:e9af315c4b6ed0f3a0ccc0956921b04f75865a019ada427bdb1d871a1a059bcb
     type: script
-    size: 9847
+    size: 10120
   - path: development/scripts/workflow-state-manager.js
-    hash: sha256:3a896079b32b8efb8c532c0626c4ce14fb52cc92afbb086f6f2d2a0367d60dec
+    hash: sha256:34b249724bb9b4625b4c6e0c67f412d341927323278867367faf8999d09e741c
     type: script
-    size: 20129
+    size: 20137
   - path: development/scripts/workflow-validator.js
     hash: sha256:abb16e5cd34ec06bbca0a31af3fc500c3a5c98f66d0a72546e4a2827653abcd3
     type: script
@@ -2205,9 +2205,9 @@ files:
     type: task
     size: 13356
   - path: development/tasks/next.md
-    hash: sha256:f3f685218c1df95ef399a9ba3c8ea7c29607e591acc2a7fbc2847a2883f08e02
+    hash: sha256:bc65cd39c47607cef82f4d72e21f80b69ee4d5b1c42f3ffc317d91910fbae4ae
     type: task
-    size: 7641
+    size: 7792
   - path: development/tasks/orchestrate-resume.md
     hash: sha256:c15ca8e699269246cc48a581ca6a956acf6ba9b717024274836d6447cfbccc76
     type: task
@@ -2393,13 +2393,13 @@ files:
     type: task
     size: 16130
   - path: development/tasks/run-workflow-engine.md
-    hash: sha256:885b63bbfb3506740398768bc4979947acfc4063c5638d89566f6e6da74aaabb
+    hash: sha256:c1f10d20c25283675ca8b7f3644699c17298d7ffd2745640e252aa40bb654397
     type: task
-    size: 26147
+    size: 26307
   - path: development/tasks/run-workflow.md
-    hash: sha256:01a7addd0554399249541012f93f3ab2dd46e69336ba4f96737bc4e271b22b4b
+    hash: sha256:484bb719fc4b4584875370647c59c04bdc24b57eaaf6b99460404b57f80772b1
     type: task
-    size: 10587
+    size: 10725
   - path: development/tasks/search-mcp.md
     hash: sha256:4c7d9239c740b250baf9d82a5aa3baf1cd0bb8c671f0889c9a6fc6c0a668ac9c
     type: task
