@@ -543,7 +543,7 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
           // BUG-3 fix (INS-1): Copy .claude/hooks/ folder (SYNAPSE engine + precompact)
           spinner.start('Copying Claude Code hooks...');
-          const hookFiles = await copyClaudeHooksFolder(projectRoot);
+          const hookFiles = await copyClaudeHooksFolder(projectRoot, wizardState);
           createdFiles.push(...hookFiles);
           if (hookFiles.length > 0) {
             createdFolders.push(path.join(projectRoot, '.claude', 'hooks'));
@@ -661,9 +661,10 @@ function showSuccessSummary(result) {
  * BUG-3 fix (INS-1): Copy .claude/hooks/ folder during installation
  * Only copies JS hooks that work without external dependencies (Python, etc.)
  * @param {string} projectRoot - Project root directory
+ * @param {Object} [wizardState={}] - Current wizard state
  * @returns {Promise<string[]>} List of copied files
  */
-async function copyClaudeHooksFolder(projectRoot) {
+async function copyClaudeHooksFolder(projectRoot, wizardState = {}) {
   const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.claude', 'hooks');
   const targetDir = path.join(projectRoot, '.claude', 'hooks');
   const copiedFiles = [];
@@ -679,13 +680,17 @@ async function copyClaudeHooksFolder(projectRoot) {
 
   await fs.ensureDir(targetDir);
 
-  // Only copy JS hooks that work standalone (no Python/shell deps)
-  const HOOKS_TO_COPY = [
+  const HOOKS_FREE = [
     'synapse-engine.cjs',
     'code-intel-pretool.cjs',
-    'precompact-session-digest.cjs',
     'README.md',
   ];
+  const HOOKS_PRO_ONLY = [
+    'precompact-session-digest.cjs',
+  ];
+  const HOOKS_TO_COPY = shouldCopyProHooks(wizardState)
+    ? [...HOOKS_FREE, ...HOOKS_PRO_ONLY]
+    : HOOKS_FREE;
 
   const files = await fs.readdir(sourceDir);
 
@@ -705,6 +710,31 @@ async function copyClaudeHooksFolder(projectRoot) {
   }
 
   return copiedFiles;
+}
+
+/**
+ * Decide whether Pro-only hooks should be copied.
+ * Explicit wizard tier wins; otherwise fall back to runtime Pro detection.
+ * Supports wizardState.proTier as a legacy alias from older Pro setup state.
+ *
+ * @param {Object} [wizardState={}] - Current wizard state
+ * @returns {boolean} true when Pro-only hooks should be installed
+ */
+function shouldCopyProHooks(wizardState = {}) {
+  const tier = String(wizardState.tier || wizardState.proTier || '').toLowerCase();
+  if (tier === 'pro') return true;
+  if (['free', 'community', 'core'].includes(tier)) return false;
+
+  if (wizardState.pro && typeof wizardState.pro.enabled === 'boolean') {
+    return wizardState.pro.enabled;
+  }
+
+  try {
+    const { isProAvailable } = require('../../../../bin/utils/pro-detector');
+    return isProAvailable();
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -1208,6 +1238,7 @@ module.exports = {
   promptFileExists,
   generateTemplateVariables,
   copyClaudeHooksFolder,
+  shouldCopyProHooks,
   createClaudeSettingsLocal,
   copySkillFiles,
   generateCodexSkills,

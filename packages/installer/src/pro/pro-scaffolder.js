@@ -2,7 +2,7 @@
  * Pro Content Scaffolder
  *
  * Copies premium content (squads, configs, feature registry) from
- * node_modules/@aiox-fullstack/pro/ (or @aios-fullstack/pro/) into the user's project after
+ * node_modules/@aiox-squads/pro/ (or a legacy Pro scope) into the user's project after
  * license activation.
  *
  * @module packages/installer/src/pro/pro-scaffolder
@@ -55,7 +55,7 @@ const SCAFFOLD_ITEMS = [
  * Scaffold pro content into user project.
  *
  * @param {string} targetDir - Project root directory
- * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-fullstack/pro or @aios-fullstack/pro)
+ * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-squads/pro or legacy scopes)
  * @param {Object} [options={}] - Scaffold options
  * @param {Function} [options.onProgress] - Progress callback ({item, status, message})
  * @param {boolean} [options.force=false] - Force overwrite even if content exists

@@ -23,9 +23,10 @@ const path = require('path');
 const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
-const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
-const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
-const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
+const PRO_PACKAGE_CANONICAL = '@aiox-squads/pro';
+const PRO_PACKAGE_FALLBACK = '@aiox-fullstack/pro';
+const PRO_PACKAGE_LEGACY = '@aios-fullstack/pro';
+const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK, PRO_PACKAGE_LEGACY];
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);

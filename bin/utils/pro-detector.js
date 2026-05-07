@@ -31,25 +31,35 @@ const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const PRO_PACKAGE_PATH = path.join(PRO_DIR, 'package.json');
 
 /**
- * Canonical npm package name (future, after org rename).
+ * Canonical npm package name.
  */
-const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
+const PRO_PACKAGE_CANONICAL = '@aiox-squads/pro';
 
 /**
- * Fallback npm package name (active until org rename).
+ * Legacy npm package name kept as a fallback for installs created during the
+ * unpublished @aiox-fullstack/pro transition.
  */
-const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
+const PRO_PACKAGE_FALLBACK = '@aiox-fullstack/pro';
+
+/**
+ * Original AIOS npm package name, retained for backward compatibility.
+ */
+const PRO_PACKAGE_LEGACY = '@aios-fullstack/pro';
+
+const PRO_PACKAGES = [
+  PRO_PACKAGE_CANONICAL,
+  PRO_PACKAGE_FALLBACK,
+  PRO_PACKAGE_LEGACY,
+];
 
 /**
  * Resolve the installed npm Pro package path.
- * Tries canonical name first, then fallback.
+ * Tries canonical name first, then legacy fallbacks.
  *
  * @returns {{ packagePath: string, packageName: string } | null}
  */
 function resolveNpmProPackage() {
-  const candidates = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
-
-  for (const packageName of candidates) {
+  for (const packageName of PRO_PACKAGES) {
     try {
       const pkgJson = require.resolve(`${packageName}/package.json`, {
         paths: [process.cwd()],
@@ -67,7 +77,7 @@ function resolveNpmProPackage() {
  * Check if the AIOX Pro is available via any source.
  *
  * Detection priority:
- * 1. npm package (canonical @aiox-fullstack/pro or fallback @aios-fullstack/pro)
+ * 1. npm package (canonical @aiox-squads/pro or legacy fallbacks)
  * 2. pro/ submodule directory
  *
  * @returns {boolean} true if Pro is available
@@ -186,6 +196,8 @@ module.exports = {
   resolveNpmProPackage,
   PRO_PACKAGE_CANONICAL,
   PRO_PACKAGE_FALLBACK,
+  PRO_PACKAGE_LEGACY,
+  PRO_PACKAGES,
   // Exported for testing
   _PRO_DIR: PRO_DIR,
   _PRO_PACKAGE_PATH: PRO_PACKAGE_PATH,

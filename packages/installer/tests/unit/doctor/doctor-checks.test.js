@@ -364,12 +364,15 @@ describe('code-intel check', () => {
 });
 
 describe('ide-sync check', () => {
+  const portablePath = (targetPath) => String(targetPath).replace(/\\/g, '/');
+
   it('should PASS when counts match', async () => {
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
-      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('qa')];
-      if (p.includes('.claude/commands')) return ['dev.md', 'qa.md'];
-      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      const normalizedPath = portablePath(p);
+      if (normalizedPath.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('qa')];
+      if (normalizedPath.includes('.claude/commands')) return ['dev.md', 'qa.md'];
+      if (normalizedPath.includes('development/agents')) return ['dev.md', 'qa.md'];
       return [];
     });
 
@@ -380,9 +383,10 @@ describe('ide-sync check', () => {
   it('should WARN when counts mismatch', async () => {
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
-      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('qa')];
-      if (p.includes('commands')) return ['dev.md', 'qa.md', 'pm.md'];
-      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      const normalizedPath = portablePath(p);
+      if (normalizedPath.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('qa')];
+      if (normalizedPath.includes('commands')) return ['dev.md', 'qa.md', 'pm.md'];
+      if (normalizedPath.includes('development/agents')) return ['dev.md', 'qa.md'];
       return [];
     });
 
@@ -393,9 +397,10 @@ describe('ide-sync check', () => {
   it('should WARN when counts match but agent identities mismatch', async () => {
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
-      if (p.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('pm')];
-      if (p.includes('.claude/commands')) return ['dev.md', 'qa.md'];
-      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      const normalizedPath = portablePath(p);
+      if (normalizedPath.includes('.claude/skills')) return [dirEntry('dev'), dirEntry('pm')];
+      if (normalizedPath.includes('.claude/commands')) return ['dev.md', 'qa.md'];
+      if (normalizedPath.includes('development/agents')) return ['dev.md', 'qa.md'];
       return [];
     });
 
@@ -408,7 +413,8 @@ describe('ide-sync check', () => {
   it('should FAIL when Claude directories cannot be read', async () => {
     fs.existsSync.mockReturnValue(true);
     fs.readdirSync.mockImplementation((p) => {
-      if (p.includes('development/agents')) return ['dev.md', 'qa.md'];
+      const normalizedPath = portablePath(p);
+      if (normalizedPath.includes('development/agents')) return ['dev.md', 'qa.md'];
       throw new Error('permission denied');
     });
 

@@ -26,7 +26,7 @@ const { createBuyerCommand } = require('./buyer');
 
 // BUG-6 fix (INS-1): Dynamic licensePath resolution
 // In framework-dev: __dirname = aiox-core/.aiox-core/cli/commands/pro → ../../../../pro/license
-// In project-dev: pro is installed via npm as @aiox-fullstack/pro or @aios-fullstack/pro
+// In project-dev: pro is installed via npm as @aiox-squads/pro or a legacy scope.
 function resolveLicensePath() {
   // 1. Try relative path (framework-dev mode)
   const relativePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
@@ -36,6 +36,7 @@ function resolveLicensePath() {
 
   // 2. Try npm packages — canonical then fallback
   const npmCandidates = [
+    '@aiox-squads/pro',
     '@aiox-fullstack/pro',
     '@aios-fullstack/pro',
   ];
@@ -56,6 +57,7 @@ function resolveLicensePath() {
   // 3. Try project root node_modules (both scopes)
   const projectRoot = process.cwd();
   const scopePaths = [
+    path.join(projectRoot, 'node_modules', '@aiox-squads', 'pro', 'license'),
     path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'license'),
     path.join(projectRoot, 'node_modules', '@aios-fullstack', 'pro', 'license'),
   ];
@@ -592,13 +594,13 @@ async function validateAction() {
 /**
  * Setup and verify AIOX Pro installation.
  *
- * Tries canonical @aiox-fullstack/pro first, falls back to @aios-fullstack/pro.
+ * Tries canonical @aiox-squads/pro first, then legacy fallbacks.
  *
  * @param {object} options - Command options
  * @param {boolean} options.verify - Only verify without installing
  */
 async function setupAction(options) {
-  const PRO_PACKAGES = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+  const PRO_PACKAGES = ['@aiox-squads/pro', '@aiox-fullstack/pro', '@aios-fullstack/pro'];
 
   console.log('\nAIOX Pro - Setup\n');
 

@@ -22,6 +22,8 @@ const {
   resolveNpmProPackage,
   PRO_PACKAGE_CANONICAL,
   PRO_PACKAGE_FALLBACK,
+  PRO_PACKAGE_LEGACY,
+  PRO_PACKAGES,
   _PRO_DIR,
   _PRO_PACKAGE_PATH,
 } = require('../../bin/utils/pro-detector');
@@ -71,7 +73,7 @@ describe('pro-detector', () => {
 
     it('should return true when npm package exists (canonical or fallback)', () => {
       const tmpDir = realFs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-detector-'));
-      const canonicalDir = path.join(tmpDir, 'node_modules', '@aiox-fullstack', 'pro');
+      const canonicalDir = path.join(tmpDir, 'node_modules', '@aiox-squads', 'pro');
       realFs.mkdirSync(canonicalDir, { recursive: true });
       realFs.writeFileSync(
         path.join(canonicalDir, 'package.json'),
@@ -104,14 +106,20 @@ describe('pro-detector', () => {
 
   describe('resolveNpmProPackage()', () => {
     it('should export canonical and fallback package names', () => {
-      expect(PRO_PACKAGE_CANONICAL).toBe('@aiox-fullstack/pro');
-      expect(PRO_PACKAGE_FALLBACK).toBe('@aios-fullstack/pro');
+      expect(PRO_PACKAGE_CANONICAL).toBe('@aiox-squads/pro');
+      expect(PRO_PACKAGE_FALLBACK).toBe('@aiox-fullstack/pro');
+      expect(PRO_PACKAGE_LEGACY).toBe('@aios-fullstack/pro');
+      expect(PRO_PACKAGES).toEqual([
+        '@aiox-squads/pro',
+        '@aiox-fullstack/pro',
+        '@aios-fullstack/pro',
+      ]);
     });
 
     it('should prefer the canonical package when both scopes resolve', () => {
       const tmpDir = realFs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-detector-'));
-      const canonicalDir = path.join(tmpDir, 'node_modules', '@aiox-fullstack', 'pro');
-      const fallbackDir = path.join(tmpDir, 'node_modules', '@aios-fullstack', 'pro');
+      const canonicalDir = path.join(tmpDir, 'node_modules', '@aiox-squads', 'pro');
+      const fallbackDir = path.join(tmpDir, 'node_modules', '@aiox-fullstack', 'pro');
       realFs.mkdirSync(canonicalDir, { recursive: true });
       realFs.mkdirSync(fallbackDir, { recursive: true });
       realFs.writeFileSync(
@@ -137,7 +145,7 @@ describe('pro-detector', () => {
 
     it('should fall back when the canonical package cannot be resolved', () => {
       const tmpDir = realFs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-detector-'));
-      const fallbackDir = path.join(tmpDir, 'node_modules', '@aios-fullstack', 'pro');
+      const fallbackDir = path.join(tmpDir, 'node_modules', '@aiox-fullstack', 'pro');
       realFs.mkdirSync(fallbackDir, { recursive: true });
       realFs.writeFileSync(
         path.join(fallbackDir, 'package.json'),
@@ -149,6 +157,27 @@ describe('pro-detector', () => {
         expect(resolveNpmProPackage()).toEqual({
           packagePath: realFs.realpathSync(fallbackDir),
           packageName: PRO_PACKAGE_FALLBACK,
+        });
+      } finally {
+        process.chdir(originalCwd);
+        realFs.rmSync(tmpDir, { recursive: true, force: true });
+      }
+    });
+
+    it('should fall back to the original AIOS package when newer scopes are unavailable', () => {
+      const tmpDir = realFs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-detector-'));
+      const legacyDir = path.join(tmpDir, 'node_modules', '@aios-fullstack', 'pro');
+      realFs.mkdirSync(legacyDir, { recursive: true });
+      realFs.writeFileSync(
+        path.join(legacyDir, 'package.json'),
+        JSON.stringify({ name: PRO_PACKAGE_LEGACY, version: '0.3.0' }),
+      );
+      process.chdir(tmpDir);
+
+      try {
+        expect(resolveNpmProPackage()).toEqual({
+          packagePath: realFs.realpathSync(legacyDir),
+          packageName: PRO_PACKAGE_LEGACY,
         });
       } finally {
         process.chdir(originalCwd);

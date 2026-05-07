@@ -49,7 +49,7 @@ beforeEach(async () => {
   );
   await fs.writeJson(
     path.join(proSourceDir, 'package.json'),
-    { name: '@aiox-fullstack/pro', version: '2.0.0' },
+    { name: '@aiox-squads/pro', version: '2.0.0' },
   );
 });
 

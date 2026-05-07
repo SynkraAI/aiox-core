@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-06T23:18:07.599Z'
-  entityCount: 745
+  lastUpdated: '2026-05-07T00:08:59.095Z'
+  entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -12781,6 +12781,22 @@ entities:
         extensionPoints: []
       checksum: sha256:dd025894f8f0d3bd22a147dbc0debef8b83e96f3c59483653404b3cd5a01d5aa
       lastVerified: '2026-03-11T00:48:55.903Z'
+    pro-updater:
+      path: .aiox-core/core/pro/pro-updater.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/pro/pro-updater.js
+      keywords:
+        - pro
+        - updater
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:724682d68410d65fc144356cc59324000e433f8a3f2e582a0403ae81f1af911e
+      lastVerified: '2026-05-07T00:08:58.904Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md

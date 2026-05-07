@@ -5,6 +5,7 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 const childProcess = require('child_process');
 const { validateDependencies } = require('../../../../packages/installer/src/wizard/validation/validators/dependency-validator');
 
@@ -18,6 +19,14 @@ function mockExecSuccess(payload) {
   });
 }
 
+function samePath(actual, expected) {
+  return path.normalize(String(actual)) === path.normalize(String(expected));
+}
+
+function projectFile(projectPath, ...segments) {
+  return path.join(projectPath, ...segments);
+}
+
 describe('Dependency Validator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -28,9 +37,9 @@ describe('Dependency Validator', () => {
     const projectPath = '/tmp/aiox-project';
 
     fs.existsSync.mockImplementation((targetPath) => (
-      targetPath === `${projectPath}/package.json`
-      || targetPath === `${projectPath}/node_modules`
-      || targetPath === `${projectPath}/node_modules/react`
+      samePath(targetPath, projectFile(projectPath, 'package.json'))
+      || samePath(targetPath, projectFile(projectPath, 'node_modules'))
+      || samePath(targetPath, projectFile(projectPath, 'node_modules', 'react'))
     ));
     fs.readFileSync.mockReturnValue(JSON.stringify({
       name: 'demo-app',
@@ -76,9 +85,9 @@ describe('Dependency Validator', () => {
     const projectPath = '/tmp/aiox-project';
 
     fs.existsSync.mockImplementation((targetPath) => (
-      targetPath === `${projectPath}/package.json`
-      || targetPath === `${projectPath}/node_modules`
-      || targetPath === `${projectPath}/node_modules/react`
+      samePath(targetPath, projectFile(projectPath, 'package.json'))
+      || samePath(targetPath, projectFile(projectPath, 'node_modules'))
+      || samePath(targetPath, projectFile(projectPath, 'node_modules', 'react'))
     ));
     fs.readFileSync.mockReturnValue(JSON.stringify({
       name: 'demo-app',
@@ -137,7 +146,7 @@ describe('Dependency Validator', () => {
   it('fails when package.json declares dependencies but node_modules is missing', async () => {
     const projectPath = '/tmp/aiox-broken';
 
-    fs.existsSync.mockImplementation((targetPath) => targetPath === `${projectPath}/package.json`);
+    fs.existsSync.mockImplementation((targetPath) => samePath(targetPath, projectFile(projectPath, 'package.json')));
     fs.readFileSync.mockReturnValue(JSON.stringify({
       name: 'demo-app',
       dependencies: {

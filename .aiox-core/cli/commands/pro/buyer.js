@@ -28,12 +28,13 @@ const path = require('path');
 //
 // Resolution order (matches pro/index.js and pro-setup.js):
 //   1. Bundled pro/ (framework-dev / npx context with submodule)
-//   2. npm canonical scope (@aiox-fullstack/pro) — preferred future state
-//   3. npm legacy scope (@aios-fullstack/pro) — fallback while npm rename in flight
+//   2. npm canonical scope (@aiox-squads/pro)
+//   3. npm legacy scopes (@aiox-fullstack/pro, @aios-fullstack/pro)
 //   4. cwd node_modules under either scope
-const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
-const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
-const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK];
+const PRO_PACKAGE_CANONICAL = '@aiox-squads/pro';
+const PRO_PACKAGE_FALLBACK = '@aiox-fullstack/pro';
+const PRO_PACKAGE_LEGACY = '@aios-fullstack/pro';
+const PRO_PACKAGES = [PRO_PACKAGE_CANONICAL, PRO_PACKAGE_FALLBACK, PRO_PACKAGE_LEGACY];
 
 function resolveLicensePath() {
   const relativePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
@@ -76,7 +77,7 @@ function loadClient() {
   } catch (error) {
     console.error('Erro: módulo AIOX Pro license não disponível.');
     console.error(`Instale: npm install ${PRO_PACKAGE_CANONICAL}`);
-    console.error(`(ou fallback: npm install ${PRO_PACKAGE_FALLBACK})`);
+    console.error(`(ou fallback: npm install ${PRO_PACKAGE_FALLBACK} / ${PRO_PACKAGE_LEGACY})`);
     console.error(`Detalhe: ${error.message}`);
     process.exit(2);
   }

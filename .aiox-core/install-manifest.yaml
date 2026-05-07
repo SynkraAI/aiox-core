@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.0
-generated_at: "2026-05-06T23:19:15.800Z"
+generated_at: "2026-05-07T07:41:42.617Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -101,13 +101,13 @@ files:
     type: cli
     size: 12326
   - path: cli/commands/pro/buyer.js
-    hash: sha256:e71066fefb12fd9da0cd2078f2a8c70a378322428a6a0422c8821a1024084057
+    hash: sha256:b866132041f28ab473e5b9df41e636ded1ba96ae278de02b1233993ee527ada9
     type: cli
-    size: 12292
+    size: 12335
   - path: cli/commands/pro/index.js
-    hash: sha256:c7fc2899b44b6ee69bf3851db5c9fe3d51e448a4ad0727020daeefe3ee8429c7
+    hash: sha256:d22457253ad517114883d38e2d8ddc2de6257fd2f9222c299b56f55eb6ad2ba9
     type: cli
-    size: 26195
+    size: 26295
   - path: cli/commands/qa/index.js
     hash: sha256:3a9e30419a66e56781f9b5dcddc8f4dd0ed24dabf8fe8c3005cd26f5cb02558f
     type: cli
@@ -181,9 +181,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:08471a9bf736776c15e72695f373fc3a203caf139412d3ec5c78a977796c1208
+    hash: sha256:9ddfc19a58ca25ca628925ec2ba2afab720c89d80817dfc2e0b03c3fcfcfecc2
     type: config
-    size: 11032
+    size: 11368
   - path: core/code-intel/code-intel-client.js
     hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
@@ -973,9 +973,9 @@ files:
     type: core
     size: 7193
   - path: core/pro/pro-updater.js
-    hash: sha256:f4f2ec9bfe06921f559003e8e21a79d2ed9e9283488e3cceab7c6eb199f7f5d0
+    hash: sha256:724682d68410d65fc144356cc59324000e433f8a3f2e582a0403ae81f1af911e
     type: core
-    size: 17473
+    size: 17722
   - path: core/quality-gates/base-layer.js
     hash: sha256:9a9a3921da08176b0bd44f338a59abc1f5107f3b1ee56571e840bf4e8ed233f4
     type: core
@@ -1057,9 +1057,9 @@ files:
     type: core
     size: 1013
   - path: core/synapse/context/context-tracker.js
-    hash: sha256:48e94db7b1778dedecc8eae829139579ad7778ff47668597ebe766610696553f
+    hash: sha256:5a54a15fbbbd4b6095e7e78297cb87e4a123a7c1d714a7c7916272ef6fd680f1
     type: core
-    size: 5839
+    size: 9144
   - path: core/synapse/diagnostics/collectors/consistency-collector.js
     hash: sha256:65f4255f87c9900400649dc8b9aedaac4851b5939d93e127778bd93cee99db12
     type: core
@@ -1229,9 +1229,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:90e7b480034004014d5598d753d4cfa1aa797afd663711eb24a95f3c366f13f8
+    hash: sha256:e6f6c9b9194319ccb794ba40d16fe458c15aa1df907f9f377683750d08d60280
     type: data
-    size: 521936
+    size: 522409
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -2001,9 +2001,9 @@ files:
     type: task
     size: 11021
   - path: development/tasks/dev-develop-story.md
-    hash: sha256:24ef3f76f37f82c8caa0bfaec4ac1ccf14ebd1cd60c6f0fe5c355d63b113784c
+    hash: sha256:be8924aa0de759ca92a177b0ea12a5b076a3095ee2a9f530b74b3de19e996954
     type: task
-    size: 27355
+    size: 29737
   - path: development/tasks/dev-improve-code-quality.md
     hash: sha256:6cf78aed6cca48bf13cc1f677f2cde86aea591785f428f9f56733de478107e2f
     type: task
@@ -2317,9 +2317,9 @@ files:
     type: task
     size: 15785
   - path: development/tasks/qa-gate.md
-    hash: sha256:25fc098d7c71554836925632c4a3f99aff9ade392e1ab1c669ae0983f49c6070
+    hash: sha256:b151ea672e7ad0e9229807f86430e4f3483395ee4beae40f2f17d7f6228aee24
     type: task
-    size: 10759
+    size: 13591
   - path: development/tasks/qa-generate-tests.md
     hash: sha256:245885950328b086ffbe9320bba2e814b3f6b5e3e5342bac904ccd814d4e8519
     type: task
@@ -2573,9 +2573,9 @@ files:
     type: task
     size: 3595
   - path: development/tasks/validate-next-story.md
-    hash: sha256:a7e0dbd89753d72248a6171d6bd4aa88d97e9c5051a5889d566c509d048d113c
+    hash: sha256:f121211b1fbe915e181399d10bd30c435aec55c0af9b49d99c533473574a4907
     type: task
-    size: 16914
+    size: 18848
   - path: development/tasks/validate-tech-preset.md
     hash: sha256:50a65289c223c1a79b0bebe4120f3f703df45d42522309e658f6d0f5c9fdb54e
     type: task
