@@ -3,7 +3,7 @@
  * Validate Package Completeness for npm Publishing
  *
  * Ensures the npm tarball contains all critical files and excludes
- * private content before publishing. Runs as prepublishOnly hook.
+ * local/private development content before publishing.
  *
  * @script scripts/validate-package-completeness.js
  * @story INS-2 - Release Pipeline: Preview to Latest
@@ -44,13 +44,14 @@ const REQUIRED_PATHS = [
   '.aiox-core/constitution.md',
   '.aiox-core/development/agents/',
   '.aiox-core/development/tasks/',
+  // Pro entitlement runtime is intentionally shipped with core.
+  'pro/license/license-api.js',
 ];
 
 /**
  * Paths that MUST NOT appear in the tarball (leak prevention).
  */
 const EXCLUDED_PATHS = [
-  'pro/',
   '.env',
   '.git/',
   'node_modules/',
