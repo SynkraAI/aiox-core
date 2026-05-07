@@ -656,14 +656,26 @@ class RecoveryHandler extends EventEmitter {
   }
 
   /**
-   * Get all logs (AC7)
+   * Gets all recovery logs (AC7).
+   *
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Copy of all log entries.
+   *
+   * @example
+   * const logs = recoveryHandler.getLogs();
+   * logs.forEach((log) => console.log(`[${log.level}] ${log.message}`));
    */
   getLogs() {
     return [...this.logs];
   }
 
   /**
-   * Get logs for specific epic
+   * Gets logs filtered by a specific epic number.
+   *
+   * @param {number} epicNum - Epic number to filter logs for.
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Filtered log entries.
+   *
+   * @example
+   * const epic4Logs = recoveryHandler.getEpicLogs(4);
    */
   getEpicLogs(epicNum) {
     return this.logs.filter(
@@ -672,28 +684,50 @@ class RecoveryHandler extends EventEmitter {
   }
 
   /**
-   * Get attempt history for all epics
+   * Gets attempt history for all epics.
+   *
+   * Returns a shallow copy of the internal attempts map, keyed by epic number,
+   * with each value containing attempt records.
+   *
+   * @returns {Object<number, Array>} Map of epic numbers to attempt records.
    */
   getAttemptHistory() {
     return { ...this.attempts };
   }
 
   /**
-   * Get attempt count for specific epic (AC5)
+   * Gets the recovery attempt count for a specific epic (AC5).
+   *
+   * @param {number} epicNum - Epic number to inspect.
+   * @returns {number} Number of recovery attempts made for the epic.
    */
   getAttemptCount(epicNum) {
     return (this.attempts[epicNum] || []).length;
   }
 
   /**
-   * Check if can retry (under max retries) (AC5)
+   * Checks whether an epic can still be retried (AC5).
+   *
+   * @param {number} epicNum - Epic number to inspect.
+   * @returns {boolean} True if the epic attempt count is below maxRetries.
+   *
+   * @example
+   * if (recoveryHandler.canRetry(4)) {
+   *   await orchestrator.executeEpic(4);
+   * }
    */
   canRetry(epicNum) {
     return this.getAttemptCount(epicNum) < this.maxRetries;
   }
 
   /**
-   * Reset attempts for an epic
+   * Resets all recovery attempts for a specific epic.
+   *
+   * Clears attempt history so the epic can be retried from scratch up to the
+   * configured maxRetries limit.
+   *
+   * @param {number} epicNum - Epic number to reset.
+   * @returns {void}
    */
   resetAttempts(epicNum) {
     this.attempts[epicNum] = [];
@@ -701,7 +735,12 @@ class RecoveryHandler extends EventEmitter {
   }
 
   /**
-   * Clear all state
+   * Clears all internal recovery state.
+   *
+   * Resets attempts and logs, returning the recovery handler to its initial
+   * state for a fresh orchestration run.
+   *
+   * @returns {void}
    */
   clear() {
     this.attempts = {};

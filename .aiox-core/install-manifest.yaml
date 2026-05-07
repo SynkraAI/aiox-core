@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T19:24:04.148Z"
+generated_at: "2026-05-07T19:55:39.252Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -245,9 +245,9 @@ files:
     type: core
     size: 5039
   - path: core/config/config-loader.js
-    hash: sha256:bbc6a9e57e9db7a74ae63c901b199f8b8a79eb093f23a280b6420d1aa5f7f813
+    hash: sha256:e70385b1173a6d1e4f4354b6afd88896986a82699d5e0fb779eb5abfcc446e6d
     type: core
-    size: 8534
+    size: 10631
   - path: core/config/config-resolver.js
     hash: sha256:3b29df6954cec440debef87cb4e4e7610c94dc74e562d32c74b8ec57d893213b
     type: core
@@ -389,9 +389,9 @@ files:
     type: elicitation
     size: 10935
   - path: core/events/dashboard-emitter.js
-    hash: sha256:20f3d2297c29a64bae34ac8097cc0b54f4f706b19f0dbd6c752a20d7c4ad9eb1
+    hash: sha256:6c694e4fc5765d6c396b25617cc34e3447068af780fdbb202b060a31cd357549
     type: core
-    size: 9165
+    size: 10721
   - path: core/events/index.js
     hash: sha256:c5a3a1ba660f1a0d7963e4e8a29ee536a301621c941d962c00f67ade17ba7db3
     type: core
@@ -809,9 +809,9 @@ files:
     type: core
     size: 16573
   - path: core/orchestration/bob-orchestrator.js
-    hash: sha256:35219c5113c262a39f249866e66c76f9f1206465dd68a66eb27d82c623b46048
+    hash: sha256:971a21ed77f09ab76dc2822030c4b36edd1fd9d8ec405b25b32f36f0cd606ec8
     type: core
-    size: 35841
+    size: 36831
   - path: core/orchestration/bob-status-writer.js
     hash: sha256:d0368d44b8b45549f503d737b0fdb21afb02db8d544b19f4d0289828501ac016
     type: core
@@ -821,9 +821,9 @@ files:
     type: core
     size: 8113
   - path: core/orchestration/brownfield-handler.js
-    hash: sha256:370599a3de3c936e8ebf2f5d14a1d09b8b33c3ccda3027d68740171314888215
+    hash: sha256:153eed3dcad1b5f58e0abb9ec4fb0c7013f441efeb169ea4a0cfda23f75928fc
     type: core
-    size: 26070
+    size: 26866
   - path: core/orchestration/checklist-runner.js
     hash: sha256:40f17b74c2fe6746f45aa5750c0b85b5af22221e010951eb6e93f5796fb70a8f
     type: core
@@ -845,9 +845,9 @@ files:
     type: core
     size: 15116
   - path: core/orchestration/data-lifecycle-manager.js
-    hash: sha256:031c351aa28e96eb232db709741eb3474fbe8c25bfc834f607834fdddd8cb632
+    hash: sha256:7fe6c9d9a278a1d7714e7fdba8710fafbc221520b096639be46f2ce1549a5c2a
     type: core
-    size: 10867
+    size: 11622
   - path: core/orchestration/epic-context-accumulator.js
     hash: sha256:4f342f7fc05f404de2b899358f86143106737b56d6c486c98e988a67d420078b
     type: core
@@ -885,29 +885,29 @@ files:
     type: core
     size: 1945
   - path: core/orchestration/gate-evaluator.js
-    hash: sha256:66a6ff6afefcdbf3e5149100b8e10aad95feaa5a84a0a993255ddb939b1c0eb4
+    hash: sha256:4e9e78745f937ee78b13704f3acdb45b19d4aab9bc0f17a5adaf5eecfc58e653
     type: core
-    size: 15814
+    size: 16655
   - path: core/orchestration/gemini-model-selector.js
     hash: sha256:2fe54c401ae60c0b5dc07f74c7a464992a0558b10c0b61f183c06943441d0d57
     type: core
     size: 4383
   - path: core/orchestration/greenfield-handler.js
-    hash: sha256:e4e951e1347f846f4df0af2a7692838a734418030331cb25ce6fa86721beafdf
+    hash: sha256:949c80c9c0430d4ddb1fa6e721661bad479ab476a4fb529aad8bf8dafa6e57fd
     type: core
-    size: 35270
+    size: 35723
   - path: core/orchestration/index.js
     hash: sha256:8baea00058c1dcae86328fff06b04c52cfad8ad9a77e3f49458f062609aa478a
     type: core
     size: 8835
   - path: core/orchestration/lock-manager.js
-    hash: sha256:3917ef9443f8a0e0de0c79715de54fe1e9451faa9860ee2f0c0f588dfaaf7a09
+    hash: sha256:30af501b40da2a7bcfd591c62e367c5667eefd40af91d265c986521c93e7d1f2
     type: core
-    size: 8663
+    size: 9382
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:61c988509c2edc03c1cd4dec333b284f7d15273f3e799c56950706a2e88f341b
+    hash: sha256:39ce48a0caa7657ce06a0549374c067f80a2fa516f1e7a311f44e0d9966c9e85
     type: core
-    size: 54621
+    size: 56733
   - path: core/orchestration/message-formatter.js
     hash: sha256:b7413c04fa22db1c5fc2f5c2aa47bb8ca0374e079894a44df21b733da6c258ae
     type: core
@@ -917,13 +917,13 @@ files:
     type: core
     size: 5820
   - path: core/orchestration/recovery-handler.js
-    hash: sha256:6a9ef025f95885849aa893188299aca698cea2ea428cc302012833032c9e106e
+    hash: sha256:a70f23fe9424c2cba4ed554bf0b0ee4687349af960eadb8ee752d45ff5b7cea7
     type: core
-    size: 24355
+    size: 25872
   - path: core/orchestration/session-state.js
-    hash: sha256:72aa24d7a7a256a56973d7b4e7b03c968eabeb0d22be23af75f65f2e45ac88b3
+    hash: sha256:70d511bf6a03e8cacefcec0065a4727cfb380471c89762bb291840968f55b44b
     type: core
-    size: 24781
+    size: 26320
   - path: core/orchestration/skill-dispatcher.js
     hash: sha256:5ebee66973a1df5d9dfed195ac6d83765a92023ba504e1814674345094fb8117
     type: core
