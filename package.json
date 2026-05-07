@@ -1,6 +1,6 @@
 {
   "name": "@aiox-squads/core",
-  "version": "5.1.11",
+  "version": "5.1.12",
   "description": "Synkra AIOX: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
     "aiox": "bin/aiox.js",
@@ -18,6 +18,7 @@
     "packages/",
     ".aiox-core/",
     ".claude/CLAUDE.md",
+    ".claude/settings.json",
     ".claude/agents/",
     ".claude/commands/",
     ".claude/skills/",
