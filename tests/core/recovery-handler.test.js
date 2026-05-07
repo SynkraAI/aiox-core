@@ -231,10 +231,17 @@ describe('Recovery Handler (Story 0.5)', () => {
     it('should return data-only attempt history for non-JSON context values', async () => {
       const circular = {};
       circular.self = circular;
+      const cause = new Error('Cause failure');
+      cause.code = 'ECAUSE';
+      const contextError = new Error('Context failure');
+      contextError.cause = cause;
+      contextError.code = 'ECONTEXT';
+      contextError.details = new Map([['attempt', 3n]]);
+      contextError.status = 500;
 
       await handler.handleEpicFailure(3, new Error('Specific error'), {
         circular,
-        error: new Error('Context failure'),
+        error: contextError,
         map: new Map([['attempt', 1n]]),
         maybe: undefined,
         set: new Set([2n]),
@@ -247,6 +254,14 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(context.error).toMatchObject({
         name: 'Error',
         message: 'Context failure',
+        cause: {
+          code: 'ECAUSE',
+          message: 'Cause failure',
+          name: 'Error',
+        },
+        code: 'ECONTEXT',
+        details: [['attempt', '3']],
+        status: 500,
       });
       expect(context.map).toEqual([['attempt', '1']]);
       expect(Object.prototype.hasOwnProperty.call(context, 'maybe')).toBe(true);

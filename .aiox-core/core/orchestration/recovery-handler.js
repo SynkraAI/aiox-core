@@ -817,11 +817,31 @@ class RecoveryHandler extends EventEmitter {
     }
 
     if (value instanceof Error) {
-      return {
+      const safeError = {
         name: value.name,
         message: value.message,
         stack: value.stack,
       };
+
+      seen.add(value);
+
+      try {
+        Object.getOwnPropertyNames(value).forEach((key) => {
+          if (key === 'name' || key === 'message' || key === 'stack') {
+            return;
+          }
+
+          try {
+            safeError[key] = this._sanitizeValue(value[key], seen);
+          } catch (error) {
+            safeError[key] = `[Unserializable: ${error.message}]`;
+          }
+        });
+
+        return safeError;
+      } finally {
+        seen.delete(value);
+      }
     }
 
     seen.add(value);

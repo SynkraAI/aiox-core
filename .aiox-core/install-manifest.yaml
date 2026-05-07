@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T21:32:27.906Z"
+generated_at: "2026-05-07T21:43:49.303Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1103
 files:
@@ -917,9 +917,9 @@ files:
     type: core
     size: 5820
   - path: core/orchestration/recovery-handler.js
-    hash: sha256:37bc632071d07fdf7c944c3b8f2c98e6c03a676a0fa7cc9ada6691269ecbd19b
+    hash: sha256:3224718aa40bbdd08e117b27ac71f4ec66252d9874acaf9bb3addfe8ca4d0c06
     type: core
-    size: 29569
+    size: 30067
   - path: core/orchestration/session-state.js
     hash: sha256:70d511bf6a03e8cacefcec0065a4727cfb380471c89762bb291840968f55b44b
     type: core
