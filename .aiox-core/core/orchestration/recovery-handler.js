@@ -761,7 +761,7 @@ class RecoveryHandler extends EventEmitter {
    */
   _assertValidEpicNum(epicNum) {
     if (typeof epicNum !== 'number' || !Number.isInteger(epicNum) || epicNum < 0) {
-      throw new TypeError(`epicNum must be a non-negative integer, got: ${JSON.stringify(epicNum)}`);
+      throw new TypeError(`epicNum must be a non-negative integer, got: ${String(epicNum)}`);
     }
   }
 

@@ -127,6 +127,9 @@ describe('Recovery Handler (Story 0.5)', () => {
       await expect(handler.handleEpicFailure(null, new Error('Invalid epic'))).rejects.toThrow(
         TypeError,
       );
+      await expect(handler.handleEpicFailure(1n, new Error('Invalid epic'))).rejects.toThrow(
+        'got: 1',
+      );
 
       expect(Object.keys(handler.getAttemptHistory())).toHaveLength(0);
     });
@@ -250,6 +253,7 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(() => handler.canRetry(undefined)).toThrow(TypeError);
       expect(() => handler.resetAttempts(-1)).toThrow(TypeError);
       expect(() => handler.getEpicLogs(1.5)).toThrow(TypeError);
+      expect(() => handler.getAttemptCount(1n)).toThrow('got: 1');
     });
 
     it('should clear all state', async () => {
