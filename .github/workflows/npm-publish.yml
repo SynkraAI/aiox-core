@@ -59,7 +59,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: npm run test:ci
 
       - name: Run security audit
         # Note: Using critical level because high vulns are in dev deps (semantic-release, mocha)
