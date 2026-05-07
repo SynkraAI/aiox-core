@@ -214,7 +214,12 @@ function validatePackageJson(pkg) {
   const filesArray = pkg.files || [];
 
   for (const entry of REQUIRED_FILES_ENTRIES) {
-    const found = filesArray.some((f) => f === entry || f.startsWith(entry));
+    const found = filesArray.some((f) => {
+      if (entry.endsWith('/')) {
+        return f === entry || f.startsWith(entry);
+      }
+      return f === entry;
+    });
     check(
       `files[] includes "${entry}"`,
       found,
