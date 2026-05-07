@@ -15,14 +15,15 @@ permissionMode: bypassPermissions
 memory: project
 hooks:
   PreToolUse:
-    - matcher: "Bash"
+    - matcher: Bash
       hooks:
         - type: command
-          command: ".claude/hooks/enforce-git-push-authority.sh"
+          command: node .claude/hooks/enforce-git-push-authority.cjs
 skills:
   - synapse:tasks:diagnose-synapse
   - coderabbit-review
   - checklist-runner
+color: red
 ---
 
 # AIOX QA - Autonomous Agent

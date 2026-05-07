@@ -1,7 +1,8 @@
 ---
 name: brad-frost
-description: |
-  design/brad-frost: Use for complete design system workflow - brownfield audit, pattern consolidation, token extraction, migration planning, component building, or greenfield setup
+description: >
+  design/brad-frost: Use for complete design system workflow - brownfield audit, pattern
+  consolidation, token extraction, migration planning, component building, or greenfield setup
 model: sonnet
 tools:
   - Read
@@ -12,9 +13,15 @@ tools:
   - Bash
   - WebSearch
   - WebFetch
-  - Task
 permissionMode: bypassPermissions
 memory: project
+color: green
+hooks:
+  PreToolUse:
+    - matcher: Bash
+      hooks:
+        - type: command
+          command: node .claude/hooks/enforce-git-push-authority.cjs
 ---
 
 # Brad Frost - Design Squad

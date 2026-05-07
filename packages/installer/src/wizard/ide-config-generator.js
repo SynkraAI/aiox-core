@@ -548,6 +548,16 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
         // For Claude Code, also copy .claude/rules folder, hooks, and settings
         if (ideKey === 'claude-code') {
+          spinner.start('Copying Claude Code native subagents...');
+          const nativeAgentFiles = await copyClaudeNativeAgentsFolder(projectRoot);
+          createdFiles.push(...nativeAgentFiles);
+          if (nativeAgentFiles.length > 0) {
+            createdFolders.push(path.join(projectRoot, ide.nativeAgentFolder || '.claude/agents'));
+            spinner.succeed(`Copied ${nativeAgentFiles.length} native subagent file(s) to .claude/agents`);
+          } else {
+            spinner.info('No native subagent files to copy');
+          }
+
           spinner.start('Copying Claude Code rules...');
           const rulesFiles = await copyClaudeRulesFolder(projectRoot);
           createdFiles.push(...rulesFiles);
@@ -700,6 +710,7 @@ async function copyClaudeHooksFolder(projectRoot, wizardState = {}) {
   const HOOKS_FREE = [
     'synapse-engine.cjs',
     'code-intel-pretool.cjs',
+    'enforce-git-push-authority.cjs',
     'README.md',
   ];
   const HOOKS_PRO_ONLY = [
@@ -773,6 +784,11 @@ const HOOK_EVENT_MAP = {
     matcher: 'Write|Edit',
     timeout: 10,
   },
+  'enforce-git-push-authority.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Bash',
+    timeout: 10,
+  },
   'precompact-session-digest.cjs': {
     event: 'PreCompact',
     matcher: null,
@@ -786,6 +802,43 @@ const DEFAULT_HOOK_CONFIG = {
   matcher: null,
   timeout: 10,
 };
+
+async function copyClaudeNativeAgentsFolder(projectRoot) {
+  const sourceDir = resolveAioxCorePath('.claude', 'agents');
+  const targetDir = path.join(projectRoot, '.claude', 'agents');
+  const copiedFiles = [];
+
+  if (!await fs.pathExists(sourceDir)) {
+    return copiedFiles;
+  }
+
+  // Framework-dev mode: source and destination are the same checkout.
+  if (path.resolve(sourceDir) === path.resolve(targetDir)) {
+    return copiedFiles;
+  }
+
+  await fs.ensureDir(targetDir);
+
+  const files = await fs.readdir(sourceDir);
+  const agentFiles = files.filter(file =>
+    file.endsWith('.md') &&
+    !file.includes('.backup') &&
+    !file.startsWith('test-'),
+  );
+
+  for (const file of agentFiles) {
+    const sourcePath = path.join(sourceDir, file);
+    const targetPath = path.join(targetDir, file);
+    const stat = await fs.stat(sourcePath);
+
+    if (stat.isFile()) {
+      await fs.copy(sourcePath, targetPath, { overwrite: true });
+      copiedFiles.push(targetPath);
+    }
+  }
+
+  return copiedFiles;
+}
 
 /**
  * BUG-4 fix (INS-1) + MIS-3.1: Create .claude/settings.local.json with hook registration
@@ -1256,6 +1309,7 @@ module.exports = {
   promptFileExists,
   generateTemplateVariables,
   copyClaudeHooksFolder,
+  copyClaudeNativeAgentsFolder,
   shouldCopyProHooks,
   createClaudeSettingsLocal,
   copySkillFiles,

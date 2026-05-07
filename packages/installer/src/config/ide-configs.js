@@ -43,6 +43,7 @@ const IDE_CONFIGS = {
     format: 'text',
     recommended: true,
     agentFolder: path.join('.claude', 'commands', 'AIOX', 'agents'),
+    nativeAgentFolder: path.join('.claude', 'agents'),
   },
   codex: {
     name: 'Codex CLI',

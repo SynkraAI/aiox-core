@@ -15,6 +15,13 @@ tools:
   - WebFetch
 permissionMode: bypassPermissions
 memory: project
+color: pink
+hooks:
+  PreToolUse:
+    - matcher: Bash
+      hooks:
+        - type: command
+          command: node .claude/hooks/enforce-git-push-authority.cjs
 ---
 
 # Story Chief - Autonomous Agent

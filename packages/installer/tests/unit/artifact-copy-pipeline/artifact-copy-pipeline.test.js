@@ -190,6 +190,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         expect(fileNames).toEqual(expectedAvailableHooks(
           'README.md',
           'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
           'synapse-engine.cjs',
         ));
 
@@ -198,8 +199,12 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
 
         expect(settings.hooks.UserPromptSubmit).toHaveLength(1);
-        if (fileNames.includes('code-intel-pretool.cjs')) {
-          expect(settings.hooks.PreToolUse).toHaveLength(1);
+        const preToolUseHookCount = [
+          'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
+        ].filter(file => fileNames.includes(file)).length;
+        if (preToolUseHookCount > 0) {
+          expect(settings.hooks.PreToolUse).toHaveLength(preToolUseHookCount);
         } else {
           expect(settings.hooks.PreToolUse).toBeUndefined();
         }
@@ -219,6 +224,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         expect(fileNames).toEqual(expectedAvailableHooks(
           'README.md',
           'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
           'precompact-session-digest.cjs',
           'synapse-engine.cjs',
         ));
@@ -228,8 +234,12 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
 
         expect(settings.hooks.UserPromptSubmit).toHaveLength(1);
-        if (fileNames.includes('code-intel-pretool.cjs')) {
-          expect(settings.hooks.PreToolUse).toHaveLength(1);
+        const preToolUseHookCount = [
+          'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
+        ].filter(file => fileNames.includes(file)).length;
+        if (preToolUseHookCount > 0) {
+          expect(settings.hooks.PreToolUse).toHaveLength(preToolUseHookCount);
         } else {
           expect(settings.hooks.PreToolUse).toBeUndefined();
         }
@@ -268,6 +278,14 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
       expect(config.timeout).toBe(10);
     });
 
+    test('maps enforce-git-push-authority.cjs to PreToolUse with Bash matcher', () => {
+      const config = HOOK_EVENT_MAP['enforce-git-push-authority.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('PreToolUse');
+      expect(config.matcher).toBe('Bash');
+      expect(config.timeout).toBe(10);
+    });
+
     test('maps precompact-session-digest.cjs to PreCompact', () => {
       const config = HOOK_EVENT_MAP['precompact-session-digest.cjs'];
       expect(config).toBeDefined();
@@ -276,11 +294,12 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
       expect(config.timeout).toBe(10);
     });
 
-    test('covers all 3 known hooks', () => {
+    test('covers all 4 known hooks', () => {
       const keys = Object.keys(HOOK_EVENT_MAP);
-      expect(keys).toHaveLength(3);
+      expect(keys).toHaveLength(4);
       expect(keys).toContain('synapse-engine.cjs');
       expect(keys).toContain('code-intel-pretool.cjs');
+      expect(keys).toContain('enforce-git-push-authority.cjs');
       expect(keys).toContain('precompact-session-digest.cjs');
     });
 

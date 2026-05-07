@@ -1,7 +1,8 @@
 ---
 name: dave-malouf
-description: |
-  design/dave-malouf: Use for DesignOps - maturity assessment, process optimization, metrics setup, team scaling, tooling audit, triage, review orchestration
+description: >
+  design/dave-malouf: Use for DesignOps - maturity assessment, process optimization, metrics setup,
+  team scaling, tooling audit, triage, review orchestration
 model: sonnet
 tools:
   - Read
@@ -14,6 +15,13 @@ tools:
   - WebFetch
 permissionMode: bypassPermissions
 memory: project
+color: purple
+hooks:
+  PreToolUse:
+    - matcher: Bash
+      hooks:
+        - type: command
+          command: node .claude/hooks/enforce-git-push-authority.cjs
 ---
 
 # Dave Malouf - Design Squad
