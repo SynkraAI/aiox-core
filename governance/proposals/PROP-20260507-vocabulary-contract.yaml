@@ -66,9 +66,9 @@ framework_proposal:
       visible in stderr + QA gates check PR descriptions for dictionary references.
 
   approval:
-    eliel_decision: "PENDING"
-    eliel_decision_at: null
-    eliel_decision_rationale: ""
+    eliel_decision: "APPROVED"
+    eliel_decision_at: "2026-05-07T19:15:00Z"
+    eliel_decision_rationale: "Aditivo, baixo risco, fecha gap do Akita (Article VII anti-vibecoding). Previne re-ocorrência da falha Wave 1.A em epics futuros. Custo 3-4h compensado pelo savings recorrente em qualquer projeto AIOX que toque domain enums."
     revision_request: []
 
   implementation:

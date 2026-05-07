@@ -65,9 +65,9 @@ framework_proposal:
       iterative tuning after rollout.
 
   approval:
-    eliel_decision: "PENDING"
-    eliel_decision_at: null
-    eliel_decision_rationale: ""
+    eliel_decision: "APPROVED"
+    eliel_decision_at: "2026-05-07T19:15:00Z"
+    eliel_decision_rationale: "Fecha gap declarado de integração de squads (voice-clones, claude-code-mastery, audience-engine, db-inventory). Advisory-only mitiga risco de false-positives. ROI alto: 30-50% token savings em sessões multi-domínio compostam ao longo do tempo. Ordem natural: implementar APÓS vocabulary-contract para que routing matrix referencie a Article VII recém-formalizada."
     revision_request: []
 
   implementation:
