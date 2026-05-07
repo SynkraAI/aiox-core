@@ -228,37 +228,30 @@ describe('Recovery Handler (Story 0.5)', () => {
       expect(handler.getAttemptHistory()[3][0].approach).toBe('custom approach');
     });
 
-    it('should return sanitized attempt history when JSON cloning would lose data', async () => {
-      const originalStructuredClone = global.structuredClone;
-      global.structuredClone = undefined;
-
+    it('should return data-only attempt history for non-JSON context values', async () => {
       const circular = {};
       circular.self = circular;
 
-      try {
-        await handler.handleEpicFailure(3, new Error('Specific error'), {
-          circular,
-          error: new Error('Context failure'),
-          map: new Map([['attempt', 1n]]),
-          maybe: undefined,
-          set: new Set([2n]),
-        });
+      await handler.handleEpicFailure(3, new Error('Specific error'), {
+        circular,
+        error: new Error('Context failure'),
+        map: new Map([['attempt', 1n]]),
+        maybe: undefined,
+        set: new Set([2n]),
+      });
 
-        const history = handler.getAttemptHistory();
-        const context = history['3'][0].context;
+      const history = handler.getAttemptHistory();
+      const context = history['3'][0].context;
 
-        expect(context.circular.self).toBe('[Circular]');
-        expect(context.error).toMatchObject({
-          name: 'Error',
-          message: 'Context failure',
-        });
-        expect(context.map).toEqual([['attempt', '1']]);
-        expect(Object.prototype.hasOwnProperty.call(context, 'maybe')).toBe(true);
-        expect(context.maybe).toBeUndefined();
-        expect(context.set).toEqual(['2']);
-      } finally {
-        global.structuredClone = originalStructuredClone;
-      }
+      expect(context.circular.self).toBe('[Circular]');
+      expect(context.error).toMatchObject({
+        name: 'Error',
+        message: 'Context failure',
+      });
+      expect(context.map).toEqual([['attempt', '1']]);
+      expect(Object.prototype.hasOwnProperty.call(context, 'maybe')).toBe(true);
+      expect(context.maybe).toBeUndefined();
+      expect(context.set).toEqual(['2']);
     });
 
     it('should get logs for specific epic', async () => {

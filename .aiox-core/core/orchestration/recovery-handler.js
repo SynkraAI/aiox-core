@@ -692,9 +692,12 @@ class RecoveryHandler extends EventEmitter {
   /**
    * Gets attempt history for all epics.
    *
-   * Returns cloned attempt arrays to prevent callers from mutating internal
+   * Returns deep-cloned attempt arrays to prevent callers from mutating internal
    * recovery state. Epic number keys are stringified because JavaScript object
-   * keys are strings.
+   * keys are strings. Reference equality with internal state is intentionally
+   * not preserved. Attempt records are normalized through _cloneAttempt as
+   * data-only objects, so Error, Map, Set, BigInt, and circular context values
+   * are represented with stable serializable shapes.
    *
    * @returns {Object<string, Array>} Map of stringified epic numbers to attempt records.
    */
@@ -733,6 +736,8 @@ class RecoveryHandler extends EventEmitter {
    * }
    */
   canRetry(epicNum) {
+    this._assertValidEpicNum(epicNum);
+
     return this.getAttemptCount(epicNum) < this.maxRetries;
   }
 
@@ -769,74 +774,15 @@ class RecoveryHandler extends EventEmitter {
   /**
    * Clones an attempt record for safe external access.
    *
-   * Uses structuredClone when available, falls back to JSON for simple data, and
-   * returns a sanitized data-only representation for non-serializable context.
+   * Always returns a sanitized data-only representation so callers observe the
+   * same output shape across Node versions and runtime clone capabilities.
    *
    * @param {Object} attempt - Attempt record.
    * @returns {Object} Cloned attempt record.
    * @private
    */
   _cloneAttempt(attempt) {
-    if (typeof structuredClone === 'function') {
-      try {
-        return structuredClone(attempt);
-      } catch (error) {
-        // Fall through to serializable/sanitized fallback for unsupported values.
-      }
-    }
-
-    if (!this._requiresSanitizedClone(attempt)) {
-      try {
-        return JSON.parse(JSON.stringify(attempt));
-      } catch (error) {
-        // Fall through to sanitized fallback if JSON cloning unexpectedly fails.
-      }
-    }
-
     return this._sanitizeValue(attempt);
-  }
-
-  /**
-   * Checks if JSON cloning would lose data or throw for a value.
-   *
-   * @param {*} value - Value to inspect.
-   * @param {WeakSet<object>} [seen=new WeakSet()] - Objects in the current path.
-   * @returns {boolean} True when the value needs the sanitizer fallback.
-   * @private
-   */
-  _requiresSanitizedClone(value, seen = new WeakSet()) {
-    if (value === undefined) {
-      return true;
-    }
-
-    const valueType = typeof value;
-
-    if (valueType === 'bigint' || valueType === 'function' || valueType === 'symbol') {
-      return true;
-    }
-
-    if (value === null || valueType !== 'object') {
-      return false;
-    }
-
-    if (value instanceof Error || value instanceof Map || value instanceof Set) {
-      return true;
-    }
-
-    if (seen.has(value)) {
-      return true;
-    }
-
-    seen.add(value);
-
-    try {
-      const childValues = Array.isArray(value) ? value : Object.values(value);
-      return childValues.some((childValue) => this._requiresSanitizedClone(childValue, seen));
-    } catch (error) {
-      return true;
-    } finally {
-      seen.delete(value);
-    }
   }
 
   /**
