@@ -15,6 +15,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 const { hashFileAsync, hashFilesMatchAsync } = require('../installer/file-hasher');
+const { ensureProjectNodeModulesLink } = require('../installer/aiox-core-installer');
 
 /**
  * Directories excluded from scaffolding (private/internal squads).
@@ -70,6 +71,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
     errors: [],
     manifest: null,
     versionInfo: null,
+    dependencyResolution: null,
   };
 
   // Track files for rollback on partial failure
@@ -152,6 +154,24 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
           message: `${commandsResult.installed} squad agent commands installed`,
         });
       }
+    }
+
+    const dependencyResolution = await ensureProjectNodeModulesLink({ targetDir });
+    result.dependencyResolution = dependencyResolution;
+    if (dependencyResolution.linked) {
+      rollbackFiles.push(dependencyResolution.path);
+    }
+    if (dependencyResolution.linked && onProgress) {
+      onProgress({
+        item: 'squad-dependencies',
+        status: 'done',
+        message: 'Squad dependency resolution linked',
+      });
+    } else if (!dependencyResolution.success) {
+      result.warnings.push(
+        `Squad dependency resolution not linked: ${dependencyResolution.reason}` +
+          (dependencyResolution.error ? ` (${dependencyResolution.error})` : '')
+      );
     }
 
     // Generate pro-version.json (AC4)

@@ -207,6 +207,32 @@ describe('scaffoldProContent', () => {
     expect(progress.length).toBeGreaterThan(0);
     expect(progress.some(p => p.status === 'done')).toBe(true);
   });
+
+  it('should link framework dependencies so copied squad scripts resolve js-yaml', async () => {
+    await fs.ensureDir(path.join(targetDir, '.aiox-core', 'node_modules', 'js-yaml'));
+    await fs.writeFile(
+      path.join(targetDir, '.aiox-core', 'node_modules', 'js-yaml', 'index.js'),
+      'module.exports = { ok: true };\n',
+    );
+    await fs.ensureDir(path.join(proSourceDir, 'squads', 'devops-squad', 'scripts'));
+    await fs.writeFile(
+      path.join(proSourceDir, 'squads', 'devops-squad', 'scripts', 'uses-yaml.js'),
+      "require('js-yaml');\n",
+    );
+
+    const result = await scaffoldProContent(targetDir, proSourceDir);
+
+    expect(result.success).toBe(true);
+    expect(result.dependencyResolution.linked).toBe(true);
+    expect(await fs.realpath(path.join(targetDir, 'node_modules'))).toBe(
+      await fs.realpath(path.join(targetDir, '.aiox-core', 'node_modules')),
+    );
+
+    const resolved = require.resolve('js-yaml', {
+      paths: [path.join(targetDir, 'squads', 'devops-squad', 'scripts')],
+    });
+    expect(resolved).toContain(path.join('js-yaml', 'index.js'));
+  });
 });
 
 describe('rollbackScaffold', () => {

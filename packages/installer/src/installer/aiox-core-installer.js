@@ -467,6 +467,69 @@ async function hasPackageJson(targetDir = process.cwd()) {
 }
 
 /**
+ * Link project-level node_modules to the framework dependency install when the
+ * project has no node_modules of its own. This lets root-level squad scripts
+ * resolve framework dependencies such as js-yaml after Pro scaffolding.
+ *
+ * @param {Object} options - Options
+ * @param {string} [options.targetDir=process.cwd()] - Project root directory
+ * @param {string} [options.targetAioxCore] - Installed .aiox-core directory
+ * @returns {Promise<Object>} Link result
+ */
+async function ensureProjectNodeModulesLink(options = {}) {
+  const {
+    targetDir = process.cwd(),
+    targetAioxCore = path.join(targetDir, '.aiox-core'),
+  } = options;
+
+  const projectNodeModules = path.join(targetDir, 'node_modules');
+  const frameworkNodeModules = path.join(targetAioxCore, 'node_modules');
+
+  if (await fs.pathExists(projectNodeModules)) {
+    return {
+      success: true,
+      linked: false,
+      reason: 'project-node-modules-exists',
+      path: projectNodeModules,
+    };
+  }
+
+  if (!(await fs.pathExists(frameworkNodeModules))) {
+    return {
+      success: false,
+      linked: false,
+      reason: 'framework-node-modules-missing',
+      path: projectNodeModules,
+      target: frameworkNodeModules,
+    };
+  }
+
+  const linkTarget = process.platform === 'win32'
+    ? frameworkNodeModules
+    : path.relative(targetDir, frameworkNodeModules) || frameworkNodeModules;
+  const linkType = process.platform === 'win32' ? 'junction' : 'dir';
+
+  try {
+    await fs.symlink(linkTarget, projectNodeModules, linkType);
+    return {
+      success: true,
+      linked: true,
+      path: projectNodeModules,
+      target: frameworkNodeModules,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      linked: false,
+      reason: 'link-failed',
+      path: projectNodeModules,
+      target: frameworkNodeModules,
+      error: error.message,
+    };
+  }
+}
+
+/**
  * Create a basic package.json for AIOX projects
  * @param {Object} options - Options
  * @param {string} [options.targetDir=process.cwd()] - Target directory
@@ -515,6 +578,7 @@ function sanitizePackageName(name) {
 module.exports = {
   installAioxCore,
   hasPackageJson,
+  ensureProjectNodeModulesLink,
   createBasicPackageJson,
   getAioxCoreSourcePath,
   copyFileWithRootReplacement,

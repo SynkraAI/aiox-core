@@ -518,6 +518,26 @@ async function main() {
         chalk.gray('(11 agents, 68 tasks, 23 templates)')
     );
 
+    // Ensure root squad scripts can resolve framework dependencies.
+    const projectNodeModules = path.join(context.projectRoot, 'node_modules');
+    const frameworkNodeModules = path.join(targetCoreDir, 'node_modules');
+    if (!fs.existsSync(projectNodeModules) && fs.existsSync(frameworkNodeModules)) {
+      try {
+        const linkTarget = process.platform === 'win32'
+          ? frameworkNodeModules
+          : path.relative(context.projectRoot, frameworkNodeModules);
+        const linkType = process.platform === 'win32' ? 'junction' : 'dir';
+        await fse.symlink(linkTarget || frameworkNodeModules, projectNodeModules, linkType);
+        console.log(chalk.green('✓') + ' node_modules linked to .aiox-core/node_modules');
+      } catch (symlinkError) {
+        console.log(
+          chalk.yellow('⚠') +
+            ' Could not create node_modules symlink: ' +
+            symlinkError.message
+        );
+      }
+    }
+
     // Create installed manifest for brownfield upgrades (Story 6.18)
     if (brownfieldUpgrader) {
       try {
