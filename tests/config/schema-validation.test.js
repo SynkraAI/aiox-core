@@ -119,6 +119,10 @@ describe('schema-validation — enriched schemas', () => {
       expect(schema.properties.external_executors.properties.default_sandbox.enum).toContain('full-auto');
 
       expect(frameworkConfig.dev.execution_mode).toBe('native');
+      expect(frameworkConfig.dev.fast_path.enabled).toBe(true);
+      expect(frameworkConfig.dev.fast_path.min_confidence).toBe(0.58);
+      expect(frameworkConfig.dev.fast_path.min_batch_items).toBe(3);
+      expect(frameworkConfig.dev.fast_path.external_executor_threshold).toBe(0.78);
       expect(frameworkConfig.external_executors.enabled).toBe(false);
       expect(frameworkConfig.external_executors.default_sandbox).toBe('workspace-write');
     });

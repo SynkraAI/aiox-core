@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T02:58:22.301Z"
+generated_at: "2026-05-08T03:56:46.901Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1109
+file_count: 1111
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -265,9 +265,9 @@ files:
     type: core
     size: 8156
   - path: core/config/schemas/framework-config.schema.json
-    hash: sha256:1becd882f8077e0f8c95ce1ca395b05bf03fa7a1726f67c0bc5fed0ae59c3f27
+    hash: sha256:f1cfea4db66373ce7624584e56558f35885407eec48ee93f9c14cc1fc9131af2
     type: core
-    size: 7463
+    size: 8288
   - path: core/config/schemas/local-config.schema.json
     hash: sha256:0349e44aea7b3dfe051ce586eb201f25edab8a7ea6d054704034f877848aa43f
     type: core
@@ -892,6 +892,10 @@ files:
     hash: sha256:21f66b6d59c67079bfd6f30dcb675bab60d8a3b6283c24246497d641beed1f57
     type: core
     size: 1945
+  - path: core/orchestration/fast-path-gate.js
+    hash: sha256:ecd04d15600bcbf1c717cfe5f1ac3ce38bdde30275fd38f7f48f96cf0757b249
+    type: core
+    size: 10211
   - path: core/orchestration/gate-evaluator.js
     hash: sha256:4e9e78745f937ee78b13704f3acdb45b19d4aab9bc0f17a5adaf5eecfc58e653
     type: core
@@ -905,9 +909,9 @@ files:
     type: core
     size: 35723
   - path: core/orchestration/index.js
-    hash: sha256:8baea00058c1dcae86328fff06b04c52cfad8ad9a77e3f49458f062609aa478a
+    hash: sha256:eaebc2df86ad8fdd91082c4b1f007f967b2de89eb1ac4e5902e3b46b2eb5b169
     type: core
-    size: 8835
+    size: 8966
   - path: core/orchestration/lock-manager.js
     hash: sha256:30af501b40da2a7bcfd591c62e367c5667eefd40af91d265c986521c93e7d1f2
     type: core
@@ -2112,6 +2116,10 @@ files:
     hash: sha256:c351428e7aa1af079046bbf357af98668675943fd13920b98b7ecfd9f87a6081
     type: task
     size: 13901
+  - path: development/tasks/fast-path-gate.md
+    hash: sha256:d28e2def9134ffe79e04ebcfa25de651d659471eab07367fa4c7992245f79fe2
+    type: task
+    size: 3632
   - path: development/tasks/generate-ai-frontend-prompt.md
     hash: sha256:d4c2abf28b065922f1e67c95fa2a69dd792c9828c6dd31d2fc173a5361b021aa
     type: task

@@ -97,6 +97,34 @@
           "type": "boolean",
           "description": "Require orchestrator review before story state mutation",
           "default": true
+        },
+        "fast_path": {
+          "type": "object",
+          "description": "Fast-path gate defaults for mechanical, batchable, or parallelizable tasks",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "min_confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.58
+            },
+            "min_batch_items": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 3
+            },
+            "external_executor_threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.78
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false

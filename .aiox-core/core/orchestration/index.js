@@ -23,6 +23,7 @@ const TechStackDetector = require('./tech-stack-detector');
 const ConditionEvaluator = require('./condition-evaluator');
 const SkillDispatcher = require('./skill-dispatcher');
 const executionProfileResolver = require('./execution-profile-resolver');
+const fastPathGate = require('./fast-path-gate');
 
 // Epic 0: Master Orchestrator (ADE)
 const MasterOrchestrator = require('./master-orchestrator');
@@ -162,6 +163,8 @@ module.exports = {
   SkillDispatcher,
   ExecutionProfileResolver: executionProfileResolver,
   resolveExecutionProfile: executionProfileResolver.resolveExecutionProfile,
+  FastPathGate: fastPathGate,
+  evaluateFastPath: fastPathGate.evaluateFastPath,
 
   // Epic 0: Orchestrator constants
   OrchestratorState: MasterOrchestrator.OrchestratorState,

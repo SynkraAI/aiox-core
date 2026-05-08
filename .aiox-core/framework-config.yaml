@@ -51,6 +51,11 @@ dev:
   execution_mode: native # native | delegate
   delegate_to: codex
   auto_review: true
+  fast_path:
+    enabled: true
+    min_confidence: 0.58
+    min_batch_items: 3
+    external_executor_threshold: 0.78
 
 external_executors:
   enabled: false
