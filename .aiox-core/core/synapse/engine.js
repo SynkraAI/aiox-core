@@ -180,10 +180,20 @@ const PIPELINE_TIMEOUT_MS = 100;
 const DEFAULT_ACTIVE_LAYERS = [0, 1, 2];
 const LEGACY_MODE = process.env.SYNAPSE_LEGACY_MODE === 'true';
 
+/**
+ * Safely read the last processing error exposed by a layer.
+ *
+ * @param {object} layer - Synapse layer instance.
+ * @returns {Error|null} Last layer error, or the accessor failure as an Error.
+ */
 function getLayerError(layer) {
   if (!layer) return null;
   if (typeof layer.getLastError === 'function') {
-    return layer.getLastError();
+    try {
+      return layer.getLastError();
+    } catch (error) {
+      return error instanceof Error ? error : new Error(String(error));
+    }
   }
   return null;
 }

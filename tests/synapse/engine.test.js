@@ -424,6 +424,22 @@ describe('SynapseEngine', () => {
       }));
       expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
     });
+
+    test('should record getLastError accessor failures in metrics', async () => {
+      const layer = engine.layers[0];
+      layer._safeProcess = jest.fn(() => null);
+      layer.getLastError = jest.fn(() => {
+        throw new Error('Last error unavailable');
+      });
+
+      const result = await engine.process('test', {});
+
+      expect(result.metrics.per_layer[layer.name]).toEqual(expect.objectContaining({
+        status: 'error',
+        error: 'Last error unavailable',
+      }));
+      expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
+    });
   });
 
   describe('process() — metrics', () => {
