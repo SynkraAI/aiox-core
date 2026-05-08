@@ -49,6 +49,7 @@ const EXTERNAL_TOOLS = new Set([
 ]);
 
 const DEPRECATED_PATTERNS = [/^old[-_]/, /^backup[-_]/, /deprecated/i, /^legacy[-_]/];
+const INDEX_RESOLUTION_EXTENSIONS = ['.js', '.mjs', '.ts', '.yaml', '.yml', '.md'];
 
 const SENTINEL_VALUES = new Set(['n/a', 'na', 'none', 'tbd', 'todo', '-', '']);
 
@@ -109,6 +110,42 @@ function resolveEntityId(filePath, config, existingEntities = {}, repoRoot = REP
   }
 
   return candidate;
+}
+
+function findScanConfigForPath(filePath, repoRoot = REPO_ROOT) {
+  const relPath = path.relative(repoRoot, filePath).replace(/\\/g, '/');
+  return SCAN_CONFIG.find((config) => {
+    const basePath = config.basePath.replace(/\\/g, '/').replace(/\/+$/, '');
+    return relPath === basePath || relPath.startsWith(`${basePath}/`);
+  }) || null;
+}
+
+function resolveRelativeDependencyId(refPath, currentFilePath) {
+  if (!currentFilePath || !(refPath.startsWith('.') || refPath.startsWith('/'))) {
+    return null;
+  }
+
+  const resolvedPath = path.resolve(path.dirname(currentFilePath), refPath);
+  const resolvedExt = path.extname(resolvedPath);
+
+  if (resolvedExt) {
+    if (path.basename(resolvedPath, resolvedExt) === 'index') {
+      const config = findScanConfigForPath(resolvedPath);
+      if (config) return toScopedEntityId(resolvedPath, config);
+    }
+    return path.basename(resolvedPath, resolvedExt);
+  }
+
+  for (const ext of INDEX_RESOLUTION_EXTENSIONS) {
+    const indexPath = path.join(resolvedPath, `index${ext}`);
+    if (fs.existsSync(indexPath)) {
+      const config = findScanConfigForPath(indexPath);
+      if (config) return toScopedEntityId(indexPath, config);
+      return path.basename(resolvedPath);
+    }
+  }
+
+  return path.basename(resolvedPath);
 }
 
 function extractKeywords(filePath, content) {
@@ -302,15 +339,16 @@ function extractMarkdownCrossReferences(content, entityId, verbose = false) {
   return [...deps];
 }
 
-function detectDependencies(content, entityId, verbose = false) {
+function detectDependencies(content, entityId, verbose = false, currentFilePath = null) {
   const deps = new Set();
 
   const requireMatches = content.matchAll(/require\s*\(\s*['"]([^'"]+)['"]\s*\)/g);
   for (const m of requireMatches) {
     const reqPath = m[1];
     if (reqPath.startsWith('.') || reqPath.startsWith('/')) {
-      const base = path.basename(reqPath, path.extname(reqPath));
-      if (base !== entityId) deps.add(base);
+      const dependencyId = resolveRelativeDependencyId(reqPath, currentFilePath)
+        || path.basename(reqPath, path.extname(reqPath));
+      if (dependencyId !== entityId) deps.add(dependencyId);
     }
   }
 
@@ -318,8 +356,9 @@ function detectDependencies(content, entityId, verbose = false) {
   for (const m of importMatches) {
     const impPath = m[1];
     if (impPath.startsWith('.') || impPath.startsWith('/')) {
-      const base = path.basename(impPath, path.extname(impPath));
-      if (base !== entityId) deps.add(base);
+      const dependencyId = resolveRelativeDependencyId(impPath, currentFilePath)
+        || path.basename(impPath, path.extname(impPath));
+      if (dependencyId !== entityId) deps.add(dependencyId);
     }
   }
 
@@ -371,7 +410,7 @@ function scanCategory(config, verbose = false) {
     const relPath = path.relative(REPO_ROOT, filePath).replace(/\\/g, '/');
     const keywords = extractKeywords(filePath, content);
     const purpose = extractPurpose(content, filePath);
-    const baseDeps = detectDependencies(content, entityId, verbose);
+    const baseDeps = detectDependencies(content, entityId, verbose, filePath);
 
     // Semantic YAML extraction for agents and workflows
     const yamlCategories = ['agents', 'workflows'];
@@ -677,6 +716,8 @@ module.exports = {
   extractEntityId,
   toScopedEntityId,
   resolveEntityId,
+  findScanConfigForPath,
+  resolveRelativeDependencyId,
   extractKeywords,
   extractPurpose,
   detectDependencies,

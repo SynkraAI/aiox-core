@@ -6,7 +6,7 @@
 |-------|-------|
 | Epic ID | AIOX-ERROR-GOVERNANCE |
 | Status | In Progress |
-| Source Issue | #701 |
+| Source Issue | #701, #621 |
 | Parent | #621 |
 | Priority | P1 |
 
@@ -35,4 +35,5 @@ silenciosas de hooks.
 
 | Story | Título | Status |
 |-------|--------|--------|
-| AIOX-ERROR.1 | Core Error Contract | Ready for Review |
+| AIOX-ERROR.1 | Core Error Contract | Done |
+| AIOX-ERROR.2 | Serialization-Sensitive Migration | Done |

@@ -163,6 +163,12 @@ describe('PipelineMetrics', () => {
     metrics.errorLayer('keyword', new Error('File not found'));
     expect(metrics.layers.keyword.status).toBe('error');
     expect(metrics.layers.keyword.error).toBe('File not found');
+    expect(metrics.layers.keyword.errorDetails).toEqual(expect.objectContaining({
+      name: 'AIOXError',
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      category: 'synapse',
+      stack: '[redacted]',
+    }));
   });
 
   test('errorLayer() should record duration if startLayer() was called', () => {
@@ -176,6 +182,41 @@ describe('PipelineMetrics', () => {
   test('errorLayer() should handle non-Error objects', () => {
     metrics.errorLayer('test', 'string error');
     expect(metrics.layers.test.error).toBe('string error');
+    expect(metrics.layers.test.errorDetails).toEqual(expect.objectContaining({
+      name: 'AIOXError',
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      message: 'string error',
+    }));
+  });
+
+  test('errorLayer() should preserve canonical metadata without changing legacy message', () => {
+    const error = new TypeError('Layer typed failure');
+    error.layerPhase = 'parse';
+
+    metrics.errorLayer('workflow', error);
+
+    expect(metrics.layers.workflow.error).toBe('Layer typed failure');
+    expect(metrics.layers.workflow.errorDetails).toEqual(expect.objectContaining({
+      name: 'AIOXError',
+      message: 'Layer typed failure',
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      category: 'synapse',
+      metadata: expect.objectContaining({
+        synapse: { layer: 'workflow' },
+        originalError: expect.objectContaining({
+          name: 'TypeError',
+          properties: expect.objectContaining({
+            layerPhase: 'parse',
+          }),
+        }),
+      }),
+      cause: expect.objectContaining({
+        name: 'TypeError',
+        message: 'Layer typed failure',
+        stack: '[redacted]',
+        layerPhase: 'parse',
+      }),
+    }));
   });
 
   test('getSummary() should return correct totals', () => {

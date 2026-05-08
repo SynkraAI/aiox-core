@@ -188,7 +188,7 @@ describe('RegistryUpdater', () => {
       expect(entity.keywords).toEqual(expect.arrayContaining(['deploy', 'automation']));
     });
 
-    it('detects dependencies from require statements', async () => {
+    it('classifies unresolved require dependencies as planned dependencies', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aiox-core/development/scripts/consumer.js',
@@ -200,7 +200,8 @@ describe('RegistryUpdater', () => {
       const registry = readRegistry();
       const entity = registry.entities.scripts.consumer;
       expect(entity).toBeDefined();
-      expect(entity.dependencies).toContain('helper');
+      expect(entity.dependencies).not.toContain('helper');
+      expect(entity.plannedDeps).toContain('helper');
     });
 
     it('creates category if it does not exist', async () => {

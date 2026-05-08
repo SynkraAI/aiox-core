@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T10:11:41.844Z"
+generated_at: "2026-05-08T14:35:03.596Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1117
 files:
@@ -433,9 +433,9 @@ files:
     type: core
     size: 33071
   - path: core/execution/build-state-manager.js
-    hash: sha256:7a6127abb4cd23b83563e55065b6a4771764972d40d87ba08117ee8c0c48980e
+    hash: sha256:02bafb4a29e7f769ae775fbc4e571ad34882569665f61ebc28eb87f7043eafc8
     type: core
-    size: 54015
+    size: 53043
   - path: core/execution/context-injector.js
     hash: sha256:7654f6e6c3d555f3963369e71edf84b15c0fdec53bd161800b71782f78275244
     type: core
@@ -777,9 +777,9 @@ files:
     type: core
     size: 8096
   - path: core/ids/registry-updater.js
-    hash: sha256:ed794ec39dc294567814693033dccf43669b177500c215fb70d6c3fc5b691527
+    hash: sha256:00ae2e78486a9e7b3c8bf8e9ca0e9e955211ee4ae795c630e7f2934840d5596d
     type: core
-    size: 24686
+    size: 27005
   - path: core/ids/verification-gate.js
     hash: sha256:96050661c90fa52bfc755911d02c9194ec35c00e71fc6bbc92a13686dd53bb91
     type: core
@@ -1153,9 +1153,9 @@ files:
     type: core
     size: 8122
   - path: core/synapse/engine.js
-    hash: sha256:cd26f9a88527744fa4984fc006c428563d6a1ef023a9feb2dd8da073b4e70b9f
+    hash: sha256:1b65523b2fec6a44ab380298c4d98f0569209dec8b50be3922479ffcd6548df0
     type: core
-    size: 14362
+    size: 14631
   - path: core/synapse/layers/l0-constitution.js
     hash: sha256:2123a6a44915aaac2a6bbd26c67c285c9d1e12b50fe42a8ada668306b07d1c4a
     type: core
@@ -1265,9 +1265,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:749b0ef51090a7787772dc9b07e604e6ff3403e32d1d59cf04a2229d68801543
+    hash: sha256:9f68c1c624f34243acbd1205cde7989d58aeefc71692f17ea3c92afa9e69877a
     type: data
-    size: 525678
+    size: 526494
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1633,9 +1633,9 @@ files:
     type: script
     size: 23410
   - path: development/scripts/populate-entity-registry.js
-    hash: sha256:31c29851e506246818f17564e7e67d82c1cc52e6108b40cd740e0415a96cdc77
+    hash: sha256:418fcbf6ca3a6259f8d13e3290e8e49d6a16917b304039a6470264c5fdece89e
     type: script
-    size: 23451
+    size: 25077
   - path: development/scripts/refactoring-suggester.js
     hash: sha256:d50ea6b609c9cf8385979386fee4b4385d11ebcde15460260f66d04c705f6cd9
     type: script

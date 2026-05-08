@@ -23,6 +23,11 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const {
+  normalizeError,
+  sanitizeValue: sanitizeErrorValue,
+  serializeError,
+} = require('../errors');
 
 // Optional dependencies with graceful fallback
 let chalk;
@@ -95,95 +100,9 @@ const NotificationType = {
  * @returns {*} Data-only representation that JSON.stringify can serialize.
  */
 function sanitizeLogValue(value, seen = new WeakSet()) {
-  if (value === undefined || value === null) {
-    return value;
-  }
-
-  const valueType = typeof value;
-
-  if (valueType === 'bigint') {
-    return value.toString();
-  }
-
-  if (valueType === 'function' || valueType === 'symbol') {
-    return String(value);
-  }
-
-  if (valueType !== 'object') {
-    return value;
-  }
-
-  if (seen.has(value)) {
-    return '[Circular]';
-  }
-
-  if (value instanceof Date) {
-    return Number.isNaN(value.getTime()) ? value.toString() : value.toISOString();
-  }
-
-  if (value instanceof RegExp) {
-    return value.toString();
-  }
-
-  if (value instanceof Error) {
-    const safeError = {
-      name: value.name,
-      message: value.message,
-      stack: shouldExposeLogErrorStack() ? value.stack : '[redacted]',
-    };
-
-    seen.add(value);
-
-    try {
-      Object.getOwnPropertyNames(value).forEach((key) => {
-        if (key === 'name' || key === 'message' || key === 'stack') {
-          return;
-        }
-
-        try {
-          safeError[key] = sanitizeLogValue(value[key], seen);
-        } catch (error) {
-          safeError[key] = `[Unserializable: ${error.message}]`;
-        }
-      });
-
-      return safeError;
-    } finally {
-      seen.delete(value);
-    }
-  }
-
-  seen.add(value);
-
-  try {
-    if (value instanceof Map) {
-      return Array.from(value.entries()).map(([key, entryValue]) => [
-        sanitizeLogValue(key, seen),
-        sanitizeLogValue(entryValue, seen),
-      ]);
-    }
-
-    if (value instanceof Set) {
-      return Array.from(value.values()).map((entryValue) => sanitizeLogValue(entryValue, seen));
-    }
-
-    if (Array.isArray(value)) {
-      return value.map((entryValue) => sanitizeLogValue(entryValue, seen));
-    }
-
-    return Object.keys(value).reduce((safeValue, key) => {
-      try {
-        safeValue[key] = sanitizeLogValue(value[key], seen);
-      } catch (error) {
-        safeValue[key] = `[Unserializable: ${error.message}]`;
-      }
-      return safeValue;
-    }, {});
-  } catch (error) {
-    return `[Unserializable: ${error.message}]`;
-  } finally {
-    seen.delete(value);
-  }
+  return sanitizeErrorValue(value, seen, {
+    includeStack: shouldExposeLogErrorStack(),
+  });
 }
 
 /**
@@ -208,6 +127,29 @@ function stringifyLogDetails(value) {
   } catch (error) {
     return JSON.stringify(`[Unserializable: ${error.message}]`);
   }
+}
+
+/**
+ * Normalize a failed build attempt into legacy message plus canonical details.
+ *
+ * @param {*} error - Raw failure error/value.
+ * @param {object} context - Build/subtask context for metadata.
+ * @returns {{ message: string, details: object }} Normalized failure payload.
+ */
+function normalizeFailureError(error, context = {}) {
+  const normalized = normalizeError(error || 'Unknown error', {
+    code: 'AIOX_EXECUTION_FAILED',
+    metadata: {
+      buildState: context,
+    },
+  });
+
+  return {
+    message: normalized.message,
+    details: serializeError(normalized, {
+      includeStack: shouldExposeLogErrorStack(),
+    }),
+  };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -930,12 +872,21 @@ class BuildStateManager {
       throw new Error('No state loaded');
     }
 
+    const attempt =
+      options.attempt ||
+      this._state.failedAttempts.filter((f) => f.subtaskId === subtaskId).length + 1;
+
+    const normalizedFailure = normalizeFailureError(options.error, {
+      storyId: this.storyId,
+      subtaskId,
+      attempt,
+    });
+
     const failure = {
       subtaskId,
-      attempt:
-        options.attempt ||
-        this._state.failedAttempts.filter((f) => f.subtaskId === subtaskId).length + 1,
-      error: options.error || 'Unknown error',
+      attempt,
+      error: normalizedFailure.message,
+      errorDetails: normalizedFailure.details,
       timestamp: new Date().toISOString(),
       approach: options.approach || null,
       duration: options.duration || null,
@@ -957,6 +908,7 @@ class BuildStateManager {
     this._logAttempt(subtaskId, 'failure', {
       attempt: failure.attempt,
       error: failure.error,
+      errorDetails: failure.errorDetails,
       isStuck: isStuck.stuck,
     });
 

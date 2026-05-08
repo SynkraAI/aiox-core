@@ -501,10 +501,59 @@ describe('BuildStateManager', () => {
 
       expect(result.failure.subtaskId).toBe('1.1');
       expect(result.failure.error).toBe('Test error');
+      expect(result.failure.errorDetails).toEqual(expect.objectContaining({
+        name: 'AIOXError',
+        code: 'AIOX_EXECUTION_FAILED',
+        stack: '[redacted]',
+      }));
 
       const state = manager.getState();
       expect(state.failedAttempts).toHaveLength(1);
       expect(state.metrics.totalFailures).toBe(1);
+    });
+
+    test('should preserve structured failure metadata for Error inputs', () => {
+      const cause = new Error('root cause');
+      const error = new TypeError('Typed failure');
+      error.cause = cause;
+      error.exitCode = 2;
+
+      const result = manager.recordFailure('1.structured', {
+        error,
+        attempt: 1,
+      });
+
+      expect(result.failure.error).toBe('Typed failure');
+      expect(result.failure.errorDetails).toEqual(expect.objectContaining({
+        name: 'AIOXError',
+        message: 'Typed failure',
+        code: 'AIOX_EXECUTION_FAILED',
+        category: 'execution',
+        stack: '[redacted]',
+        metadata: expect.objectContaining({
+          buildState: expect.objectContaining({
+            storyId: testStoryId,
+            subtaskId: '1.structured',
+            attempt: 1,
+          }),
+          originalError: expect.objectContaining({
+            name: 'TypeError',
+            properties: expect.objectContaining({
+              exitCode: 2,
+            }),
+          }),
+        }),
+        cause: expect.objectContaining({
+          name: 'TypeError',
+          message: 'Typed failure',
+          stack: '[redacted]',
+          cause: expect.objectContaining({
+            name: 'Error',
+            message: 'root cause',
+            stack: '[redacted]',
+          }),
+        }),
+      }));
     });
 
     test('should track multiple failures', () => {
@@ -623,6 +672,7 @@ describe('BuildStateManager', () => {
       expect(content).toContain('"name":"TypeError"');
       expect(content).toContain('"message":"boom"');
       expect(content).toContain('"stack":"[redacted]"');
+      expect(content).toContain('"cause":{"name":"Error","message":"nested cause","stack":"[redacted]"}');
       expect(content).toContain('[["attempt","3"]]');
       expect(content).toContain('"set":["2"]');
       expect(content).toMatch(/"callback":"[^"]*ignored[^"]*"/);

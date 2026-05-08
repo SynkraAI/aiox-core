@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { normalizeError, serializeError } = require('../errors');
 
 const {
   estimateContextPercent,
@@ -131,10 +132,20 @@ class PipelineMetrics {
       existing.end = endTime;
       existing.duration = Number(endTime - existing.start) / 1e6;
     }
+    const normalizedError = normalizeError(error, {
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      metadata: {
+        synapse: {
+          layer: name,
+        },
+      },
+    });
+
     this.layers[name] = {
       ...existing,
       status: 'error',
-      error: error && error.message ? error.message : String(error),
+      error: normalizedError.message,
+      errorDetails: serializeError(normalizedError),
     };
   }
 

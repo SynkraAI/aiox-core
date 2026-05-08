@@ -14,8 +14,11 @@ const {
   computeChecksum,
   resolveEntityId,
   resolveUsedBy,
+  buildNameIndex,
+  detectLifecycle,
   SCAN_CONFIG,
   ADAPTABILITY_DEFAULTS,
+  EXTERNAL_TOOLS,
   REPO_ROOT,
   REGISTRY_PATH,
 } = require(path.resolve(__dirname, '../../development/scripts/populate-entity-registry.js'));
@@ -250,6 +253,7 @@ class RegistryUpdater {
     try {
       await this._withLock(async () => {
         const registry = this._loadRegistry();
+        const changedEntities = [];
 
         for (const { action, filePath } of batch) {
           try {
@@ -271,7 +275,20 @@ class RegistryUpdater {
               default:
                 console.warn(`[IDS-Updater] Unknown action: ${action}`);
             }
-            if (mutated) updated++;
+            if (mutated) {
+              updated++;
+              if (action !== 'unlink') {
+                const relPath = path.relative(this._repoRoot, abs).replace(/\\/g, '/');
+                const config = this._detectCategory(relPath);
+                if (config) {
+                  const category = config.category;
+                  const entityId = resolveEntityId(abs, config, registry.entities[category] || {}, this._repoRoot);
+                  if (registry.entities[category]?.[entityId]) {
+                    changedEntities.push({ category, entityId });
+                  }
+                }
+              }
+            }
 
             this._logAudit({ action, path: path.relative(this._repoRoot, abs).replace(/\\/g, '/'), trigger: 'watcher' });
           } catch (err) {
@@ -283,10 +300,13 @@ class RegistryUpdater {
 
         if (updated > 0) {
           this._resolveAllUsedBy(registry);
+          this._refreshDerivedDependencyFields(registry, changedEntities);
 
           // NOG-8: Apply code intelligence enrichment AFTER resolveAllUsedBy
           // so that code-intel usedBy data is merged on top of static graph
           await this._applyCodeIntelEnrichments(registry);
+          this._resolveAllUsedBy(registry);
+          this._refreshDerivedDependencyFields(registry, changedEntities);
           registry.metadata.lastUpdated = new Date().toISOString();
           registry.metadata.entityCount = this._countEntities(registry);
           this._writeRegistry(registry);
@@ -330,7 +350,7 @@ class RegistryUpdater {
     const resolvedEntityId = resolveEntityId(absPath, config, registry.entities[category], this._repoRoot);
     const keywords = extractKeywords(absPath, content);
     const purpose = extractPurpose(content, absPath);
-    const dependencies = detectDependencies(content, resolvedEntityId);
+    const dependencies = detectDependencies(content, resolvedEntityId, false, absPath);
     const checksum = computeChecksum(absPath);
     const defaultScore = ADAPTABILITY_DEFAULTS[config.type] || 0.5;
 
@@ -342,6 +362,9 @@ class RegistryUpdater {
       keywords,
       usedBy: [],
       dependencies,
+      externalDeps: [],
+      plannedDeps: [],
+      lifecycle: 'experimental',
       adaptability: {
         score: defaultScore,
         constraints: [],
@@ -383,12 +406,15 @@ class RegistryUpdater {
     }
 
     const newChecksum = computeChecksum(absPath);
+    const nextDependencies = detectDependencies(content, entityId, false, absPath);
 
     if (newChecksum !== existing.checksum) {
       existing.checksum = newChecksum;
       existing.purpose = extractPurpose(content, absPath);
       existing.keywords = extractKeywords(absPath, content);
-      existing.dependencies = detectDependencies(content, entityId);
+      existing.dependencies = nextDependencies;
+    } else if (JSON.stringify(existing.dependencies || []) !== JSON.stringify(nextDependencies)) {
+      existing.dependencies = nextDependencies;
     }
 
     existing.lastVerified = new Date().toISOString();
@@ -610,6 +636,45 @@ class RegistryUpdater {
       }
     }
     resolveUsedBy(registry.entities);
+  }
+
+  _refreshDerivedDependencyFields(registry, changedEntities) {
+    const nameIndex = buildNameIndex(registry.entities);
+    const seen = new Set();
+
+    for (const { category, entityId } of changedEntities) {
+      const key = `${category}:${entityId}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      const entity = registry.entities[category]?.[entityId];
+      if (!entity) continue;
+
+      const internal = [];
+      const external = [];
+      const planned = [];
+
+      const rawDeps = [
+        ...(entity.dependencies || []),
+        ...(entity.externalDeps || []),
+        ...(entity.plannedDeps || []),
+      ];
+
+      for (const dep of rawDeps) {
+        if (nameIndex.has(dep)) {
+          internal.push(dep);
+        } else if (EXTERNAL_TOOLS.has(String(dep).toLowerCase())) {
+          external.push(dep);
+        } else {
+          planned.push(dep);
+        }
+      }
+
+      entity.dependencies = [...new Set(internal)];
+      entity.externalDeps = [...new Set(external)];
+      entity.plannedDeps = [...new Set(planned)];
+      entity.lifecycle = detectLifecycle(entityId, entity);
+    }
   }
 
   _countEntities(registry) {

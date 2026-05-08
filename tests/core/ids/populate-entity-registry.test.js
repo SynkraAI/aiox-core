@@ -11,6 +11,7 @@ const {
   extractMarkdownCrossReferences,
   resolveEntityId,
   toScopedEntityId,
+  findScanConfigForPath,
   computeChecksum,
   scanCategory,
   resolveUsedBy,
@@ -106,6 +107,15 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
     });
   });
 
+  describe('findScanConfigForPath()', () => {
+    it('matches scan config only on directory boundaries', () => {
+      const repoRoot = '/repo';
+
+      expect(findScanConfigForPath('/repo/.aiox-core/core/errors/index.js', repoRoot)?.category).toBe('modules');
+      expect(findScanConfigForPath('/repo/.aiox-core/corex/errors/index.js', repoRoot)).toBeNull();
+    });
+  });
+
   describe('extractKeywords()', () => {
     it('extracts keywords from filename', () => {
       const kws = extractKeywords('create-doc-template.md', '');
@@ -175,6 +185,16 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       const deps = detectDependencies(content, 'main');
       expect(deps).toContain('foo-module');
       expect(deps).toContain('bar');
+    });
+
+    it('resolves relative directory index dependencies to scoped entity ids', () => {
+      const content = "const { normalizeError } = require('../errors');";
+      const currentFilePath = path.resolve(__dirname, '../../../.aiox-core/core/synapse/engine.js');
+
+      const deps = detectDependencies(content, 'synapse-engine', false, currentFilePath);
+
+      expect(deps).toContain('errors-index');
+      expect(deps).not.toContain('errors');
     });
 
     it('detects import dependencies', () => {
