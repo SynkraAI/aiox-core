@@ -171,6 +171,8 @@ class MasterOrchestrator extends EventEmitter {
     this._state = OrchestratorState.INITIALIZED;
     this._previousState = null;
     this._inFullPipeline = false; // Flag for gate evaluation during full pipeline
+    this._persistenceAvailable = true;
+    this._persistenceError = null;
 
     // Execution state
     this.executionState = {
@@ -1128,17 +1130,25 @@ class MasterOrchestrator extends EventEmitter {
         // Errors and insights
         errors: this.executionState.errors,
         insights: this.executionState.insights,
+        persistence: {
+          available: this._persistenceAvailable,
+          lastError: this._persistenceError,
+        },
 
         // Session insights
         sessionInsights: this._collectSessionInsights(),
       };
 
       await fs.writeJson(this.statePath, stateToSave, { spaces: 2 });
+      this._persistenceAvailable = true;
+      this._persistenceError = null;
       this._log('State saved successfully', { path: this.statePath });
 
       return true;
     } catch (error) {
-      this._log(`Failed to save state: ${error.message}`, { level: 'warn' });
+      this._persistenceAvailable = false;
+      this._persistenceError = error && error.message ? error.message : String(error);
+      this._log(`Failed to save state: ${this._persistenceError}`, { level: 'warn' });
       return false;
     }
   }
@@ -1434,6 +1444,10 @@ class MasterOrchestrator extends EventEmitter {
       },
       errors: this.executionState.errors,
       insights: this.executionState.insights,
+      persistence: {
+        available: this._persistenceAvailable,
+        error: this._persistenceError,
+      },
       state: this.executionState,
     };
   }
@@ -1475,7 +1489,29 @@ class MasterOrchestrator extends EventEmitter {
         ]),
       ),
       errors: this.executionState.errors.length,
+      persistence: {
+        available: this._persistenceAvailable,
+        error: this._persistenceError,
+      },
     };
+  }
+
+  /**
+   * Whether the last state persistence operation succeeded.
+   *
+   * @returns {boolean} True when persistence is available.
+   */
+  isPersistenceAvailable() {
+    return this._persistenceAvailable;
+  }
+
+  /**
+   * Return the last state persistence error message, if any.
+   *
+   * @returns {string|null} Last persistence error message.
+   */
+  getPersistenceError() {
+    return this._persistenceError;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════════

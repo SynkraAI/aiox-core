@@ -280,6 +280,34 @@ describe('MasterOrchestrator', () => {
         await orchestrator.initialize();
         const result = await orchestrator.saveState();
         expect(result).toBe(true);
+        expect(orchestrator.isPersistenceAvailable()).toBe(true);
+        expect(orchestrator.getPersistenceError()).toBeNull();
+        expect(orchestrator.getStatus().persistence).toEqual({
+          available: true,
+          error: null,
+        });
+      });
+
+      it('should expose persistence degradation when state save fails', async () => {
+        const writeJsonSpy = jest.spyOn(fs, 'writeJson').mockRejectedValueOnce(new Error('disk full'));
+
+        try {
+          const result = await orchestrator.saveState();
+
+          expect(result).toBe(false);
+          expect(orchestrator.isPersistenceAvailable()).toBe(false);
+          expect(orchestrator.getPersistenceError()).toBe('disk full');
+          expect(orchestrator.getStatus().persistence).toEqual({
+            available: false,
+            error: 'disk full',
+          });
+          expect(orchestrator.finalize().persistence).toEqual({
+            available: false,
+            error: 'disk full',
+          });
+        } finally {
+          writeJsonSpy.mockRestore();
+        }
       });
     });
 
