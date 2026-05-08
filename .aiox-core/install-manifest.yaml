@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-07T23:49:01.680Z"
+generated_at: "2026-05-08T00:07:45.552Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1104
 files:
@@ -3133,9 +3133,9 @@ files:
     type: script
     size: 5534
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:2fbcfe20ece516bfd54af707e36ec4191186c49b63febd85184e729788d17dbd
+    hash: sha256:2ea2fe3a070010da33be2fed3d75c305d3414cf515c1bf5fbafb334e0a7da5fa
     type: script
-    size: 18187
+    size: 18746
   - path: infrastructure/scripts/ide-sync/README.md
     hash: sha256:d4dd100db52a0f4a092466668ebb8c321c901720bd726dba9371da9f9cc8a583
     type: script
@@ -3161,13 +3161,13 @@ files:
     type: script
     size: 5693
   - path: infrastructure/scripts/ide-sync/transformers/kimi.js
-    hash: sha256:f8fea101a9de1efc4a6a0f18111afeb5ede105ffd9485700867c98dee94a47a1
+    hash: sha256:269fba3c07fcae905e48a1eebd7e65106480fb7e38e0521e4cd77f529465c1c9
     type: script
-    size: 11695
+    size: 13795
   - path: infrastructure/scripts/ide-sync/validator.js
-    hash: sha256:4f01ed419d5175e15959add2d31e19559dac12c231175cffc1967fbe37183fe2
+    hash: sha256:768eba65a0f8ff937c34f6f43fe1b4dc990f2d406e592bc1cda0f8ab5b4f7e0b
     type: script
-    size: 8134
+    size: 8038
   - path: infrastructure/scripts/improvement-engine.js
     hash: sha256:4fed61115f4148eb6b8c42ebd9d5b05732695ab1b4343e2466383baf4883d58d
     type: script

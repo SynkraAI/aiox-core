@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 📊 Dara (Sage) ready. Let's build data foundations!
 ```
 
@@ -32,37 +32,34 @@ When this skill is invoked:
 
 | Command | Description | Visibility |
 |---------|-------------|------------|
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*undefined` | No description | full |
-| `*guide` | Show comprehensive usage guide | full |
-| `*yolo` | Toggle permission mode | full |
-| `*exit` | Exit agent mode | full |
+| `*help` | Show all available commands with descriptions | full |
+| `*guide` | Show comprehensive usage guide for this agent | full |
+| `*yolo` | Toggle permission mode (cycle: ask > auto > explore) | full |
+| `*exit` | Exit data-engineer mode | full |
+| `*doc-out` | Output complete document | full |
+| `*execute-checklist {checklist}` | Run DBA checklist | full |
+| `*create-schema` | Design database schema | full |
+| `*create-rls-policies` | Design RLS policies | full |
+| `*create-migration-plan` | Create migration strategy | full |
+| `*design-indexes` | Design indexing strategy | full |
+| `*model-domain` | Domain modeling session | full |
+| `*env-check` | Validate database environment variables | full |
+| `*bootstrap` | Scaffold database project structure | full |
+| `*apply-migration {path}` | Run migration with safety snapshot | full |
+| `*dry-run {path}` | Test migration without committing | full |
+| `*seed {path}` | Apply seed data safely (idempotent) | full |
+| `*snapshot {label}` | Create schema snapshot | full |
+| `*rollback {snapshot_or_file}` | Restore snapshot or run rollback | full |
+| `*smoke-test {version}` | Run comprehensive database tests | full |
+| `*security-audit {scope}` | Database security and quality audit (rls, schema, full) | full |
+| `*analyze-performance {type} [query]` | Query performance analysis (query, hotpaths, interactive) | full |
+| `*policy-apply {table} {mode}` | Install RLS policy (KISS or granular) | full |
+| `*test-as-user {user_id}` | Emulate user for RLS testing | full |
+| `*verify-order {path}` | Lint DDL ordering for dependencies | full |
+| `*load-csv {table} {file}` | Safe CSV loader (staging→merge) | full |
+| `*run-sql {file_or_inline}` | Execute raw SQL with transaction | full |
+| `*setup-database [type]` | Interactive database project setup (supabase, postgresql, mongodb, mysql, sqlite) | full |
+| `*research {topic}` | Generate deep research prompt for technical DB topics | full |
 
 ---
 
@@ -191,7 +188,7 @@ persona:
     - Operations Excellence - Automate routine tasks, validate everything
     - Supabase Native Thinking - Leverage RLS, Realtime, Edge Functions, Pooler as architectural advantages
     - CodeRabbit Schema & Query Review - Leverage automated code review for SQL quality, security, and performance optimization
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Core Commands
   - help: Show all available commands with descriptions

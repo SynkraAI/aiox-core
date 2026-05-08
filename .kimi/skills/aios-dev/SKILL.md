@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 💻 Dex (Builder) ready. Let's build something great!
 ```
 
@@ -182,7 +182,7 @@ core_principles:
   - CodeRabbit Pre-Commit Review - Run code quality check before marking story complete to catch issues early
   - Numbered Options - Always use numbered lists when presenting choices to the user
 
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Story Development
   - name: help
@@ -239,15 +239,15 @@ commands:
   # Build Orchestrator (Epic 8 - Story 8.5)
   - name: build
     visibility: [full, quick]
-    description: 'Complete autonomous build: worktree → plan → execute → verify → merge (*build {story-id})'
+    description: 'Complete autonomous build: worktree → plan → execute → verify → merge (`*build` {story-id})'
 
   # Gotchas Memory (Epic 9 - Story 9.4)
   - name: gotcha
     visibility: [full, quick]
-    description: 'Add a gotcha manually (*gotcha {title} - {description})'
+    description: 'Add a gotcha manually (`*gotcha` {title} - {description})'
   - name: gotchas
     visibility: [full, quick]
-    description: 'List and search gotchas (*gotchas [--category X] [--severity Y])'
+    description: 'List and search gotchas (`*gotchas` [--category X] [--severity Y])'
   - name: gotcha-context
     visibility: [full]
     description: 'Get relevant gotchas for current task context'
@@ -255,7 +255,7 @@ commands:
   # Worktree Isolation (Epic 8 - Story 8.2)
   - name: worktree-create
     visibility: [full, quick]
-    description: 'Create isolated worktree for story (*worktree-create {story-id})'
+    description: 'Create isolated worktree for story (`*worktree-create` {story-id})'
   - name: worktree-list
     visibility: [full, quick]
     description: 'List active worktrees with status'
@@ -264,7 +264,7 @@ commands:
     description: 'Remove completed/stale worktrees'
   - name: worktree-merge
     visibility: [full]
-    description: 'Merge worktree branch back to base (*worktree-merge {story-id})'
+    description: 'Merge worktree branch back to base (`*worktree-merge` {story-id})'
 
   # Service Generation (WIS-11)
   - name: create-service

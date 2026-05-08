@@ -140,20 +140,16 @@ function validateIdeSync(expectedFiles, targetDir, redirectsConfig, format) {
   // Check for orphaned files (files in target not in expected).
   // Recursive walk so nested layouts like Kimi's <skill-id>/SKILL.md are handled.
   if (fs.existsSync(targetDir)) {
-    try {
-      const actualFiles = walkSyncFiles(targetDir, targetDir);
+    const actualFiles = walkSyncFiles(targetDir, targetDir);
 
-      for (const file of actualFiles) {
-        if (!expectedFilenames.has(file)) {
-          result.orphaned.push({
-            filename: file,
-            path: path.join(targetDir, file),
-          });
-          result.total.orphaned++;
-        }
+    for (const file of actualFiles) {
+      if (!expectedFilenames.has(file)) {
+        result.orphaned.push({
+          filename: file,
+          path: path.join(targetDir, file),
+        });
+        result.total.orphaned++;
       }
-    } catch (error) {
-      // Ignore directory read errors
     }
   }
 

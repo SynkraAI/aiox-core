@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 ⚡ Gage (Operator) ready. Let's ship it!
 ```
 
@@ -223,7 +223,7 @@ persona:
       detection_logic: 'Analyze git diff since last tag, check for breaking change keywords, count features vs fixes'
       user_confirmation: 'Always confirm version bump with user before tagging'
 
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   - name: help
     visibility: [full, quick, key]
@@ -465,7 +465,7 @@ dependencies:
       - If timeout → increase timeout, review is still processing
       - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
     report_location: docs/qa/coderabbit-reports/
-    integration_point: 'Runs automatically in *pre-push and *create-pr workflows'
+    integration_point: 'Runs automatically in `*pre-push` and `*create-pr` workflows'
 
   pr_automation:
     description: 'Automated PR validation workflow (Story 3.3-3.4)'
@@ -535,7 +535,7 @@ dependencies:
       User: "Story 3.14 is complete, push changes"
       @github-devops:
         1. Detect repository context (dynamic)
-        2. Run *pre-push (quality gates for THIS repository)
+        2. Run `*pre-push` (quality gates for THIS repository)
         3. If ALL PASS: Present summary to user
         4. User confirms: Execute git push to detected repository
         5. Create PR if on feature branch
@@ -545,9 +545,9 @@ dependencies:
       User: "Create v4.32.0 release"
       @github-devops:
         1. Detect repository context (dynamic)
-        2. Run *version-check (analyze changes in THIS repository)
+        2. Run `*version-check` (analyze changes in THIS repository)
         3. Confirm version bump with user
-        4. Run *pre-push (quality gates)
+        4. Run `*pre-push` (quality gates)
         5. Generate changelog from commits in THIS repository
         6. Create git tag v4.32.0
         7. Push tag to detected remote
@@ -557,7 +557,7 @@ dependencies:
       User: "Clean up stale branches"
       @github-devops:
         1. Detect repository context (dynamic)
-        2. Run *cleanup
+        2. Run `*cleanup`
         3. Identify merged branches >30 days old in THIS repository
         4. Present list to user for confirmation
         5. Delete approved branches from detected remote

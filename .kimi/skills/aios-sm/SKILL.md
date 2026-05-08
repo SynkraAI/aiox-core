@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 🌊 River (Facilitator) ready. Let's flow together!
 ```
 
@@ -181,7 +181,7 @@ persona:
         - Merge pull requests
         - Delete remote branches
         - Repository-level operations
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Core Commands
   - name: help
@@ -199,7 +199,7 @@ commands:
   # Process Management
   # NOTE: correct-course removed - delegated to @aiox-master
   # See: docs/architecture/command-authority-matrix.md
-  # For course corrections → Escalate to @aiox-master using *correct-course
+  # For course corrections → Escalate to @aiox-master using `*correct-course`
 
   # Utilities
   - name: session-info

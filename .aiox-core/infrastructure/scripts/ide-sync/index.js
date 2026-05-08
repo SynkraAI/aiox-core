@@ -31,7 +31,7 @@ const claudeCodeTransformer = require('./transformers/claude-code');
 const cursorTransformer = require('./transformers/cursor');
 const antigravityTransformer = require('./transformers/antigravity');
 const githubCopilotTransformer = require('./transformers/github-copilot');
-const kimiTransformer = require('./transformers/kimi');
+const kimiTransformer = require(path.resolve(__dirname, 'transformers', 'kimi'));
 
 // ANSI colors for output
 const colors = {
@@ -150,6 +150,14 @@ function transformPrimaryContent(transformer, agent, ideName) {
   return transformer.transform(agent);
 }
 
+function isPathInside(rootDir, candidatePath) {
+  const relativePath = path.relative(rootDir, candidatePath);
+  return relativePath !== '' &&
+    relativePath !== '..' &&
+    !relativePath.startsWith(`..${path.sep}`) &&
+    !path.isAbsolute(relativePath);
+}
+
 /**
  * Sync agents to a specific IDE
  * @param {object[]} agents - Parsed agent data
@@ -206,8 +214,15 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
       // Kimi format uses subdirectories per skill: <skill-id>/SKILL.md
       let targetPath;
       if (ideConfig.format === 'kimi-skill' && transformer.getDirname) {
-        const skillDir = path.join(result.targetDir, transformer.getDirname(agent));
-        targetPath = path.join(skillDir, filename);
+        const targetRoot = path.resolve(result.targetDir);
+        const dirname = transformer.getDirname(agent);
+        const skillDir = path.resolve(targetRoot, dirname);
+        targetPath = path.resolve(skillDir, filename);
+
+        if (!isPathInside(targetRoot, skillDir) || !isPathInside(targetRoot, targetPath)) {
+          throw new Error(`Unsafe Kimi output path for agent '${agent.id}'`);
+        }
+
         if (!options.dryRun) {
           fs.ensureDirSync(skillDir);
         }

@@ -62,7 +62,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-\`\`\`
+\`\`\`text
 ${namedGreeting}
 \`\`\`
 
@@ -131,20 +131,11 @@ function buildProtocolSection(yaml) {
 }
 
 function buildCommandsTable(commands) {
-  if (!commands || !Array.isArray(commands) || commands.length === 0) {
+  const normalized = normalizeCommands(commands);
+
+  if (normalized.length === 0) {
     return '';
   }
-
-  const normalized = commands.map(cmd => {
-    if (typeof cmd === 'string') {
-      const dashMatch = cmd.trim().match(/^\*?([a-zA-Z0-9:_-]+)\s*[-:]\s*(.+)$/);
-      if (dashMatch) {
-        return { name: dashMatch[1], description: dashMatch[2], visibility: ['full', 'quick'] };
-      }
-      return { name: cmd.replace(/^\*/, '') || 'unknown', description: 'No description', visibility: ['full', 'quick'] };
-    }
-    return cmd;
-  });
 
   const allRows = normalized.map(cmd => {
     let vis = 'full';
@@ -155,7 +146,7 @@ function buildCommandsTable(commands) {
         vis = cmd.visibility;
       }
     }
-    return `| \`*${cmd.name}\` | ${cmd.description || 'No description'} | ${vis} |`;
+    return `| \`*${cmd.name}\` | ${formatCommandDescription(cmd.description)} | ${vis} |`;
   });
 
   // Always include guide/yolo/exit
@@ -168,6 +159,63 @@ function buildCommandsTable(commands) {
   if (!hasExit) allRows.push('| `*exit` | Exit agent mode | full |');
 
   return `## Star Commands\n\n| Command | Description | Visibility |\n|---------|-------------|------------|\n${allRows.join('\n')}\n\n`;
+}
+
+function normalizeCommands(commands) {
+  if (!commands) return [];
+
+  const commandList = Array.isArray(commands)
+    ? commands
+    : (typeof commands === 'object'
+      ? Object.entries(commands).map(([name, description]) => ({
+        name,
+        description,
+        visibility: ['full', 'quick'],
+      }))
+      : []);
+
+  return commandList
+    .map(normalizeCommand)
+    .filter(cmd => cmd && cmd.name);
+}
+
+function normalizeCommand(cmd) {
+  if (typeof cmd === 'string') {
+    const dashMatch = cmd.trim().match(/^\*?([a-zA-Z0-9:_-]+)\s*[-:]\s*(.+)$/);
+    if (dashMatch) {
+      return { name: dashMatch[1], description: dashMatch[2], visibility: ['full', 'quick'] };
+    }
+    return { name: cmd.replace(/^\*/, '') || 'unknown', description: 'No description', visibility: ['full', 'quick'] };
+  }
+
+  if (!cmd || typeof cmd !== 'object') return null;
+  if (cmd.name) return cmd;
+
+  const entries = Object.entries(cmd);
+  if (entries.length !== 1) return null;
+
+  const [name, value] = entries[0];
+  if (!name) return null;
+
+  if (value && typeof value === 'object') {
+    return {
+      name,
+      description: value.description || value.summary || 'No description',
+      visibility: value.visibility || ['full'],
+    };
+  }
+
+  return {
+    name,
+    description: value === null || value === undefined ? 'No description' : String(value),
+    visibility: ['full'],
+  };
+}
+
+function formatCommandDescription(value) {
+  if (value === null || value === undefined || value === '') return 'No description';
+  if (typeof value === 'string') return value;
+  return JSON.stringify(value);
 }
 
 function buildWorkflowSection(yaml) {
@@ -271,7 +319,52 @@ function buildRawContentSection(rawContent, id) {
     return '> Agent definition not available.\n';
   }
 
-  return rawContent;
+  return sanitizeGeneratedMarkdown(rawContent);
+}
+
+function sanitizeGeneratedMarkdown(content) {
+  return addLanguageToUntypedFences(content)
+    .split('\n')
+    .map(sanitizeBareStarCommands)
+    .join('\n');
+}
+
+function sanitizeBareStarCommands(line) {
+  return line
+    .split(/(`[^`]*`)/g)
+    .map(segment => {
+      if (segment.startsWith('`') && segment.endsWith('`')) {
+        return segment;
+      }
+
+      return segment.replace(
+        /(^|[\s(,])\*([a-zA-Z0-9][a-zA-Z0-9:_-]*)(?=([\s,).;:]|$))/g,
+        '$1`*$2`'
+      );
+    })
+    .join('');
+}
+
+function addLanguageToUntypedFences(content) {
+  let inFence = false;
+
+  return content.split('\n').map((line) => {
+    if (/^```[ \t]*$/.test(line)) {
+      if (!inFence) {
+        inFence = true;
+        return '```text';
+      }
+
+      inFence = false;
+      return '```';
+    }
+
+    if (/^```/.test(line)) {
+      inFence = !inFence;
+    }
+
+    return line;
+  }).join('\n');
 }
 
 // Normalize an array item that may be a string OR a YAML-parsed object.

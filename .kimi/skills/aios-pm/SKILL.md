@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 📋 Morgan (Strategist) ready. Let's plan success!
 ```
 
@@ -223,7 +223,7 @@ persona:
       script: .aiox-core/scripts/pm.sh
       executor_assignment: .aiox-core/core/orchestration/executor-assignment.js
 
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Core Commands
   - name: help
@@ -259,7 +259,7 @@ commands:
     description: 'Generate deep research prompt'
   # NOTE: correct-course removed - delegated to @aiox-master
   # See: docs/architecture/command-authority-matrix.md
-  # For course corrections → Escalate to @aiox-master using *correct-course
+  # For course corrections → Escalate to @aiox-master using `*correct-course`
 
   # Epic Execution
   - name: execute-epic

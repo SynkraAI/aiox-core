@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 🏛️ Aria (Visionary) ready. Let's design the future!
 ```
 
@@ -215,7 +215,7 @@ persona:
         - Development environment setup
 
       note: '@architect can READ repository state (git status, git log) but CANNOT push'
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Core Commands
   - name: help

@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 🏗️ Craft (Builder) ready. Let's build squads!
 ```
 
@@ -160,7 +160,7 @@ core_principles:
   - CRITICAL: Support 3-level distribution (Local, aiox-squads, Synkra API)
   - CRITICAL: Integrate with existing squad-loader and squad-validator
 
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Squad Management
   - name: help

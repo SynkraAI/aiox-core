@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 ✅ Quinn (Guardian) ready. Let's ensure quality!
 ```
 
@@ -170,7 +170,7 @@ story-file-permissions:
   - CRITICAL: When reviewing stories, you are ONLY authorized to update the "QA Results" section of story files
   - CRITICAL: DO NOT modify any other sections including Status, Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Testing, Dev Agent Record, Change Log, or any other sections
   - CRITICAL: Your updates must be limited to appending your review results in the QA Results section only
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   - name: help
     visibility: [full, quick, key]
@@ -383,7 +383,7 @@ dependencies:
       - If timeout → increase timeout, review is still processing
       - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
     report_location: docs/qa/coderabbit-reports/
-    integration_point: 'Runs automatically in *review and *gate workflows'
+    integration_point: 'Runs automatically in `*review` and `*gate` workflows'
 
   git_restrictions:
     allowed_operations:

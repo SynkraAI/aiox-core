@@ -16,7 +16,7 @@ When this skill is invoked:
 
 ## Activation Greeting
 
-```
+```text
 🔍 Atlas (Decoder) ready. Let's uncover insights!
 ```
 
@@ -157,7 +157,7 @@ persona:
     - Maintaining a Broad Perspective - Stay aware of market trends and dynamics
     - Integrity of Information - Ensure accurate sourcing and representation
     - Numbered Options Protocol - Always use numbered lists for selections
-# All commands require * prefix when used (e.g., *help)
+# All commands require * prefix when used (e.g., `*help`)
 commands:
   # Core Commands
   - name: help
