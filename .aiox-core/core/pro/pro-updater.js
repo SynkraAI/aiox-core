@@ -168,13 +168,13 @@ function assertValidProjectRoot(projectRoot) {
     stats = fs.statSync(resolvedProjectRoot);
   } catch {
     throw new Error(
-      `updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`
+      `updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`,
     );
   }
 
   if (!stats.isDirectory()) {
     throw new Error(
-      `updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`
+      `updatePro(projectRoot): projectRoot does not exist or is not a directory: ${resolvedProjectRoot}`,
     );
   }
 
@@ -400,7 +400,7 @@ async function updatePro(projectRoot, options = {}) {
         installed.packagePath,
         result,
         onProgress,
-        'AIOX Pro is up to date, but re-scaffolding failed.'
+        'AIOX Pro is up to date, but re-scaffolding failed.',
       );
       if (!scaffolded) {
         return result;
@@ -420,7 +420,7 @@ async function updatePro(projectRoot, options = {}) {
   // 5. Check compatibility with aiox-core
   const coreVersion = getCoreVersion(resolvedProjectRoot);
   const requiredCore = CORE_PACKAGES.map(
-    (packageName) => latest.peerDependencies?.[packageName]
+    (packageName) => latest.peerDependencies?.[packageName],
   ).find(Boolean);
 
   if (requiredCore && coreVersion && !satisfiesPeer(coreVersion, requiredCore)) {
@@ -509,7 +509,7 @@ async function updatePro(projectRoot, options = {}) {
       proPath,
       result,
       onProgress,
-      'AIOX Pro package updated, but re-scaffolding failed.'
+      'AIOX Pro package updated, but re-scaffolding failed.',
     );
     if (!scaffolded) {
       return result;

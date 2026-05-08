@@ -153,7 +153,7 @@ describe('SquadValidator', () => {
 
       expect(result.valid).toBe(false);
       const schemaErrors = result.errors.filter(
-        (e) => e.code === ValidationErrorCodes.SCHEMA_ERROR
+        (e) => e.code === ValidationErrorCodes.SCHEMA_ERROR,
       );
       expect(schemaErrors.length).toBeGreaterThan(0);
     });
@@ -164,7 +164,7 @@ describe('SquadValidator', () => {
 
       expect(result.valid).toBe(false);
       const schemaErrors = result.errors.filter(
-        (e) => e.code === ValidationErrorCodes.SCHEMA_ERROR
+        (e) => e.code === ValidationErrorCodes.SCHEMA_ERROR,
       );
       expect(schemaErrors.length).toBeGreaterThan(0);
     });
@@ -185,7 +185,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateStructure(squadPath);
 
       const missingDirWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.MISSING_DIRECTORY
+        (w) => w.code === ValidationErrorCodes.MISSING_DIRECTORY,
       );
       expect(missingDirWarnings.some((w) => w.message.includes('tasks/'))).toBe(true);
     });
@@ -195,7 +195,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateStructure(squadPath);
 
       const missingDirWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.MISSING_DIRECTORY
+        (w) => w.code === ValidationErrorCodes.MISSING_DIRECTORY,
       );
       expect(missingDirWarnings.some((w) => w.message.includes('agents/'))).toBe(true);
     });
@@ -205,7 +205,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateStructure(squadPath);
 
       const missingDirWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.MISSING_DIRECTORY
+        (w) => w.code === ValidationErrorCodes.MISSING_DIRECTORY,
       );
       // Should not have warnings for tasks/ or agents/
       expect(missingDirWarnings.some((w) => w.message.includes('tasks/'))).toBe(false);
@@ -218,7 +218,7 @@ describe('SquadValidator', () => {
 
       expect(result.valid).toBe(false);
       const fileNotFoundErrors = result.errors.filter(
-        (e) => e.code === ValidationErrorCodes.FILE_NOT_FOUND
+        (e) => e.code === ValidationErrorCodes.FILE_NOT_FOUND,
       );
       expect(fileNotFoundErrors.length).toBeGreaterThan(0);
     });
@@ -238,7 +238,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateTasks(squadPath);
 
       const noTasksWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.NO_TASKS
+        (w) => w.code === ValidationErrorCodes.NO_TASKS,
       );
       expect(noTasksWarnings.length).toBe(1);
     });
@@ -248,7 +248,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateTasks(squadPath);
 
       const missingFieldWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.TASK_MISSING_FIELD
+        (w) => w.code === ValidationErrorCodes.TASK_MISSING_FIELD,
       );
       expect(missingFieldWarnings.length).toBeGreaterThan(0);
     });
@@ -258,7 +258,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateTasks(squadPath);
 
       const missingFieldWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.TASK_MISSING_FIELD && w.file === 'valid-task.md'
+        (w) => w.code === ValidationErrorCodes.TASK_MISSING_FIELD && w.file === 'valid-task.md',
       );
       expect(missingFieldWarnings.length).toBe(0);
     });
@@ -268,7 +268,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateTasks(squadPath);
 
       const namingWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.INVALID_NAMING
+        (w) => w.code === ValidationErrorCodes.INVALID_NAMING,
       );
       expect(namingWarnings.length).toBeGreaterThan(0);
     });
@@ -289,7 +289,7 @@ describe('SquadValidator', () => {
 
       expect(result.valid).toBe(true);
       const formatWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.AGENT_INVALID_FORMAT && w.file === 'test-agent.md'
+        (w) => w.code === ValidationErrorCodes.AGENT_INVALID_FORMAT && w.file === 'test-agent.md',
       );
       expect(formatWarnings.length).toBe(0);
     });
@@ -299,7 +299,7 @@ describe('SquadValidator', () => {
       const result = await validator.validateAgents(squadPath);
 
       const formatWarnings = result.warnings.filter(
-        (w) => w.code === ValidationErrorCodes.AGENT_INVALID_FORMAT
+        (w) => w.code === ValidationErrorCodes.AGENT_INVALID_FORMAT,
       );
       expect(formatWarnings.length).toBeGreaterThan(0);
     });
@@ -310,7 +310,7 @@ describe('SquadValidator', () => {
 
       const namingWarnings = result.warnings.filter(
         (w) =>
-          w.code === ValidationErrorCodes.INVALID_NAMING && w.file.toLowerCase().includes('agent')
+          w.code === ValidationErrorCodes.INVALID_NAMING && w.file.toLowerCase().includes('agent'),
       );
       expect(namingWarnings.length).toBeGreaterThan(0);
     });
@@ -350,7 +350,7 @@ describe('SquadValidator', () => {
       // Has deprecated config.yaml warning which becomes error in strict mode
       expect(result.valid).toBe(false);
       expect(result.errors.some((e) => e.code === ValidationErrorCodes.DEPRECATED_MANIFEST)).toBe(
-        true
+        true,
       );
       expect(result.warnings).toHaveLength(0);
     });
@@ -362,7 +362,7 @@ describe('SquadValidator', () => {
       // Has deprecated config.yaml warning but still valid
       expect(result.valid).toBe(true);
       expect(result.warnings.some((w) => w.code === ValidationErrorCodes.DEPRECATED_MANIFEST)).toBe(
-        true
+        true,
       );
     });
 
@@ -426,7 +426,7 @@ describe('SquadValidator', () => {
 
       expect(consoleLogSpy).toHaveBeenCalled();
       expect(consoleLogSpy.mock.calls.some((call) => call[0].includes('[SquadValidator]'))).toBe(
-        true
+        true,
       );
     });
 
@@ -435,7 +435,7 @@ describe('SquadValidator', () => {
       await validator.validate(squadPath);
 
       const validatorLogs = consoleLogSpy.mock.calls.filter((call) =>
-        call[0].includes('[SquadValidator]')
+        call[0].includes('[SquadValidator]'),
       );
       expect(validatorLogs.length).toBe(0);
     });
@@ -545,7 +545,7 @@ config:
       await fs.mkdir(frameworkDir, { recursive: true });
       await fs.writeFile(
         path.join(frameworkDir, 'CODING-STANDARDS.md'),
-        '# Project Coding Standards'
+        '# Project Coding Standards',
       );
       await fs.writeFile(path.join(frameworkDir, 'TECH-STACK.md'), '# Project Tech Stack');
 
@@ -648,7 +648,7 @@ config:
 
       const result = await validator._resolveConfigPath(
         squadPath,
-        '../../docs/framework/CODING-STANDARDS.md'
+        '../../docs/framework/CODING-STANDARDS.md',
       );
 
       expect(result).toBeDefined();

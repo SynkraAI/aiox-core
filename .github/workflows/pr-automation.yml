@@ -33,10 +33,10 @@ jobs:
       coverage-summary: ${{ steps.coverage.outputs.summary }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
@@ -62,7 +62,7 @@ jobs:
           fi
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         with:
           files: ./coverage/lcov.info
           flags: unittests
@@ -80,7 +80,7 @@ jobs:
     if: always()
     steps:
       - name: Post coverage comment
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const coverageSummary = '${{ needs.coverage-report.outputs.coverage-summary }}' || 'Coverage data not available';
@@ -132,7 +132,7 @@ jobs:
     timeout-minutes: 2
     steps:
       - name: Verify CodeRabbit config exists
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           sparse-checkout: .coderabbit.yaml
           sparse-checkout-cone-mode: false
@@ -160,14 +160,14 @@ jobs:
     if: always()
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'

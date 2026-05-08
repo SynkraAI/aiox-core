@@ -206,7 +206,7 @@ describe('IDE Transformers', () => {
 
     it('should reject redirect ids that cannot produce safe filenames', () => {
       expect(() => generateRedirect('..', 'dev', process.cwd(), 'condensed-rules')).toThrow(
-        'Invalid redirect id'
+        'Invalid redirect id',
       );
     });
   });

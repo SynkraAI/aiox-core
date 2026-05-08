@@ -229,12 +229,12 @@ describe('stepInstallScaffold', () => {
     });
     fs.writeFileSync(
       path.join(proSourceDir, 'squads', 'premium-squad', 'agents', 'agent.md'),
-      '# Premium Agent\n'
+      '# Premium Agent\n',
     );
     fs.writeFileSync(path.join(proSourceDir, 'pro-config.yaml'), 'pro:\n  enabled: true\n');
     fs.writeFileSync(
       path.join(proSourceDir, 'package.json'),
-      JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-test' }, null, 2)
+      JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-test' }, null, 2),
     );
 
     try {

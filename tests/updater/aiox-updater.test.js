@@ -85,7 +85,7 @@ describe('AIOXUpdater', () => {
         {
           name: '@aiox-squads/core',
           version: '5.1.0',
-        }
+        },
       );
 
       const version = await updater.getInstalledVersion();
@@ -229,13 +229,13 @@ describe('AIOXUpdater', () => {
       await fs.writeFile(
         path.join(tempDir, '.aiox-core', 'install-manifest.yaml.minisig'),
         'signature',
-        'utf8'
+        'utf8',
       );
 
       await updater.createBackup();
 
       expect(fs.existsSync(path.join(updater.backupDir, 'install-manifest.yaml.minisig'))).toBe(
-        true
+        true,
       );
     });
   });
@@ -323,7 +323,7 @@ describe('AIOXUpdater', () => {
           { path: 'core-config.yaml', hash: 'sha256:package-core' },
           { path: 'development/agents/dev/MEMORY.md', hash: 'sha256:memory' },
           { path: 'project-only.md', hash: 'sha256:project-only' },
-        ])
+        ]),
       );
     });
 

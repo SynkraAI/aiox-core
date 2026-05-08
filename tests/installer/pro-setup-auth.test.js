@@ -297,7 +297,7 @@ describe('pro-setup interactive email fallback', () => {
     expect(client.activate).toHaveBeenCalledWith(
       'PRO-ABCD-1234-5678-WXYZ',
       observedMachineId,
-      expect.any(String)
+      expect.any(String),
     );
     expect(result.activationResult.features).toEqual(['pro.squads.*', 'pro.memory.*']);
   });
@@ -365,7 +365,7 @@ describe('pro-setup license cache persistence', () => {
         cacheValidDays: 30,
         gracePeriodDays: 7,
       },
-      '/tmp/aiox-pro-target'
+      '/tmp/aiox-pro-target',
     );
   });
 
@@ -449,7 +449,7 @@ describe('InlineLicenseClient current auth contract', () => {
             accessToken: 'live-access-token',
             refreshToken: 'refresh-token',
             emailVerified: true,
-          })
+          }),
         );
       });
     });
@@ -476,7 +476,7 @@ describe('InlineLicenseClient current auth contract', () => {
           JSON.stringify({
             email: 'user@example.com',
             emailVerified: true,
-          })
+          }),
         );
       });
     });
@@ -508,7 +508,7 @@ describe('InlineLicenseClient current auth contract', () => {
             activated: true,
             licenseKey: 'PRO-ABCD-1234-EFGH-5678',
             features: ['pro'],
-          })
+          }),
         );
       });
     });
@@ -565,7 +565,7 @@ describe('resolveProSourceDir', () => {
       expect.objectContaining({
         cwd: path.resolve(__dirname, '../..'),
         stdio: 'ignore',
-      })
+      }),
     );
     expect(result).toEqual({ proSourceDir: bundledProDir });
   });

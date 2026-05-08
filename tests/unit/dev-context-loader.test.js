@@ -119,7 +119,7 @@ describe('DevContextLoader', () => {
       // Calculate total lines only from successfully loaded files
       const summaryLines = successfulSummaryFiles.reduce(
         (sum, f) => sum + (f.summaryLines || 0),
-        0
+        0,
       );
       const fullLines = successfulFullFiles.reduce((sum, f) => sum + (f.linesCount || 0), 0);
 

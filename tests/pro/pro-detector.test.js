@@ -74,7 +74,7 @@ describe('pro-detector', () => {
       realFs.mkdirSync(packageDir, { recursive: true });
       realFs.writeFileSync(
         path.join(packageDir, 'package.json'),
-        JSON.stringify({ name: PRO_PACKAGE_NAME, version: '0.4.0' })
+        JSON.stringify({ name: PRO_PACKAGE_NAME, version: '0.4.0' }),
       );
       process.chdir(tmpDir);
 
@@ -112,7 +112,7 @@ describe('pro-detector', () => {
       realFs.mkdirSync(packageDir, { recursive: true });
       realFs.writeFileSync(
         path.join(packageDir, 'package.json'),
-        JSON.stringify({ name: PRO_PACKAGE_NAME, version: '0.4.0' })
+        JSON.stringify({ name: PRO_PACKAGE_NAME, version: '0.4.0' }),
       );
       process.chdir(tmpDir);
 
@@ -151,7 +151,7 @@ describe('pro-detector', () => {
         () => {
           throw new Error('Module initialization failed');
         },
-        { virtual: true }
+        { virtual: true },
       );
 
       expect(loadProModule('broken-module')).toBeNull();
@@ -182,7 +182,7 @@ describe('pro-detector', () => {
       // Only submodule path exists
       fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockReturnValue(
-        JSON.stringify({ name: '@aiox-squads/pro', version: '0.4.0' })
+        JSON.stringify({ name: '@aiox-squads/pro', version: '0.4.0' }),
       );
 
       expect(getProVersion()).toBe('0.4.0');
@@ -225,7 +225,7 @@ describe('pro-detector', () => {
     it('should return full info when pro submodule is available', () => {
       fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockReturnValue(
-        JSON.stringify({ name: '@aiox-squads/pro', version: '0.4.0' })
+        JSON.stringify({ name: '@aiox-squads/pro', version: '0.4.0' }),
       );
 
       const info = getProInfo();
