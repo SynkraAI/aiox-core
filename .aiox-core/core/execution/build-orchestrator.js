@@ -501,9 +501,13 @@ The subtask is complete only when verification passes.
   }
 
   /**
-   * Run Claude CLI with prompt
+   * Run Claude CLI with prompt delivered through stdin.
    */
-  async runClaudeCLI(prompt, workDir, config) {
+  async runClaudeCLI(prompt, workDir, config = {}) {
+    if (!prompt || typeof prompt !== 'string') {
+      throw new Error('runClaudeCLI requires a non-empty string prompt');
+    }
+
     return new Promise((resolve, reject) => {
       const args = [
         '--print', // Non-interactive mode
@@ -514,21 +518,58 @@ The subtask is complete only when verification passes.
         args.push('--model', config.claudeModel);
       }
 
-      // Escape prompt for shell
-      const escapedPrompt = prompt.replace(/'/g, "'\\''");
-
-      const fullCommand = `echo '${escapedPrompt}' | claude ${args.join(' ')}`;
-
       this.log(`Running Claude CLI in ${workDir}`, 'debug');
 
-      const child = spawn('sh', ['-c', fullCommand], {
+      const child = spawn('claude', args, {
         cwd: workDir,
         env: { ...process.env },
         timeout: config.subtaskTimeout,
+        stdio: ['pipe', 'pipe', 'pipe'],
       });
 
       let stdout = '';
       let stderr = '';
+      let stdinError = null;
+      let settled = false;
+
+      const resolveOnce = (result) => {
+        if (settled) return;
+        settled = true;
+        resolve(result);
+      };
+
+      const rejectOnce = (error) => {
+        if (settled) return;
+        settled = true;
+        reject(error);
+      };
+
+      child.on('error', rejectOnce);
+
+      if (!child.stdin || typeof child.stdin.write !== 'function' || typeof child.stdin.end !== 'function') {
+        rejectOnce(new Error('Claude CLI stdin is not available'));
+        return;
+      }
+
+      child.stdin.on('error', (error) => {
+        stdinError = error;
+        this.log(`Claude stdin stream error: ${error.message}`, 'debug');
+      });
+
+      if (child.stdin.writable === false) {
+        child.kill?.();
+        rejectOnce(new Error('Claude CLI stdin is not writable'));
+        return;
+      }
+
+      try {
+        child.stdin.write(prompt);
+        child.stdin.end();
+      } catch (error) {
+        child.kill?.();
+        rejectOnce(new Error(`Claude CLI stdin write failed: ${error.message}`));
+        return;
+      }
 
       child.stdout.on('data', (data) => {
         stdout += data.toString();
@@ -544,16 +585,16 @@ The subtask is complete only when verification passes.
         }
       });
 
-      child.on('close', (code) => {
-        if (code === 0) {
-          resolve({ stdout, stderr, code });
+      child.on('close', (code, signal) => {
+        if (stdinError) {
+          rejectOnce(new Error(`Claude CLI stdin write failed: ${stdinError.message}`));
+        } else if (code === 0) {
+          resolveOnce({ stdout, stderr, code });
+        } else if (signal) {
+          rejectOnce(new Error(`Claude CLI killed by signal ${signal}: ${stderr}`));
         } else {
-          reject(new Error(`Claude CLI exited with code ${code}: ${stderr}`));
+          rejectOnce(new Error(`Claude CLI exited with code ${code}: ${stderr}`));
         }
-      });
-
-      child.on('error', (error) => {
-        reject(error);
       });
     });
   }
