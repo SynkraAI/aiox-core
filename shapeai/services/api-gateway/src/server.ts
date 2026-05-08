@@ -1,4 +1,9 @@
 import 'dotenv/config'
+import { webcrypto } from 'crypto'
+// Node.js 18 não expõe `crypto` como global — necessário para jose e AWS SDK
+if (typeof (globalThis as Record<string, unknown>).crypto === 'undefined') {
+  Object.defineProperty(globalThis, 'crypto', { value: webcrypto, writable: false, configurable: true })
+}
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import rateLimit from '@fastify/rate-limit'
