@@ -1,7 +1,7 @@
 /**
  * @fileoverview Base AI Provider Class
  *
- * Abstract base class for AI CLI providers (Claude Code, Gemini CLI, etc.).
+ * Abstract base class for AI providers (Claude Code, Gemini CLI, HTTP APIs, etc.).
  * Defines the common interface for executing prompts and managing AI interactions.
  *
  * @see Epic GEMINI-INT - Story 2: AI Provider Factory Pattern
@@ -18,7 +18,7 @@ class AIProvider {
    * Create an AI provider
    * @param {Object} config - Provider configuration
    * @param {string} config.name - Provider name
-   * @param {string} config.command - CLI command to execute
+   * @param {string} config.command - CLI command or transport identifier
    * @param {number} [config.timeout=300000] - Execution timeout in ms (default: 5 min)
    * @param {number} [config.maxRetries=3] - Maximum retry attempts
    * @param {Object} [config.options={}] - Additional provider-specific options
@@ -91,7 +91,9 @@ class AIProvider {
       }
     }
 
-    throw new Error(`[${this.name}] All ${maxRetries} attempts failed. Last error: ${lastError.message}`);
+    throw new Error(
+      `[${this.name}] All ${maxRetries} attempts failed. Last error: ${lastError.message}`,
+    );
   }
 
   /**

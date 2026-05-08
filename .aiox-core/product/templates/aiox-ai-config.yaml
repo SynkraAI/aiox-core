@@ -1,6 +1,6 @@
 # AIOX AI Provider Configuration
 #
-# Configure AI providers (Claude Code, Gemini CLI) for AIOX operations.
+# Configure AI providers (Claude Code, Gemini CLI, OpenAI-compatible APIs) for AIOX operations.
 # This file controls which provider is used for different task types.
 #
 # @see Epic GEMINI-INT - Story 2: AI Provider Factory Pattern
@@ -8,19 +8,19 @@
 # Provider Configuration
 ai_providers:
   # Primary provider - used by default
-  primary: claude        # Options: claude, gemini
+  primary: claude # Options: claude, gemini, kimi, openai-compatible
 
   # Fallback provider - used when primary fails
-  fallback: gemini       # Options: claude, gemini, null (no fallback)
+  fallback: gemini # Options: claude, gemini, kimi, openai-compatible, null (no fallback)
 
   # Task-based routing
   # Route specific task types to preferred providers
   routing:
     # Simple tasks - use cheaper/faster provider
-    simple_tasks: gemini       # Code formatting, simple refactors
+    simple_tasks: gemini # Code formatting, simple refactors
 
     # Complex tasks - use more capable provider
-    complex_tasks: claude      # Architecture, security reviews
+    complex_tasks: claude # Architecture, security reviews
 
     # Documentation - high volume, speed matters
     documentation: gemini
@@ -40,10 +40,10 @@ ai_providers:
 # Claude Code Configuration
 claude:
   # Model to use
-  model: claude-3-5-sonnet    # Options: claude-3-5-sonnet, claude-3-opus, etc.
+  model: claude-3-5-sonnet # Options: claude-3-5-sonnet, claude-3-opus, etc.
 
   # Execution timeout (ms)
-  timeout: 300000             # 5 minutes
+  timeout: 300000 # 5 minutes
 
   # Maximum retry attempts
   maxRetries: 3
@@ -54,10 +54,10 @@ claude:
 # Gemini CLI Configuration
 gemini:
   # Model to use
-  model: gemini-2.0-flash     # Options: gemini-2.0-flash, gemini-2.0-pro
+  model: gemini-2.0-flash # Options: gemini-2.0-flash, gemini-2.0-pro
 
   # Execution timeout (ms)
-  timeout: 300000             # 5 minutes
+  timeout: 300000 # 5 minutes
 
   # Maximum retry attempts
   maxRetries: 3
@@ -68,37 +68,59 @@ gemini:
   # Use JSON output format by default
   jsonOutput: false
 
+# Kimi / Moonshot Configuration
+# Uses the OpenAI-compatible Chat Completions API. Keep MOONSHOT_API_KEY in .env.
+kimi:
+  provider: openai-compatible
+  baseURL: https://api.moonshot.ai/v1
+  endpoint: /chat/completions
+  apiKeyEnv: MOONSHOT_API_KEY
+  model: kimi-k2.5
+  timeout: 300000
+  maxRetries: 3
+
+# Generic OpenAI-Compatible Configuration
+# REQUIRED: Override all values below for your specific gateway.
+openai_compatible:
+  provider: openai-compatible
+  baseURL: https://your-openai-compatible-gateway.example/v1
+  endpoint: /chat/completions
+  apiKeyEnv: YOUR_OPENAI_COMPATIBLE_API_KEY
+  model: your-model-id
+  timeout: 300000
+  maxRetries: 3
+
 # Model Switching (Story 16)
 # Automatic selection between Flash and Pro based on task complexity
 model_switching:
-  enabled: false              # Enable when Story 16 is complete
+  enabled: false # Enable when Story 16 is complete
   default_model: gemini-2.0-flash
   complexity_threshold:
-    simple: 0.3               # < 0.3 = Flash
-    medium: 0.7               # 0.3-0.7 = Flash
-    complex: 1.0              # > 0.7 = Pro
+    simple: 0.3 # < 0.3 = Flash
+    medium: 0.7 # 0.3-0.7 = Flash
+    complex: 1.0 # > 0.7 = Pro
   quality_fallback:
     enabled: true
-    min_score: 0.6            # If quality < 0.6, retry with Pro
+    min_score: 0.6 # If quality < 0.6, retry with Pro
 
 # Parallel Execution (Story 17)
 # Run Claude + Gemini simultaneously for better quality
 parallel_execution:
-  enabled: false              # Enable when Story 17 is complete
-  default_mode: fallback      # Options: race, consensus, best-of, merge, fallback
+  enabled: false # Enable when Story 17 is complete
+  default_mode: fallback # Options: race, consensus, best-of, merge, fallback
 
   # Task-specific modes
   task_modes:
-    architecture: consensus   # Both must agree on architecture
-    security: consensus       # Critical - need agreement
-    code_generation: best-of  # Pick best code
-    documentation: race       # Speed matters
-    refactoring: merge        # Combine insights
+    architecture: consensus # Both must agree on architecture
+    security: consensus # Critical - need agreement
+    code_generation: best-of # Pick best code
+    documentation: race # Speed matters
+    refactoring: merge # Combine insights
 
   # Cost control
   cost_control:
-    max_parallel_cost: 1.00   # Max cost for parallel run (USD)
-    fallback_on_budget: true  # Disable parallel if over budget
+    max_parallel_cost: 1.00 # Max cost for parallel run (USD)
+    fallback_on_budget: true # Disable parallel if over budget
 
   # Quality thresholds
   quality_thresholds:

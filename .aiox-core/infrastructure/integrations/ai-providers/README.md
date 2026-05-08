@@ -1,6 +1,6 @@
 # AI Providers
 
-Multi-provider AI integration for AIOX. Supports Claude Code and Gemini CLI with automatic fallback and task-based routing.
+Multi-provider AI integration for AIOX. Supports Claude Code, Gemini CLI and OpenAI-compatible HTTP APIs with automatic fallback and task-based routing.
 
 ## Architecture
 
@@ -9,6 +9,7 @@ ai-providers/
 ├── ai-provider.js           # Base abstract class
 ├── claude-provider.js       # Claude Code implementation
 ├── gemini-provider.js       # Gemini CLI implementation
+├── openai-compatible-provider.js # OpenAI-compatible HTTP implementation
 ├── ai-provider-factory.js   # Factory with routing and fallback
 └── index.js                 # Module exports
 ```
@@ -35,13 +36,13 @@ const { getProviderForTask } = require('./ai-providers');
 
 // Get optimal provider for task type
 const provider = getProviderForTask('code_generation'); // Returns Gemini (faster)
-const provider = getProviderForTask('security');        // Returns Claude (deeper reasoning)
+const provider = getProviderForTask('security'); // Returns Claude (deeper reasoning)
 ```
 
 ### Direct Provider Access
 
 ```javascript
-const { ClaudeProvider, GeminiProvider } = require('./ai-providers');
+const { ClaudeProvider, GeminiProvider, OpenAICompatibleProvider } = require('./ai-providers');
 
 // Claude
 const claude = new ClaudeProvider({ model: 'claude-3-5-sonnet' });
@@ -50,6 +51,15 @@ const response = await claude.execute('Explain this function');
 // Gemini with JSON output
 const gemini = new GeminiProvider({ jsonOutput: true });
 const response = await gemini.executeJson('List 5 best practices');
+
+// Kimi/Moonshot through the OpenAI-compatible contract
+const kimi = new OpenAICompatibleProvider({
+  name: 'kimi',
+  baseURL: 'https://api.moonshot.ai/v1',
+  apiKeyEnv: 'MOONSHOT_API_KEY',
+  model: 'kimi-k2.5',
+});
+const response = await kimi.execute('Explain this function');
 ```
 
 ### Check Provider Status
@@ -84,16 +94,23 @@ claude:
 gemini:
   model: gemini-2.0-flash
   previewFeatures: true
+
+kimi:
+  provider: openai-compatible
+  baseURL: https://api.moonshot.ai/v1
+  endpoint: /chat/completions
+  apiKeyEnv: MOONSHOT_API_KEY
+  model: kimi-k2.5
 ```
 
 ## Provider Comparison
 
-| Feature | Claude | Gemini |
-|---------|--------|--------|
-| Best for | Complex reasoning, security | Speed, cost efficiency |
-| JSON output | Manual parsing | Native `--output-format json` |
-| Cost | Higher | ~4x cheaper (Flash) |
-| SWE-bench | ~70% | 78% (Flash) |
+| Feature     | Claude                      | Gemini                        |
+| ----------- | --------------------------- | ----------------------------- |
+| Best for    | Complex reasoning, security | Speed, cost efficiency        |
+| JSON output | Manual parsing              | Native `--output-format json` |
+| Cost        | Higher                      | ~4x cheaper (Flash)           |
+| SWE-bench   | ~70%                        | 78% (Flash)                   |
 
 ## Epic Reference
 

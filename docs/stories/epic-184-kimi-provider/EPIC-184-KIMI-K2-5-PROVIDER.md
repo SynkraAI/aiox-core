@@ -5,7 +5,7 @@
 | Campo | Valor |
 |-------|-------|
 | Epic ID | 184 |
-| Status | Ready |
+| Status | In Review |
 | Source Issue | #184 |
 | Issue URL | https://github.com/SynkraAI/aiox-core/issues/184 |
 | Repository | SynkraAI/aiox-core |
@@ -45,7 +45,7 @@ Adicionar suporte nativo e backward-compatible para Kimi K2.5 da Moonshot AI com
 
 | Story | Título | Status | Prioridade | Ordem |
 |-------|--------|--------|------------|-------|
-| 184.1 | OpenAI-Compatible Kimi Provider Contract | Ready | P4 | 1 |
+| 184.1 | OpenAI-Compatible Kimi Provider Contract | Ready for Review | P4 | 1 |
 
 ## Ordem de Execução
 
