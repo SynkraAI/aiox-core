@@ -554,6 +554,43 @@ describe('BuildStateManager', () => {
 
       expect(logs.length).toBe(3);
     });
+
+    test('should serialize circular log details without throwing', () => {
+      const details = { step: 'circular-log' };
+      details.self = details;
+
+      expect(() => {
+        manager._logAttempt('1.circular', 'debug', details);
+        manager.saveState();
+      }).not.toThrow();
+
+      const content = fs.readFileSync(path.join(testDir, 'plan', 'build-attempts.log'), 'utf-8');
+      expect(content).toContain('1.circular');
+      expect(content).toContain('"self":"[Circular]"');
+    });
+
+    test('should serialize non-JSON log values into stable data shapes', () => {
+      const cause = new Error('nested cause');
+      const error = new TypeError('boom');
+      error.cause = cause;
+      error.details = new Map([['attempt', 3n]]);
+
+      expect(() => {
+        manager._logAttempt('1.non-json', 'debug', {
+          error,
+          set: new Set([2n]),
+          callback: () => 'ignored',
+        });
+        manager.saveState();
+      }).not.toThrow();
+
+      const content = fs.readFileSync(path.join(testDir, 'plan', 'build-attempts.log'), 'utf-8');
+      expect(content).toContain('"name":"TypeError"');
+      expect(content).toContain('"message":"boom"');
+      expect(content).toContain('[["attempt","3"]]');
+      expect(content).toContain('"set":["2"]');
+      expect(content).toContain('"callback":"() => \'ignored\'"');
+    });
   });
 
   // ─────────────────────────────────────────────────────────────────────────────────

@@ -87,6 +87,119 @@ const NotificationType = {
   ABANDONED: 'abandoned',
 };
 
+/**
+ * Converts arbitrary values into stable, JSON-safe log data.
+ *
+ * @param {*} value - Value to sanitize.
+ * @param {WeakSet<object>} [seen=new WeakSet()] - Objects in the current path.
+ * @returns {*} Data-only representation that JSON.stringify can serialize.
+ */
+function sanitizeLogValue(value, seen = new WeakSet()) {
+  if (value === undefined || value === null) {
+    return value;
+  }
+
+  const valueType = typeof value;
+
+  if (valueType === 'bigint') {
+    return value.toString();
+  }
+
+  if (valueType === 'function' || valueType === 'symbol') {
+    return String(value);
+  }
+
+  if (valueType !== 'object') {
+    return value;
+  }
+
+  if (seen.has(value)) {
+    return '[Circular]';
+  }
+
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? value.toString() : value.toISOString();
+  }
+
+  if (value instanceof RegExp) {
+    return value.toString();
+  }
+
+  if (value instanceof Error) {
+    const safeError = {
+      name: value.name,
+      message: value.message,
+      stack: value.stack,
+    };
+
+    seen.add(value);
+
+    try {
+      Object.getOwnPropertyNames(value).forEach((key) => {
+        if (key === 'name' || key === 'message' || key === 'stack') {
+          return;
+        }
+
+        try {
+          safeError[key] = sanitizeLogValue(value[key], seen);
+        } catch (error) {
+          safeError[key] = `[Unserializable: ${error.message}]`;
+        }
+      });
+
+      return safeError;
+    } finally {
+      seen.delete(value);
+    }
+  }
+
+  seen.add(value);
+
+  try {
+    if (value instanceof Map) {
+      return Array.from(value.entries()).map(([key, entryValue]) => [
+        sanitizeLogValue(key, seen),
+        sanitizeLogValue(entryValue, seen),
+      ]);
+    }
+
+    if (value instanceof Set) {
+      return Array.from(value.values()).map((entryValue) => sanitizeLogValue(entryValue, seen));
+    }
+
+    if (Array.isArray(value)) {
+      return value.map((entryValue) => sanitizeLogValue(entryValue, seen));
+    }
+
+    return Object.keys(value).reduce((safeValue, key) => {
+      try {
+        safeValue[key] = sanitizeLogValue(value[key], seen);
+      } catch (error) {
+        safeValue[key] = `[Unserializable: ${error.message}]`;
+      }
+      return safeValue;
+    }, {});
+  } catch (error) {
+    return `[Unserializable: ${error.message}]`;
+  } finally {
+    seen.delete(value);
+  }
+}
+
+/**
+ * Stringifies attempt log details without allowing log formatting to throw.
+ *
+ * @param {*} value - Value to stringify.
+ * @returns {string} JSON string or a fallback marker.
+ */
+function stringifyLogDetails(value) {
+  try {
+    return JSON.stringify(sanitizeLogValue(value));
+  } catch (error) {
+    return JSON.stringify(`[Unserializable: ${error.message}]`);
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              SCHEMA VALIDATION
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -927,7 +1040,7 @@ class BuildStateManager {
     };
 
     // Format log line
-    const logLine = `[${entry.timestamp}] [${this.storyId}] [${subtaskId}] ${action}: ${JSON.stringify(details)}\n`;
+    const logLine = `[${entry.timestamp}] [${this.storyId}] [${subtaskId}] ${action}: ${stringifyLogDetails(details)}\n`;
 
     this._logBuffer.push(logLine);
 

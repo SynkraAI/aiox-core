@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T03:56:46.901Z"
+generated_at: "2026-05-08T04:14:50.631Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1111
 files:
@@ -409,9 +409,9 @@ files:
     type: core
     size: 33071
   - path: core/execution/build-state-manager.js
-    hash: sha256:415fca3ad3d750db1f41f14f33971cf661ee9d6073a570175d695bb3c1be655c
+    hash: sha256:38926431dc75a750c433c6f706491778f8aebd27c88c6534dfcc05ae110cf369
     type: core
-    size: 48976
+    size: 51697
   - path: core/execution/context-injector.js
     hash: sha256:7654f6e6c3d555f3963369e71edf84b15c0fdec53bd161800b71782f78275244
     type: core
