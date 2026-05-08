@@ -5,7 +5,7 @@
 | Campo | Valor |
 |-------|-------|
 | Epic ID | 184 |
-| Status | Draft |
+| Status | Ready |
 | Source Issue | #184 |
 | Issue URL | https://github.com/SynkraAI/aiox-core/issues/184 |
 | Repository | SynkraAI/aiox-core |
@@ -45,7 +45,7 @@ Adicionar suporte nativo e backward-compatible para Kimi K2.5 da Moonshot AI com
 
 | Story | Título | Status | Prioridade | Ordem |
 |-------|--------|--------|------------|-------|
-| 184.1 | OpenAI-Compatible Kimi Provider Contract | Draft | P4 | 1 |
+| 184.1 | OpenAI-Compatible Kimi Provider Contract | Ready | P4 | 1 |
 
 ## Ordem de Execução
 
@@ -69,6 +69,13 @@ Adicionar suporte nativo e backward-compatible para Kimi K2.5 da Moonshot AI com
 - `npm run lint`
 - `npm run typecheck`
 - `npm run validate:manifest`, se novos arquivos entrarem no pacote instalável.
+
+## PO Validation
+
+- Story 184.1 validada em 2026-05-08 contra `origin/main` após merge do PR #710.
+- Nenhuma story anterior existe na Epic 184, então não há divergência cross-story.
+- Ajustes adicionados à story: export do provider em `index.js`, atualização de README/template `.aiox-ai-config.yaml`, fallback configurável no `subagent-dispatcher` e neutralização do JSDoc CLI-only em `AIProvider`.
+- Resultado: Ready para implementação, mantendo #184 aberto até existir evidência runtime.
 
 ## Referências
 
