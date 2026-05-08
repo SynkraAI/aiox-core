@@ -5,7 +5,7 @@
 | Campo | Valor |
 |-------|-------|
 | Epic ID | 447 |
-| Status | Ready |
+| Status | Done |
 | Source Issue | #447 |
 | Issue URL | https://github.com/SynkraAI/aiox-core/issues/447 |
 | Repository | SynkraAI/aiox-core |
@@ -26,7 +26,7 @@ Execuções longas de agentes acumulam mensagens e eventualmente atingem limites
 - `.aiox-core/core/synapse/utils/tokens.js` já oferece `estimateTokens()` por heurística `chars / 4`.
 - `.aiox-core/core/synapse/memory/memory-bridge.js` já faz retrieval bracket-aware de memórias, mas é consumer-only e não gerencia histórico ativo.
 - `.aiox-core/core/orchestration/context-manager.js` já persiste estado de workflow, mas não é um gerenciador de janela de contexto de LLM.
-- Não existe hoje uma classe `HierarchicalContextManager` ou API equivalente.
+- A API `HierarchicalContextManager` agora existe em `.aiox-core/core/synapse/context/` e é exportada pela superfície canônica de contexto.
 
 ## Escopo
 
@@ -48,7 +48,23 @@ Execuções longas de agentes acumulam mensagens e eventualmente atingem limites
 
 | Story | Título | Status | Prioridade | Ordem |
 |-------|--------|--------|------------|-------|
-| 447.1 | Hierarchical Context Manager Contract | Ready | P3 | 1 |
+| 447.1 | Hierarchical Context Manager Contract | Done | P3 | 1 |
+
+## Progress
+
+| Métrica | Valor |
+|---------|-------|
+| Stories Done | 1/1 |
+| Percentual | 100% |
+| Último Merge | PR #706 |
+| Merge Commit | `d3f9e6fc9449c9f4797148754df2424660bcdc5d` |
+
+## Closure Evidence
+
+- PR #706 implementou e mergeou a superfície canônica de gerenciamento hierárquico de contexto: https://github.com/SynkraAI/aiox-core/pull/706
+- Issue #447 foi atendido pela story 447.1.
+- A implementação é aditiva e preserva `context-tracker`, `MemoryBridge` e o context manager de orchestration sem mudanças comportamentais obrigatórias.
+- Próximas integrações em loops de agente devem ser tratadas como novas stories, fora do escopo deste epic.
 
 ## Ordem de Execução
 
