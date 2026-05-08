@@ -15,6 +15,10 @@ const {
 // Test fixtures
 const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project-bob');
 
+function portablePath(targetPath) {
+  return String(targetPath).replace(/\\/g, '/');
+}
+
 // Mock Epic 11 modules
 jest.mock('../../../.aiox-core/core/config/config-resolver', () => ({
   resolveConfig: jest.fn(),
@@ -1061,7 +1065,7 @@ describe('BobOrchestrator', () => {
       const result = orchestrator._resolveStoryPath('99.99');
 
       // Then
-      expect(result).toContain('docs/stories/active');
+      expect(portablePath(result)).toContain('docs/stories/active');
       expect(result).toContain('99.99.story.md');
     });
   });
