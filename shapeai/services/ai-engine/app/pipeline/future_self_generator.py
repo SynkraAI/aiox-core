@@ -73,7 +73,7 @@ def generate_future_self(
         resized = _resize(front_bytes)
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash-preview-image-generation",
+            model="gemini-2.5-flash-image",
             contents=[
                 genai_types.Part.from_bytes(data=resized, mime_type="image/jpeg"),
                 genai_types.Part.from_text(text=prompt),
@@ -81,15 +81,27 @@ def generate_future_self(
             config=genai_types.GenerateContentConfig(
                 response_modalities=["IMAGE", "TEXT"],
                 temperature=1.0,
+                safety_settings=[
+                    genai_types.SafetySetting(
+                        category="HARM_CATEGORY_HARASSMENT",
+                        threshold="BLOCK_ONLY_HIGH",
+                    ),
+                    genai_types.SafetySetting(
+                        category="HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                        threshold="BLOCK_ONLY_HIGH",
+                    ),
+                ],
             ),
         )
 
         for candidate in response.candidates or []:
+            finish = getattr(candidate, "finish_reason", None)
             for part in candidate.content.parts or []:
                 if part.inline_data and part.inline_data.data:
                     raw = part.inline_data.data
-                    # SDK may return bytes or base64 string
+                    logger.info("[future_self] Image generated successfully (%s bytes)", len(raw) if isinstance(raw, bytes) else "b64")
                     return raw if isinstance(raw, bytes) else base64.b64decode(raw)
+            logger.warning("[future_self] Candidate had no image — finish_reason=%s", finish)
 
         logger.warning("[future_self] Gemini returned no image in response")
         return None
