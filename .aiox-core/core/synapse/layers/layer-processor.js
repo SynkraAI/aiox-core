@@ -34,6 +34,7 @@ class LayerProcessor {
     this.name = name;
     this.layer = layer;
     this.timeout = timeout;
+    this._lastError = null;
   }
 
   /**
@@ -65,6 +66,7 @@ class LayerProcessor {
    */
   _safeProcess(context) {
     const start = Date.now();
+    this._lastError = null;
     try {
       const result = this.process(context);
       const elapsed = Date.now() - start;
@@ -73,9 +75,19 @@ class LayerProcessor {
       }
       return result;
     } catch (error) {
-      console.warn(`[synapse:${this.name}] Error: ${error.message}`);
+      this._lastError = error instanceof Error ? error : new Error(String(error));
+      console.warn(`[synapse:${this.name}] Error: ${this._lastError.message}`);
       return null;
     }
+  }
+
+  /**
+   * Return the last error captured by _safeProcess(), if any.
+   *
+   * @returns {Error|null} Last captured processing error.
+   */
+  getLastError() {
+    return this._lastError;
   }
 }
 

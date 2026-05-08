@@ -180,6 +180,14 @@ const PIPELINE_TIMEOUT_MS = 100;
 const DEFAULT_ACTIVE_LAYERS = [0, 1, 2];
 const LEGACY_MODE = process.env.SYNAPSE_LEGACY_MODE === 'true';
 
+function getLayerError(layer) {
+  if (!layer) return null;
+  if (typeof layer.getLastError === 'function') {
+    return layer.getLastError();
+  }
+  return null;
+}
+
 /**
  * Orchestrates the 8-layer SYNAPSE context injection pipeline.
  *
@@ -298,14 +306,25 @@ class SynapseEngine {
         previousLayers,
       });
 
-      const result = layer._safeProcess(context);
+      let result;
+      try {
+        result = layer._safeProcess(context);
+      } catch (error) {
+        metrics.errorLayer(layer.name, error);
+        continue;
+      }
 
       if (result && Array.isArray(result.rules)) {
         metrics.endLayer(layer.name, result.rules.length);
         results.push(result);
         previousLayers.push(result);
       } else if (result === null || result === undefined) {
-        metrics.skipLayer(layer.name, 'Returned null');
+        const layerError = getLayerError(layer);
+        if (layerError) {
+          metrics.errorLayer(layer.name, layerError);
+        } else {
+          metrics.skipLayer(layer.name, 'Returned null');
+        }
       } else {
         metrics.skipLayer(layer.name, 'Invalid result format');
       }

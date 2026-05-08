@@ -395,6 +395,35 @@ describe('SynapseEngine', () => {
         expect(calls[i].prevCount).toBeGreaterThanOrEqual(calls[i - 1].prevCount);
       }
     });
+
+    test('should record captured layer processing errors in metrics', async () => {
+      const layer = engine.layers[0];
+      layer._safeProcess = jest.fn(() => null);
+      layer.getLastError = jest.fn(() => new Error('Layer processing failed'));
+
+      const result = await engine.process('test', {});
+
+      expect(result.metrics.per_layer[layer.name]).toEqual(expect.objectContaining({
+        status: 'error',
+        error: 'Layer processing failed',
+      }));
+      expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
+    });
+
+    test('should record direct _safeProcess exceptions in metrics', async () => {
+      const layer = engine.layers[0];
+      layer._safeProcess = jest.fn(() => {
+        throw new Error('Unsafe layer crash');
+      });
+
+      const result = await engine.process('test', {});
+
+      expect(result.metrics.per_layer[layer.name]).toEqual(expect.objectContaining({
+        status: 'error',
+        error: 'Unsafe layer crash',
+      }));
+      expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
+    });
   });
 
   describe('process() — metrics', () => {

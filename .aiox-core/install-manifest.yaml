@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T06:26:53.273Z"
+generated_at: "2026-05-08T06:38:44.310Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1111
 files:
@@ -1129,9 +1129,9 @@ files:
     type: core
     size: 8122
   - path: core/synapse/engine.js
-    hash: sha256:47bab93a2144edce875ee68cc2717fee1bd824c9affdd5964454f5141310b8e0
+    hash: sha256:3a459378da54c9c59102712e86a8800b6a854db1aee58c85fa54b45c214ffb66
     type: core
-    size: 13602
+    size: 14047
   - path: core/synapse/layers/l0-constitution.js
     hash: sha256:2123a6a44915aaac2a6bbd26c67c285c9d1e12b50fe42a8ada668306b07d1c4a
     type: core
@@ -1165,9 +1165,9 @@ files:
     type: core
     size: 4672
   - path: core/synapse/layers/layer-processor.js
-    hash: sha256:15f9e4c1525d3fa2186170705a26191ad87d94ffd7fa7d61f373b07b6fb3d874
+    hash: sha256:9cdb5efb2e95780373dd0ce8dcb64791dd1471128fc6914d274c6744036842a3
     type: core
-    size: 2882
+    size: 3222
   - path: core/synapse/memory/memory-bridge.js
     hash: sha256:820875f97ceea80fc6402c0dab1706cfe58de527897b22dea68db40b0d6ec368
     type: core
