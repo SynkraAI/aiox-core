@@ -19,7 +19,7 @@ const repoRoot = path.resolve(__dirname, '..', '..');
 const rootPackageJson = require(path.join(repoRoot, 'package.json'));
 const packageInstallRelativePath = path.join('node_modules', ...rootPackageJson.name.split('/'));
 const { getSkillId } = require(
-  path.join(repoRoot, '.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index')
+  path.join(repoRoot, '.aiox-core', 'infrastructure', 'scripts', 'codex-skills-sync', 'index'),
 );
 function parseTimeoutEnv(name, fallbackMs) {
   const parsed = Number.parseInt(process.env[name] || '', 10);
@@ -80,7 +80,7 @@ function run(command, args, options = {}) {
       `Command failed (${result.status}): ${label}`,
       [result.stdout && `STDOUT:\n${result.stdout}`, result.stderr && `STDERR:\n${result.stderr}`]
         .filter(Boolean)
-        .join('\n\n')
+        .join('\n\n'),
     );
   }
 
@@ -187,7 +187,7 @@ async function main() {
     projectRoot,
     'node_modules',
     '.bin',
-    `aiox-core${process.platform === 'win32' ? '.cmd' : ''}`
+    `aiox-core${process.platform === 'win32' ? '.cmd' : ''}`,
   );
   const packagedCoreDir = path.join(projectRoot, packageInstallRelativePath, '.aiox-core');
   assertPathExists(path.join(packageInstallRelativePath, 'bin', 'aiox.js'), 'file');
@@ -240,7 +240,7 @@ async function main() {
     assertContains(
       claudeSkillContent,
       `Source: .aiox-core/development/agents/${agent}.md`,
-      claudeSkill
+      claudeSkill,
     );
 
     const codexAgentContent = assertNoSourceRepoLeak(codexAgent);
@@ -257,7 +257,7 @@ async function main() {
     '.aiox-core',
     'development',
     'scripts',
-    'generate-greeting.js'
+    'generate-greeting.js',
   );
   assertPathExists('.aiox-core/development/scripts/generate-greeting.js', 'file');
 
@@ -289,7 +289,7 @@ main()
     console.error(`\n[installed-skills-e2e] FAIL: ${error.message}`);
     if (!keepTemp) {
       console.error(
-        '[installed-skills-e2e] Re-run with AIOX_E2E_KEEP_TEMP=1 to preserve temp files.'
+        '[installed-skills-e2e] Re-run with AIOX_E2E_KEEP_TEMP=1 to preserve temp files.',
       );
     } else {
       console.error(`[installed-skills-e2e] Temp root preserved: ${tempRoot}`);

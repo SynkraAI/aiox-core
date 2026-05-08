@@ -218,7 +218,7 @@ if (isProAvailable()) {
 | Repository | Checkout | Tests | Publish |
 |------------|----------|-------|---------|
 | **aiox-core** | Without submodules | Core-only (pro/ absent) | npm (excludes pro/) |
-| **aiox-pro** | With aiox-core cloned | Integration (pro/ symlinked) | npm artifact for maintainers, customer access through license-server signed URL |
+| **aiox-pro** | With aiox-core cloned | Integration (pro/ symlinked) | npm artifact for maintainers, customer access through license-server-signed URL |
 
 ---
 

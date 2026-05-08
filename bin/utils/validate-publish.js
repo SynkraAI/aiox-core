@@ -63,7 +63,10 @@ function parsePackedFiles(packOutput) {
         !line.includes('integrity:') &&
         !line.includes('total files:'),
     )
-    .map((line) => line.replace(/^.*npm notice\s+/, '').trim())
+    .map((line) => {
+      const sizedPath = line.match(/npm notice\s+[\d.]+[kMG]?B?\s+(.+)/);
+      return sizedPath ? sizedPath[1].trim() : line.replace(/^.*npm notice\s+/, '').trim();
+    })
     .filter(Boolean);
 }
 

@@ -77,14 +77,14 @@ jobs:
 
       - name: Checkout with submodules
         if: steps.token-check.outputs.skip != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: 'recursive'
 
       - name: Setup Node.js
         if: steps.token-check.outputs.skip != 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'

@@ -30,6 +30,10 @@ describe('Publish Safety Gate (Story INS-4.10 / PRO-13.5)', () => {
       expect(scriptSource).toContain('Public package excludes pro/ content');
     });
 
+    test('legacy npm notice parser strips size prefixes before path checks', () => {
+      expect(scriptSource).toContain('npm notice\\s+[\\d.]+[kMG]?B?\\s+(.+)');
+    });
+
     test('script exits with code 1 on failure', () => {
       expect(scriptSource).toContain('process.exit(1)');
     });

@@ -220,4 +220,12 @@ describe('CLI alias reset-password', () => {
     );
     expect(cliSource).toMatch(/reset-password\s+.*alias/i);
   });
+
+  test('install and wizard accept short -k key flag', () => {
+    const cliSource = require('fs').readFileSync(
+      require('path').join(__dirname, '../packages/aiox-pro-cli/bin/aiox-pro.js'),
+      'utf-8',
+    );
+    expect(cliSource).toContain("getArgValue('--key', '-k')");
+  });
 });

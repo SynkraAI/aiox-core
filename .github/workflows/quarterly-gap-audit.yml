@@ -6,16 +6,20 @@ on:
     - cron: '0 0 1 1,4,7,10 *'
   workflow_dispatch:  # Manual trigger
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   architecture-audit:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '18'
           cache: 'npm'
@@ -47,7 +51,7 @@ jobs:
           echo "gap_count=$(cat outputs/architecture-map/reports/gap-count.txt)" >> $GITHUB_OUTPUT
 
       - name: Upload audit artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gap-audit-${{ github.run_number }}
           path: |
@@ -57,7 +61,7 @@ jobs:
             outputs/architecture-map/reports/gap-trend-history.json
 
       - name: Create GitHub issue
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -74,5 +78,4 @@ jobs:
               labels: ['architecture', 'gap-remediation', 'quarterly-audit'],
               assignees: []  // Configure team members in repo settings
             });
-
 

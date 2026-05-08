@@ -17,14 +17,14 @@ jobs:
       pull-requests: write
     steps:
       - name: Label PR based on files changed
-        uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4
+        uses: actions/labeler@v6 # v6
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/labeler.yml
           sync-labels: true
 
       - name: Check for squad changes and add label
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        uses: actions/github-script@v9 # v9
         with:
           script: |
             const files = await github.paginate(github.rest.pulls.listFiles, {

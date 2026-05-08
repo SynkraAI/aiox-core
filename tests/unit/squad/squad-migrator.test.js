@@ -161,7 +161,7 @@ describe('SquadMigrator', () => {
       expect(analysis.needsMigration).toBe(true);
       expect(analysis.issues.some((i) => i.type === 'MISSING_AIOX_TYPE')).toBe(true);
       expect(analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aiox.type')).toBe(
-        true
+        true,
       );
     });
 
@@ -172,7 +172,7 @@ describe('SquadMigrator', () => {
       expect(analysis.needsMigration).toBe(true);
       expect(analysis.issues.some((i) => i.type === 'MISSING_MIN_VERSION')).toBe(true);
       expect(
-        analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aiox.minVersion')
+        analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aiox.minVersion'),
       ).toBe(true);
     });
 
@@ -438,7 +438,7 @@ describe('SquadMigrator', () => {
 
       expect(consoleLogSpy).toHaveBeenCalled();
       expect(consoleLogSpy.mock.calls.some((call) => call[0].includes('[SquadMigrator]'))).toBe(
-        true
+        true,
       );
     });
 
@@ -447,7 +447,7 @@ describe('SquadMigrator', () => {
       await migrator.analyze(squadPath);
 
       const migratorLogs = consoleLogSpy.mock.calls.filter((call) =>
-        call[0].includes('[SquadMigrator]')
+        call[0].includes('[SquadMigrator]'),
       );
       expect(migratorLogs.length).toBe(0);
     });
@@ -581,7 +581,7 @@ describe('SquadMigrator', () => {
       await fs.mkdir(testPath, { recursive: true });
 
       await expect(migrator._executeAction(testPath, { type: 'UNKNOWN_ACTION' })).rejects.toThrow(
-        SquadMigratorError
+        SquadMigratorError,
       );
     });
   });
@@ -597,7 +597,7 @@ describe('SquadMigrator', () => {
       await fs.writeFile(
         path.join(testPath, 'config.yaml'),
         yaml.dump({ name: 'test', version: '1.0.0' }),
-        'utf-8'
+        'utf-8',
       );
 
       // Create a custom migrator that will fail on ADD_FIELD

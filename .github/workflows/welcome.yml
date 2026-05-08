@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Welcome first-time contributors
-        uses: actions/first-interaction@v1
+        uses: actions/first-interaction@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: |
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_message: |
             Welcome to **aiox-core**! Thanks for opening your first issue.
 
             **What happens next?**
@@ -38,7 +38,7 @@ jobs:
 
             **Looking to contribute?** Check issues labeled `community: good first issue`.
 
-          pr-message: |
+          pr_message: |
             Welcome to **aiox-core**! Thanks for your first pull request.
 
             **What happens next?**
@@ -55,7 +55,7 @@ jobs:
 
       - name: Add triage label to new issues
         if: github.event_name == 'issues'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const labels = await github.rest.issues.listLabelsOnIssue({

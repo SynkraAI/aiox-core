@@ -327,7 +327,7 @@ describe('GreetingBuilder', () => {
       jest.useFakeTimers();
       // Mock slow operation
       loadProjectStatus.mockImplementation(
-        () => new Promise((resolve) => setTimeout(resolve, 200))
+        () => new Promise((resolve) => setTimeout(resolve, 200)),
       );
 
       const greetingPromise = builder.buildGreeting(mockAgent, {});

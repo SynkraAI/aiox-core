@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-08T19:13:43.512Z'
+  lastUpdated: '2026-05-08T19:57:34.743Z'
   entityCount: 755
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -12802,8 +12802,11 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:8246c4c3997ddff6fcf51555fb840bbd4fcac3c294e5ed5fa2c8585a42d91029
-      lastVerified: '2026-05-07T07:53:00.000Z'
+      checksum: sha256:532bdded456b4d5c62ddcfb82a145c67e2c34a42153589cf7a4632d27b16fa7d
+      lastVerified: '2026-05-08T19:57:34.737Z'
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
     aiox-error:
       path: .aiox-core/core/errors/aiox-error.js
       layer: L1

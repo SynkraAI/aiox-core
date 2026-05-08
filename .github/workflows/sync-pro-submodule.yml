@@ -24,7 +24,7 @@ jobs:
       SYNC_BRANCH: bot/sync-pro-submodule
     steps:
       - name: Checkout aiox-core
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ github.token }}

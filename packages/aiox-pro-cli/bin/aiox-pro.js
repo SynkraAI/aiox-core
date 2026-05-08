@@ -63,13 +63,15 @@ function delegateToAiox(subcommand) {
 /**
  * Get value of a CLI argument (e.g., --key VALUE).
  *
- * @param {string} flag - Flag name (e.g., '--key')
+ * @param {...string} flags - Flag names (e.g., '--key', '-k')
  * @returns {string|null} Value or null
  */
-function getArgValue(flag) {
-  const idx = args.indexOf(flag);
-  if (idx !== -1 && idx + 1 < args.length) {
-    return args[idx + 1];
+function getArgValue(...flags) {
+  for (const flag of flags) {
+    const idx = args.indexOf(flag);
+    if (idx !== -1 && idx + 1 < args.length) {
+      return args[idx + 1];
+    }
   }
   return null;
 }
@@ -139,6 +141,7 @@ Examples:
   npx aiox-pro update
   npx aiox-pro setup
   npx aiox-pro wizard --key PRO-XXXX-XXXX-XXXX-XXXX
+  npx aiox-pro install -k PRO-XXXX-XXXX-XXXX-XXXX
   npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aiox-pro status
   npx aiox-pro recover
@@ -148,7 +151,7 @@ Documentation: https://synkra.ai/pro/docs
 }
 
 function installPro() {
-  runProWizard(getArgValue('--key'));
+  runProWizard(getArgValue('--key', '-k'));
 }
 
 // ─── Main ───────────────────────────────────────────────────────────────────
@@ -172,7 +175,7 @@ switch (command) {
   case 'setup':
   case 'wizard': {
     // Run the Pro Installation Wizard with license gate
-    const wizardKey = getArgValue('--key');
+    const wizardKey = getArgValue('--key', '-k');
     runProWizard(wizardKey);
     break;
   }

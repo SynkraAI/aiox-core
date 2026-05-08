@@ -23,7 +23,7 @@ describe('Wizard Validation Flow', () => {
     tempDirs.push(dir);
     fs.writeFileSync(
       path.join(dir, 'package.json'),
-      JSON.stringify({ name: 'validation-fixture', version: '1.0.0' }, null, 2)
+      JSON.stringify({ name: 'validation-fixture', version: '1.0.0' }, null, 2),
     );
     return dir;
   }

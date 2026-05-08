@@ -6,7 +6,7 @@
 |-------|-------|
 | Story ID | 447.1 |
 | Epic | [447 - Hierarchical Context Management](./EPIC-447-HIERARCHICAL-CONTEXT-MANAGEMENT.md) |
-| Status | Ready for Review |
+| Status | Done |
 | Executor | @dev |
 | Quality Gate | @architect |
 | quality_gate_tools | npm test focused, npm run lint, npm run typecheck, npm run validate:manifest |
@@ -24,6 +24,7 @@
 - [x] PO validated
 - [x] Ready for implementation
 - [x] Ready for Review
+- [x] Done
 
 ## Executor Assignment
 
@@ -66,16 +67,16 @@ Existing surfaces to reuse or preserve:
 
 ## Acceptance Criteria
 
-- [ ] AC1: A new canonical `HierarchicalContextManager` API exists under the SYNAPSE/context runtime and is exported from the appropriate module surface.
-- [ ] AC2: The API supports at minimum `addMessage(message)`, `getContext()`, `getStats()` and `clear()` without requiring a live LLM provider.
-- [ ] AC3: Configuration supports `maxTokens`, `summarizationThreshold`, injected `tokenizer`, injected `summarizer`, and a safe fallback to the existing `estimateTokens()` utility.
-- [ ] AC4: When the active context crosses the configured threshold, older messages are summarized into a long-term buffer while recent messages remain available in short-term context.
-- [ ] AC5: `getContext()` returns a context payload that stays within `maxTokens` under deterministic tests, including cases with repeated long messages.
-- [ ] AC6: Swap events are observable through a minimal event interface or callback hooks, including success and failure paths, without crashing the agent loop on summarization failure.
-- [ ] AC7: The implementation preserves message role/content/metadata shape and never silently drops unsummarized content unless the configured summarizer explicitly returns a summary.
-- [ ] AC8: The story does not alter existing `context-tracker`, `MemoryBridge`, or orchestration behavior except through additive exports or optional integration points.
-- [ ] AC9: Documentation includes a usage example matching the issue intent and explains how to inject tokenizer/summarizer dependencies.
-- [ ] AC10: Focused tests cover threshold behavior, token accounting, summary insertion, failure fallback, metadata preservation and max-token enforcement.
+- [x] AC1: A new canonical `HierarchicalContextManager` API exists under the SYNAPSE/context runtime and is exported from the appropriate module surface.
+- [x] AC2: The API supports at minimum `addMessage(message)`, `getContext()`, `getStats()` and `clear()` without requiring a live LLM provider.
+- [x] AC3: Configuration supports `maxTokens`, `summarizationThreshold`, injected `tokenizer`, injected `summarizer`, and a safe fallback to the existing `estimateTokens()` utility.
+- [x] AC4: When the active context crosses the configured threshold, older messages are summarized into a long-term buffer while recent messages remain available in short-term context.
+- [x] AC5: `getContext()` returns a context payload that stays within `maxTokens` under deterministic tests, including cases with repeated long messages.
+- [x] AC6: Swap events are observable through a minimal event interface or callback hooks, including success and failure paths, without crashing the agent loop on summarization failure.
+- [x] AC7: The implementation preserves message role/content/metadata shape and never silently drops unsummarized content unless the configured summarizer explicitly returns a summary.
+- [x] AC8: The story does not alter existing `context-tracker`, `MemoryBridge`, or orchestration behavior except through additive exports or optional integration points.
+- [x] AC9: Documentation includes a usage example matching the issue intent and explains how to inject tokenizer/summarizer dependencies.
+- [x] AC10: Focused tests cover threshold behavior, token accounting, summary insertion, failure fallback, metadata preservation and max-token enforcement.
 
 ## CodeRabbit Integration
 
@@ -97,9 +98,9 @@ Existing surfaces to reuse or preserve:
 
 ### Quality Gate Tasks
 
-- [ ] Pre-Commit (@dev): Run focused unit tests and verify no existing SYNAPSE context behavior regressed.
-- [ ] Pre-PR (@devops): Confirm additive API surface and package manifest updates if new files are exported.
-- [ ] Architecture Review (@architect): Confirm the implementation extends existing context/memory primitives instead of duplicating them.
+- [x] Pre-Commit (@dev): Run focused unit tests and verify no existing SYNAPSE context behavior regressed.
+- [x] Pre-PR (@devops): Confirm additive API surface and package manifest updates if new files are exported.
+- [x] Architecture Review (@architect): Confirm the implementation extends existing context/memory primitives instead of duplicating them.
 
 ### Self-Healing Configuration
 
@@ -153,11 +154,25 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 
 ## Definition of Done
 
-- [ ] All ACs complete.
-- [ ] Focused tests pass.
-- [ ] Lint and typecheck pass.
-- [ ] Manifest validation passes if new package files are added.
-- [ ] File List and Dev Agent Record are updated.
+- [x] All ACs complete.
+- [x] Focused tests pass.
+- [x] Lint and typecheck pass.
+- [x] Manifest validation passes if new package files are added.
+- [x] File List and Dev Agent Record are updated.
+
+## Quality Gate Review
+
+**Reviewer**: @architect closure verification
+**Verdict**: PASS
+**Date**: 2026-05-08
+
+Evidence:
+
+- Implementation merged to `main` via PR #706: https://github.com/SynkraAI/aiox-core/pull/706
+- Merge commit: `d3f9e6fc9449c9f4797148754df2424660bcdc5d`
+- Required remote checks passed for PR #706: Validation Summary, ESLint, TypeScript Type Checking and Jest on Node 18/20/22/24/25.
+- CodeRabbit actionable comments were addressed before merge: serialized concurrent mutations, preserved long-term summary lineage under hard token limits, strengthened event/error assertions and aligned the test import with the configured absolute module alias.
+- No deploy verification required because `deploy_type: none`.
 
 ## Dev Agent Record
 
@@ -171,6 +186,7 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 - Validation completed: focused hierarchical test suite passed, adjacent SYNAPSE/orchestration suites passed, manifest validation passed, ESLint scoped check passed, repository lint passed with pre-existing warnings only, typecheck passed and full Jest suite passed.
 - Story DoD self-assessment completed. Build command is N/A because `package.json` does not define `npm run build`. CodeRabbit PR loop is deferred until a PR exists; no local CodeRabbit script is defined in `package.json`.
 - CodeRabbit follow-up addressed on PR #706: serialized concurrent `addMessage()` mutations, collapsed long-term summaries before hard-limit truncation, strengthened event/error tests and switched the test import to the configured absolute module alias.
+- PR #706 was merged to `main` on 2026-05-08 with squash commit `d3f9e6fc9449c9f4797148754df2424660bcdc5d`.
 
 ### Agent Model Used
 
@@ -184,6 +200,7 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 - Hard-limit truncation now compacts all long-term summaries before truncating the combined result, preserving source-message lineage.
 - Documentation includes dependency-injection usage for tokenizer and summarizer.
 - Story is ready for architecture/QA review.
+- Story closure completed after merge; Epic 447 now has 1/1 stories done.
 
 ### File List
 
@@ -207,3 +224,4 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 | 2026-05-08 | @po (Pax) | Validated 9.2/10 [GO with Auto-Fix]. Context: Epic 447, Wave 1. 0 stories anteriores analisadas. D10: 0 divergências, 5 ajustes. Condições: nenhuma. |
 | 2026-05-08 | @dev (Dex) | Implementado `HierarchicalContextManager`, export aditivo, documentação, testes determinísticos, manifest e registry atualizados. |
 | 2026-05-08 | @dev (Dex) | Ajustados apontamentos do CodeRabbit no PR #706: concorrência, preservação de summaries e assertions de eventos/erros. |
+| 2026-05-08 | @po (Pax) | Story fechada como Done após merge do PR #706 e validação dos gates de qualidade/documentação. |

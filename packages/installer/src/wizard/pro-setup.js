@@ -47,6 +47,7 @@ const DEFAULT_LICENSE_SERVER_URL = 'https://aiox-license-server.vercel.app';
 const PRO_ARTIFACT_PACKAGE = '@aiox-squads/pro';
 const DEFAULT_PRO_ARTIFACT_VERSION = '0.4.1';
 const MAX_PRO_ARTIFACT_SIZE_BYTES = 100 * 1024 * 1024;
+const PRO_ARTIFACT_DOWNLOAD_TIMEOUT_MS = 60000;
 const PRO_ARTIFACT_INSTALL_TIMEOUT_MS = 120000;
 
 function isLocalLicenseHost(hostname) {
@@ -700,12 +701,28 @@ function assertSafeArtifactUrl(artifactUrl) {
 async function downloadArtifactFile(artifactUrl, destinationPath, expectedSizeBytes) {
   assertSafeArtifactUrl(artifactUrl);
 
-  const response = await fetch(artifactUrl);
-  if (!response.ok) {
-    throw new Error(`Pro artifact download failed with HTTP ${response.status}`);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), PRO_ARTIFACT_DOWNLOAD_TIMEOUT_MS);
+  let buffer;
+
+  try {
+    const response = await fetch(artifactUrl, { signal: controller.signal });
+    if (!response.ok) {
+      throw new Error(`Pro artifact download failed with HTTP ${response.status}`);
+    }
+
+    buffer = Buffer.from(await response.arrayBuffer());
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      throw new Error(
+        `Pro artifact download timed out after ${PRO_ARTIFACT_DOWNLOAD_TIMEOUT_MS}ms.`,
+      );
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
   }
 
-  const buffer = Buffer.from(await response.arrayBuffer());
   if (buffer.length > MAX_PRO_ARTIFACT_SIZE_BYTES) {
     throw new Error('Pro artifact exceeds maximum supported size.');
   }
@@ -846,6 +863,7 @@ async function acquireProArtifactSourceDir(targetDir, licenseResult, options = {
     return {
       success: true,
       proSourceDir: installedProSourceDir || extractedProSourceDir,
+      installedProSourceDir: installedProSourceDir || null,
       tempRoot,
       artifact: {
         package: artifact.package,
@@ -1865,6 +1883,12 @@ async function stepInstallScaffold(targetDir, options = {}) {
 
   let resolvedProSourceDir = proSourceDir;
   let tempProSourceRoot = null;
+  let installedArtifactProSourceDir = null;
+  const cleanupAcquiredArtifactInstall = async () => {
+    if (installedArtifactProSourceDir) {
+      await fs.remove(installedArtifactProSourceDir).catch(() => {});
+    }
+  };
 
   if (!resolvedProSourceDir && options.licenseResult) {
     const acquisition = await artifactAcquirer(targetDir, options.licenseResult, options);
@@ -1877,6 +1901,7 @@ async function stepInstallScaffold(targetDir, options = {}) {
 
     resolvedProSourceDir = acquisition.proSourceDir;
     tempProSourceRoot = acquisition.tempRoot || null;
+    installedArtifactProSourceDir = acquisition.installedProSourceDir || null;
   }
 
   if (!resolvedProSourceDir) {
@@ -1888,28 +1913,12 @@ async function stepInstallScaffold(targetDir, options = {}) {
     };
   }
 
-  if (options.licenseResult) {
-    const cachePersistResult = persistLicenseCache(
-      targetDir,
-      options.licenseResult,
-      resolvedProSourceDir,
-    );
-    if (!cachePersistResult.success) {
-      if (tempProSourceRoot) {
-        await fs.remove(tempProSourceRoot).catch(() => {});
-      }
-      return {
-        success: false,
-        error: tf('proLicenseCacheFailed', { message: cachePersistResult.error }),
-      };
-    }
-  }
-
   // Step 2c: Scaffold pro content
   const scaffolderModule = loadProScaffolder();
 
   if (!scaffolderModule) {
     showWarning(t('proScaffolderNotAvailable'));
+    await cleanupAcquiredArtifactInstall();
     if (tempProSourceRoot) {
       await fs.remove(tempProSourceRoot).catch(() => {});
     }
@@ -1930,6 +1939,23 @@ async function stepInstallScaffold(targetDir, options = {}) {
     });
 
     if (scaffoldResult.success) {
+      if (options.licenseResult) {
+        const cachePersistResult = persistLicenseCache(
+          targetDir,
+          options.licenseResult,
+          resolvedProSourceDir,
+        );
+        if (!cachePersistResult.success) {
+          spinner.fail(tf('proLicenseCacheFailed', { message: cachePersistResult.error }));
+          await cleanupAcquiredArtifactInstall();
+          return {
+            success: false,
+            error: tf('proLicenseCacheFailed', { message: cachePersistResult.error }),
+            scaffoldResult,
+          };
+        }
+      }
+
       spinner.succeed(tf('proContentInstalled', { count: scaffoldResult.copiedFiles.length }));
 
       if (scaffoldResult.warnings.length > 0) {
@@ -1942,6 +1968,7 @@ async function stepInstallScaffold(targetDir, options = {}) {
     }
 
     spinner.fail(t('proScaffoldFailed'));
+    await cleanupAcquiredArtifactInstall();
     for (const error of scaffoldResult.errors) {
       showError(error);
     }
@@ -1949,6 +1976,7 @@ async function stepInstallScaffold(targetDir, options = {}) {
     return { success: false, error: scaffoldResult.errors.join('; '), scaffoldResult };
   } catch (error) {
     spinner.fail(tf('proScaffoldError', { message: error.message }));
+    await cleanupAcquiredArtifactInstall();
     return { success: false, error: error.message };
   } finally {
     if (tempProSourceRoot) {
