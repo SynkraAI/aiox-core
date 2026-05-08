@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T04:49:28.006Z"
+generated_at: "2026-05-08T05:14:31.637Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1111
 files:
@@ -845,9 +845,9 @@ files:
     type: core
     size: 12722
   - path: core/orchestration/context-manager.js
-    hash: sha256:7bf273723a2c08cb84e670b9d4c55aacec51819b1fbd5f3b0c46c4ccfa2ec192
+    hash: sha256:b6ed0e4eb069558998f95ab0c68fa040b1b8c2aab74ab44e26ab682fe9e247b4
     type: core
-    size: 16842
+    size: 17620
   - path: core/orchestration/dashboard-integration.js
     hash: sha256:8f2dd7d3885a9eaf58957505d312923e149f2771ae3ca0cda879631683f826c9
     type: core
