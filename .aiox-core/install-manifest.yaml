@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T00:32:00.816Z"
+generated_at: "2026-05-08T02:21:46.248Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1104
 files:
@@ -745,9 +745,9 @@ files:
     type: core
     size: 8096
   - path: core/ids/registry-updater.js
-    hash: sha256:4873507324efab32ba59e1ade70aaa79f318f9c5d689bdb747d8721effba38d1
+    hash: sha256:194ecce0795fbf8654a7c69799252765d738d50274dd406f575d796c21c3b754
     type: core
-    size: 24542
+    size: 24513
   - path: core/ids/verification-gate.js
     hash: sha256:96050661c90fa52bfc755911d02c9194ec35c00e71fc6bbc92a13686dd53bb91
     type: core

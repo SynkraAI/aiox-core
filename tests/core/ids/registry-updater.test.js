@@ -703,6 +703,61 @@ describe('RegistryUpdater', () => {
       expect(registry.entities).toBeDefined();
       expect(registry.entities.tasks).toBeDefined();
     });
+
+    it('drains watcher updates queued while a batch is processing', async () => {
+      jest.useFakeTimers();
+
+      try {
+        const updater = createUpdater({ debounceMs: 10 });
+        const batches = [];
+        let releaseFirstBatch;
+        const firstBatchGate = new Promise((resolve) => {
+          releaseFirstBatch = resolve;
+        });
+
+        updater._executeBatch = jest.fn(async (batch) => {
+          batches.push(batch.map((item) => path.basename(item.filePath)));
+          updater._isProcessing = true;
+
+          try {
+            if (batches.length === 1) {
+              await firstBatchGate;
+            }
+            return { updated: batch.length, errors: [] };
+          } finally {
+            updater._isProcessing = false;
+          }
+        });
+
+        const firstFile = createTempFile(
+          '.aiox-core/development/tasks/queued-a.md',
+          '# Queued A\n\n## Purpose\nFirst queued update.\n',
+        );
+        updater._queueUpdate('add', firstFile);
+        await jest.advanceTimersByTimeAsync(10);
+
+        expect(batches).toEqual([['queued-a.md']]);
+
+        const secondFile = createTempFile(
+          '.aiox-core/development/tasks/queued-b.md',
+          '# Queued B\n\n## Purpose\nSecond queued update.\n',
+        );
+        updater._queueUpdate('add', secondFile);
+        await jest.advanceTimersByTimeAsync(10);
+
+        expect(updater.getStats().pendingUpdates).toBe(1);
+
+        releaseFirstBatch();
+        await Promise.resolve();
+        await jest.advanceTimersByTimeAsync(10);
+
+        expect(updater._executeBatch).toHaveBeenCalledTimes(2);
+        expect(batches).toEqual([['queued-a.md'], ['queued-b.md']]);
+        expect(updater.getStats().pendingUpdates).toBe(0);
+      } finally {
+        jest.useRealTimers();
+      }
+    });
   });
 
   describe('Performance (AC: 7)', () => {

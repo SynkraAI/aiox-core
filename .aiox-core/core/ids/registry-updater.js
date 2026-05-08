@@ -203,13 +203,22 @@ class RegistryUpdater {
     const normalized = path.resolve(filePath).replace(/\\/g, '/');
     this._pendingUpdates.set(normalized, { action, filePath: normalized, timestamp: Date.now() });
 
+    this._scheduleFlush('Flush failed');
+  }
+
+  _scheduleFlush(errorLabel) {
     if (this._debounceTimer) {
       clearTimeout(this._debounceTimer);
     }
+
     this._debounceTimer = setTimeout(() => {
+      this._debounceTimer = null;
       this._flushPending().catch((err) => {
-        console.error(`[IDS-Updater] Flush failed: ${err.message}`);
+        console.error(`[IDS-Updater] ${errorLabel}: ${err.message}`);
         this._isProcessing = false;
+        if (this._pendingUpdates.size > 0) {
+          this._scheduleFlush('Deferred flush failed');
+        }
       });
     }, this._debounceMs);
   }
@@ -219,14 +228,7 @@ class RegistryUpdater {
 
     if (this._isProcessing) {
       // Re-schedule flush — don't drop pending updates
-      if (!this._debounceTimer) {
-        this._debounceTimer = setTimeout(() => {
-          this._flushPending().catch((err) => {
-            console.error(`[IDS-Updater] Deferred flush failed: ${err.message}`);
-            this._isProcessing = false;
-          });
-        }, this._debounceMs);
-      }
+      this._scheduleFlush('Deferred flush failed');
       return;
     }
 
