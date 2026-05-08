@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const yaml = require('js-yaml');
 
 const { ClaudeProvider } = require('./claude-provider');
@@ -145,7 +146,7 @@ function loadConfig(projectRoot = process.cwd()) {
  */
 function getProvider(providerName, config = null) {
   const normalizedName = normalizeProviderName(providerName);
-  const cacheKey = `${normalizedName}:${JSON.stringify(config || {})}`;
+  const cacheKey = createProviderCacheKey(normalizedName, config);
 
   if (providerCache.has(cacheKey)) {
     return providerCache.get(cacheKey);
@@ -331,6 +332,44 @@ function normalizeProviderName(providerName) {
   const rawName = String(providerName || '').trim();
   const lowerName = rawName.toLowerCase();
   return PROVIDER_ALIASES[rawName] || PROVIDER_ALIASES[lowerName] || lowerName;
+}
+
+function createProviderCacheKey(normalizedName, config) {
+  return `${normalizedName}:${JSON.stringify(sanitizeCacheConfig(config || {}))}`;
+}
+
+function sanitizeCacheConfig(config) {
+  const { apiKey, fetch: _fetch, headers, ...safeConfig } = config;
+  const sanitized = { ...safeConfig };
+
+  if (apiKey) {
+    sanitized.apiKeyHash = hashSecret(apiKey);
+  }
+
+  if (headers) {
+    sanitized.headers = sanitizeHeaders(headers);
+  }
+
+  return sanitized;
+}
+
+function sanitizeHeaders(headers) {
+  const sanitized = {};
+
+  for (const [key, value] of Object.entries(headers)) {
+    const lowerKey = key.toLowerCase();
+    if (lowerKey === 'authorization' || lowerKey.includes('api-key')) {
+      sanitized[key] = value ? `[sha256:${hashSecret(value)}]` : value;
+    } else {
+      sanitized[key] = value;
+    }
+  }
+
+  return sanitized;
+}
+
+function hashSecret(value) {
+  return crypto.createHash('sha256').update(String(value)).digest('hex').slice(0, 16);
 }
 
 /**

@@ -80,13 +80,13 @@ kimi:
   maxRetries: 3
 
 # Generic OpenAI-Compatible Configuration
-# Override these values for OpenRouter or another compatible gateway.
+# REQUIRED: Override all values below for your specific gateway.
 openai_compatible:
   provider: openai-compatible
-  baseURL: https://api.openai.com/v1
+  baseURL: https://your-openai-compatible-gateway.example/v1
   endpoint: /chat/completions
-  apiKeyEnv: OPENAI_API_KEY
-  model: gpt-4o-mini
+  apiKeyEnv: YOUR_OPENAI_COMPATIBLE_API_KEY
+  model: your-model-id
   timeout: 300000
   maxRetries: 3
 

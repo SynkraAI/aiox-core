@@ -32,22 +32,14 @@ class OpenAICompatibleProvider extends AIProvider {
    */
   constructor(config = {}) {
     const providerName = config.name || 'openai-compatible';
+    const safeOptions = buildProviderOptions(config);
 
     super({
       name: providerName,
       command: 'http',
       timeout: config.timeout || DEFAULT_TIMEOUT,
       maxRetries: config.maxRetries || 3,
-      options: {
-        endpoint: config.endpoint || DEFAULT_ENDPOINT,
-        baseURL: config.baseURL || config.baseUrl,
-        apiKeyEnv: config.apiKeyEnv || 'OPENAI_API_KEY',
-        model: config.model,
-        headers: config.headers || {},
-        requestOptions: config.requestOptions || {},
-        extraBody: config.extraBody || {},
-        ...config,
-      },
+      options: safeOptions,
     });
 
     this.baseURL = this._normalizeBaseURL(config.baseURL || config.baseUrl);
@@ -257,7 +249,7 @@ class OpenAICompatibleProvider extends AIProvider {
     const contentType = response.headers?.get?.('content-type') || '';
 
     if (contentType.includes('application/json')) {
-      return response.json();
+      return await response.json();
     }
 
     const text = await response.text();
@@ -339,6 +331,21 @@ class OpenAICompatibleProvider extends AIProvider {
 
     return new AbortController();
   }
+}
+
+function buildProviderOptions(config) {
+  const { apiKey: _apiKey, fetch: _fetch, name: _name, ...safeConfig } = config;
+
+  return {
+    ...safeConfig,
+    endpoint: safeConfig.endpoint || DEFAULT_ENDPOINT,
+    baseURL: safeConfig.baseURL || safeConfig.baseUrl,
+    apiKeyEnv: safeConfig.apiKeyEnv || 'OPENAI_API_KEY',
+    model: safeConfig.model,
+    headers: safeConfig.headers || {},
+    requestOptions: safeConfig.requestOptions || {},
+    extraBody: safeConfig.extraBody || {},
+  };
 }
 
 module.exports = { OpenAICompatibleProvider };

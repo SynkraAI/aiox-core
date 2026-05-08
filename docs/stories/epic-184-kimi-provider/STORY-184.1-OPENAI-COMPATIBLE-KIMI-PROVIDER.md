@@ -207,6 +207,7 @@ If the provider test lands under a different path, update this section and the F
 - Added factory aliases/presets for `openai-compatible`, `openai_compatible`, `openai`, `kimi` and `moonshot`, preserving `claude` primary and `gemini` fallback defaults.
 - Generalized provider status discovery and `subagent-dispatcher` fallback behavior for configured non-CLI providers.
 - Regenerated `.aiox-core/install-manifest.yaml` after adding the new provider file.
+- Addressed CodeRabbit review feedback for secret-safe provider options/cache keys, async JSON parsing, generic OpenAI-compatible template placeholders and configured fallback test coverage.
 
 ### Agent Model Used
 
@@ -221,7 +222,7 @@ If the provider test lands under a different path, update this section and the F
 
 ### Validation Evidence
 
-- `npm test -- --runTestsByPath tests/infrastructure/ai-providers/openai-compatible-provider.test.js tests/infrastructure/ai-providers/ai-provider-factory.test.js tests/core/subagent-dispatcher.test.js --runInBand` passed: 3 suites, 56 tests.
+- `npm test -- --runTestsByPath tests/infrastructure/ai-providers/openai-compatible-provider.test.js tests/infrastructure/ai-providers/ai-provider-factory.test.js tests/core/subagent-dispatcher.test.js --runInBand` passed: 3 suites, 58 tests.
 - `npm run test:ci` passed: 338 suites passed, 12 skipped; 8399 tests passed, 170 skipped.
 - `npm run validate:manifest` passed.
 - `npm run lint` passed with 0 errors and existing repo-wide warnings.

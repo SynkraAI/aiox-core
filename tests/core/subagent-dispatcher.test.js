@@ -12,6 +12,7 @@ const {
   createMockGotchasMemory,
   collectEvents,
 } = require('./execution-test-helpers');
+const AIProviderFactory = require('../../.aiox-core/infrastructure/integrations/ai-providers');
 
 // Mock gotchas-memory (exists but exports object, not constructor directly)
 jest.mock('../../.aiox-core/core/memory/gotchas-memory', () => {
@@ -254,12 +255,29 @@ describe('SubagentDispatcher', () => {
   // ── Provider fallback ────────────────────────────────────────────────
 
   describe('provider fallback', () => {
-    test('uses configured fallback before legacy Claude/Gemini pair', () => {
+    test('uses default provider configuration before the legacy Claude/Gemini pair', () => {
       const sd = new SubagentDispatcher();
 
       expect(sd.getFallbackProviderName('kimi')).toBe('gemini');
       expect(sd.getFallbackProviderName('gemini')).toBe('claude');
       expect(sd.getFallbackProviderName('claude')).toBe('gemini');
+    });
+
+    test('honors configured fallback before legacy provider pairing', () => {
+      const getConfigSpy = jest.spyOn(AIProviderFactory, 'getConfig').mockReturnValue({
+        ai_providers: {
+          primary: 'kimi',
+          fallback: 'openai-compatible',
+        },
+      });
+
+      try {
+        const sd = new SubagentDispatcher();
+        expect(sd.getFallbackProviderName('claude')).toBe('openai-compatible');
+        expect(sd.getFallbackProviderName('openai-compatible')).toBe('kimi');
+      } finally {
+        getConfigSpy.mockRestore();
+      }
     });
   });
 

@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T21:09:35.695Z"
+generated_at: "2026-05-08T21:14:02.282Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1122
 files:
@@ -2921,9 +2921,9 @@ files:
     type: infrastructure
     size: 6882
   - path: infrastructure/integrations/ai-providers/ai-provider-factory.js
-    hash: sha256:8a19d40cd4f9ccf8b457b12fb3318ef4d1ac81ecbc0823c5b9149bff0ee02bff
+    hash: sha256:6c5d55300997a40b7ea49b1a3dca49ae017b3a3b2366e4ced3453c056bb1d460
     type: infrastructure
-    size: 11616
+    size: 12596
   - path: infrastructure/integrations/ai-providers/ai-provider.js
     hash: sha256:6818a612190788be35664d39c053bdcf597230bf38dc4e7f2d4744ee996449a1
     type: infrastructure
@@ -2941,9 +2941,9 @@ files:
     type: infrastructure
     size: 1068
   - path: infrastructure/integrations/ai-providers/openai-compatible-provider.js
-    hash: sha256:cdcfd0f2e2c85fe545333d04a10254b09dec552d6525cdd8cf08d03b4152b8f9
+    hash: sha256:6fec5be513b71b5d99b87f26ff101fba5c32d3d67e2f2687dac23d2f27a8c8a3
     type: infrastructure
-    size: 9992
+    size: 10199
   - path: infrastructure/integrations/ai-providers/README.md
     hash: sha256:41945acf8b602add3cc4502025ed49a38bcb0f0644636368945b094db50bd3e4
     type: infrastructure
@@ -3825,9 +3825,9 @@ files:
     type: template
     size: 3210
   - path: product/templates/aiox-ai-config.yaml
-    hash: sha256:0fe45ebef52ec371be568e82b119678d1ce407bfb51452dee12778eddacc7629
+    hash: sha256:14efe89e4be87326f621b1ff2a03c928806566ec134e74b191ff24156d5a0140
     type: template
-    size: 3692
+    size: 3729
   - path: product/templates/architecture-tmpl.yaml
     hash: sha256:9483f38486932842e1bc1a73c35b3f90fa2cd9c703c7d5effabea7dc8f76350a
     type: template

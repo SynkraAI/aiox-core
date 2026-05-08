@@ -100,6 +100,27 @@ describe('AI Provider Factory', () => {
       expect(provider.baseURL).toBe('https://gateway.example/v1');
     });
 
+    it('should not reuse custom providers with different inline API keys', () => {
+      const first = getProvider('custom-gateway', {
+        provider: 'openai-compatible',
+        baseURL: 'https://gateway.example/v1',
+        apiKey: 'first-test-key',
+        model: 'gateway-model',
+        fetch: jest.fn(),
+      });
+      const second = getProvider('custom-gateway', {
+        provider: 'openai-compatible',
+        baseURL: 'https://gateway.example/v1',
+        apiKey: 'second-test-key',
+        model: 'gateway-model',
+        fetch: jest.fn(),
+      });
+
+      expect(first).toBeInstanceOf(OpenAICompatibleProvider);
+      expect(second).toBeInstanceOf(OpenAICompatibleProvider);
+      expect(first).not.toBe(second);
+    });
+
     it('should throw error for unknown provider', () => {
       expect(() => getProvider('unknown')).toThrow('Unknown AI provider');
     });

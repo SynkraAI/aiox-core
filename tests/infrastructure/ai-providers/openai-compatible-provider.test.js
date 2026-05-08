@@ -51,6 +51,8 @@ describe('OpenAICompatibleProvider', () => {
     expect(provider).toBeInstanceOf(AIProvider);
     expect(provider.name).toBe('kimi');
     expect(provider.command).toBe('http');
+    expect(provider.options.apiKey).toBeUndefined();
+    expect(provider.options.fetch).toBeUndefined();
     expect(provider.getInfo()).toMatchObject({
       name: 'kimi',
       baseURL: 'https://api.moonshot.ai/v1',
