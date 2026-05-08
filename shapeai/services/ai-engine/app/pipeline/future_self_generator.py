@@ -59,8 +59,10 @@ def generate_future_self(
     period_days: int = 90,
 ) -> bytes | None:
     """Generate future-self image via Gemini. Returns JPEG bytes or None on failure."""
+    print(f"[future_self] called — img={len(front_bytes) if front_bytes else 0}B key_set={bool(GEMINI_API_KEY)}", flush=True)
     if not GEMINI_API_KEY:
         logger.warning("[future_self] GEMINI_API_KEY not set — skipping")
+        print("[future_self] GEMINI_API_KEY not set — skipping", flush=True)
         return None
 
     try:
@@ -70,7 +72,9 @@ def generate_future_self(
         client = google_genai.Client(api_key=GEMINI_API_KEY)
 
         prompt = _build_prompt(scores, profile, period_days)
+        print(f"[future_self] resizing image ({len(front_bytes)}B)...", flush=True)
         resized = _resize(front_bytes)
+        print(f"[future_self] resized to {len(resized)}B, calling Gemini...", flush=True)
 
         response = client.models.generate_content(
             model="gemini-2.5-flash-image",
@@ -94,18 +98,27 @@ def generate_future_self(
             ),
         )
 
+        num_candidates = len(response.candidates) if response.candidates else 0
+        print(f"[future_self] Gemini responded — {num_candidates} candidate(s)", flush=True)
         for candidate in response.candidates or []:
             finish = getattr(candidate, "finish_reason", None)
+            num_parts = len(candidate.content.parts) if candidate.content and candidate.content.parts else 0
+            print(f"[future_self] candidate finish={finish} parts={num_parts}", flush=True)
             for part in candidate.content.parts or []:
                 if part.inline_data and part.inline_data.data:
                     raw = part.inline_data.data
-                    logger.info("[future_self] Image generated successfully (%s bytes)", len(raw) if isinstance(raw, bytes) else "b64")
+                    size = len(raw) if isinstance(raw, bytes) else "b64"
+                    logger.info("[future_self] Image generated successfully (%s bytes)", size)
+                    print(f"[future_self] Image generated successfully ({size} bytes)", flush=True)
                     return raw if isinstance(raw, bytes) else base64.b64decode(raw)
             logger.warning("[future_self] Candidate had no image — finish_reason=%s", finish)
+            print(f"[future_self] Candidate had no image — finish_reason={finish}", flush=True)
 
         logger.warning("[future_self] Gemini returned no image in response")
+        print("[future_self] Gemini returned no image in response", flush=True)
         return None
 
     except Exception as exc:
         logger.error("[future_self] Generation failed (%s): %s", type(exc).__name__, exc)
+        print(f"[future_self] Generation FAILED ({type(exc).__name__}): {exc}", flush=True)
         return None

@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-ARG BUST=20260508-4
+ARG BUST=20260508-5
 RUN echo "Build: $BUST"
 
 COPY . .

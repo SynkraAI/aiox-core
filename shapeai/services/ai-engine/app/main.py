@@ -1,11 +1,18 @@
 from dotenv import load_dotenv
 load_dotenv()
 
+import logging
 import os
 from fastapi import FastAPI
 from app.routers import analysis
 
-BUILD_VERSION = "20260508-2"
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    force=True,
+)
+
+BUILD_VERSION = "20260508-5"
 
 app = FastAPI(title="ShapeAI AI Engine", version="1.0.0")
 app.include_router(analysis.router)
