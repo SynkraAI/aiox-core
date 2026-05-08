@@ -145,7 +145,7 @@ function cleanup() {
   fs.rmSync(tempRoot, { recursive: true, force: true });
 }
 
-async function main() {
+function main() {
   try {
     log(`Temp root: ${tempRoot}`);
     setupTarget();
@@ -224,7 +224,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
+try {
+  main();
+} catch (error) {
   console.error(`[pro-enterprise-e2e] FAIL: ${error.message}`);
   process.exit(1);
-});
+}

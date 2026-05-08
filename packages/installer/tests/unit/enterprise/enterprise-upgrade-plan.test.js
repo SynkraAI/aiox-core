@@ -7,6 +7,7 @@ const fs = require('fs-extra');
 const yaml = require('js-yaml');
 const {
   buildEnterpriseUpgradePlan,
+  parseEnterpriseUpgradeArgs,
   runEnterpriseUpgradeCli,
   writeEnterpriseUpgradePlan,
 } = require('../../../src/enterprise/enterprise-upgrade-plan');
@@ -176,6 +177,19 @@ describe('Enterprise upgrade dry-run planning', () => {
     ]));
     expect(parsed.candidateOps.length).toBeGreaterThan(0);
     expect(parsed.blockedOps.map(op => op.path)).toEqual(expect.arrayContaining(['.env*']));
+    expect(parsed.warnings).toContain('Dry-run mode: no files will be modified.');
+    expect(parsed.warnings).not.toContain('Dry-run only: apply, rollback, and validation policy are implemented in later slices.');
+  });
+
+  test.each([
+    '--target',
+    '--enterprise-source',
+    '--manifest',
+    '--plan',
+    '--format',
+  ])('fails fast when %s is missing its value', optionName => {
+    expect(() => parseEnterpriseUpgradeArgs(['upgrade', optionName, '--dry-run']))
+      .toThrow(`Missing value for ${optionName}`);
   });
 
   test('fails when the Enterprise source is invalid', () => {

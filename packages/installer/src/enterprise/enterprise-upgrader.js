@@ -1,6 +1,5 @@
 'use strict';
 
-const crypto = require('crypto');
 const path = require('path');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
@@ -12,6 +11,7 @@ const {
   resolveMigrationPolicy,
 } = require('./enterprise-manifest-loader');
 const { toPortablePath } = require('./enterprise-detector');
+const { sha256File } = require('./enterprise-utils');
 
 function nowStamp() {
   return new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14);
@@ -19,13 +19,6 @@ function nowStamp() {
 
 function hasGlob(pattern) {
   return /[*?[\]{}]/.test(pattern);
-}
-
-function sha256File(filePath) {
-  return crypto
-    .createHash('sha256')
-    .update(fs.readFileSync(filePath))
-    .digest('hex');
 }
 
 function readYamlIfExists(filePath) {
@@ -41,7 +34,30 @@ function writeYaml(filePath, data) {
   fs.writeFileSync(filePath, yaml.dump(data, { lineWidth: 120, noRefs: true, sortKeys: false }), 'utf8');
 }
 
+function arrayItemKey(item) {
+  return typeof item === 'object' && item !== null ? JSON.stringify(item) : String(item);
+}
+
+function mergeArrays(source, target) {
+  const merged = [...target];
+  const seen = new Set(target.map(item => arrayItemKey(item)));
+
+  for (const item of source) {
+    const key = arrayItemKey(item);
+    if (!seen.has(key)) {
+      merged.push(item);
+      seen.add(key);
+    }
+  }
+
+  return merged;
+}
+
 function mergeDeep(source, target) {
+  if (Array.isArray(source) && Array.isArray(target)) {
+    return mergeArrays(source, target);
+  }
+
   if (Array.isArray(source) || Array.isArray(target)) {
     return target === undefined ? source : target;
   }
@@ -282,17 +298,18 @@ function applyMergeYaml(operation) {
 
   const merged = mergeDeep(sourceYaml, targetYaml);
   writeYaml(destPath, merged);
+  const mergedHash = sha256File(destPath);
 
   executionManifest.merged.push({
     path: relativePath,
     policy: 'merge-yaml',
-    sha256: sha256File(destPath),
+    sha256: mergedHash,
     backedUp: existed,
   });
   executionManifest.validated.push({
     path: relativePath,
     type: 'exists',
-    sha256: sha256File(destPath),
+    sha256: mergedHash,
   });
 }
 

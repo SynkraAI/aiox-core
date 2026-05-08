@@ -75,7 +75,7 @@ USAGE:
   npx aiox-core@latest info         # Show system info
   npx aiox-core@latest doctor       # Run diagnostics
   aiox-delegate codex -t <slug>     # Delegate implementation to external executor
-  npx aiox-core@latest enterprise upgrade --dry-run --enterprise-source <path>
+  npx aiox-core@latest enterprise upgrade --target . --dry-run --enterprise-source <path>
                                        # Plan Pro to Enterprise upgrade
   npx aiox-core@latest --version    # Show version
   npx aiox-core@latest --version -d # Show detailed version info

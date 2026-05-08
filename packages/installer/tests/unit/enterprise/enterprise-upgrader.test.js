@@ -160,6 +160,24 @@ describe('Enterprise transactional upgrader and rollback', () => {
     expect(fs.existsSync(path.join(targetDir, 'workspace', '_templates', 'secret-template.yaml'))).toBe(false);
   });
 
+  test('merge-yaml unions arrays while preserving target order', () => {
+    const targetDir = createReadyTarget();
+    const enterpriseSource = temp('aiox-enterprise-source');
+    createEnterpriseSource(enterpriseSource);
+    writeYaml(path.join(targetDir, '.aiox-sync.yaml'), {
+      active_ides: ['codex'],
+    });
+
+    applyEnterpriseUpgrade({
+      targetDir,
+      enterpriseSource,
+      env: { AIOX_ENTERPRISE_TEST_FIXTURE: '1' },
+    });
+    const merged = yaml.load(fs.readFileSync(path.join(targetDir, '.aiox-sync.yaml'), 'utf8'));
+
+    expect(merged.active_ides).toEqual(['codex', 'claude']);
+  });
+
   test('rollback restores backed up files from execution manifest', () => {
     const targetDir = createReadyTarget();
     const enterpriseSource = temp('aiox-enterprise-source');

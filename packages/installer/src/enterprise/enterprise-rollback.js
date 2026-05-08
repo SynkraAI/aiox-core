@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
 const { EnterpriseUpgradeError } = require('./enterprise-errors');
-const { sha256File } = require('./enterprise-upgrader');
+const { sha256File } = require('./enterprise-utils');
 
 function readExecutionManifest(manifestPath) {
   const absoluteManifestPath = path.resolve(manifestPath);

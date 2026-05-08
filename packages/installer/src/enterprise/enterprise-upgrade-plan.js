@@ -26,7 +26,7 @@ function normalizeOptions(options = {}) {
   };
 }
 
-function buildWarnings(context) {
+function buildWarnings(context, options = {}) {
   const warnings = [];
 
   if (context.activeIdes.length === 0) {
@@ -41,7 +41,9 @@ function buildWarnings(context) {
     warnings.push('AIOX Pro version could not be resolved from detected markers.');
   }
 
-  warnings.push('Dry-run only: apply, rollback, and validation policy are implemented in later slices.');
+  if (options.mode === 'dry-run' || options.dryRun) {
+    warnings.push('Dry-run mode: no files will be modified.');
+  }
 
   return warnings;
 }
@@ -136,7 +138,7 @@ function buildEnterpriseUpgradePlan(options = {}) {
     preservedPaths: getPreservedPaths(migrationManifest),
     candidateOps: buildCandidateOpsFromManifest(migrationManifest, context.enterprise.path),
     blockedOps: buildBlockedOpsFromManifest(migrationManifest),
-    warnings: buildWarnings(context),
+    warnings: buildWarnings(context, { mode: normalized.mode }),
   };
 }
 
@@ -180,6 +182,20 @@ function writeEnterpriseUpgradePlan(plan, planPath, options = {}) {
   };
 }
 
+function readRequiredOptionValue(argv, index, optionName) {
+  const value = argv[index + 1];
+
+  if (!value || value.startsWith('-')) {
+    throw new EnterpriseUpgradeError(
+      'AIOX_ENTERPRISE_OPTION_VALUE_REQUIRED',
+      `Missing value for ${optionName}`,
+      { option: optionName },
+    );
+  }
+
+  return value;
+}
+
 function parseEnterpriseUpgradeArgs(argv = []) {
   const options = {
     command: argv[0],
@@ -208,19 +224,19 @@ function parseEnterpriseUpgradeArgs(argv = []) {
     } else if (arg === '--apply') {
       options.apply = true;
     } else if (arg === '--target') {
-      options.targetDir = argv[index + 1];
+      options.targetDir = readRequiredOptionValue(argv, index, arg);
       index += 1;
     } else if (arg === '--enterprise-source') {
-      options.enterpriseSource = argv[index + 1];
+      options.enterpriseSource = readRequiredOptionValue(argv, index, arg);
       index += 1;
     } else if (arg === '--manifest') {
-      options.manifestPath = argv[index + 1];
+      options.manifestPath = readRequiredOptionValue(argv, index, arg);
       index += 1;
     } else if (arg === '--plan') {
-      options.planPath = argv[index + 1];
+      options.planPath = readRequiredOptionValue(argv, index, arg);
       index += 1;
     } else if (arg === '--format') {
-      options.format = argv[index + 1];
+      options.format = readRequiredOptionValue(argv, index, arg);
       index += 1;
     } else if (arg === '--help' || arg === '-h') {
       options.help = true;
@@ -348,6 +364,7 @@ module.exports = {
   buildEnterpriseUpgradePlan,
   enterpriseUpgradeHelp,
   parseEnterpriseUpgradeArgs,
+  readRequiredOptionValue,
   runEnterpriseUpgradeCli,
   serializePlan,
   writeEnterpriseUpgradePlan,
