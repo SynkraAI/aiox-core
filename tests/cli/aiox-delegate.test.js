@@ -12,6 +12,7 @@ const {
 
 describe('aiox-delegate external executor CLI', () => {
   const fixedDate = new Date(Date.UTC(2026, 4, 8, 2, 30, 45));
+  const workdir = path.resolve('/tmp/work');
 
   test('parses codex delegation arguments', () => {
     const options = parseArgs([
@@ -42,10 +43,10 @@ describe('aiox-delegate external executor CLI', () => {
     );
 
     expect(plan.slug).toBe('story-4.3');
-    expect(plan.runDir).toBe('/tmp/work/.aiox/external-runs/20260508-023045-story-4.3');
+    expect(plan.runDir).toBe(path.join(workdir, '.aiox', 'external-runs', '20260508-023045-story-4.3'));
     expect(plan.command).toBe('codex');
     expect(plan.args).toEqual(
-      expect.arrayContaining(['-a', 'never', '-s', 'workspace-write', 'exec', '-C', '/tmp/work']),
+      expect.arrayContaining(['-a', 'never', '-s', 'workspace-write', 'exec', '-C', workdir]),
     );
     expect(plan.args.at(-1)).toBe('-');
     expect(plan.outputPath).toBe(path.join(plan.runDir, 'output.md'));
@@ -68,7 +69,7 @@ describe('aiox-delegate external executor CLI', () => {
     );
 
     expect(plan.args).toEqual(
-      expect.arrayContaining(['-a', 'never', '-s', 'workspace-write', 'exec', '-C', '/tmp/work']),
+      expect.arrayContaining(['-a', 'never', '-s', 'workspace-write', 'exec', '-C', workdir]),
     );
   });
 
