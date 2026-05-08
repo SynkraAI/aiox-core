@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.1.15
-generated_at: "2026-05-08T19:14:10.833Z"
+version: 5.1.16
+generated_at: "2026-05-08T20:54:57.700Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1120
 files:
@@ -105,9 +105,9 @@ files:
     type: cli
     size: 11845
   - path: cli/commands/pro/index.js
-    hash: sha256:ea8a505cd407580c2ae96bdd258a61c9dda264e3e9216768d4ac0588879e98e6
+    hash: sha256:9646c62ad5b495002a66e380246306d42984d704653f69faa760278f7de05bc8
     type: cli
-    size: 24594
+    size: 24584
   - path: cli/commands/qa/index.js
     hash: sha256:3a9e30419a66e56781f9b5dcddc8f4dd0ed24dabf8fe8c3005cd26f5cb02558f
     type: cli

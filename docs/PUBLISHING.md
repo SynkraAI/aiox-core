@@ -175,6 +175,62 @@ peer dependency -> @aiox-squads/core >=5.1.0
 publish token -> NPM_TOKEN_AIOX_SQUADS in SynkraAI/aiox-pro
 ```
 
+### PRO-13.5 - Private Pro Distribution
+
+Customer-facing Pro distribution must use the license-server signed artifact channel, not npm org membership.
+
+Pre-publish checks for the public core package:
+
+```bash
+npm run validate:publish
+npm pack --dry-run --json > outputs/qa/<date>-pro-13-5-core-pack-dry-run.json
+node -e "const p=require('./outputs/qa/<date>-pro-13-5-core-pack-dry-run.json')[0]; const files=p.files.map(f=>f.path); if (files.some(f=>f==='pro'||f.startsWith('pro/'))) process.exit(1)"
+```
+
+Expected result:
+
+```text
+@aiox-squads/core public tarball includes 0 files under pro/
+@aiox-squads/pro remains public until authenticated install/update smoke passes
+```
+
+DevOps artifact channel checks:
+
+```bash
+npm view @aiox-squads/core version dist-tags --json
+npm view @aiox-squads/pro version dist-tags --json
+npm access get status @aiox-squads/pro --json
+```
+
+`@aiox-squads/pro` may be changed to private only after all of these pass:
+
+1. Production `aios-license-server` has `PRO_ARTIFACT_BUCKET`, `PRO_ARTIFACT_MANIFEST_JSON`, and `PRO_ARTIFACT_SIGNED_URL_TTL_SECONDS`.
+2. A verified Pro user can request `POST /api/v1/pro/artifact-url`, download the `.tgz`, and match manifest `sha256` and `sizeBytes`.
+3. A verified non-Pro user receives 403.
+4. A core-only install without npm token does not receive `pro/` content.
+5. Existing Pro update/install does not duplicate slash commands, agent activators, or generated skills.
+
+Privacy transition command, after smoke:
+
+```bash
+npm access set status=private @aiox-squads/pro
+npm access get status @aiox-squads/pro --json
+```
+
+Rollback if valid customers are blocked:
+
+```bash
+npm access set status=public @aiox-squads/pro
+npm access get status @aiox-squads/pro --json
+```
+
+If a public core publish accidentally omits required core files, correct the package metadata, publish the next patch, and move the `latest` dist-tag to the corrected version:
+
+```bash
+npm dist-tag add @aiox-squads/core@<corrected-version> latest
+npm view @aiox-squads/core version dist-tags --json
+```
+
 ### Story 124.5 - Monorepo Packages
 
 Target names:

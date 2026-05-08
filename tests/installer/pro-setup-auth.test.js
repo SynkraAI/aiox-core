@@ -165,6 +165,7 @@ describe('pro-setup backward compatibility (AC-7)', () => {
     expect(typeof proSetup._testing.fallbackAuthWithoutBuyerCheck).toBe('function');
     expect(typeof proSetup._testing.generateMachineId).toBe('function');
     expect(typeof proSetup._testing.persistLicenseCache).toBe('function');
+    expect(typeof proSetup._testing.installProArtifactIntoTarget).toBe('function');
   });
 });
 
@@ -297,7 +298,7 @@ describe('pro-setup interactive email fallback', () => {
     expect(client.activate).toHaveBeenCalledWith(
       'PRO-ABCD-1234-5678-WXYZ',
       observedMachineId,
-      expect.any(String)
+      expect.any(String),
     );
     expect(result.activationResult.features).toEqual(['pro.squads.*', 'pro.memory.*']);
   });
@@ -365,7 +366,7 @@ describe('pro-setup license cache persistence', () => {
         cacheValidDays: 30,
         gracePeriodDays: 7,
       },
-      '/tmp/aiox-pro-target'
+      '/tmp/aiox-pro-target',
     );
   });
 
@@ -449,7 +450,7 @@ describe('InlineLicenseClient current auth contract', () => {
             accessToken: 'live-access-token',
             refreshToken: 'refresh-token',
             emailVerified: true,
-          })
+          }),
         );
       });
     });
@@ -476,7 +477,7 @@ describe('InlineLicenseClient current auth contract', () => {
           JSON.stringify({
             email: 'user@example.com',
             emailVerified: true,
-          })
+          }),
         );
       });
     });
@@ -508,7 +509,7 @@ describe('InlineLicenseClient current auth contract', () => {
             activated: true,
             licenseKey: 'PRO-ABCD-1234-EFGH-5678',
             features: ['pro'],
-          })
+          }),
         );
       });
     });
@@ -518,6 +519,50 @@ describe('InlineLicenseClient current auth contract', () => {
 
     expect(result.key).toBe('PRO-ABCD-1234-EFGH-5678');
     expect(result.licenseKey).toBe('PRO-ABCD-1234-EFGH-5678');
+  });
+
+  it('requests signed Pro artifact URLs with bearer auth', async () => {
+    await createMockServer((req, res) => {
+      expect(req.method).toBe('POST');
+      expect(req.url).toBe('/api/v1/pro/artifact-url');
+      expect(req.headers.authorization).toBe('Bearer live-access-token');
+
+      let body = '';
+      req.on('data', (chunk) => (body += chunk));
+      req.on('end', () => {
+        expect(JSON.parse(body)).toEqual({
+          package: '@aiox-squads/pro',
+          version: '0.4.0',
+          format: 'tgz',
+          machineId: 'machine-id',
+          aioxCoreVersion: '5.1.3',
+        });
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(
+          JSON.stringify({
+            package: '@aiox-squads/pro',
+            version: '0.4.0',
+            artifactUrl: `${baseUrl}/artifact.tgz`,
+            expiresAt: '2026-05-08T20:00:00.000Z',
+            sha256: 'a'.repeat(64),
+            sizeBytes: 123,
+          }),
+        );
+      });
+    });
+
+    const client = new proSetup._testing.InlineLicenseClient(baseUrl);
+    const result = await client.getProArtifactUrl('live-access-token', {
+      package: '@aiox-squads/pro',
+      version: '0.4.0',
+      format: 'tgz',
+      machineId: 'machine-id',
+      aioxCoreVersion: '5.1.3',
+    });
+
+    expect(result.artifactUrl).toBe(`${baseUrl}/artifact.tgz`);
+    expect(result.sha256).toBe('a'.repeat(64));
   });
 });
 
@@ -565,7 +610,7 @@ describe('resolveProSourceDir', () => {
       expect.objectContaining({
         cwd: path.resolve(__dirname, '../..'),
         stdio: 'ignore',
-      })
+      }),
     );
     expect(result).toEqual({ proSourceDir: bundledProDir });
   });

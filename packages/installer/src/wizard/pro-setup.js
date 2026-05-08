@@ -16,10 +16,17 @@
 'use strict';
 
 const path = require('path');
+const fs = require('fs-extra');
+const os = require('os');
+const crypto = require('crypto');
+const { execFile } = require('child_process');
+const { promisify } = require('util');
 const { createSpinner, showSuccess, showError, showWarning, showInfo } = require('./feedback');
 const { colors, status } = require('../utils/aiox-colors');
 const { getAioxCoreVersion, resolveAioxCorePath } = require('../utils/package-paths');
 const { t, tf } = require('./i18n');
+
+const execFileAsync = promisify(execFile);
 
 /**
  * Gold color for Pro branding.
@@ -37,6 +44,10 @@ try {
  * License server base URL (same source of truth as license-api.js CONFIG.BASE_URL).
  */
 const DEFAULT_LICENSE_SERVER_URL = 'https://aiox-license-server.vercel.app';
+const PRO_ARTIFACT_PACKAGE = '@aiox-squads/pro';
+const DEFAULT_PRO_ARTIFACT_VERSION = '0.4.1';
+const MAX_PRO_ARTIFACT_SIZE_BYTES = 100 * 1024 * 1024;
+const PRO_ARTIFACT_INSTALL_TIMEOUT_MS = 120000;
 
 function isLocalLicenseHost(hostname) {
   return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
@@ -209,11 +220,23 @@ class InlineLicenseClient {
       {
         // Preserve legacy compatibility with older server deployments.
         Authorization: `Bearer ${token}`,
-      }
+      },
     ).then((result) => ({
       ...result,
       key: result.key || result.licenseKey,
     }));
+  }
+
+  /**
+   * Request a short-lived signed URL for the Pro artifact.
+   * @param {string} token - Supabase access token
+   * @param {Object} request - Artifact request payload
+   * @returns {Promise<Object>} Artifact descriptor with artifactUrl, sha256, sizeBytes
+   */
+  async getProArtifactUrl(token, request) {
+    return this._request('POST', '/api/v1/pro/artifact-url', request, {
+      Authorization: `Bearer ${token}`,
+    });
   }
 
   /**
@@ -224,9 +247,11 @@ class InlineLicenseClient {
    * @returns {Promise<Object>} Activation result
    */
   async activate(licenseKey, machineId, version) {
-    return this._request('POST', '/api/v1/licenses/activate', {
+    return this._request('POST', '/api/v1/license/activate', {
       key: licenseKey,
       machineId,
+      aioxCoreVersion: version,
+      aiosCoreVersion: version,
       version,
     });
   }
@@ -437,7 +462,7 @@ function loadProModule(moduleName) {
     'aiox-core',
     'pro',
     'license',
-    moduleName
+    moduleName,
   );
   const aioxCoreModule = tryRequire(aioxCorePath);
   if (aioxCoreModule) {
@@ -452,7 +477,7 @@ function loadProModule(moduleName) {
     '@aiox-squads',
     'pro',
     'license',
-    moduleName
+    moduleName,
   );
   const loadedModule = tryRequire(absPath);
   if (loadedModule) {
@@ -575,19 +600,10 @@ function loadProScaffolder() {
  *
  * @param {string} targetDir - Project root directory
  * @param {Object} licenseResult - Successful result from stepLicenseGate()
+ * @param {string} [proSourceDir] - Optional Pro package source with license cache helpers
  * @returns {{ success: boolean, error?: string }} Cache write result
  */
-function persistLicenseCache(targetDir, licenseResult) {
-  const loader =
-    module.exports._testing && module.exports._testing.loadLicenseCache
-      ? module.exports._testing.loadLicenseCache
-      : loadLicenseCache;
-  const cacheModule = loader();
-
-  if (!cacheModule || typeof cacheModule.writeLicenseCache !== 'function') {
-    return { success: false, error: 'License cache module not available.' };
-  }
-
+function persistLicenseCache(targetDir, licenseResult, proSourceDir) {
   const activationResult =
     licenseResult && licenseResult.activationResult ? licenseResult.activationResult : {};
   const key = activationResult.key || licenseResult.key;
@@ -603,6 +619,24 @@ function persistLicenseCache(targetDir, licenseResult) {
     };
   }
 
+  const loader =
+    module.exports._testing && module.exports._testing.loadLicenseCache
+      ? module.exports._testing.loadLicenseCache
+      : loadLicenseCache;
+  let cacheModule = loader();
+
+  if (!cacheModule && proSourceDir) {
+    try {
+      cacheModule = require(path.join(proSourceDir, 'license', 'license-cache'));
+    } catch {
+      cacheModule = null;
+    }
+  }
+
+  if (!cacheModule || typeof cacheModule.writeLicenseCache !== 'function') {
+    return { success: false, error: 'License cache module not available.' };
+  }
+
   return cacheModule.writeLicenseCache(
     {
       key,
@@ -613,8 +647,221 @@ function persistLicenseCache(targetDir, licenseResult) {
       cacheValidDays: activationResult.cacheValidDays,
       gracePeriodDays: activationResult.gracePeriodDays,
     },
-    targetDir
+    targetDir,
   );
+}
+
+function getProArtifactVersion(options = {}) {
+  if (options.proArtifactVersion) {
+    return options.proArtifactVersion;
+  }
+
+  if (process.env.AIOX_PRO_ARTIFACT_VERSION) {
+    return process.env.AIOX_PRO_ARTIFACT_VERSION;
+  }
+
+  try {
+    const localProPkg = require(resolveAioxCorePath('pro', 'package.json'));
+    if (localProPkg && localProPkg.version) {
+      return localProPkg.version;
+    }
+  } catch {
+    // Public core packages do not contain pro/package.json.
+  }
+
+  return DEFAULT_PRO_ARTIFACT_VERSION;
+}
+
+function getLicenseResultAccessToken(licenseResult) {
+  return (
+    licenseResult?.accessToken ||
+    licenseResult?.sessionToken ||
+    licenseResult?.authToken ||
+    licenseResult?.activationResult?.accessToken ||
+    licenseResult?.activationResult?.sessionToken ||
+    null
+  );
+}
+
+function assertSafeArtifactUrl(artifactUrl) {
+  let parsed;
+  try {
+    parsed = new URL(artifactUrl);
+  } catch (error) {
+    throw new Error(`Invalid Pro artifact URL returned by license server: ${error.message}`);
+  }
+
+  const isAllowedLocalHttp = parsed.protocol === 'http:' && isLocalLicenseHost(parsed.hostname);
+  if (parsed.protocol !== 'https:' && !isAllowedLocalHttp) {
+    throw new Error('Pro artifact URL must use https://, except for localhost development.');
+  }
+}
+
+async function downloadArtifactFile(artifactUrl, destinationPath, expectedSizeBytes) {
+  assertSafeArtifactUrl(artifactUrl);
+
+  const response = await fetch(artifactUrl);
+  if (!response.ok) {
+    throw new Error(`Pro artifact download failed with HTTP ${response.status}`);
+  }
+
+  const buffer = Buffer.from(await response.arrayBuffer());
+  if (buffer.length > MAX_PRO_ARTIFACT_SIZE_BYTES) {
+    throw new Error('Pro artifact exceeds maximum supported size.');
+  }
+
+  if (expectedSizeBytes && buffer.length !== expectedSizeBytes) {
+    throw new Error(
+      `Pro artifact size mismatch: expected ${expectedSizeBytes}, received ${buffer.length}.`,
+    );
+  }
+
+  await fs.writeFile(destinationPath, buffer);
+
+  return {
+    sizeBytes: buffer.length,
+    sha256: crypto.createHash('sha256').update(buffer).digest('hex'),
+  };
+}
+
+async function extractProArtifactToTemp(artifactPath, tempRoot) {
+  const installRoot = path.join(tempRoot, 'package-root');
+  await fs.ensureDir(installRoot);
+  await fs.writeJson(path.join(installRoot, 'package.json'), {
+    private: true,
+    dependencies: {},
+  });
+
+  const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  try {
+    await execFileAsync(
+      npmBin,
+      ['install', artifactPath, '--ignore-scripts', '--no-audit', '--no-fund', '--no-save', '--silent'],
+      {
+        cwd: installRoot,
+        timeout: PRO_ARTIFACT_INSTALL_TIMEOUT_MS,
+        maxBuffer: 1024 * 1024 * 10,
+      },
+    );
+  } catch (error) {
+    const details = error.stderr || error.stdout || error.message;
+    throw new Error(`Failed to extract Pro artifact package: ${String(details).trim()}`);
+  }
+
+  const proSourceDir = path.join(installRoot, 'node_modules', '@aiox-squads', 'pro');
+  if (!(await fs.pathExists(path.join(proSourceDir, 'package.json')))) {
+    throw new Error('Extracted Pro artifact did not contain @aiox-squads/pro package metadata.');
+  }
+
+  return proSourceDir;
+}
+
+async function installProArtifactIntoTarget(artifactPath, targetDir) {
+  await fs.ensureDir(targetDir);
+
+  const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  try {
+    await execFileAsync(
+      npmBin,
+      [
+        'install',
+        artifactPath,
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--no-save',
+        '--package-lock=false',
+        '--silent',
+      ],
+      {
+        cwd: targetDir,
+        timeout: PRO_ARTIFACT_INSTALL_TIMEOUT_MS,
+        maxBuffer: 1024 * 1024 * 10,
+      },
+    );
+  } catch (error) {
+    const details = error.stderr || error.stdout || error.message;
+    throw new Error(`Failed to install Pro artifact into project: ${String(details).trim()}`);
+  }
+
+  const proSourceDir = path.join(targetDir, 'node_modules', '@aiox-squads', 'pro');
+  if (!(await fs.pathExists(path.join(proSourceDir, 'package.json')))) {
+    throw new Error('Installed Pro artifact did not create node_modules/@aiox-squads/pro.');
+  }
+
+  return proSourceDir;
+}
+
+async function acquireProArtifactSourceDir(targetDir, licenseResult, options = {}) {
+  const accessToken = getLicenseResultAccessToken(licenseResult);
+  if (!accessToken) {
+    return {
+      success: false,
+      error:
+        'Authenticated Pro artifact download requires email/password login. Run `npx aiox-pro setup` and choose the login/create-account flow.',
+    };
+  }
+
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'aiox-pro-artifact-'));
+
+  try {
+    const machineId = licenseResult.machineId || generateMachineId();
+    const aioxCoreVersion = licenseResult.aioxCoreVersion || getAioxCoreVersion() || 'unknown';
+    const version = getProArtifactVersion(options);
+    const client = new InlineLicenseClient();
+    const artifact = await client.getProArtifactUrl(accessToken, {
+      package: PRO_ARTIFACT_PACKAGE,
+      version,
+      format: 'tgz',
+      machineId,
+      aioxCoreVersion,
+    });
+
+    if (!artifact || artifact.package !== PRO_ARTIFACT_PACKAGE || artifact.version !== version) {
+      throw new Error('License server returned an unexpected Pro artifact descriptor.');
+    }
+
+    if (!/^[a-f0-9]{64}$/i.test(artifact.sha256 || '')) {
+      throw new Error('License server returned an invalid Pro artifact sha256.');
+    }
+
+    const artifactPath = path.join(tempRoot, `aiox-squads-pro-${version}.tgz`);
+    const downloaded = await downloadArtifactFile(
+      artifact.artifactUrl,
+      artifactPath,
+      artifact.sizeBytes,
+    );
+
+    if (downloaded.sha256 !== artifact.sha256) {
+      throw new Error('Pro artifact sha256 mismatch after download.');
+    }
+
+    const targetInstaller =
+      module.exports._testing && module.exports._testing.installProArtifactIntoTarget
+        ? module.exports._testing.installProArtifactIntoTarget
+        : installProArtifactIntoTarget;
+    const extractedProSourceDir = await extractProArtifactToTemp(artifactPath, tempRoot);
+    const installedProSourceDir = await targetInstaller(artifactPath, targetDir);
+
+    return {
+      success: true,
+      proSourceDir: installedProSourceDir || extractedProSourceDir,
+      tempRoot,
+      artifact: {
+        package: artifact.package,
+        version: artifact.version,
+        sha256: artifact.sha256,
+        sizeBytes: artifact.sizeBytes,
+        expiresAt: artifact.expiresAt,
+      },
+    };
+  } catch (error) {
+    await fs.remove(tempRoot).catch(() => {});
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
 }
 
 /**
@@ -663,7 +910,7 @@ async function ensureKeyValidationParity(client, activationResult, machineId, ai
     const normalizedActivation = await client.activate(
       activationResult.key,
       machineId,
-      aioxCoreVersion
+      aioxCoreVersion,
     );
     return mergeActivation(normalizedActivation);
   } catch (error) {
@@ -1011,7 +1258,7 @@ async function loginWithRetry(client, email) {
         const verifyResult = await waitForEmailVerification(
           client,
           loginResult.sessionToken,
-          email
+          email,
         );
         if (!verifyResult.success) {
           return verifyResult;
@@ -1036,7 +1283,7 @@ async function loginWithRetry(client, email) {
               const verifyResult = await waitForEmailVerification(
                 client,
                 retryLogin.sessionToken,
-                email
+                email,
               );
               if (!verifyResult.success) return verifyResult;
             }
@@ -1056,7 +1303,7 @@ async function loginWithRetry(client, email) {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
           spinner.fail(
-            `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`
+            `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`,
           );
           showInfo(`Forgot your password? Visit ${PASSWORD_RESET_URL}`);
         } else {
@@ -1382,13 +1629,14 @@ async function waitForEmailVerification(client, sessionToken, email) {
 async function activateProByAuth(client, sessionToken) {
   const spinner = createSpinner(t('proValidatingSubscription'));
   spinner.start();
+  let machineId;
+  let aioxCoreVersion = 'unknown';
 
   try {
     // Generate machine fingerprint compatible with the Pro runtime
-    const machineId = generateMachineId();
+    machineId = generateMachineId();
 
     // Read aiox-core version
-    let aioxCoreVersion = 'unknown';
     try {
       aioxCoreVersion = getAioxCoreVersion() || 'unknown';
     } catch {
@@ -1398,17 +1646,25 @@ async function activateProByAuth(client, sessionToken) {
     const authActivationResult = await client.activateByAuth(
       sessionToken,
       machineId,
-      aioxCoreVersion
+      aioxCoreVersion,
     );
     const activationResult = await ensureKeyValidationParity(
       client,
       authActivationResult,
       machineId,
-      aioxCoreVersion
+      aioxCoreVersion,
     );
 
     spinner.succeed(tf('proSubscriptionConfirmed', { key: maskLicenseKey(activationResult.key) }));
-    return { success: true, key: activationResult.key, activationResult };
+    return {
+      success: true,
+      key: activationResult.key,
+      activationResult,
+      sessionToken,
+      accessToken: sessionToken,
+      machineId,
+      aioxCoreVersion,
+    };
   } catch (error) {
     if (error.code === 'NOT_A_BUYER') {
       spinner.fail(t('proNoSubscription'));
@@ -1423,7 +1679,15 @@ async function activateProByAuth(client, sessionToken) {
     if (error.code === 'ALREADY_ACTIVATED') {
       // License already exists — treat as success (re-install scenario)
       spinner.succeed(t('proAlreadyActivated'));
-      return { success: true, key: 'existing', activationResult: { reactivation: true } };
+      return {
+        success: true,
+        key: 'existing',
+        activationResult: { reactivation: true },
+        sessionToken,
+        accessToken: sessionToken,
+        machineId: machineId || generateMachineId(),
+        aioxCoreVersion,
+      };
     }
 
     spinner.fail(tf('proActivationFailed', { message: error.message }));
@@ -1579,11 +1843,43 @@ async function validateKeyWithApi(key) {
 async function stepInstallScaffold(targetDir, options = {}) {
   showStep(2, 3, t('proContentInstallation'));
 
-  const { proSourceDir, bootstrapError } = options.proSourceDir
-    ? { proSourceDir: options.proSourceDir }
-    : resolveProSourceDir(targetDir);
+  const sourceResolver =
+    module.exports._testing && module.exports._testing.resolveProSourceDir
+      ? module.exports._testing.resolveProSourceDir
+      : resolveProSourceDir;
+  const artifactAcquirer =
+    module.exports._testing && module.exports._testing.acquireProArtifactSourceDir
+      ? module.exports._testing.acquireProArtifactSourceDir
+      : acquireProArtifactSourceDir;
 
-  if (!proSourceDir) {
+  let sourceResolution;
+  if (options.proSourceDir) {
+    sourceResolution = { proSourceDir: options.proSourceDir };
+  } else if (options.refreshArtifact) {
+    sourceResolution = { proSourceDir: null };
+  } else {
+    sourceResolution = sourceResolver(targetDir);
+  }
+
+  const { proSourceDir, bootstrapError } = sourceResolution;
+
+  let resolvedProSourceDir = proSourceDir;
+  let tempProSourceRoot = null;
+
+  if (!resolvedProSourceDir && options.licenseResult) {
+    const acquisition = await artifactAcquirer(targetDir, options.licenseResult, options);
+    if (!acquisition.success) {
+      return {
+        success: false,
+        error: acquisition.error,
+      };
+    }
+
+    resolvedProSourceDir = acquisition.proSourceDir;
+    tempProSourceRoot = acquisition.tempRoot || null;
+  }
+
+  if (!resolvedProSourceDir) {
     return {
       success: false,
       error: bootstrapError
@@ -1592,11 +1888,31 @@ async function stepInstallScaffold(targetDir, options = {}) {
     };
   }
 
+  if (options.licenseResult) {
+    const cachePersistResult = persistLicenseCache(
+      targetDir,
+      options.licenseResult,
+      resolvedProSourceDir,
+    );
+    if (!cachePersistResult.success) {
+      if (tempProSourceRoot) {
+        await fs.remove(tempProSourceRoot).catch(() => {});
+      }
+      return {
+        success: false,
+        error: tf('proLicenseCacheFailed', { message: cachePersistResult.error }),
+      };
+    }
+  }
+
   // Step 2c: Scaffold pro content
   const scaffolderModule = loadProScaffolder();
 
   if (!scaffolderModule) {
     showWarning(t('proScaffolderNotAvailable'));
+    if (tempProSourceRoot) {
+      await fs.remove(tempProSourceRoot).catch(() => {});
+    }
     return { success: false, error: t('proScaffolderNotFound') };
   }
 
@@ -1606,7 +1922,7 @@ async function stepInstallScaffold(targetDir, options = {}) {
   spinner.start();
 
   try {
-    const scaffoldResult = await scaffoldProContent(targetDir, proSourceDir, {
+    const scaffoldResult = await scaffoldProContent(targetDir, resolvedProSourceDir, {
       onProgress: (progress) => {
         spinner.text = tf('proScaffoldingProgress', { message: progress.message });
       },
@@ -1634,6 +1950,10 @@ async function stepInstallScaffold(targetDir, options = {}) {
   } catch (error) {
     spinner.fail(tf('proScaffoldError', { message: error.message }));
     return { success: false, error: error.message };
+  } finally {
+    if (tempProSourceRoot) {
+      await fs.remove(tempProSourceRoot).catch(() => {});
+    }
   }
 }
 
@@ -1717,6 +2037,7 @@ async function stepVerify(scaffoldResult) {
  * @param {string} [options.key] - Pre-provided license key
  * @param {string} [options.targetDir] - Project root (default: process.cwd())
  * @param {boolean} [options.force] - Force overwrite existing content
+ * @param {boolean} [options.refreshArtifact] - Force signed artifact acquisition even if Pro is installed
  * @param {boolean} [options.quiet] - Suppress non-essential output
  * @returns {Promise<Object>} Wizard result
  */
@@ -1756,16 +2077,12 @@ async function runProWizard(options = {}) {
 
   result.licenseValidated = true;
 
-  const cachePersistResult = persistLicenseCache(targetDir, licenseResult);
-  if (!cachePersistResult.success) {
-    result.error = tf('proLicenseCacheFailed', { message: cachePersistResult.error });
-    showError(result.error);
-    return result;
-  }
-
   // Step 2: Install/Scaffold
   const scaffoldResult = await stepInstallScaffold(targetDir, {
     force: options.force,
+    licenseResult,
+    proArtifactVersion: options.proArtifactVersion,
+    refreshArtifact: options.refreshArtifact,
   });
 
   if (!scaffoldResult.success) {
@@ -1819,7 +2136,15 @@ module.exports = {
     persistLicenseCache,
     resolveLicenseServerUrl,
     ensureKeyValidationParity,
+    acquireProArtifactSourceDir,
+    downloadArtifactFile,
+    extractProArtifactToTemp,
+    installProArtifactIntoTarget,
+    getProArtifactVersion,
+    getLicenseResultAccessToken,
     LICENSE_SERVER_URL,
+    PRO_ARTIFACT_PACKAGE,
+    DEFAULT_PRO_ARTIFACT_VERSION,
     PASSWORD_RESET_URL,
     MAX_RETRIES,
     LICENSE_KEY_PATTERN,

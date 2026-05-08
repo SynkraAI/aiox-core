@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-05-08T20:46:55.423Z",
+  "env": "PRO_ARTIFACT_MANIFEST_JSON",
+  "production": true,
+  "versions": [
+    "0.4.0",
+    "0.4.1"
+  ],
+  "updated": true
+}

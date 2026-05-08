@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-05-08T20:48:49.117Z",
+  "licenseServerUrl": "https://aiox-license-server.vercel.app",
+  "package": {
+    "tarballName": "aiox-squads-core-5.1.16.tgz",
+    "tarballExists": true
+  },
+  "coreOnly": {
+    "coreProDirExists": false,
+    "version": "5.1.16"
+  },
+  "validPro": {
+    "wizard": {
+      "success": true,
+      "error": null,
+      "licenseValidated": true,
+      "scaffolded": true,
+      "verified": true,
+      "featureCount": 34,
+      "squadCount": 2180
+    },
+    "packageInstalled": true,
+    "manifestExists": true,
+    "versionJsonExists": true,
+    "licenseCacheExists": true,
+    "proVersion": "0.4.1",
+    "verifyOutputContainsInstalled": true,
+    "statusExitOk": true
+  },
+  "invalidPro": {
+    "wizard": {
+      "success": false,
+      "error": "Email not found in Pro buyers list.",
+      "licenseValidated": false,
+      "scaffolded": false,
+      "verified": false,
+      "featureCount": 0,
+      "squadCount": 0
+    },
+    "failedAsExpected": true,
+    "packageInstalled": false,
+    "manifestExists": false
+  },
+  "update": {
+    "checkOutputContainsExpected": true,
+    "dryRunOutputContainsArtifact": true,
+    "actualOutputContainsComplete": true
+  },
+  "idempotency": {
+    "commandsBefore": 88,
+    "codexAgentsBefore": 86,
+    "commandsAfter": 88,
+    "codexAgentsAfter": 86,
+    "commandsStable": true,
+    "codexAgentsStable": true,
+    "duplicateCommandPaths": 0,
+    "duplicateCodexAgentPaths": 0
+  },
+  "cleanup": {
+    "validUserRemoved": true,
+    "invalidUserRemoved": true,
+    "tmpRootRemoved": true
+  }
+}
