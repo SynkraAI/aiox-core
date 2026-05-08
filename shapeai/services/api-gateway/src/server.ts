@@ -9,10 +9,14 @@ import { profileRoutes } from './routes/profile'
 import { subscriptionRoutes } from './routes/subscription'
 import { pushTokensRoutes } from './routes/push-tokens'
 import { sendReanalysisNotifications } from './services/notification.service'
+import { runMigrations } from './db/migrate'
+import { pool } from './db/client'
 
 const app = Fastify({ logger: true })
 
 async function bootstrap() {
+  await runMigrations(pool)
+
   await app.register(cors, { origin: true })
 
   await app.register(rateLimit, {

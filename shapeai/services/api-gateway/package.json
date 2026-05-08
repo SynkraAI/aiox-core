@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsc && node -e \"const{cpSync,mkdirSync}=require('fs');mkdirSync('dist/db/migrations',{recursive:true});cpSync('src/db/migrations','dist/db/migrations',{recursive:true})\"",
     "start": "node dist/server.js",
     "test": "vitest run",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
-    "migrate": "node src/db/migrate.js"
+    "migrate": "tsx src/db/migrate.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.750.0",

@@ -250,7 +250,7 @@ Análise recente: ${JSON.stringify(a2.scores)}`
       await pool.query(
         `UPDATE analyses
          SET status = 'completed', scores = $1, completed_at = NOW(),
-             photo_front_url = NULL, photo_side_url = NULL, photo_back_url = NULL, photos_deleted_at = NOW(),
+             photo_front_url = NULL, photo_back_url = NULL, photos_deleted_at = NOW(),
              future_self_url = $3
          WHERE id = $2`,
         [JSON.stringify(scores), id, future_self_url ?? null]
