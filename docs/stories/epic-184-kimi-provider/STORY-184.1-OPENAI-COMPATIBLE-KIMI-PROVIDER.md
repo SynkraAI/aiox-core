@@ -61,7 +61,7 @@ Issue #184 asks for native Kimi K2.5 support as an alternative to OpenAI or Clau
 Official Kimi documentation confirms the API is OpenAI-compatible and uses:
 
 - `base_url`: `https://api.moonshot.ai/v1`
-- chat completions endpoint: `/v1/chat/completions`
+- chat completions endpoint relative to that base URL: `/chat/completions`
 
 The correct implementation path is a reusable `OpenAICompatibleProvider` plus a Kimi preset/alias. A Kimi-specific hardcoded provider would solve less and create avoidable duplication.
 
@@ -120,7 +120,7 @@ The correct implementation path is a reusable `OpenAICompatibleProvider` plus a 
 - Prefer `apiKeyEnv` defaults such as `MOONSHOT_API_KEY` for Kimi and allow explicit override.
 - Treat `baseURL` and `baseUrl` as equivalent input names for compatibility with common OpenAI-style config.
 - Preserve current default provider behavior: `primary: claude`, `fallback: gemini`.
-- The stale branch `/private/tmp/aiox-core-kimi` is scoped to IDE sync and should not be replayed into this story without a separate decision.
+- The stale `aiox-core-kimi` branch/worktree is scoped to IDE sync and should not be replayed into this story without a separate decision.
 
 ## Testing
 
@@ -163,9 +163,9 @@ If the provider test lands under a different path, update this section and the F
 
 - Draft created from issue #184 and current repo inspection on 2026-05-08.
 - Confirmed no open PR currently targets Kimi/Moonshot/provider support.
-- Identified stale worktree `/private/tmp/aiox-core-kimi` as IDE sync scope, not provider LLM scope.
+- Identified stale `aiox-core-kimi` branch/worktree as IDE sync scope, not provider LLM scope.
 - Confirmed current provider factory registers `claude` and `gemini` only.
-- Verified current Kimi API docs: OpenAI-compatible base URL is `https://api.moonshot.ai/v1`, chat completions endpoint is `/v1/chat/completions`.
+- Verified current Kimi API docs: OpenAI-compatible base URL is `https://api.moonshot.ai/v1`, and the chat completions endpoint relative to that base URL is `/chat/completions`.
 
 ### Agent Model Used
 

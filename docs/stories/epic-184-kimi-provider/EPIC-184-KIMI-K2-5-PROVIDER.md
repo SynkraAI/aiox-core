@@ -23,7 +23,7 @@ Adicionar suporte nativo e backward-compatible para Kimi K2.5 da Moonshot AI com
 - `ClaudeProvider` e `GeminiProvider` são wrappers de CLI; Kimi K2.5 deve ser HTTP/OpenAI-compatible, não wrapper de CLI.
 - `docs/guides/llm-routing.md` já cobre roteamento Claude Code para DeepSeek via endpoint Anthropic-compatible, mas isso é diferente de provider nativo no factory de `AIProvider`.
 - Existe uma worktree antiga `feat/kimi-ide-integration-20260507`, porém seu escopo é Kimi como target de IDE sync (`.kimi/skills` e transformer), não o provider LLM solicitado no issue #184.
-- A documentação oficial da Kimi API declara compatibilidade com o formato OpenAI e usa `https://api.moonshot.ai/v1` como `base_url`; o endpoint de chat é `/v1/chat/completions`.
+- A documentação oficial da Kimi API declara compatibilidade com o formato OpenAI e usa `https://api.moonshot.ai/v1` como `base_url`; com esse `base_url`, o endpoint relativo de chat é `/chat/completions`.
 
 ## Escopo
 
