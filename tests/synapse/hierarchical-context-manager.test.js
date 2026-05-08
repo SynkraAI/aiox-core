@@ -1,7 +1,7 @@
 const {
   HierarchicalContextManager,
   buildDefaultSummary,
-} = require('../../.aiox-core/core/synapse/context');
+} = require('aiox-core/core/synapse/context');
 
 const wordTokenizer = text => String(text || '').trim().split(/\s+/).filter(Boolean).length;
 
@@ -72,8 +72,17 @@ describe('HierarchicalContextManager', () => {
 
     const context = manager.getContext();
     const stats = manager.getStats();
+    const firstCompleteEvent = completeEvents[0];
 
     expect(completeEvents.length).toBeGreaterThan(0);
+    expect(firstCompleteEvent).toMatchObject({
+      source: 'short-term',
+      messagesRemoved: 1,
+      swapCount: 1,
+    });
+    expect(firstCompleteEvent.tokensBefore).toBeGreaterThan(0);
+    expect(firstCompleteEvent.tokensAfter).toBeGreaterThan(0);
+    expect(firstCompleteEvent.summaryTokens).toBeGreaterThan(0);
     expect(stats.longTermSummaries).toBeGreaterThanOrEqual(1);
     expect(stats.totalTokens).toBeLessThanOrEqual(stats.maxTokens);
     expect(context[0].role).toBe('system');
@@ -113,8 +122,86 @@ describe('HierarchicalContextManager', () => {
     expect(contextText).toContain('summary of');
   });
 
+  test('serializes concurrent addMessage calls so swaps cannot corrupt state', async () => {
+    const manager = new HierarchicalContextManager({
+      maxTokens: 32,
+      summarizationThreshold: 0.5,
+      minRecentMessages: 0,
+      tokenizer: wordTokenizer,
+      summarizer: async ({ messages }) => {
+        await new Promise(resolve => setTimeout(resolve, 5));
+        return `summary for ${messages.map(message => message.id).join(',')}`;
+      },
+    });
+
+    await Promise.all(
+      Array.from({ length: 6 }, (_, index) => manager.addMessage({
+        id: `m${index + 1}`,
+        role: index % 2 === 0 ? 'user' : 'assistant',
+        content: 'one two three four five six seven eight',
+      })),
+    );
+
+    const context = manager.getContext();
+    const contextIds = context
+      .flatMap(message => [
+        message.id,
+        ...(message.metadata?.aiox?.sourceMessages || []).map(source => source.id),
+      ])
+      .filter(Boolean);
+
+    expect(new Set(contextIds).size).toBe(contextIds.length);
+    expect(contextIds).toEqual(expect.arrayContaining(['m1', 'm2', 'm3', 'm4', 'm5', 'm6']));
+    expect(manager.getStats().totalTokens).toBeLessThanOrEqual(manager.getStats().maxTokens);
+  });
+
+  test('collapses all long-term summaries before hard-limit truncation', async () => {
+    const manager = new HierarchicalContextManager({
+      maxTokens: 14,
+      summarizationThreshold: 0.75,
+      tokenizer: wordTokenizer,
+      summarizer: async ({ messages }) => `combined ${messages
+        .flatMap(message => message.metadata?.aiox?.sourceMessages || [])
+        .map(source => source.id)
+        .join(' ')}`,
+    });
+
+    manager._longTermSummaries = [
+      {
+        role: 'system',
+        content: 'first summary one two three four five six',
+        metadata: {
+          aiox: {
+            sourceMessages: [{ id: 'm1' }, { id: 'm2' }],
+          },
+        },
+      },
+      {
+        role: 'system',
+        content: 'second summary seven eight nine ten eleven twelve',
+        metadata: {
+          aiox: {
+            sourceMessages: [{ id: 'm3' }, { id: 'm4' }],
+          },
+        },
+      },
+    ];
+
+    await manager._fitLongTermSummariesToBudget();
+
+    expect(manager._longTermSummaries).toHaveLength(1);
+    expect(manager._longTermSummaries[0].metadata.aiox.sourceMessages).toEqual([
+      { id: 'm1' },
+      { id: 'm2' },
+      { id: 'm3' },
+      { id: 'm4' },
+    ]);
+    expect(manager.getStats().totalTokens).toBeLessThanOrEqual(manager.getStats().maxTokens);
+  });
+
   test('emits swap:error and falls back to deterministic summary when summarizer fails', async () => {
-    const errorEvents = [];
+    const callbackEvents = [];
+    const emitterEvents = [];
     const manager = new HierarchicalContextManager({
       maxTokens: 30,
       summarizationThreshold: 0.5,
@@ -122,10 +209,10 @@ describe('HierarchicalContextManager', () => {
       summarizer: async () => {
         throw new Error('summarizer unavailable');
       },
-      onSwapError: event => errorEvents.push(event),
+      onSwapError: event => callbackEvents.push(event),
     });
 
-    manager.on('swap:error', event => errorEvents.push(event));
+    manager.on('swap:error', event => emitterEvents.push(event));
 
     await manager.addMessages([
       { role: 'user', content: 'one two three four five six seven eight nine ten eleven' },
@@ -134,7 +221,10 @@ describe('HierarchicalContextManager', () => {
 
     const context = manager.getContext();
 
-    expect(errorEvents.length).toBeGreaterThan(0);
+    expect(callbackEvents).toHaveLength(1);
+    expect(emitterEvents).toHaveLength(1);
+    expect(callbackEvents[0]).toMatchObject({ source: 'short-term' });
+    expect(emitterEvents[0]).toMatchObject({ source: 'short-term' });
     expect(manager.getStats().lastError).toEqual({ message: 'summarizer unavailable' });
     expect(context[0].content).toContain('Long-term context summary');
     expect(context[0].metadata.aiox.fallbackUsed).toBe(true);

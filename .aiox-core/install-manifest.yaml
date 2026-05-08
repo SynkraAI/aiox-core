@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T18:32:17.980Z"
+generated_at: "2026-05-08T19:14:10.833Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1120
 files:
@@ -1097,9 +1097,9 @@ files:
     type: core
     size: 9144
   - path: core/synapse/context/hierarchical-context-manager.js
-    hash: sha256:8f10627cf01712aa4e799ca2cb01fcd6c6694e3462cd0be592561c37ff8cbd53
+    hash: sha256:34f5b9e64c46880138ad684d64e7006f63c16211a219afa81a2c1b6236748af5
     type: core
-    size: 15720
+    size: 16313
   - path: core/synapse/context/index.js
     hash: sha256:a67e843cf61e823e0c1b73efdb2d67d268a798fc0c25505a199c1da130d4fe36
     type: core
@@ -1277,9 +1277,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:ff8b68dc4924b962e87edb6ca660128caca635f62acf4edd3dd05cc5232331db
+    hash: sha256:c2b4e0dacd2225744a29db180f022519cef80db8ba9156b5d348fb0a2bd65128
     type: data
-    size: 527962
+    size: 527952
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data

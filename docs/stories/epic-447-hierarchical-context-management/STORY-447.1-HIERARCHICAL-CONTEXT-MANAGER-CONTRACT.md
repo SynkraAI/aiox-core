@@ -170,6 +170,7 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 - Removed full-suite generated `entity-registry.yaml` timestamp churn and kept the scoped registry update for the new SYNAPSE context modules.
 - Validation completed: focused hierarchical test suite passed, adjacent SYNAPSE/orchestration suites passed, manifest validation passed, ESLint scoped check passed, repository lint passed with pre-existing warnings only, typecheck passed and full Jest suite passed.
 - Story DoD self-assessment completed. Build command is N/A because `package.json` does not define `npm run build`. CodeRabbit PR loop is deferred until a PR exists; no local CodeRabbit script is defined in `package.json`.
+- CodeRabbit follow-up addressed on PR #706: serialized concurrent `addMessage()` mutations, collapsed long-term summaries before hard-limit truncation, strengthened event/error tests and switched the test import to the configured absolute module alias.
 
 ### Agent Model Used
 
@@ -179,6 +180,8 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 
 - Implemented the canonical hierarchical context manager contract for Story 447.1.
 - Long-running context compaction now maintains short-term messages plus long-term summaries, emits/calls swap observability hooks and falls back safely on summarization failure.
+- Concurrent message additions are serialized through an internal mutation queue so summarization swaps cannot interleave and corrupt context state.
+- Hard-limit truncation now compacts all long-term summaries before truncating the combined result, preserving source-message lineage.
 - Documentation includes dependency-injection usage for tokenizer and summarizer.
 - Story is ready for architecture/QA review.
 
@@ -203,3 +206,4 @@ If `tests/synapse/hierarchical-context-manager.test.js` lands under a different 
 | 2026-05-08 | @po (Pax) | Validation auto-fix: seção de status, executor assignment, accountable, deploy_type e headings canônicos adicionados. |
 | 2026-05-08 | @po (Pax) | Validated 9.2/10 [GO with Auto-Fix]. Context: Epic 447, Wave 1. 0 stories anteriores analisadas. D10: 0 divergências, 5 ajustes. Condições: nenhuma. |
 | 2026-05-08 | @dev (Dex) | Implementado `HierarchicalContextManager`, export aditivo, documentação, testes determinísticos, manifest e registry atualizados. |
+| 2026-05-08 | @dev (Dex) | Ajustados apontamentos do CodeRabbit no PR #706: concorrência, preservação de summaries e assertions de eventos/erros. |

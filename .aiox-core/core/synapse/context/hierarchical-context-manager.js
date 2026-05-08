@@ -123,6 +123,7 @@ class HierarchicalContextManager extends EventEmitter {
     this._swapCount = 0;
     this._lastSwap = null;
     this._lastError = null;
+    this._operationQueue = Promise.resolve();
   }
 
   /**
@@ -132,9 +133,11 @@ class HierarchicalContextManager extends EventEmitter {
    * @returns {Promise<object>} Manager stats after insertion.
    */
   async addMessage(message) {
-    this._shortTermMessages.push(this._normalizeMessage(message));
-    await this._compactIfNeeded();
-    return this.getStats();
+    return this._enqueueMutation(async () => {
+      this._shortTermMessages.push(this._normalizeMessage(message));
+      await this._compactIfNeeded();
+      return this.getStats();
+    });
   }
 
   /**
@@ -198,6 +201,13 @@ class HierarchicalContextManager extends EventEmitter {
     this._swapCount = 0;
     this._lastSwap = null;
     this._lastError = null;
+    this._operationQueue = Promise.resolve();
+  }
+
+  _enqueueMutation(operation) {
+    const run = this._operationQueue.then(operation, operation);
+    this._operationQueue = run.catch(() => {});
+    return run;
   }
 
   _normalizeMessage(message) {
@@ -237,9 +247,21 @@ class HierarchicalContextManager extends EventEmitter {
       break;
     }
 
+    await this._fitLongTermSummariesToBudget();
+  }
+
+  async _fitLongTermSummariesToBudget() {
+    if (this._getTotalTokens() <= this.maxTokens || this._longTermSummaries.length === 0) {
+      return;
+    }
+
+    if (this._longTermSummaries.length > 1) {
+      await this._compactLongTermSummaries();
+    }
+
     if (this._getTotalTokens() > this.maxTokens && this._longTermSummaries.length > 0) {
       this._longTermSummaries = [
-        this._truncateSummaryMessage(this._longTermSummaries[this._longTermSummaries.length - 1]),
+        this._truncateSummaryMessage(this._longTermSummaries[0]),
       ];
     }
   }
