@@ -446,6 +446,7 @@ Expected implementation touchpoints:
 - 2026-05-08: `pro/package-lock.json` drift corrected; `npm --prefix pro ci --ignore-scripts --no-audit --no-fund` passes.
 - 2026-05-08: Publish/private distribution docs updated with signed artifact preconditions, privacy command, and rollback command.
 - 2026-05-08: Full local smoke passed and saved to `outputs/qa/2026-05-pro-13-5-smoke.json`: core-only install has no bundled `pro/`; valid Pro user installs `@aiox-squads/pro@0.4.1` via signed artifact; invalid Pro user is blocked before content; `aiox pro update` completes through artifact channel; `.claude/commands` and `.codex/agents` file sets remain stable with zero duplicate paths.
+- 2026-05-08: GitHub CI follow-up fixed: `tests/pro-wizard.test.js` interactive license-key retry test now stubs the license client instead of reaching the real inline HTTP fallback, removing the Node 18 timeout while preserving prompt/retry assertions.
 - Validation evidence:
   - `node -c packages/installer/src/wizard/pro-setup.js && node -c packages/aiox-pro-cli/bin/aiox-pro.js && node -c bin/utils/validate-publish.js`
   - `node -c packages/installer/src/pro/pro-scaffolder.js && node -c pro/license/license-api.js && node -c .aiox-core/cli/commands/pro/index.js`

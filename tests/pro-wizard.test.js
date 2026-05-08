@@ -199,7 +199,27 @@ describe('stepLicenseGate', () => {
       return Promise.resolve({ licenseKey: 'PRO-AAAA-BBBB-CCCC-DDDD' });
     });
 
-    const result = await proSetup.stepLicenseGate();
+    const originalLoadLicenseApi = proSetup._testing.loadLicenseApi;
+    proSetup._testing.loadLicenseApi = () => ({
+      LicenseApiClient: class {
+        async isOnline() {
+          return true;
+        }
+
+        async activate() {
+          const error = new Error('Invalid');
+          error.code = 'INVALID_KEY';
+          throw error;
+        }
+      },
+    });
+
+    let result;
+    try {
+      result = await proSetup.stepLicenseGate();
+    } finally {
+      proSetup._testing.loadLicenseApi = originalLoadLicenseApi;
+    }
 
     // 1 for method choice + 3 for max retries = 4 total calls
     expect(callCount).toBe(4);
