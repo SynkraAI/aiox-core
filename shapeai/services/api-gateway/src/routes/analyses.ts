@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify'
 import axios from 'axios'
 import { pool } from '../db/client'
 import { requireAuth } from '../middleware/auth'
-import { generatePresignedUploadUrl } from '../services/s3.service'
+import { generatePresignedUploadUrl, generatePresignedGetUrl } from '../services/s3.service'
 import { checkFreemiumLimit } from '../services/freemium.service'
 
 export async function analysesRoutes(app: FastifyInstance) {
@@ -126,7 +126,7 @@ export async function analysesRoutes(app: FastifyInstance) {
           response.body_composition = row.body_composition
         }
         if (row.future_self_url) {
-          response.future_self_url = row.future_self_url
+          response.future_self_url = await generatePresignedGetUrl(row.future_self_url)
         }
       }
 
