@@ -221,6 +221,40 @@ describe('RegistryUpdater', () => {
       expect(registry.entities.modules).toBeDefined();
       expect(registry.entities.modules['new-module']).toBeDefined();
     });
+
+    it('does not overwrite an existing basename entity when adding a same-name file in another directory', async () => {
+      const baseReg = getBaseRegistry();
+      baseReg.entities.modules = {
+        index: {
+          path: '.aiox-core/core/index.js',
+          type: 'module',
+          purpose: 'Root core barrel',
+          keywords: ['index'],
+          usedBy: [],
+          dependencies: ['config-loader'],
+          adaptability: { score: 0.4, constraints: [], extensionPoints: [] },
+          checksum: 'sha256:3333333333333333333333333333333333333333333333333333333333333333',
+          lastVerified: '2026-02-08T00:00:00Z',
+        },
+      };
+      createTempRegistry(baseReg);
+
+      const updater = createUpdater();
+      const filePath = createTempFile(
+        '.aiox-core/core/errors/index.js',
+        "const constants = require('./constants');\nmodule.exports = { constants };\n",
+      );
+
+      const result = await updater.processChanges([{ action: 'add', filePath }]);
+
+      expect(result.updated).toBe(1);
+
+      const registry = readRegistry();
+      expect(registry.entities.modules.index.path).toBe('.aiox-core/core/index.js');
+      expect(registry.entities.modules.index.purpose).toBe('Root core barrel');
+      expect(registry.entities.modules['errors-index']).toBeDefined();
+      expect(registry.entities.modules['errors-index'].path).toBe('.aiox-core/core/errors/index.js');
+    });
   });
 
   describe('File modification handling (AC: 3)', () => {

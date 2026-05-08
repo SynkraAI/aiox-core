@@ -9,6 +9,8 @@ const {
   detectDependencies,
   extractYamlDependencies,
   extractMarkdownCrossReferences,
+  resolveEntityId,
+  toScopedEntityId,
   computeChecksum,
   scanCategory,
   resolveUsedBy,
@@ -33,6 +35,74 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       expect(extractEntityId('/foo/bar/my-task.md')).toBe('my-task');
       expect(extractEntityId('/foo/bar/script.js')).toBe('script');
       expect(extractEntityId('template.yaml')).toBe('template');
+    });
+  });
+
+  describe('resolveEntityId()', () => {
+    const modulesConfig = {
+      category: 'modules',
+      basePath: '.aiox-core/core',
+      glob: '**/*.{js,mjs}',
+      type: 'module',
+    };
+    const repoRoot = '/repo';
+
+    it('keeps basename ID when there is no collision', () => {
+      const filePath = '/repo/.aiox-core/core/errors/constants.js';
+
+      expect(resolveEntityId(filePath, modulesConfig, {}, repoRoot)).toBe('constants');
+    });
+
+    it('keeps basename ID when the existing entity points to the same path', () => {
+      const filePath = '/repo/.aiox-core/core/index.js';
+      const existing = {
+        index: {
+          path: '.aiox-core/core/index.js',
+        },
+      };
+
+      expect(resolveEntityId(filePath, modulesConfig, existing, repoRoot)).toBe('index');
+    });
+
+    it('uses a path-scoped ID when basename belongs to a different path', () => {
+      const filePath = '/repo/.aiox-core/core/errors/index.js';
+      const existing = {
+        index: {
+          path: '.aiox-core/core/index.js',
+        },
+      };
+
+      expect(resolveEntityId(filePath, modulesConfig, existing, repoRoot)).toBe('errors-index');
+    });
+
+    it('adds a numeric suffix when the scoped ID is also occupied by another path', () => {
+      const filePath = '/repo/.aiox-core/core/errors/index.js';
+      const existing = {
+        index: {
+          path: '.aiox-core/core/index.js',
+        },
+        'errors-index': {
+          path: '.aiox-core/core/other/index.js',
+        },
+      };
+
+      expect(resolveEntityId(filePath, modulesConfig, existing, repoRoot)).toBe('errors-index-2');
+    });
+  });
+
+  describe('toScopedEntityId()', () => {
+    it('derives deterministic path-scoped IDs from the category base path', () => {
+      const config = {
+        category: 'modules',
+        basePath: '.aiox-core/core',
+        glob: '**/*.{js,mjs}',
+        type: 'module',
+      };
+
+      expect(toScopedEntityId('/repo/.aiox-core/core/errors/index.js', config, '/repo')).toBe('errors-index');
+      expect(toScopedEntityId('/repo/.aiox-core/core/code-intel/helpers/creation-helper.js', config, '/repo')).toBe(
+        'code-intel-helpers-creation-helper',
+      );
     });
   });
 
@@ -805,8 +875,8 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
     });
   });
 
-  describe('duplicate detection (AC: 12)', () => {
-    it('scanCategory skips duplicate entity IDs with warning', () => {
+  describe('duplicate-safe IDs (AC: 12)', () => {
+    it('scanCategory returns unique entity IDs', () => {
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       const result = scanCategory({
@@ -823,11 +893,10 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       const uniqueIds = new Set(ids);
       expect(ids.length).toBe(uniqueIds.size);
 
-      // Verify that duplicates are logged (if any were found)
+      // Collision-safe IDs keep returned keys unique even when filenames repeat.
       const dupWarnings = warnSpy.mock.calls.filter(
         (call) => typeof call[0] === 'string' && call[0].includes('Duplicate entity ID'),
       );
-      // All returned IDs are unique — any duplicates found would have been warned about
       expect(dupWarnings.length + ids.length).toBeGreaterThanOrEqual(ids.length);
 
       warnSpy.mockRestore();

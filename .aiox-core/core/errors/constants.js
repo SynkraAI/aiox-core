@@ -1,0 +1,137 @@
+const ErrorCategory = Object.freeze({
+  CONFIGURATION: 'configuration',
+  VALIDATION: 'validation',
+  FILESYSTEM: 'filesystem',
+  NETWORK: 'network',
+  REGISTRY: 'registry',
+  ORCHESTRATION: 'orchestration',
+  SYNAPSE: 'synapse',
+  EXECUTION: 'execution',
+  PERMISSION: 'permission',
+  EXTERNAL_EXECUTOR: 'external_executor',
+  UNKNOWN: 'unknown',
+});
+
+const ErrorSeverity = Object.freeze({
+  CRITICAL: 'critical',
+  ERROR: 'error',
+  WARNING: 'warning',
+  INFO: 'info',
+});
+
+const DEFAULT_ERROR_CODE = 'AIOX_UNKNOWN_ERROR';
+
+const CORE_ERROR_DEFINITIONS = Object.freeze([
+  {
+    code: DEFAULT_ERROR_CODE,
+    category: ErrorCategory.UNKNOWN,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    userMessage: 'An unexpected AIOX core error occurred.',
+    recovery: ['Review the error metadata and retry if the operation is safe to repeat.'],
+  },
+  {
+    code: 'AIOX_CONFIGURATION_INVALID',
+    category: ErrorCategory.CONFIGURATION,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    userMessage: 'AIOX configuration is invalid.',
+    recovery: ['Validate the active AIOX configuration and retry.'],
+  },
+  {
+    code: 'AIOX_VALIDATION_FAILED',
+    category: ErrorCategory.VALIDATION,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    userMessage: 'AIOX validation failed.',
+    recovery: ['Review validation errors and correct the invalid input.'],
+  },
+  {
+    code: 'AIOX_FILESYSTEM_ERROR',
+    category: ErrorCategory.FILESYSTEM,
+    severity: ErrorSeverity.ERROR,
+    retryable: true,
+    userMessage: 'A filesystem operation failed.',
+    recovery: ['Check path existence, permissions, and disk availability.'],
+  },
+  {
+    code: 'AIOX_PERMISSION_DENIED',
+    category: ErrorCategory.PERMISSION,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    exitCode: 13,
+    userMessage: 'The operation does not have the required permissions.',
+    recovery: ['Grant the required permission or run the command in an authorized context.'],
+  },
+  {
+    code: 'AIOX_NETWORK_ERROR',
+    category: ErrorCategory.NETWORK,
+    severity: ErrorSeverity.ERROR,
+    retryable: true,
+    userMessage: 'A network operation failed.',
+    recovery: ['Check connectivity and retry the operation.'],
+  },
+  {
+    code: 'AIOX_REGISTRY_LOAD_FAILED',
+    category: ErrorCategory.REGISTRY,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    userMessage: 'AIOX could not load a registry.',
+    recovery: ['Validate registry file syntax and path configuration.'],
+  },
+  {
+    code: 'AIOX_REGISTRY_WRITE_FAILED',
+    category: ErrorCategory.REGISTRY,
+    severity: ErrorSeverity.ERROR,
+    retryable: true,
+    userMessage: 'AIOX could not write a registry.',
+    recovery: ['Check registry path permissions and retry.'],
+  },
+  {
+    code: 'AIOX_ORCHESTRATION_FAILED',
+    category: ErrorCategory.ORCHESTRATION,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    userMessage: 'AIOX orchestration failed.',
+    recovery: ['Review orchestration metadata and the active workflow state.'],
+  },
+  {
+    code: 'AIOX_SYNAPSE_LAYER_FAILED',
+    category: ErrorCategory.SYNAPSE,
+    severity: ErrorSeverity.WARNING,
+    retryable: true,
+    userMessage: 'A Synapse layer failed while processing context.',
+    recovery: ['Review layer metadata and continue with graceful degradation when possible.'],
+  },
+  {
+    code: 'AIOX_EXECUTION_FAILED',
+    category: ErrorCategory.EXECUTION,
+    severity: ErrorSeverity.ERROR,
+    retryable: false,
+    userMessage: 'AIOX execution failed.',
+    recovery: ['Review execution logs and retry after correcting the failure cause.'],
+  },
+  {
+    code: 'AIOX_EXTERNAL_EXECUTOR_FAILED',
+    category: ErrorCategory.EXTERNAL_EXECUTOR,
+    severity: ErrorSeverity.ERROR,
+    retryable: true,
+    userMessage: 'An external executor failed.',
+    recovery: ['Review external executor logs and retry if the command is idempotent.'],
+  },
+  {
+    code: 'AIOX_PERSISTENCE_DEGRADED',
+    category: ErrorCategory.FILESYSTEM,
+    severity: ErrorSeverity.WARNING,
+    retryable: true,
+    userMessage: 'AIOX persistence degraded and continued in memory.',
+    recovery: ['Check persistence path permissions and available disk space.'],
+  },
+]);
+
+module.exports = {
+  ErrorCategory,
+  ErrorSeverity,
+  DEFAULT_ERROR_CODE,
+  CORE_ERROR_DEFINITIONS,
+};

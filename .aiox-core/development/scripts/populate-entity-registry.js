@@ -25,7 +25,7 @@ const SCAN_CONFIG = [
   { category: 'infra-scripts', basePath: '.aiox-core/infrastructure/scripts', glob: '**/*.js', type: 'script' },
   { category: 'infra-tools', basePath: '.aiox-core/infrastructure/tools', glob: '**/*.{yaml,yml,md}', type: 'tool' },
   { category: 'product-checklists', basePath: '.aiox-core/product/checklists', glob: '**/*.md', type: 'checklist' },
-  { category: 'product-data', basePath: '.aiox-core/product/data', glob: '**/*.{yaml,yml,md}', type: 'data' }
+  { category: 'product-data', basePath: '.aiox-core/product/data', glob: '**/*.{yaml,yml,md}', type: 'data' },
 ];
 
 const ADAPTABILITY_DEFAULTS = {
@@ -38,14 +38,14 @@ const ADAPTABILITY_DEFAULTS = {
   task: 0.8,
   workflow: 0.4,
   util: 0.6,
-  tool: 0.7
+  tool: 0.7,
 };
 
 const EXTERNAL_TOOLS = new Set([
   'coderabbit', 'git', 'github-cli', 'docker', 'supabase', 'browser',
   'ffmpeg', 'n8n', 'context7', 'playwright', 'apify', 'clickup',
   'jira', 'slack', 'exa', 'eslint', 'jest', 'npm', 'node',
-  'docker-gateway', 'desktop-commander', 'railway'
+  'docker-gateway', 'desktop-commander', 'railway',
 ]);
 
 const DEPRECATED_PATTERNS = [/^old[-_]/, /^backup[-_]/, /deprecated/i, /^legacy[-_]/];
@@ -74,6 +74,41 @@ function computeChecksum(filePath) {
 
 function extractEntityId(filePath) {
   return path.basename(filePath, path.extname(filePath));
+}
+
+function toScopedEntityId(filePath, config, repoRoot = REPO_ROOT) {
+  const baseRoot = path.resolve(repoRoot, config.basePath);
+  const relativeToBase = path.relative(baseRoot, filePath).replace(/\\/g, '/');
+  const withoutExt = relativeToBase.replace(/\.[^.]+$/, '');
+  const scopedId = withoutExt
+    .split('/')
+    .filter(Boolean)
+    .join('-')
+    .replace(/[^a-zA-Z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  return scopedId || extractEntityId(filePath);
+}
+
+function resolveEntityId(filePath, config, existingEntities = {}, repoRoot = REPO_ROOT) {
+  const baseId = extractEntityId(filePath);
+  const relPath = path.relative(repoRoot, filePath).replace(/\\/g, '/');
+  const existing = existingEntities[baseId];
+
+  if (!existing || existing.path === relPath) {
+    return baseId;
+  }
+
+  const scopedId = toScopedEntityId(filePath, config, repoRoot);
+  let candidate = scopedId;
+  let suffix = 2;
+
+  while (existingEntities[candidate] && existingEntities[candidate].path !== relPath) {
+    candidate = `${scopedId}-${suffix}`;
+    suffix += 1;
+  }
+
+  return candidate;
 }
 
 function extractKeywords(filePath, content) {
@@ -132,7 +167,7 @@ const YAML_DEP_FIELDS = {
 
 const KNOWN_AGENTS = [
   'dev', 'qa', 'pm', 'po', 'sm', 'architect', 'devops',
-  'analyst', 'data-engineer', 'ux-design-expert', 'aiox-master'
+  'analyst', 'data-engineer', 'ux-design-expert', 'aiox-master',
 ];
 
 // Pattern A: YAML dependency block items (- name.md)
@@ -321,16 +356,9 @@ function scanCategory(config, verbose = false) {
   const files = fg.sync(globPattern, { onlyFiles: true, absolute: true });
 
   const entities = {};
-  const seenIds = new Set();
 
   for (const filePath of files) {
-    const entityId = extractEntityId(filePath);
-
-    if (seenIds.has(entityId)) {
-      console.warn(`[IDS] Duplicate entity ID "${entityId}" at ${path.relative(REPO_ROOT, filePath)} — skipping`);
-      continue;
-    }
-    seenIds.add(entityId);
+    const entityId = resolveEntityId(filePath, config, entities);
 
     let content = '';
     try {
@@ -396,10 +424,10 @@ function scanCategory(config, verbose = false) {
       adaptability: {
         score: defaultScore,
         constraints: [],
-        extensionPoints: []
+        extensionPoints: [],
       },
       checksum,
-      lastVerified: new Date().toISOString()
+      lastVerified: new Date().toISOString(),
     };
 
     if (lifecycleOverride) {
@@ -457,7 +485,7 @@ function resolveUsedBy(allEntities) {
   }
 
   // Build reverse references
-  for (const [category, entities] of Object.entries(allEntities)) {
+  for (const entities of Object.values(allEntities)) {
     for (const [entityId, entity] of Object.entries(entities)) {
       for (const depRef of entity.dependencies) {
         const target = nameIndex.get(depRef);
@@ -580,7 +608,7 @@ function populate(options = {}) {
   const categories = SCAN_CONFIG.map((c) => ({
     id: c.category,
     description: getCategoryDescription(c.category),
-    basePath: c.basePath
+    basePath: c.basePath,
   }));
 
   const registry = {
@@ -589,16 +617,16 @@ function populate(options = {}) {
       lastUpdated: new Date().toISOString(),
       entityCount: totalCount,
       checksumAlgorithm: 'sha256',
-      resolutionRate: rate
+      resolutionRate: rate,
     },
     entities: allEntities,
-    categories
+    categories,
   };
 
   const yamlContent = yaml.dump(registry, {
     lineWidth: 120,
     noRefs: true,
-    sortKeys: false
+    sortKeys: false,
   });
 
   try {
@@ -627,14 +655,14 @@ function getCategoryDescription(category) {
     'infra-scripts': 'Infrastructure automation and utility scripts',
     'infra-tools': 'Infrastructure tool definitions and configurations',
     'product-checklists': 'Product validation and review checklists',
-    'product-data': 'Product reference data and configuration files'
+    'product-data': 'Product reference data and configuration files',
   };
   return descriptions[category] || category;
 }
 
 if (require.main === module) {
   try {
-    const registry = populate();
+    populate();
     console.log('[IDS] Population complete.');
     process.exit(0);
   } catch (err) {
@@ -647,6 +675,8 @@ module.exports = {
   populate,
   scanCategory,
   extractEntityId,
+  toScopedEntityId,
+  resolveEntityId,
   extractKeywords,
   extractPurpose,
   detectDependencies,
@@ -669,5 +699,5 @@ module.exports = {
   EXTERNAL_TOOLS,
   DEPRECATED_PATTERNS,
   REPO_ROOT,
-  REGISTRY_PATH
+  REGISTRY_PATH,
 };

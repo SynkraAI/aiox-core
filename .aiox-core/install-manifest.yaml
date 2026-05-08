@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T06:49:15.800Z"
+generated_at: "2026-05-08T10:11:41.844Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1111
+file_count: 1117
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -388,6 +388,30 @@ files:
     hash: sha256:722d9b28d2485e3b5b89af6ea136e6d3907b805b9870f6e07e943d0264dc7fff
     type: elicitation
     size: 10935
+  - path: core/errors/aiox-error.js
+    hash: sha256:6734641df389f921f1d139c129ec007d15b3a08114a15fe9faf792ed1036d0c8
+    type: core
+    size: 4487
+  - path: core/errors/constants.js
+    hash: sha256:9f6fa0b1a9b8538d321674ac43628f42452ce2ac770d0433c1ab84b55b1e56dd
+    type: core
+    size: 4305
+  - path: core/errors/error-registry.js
+    hash: sha256:7ba8dffa725860a285618593b8ed47b05c4fa488fdedf1282c2e214881c370bc
+    type: core
+    size: 4643
+  - path: core/errors/index.js
+    hash: sha256:462d0aed6f57f2e4b9d51bcb20467451473c927e0d182b5c3ad43f352f44122c
+    type: core
+    size: 744
+  - path: core/errors/serializer.js
+    hash: sha256:7144adaf3a245afd732aef16e2cdb61f08246badb6b90ac1a7f4b73705ff3ce8
+    type: core
+    size: 4093
+  - path: core/errors/utils.js
+    hash: sha256:24b8ff80e98efc2b562843262490b7ac537ee77565715b644f212652192ced62
+    type: core
+    size: 2014
   - path: core/events/dashboard-emitter.js
     hash: sha256:6c694e4fc5765d6c396b25617cc34e3447068af780fdbb202b060a31cd357549
     type: core
@@ -753,9 +777,9 @@ files:
     type: core
     size: 8096
   - path: core/ids/registry-updater.js
-    hash: sha256:194ecce0795fbf8654a7c69799252765d738d50274dd406f575d796c21c3b754
+    hash: sha256:ed794ec39dc294567814693033dccf43669b177500c215fb70d6c3fc5b691527
     type: core
-    size: 24513
+    size: 24686
   - path: core/ids/verification-gate.js
     hash: sha256:96050661c90fa52bfc755911d02c9194ec35c00e71fc6bbc92a13686dd53bb91
     type: core
@@ -1241,9 +1265,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:1c8e010516647898377715d160234094bc262b0812cf17c96d7d1d4d36c7b4e8
+    hash: sha256:749b0ef51090a7787772dc9b07e604e6ff3403e32d1d59cf04a2229d68801543
     type: data
-    size: 522368
+    size: 525678
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1609,9 +1633,9 @@ files:
     type: script
     size: 23410
   - path: development/scripts/populate-entity-registry.js
-    hash: sha256:3021b425f334c63d6462e64f6316f8b4036bd77b0b49ae419f20695fe3d1a89d
+    hash: sha256:31c29851e506246818f17564e7e67d82c1cc52e6108b40cd740e0415a96cdc77
     type: script
-    size: 22558
+    size: 23451
   - path: development/scripts/refactoring-suggester.js
     hash: sha256:d50ea6b609c9cf8385979386fee4b4385d11ebcde15460260f66d04c705f6cd9
     type: script

@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-08T06:26:24.449Z'
-  entityCount: 746
+  lastUpdated: '2026-05-08T10:11:41.100Z'
+  entityCount: 752
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -7453,8 +7453,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:3021b425f334c63d6462e64f6316f8b4036bd77b0b49ae419f20695fe3d1a89d
-      lastVerified: '2026-03-11T00:48:55.862Z'
+      checksum: sha256:31c29851e506246818f17564e7e67d82c1cc52e6108b40cd740e0415a96cdc77
+      lastVerified: '2026-05-08T10:11:41.097Z'
     refactoring-suggester:
       path: .aiox-core/development/scripts/refactoring-suggester.js
       layer: L2
@@ -9181,8 +9181,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4873507324efab32ba59e1ade70aaa79f318f9c5d689bdb747d8721effba38d1
-      lastVerified: '2026-03-11T00:48:55.880Z'
+      checksum: sha256:ed794ec39dc294567814693033dccf43669b177500c215fb70d6c3fc5b691527
+      lastVerified: '2026-05-08T10:11:41.097Z'
     verification-gate:
       path: .aiox-core/core/ids/verification-gate.js
       layer: L1
@@ -12796,6 +12796,124 @@ entities:
         extensionPoints: []
       checksum: sha256:8246c4c3997ddff6fcf51555fb840bbd4fcac3c294e5ed5fa2c8585a42d91029
       lastVerified: '2026-05-07T07:53:00.000Z'
+    aiox-error:
+      path: .aiox-core/core/errors/aiox-error.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/aiox-error.js
+      keywords:
+        - aiox
+        - error
+      usedBy:
+        - errors-index
+      dependencies:
+        - constants
+        - error-registry
+        - serializer
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:6734641df389f921f1d139c129ec007d15b3a08114a15fe9faf792ed1036d0c8
+      lastVerified: '2026-05-08T10:11:41.092Z'
+    constants:
+      path: .aiox-core/core/errors/constants.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/constants.js
+      keywords:
+        - constants
+      usedBy:
+        - aiox-error
+        - error-registry
+        - errors-index
+        - serializer
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:9f6fa0b1a9b8538d321674ac43628f42452ce2ac770d0433c1ab84b55b1e56dd
+      lastVerified: '2026-05-08T10:11:41.094Z'
+    error-registry:
+      path: .aiox-core/core/errors/error-registry.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/error-registry.js
+      keywords:
+        - error
+        - registry
+      usedBy:
+        - aiox-error
+        - errors-index
+      dependencies:
+        - constants
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:7ba8dffa725860a285618593b8ed47b05c4fa488fdedf1282c2e214881c370bc
+      lastVerified: '2026-05-08T10:11:41.094Z'
+    errors-index:
+      path: .aiox-core/core/errors/index.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/index.js
+      keywords:
+        - index
+      usedBy: []
+      dependencies:
+        - constants
+        - error-registry
+        - aiox-error
+        - serializer
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:462d0aed6f57f2e4b9d51bcb20467451473c927e0d182b5c3ad43f352f44122c
+      lastVerified: '2026-05-08T10:11:41.095Z'
+    serializer:
+      path: .aiox-core/core/errors/serializer.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/serializer.js
+      keywords:
+        - serializer
+      usedBy:
+        - aiox-error
+        - errors-index
+      dependencies:
+        - constants
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:7144adaf3a245afd732aef16e2cdb61f08246badb6b90ac1a7f4b73705ff3ce8
+      lastVerified: '2026-05-08T10:11:41.096Z'
+    utils:
+      path: .aiox-core/core/errors/utils.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/utils.js
+      keywords:
+        - utils
+      usedBy:
+        - aiox-error
+        - error-registry
+        - errors-index
+        - serializer
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:24b8ff80e98efc2b562843262490b7ac537ee77565715b644f212652192ced62
+      lastVerified: '2026-05-08T10:11:41.096Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md

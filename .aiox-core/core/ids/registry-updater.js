@@ -12,6 +12,7 @@ const {
   extractPurpose,
   detectDependencies,
   computeChecksum,
+  resolveEntityId,
   resolveUsedBy,
   SCAN_CONFIG,
   ADAPTABILITY_DEFAULTS,
@@ -320,20 +321,20 @@ class RegistryUpdater {
       throw err;
     }
 
-    const entityId = extractEntityId(absPath);
     const category = config.category;
 
     if (!registry.entities[category]) {
       registry.entities[category] = {};
     }
 
+    const resolvedEntityId = resolveEntityId(absPath, config, registry.entities[category], this._repoRoot);
     const keywords = extractKeywords(absPath, content);
     const purpose = extractPurpose(content, absPath);
-    const dependencies = detectDependencies(content, entityId);
+    const dependencies = detectDependencies(content, resolvedEntityId);
     const checksum = computeChecksum(absPath);
     const defaultScore = ADAPTABILITY_DEFAULTS[config.type] || 0.5;
 
-    registry.entities[category][entityId] = {
+    registry.entities[category][resolvedEntityId] = {
       path: relPath,
       layer: classifyLayer(relPath),
       type: config.type,
@@ -352,7 +353,7 @@ class RegistryUpdater {
 
     // NOG-8: Enrich with code intelligence data (advisory, never blocks registration)
     this._pendingEnrichments = this._pendingEnrichments || [];
-    this._pendingEnrichments.push({ entityId, category, relPath });
+    this._pendingEnrichments.push({ entityId: resolvedEntityId, category, relPath });
 
     return true;
   }
@@ -362,8 +363,8 @@ class RegistryUpdater {
     const config = this._detectCategory(relPath);
     if (!config) return false;
 
-    const entityId = extractEntityId(absPath);
     const category = config.category;
+    const entityId = resolveEntityId(absPath, config, registry.entities[category] || {}, this._repoRoot);
     const existing = registry.entities[category]?.[entityId];
 
     if (!existing) {
