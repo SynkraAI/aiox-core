@@ -308,6 +308,8 @@ class BuildStateManager {
     // Internal state
     this._state = null;
     this._logBuffer = [];
+    this._persistenceAvailable = true;
+    this._persistenceError = null;
   }
 
   // ─────────────────────────────────────────────────────────────────────────────────
@@ -367,14 +369,24 @@ class BuildStateManager {
    * @returns {Object|null} Loaded state or null if not exists
    */
   loadState() {
+    if (!this._persistenceAvailable) {
+      return this._state;
+    }
+
     if (!fs.existsSync(this.stateFilePath)) {
       return null;
     }
 
+    let content;
     try {
-      const content = fs.readFileSync(this.stateFilePath, 'utf-8');
-      const state = JSON.parse(content);
+      content = fs.readFileSync(this.stateFilePath, 'utf-8');
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
+      return this._state;
+    }
 
+    try {
+      const state = JSON.parse(content);
       // Validate
       const validation = validateBuildState(state);
       if (!validation.valid) {
@@ -400,11 +412,6 @@ class BuildStateManager {
       throw new Error('No state to save. Call createState() or loadState() first.');
     }
 
-    // Ensure directory exists
-    if (!fs.existsSync(this.planDir)) {
-      fs.mkdirSync(this.planDir, { recursive: true });
-    }
-
     // Only update timestamp if explicitly requested (via saveCheckpoint)
     if (options.updateCheckpoint) {
       this._state.lastCheckpoint = new Date().toISOString();
@@ -416,11 +423,24 @@ class BuildStateManager {
       throw new Error(`Invalid state: ${validation.errors.join(', ')}`);
     }
 
-    // Write state file
-    fs.writeFileSync(this.stateFilePath, JSON.stringify(this._state, null, 2), 'utf-8');
+    if (!this._persistenceAvailable) {
+      return this._state;
+    }
 
-    // Flush log buffer
-    this._flushLogBuffer();
+    try {
+      // Ensure directory exists
+      if (!fs.existsSync(this.planDir)) {
+        fs.mkdirSync(this.planDir, { recursive: true });
+      }
+
+      // Write state file
+      fs.writeFileSync(this.stateFilePath, JSON.stringify(this._state, null, 2), 'utf-8');
+
+      // Flush log buffer
+      this._flushLogBuffer();
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
+    }
 
     return this._state;
   }
@@ -464,11 +484,6 @@ class BuildStateManager {
       throw new Error('No state loaded');
     }
 
-    // Ensure checkpoint directory exists
-    if (!fs.existsSync(this.checkpointDir)) {
-      fs.mkdirSync(this.checkpointDir, { recursive: true });
-    }
-
     const checkpointId = this._generateCheckpointId();
     const now = new Date().toISOString();
 
@@ -499,8 +514,19 @@ class BuildStateManager {
     this._updateMetrics(checkpoint);
 
     // Save checkpoint file
-    const checkpointPath = path.join(this.checkpointDir, `${checkpointId}.json`);
-    fs.writeFileSync(checkpointPath, JSON.stringify(checkpoint, null, 2), 'utf-8');
+    if (this._persistenceAvailable) {
+      try {
+        // Ensure checkpoint directory exists
+        if (!fs.existsSync(this.checkpointDir)) {
+          fs.mkdirSync(this.checkpointDir, { recursive: true });
+        }
+
+        const checkpointPath = path.join(this.checkpointDir, `${checkpointId}.json`);
+        fs.writeFileSync(checkpointPath, JSON.stringify(checkpoint, null, 2), 'utf-8');
+      } catch (error) {
+        this._markPersistenceUnavailable(error);
+      }
+    }
 
     // Save main state with checkpoint timestamp update
     this.saveState({ updateCheckpoint: true });
@@ -1041,6 +1067,8 @@ class BuildStateManager {
    * @private
    */
   _logAttempt(subtaskId, action, details = {}) {
+    if (!this._persistenceAvailable) return;
+
     const entry = {
       timestamp: new Date().toISOString(),
       storyId: this.storyId,
@@ -1066,15 +1094,20 @@ class BuildStateManager {
    */
   _flushLogBuffer() {
     if (this._logBuffer.length === 0) return;
+    if (!this._persistenceAvailable) return;
 
-    // Ensure directory exists
-    if (!fs.existsSync(this.planDir)) {
-      fs.mkdirSync(this.planDir, { recursive: true });
+    try {
+      // Ensure directory exists
+      if (!fs.existsSync(this.planDir)) {
+        fs.mkdirSync(this.planDir, { recursive: true });
+      }
+
+      // Append to log file
+      fs.appendFileSync(this.logFilePath, this._logBuffer.join(''), 'utf-8');
+      this._logBuffer = [];
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
     }
-
-    // Append to log file
-    fs.appendFileSync(this.logFilePath, this._logBuffer.join(''), 'utf-8');
-    this._logBuffer = [];
   }
 
   /**
@@ -1084,11 +1117,22 @@ class BuildStateManager {
    * @returns {string[]} Log lines
    */
   getAttemptLog(options = {}) {
+    if (!this._persistenceAvailable) {
+      return [];
+    }
+
     if (!fs.existsSync(this.logFilePath)) {
       return [];
     }
 
-    const content = fs.readFileSync(this.logFilePath, 'utf-8');
+    let content;
+    try {
+      content = fs.readFileSync(this.logFilePath, 'utf-8');
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
+      return [];
+    }
+
     let lines = content.split('\n').filter((l) => l.trim());
 
     // Filter by subtask if specified
@@ -1264,6 +1308,39 @@ class BuildStateManager {
    */
   _log(_message) {
     // Silent by default - can be overridden
+  }
+
+  /**
+   * Check if file-backed persistence is still available.
+   *
+   * @returns {boolean} True when state/checkpoint/log writes are available.
+   */
+  isPersistenceAvailable() {
+    return this._persistenceAvailable;
+  }
+
+  /**
+   * Get the first persistence error that disabled file-backed writes.
+   *
+   * @returns {Error|null} Persistence error or null when persistence is available.
+   */
+  getPersistenceError() {
+    return this._persistenceError;
+  }
+
+  /**
+   * Disable file-backed persistence after an I/O failure.
+   *
+   * @param {Error} error - Underlying persistence error.
+   * @private
+   */
+  _markPersistenceUnavailable(error) {
+    if (!this._persistenceAvailable) return;
+
+    this._persistenceAvailable = false;
+    this._persistenceError = error instanceof Error ? error : new Error(String(error));
+    this._logBuffer = [];
+    this._log(`Persistence unavailable: ${this._persistenceError.message}`);
   }
 
   // ─────────────────────────────────────────────────────────────────────────────────

@@ -41,6 +41,8 @@ describe('BuildStateManager', () => {
   });
 
   afterEach(() => {
+    jest.restoreAllMocks();
+
     // Cleanup temp directory
     if (testDir && fs.existsSync(testDir)) {
       fs.rmSync(testDir, { recursive: true, force: true });
@@ -157,6 +159,20 @@ describe('BuildStateManager', () => {
       expect(state2.metrics.totalSubtasks).toBe(7); // Should be original value
     });
 
+    test('should keep state in memory when persistence fails during save', () => {
+      manager.createState({ totalSubtasks: 3 });
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+        throw new Error('EACCES: permission denied');
+      });
+
+      expect(() => manager.saveState()).not.toThrow();
+
+      expect(manager.isPersistenceAvailable()).toBe(false);
+      expect(manager.getPersistenceError().message).toContain('EACCES');
+      expect(manager.getState().metrics.totalSubtasks).toBe(3);
+      expect(fs.existsSync(path.join(testDir, 'plan', 'build-state.json'))).toBe(false);
+    });
+
     test('should throw when storyId not provided', () => {
       expect(() => new BuildStateManager(null)).toThrow('storyId is required');
     });
@@ -229,6 +245,25 @@ describe('BuildStateManager', () => {
       const state = manager.getState();
       expect(state.completedSubtasks).toEqual(['1.1']);
       expect(state.checkpoints).toHaveLength(2); // Still records checkpoint
+    });
+
+    test('should keep checkpoint state in memory when checkpoint persistence fails', () => {
+      const originalWriteFileSync = fs.writeFileSync;
+      jest.spyOn(fs, 'writeFileSync').mockImplementation((filePath, ...args) => {
+        if (String(filePath).includes('checkpoints')) {
+          throw new Error('ENOSPC: no space left on device');
+        }
+        return originalWriteFileSync.call(fs, filePath, ...args);
+      });
+
+      expect(() => manager.saveCheckpoint('1.persistence')).not.toThrow();
+
+      const state = manager.getState();
+      expect(manager.isPersistenceAvailable()).toBe(false);
+      expect(manager.getPersistenceError().message).toContain('ENOSPC');
+      expect(state.checkpoints).toHaveLength(1);
+      expect(state.completedSubtasks).toContain('1.persistence');
+      expect(state.metrics.completedSubtasks).toBe(1);
     });
   });
 
