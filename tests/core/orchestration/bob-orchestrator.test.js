@@ -1291,7 +1291,7 @@ describe('BobOrchestrator', () => {
     it('should use singular form for 1 hour', async () => {
       // Given
       const oneHourAgo = new Date();
-      oneHourAgo.setMinutes(oneHourAgo.getMinutes() - 90);
+      oneHourAgo.setHours(oneHourAgo.getHours() - 1);
 
       const mockSessionState = {
         session_state: {
