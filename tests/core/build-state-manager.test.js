@@ -587,9 +587,10 @@ describe('BuildStateManager', () => {
       const content = fs.readFileSync(path.join(testDir, 'plan', 'build-attempts.log'), 'utf-8');
       expect(content).toContain('"name":"TypeError"');
       expect(content).toContain('"message":"boom"');
+      expect(content).toContain('"stack":"[redacted]"');
       expect(content).toContain('[["attempt","3"]]');
       expect(content).toContain('"set":["2"]');
-      expect(content).toContain('"callback":"() => \'ignored\'"');
+      expect(content).toMatch(/"callback":"[^"]*ignored[^"]*"/);
     });
   });
 

@@ -129,7 +129,7 @@ function sanitizeLogValue(value, seen = new WeakSet()) {
     const safeError = {
       name: value.name,
       message: value.message,
-      stack: value.stack,
+      stack: shouldExposeLogErrorStack() ? value.stack : '[redacted]',
     };
 
     seen.add(value);
@@ -184,6 +184,16 @@ function sanitizeLogValue(value, seen = new WeakSet()) {
   } finally {
     seen.delete(value);
   }
+}
+
+/**
+ * Checks whether persisted attempt logs may include raw error stack traces.
+ *
+ * @returns {boolean} True when stack trace logging is explicitly enabled.
+ */
+function shouldExposeLogErrorStack() {
+  const stackFlag = process.env.DEBUG_ERROR_STACKS || process.env.DEBUG_STACKS || '';
+  return ['1', 'true', 'yes', 'on'].includes(String(stackFlag).toLowerCase());
 }
 
 /**
