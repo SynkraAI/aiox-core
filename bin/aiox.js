@@ -75,6 +75,8 @@ USAGE:
   npx aiox-core@latest info         # Show system info
   npx aiox-core@latest doctor       # Run diagnostics
   aiox-delegate codex -t <slug>     # Delegate implementation to external executor
+  npx aiox-core@latest enterprise upgrade --dry-run --enterprise-source <path>
+                                       # Plan Pro to Enterprise upgrade
   npx aiox-core@latest --version    # Show version
   npx aiox-core@latest --version -d # Show detailed version info
   npx aiox-core@latest --help       # Show this help
@@ -109,6 +111,10 @@ SERVICE DISCOVERY:
 EXTERNAL EXECUTION:
   aiox-delegate codex -t story-4.3 -f prompt.md
   aiox-delegate codex -t story-4.3 -p "Implement AC1" --dry-run
+
+ENTERPRISE:
+  aiox enterprise upgrade --target . --enterprise-source /path/to/AIOX-enterprise --dry-run
+  aiox enterprise upgrade --target . --enterprise-source /path/to/AIOX-enterprise --dry-run --plan outputs/enterprise-upgrade-plan.yaml
 
 EXAMPLES:
   # Install in current directory
@@ -411,6 +417,35 @@ async function runDoctor(options = {}) {
 
   // Exit with code 1 if any FAIL results
   if (result.data && result.data.summary && result.data.summary.fail > 0) {
+    process.exit(1);
+  }
+}
+
+// Helper: Run Enterprise commands
+async function runEnterprise() {
+  const enterpriseArgs = args.slice(1);
+  const enterprisePath = path.join(
+    __dirname,
+    '..',
+    'packages',
+    'installer',
+    'src',
+    'enterprise',
+    'enterprise-upgrade-plan.js',
+  );
+
+  try {
+    const { runEnterpriseUpgradeCli } = require(enterprisePath);
+    const exitCode = await runEnterpriseUpgradeCli(enterpriseArgs, {
+      stdout: process.stdout,
+      stderr: process.stderr,
+    });
+
+    if (exitCode !== 0) {
+      process.exit(exitCode);
+    }
+  } catch (error) {
+    console.error(`❌ Enterprise command error: ${error.message}`);
     process.exit(1);
   }
 }
@@ -882,6 +917,11 @@ async function main() {
         console.error(`❌ Pro command error: ${error.message}`);
         process.exit(1);
       }
+      break;
+
+    case 'enterprise':
+      // AIOX Enterprise Upgrade Planning - Story PEM.1
+      await runEnterprise();
       break;
 
     case 'install': {

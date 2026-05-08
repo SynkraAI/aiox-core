@@ -50,6 +50,12 @@
   ],
   "exports": {
     "./installer/aiox-core-installer": "./packages/installer/src/installer/aiox-core-installer.js",
+    "./installer/enterprise-detector": "./packages/installer/src/enterprise/enterprise-detector.js",
+    "./installer/enterprise-errors": "./packages/installer/src/enterprise/enterprise-errors.js",
+    "./installer/enterprise-manifest-loader": "./packages/installer/src/enterprise/enterprise-manifest-loader.js",
+    "./installer/enterprise-rollback": "./packages/installer/src/enterprise/enterprise-rollback.js",
+    "./installer/enterprise-upgrader": "./packages/installer/src/enterprise/enterprise-upgrader.js",
+    "./installer/enterprise-upgrade-plan": "./packages/installer/src/enterprise/enterprise-upgrade-plan.js",
     "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
     "./package.json": "./package.json"
   },
@@ -60,6 +66,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e:installed-skills": "node scripts/e2e/installed-skills-smoke.js",
+    "test:e2e:pro-enterprise-upgrade": "node scripts/e2e/pro-to-enterprise-upgrade-smoke.js",
     "test:health-check": "mocha tests/health-check/**/*.test.js --timeout 30000",
     "lint": "eslint . --cache --cache-location .eslintcache",
     "typecheck": "tsc --noEmit",
