@@ -73,13 +73,13 @@ def generate_future_self(
         resized = _resize(front_bytes)
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash-preview-image-generation",
+            model="gemini-2.5-flash-image",
             contents=[
                 genai_types.Part.from_bytes(data=resized, mime_type="image/jpeg"),
                 genai_types.Part.from_text(text=prompt),
             ],
             config=genai_types.GenerateContentConfig(
-                response_modalities=["IMAGE"],
+                response_modalities=["IMAGE", "TEXT"],
                 temperature=1.0,
             ),
         )
