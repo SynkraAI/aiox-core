@@ -20,7 +20,7 @@ const kimi = require(path.resolve(
   'scripts',
   'ide-sync',
   'transformers',
-  'kimi'
+  'kimi',
 ));
 const { syncIde } = require('../../.aiox-core/infrastructure/scripts/ide-sync/index');
 
@@ -79,7 +79,7 @@ describe('kimi transformer', () => {
     });
     expect(skillId).toBe('aios-team-danger-agent');
     expect(kimi.getDirname({ id: '..', agent: { preferredActivationAlias: '../../' } })).toBe(
-      'aios-agent'
+      'aios-agent',
     );
   });
 
@@ -180,7 +180,7 @@ describe('kimi transformer', () => {
         { enabled: true, path: '.kimi/skills', format: 'kimi-skill' },
         'kimi',
         tmpRoot,
-        { dryRun: false }
+        { dryRun: false },
       );
 
       expect(result.errors).toHaveLength(1);
