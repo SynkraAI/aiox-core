@@ -88,6 +88,7 @@ export interface AnalysisResult {
   }
   body_composition?: BodyComposition
   completed_at: string
+  future_self_url?: string | null
 }
 
 export async function listAnalyses(page: number = 1): Promise<{ analyses: AnalysisSummary[]; has_more: boolean }> {

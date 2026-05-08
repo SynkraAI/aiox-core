@@ -34,3 +34,16 @@ def delete_all_photos(*urls: str) -> None:
     for url in urls:
         if url:
             delete_photo(url)
+
+
+def upload_future_self(analysis_id: str, image_bytes: bytes) -> str:
+    """Upload generated future-self image and return its public URL."""
+    key = f"future-self/{analysis_id}/evolution.jpg"
+    s3_client.put_object(
+        Bucket=BUCKET,
+        Key=key,
+        Body=image_bytes,
+        ContentType="image/jpeg",
+    )
+    region = os.getenv("AWS_REGION", "us-east-1")
+    return f"https://{BUCKET}.s3.{region}.amazonaws.com/{key}"

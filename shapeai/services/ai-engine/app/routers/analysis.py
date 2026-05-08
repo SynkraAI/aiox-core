@@ -7,11 +7,12 @@ import httpx
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
+from app.pipeline.future_self_generator import generate_future_self
 from app.pipeline.plan_generator import generate_workout_plan
 from app.pipeline.report_generator import generate_report
 from app.pipeline.vision_analyzer import analyze_body_vision
 from app.services.db_service import get_analysis, mark_failed, mark_photos_deleted
-from app.services.s3_service import delete_all_photos, download_photo
+from app.services.s3_service import delete_all_photos, download_photo, upload_future_self
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -75,14 +76,24 @@ async def analyze(request: AnalyzeRequest):
         # 4. Build scores dict from vision output
         scores_dict = _build_scores(dict(body_composition))
 
-        # 5. LGPD: deletar fotos + gerar relatório e plano em paralelo
+        # 5. LGPD: deletar fotos + gerar relatório, plano e future-self em paralelo
+        # Future-self usa front_bytes (já em memória) — deleção do S3 pode ocorrer em paralelo
         bc_dict = dict(body_composition)
-        report, workout_plan, _ = await asyncio.gather(
+        report, workout_plan, future_self_bytes, _ = await asyncio.gather(
             loop.run_in_executor(None, partial(generate_report, scores_dict, bc_dict, profile)),
             loop.run_in_executor(None, partial(generate_workout_plan, scores_dict, bc_dict, profile)),
+            loop.run_in_executor(None, partial(generate_future_self, front_bytes, scores_dict, profile)),
             loop.run_in_executor(None, delete_all_photos, front_url, back_url),
         )
         mark_photos_deleted(analysis_id)
+
+        # 6. Upload da imagem de evolução (se gerada com sucesso)
+        future_self_url = None
+        if future_self_bytes:
+            try:
+                future_self_url = upload_future_self(analysis_id, future_self_bytes)
+            except Exception as upload_err:
+                logger.error("[ai-engine] Failed to upload future-self for %s: %s", analysis_id, upload_err)
 
         # 7. Callback ao API Gateway
         async with httpx.AsyncClient(timeout=30) as http:
@@ -93,6 +104,7 @@ async def analyze(request: AnalyzeRequest):
                     "report": dict(report),
                     "workout_plan": dict(workout_plan),
                     "body_composition": dict(body_composition),
+                    "future_self_url": future_self_url,
                 },
                 headers={"x-internal-secret": INTERNAL_SECRET},
             )

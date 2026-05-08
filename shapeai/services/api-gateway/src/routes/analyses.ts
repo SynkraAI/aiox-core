@@ -95,6 +95,7 @@ export async function analysesRoutes(app: FastifyInstance) {
       const { rows } = await pool.query(
         `SELECT
            a.id, a.status, a.scores, a.created_at, a.completed_at,
+           a.future_self_url,
            r.highlights, r.development_areas, r.body_composition,
            wp.weeks AS workout_weeks
          FROM analyses a
@@ -123,6 +124,9 @@ export async function analysesRoutes(app: FastifyInstance) {
         response.workout_plan = { weeks: row.workout_weeks }
         if (row.body_composition) {
           response.body_composition = row.body_composition
+        }
+        if (row.future_self_url) {
+          response.future_self_url = row.future_self_url
         }
       }
 
@@ -221,6 +225,7 @@ Análise recente: ${JSON.stringify(a2.scores)}`
     report: { highlights: unknown[]; development_areas: unknown[] }
     workout_plan: { weeks: unknown[] }
     body_composition?: Record<string, unknown>
+    future_self_url?: string | null
   } }>(
     '/internal/analyses/:id/complete',
     async (request, reply) => {
@@ -230,7 +235,7 @@ Análise recente: ${JSON.stringify(a2.scores)}`
       }
 
       const { id } = request.params
-      const { scores, report, workout_plan, body_composition } = request.body
+      const { scores, report, workout_plan, body_composition, future_self_url } = request.body
 
       // Busca análise e user_id
       const { rows: analysisRows } = await pool.query<{ user_id: string }>(
@@ -245,9 +250,10 @@ Análise recente: ${JSON.stringify(a2.scores)}`
       await pool.query(
         `UPDATE analyses
          SET status = 'completed', scores = $1, completed_at = NOW(),
-             photo_front_url = NULL, photo_side_url = NULL, photo_back_url = NULL, photos_deleted_at = NOW()
+             photo_front_url = NULL, photo_side_url = NULL, photo_back_url = NULL, photos_deleted_at = NOW(),
+             future_self_url = $3
          WHERE id = $2`,
-        [JSON.stringify(scores), id]
+        [JSON.stringify(scores), id, future_self_url ?? null]
       )
 
       // Insere relatório

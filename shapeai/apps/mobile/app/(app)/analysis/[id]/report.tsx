@@ -7,11 +7,13 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Dimensions,
+  Image,
 } from 'react-native'
 import { useLocalSearchParams, router } from 'expo-router'
 import Svg, { Circle, Text as SvgText } from 'react-native-svg'
 import { getAnalysisResult, AnalysisResult, BodyComposition, MuscleScores } from '../../../../src/services/analysis.service'
 import ReportSectionCard, { ReportSection } from '../../../../src/components/report/ReportSectionCard'
+import { useSubscription } from '../../../../src/hooks/useSubscription'
 
 const { width: SCREEN_W } = Dimensions.get('window')
 
@@ -273,6 +275,37 @@ function MusclesTab({ muscle_scores }: { muscle_scores: MuscleScores }) {
   )
 }
 
+function FutureEvolutionCard({ imageUrl, isPro }: { imageUrl: string; isPro: boolean }) {
+  return (
+    <View style={fes.card}>
+      <Text style={fes.label}>SUA EVOLUÇÃO EM 90 DIAS</Text>
+      <View style={fes.imageWrapper}>
+        <Image
+          source={{ uri: imageUrl }}
+          style={fes.image}
+          blurRadius={isPro ? 0 : 28}
+          resizeMode="cover"
+        />
+        {!isPro && (
+          <View style={fes.lockOverlay}>
+            <Text style={fes.lockIcon}>🔒</Text>
+            <Text style={fes.lockTitle}>Desbloqueie sua evolução</Text>
+            <Text style={fes.lockSub}>Veja como você pode estar em 90 dias de treino consistente</Text>
+            <TouchableOpacity style={fes.upgradeBtn} onPress={() => router.push('/(app)/paywall')}>
+              <Text style={fes.upgradeBtnText}>Assinar Pro</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+      {isPro && (
+        <Text style={fes.disclaimer}>
+          Projeção gerada por IA. Resultados reais dependem de consistência, alimentação e genética individual.
+        </Text>
+      )}
+    </View>
+  )
+}
+
 export default function ReportScreen() {
   const { id } = useLocalSearchParams<{ id: string }>()
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
@@ -280,6 +313,8 @@ export default function ReportScreen() {
   const [error, setError] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(0)
   const pagerRef = useRef<ScrollView>(null)
+  const { subscription } = useSubscription()
+  const isPro = subscription?.status === 'pro'
 
   useEffect(() => {
     if (!id) return
@@ -347,6 +382,9 @@ export default function ReportScreen() {
           <HeroCard score={overallScore} date={analysis.completed_at} />
           {bc?.overall_assessment ? <AssessmentCard text={bc.overall_assessment} /> : null}
           {bc ? <CompactBodyComp data={bc} /> : null}
+          {analysis.future_self_url ? (
+            <FutureEvolutionCard imageUrl={analysis.future_self_url} isPro={isPro} />
+          ) : null}
           <TouchableOpacity
             style={s.workoutButton}
             onPress={() => router.push(`/(app)/analysis/${id}/workout`)}
@@ -569,4 +607,76 @@ const s = StyleSheet.create({
 const barStyles = StyleSheet.create({
   track: { height: 8, backgroundColor: '#1A1A1A', borderRadius: 4, overflow: 'hidden' },
   fill: { height: 8, borderRadius: 4 },
+})
+
+const fes = StyleSheet.create({
+  card: {
+    backgroundColor: '#111',
+    borderRadius: 20,
+    overflow: 'hidden',
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#1E3A1E',
+  },
+  label: {
+    color: '#4CAF50',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1.5,
+    padding: 16,
+    paddingBottom: 10,
+  },
+  imageWrapper: {
+    width: '100%',
+    height: 320,
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  lockOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(10, 10, 10, 0.55)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+    gap: 10,
+  },
+  lockIcon: { fontSize: 32 },
+  lockTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  lockSub: {
+    color: '#aaa',
+    fontSize: 13,
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  upgradeBtn: {
+    marginTop: 6,
+    backgroundColor: '#4CAF50',
+    borderRadius: 12,
+    paddingHorizontal: 28,
+    paddingVertical: 12,
+  },
+  upgradeBtnText: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  disclaimer: {
+    color: '#333',
+    fontSize: 10,
+    lineHeight: 15,
+    textAlign: 'center',
+    padding: 12,
+  },
 })
