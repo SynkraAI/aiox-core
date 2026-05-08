@@ -1,4 +1,4 @@
-# build: 20260508-1
+# build: 20260508-2
 fastapi==0.115.5
 uvicorn==0.32.1
 anthropic==0.40.0

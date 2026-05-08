@@ -5,7 +5,7 @@ import os
 from fastapi import FastAPI
 from app.routers import analysis
 
-BUILD_VERSION = "20260508-1"
+BUILD_VERSION = "20260508-2"
 
 app = FastAPI(title="ShapeAI AI Engine", version="1.0.0")
 app.include_router(analysis.router)
