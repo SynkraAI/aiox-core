@@ -129,6 +129,7 @@ module.exports = {
   roots: ['<rootDir>'],
   moduleDirectories: ['node_modules', '.'],
   moduleNameMapper: {
+    '^aiox-core/(.*)$': '<rootDir>/.aiox-core/$1',
     '^@aiox-core/(.*)$': '<rootDir>/.aiox-core/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
