@@ -6,7 +6,8 @@
     "aiox": "bin/aiox.js",
     "aiox-core": "bin/aiox.js",
     "aiox-minimal": "bin/aiox-minimal.js",
-    "aiox-graph": "bin/aiox-graph.js"
+    "aiox-graph": "bin/aiox-graph.js",
+    "aiox-delegate": "bin/aiox-delegate.js"
   },
   "preferGlobal": false,
   "workspaces": [

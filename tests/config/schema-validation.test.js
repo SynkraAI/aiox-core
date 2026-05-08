@@ -56,6 +56,8 @@ describe('schema-validation — enriched schemas', () => {
         'markdownExploder',
         'resource_locations',
         'performance_defaults',
+        'dev',
+        'external_executors',
         'utility_scripts_registry',
         'ide_sync_system',
         'template_overrides',
@@ -109,6 +111,15 @@ describe('schema-validation — enriched schemas', () => {
       expect(tmpl.type).toBe('object');
       expect(tmpl.properties.story.properties).toHaveProperty('sections_order');
       expect(tmpl.properties.story.properties).toHaveProperty('optional_sections');
+    });
+
+    test('external executor schema keeps delegation opt-in and sandboxed by default', () => {
+      expect(schema.properties.dev.properties.execution_mode.enum).toEqual(['native', 'delegate']);
+      expect(schema.properties.external_executors.properties.default_sandbox.enum).toContain('full-auto');
+
+      const data = loadYaml('framework-config.yaml');
+      expect(data.dev.execution_mode).toBe('native');
+      expect(data.external_executors.enabled).toBe(false);
     });
   });
 

@@ -75,7 +75,7 @@ const REQUIRED_FILES_ENTRIES = [
 /**
  * Bin entries that must point to existing files.
  */
-const REQUIRED_BIN_ENTRIES = ['aiox', 'aiox-core'];
+const REQUIRED_BIN_ENTRIES = ['aiox', 'aiox-core', 'aiox-delegate'];
 
 /**
  * Runtime dependencies that must be present.

@@ -80,6 +80,47 @@
       },
       "additionalProperties": false
     },
+    "dev": {
+      "type": "object",
+      "description": "Development execution defaults",
+      "properties": {
+        "execution_mode": {
+          "type": "string",
+          "enum": ["native", "delegate"],
+          "default": "native"
+        },
+        "delegate_to": {
+          "type": "string",
+          "description": "Default external executor provider when execution_mode=delegate"
+        },
+        "auto_review": {
+          "type": "boolean",
+          "description": "Require orchestrator review before story state mutation",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "external_executors": {
+      "type": "object",
+      "description": "External executor provider defaults",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "default_sandbox": {
+          "type": "string",
+          "enum": ["read-only", "workspace-write", "full-auto", "danger-full-access"],
+          "default": "full-auto"
+        },
+        "run_dir": {
+          "type": "string",
+          "default": ".aiox/external-runs"
+        }
+      },
+      "additionalProperties": false
+    },
     "utility_scripts_registry": {
       "type": "object",
       "description": "Registry of utility scripts by category",

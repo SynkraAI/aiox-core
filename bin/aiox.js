@@ -74,6 +74,7 @@ USAGE:
   npx aiox-core@latest validate     # Validate installation integrity
   npx aiox-core@latest info         # Show system info
   npx aiox-core@latest doctor       # Run diagnostics
+  aiox-delegate codex -t <slug>     # Delegate implementation to external executor
   npx aiox-core@latest --version    # Show version
   npx aiox-core@latest --version -d # Show detailed version info
   npx aiox-core@latest --help       # Show this help
@@ -104,6 +105,10 @@ SERVICE DISCOVERY:
   aiox workers search "json" --category=data
   aiox workers search "transform" --tags=etl,data
   aiox workers search "api" --format=json
+
+EXTERNAL EXECUTION:
+  aiox-delegate codex -t story-4.3 -f prompt.md
+  aiox-delegate codex -t story-4.3 -p "Implement AC1" --dry-run
 
 EXAMPLES:
   # Install in current directory

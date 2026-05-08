@@ -46,6 +46,17 @@ performance_defaults:
     show_config_warning: true
     cache_time_seconds: 300
 
+# --- Development Execution Defaults (Section 6.5) ---
+dev:
+  execution_mode: native # native | delegate
+  delegate_to: codex
+  auto_review: true
+
+external_executors:
+  enabled: false
+  default_sandbox: full-auto # read-only | workspace-write | full-auto | danger-full-access
+  run_dir: .aiox/external-runs
+
 # --- Utility Scripts Registry (Section 11) ---
 utility_scripts_registry:
   # Agent Helper utilities (28) — Used directly by agents
