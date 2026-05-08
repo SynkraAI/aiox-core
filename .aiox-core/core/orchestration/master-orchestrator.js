@@ -1086,6 +1086,10 @@ class MasterOrchestrator extends EventEmitter {
   async saveState() {
     try {
       await fs.ensureDir(path.dirname(this.statePath));
+      const persistedHealth = {
+        available: true,
+        lastError: null,
+      };
 
       // Build comprehensive state object (AC2, AC6, AC7)
       const stateToSave = {
@@ -1130,18 +1134,15 @@ class MasterOrchestrator extends EventEmitter {
         // Errors and insights
         errors: this.executionState.errors,
         insights: this.executionState.insights,
-        persistence: {
-          available: this._persistenceAvailable,
-          lastError: this._persistenceError,
-        },
+        persistence: persistedHealth,
 
         // Session insights
         sessionInsights: this._collectSessionInsights(),
       };
 
       await fs.writeJson(this.statePath, stateToSave, { spaces: 2 });
-      this._persistenceAvailable = true;
-      this._persistenceError = null;
+      this._persistenceAvailable = persistedHealth.available;
+      this._persistenceError = persistedHealth.lastError;
       this._log('State saved successfully', { path: this.statePath });
 
       return true;

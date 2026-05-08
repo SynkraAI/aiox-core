@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-08T06:11:22.101Z'
+  lastUpdated: '2026-05-08T06:26:24.449Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -9745,8 +9745,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:8d86c4969eda3de3bc4ed4ac39711795f33226b447f4f8936ee39c0fea707fd0
-      lastVerified: '2026-05-08T06:11:22.098Z'
+      checksum: sha256:88238a9e0ef7d058efe0ca2fe7a9d0e34202bff7e409fd1a97886b0a8ccdce97
+      lastVerified: '2026-05-08T06:26:24.445Z'
     message-formatter:
       path: .aiox-core/core/orchestration/message-formatter.js
       layer: L1

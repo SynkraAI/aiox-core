@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T06:12:39.595Z"
+generated_at: "2026-05-08T06:26:53.273Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1111
 files:
@@ -917,9 +917,9 @@ files:
     type: core
     size: 9382
   - path: core/orchestration/master-orchestrator.js
-    hash: sha256:8d86c4969eda3de3bc4ed4ac39711795f33226b447f4f8936ee39c0fea707fd0
+    hash: sha256:88238a9e0ef7d058efe0ca2fe7a9d0e34202bff7e409fd1a97886b0a8ccdce97
     type: core
-    size: 57934
+    size: 57977
   - path: core/orchestration/message-formatter.js
     hash: sha256:b7413c04fa22db1c5fc2f5c2aa47bb8ca0374e079894a44df21b733da6c258ae
     type: core
@@ -1241,7 +1241,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:da7791d73e7680cc8d3bb344663d69b5a5930e848fad80d81b0bf1d8fe7777b6
+    hash: sha256:1c8e010516647898377715d160234094bc262b0812cf17c96d7d1d4d36c7b4e8
     type: data
     size: 522368
   - path: data/learned-patterns.yaml

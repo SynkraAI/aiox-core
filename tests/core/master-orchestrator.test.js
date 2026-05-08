@@ -305,6 +305,25 @@ describe('MasterOrchestrator', () => {
             available: false,
             error: 'disk full',
           });
+
+          writeJsonSpy.mockResolvedValueOnce();
+          const recoveryResult = await orchestrator.saveState();
+
+          expect(recoveryResult).toBe(true);
+          expect(orchestrator.isPersistenceAvailable()).toBe(true);
+          expect(orchestrator.getPersistenceError()).toBeNull();
+          expect(orchestrator.getStatus().persistence).toEqual({
+            available: true,
+            error: null,
+          });
+          expect(orchestrator.finalize().persistence).toEqual({
+            available: true,
+            error: null,
+          });
+          expect(writeJsonSpy.mock.calls[1][1].persistence).toEqual({
+            available: true,
+            lastError: null,
+          });
         } finally {
           writeJsonSpy.mockRestore();
         }
