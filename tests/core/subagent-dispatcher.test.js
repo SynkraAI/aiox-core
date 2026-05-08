@@ -14,7 +14,9 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock gotchas-memory (exists but exports object, not constructor directly)
-jest.mock('../../.aiox-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
+jest.mock('../../.aiox-core/core/memory/gotchas-memory', () => {
+  throw new Error('mocked');
+});
 
 const { SubagentDispatcher } = require('../../.aiox-core/core/execution/subagent-dispatcher');
 
@@ -200,12 +202,16 @@ describe('SubagentDispatcher', () => {
   describe('buildPrompt', () => {
     test('includes agent and task info', () => {
       const sd = new SubagentDispatcher();
-      const prompt = sd.buildPrompt('@dev', {
-        id: 't1',
-        description: 'Build feature X',
-        acceptanceCriteria: ['AC1', 'AC2'],
-        files: ['src/app.js'],
-      }, {});
+      const prompt = sd.buildPrompt(
+        '@dev',
+        {
+          id: 't1',
+          description: 'Build feature X',
+          acceptanceCriteria: ['AC1', 'AC2'],
+          files: ['src/app.js'],
+        },
+        {},
+      );
 
       expect(prompt).toContain('@dev');
       expect(prompt).toContain('Build feature X');
@@ -215,10 +221,14 @@ describe('SubagentDispatcher', () => {
 
     test('includes gotchas and patterns from context', () => {
       const sd = new SubagentDispatcher();
-      const prompt = sd.buildPrompt('@dev', { id: 't1', description: 'test' }, {
-        gotchas: [{ pattern: 'avoid X', workaround: 'use Y' }],
-        patterns: [{ name: 'Pattern A', description: 'Desc' }],
-      });
+      const prompt = sd.buildPrompt(
+        '@dev',
+        { id: 't1', description: 'test' },
+        {
+          gotchas: [{ pattern: 'avoid X', workaround: 'use Y' }],
+          patterns: [{ name: 'Pattern A', description: 'Desc' }],
+        },
+      );
 
       expect(prompt).toContain('avoid X');
       expect(prompt).toContain('Pattern A');
@@ -238,6 +248,18 @@ describe('SubagentDispatcher', () => {
     test('returns empty for empty output', () => {
       const sd = new SubagentDispatcher();
       expect(sd.extractModifiedFiles('')).toEqual([]);
+    });
+  });
+
+  // ── Provider fallback ────────────────────────────────────────────────
+
+  describe('provider fallback', () => {
+    test('uses configured fallback before legacy Claude/Gemini pair', () => {
+      const sd = new SubagentDispatcher();
+
+      expect(sd.getFallbackProviderName('kimi')).toBe('gemini');
+      expect(sd.getFallbackProviderName('gemini')).toBe('claude');
+      expect(sd.getFallbackProviderName('claude')).toBe('gemini');
     });
   });
 

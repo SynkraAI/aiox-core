@@ -322,6 +322,37 @@ class SubagentDispatcher extends EventEmitter {
   }
 
   /**
+   * Resolve fallback provider from configuration before using the legacy pair.
+   * @param {string} providerName - Current provider name
+   * @returns {string|null} Fallback provider name
+   */
+  getFallbackProviderName(providerName) {
+    if (AIProviderFactory?.getConfig) {
+      const config = AIProviderFactory.getConfig();
+      const configuredFallback = config.ai_providers?.fallback;
+      const configuredPrimary = config.ai_providers?.primary;
+
+      if (configuredFallback && configuredFallback !== providerName) {
+        return configuredFallback;
+      }
+
+      if (configuredPrimary && configuredPrimary !== providerName) {
+        return configuredPrimary;
+      }
+    }
+
+    if (providerName === 'claude') {
+      return 'gemini';
+    }
+
+    if (providerName === 'gemini') {
+      return 'claude';
+    }
+
+    return null;
+  }
+
+  /**
    * Enrich context with memory and gotchas
    * @param {Object} task - Task being dispatched
    * @param {Object} context - Base context
@@ -432,8 +463,6 @@ class SubagentDispatcher extends EventEmitter {
    * @returns {Promise<Object>} - Execution result
    */
   async executeWithProvider(prompt, providerName, task) {
-    const startTime = Date.now();
-
     // Get primary provider
     const provider = this.getAIProvider(providerName);
 
@@ -450,8 +479,8 @@ class SubagentDispatcher extends EventEmitter {
       this.log('provider_not_available', { provider: providerName });
 
       // Try fallback provider
-      const fallbackName = providerName === 'claude' ? 'gemini' : 'claude';
-      const fallback = this.getAIProvider(fallbackName);
+      const fallbackName = this.getFallbackProviderName(providerName);
+      const fallback = fallbackName ? this.getAIProvider(fallbackName) : null;
 
       if (fallback && (await fallback.checkAvailability())) {
         this.log('using_fallback_provider', { original: providerName, fallback: fallbackName });
@@ -563,10 +592,10 @@ class SubagentDispatcher extends EventEmitter {
    * Select result from parallel execution based on mode
    * @param {Object|null} claudeResult - Claude result
    * @param {Object|null} geminiResult - Gemini result
-   * @param {Object} task - Original task
+   * @param {Object} _task - Original task
    * @returns {Object} - Selected result
    */
-  selectParallelResult(claudeResult, geminiResult, task) {
+  selectParallelResult(claudeResult, geminiResult, _task) {
     switch (this.parallelMode) {
       case 'race':
         // Return first successful result
@@ -698,7 +727,11 @@ class SubagentDispatcher extends EventEmitter {
 
       child.on('error', rejectOnce);
 
-      if (!child.stdin || typeof child.stdin.write !== 'function' || typeof child.stdin.end !== 'function') {
+      if (
+        !child.stdin ||
+        typeof child.stdin.write !== 'function' ||
+        typeof child.stdin.end !== 'function'
+      ) {
         rejectOnce(new Error('Claude CLI stdin is not available'));
         return;
       }

@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T19:14:10.833Z"
+generated_at: "2026-05-08T20:56:13.546Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1120
+file_count: 1121
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -461,9 +461,9 @@ files:
     type: core
     size: 51556
   - path: core/execution/subagent-dispatcher.js
-    hash: sha256:26e2bbc4b30142186e8ad450aced18284f8333677af0fb506e0b19a8324e94f2
+    hash: sha256:fa8ce6aa5fdd85f7a06c3c560a85d904222658076158c35031ddae19bb63efe1
     type: core
-    size: 28002
+    size: 28869
   - path: core/execution/wave-executor.js
     hash: sha256:4e2324edb37ae0729062b5ac029f2891e050e7efd3a48d0f4a1dc4f227a6716b
     type: core
@@ -2921,13 +2921,13 @@ files:
     type: infrastructure
     size: 6882
   - path: infrastructure/integrations/ai-providers/ai-provider-factory.js
-    hash: sha256:b558c971363fb5b1a8bb4f3caf7683a4a72f3feb6f67e1810ad6679860373e12
+    hash: sha256:8a19d40cd4f9ccf8b457b12fb3318ef4d1ac81ecbc0823c5b9149bff0ee02bff
     type: infrastructure
-    size: 6990
+    size: 11616
   - path: infrastructure/integrations/ai-providers/ai-provider.js
-    hash: sha256:78a9d55c187de61af315e3bc9ac74356cf2788d39f5c04682f5f4697fc38bca3
+    hash: sha256:6818a612190788be35664d39c053bdcf597230bf38dc4e7f2d4744ee996449a1
     type: infrastructure
-    size: 4507
+    size: 4540
   - path: infrastructure/integrations/ai-providers/claude-provider.js
     hash: sha256:ae3c88afda09e599d15911be353efc0e68c1b1ec7797d8859711d9538a606637
     type: infrastructure
@@ -2937,13 +2937,17 @@ files:
     type: infrastructure
     size: 10494
   - path: infrastructure/integrations/ai-providers/index.js
-    hash: sha256:7e72904e827f143bb3d1a74004a2c2c52ba44b696d9709544511cc180d8d641a
+    hash: sha256:67906c50c6d233d5da8f05b3c0c0891fa58ee609d84410d043c81c9966dcc3b3
     type: infrastructure
-    size: 962
+    size: 1068
+  - path: infrastructure/integrations/ai-providers/openai-compatible-provider.js
+    hash: sha256:cdcfd0f2e2c85fe545333d04a10254b09dec552d6525cdd8cf08d03b4152b8f9
+    type: infrastructure
+    size: 9992
   - path: infrastructure/integrations/ai-providers/README.md
-    hash: sha256:a9f492467a613990049e37cc1702a67e284390b98de1b2ecea3cb71050a3dff6
+    hash: sha256:41945acf8b602add3cc4502025ed49a38bcb0f0644636368945b094db50bd3e4
     type: infrastructure
-    size: 2599
+    size: 3360
   - path: infrastructure/integrations/gemini-extensions/cloudrun-adapter.js
     hash: sha256:e4134d7f150c6fe010d2820363f78896e2b6c13b4a2352b38b4d8b2d9f12b478
     type: infrastructure
@@ -3821,9 +3825,9 @@ files:
     type: template
     size: 3210
   - path: product/templates/aiox-ai-config.yaml
-    hash: sha256:58023a5108ee66b16f93c82ee8a7c0414852f7c887257a8ff9040f060b140746
+    hash: sha256:0fe45ebef52ec371be568e82b119678d1ce407bfb51452dee12778eddacc7629
     type: template
-    size: 3167
+    size: 3692
   - path: product/templates/architecture-tmpl.yaml
     hash: sha256:9483f38486932842e1bc1a73c35b3f90fa2cd9c703c7d5effabea7dc8f76350a
     type: template
