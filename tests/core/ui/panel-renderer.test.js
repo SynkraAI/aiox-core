@@ -5,10 +5,17 @@
  * the observability panel using box drawing and ANSI colors.
  */
 
-const { PanelRenderer, BOX, STATUS } = require('../../../.aios-core/core/ui/panel-renderer');
+const path = require('path');
 
-// Strip all ANSI codes for content assertions (RegExp constructor avoids Biome lint/suspicious/noControlCharactersInRegex)
-const ANSI_RE = new RegExp('\\u001B\\[[0-9;]*[a-zA-Z]', 'g');
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
+const { PanelRenderer, BOX, STATUS } = require(path.join(
+  REPO_ROOT,
+  '.aiox-core/core/ui/panel-renderer',
+));
+
+// Strip all ANSI codes for content assertions without embedding control chars.
+const ESC = String.fromCharCode(27);
+const ANSI_RE = new RegExp(`${ESC}\\[[0-9;]*[a-zA-Z]`, 'g');
 function stripAnsi(str) {
   return str.replace(ANSI_RE, '');
 }
