@@ -9,7 +9,11 @@ const path = require('path');
 
 jest.mock('fs-extra');
 const fs = require('fs-extra');
-const TechStackDetector = require('../../../.aios-core/core/orchestration/tech-stack-detector');
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
+const TechStackDetector = require(path.join(
+  REPO_ROOT,
+  '.aiox-core/core/orchestration/tech-stack-detector',
+));
 
 describe('TechStackDetector', () => {
   let detector;
