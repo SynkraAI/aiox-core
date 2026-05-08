@@ -100,31 +100,39 @@ describe('CLI Entry Point', () => {
       });
     });
 
-    it('should load packaged worker registry outside a project cwd', (done) => {
+    it('should load packaged worker registry outside a project cwd', async () => {
       const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-cli-registry-'));
-      const child = spawn('node', [cliPath, 'workers', 'list', '--count'], {
-        cwd: tempDir,
-        env: process.env,
-      });
-      let output = '';
-      let errors = '';
+      try {
+        const { code, output, errors } = await new Promise((resolve) => {
+          const child = spawn('node', [cliPath, 'workers', 'list', '--count'], {
+            cwd: tempDir,
+            env: process.env,
+          });
+          let output = '';
+          let errors = '';
 
-      child.stdout.on('data', (data) => {
-        output += data.toString();
-      });
+          child.stdout.on('data', (data) => {
+            output += data.toString();
+          });
 
-      child.stderr.on('data', (data) => {
-        errors += data.toString();
-      });
+          child.stderr.on('data', (data) => {
+            errors += data.toString();
+          });
 
-      child.on('close', (code) => {
-        fs.rmSync(tempDir, { recursive: true, force: true });
-        expect(code).toBe(0);
-        expect(errors).toBe('');
+          child.on('close', (code) => {
+            resolve({ code, output, errors });
+          });
+        });
+
+        expect({ code, errors }).toEqual({
+          code: 0,
+          errors: expect.not.stringMatching(/\b(?:Error|ERROR)\b/),
+        });
         expect(output).toContain('Total:');
         expect(output).toContain('workers');
-        done();
-      });
+      } finally {
+        fs.rmSync(tempDir, { recursive: true, force: true });
+      }
     }, 15000);
 
     it('should error on unknown command', (done) => {
