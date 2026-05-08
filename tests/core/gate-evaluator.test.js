@@ -380,7 +380,7 @@ describe('Gate Evaluator (Story 0.6)', () => {
     });
 
     it('should load and merge config from core-config.yaml', async () => {
-      const configDir = path.join(tempDir, '.aios-core');
+      const configDir = path.join(tempDir, '.aiox-core');
       await fs.ensureDir(configDir);
       const yamlContent = `
 autoClaude:
@@ -400,7 +400,7 @@ autoClaude:
     });
 
     it('should fall back to defaults on YAML parse error', async () => {
-      const configDir = path.join(tempDir, '.aios-core');
+      const configDir = path.join(tempDir, '.aiox-core');
       await fs.ensureDir(configDir);
       await fs.writeFile(path.join(configDir, 'core-config.yaml'), '{{invalid: yaml::');
 
@@ -410,7 +410,7 @@ autoClaude:
     });
 
     it('should fall back to defaults when config has no gates section', async () => {
-      const configDir = path.join(tempDir, '.aios-core');
+      const configDir = path.join(tempDir, '.aiox-core');
       await fs.ensureDir(configDir);
       await fs.writeFile(path.join(configDir, 'core-config.yaml'), 'autoClaude:\n  other: true\n');
 
