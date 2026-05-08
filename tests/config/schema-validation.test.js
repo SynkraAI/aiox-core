@@ -73,6 +73,7 @@ describe('schema-validation — enriched schemas', () => {
       const targetSchema = schema.properties.ide_sync_system.properties.targets.additionalProperties;
       expect(targetSchema.properties).toHaveProperty('skillsPath');
       expect(targetSchema.properties).toHaveProperty('fallbackSources');
+      expect(targetSchema.properties).toHaveProperty('format');
       expect(targetSchema.properties.format.enum).toContain('kimi-skill');
     });
 
