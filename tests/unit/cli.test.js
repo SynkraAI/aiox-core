@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const { spawn } = require('child_process');
 
 describe('CLI Entry Point', () => {
@@ -98,6 +99,33 @@ describe('CLI Entry Point', () => {
         done();
       });
     });
+
+    it('should load packaged worker registry outside a project cwd', (done) => {
+      const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-cli-registry-'));
+      const child = spawn('node', [cliPath, 'workers', 'list', '--count'], {
+        cwd: tempDir,
+        env: process.env,
+      });
+      let output = '';
+      let errors = '';
+
+      child.stdout.on('data', (data) => {
+        output += data.toString();
+      });
+
+      child.stderr.on('data', (data) => {
+        errors += data.toString();
+      });
+
+      child.on('close', (code) => {
+        fs.rmSync(tempDir, { recursive: true, force: true });
+        expect(code).toBe(0);
+        expect(errors).toBe('');
+        expect(output).toContain('Total:');
+        expect(output).toContain('workers');
+        done();
+      });
+    }, 15000);
 
     it('should error on unknown command', (done) => {
       const child = spawn('node', [cliPath, 'unknown-command']);

@@ -14,6 +14,36 @@ const path = require('path');
 
 // Cache configuration
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const REGISTRY_RELATIVE_PATH = path.join('.aiox-core', 'core', 'registry', 'service-registry.json');
+const PACKAGE_REGISTRY_PATH = path.join(__dirname, 'service-registry.json');
+
+function uniquePaths(paths) {
+  return Array.from(new Set(paths));
+}
+
+function getDefaultRegistryPaths() {
+  return uniquePaths([
+    path.join(process.cwd(), REGISTRY_RELATIVE_PATH),
+    PACKAGE_REGISTRY_PATH,
+  ]);
+}
+
+async function readRegistryFile(paths) {
+  const errors = [];
+
+  for (const registryPath of paths) {
+    try {
+      return {
+        content: await fs.readFile(registryPath, 'utf8'),
+        registryPath,
+      };
+    } catch (error) {
+      errors.push(`${registryPath}: ${error.message}`);
+    }
+  }
+
+  throw new Error(`Failed to load registry: ${errors.join('; ')}`);
+}
 
 /**
  * Service Registry class with caching
@@ -24,6 +54,7 @@ class ServiceRegistry {
     this.cache = null;
     this.cacheTimestamp = 0;
     this.cacheTTL = options.cacheTTL || CACHE_TTL_MS;
+    this.resolvedRegistryPath = null;
 
     // Indexed lookups (built on load)
     this._byId = new Map();
@@ -45,16 +76,15 @@ class ServiceRegistry {
       return this.cache;
     }
 
-    // Determine registry path
-    const registryPath = this.registryPath ||
-      path.join(process.cwd(), '.aiox-core/core/registry/service-registry.json');
+    const registryPaths = this.registryPath ? [this.registryPath] : getDefaultRegistryPaths();
 
     const startTime = Date.now();
 
     try {
-      const content = await fs.readFile(registryPath, 'utf8');
+      const { content, registryPath } = await readRegistryFile(registryPaths);
       this.cache = JSON.parse(content);
       this.cacheTimestamp = now;
+      this.resolvedRegistryPath = registryPath;
 
       // Build indexes
       this._buildIndexes();
@@ -66,6 +96,9 @@ class ServiceRegistry {
 
       return this.cache;
     } catch (error) {
+      if (error.message.startsWith('Failed to load registry:')) {
+        throw error;
+      }
       throw new Error(`Failed to load registry: ${error.message}`);
     }
   }
@@ -276,6 +309,7 @@ class ServiceRegistry {
   clearCache() {
     this.cache = null;
     this.cacheTimestamp = 0;
+    this.resolvedRegistryPath = null;
     this._byId.clear();
     this._byCategory.clear();
     this._byTag.clear();
@@ -290,6 +324,7 @@ class ServiceRegistry {
     return {
       cached: this.cache !== null,
       cacheAge: this.cache ? Date.now() - this.cacheTimestamp : null,
+      registryPath: this.resolvedRegistryPath,
       workerCount: this._byId.size,
       categoryCount: this._byCategory.size,
       tagCount: this._byTag.size,
@@ -326,5 +361,6 @@ async function loadRegistry(registryPath = null) {
 module.exports = {
   ServiceRegistry,
   getRegistry,
+  getDefaultRegistryPaths,
   loadRegistry,
 };
