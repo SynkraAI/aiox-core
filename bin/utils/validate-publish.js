@@ -26,7 +26,7 @@ const MIN_FILE_COUNT = 50;
 const DEFAULT_PACK_TIMEOUT_MS = 300000;
 const parsedPackTimeoutMs = Number.parseInt(
   process.env.AIOX_VALIDATE_PUBLISH_PACK_TIMEOUT_MS || '',
-  10
+  10,
 );
 const PACK_TIMEOUT_MS =
   Number.isFinite(parsedPackTimeoutMs) && parsedPackTimeoutMs > 0
@@ -64,7 +64,7 @@ function countPackedFiles(packOutput) {
         !line.includes('unpacked size:') &&
         !line.includes('shasum:') &&
         !line.includes('integrity:') &&
-        !line.includes('total files:')
+        !line.includes('total files:'),
     ).length;
 }
 
@@ -74,7 +74,7 @@ console.log('--- Publish Safety Gate (INS-4.10) ---\n');
 if (!fs.existsSync(PRO_DIR)) {
   if (IS_CI) {
     console.log(
-      'SKIP: pro/ directory not available (CI — private submodule requires separate access token)'
+      'SKIP: pro/ directory not available (CI — private submodule requires separate access token)',
     );
   } else {
     console.error('FAIL: pro/ directory does not exist.');
@@ -86,7 +86,7 @@ if (!fs.existsSync(PRO_DIR)) {
   if (entries.length === 0) {
     if (IS_CI) {
       console.log(
-        'SKIP: pro/ submodule empty (CI — private submodule requires separate access token)'
+        'SKIP: pro/ submodule empty (CI — private submodule requires separate access token)',
       );
     } else {
       console.error('FAIL: pro/ submodule not initialized (directory is empty).');

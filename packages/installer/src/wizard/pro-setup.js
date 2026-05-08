@@ -209,7 +209,7 @@ class InlineLicenseClient {
       {
         // Preserve legacy compatibility with older server deployments.
         Authorization: `Bearer ${token}`,
-      }
+      },
     ).then((result) => ({
       ...result,
       key: result.key || result.licenseKey,
@@ -437,7 +437,7 @@ function loadProModule(moduleName) {
     'aiox-core',
     'pro',
     'license',
-    moduleName
+    moduleName,
   );
   const aioxCoreModule = tryRequire(aioxCorePath);
   if (aioxCoreModule) {
@@ -452,7 +452,7 @@ function loadProModule(moduleName) {
     '@aiox-squads',
     'pro',
     'license',
-    moduleName
+    moduleName,
   );
   const loadedModule = tryRequire(absPath);
   if (loadedModule) {
@@ -613,7 +613,7 @@ function persistLicenseCache(targetDir, licenseResult) {
       cacheValidDays: activationResult.cacheValidDays,
       gracePeriodDays: activationResult.gracePeriodDays,
     },
-    targetDir
+    targetDir,
   );
 }
 
@@ -663,7 +663,7 @@ async function ensureKeyValidationParity(client, activationResult, machineId, ai
     const normalizedActivation = await client.activate(
       activationResult.key,
       machineId,
-      aioxCoreVersion
+      aioxCoreVersion,
     );
     return mergeActivation(normalizedActivation);
   } catch (error) {
@@ -1011,7 +1011,7 @@ async function loginWithRetry(client, email) {
         const verifyResult = await waitForEmailVerification(
           client,
           loginResult.sessionToken,
-          email
+          email,
         );
         if (!verifyResult.success) {
           return verifyResult;
@@ -1036,7 +1036,7 @@ async function loginWithRetry(client, email) {
               const verifyResult = await waitForEmailVerification(
                 client,
                 retryLogin.sessionToken,
-                email
+                email,
               );
               if (!verifyResult.success) return verifyResult;
             }
@@ -1056,7 +1056,7 @@ async function loginWithRetry(client, email) {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
           spinner.fail(
-            `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`
+            `Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`,
           );
           showInfo(`Forgot your password? Visit ${PASSWORD_RESET_URL}`);
         } else {
@@ -1398,13 +1398,13 @@ async function activateProByAuth(client, sessionToken) {
     const authActivationResult = await client.activateByAuth(
       sessionToken,
       machineId,
-      aioxCoreVersion
+      aioxCoreVersion,
     );
     const activationResult = await ensureKeyValidationParity(
       client,
       authActivationResult,
       machineId,
-      aioxCoreVersion
+      aioxCoreVersion,
     );
 
     spinner.succeed(tf('proSubscriptionConfirmed', { key: maskLicenseKey(activationResult.key) }));

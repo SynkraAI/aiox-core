@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Card, StatusBadge, TrendChart, HealthScore } from '../components';
+import { Card, StatusBadge, HealthScore } from '../components';
 import { useHealthData } from '../hooks';
 import './DomainDetail.css';
 

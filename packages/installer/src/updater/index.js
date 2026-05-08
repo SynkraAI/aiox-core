@@ -23,7 +23,7 @@ const { execFileSync } = require('child_process');
 const installerDir = path.join(__dirname, '..', 'installer');
 const { hashFile, hashesMatch } = require(path.join(installerDir, 'file-hasher'));
 const { PostInstallValidator, formatReport: formatValidationReport } = require(
-  path.join(installerDir, 'post-install-validator')
+  path.join(installerDir, 'post-install-validator'),
 );
 const {
   loadSourceManifest,
@@ -326,7 +326,7 @@ class AIOXUpdater {
               resolve(null);
             }
           });
-        }
+        },
       );
 
       request.on('error', (error) => {
@@ -732,7 +732,7 @@ class AIOXUpdater {
 
       const installedManifest = selectInstalledManifest(
         loadInstalledManifest(this.projectRoot),
-        manifestToInstalledManifest(previousSourceManifest)
+        manifestToInstalledManifest(previousSourceManifest),
       );
       const report = generateUpgradeReport(sourceManifest, installedManifest, this.projectRoot);
       const applyResult = await applyUpgrade(report, sourceAioxCore, this.projectRoot, {
@@ -749,7 +749,7 @@ class AIOXUpdater {
       await fs.copy(
         path.join(sourceAioxCore, 'install-manifest.yaml'),
         path.join(this.aioxCoreDir, 'install-manifest.yaml'),
-        { overwrite: true }
+        { overwrite: true },
       );
 
       const sourceSignaturePath = path.join(sourceAioxCore, 'install-manifest.yaml.minisig');
@@ -763,7 +763,7 @@ class AIOXUpdater {
       updateInstalledManifest(
         this.projectRoot,
         sourceManifest,
-        `${CORE_PACKAGE_NAME}@${targetVersion}`
+        `${CORE_PACKAGE_NAME}@${targetVersion}`,
       );
 
       result.success = true;
@@ -882,7 +882,7 @@ function formatCheckResult(result, options = {}) {
 
   if (result.installed) {
     lines.push(
-      `📦 Current: ${c.cyan}v${result.installed}${c.reset}${result.installedAt ? ` ${c.dim}(installed ${result.installedAt})${c.reset}` : ''}`
+      `📦 Current: ${c.cyan}v${result.installed}${c.reset}${result.installedAt ? ` ${c.dim}(installed ${result.installedAt})${c.reset}` : ''}`,
     );
   } else {
     lines.push(`📦 Current: ${c.red}Not installed${c.reset}`);

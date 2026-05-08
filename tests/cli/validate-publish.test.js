@@ -94,7 +94,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
         '..',
         '.github',
         'workflows',
-        'npm-publish.yml'
+        'npm-publish.yml',
       );
       const workflow = fs.readFileSync(workflowPath, 'utf8');
       expect(workflow).toContain('Publish safety gate (INS-4.10)');
@@ -121,7 +121,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
       // This test runs the actual script against the real repo
       // In CI/dev with pro/ populated, it should pass
       const proExists = fs.existsSync(
-        path.join(__dirname, '..', '..', 'pro', 'license', 'license-api.js')
+        path.join(__dirname, '..', '..', 'pro', 'license', 'license-api.js'),
       );
 
       if (!proExists) {

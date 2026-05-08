@@ -80,7 +80,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
   // Validate pro source exists
   if (!(await fs.pathExists(proSourceDir))) {
     result.errors.push(
-      `Pro package not found at ${proSourceDir}. Run "npx aiox-pro install" or "aiox pro setup" first.`
+      `Pro package not found at ${proSourceDir}. Run "npx aiox-pro install" or "aiox pro setup" first.`,
     );
     return result;
   }
@@ -170,7 +170,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
     } else if (!dependencyResolution.success) {
       result.warnings.push(
         `Squad dependency resolution not linked: ${dependencyResolution.reason}` +
-          (dependencyResolution.error ? ` (${dependencyResolution.error})` : '')
+          (dependencyResolution.error ? ` (${dependencyResolution.error})` : ''),
       );
     }
 
@@ -196,7 +196,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
       result.errors.push(`Rollback errors: ${rollbackResult.errors.join(', ')}`);
     }
     result.warnings.push(
-      `Scaffolding failed: ${error.message}. ${rollbackResult.removed} files cleaned up.`
+      `Scaffolding failed: ${error.message}. ${rollbackResult.removed} files cleaned up.`,
     );
   }
 
@@ -461,7 +461,7 @@ async function installSquadCommands(targetDir) {
     if (!(await fs.pathExists(agentsDir))) continue;
 
     const agentFiles = (await fs.readdir(agentsDir)).filter(
-      (f) => f.endsWith('.md') && !f.startsWith('test-')
+      (f) => f.endsWith('.md') && !f.startsWith('test-'),
     );
 
     for (const ide of activeIDEs) {

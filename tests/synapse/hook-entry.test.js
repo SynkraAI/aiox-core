@@ -464,7 +464,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       const synapseHook = hookEntries.find(
         (entry) =>
           entry.hooks &&
-          entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.cjs'))
+          entry.hooks.some((h) => h.command && h.command.includes('synapse-engine.cjs')),
       );
       expect(synapseHook).toBeDefined();
     });

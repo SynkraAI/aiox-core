@@ -48,7 +48,7 @@ function isProInstalled() {
       'node_modules',
       '@aiox-squads',
       'pro',
-      'package.json'
+      'package.json',
     );
     return fs.existsSync(packageJson);
   } catch {

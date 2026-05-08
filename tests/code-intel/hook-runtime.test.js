@@ -2,7 +2,7 @@
 
 const path = require('path');
 const { resolveCodeIntel, formatAsXml, escapeXml, _resetForTesting } = require(
-  path.join(__dirname, '..', '..', '.aiox-core', 'core', 'code-intel', 'hook-runtime.js')
+  path.join(__dirname, '..', '..', '.aiox-core', 'core', 'code-intel', 'hook-runtime.js'),
 );
 
 const PROJECT_ROOT = path.join(__dirname, '..', '..');
@@ -27,7 +27,7 @@ describe('code-intel hook-runtime', () => {
       // Use a path known to exist in entity-registry.yaml
       const result = await resolveCodeIntel(
         '.aiox-core/development/tasks/create-next-story.md',
-        PROJECT_ROOT
+        PROJECT_ROOT,
       );
 
       // Should find something (entity or references)
@@ -53,7 +53,7 @@ describe('code-intel hook-runtime', () => {
         '.aiox-core',
         'development',
         'tasks',
-        'create-next-story.md'
+        'create-next-story.md',
       );
       const result = await resolveCodeIntel(absPath, PROJECT_ROOT);
 

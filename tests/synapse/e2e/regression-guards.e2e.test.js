@@ -42,13 +42,13 @@ const describeIfSynapse = synapseExists ? describe : describe.skip;
 
 describeIfSynapse('SYNAPSE E2E: Regression Guards', () => {
   const { SynapseEngine } = require(
-    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js')
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js'),
   );
   const { parseManifest } = require(
-    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js')
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
   );
   const { loadSession } = require(
-    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'session', 'session-manager.js')
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'session', 'session-manager.js'),
   );
 
   let manifest;
@@ -126,7 +126,7 @@ describeIfSynapse('SYNAPSE E2E: Regression Guards', () => {
     const p95 = percentile(sorted, 95);
     if (p95 >= PIPELINE_TARGET_MS) {
       console.warn(
-        `[WARN] Pipeline p95 (${p95.toFixed(2)}ms) approaching hard limit (target: <${PIPELINE_TARGET_MS}ms)`
+        `[WARN] Pipeline p95 (${p95.toFixed(2)}ms) approaching hard limit (target: <${PIPELINE_TARGET_MS}ms)`,
       );
     }
   });

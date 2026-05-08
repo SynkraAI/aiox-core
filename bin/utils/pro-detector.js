@@ -112,7 +112,7 @@ function getProVersion() {
   if (npmPro) {
     try {
       const packageData = JSON.parse(
-        fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8')
+        fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8'),
       );
       return packageData.version || null;
     } catch {
@@ -143,7 +143,7 @@ function getProInfo() {
   if (npmPro) {
     try {
       const packageData = JSON.parse(
-        fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8')
+        fs.readFileSync(path.join(npmPro.packagePath, 'package.json'), 'utf8'),
       );
       return {
         available: true,

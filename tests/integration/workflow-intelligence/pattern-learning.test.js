@@ -443,7 +443,7 @@ describe('Pattern Learning Integration', () => {
         'deep',
         'nested',
         'dir',
-        `patterns-${Date.now()}.yaml`
+        `patterns-${Date.now()}.yaml`,
       );
 
       const store = createPatternStore({ storagePath: deepPath });

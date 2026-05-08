@@ -29,7 +29,7 @@ function loadProviderModule() {
     })),
   });
   const memoryLoaderExists = fs.existsSync(
-    path.join(__dirname, '../../pro/memory/memory-loader.js')
+    path.join(__dirname, '../../pro/memory/memory-loader.js'),
   );
 
   if (memoryLoaderExists) {
@@ -90,7 +90,7 @@ describe('SynapseMemoryProvider', () => {
         'dev',
         expect.objectContaining({
           sectors: ['procedural', 'semantic'],
-        })
+        }),
       );
     });
 
@@ -100,7 +100,7 @@ describe('SynapseMemoryProvider', () => {
         'qa',
         expect.objectContaining({
           sectors: ['reflective', 'episodic'],
-        })
+        }),
       );
     });
 
@@ -110,7 +110,7 @@ describe('SynapseMemoryProvider', () => {
         'architect',
         expect.objectContaining({
           sectors: ['semantic', 'reflective'],
-        })
+        }),
       );
     });
 
@@ -120,7 +120,7 @@ describe('SynapseMemoryProvider', () => {
         'unknown-agent',
         expect.objectContaining({
           sectors: ['semantic'],
-        })
+        }),
       );
     });
   });
@@ -183,7 +183,7 @@ describe('SynapseMemoryProvider', () => {
           layer: 1,
           limit: 3,
           minRelevance: 0.7,
-        })
+        }),
       );
     });
 
@@ -195,7 +195,7 @@ describe('SynapseMemoryProvider', () => {
           layer: 2,
           limit: 5,
           minRelevance: 0.5,
-        })
+        }),
       );
     });
 
@@ -207,7 +207,7 @@ describe('SynapseMemoryProvider', () => {
           layer: 3,
           limit: 10,
           minRelevance: 0.3,
-        })
+        }),
       );
     });
 

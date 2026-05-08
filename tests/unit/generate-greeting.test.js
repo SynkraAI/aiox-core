@@ -17,14 +17,14 @@ const SCRIPT_PATH = path.join(
   '.aiox-core',
   'development',
   'scripts',
-  'generate-greeting.js'
+  'generate-greeting.js',
 );
 const RUNTIME_PATH = path.join(
   REPO_ROOT,
   '.aiox-core',
   'development',
   'scripts',
-  'activation-runtime.js'
+  'activation-runtime.js',
 );
 
 function loadGenerateGreetingWithRuntime(activateMock) {

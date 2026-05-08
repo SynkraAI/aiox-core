@@ -646,7 +646,7 @@ describe('config-resolver', () => {
       fs.writeFileSync(
         CONFIG_FILES.user,
         'user_profile: "advanced"\ndefault_language: "pt-BR"\n',
-        'utf8'
+        'utf8',
       );
 
       const config = getConfigAtLevel('/tmp', 'L5');

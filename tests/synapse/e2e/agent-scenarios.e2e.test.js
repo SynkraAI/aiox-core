@@ -15,10 +15,10 @@ const SYNAPSE_DIR = path.join(PROJECT_ROOT, '.synapse');
 const MANIFEST_PATH = path.join(SYNAPSE_DIR, 'manifest');
 
 const { SynapseEngine } = require(
-  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js')
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js'),
 );
 const { parseManifest } = require(
-  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js')
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
 );
 
 // ---------------------------------------------------------------------------
