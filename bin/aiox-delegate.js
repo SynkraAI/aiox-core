@@ -1,6 +1,16 @@
 #!/usr/bin/env node
 
-const { main } = require('../.aiox-core/core/external-executors/delegate-cli');
+const path = require('path');
+const { main } = require(path.join(
+  __dirname,
+  '..',
+  '.aiox-core',
+  'core',
+  'external-executors',
+  'delegate-cli',
+));
 
-main();
-
+main().catch((error) => {
+  process.stderr.write(`ERROR=${error.message || error}\n`);
+  process.exit(error.exitCode || 1);
+});

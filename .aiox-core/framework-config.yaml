@@ -54,7 +54,7 @@ dev:
 
 external_executors:
   enabled: false
-  default_sandbox: full-auto # read-only | workspace-write | full-auto | danger-full-access
+  default_sandbox: workspace-write # read-only | workspace-write | full-auto | danger-full-access
   run_dir: .aiox/external-runs
 
 # --- Utility Scripts Registry (Section 11) ---

@@ -46,10 +46,11 @@ const PROVIDERS = {
 };
 
 class DelegateCliError extends Error {
-  constructor(message, exitCode = 1) {
+  constructor(message, exitCode = 1, cause = null) {
     super(message);
     this.name = 'DelegateCliError';
     this.exitCode = exitCode;
+    this.cause = cause;
   }
 }
 
@@ -92,7 +93,7 @@ function parseArgs(argv) {
     workdir: process.cwd(),
     model: null,
     profile: null,
-    sandbox: 'full-auto',
+    sandbox: 'workspace-write',
     runDirBase: DEFAULT_RUN_DIR,
     images: [],
     allowDirty: false,
@@ -244,8 +245,28 @@ function resolvePathFrom(baseDir, value) {
 function loadPrompt(options) {
   if (options.promptFile) {
     const promptFile = path.resolve(options.promptFile);
+    let text;
+
+    try {
+      text = fs.readFileSync(promptFile, 'utf8');
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        throw new DelegateCliError(
+          `Prompt file not found: ${promptFile}. Use --prompt for inline text or --prompt-file <path> for an existing file.`,
+          2,
+          error,
+        );
+      }
+
+      throw new DelegateCliError(
+        `Could not read prompt file ${promptFile}: ${error.message}`,
+        2,
+        error,
+      );
+    }
+
     return {
-      text: fs.readFileSync(promptFile, 'utf8'),
+      text,
       source: promptFile,
     };
   }
@@ -409,37 +430,92 @@ function writeRunFiles(plan, pid = null) {
 }
 
 async function spawnExecutor(plan) {
+  fs.mkdirSync(path.dirname(plan.logPath), { recursive: true });
   const logFd = fs.openSync(plan.logPath, 'a');
-  const child = spawn(plan.command, plan.args, {
-    cwd: plan.options.workdir,
-    detached: !plan.options.foreground,
-    stdio: ['pipe', logFd, logFd],
-    env: process.env,
-  });
+  let logClosed = false;
+  let child;
 
-  child.stdin.write(plan.prompt.text);
-  child.stdin.end();
+  const closeLog = () => {
+    if (!logClosed) {
+      fs.closeSync(logFd);
+      logClosed = true;
+    }
+  };
 
-  writeRunFiles(plan, child.pid);
+  const recordSpawnError = (error) => {
+    if (!logClosed) {
+      fs.writeSync(logFd, `\n[aiox-delegate] executor error: ${error.message}\n`);
+    }
+  };
 
-  if (!plan.options.foreground) {
-    child.unref();
-    fs.closeSync(logFd);
-    return { status: 'started', pid: child.pid, exitCode: 0 };
+  try {
+    child = spawn(plan.command, plan.args, {
+      cwd: plan.options.workdir,
+      detached: !plan.options.foreground,
+      stdio: ['pipe', logFd, logFd],
+      env: process.env,
+    });
+  } catch (error) {
+    recordSpawnError(error);
+    writeRunFiles(plan, null);
+    closeLog();
+    return { status: 'failed', pid: null, exitCode: 1, error: error.message };
   }
 
-  const exitCode = await new Promise((resolve) => {
-    child.on('close', (code) => {
-      fs.closeSync(logFd);
-      resolve(code || 0);
+  writeRunFiles(plan, child.pid || null);
+
+  const errorResult = new Promise((resolve) => {
+    child.once('error', (error) => {
+      recordSpawnError(error);
+      closeLog();
+      resolve({
+        status: 'failed',
+        pid: child.pid || null,
+        exitCode: 1,
+        error: error.message,
+      });
     });
   });
 
-  return {
-    status: exitCode === 0 ? 'completed' : 'failed',
-    pid: child.pid,
-    exitCode,
-  };
+  if (child.stdin) {
+    child.stdin.end(plan.prompt.text);
+  }
+
+  if (!plan.options.foreground) {
+    const immediateError = await Promise.race([
+      errorResult,
+      new Promise((resolve) => setImmediate(() => resolve(null))),
+    ]);
+
+    if (immediateError) {
+      return immediateError;
+    }
+
+    child.unref();
+    closeLog();
+    return { status: 'started', pid: child.pid, exitCode: 0 };
+  }
+
+  const result = await Promise.race([
+    errorResult,
+    new Promise((resolve) => {
+      child.once('close', (code) => {
+        closeLog();
+        const exitCode = code !== null ? code : 1;
+        resolve({
+          status: exitCode === 0 ? 'completed' : 'failed',
+          pid: child.pid,
+          exitCode,
+        });
+      });
+    }),
+  ]);
+
+  return result;
+}
+
+function sanitizeResultValue(value) {
+  return String(value).replace(/\r?\n/g, ' ');
 }
 
 function printResult(plan, result, output = process.stdout) {
@@ -451,6 +527,7 @@ function printResult(plan, result, output = process.stdout) {
     `OUTPUT=${plan.outputPath}`,
     `PROMPT=${plan.promptPath}`,
     `COMMAND=${plan.displayCommand}`,
+    result.error ? `ERROR=${sanitizeResultValue(result.error)}` : null,
   ].filter(Boolean);
 
   output.write(`${lines.join('\n')}\n`);
@@ -473,7 +550,6 @@ async function runCli(argv, output = process.stdout, _errorOutput = process.stde
 
   assertExecutorAvailable(plan.provider);
   assertGitReady(plan.options);
-  writeRunFiles(plan);
 
   const result = await spawnExecutor(plan);
   printResult(plan, result, output);

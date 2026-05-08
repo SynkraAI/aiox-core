@@ -40,9 +40,11 @@ describe('schema-validation — enriched schemas', () => {
   // AC1: Framework schema enriched with all L1 keys
   describe('framework-config.schema.json (L1)', () => {
     let schema;
+    let frameworkConfig;
 
     beforeAll(() => {
       schema = loadSchema('framework-config.schema.json');
+      frameworkConfig = loadYaml('framework-config.yaml');
     });
 
     test('schema is valid JSON Schema draft-07', () => {
@@ -80,9 +82,8 @@ describe('schema-validation — enriched schemas', () => {
     });
 
     test('validates real framework-config.yaml without errors', () => {
-      const data = loadYaml('framework-config.yaml');
       const validate = ajv.compile(schema);
-      const isValid = validate(data);
+      const isValid = validate(frameworkConfig);
       if (!isValid) {
          
         console.log('Validation errors:', validate.errors);
@@ -117,9 +118,9 @@ describe('schema-validation — enriched schemas', () => {
       expect(schema.properties.dev.properties.execution_mode.enum).toEqual(['native', 'delegate']);
       expect(schema.properties.external_executors.properties.default_sandbox.enum).toContain('full-auto');
 
-      const data = loadYaml('framework-config.yaml');
-      expect(data.dev.execution_mode).toBe('native');
-      expect(data.external_executors.enabled).toBe(false);
+      expect(frameworkConfig.dev.execution_mode).toBe('native');
+      expect(frameworkConfig.external_executors.enabled).toBe(false);
+      expect(frameworkConfig.external_executors.default_sandbox).toBe('workspace-write');
     });
   });
 

@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.15
-generated_at: "2026-05-08T02:37:02.457Z"
+generated_at: "2026-05-08T02:58:22.301Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1109
 files:
@@ -265,9 +265,9 @@ files:
     type: core
     size: 8156
   - path: core/config/schemas/framework-config.schema.json
-    hash: sha256:22ae35c20a7fb0ec7240ac943ecee2b860111f9d11a9d05047aaf1e17c376b4b
+    hash: sha256:1becd882f8077e0f8c95ce1ca395b05bf03fa7a1726f67c0bc5fed0ae59c3f27
     type: core
-    size: 7457
+    size: 7463
   - path: core/config/schemas/local-config.schema.json
     hash: sha256:0349e44aea7b3dfe051ce586eb201f25edab8a7ea6d054704034f877848aa43f
     type: core
@@ -445,13 +445,13 @@ files:
     type: core
     size: 11060
   - path: core/external-executors/delegate-cli.js
-    hash: sha256:ad4fc2d186a8e1ffc31c0bdd5f33db6bbb9e245d913b2f2f0228f1c60f070340
+    hash: sha256:3f4bb7d4edd742ad13dc91ebdc7296b94ac762caa50ea6943429d93cd65c0ce1
     type: core
-    size: 13259
+    size: 15069
   - path: core/external-executors/index.js
-    hash: sha256:34665b4bfc2851b74e2907dee8bfd8a4a5cfd68d4ffc59cecb2b2704db4ad487
+    hash: sha256:db61bee165e4a7dba3627275d52d6b162e3b2cbf47d31d88beb38682cb8352db
     type: core
-    size: 89
+    size: 484
   - path: core/graph-dashboard/cli.js
     hash: sha256:29f273a06fecc77eb3e39162ba1aaf28e1cbadb2a000158f009817021a30b4d1
     type: core
@@ -2005,9 +2005,9 @@ files:
     type: task
     size: 11488
   - path: development/tasks/delegate-to-external-executor.md
-    hash: sha256:c7bf9d7ab87a78a3ced1a524c098bc42f68e4b639048c03c95964ca49cd285cc
+    hash: sha256:68c73a78e4eeebcb551f69bc8c13f37157be253b91a3d3d80ea9bc52c5330808
     type: task
-    size: 4395
+    size: 4400
   - path: development/tasks/deprecate-component.md
     hash: sha256:72dfca4d222b990ed868e5fd4c0d5793848cd1a9fda6d48fb7caec93e02c59ed
     type: task

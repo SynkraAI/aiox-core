@@ -65,7 +65,7 @@ dev:
 
 external_executors:
   enabled: false
-  default_sandbox: full-auto   # read-only | workspace-write | full-auto | danger-full-access
+  default_sandbox: workspace-write   # read-only | workspace-write | full-auto | danger-full-access
   run_dir: .aiox/external-runs
 ```
 
@@ -150,4 +150,3 @@ review_checklist:
 - Letting the executor create PRs, push, release, or mutate story state.
 - Delegating vague work without acceptance criteria and file scope.
 - Running with `danger-full-access` unless the surrounding environment is externally sandboxed.
-

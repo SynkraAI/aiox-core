@@ -112,7 +112,7 @@
         "default_sandbox": {
           "type": "string",
           "enum": ["read-only", "workspace-write", "full-auto", "danger-full-access"],
-          "default": "full-auto"
+          "default": "workspace-write"
         },
         "run_dir": {
           "type": "string",
