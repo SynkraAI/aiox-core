@@ -43,6 +43,8 @@
     "LICENSE"
   ],
   "exports": {
+    "./resilience": "./.aiox-core/core/resilience/index.js",
+    "./resilience/agent-immortality": "./.aiox-core/core/resilience/agent-immortality.js",
     "./installer/aiox-core-installer": "./packages/installer/src/installer/aiox-core-installer.js",
     "./installer/enterprise-detector": "./packages/installer/src/enterprise/enterprise-detector.js",
     "./installer/enterprise-errors": "./packages/installer/src/enterprise/enterprise-errors.js",

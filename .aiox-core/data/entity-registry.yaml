@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-08T21:44:50.560Z'
-  entityCount: 755
+  lastUpdated: '2026-05-09T07:56:57.030Z'
+  entityCount: 757
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -8233,16 +8233,19 @@ entities:
         - output-formatter
         - yaml-validator
         - registry-loader
+        - resilience-index
       externalDeps: []
       plannedDeps:
+        - health-check-index
+        - external-executors-index
         - health-check
       lifecycle: experimental
       adaptability:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:970b617b0e723e8248065f698eca2298a5a0b72e3e43ee820ea85294555736e2
-      lastVerified: '2026-03-11T00:48:55.872Z'
+      checksum: sha256:b09d5546bdb1507c60ddc5dc9b48760b55e4e6a4ccc8fdcb63e168e8ea334b13
+      lastVerified: '2026-05-09T07:56:57.018Z'
     code-intel-client:
       path: .aiox-core/core/code-intel/code-intel-client.js
       layer: L1
@@ -12991,6 +12994,46 @@ entities:
         extensionPoints: []
       checksum: sha256:a67e843cf61e823e0c1b73efdb2d67d268a798fc0c25505a199c1da130d4fe36
       lastVerified: '2026-05-08T19:10:54.503Z'
+    agent-immortality:
+      path: .aiox-core/core/resilience/agent-immortality.js
+      layer: L1
+      type: module
+      purpose: truncate(summary, options.maxLegacyChars ?? DEFAULT_CONFIG.maxLegacyChars),
+      keywords:
+        - agent
+        - immortality
+      usedBy:
+        - resilience-index
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d1612c672e91a802924c4a61d8beade66d5740487ca0a244950a2c8249a70962
+      lastVerified: '2026-05-09T07:56:57.020Z'
+    resilience-index:
+      path: .aiox-core/core/resilience/index.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/resilience/index.js
+      keywords:
+        - index
+      usedBy:
+        - index
+      dependencies:
+        - agent-immortality
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:5acbb55fbbf25fc052c0ee2eac5f35d30228144e9f426083b89aabc9e54d084f
+      lastVerified: '2026-05-09T07:56:57.021Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md

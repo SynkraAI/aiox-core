@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.1.17
-generated_at: "2026-05-09T07:21:15.059Z"
+generated_at: "2026-05-09T08:01:26.461Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1125
+file_count: 1128
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -793,9 +793,9 @@ files:
     type: core
     size: 1486
   - path: core/index.js
-    hash: sha256:7258643ec31b5389e1abb0f0af48e9f5e569336f5548c31cfe22e229e7254e13
+    hash: sha256:b09d5546bdb1507c60ddc5dc9b48760b55e4e6a4ccc8fdcb63e168e8ea334b13
     type: core
-    size: 2723
+    size: 2824
   - path: core/manifest/manifest-generator.js
     hash: sha256:81b796990dd747bbb9785d205dbe5f6d5556754fc51745fb84b7ce4675acbdbf
     type: core
@@ -1084,6 +1084,18 @@ files:
     hash: sha256:d9805ce445661a3a2d9e6c73bf35cbd1bc2403419825442cd7b8f01cc1409cb3
     type: core
     size: 9179
+  - path: core/resilience/agent-immortality.js
+    hash: sha256:d1612c672e91a802924c4a61d8beade66d5740487ca0a244950a2c8249a70962
+    type: core
+    size: 21663
+  - path: core/resilience/index.js
+    hash: sha256:5acbb55fbbf25fc052c0ee2eac5f35d30228144e9f426083b89aabc9e54d084f
+    type: core
+    size: 118
+  - path: core/resilience/README.md
+    hash: sha256:57b60c664aac51299a8576be57eff702d716fb48595af342e534c1191355eb85
+    type: core
+    size: 1139
   - path: core/session/context-detector.js
     hash: sha256:5537563d5dfc613e16fd610c9e1407e7811c4f19745a78a4fc81c34af20000f4
     type: core
@@ -1285,9 +1297,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:848caa6041aad92acc1fb30c6917bd06d26a91592f553e33e4b7b650ffb560b6
+    hash: sha256:4b701001f233800095b8830d8406209d1074bb2847fd5c279261b52452a2d71d
     type: data
-    size: 527978
+    size: 529270
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
