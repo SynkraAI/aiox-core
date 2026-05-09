@@ -8,9 +8,9 @@ Guia completo para instalar, ativar e gerenciar o AIOX Pro.
 
 ## Visão Geral
 
-O AIOX Pro é distribuído por um canal autenticado. O instalador valida a **licença ativa**, solicita uma URL assinada de curta duração ao license-server histórico (`aios-license-server`) e instala o artefato premium verificado no projeto.
+O AIOX Pro é distribuído por um canal autenticado. O instalador valida a **licença ativa**, solicita uma URL assinada de curta duração ao serviço/repo histórico `aios-license-server` (mantido sob branding AIOX) e instala o artefato premium verificado no projeto.
 
-```
+```text
 Comprar Licença -> Validar -> Baixar artefato assinado -> Usar Features Pro
 ```
 

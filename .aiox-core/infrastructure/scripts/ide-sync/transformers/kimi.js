@@ -311,7 +311,8 @@ function buildDescription(id, name, title, whenToUse) {
     `@${id}`,
   ];
 
-  return `Activate the AIOX ${title} agent (${name}). ${desc} Trigger when user asks to ${id}, or says '${triggerPhrases.join("', '")}'.`;
+  const brandedTitle = /^AIOX\b/i.test(title) ? title : `AIOX ${title}`;
+  return `Activate the ${brandedTitle} agent (${name}). ${desc} Trigger when user asks to ${id}, or says '${triggerPhrases.join("', '")}'.`;
 }
 
 function buildRawContentSection(rawContent, id) {

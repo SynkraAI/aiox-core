@@ -120,6 +120,14 @@ describe('kimi transformer', () => {
     expect(out).toContain('```text\n💻 Dex (Builder) ready');
   });
 
+  test('does not duplicate AIOX in already-branded titles', () => {
+    const out = kimi.transform(buildAgentData({
+      agent: { title: 'AIOX Master Orchestrator' },
+    }));
+    expect(out).toContain('Activate the AIOX Master Orchestrator agent');
+    expect(out).not.toContain('AIOX AIOX');
+  });
+
   test('supports object-shaped command catalogs', () => {
     const out = kimi.transform(buildAgentData({
       commands: {

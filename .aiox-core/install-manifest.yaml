@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.17
-generated_at: "2026-05-09T08:57:54.287Z"
+generated_at: "2026-05-09T09:07:47.281Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -3253,9 +3253,9 @@ files:
     type: script
     size: 5693
   - path: infrastructure/scripts/ide-sync/transformers/kimi.js
-    hash: sha256:923e6b39d901d1dde2fdc0e98b9393dc6e32fd9d93f8bb484f3974ee62af1613
+    hash: sha256:69a6b34e81ba956242ff38cfce4063d9a0d9e32818a5f36e0246d80e41940def
     type: script
-    size: 13863
+    size: 13938
   - path: infrastructure/scripts/ide-sync/validator.js
     hash: sha256:768eba65a0f8ff937c34f6f43fe1b4dc990f2d406e592bc1cda0f8ab5b4f7e0b
     type: script
