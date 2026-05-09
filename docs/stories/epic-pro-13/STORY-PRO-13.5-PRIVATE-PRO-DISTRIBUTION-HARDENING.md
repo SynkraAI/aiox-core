@@ -242,10 +242,10 @@ pro-artifacts/@aiox-squads/pro/0.4.0/aiox-squads-pro-0.4.0.tgz
   - [x] Existing Pro update path.
   - [x] Agent-to-skill sync/idempotency check.
 
-- [ ] T7. Publish and privacy transition
-  - [ ] Publish `aiox-core` patch release after tests pass.
+- [x] T7. Publish and privacy transition
+  - [x] Publish `aiox-core` patch release after tests pass.
   - [x] Verify public tarball excludes Pro.
-  - [ ] Change `@aiox-squads/pro` visibility only after smoke validation.
+  - [x] Change `@aiox-squads/pro` visibility only after smoke validation.
   - [x] Save npm access/status evidence.
 
 - [x] T8. Update docs
@@ -263,7 +263,7 @@ pro-artifacts/@aiox-squads/pro/0.4.0/aiox-squads-pro-0.4.0.tgz
    - **Architect recommendation:** make npm private/restricted only after signed artifact install smoke passes. Treat npm as maintainer/release-pipeline infrastructure, not customer distribution.
 
 3. What is the patch version target for the public-core fix?
-   - Resolved for this implementation: `@aiox-squads/core@5.1.16`, the next patch after registry/latest `5.1.15`. Do not hardcode `aiox-core@5.0.9` unless Product explicitly opens an unscoped legacy hotfix.
+   - Resolved for this implementation: `@aiox-squads/core@5.1.17`, the next patch after the published `5.1.16`, because `@aiox-squads/pro@0.4.2` corrected npm package metadata after the `0.4.1` drift was discovered. Do not hardcode `aiox-core@5.0.9` unless Product explicitly opens an unscoped legacy hotfix.
 
 4. What TTL should signed Pro artifact URLs use if the license-server path is selected?
    - Resolved default: 10 minutes. Acceptable range for implementation tests: 5 to 15 minutes.
@@ -274,7 +274,7 @@ pro-artifacts/@aiox-squads/pro/0.4.0/aiox-squads-pro-0.4.0.tgz
 6. What still blocks implementation readiness?
    - Resolved architecture no longer blocks. Story decomposition is complete via `aios-license-server/docs/stories/STORY-PRO-13.6-PRO-ARTIFACT-SIGNED-URL.md`, validated Ready on 2026-05-08.
    - PRO-13.6 is merged, deployed to production, configured with private Supabase Storage artifact manifest, and smoke-tested with signed URL download/hash validation.
-   - Current blocker: finish core smoke matrix, publish the next public-core patch, then change `@aiox-squads/pro` visibility only after customer install smoke passes.
+   - Resolved: core smoke passed, `@aiox-squads/core@5.1.17` is the corrected publish target, and `@aiox-squads/pro` privacy transition passed after customer artifact smoke.
 
 ## Risks and Mitigations
 
@@ -374,6 +374,8 @@ Expected implementation touchpoints:
 - `outputs/qa/2026-05-pro-13-5-smoke.json`
 - `outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.1.json`
 - `outputs/qa/2026-05-pro-13-5-vercel-manifest-0.4.1.json`
+- `outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.2.json`
+- `outputs/qa/2026-05-pro-13-5-publish-0.4.2-5.1.17.json`
 - `outputs/qa/2026-05-pro-13-5-npm-view-core.json`
 - `outputs/qa/2026-05-pro-13-5-npm-view-pro.json`
 - `outputs/qa/2026-05-pro-13-5-npm-access-pro-status.json`
@@ -387,14 +389,14 @@ Expected implementation touchpoints:
 - **Depends on:** PRO-13.2 release gate alignment and `@aiox-squads/pro@0.4.0` publish.
 - **Must not collide with:** existing `STORY-PRO-13.4-AIOS-LEGACY-CLEANUP.md` in `aios-license-server`; this story is intentionally PRO-13.5.
 - **Must reconcile with:** Epic 124 package-scope migration, especially current single-scope `@aiox-squads/pro` behavior.
-- **Requires:** backend follow-up in `aios-license-server` for signed artifact URL endpoint and artifact manifest.
+- **Backend dependency:** completed via `aios-license-server` PRO-13.6 signed artifact URL endpoint and production artifact manifest.
 - **Does not block:** PRO-13.3 churn detection unless Product decides distribution security is the higher operational priority.
 
 ## Definition of Done
 
-- [ ] `aiox-core` patch release published with no `pro/` files in the public tarball.
+- [x] `aiox-core` patch release published with no `pro/` files in the public tarball.
 - [x] Pro acquisition path is authenticated through `aios-license-server` signed artifact URL after license validation.
-- [ ] `@aiox-squads/pro` privacy/access transition is completed only after smoke validation.
+- [x] `@aiox-squads/pro` privacy/access transition is completed only after smoke validation.
 - [x] Existing install/update does not duplicate slash commands, agent activators, or generated skills.
 - [x] Rollback procedure and evidence are captured in the story or `outputs/qa/`.
 
@@ -446,6 +448,12 @@ Expected implementation touchpoints:
 - 2026-05-08: `pro/package-lock.json` drift corrected; `npm --prefix pro ci --ignore-scripts --no-audit --no-fund` passes.
 - 2026-05-08: Publish/private distribution docs updated with signed artifact preconditions, privacy command, and rollback command.
 - 2026-05-08: Full local smoke passed and saved to `outputs/qa/2026-05-pro-13-5-smoke.json`: core-only install has no bundled `pro/`; valid Pro user installs `@aiox-squads/pro@0.4.1` via signed artifact; invalid Pro user is blocked before content; `aiox pro update` completes through artifact channel; `.claude/commands` and `.codex/agents` file sets remain stable with zero duplicate paths.
+- 2026-05-09: Post-publish drift found in npm `@aiox-squads/pro@0.4.1`: package metadata still declared legacy `aiox-core >=5.0.8` peer while the signed artifact channel used the scoped-core corrected artifact.
+- 2026-05-09: Published private `@aiox-squads/pro@0.4.2` with canonical `@aiox-squads/core >=5.1.0` peer dependency and `publishConfig.access=restricted`.
+- 2026-05-09: Uploaded `@aiox-squads/pro@0.4.2` to private Supabase Storage at `@aiox-squads/pro/0.4.2/aiox-squads-pro-0.4.2.tgz`; production `aios-license-server` redeployed as `dpl_EBiFzRXEhqhLBU3ZpfuF5NZ2DhXg`.
+- 2026-05-09: Live production smoke for `0.4.2` passed: missing bearer returns 401, verified non-Pro user returns 403, verified Pro smoke user receives a signed URL, and downloaded artifact matches SHA-256 and byte size.
+- 2026-05-09: Core patch target moved to `@aiox-squads/core@5.1.17`; installer default Pro artifact version changed to `0.4.2`.
+- 2026-05-09: Published `@aiox-squads/core@5.1.17`; npm `latest` resolves to `5.1.17`; clean install smoke confirms `aiox --version` returns `5.1.17`, the installed public package has zero `pro/` paths, and the installer default points to Pro artifact `0.4.2`.
 - 2026-05-08: GitHub CI follow-up fixed: `tests/pro-wizard.test.js` interactive license-key retry test now stubs the license client instead of reaching the real inline HTTP fallback, removing the Node 18 timeout while preserving prompt/retry assertions.
 - 2026-05-08: Merged `origin/main` and addressed CodeRabbit actionable comments: legacy `npm notice` size-prefixed pack output is normalized before `pro/` checks, `aiox-pro install/setup/wizard -k` is accepted, artifact download has an abort timeout, and artifact-installed Pro package cleanup runs on scaffold failures.
 - Validation evidence:
@@ -459,8 +467,11 @@ Expected implementation touchpoints:
   - full smoke matrix saved in `outputs/qa/2026-05-pro-13-5-smoke.json`
   - Pro artifact upload evidence saved in `outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.1.json`
   - Vercel production manifest update evidence saved in `outputs/qa/2026-05-pro-13-5-vercel-manifest-0.4.1.json`
+  - Pro `0.4.2` artifact and privacy evidence saved in `outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.2.json`
+  - Post-publish evidence saved in `outputs/qa/2026-05-pro-13-5-publish-0.4.2-5.1.17.json`
+  - `npm pack --dry-run --json` for `@aiox-squads/core@5.1.17` captured in `outputs/qa/2026-05-pro-13-5-core-pack-dry-run-5.1.17.json` with `proFileCount: 0`.
   - `npm pack --dry-run --json` captured in `outputs/qa/2026-05-pro-13-5-core-pack-dry-run.json` with `proFileCount: 0`.
-  - `npm access get status @aiox-squads/pro --json` captured as `public`; privacy transition intentionally pending until core smoke/publish completes.
+  - `npm access get status @aiox-squads/pro --json` captured as `private` after signed artifact smoke passed.
 
 ## Change Log
 
@@ -474,3 +485,5 @@ Expected implementation touchpoints:
 | 2026-05-08 | 0.6 | PRO-13.6 deployed/smoked; core publish boundary and signed artifact acquisition implemented; focused validation evidence captured | Codex |
 | 2026-05-08 | 0.7 | Full core/pro smoke matrix passed; customer update moved to signed artifact channel; story ready for DevOps publish/privacy transition | Codex |
 | 2026-05-08 | 0.8 | Versions bumped to core 5.1.16 and Pro 0.4.1; Pro 0.4.1 artifact uploaded and production manifest redeployed; final smoke passed on 0.4.1 | Codex |
+| 2026-05-09 | 0.9 | Post-publish npm drift corrected with private Pro 0.4.2, production artifact smoke passed, and core patch target advanced to 5.1.17 | Codex |
+| 2026-05-09 | 1.0 | `@aiox-squads/core@5.1.17` published and smoke-validated against Pro artifact `0.4.2` | Codex |

@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-05-09T01:53:07.000Z",
+  "story": "PRO-13.5",
+  "core": {
+    "package": "@aiox-squads/core",
+    "publishedVersion": "5.1.17",
+    "npmLatest": "5.1.17",
+    "distTags": {
+      "latest": "5.1.17",
+      "preview": "5.1.4"
+    },
+    "packDryRun": {
+      "file": "outputs/qa/2026-05-pro-13-5-core-pack-dry-run-5.1.17.json",
+      "filename": "aiox-squads-core-5.1.17.tgz",
+      "entryCount": 2033,
+      "proFileCount": 0
+    },
+    "publishedInstallSmoke": {
+      "aioxVersion": "5.1.17",
+      "proCommandAvailable": true,
+      "defaultProArtifactVersionLine": "const DEFAULT_PRO_ARTIFACT_VERSION = '0.4.2';",
+      "installedProPathCount": 0
+    }
+  },
+  "pro": {
+    "package": "@aiox-squads/pro",
+    "publishedVersion": "0.4.2",
+    "latest": "0.4.2",
+    "accessStatus": "private",
+    "peerDependencies": {
+      "@aiox-squads/core": ">=5.1.0"
+    },
+    "publishConfig": {
+      "access": "restricted",
+      "registry": "https://registry.npmjs.org"
+    },
+    "unauthenticatedNpmView": {
+      "status": "E404",
+      "expectedBecausePackageIsPrivate": true
+    }
+  },
+  "artifactBroker": {
+    "licenseServerDeploymentId": "dpl_EBiFzRXEhqhLBU3ZpfuF5NZ2DhXg",
+    "artifactEvidenceFile": "outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.2.json",
+    "objectPath": "@aiox-squads/pro/0.4.2/aiox-squads-pro-0.4.2.tgz",
+    "sha256": "a5565e693838aca2b0e3e5fc38af274d0fb6efc84c507de48375b516bd1efd41",
+    "sizeBytes": 6685182,
+    "liveSmoke": {
+      "missingBearerStatus": 401,
+      "verifiedNonProStatus": 403,
+      "verifiedProStatus": 200,
+      "downloadStatus": 200,
+      "sha256Matches": true,
+      "sizeMatches": true
+    }
+  },
+  "validation": [
+    "npm run validate:publish",
+    "npm run typecheck",
+    "npm test -- --runInBand tests/installer/pro-setup-auth.test.js tests/pro/pro-updater.test.js tests/cli/validate-publish.test.js",
+    "npm pack --dry-run --json",
+    "npm install @aiox-squads/core@5.1.17 --ignore-scripts --no-audit --no-fund",
+    "node node_modules/@aiox-squads/core/bin/aiox.js --version",
+    "node node_modules/@aiox-squads/core/bin/aiox.js pro --help"
+  ],
+  "result": "published"
+}
