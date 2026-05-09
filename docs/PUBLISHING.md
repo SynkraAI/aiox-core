@@ -24,7 +24,7 @@ Current release state, verified on 2026-05-09:
 
 ```text
 @aiox-squads/core@5.1.17 -> public latest
-@aiox-squads/pro@0.4.2  -> private/restricted release artifact
+@aiox-squads/pro@0.4.3  -> private/restricted release artifact
 ```
 
 Customer Pro acquisition does not require direct npm org access. The supported customer path is the authenticated signed-artifact channel served by the historical `aios-license-server` repo.
