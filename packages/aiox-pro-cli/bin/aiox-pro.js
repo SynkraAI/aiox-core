@@ -3,11 +3,11 @@
 /**
  * aiox-pro CLI
  *
- * Thin CLI wrapper for AIOX Pro packages.
+ * Thin CLI wrapper for AIOX Pro setup and delegated commands.
  * Provides a clean npx interface: npx aiox-pro install
  *
  * Commands:
- *   install             Install AIOX Pro in the current project
+ *   install             Run authenticated Pro setup in the current project
  *   update              Update AIOX Pro and re-sync assets
  *   activate --key X    Activate a license key
  *   deactivate          Deactivate the current license
@@ -23,7 +23,6 @@ const path = require('path');
 const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
-const PRO_PACKAGE = '@aiox-squads/pro';
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);
@@ -31,36 +30,12 @@ const command = args[0];
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
-function run(cmd, options = {}) {
-  const result = spawnSync(cmd, {
-    shell: true,
-    stdio: 'inherit',
-    cwd: process.cwd(),
-    ...options,
-  });
-  return result.status;
-}
-
-function isProInstalled() {
-  try {
-    const packageJson = path.join(
-      process.cwd(),
-      'node_modules',
-      '@aiox-squads',
-      'pro',
-      'package.json',
-    );
-    return fs.existsSync(packageJson);
-  } catch {
-    return false;
-  }
-}
-
 function findAioxCli() {
   // Check local node_modules first
   const localBin = path.join(process.cwd(), 'node_modules', '.bin', 'aiox');
-  if (fs.existsSync(localBin) || fs.existsSync(localBin + '.cmd')) {
-    return 'npx aiox';
+  const localBinPath = process.platform === 'win32' ? `${localBin}.cmd` : localBin;
+  if (fs.existsSync(localBinPath)) {
+    return localBinPath;
   }
 
   // Check global
@@ -88,13 +63,15 @@ function delegateToAiox(subcommand) {
 /**
  * Get value of a CLI argument (e.g., --key VALUE).
  *
- * @param {string} flag - Flag name (e.g., '--key')
+ * @param {...string} flags - Flag names (e.g., '--key', '-k')
  * @returns {string|null} Value or null
  */
-function getArgValue(flag) {
-  const idx = args.indexOf(flag);
-  if (idx !== -1 && idx + 1 < args.length) {
-    return args[idx + 1];
+function getArgValue(...flags) {
+  for (const flag of flags) {
+    const idx = args.indexOf(flag);
+    if (idx !== -1 && idx + 1 < args.length) {
+      return args[idx + 1];
+    }
   }
   return null;
 }
@@ -147,9 +124,8 @@ Usage:
   npx aiox-pro <command> [options]
 
 Commands:
-  install              Install AIOX Pro in the current project
+  install              Run authenticated Pro setup in the current project
   update               Update AIOX Pro and re-sync assets
-  install --wizard     Install and run the setup wizard
   setup, wizard        Run Pro setup wizard (license gate + scaffold + verify)
   activate --key KEY   Activate a license key
   deactivate           Deactivate the current license
@@ -165,6 +141,7 @@ Examples:
   npx aiox-pro update
   npx aiox-pro setup
   npx aiox-pro wizard --key PRO-XXXX-XXXX-XXXX-XXXX
+  npx aiox-pro install -k PRO-XXXX-XXXX-XXXX-XXXX
   npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aiox-pro status
   npx aiox-pro recover
@@ -174,27 +151,7 @@ Documentation: https://synkra.ai/pro/docs
 }
 
 function installPro() {
-  console.log('\nInstalling AIOX Pro...\n');
-
-  let installedPackage = null;
-
-  console.log(`Installing ${PRO_PACKAGE}...`);
-  const exitCode = run(`npm install ${PRO_PACKAGE}`);
-  if (exitCode === 0) {
-    installedPackage = PRO_PACKAGE;
-  }
-
-  if (!installedPackage) {
-    console.error('\nFailed to install AIOX Pro.');
-    console.error(`Tried: ${PRO_PACKAGE}`);
-    process.exit(1);
-  }
-
-  console.log(`\n✅ ${installedPackage} installed successfully!\n`);
-  console.log('Next steps:');
-  console.log('  npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX');
-  console.log('  npx aiox-pro status');
-  console.log('');
+  runProWizard(getArgValue('--key', '-k'));
 }
 
 // ─── Main ───────────────────────────────────────────────────────────────────
@@ -211,19 +168,14 @@ if (command === '--version' || command === '-v') {
 
 switch (command) {
   case 'install': {
-    // Check for --wizard flag to run wizard after install
-    const runWizardAfter = args.includes('--wizard');
     installPro();
-    if (runWizardAfter) {
-      runProWizard();
-    }
     break;
   }
 
   case 'setup':
   case 'wizard': {
     // Run the Pro Installation Wizard with license gate
-    const wizardKey = getArgValue('--key');
+    const wizardKey = getArgValue('--key', '-k');
     runProWizard(wizardKey);
     break;
   }
@@ -242,11 +194,6 @@ switch (command) {
   case 'features':
   case 'validate':
   case 'update':
-    if (!isProInstalled()) {
-      console.error('AIOX Pro is not installed.');
-      console.error('Run first: npx aiox-pro install\n');
-      process.exit(1);
-    }
     delegateToAiox(command);
     break;
 

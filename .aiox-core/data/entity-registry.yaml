@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-08T21:17:46.181Z'
+  lastUpdated: '2026-05-08T21:44:50.560Z'
   entityCount: 755
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -5600,8 +5600,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:58023a5108ee66b16f93c82ee8a7c0414852f7c887257a8ff9040f060b140746
-      lastVerified: '2026-03-11T00:48:55.851Z'
+      checksum: sha256:14efe89e4be87326f621b1ff2a03c928806566ec134e74b191ff24156d5a0140
+      lastVerified: '2026-05-08T21:25:19.323Z'
     architecture-tmpl:
       path: .aiox-core/product/templates/architecture-tmpl.yaml
       layer: L2
@@ -8855,9 +8855,7 @@ entities:
         - subagent
         - dispatcher
       usedBy: []
-      dependencies:
-        - ai-providers
-        - memory-query
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - ai-providers
@@ -8867,8 +8865,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:a69a03b714a39c8daf59ce2bcfb03cc6168f25e1fab07a754bd0ac7c3a91109b
-      lastVerified: '2026-05-07T14:31:05.478Z'
+      checksum: sha256:fa8ce6aa5fdd85f7a06c3c560a85d904222658076158c35031ddae19bb63efe1
+      lastVerified: '2026-05-08T21:25:19.321Z'
     wave-executor:
       path: .aiox-core/core/execution/wave-executor.js
       layer: L1
@@ -12803,7 +12801,7 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:30ea78b8ab088e695936ae662057697410856751f463eeb649e00b67dcc31531
-      lastVerified: '2026-05-08T21:17:46.174Z'
+      lastVerified: '2026-05-08T21:44:50.553Z'
       externalDeps: []
       plannedDeps: []
       lifecycle: orphan

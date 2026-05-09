@@ -15,7 +15,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 const { hashFileAsync, hashFilesMatchAsync } = require('../installer/file-hasher');
-const { ensureProjectNodeModulesLink } = require('@aiox-squads/installer/aiox-core-installer');
+const { ensureProjectNodeModulesLink } = require('../installer/aiox-core-installer');
 
 /**
  * Directories excluded from scaffolding (private/internal squads).

@@ -2,14 +2,13 @@
 'use strict';
 
 /**
- * Publish Safety Gate — Submodule + File Count + Dependency Validation
- * Story INS-4.10, INS-4.12
+ * Publish Safety Gate — Public Tarball + Dependency Validation
+ * Story INS-4.10, INS-4.12, PRO-13.5
  *
  * Prevents publishing incomplete packages by validating:
- * 1. pro/ submodule is populated (not empty or uninitialized)
- * 2. Critical file pro/license/license-api.js exists
- * 3. Package file count meets minimum threshold (>= 50)
- * 4. (INS-4.12) .aiox-core/package.json dependency completeness
+ * 1. Public package file count meets minimum threshold (>= 50)
+ * 2. Public package excludes premium pro/ content
+ * 3. (INS-4.12) .aiox-core/package.json dependency completeness
  *
  * Exit codes: 0 = PASS, 1 = FAIL
  * Usage: node bin/utils/validate-publish.js
@@ -20,9 +19,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const PROJECT_ROOT = path.join(__dirname, '..', '..');
-const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
-const CRITICAL_FILE = path.join(PRO_DIR, 'license', 'license-api.js');
 const MIN_FILE_COUNT = 50;
+const PRO_PATH_PATTERN = /^pro(?:\/|$)/;
 const DEFAULT_PACK_TIMEOUT_MS = 300000;
 const parsedPackTimeoutMs = Number.parseInt(
   process.env.AIOX_VALIDATE_PUBLISH_PACK_TIMEOUT_MS || '',
@@ -34,18 +32,17 @@ const PACK_TIMEOUT_MS =
     : DEFAULT_PACK_TIMEOUT_MS;
 const PACK_MAX_BUFFER = 1024 * 1024 * 20;
 
-// CI environments may not have access to the private pro submodule
-const IS_CI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
-
 let passed = true;
 let fileCount = 0;
 
-function countPackedFiles(packOutput) {
+function parsePackedFiles(packOutput) {
   try {
     const parsed = JSON.parse(packOutput);
     const firstPackage = Array.isArray(parsed) ? parsed[0] : parsed;
     if (firstPackage && Array.isArray(firstPackage.files)) {
-      return firstPackage.files.length;
+      return firstPackage.files
+        .map((file) => file && file.path)
+        .filter((filePath) => typeof filePath === 'string');
     }
   } catch (_err) {
     // Older npm versions may emit notice lines instead of valid JSON; parse that legacy output.
@@ -65,54 +62,17 @@ function countPackedFiles(packOutput) {
         !line.includes('shasum:') &&
         !line.includes('integrity:') &&
         !line.includes('total files:'),
-    ).length;
+    )
+    .map((line) => {
+      const sizedPath = line.match(/npm notice\s+[\d.]+[kMG]?B?\s+(.+)/);
+      return sizedPath ? sizedPath[1].trim() : line.replace(/^.*npm notice\s+/, '').trim();
+    })
+    .filter(Boolean);
 }
 
-// Check 1: pro/ submodule populated
-console.log('--- Publish Safety Gate (INS-4.10) ---\n');
+// Check 1/2: public tarball shape
+console.log('--- Publish Safety Gate (PRO-13.5) ---\n');
 
-if (!fs.existsSync(PRO_DIR)) {
-  if (IS_CI) {
-    console.log(
-      'SKIP: pro/ directory not available (CI — private submodule requires separate access token)',
-    );
-  } else {
-    console.error('FAIL: pro/ directory does not exist.');
-    console.error('  Fix: git submodule update --init pro');
-    passed = false;
-  }
-} else {
-  const entries = fs.readdirSync(PRO_DIR).filter((e) => e !== '.git');
-  if (entries.length === 0) {
-    if (IS_CI) {
-      console.log(
-        'SKIP: pro/ submodule empty (CI — private submodule requires separate access token)',
-      );
-    } else {
-      console.error('FAIL: pro/ submodule not initialized (directory is empty).');
-      console.error('  Fix: git submodule update --init pro');
-      passed = false;
-    }
-  } else {
-    console.log(`PASS: pro/ submodule populated (${entries.length} entries)`);
-  }
-}
-
-// Check 2: Critical file exists
-if (!fs.existsSync(CRITICAL_FILE)) {
-  if (IS_CI) {
-    console.log('SKIP: pro/license/license-api.js not available (CI — private submodule)');
-  } else {
-    console.error('FAIL: pro/license/license-api.js not found.');
-    console.error('  This is a critical file required for Pro license validation.');
-    console.error('  Fix: git submodule update --init --recursive pro');
-    passed = false;
-  }
-} else {
-  console.log('PASS: pro/license/license-api.js exists');
-}
-
-// Check 3: File count threshold via npm pack --dry-run
 try {
   const packOutput = execSync('npm pack --dry-run --json', {
     encoding: 'utf8',
@@ -120,7 +80,8 @@ try {
     timeout: PACK_TIMEOUT_MS,
     maxBuffer: PACK_MAX_BUFFER,
   });
-  fileCount = countPackedFiles(packOutput);
+  const packedFiles = parsePackedFiles(packOutput);
+  fileCount = packedFiles.length;
 
   if (fileCount < MIN_FILE_COUNT) {
     console.error(`FAIL: Package has only ${fileCount} files, expected >= ${MIN_FILE_COUNT}.`);
@@ -128,6 +89,21 @@ try {
     passed = false;
   } else {
     console.log(`PASS: Package contains ${fileCount} files (minimum: ${MIN_FILE_COUNT})`);
+  }
+
+  const proFiles = packedFiles.filter((filePath) => PRO_PATH_PATTERN.test(filePath));
+  if (proFiles.length > 0) {
+    console.error(`FAIL: Public package includes ${proFiles.length} pro/ file(s).`);
+    console.error('  Pro content must be distributed through the authenticated artifact channel.');
+    for (const filePath of proFiles.slice(0, 20)) {
+      console.error(`  - ${filePath}`);
+    }
+    if (proFiles.length > 20) {
+      console.error(`  ... and ${proFiles.length - 20} more`);
+    }
+    passed = false;
+  } else {
+    console.log('PASS: Public package excludes pro/ content');
   }
 } catch (err) {
   console.error(`FAIL: npm pack --dry-run failed: ${err.message}`);

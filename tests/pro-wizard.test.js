@@ -199,7 +199,27 @@ describe('stepLicenseGate', () => {
       return Promise.resolve({ licenseKey: 'PRO-AAAA-BBBB-CCCC-DDDD' });
     });
 
-    const result = await proSetup.stepLicenseGate();
+    const originalLoadLicenseApi = proSetup._testing.loadLicenseApi;
+    proSetup._testing.loadLicenseApi = () => ({
+      LicenseApiClient: class {
+        async isOnline() {
+          return true;
+        }
+
+        async activate() {
+          const error = new Error('Invalid');
+          error.code = 'INVALID_KEY';
+          throw error;
+        }
+      },
+    });
+
+    let result;
+    try {
+      result = await proSetup.stepLicenseGate();
+    } finally {
+      proSetup._testing.loadLicenseApi = originalLoadLicenseApi;
+    }
 
     // 1 for method choice + 3 for max retries = 4 total calls
     expect(callCount).toBe(4);
@@ -244,6 +264,65 @@ describe('stepInstallScaffold', () => {
       expect(result.scaffoldResult.copiedFiles).toContain('squads/premium-squad/agents/agent.md');
       expect(result.scaffoldResult.copiedFiles).toContain('pro-version.json');
     } finally {
+      fs.rmSync(tmpRoot, { recursive: true, force: true });
+    }
+  });
+
+  test('acquires Pro artifact source after license validation when no local source exists', async () => {
+    const os = require('os');
+    const fs = require('fs');
+    const path = require('path');
+
+    const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-artifact-test-'));
+    const targetDir = path.join(tmpRoot, 'target');
+    const proSourceDir = path.join(tmpRoot, 'artifact-source');
+    const originalResolver = proSetup._testing.resolveProSourceDir;
+    const originalAcquirer = proSetup._testing.acquireProArtifactSourceDir;
+
+    fs.mkdirSync(path.join(proSourceDir, 'squads', 'artifact-squad', 'agents'), {
+      recursive: true,
+    });
+    fs.mkdirSync(path.join(proSourceDir, 'license'), { recursive: true });
+    fs.writeFileSync(
+      path.join(proSourceDir, 'squads', 'artifact-squad', 'agents', 'agent.md'),
+      '# Artifact Agent\n',
+    );
+    fs.writeFileSync(
+      path.join(proSourceDir, 'license', 'license-cache.js'),
+      'module.exports = { writeLicenseCache: () => ({ success: true }) };\n',
+    );
+    fs.writeFileSync(path.join(proSourceDir, 'pro-config.yaml'), 'pro:\n  enabled: true\n');
+    fs.writeFileSync(
+      path.join(proSourceDir, 'package.json'),
+      JSON.stringify({ name: '@aiox-squads/pro', version: '0.4.0' }, null, 2),
+    );
+
+    proSetup._testing.resolveProSourceDir = jest.fn(() => ({ proSourceDir: null }));
+    proSetup._testing.acquireProArtifactSourceDir = jest.fn(async () => ({
+      success: true,
+      proSourceDir,
+      tempRoot: null,
+    }));
+
+    try {
+      const licenseResult = {
+        sessionToken: 'session-token',
+        machineId: 'm'.repeat(64),
+        key: 'PRO-ABCD-EFGH-IJKL-MNOP',
+        activationResult: { key: 'PRO-ABCD-EFGH-IJKL-MNOP', features: ['pro'] },
+      };
+      const result = await proSetup.stepInstallScaffold(targetDir, { licenseResult });
+
+      expect(proSetup._testing.acquireProArtifactSourceDir).toHaveBeenCalledWith(
+        targetDir,
+        licenseResult,
+        expect.objectContaining({ licenseResult }),
+      );
+      expect(result.success).toBe(true);
+      expect(result.scaffoldResult.copiedFiles).toContain('squads/artifact-squad/agents/agent.md');
+    } finally {
+      proSetup._testing.resolveProSourceDir = originalResolver;
+      proSetup._testing.acquireProArtifactSourceDir = originalAcquirer;
       fs.rmSync(tmpRoot, { recursive: true, force: true });
     }
   });

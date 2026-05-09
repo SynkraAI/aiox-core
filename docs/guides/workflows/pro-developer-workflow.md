@@ -21,6 +21,18 @@ aiox-core/
 └── package.json
 ```
 
+Published `@aiox-squads/core` packages do not include `pro/` content. Customer Pro setup runs the license gate first, then requests a short-lived signed artifact URL from `aios-license-server`, verifies the artifact hash, extracts it in a temporary directory, and scaffolds from that verified source.
+
+Customer Pro updates use the same authenticated artifact channel:
+
+```bash
+aiox pro update --check
+aiox pro update --dry-run
+aiox pro update
+```
+
+`aiox pro update` validates the Pro login/license before downloading premium content, installs the verified artifact into `node_modules/@aiox-squads/pro` with `--no-save`, and re-scaffolds idempotently. It must not require customer npm org access.
+
 ---
 
 ## Workflow 1: Core-Only Developer (Open-Source Contributor)
@@ -65,6 +77,7 @@ git push origin feature/my-feature
 ### Important Notes
 
 - The `pro/` directory will NOT exist — this is expected
+- Public npm tarballs for `@aiox-squads/core` must contain zero `pro/` files
 - All core tests pass without `pro/` present
 - `bin/utils/pro-detector.js` returns `isProAvailable() === false`
 - No features are degraded for core-only developers
@@ -103,12 +116,20 @@ git submodule update --init pro
 ls pro/package.json
 ```
 
-### Future: CLI Setup Command
+### Customer Pro Setup
 
 ```bash
-# (Coming in a future story)
-aiox setup --pro
+npx aiox-pro setup
 ```
+
+The setup flow uses email/password authentication. Normal customers do not need npm org access or `NPM_TOKEN`.
+
+Troubleshooting:
+
+- `Pro content source not found`: rerun `npx aiox-pro setup` and choose the email login/create-account flow.
+- `Pro artifact download failed`: retry after a few minutes; the signed URL is short-lived.
+- `Pro artifact sha256 mismatch`: stop and contact support. Do not scaffold from the downloaded artifact.
+- `No active Pro subscription`: confirm the email used for login matches the Pro purchase.
 
 ### Working on Pro Modules
 
@@ -197,7 +218,7 @@ if (isProAvailable()) {
 | Repository | Checkout | Tests | Publish |
 |------------|----------|-------|---------|
 | **aiox-core** | Without submodules | Core-only (pro/ absent) | npm (excludes pro/) |
-| **aiox-pro** | With aiox-core cloned | Integration (pro/ symlinked) | GitHub Packages |
+| **aiox-pro** | With aiox-core cloned | Integration (pro/ symlinked) | npm artifact for maintainers, customer access through license-server-signed URL |
 
 ---
 
