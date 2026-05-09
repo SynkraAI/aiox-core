@@ -3,7 +3,7 @@
  * @story Kimi IDE Integration
  *
  * Format: SKILL.md with YAML frontmatter + markdown instructions
- * Target: .kimi/skills/aios-{agent-id}/SKILL.md
+ * Target: .kimi/skills/aiox-{agent-id}/SKILL.md
  */
 
 /**
@@ -23,7 +23,7 @@ function transform(agentData) {
   const skillId = getSkillId(agentData);
   const activationId = getPreferredActivationId(agentData);
   const name = rawAgent.name || fallbackAgent.name || id;
-  const title = rawAgent.title || fallbackAgent.title || 'AIOS Agent';
+  const title = rawAgent.title || fallbackAgent.title || 'AIOX Agent';
   const icon = rawAgent.icon || fallbackAgent.icon || '🤖';
   const whenToUse = rawAgent.whenToUse || fallbackAgent.whenToUse || `Use for ${title.toLowerCase()} tasks`;
   const archetype = persona.archetype || rawAgent.archetype || 'Specialist';
@@ -311,7 +311,7 @@ function buildDescription(id, name, title, whenToUse) {
     `@${id}`,
   ];
 
-  return `Activate the AIOS ${title} agent (${name}). ${desc} Trigger when user asks to ${id}, or says '${triggerPhrases.join("', '")}'.`;
+  return `Activate the AIOX ${title} agent (${name}). ${desc} Trigger when user asks to ${id}, or says '${triggerPhrases.join("', '")}'.`;
 }
 
 function buildRawContentSection(rawContent, id) {
@@ -394,8 +394,9 @@ function getPreferredActivationId(agentData) {
 
 function getSkillId(agentData) {
   const id = getPreferredActivationId(agentData);
-  if (id.startsWith('aios-')) return id;
-  return `aios-${id}`;
+  if (id.startsWith('aiox-')) return id;
+  if (id.startsWith('aios-')) return id.replace(/^aios-/, 'aiox-');
+  return `aiox-${id}`;
 }
 
 function getDirname(agentData) {

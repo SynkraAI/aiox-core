@@ -1,6 +1,6 @@
 ---
-name: "aios-po"
-description: "Activate the AIOS Product Owner agent (Pax). Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions Trigger when user asks to po, or says 'activate po', 'switch to po', '@po'."
+name: "aiox-po"
+description: "Activate the AIOX Product Owner agent (Pax). Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions Trigger when user asks to po, or says 'activate po', 'switch to po', '@po'."
 ---
 
 # 🎯 @po — Pax (Balancer) | Product Owner

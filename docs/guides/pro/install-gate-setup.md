@@ -6,20 +6,20 @@ Guia completo para instalar, ativar e gerenciar o AIOX Pro.
 
 ---
 
-## Visao Geral
+## Visão Geral
 
-O AIOX Pro e distribuido via npm publico. O pacote e livre para instalar, mas as features premium requerem uma **licenca ativa** para funcionar.
+O AIOX Pro é distribuído por um canal autenticado. O instalador valida a **licença ativa**, solicita uma URL assinada de curta duração ao license-server histórico (`aios-license-server`) e instala o artefato premium verificado no projeto.
 
 ```
-Comprar Licenca → Instalar → Ativar → Usar Features Pro
+Comprar Licença -> Validar -> Baixar artefato assinado -> Usar Features Pro
 ```
 
 ### Pacotes npm
 
-| Pacote | Tipo | Proposito |
+| Pacote | Tipo | Propósito |
 |--------|------|-----------|
-| `aiox-pro` | CLI (1.8 KB) | Comandos de instalacao e gerenciamento |
-| `@aiox-fullstack/pro` | Core (10 MB) | Nome canônico do pacote premium (com fallback legado durante a transição) |
+| `aiox-pro` | CLI (1.8 KB) | Comandos de instalação e gerenciamento |
+| `@aiox-squads/pro` | Artefato premium | Pacote Pro canônico, entregue ao cliente pelo artifact broker autenticado |
 
 ---
 
@@ -40,10 +40,10 @@ npx aiox-pro status
 
 ## Passo a Passo
 
-### Prerequisitos
+### Pré-requisitos
 
 - Node.js >= 18
-- `aiox-core` >= 4.0.0 instalado no projeto
+- `@aiox-squads/core` >= 5.1.0 instalado no projeto
 
 ### Passo 1: Instalar AIOX Pro
 
@@ -51,15 +51,9 @@ npx aiox-pro status
 npx aiox-pro install
 ```
 
-Isso instala o pacote Pro compatível no seu projeto, priorizando o nome canônico e caindo para o legado quando necessário.
+Isso valida sua licença e instala o artefato canônico `@aiox-squads/pro` no projeto. O cliente não precisa de acesso direto ao pacote privado/restrito no npm.
 
-**Alternativa** (instalação manual):
-
-```bash
-npm install @aiox-fullstack/pro@latest
-```
-
-Depois da instalação manual, rode o bootstrap do conteúdo Pro no projeto:
+**Se você já tem o artefato Pro instalado por outro fluxo autorizado**, rode novamente o bootstrap para revalidar e re-scaffoldar o conteúdo Pro:
 
 ```bash
 npx aiox-pro install

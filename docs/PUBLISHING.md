@@ -20,6 +20,15 @@ Verified on 2026-05-06:
 | `gh secret list --repo SynkraAI/aiox-core`        | `NPM_TOKEN_AIOX_SQUADS` present                                                 |
 | `gh secret list --repo SynkraAI/aiox-pro`         | `NPM_TOKEN_AIOX_SQUADS` present                                                 |
 
+Current release state, verified on 2026-05-09:
+
+```text
+@aiox-squads/core@5.1.17 -> public latest
+@aiox-squads/pro@0.4.2  -> private/restricted release artifact
+```
+
+Customer Pro acquisition does not require direct npm org access. The supported customer path is the authenticated signed-artifact channel served by the historical `aios-license-server` repo.
+
 Maintainer invite status:
 
 ```text
@@ -191,7 +200,7 @@ Expected result:
 
 ```text
 @aiox-squads/core public tarball includes 0 files under pro/
-@aiox-squads/pro remains public until authenticated install/update smoke passes
+@aiox-squads/pro remains private/restricted and is delivered to customers through signed artifact URLs
 ```
 
 DevOps artifact channel checks:
@@ -202,7 +211,7 @@ npm view @aiox-squads/pro version dist-tags --json
 npm access get status @aiox-squads/pro --json
 ```
 
-`@aiox-squads/pro` may be changed to private only after all of these pass:
+`@aiox-squads/pro` is allowed to remain private only while all of these checks pass:
 
 1. Production `aios-license-server` has `PRO_ARTIFACT_BUCKET`, `PRO_ARTIFACT_MANIFEST_JSON`, and `PRO_ARTIFACT_SIGNED_URL_TTL_SECONDS`.
 2. A verified Pro user can request `POST /api/v1/pro/artifact-url`, download the `.tgz`, and match manifest `sha256` and `sizeBytes`.
@@ -210,7 +219,7 @@ npm access get status @aiox-squads/pro --json
 4. A core-only install without npm token does not receive `pro/` content.
 5. Existing Pro update/install does not duplicate slash commands, agent activators, or generated skills.
 
-Privacy transition command, after smoke:
+Privacy transition command, only if the package is ever found public again after smoke:
 
 ```bash
 npm access set status=private @aiox-squads/pro

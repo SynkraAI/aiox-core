@@ -1,6 +1,6 @@
 ---
-name: "aios-pm"
-description: "Activate the AIOS Product Manager agent (Morgan). Use for PRD creation (greenfield and brownfield), epic creation and management, product strategy and vision, feature prioritization (MoSCoW, RICE), roadmap planning, business case development, go/no-go decisions, scope definition, success metrics, and stakeholder communication. Epic/Story Delegat... Trigger when user asks to pm, or says 'activate pm', 'switch to pm', '@pm'."
+name: "aiox-pm"
+description: "Activate the AIOX Product Manager agent (Morgan). Use for PRD creation (greenfield and brownfield), epic creation and management, product strategy and vision, feature prioritization (MoSCoW, RICE), roadmap planning, business case development, go/no-go decisions, scope definition, success metrics, and stakeholder communication. Epic/Story Delegat... Trigger when user asks to pm, or says 'activate pm', 'switch to pm', '@pm'."
 ---
 
 # 📋 @pm — Morgan (Strategist) | Product Manager

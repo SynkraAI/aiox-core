@@ -1,6 +1,6 @@
 ---
-name: "aios-devops"
-description: "Activate the AIOS GitHub Repository Manager & DevOps Specialist agent (Gage). Use for repository operations, version management, CI/CD, quality gates, and GitHub push operations. ONLY agent authorized to push to remote repository. Trigger when user asks to devops, or says 'activate devops', 'switch to devops', '@devops'."
+name: "aiox-devops"
+description: "Activate the AIOX GitHub Repository Manager & DevOps Specialist agent (Gage). Use for repository operations, version management, CI/CD, quality gates, and GitHub push operations. ONLY agent authorized to push to remote repository. Trigger when user asks to devops, or says 'activate devops', 'switch to devops', '@devops'."
 ---
 
 # ⚡ @devops — Gage (Operator) | GitHub Repository Manager & DevOps Specialist

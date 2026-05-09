@@ -1,6 +1,6 @@
 ---
-name: "aios-ux-design-expert"
-description: "Activate the AIOS UX/UI Designer & Design System Architect agent (Uma). Complete design workflow - user research, wireframes, design systems, token extraction, component building, and quality assurance Trigger when user asks to ux-design-expert, or says 'activate ux-design-expert', 'switch to ux-design-expert', '@ux-design-expert'."
+name: "aiox-ux-design-expert"
+description: "Activate the AIOX UX/UI Designer & Design System Architect agent (Uma). Complete design workflow - user research, wireframes, design systems, token extraction, component building, and quality assurance Trigger when user asks to ux-design-expert, or says 'activate ux-design-expert', 'switch to ux-design-expert', '@ux-design-expert'."
 ---
 
 # 🎨 @ux-design-expert — Uma (Empathizer) | UX/UI Designer & Design System Architect

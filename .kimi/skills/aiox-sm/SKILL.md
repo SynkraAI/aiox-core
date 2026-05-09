@@ -1,6 +1,6 @@
 ---
-name: "aios-sm"
-description: "Activate the AIOS Scrum Master agent (River). Use for user story creation from PRD, story validation and completeness checking, acceptance criteria definition, story refinement, sprint planning, backlog grooming, retrospectives, daily standup facilitation, and local branch management (create/switch/list/delete local branches, local merges). ... Trigger when user asks to sm, or says 'activate sm', 'switch to sm', '@sm'."
+name: "aiox-sm"
+description: "Activate the AIOX Scrum Master agent (River). Use for user story creation from PRD, story validation and completeness checking, acceptance criteria definition, story refinement, sprint planning, backlog grooming, retrospectives, daily standup facilitation, and local branch management (create/switch/list/delete local branches, local merges). ... Trigger when user asks to sm, or says 'activate sm', 'switch to sm', '@sm'."
 ---
 
 # 🌊 @sm — River (Facilitator) | Scrum Master

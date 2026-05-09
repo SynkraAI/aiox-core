@@ -1,6 +1,6 @@
 ---
-name: "aios-squad-creator"
-description: "Activate the AIOS Squad Creator agent (Craft). Use to create, validate, publish and manage squads Trigger when user asks to squad-creator, or says 'activate squad-creator', 'switch to squad-creator', '@squad-creator'."
+name: "aiox-squad-creator"
+description: "Activate the AIOX Squad Creator agent (Craft). Use to create, validate, publish and manage squads Trigger when user asks to squad-creator, or says 'activate squad-creator', 'switch to squad-creator', '@squad-creator'."
 ---
 
 # 🏗️ @squad-creator — Craft (Builder) | Squad Creator

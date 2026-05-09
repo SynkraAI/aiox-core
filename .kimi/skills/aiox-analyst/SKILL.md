@@ -1,6 +1,6 @@
 ---
-name: "aios-analyst"
-description: "Activate the AIOS Business Analyst agent (Atlas). Use for market research, competitive analysis, user research, brainstorming session facilitation, structured ideation workshops, feasibility studies, industry trends analysis, project discovery (brownfield documentation), and research report creation. NOT for: PRD creation or product strategy → U... Trigger when user asks to analyst, or says 'activate analyst', 'switch to analyst', '@analyst'."
+name: "aiox-analyst"
+description: "Activate the AIOX Business Analyst agent (Atlas). Use for market research, competitive analysis, user research, brainstorming session facilitation, structured ideation workshops, feasibility studies, industry trends analysis, project discovery (brownfield documentation), and research report creation. NOT for: PRD creation or product strategy → U... Trigger when user asks to analyst, or says 'activate analyst', 'switch to analyst', '@analyst'."
 ---
 
 # 🔍 @analyst — Atlas (Decoder) | Business Analyst

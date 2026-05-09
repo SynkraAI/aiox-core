@@ -142,16 +142,16 @@ describe('validator', () => {
     });
 
     it('should detect orphaned files in nested Kimi skill directories', () => {
-      fs.ensureDirSync(path.join(targetDir, 'aios-dev'));
-      fs.ensureDirSync(path.join(targetDir, 'aios-qa'));
-      fs.writeFileSync(path.join(targetDir, 'aios-dev', 'SKILL.md'), 'content');
-      fs.writeFileSync(path.join(targetDir, 'aios-qa', 'SKILL.md'), 'orphan');
+      fs.ensureDirSync(path.join(targetDir, 'aiox-dev'));
+      fs.ensureDirSync(path.join(targetDir, 'aiox-qa'));
+      fs.writeFileSync(path.join(targetDir, 'aiox-dev', 'SKILL.md'), 'content');
+      fs.writeFileSync(path.join(targetDir, 'aiox-qa', 'SKILL.md'), 'orphan');
 
-      const expected = [{ filename: path.join('aios-dev', 'SKILL.md'), content: 'content' }];
+      const expected = [{ filename: path.join('aiox-dev', 'SKILL.md'), content: 'content' }];
       const result = validateIdeSync(expected, targetDir, {}, 'kimi-skill');
 
       expect(result.orphaned).toHaveLength(1);
-      expect(result.orphaned[0].filename).toBe(path.join('aios-qa', 'SKILL.md'));
+      expect(result.orphaned[0].filename).toBe(path.join('aiox-qa', 'SKILL.md'));
     });
 
     it('should not count redirect files as orphaned', () => {

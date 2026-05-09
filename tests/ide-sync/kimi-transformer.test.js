@@ -1,7 +1,7 @@
 /**
  * Tests for the Kimi transformer (kimi-skill format).
  * Covers:
- *  - skillId normalization (no double aios- prefix)
+ *  - skillId normalization (no double aiox- prefix)
  *  - preferredActivationAlias support
  *  - YAML object items in array fields render as **KEY:** value (not [object Object])
  *  - Activation Protocol directive is present
@@ -51,9 +51,10 @@ function buildAgentData(overrides = {}) {
 }
 
 describe('kimi transformer', () => {
-  test('normalizes skill id without double aios- prefix', () => {
-    expect(kimi.getSkillId({ id: 'dev', agent: {} })).toBe('aios-dev');
-    expect(kimi.getSkillId({ id: 'aios-master', agent: {} })).toBe('aios-master');
+  test('normalizes skill id without double aiox- prefix', () => {
+    expect(kimi.getSkillId({ id: 'dev', agent: {} })).toBe('aiox-dev');
+    expect(kimi.getSkillId({ id: 'aiox-master', agent: {} })).toBe('aiox-master');
+    expect(kimi.getSkillId({ id: 'aios-master', agent: {} })).toBe('aiox-master');
   });
 
   test('respects preferredActivationAlias', () => {
@@ -61,7 +62,7 @@ describe('kimi transformer', () => {
       id: 'davi-ribas-community-growth-strategist',
       agent: { preferredActivationAlias: 'davi-ribas' },
     });
-    expect(skillId).toBe('aios-davi-ribas');
+    expect(skillId).toBe('aiox-davi-ribas');
   });
 
   test('respects preferred_activation_alias', () => {
@@ -69,7 +70,7 @@ describe('kimi transformer', () => {
       id: 'davi-ribas-community-growth-strategist',
       agent: { preferred_activation_alias: 'davi-ribas' },
     });
-    expect(skillId).toBe('aios-davi-ribas');
+    expect(skillId).toBe('aiox-davi-ribas');
   });
 
   test('sanitizes skill ids used as directories', () => {
@@ -77,9 +78,9 @@ describe('kimi transformer', () => {
       id: 'dev',
       agent: { preferredActivationAlias: '../team\\Danger Agent' },
     });
-    expect(skillId).toBe('aios-team-danger-agent');
+    expect(skillId).toBe('aiox-team-danger-agent');
     expect(kimi.getDirname({ id: '..', agent: { preferredActivationAlias: '../../' } })).toBe(
-      'aios-agent',
+      'aiox-agent',
     );
   });
 
@@ -165,7 +166,7 @@ describe('kimi transformer', () => {
   test('produces nested layout: <skill-id>/SKILL.md', () => {
     const data = buildAgentData({ id: 'dev' });
     expect(kimi.getFilename(data)).toBe('SKILL.md');
-    expect(kimi.getDirname(data)).toBe('aios-dev');
+    expect(kimi.getDirname(data)).toBe('aiox-dev');
     expect(kimi.format).toBe('kimi-skill');
   });
 
