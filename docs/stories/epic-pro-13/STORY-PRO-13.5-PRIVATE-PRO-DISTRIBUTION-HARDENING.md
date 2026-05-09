@@ -4,7 +4,7 @@
 | --- | --- |
 | Story ID | PRO-13.5 |
 | Epic | PRO-13 — Stable Machine ID and Pro Distribution Hardening |
-| Status | Ready for DevOps Publish |
+| Status | Published |
 | Executor | @architect for acquisition decision, then @dev + @devops |
 | Quality Gate | @architect + @qa + @po |
 | DevOps Authority | @devops for publish/access changes |
@@ -13,7 +13,7 @@
 
 ## Status
 
-Ready for DevOps Publish
+Published
 
 ## Story
 
