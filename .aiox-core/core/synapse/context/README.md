@@ -33,3 +33,34 @@ The manager does not call OpenAI, Anthropic, Claude, Gemini, Kimi or OpenRouter
 directly. Inject a summarizer when an agent loop wants model-based compression.
 If that summarizer fails, the manager emits `swap:error` and falls back to a
 local extractive summary instead of crashing the loop.
+
+## SemanticHandshakeEngine
+
+`SemanticHandshakeEngine` turns planning constraints into executable checks that
+can run before implementation. It is deterministic by default and does not call
+an LLM.
+
+```javascript
+const { SemanticHandshakeEngine } = require('./.aiox-core/core/synapse/context');
+
+const handshake = new SemanticHandshakeEngine();
+handshake.registerConstraints('Use serverless functions with PostgreSQL.');
+
+const result = await handshake.validateExecutionIntent({
+  files: [
+    {
+      path: 'src/db.js',
+      content: "const { Pool } = require('pg');",
+    },
+  ],
+});
+
+if (!result.passed) {
+  throw new Error(handshake.generateComplianceReport(result));
+}
+```
+
+The first supported extraction rules cover PostgreSQL, serverless local-state
+writes, absolute imports and `eval` bans. Callers can also add structured custom
+constraints with `addConstraint()`. Use `toContextMessage()` to inject the
+handshake result into an agent context as a system message.

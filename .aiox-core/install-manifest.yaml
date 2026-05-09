@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.1.17
-generated_at: "2026-05-09T01:47:43.261Z"
+generated_at: "2026-05-09T07:21:15.059Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1123
+file_count: 1125
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -752,14 +752,18 @@ files:
     hash: sha256:a0fdd59eb0c3a8a59862397b1af5af84971ce051929ae9d32361b7ca99a444fb
     type: core
     size: 4399
+  - path: core/ids/gates/g5-semantic-handshake.js
+    hash: sha256:a008c60a4afc98f03dc41219989f7306884254d802b0958282a29462c9fd0f72
+    type: core
+    size: 3907
   - path: core/ids/incremental-decision-engine.js
     hash: sha256:257b1f67f6df8eb91fe0a95405563611b8bf2f836cbca2398a0a394e40d6c219
     type: core
     size: 21404
   - path: core/ids/index.js
-    hash: sha256:0f3ac48411d378d184f01152eaefe1b9d87af5ef39fa51371cb07605c2f6a645
+    hash: sha256:363ef37a0fcc18e9e2646650f74750a77c21a95e16de976f64f52825cc50a6a1
     type: core
-    size: 3624
+    size: 3785
   - path: core/ids/layer-classifier.js
     hash: sha256:2a240b70ac3507e50a64b96d580c4d933bf2116125fb52c8237db2ed9ebf27b7
     type: core
@@ -1101,13 +1105,17 @@ files:
     type: core
     size: 16313
   - path: core/synapse/context/index.js
-    hash: sha256:a67e843cf61e823e0c1b73efdb2d67d268a798fc0c25505a199c1da130d4fe36
+    hash: sha256:6475a5730451d8754cc6c7ab4c1ef4decca98e093c69045661eae17da5897e07
     type: core
-    size: 363
+    size: 596
   - path: core/synapse/context/README.md
-    hash: sha256:0376afd13b40d31338ecfdc327f872b2290e2f1736483b527fb1ae469f0c33dc
+    hash: sha256:3c9d4ac5a77f0a8a7d8e20c0bb30385036cc9a56f817be2d2d415a8c9813d08e
     type: core
-    size: 1380
+    size: 2354
+  - path: core/synapse/context/semantic-handshake-engine.js
+    hash: sha256:be5f2f7300902a2916f6758b46636b96f083c11e1b831f5835bf97859a4b80a6
+    type: core
+    size: 15725
   - path: core/synapse/diagnostics/collectors/consistency-collector.js
     hash: sha256:65f4255f87c9900400649dc8b9aedaac4851b5939d93e127778bd93cee99db12
     type: core
