@@ -43,7 +43,7 @@ npx aiox-pro status
 ### Pré-requisitos
 
 - Node.js >= 18
-- `@aiox-squads/core` >= 5.1.0 instalado no projeto
+- `@aiox-squads/core` >= 5.1.17 instalado no projeto
 
 ### Passo 1: Instalar AIOX Pro
 

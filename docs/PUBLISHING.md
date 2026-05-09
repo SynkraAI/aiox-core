@@ -170,7 +170,7 @@ aiox-core -> published, currently 5.0.7 in registry
 @aiox-squads/core -> 404
 ```
 
-Important: `@aiox-squads/core@5.1.0` is the continuity publish after the last legacy registry version, `aiox-core@5.0.7`. Confirm the local root `package.json` remains `@aiox-squads/core` at `5.1.0` before publishing.
+Historical note: `@aiox-squads/core@5.1.0` was the continuity publish after the last legacy registry version, `aiox-core@5.0.7`. The current operational release baseline is `@aiox-squads/core@5.1.17`; confirm the local root `package.json` remains `@aiox-squads/core` at `5.1.17` before publishing.
 
 ### Story 124.4 - `@aiox-squads/pro`
 
@@ -180,7 +180,7 @@ Required changes:
 
 ```text
 package name -> @aiox-squads/pro
-peer dependency -> @aiox-squads/core >=5.1.0
+peer dependency -> @aiox-squads/core >=5.1.17
 publish token -> NPM_TOKEN_AIOX_SQUADS in SynkraAI/aiox-pro
 ```
 
