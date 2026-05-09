@@ -180,6 +180,7 @@ export class AuthService {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
+      path: '/',
       maxAge: 3600 * 1000, // 1 hour in ms
     });
 
@@ -204,7 +205,12 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('access_token');
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+    });
     return { message: 'Logged out' };
   }
 }
@@ -264,11 +270,11 @@ export class AuthService {
     }
   }
 
-  logout(): void {
+  async logout(): Promise<void> {
     // Call backend to clear the HttpOnly cookie
-    this.http.post('/api/auth/logout', {}, { withCredentials: true }).subscribe();
+    await firstValueFrom(this.http.post('/api/auth/logout', {}, { withCredentials: true }));
     this._user.set(null);
-    this.router.navigate(['/login']);
+    await this.router.navigate(['/login']);
   }
 }
 ```
