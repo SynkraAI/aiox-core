@@ -10,13 +10,33 @@ logger = logging.getLogger(__name__)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
 _GOAL_CONTEXT = {
-    "hypertrophy": "significantly increased muscle mass, broader shoulders, more developed chest and arms, athletic muscular physique",
-    "fat_loss": "significantly reduced body fat, leaner and more defined physique, visible muscle definition throughout",
-    "conditioning": "improved athletic build, balanced muscle development, reduced body fat, athletic and toned",
-    "maintenance": "slightly more defined and athletic physique, improved overall muscle tone",
+    "hypertrophy": (
+        "extremely muscular and developed physique with 15-20kg more lean muscle mass than current — "
+        "massive chest, broad powerful shoulders, thick arms, well-developed back and legs, "
+        "low body fat (10-12%) with visible muscle separation and definition throughout, "
+        "the physique of a natural competitive bodybuilder at peak condition"
+    ),
+    "fat_loss": (
+        "very lean physique with minimal body fat (8-11% for male, 15-18% for female) — "
+        "flat stomach, visible abs, defined jawline, lean arms and legs, "
+        "no excess fat anywhere on the body but still healthy and athletic-looking, "
+        "not emaciated or too extreme, just beautifully lean and fit"
+    ),
+    "conditioning": (
+        "peak athletic conditioning — lean, muscular and symmetrical physique, "
+        "low body fat (10-13%), visible muscle definition everywhere, "
+        "athletic V-taper with broad shoulders and narrow waist, "
+        "the body of a high-performance athlete"
+    ),
+    "maintenance": (
+        "optimal fit physique — toned muscles, low-normal body fat (12-15%), "
+        "flat stomach, defined arms and legs, healthy and athletic appearance"
+    ),
 }
 
-_DEFAULT_GOAL = "improved athletic physique, better muscle definition and tone"
+_DEFAULT_GOAL = (
+    "peak fit physique — lean, muscular and athletic, low body fat, visible muscle definition"
+)
 
 
 def _build_prompt(scores: dict, profile: dict, period_days: int) -> str:
@@ -26,18 +46,17 @@ def _build_prompt(scores: dict, profile: dict, period_days: int) -> str:
     goal_desc = _GOAL_CONTEXT.get(goal, _DEFAULT_GOAL)
 
     return (
-        f"Generate a photorealistic fitness transformation image of the same {sex} person "
-        f"from the reference photo, showing their predicted physique after {period_days} days "
-        f"of consistent training and healthy nutrition.\n\n"
+        f"Generate a photorealistic image of the DREAM PHYSIQUE of the same {sex} person "
+        f"from the reference photo — show their ultimate ideal body, their fitness goal fully achieved.\n\n"
         f"CRITICAL RULES:\n"
         f"- Keep the EXACT SAME face, facial features, skin tone, hair, and identity\n"
-        f"- Same height and body proportions framework\n"
-        f"- Similar pose and camera angle as the reference photo\n"
-        f"- Natural photorealistic result, not illustrated or cartoonish\n\n"
-        f"Physical changes to show: {goal_desc}\n"
-        f"Current estimated body fat: {fat_pct:.1f}%\n"
-        f"Transformation should look natural and achievable, not extreme.\n\n"
-        f"Style: photorealistic, fitness photography, clean neutral background, good lighting"
+        f"- Same height and skeletal frame\n"
+        f"- Same pose and camera angle as the reference photo\n"
+        f"- Photorealistic result, not illustrated or cartoonish\n"
+        f"- Do NOT make it look like a different person — same face, just transformed body\n\n"
+        f"DREAM PHYSIQUE TO SHOW: {goal_desc}\n"
+        f"Current body fat to transform from: {fat_pct:.1f}%\n\n"
+        f"Style: photorealistic, fitness photography, clean neutral background, dramatic lighting that shows muscle definition"
     )
 
 
