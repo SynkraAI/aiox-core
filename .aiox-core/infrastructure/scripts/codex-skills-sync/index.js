@@ -42,12 +42,14 @@ function trimText(text, max = 220) {
 function getSkillId(agentId) {
   const id = String(agentId || '').trim();
   if (id.startsWith('aiox-')) return id;
+  if (id.startsWith('aios-')) return id.replace(/^aios-/, 'aiox-');
   return `aiox-${id}`;
 }
 
 function getLegacySkillId(agentId) {
   const id = String(agentId || '').trim();
   if (!id) return 'aios-unknown';
+  if (id.startsWith('aios-')) return id;
   if (id.startsWith('aiox-')) return id.replace(/^aiox-/, 'aios-');
   return `aios-${id}`;
 }

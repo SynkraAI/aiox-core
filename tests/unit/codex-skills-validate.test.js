@@ -168,6 +168,8 @@ describe('Codex Skills Validator', () => {
     expect(result.missing).toEqual([]);
     expect(result.orphaned).toEqual([]);
     expect(result.legacy).toEqual([]);
+    expect(result.legacyAliases).toEqual([]);
+    expect(result.duplicatePayloads).toEqual([]);
     expect(result.ignored).toEqual([]);
     expect(result.selfTests).toEqual([]);
   });
@@ -221,7 +223,16 @@ describe('Codex Skills Validator', () => {
 
     expect(result.ok).toBe(false);
     expect(result.legacy).toContain('aios-dev');
-    expect(result.errors.some(error => error.includes('Legacy skill alias directory'))).toBe(true);
+    expect(result.legacyAliases).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          dir: 'aios-dev',
+          classification: 'unclassified-legacy-alias',
+          fatal: true,
+        }),
+      ]),
+    );
+    expect(result.errors.some(error => error.includes('Unclassified legacy skill alias directory'))).toBe(true);
   });
 
   it('ignores generated squad chief skills that point to an existing squad source', () => {
