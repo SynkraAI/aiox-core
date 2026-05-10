@@ -9,10 +9,16 @@ const {
   buildSkillContent,
   getSkillId,
   getLegacySkillId,
-} = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/index');
+} = require(path.join(
+  process.cwd(),
+  '.aiox-core/infrastructure/scripts/codex-skills-sync/index',
+));
 const {
   validateCodexSkills,
-} = require('../../.aiox-core/infrastructure/scripts/codex-skills-sync/validate');
+} = require(path.join(
+  process.cwd(),
+  '.aiox-core/infrastructure/scripts/codex-skills-sync/validate',
+));
 
 describe('Codex Skills Sync', () => {
   let tmpRoot;
