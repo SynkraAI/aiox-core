@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.1.17
-generated_at: "2026-05-10T01:14:38.554Z"
+generated_at: "2026-05-10T16:27:34.757Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -237,9 +237,9 @@ files:
     type: core
     size: 15619
   - path: core/code-intel/registry-syncer.js
-    hash: sha256:701102a519457938d5b9187b75a1f97d85cb5466cef23bce5edfb48b34c69ab8
+    hash: sha256:0fc20a7f90fc1ac2078878267db64517fd2ae75d8d2a81101d0cac77d1bf6458
     type: core
-    size: 10891
+    size: 11003
   - path: core/config/config-cache.js
     hash: sha256:9f3c3f90f574d5f49dd94592ab28109465d025b3a740d8639ab781c2560c12ab
     type: core
@@ -1297,9 +1297,9 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:4b701001f233800095b8830d8406209d1074bb2847fd5c279261b52452a2d71d
+    hash: sha256:84acf809f112cb726710a9878904db6b9d5c0eb487a2e578de25ede0c2177c5e
     type: data
-    size: 529270
+    size: 529247
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -3697,9 +3697,9 @@ files:
     type: monitor
     size: 818
   - path: package.json
-    hash: sha256:9fdf0dcee2dcec6c0643634ee384ba181ad077dcff1267d8807434d4cb4809c7
+    hash: sha256:049326a853153ea930a49c1d083d5fa9a5eb5d05c3198f0322dbd831fe151b2e
     type: other
-    size: 2495
+    size: 2529
   - path: product/checklists/accessibility-wcag-checklist.md
     hash: sha256:56126182b25e9b7bdde43f75315e33167eb49b1f9a9cb0e9a37bc068af40aeab
     type: checklist

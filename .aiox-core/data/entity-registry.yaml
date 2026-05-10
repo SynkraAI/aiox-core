@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-09T07:56:57.030Z'
+  lastUpdated: '2026-05-10T16:26:31.587Z'
   entityCount: 757
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -8319,17 +8319,17 @@ entities:
       usedBy:
         - sync-registry-intel
       dependencies:
-        - code-intel
         - registry-loader
       externalDeps: []
-      plannedDeps: []
+      plannedDeps:
+        - code-intel-index
       lifecycle: production
       adaptability:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:701102a519457938d5b9187b75a1f97d85cb5466cef23bce5edfb48b34c69ab8
-      lastVerified: '2026-03-11T00:48:55.875Z'
+      checksum: sha256:0fc20a7f90fc1ac2078878267db64517fd2ae75d8d2a81101d0cac77d1bf6458
+      lastVerified: '2026-05-10T16:26:31.572Z'
     config-cache:
       path: .aiox-core/core/config/config-cache.js
       layer: L1
@@ -10673,7 +10673,6 @@ entities:
         - github-devops-pre-push-quality-gate
         - plan-create-context
         - plan-create-implementation
-        - registry-syncer
         - code-intel-source
         - metrics-source
       dependencies: []

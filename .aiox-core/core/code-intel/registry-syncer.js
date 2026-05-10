@@ -74,6 +74,9 @@ class RegistrySyncer {
   async sync(options = {}) {
     const isFull = options.full === true;
 
+    // Bootstrap the lazy singleton before checking module-level provider availability.
+    this._getClient();
+
     // AC5: Fallback — check provider availability first
     if (!this._isProviderAvailable()) {
       this._logger('[registry-syncer] No code intelligence provider available, skipping enrichment');

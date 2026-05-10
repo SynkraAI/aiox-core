@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const codeIntel = require('../../.aiox-core/core/code-intel');
 const { RegistrySyncer, inferRole, ROLE_MAP } = require('../../.aiox-core/core/code-intel/registry-syncer');
 
 // Mock fs module for controlled testing
@@ -87,6 +88,8 @@ function createSyncer(options = {}) {
 describe('RegistrySyncer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    codeIntel.getClient.mockReset();
+    codeIntel.isCodeIntelAvailable.mockReset().mockReturnValue(false);
     // Default fs mocks
     fs.existsSync.mockReturnValue(true);
     fs.writeFileSync.mockImplementation(() => {});
@@ -304,6 +307,30 @@ describe('RegistrySyncer', () => {
 
   // T5: Fallback sem provider (AC5)
   describe('Fallback without provider (T5 — AC5)', () => {
+    it('should bootstrap default client before checking module-level provider availability', async () => {
+      const logger = jest.fn();
+      const mockClient = createMockClient();
+
+      codeIntel.getClient.mockReturnValue(mockClient);
+      codeIntel.isCodeIntelAvailable.mockImplementation(
+        () => codeIntel.getClient.mock.calls.length > 0,
+      );
+
+      const syncer = new RegistrySyncer({
+        registryPath: '/mock/entity-registry.yaml',
+        repoRoot: '/mock/repo',
+        client: null,
+        logger,
+      });
+
+      const stats = await syncer.sync({ full: true });
+
+      expect(codeIntel.getClient).toHaveBeenCalled();
+      expect(stats.aborted).toBeUndefined();
+      expect(stats.processed).toBe(3);
+      expect(fs.writeFileSync).toHaveBeenCalled();
+    });
+
     it('should skip enrichment and log message when no provider available', async () => {
       const logger = jest.fn();
       const syncer = new RegistrySyncer({
