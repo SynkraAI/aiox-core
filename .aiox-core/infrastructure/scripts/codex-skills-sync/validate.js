@@ -277,7 +277,11 @@ function hasFullActivationPayload(content) {
   );
 }
 
-function isIntentionalLegacyAlias(content, canonicalSkillId) {
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function hasLegacyAliasIntent(content, canonicalSkillId) {
   const value = String(content || '');
   const normalized = value.toLowerCase();
   return (
@@ -288,6 +292,41 @@ function isIntentionalLegacyAlias(content, canonicalSkillId) {
       value.includes(canonicalSkillId)
     )
   );
+}
+
+function getThinLegacyRedirectIssues(content, canonicalSkillId, legacySkillId) {
+  const lines = String(content || '')
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean);
+  const canonical = escapeRegExp(canonicalSkillId);
+  const legacy = escapeRegExp(legacySkillId);
+  const allowedLinePatterns = [
+    /^<!--\s*AIOX-CODEX-LEGACY-ALIAS:\s*redirect\s*-->$/,
+    new RegExp(`^#\\s+${legacy}$`),
+    new RegExp(`^This legacy alias redirects to canonical skill \`${canonical}\`\\.$`),
+    new RegExp(`^Use \`\\$?${canonical}\` instead\\.$`),
+  ];
+  const issues = [];
+
+  if (!lines.some(line => /^<!--\s*AIOX-CODEX-LEGACY-ALIAS:\s*redirect\s*-->$/.test(line))) {
+    issues.push('missing exact legacy redirect marker');
+  }
+
+  if (!lines.some(line => new RegExp(`^This legacy alias redirects to canonical skill \`${canonical}\`\\.$`).test(line))) {
+    issues.push(`missing exact canonical redirect sentence for "${canonicalSkillId}"`);
+  }
+
+  const invalidLines = lines.filter(line => !allowedLinePatterns.some(pattern => pattern.test(line)));
+  if (invalidLines.length > 0) {
+    issues.push('contains non-redirect content');
+  }
+
+  return issues;
+}
+
+function isIntentionalLegacyAlias(content, canonicalSkillId, legacySkillId) {
+  return getThinLegacyRedirectIssues(content, canonicalSkillId, legacySkillId).length === 0;
 }
 
 function classifyLegacySkillAlias(content, item, relativeSkillPath) {
@@ -312,13 +351,24 @@ function classifyLegacySkillAlias(content, item, relativeSkillPath) {
     };
   }
 
-  if (isIntentionalLegacyAlias(content, item.skillId)) {
+  if (isIntentionalLegacyAlias(content, item.skillId, item.legacySkillId)) {
     return {
       dir: item.legacySkillId,
       canonicalSkillId: item.skillId,
       classification: 'intentional-redirect',
       fatal: false,
       message: `Intentional legacy skill alias directory: ${relativeSkillPath} -> ${item.skillId}`,
+    };
+  }
+
+  if (hasLegacyAliasIntent(content, item.skillId)) {
+    const issues = getThinLegacyRedirectIssues(content, item.skillId, item.legacySkillId);
+    return {
+      dir: item.legacySkillId,
+      canonicalSkillId: item.skillId,
+      classification: 'non-thin-legacy-alias',
+      fatal: true,
+      message: `Legacy skill alias is not a thin redirect: ${relativeSkillPath} -> ${item.skillId} (${issues.join('; ')})`,
     };
   }
 
@@ -545,6 +595,8 @@ module.exports = {
   extractGeneratedSquadSource,
   isGeneratedSquadSkill,
   hasFullActivationPayload,
+  hasLegacyAliasIntent,
+  getThinLegacyRedirectIssues,
   isIntentionalLegacyAlias,
   classifyLegacySkillAlias,
   parseArgs,

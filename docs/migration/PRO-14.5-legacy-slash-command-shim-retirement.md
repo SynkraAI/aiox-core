@@ -33,7 +33,7 @@ Strict Codex skill validation must fail when any of these conditions appears:
 - an orphaned canonical `aiox-*` directory duplicates the full payload of a known source agent;
 - an unexpected `aiox-*` generated skill directory is orphaned from source agents, unless it is an explicitly detected generated squad skill.
 
-Strict validation may pass with an intentional legacy alias only when the alias is a thin redirect and includes an explicit legacy-alias marker or equivalent canonical redirect text. Passing aliases are still reported as warnings so the migration remains visible.
+Strict validation may pass with an intentional legacy alias only when the alias is a thin redirect with the exact `AIOX-CODEX-LEGACY-ALIAS: redirect` marker and an explicit canonical redirect sentence. Any extra non-redirect content is fatal. Passing aliases are still reported as warnings so the migration remains visible.
 
 ## Removal Criteria
 

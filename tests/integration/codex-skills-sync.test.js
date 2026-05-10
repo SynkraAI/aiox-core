@@ -179,6 +179,51 @@ describe('Codex Skills Sync', () => {
     expect(result.warnings.join('\n')).toContain('Intentional legacy skill alias directory');
   });
 
+  it('strict validation rejects legacy aliases that include extra non-redirect content', () => {
+    const localSkillsDir = path.join(tmpRoot, '.codex', 'skills');
+    syncSkills({
+      sourceDir: path.join(process.cwd(), '.aiox-core', 'development', 'agents'),
+      localSkillsDir,
+      dryRun: false,
+    });
+
+    const legacyDir = path.join(localSkillsDir, 'aios-dev');
+    fs.mkdirSync(legacyDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(legacyDir, 'SKILL.md'),
+      [
+        '<!-- AIOX-CODEX-LEGACY-ALIAS: redirect -->',
+        '# aios-dev',
+        '',
+        'This legacy alias redirects to canonical skill `aiox-dev`.',
+        '',
+        'When activated, load the developer persona and command list from this file.',
+        '',
+      ].join('\n'),
+      'utf8',
+    );
+
+    const result = validateCodexSkills({
+      sourceDir: path.join(process.cwd(), '.aiox-core', 'development', 'agents'),
+      skillsDir: localSkillsDir,
+      strict: true,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.legacyAliases).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          dir: 'aios-dev',
+          canonicalSkillId: 'aiox-dev',
+          classification: 'non-thin-legacy-alias',
+          fatal: true,
+        }),
+      ]),
+    );
+    expect(result.errors.join('\n')).toContain('Legacy skill alias is not a thin redirect');
+    expect(result.errors.join('\n')).toContain('contains non-redirect content');
+  });
+
   it('strict validation rejects orphaned canonical dirs that duplicate full skill payloads', () => {
     const localSkillsDir = path.join(tmpRoot, '.codex', 'skills');
     syncSkills({
