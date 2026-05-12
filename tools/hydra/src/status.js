@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getIndexStats } from './dedup/dedup-index.js';
+import { getDedupStore } from './dedup/dedup-store.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.resolve(__dirname, '../hydra-data');
@@ -65,13 +65,15 @@ function getRecentLogs(limit = 5) {
 export async function showStatus() {
   console.log('\n=== HYDRA Status ===\n');
 
-  // Dedup index stats
-  const indexStats = await getIndexStats();
-  console.log('Dedup Index:');
+  // Dedup store stats (SQLite-backed)
+  const store = getDedupStore();
+  const indexStats = store.getStats();
+  const lastRun = store.getLastRun();
+  console.log('Dedup Store (SQLite):');
   console.log(`  URLs tracked:      ${indexStats.urls}`);
   console.log(`  Hashes tracked:    ${indexStats.hashes}`);
-  console.log(`  Total processed:   ${indexStats.totalProcessed}`);
-  console.log(`  Total duplicates:  ${indexStats.totalDuplicates}`);
+  console.log(`  Pipeline runs:     ${indexStats.pipelineRuns}`);
+  console.log(`  Last run:          ${lastRun ? lastRun.finishedAt : 'never'}`);
 
   // Data directories
   console.log('\nData Directories:');
