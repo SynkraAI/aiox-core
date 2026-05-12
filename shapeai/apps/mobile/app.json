@@ -65,6 +65,12 @@
         "projectId": "d2a837be-0915-4116-86d7-b438cab06296"
       }
     },
-    "owner": "ryan13848"
+    "owner": "ryan13848",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d2a837be-0915-4116-86d7-b438cab06296"
+    }
   }
 }

@@ -79,11 +79,11 @@ print()
 
 # --- Executa ---
 print("Importando generate_future_self...")
-from app.pipeline.future_self_generator import generate_future_self, _describe_body_goal, _build_prompt
+from app.pipeline.future_self_generator import generate_future_self, _build_prompt
 print("Importado OK\n")
 
 # Mostra o prompt que sera enviado para debug
-prompt_preview = _build_prompt(scores, profile, 90)
+prompt_preview = _build_prompt(scores)
 print("=" * 60)
 print("PROMPT QUE SERA ENVIADO AO GEMINI:")
 print("=" * 60)
