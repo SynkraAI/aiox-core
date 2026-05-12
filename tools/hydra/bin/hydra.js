@@ -655,4 +655,76 @@ program
     }
   });
 
+// ========== Story 1.12: Feed Reader CLI ==========
+
+const feed = program
+  .command('feed')
+  .description('HYDRA feed reader (consumption side, Story 1.12)');
+
+feed
+  .command('read <clone-id>')
+  .description('Load and pretty-print a clone\'s HYDRA feed entries')
+  .option('--days <n>', 'Lookback window in days', '30')
+  .option('--max-tokens <n>', 'Token budget', '30000')
+  .option('--tier <minTier>', 'Minimum tier (S, A, B)', 'A')
+  .action(async (cloneId, options) => {
+    try {
+      const { loadCloneFeeds } = await import('../src/distribution/feed-reader.js');
+      const result = await loadCloneFeeds(cloneId, {
+        days: parseInt(options.days, 10),
+        maxTokens: parseInt(options.maxTokens, 10),
+        minTier: options.tier,
+      });
+      console.log(`Loaded ${result.entries.length} entries for ${cloneId}`);
+      console.log(`  Date range: ${result.oldestDate || 'n/a'} → ${result.newestDate || 'n/a'}`);
+      console.log(`  Total tokens: ${result.totalTokens}`);
+      console.log(`  Truncated (over budget): ${result.truncatedCount}`);
+      console.log(`  Empty: ${result.isEmpty}`);
+      console.log('');
+      for (const e of result.entries.slice(0, 10)) {
+        console.log(`  [${e.date}] [${e.tier}] ${e.title}${e.quarantined ? ' (QUARANTINED)' : ''}`);
+        console.log(`    ${e.url}`);
+      }
+      if (result.entries.length > 10) console.log(`  ... and ${result.entries.length - 10} more`);
+    } catch (error) {
+      console.error(`[ERROR] feed read failed: ${error.message}`);
+      process.exit(1);
+    }
+  });
+
+feed
+  .command('coverage')
+  .description('Show feed coverage across all clones (stale/empty detection)')
+  .action(async () => {
+    try {
+      const { collectCoverage } = await import('../src/distribution/feed-reader.js');
+      const rows = await collectCoverage();
+      if (rows.length === 0) {
+        console.log('No clone directories found under knowledge-feed/.');
+        return;
+      }
+      console.log(`Coverage across ${rows.length} clones:\n`);
+      console.log('  clone'.padEnd(40), 'latest'.padEnd(14), 'entries'.padEnd(10), 'status');
+      console.log('  ' + '-'.repeat(72));
+      let staleCount = 0;
+      let emptyCount = 0;
+      for (const r of rows) {
+        const status = r.isEmpty ? 'EMPTY' : r.hasStale ? 'STALE (>30d)' : 'fresh';
+        if (r.isEmpty) emptyCount++;
+        if (r.hasStale) staleCount++;
+        console.log(
+          '  ' + r.cloneId.padEnd(40),
+          (r.latestDate || 'n/a').padEnd(14),
+          String(r.totalEntries).padEnd(10),
+          status,
+        );
+      }
+      console.log('');
+      console.log(`Summary: ${rows.length - emptyCount - staleCount} fresh, ${staleCount} stale, ${emptyCount} empty`);
+    } catch (error) {
+      console.error(`[ERROR] feed coverage failed: ${error.message}`);
+      process.exit(1);
+    }
+  });
+
 program.parse();

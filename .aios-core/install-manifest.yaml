@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-05-05T23:07:37.305Z"
+generated_at: "2026-05-12T15:11:47.567Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1357
+file_count: 1164
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -704,26 +704,14 @@ files:
     hash: sha256:999b8da6f83d7acc201d84cec28fce2a1b618ff13db7f4ee96a6c1270e1022c1
     type: core
     size: 17085
-  - path: core/jarvis/mind-clone-cached-prompt.js
-    hash: sha256:e83fe12b29838ef8b1beecabd5c352de6c0976836b237d91786511cdfed1df64
-    type: core
-    size: 7289
-  - path: core/jarvis/mind-clone-pipeline.js
-    hash: sha256:9398b19b11ccbb44e290d6bef160961986f6e23d7ad4fec33e82633e1cbac04e
-    type: core
-    size: 10485
   - path: core/jarvis/project-detector.js
     hash: sha256:ec20dff73c091b51fd681176ffe16c115db219eae926db46a8721ff76d1c84ad
     type: core
     size: 5981
   - path: core/jarvis/self-consultation.js
-    hash: sha256:7f93d3d0e2268f5dd029209411bcfb5efa7dfaf801e548fb689a1a20426ca83e
+    hash: sha256:f0e7fb9bff86f34ddef3203f5d1db35a3b09d6a1311a079f1ff2ab225aa267f6
     type: core
-    size: 26404
-  - path: core/jarvis/trajectory-recorder.js
-    hash: sha256:77dea359e2cd98a47eec19b8c6a2901d05d66a4e54093af82b6d24f7f7fe7ce9
-    type: core
-    size: 5443
+    size: 26880
   - path: core/manifest/manifest-generator.js
     hash: sha256:94d25e22a261c09f719b52ad62979d0c013506866b07aca1b0e2623192b76428
     type: core
@@ -1156,10 +1144,6 @@ files:
     hash: sha256:d51a8a9d1dd76ce6bc08d38eaf53f4f7df948cc4edc8e7f56d68c39522f64dc6
     type: core
     size: 9675
-  - path: core/utils/agent-path-resolver.js
-    hash: sha256:3c42c3f17a29e17469a67568886c11e5af586db0dde2e888ce9aa9c018c2b1fb
-    type: core
-    size: 2714
   - path: core/utils/output-formatter.js
     hash: sha256:7cb743d4c06cf18ceb5975378cfae9fe1ae36e8c37399f84ffed7a5a72f25817
     type: core
@@ -1168,10 +1152,6 @@ files:
     hash: sha256:6b26ebf9c2deb631cfedcfcbb6584e2baae50e655d370d8d7184e887a5bfc4a8
     type: core
     size: 9061
-  - path: core/utils/thinking-budget.js
-    hash: sha256:f3b03df786fadf63ac7bd9294f0bf885d24a85e57fe3bfb6cbb65c975d04d486
-    type: core
-    size: 3353
   - path: core/utils/yaml-validator.js
     hash: sha256:9538e95d3dae99a28aa0f7486733276686bdd48307bac8554ef657bda96a3199
     type: core
@@ -1180,10 +1160,6 @@ files:
     hash: sha256:90c6ff32be3a9bb29158a2c3e6c44eb8ec56eedf8bb8b058812352bde8f79832
     type: data
     size: 10368
-  - path: data/agent-registry-policy.md
-    hash: sha256:26c125502c17cbd70c8bd4dc47bfdc55576e5b808c971f0dd4c0a7a02458f563
-    type: data
-    size: 11556
   - path: data/aios-kb.md
     hash: sha256:bd170b28092614e866e40195fc3358601791f8c934229a844ebd8edce0868fed
     type: data
@@ -1197,9 +1173,9 @@ files:
     type: data
     size: 210
   - path: data/entity-registry.yaml
-    hash: sha256:ea74dcfc63ecf501fec2436a449e56a5779f800ced6dbbf384194d6ad294877e
+    hash: sha256:51f345cde45d82e22be679a4e32c7bf7655a61ef1ebf0440009f0230cc84bf2b
     type: data
-    size: 953700
+    size: 949714
   - path: data/gates/PR-1-foundation-tokens.yaml
     hash: sha256:ca9e8b6fa19390be476bc5429a7765b13eea9a07648ff34ae082b8b0228adc44
     type: data
@@ -1208,10 +1184,6 @@ files:
     hash: sha256:c4b804084db5f5f8d56c201a7385b7a85abfc0da188391f202167b6a41a830e3
     type: data
     size: 7610
-  - path: data/jarvis-mind-clone-index.json
-    hash: sha256:043a5312e6b29174607e8c720feec17ffd5e90a234eb5122815f5d0a24549564
-    type: data
-    size: 163147
   - path: data/jarvis-mind-clone-map.yaml
     hash: sha256:d404e07f7de09951ca2770cb073e315b3d8f7dd93295c3f21fad04f17ab5e7b0
     type: data
@@ -1252,694 +1224,6 @@ files:
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
     size: 68
-  - path: data/mind-clone-skills/abby-covert/SKILL.md
-    hash: sha256:98a4b24256d6af4e750a3cb62edaf8d557c55222c58e81e232f40443c0b9c8d3
-    type: data
-    size: 2520
-  - path: data/mind-clone-skills/acacia-parks/SKILL.md
-    hash: sha256:1873b79babbea64d053dbf184abbb685a05cc75ae304b974f8811c48f92cc72e
-    type: data
-    size: 5891
-  - path: data/mind-clone-skills/adam-grant/SKILL.md
-    hash: sha256:dc0fa3a43ef0c482b9a9f04e05b28d8820c8edaf8acc7cd53b0591eb2e539c9c
-    type: data
-    size: 6027
-  - path: data/mind-clone-skills/addy-osmani/SKILL.md
-    hash: sha256:2c13cb2c8de57592e6b5531a7240e000d21a9e7117a45b21a9450fb046919ea4
-    type: data
-    size: 2672
-  - path: data/mind-clone-skills/adriana-dallari/SKILL.md
-    hash: sha256:f52754614ea1cfadc6b16f66565c4a703b39d63bc0d575bc7146d1db746f870d
-    type: data
-    size: 5732
-  - path: data/mind-clone-skills/alan-nichol/SKILL.md
-    hash: sha256:4c09d7b077e462f915d6404b3e4f484fce9ae3ec4569b24246244de733dc0a1a
-    type: data
-    size: 2678
-  - path: data/mind-clone-skills/alex-hormozi/SKILL.md
-    hash: sha256:6130a161a104e0dff48192219d6c99f886f79daf2292570002899c16d50f8333
-    type: data
-    size: 3372
-  - path: data/mind-clone-skills/alexander-osterwalder/SKILL.md
-    hash: sha256:f2c9d64c3117ff34fe1f6d7eddfc0f897bb92679780ab24219ea01bf97ca17e9
-    type: data
-    size: 2447
-  - path: data/mind-clone-skills/alison-darcy/SKILL.md
-    hash: sha256:f67315446e0174ce04ab8565cbc100e2399f1979aa24be3832b35a3913a70d06
-    type: data
-    size: 5048
-  - path: data/mind-clone-skills/amy-edmondson/SKILL.md
-    hash: sha256:6805ad5b347b6bbac9b16c3c3e1414303a454ba0eb284c2f9290ef0f120e404d
-    type: data
-    size: 2775
-  - path: data/mind-clone-skills/anders-ericsson/SKILL.md
-    hash: sha256:1cee119fe96dbb74557fc140b25a4b4dc20889a7a88e365ef323f793db726b72
-    type: data
-    size: 7156
-  - path: data/mind-clone-skills/andrej-karpathy/SKILL.md
-    hash: sha256:0f72bb8b162c17196b44131d5f195926df58c5cf814323081273ab773d942f65
-    type: data
-    size: 5555
-  - path: data/mind-clone-skills/andrew-ng/SKILL.md
-    hash: sha256:93fa45b27df27e68798091ebd1140b20655f3234295241918f2d435203b8ca3b
-    type: data
-    size: 5916
-  - path: data/mind-clone-skills/ann-cavoukian/SKILL.md
-    hash: sha256:080f0b5df7c86267520bce9631f7778e6617dff3ea808e1c5ee9c52caf3716a7
-    type: data
-    size: 2609
-  - path: data/mind-clone-skills/ann-handley/SKILL.md
-    hash: sha256:c164a30eb22e1b26c807d39c08e553d82474797d904bcf7e0cc7026483e37082
-    type: data
-    size: 5487
-  - path: data/mind-clone-skills/april-dunford/SKILL.md
-    hash: sha256:417bf8a93024bee7af6e80e1033fe81720b96f47f1d75d7639ec65607cd84ba5
-    type: data
-    size: 6303
-  - path: data/mind-clone-skills/aswath-damodaran/SKILL.md
-    hash: sha256:fe6cf0d27d010c559cca160c19ad1d0cf8a5c154c3ac6b18675ba92cef19e219
-    type: data
-    size: 6205
-  - path: data/mind-clone-skills/atul-butte/SKILL.md
-    hash: sha256:9e4f830b5cad0c04ff2617adb75ab256b6471dbf78d5843b9c5aed19135eac38
-    type: data
-    size: 8961
-  - path: data/mind-clone-skills/bakul-patel/SKILL.md
-    hash: sha256:1436e945944c5ead7d30c82c8a4fcc5b172969c210517c6b5c90c6894f469a84
-    type: data
-    size: 8124
-  - path: data/mind-clone-skills/bj-fogg/SKILL.md
-    hash: sha256:8865cc73d68e68f665505e7ad8f5cf5cdde03c6ca7bf23229f6994efaa809ba6
-    type: data
-    size: 5787
-  - path: data/mind-clone-skills/brad-feld/SKILL.md
-    hash: sha256:fe78cd620199ca94244b68b2a19daff53a11daa7ccfb2249552d811eebb720e1
-    type: data
-    size: 2841
-  - path: data/mind-clone-skills/brad-frost/SKILL.md
-    hash: sha256:586f381257d8245d13e92389424fa7ab33e1aa2b2712b17cc909fec6fd95f29e
-    type: data
-    size: 2454
-  - path: data/mind-clone-skills/brendan-gregg/SKILL.md
-    hash: sha256:7d76284ada09a9bf586b1eaa830eb00bcae81ecfab5bf7105bec01d119a1a80f
-    type: data
-    size: 2905
-  - path: data/mind-clone-skills/brene-brown/SKILL.md
-    hash: sha256:17cf81b40535b6fa03eef42e059b9ddb25caafd14b1b92ce07cbb442e3c4716c
-    type: data
-    size: 5412
-  - path: data/mind-clone-skills/bruce-schneier/SKILL.md
-    hash: sha256:2b064ecd6c3f46f8c6e9a826c3b337d50984bc941d0f3f6a843e73a8c44ffa3b
-    type: data
-    size: 6022
-  - path: data/mind-clone-skills/casey-rosenthal/SKILL.md
-    hash: sha256:a9ae2e8777cc2d751dc23fc2577051bca29b0562e627434767f8a7e955ad033a
-    type: data
-    size: 2439
-  - path: data/mind-clone-skills/cassie-kozyrkov/SKILL.md
-    hash: sha256:215c8fb564ea46b6d767b677cd7ee508676c0e4645226b67e3d7cd928ffc1001
-    type: data
-    size: 6288
-  - path: data/mind-clone-skills/cathy-pearl/SKILL.md
-    hash: sha256:de245e672313a151babfd44f8ddaed2d6efe75bc669f94464b9a13831d589059
-    type: data
-    size: 2656
-  - path: data/mind-clone-skills/charity-majors/SKILL.md
-    hash: sha256:c301c52428682df79cb178917890634596c79b5a8be83c02bef5c21bfee319cb
-    type: data
-    size: 6035
-  - path: data/mind-clone-skills/charles-spurgeon/SKILL.md
-    hash: sha256:5c99208ab9ac592ba21b1b9dd0075baa1c987ee2342340b320e056ab6132c3d7
-    type: data
-    size: 8225
-  - path: data/mind-clone-skills/chip-huyen/SKILL.md
-    hash: sha256:d4cb147c9328a613d56bf0e3dfa2abf7a8fd7a1c719dc7a9f77767552cc46ca1
-    type: data
-    size: 4864
-  - path: data/mind-clone-skills/chris-voss/SKILL.md
-    hash: sha256:19cf4b3ec2464889dbe73634cf6f4dde6ff751d5657ae1eccf623709b5b4150a
-    type: data
-    size: 4662
-  - path: data/mind-clone-skills/christian-dunker/SKILL.md
-    hash: sha256:f02a703d702217a028cc028579c814de578089398fc7703c69381187dcb2fb4b
-    type: data
-    size: 5059
-  - path: data/mind-clone-skills/clayton-christensen/SKILL.md
-    hash: sha256:a14f1066b737f1a20ba75f6627a28fc3de99cac8b439bfffa32f323f290489f9
-    type: data
-    size: 6677
-  - path: data/mind-clone-skills/craig-kerstiens/SKILL.md
-    hash: sha256:b64340aa7585969c308d26607a7ad0975cbd4fb9782302b98bcc484a72160dc4
-    type: data
-    size: 3924
-  - path: data/mind-clone-skills/dan-abramov/SKILL.md
-    hash: sha256:6cd0dee4a264719cc17fe20b75273ebbcd584562e7f38b5c22b1197c6bcff62b
-    type: data
-    size: 2759
-  - path: data/mind-clone-skills/daniel-kahneman/SKILL.md
-    hash: sha256:e13d39bcf71d976204ebd5fe8bb0e3ead43a67889ae3275052e932b41159524d
-    type: data
-    size: 5894
-  - path: data/mind-clone-skills/daniel-miessler/SKILL.md
-    hash: sha256:d18f8344d4ba14c62ea1c007b8b8ab8ec96c57ecb345ccc61f6e05711d225aa7
-    type: data
-    size: 6090
-  - path: data/mind-clone-skills/danijel-overtime/SKILL.md
-    hash: sha256:09ce1a0b1c497bc86c07ae4b7a6ecea2f7cab603456c3c5eb66c1c3ce4d6afad
-    type: data
-    size: 3207
-  - path: data/mind-clone-skills/darren-murph/SKILL.md
-    hash: sha256:e784a8194b8f7ca396d7eb41e794edd7a74484fb666d1965064a77eb34fe8fb8
-    type: data
-    size: 2357
-  - path: data/mind-clone-skills/dave-snowden/SKILL.md
-    hash: sha256:4862e27c1cace0bb727a949a9683997a22803df495cb0728adcafedf780d55af
-    type: data
-    size: 3093
-  - path: data/mind-clone-skills/david-ebersman/SKILL.md
-    hash: sha256:c258f92a614f18be728f84edbad1b27d4cfd25427f8b891c7230237b7733169e
-    type: data
-    size: 6437
-  - path: data/mind-clone-skills/demis-hassabis/SKILL.md
-    hash: sha256:2d4efa293b007208bc5b0b9cd4f0a4d32338a3e51d0d1a9fb684cad037c380c8
-    type: data
-    size: 7901
-  - path: data/mind-clone-skills/dena-bravata/SKILL.md
-    hash: sha256:45ca40121fb65e6ac723e295b2fe13b186b2a67ce23deef6281696a6ae36d296
-    type: data
-    size: 7880
-  - path: data/mind-clone-skills/design-lead/SKILL.md
-    hash: sha256:1be9796cd72db23ae554079a8054f884b83d828fcfe34d3098186783465ee5a1
-    type: data
-    size: 5159
-  - path: data/mind-clone-skills/design-systems-engineer/SKILL.md
-    hash: sha256:56c58cdf7aee4ca1b25966ef65bb727e92a70d15cb359df603f01bdbf4872910
-    type: data
-    size: 4734
-  - path: data/mind-clone-skills/dieter-rams/SKILL.md
-    hash: sha256:c9735c76e71beeb6efcf8f3ebd97bb8ed8c1b5a2fde894c4cff65fbe4219cb26
-    type: data
-    size: 6421
-  - path: data/mind-clone-skills/domer-polymarket/SKILL.md
-    hash: sha256:b7d277526b15ab34bcfb954bf1932b9a87347de528bfc4f0f5cb2417e7bbe2f9
-    type: data
-    size: 3001
-  - path: data/mind-clone-skills/don-norman/SKILL.md
-    hash: sha256:d6f27e8f16de431dae5780ee85de80ae7d1c9fda5d10b2509c1bffc2951f9b48
-    type: data
-    size: 7257
-  - path: data/mind-clone-skills/donald-miller/SKILL.md
-    hash: sha256:30c258d07d4b2ec40c57ca071e0fdeb5d2d77b0645463951a4f6b405f2715c1a
-    type: data
-    size: 5433
-  - path: data/mind-clone-skills/eduardo-bunge/SKILL.md
-    hash: sha256:9218471b71cfe527917c94fcfd723ddd43711cb53c2f59f028d4eb28890b065d
-    type: data
-    size: 8403
-  - path: data/mind-clone-skills/edward-tufte/SKILL.md
-    hash: sha256:4315de5012e1a6d34284d733f51a0dcb8f0543f3906ebbc176cb3a58d83caa87
-    type: data
-    size: 3186
-  - path: data/mind-clone-skills/eliyahu-goldratt/SKILL.md
-    hash: sha256:13c4d1879bd4343afe1ae7b39a0221ffb99ae641fcfd7fdcc5ec9e610b8e1bfa
-    type: data
-    size: 5932
-  - path: data/mind-clone-skills/eric-ries/SKILL.md
-    hash: sha256:9e8dba980fa39e2ff6b5d2ee96d18b960fdcb1005c462fdcbf02b3fde1a0c4d2
-    type: data
-    size: 6736
-  - path: data/mind-clone-skills/eric-topol/SKILL.md
-    hash: sha256:72b51764222ae3b645662b5113588ae2ce39fe47c87383762ab407f49bfe2b6d
-    type: data
-    size: 2686
-  - path: data/mind-clone-skills/erik-nymanczuk/SKILL.md
-    hash: sha256:551890dc900a9ceea12400134acd770349080214149308343ab57c92d2c01544
-    type: data
-    size: 5551
-  - path: data/mind-clone-skills/erik-spiekermann/SKILL.md
-    hash: sha256:defcebdcc65b4036362f8244b4b4a046725c1e9dd28d95059e6ccbb484eb47c6
-    type: data
-    size: 6047
-  - path: data/mind-clone-skills/fei-fei-li/SKILL.md
-    hash: sha256:7bd7ec07e46284a1e1d52412e7c73e87239c52148339da43e7ed23a8515803a3
-    type: data
-    size: 6495
-  - path: data/mind-clone-skills/gary-vaynerchuk/SKILL.md
-    hash: sha256:bfd4cfdb39441645a2960e75083b14bb036fb95af4228bf560ad260f6fdae1fe
-    type: data
-    size: 5587
-  - path: data/mind-clone-skills/gcr-crypto/SKILL.md
-    hash: sha256:d1e4985709c280b1fb10a65ac85d681f6818d9db2df0e38958df6d65f87ff766
-    type: data
-    size: 3133
-  - path: data/mind-clone-skills/gene-kim/SKILL.md
-    hash: sha256:89df5c647b236f2e65597b431452cbce7964c3b02653d361341b1b51cf7c3ddf
-    type: data
-    size: 6585
-  - path: data/mind-clone-skills/geoff-cook/SKILL.md
-    hash: sha256:d60091747d15ba44f3336e311fb8775437544d7dbee3a2c2d0631c4bb7a95cd5
-    type: data
-    size: 7088
-  - path: data/mind-clone-skills/grant-cardone/SKILL.md
-    hash: sha256:30df272eade101c2d38b39858567fdb17a92b4fb451eeb54372f0e1698fdcb2e
-    type: data
-    size: 3295
-  - path: data/mind-clone-skills/guillaume-moubeche/SKILL.md
-    hash: sha256:36f29c103a0ae4bc7f546cf3cb6e2a803b8948efd34198497e352bacd3d46451
-    type: data
-    size: 5103
-  - path: data/mind-clone-skills/guillermo-rauch/SKILL.md
-    hash: sha256:860b2a9fc60d177d59b930e4c636dfaf768d26bdc983602b4db261401f6282dc
-    type: data
-    size: 4199
-  - path: data/mind-clone-skills/halle-tecco/SKILL.md
-    hash: sha256:d120ec5914622ed220120d953521c6b9b4fc4dfd81b459d58b4c4a7c509d02ef
-    type: data
-    size: 7489
-  - path: data/mind-clone-skills/harrison-chase/SKILL.md
-    hash: sha256:1d9a39e8d195093137f1543a0ce6d62c382aa75cf66010e98bda68ccf9b63932
-    type: data
-    size: 4415
-  - path: data/mind-clone-skills/heather-meeker/SKILL.md
-    hash: sha256:ff85c142bb481c480ec043a6c3ce6e0fea670a347654446f617d820e48c7e236
-    type: data
-    size: 6184
-  - path: data/mind-clone-skills/ilya-sutskever/SKILL.md
-    hash: sha256:d4cf5a62d9c7994a41ae7c116ad9b034c03fc12635f503e2970b174b23c89e51
-    type: data
-    size: 5827
-  - path: data/mind-clone-skills/jason-lemkin/SKILL.md
-    hash: sha256:732c05cc80f2993ea929141a145896d8fe9db6c144d3d0de32b68723e4bf028e
-    type: data
-    size: 5490
-  - path: data/mind-clone-skills/jay-abraham/SKILL.md
-    hash: sha256:243a807aab1be0f59eb3c463729a4efbff4d323c46c749a3e46356cc6cdbcc22
-    type: data
-    size: 2399
-  - path: data/mind-clone-skills/jeb-blount/SKILL.md
-    hash: sha256:71f0eff141f70ce1e5031b0e3c28ca30ff298ec98bc171adea9d8d403af60e88
-    type: data
-    size: 4968
-  - path: data/mind-clone-skills/jerry-liu/SKILL.md
-    hash: sha256:adc0a06871586c4323347eeda7904407c98a8dff80e034d0f77fd180aad6087b
-    type: data
-    size: 4514
-  - path: data/mind-clone-skills/jez-humble/SKILL.md
-    hash: sha256:3343cfc846d7c1b6b50aeec85efed8074478e55b2234a6d9743a312d3a5eaa60
-    type: data
-    size: 2934
-  - path: data/mind-clone-skills/jim-fan/SKILL.md
-    hash: sha256:4441724a19a0ca68d2712865b9385271afa2441b053d5632ae1d963046279344
-    type: data
-    size: 2899
-  - path: data/mind-clone-skills/joanna-wiebe/SKILL.md
-    hash: sha256:e51253dc7cb041802f3391dc97fe3d16e128c1b6d95119b28bb3c54c4a308d0a
-    type: data
-    size: 6178
-  - path: data/mind-clone-skills/joe-pulizzi/SKILL.md
-    hash: sha256:b082f746e63deb360feb26439fca66fff72ec01e343829feada8a372c06d413b
-    type: data
-    size: 5556
-  - path: data/mind-clone-skills/joe-reis/SKILL.md
-    hash: sha256:690d13beeed6c0e21303a3a85d22c10d9b7059848c8a00d5b38aa4d740095356
-    type: data
-    size: 3063
-  - path: data/mind-clone-skills/johannes-thrul/SKILL.md
-    hash: sha256:c9ae52976342e36bfe45f17daae9d1eff7f3cc0b4b862d98906deba2fe0cc3ee
-    type: data
-    size: 9244
-  - path: data/mind-clone-skills/john-kindervag/SKILL.md
-    hash: sha256:aae82f2e79d074237cd8d6bdc278f1842e1b0bbe908b9213d52c93842bf61bd1
-    type: data
-    size: 2828
-  - path: data/mind-clone-skills/john-maeda/SKILL.md
-    hash: sha256:5453c342ab538f6f6fbe3b2c00e527da03aca287e3d8e454ef5d12b6964025bd
-    type: data
-    size: 7754
-  - path: data/mind-clone-skills/josh-bersin/SKILL.md
-    hash: sha256:577a194c0281ddc13b74e22ae813543f224e86522b52da524c3536a28a272d1a
-    type: data
-    size: 5738
-  - path: data/mind-clone-skills/julie-zhuo/SKILL.md
-    hash: sha256:6eb22be6cbc9a3ea86c145d1182f1179403f574c420ea42c1b5f700d0056b918
-    type: data
-    size: 7679
-  - path: data/mind-clone-skills/kat-holmes/SKILL.md
-    hash: sha256:2360ccdcc357bf4879da389d5f2036b36e797174958bca03d6b43c011737ef40
-    type: data
-    size: 3136
-  - path: data/mind-clone-skills/kate-ryder/SKILL.md
-    hash: sha256:0ddf727d1e346ccf975b0f006924ce8f6fe843c4902856772d309a7fbaec4664
-    type: data
-    size: 4936
-  - path: data/mind-clone-skills/kelsey-hightower/SKILL.md
-    hash: sha256:6ac1e232c5b7bf65beba598f87ee0cd7f92a3cf1a327bcf70ed250cb50835431
-    type: data
-    size: 7614
-  - path: data/mind-clone-skills/kent-beck/SKILL.md
-    hash: sha256:62bf6715f79545452049a7028b7989172efd8aae4253f6fabe693c693aa4f561
-    type: data
-    size: 3301
-  - path: data/mind-clone-skills/kent-c-dodds/SKILL.md
-    hash: sha256:f572dff9ca544392b6d5ac09443d0a281fe9b20aa25cb1092c0cd078b21b528a
-    type: data
-    size: 3991
-  - path: data/mind-clone-skills/kevin-mitnick/SKILL.md
-    hash: sha256:d81d1b78a8ec73495bf5dcea6d6dcc14c9b05fb32165cbc524498ccf1ae654c2
-    type: data
-    size: 5877
-  - path: data/mind-clone-skills/larry-kim/SKILL.md
-    hash: sha256:a19b24bca2dc33a5d1f51da3ec5bbea0a2dc7891fc9c2ba7286a0378558ef9b0
-    type: data
-    size: 2574
-  - path: data/mind-clone-skills/laszlo-bock/SKILL.md
-    hash: sha256:e14832e1a26275cb196c2ffe53a2f5af43cbf302c809a671215079587242b556
-    type: data
-    size: 5145
-  - path: data/mind-clone-skills/lawrence-lessig/SKILL.md
-    hash: sha256:d2b96192b14583876a6e2565f606359f43ab04ab0a6552a14d2a8909a6d89a9f
-    type: data
-    size: 5919
-  - path: data/mind-clone-skills/lilian-weng/SKILL.md
-    hash: sha256:d0bc70ba8c2c0eb5a83da500c0220decd1eff06fb6254ef166755b0a240f3d05
-    type: data
-    size: 2439
-  - path: data/mind-clone-skills/lincoln-murphy/SKILL.md
-    hash: sha256:6b1b547e61a1c5d7cc896377a0dc49055040bb3cf2b62f8bf53972090f5b15b1
-    type: data
-    size: 5842
-  - path: data/mind-clone-skills/linus-torvalds/SKILL.md
-    hash: sha256:198baeee07a6071e6fdfaba5bd469f4a81037bb8718fde4f12108af5718e6b39
-    type: data
-    size: 3333
-  - path: data/mind-clone-skills/liran-tal/SKILL.md
-    hash: sha256:0cc1adb576c591a5a775ea6c4d89ff3f0ae26feb0a6a2aebd6393f37bdae5acf
-    type: data
-    size: 3899
-  - path: data/mind-clone-skills/luana-lopes-lara/SKILL.md
-    hash: sha256:2eb3fc8dc79ce9a884da0745d2e4ec329b37283e45d79adae99e678e2401260a
-    type: data
-    size: 3201
-  - path: data/mind-clone-skills/lucia-savage/SKILL.md
-    hash: sha256:315625f3257dece12083025e5f769731effae07025940bb6a99536dd7a23ec69
-    type: data
-    size: 7937
-  - path: data/mind-clone-skills/mariana-mazzucato/SKILL.md
-    hash: sha256:a2f33ae8596f76f73c91a03a1e13dad2e4dd89220fa9bb94a6001e71bfc4195c
-    type: data
-    size: 7438
-  - path: data/mind-clone-skills/markus-winand/SKILL.md
-    hash: sha256:e5fb8e1f9f3465f6a48c9a19c0fa3751a351d65a159a5e92050fd99bcfaa056b
-    type: data
-    size: 3565
-  - path: data/mind-clone-skills/martin-fowler/SKILL.md
-    hash: sha256:8f3750b7f2b650327566136c34425bd0b01a891f9729499dc07f82fc422552e0
-    type: data
-    size: 6503
-  - path: data/mind-clone-skills/martin-kleppmann/SKILL.md
-    hash: sha256:c477b63074f9f674a0ae99f219fef04d1a82802dd1e1be4eceedb18a2accffa4
-    type: data
-    size: 4603
-  - path: data/mind-clone-skills/marty-cagan/SKILL.md
-    hash: sha256:69959f156449e7c9304210b799fc588437e247cf0e72ccafb9d852c2ed245c2f
-    type: data
-    size: 3464
-  - path: data/mind-clone-skills/marty-neumeier/SKILL.md
-    hash: sha256:3f02bfa25f48014e9ec330a32399c9fdd941eeec94c6894a430a4e3709bdd2ae
-    type: data
-    size: 2378
-  - path: data/mind-clone-skills/matt-dixon/SKILL.md
-    hash: sha256:fc5a09485ccee53094bb678207a303bc410917ee9d47233f88c172c2e2d41879
-    type: data
-    size: 5133
-  - path: data/mind-clone-skills/matt-pocock/SKILL.md
-    hash: sha256:ca64f28de1d4739093e90aee04e1b52d2924cfff154ea0776ebc1237fd03ca42
-    type: data
-    size: 3899
-  - path: data/mind-clone-skills/micky-tripathi/SKILL.md
-    hash: sha256:77486ec48485c0f8dda07b62d94de368e8d18a63dd0ac30ff484aa5e31dcc392
-    type: data
-    size: 8344
-  - path: data/mind-clone-skills/mikko-hypponen/SKILL.md
-    hash: sha256:f5a918e0a582a8e5c56a1375e4d3971638d75bef074a97cb57051d82e5167ab6
-    type: data
-    size: 5916
-  - path: data/mind-clone-skills/mitchell-hashimoto/SKILL.md
-    hash: sha256:d3eacbbe7a10353220b5b7e9d95d6a0b683af86c9babd32730b86d2c5a172152
-    type: data
-    size: 3931
-  - path: data/mind-clone-skills/morgan-housel/SKILL.md
-    hash: sha256:e25671987016e14687ff1b037d430538a8e833293727535ab1058bfbfacabdde
-    type: data
-    size: 6768
-  - path: data/mind-clone-skills/motion-designer/SKILL.md
-    hash: sha256:09358866963a3473aea17fdffecab8f6b6592a59c997e4df860bc9576c0adacc
-    type: data
-    size: 4563
-  - path: data/mind-clone-skills/nate-silver/SKILL.md
-    hash: sha256:947a857a21cab5cf7b854dc293960f90d6093f04fd902395e0d971200ef4acfc
-    type: data
-    size: 3263
-  - path: data/mind-clone-skills/neil-patel/SKILL.md
-    hash: sha256:4d7f6d009d6ca66ce69a8ab2d5f5349a2de4bee92f231f2ccdd4078af8b0b18d
-    type: data
-    size: 3192
-  - path: data/mind-clone-skills/niall-murphy/SKILL.md
-    hash: sha256:19c7f4d872e049fcbf498670530e419f46c9a664a8e455498cd20def553d6bac
-    type: data
-    size: 2903
-  - path: data/mind-clone-skills/nick-mehta/SKILL.md
-    hash: sha256:461db0c7f7746a4202e3e0610490f17525a675fccb6863e453d67b00000f24d8
-    type: data
-    size: 5099
-  - path: data/mind-clone-skills/nicole-forsgren/SKILL.md
-    hash: sha256:4b5863655c5c0734c4796ce81aaaf82c181cad469acc61a09aa4e65f9939ac71
-    type: data
-    size: 3850
-  - path: data/mind-clone-skills/nir-eyal/SKILL.md
-    hash: sha256:db9d6bf6ba917a53f0ebbc6c718555f5f0c2e09bd28df8dd63dd159182777eb5
-    type: data
-    size: 7032
-  - path: data/mind-clone-skills/oalanicolas/SKILL.md
-    hash: sha256:e1177e6befed20e70753b616aed49853af31d4edd3498bc6fbd6986f99d5c89d
-    type: data
-    size: 2356
-  - path: data/mind-clone-skills/oli-gardner/SKILL.md
-    hash: sha256:4a9e3b43da99a53d64c370e53da049dbe7ef033d606b9e2e7bcfadb3ff51be3c
-    type: data
-    size: 6389
-  - path: data/mind-clone-skills/patricia-peck/SKILL.md
-    hash: sha256:c9bdee7f0be64f11cbe5f881d5ff8405feea0248ceff39107a73eb9dbe2282e7
-    type: data
-    size: 4510
-  - path: data/mind-clone-skills/patrick-campbell/SKILL.md
-    hash: sha256:1d8cc4c6a67aaae1f96a100c4c06f1309d9fd92d52b513eca02001c4196705a9
-    type: data
-    size: 5511
-  - path: data/mind-clone-skills/patty-mccord/SKILL.md
-    hash: sha256:f995a0e7a1f69eb68da00a4e3c720a8668df96f227d13e4c818f0cd439444aa7
-    type: data
-    size: 5145
-  - path: data/mind-clone-skills/paul-copplestone/SKILL.md
-    hash: sha256:668cbbf23dce3a0fc6bb6cedeb77149fcbdef28e40f7bfab4addc442901e3ebd
-    type: data
-    size: 3853
-  - path: data/mind-clone-skills/pedro-valerio/SKILL.md
-    hash: sha256:36c5f31fe321e8249dd75a170315d67747330663e4689afefbf70e51f61b1402
-    type: data
-    size: 2224
-  - path: data/mind-clone-skills/peep-laja/SKILL.md
-    hash: sha256:d5c85e0a402464ac977143828159a7e1d0a182a62a70fa796f4d28f8181354c4
-    type: data
-    size: 6228
-  - path: data/mind-clone-skills/peter-diamandis/SKILL.md
-    hash: sha256:05e42058c05efd1a5cadbc006f72e205d120d20b387a733e6a6030cdcd144ee7
-    type: data
-    size: 5827
-  - path: data/mind-clone-skills/philip-tetlock/SKILL.md
-    hash: sha256:18c2f324bda2d7b2e4946eb8a69bcca775686a60cacddab883bc79b3882e5497
-    type: data
-    size: 3294
-  - path: data/mind-clone-skills/rafael-calvo/SKILL.md
-    hash: sha256:5624f80bcfb3b1cef2aa1807cd9db3477c6b45f3ba860769d3a3905018b25b9d
-    type: data
-    size: 7662
-  - path: data/mind-clone-skills/rand-fishkin/SKILL.md
-    hash: sha256:a2e6ddb7837f3314c226c84008fb9711b61b45a75c65b63568b7f718b48225a4
-    type: data
-    size: 6190
-  - path: data/mind-clone-skills/ray-dalio/SKILL.md
-    hash: sha256:698b342c68585b818de6e973ef5dd9a2a00d9ff766ddfc89ed763beceb0638c5
-    type: data
-    size: 3629
-  - path: data/mind-clone-skills/refika-anadol/SKILL.md
-    hash: sha256:4a5c2716be6ebc0abc96807e8ae61cd11057271788912f94a1b80c4a87049566
-    type: data
-    size: 6348
-  - path: data/mind-clone-skills/richard-susskind/SKILL.md
-    hash: sha256:e68e293e70794b63d3d8c6e8af44825ce440a7ff2711703cb94222e5a0255555
-    type: data
-    size: 5703
-  - path: data/mind-clone-skills/richard-thaler/SKILL.md
-    hash: sha256:3a82131cf53ec4584616e6b6b95dfc99048c5551e52947a32773bbd2d52f9559
-    type: data
-    size: 5904
-  - path: data/mind-clone-skills/rob-walling/SKILL.md
-    hash: sha256:e6865da8be6c8d2b0b94825cb4c1a730ea649d3238b2de08f19b2b5667162327
-    type: data
-    size: 2369
-  - path: data/mind-clone-skills/robert-mckee/SKILL.md
-    hash: sha256:4613cec6cec2c61f2eef245c0ceb7d76700994857e6b0d0493ec1c4d9b7aef61
-    type: data
-    size: 5751
-  - path: data/mind-clone-skills/robin-hanson/SKILL.md
-    hash: sha256:827597846bbe15e88f4fdef1dcb180257536b5f1dad7ad851a296ca6bdde0a0c
-    type: data
-    size: 3413
-  - path: data/mind-clone-skills/russell-brunson/SKILL.md
-    hash: sha256:10ff6bbbb6e5bf4725663c311cfcae6cdf0a500f88c4c3ee87c984de402d566d
-    type: data
-    size: 3297
-  - path: data/mind-clone-skills/ryan-dahl/SKILL.md
-    hash: sha256:655fc546fe589c48b9350dd70e167832e0d61f00b1ec077f6836d93f26c1caf1
-    type: data
-    size: 3974
-  - path: data/mind-clone-skills/ryan-holiday/SKILL.md
-    hash: sha256:084fa7fd1551ec0cc8f8b8b317d67ebb8494aa73fc3e2803097e3e05ee1fd098
-    type: data
-    size: 3545
-  - path: data/mind-clone-skills/sal-khan/SKILL.md
-    hash: sha256:cdb0a2fbe17aae8e9912c1119f5bca9533373d5a05cec8e8540b27062095e303
-    type: data
-    size: 5861
-  - path: data/mind-clone-skills/sam-newman/SKILL.md
-    hash: sha256:d820626bf2362261b351607db229dfcc08a558e0f1754eeb80af575508e9985d
-    type: data
-    size: 4549
-  - path: data/mind-clone-skills/sarah-drasner/SKILL.md
-    hash: sha256:091d432e3bdc9318a7aef110bef0fc0cae45637f82e8d4e704ca969de8c45f8e
-    type: data
-    size: 6362
-  - path: data/mind-clone-skills/scott-alexander/SKILL.md
-    hash: sha256:812bb37742bb542566f1f18913d31e19c84cce7889f3ce404f9ea11d5fc58d2b
-    type: data
-    size: 3132
-  - path: data/mind-clone-skills/scott-galloway/SKILL.md
-    hash: sha256:8a98d78926104e438d2bfed5bffb72dca8d1116fea7b6de798956387723da3db
-    type: data
-    size: 5647
-  - path: data/mind-clone-skills/scott-hanselman/SKILL.md
-    hash: sha256:ab5eb36602fadb3c519d3e6a7211acd64c053e75bebbfaffd150e5149254c536
-    type: data
-    size: 5709
-  - path: data/mind-clone-skills/sean-duffy/SKILL.md
-    hash: sha256:25cd444b6a2f8b9bdb4a632f0f1240d999e12cea84720d3b9c6cef8cf3636db3
-    type: data
-    size: 6846
-  - path: data/mind-clone-skills/seth-godin/SKILL.md
-    hash: sha256:c42645efb7404c2669f40880aa99ab1101f44967268af5c4aa371d4579d2a48c
-    type: data
-    size: 5308
-  - path: data/mind-clone-skills/simon-sinek/SKILL.md
-    hash: sha256:2d98677e560a83a90a64a1a11d354436fc01c457eee938d61b0ac979c476bb6d
-    type: data
-    size: 5303
-  - path: data/mind-clone-skills/simon-willison/SKILL.md
-    hash: sha256:6909288a7fbf58a6231fb0dcb20cc792a51f875619bd5a276348e639ed4e3c73
-    type: data
-    size: 4732
-  - path: data/mind-clone-skills/sop-extractor/SKILL.md
-    hash: sha256:27ea972caaf1e8062ae8cc07dc4a4251dcebf6ca25630c65ef0e662f2379ff41
-    type: data
-    size: 2344
-  - path: data/mind-clone-skills/stephen-hahn/SKILL.md
-    hash: sha256:51baa3b9e111d1427208ac1557c100ea546d182a1f761ac8c3ff141e914453d8
-    type: data
-    size: 6125
-  - path: data/mind-clone-skills/steve-blank/SKILL.md
-    hash: sha256:3b328abf6993cae83906b766a693c77c4595c4e5435be0e5aa727f5e3826850e
-    type: data
-    size: 2573
-  - path: data/mind-clone-skills/sugata-mitra/SKILL.md
-    hash: sha256:5c2936be9fe70b140ae4beef251f47a4da6db3d401bf0cf0ed37aa07d1c02fc8
-    type: data
-    size: 5822
-  - path: data/mind-clone-skills/swyx/SKILL.md
-    hash: sha256:9663cdc35a828c6f76150084c0a67ace393f1d6d2e9bf6753e74e65ff0652932
-    type: data
-    size: 2343
-  - path: data/mind-clone-skills/teresa-torres/SKILL.md
-    hash: sha256:0725886f8882707dcd2f10ac0e87892cc8208a713b0a0c9d152de70053b539d0
-    type: data
-    size: 3313
-  - path: data/mind-clone-skills/theo-polymarket/SKILL.md
-    hash: sha256:ad719c1548517417849a09ae199050c9ebdbe235b0b55ab4e2f56f9a02194ff5
-    type: data
-    size: 3160
-  - path: data/mind-clone-skills/timnit-gebru/SKILL.md
-    hash: sha256:6db3c951998e9d4c9d2fe9fd0147cf07e89df7e725098653a369ba7ecd5d46a5
-    type: data
-    size: 2612
-  - path: data/mind-clone-skills/tobias-van-schneider/SKILL.md
-    hash: sha256:4e833db750525f65e6ac50a3e39cfd0a95c39f6d8f1b264e2a1929ff08c14f7f
-    type: data
-    size: 6523
-  - path: data/mind-clone-skills/troy-hunt/SKILL.md
-    hash: sha256:b535796f916fefd6bf8d5dd345fae803b06d430b98dcaad37c34b1362c6ff2f0
-    type: data
-    size: 5405
-  - path: data/mind-clone-skills/ui-designer/SKILL.md
-    hash: sha256:d7f28a430c73f682923d3516d455e5c37ca7e35a18ac10b4adf7b52d9beaaa5d
-    type: data
-    size: 4091
-  - path: data/mind-clone-skills/uncle-bob-martin/SKILL.md
-    hash: sha256:6e61e3826abe49c91420addf8499df1b9547fa78bc803e84b9d0fad53d2aea7f
-    type: data
-    size: 3262
-  - path: data/mind-clone-skills/ux-designer/SKILL.md
-    hash: sha256:1c18dc6979015a8706655b040688f44743a7ca963145a77e6ada7bb8838c3c11
-    type: data
-    size: 3503
-  - path: data/mind-clone-skills/ux-researcher/SKILL.md
-    hash: sha256:1e200923132f3ad8d9b71823c8660d3c2a1829a9e7febccdf8d0459a30691ad6
-    type: data
-    size: 4365
-  - path: data/mind-clone-skills/ux-writer/SKILL.md
-    hash: sha256:14c7ab3d0ab54397f8549fb41eec072bff4d50219a5f44c28c4877fa078a6b62
-    type: data
-    size: 4242
-  - path: data/mind-clone-skills/val-head/SKILL.md
-    hash: sha256:46d6538a11f9142a120a302f7b95f4d502a2fee4d2aa64f47c112bd7cf6b3c6c
-    type: data
-    size: 6496
-  - path: data/mind-clone-skills/vitaly-friedman/SKILL.md
-    hash: sha256:c45b5e81a1f365487c483e5d95d87649b826e40ca768d063a446bfc2da1b61c3
-    type: data
-    size: 5975
-  - path: data/mind-clone-skills/warren-buffett/SKILL.md
-    hash: sha256:69f313141422e252ef78ec96191419f42b6c138d46efe7003905e022b53d7fbd
-    type: data
-    size: 6012
-  - path: data/mind-clone-skills/werner-vogels/SKILL.md
-    hash: sha256:7d4eb5611a4c5e3fc5ac0903627e36355cf8c9dd2ca3bef08fc11fd7cbea45d9
-    type: data
-    size: 5006
-  - path: data/mind-clone-skills/wes-bush/SKILL.md
-    hash: sha256:6811249b39a8494fbaa6c8fe5eb803161be6dbefa679f9887b36ded8b1d982f9
-    type: data
-    size: 2896
-  - path: data/mind-clone-skills/will-larson/SKILL.md
-    hash: sha256:574b8809c16b6a0711568f40aa8b7782a0d05b9c9b5ae9de92bb4769ce6b247a
-    type: data
-    size: 5466
-  - path: data/mind-clone-skills/yann-lecun/SKILL.md
-    hash: sha256:335388e05506952bed107a9da56d88a091b6f61c3ca48d377157e98872d3a659
-    type: data
-    size: 6011
-  - path: data/mind-clone-skills/yu-kai-chou/SKILL.md
-    hash: sha256:b8101d5752f5e0ce2acfdb1f1c1272dbceac3b00b4ec450139bdb9ad827421fb
-    type: data
-    size: 3075
   - path: data/tech-presets/_template.md
     hash: sha256:1a7262912c8c8e264d307f0d38a1109bdb2b9bff9ea7d8855c768835201aa59b
     type: data
@@ -1952,14 +1236,6 @@ files:
     hash: sha256:7acc7123b9678ce4a48ee5c0e5f4d84665b7f3c34798178640c2c1e982c2e2c3
     type: data
     size: 2643
-  - path: data/trajectories/2026-05-04.jsonl
-    hash: sha256:b417327f2b57512633878b14b505d59c63772d3921eab7c85ed7a5ea617d65a3
-    type: data
-    size: 2743
-  - path: data/trajectories/2026-05-05.jsonl
-    hash: sha256:cde670f59e284b103118b9cb420a5a8222c08ad47c5f4368a5764eb0ab593844
-    type: data
-    size: 3332
   - path: data/workflow-patterns.yaml
     hash: sha256:3c3625a5d9eb6eca6f33e3ac35d20fa377b44b061dc1dbf6b04116c6c5722834
     type: data
@@ -2452,10 +1728,6 @@ files:
     hash: sha256:805ce1660ab1682327a7f5c372798f1927d6f7f0356b5b12d20eb4c8c6c32a4a
     type: script
     size: 3212
-  - path: development/scripts/anti-tailwind-default-check.js
-    hash: sha256:812aa5469881ccc06d875c51ef8234a0f402429df220902df429152dc04d46bb
-    type: script
-    size: 11232
   - path: development/scripts/apply-inline-greeting-all-agents.js
     hash: sha256:9cf5082fbcec95984127fdece65ce9b3e9b8e091510175535086714f290d9590
     type: script
@@ -2468,14 +1740,6 @@ files:
     hash: sha256:861428491ec5bb6741877381fd7e8506b2150f8c81a00d061ae499b2480c524d
     type: script
     size: 9814
-  - path: development/scripts/audit-agent-registry.js
-    hash: sha256:7bc2d72d7f6e99beb71e6c66d05bd549adbbfc0f1337e6732ffba48d7d5f7f22
-    type: script
-    size: 13767
-  - path: development/scripts/audit-squads.js
-    hash: sha256:bea6a4b68d57b7542a1c1e8aa56aafa103a953de936b38307b2aa3b0b38e58f6
-    type: script
-    size: 9227
   - path: development/scripts/backlog-manager.js
     hash: sha256:a1626b99b11cee20e982de7c166023baa6e6bebc34f7e78fabb947c8ae22a8de
     type: script
@@ -2544,18 +1808,10 @@ files:
     hash: sha256:4385acbfd7c184a38e123f7a20b5e7b06c1d89d645a6e1bae1c5e0e4232d5181
     type: script
     size: 8111
-  - path: development/scripts/fix-mindclone-yaml-quotes.js
-    hash: sha256:00c0baa3aac39ee97c50932197db5a4b0e4fbf5420d7df2ac4e8154d47301e3a
-    type: script
-    size: 5056
   - path: development/scripts/generate-greeting.js
     hash: sha256:5e1cb02f7a4baa664913338ff9d00c54976e8f79c2f13901aff7043308c27063
     type: script
     size: 4141
-  - path: development/scripts/generate-squad-readmes.js
-    hash: sha256:b625492967bb2801e06a5bc0791f8d7a4f50d92deb2a142c7b8d4741722018af
-    type: script
-    size: 6161
   - path: development/scripts/git-wrapper.js
     hash: sha256:88644f25e4312f4cfa49323d80adfee16f299c22830136f1bb07ddc15ca1d445
     type: script
@@ -2580,10 +1836,6 @@ files:
     hash: sha256:e08baea0b02b2f54973794f9df786cee2432a98bd0ba0290e3922b025e629fef
     type: script
     size: 21726
-  - path: development/scripts/migrate-mindclones-to-skillmd.js
-    hash: sha256:2068c1490310423c0e67382e65b428923604557e194d4ee41264c6212cc6c2a7
-    type: script
-    size: 11124
   - path: development/scripts/migrate-task-to-v2.js
     hash: sha256:50d0affb4b69de2237ec43c0a89d39d64faa40d25b76835d7ab8907553b4dc54
     type: script
@@ -2604,18 +1856,10 @@ files:
     hash: sha256:836f1261d296a949eb0c6d2e754afc1115854a39cff8927c82c6efd6fd693290
     type: script
     size: 8388
-  - path: development/scripts/pre-commit-agent-drift.js
-    hash: sha256:1b87a02a54cf8fbf60bf64f3cd65b3796cd0076c9771bd5f5d41d7b68ffbb8bf
-    type: script
-    size: 2331
   - path: development/scripts/refactoring-suggester.js
     hash: sha256:d5183f79fae9dc4bf4d3c9136b3622e43a63643a7df622742c350931e45f18f4
     type: script
     size: 34675
-  - path: development/scripts/reinforce-squads.js
-    hash: sha256:4df40a892626dc7e526cb2211deec4d26cdad07f0984497b540ef25bff64881e
-    type: script
-    size: 17742
   - path: development/scripts/rollback-handler.js
     hash: sha256:b18a9451fa3f8919733251857dbad2bc4b7ecbf782e6c114b88bc867358421a9
     type: script
@@ -2696,10 +1940,6 @@ files:
     hash: sha256:c0b3827168b691bec36b3b64e54da982fc2ccc9b5d88843b5b60f55e5d2547d5
     type: script
     size: 1844
-  - path: development/scripts/standardize-squad-shape.js
-    hash: sha256:ad9c99e7523538fa3f703a3a6c85f3bf7208044f9ef27851af82f048bd7192a4
-    type: script
-    size: 2377
   - path: development/scripts/story-index-generator.js
     hash: sha256:5c9bf1339857e25b20875193c6dd42ac6c829491c0f46ba26bf07652aff6ed8b
     type: script
@@ -2732,10 +1972,6 @@ files:
     hash: sha256:a4b842ae6d1f7ea5224bd789e258b8dcda1b2e16b41c25f0cc603055eb091bda
     type: script
     size: 5533
-  - path: development/scripts/trajectory-dashboard.js
-    hash: sha256:02233b7fc2b778f8c5ab95ad985d92ed8df4d174d77b755a684a05e5e786e1ae
-    type: script
-    size: 13848
   - path: development/scripts/transaction-manager.js
     hash: sha256:c9a769a030b1357208852a1ac4a0cce756a2f3ba6b541a21699cf19be7472023
     type: script
@@ -2744,10 +1980,6 @@ files:
     hash: sha256:dd1ad8050ac6ea04ff634434be9b97f67239ee0a7342d669bc5618eb2b7a7f5b
     type: script
     size: 29211
-  - path: development/scripts/update-mindclone-activation-step.js
-    hash: sha256:12f823515c7b12f3bc3e81b6d793a21ae8f75ea6e44d272d867141c730ffd464
-    type: script
-    size: 4354
   - path: development/scripts/usage-tracker.js
     hash: sha256:b3079713787de7c6ac38a742255861f04e8359ef1b227836040920a64b7e8aac
     type: script
@@ -2912,10 +2144,6 @@ files:
     hash: sha256:cd4e1d63aaef58bc622fb86276344f01c2919eb807c7fc2c6106fe92087bf702
     type: task
     size: 32261
-  - path: development/tasks/collect-visual-references.md
-    hash: sha256:6053b1b286780b10369e2de1e2b6398d3ecd7ef4bd9be30991998f6c0db6f833
-    type: task
-    size: 21941
   - path: development/tasks/compose-molecule.md
     hash: sha256:00ebc6b401ebf6b3ae2e289ba5d54cfe94ae08bf24f67c5354974f636f584247
     type: task
