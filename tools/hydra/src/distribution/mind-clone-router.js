@@ -159,15 +159,35 @@ function departmentMatchesDomains(cloneDepartment, contentDomains, domainsConfig
   const deptToDomainMap = {
     'ai-science': ['ai-ml'],
     'growth': ['marketing', 'negocios'],
+    'growth-ops': ['marketing', 'negocios'],
     'expert-council': ['engenharia'],
     'product': ['negocios'],
+    'product-ops': ['negocios'],
     'engineering': ['engenharia'],
+    'engineering-ops': ['engenharia'],
     'design': ['design-interiores'],
+    'design-ops': ['design-interiores'],
     'legal': ['legal'],
+    'legal-ops': ['legal'],
     'marketing': ['marketing'],
-    'sales': ['negocios', 'moveis-luxo'],
+    'marketing-ops': ['marketing', 'negocios'],
+    'sales': ['negocios', 'moveis-luxo', 'marketing'],
+    'sales-ops': ['negocios', 'moveis-luxo', 'marketing'],
     'mental-health': ['saude-mental'],
+    'mental-health-ops': ['saude-mental'],
     'clinical': ['saude-mental'],
+    'clinical-ops': ['saude-mental'],
+    'therapy': ['saude-mental'],                    // 4 clones (Anipis)
+    'design-terapeutico': ['saude-mental', 'design-interiores'],  // 3 clones (Anipis UX)
+    'health-tech': ['saude-mental', 'ai-ml', 'engenharia'],       // 2 clones
+    'health-data': ['saude-mental', 'ai-ml'],       // 1 clone
+    'customer-ops': ['negocios', 'marketing'],
+    'finance': ['negocios'],
+    'finance-ops': ['negocios'],
+    'product-research': ['negocios', 'marketing'],
+    'executive-team': ['negocios', 'marketing'],
+    'innovation': ['ai-ml', 'engenharia', 'negocios'],
+    'aios-agent': [],                               // 40 AIOS core agents — not auto-routed
   };
 
   const mappedDomains = deptToDomainMap[normalizedDept] || [];

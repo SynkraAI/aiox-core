@@ -1,6 +1,6 @@
 routing:
   min_relevance_score: 0.3
-  max_clones_per_item: 10
+  max_clones_per_item: 25
   tier_priority_map:
     S: urgent
     A: normal
