@@ -467,6 +467,7 @@ Expected implementation touchpoints:
 - 2026-05-12: `@aiox-squads/installer` bumped to `3.3.2` and `@aiox-squads/aiox-pro-cli` bumped to `0.2.1` so @devops can publish the signed-artifact installer and scoped CLI command fix.
 - 2026-05-12: GitHub Pro Integration checkout fixed to use `GITHUB_TOKEN` for the `aiox-core` PR merge ref and reserve `PRO_SUBMODULE_TOKEN` for private Pro submodule initialization only.
 - 2026-05-12: CodeRabbit PR follow-up applied: Pro Integration now injects the credentialized submodule URL through process-scoped `GIT_CONFIG_*` environment variables, and Pro wizard tests use repository-absolute package imports.
+- 2026-05-12: Release patch target advanced to `@aiox-squads/core@5.2.2` because npm latest is already `5.2.1`; the merged installer command fix must not be published from a regressive root package version.
 - Validation evidence:
   - `node -c packages/installer/src/wizard/pro-setup.js && node -c packages/aiox-pro-cli/bin/aiox-pro.js && node -c bin/utils/validate-publish.js`
   - `node -c packages/installer/src/pro/pro-scaffolder.js && node -c pro/license/license-api.js && node -c .aiox-core/cli/commands/pro/index.js`
