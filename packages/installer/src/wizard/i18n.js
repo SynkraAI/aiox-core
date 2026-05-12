@@ -122,7 +122,8 @@ const TRANSLATIONS = {
     proKeyRequired: 'License key is required',
     proKeyInvalid: 'Invalid format. Expected: PRO-XXXX-XXXX-XXXX-XXXX',
     proKeyValidated: 'License validated: {key}',
-    proModuleNotAvailable: 'Pro license module not available. Install AIOX Pro with `npx aiox-pro install`.',
+    proModuleNotAvailable:
+      'Pro license module not available. Run: npx -y -p @aiox-squads/core@latest aiox pro setup',
     proModuleBootstrap: 'Pro license module not found locally. Installing AIOX Pro to bootstrap...',
     proServerUnreachable: 'License server is unreachable. Check your internet connection and try again.',
     proVerifyingAccessShort: 'Verifying access...',
@@ -150,19 +151,21 @@ const TRANSLATIONS = {
     proInstallingPackage: 'Installing AIOX Pro package...',
     proPackageInstalled: 'Pro package installed',
     proPackageInstallFailed: 'Failed to install Pro package',
-    proScaffolderNotAvailable: 'Pro scaffolder not available. Install AIOX Pro with `npx aiox-pro install`.',
+    proScaffolderNotAvailable:
+      'Pro scaffolder not available. Run: npx -y -p @aiox-squads/core@latest aiox pro setup',
     proFilesInstalled: 'Files installed: {count}',
     proSquads: 'Squads: {names}',
     proConfigs: 'Configs: {count} files',
     proFeaturesUnlocked: 'Features unlocked: {count}',
     proInstallComplete: 'AIOX Pro installation complete!',
-    proNeedHelp: 'Need help? Run: npx aiox-pro recover',
+    proNeedHelp: 'Need help? Run: npx -y @aiox-squads/aiox-pro-cli@latest recover',
     proCISetEnv: 'CI mode: Set AIOX_PRO_EMAIL + AIOX_PRO_PASSWORD or AIOX_PRO_KEY environment variables.',
     proVerificationFailed: 'Verification failed: {message}',
     proPackageNotFound: 'Pro content source not found. Re-run Pro setup with email login or contact support.',
     proScaffolderNotFound: 'Pro scaffolder module not found.',
     proNpmInitFailed: 'npm init failed: {message}',
-    proNpmInstallFailed: 'AIOX Pro package install failed: {message}. Try manually: npx aiox-pro install',
+    proNpmInstallFailed:
+      'AIOX Pro package install failed: {message}. Try manually: npx -y -p @aiox-squads/core@latest aiox pro setup',
   },
 
   pt: {
@@ -281,7 +284,8 @@ const TRANSLATIONS = {
     proKeyRequired: 'Chave de licença é obrigatória',
     proKeyInvalid: 'Formato inválido. Esperado: PRO-XXXX-XXXX-XXXX-XXXX',
     proKeyValidated: 'Licença validada: {key}',
-    proModuleNotAvailable: 'Módulo de licença Pro não disponível. Instale o AIOX Pro com `npx aiox-pro install`.',
+    proModuleNotAvailable:
+      'Módulo de licença Pro não disponível. Execute: npx -y -p @aiox-squads/core@latest aiox pro setup',
     proModuleBootstrap: 'Módulo de licença Pro não encontrado localmente. Instalando o AIOX Pro...',
     proServerUnreachable: 'Servidor de licenças inacessível. Verifique sua conexão com a internet e tente novamente.',
     proVerifyingAccessShort: 'Verificando acesso...',
@@ -309,19 +313,21 @@ const TRANSLATIONS = {
     proInstallingPackage: 'Instalando pacote AIOX Pro...',
     proPackageInstalled: 'Pacote Pro instalado',
     proPackageInstallFailed: 'Falha ao instalar pacote Pro',
-    proScaffolderNotAvailable: 'Scaffolder Pro não disponível. Instale o AIOX Pro com `npx aiox-pro install`.',
+    proScaffolderNotAvailable:
+      'Scaffolder Pro não disponível. Execute: npx -y -p @aiox-squads/core@latest aiox pro setup',
     proFilesInstalled: 'Arquivos instalados: {count}',
     proSquads: 'Squads: {names}',
     proConfigs: 'Configs: {count} arquivos',
     proFeaturesUnlocked: 'Recursos desbloqueados: {count}',
     proInstallComplete: 'Instalação do AIOX Pro completa!',
-    proNeedHelp: 'Precisa de ajuda? Execute: npx aiox-pro recover',
+    proNeedHelp: 'Precisa de ajuda? Execute: npx -y @aiox-squads/aiox-pro-cli@latest recover',
     proCISetEnv: 'Modo CI: Defina as variáveis AIOX_PRO_EMAIL + AIOX_PRO_PASSWORD ou AIOX_PRO_KEY.',
     proVerificationFailed: 'Verificação falhou: {message}',
     proPackageNotFound: 'Fonte de conteúdo Pro não encontrada. Rode o setup Pro novamente com login por email ou contate o suporte.',
     proScaffolderNotFound: 'Módulo scaffolder Pro não encontrado.',
     proNpmInitFailed: 'npm init falhou: {message}',
-    proNpmInstallFailed: 'A instalação do pacote AIOX Pro falhou: {message}. Tente manualmente: npx aiox-pro install',
+    proNpmInstallFailed:
+      'A instalação do pacote AIOX Pro falhou: {message}. Tente manualmente: npx -y -p @aiox-squads/core@latest aiox pro setup',
   },
 
   es: {
@@ -439,7 +445,8 @@ const TRANSLATIONS = {
     proKeyRequired: 'Clave de licencia es obligatoria',
     proKeyInvalid: 'Formato inválido. Esperado: PRO-XXXX-XXXX-XXXX-XXXX',
     proKeyValidated: 'Licencia validada: {key}',
-    proModuleNotAvailable: 'Módulo de licencia Pro no disponible. Instale AIOX Pro con `npx aiox-pro install`.',
+    proModuleNotAvailable:
+      'Módulo de licencia Pro no disponible. Ejecute: npx -y -p @aiox-squads/core@latest aiox pro setup',
     proModuleBootstrap: 'Módulo de licencia Pro no encontrado localmente. Instalando AIOX Pro...',
     proServerUnreachable: 'Servidor de licencias inaccesible. Verifique su conexión a internet e intente nuevamente.',
     proVerifyingAccessShort: 'Verificando acceso...',
@@ -467,19 +474,21 @@ const TRANSLATIONS = {
     proInstallingPackage: 'Instalando paquete AIOX Pro...',
     proPackageInstalled: 'Paquete Pro instalado',
     proPackageInstallFailed: 'Error al instalar paquete Pro',
-    proScaffolderNotAvailable: 'Scaffolder Pro no disponible. Instale AIOX Pro con `npx aiox-pro install`.',
+    proScaffolderNotAvailable:
+      'Scaffolder Pro no disponible. Ejecute: npx -y -p @aiox-squads/core@latest aiox pro setup',
     proFilesInstalled: 'Archivos instalados: {count}',
     proSquads: 'Squads: {names}',
     proConfigs: 'Configs: {count} archivos',
     proFeaturesUnlocked: 'Funciones desbloqueadas: {count}',
     proInstallComplete: '¡Instalación de AIOX Pro completa!',
-    proNeedHelp: '¿Necesita ayuda? Ejecute: npx aiox-pro recover',
+    proNeedHelp: '¿Necesita ayuda? Ejecute: npx -y @aiox-squads/aiox-pro-cli@latest recover',
     proCISetEnv: 'Modo CI: Configure las variables AIOX_PRO_EMAIL + AIOX_PRO_PASSWORD o AIOX_PRO_KEY.',
     proVerificationFailed: 'Verificación fallida: {message}',
     proPackageNotFound: 'Fuente de contenido Pro no encontrada. Ejecuta el setup Pro nuevamente con login por email o contacta soporte.',
     proScaffolderNotFound: 'Módulo scaffolder Pro no encontrado.',
     proNpmInitFailed: 'npm init falló: {message}',
-    proNpmInstallFailed: 'La instalación del paquete AIOX Pro falló: {message}. Intente manualmente: npx aiox-pro install',
+    proNpmInstallFailed:
+      'La instalación del paquete AIOX Pro falló: {message}. Intente manualmente: npx -y -p @aiox-squads/core@latest aiox pro setup',
   },
 };
 

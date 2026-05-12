@@ -357,12 +357,18 @@ Implementation should preserve the open-core boundary:
 Expected implementation touchpoints:
 
 - `package.json`
+- `package-lock.json`
 - `bin/utils/validate-publish.js`
 - `packages/installer/src/wizard/pro-setup.js`
 - `packages/installer/src/pro/pro-scaffolder.js`
 - `packages/aiox-pro-cli/bin/aiox-pro.js`
+- `packages/aiox-pro-cli/package.json`
+- `packages/installer/package.json`
 - `packages/installer/src/wizard/i18n.js`
 - `docs/PUBLISHING.md`
+- `README.md`
+- `docs/guides/aiox-pro-access.md`
+- `docs/guides/pro/install-gate-setup.md`
 - `docs/guides/workflows/pro-developer-workflow.md`
 - `tests/pro-wizard.test.js`
 - `tests/installer/pro-setup-auth.test.js`
@@ -456,6 +462,8 @@ Expected implementation touchpoints:
 - 2026-05-09: Published `@aiox-squads/core@5.1.17`; npm `latest` resolves to `5.1.17`; clean install smoke confirms `aiox --version` returns `5.1.17`, the installed public package has zero `pro/` paths, and the installer default points to Pro artifact `0.4.2`.
 - 2026-05-08: GitHub CI follow-up fixed: `tests/pro-wizard.test.js` interactive license-key retry test now stubs the license client instead of reaching the real inline HTTP fallback, removing the Node 18 timeout while preserving prompt/retry assertions.
 - 2026-05-08: Merged `origin/main` and addressed CodeRabbit actionable comments: legacy `npm notice` size-prefixed pack output is normalized before `pro/` checks, `aiox-pro install/setup/wizard -k` is accepted, artifact download has an abort timeout, and artifact-installed Pro package cleanup runs on scaffold failures.
+- 2026-05-12: Student install incident triage confirmed the unscoped `npx aiox-pro recover/install/setup` path is invalid for fresh machines; installer and docs now point recovery to `npx -y @aiox-squads/aiox-pro-cli@latest recover` and setup to `npx -y -p @aiox-squads/core@latest aiox pro setup`.
+- 2026-05-12: `@aiox-squads/installer` bumped to `3.3.2` and `@aiox-squads/aiox-pro-cli` bumped to `0.2.1` so @devops can publish the signed-artifact installer and scoped CLI command fix.
 - Validation evidence:
   - `node -c packages/installer/src/wizard/pro-setup.js && node -c packages/aiox-pro-cli/bin/aiox-pro.js && node -c bin/utils/validate-publish.js`
   - `node -c packages/installer/src/pro/pro-scaffolder.js && node -c pro/license/license-api.js && node -c .aiox-core/cli/commands/pro/index.js`
@@ -463,6 +471,11 @@ Expected implementation touchpoints:
   - `npm run validate:publish`
   - `npm run typecheck`
   - `npm test -- --runInBand tests/pro-wizard.test.js tests/installer/pro-setup-auth.test.js tests/installer/pro-scaffolder.test.js tests/cli/validate-publish.test.js tests/pro/pro-updater.test.js tests/pro-recover.test.js`
+  - `node -c packages/installer/src/wizard/i18n.js && node -c packages/installer/src/wizard/pro-setup.js && node -c packages/installer/src/pro/pro-scaffolder.js && node -c packages/aiox-pro-cli/bin/aiox-pro.js`
+  - `npm test -- --runInBand tests/pro-wizard.test.js tests/installer/pro-setup-auth.test.js tests/pro-recover.test.js tests/installer/pro-scaffolder.test.js`
+  - `npm pack --workspace @aiox-squads/aiox-pro-cli --dry-run --json`
+  - `npm pack --workspace @aiox-squads/installer --dry-run --json`
+  - `npm run validate:publish`
   - `npx jest --runInBand tests/license/license-api.test.js --testPathIgnorePatterns='node_modules'`
   - full smoke matrix saved in `outputs/qa/2026-05-pro-13-5-smoke.json`
   - Pro artifact upload evidence saved in `outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.1.json`

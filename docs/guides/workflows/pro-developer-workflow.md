@@ -119,14 +119,14 @@ ls pro/package.json
 ### Customer Pro Setup
 
 ```bash
-npx aiox-pro setup
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 The setup flow uses email/password authentication. Normal customers do not need npm org access or `NPM_TOKEN`.
 
 Troubleshooting:
 
-- `Pro content source not found`: rerun `npx aiox-pro setup` and choose the email login/create-account flow.
+- `Pro content source not found`: rerun `npx -y -p @aiox-squads/core@latest aiox pro setup` and choose the email login/create-account flow.
 - `Pro artifact download failed`: retry after a few minutes; the signed URL is short-lived.
 - `Pro artifact sha256 mismatch`: stop and contact support. Do not scaffold from the downloaded artifact.
 - `No active Pro subscription`: confirm the email used for login matches the Pro purchase.

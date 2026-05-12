@@ -219,6 +219,8 @@ describe('CLI alias reset-password', () => {
       'utf-8',
     );
     expect(cliSource).toMatch(/reset-password\s+.*alias/i);
+    expect(cliSource).toContain('npx -y @aiox-squads/aiox-pro-cli@latest recover');
+    expect(cliSource).not.toContain('npx aiox-pro recover');
   });
 
   test('install and wizard accept short -k key flag', () => {

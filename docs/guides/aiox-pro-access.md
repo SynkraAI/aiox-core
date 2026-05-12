@@ -15,8 +15,7 @@ Se o instalador responder que não encontrou acesso para o email, o problema é 
 No projeto onde você quer usar o Pro:
 
 ```bash
-npx aiox-pro install
-npx aiox-pro setup
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 O setup guiado oferece dois caminhos:
@@ -29,14 +28,14 @@ Em automação/CI, use variáveis de ambiente:
 ```bash
 export AIOX_PRO_EMAIL="seu-email@exemplo.com"
 export AIOX_PRO_PASSWORD="sua-senha"
-npx aiox-pro setup
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 Ou, para chave legada:
 
 ```bash
 export AIOX_PRO_KEY="PRO-XXXX-XXXX-XXXX-XXXX"
-npx aiox-pro setup
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 ## Verificar o acesso
@@ -44,9 +43,9 @@ npx aiox-pro setup
 Depois de instalar:
 
 ```bash
-npx aiox-pro status
-npx aiox-pro features
-npx aiox-pro validate
+npx -y -p @aiox-squads/core@latest aiox pro status
+npx -y -p @aiox-squads/core@latest aiox pro features
+npx -y -p @aiox-squads/core@latest aiox pro validate
 ```
 
 Esses comandos verificam a licença, listam recursos Pro disponíveis e forçam uma revalidação online quando necessário.
@@ -58,7 +57,7 @@ As squads Pro são entregues pelo pacote Pro privado e sincronizadas pelo instal
 Se as squads não aparecerem depois de uma instalação bem-sucedida, rode:
 
 ```bash
-npx aiox-pro update
+npx -y -p @aiox-squads/core@latest aiox pro update
 npm run sync:ide
 ```
 
@@ -67,7 +66,7 @@ npm run sync:ide
 Para recuperar senha ou licença:
 
 ```bash
-npx aiox-pro recover
+npx -y @aiox-squads/aiox-pro-cli@latest recover
 ```
 
 Se o email comprado não for reconhecido, ou se a conta existir mas a ativação falhar, o fluxo operacional correto é acionar `@devops` com um destes comandos:
@@ -80,7 +79,7 @@ Se o email comprado não for reconhecido, ou se a conta existir mas a ativação
 ## Erros comuns
 
 - `No AIOX Pro access found for this email.`: o email ainda não tem entitlement Pro ou foi digitado diferente do cadastro.
-- `AIOX Pro is not installed.`: rode `npx aiox-pro install` antes de status/validate.
+- `AIOX Pro is not installed.`: rode `npx -y -p @aiox-squads/core@latest aiox pro setup` antes de status/validate.
 - `Invalid key format`: a chave legada precisa seguir o formato `PRO-XXXX-XXXX-XXXX-XXXX`.
 - Falha em CI sem prompt interativo: defina `AIOX_PRO_EMAIL` + `AIOX_PRO_PASSWORD` ou `AIOX_PRO_KEY`.
 

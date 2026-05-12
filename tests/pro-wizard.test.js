@@ -54,6 +54,10 @@ afterEach(() => {
 // ─── Helper to get module ───────────────────────────────────────────────────
 
 const proSetup = require('../packages/installer/src/wizard/pro-setup');
+const wizardI18n = require('../packages/installer/src/wizard/i18n');
+
+const CORE_PRO_SETUP_COMMAND = 'npx -y -p @aiox-squads/core@latest aiox pro setup';
+const SCOPED_PRO_RECOVER_COMMAND = 'npx -y @aiox-squads/aiox-pro-cli@latest recover';
 
 // ─── maskLicenseKey ──────────────────────────────────────────────────────────
 
@@ -143,6 +147,23 @@ describe('showProHeader', () => {
     const output = console.log.mock.calls.map((c) => String(c[0] || '')).join('\n');
     expect(output).toContain('AIOX Pro');
     expect(output).toContain('Premium');
+  });
+});
+
+// ─── recovery/install command hints ─────────────────────────────────────────
+
+describe('Pro command hints', () => {
+  afterEach(() => {
+    wizardI18n.setLanguage('en');
+  });
+
+  test.each(['en', 'pt', 'es'])('uses published scoped npx commands in %s', (language) => {
+    wizardI18n.setLanguage(language);
+
+    expect(wizardI18n.t('proNeedHelp')).toContain(SCOPED_PRO_RECOVER_COMMAND);
+    expect(wizardI18n.t('proNeedHelp')).not.toContain('npx aiox-pro');
+    expect(wizardI18n.t('proModuleNotAvailable')).toContain(CORE_PRO_SETUP_COMMAND);
+    expect(wizardI18n.t('proScaffolderNotAvailable')).toContain(CORE_PRO_SETUP_COMMAND);
   });
 });
 

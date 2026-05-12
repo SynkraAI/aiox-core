@@ -80,7 +80,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
   // Validate pro source exists
   if (!(await fs.pathExists(proSourceDir))) {
     result.errors.push(
-      `Pro package not found at ${proSourceDir}. Run "npx aiox-pro install" or "aiox pro setup" first.`,
+      `Pro package not found at ${proSourceDir}. Run "npx -y -p @aiox-squads/core@latest aiox pro setup" or "aiox pro setup" first.`,
     );
     return result;
   }

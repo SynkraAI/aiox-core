@@ -4,7 +4,7 @@
  * aiox-pro CLI
  *
  * Thin CLI wrapper for AIOX Pro setup and delegated commands.
- * Provides a clean npx interface: npx aiox-pro install
+ * Provides a clean npx interface: npx @aiox-squads/aiox-pro-cli install
  *
  * Commands:
  *   install             Run authenticated Pro setup in the current project
@@ -121,7 +121,7 @@ function showHelp() {
 aiox-pro v${VERSION} — AIOX Pro CLI
 
 Usage:
-  npx aiox-pro <command> [options]
+  npx -y @aiox-squads/aiox-pro-cli@latest <command> [options]
 
 Commands:
   install              Run authenticated Pro setup in the current project
@@ -137,14 +137,14 @@ Commands:
   help                 Show this help message
 
 Examples:
-  npx aiox-pro install
-  npx aiox-pro update
-  npx aiox-pro setup
-  npx aiox-pro wizard --key PRO-XXXX-XXXX-XXXX-XXXX
-  npx aiox-pro install -k PRO-XXXX-XXXX-XXXX-XXXX
-  npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
-  npx aiox-pro status
-  npx aiox-pro recover
+  npx -y @aiox-squads/aiox-pro-cli@latest install
+  npx -y @aiox-squads/aiox-pro-cli@latest update
+  npx -y @aiox-squads/aiox-pro-cli@latest setup
+  npx -y @aiox-squads/aiox-pro-cli@latest wizard --key PRO-XXXX-XXXX-XXXX-XXXX
+  npx -y @aiox-squads/aiox-pro-cli@latest install -k PRO-XXXX-XXXX-XXXX-XXXX
+  npx -y @aiox-squads/aiox-pro-cli@latest activate --key PRO-XXXX-XXXX-XXXX-XXXX
+  npx -y @aiox-squads/aiox-pro-cli@latest status
+  npx -y @aiox-squads/aiox-pro-cli@latest recover
 
 Documentation: https://synkra.ai/pro/docs
 `);

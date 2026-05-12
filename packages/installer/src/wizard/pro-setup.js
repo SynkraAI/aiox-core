@@ -815,7 +815,7 @@ async function acquireProArtifactSourceDir(targetDir, licenseResult, options = {
     return {
       success: false,
       error:
-        'Authenticated Pro artifact download requires email/password login. Run `npx aiox-pro setup` and choose the login/create-account flow.',
+        'Authenticated Pro artifact download requires email/password login. Run `npx -y -p @aiox-squads/core@latest aiox pro setup` and choose the login/create-account flow.',
     };
   }
 

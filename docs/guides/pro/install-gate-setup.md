@@ -18,7 +18,7 @@ Comprar Licença -> Validar -> Baixar artefato assinado -> Usar Features Pro
 
 | Pacote | Tipo | Propósito |
 |--------|------|-----------|
-| `aiox-pro` | CLI (1.8 KB) | Comandos de instalação e gerenciamento |
+| `@aiox-squads/aiox-pro-cli` | CLI | Comandos de recuperação e compatibilidade |
 | `@aiox-squads/pro` | Artefato premium | Pacote Pro canônico, entregue ao cliente pelo artifact broker autenticado |
 
 ---
@@ -27,13 +27,13 @@ Comprar Licença -> Validar -> Baixar artefato assinado -> Usar Features Pro
 
 ```bash
 # Instalar AIOX Pro (instala o pacote Pro compatível automaticamente)
-npx aiox-pro install
+npx -y -p @aiox-squads/core@latest aiox pro setup
 
-# Ativar sua licenca
-npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
+# Ativar sua licença por chave legada
+npx -y -p @aiox-squads/core@latest aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
 
-# Verificar ativacao
-npx aiox-pro status
+# Verificar ativação
+npx -y -p @aiox-squads/core@latest aiox pro status
 ```
 
 ---
@@ -48,7 +48,7 @@ npx aiox-pro status
 ### Passo 1: Instalar AIOX Pro
 
 ```bash
-npx aiox-pro install
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 Isso valida sua licença e instala o artefato canônico `@aiox-squads/pro` no projeto. O cliente não precisa de acesso direto ao pacote privado/restrito no npm.
@@ -56,7 +56,7 @@ Isso valida sua licença e instala o artefato canônico `@aiox-squads/pro` no pr
 **Se você já tem o artefato Pro instalado por outro fluxo autorizado**, rode novamente o bootstrap para revalidar e re-scaffoldar o conteúdo Pro:
 
 ```bash
-npx aiox-pro install
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 ### Passo 2: Ativar Licenca
@@ -64,7 +64,7 @@ npx aiox-pro install
 Apos a compra, voce recebera uma chave no formato `PRO-XXXX-XXXX-XXXX-XXXX`.
 
 ```bash
-npx aiox-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
+npx -y -p @aiox-squads/core@latest aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
 ```
 
 Esse comando:
@@ -76,10 +76,10 @@ Esse comando:
 
 ```bash
 # Status da licenca
-npx aiox-pro status
+npx -y -p @aiox-squads/core@latest aiox pro status
 
 # Listar features disponiveis
-npx aiox-pro features
+npx -y -p @aiox-squads/core@latest aiox pro features
 ```
 
 ---
@@ -88,13 +88,13 @@ npx aiox-pro features
 
 | Comando | Descricao |
 |---------|-----------|
-| `npx aiox-pro install` | Instala o pacote AIOX Pro compatível no projeto |
-| `npx aiox-pro activate --key KEY` | Ativa uma chave de licenca |
-| `npx aiox-pro status` | Mostra status da licenca atual |
-| `npx aiox-pro features` | Lista todas as features pro e disponibilidade |
-| `npx aiox-pro validate` | Forca revalidacao online da licenca |
-| `npx aiox-pro deactivate` | Desativa a licenca nesta maquina |
-| `npx aiox-pro help` | Mostra todos os comandos |
+| `npx -y -p @aiox-squads/core@latest aiox pro setup` | Instala o pacote AIOX Pro compatível no projeto |
+| `npx -y -p @aiox-squads/core@latest aiox pro activate --key KEY` | Ativa uma chave de licença |
+| `npx -y -p @aiox-squads/core@latest aiox pro status` | Mostra status da licença atual |
+| `npx -y -p @aiox-squads/core@latest aiox pro features` | Lista todas as features Pro e disponibilidade |
+| `npx -y -p @aiox-squads/core@latest aiox pro validate` | Força revalidação online da licença |
+| `npx -y -p @aiox-squads/core@latest aiox pro deactivate` | Desativa a licença nesta máquina |
+| `npx -y -p @aiox-squads/core@latest aiox pro help` | Mostra todos os comandos |
 
 ---
 
@@ -107,9 +107,9 @@ Apos a instalacao e ativacao, o AIOX Pro funciona offline:
 - Verificacao de features 100% local no dia a dia
 
 A internet so e necessaria para:
-1. Ativacao inicial (`npx aiox-pro activate`)
+1. Ativação inicial (`npx -y -p @aiox-squads/core@latest aiox pro activate`)
 2. Revalidacao periodica (automatica a cada 30 dias)
-3. Desativacao (`npx aiox-pro deactivate`)
+3. Desativação (`npx -y -p @aiox-squads/core@latest aiox pro deactivate`)
 
 ---
 
@@ -120,17 +120,17 @@ Para pipelines, instale e ative usando secrets de ambiente:
 **GitHub Actions:**
 ```yaml
 - name: Install AIOX Pro
-  run: npx aiox-pro install
+  run: npx -y -p @aiox-squads/core@latest aiox pro setup
 
 - name: Activate License
-  run: npx aiox-pro activate --key ${{ secrets.AIOX_PRO_LICENSE_KEY }}
+  run: npx -y -p @aiox-squads/core@latest aiox pro activate --key ${{ secrets.AIOX_PRO_LICENSE_KEY }}
 ```
 
 **GitLab CI:**
 ```yaml
 before_script:
-  - npx aiox-pro install
-  - npx aiox-pro activate --key ${AIOX_PRO_LICENSE_KEY}
+  - npx -y -p @aiox-squads/core@latest aiox pro setup
+  - npx -y -p @aiox-squads/core@latest aiox pro activate --key ${AIOX_PRO_LICENSE_KEY}
 ```
 
 ---
@@ -153,7 +153,7 @@ License activation failed: Invalid key format
 License activation failed: Maximum seats exceeded
 ```
 
-- Desative a licenca na outra maquina: `npx aiox-pro deactivate`
+- Desative a licença na outra máquina: `npx -y -p @aiox-squads/core@latest aiox pro deactivate`
 - Ou contate support para aumentar o limite de seats
 
 ### Erro de rede na ativacao
@@ -173,7 +173,7 @@ License activation failed: ECONNREFUSED
 ```
 ┌─────────────────┐     ┌─────────────────────────────────┐     ┌──────────┐
 │  Cliente (CLI)   │────>│  License Server (Vercel)        │────>│ Supabase │
-│  npx aiox-pro    │<────│  aiox-license-server.vercel.app │<────│ Database │
+│  aiox pro        │<────│  aiox-license-server.vercel.app │<────│ Database │
 └─────────────────┘     └─────────────────────────────────┘     └──────────┘
                                                                       │
                                                                       │

@@ -1,6 +1,6 @@
 {
   "name": "@aiox-squads/aiox-pro-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "CLI for AIOX Pro — install, activate and manage your license",
   "bin": {
     "aiox-pro": "bin/aiox-pro.js"
@@ -10,7 +10,7 @@
     "src/"
   ],
   "dependencies": {
-    "@aiox-squads/installer": "^3.3.0",
+    "@aiox-squads/installer": "^3.3.2",
     "open": "^10.0.0"
   },
   "keywords": [

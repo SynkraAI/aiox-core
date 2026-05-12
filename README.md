@@ -618,8 +618,7 @@ Para saber como acessar, ativar, recuperar conta e validar as squads Pro, consul
 ### Instalação
 
 ```bash
-npx aiox-pro install
-npx aiox-pro setup
+npx -y -p @aiox-squads/core@latest aiox pro setup
 ```
 
 ### Identificação Estável de Máquina (>= 5.0.8)
