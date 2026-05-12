@@ -32,20 +32,20 @@ El Enrutamiento de LLM proporciona dos comandos para diferentes casos de uso:
 
 ### Instalacion
 
-**Opcion 1: Si tienes aios-core clonado**
+**Opcion 1: Si tienes aiox-core clonado**
 ```bash
-# Desde el directorio aios-core
-node .aios-core/infrastructure/scripts/llm-routing/install-llm-routing.js
+# Desde el directorio aiox-core
+node .aiox-core/infrastructure/scripts/llm-routing/install-llm-routing.js
 ```
 
 **Opcion 2: Instalacion nueva**
 ```bash
 # Clonar el repositorio
-git clone https://github.com/SynkraAI/aios-core.git
-cd aios-core
+git clone https://github.com/SynkraAI/aiox-core.git
+cd aiox-core
 
 # Ejecutar el instalador
-node .aios-core/infrastructure/scripts/llm-routing/install-llm-routing.js
+node .aiox-core/infrastructure/scripts/llm-routing/install-llm-routing.js
 ```
 
 ### Configurar Clave API de DeepSeek
@@ -246,8 +246,8 @@ El endpoint `/anthropic` de DeepSeek soporta llamadas a herramientas. Si las her
 
 Editar los archivos de plantilla si necesitas modelos diferentes:
 
-**Windows:** `.aios-core/infrastructure/scripts/llm-routing/templates/claude-free.cmd`
-**Unix:** `.aios-core/infrastructure/scripts/llm-routing/templates/claude-free.sh`
+**Windows:** `.aiox-core/infrastructure/scripts/llm-routing/templates/claude-free.cmd`
+**Unix:** `.aiox-core/infrastructure/scripts/llm-routing/templates/claude-free.sh`
 
 Cambiar:
 ```bash
@@ -286,9 +286,9 @@ rm ~/bin/claude-max
 
 ## Recursos Relacionados
 
-- **Definicion de Herramienta:** `.aios-core/infrastructure/tools/cli/llm-routing.yaml`
-- **Script de Instalacion:** `.aios-core/infrastructure/scripts/llm-routing/install-llm-routing.js`
-- **Definicion de Tarea:** `.aios-core/development/tasks/setup-llm-routing.md`
+- **Definicion de Herramienta:** `.aiox-core/infrastructure/tools/cli/llm-routing.yaml`
+- **Script de Instalacion:** `.aiox-core/infrastructure/scripts/llm-routing/install-llm-routing.js`
+- **Definicion de Tarea:** `.aiox-core/development/tasks/setup-llm-routing.md`
 - **API de DeepSeek:** <https://platform.deepseek.com/api_keys>
 
 ---
@@ -309,4 +309,4 @@ R: Las claves se cargan desde archivos `.env` (no los subas al repositorio!) o v
 
 ---
 
-*Generado por AIOS Framework - Story 6.7*
+*Generado por AIOX Framework - Story 6.7*

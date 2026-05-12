@@ -6,7 +6,7 @@
 const {
   TaskComplexityClassifier,
   COMPLEXITY_INDICATORS,
-} = require('../../../.aios-core/core/orchestration/task-complexity-classifier');
+} = require('../../../.aiox-core/core/orchestration/task-complexity-classifier');
 
 describe('TaskComplexityClassifier', () => {
   let classifier;

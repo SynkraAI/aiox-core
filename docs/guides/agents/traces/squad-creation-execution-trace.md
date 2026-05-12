@@ -1,7 +1,7 @@
 # @squad-creator (Craft) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/squad-creator.md`
+> Agent definition: `.aiox-core/development/agents/squad-creator.md`
 
 ## 1. Activation Trace
 
@@ -9,12 +9,12 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/squad-creator.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation (no squad-creator entry found) |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 6 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/squad-creator.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation (no squad-creator entry found) |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 6 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -73,7 +73,7 @@ squad-creator:
   files_loaded: []                  # no agent-specific files eagerly loaded
   lazy_loading:
     agent_registry: true            # Load when validating/creating squads (ACT-8)
-    expansion_pack_manifest: true   # Load when managing expansion packs (ACT-8)
+    squad_manifest: true   # Load when managing squads (ACT-8)
   performance_target: <150ms
 ```
 
@@ -114,7 +114,7 @@ squad-creator:
 
 ### `*design-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-design.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-design.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -152,7 +152,7 @@ flowchart TD
 
 ### `*create-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-create.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-create.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -161,7 +161,7 @@ flowchart TD
 | `squad-generator.js` | Script | EXISTS |
 | `squad-validator.js` | Script | EXISTS |
 | `squad-schema.json` | Schema | EXISTS |
-| `.aios-core/development/templates/squad-template/` | Template scaffold | EXISTS |
+| `.aiox-core/development/templates/squad-template/` | Template scaffold | EXISTS |
 
 **Execution flow:**
 
@@ -197,7 +197,7 @@ flowchart TD
 
 ### `*validate-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-validate.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-validate.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -234,7 +234,7 @@ flowchart TD
 
 ### `*list-squads`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-list.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-list.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -268,7 +268,7 @@ flowchart TD
 
 ### `*migrate-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-migrate.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-migrate.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -283,7 +283,7 @@ flowchart TD
 flowchart TD
     A["*migrate-squad {path}"] --> B[Load squad-creator-migrate.md task]
     B --> C[Analyze squad for legacy patterns]
-    C --> D["Detect: config.yaml, flat structure,<br/>missing aios.type, missing aios.minVersion"]
+    C --> D["Detect: config.yaml, flat structure,<br/>missing aiox.type, missing aiox.minVersion"]
     D --> E{Needs migration?}
     E -->|no| F[Report: already up to date]
     E -->|yes| G{--dry-run?}
@@ -294,13 +294,13 @@ flowchart TD
     K --> L[Generate migration report]
 ```
 
-**Migration detections:** config.yaml (rename to squad.yaml), flat structure (create dirs), missing fields (aios.type, aios.minVersion, name, version)
+**Migration detections:** config.yaml (rename to squad.yaml), flat structure (create dirs), missing fields (aiox.type, aiox.minVersion, name, version)
 
 ---
 
 ### `*analyze-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-analyze.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-analyze.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -335,7 +335,7 @@ flowchart TD
 
 ### `*extend-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-extend.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-extend.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -344,14 +344,14 @@ flowchart TD
 | `squad-loader.js` | Script | EXISTS |
 | `squad-extender.js` | Script | EXISTS |
 | `squad-validator.js` | Script | EXISTS |
-| `.aios-core/development/templates/squad/agent-template.md` | Template | EXISTS |
-| `.aios-core/development/templates/squad/task-template.md` | Template | EXISTS |
-| `.aios-core/development/templates/squad/workflow-template.yaml` | Template | EXISTS |
-| `.aios-core/development/templates/squad/checklist-template.md` | Template | EXISTS |
-| `.aios-core/development/templates/squad/template-template.md` | Template | EXISTS |
-| `.aios-core/development/templates/squad/tool-template.js` | Template | EXISTS |
-| `.aios-core/development/templates/squad/script-template.js` | Template | EXISTS |
-| `.aios-core/development/templates/squad/data-template.yaml` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/agent-template.md` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/task-template.md` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/workflow-template.yaml` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/checklist-template.md` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/template-template.md` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/tool-template.js` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/script-template.js` | Template | EXISTS |
+| `.aiox-core/development/templates/squad/data-template.yaml` | Template | EXISTS |
 
 **Execution flow:**
 
@@ -381,7 +381,7 @@ flowchart TD
 
 ### `*download-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-download.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-download.md`
 **Status:** Active (Sprint 8)
 
 **Dependencies loaded:**
@@ -397,7 +397,7 @@ flowchart TD
 flowchart TD
     A["*download-squad {name}"] --> B[Load squad-creator-download.md task]
     B --> C{--list flag?}
-    C -->|yes| D[Fetch registry.json from aios-squads]
+    C -->|yes| D[Fetch registry.json from aiox-squads]
     C -->|no| E{Squad exists locally?}
     D --> F[Display available squads]
     E -->|yes and no --overwrite| G[Error: already exists]
@@ -410,13 +410,13 @@ flowchart TD
     M --> N[Display success + next steps]
 ```
 
-**Source:** `github.com/SynkraAI/aios-squads`
+**Source:** `github.com/SynkraAI/aiox-squads`
 
 ---
 
 ### `*publish-squad`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-publish.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-publish.md`
 **Status:** Active (Sprint 8)
 
 **Dependencies loaded:**
@@ -437,7 +437,7 @@ flowchart TD
     D -->|yes| F[Check gh auth status]
     F --> G{--dry-run?}
     G -->|yes| H[Preview PR details and exit]
-    G -->|no| I[Fork/clone aios-squads]
+    G -->|no| I[Fork/clone aiox-squads]
     I --> J["Create branch: squad/{name}"]
     J --> K["Copy files to packages/{name}/"]
     K --> L[Update registry.json]
@@ -446,7 +446,7 @@ flowchart TD
     N --> O[Display PR URL]
 ```
 
-**Target:** `github.com/SynkraAI/aios-squads` via Pull Request
+**Target:** `github.com/SynkraAI/aiox-squads` via Pull Request
 
 **Tools used:** github-cli (gh auth, gh pr create)
 
@@ -454,7 +454,7 @@ flowchart TD
 
 ### `*sync-squad-synkra`
 
-**Task file:** `.aios-core/development/tasks/squad-creator-sync-synkra.md`
+**Task file:** `.aiox-core/development/tasks/squad-creator-sync-synkra.md`
 **Status:** Active (Sprint 8)
 
 **Dependencies loaded:**
@@ -643,7 +643,7 @@ graph TD
 | @squad-creator -> @dev | Handoff | Squad created, needs code implementation |
 | @squad-creator -> @qa | Handoff | Squad created, needs quality review |
 | @squad-creator -> @devops | Delegate | Publishing, deployment, git push operations |
-| @aios-master -> @squad-creator | Invokes | Component creation (agents, tasks, workflows) |
+| @aiox-master -> @squad-creator | Invokes | Component creation (agents, tasks, workflows) |
 | @pm -> @squad-creator | Receives | Requirements for new squads |
 | @architect -> @squad-creator | Receives | Architecture decisions affecting squad structure |
 
@@ -681,56 +681,56 @@ graph TD
 ### Complete File Inventory
 
 **Tasks (11 files, all EXISTS):**
-- `.aios-core/development/tasks/squad-creator-design.md`
-- `.aios-core/development/tasks/squad-creator-create.md`
-- `.aios-core/development/tasks/squad-creator-validate.md`
-- `.aios-core/development/tasks/squad-creator-list.md`
-- `.aios-core/development/tasks/squad-creator-migrate.md`
-- `.aios-core/development/tasks/squad-creator-analyze.md`
-- `.aios-core/development/tasks/squad-creator-extend.md`
-- `.aios-core/development/tasks/squad-creator-download.md`
-- `.aios-core/development/tasks/squad-creator-publish.md`
-- `.aios-core/development/tasks/squad-creator-sync-synkra.md`
-- `.aios-core/development/tasks/squad-creator-sync-ide-command.md`
+- `.aiox-core/development/tasks/squad-creator-design.md`
+- `.aiox-core/development/tasks/squad-creator-create.md`
+- `.aiox-core/development/tasks/squad-creator-validate.md`
+- `.aiox-core/development/tasks/squad-creator-list.md`
+- `.aiox-core/development/tasks/squad-creator-migrate.md`
+- `.aiox-core/development/tasks/squad-creator-analyze.md`
+- `.aiox-core/development/tasks/squad-creator-extend.md`
+- `.aiox-core/development/tasks/squad-creator-download.md`
+- `.aiox-core/development/tasks/squad-creator-publish.md`
+- `.aiox-core/development/tasks/squad-creator-sync-synkra.md`
+- `.aiox-core/development/tasks/squad-creator-sync-ide-command.md`
 
 **Scripts (11 files in squad/ dir, all EXISTS):**
-- `.aios-core/development/scripts/squad/index.js`
-- `.aios-core/development/scripts/squad/squad-loader.js`
-- `.aios-core/development/scripts/squad/squad-validator.js`
-- `.aios-core/development/scripts/squad/squad-generator.js`
-- `.aios-core/development/scripts/squad/squad-designer.js`
-- `.aios-core/development/scripts/squad/squad-migrator.js`
-- `.aios-core/development/scripts/squad/squad-analyzer.js`
-- `.aios-core/development/scripts/squad/squad-extender.js`
-- `.aios-core/development/scripts/squad/squad-downloader.js`
-- `.aios-core/development/scripts/squad/squad-publisher.js`
-- `.aios-core/development/scripts/squad/README.md`
+- `.aiox-core/development/scripts/squad/index.js`
+- `.aiox-core/development/scripts/squad/squad-loader.js`
+- `.aiox-core/development/scripts/squad/squad-validator.js`
+- `.aiox-core/development/scripts/squad/squad-generator.js`
+- `.aiox-core/development/scripts/squad/squad-designer.js`
+- `.aiox-core/development/scripts/squad/squad-migrator.js`
+- `.aiox-core/development/scripts/squad/squad-analyzer.js`
+- `.aiox-core/development/scripts/squad/squad-extender.js`
+- `.aiox-core/development/scripts/squad/squad-downloader.js`
+- `.aiox-core/development/scripts/squad/squad-publisher.js`
+- `.aiox-core/development/scripts/squad/README.md`
 
 **Schemas (2 files, all EXISTS):**
-- `.aios-core/schemas/squad-schema.json`
-- `.aios-core/schemas/squad-design-schema.json`
+- `.aiox-core/schemas/squad-schema.json`
+- `.aiox-core/schemas/squad-design-schema.json`
 
 **Component Templates (8 files, all EXISTS):**
-- `.aios-core/development/templates/squad/agent-template.md`
-- `.aios-core/development/templates/squad/task-template.md`
-- `.aios-core/development/templates/squad/workflow-template.yaml`
-- `.aios-core/development/templates/squad/checklist-template.md`
-- `.aios-core/development/templates/squad/template-template.md`
-- `.aios-core/development/templates/squad/tool-template.js`
-- `.aios-core/development/templates/squad/script-template.js`
-- `.aios-core/development/templates/squad/data-template.yaml`
+- `.aiox-core/development/templates/squad/agent-template.md`
+- `.aiox-core/development/templates/squad/task-template.md`
+- `.aiox-core/development/templates/squad/workflow-template.yaml`
+- `.aiox-core/development/templates/squad/checklist-template.md`
+- `.aiox-core/development/templates/squad/template-template.md`
+- `.aiox-core/development/templates/squad/tool-template.js`
+- `.aiox-core/development/templates/squad/script-template.js`
+- `.aiox-core/development/templates/squad/data-template.yaml`
 
 **Squad Template Scaffold (10 files, all EXISTS):**
-- `.aios-core/development/templates/squad-template/squad.yaml`
-- `.aios-core/development/templates/squad-template/README.md`
-- `.aios-core/development/templates/squad-template/package.json`
-- `.aios-core/development/templates/squad-template/.gitignore`
-- `.aios-core/development/templates/squad-template/LICENSE`
-- `.aios-core/development/templates/squad-template/agents/example-agent.yaml`
-- `.aios-core/development/templates/squad-template/tasks/example-task.yaml`
-- `.aios-core/development/templates/squad-template/workflows/example-workflow.yaml`
-- `.aios-core/development/templates/squad-template/templates/example-template.md`
-- `.aios-core/development/templates/squad-template/tests/example-agent.test.js`
+- `.aiox-core/development/templates/squad-template/squad.yaml`
+- `.aiox-core/development/templates/squad-template/README.md`
+- `.aiox-core/development/templates/squad-template/package.json`
+- `.aiox-core/development/templates/squad-template/.gitignore`
+- `.aiox-core/development/templates/squad-template/LICENSE`
+- `.aiox-core/development/templates/squad-template/agents/example-agent.yaml`
+- `.aiox-core/development/templates/squad-template/tasks/example-task.yaml`
+- `.aiox-core/development/templates/squad-template/workflows/example-workflow.yaml`
+- `.aiox-core/development/templates/squad-template/templates/example-template.md`
+- `.aiox-core/development/templates/squad-template/tests/example-agent.test.js`
 
 **Tools (2, referenced in agent definition):**
 - `git` - For checking author info during squad creation
@@ -738,4 +738,4 @@ graph TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

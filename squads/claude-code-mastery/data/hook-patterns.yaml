@@ -1,0 +1,512 @@
+# Hook Patterns — Common Automation Recipes for Claude Code
+# Squad: claude-code-mastery
+# Last updated: 2026-03-02
+
+version: "1.0.0"
+
+# Each pattern provides a complete, copy-paste-ready hook configuration
+# with explanation and settings.json integration.
+
+patterns:
+
+  # ---------------------------------------------------------------------------
+  # 1. DAMAGE CONTROL — Block destructive commands
+  # ---------------------------------------------------------------------------
+  - name: damage-control
+    event: PreToolUse
+    description: |
+      Intercept Bash tool calls and block dangerous commands before execution.
+      Prevents accidental rm -rf, git push --force, DROP TABLE, etc.
+    matcher: "Bash"
+    severity: critical
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "matcher": "Bash",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "python3 ~/.claude/hooks/damage-control.py"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: python
+      filename: "~/.claude/hooks/damage-control.py"
+      code: |
+        #!/usr/bin/env python3
+        """Damage control hook — block destructive Bash commands."""
+        import json
+        import sys
+        import re
+
+        BLOCKED_PATTERNS = [
+            r'\brm\s+(-[rRf]+\s+|--recursive)',       # rm -rf
+            r'\bgit\s+push\s+--force',                 # git push --force
+            r'\bgit\s+reset\s+--hard',                 # git reset --hard
+            r'\bgit\s+clean\s+-[fd]',                  # git clean -f/-d
+            r'\bDROP\s+(TABLE|DATABASE|SCHEMA)',        # SQL destructive
+            r'\bTRUNCATE\s+TABLE',                     # SQL truncate
+            r'\bchmod\s+777',                           # Insecure perms
+            r'\bcurl\b.*\|\s*(sudo\s+)?bash',          # Pipe curl to bash
+            r'\bsudo\s+rm\b',                           # sudo rm
+        ]
+
+        def main():
+            input_data = json.loads(sys.stdin.read())
+            tool_input = input_data.get("tool_input", {})
+            command = tool_input.get("command", "")
+
+            for pattern in BLOCKED_PATTERNS:
+                if re.search(pattern, command, re.IGNORECASE):
+                    result = {
+                        "decision": "block",
+                        "reason": f"Blocked by damage-control: matches '{pattern}'"
+                    }
+                    print(json.dumps(result))
+                    return
+
+            print(json.dumps({"decision": "approve"}))
+
+        if __name__ == "__main__":
+            main()
+
+  # ---------------------------------------------------------------------------
+  # 2. AUTO-LINT — Run linter after file modifications
+  # ---------------------------------------------------------------------------
+  - name: auto-lint
+    event: PostToolUse
+    description: |
+      Automatically run linter/formatter after Write or Edit tool calls.
+      Catches style issues immediately, maintaining code quality.
+    matcher: "Write|Edit"
+    severity: low
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "PostToolUse": [
+            {
+              "matcher": "Write|Edit",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "python3 ~/.claude/hooks/auto-lint.py"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: python
+      filename: "~/.claude/hooks/auto-lint.py"
+      code: |
+        #!/usr/bin/env python3
+        """Auto-lint hook — run appropriate linter after file changes."""
+        import json
+        import subprocess
+        import sys
+        import os
+
+        LINTERS = {
+            ".ts": "npx eslint --fix {file}",
+            ".tsx": "npx eslint --fix {file}",
+            ".js": "npx eslint --fix {file}",
+            ".jsx": "npx eslint --fix {file}",
+            ".py": "ruff check --fix {file}",
+            ".rs": "rustfmt {file}",
+            ".go": "gofmt -w {file}",
+            ".css": "npx prettier --write {file}",
+            ".json": "npx prettier --write {file}",
+        }
+
+        def main():
+            input_data = json.loads(sys.stdin.read())
+            tool_input = input_data.get("tool_input", {})
+            file_path = tool_input.get("file_path", "")
+
+            if not file_path or not os.path.exists(file_path):
+                return
+
+            _, ext = os.path.splitext(file_path)
+            lint_cmd = LINTERS.get(ext)
+
+            if lint_cmd:
+                cmd = lint_cmd.format(file=file_path)
+                try:
+                    subprocess.run(
+                        cmd, shell=True, capture_output=True,
+                        timeout=30, cwd=os.getcwd()
+                    )
+                except (subprocess.TimeoutExpired, Exception):
+                    pass  # Non-blocking — lint failure should not stop work
+
+        if __name__ == "__main__":
+            main()
+
+  # ---------------------------------------------------------------------------
+  # 3. NOTIFICATION — Send alerts to Slack/Discord
+  # ---------------------------------------------------------------------------
+  - name: notification
+    event: Notification
+    description: |
+      Forward Claude Code notifications to external channels.
+      Useful for team awareness of agent activity.
+    matcher: ""
+    severity: low
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "Notification": [
+            {
+              "matcher": "",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "python3 ~/.claude/hooks/notify.py"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: python
+      filename: "~/.claude/hooks/notify.py"
+      code: |
+        #!/usr/bin/env python3
+        """Notification hook — forward to Slack webhook."""
+        import json
+        import sys
+        import urllib.request
+
+        SLACK_WEBHOOK = os.environ.get("SLACK_WEBHOOK_URL", "")
+
+        def main():
+            if not SLACK_WEBHOOK:
+                return
+
+            input_data = json.loads(sys.stdin.read())
+            message = input_data.get("message", "Claude Code notification")
+            title = input_data.get("title", "Notification")
+
+            payload = {
+                "text": f"*{title}*\n{message}",
+                "username": "Claude Code",
+                "icon_emoji": ":robot_face:"
+            }
+
+            req = urllib.request.Request(
+                SLACK_WEBHOOK,
+                data=json.dumps(payload).encode(),
+                headers={"Content-Type": "application/json"}
+            )
+
+            try:
+                urllib.request.urlopen(req, timeout=5)
+            except Exception:
+                pass  # Non-blocking
+
+        if __name__ == "__main__":
+            import os
+            main()
+
+  # ---------------------------------------------------------------------------
+  # 4. CONTEXT PRESERVATION — Save state before compaction
+  # ---------------------------------------------------------------------------
+  - name: context-preservation
+    event: PreCompact
+    description: |
+      Before context window compaction, save critical state to disk.
+      Preserves important decisions, file lists, and progress that
+      would otherwise be lost during compaction.
+    matcher: ""
+    severity: medium
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "PreCompact": [
+            {
+              "matcher": "",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "python3 ~/.claude/hooks/preserve-context.py"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: python
+      filename: "~/.claude/hooks/preserve-context.py"
+      code: |
+        #!/usr/bin/env python3
+        """PreCompact hook — preserve critical context before compaction."""
+        import json
+        import sys
+        import os
+        from datetime import datetime
+
+        PRESERVE_DIR = os.path.join(os.getcwd(), ".claude", "preserved-context")
+
+        def main():
+            input_data = json.loads(sys.stdin.read())
+            session_id = input_data.get("session_id", "unknown")
+            conversation = input_data.get("conversation_summary", "")
+
+            os.makedirs(PRESERVE_DIR, exist_ok=True)
+
+            timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            filename = f"context-{session_id[:8]}-{timestamp}.json"
+            filepath = os.path.join(PRESERVE_DIR, filename)
+
+            preserved = {
+                "timestamp": timestamp,
+                "session_id": session_id,
+                "summary": conversation,
+                "cwd": os.getcwd(),
+            }
+
+            with open(filepath, "w") as f:
+                json.dump(preserved, f, indent=2)
+
+        if __name__ == "__main__":
+            main()
+
+  # ---------------------------------------------------------------------------
+  # 5. COST TRACKING — Log token usage on session end
+  # ---------------------------------------------------------------------------
+  - name: cost-tracking
+    event: Stop
+    description: |
+      Track token usage and estimated cost at the end of each agent turn.
+      Writes to a JSONL log for analysis and budgeting.
+    matcher: ""
+    severity: low
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "Stop": [
+            {
+              "matcher": "",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "python3 ~/.claude/hooks/cost-tracker.py"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: python
+      filename: "~/.claude/hooks/cost-tracker.py"
+      code: |
+        #!/usr/bin/env python3
+        """Stop hook — log token usage and estimated cost."""
+        import json
+        import sys
+        import os
+        from datetime import datetime
+
+        LOG_FILE = os.path.expanduser("~/.claude/logs/cost-tracking.jsonl")
+
+        # Approximate pricing per 1M tokens (Claude Sonnet 4)
+        INPUT_COST_PER_M = 3.0
+        OUTPUT_COST_PER_M = 15.0
+
+        def main():
+            input_data = json.loads(sys.stdin.read())
+
+            input_tokens = input_data.get("input_tokens", 0)
+            output_tokens = input_data.get("output_tokens", 0)
+            session_id = input_data.get("session_id", "unknown")
+
+            cost_input = (input_tokens / 1_000_000) * INPUT_COST_PER_M
+            cost_output = (output_tokens / 1_000_000) * OUTPUT_COST_PER_M
+            total_cost = cost_input + cost_output
+
+            entry = {
+                "timestamp": datetime.now().isoformat(),
+                "session_id": session_id,
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+                "estimated_cost_usd": round(total_cost, 4),
+                "project": os.path.basename(os.getcwd()),
+            }
+
+            os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+            with open(LOG_FILE, "a") as f:
+                f.write(json.dumps(entry) + "\n")
+
+        if __name__ == "__main__":
+            main()
+
+  # ---------------------------------------------------------------------------
+  # 6. SECURITY GATE — Validate no secrets exposure
+  # ---------------------------------------------------------------------------
+  - name: security-gate
+    event: PreToolUse
+    description: |
+      Scan tool inputs for secrets, API keys, and credentials before execution.
+      Blocks Write/Edit calls that would commit sensitive data.
+    matcher: "Write|Edit|Bash"
+    severity: critical
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "matcher": "Write|Edit|Bash",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "python3 ~/.claude/hooks/security-gate.py"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: python
+      filename: "~/.claude/hooks/security-gate.py"
+      code: |
+        #!/usr/bin/env python3
+        """Security gate — detect secrets in tool inputs."""
+        import json
+        import sys
+        import re
+
+        SECRET_PATTERNS = [
+            (r'(?:api[_-]?key|apikey)\s*[:=]\s*["\']?[a-zA-Z0-9_\-]{20,}', "API Key"),
+            (r'(?:secret|password|passwd|pwd)\s*[:=]\s*["\']?[^\s"\']{8,}', "Password/Secret"),
+            (r'(?:token)\s*[:=]\s*["\']?[a-zA-Z0-9_\-\.]{20,}', "Token"),
+            (r'sk-[a-zA-Z0-9]{32,}', "OpenAI API Key"),
+            (r'ghp_[a-zA-Z0-9]{36}', "GitHub Personal Access Token"),
+            (r'-----BEGIN (?:RSA |EC )?PRIVATE KEY-----', "Private Key"),
+            (r'AKIA[0-9A-Z]{16}', "AWS Access Key"),
+            (r'mongodb\+srv://[^\s]+', "MongoDB Connection String"),
+            (r'postgres(?:ql)?://[^\s]+@[^\s]+', "PostgreSQL Connection String"),
+        ]
+
+        SAFE_FILES = [".env.example", ".env.template", ".env.sample"]
+
+        def main():
+            input_data = json.loads(sys.stdin.read())
+            tool_name = input_data.get("tool_name", "")
+            tool_input = input_data.get("tool_input", {})
+
+            content = ""
+            file_path = tool_input.get("file_path", "")
+
+            if tool_name in ("Write", "Edit"):
+                content = tool_input.get("content", "") + tool_input.get("new_string", "")
+            elif tool_name == "Bash":
+                content = tool_input.get("command", "")
+
+            # Skip safe files
+            if any(file_path.endswith(sf) for sf in SAFE_FILES):
+                print(json.dumps({"decision": "approve"}))
+                return
+
+            for pattern, label in SECRET_PATTERNS:
+                if re.search(pattern, content, re.IGNORECASE):
+                    result = {
+                        "decision": "block",
+                        "reason": f"Security gate: potential {label} detected in {tool_name} input"
+                    }
+                    print(json.dumps(result))
+                    return
+
+            print(json.dumps({"decision": "approve"}))
+
+        if __name__ == "__main__":
+            main()
+
+  # ---------------------------------------------------------------------------
+  # 7. TIMING LOGGER — Performance instrumentation
+  # ---------------------------------------------------------------------------
+  - name: timing-logger
+    event: PreToolUse
+    paired_event: PostToolUse
+    description: |
+      Log timestamps for every tool call to enable performance analysis.
+      Paired PreToolUse/PostToolUse hooks create a complete timeline.
+    matcher: ""
+    severity: low
+    settings_json_snippet: |
+      {
+        "hooks": {
+          "PreToolUse": [
+            {
+              "matcher": "",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "node ~/.claude/hooks/timing-logger.js pre"
+                }
+              ]
+            }
+          ],
+          "PostToolUse": [
+            {
+              "matcher": "",
+              "hooks": [
+                {
+                  "type": "command",
+                  "command": "node ~/.claude/hooks/timing-logger.js post"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    code_example:
+      language: javascript
+      filename: "~/.claude/hooks/timing-logger.js"
+      code: |
+        #!/usr/bin/env node
+        /**
+         * Timing logger hook - records PreToolUse/PostToolUse timestamps.
+         * Usage: node timing-logger.js pre|post
+         * Reads tool data from stdin, writes JSONL to ~/.claude/logs/timing-YYYY-MM-DD.jsonl
+         */
+        const fs = require('fs');
+        const path = require('path');
+        const os = require('os');
+
+        const phase = process.argv[2]; // 'pre' or 'post'
+        const LOG_DIR = path.join(os.homedir(), '.claude', 'logs');
+        const today = new Date().toISOString().slice(0, 10);
+        const logFile = path.join(LOG_DIR, `timing-${today}.jsonl`);
+
+        let input = '';
+        process.stdin.on('data', chunk => { input += chunk; });
+        process.stdin.on('end', () => {
+          try {
+            const data = JSON.parse(input);
+            const entry = {
+              timestamp: new Date().toISOString(),
+              epochMs: Date.now(),
+              event: phase === 'pre' ? 'PreToolUse' : 'PostToolUse',
+              tool: data.tool_name || 'unknown',
+              session: data.session_id || 'unknown',
+            };
+            if (phase === 'post' && data.duration_ms) {
+              entry.durationMs = data.duration_ms;
+            }
+            fs.mkdirSync(LOG_DIR, { recursive: true });
+            fs.appendFileSync(logFile, JSON.stringify(entry) + '\n');
+          } catch (e) {
+            // Non-blocking — do not fail the tool call
+          }
+        });

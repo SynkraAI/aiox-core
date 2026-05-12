@@ -24,7 +24,7 @@
 
 ## Visão Geral
 
-O **Motor de Desenvolvimento Autônomo (ADE)** é a infraestrutura do AIOS para workflows de desenvolvimento autônomo. Ele permite que agentes de IA trabalhem de forma independente através de pipelines inteligentes, loops auto-recuperáveis e aprendizado persistente.
+O **Motor de Desenvolvimento Autônomo (ADE)** é a infraestrutura do AIOX para workflows de desenvolvimento autônomo. Ele permite que agentes de IA trabalhem de forma independente através de pipelines inteligentes, loops auto-recuperáveis e aprendizado persistente.
 
 ### Capacidades Principais
 
@@ -42,7 +42,7 @@ O **Motor de Desenvolvimento Autônomo (ADE)** é a infraestrutura do AIOS para 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           Framework AIOS                                     │
+│                           Framework AIOX                                     │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  ┌────────────────────────────────────────────────────────────────────────┐ │
@@ -57,7 +57,7 @@ O **Motor de Desenvolvimento Autônomo (ADE)** é a infraestrutura do AIOS para 
 │  │         │                │                │                │          │ │
 │  │         ▼                ▼                ▼                ▼          │ │
 │  │  ┌─────────────────────────────────────────────────────────────────┐  │ │
-│  │  │                     Estado Runtime .aios/                       │  │ │
+│  │  │                     Estado Runtime .aiox/                       │  │ │
 │  │  └─────────────────────────────────────────────────────────────────┘  │ │
 │  │         │                │                │                │          │ │
 │  │         ▼                ▼                ▼                ▼          │ │
@@ -88,7 +88,7 @@ Prioridade:
 
 ### 2. Persistência de Estado
 
-Todo o estado do ADE é persistido em `.aios/` para:
+Todo o estado do ADE é persistido em `.aiox/` para:
 
 - Recuperação de sessão
 - Rastreamento de progresso
@@ -120,7 +120,7 @@ Todo pipeline tem recuperação integrada:
 
 ```
 Componente: worktree-manager.js
-Localização: .aios-core/infrastructure/scripts/
+Localização: .aiox-core/infrastructure/scripts/
 
 Fluxo:
   1. Story iniciada → Criar worktree
@@ -141,9 +141,9 @@ Fluxo:
 
 ```
 Componente: project-status-loader.js
-Localização: .aios-core/infrastructure/scripts/
+Localização: .aiox-core/infrastructure/scripts/
 
-Arquivo de Estado: .aios/project-status.yaml
+Arquivo de Estado: .aiox/project-status.yaml
 ```
 
 **Schema de Status:**
@@ -329,10 +329,10 @@ Componentes:
 
 | Tipo                | Descrição                          | Armazenamento                     |
 | ------------------- | ---------------------------------- | --------------------------------- |
-| Padrões de Código   | Padrões reutilizáveis da base     | .aios/patterns/code-patterns.json |
-| Gotchas             | Problemas conhecidos e soluções   | .aios/patterns/gotchas.json       |
-| Insights de Sessão  | Descobertas durante sessões       | .aios/sessions/                   |
-| Mapa de Codebase    | Análise de estrutura do projeto   | .aios/codebase-map.json           |
+| Padrões de Código   | Padrões reutilizáveis da base     | .aiox/patterns/code-patterns.json |
+| Gotchas             | Problemas conhecidos e soluções   | .aiox/patterns/gotchas.json       |
+| Insights de Sessão  | Descobertas durante sessões       | .aiox/sessions/                   |
+| Mapa de Codebase    | Análise de estrutura do projeto   | .aiox/codebase-map.json           |
 
 ---
 
@@ -399,7 +399,7 @@ Componentes:
 
 ### Integração com Agentes
 
-ADE integra-se com agentes AIOS através de:
+ADE integra-se com agentes AIOX através de:
 
 ```yaml
 autoClaude:
@@ -414,7 +414,7 @@ autoClaude:
 
 ### Integração com Status.json
 
-Todos os componentes do ADE atualizam `.aios/status.json`:
+Todos os componentes do ADE atualizam `.aiox/status.json`:
 
 ```json
 {
@@ -445,7 +445,7 @@ A documentação do ADE é carregada via devLoadAlwaysFiles:
 ### Estrutura de Diretório de Estado
 
 ```
-.aios/
+.aiox/
 ├── project-status.yaml        # Status do projeto
 ├── status.json                # Status de runtime
 ├── patterns/                  # Padrões aprendidos (Épica 7)
@@ -476,7 +476,7 @@ Início de Sessão → Carregar Estado → Executar → Atualizar Estado → Fim
 
 ### Configuração Principal
 
-Localizada em `.aios-core/core-config.yaml`:
+Localizada em `.aiox-core/core-config.yaml`:
 
 ```yaml
 ade:
@@ -499,7 +499,7 @@ ade:
 
   memoryLayer:
     enabled: true
-    patternStore: .aios/patterns/
+    patternStore: .aiox/patterns/
     sessionCapture: true
 
   selfHealing:
@@ -517,7 +517,7 @@ O WIS fornece sugestões inteligentes baseadas em padrões aprendidos.
 ### Componentes
 
 ```
-.aios-core/workflow-intelligence/
+.aiox-core/workflow-intelligence/
 ├── engine/
 │   ├── confidence-scorer.js   # Pontuação de confiança de padrão
 │   ├── output-formatter.js    # Formatação de saída
@@ -584,4 +584,4 @@ estratégias:
 
 ---
 
-_Este é um padrão oficial do framework AIOS documentando o Motor de Desenvolvimento Autônomo._
+_Este é um padrão oficial do framework AIOX documentando o Motor de Desenvolvimento Autônomo._

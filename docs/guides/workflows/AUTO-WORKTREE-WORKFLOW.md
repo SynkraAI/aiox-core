@@ -74,7 +74,7 @@ flowchart TB
     PF2 -->|Nao| ERR2[Erro: Git < 2.5]
 
     PF3 -->|Existe| PF4
-    PF3 -->|Nao existe| ERR3[Erro: AIOS incompleto]
+    PF3 -->|Nao existe| ERR3[Erro: AIOX incompleto]
 
     PF4 -->|OK| S1
     PF4 -->|Limite| WARN1[Aviso: Proximo do limite]
@@ -141,7 +141,7 @@ stateDiagram-v2
 
 ```mermaid
 graph TB
-    subgraph AIOS["AIOS Core"]
+    subgraph AIOX["AIOX Core"]
         WF[auto-worktree.yaml<br/>Workflow Definition]
         TK[create-worktree.md<br/>Task Definition]
     end
@@ -152,8 +152,8 @@ graph TB
     end
 
     subgraph FS["File System"]
-        WT[.aios/worktrees/{storyId}/<br/>Worktree Directory]
-        LOG[.aios/logs/merges/<br/>Merge Audit Logs]
+        WT[.aiox/worktrees/{storyId}/<br/>Worktree Directory]
+        LOG[.aiox/logs/merges/<br/>Merge Audit Logs]
     end
 
     subgraph AGENTS["Agentes"]
@@ -169,7 +169,7 @@ graph TB
     GIT -->|Cria| WT
     WM -->|Grava logs| LOG
 
-    style AIOS fill:#e3f2fd
+    style AIOX fill:#e3f2fd
     style INFRA fill:#fce4ec
     style FS fill:#f3e5f5
     style AGENTS fill:#e8f5e9
@@ -296,7 +296,7 @@ Cria uma nova worktree isolada para a story usando o WorktreeManager.
 
 **Estrutura Criada:**
 ```
-.aios/worktrees/{storyId}/     # Diretorio de trabalho
+.aiox/worktrees/{storyId}/     # Diretorio de trabalho
 Branch: auto-claude/{storyId}   # Branch Git
 ```
 
@@ -318,7 +318,7 @@ interface CreateResult {
 
 **Comandos Git Executados:**
 ```bash
-git worktree add .aios/worktrees/{storyId} -b auto-claude/{storyId}
+git worktree add .aiox/worktrees/{storyId} -b auto-claude/{storyId}
 ```
 
 ---
@@ -337,8 +337,8 @@ Configura variaveis de ambiente e exibe instrucoes para navegar ate a worktree.
 
 **Variaveis de Ambiente:**
 ```bash
-AIOS_WORKTREE=/path/to/.aios/worktrees/{storyId}
-AIOS_STORY={storyId}
+AIOX_WORKTREE=/path/to/.aiox/worktrees/{storyId}
+AIOX_STORY={storyId}
 ```
 
 **Output:**
@@ -428,7 +428,7 @@ Alteracoes aqui nao afetam a branch principal ate o merge.
 
 | Propriedade | Valor |
 |-------------|-------|
-| **Localizacao** | `.aios-core/development/tasks/create-worktree.md` |
+| **Localizacao** | `.aiox-core/development/tasks/create-worktree.md` |
 | **Agente** | @devops (Gage) |
 | **Versao** | 1.0 |
 | **Story** | 1.3 |
@@ -459,7 +459,7 @@ Alteracoes aqui nao afetam a branch principal ate o merge.
 |-----------|---------------|-------------|
 | **Git** | >= 2.5 | `git --version` |
 | **Node.js** | >= 18 | `node --version` |
-| **AIOS Core** | Instalado | Verificar `.aios-core/` |
+| **AIOX Core** | Instalado | Verificar `.aiox-core/` |
 
 ### Dependencias NPM
 
@@ -471,7 +471,7 @@ Alteracoes aqui nao afetam a branch principal ate o merge.
 ### Arquivos Necessarios
 
 ```
-.aios-core/
+.aiox-core/
   infrastructure/
     scripts/
       worktree-manager.js     # Classe WorktreeManager
@@ -513,7 +513,7 @@ Alteracoes aqui nao afetam a branch principal ate o merge.
 ```typescript
 interface WorktreeInfo {
   storyId: string;           // 'STORY-42'
-  path: string;              // '/abs/path/.aios/worktrees/STORY-42'
+  path: string;              // '/abs/path/.aiox/worktrees/STORY-42'
   branch: string;            // 'auto-claude/STORY-42'
   createdAt: Date;           // Data de criacao
   uncommittedChanges: number; // Numero de alteracoes nao commitadas
@@ -591,7 +591,7 @@ flowchart TD
 |------|-------|-----------|
 | `Not a git repository` | Diretorio nao e repo git | Executar `git init` |
 | `Git worktree not supported` | Git < 2.5 | Atualizar Git |
-| `WorktreeManager not found` | AIOS incompleto | Reinstalar AIOS |
+| `WorktreeManager not found` | AIOX incompleto | Reinstalar AIOX |
 | `Maximum worktrees limit reached` | >= 10 worktrees | Executar `*cleanup-worktrees` |
 | `Could not determine story ID` | ID nao encontrado | Fornecer ID explicitamente |
 | `Worktree creation failed` | Erro no git worktree | Verificar git status |
@@ -646,7 +646,7 @@ git --version
 git worktree list
 
 # Verificar se WorktreeManager existe
-ls .aios-core/infrastructure/scripts/worktree-manager.js
+ls .aiox-core/infrastructure/scripts/worktree-manager.js
 ```
 
 **Solucoes:**
@@ -674,7 +674,7 @@ git worktree list | wc -l
 **Solucoes:**
 1. Limpar worktrees obsoletas: `*cleanup-worktrees`
 2. Remover worktrees nao utilizadas: `*remove-worktree {storyId}`
-3. Aumentar limite (se necessario) em `.aios/config.yaml`
+3. Aumentar limite (se necessario) em `.aiox/config.yaml`
 
 ---
 
@@ -720,7 +720,7 @@ ls .git/worktrees/{storyId}/locked
 2. Remover worktree com force: `*remove-worktree {storyId} --force`
 3. Remocao manual:
    ```bash
-   git worktree remove .aios/worktrees/{storyId} --force
+   git worktree remove .aiox/worktrees/{storyId} --force
    git branch -D auto-claude/{storyId}
    ```
 
@@ -756,9 +756,9 @@ ls .git/worktrees/{storyId}/locked
 
 | Arquivo | Caminho |
 |---------|---------|
-| **Workflow Definition** | `.aios-core/development/workflows/auto-worktree.yaml` |
-| **Task Create** | `.aios-core/development/tasks/create-worktree.md` |
-| **WorktreeManager** | `.aios-core/infrastructure/scripts/worktree-manager.js` |
+| **Workflow Definition** | `.aiox-core/development/workflows/auto-worktree.yaml` |
+| **Task Create** | `.aiox-core/development/tasks/create-worktree.md` |
+| **WorktreeManager** | `.aiox-core/infrastructure/scripts/worktree-manager.js` |
 
 ### Documentacao Relacionada
 
@@ -786,4 +786,4 @@ ls .git/worktrees/{storyId}/locked
 
 ---
 
-*Documentacao gerada automaticamente pelo AIOS-FULLSTACK*
+*Documentacao gerada automaticamente pelo AIOX-FULLSTACK*

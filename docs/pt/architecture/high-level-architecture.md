@@ -1,6 +1,6 @@
 <!-- Tradução: PT-BR | Original: /docs/en/architecture/high-level-architecture.md | Sincronização: 2026-01-26 -->
 
-# Arquitetura de Alto Nível do AIOS v2.1
+# Arquitetura de Alto Nível do AIOX v4
 
 > 🌐 [EN](../../architecture/high-level-architecture.md) | **PT** | [ES](../../es/architecture/high-level-architecture.md)
 
@@ -27,9 +27,9 @@
 
 ## Visão Geral
 
-**AIOS (AI Operating System)** é um framework sofisticado para orquestração de agentes de IA, workers e humanos em fluxos de trabalho complexos de desenvolvimento de software. A versão 2.1 introduz uma arquitetura modular com 4 módulos, estratégia multi-repositório e quality gates de 3 camadas.
+**AIOX (AI Operating System)** é um framework sofisticado para orquestração de agentes de IA, workers e humanos em fluxos de trabalho complexos de desenvolvimento de software. A versão 2.1 introduz uma arquitetura modular com 4 módulos, estratégia multi-repositório e quality gates de 3 camadas.
 
-### Capacidades Principais v2.1
+### Capacidades Principais v4.2
 
 | Capacidade                    | Descrição                                                                         |
 | ----------------------------- | --------------------------------------------------------------------------------- |
@@ -49,12 +49,12 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                     FRAMEWORK AIOS v2.1                                 │
+│                     FRAMEWORK AIOX v4                                 │
 │                     ═══════════════════                                 │
 │                                                                         │
 │   ┌─────────────────────────────────────────────────────────────────┐   │
 │   │                        CLI / FERRAMENTAS                        │   │
-│   │  (aios agents, aios tasks, aios squads, aios workflow)          │   │
+│   │  (aiox agents, aiox tasks, aiox squads, aiox workflow)          │   │
 │   └─────────────────────────────────────────────────────────────────┘   │
 │                                │                                        │
 │          ┌────────────────────┼────────────────────┐                   │
@@ -151,8 +151,8 @@
 │                                                                         │
 │   ┌────────────────────┐     ┌────────────────────┐                    │
 │   │  SynkraAI/         │     │  SynkraAI/         │                    │
-│   │  aios-core         │     │  aios-squads       │                    │
-│   │  (Commons Clause)  │◄────│  (MIT)             │                    │
+│   │  aiox-core         │     │  aiox-squads       │                    │
+│   │  (MIT)  │◄────│  (MIT)             │                    │
 │   │                    │     │                    │                    │
 │   │  • Core Framework  │     │  • ETL Squad       │                    │
 │   │  • 11 Agentes Base │     │  • Creator Squad   │                    │
@@ -190,11 +190,11 @@
 
 | Pacote                | Registry    | Licença        |
 | --------------------- | ----------- | -------------- |
-| `@aios/core`          | npm público | Commons Clause |
-| `@aios/squad-etl`     | npm público | MIT            |
-| `@aios/squad-creator` | npm público | MIT            |
-| `@aios/squad-mmos`    | npm público | MIT            |
-| `@aios/mcp-presets`   | npm público | Apache 2.0     |
+| `@aiox/core`          | npm público | MIT            |
+| `@aiox/squad-etl`     | npm público | MIT            |
+| `@aiox/squad-creator` | npm público | MIT            |
+| `@aiox/squad-mmos`    | npm público | MIT            |
+| `@aiox/mcp-presets`   | npm público | Apache 2.0     |
 
 ---
 
@@ -214,11 +214,11 @@
 
 ## Estrutura de Diretórios
 
-### Estrutura Atual (v2.1)
+### Estrutura Atual (v4)
 
 ```
-@synkra/aios-core/
-├── .aios-core/                    # Camada do Framework
+aiox-core/
+├── .aiox-core/                    # Camada do Framework
 │   ├── core/                      # Módulo Core (fundação)
 │   │   ├── config/                # Gerenciamento de configuração
 │   │   ├── registry/              # Service Discovery
@@ -271,10 +271,10 @@
 
 | Módulo             | Caminho                      | Propósito             | Conteúdos Principais                 |
 | ------------------ | ---------------------------- | --------------------- | ------------------------------------ |
-| **Core**           | `.aios-core/core/`           | Fundação do framework | Config, Registry, QG, MCP, Session   |
-| **Development**    | `.aios-core/development/`    | Artefatos de dev      | Agentes, Tarefas, Workflows, Scripts |
-| **Product**        | `.aios-core/product/`        | Artefatos PM          | Templates, Checklists, Dados         |
-| **Infrastructure** | `.aios-core/infrastructure/` | Config do sistema     | Scripts, Ferramentas, Integrações    |
+| **Core**           | `.aiox-core/core/`           | Fundação do framework | Config, Registry, QG, MCP, Session   |
+| **Development**    | `.aiox-core/development/`    | Artefatos de dev      | Agentes, Tarefas, Workflows, Scripts |
+| **Product**        | `.aiox-core/product/`        | Artefatos PM          | Templates, Checklists, Dados         |
+| **Infrastructure** | `.aiox-core/infrastructure/` | Config do sistema     | Scripts, Ferramentas, Integrações    |
 
 ### Sistema de Agentes
 
@@ -290,7 +290,7 @@
 | Dara   | `data-engineer` | Architect    | Engenharia de dados       |
 | Felix  | `devops`        | Optimizer    | CI/CD e operações         |
 | Uma    | `ux-expert`     | Creator      | Experiência do usuário    |
-| Pax    | `aios-master`   | Orchestrator | Orquestração do framework |
+| Pax    | `aiox-master`   | Orchestrator | Orquestração do framework |
 
 ---
 
@@ -348,7 +348,7 @@
 
 - [Sistema de Módulos](./module-system.md) - Arquitetura detalhada dos módulos
 - [ARCHITECTURE-INDEX.md](./ARCHITECTURE-INDEX.md) - Índice completo da documentação
-- [AIOS-LIVRO-DE-OURO-V2.1-COMPLETE.md](../../../.aios-core/docs/standards/AIOS-LIVRO-DE-OURO-V2.1-COMPLETE.md) - Guia completo do framework
+- [AIOX-LIVRO-DE-OURO-V2.1-COMPLETE.md](../../../.aiox-core/docs/standards/AIOX-LIVRO-DE-OURO-V2.1-COMPLETE.md) - Guia completo do framework
 
 ---
 

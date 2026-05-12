@@ -3,7 +3,7 @@
  *
  * Tests the indexing system for decision logs.
  *
- * @see .aios-core/scripts/decision-log-indexer.js
+ * @see .aiox-core/scripts/decision-log-indexer.js
  */
 
 const fs = require('fs').promises;
@@ -13,7 +13,7 @@ const {
   generateIndexContent,
   addToIndex,
   rebuildIndex,
-} = require('../../.aios-core/development/scripts/decision-log-indexer');
+} = require('../../.aiox-core/development/scripts/decision-log-indexer');
 
 // Mock fs.promises
 jest.mock('fs', () => ({

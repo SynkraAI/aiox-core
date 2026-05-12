@@ -219,4 +219,4 @@
 
 ---
 
-*Gerado automaticamente pela Auditoria de Configuração de Agentes AIOS (Story 6.1.2.6)*
+*Gerado automaticamente pela Auditoria de Configuração de Agentes AIOX (Story 6.1.2.6)*

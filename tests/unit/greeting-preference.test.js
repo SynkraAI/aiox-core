@@ -9,24 +9,24 @@
  * - Config backup/restore
  */
 
-const GreetingPreferenceManager = require('../../.aios-core/development/scripts/greeting-preference-manager');
+const GreetingPreferenceManager = require('../../.aiox-core/development/scripts/greeting-preference-manager');
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
 // Mock dependencies for GreetingBuilder
-jest.mock('../../.aios-core/core/session/context-detector');
-jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector');
-jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader', () => ({
+jest.mock('../../.aiox-core/core/session/context-detector');
+jest.mock('../../.aiox-core/infrastructure/scripts/git-config-detector');
+jest.mock('../../.aiox-core/infrastructure/scripts/project-status-loader', () => ({
   loadProjectStatus: jest.fn(),
   formatStatusDisplay: jest.fn(),
 }));
 
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
 
 // Mock fs operations for config file
-const CONFIG_PATH = path.join(process.cwd(), '.aios-core', 'core-config.yaml');
-const BACKUP_PATH = path.join(process.cwd(), '.aios-core', 'core-config.yaml.backup');
+const CONFIG_PATH = path.join(process.cwd(), '.aiox-core', 'core-config.yaml');
+const BACKUP_PATH = path.join(process.cwd(), '.aiox-core', 'core-config.yaml.backup');
 const TEST_CONFIG_PATH = path.join(__dirname, '..', 'fixtures', 'test-core-config.yaml');
 
 describe('GreetingPreferenceManager', () => {

@@ -21,7 +21,7 @@ const TROUBLESHOOTING_DATABASE = {
       '.env accidentally deleted',
     ],
     solutions: [
-      'Re-run wizard: npx @SynkraAI/aios@latest init',
+      'Re-run wizard: npx @SynkraAI/aiox@latest init',
       'Manually create .env from template: cp .env.example .env',
       'Check file permissions in project directory',
     ],
@@ -33,12 +33,12 @@ const TROUBLESHOOTING_DATABASE = {
     problem: 'core-config.yaml not found',
     causes: [
       'Environment configuration step failed',
-      '.aios-core directory missing',
+      '.aiox-core directory missing',
       'File creation failed',
     ],
     solutions: [
-      'Re-run wizard: npx @SynkraAI/aios@latest init',
-      'Check .aios-core directory exists',
+      'Re-run wizard: npx @SynkraAI/aiox@latest init',
+      'Check .aiox-core directory exists',
       'Manually create from template',
     ],
     docs: 'https://docs.SynkraAI.com/configuration/core-config',
@@ -225,10 +225,10 @@ async function offerTroubleshooting(errors) {
   if (viewLogs) {
     console.log('');
     console.log(chalk.bold('📄 Installation Logs:'));
-    console.log(chalk.dim('  - .aios/install-log.txt'));
-    console.log(chalk.dim('  - .aios/install-errors.log'));
+    console.log(chalk.dim('  - .aiox/install-log.txt'));
+    console.log(chalk.dim('  - .aiox/install-errors.log'));
     console.log('');
-    console.log(chalk.dim('View with: cat .aios/install-log.txt'));
+    console.log(chalk.dim('View with: cat .aiox/install-log.txt'));
   }
 
   // Offer to open documentation
@@ -251,7 +251,7 @@ async function offerTroubleshooting(errors) {
   // Offer support contact
   console.log('');
   console.log(chalk.bold('💬 Need Help?'));
-  console.log(chalk.dim('  - GitHub Issues: https://github.com/SynkraAI/aios/issues'));
+  console.log(chalk.dim('  - GitHub Issues: https://github.com/SynkraAI/aiox/issues'));
   console.log(chalk.dim('  - Documentation: https://docs.SynkraAI.com'));
   console.log('');
 }
@@ -331,7 +331,7 @@ function displayGenericTroubleshooting(code, errorInstances) {
   console.log('');
   console.log(chalk.bold.green('General Solutions:'));
   console.log(chalk.green('  1. Review error message above'));
-  console.log(chalk.green('  2. Check installation logs in .aios/'));
+  console.log(chalk.green('  2. Check installation logs in .aiox/'));
   console.log(chalk.green('  3. Re-run installation'));
   console.log(chalk.green('  4. Contact support if issue persists'));
   console.log('');

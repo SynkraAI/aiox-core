@@ -1,7 +1,7 @@
 # Cross-Reference Phase 4: Infrastructure Analysis
 
 **Generated:** 2026-02-05
-**Scope:** `.aios-core/infrastructure/` -- scripts, integrations, tools, templates, tests
+**Scope:** `.aiox-core/infrastructure/` -- scripts, integrations, tools, templates, tests
 **Total files analyzed:** 115
 
 ---
@@ -26,7 +26,7 @@ Total: 90 files (75 JS + 10 shell templates + 5 doc-integrity sub-module)
 
 ### 1.1 Scripts Exported via `index.js` (47 scripts)
 
-These scripts are imported in `.aios-core/infrastructure/index.js` and exposed as the module's public API.
+These scripts are imported in `.aiox-core/infrastructure/index.js` and exposed as the module's public API.
 
 | # | File | Category | Purpose | Key Dependencies | Consumers (beyond index.js) | Orphan? |
 |---|------|----------|---------|-----------------|---------------------------|---------|
@@ -36,22 +36,22 @@ These scripts are imported in `.aios-core/infrastructure/index.js` and exposed a
 | 4 | `scripts/commit-message-generator.js` | Git | Generates conventional commit messages | diff-generator, modification-validator | utility-integration-guide | No |
 | 5 | `scripts/pm-adapter.js` | PM Integration | Base PMAdapter class for all PM adapters | `fs`, `yaml` | clickup/jira/github/local adapters, pm-adapter-factory, index.js | No |
 | 6 | `scripts/pm-adapter-factory.js` | PM Integration | Factory for creating PM adapter instances | pm-adapters/*.js | story-manager, index.js, tasks/po-sync, tasks/po-pull | No |
-| 7 | `scripts/status-mapper.js` | PM Integration | Maps story status between AIOS and PM tools | -- | clickup-helpers, tests/clickup, tasks | No |
+| 7 | `scripts/status-mapper.js` | PM Integration | Maps story status between AIOX and PM tools | -- | clickup-helpers, tests/clickup, tasks | No |
 | 8 | `scripts/clickup-helpers.js` | PM Integration | ClickUp API helper functions | `https`, tool-resolver, status-mapper | clickup-adapter, story-update-hook, tests | No |
-| 9 | `scripts/template-engine.js` | Template/Generation | Template rendering engine (Handlebars-like) | `fs`, `yaml` | component-generator, template-validator, tasks, aios-core index | No |
-| 10 | `scripts/component-generator.js` | Template/Generation | AIOS component generation (agents, tasks, templates) | template-engine, yaml-validator, security-checker, transaction-manager | tasks (15+ tasks), aios-core index | No |
-| 11 | `scripts/component-metadata.js` | Template/Generation | Metadata management for AIOS components | `fs`, `yaml` | component-generator, transaction-manager, tasks/modify-agent | No |
-| 12 | `scripts/component-search.js` | Template/Generation | Search across AIOS components | `fs` | aios-core index, tasks (analyze-framework, qa-generate-tests) | No |
-| 13 | `scripts/batch-creator.js` | Template/Generation | Batch creation of AIOS components | component-generator, dependency-analyzer, transaction-manager | aios-core index, tasks/cleanup-utilities | No |
-| 14 | `scripts/aios-validator.js` | Validation | Validates AIOS component structure and schema | `fs`, `yaml` | CI (ci.yml), installer tests, README, git-workflow-guide | No |
+| 9 | `scripts/template-engine.js` | Template/Generation | Template rendering engine (Handlebars-like) | `fs`, `yaml` | component-generator, template-validator, tasks, aiox-core index | No |
+| 10 | `scripts/component-generator.js` | Template/Generation | AIOX component generation (agents, tasks, templates) | template-engine, yaml-validator, security-checker, transaction-manager | tasks (15+ tasks), aiox-core index | No |
+| 11 | `scripts/component-metadata.js` | Template/Generation | Metadata management for AIOX components | `fs`, `yaml` | component-generator, transaction-manager, tasks/modify-agent | No |
+| 12 | `scripts/component-search.js` | Template/Generation | Search across AIOX components | `fs` | aiox-core index, tasks (analyze-framework, qa-generate-tests) | No |
+| 13 | `scripts/batch-creator.js` | Template/Generation | Batch creation of AIOX components | component-generator, dependency-analyzer, transaction-manager | aiox-core index, tasks/cleanup-utilities | No |
+| 14 | `scripts/aiox-validator.js` | Validation | Validates AIOX component structure and schema | `fs`, `yaml` | CI (ci.yml), installer tests, README, git-workflow-guide | No |
 | 15 | `scripts/template-validator.js` | Validation | Validates template files for correctness | template-engine | component-generator, tasks/create-doc | No |
 | 16 | `scripts/validate-output-pattern.js` | Validation | Validates task output patterns | -- | task-execution-report, output-formatter tests | No |
 | 17 | `scripts/spot-check-validator.js` | Validation | Spot check validation for components | -- | Only index.js + install-manifest | Likely |
-| 18 | `scripts/dependency-analyzer.js` | Analysis | Analyzes component dependencies | `fs` | batch-creator, modification-validator, aios-core index, tasks | No |
+| 18 | `scripts/dependency-analyzer.js` | Analysis | Analyzes component dependencies | `fs` | batch-creator, modification-validator, aiox-core index, tasks | No |
 | 19 | `scripts/dependency-impact-analyzer.js` | Analysis | Analyzes impact of dependency changes | -- | tasks (propose-modification, architect-analyze-impact, qa-review) | No |
 | 20 | `scripts/framework-analyzer.js` | Analysis | Discovers and catalogs framework components | `fs`, `yaml`, `chalk` | verify-workflow-gaps, tasks/analyze-framework, core-config | No |
 | 21 | `scripts/capability-analyzer.js` | Analysis | Analyzes agent/component capabilities | security-checker | improvement-validator, tasks/improve-self, elicitation-engine | No |
-| 22 | `scripts/security-checker.js` | Analysis | Security validation for components | -- | component-generator, elicitation-engine, aios-master agent | No |
+| 22 | `scripts/security-checker.js` | Analysis | Security validation for components | -- | component-generator, elicitation-engine, aiox-master agent | No |
 | 23 | `scripts/modification-risk-assessment.js` | Analysis | Assesses risk of modifications | -- | tasks/architect-analyze-impact | No |
 | 24 | `scripts/coverage-analyzer.js` | Testing | Test coverage analysis | -- | tasks/qa-generate-tests | No |
 | 25 | `scripts/test-generator.js` | Testing | Test file generation | -- | tasks/qa-generate-tests, getting-started docs | No |
@@ -71,18 +71,18 @@ These scripts are imported in `.aios-core/infrastructure/index.js` and exposed a
 | 39 | `scripts/conflict-resolver.js` | Utilities | Resolves merge conflicts | git-wrapper | Only index.js + config refs | No |
 | 40 | `scripts/documentation-synchronizer.js` | Utilities | Syncs documentation with code changes | `@babel/parser`, `@babel/traverse`, `yaml`, `marked` | tasks/sync-documentation, utility-integration-guide | No |
 | 41 | `scripts/tool-resolver.js` | Utilities | Resolves tool configurations from tools/ | `fs`, `yaml` | clickup-helpers, story-manager, many tests, tools README | No |
-| 42 | `scripts/usage-analytics.js` | Utilities | Analytics for AIOS feature usage | -- | tasks/analyze-framework | No |
+| 42 | `scripts/usage-analytics.js` | Utilities | Analytics for AIOX feature usage | -- | tasks/analyze-framework | No |
 | 43 | `scripts/project-status-loader.js` | Utilities | Dynamic project status for agent greetings | worktree-manager, `execa`, `yaml` | greeting-builder, generate-greeting, tests, many docs | No |
 | 44 | `scripts/visual-impact-generator.js` | Utilities | Generates visual impact reports | -- | tasks/architect-analyze-impact | No |
 | 45 | `scripts/atomic-layer-classifier.js` | Utilities | Classifies components by atomic design layer | -- | Only index.js + install-manifest | Likely |
 | 46 | `scripts/backup-manager.js` | System | File backup and restore management | `fs` | health-check healers, improvement-validator, tasks | No |
 | 47 | `scripts/transaction-manager.js` | System | Transactional operations with rollback | -- | batch-creator, component-generator | No |
-| 48 | `scripts/repository-detector.js` | System | Detects repository type and structure | -- | aios-init.js, agent devops, tasks | No |
+| 48 | `scripts/repository-detector.js` | System | Detects repository type and structure | -- | aiox-init.js, agent devops, tasks | No |
 | 49 | `scripts/approval-workflow.js` | System | Approval workflow management | -- | tasks/architect-analyze-impact | No |
 | 50 | `scripts/config-cache.js` | Config | Configuration caching layer | -- | config-resolver, agent-config-loader, core modules | No |
 | 51 | `scripts/config-loader.js` | Config | Configuration file loading | -- | index.js internal reference | No |
 | 52 | `scripts/output-formatter.js` | Config | Output formatting utilities | -- | core index, workflow-intelligence, CLI search, many tests | No |
-| 53 | `scripts/yaml-validator.js` | Config | YAML file validation | -- | component-generator, modification-validator, aios-master agent | No |
+| 53 | `scripts/yaml-validator.js` | Config | YAML file validation | -- | component-generator, modification-validator, aiox-master agent | No |
 
 ### 1.2 Scripts NOT Exported via `index.js` (28 scripts)
 
@@ -91,7 +91,7 @@ These scripts exist in the scripts/ directory but are NOT part of the module's p
 | # | File | Category | Purpose | Key Dependencies | Consumers | Orphan? |
 |---|------|----------|---------|-----------------|-----------|---------|
 | 1 | `scripts/approach-manager.js` | Recovery (Epic 5) | Tracks current approach for implementation attempts | `fs`, `path` | epic-5-executor, agent dev, docs | No |
-| 2 | `scripts/asset-inventory.js` | Analysis (Epic 2) | Creates comprehensive inventory of AIOS assets | `fs`, `yaml` | agent devops, many docs, install-manifest | No |
+| 2 | `scripts/asset-inventory.js` | Analysis (Epic 2) | Creates comprehensive inventory of AIOX assets | `fs`, `yaml` | agent devops, many docs, install-manifest | No |
 | 3 | `scripts/changelog-generator.js` | Documentation | Auto-generates changelogs from stories/commits | `fs`, `child_process` | Only install-manifest | **YES** |
 | 4 | `scripts/codebase-mapper.js` | Memory (Epic 7) | Generates codebase maps for context generation | `fs`, `path` | agent architect, many docs | No |
 | 5 | `scripts/dashboard-status-writer.js` | Dashboard | Writes agent status to dashboard status.json | `fs` | Only install-manifest + self | **YES** |
@@ -126,7 +126,6 @@ These scripts exist in the scripts/ directory but are NOT part of the module's p
 | 4 | `scripts/ide-sync/redirect-generator.js` | IDE Sync | Creates redirect files for deprecated agents | `fs-extra` | ide-sync/index.js | No |
 | 5 | `scripts/ide-sync/transformers/claude-code.js` | IDE Sync | Transforms agent definitions for Claude Code | -- | ide-sync/index.js, tests | No |
 | 6 | `scripts/ide-sync/transformers/cursor.js` | IDE Sync | Transforms agent definitions for Cursor IDE | -- | ide-sync/index.js, tests | No |
-| 7 | `scripts/ide-sync/transformers/windsurf.js` | IDE Sync | Transforms agent definitions for Windsurf IDE | -- | ide-sync/index.js, tests | No |
 | 8 | `scripts/ide-sync/transformers/antigravity.js` | IDE Sync | Transforms agent definitions for Antigravity | -- | ide-sync/index.js, tests | No |
 
 ### 1.4 Documentation Integrity Sub-module (7 files)
@@ -232,7 +231,7 @@ Total: 15 files across 4 subdirectories
 
 | # | File | Category | Purpose | Orphan? |
 |---|------|----------|---------|---------|
-| 1 | `templates/gitignore/gitignore-aios-base.tmpl` | Gitignore | Base AIOS gitignore template | No |
+| 1 | `templates/gitignore/gitignore-aiox-base.tmpl` | Gitignore | Base AIOX gitignore template | No |
 | 2 | `templates/gitignore/gitignore-brownfield-merge.tmpl` | Gitignore | Brownfield merge gitignore template | No |
 | 3 | `templates/gitignore/gitignore-node.tmpl` | Gitignore | Node.js gitignore template | No |
 | 4 | `templates/gitignore/gitignore-python.tmpl` | Gitignore | Python gitignore template | No |
@@ -257,7 +256,7 @@ Total: 15 files across 4 subdirectories
 | # | File | Category | Purpose | Orphan? |
 |---|------|----------|---------|---------|
 | 1 | `templates/coderabbit.yaml.template` | Code Review | CodeRabbit configuration template | No |
-| 2 | `templates/aios-sync.yaml.template` | IDE Sync | AIOS sync configuration template | No |
+| 2 | `templates/aiox-sync.yaml.template` | IDE Sync | AIOX sync configuration template | No |
 
 ---
 
@@ -293,7 +292,7 @@ Total: 5 files
 | **Git Integration** | 5 | Git wrapper, config detector, branch manager, commit generator, diff generator |
 | **PM Integration** | 9 | Base adapter, factory, 4 adapters, helpers, status mapper, ClickUp helpers |
 | **Template/Generation** | 5 | Template engine, component generator, metadata, search, batch creator |
-| **Validation** | 6 | AIOS validator, template validator, output pattern, spot check, agent validator, yaml validator |
+| **Validation** | 6 | AIOX validator, template validator, output pattern, spot check, agent validator, yaml validator |
 | **Analysis** | 8 | Dependency (2), framework, capability, security, modification risk, asset inventory, path analyzer |
 | **Testing** | 7 | Test generator, coverage, utilities (2), quality assessment, sandbox, test discovery |
 | **Performance** | 4 | Analyzer, optimizer, tracker, error resolver |
@@ -404,14 +403,14 @@ These scripts have references primarily in documentation and architecture docs, 
 
 ### Dependency Direction
 
-The infrastructure module is the **base layer** of the AIOS modular architecture:
+The infrastructure module is the **base layer** of the AIOX modular architecture:
 
 ```
 infrastructure/ <-- core/ <-- development/ <-- product/
 (base layer)     (imports)    (imports)        (imports)
 ```
 
-- `infrastructure/` has **NO** dependencies on other AIOS modules
+- `infrastructure/` has **NO** dependencies on other AIOX modules
 - `core/` imports from infrastructure (recovery-handler, build-state-manager, executors, config)
 - `development/` imports from infrastructure (story-manager, greeting-builder, agent-config-loader)
 - `product/` imports from infrastructure (templates, activation-instructions)
@@ -429,4 +428,4 @@ infrastructure/ <-- core/ <-- development/ <-- product/
 
 ---
 
-*Generated as part of AIOS cross-reference analysis, Phase 4.*
+*Generated as part of AIOX cross-reference analysis, Phase 4.*

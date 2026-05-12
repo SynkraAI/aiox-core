@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-26
 -->
 
-# Documentação do Framework AIOS
+# Documentação do Framework AIOX
 
 > 🌐 [EN](../../framework/README.md) | **PT** | [ES](../../es/framework/README.md)
 
@@ -12,13 +12,13 @@
 
 **Status:** Padrões Oficiais do Framework
 **Criado:** 2025-01-16 (Story 6.1.2.6)
-**Destino de Migração:** Q2 2026 → repositório `SynkraAI/aios-core`
+**Destino de Migração:** Q2 2026 → repositório `SynkraAI/aiox-core`
 
 ---
 
 ## Visão Geral
 
-Este diretório contém **documentação oficial do framework AIOS** que define padrões, patterns e estruturas aplicáveis em todos os projetos AIOS (greenfield e brownfield).
+Este diretório contém **documentação oficial do framework AIOX** que define padrões, patterns e estruturas aplicáveis em todos os projetos AIOX (greenfield e brownfield).
 
 **Propósito**: Separar documentação de nível de framework dos detalhes específicos de implementação do projeto.
 
@@ -36,12 +36,12 @@ Este diretório contém **documentação oficial do framework AIOS** que define 
 
 ## Aviso de Migração
 
-**IMPORTANTE**: Estes documentos agora estão no repositório `SynkraAI/aios-core`. A migração do antigo org `aios/aios-core` foi concluída em dezembro de 2024 como parte do OSR-9 (Rebranding).
+**IMPORTANTE**: Estes documentos agora estão no repositório `SynkraAI/aiox-core`. A migração do antigo org `aiox/aiox-core` foi concluída em dezembro de 2024 como parte do OSR-9 (Rebranding).
 
 ### Cronograma de Migração
 
 - **Fase 1 (Q1 2026 - Story 6.1.2.6):** Docs do framework separados em `docs/framework/`
-- **Fase 2 (Q4 2024):** Repositório migrado para `SynkraAI/aios-core` (OSR-9)
+- **Fase 2 (Q4 2024):** Repositório migrado para `SynkraAI/aiox-core` (OSR-9)
 - **Fase 3 (Q3 2026):** Cópias antigas em `docs/architecture/` removidas do projeto brownfield
 
 ### Compatibilidade Retroativa
@@ -59,9 +59,9 @@ Para compatibilidade retroativa, os docs do framework permanecem acessíveis em 
 
 ### Documentação do Framework (`docs/framework/`)
 
-- **Escopo**: Portável entre todos os projetos AIOS
+- **Escopo**: Portável entre todos os projetos AIOX
 - **Exemplos**: Padrões de código, tech stack, estrutura de source tree
-- **Ciclo de vida**: Vive no repositório `SynkraAI/aios-core`
+- **Ciclo de vida**: Vive no repositório `SynkraAI/aiox-core`
 - **Alterações**: Requerem aprovação em nível de framework
 
 ### Documentação do Projeto (`docs/architecture/project-decisions/`)
@@ -77,7 +77,7 @@ Para compatibilidade retroativa, os docs do framework permanecem acessíveis em 
 
 ### Para Desenvolvedores
 
-1. **Leia os docs do framework durante o onboarding** - Entenda os padrões AIOS
+1. **Leia os docs do framework durante o onboarding** - Entenda os padrões AIOX
 2. **Consulte durante o desenvolvimento** - Garanta conformidade com os patterns do framework
 3. **Proponha alterações via PRs** - Padrões do framework evoluem com input da comunidade
 
@@ -87,7 +87,7 @@ Para compatibilidade retroativa, os docs do framework permanecem acessíveis em 
 2. **Revise PRs para conformidade** - Garanta que o código segue os padrões documentados
 3. **Planeje a migração** - Prepare-se para a separação de repositórios em Q2 2026
 
-### Para Mantenedores do Framework AIOS
+### Para Mantenedores do Framework AIOX
 
 1. **Controle de versão** - Acompanhe mudanças nos padrões do framework
 2. **Prontidão para migração** - Garanta que os docs estejam prontos para separação de repositórios
@@ -96,4 +96,4 @@ Para compatibilidade retroativa, os docs do framework permanecem acessíveis em 
 ---
 
 **Última Atualização**: 2025-12-14
-**Mantenedor**: Equipe do Framework AIOS
+**Mantenedor**: Equipe do Framework AIOX

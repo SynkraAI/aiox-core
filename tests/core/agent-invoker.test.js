@@ -18,7 +18,7 @@ const {
   AgentInvoker,
   SUPPORTED_AGENTS,
   InvocationStatus,
-} = require('../../.aios-core/core/orchestration/agent-invoker');
+} = require('../../.aiox-core/core/orchestration/agent-invoker');
 
 describe('Agent Invoker (Story 0.7)', () => {
   let tempDir;
@@ -29,14 +29,14 @@ describe('Agent Invoker (Story 0.7)', () => {
     await fs.ensureDir(tempDir);
 
     // Create agents directory
-    const agentsDir = path.join(tempDir, '.aios-core', 'development', 'agents');
+    const agentsDir = path.join(tempDir, '.aiox-core', 'development', 'agents');
     await fs.ensureDir(agentsDir);
 
     // Create sample agent file
     await fs.writeFile(path.join(agentsDir, 'dev.md'), '# Developer Agent\n\nDevelops code.');
 
     // Create tasks directory
-    const tasksDir = path.join(tempDir, '.aios-core', 'development', 'tasks');
+    const tasksDir = path.join(tempDir, '.aiox-core', 'development', 'tasks');
     await fs.ensureDir(tasksDir);
 
     // Create sample task file
@@ -199,7 +199,7 @@ describe('Agent Invoker (Story 0.7)', () => {
   describe('Output Validation (AC5)', () => {
     it('should validate output when schema exists', async () => {
       // Create task with schema
-      const tasksDir = path.join(tempDir, '.aios-core', 'development', 'tasks');
+      const tasksDir = path.join(tempDir, '.aiox-core', 'development', 'tasks');
       await fs.writeFile(
         path.join(tasksDir, 'schema-task.md'),
         `---
@@ -288,7 +288,7 @@ outputSchema:
 
     it('should get invocations for specific agent', async () => {
       // Create pm agent file
-      const agentsDir = path.join(tempDir, '.aios-core', 'development', 'agents');
+      const agentsDir = path.join(tempDir, '.aiox-core', 'development', 'agents');
       await fs.writeFile(path.join(agentsDir, 'pm.md'), '# PM Agent');
 
       await invoker.invokeAgent('dev', 'sample-task');
@@ -372,7 +372,7 @@ describe('Integration with MasterOrchestrator', () => {
     await fs.ensureDir(tempDir);
 
     // Create agents directory
-    const agentsDir = path.join(tempDir, '.aios-core', 'development', 'agents');
+    const agentsDir = path.join(tempDir, '.aiox-core', 'development', 'agents');
     await fs.ensureDir(agentsDir);
     await fs.writeFile(path.join(agentsDir, 'dev.md'), '# Dev Agent');
   });
@@ -382,7 +382,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should integrate AgentInvoker with MasterOrchestrator', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
@@ -393,7 +393,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should expose getAgentInvoker method', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
@@ -405,7 +405,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should expose getSupportedAgents method', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
@@ -417,10 +417,10 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should invoke agent through orchestrator', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     // Create tasks directory
-    const tasksDir = path.join(tempDir, '.aios-core', 'development', 'tasks');
+    const tasksDir = path.join(tempDir, '.aiox-core', 'development', 'tasks');
     await fs.ensureDir(tasksDir);
     await fs.writeFile(path.join(tasksDir, 'test-task.md'), '# Test Task');
 

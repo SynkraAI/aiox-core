@@ -17,9 +17,9 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock gotchas-memory (exists but exports object, not constructor directly)
-jest.mock('../../.aios-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
+jest.mock('../../.aiox-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
 
-const { ContextInjector } = require('../../.aios-core/core/execution/context-injector');
+const { ContextInjector } = require('../../.aiox-core/core/execution/context-injector');
 
 describe('ContextInjector', () => {
   let tmpDir;

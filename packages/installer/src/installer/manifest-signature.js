@@ -31,7 +31,7 @@ const SignatureLimits = {
 /**
  * PINNED PUBLIC KEY - MUST BE HARDCODED
  * This is the root of trust for manifest verification.
- * Generated with: minisign -G -p aios-core.pub -s aios-core.key
+ * Generated with: minisign -G -p aiox-core.pub -s aiox-core.key
  *
  * Format: base64-encoded Ed25519 public key
  * DO NOT load this from external files or environment variables.
@@ -39,7 +39,7 @@ const SignatureLimits = {
 const PINNED_PUBLIC_KEY = {
   // Key ID (8 bytes, base64 encoded) - opaque identifier, not UTF-8 text
   // This is compared as raw bytes against the signature's key ID
-  keyId: Buffer.from('AIOS0001').toString('base64'), // 'QUlPUzAwMDE='
+  keyId: Buffer.from('AIOX0001').toString('base64'), // 'QUlPUzAwMDE='
   // Ed25519 public key (32 bytes, base64 encoded)
   // TODO: Replace with actual generated public key before production
   publicKey: 'REPLACE_WITH_ACTUAL_PUBLIC_KEY_BASE64_HERE',

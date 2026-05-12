@@ -20,7 +20,7 @@ jest.mock('fs', () => ({
 }));
 
 const fs = require('fs').promises;
-const { ServiceRegistry, getRegistry } = require('../../.aios-core/core/registry/registry-loader');
+const { ServiceRegistry, getRegistry } = require('../../.aiox-core/core/registry/registry-loader');
 
 // Set timeout for all tests
 jest.setTimeout(30000);
@@ -383,7 +383,7 @@ describe('ServiceRegistry', () => {
 describe('getRegistry', () => {
   beforeEach(() => {
     // Reset singleton
-    const { ServiceRegistry } = require('../../.aios-core/core/registry/registry-loader');
+    const { ServiceRegistry } = require('../../.aiox-core/core/registry/registry-loader');
   });
 
   it('should return singleton instance', () => {

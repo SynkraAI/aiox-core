@@ -30,7 +30,7 @@ Auditar o estado atual de:
 
 ### 1. Configurações de Proteção de Branch
 
-**Fonte:** `gh api repos/SynkraAI/aios-core/branches/main/protection`
+**Fonte:** `gh api repos/SynkraAI/aiox-core/branches/main/protection`
 
 ```json
 {
@@ -67,11 +67,11 @@ Auditar o estado atual de:
 
 ### 2. Configurações do Repositório
 
-**Fonte:** `gh api repos/SynkraAI/aios-core`
+**Fonte:** `gh api repos/SynkraAI/aiox-core`
 
 ```json
 {
-  "name": "aios-core",
+  "name": "aiox-core",
   "default_branch": "main",
   "visibility": "public",
   "allow_forking": true,
@@ -84,7 +84,7 @@ Auditar o estado atual de:
 
 ### 3. Workflows do GitHub Actions
 
-**Fonte:** `gh api repos/SynkraAI/aios-core/actions/workflows`
+**Fonte:** `gh api repos/SynkraAI/aiox-core/actions/workflows`
 
 | Workflow                   | Estado | Caminho                                   |
 | -------------------------- | ------ | ----------------------------------------- |
@@ -201,7 +201,7 @@ Isso é aceitável para desenvolvimento interno mas **não recomendado para cont
 **Comando:**
 
 ```bash
-gh api repos/SynkraAI/aios-core/branches/main/protection -X PUT \
+gh api repos/SynkraAI/aiox-core/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \
@@ -210,7 +210,7 @@ gh api repos/SynkraAI/aios-core/branches/main/protection -X PUT \
 
 ### Fase 2: Curto prazo (ALTA)
 
-1. Criar `.coderabbit.yaml` com regras específicas do AIOS
+1. Criar `.coderabbit.yaml` com regras específicas do AIOX
 2. Atualizar CODEOWNERS com caminhos granulares
 
 ### Fase 3: Médio prazo (MÉDIA)
@@ -224,8 +224,8 @@ gh api repos/SynkraAI/aios-core/branches/main/protection -X PUT \
 
 Configurações exportadas salvas em:
 
-- `.aios/audit/branch-protection.json`
-- `.aios/audit/repo-settings.json`
+- `.aiox/audit/branch-protection.json`
+- `.aiox/audit/repo-settings.json`
 
 ---
 

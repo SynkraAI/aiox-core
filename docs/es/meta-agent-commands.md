@@ -10,7 +10,7 @@
 
 ---
 
-Guia de referencia completa para todos los comandos del meta-agente de Synkra AIOS.
+Guia de referencia completa para todos los comandos del meta-agente de Synkra AIOX.
 
 ## Tabla de Contenidos
 
@@ -715,7 +715,7 @@ Ejemplos:
 
 ### *update
 
-Actualiza Synkra AIOS.
+Actualiza Synkra AIOX.
 
 ```bash
 *update [options]
@@ -937,10 +937,10 @@ Ingresa al modo interactivo para comandos continuos:
 ```bash
 *interactive
 
-AIOS> create-agent helper
-AIOS> activate helper
-AIOS> helper translate "Hello" --to spanish
-AIOS> exit
+AIOX> create-agent helper
+AIOX> activate helper
+AIOX> helper translate "Hello" --to spanish
+AIOX> exit
 ```
 
 ## Variables de Entorno
@@ -948,12 +948,12 @@ AIOS> exit
 Controla el comportamiento con variables de entorno:
 
 ```bash
-AIOS_AI_PROVIDER=openai          # Proveedor de IA
-AIOS_AI_MODEL=gpt-4             # Modelo de IA
-AIOS_LOG_LEVEL=debug            # Nivel de log
-AIOS_TELEMETRY=disabled         # Configuracion de telemetria
-AIOS_TIMEOUT=30000             # Timeout de comando (ms)
-AIOS_MEMORY_CACHE=true         # Cache de memoria
+AIOX_AI_PROVIDER=openai          # Proveedor de IA
+AIOX_AI_MODEL=gpt-4             # Modelo de IA
+AIOX_LOG_LEVEL=debug            # Nivel de log
+AIOX_TELEMETRY=disabled         # Configuracion de telemetria
+AIOX_TIMEOUT=30000             # Timeout de comando (ms)
+AIOX_MEMORY_CACHE=true         # Cache de memoria
 ```
 
 ## Manejo de Errores

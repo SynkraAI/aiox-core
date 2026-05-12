@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-O agente **@dev (Dex)** e o Full Stack Developer do AIOS, responsavel pela implementacao de stories, debugging, refactoring e aplicacao das melhores praticas de desenvolvimento. Este agente atua como um **Builder** que implementa stories de forma precisa, atualiza somente as secoes autorizadas dos arquivos de story e mantem testes abrangentes.
+O agente **@dev (Dex)** e o Full Stack Developer do AIOX, responsavel pela implementacao de stories, debugging, refactoring e aplicacao das melhores praticas de desenvolvimento. Este agente atua como um **Builder** que implementa stories de forma precisa, atualiza somente as secoes autorizadas dos arquivos de story e mantem testes abrangentes.
 
 ### Caracteristicas Principais
 
@@ -39,51 +39,51 @@ O agente **@dev (Dex)** e o Full Stack Developer do AIOS, responsavel pela imple
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/dev-develop-story.md` | `*develop {story-id}` | Task principal - desenvolve story completa com modos YOLO/Interactive/Pre-flight |
-| `.aios-core/development/tasks/dev-improve-code-quality.md` | `*improve-code-quality <path>` | Melhora qualidade do codigo (formatting, linting, modern-syntax) |
-| `.aios-core/development/tasks/dev-optimize-performance.md` | `*optimize-performance <path>` | Analisa e otimiza performance do codigo |
-| `.aios-core/development/tasks/dev-suggest-refactoring.md` | `*suggest-refactoring <path>` | Sugere oportunidades de refactoring automatizado |
-| `.aios-core/development/tasks/dev-backlog-debt.md` | `*backlog-debt` | Registra divida tecnica no backlog |
-| `.aios-core/development/tasks/apply-qa-fixes.md` | `*apply-qa-fixes` | Aplica correcoes baseadas em feedback de QA |
-| `.aios-core/development/tasks/execute-checklist.md` | `*execute-checklist` | Valida documentacao usando checklists |
-| `.aios-core/development/tasks/validate-next-story.md` | `*validate-story-draft` | Valida qualidade e completude de stories |
-| `.aios-core/development/tasks/sync-documentation.md` | `*sync-documentation` | Sincroniza documentacao com mudancas de codigo |
-| `.aios-core/development/tasks/po-manage-story-backlog.md` | (usado internamente) | Gerencia backlog de stories |
+| `.aiox-core/development/tasks/dev-develop-story.md` | `*develop {story-id}` | Task principal - desenvolve story completa com modos YOLO/Interactive/Pre-flight |
+| `.aiox-core/development/tasks/dev-improve-code-quality.md` | `*improve-code-quality <path>` | Melhora qualidade do codigo (formatting, linting, modern-syntax) |
+| `.aiox-core/development/tasks/dev-optimize-performance.md` | `*optimize-performance <path>` | Analisa e otimiza performance do codigo |
+| `.aiox-core/development/tasks/dev-suggest-refactoring.md` | `*suggest-refactoring <path>` | Sugere oportunidades de refactoring automatizado |
+| `.aiox-core/development/tasks/dev-backlog-debt.md` | `*backlog-debt` | Registra divida tecnica no backlog |
+| `.aiox-core/development/tasks/apply-qa-fixes.md` | `*apply-qa-fixes` | Aplica correcoes baseadas em feedback de QA |
+| `.aiox-core/development/tasks/execute-checklist.md` | `*execute-checklist` | Valida documentacao usando checklists |
+| `.aiox-core/development/tasks/validate-next-story.md` | `*validate-story-draft` | Valida qualidade e completude de stories |
+| `.aiox-core/development/tasks/sync-documentation.md` | `*sync-documentation` | Sincroniza documentacao com mudancas de codigo |
+| `.aiox-core/development/tasks/po-manage-story-backlog.md` | (usado internamente) | Gerencia backlog de stories |
 
 ### Arquivos de Definicao do Agente
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/dev.md` | Definicao core do agente @dev (persona, comandos, workflows) |
-| `.claude/commands/AIOS/agents/dev.md` | Comando Claude Code para ativar @dev |
+| `.aiox-core/development/agents/dev.md` | Definicao core do agente @dev (persona, comandos, workflows) |
+| `.claude/commands/AIOX/agents/dev.md` | Comando Claude Code para ativar @dev |
 
 ### Arquivos de Checklists Usados pelo @dev
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/product/checklists/story-dod-checklist.md` | Definition of Done para stories |
-| `.aios-core/product/checklists/pre-push-checklist.md` | Checklist antes de push |
-| `.aios-core/product/checklists/change-checklist.md` | Validacao de mudancas |
+| `.aiox-core/product/checklists/story-dod-checklist.md` | Definition of Done para stories |
+| `.aiox-core/product/checklists/pre-push-checklist.md` | Checklist antes de push |
+| `.aiox-core/product/checklists/change-checklist.md` | Validacao de mudancas |
 
 ### Arquivos Relacionados de Outros Agentes
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.aios-core/development/tasks/qa-backlog-add-followup.md` | @qa | QA adiciona follow-ups ao backlog |
-| `.aios-core/development/tasks/qa-review-story.md` | @qa | QA revisa implementacao do @dev |
-| `.aios-core/development/tasks/github-devops-pre-push-quality-gate.md` | @github-devops | Quality gate antes de push |
-| `.aios-core/development/tasks/sm-create-next-story.md` | @sm | Scrum Master cria stories para @dev |
+| `.aiox-core/development/tasks/qa-backlog-add-followup.md` | @qa | QA adiciona follow-ups ao backlog |
+| `.aiox-core/development/tasks/qa-review-story.md` | @qa | QA revisa implementacao do @dev |
+| `.aiox-core/development/tasks/github-devops-pre-push-quality-gate.md` | @github-devops | Quality gate antes de push |
+| `.aiox-core/development/tasks/sm-create-next-story.md` | @sm | Scrum Master cria stories para @dev |
 
 ### Arquivos de Workflows que Usam @dev
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/workflows/brownfield-fullstack.yaml` | Workflow full-stack brownfield |
-| `.aios-core/development/workflows/brownfield-service.yaml` | Workflow de servico brownfield |
-| `.aios-core/development/workflows/brownfield-ui.yaml` | Workflow UI brownfield |
-| `.aios-core/development/workflows/greenfield-fullstack.yaml` | Workflow full-stack greenfield |
-| `.aios-core/development/workflows/greenfield-service.yaml` | Workflow de servico greenfield |
-| `.aios-core/development/workflows/greenfield-ui.yaml` | Workflow UI greenfield |
+| `.aiox-core/development/workflows/brownfield-fullstack.yaml` | Workflow full-stack brownfield |
+| `.aiox-core/development/workflows/brownfield-service.yaml` | Workflow de servico brownfield |
+| `.aiox-core/development/workflows/brownfield-ui.yaml` | Workflow UI brownfield |
+| `.aiox-core/development/workflows/greenfield-fullstack.yaml` | Workflow full-stack greenfield |
+| `.aiox-core/development/workflows/greenfield-service.yaml` | Workflow de servico greenfield |
+| `.aiox-core/development/workflows/greenfield-ui.yaml` | Workflow UI greenfield |
 
 ---
 
@@ -374,9 +374,9 @@ O @dev tem operacoes Git limitadas:
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/core-config.yaml` | Configuracao central (devStoryLocation, coderabbit, etc.) |
-| `.aios-core/development/scripts/greeting-builder.js` | Constroi greeting adaptativo |
-| `.aios-core/scripts/decision-recorder.js` | Logging de decisoes (YOLO mode) |
+| `.aiox-core/core-config.yaml` | Configuracao central (devStoryLocation, coderabbit, etc.) |
+| `.aiox-core/development/scripts/greeting-builder.js` | Constroi greeting adaptativo |
+| `.aiox-core/scripts/decision-recorder.js` | Logging de decisoes (YOLO mode) |
 
 ### devLoadAlwaysFiles
 
@@ -529,23 +529,23 @@ O @dev deve **HALT** e perguntar ao usuario quando:
 ## Referencias
 
 ### Tasks do @dev
-- [dev-develop-story.md](.aios-core/development/tasks/dev-develop-story.md)
-- [dev-improve-code-quality.md](.aios-core/development/tasks/dev-improve-code-quality.md)
-- [dev-optimize-performance.md](.aios-core/development/tasks/dev-optimize-performance.md)
-- [dev-suggest-refactoring.md](.aios-core/development/tasks/dev-suggest-refactoring.md)
-- [dev-backlog-debt.md](.aios-core/development/tasks/dev-backlog-debt.md)
-- [apply-qa-fixes.md](.aios-core/development/tasks/apply-qa-fixes.md)
+- [dev-develop-story.md](.aiox-core/development/tasks/dev-develop-story.md)
+- [dev-improve-code-quality.md](.aiox-core/development/tasks/dev-improve-code-quality.md)
+- [dev-optimize-performance.md](.aiox-core/development/tasks/dev-optimize-performance.md)
+- [dev-suggest-refactoring.md](.aiox-core/development/tasks/dev-suggest-refactoring.md)
+- [dev-backlog-debt.md](.aiox-core/development/tasks/dev-backlog-debt.md)
+- [apply-qa-fixes.md](.aiox-core/development/tasks/apply-qa-fixes.md)
 
 ### Checklists
-- [story-dod-checklist.md](.aios-core/product/checklists/story-dod-checklist.md)
-- [pre-push-checklist.md](.aios-core/product/checklists/pre-push-checklist.md)
+- [story-dod-checklist.md](.aiox-core/product/checklists/story-dod-checklist.md)
+- [pre-push-checklist.md](.aiox-core/product/checklists/pre-push-checklist.md)
 
 ### Agente
-- [dev.md](.aios-core/development/agents/dev.md)
+- [dev.md](.aiox-core/development/agents/dev.md)
 
 ### Workflows
-- [brownfield-fullstack.yaml](.aios-core/development/workflows/brownfield-fullstack.yaml)
-- [greenfield-fullstack.yaml](.aios-core/development/workflows/greenfield-fullstack.yaml)
+- [brownfield-fullstack.yaml](.aiox-core/development/workflows/brownfield-fullstack.yaml)
+- [greenfield-fullstack.yaml](.aiox-core/development/workflows/greenfield-fullstack.yaml)
 
 ### Relacionados
 - [BACKLOG-MANAGEMENT-SYSTEM.md](../BACKLOG-MANAGEMENT-SYSTEM.md)

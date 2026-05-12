@@ -736,12 +736,12 @@ graph LR
 
 | Task | Fase | Agente | Arquivo |
 |------|------|--------|---------|
-| Gather Requirements | 1 | @pm | `.aios-core/development/tasks/spec-gather-requirements.md` |
-| Assess Complexity | 2 | @architect | `.aios-core/development/tasks/spec-assess-complexity.md` |
-| Research Dependencies | 3 | @analyst | `.aios-core/development/tasks/spec-research-dependencies.md` |
-| Write Specification | 4 | @pm | `.aios-core/development/tasks/spec-write-spec.md` |
-| Critique Specification | 5, 5c | @qa | `.aios-core/development/tasks/spec-critique.md` |
-| Create Implementation Plan | 6 | @architect | `.aios-core/development/tasks/plan-create-implementation.md` |
+| Gather Requirements | 1 | @pm | `.aiox-core/development/tasks/spec-gather-requirements.md` |
+| Assess Complexity | 2 | @architect | `.aiox-core/development/tasks/spec-assess-complexity.md` |
+| Research Dependencies | 3 | @analyst | `.aiox-core/development/tasks/spec-research-dependencies.md` |
+| Write Specification | 4 | @pm | `.aiox-core/development/tasks/spec-write-spec.md` |
+| Critique Specification | 5, 5c | @qa | `.aiox-core/development/tasks/spec-critique.md` |
+| Create Implementation Plan | 6 | @architect | `.aiox-core/development/tasks/plan-create-implementation.md` |
 
 ---
 
@@ -946,27 +946,27 @@ flowchart TB
 
 | Arquivo | Localizacao |
 |---------|-------------|
-| Definicao do Workflow | `.aios-core/development/workflows/spec-pipeline.yaml` |
-| Task: Gather | `.aios-core/development/tasks/spec-gather-requirements.md` |
-| Task: Assess | `.aios-core/development/tasks/spec-assess-complexity.md` |
-| Task: Research | `.aios-core/development/tasks/spec-research-dependencies.md` |
-| Task: Write Spec | `.aios-core/development/tasks/spec-write-spec.md` |
-| Task: Critique | `.aios-core/development/tasks/spec-critique.md` |
-| Task: Create Plan | `.aios-core/development/tasks/plan-create-implementation.md` |
+| Definicao do Workflow | `.aiox-core/development/workflows/spec-pipeline.yaml` |
+| Task: Gather | `.aiox-core/development/tasks/spec-gather-requirements.md` |
+| Task: Assess | `.aiox-core/development/tasks/spec-assess-complexity.md` |
+| Task: Research | `.aiox-core/development/tasks/spec-research-dependencies.md` |
+| Task: Write Spec | `.aiox-core/development/tasks/spec-write-spec.md` |
+| Task: Critique | `.aiox-core/development/tasks/spec-critique.md` |
+| Task: Create Plan | `.aiox-core/development/tasks/plan-create-implementation.md` |
 
 ### 10.2 Agentes Relacionados
 
 | Agente | Localizacao |
 |--------|-------------|
-| @pm (Morgan) | `.aios-core/development/agents/pm.md` |
-| @architect (Aria) | `.aios-core/development/agents/architect.md` |
-| @analyst (Atlas) | `.aios-core/development/agents/analyst.md` |
-| @qa (Quinn) | `.aios-core/development/agents/qa.md` |
+| @pm (Morgan) | `.aiox-core/development/agents/pm.md` |
+| @architect (Aria) | `.aiox-core/development/agents/architect.md` |
+| @analyst (Atlas) | `.aiox-core/development/agents/analyst.md` |
+| @qa (Quinn) | `.aiox-core/development/agents/qa.md` |
 
 ### 10.3 Documentacao Relacionada
 
 - [Workflows YAML Guide](../workflows-yaml-guide.md)
-- [AIOS Documentation Index](../AIOS-DOCUMENTATION-INDEX.md)
+- [AIOX Documentation Index](../AIOX-DOCUMENTATION-INDEX.md)
 - [Backlog Management System](../BACKLOG-MANAGEMENT-SYSTEM.md)
 
 ### 10.4 Commands Rapidos
@@ -1019,13 +1019,13 @@ metadata:
   criado: 2026-02-04
   autor: Technical Documentation Specialist
   baseado_em:
-    - .aios-core/development/workflows/spec-pipeline.yaml
-    - .aios-core/development/tasks/spec-*.md
-    - .aios-core/development/agents/*.md
+    - .aiox-core/development/workflows/spec-pipeline.yaml
+    - .aiox-core/development/tasks/spec-*.md
+    - .aiox-core/development/agents/*.md
   tags:
     - spec-pipeline
     - workflow
     - documentacao
-    - aios
+    - aiox
     - auto-claude
 ```

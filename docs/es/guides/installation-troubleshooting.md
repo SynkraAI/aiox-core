@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-26
 -->
 
-# Guía de Instalación y Solución de Problemas de AIOS-Core
+# Guía de Instalación y Solución de Problemas de AIOX-Core
 
 > 🌐 [EN](../../guides/installation-troubleshooting.md) | [PT](../../pt/guides/installation-troubleshooting.md) | **ES**
 
@@ -13,10 +13,10 @@
 ## Inicio Rápido
 
 ```bash
-npx aios-core@latest
+npx aiox-core@latest
 ```
 
-Este comando descarga y ejecuta la última versión del instalador de AIOS-Core.
+Este comando descarga y ejecuta la última versión del instalador de AIOX-Core.
 
 ## Requisitos del Sistema
 
@@ -40,29 +40,29 @@ Este comando descarga y ejecuta la última versión del instalador de AIOS-Core.
 
 ```bash
 # Install in current directory
-npx aios-core@latest
+npx aiox-core@latest
 
 # Install with specific version
-npx aios-core@2.2.0
+npx aiox-core@2.2.0
 
 # Show version
-npx aios-core@latest --version
+npx aiox-core@latest --version
 
 # Show help
-npx aios-core@latest --help
+npx aiox-core@latest --help
 ```
 
 ### Método 2: Desde GitHub
 
 ```bash
-npx github:SynkraAI/aios-core install
+npx github:SynkraAI/aiox-core install
 ```
 
 ### Método 3: Instalación Global
 
 ```bash
-npm install -g aios-core
-aios-core
+npm install -g aiox-core
+aiox-core
 ```
 
 ---
@@ -73,17 +73,17 @@ Si tienes problemas de instalación, ejecuta nuestra herramienta de diagnóstico
 
 ### Windows (CMD)
 ```cmd
-curl -o diagnose.cmd https://raw.githubusercontent.com/SynkraAI/aios-core/main/tools/quick-diagnose.cmd && diagnose.cmd
+curl -o diagnose.cmd https://raw.githubusercontent.com/SynkraAI/aiox-core/main/tools/quick-diagnose.cmd && diagnose.cmd
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/SynkraAI/aios-core/main/tools/quick-diagnose.ps1 | iex
+irm https://raw.githubusercontent.com/SynkraAI/aiox-core/main/tools/quick-diagnose.ps1 | iex
 ```
 
 ### macOS/Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SynkraAI/aios-core/main/tools/diagnose-installation.js | node
+curl -fsSL https://raw.githubusercontent.com/SynkraAI/aiox-core/main/tools/diagnose-installation.js | node
 ```
 
 ---
@@ -225,7 +225,7 @@ npm cache clean --force
 rm -rf node_modules
 
 # Try again
-npx aios-core@latest
+npx aiox-core@latest
 ```
 
 ---
@@ -253,10 +253,10 @@ npm config set cafile /path/to/certificate.pem
 npx clear-npx-cache
 
 # Or force fresh download
-npx --ignore-existing aios-core@latest
+npx --ignore-existing aiox-core@latest
 
 # Or use specific version
-npx aios-core@2.2.0
+npx aiox-core@2.2.0
 ```
 
 ---
@@ -276,10 +276,10 @@ npm --version
 npx --version
 
 # 4. Check npm registry access
-npm view aios-core version
+npm view aiox-core version
 
 # 5. Test installation
-npx aios-core@latest --version
+npx aiox-core@latest --version
 ```
 
 **Salida esperada:**
@@ -297,9 +297,9 @@ v22.x.x (or v18+/v20+)
 
 Si sigues teniendo problemas:
 
-1. **GitHub Issues**: https://github.com/SynkraAI/aios-core/issues
-2. **Ejecutar diagnósticos**: `npx aios-core@latest doctor`
-3. **Verificar información del sistema**: `npx aios-core@latest info`
+1. **GitHub Issues**: https://github.com/SynkraAI/aiox-core/issues
+2. **Ejecutar diagnósticos**: `npx aiox-core@latest doctor`
+3. **Verificar información del sistema**: `npx aiox-core@latest info`
 
 Al reportar problemas, por favor incluye:
 - Sistema operativo y versión
@@ -314,14 +314,14 @@ Al reportar problemas, por favor incluye:
 
 | Comando | Descripción |
 |---------|-------------|
-| `npx aios-core@latest` | Instalar/ejecutar asistente |
-| `npx aios-core@latest --version` | Mostrar versión |
-| `npx aios-core@latest --help` | Mostrar ayuda |
-| `npx aios-core@latest install` | Instalar en directorio actual |
-| `npx aios-core@latest init <name>` | Crear nuevo proyecto |
-| `npx aios-core@latest doctor` | Ejecutar diagnósticos |
-| `npx aios-core@latest info` | Mostrar información del sistema |
+| `npx aiox-core@latest` | Instalar/ejecutar asistente |
+| `npx aiox-core@latest --version` | Mostrar versión |
+| `npx aiox-core@latest --help` | Mostrar ayuda |
+| `npx aiox-core@latest install` | Instalar en directorio actual |
+| `npx aiox-core@latest init <name>` | Crear nuevo proyecto |
+| `npx aiox-core@latest doctor` | Ejecutar diagnósticos |
+| `npx aiox-core@latest info` | Mostrar información del sistema |
 
 ---
 
-*Última actualización: Diciembre 2025 | AIOS-Core v2.2.0*
+*Última actualización: Diciembre 2025 | AIOX-Core v2.2.0*

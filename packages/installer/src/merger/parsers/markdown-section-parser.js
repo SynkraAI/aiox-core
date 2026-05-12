@@ -1,11 +1,11 @@
 /**
- * @fileoverview Parser for Markdown files with AIOS-MANAGED sections
+ * @fileoverview Parser for Markdown files with AIOX-MANAGED sections
  * @module merger/parsers/markdown-section-parser
  */
 
-// Regex patterns for AIOS markers
-const AIOS_START_MARKER = /^<!--\s*AIOS-MANAGED-START:\s*([a-zA-Z0-9_-]+)\s*-->$/;
-const AIOS_END_MARKER = /^<!--\s*AIOS-MANAGED-END:\s*([a-zA-Z0-9_-]+)\s*-->$/;
+// Regex patterns for AIOX markers
+const AIOX_START_MARKER = /^<!--\s*AIOX-MANAGED-START:\s*([a-zA-Z0-9_-]+)\s*-->$/;
+const AIOX_END_MARKER = /^<!--\s*AIOX-MANAGED-END:\s*([a-zA-Z0-9_-]+)\s*-->$/;
 const HEADER_PATTERN = /^(#{1,6})\s+(.+)$/;
 
 /**
@@ -16,7 +16,7 @@ const HEADER_PATTERN = /^(#{1,6})\s+(.+)$/;
  * @property {number} [level] - Header level (1-6)
  * @property {number} startLine - Start line number (0-indexed)
  * @property {number} [endLine] - End line number (0-indexed)
- * @property {boolean} managed - True if AIOS-MANAGED section
+ * @property {boolean} managed - True if AIOX-MANAGED section
  * @property {string[]} lines - Lines in this section (excluding markers)
  */
 
@@ -24,7 +24,7 @@ const HEADER_PATTERN = /^(#{1,6})\s+(.+)$/;
  * Result of parsing a markdown file
  * @typedef {Object} ParsedMarkdownFile
  * @property {ParsedSection[]} sections - All sections found
- * @property {boolean} hasAiosMarkers - True if file has AIOS-MANAGED markers
+ * @property {boolean} hasAioxMarkers - True if file has AIOX-MANAGED markers
  * @property {string[]} preamble - Lines before first section
  * @property {string[]} rawLines - Original lines
  */
@@ -44,7 +44,7 @@ function slugify(text) {
 }
 
 /**
- * Parse a markdown file, identifying sections and AIOS-MANAGED areas
+ * Parse a markdown file, identifying sections and AIOX-MANAGED areas
  * @param {string} content - Markdown content
  * @returns {ParsedMarkdownFile} Parsed result
  */
@@ -52,7 +52,7 @@ function parseMarkdownSections(content) {
   if (!content || content.trim() === '') {
     return {
       sections: [],
-      hasAiosMarkers: false,
+      hasAioxMarkers: false,
       preamble: [],
       rawLines: [],
     };
@@ -61,21 +61,21 @@ function parseMarkdownSections(content) {
   const lines = content.split('\n');
   const result = {
     sections: [],
-    hasAiosMarkers: false,
+    hasAioxMarkers: false,
     preamble: [],
     rawLines: lines,
   };
 
   let currentSection = null;
-  let aiosSection = null;
+  let aioxSection = null;
   let inPreamble = true;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
 
-    // Check for AIOS start marker
-    const startMatch = trimmed.match(AIOS_START_MARKER);
+    // Check for AIOX start marker
+    const startMatch = trimmed.match(AIOX_START_MARKER);
     if (startMatch) {
       // Close any current non-managed section
       if (currentSection && !currentSection.managed) {
@@ -84,32 +84,32 @@ function parseMarkdownSections(content) {
         currentSection = null;
       }
 
-      // Start new AIOS-managed section
-      aiosSection = {
+      // Start new AIOX-managed section
+      aioxSection = {
         id: startMatch[1],
         startLine: i,
         managed: true,
         lines: [],
       };
-      result.hasAiosMarkers = true;
+      result.hasAioxMarkers = true;
       inPreamble = false;
       continue;
     }
 
-    // Check for AIOS end marker
-    const endMatch = trimmed.match(AIOS_END_MARKER);
-    if (endMatch && aiosSection) {
-      if (endMatch[1] === aiosSection.id) {
-        aiosSection.endLine = i;
-        result.sections.push(aiosSection);
-        aiosSection = null;
+    // Check for AIOX end marker
+    const endMatch = trimmed.match(AIOX_END_MARKER);
+    if (endMatch && aioxSection) {
+      if (endMatch[1] === aioxSection.id) {
+        aioxSection.endLine = i;
+        result.sections.push(aioxSection);
+        aioxSection = null;
       }
       continue;
     }
 
-    // If we're in an AIOS section, collect lines
-    if (aiosSection) {
-      aiosSection.lines.push(line);
+    // If we're in an AIOX section, collect lines
+    if (aioxSection) {
+      aioxSection.lines.push(line);
       continue;
     }
 
@@ -140,8 +140,8 @@ function parseMarkdownSections(content) {
       result.preamble.push(line);
     } else if (currentSection) {
       currentSection.lines.push(line);
-    } else if (!aiosSection) {
-      // Content after an AIOS section but before next section
+    } else if (!aioxSection) {
+      // Content after an AIOX section but before next section
       // This shouldn't happen in well-formed files, but handle it
       result.preamble.push(line);
     }
@@ -153,37 +153,37 @@ function parseMarkdownSections(content) {
     result.sections.push(currentSection);
   }
 
-  // Handle unclosed AIOS section (malformed)
-  if (aiosSection) {
-    aiosSection.endLine = lines.length - 1;
-    aiosSection.lines.push('<!-- WARNING: Unclosed AIOS-MANAGED section -->');
-    result.sections.push(aiosSection);
+  // Handle unclosed AIOX section (malformed)
+  if (aioxSection) {
+    aioxSection.endLine = lines.length - 1;
+    aioxSection.lines.push('<!-- WARNING: Unclosed AIOX-MANAGED section -->');
+    result.sections.push(aioxSection);
   }
 
   return result;
 }
 
 /**
- * Check if content has AIOS-MANAGED markers
+ * Check if content has AIOX-MANAGED markers
  * @param {string} content - Markdown content
  * @returns {boolean} True if markers found
  */
-function hasAiosMarkers(content) {
+function hasAioxMarkers(content) {
   if (!content) return false;
   // Check for both START and END markers
-  const hasStart = /<!--\s*AIOS-MANAGED-START:\s*[a-zA-Z0-9_-]+\s*-->/.test(content);
-  const hasEnd = /<!--\s*AIOS-MANAGED-END:\s*[a-zA-Z0-9_-]+\s*-->/.test(content);
+  const hasStart = /<!--\s*AIOX-MANAGED-START:\s*[a-zA-Z0-9_-]+\s*-->/.test(content);
+  const hasEnd = /<!--\s*AIOX-MANAGED-END:\s*[a-zA-Z0-9_-]+\s*-->/.test(content);
   return hasStart && hasEnd;
 }
 
 /**
- * Get all AIOS section IDs from content
+ * Get all AIOX section IDs from content
  * @param {string} content - Markdown content
  * @returns {string[]} Array of section IDs
  */
-function getAiosSectionIds(content) {
+function getAioxSectionIds(content) {
   const ids = [];
-  const matches = content.matchAll(/<!--\s*AIOS-MANAGED-START:\s*([a-zA-Z0-9_-]+)\s*-->/g);
+  const matches = content.matchAll(/<!--\s*AIOX-MANAGED-START:\s*([a-zA-Z0-9_-]+)\s*-->/g);
   for (const match of matches) {
     ids.push(match[1]);
   }
@@ -193,6 +193,6 @@ function getAiosSectionIds(content) {
 module.exports = {
   slugify,
   parseMarkdownSections,
-  hasAiosMarkers,
-  getAiosSectionIds,
+  hasAioxMarkers,
+  getAioxSectionIds,
 };

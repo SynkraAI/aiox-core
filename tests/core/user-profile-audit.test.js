@@ -24,12 +24,12 @@ jest.mock('js-yaml', () => ({
 }));
 
 // Mock config-resolver
-jest.mock('../../.aios-core/core/config/config-resolver', () => ({
+jest.mock('../../.aiox-core/core/config/config-resolver', () => ({
   resolveConfig: jest.fn(),
 }));
 
 // Mock infrastructure/scripts/validate-user-profile
-jest.mock('../../.aios-core/infrastructure/scripts/validate-user-profile', () => ({
+jest.mock('../../.aiox-core/infrastructure/scripts/validate-user-profile', () => ({
   validateUserProfile: jest.fn(),
   loadAndValidateUserProfile: jest.fn(),
   getUserProfile: jest.fn(),
@@ -40,26 +40,26 @@ jest.mock('../../.aios-core/infrastructure/scripts/validate-user-profile', () =>
 }));
 
 // Mock other dependencies
-jest.mock('../../.aios-core/core/session/context-detector', () => {
+jest.mock('../../.aiox-core/core/session/context-detector', () => {
   return jest.fn().mockImplementation(() => ({
     detectSessionType: jest.fn().mockReturnValue('new'),
   }));
 });
 
-jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector', () => {
+jest.mock('../../.aiox-core/infrastructure/scripts/git-config-detector', () => {
   return jest.fn().mockImplementation(() => ({
     get: jest.fn().mockResolvedValue({ configured: true, type: 'github', branch: 'main' }),
   }));
 });
 
-jest.mock('../../.aios-core/development/scripts/workflow-navigator', () => {
+jest.mock('../../.aiox-core/development/scripts/workflow-navigator', () => {
   return jest.fn().mockImplementation(() => ({
     getNextSteps: jest.fn().mockReturnValue([]),
     detectWorkflowState: jest.fn().mockReturnValue(null),
   }));
 });
 
-jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader', () => ({
+jest.mock('../../.aiox-core/infrastructure/scripts/project-status-loader', () => ({
   loadProjectStatus: jest.fn().mockResolvedValue({
     branch: 'main',
     modifiedFiles: [],
@@ -69,7 +69,7 @@ jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader', () =>
   }),
 }));
 
-jest.mock('../../.aios-core/core/permissions', () => ({
+jest.mock('../../.aiox-core/core/permissions', () => ({
   PermissionMode: jest.fn().mockImplementation(() => ({
     load: jest.fn().mockResolvedValue(undefined),
     getBadge: jest.fn().mockReturnValue(''),
@@ -78,12 +78,12 @@ jest.mock('../../.aios-core/core/permissions', () => ({
 
 const fs = require('fs');
 const yaml = require('js-yaml');
-const { resolveConfig } = require('../../.aios-core/core/config/config-resolver');
-const { validateUserProfile } = require('../../.aios-core/infrastructure/scripts/validate-user-profile');
+const { resolveConfig } = require('../../.aiox-core/core/config/config-resolver');
+const { validateUserProfile } = require('../../.aiox-core/infrastructure/scripts/validate-user-profile');
 
 // Import modules under test after mocks
-const GreetingPreferenceManager = require('../../.aios-core/development/scripts/greeting-preference-manager');
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
+const GreetingPreferenceManager = require('../../.aiox-core/development/scripts/greeting-preference-manager');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
 
 jest.setTimeout(30000);
 
@@ -549,7 +549,7 @@ describe('Integration: Bob mode greeting flow', () => {
 describe('validate-user-profile standalone', () => {
   // Use unmocked version for these tests
   const actualValidateUserProfile = jest.requireActual(
-    '../../.aios-core/infrastructure/scripts/validate-user-profile',
+    '../../.aiox-core/infrastructure/scripts/validate-user-profile',
   ).validateUserProfile;
 
   it('should validate "bob" as valid', () => {

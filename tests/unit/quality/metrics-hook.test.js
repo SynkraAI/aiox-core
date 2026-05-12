@@ -15,8 +15,8 @@ const {
   recordHumanReviewMetrics,
   withPreCommitMetrics,
   getQuickSummary,
-} = require('../../../.aios-core/quality/metrics-hook');
-const { MetricsCollector } = require('../../../.aios-core/quality/metrics-collector');
+} = require('../../../.aiox-core/quality/metrics-hook');
+const { MetricsCollector } = require('../../../.aiox-core/quality/metrics-collector');
 
 // Test data directory
 const TEST_DATA_DIR = path.join(__dirname, '../../fixtures/quality');

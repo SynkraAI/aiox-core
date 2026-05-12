@@ -15,7 +15,7 @@ const {
   createManifestValidator,
   parseCSV,
   parseCSVLine,
-} = require('../../../.aios-core/core/manifest/manifest-validator');
+} = require('../../../.aiox-core/core/manifest/manifest-validator');
 
 describe('ManifestValidator', () => {
   const basePath = path.join(__dirname, '..', '..', '..');
@@ -116,7 +116,7 @@ describe('ManifestValidator', () => {
         expect(schema.required).toContain('id');
         expect(schema.required).toContain('name');
         expect(schema.required).toContain('file_path');
-        expect(schema.sourceDir).toBe('.aios-core/development/agents');
+        expect(schema.sourceDir).toBe('.aiox-core/development/agents');
       });
     });
 
@@ -134,7 +134,7 @@ describe('ManifestValidator', () => {
         const schema = validator.getTasksSchema();
         expect(schema.required).toContain('id');
         expect(schema.required).toContain('name');
-        expect(schema.sourceDir).toBe('.aios-core/development/tasks');
+        expect(schema.sourceDir).toBe('.aiox-core/development/tasks');
       });
     });
 
@@ -158,7 +158,7 @@ describe('ManifestValidator', () => {
     describe('validateAll', () => {
       test('validates all manifests', async () => {
         // First generate manifests to ensure they exist
-        const { createManifestGenerator } = require('../../../.aios-core/core/manifest/manifest-generator');
+        const { createManifestGenerator } = require('../../../.aiox-core/core/manifest/manifest-generator');
         const generator = createManifestGenerator({ basePath });
         await generator.generateAll();
 
@@ -173,7 +173,7 @@ describe('ManifestValidator', () => {
 
       test('reports valid manifests correctly', async () => {
         // Ensure manifests are generated
-        const { createManifestGenerator } = require('../../../.aios-core/core/manifest/manifest-generator');
+        const { createManifestGenerator } = require('../../../.aiox-core/core/manifest/manifest-generator');
         const generator = createManifestGenerator({ basePath });
         await generator.generateAll();
 

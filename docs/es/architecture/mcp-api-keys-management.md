@@ -12,13 +12,13 @@
 
 ## Visión General
 
-Este documento describe las mejores prácticas para gestionar claves de API utilizadas por servidores MCP (Model Context Protocol) en AIOS. La gestión adecuada de claves de API es crítica para la seguridad e integridad operacional.
+Este documento describe las mejores prácticas para gestionar claves de API utilizadas por servidores MCP (Model Context Protocol) en AIOX. La gestión adecuada de claves de API es crítica para la seguridad e integridad operacional.
 
 ---
 
-## Arquitectura MCP en AIOS
+## Arquitectura MCP en AIOX
 
-AIOS utiliza Docker MCP Toolkit como la infraestructura principal de MCP:
+AIOX utiliza Docker MCP Toolkit como la infraestructura principal de MCP:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -105,7 +105,7 @@ APIFY_API_TOKEN=tu-token-apify
 
 ---
 
-## Gobernanza MCP en AIOS
+## Gobernanza MCP en AIOX
 
 **IMPORTANTE:** Toda la gestión de infraestructura MCP es manejada EXCLUSIVAMENTE por el **Agente DevOps (@devops / Gage)**.
 

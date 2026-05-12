@@ -1,7 +1,7 @@
 # @architect (Aria) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/architect.md`
+> Agent definition: `.aiox-core/development/agents/architect.md`
 
 ## 1. Activation Trace
 
@@ -9,13 +9,13 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/architect.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: architecture, dataLocation, templatesLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
-| 6 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 7 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/architect.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: architecture, dataLocation, templatesLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
+| 6 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 7 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -73,7 +73,7 @@ architect:
     - dataLocation
     - templatesLocation
   files_loaded:
-    - path: .aios-core/data/technical-preferences.md
+    - path: .aiox-core/data/technical-preferences.md
       lazy: false
       size: 15KB
   lazy_loading:
@@ -124,16 +124,16 @@ architect:
 
 ### `*create-full-stack-architecture`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/fullstack-architecture-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/fullstack-architecture-tmpl.yaml` (MISSING)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `fullstack-architecture-tmpl.yaml` | Template | MISSING |
-| `.aios-core/data/elicitation-methods` | Data | Referenced by create-doc |
-| `.aios-core/product/templates/` | Templates dir | Scanned dynamically |
+| `.aiox-core/data/elicitation-methods` | Data | Referenced by create-doc |
+| `.aiox-core/product/templates/` | Templates dir | Scanned dynamically |
 
 **Execution flow:**
 
@@ -157,8 +157,8 @@ flowchart TD
 
 ### `*create-backend-architecture`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/architecture-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/architecture-tmpl.yaml` (MISSING)
 
 Same flow as `*create-full-stack-architecture` with backend-specific template.
 
@@ -166,8 +166,8 @@ Same flow as `*create-full-stack-architecture` with backend-specific template.
 
 ### `*create-front-end-architecture`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/front-end-architecture-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/front-end-architecture-tmpl.yaml` (MISSING)
 
 Same flow as `*create-full-stack-architecture` with frontend-specific template.
 
@@ -175,8 +175,8 @@ Same flow as `*create-full-stack-architecture` with frontend-specific template.
 
 ### `*create-brownfield-architecture`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/brownfield-architecture-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/brownfield-architecture-tmpl.yaml` (MISSING)
 
 Same flow as `*create-full-stack-architecture` with brownfield-specific template.
 
@@ -184,7 +184,7 @@ Same flow as `*create-full-stack-architecture` with brownfield-specific template
 
 ### `*document-project`
 
-**Task file:** `.aios-core/development/tasks/document-project.md`
+**Task file:** `.aiox-core/development/tasks/document-project.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -210,21 +210,21 @@ flowchart TD
 
 ### `*execute-checklist`
 
-**Task file:** `.aios-core/development/tasks/execute-checklist.md`
+**Task file:** `.aiox-core/development/tasks/execute-checklist.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `execute-checklist.md` | Task | EXISTS |
-| `.aios-core/product/checklists/{checklist}.md` | Checklist | Dynamically loaded |
-| `.aios-core/scripts/execute-task.js` | Script | Referenced |
+| `.aiox-core/product/checklists/{checklist}.md` | Checklist | Dynamically loaded |
+| `.aiox-core/scripts/execute-task.js` | Script | Referenced |
 
 **Execution flow:**
 
 ```mermaid
 flowchart TD
     A["*execute-checklist {name}"] --> B[Load execute-checklist.md task]
-    B --> C[Resolve checklist file from .aios-core/product/checklists/]
+    B --> C[Resolve checklist file from .aiox-core/product/checklists/]
     C --> D{Checklist exists?}
     D -->|yes| E[Parse checklist items]
     D -->|no| F[Error: checklist not found]
@@ -240,7 +240,7 @@ flowchart TD
 
 ### `*research`
 
-**Task file:** `.aios-core/development/tasks/create-deep-research-prompt.md`
+**Task file:** `.aiox-core/development/tasks/create-deep-research-prompt.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -267,7 +267,7 @@ flowchart TD
 
 ### `*analyze-project-structure`
 
-**Task file:** `.aios-core/development/tasks/analyze-project-structure.md`
+**Task file:** `.aiox-core/development/tasks/analyze-project-structure.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -294,21 +294,21 @@ flowchart TD
 
 ### `*validate-tech-preset`
 
-**Task file:** `.aios-core/development/tasks/validate-tech-preset.md`
+**Task file:** `.aiox-core/development/tasks/validate-tech-preset.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `validate-tech-preset.md` | Task | EXISTS |
-| `.aios-core/data/tech-presets/{name}.md` | Data | Validated |
-| `.aios-core/data/tech-presets/_template.md` | Template | Reference |
+| `.aiox-core/data/tech-presets/{name}.md` | Data | Validated |
+| `.aiox-core/data/tech-presets/_template.md` | Template | Reference |
 
 **Execution flow:**
 
 ```mermaid
 flowchart TD
     A["*validate-tech-preset {name}"] --> B[Load validate-tech-preset.md]
-    B --> C[Load preset from .aios-core/data/tech-presets/{name}.md]
+    B --> C[Load preset from .aiox-core/data/tech-presets/{name}.md]
     C --> D[Validate against template structure]
     D --> E[Check required metadata fields]
     E --> F{All valid?}
@@ -322,7 +322,7 @@ flowchart TD
 
 ### `*assess-complexity`
 
-**Task file:** `.aios-core/development/tasks/spec-assess-complexity.md`
+**Task file:** `.aiox-core/development/tasks/spec-assess-complexity.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -350,7 +350,7 @@ flowchart TD
 
 ### `*create-plan`
 
-**Task file:** `.aios-core/development/tasks/plan-create-implementation.md`
+**Task file:** `.aiox-core/development/tasks/plan-create-implementation.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -378,13 +378,13 @@ flowchart TD
 
 ### `*create-context`
 
-**Task file:** `.aios-core/development/tasks/plan-create-context.md`
+**Task file:** `.aiox-core/development/tasks/plan-create-context.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `plan-create-context.md` | Task | EXISTS |
-| `.aios-core/core-config.yaml` | Config | Required |
+| `.aiox-core/core-config.yaml` | Config | Required |
 | `docs/framework/tech-stack.md` | Data | Required |
 | `docs/framework/source-tree.md` | Data | Required |
 | `package.json` | Data | Required |
@@ -409,7 +409,7 @@ flowchart TD
 
 ### `*map-codebase`
 
-**Script:** `.aios-core/development/scripts/codebase-mapper.js` (MISSING)
+**Script:** `.aiox-core/development/scripts/codebase-mapper.js` (MISSING)
 
 **Note:** This script is referenced in dependencies but does not exist on disk.
 
@@ -570,4 +570,4 @@ graph TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

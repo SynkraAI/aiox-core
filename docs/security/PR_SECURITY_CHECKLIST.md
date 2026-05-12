@@ -10,7 +10,7 @@ This PR implements comprehensive security hardening for the post-install validat
 | ------------------------------------------------ | ------------ | ---------------------------------------- |
 | `src/installer/post-install-validator.js`        | **Modified** | Complete rewrite with security hardening |
 | `src/installer/manifest-signature.js`            | **New**      | Ed25519 signature verification module    |
-| `bin/aios-init.js`                               | **Modified** | Added `requireSignature` option          |
+| `bin/aiox-init.js`                               | **Modified** | Added `requireSignature` option          |
 | `tests/installer/post-install-validator.test.js` | **New**      | Security test suite                      |
 | `docs/security/MANIFEST_SIGNING.md`              | **New**      | Signing workflow documentation           |
 
@@ -25,9 +25,9 @@ This PR implements comprehensive security hardening for the post-install validat
 
 **Action Required**: Before production release, maintainers must:
 
-1. Generate a key pair: `minisign -G -p aios-core.pub -s aios-core.key`
+1. Generate a key pair: `minisign -G -p aiox-core.pub -s aiox-core.key`
 2. Update `PINNED_PUBLIC_KEY` in `manifest-signature.js` with the real public key
-3. Sign the manifest: `minisign -Sm install-manifest.yaml -s aios-core.key`
+3. Sign the manifest: `minisign -Sm install-manifest.yaml -s aiox-core.key`
 
 ### 2. Path Traversal Prevention
 
@@ -113,14 +113,14 @@ None. The validator maintains backward compatibility:
 1. **Generate signing keys**:
 
    ```bash
-   minisign -G -p aios-core.pub -s aios-core.key
+   minisign -G -p aiox-core.pub -s aiox-core.key
    ```
 
 2. **Update public key** in `src/installer/manifest-signature.js`:
 
    ```javascript
    const PINNED_PUBLIC_KEY = {
-     keyId: 'AIOS0001',
+     keyId: 'AIOX0001',
      publicKey: 'YOUR_BASE64_PUBLIC_KEY_HERE',
      algorithm: 'Ed25519',
    };
@@ -129,12 +129,12 @@ None. The validator maintains backward compatibility:
 3. **Sign manifest** before each release:
 
    ```bash
-   minisign -Sm .aios-core/install-manifest.yaml -s aios-core.key
+   minisign -Sm .aiox-core/install-manifest.yaml -s aiox-core.key
    ```
 
 4. **Commit signature file**:
    ```bash
-   git add .aios-core/install-manifest.yaml.minisig
+   git add .aiox-core/install-manifest.yaml.minisig
    ```
 
 ### For Users

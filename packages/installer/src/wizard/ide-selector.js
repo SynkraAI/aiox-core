@@ -9,7 +9,7 @@
 
 const inquirer = require('inquirer');
 const { getIDEChoices, getIDEKeys } = require('../config/ide-configs');
-const { colors } = require('../utils/aios-colors');
+const { colors } = require('../utils/aiox-colors');
 const { t } = require('./i18n');
 
 /**
@@ -46,7 +46,7 @@ function validateIDESelection(selectedIDEs) {
  *
  * @example
  * const selectedIDEs = await selectIDEs();
- * console.log(selectedIDEs); // ['cursor', 'windsurf']
+ * console.log(selectedIDEs); // ['cursor', 'github-copilot']
  */
 async function selectIDEs() {
   const { selectedIDEs } = await inquirer.prompt([

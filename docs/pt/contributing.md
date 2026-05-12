@@ -1,8 +1,8 @@
-# Contribuindo para o Synkra AIOS
+# Contribuindo para o Synkra AIOX
 
 > **[English Version](CONTRIBUTING.md)**
 
-Bem-vindo ao AIOS! Obrigado pelo seu interesse em contribuir. Este guia vai ajuda-lo a entender nosso fluxo de trabalho, processo de contribuicao e como submeter suas alteracoes.
+Bem-vindo ao AIOX! Obrigado pelo seu interesse em contribuir. Este guia vai ajuda-lo a entender nosso fluxo de trabalho, processo de contribuicao e como submeter suas alteracoes.
 
 ## Indice
 
@@ -27,11 +27,11 @@ Bem-vindo ao AIOS! Obrigado pelo seu interesse em contribuir. Este guia vai ajud
 
 ```bash
 # Faca fork via GitHub UI, depois clone seu fork
-git clone https://github.com/SEU_USUARIO/aios-core.git
-cd aios-core
+git clone https://github.com/SEU_USUARIO/aiox-core.git
+cd aiox-core
 
 # Adicione o remote upstream
-git remote add upstream https://github.com/SynkraAI/aios-core.git
+git remote add upstream https://github.com/SynkraAI/aiox-core.git
 ```
 
 ### 2. Configure o Ambiente de Desenvolvimento
@@ -143,7 +143,7 @@ Agents sao personas de IA com expertise e comandos especificos.
 ### Localizacao do Arquivo
 
 ```
-.aios-core/development/agents/seu-agent.md
+.aiox-core/development/agents/seu-agent.md
 ```
 
 ### Estrutura Obrigatoria
@@ -217,7 +217,7 @@ Tasks sao workflows executaveis que agents podem rodar.
 ### Localizacao do Arquivo
 
 ```
-.aios-core/development/tasks/sua-task.md
+.aiox-core/development/tasks/sua-task.md
 ```
 
 ### Estrutura Obrigatoria
@@ -319,7 +319,7 @@ tasks:
 
 - [Guia de Squads](docs/guides/squads-guide.md) - Documentacao completa
 - [Template de Squad](templates/squad/) - Comece de um template funcional
-- [Discussoes de Squads](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) - Compartilhe ideias
+- [Discussoes de Squads](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas) - Compartilhe ideias
 
 ---
 
@@ -343,7 +343,7 @@ Quando voce submete um PR, as seguintes verificacoes executam automaticamente:
 
 - Qualidade de codigo e boas praticas
 - Preocupacoes de seguranca
-- Padroes especificos do AIOS (agents, tasks, workflows)
+- Padroes especificos do AIOX (agents, tasks, workflows)
 - Problemas de performance
 
 **Niveis de Severidade:**
@@ -382,7 +382,7 @@ Apos as verificacoes automaticas passarem, um maintainer ira:
 
 ## Sistema de Validacao
 
-AIOS implementa uma estrategia de **Defesa em Profundidade** com 3 camadas de validacao:
+AIOX implementa uma estrategia de **Defesa em Profundidade** com 3 camadas de validacao:
 
 ### Camada 1: Pre-commit (Local)
 
@@ -424,7 +424,7 @@ AIOS implementa uma estrategia de **Defesa em Profundidade** com 3 camadas de va
 ### Organizacao de Arquivos
 
 ```
-.aios-core/
+.aiox-core/
 ├── development/
 │   ├── agents/      # Definicoes de agents
 │   ├── tasks/       # Workflows de tasks
@@ -523,8 +523,8 @@ Correcoes comuns:
 
 ## Obtendo Ajuda
 
-- **GitHub Issues:** [Abra uma issue](https://github.com/SynkraAI/aios-core/issues)
-- **Discussoes:** [Inicie uma discussao](https://github.com/SynkraAI/aios-core/discussions)
+- **GitHub Issues:** [Abra uma issue](https://github.com/SynkraAI/aiox-core/issues)
+- **Discussoes:** [Inicie uma discussao](https://github.com/SynkraAI/aiox-core/discussions)
 - **Comunidade:** [COMMUNITY-PT.md](COMMUNITY-PT.md)
 
 ---
@@ -538,4 +538,4 @@ Correcoes comuns:
 
 ---
 
-**Obrigado por contribuir para o Synkra AIOS!**
+**Obrigado por contribuir para o Synkra AIOX!**

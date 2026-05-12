@@ -16,7 +16,7 @@ const path = require('path');
 
 // Mock parseManifest before requiring manifest-collector
 jest.mock(
-  '../../../.aios-core/core/synapse/domain/domain-loader',
+  '../../../.aiox-core/core/synapse/domain/domain-loader',
   () => ({
     parseManifest: jest.fn(),
     loadDomainFile: jest.fn(() => []),
@@ -29,12 +29,12 @@ jest.mock(
   })
 );
 
-const { collectHookStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/hook-collector');
-const { collectSessionStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/session-collector');
-const { collectManifestIntegrity } = require('../../../.aios-core/core/synapse/diagnostics/collectors/manifest-collector');
-const { collectPipelineSimulation } = require('../../../.aios-core/core/synapse/diagnostics/collectors/pipeline-collector');
-const { collectUapBridgeStatus } = require('../../../.aios-core/core/synapse/diagnostics/collectors/uap-collector');
-const { parseManifest } = require('../../../.aios-core/core/synapse/domain/domain-loader');
+const { collectHookStatus } = require('../../../.aiox-core/core/synapse/diagnostics/collectors/hook-collector');
+const { collectSessionStatus } = require('../../../.aiox-core/core/synapse/diagnostics/collectors/session-collector');
+const { collectManifestIntegrity } = require('../../../.aiox-core/core/synapse/diagnostics/collectors/manifest-collector');
+const { collectPipelineSimulation } = require('../../../.aiox-core/core/synapse/diagnostics/collectors/pipeline-collector');
+const { collectUapBridgeStatus } = require('../../../.aiox-core/core/synapse/diagnostics/collectors/uap-collector');
+const { parseManifest } = require('../../../.aiox-core/core/synapse/domain/domain-loader');
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -72,13 +72,13 @@ describe('hook-collector: collectHookStatus', () => {
   test('returns PASS when settings.local.json has synapse-engine hook', () => {
     writeJson(path.join(tmpDir, '.claude', 'settings.local.json'), {
       hooks: {
-        UserPromptSubmit: ['node .claude/hooks/synapse-engine.js'],
+        UserPromptSubmit: ['node .claude/hooks/synapse-engine.cjs'],
       },
     });
 
     // Create the hook file so check 2 + 3 also pass
     writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
+      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
       'module.exports = {};'
     );
 
@@ -117,7 +117,7 @@ describe('hook-collector: collectHookStatus', () => {
       hooks: { UserPromptSubmit: [] },
     });
     writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
+      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
       '// hook\nmodule.exports = {};'
     );
 
@@ -146,7 +146,7 @@ describe('hook-collector: collectHookStatus', () => {
       hooks: { UserPromptSubmit: [] },
     });
     writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
+      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
       'module.exports = {};'
     );
 
@@ -172,12 +172,12 @@ describe('hook-collector: collectHookStatus', () => {
     writeJson(path.join(tmpDir, '.claude', 'settings.local.json'), {
       hooks: {
         UserPromptSubmit: [
-          { command: 'node .claude/hooks/synapse-engine.js', timeout: 5000 },
+          { command: 'node .claude/hooks/synapse-engine.cjs', timeout: 5000 },
         ],
       },
     });
     writeFile(
-      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.js'),
+      path.join(tmpDir, '.claude', 'hooks', 'synapse-engine.cjs'),
       'module.exports = {};'
     );
 

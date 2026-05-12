@@ -4,7 +4,7 @@
 
 ---
 
-This document explains how to propose new features for AIOS.
+This document explains how to propose new features for AIOX.
 
 ## Quick Ideas
 

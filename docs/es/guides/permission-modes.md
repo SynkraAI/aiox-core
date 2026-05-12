@@ -6,13 +6,13 @@
 
 # Guia de Modos de Permisos
 
-> Controla cuanta autonomia tienen los agentes AIOS sobre tu sistema.
+> Controla cuanta autonomia tienen los agentes AIOX sobre tu sistema.
 
 ---
 
 ## Vision General
 
-Los Modos de Permisos te permiten controlar el nivel de autonomia que tienen los agentes AIOS. Ya sea que estes explorando un nuevo codebase o ejecutando builds completamente autonomos, hay un modo para tu flujo de trabajo.
+Los Modos de Permisos te permiten controlar el nivel de autonomia que tienen los agentes AIOX. Ya sea que estes explorando un nuevo codebase o ejecutando builds completamente autonomos, hay un modo para tu flujo de trabajo.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -148,7 +148,7 @@ La insignia muestra:
 
 ## Configuracion
 
-El modo se persiste en `.aios/config.yaml`:
+El modo se persiste en `.aiox/config.yaml`:
 
 ```yaml
 permissions:
@@ -243,11 +243,11 @@ Las siguientes 5 operaciones seran ejecutadas:
 Configurar modo en automatizacion:
 
 ```yaml
-# .github/workflows/aios.yml
-- name: Run AIOS
+# .github/workflows/aiox.yml
+- name: Run AIOX
   run: |
-    echo "permissions:\n  mode: auto" > .aios/config.yaml
-    aios run build
+    echo "permissions:\n  mode: auto" > .aiox/config.yaml
+    aiox run build
 ```
 
 ### Para Equipos
@@ -270,10 +270,10 @@ Cambiar a un modo menos restrictivo:
 
 ### El modo no persiste
 
-Verificar que `.aios/config.yaml` existe y es escribible:
+Verificar que `.aiox/config.yaml` existe y es escribible:
 
 ```bash
-ls -la .aios/config.yaml
+ls -la .aiox/config.yaml
 ```
 
 ### Confirmaciones muy frecuentes
@@ -291,7 +291,7 @@ O usar aprobacion por lotes en flujos de trabajo ADE.
 ## Referencia de API
 
 ```javascript
-const { PermissionMode, OperationGuard } = require('./.aios-core/core/permissions');
+const { PermissionMode, OperationGuard } = require('./.aiox-core/core/permissions');
 
 // Cargar modo actual
 const mode = new PermissionMode();

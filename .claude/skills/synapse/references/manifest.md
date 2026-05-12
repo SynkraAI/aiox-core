@@ -4,7 +4,7 @@
 
 The manifest (`.synapse/manifest`) is the central registry for all SYNAPSE domains. It uses a KEY=VALUE format and determines which domains are loaded, when they activate, and how they behave.
 
-The manifest is parsed by `domain-loader.js` (`.aios-core/core/synapse/domain/domain-loader.js`) on every prompt.
+The manifest is parsed by `domain-loader.js` (`.aiox-core/core/synapse/domain/domain-loader.js`) on every prompt.
 
 ## File Format
 
@@ -137,6 +137,6 @@ Use `*synapse create` or manually:
 | File | Purpose |
 |------|---------|
 | `.synapse/manifest` | The manifest file itself |
-| `.aios-core/core/synapse/domain/domain-loader.js` | Manifest parser + domain file loader |
+| `.aiox-core/core/synapse/domain/domain-loader.js` | Manifest parser + domain file loader |
 | `.claude/commands/synapse/utils/manifest-parser-reference.md` | Detailed parser format spec |
 | `.claude/commands/synapse/templates/manifest-entry-template` | Template for new manifest entries |

@@ -1,18 +1,18 @@
-# Hoja de Ruta de AIOS
+# Hoja de Ruta de AIOX
 
 > 🇧🇷 [Versão em Português](ROADMAP-PT.md)
 
-Este documento describe la dirección de desarrollo planificada para AIOS.
+Este documento describe la dirección de desarrollo planificada para AIOX.
 
 > Para seguimiento detallado, consulta nuestro [Proyecto de GitHub](https://github.com/orgs/SynkraAI/projects/1)
 
 ## Visión
 
-AIOS tiene como objetivo ser el framework de agentes de IA de código abierto más completo, permitiendo a los desarrolladores construir aplicaciones sofisticadas impulsadas por IA con equipos especializados de agentes (Squads) e integración perfecta con IDEs.
+AIOX tiene como objetivo ser el framework de agentes de IA de código abierto más completo, permitiendo a los desarrolladores construir aplicaciones sofisticadas impulsadas por IA con equipos especializados de agentes (Squads) e integración perfecta con IDEs.
 
 ## Enfoque Actual (Q1 2026)
 
-### Lanzamiento v2.1
+### Lanzamiento v4.2
 
 Estabilización del framework principal e infraestructura comunitaria:
 
@@ -30,7 +30,7 @@ Estabilización del framework principal e infraestructura comunitaria:
 - [x] Guías de contribución (CONTRIBUTING.md, COMMUNITY.md)
 - [x] Proceso de solicitud de características (FEATURE_PROCESS.md)
 - [x] Hoja de ruta pública (¡este documento!)
-- [ ] Registro de expansion packs
+- [ ] Registro de squads
 
 ## Próximamente (Q2 2026)
 
@@ -63,11 +63,11 @@ Estos elementos están siendo explorados pero aún no están comprometidos:
 
 ### 1. Vota por Ideas
 
-Reacciona con :+1: en [Ideas en Discussions](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) existentes para mostrar apoyo.
+Reacciona con :+1: en [Ideas en Discussions](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas) existentes para mostrar apoyo.
 
 ### 2. Propón Características
 
-¿Tienes una nueva idea? Abre una [Discusión de Idea](https://github.com/SynkraAI/aios-core/discussions/new?category=ideas) para compartirla con la comunidad.
+¿Tienes una nueva idea? Abre una [Discusión de Idea](https://github.com/SynkraAI/aiox-core/discussions/new?category=ideas) para compartirla con la comunidad.
 
 ### 3. Escribe un RFC
 
@@ -90,7 +90,7 @@ Esta hoja de ruta es revisada y actualizada mensualmente por los mantenedores de
 2. Actualizar estado de elementos completados/en progreso
 3. Agregar características recién aprobadas de las discusiones comunitarias
 4. Eliminar elementos cancelados o despriorizados
-5. Comunicar cambios significativos vía [Anuncios](https://github.com/SynkraAI/aios-core/discussions/categories/announcements)
+5. Comunicar cambios significativos vía [Anuncios](https://github.com/SynkraAI/aiox-core/discussions/categories/announcements)
 
 **Responsable:** agentes @pm (Morgan) o @po (Pax), con supervisión de mantenedores.
 
@@ -105,7 +105,7 @@ Esta hoja de ruta pública está sincronizada con nuestra planificación interna
 | Cronograma trimestral | Ejecución basada en sprints |
 
 **Checklist de Sincronización (Mensual):**
-- [ ] Revisar sprints completados en `docs/stories/v2.1/`
+- [ ] Revisar sprints completados en `docs/stories/v4.0.4/`
 - [ ] Actualizar estado de elementos del Proyecto de GitHub (Done/In Progress)
 - [ ] Agregar nuevas características aprobadas del backlog al Proyecto
 - [ ] Actualizar este ROADMAP.md con el progreso más reciente

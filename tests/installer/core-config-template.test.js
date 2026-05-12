@@ -41,7 +41,7 @@ describe('core-config-template', () => {
         projectType: 'BROWNFIELD',
         selectedIDEs: ['vscode', 'cursor'],
         userProfile: 'bob',
-        aiosVersion: '3.0.0',
+        aioxVersion: '3.0.0',
       });
       const parsed = yaml.load(output);
 

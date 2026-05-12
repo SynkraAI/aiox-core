@@ -14,7 +14,7 @@ const {
   buildEntityIndex,
   MAX_BACKUPS,
   STALE_DAYS_THRESHOLD,
-} = require('../../../.aios-core/core/ids/registry-healer');
+} = require('../../../.aiox-core/core/ids/registry-healer');
 
 // Test constants — unique temp dir per test run
 const TEST_ROOT = path.join(os.tmpdir(), `ids-healer-test-${process.pid}-${Date.now()}`);

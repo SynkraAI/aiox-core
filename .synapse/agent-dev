@@ -1,6 +1,6 @@
 # SYNAPSE Agent Domain: @dev (Dex)
 # Layer 2: Agent-scoped rules
-# Source: .claude/rules/agent-authority.md, .aios-core/development/agents/dev.md
+# Source: .claude/rules/agent-authority.md, .aiox-core/development/agents/dev.md
 
 # Authority Boundaries
 AGENT_DEV_AUTH_0=ALLOWED: git add, git commit, git status, git diff, git log, git branch, git checkout, git merge (local)

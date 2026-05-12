@@ -17,9 +17,9 @@ const os = require('os');
 const {
   DashboardIntegration,
   NotificationType,
-} = require('../../.aios-core/core/orchestration/dashboard-integration');
+} = require('../../.aiox-core/core/orchestration/dashboard-integration');
 
-const { MasterOrchestrator, OrchestratorState } = require('../../.aios-core/core/orchestration');
+const { MasterOrchestrator, OrchestratorState } = require('../../.aiox-core/core/orchestration');
 
 describe('Dashboard Integration (Story 0.8)', () => {
   let tempDir;
@@ -110,7 +110,7 @@ describe('Dashboard Integration (Story 0.8)', () => {
       const statusPath = dashboard.getStatusPath();
       // Normalize path separators for cross-platform compatibility (Windows uses \, Unix uses /)
       const normalizedPath = statusPath.replace(/\\/g, '/');
-      expect(normalizedPath).toContain('.aios/dashboard/status.json');
+      expect(normalizedPath).toContain('.aiox/dashboard/status.json');
     });
   });
 

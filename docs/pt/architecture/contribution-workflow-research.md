@@ -15,7 +15,7 @@
 
 ## Resumo Executivo
 
-Este documento consolida as descobertas de pesquisa sobre melhores práticas para workflows de contribuidores externos em projetos open source, especificamente para habilitar contribuições seguras da comunidade para agentes e tarefas do AIOS.
+Este documento consolida as descobertas de pesquisa sobre melhores práticas para workflows de contribuidores externos em projetos open source, especificamente para habilitar contribuições seguras da comunidade para agentes e tarefas do AIOX.
 
 ---
 
@@ -126,7 +126,7 @@ auto_title_instructions: |
   Título deve ter <= 80 caracteres
 ```
 
-### 2.3 Recomendações Específicas para AIOS
+### 2.3 Recomendações Específicas para AIOX
 
 Para contribuições de agent/task, o CodeRabbit deve validar:
 
@@ -172,17 +172,17 @@ Dockerfile @org/devops-team
 /security/ @org/security-team
 ```
 
-### 3.3 Estrutura Específica do AIOS
+### 3.3 Estrutura Específica do AIOX
 
 ```codeowners
 # Padrão - requer review de maintainer
 * @SynkraAI/maintainers
 
 # Definições de agentes - requer core team
-.aios-core/development/agents/ @SynkraAI/core-team
+.aiox-core/development/agents/ @SynkraAI/core-team
 
 # Definições de tasks - requer core team
-.aios-core/development/tasks/ @SynkraAI/core-team
+.aiox-core/development/tasks/ @SynkraAI/core-team
 
 # CI/CD - requer aprovação devops
 .github/ @SynkraAI/devops
@@ -192,7 +192,7 @@ docs/ @SynkraAI/maintainers
 
 # Templates - requer review de architect
 templates/ @SynkraAI/core-team
-.aios-core/product/templates/ @SynkraAI/core-team
+.aiox-core/product/templates/ @SynkraAI/core-team
 ```
 
 ---
@@ -313,7 +313,7 @@ Do [Prisma CONTRIBUTING.md](https://github.com/prisma/prisma/blob/main/CONTRIBUT
 
 ---
 
-## 7. Recomendações para AIOS
+## 7. Recomendações para AIOX
 
 ### 7.1 Ações Imediatas (CRÍTICO)
 
@@ -323,7 +323,7 @@ Do [Prisma CONTRIBUTING.md](https://github.com/prisma/prisma/blob/main/CONTRIBUT
 
 ### 7.2 Ações de Curto Prazo (ALTO)
 
-1. **Criar `.coderabbit.yaml`** com instruções de path específicas do AIOS
+1. **Criar `.coderabbit.yaml`** com instruções de path específicas do AIOX
 2. **Atualizar CODEOWNERS** com ownership granular
 3. **Habilitar resolução de conversas obrigatória**
 

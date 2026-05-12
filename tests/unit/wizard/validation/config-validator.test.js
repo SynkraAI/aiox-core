@@ -23,12 +23,12 @@ describeIntegration('Config Validator', () => {
       fs.existsSync.mockReturnValue(true);
       fs.readFileSync.mockImplementation((path) => {
         if (path === '.env') {
-          return 'NODE_ENV=development\nAPP_NAME=AIOS\nAPI_KEY=test123\n';
+          return 'NODE_ENV=development\nAPP_NAME=AIOX\nAPI_KEY=test123\n';
         }
         if (path === '.gitignore') {
-          return '.env\nnode_modules\n.env.local\n*.key\n*.pem\n.aios/install-log.txt\n';
+          return '.env\nnode_modules\n.env.local\n*.key\n*.pem\n.aiox/install-log.txt\n';
         }
-        if (path === '.aios-core/core-config.yaml') {
+        if (path === '.aiox-core/core-config.yaml') {
           return 'markdownExploder:\n  enabled: true\nqa: {}\nprd: {}\narchitecture: {}\n';
         }
         return '';
@@ -43,7 +43,7 @@ describeIntegration('Config Validator', () => {
 
       // When
       const result = await validateConfigs({
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
       });
 
       // Then
@@ -134,7 +134,7 @@ describeIntegration('Config Validator', () => {
         if (path === '.env') {
           return 'NODE_ENV=development\n';
         }
-        if (path === '.aios-core/core-config.yaml') {
+        if (path === '.aiox-core/core-config.yaml') {
           return 'markdownExploder:\n  enabled: true\n';
         }
         if (path === '.gitignore') {
@@ -152,7 +152,7 @@ describeIntegration('Config Validator', () => {
 
       // When
       const result = await validateConfigs({
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
       });
 
       // Then
@@ -165,7 +165,7 @@ describeIntegration('Config Validator', () => {
     it('should detect missing core-config.yaml', async () => {
       // Given
       fs.existsSync.mockImplementation((path) => {
-        return path !== '.aios-core/core-config.yaml';
+        return path !== '.aiox-core/core-config.yaml';
       });
 
       fs.readFileSync.mockImplementation((path) => {
@@ -180,7 +180,7 @@ describeIntegration('Config Validator', () => {
 
       // When
       const result = await validateConfigs({
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
       });
 
       // Then
@@ -200,7 +200,7 @@ describeIntegration('Config Validator', () => {
         if (path === '.env') {
           return 'NODE_ENV=development\n';
         }
-        if (path === '.aios-core/core-config.yaml') {
+        if (path === '.aiox-core/core-config.yaml') {
           return 'invalid: yaml: syntax::\n';
         }
         if (path === '.gitignore') {
@@ -215,7 +215,7 @@ describeIntegration('Config Validator', () => {
 
       // When
       const result = await validateConfigs({
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
       });
 
       // Then
@@ -236,7 +236,7 @@ describeIntegration('Config Validator', () => {
         if (path === '.env') {
           return 'NODE_ENV=development\n';
         }
-        if (path === '.aios-core/core-config.yaml') {
+        if (path === '.aiox-core/core-config.yaml') {
           return 'markdownExploder:\n  enabled: true\n';
         }
         if (path === '.gitignore') {
@@ -252,7 +252,7 @@ describeIntegration('Config Validator', () => {
 
       // When
       const result = await validateConfigs({
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
       });
 
       // Then

@@ -16,17 +16,17 @@ const {
   generateGitignore,
   mergeGitignore,
   generateGitignoreFile,
-  hasAiosIntegration,
+  hasAioxIntegration,
   parseGitignore,
   GitignoreTemplates,
   TechStack,
-} = require('../../../.aios-core/infrastructure/scripts/documentation-integrity/gitignore-generator');
+} = require('../../../.aiox-core/infrastructure/scripts/documentation-integrity/gitignore-generator');
 
 describe('Gitignore Generator', () => {
   let tempDir;
 
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-gitignore-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-gitignore-test-'));
   });
 
   afterEach(() => {
@@ -36,10 +36,10 @@ describe('Gitignore Generator', () => {
   });
 
   describe('loadGitignoreTemplate', () => {
-    it('should load AIOS base template', () => {
-      const template = loadGitignoreTemplate(GitignoreTemplates.AIOS_BASE);
+    it('should load AIOX base template', () => {
+      const template = loadGitignoreTemplate(GitignoreTemplates.AIOX_BASE);
 
-      expect(template).toContain('.aios-core/local/');
+      expect(template).toContain('.aiox-core/local/');
       expect(template).toContain('.env');
     });
 
@@ -60,7 +60,7 @@ describe('Gitignore Generator', () => {
     it('should load brownfield merge template', () => {
       const template = loadGitignoreTemplate(GitignoreTemplates.BROWNFIELD_MERGE);
 
-      expect(template).toContain('AIOS Integration Section');
+      expect(template).toContain('AIOX Integration Section');
     });
 
     it('should throw for non-existent template', () => {
@@ -116,30 +116,30 @@ describe('Gitignore Generator', () => {
   });
 
   describe('getTemplatesForStacks', () => {
-    it('should always include AIOS base', () => {
+    it('should always include AIOX base', () => {
       const templates = getTemplatesForStacks([]);
 
-      expect(templates).toContain(GitignoreTemplates.AIOS_BASE);
+      expect(templates).toContain(GitignoreTemplates.AIOX_BASE);
     });
 
     it('should include Node.js template', () => {
       const templates = getTemplatesForStacks([TechStack.NODE]);
 
-      expect(templates).toContain(GitignoreTemplates.AIOS_BASE);
+      expect(templates).toContain(GitignoreTemplates.AIOX_BASE);
       expect(templates).toContain(GitignoreTemplates.NODE);
     });
 
     it('should include Python template', () => {
       const templates = getTemplatesForStacks([TechStack.PYTHON]);
 
-      expect(templates).toContain(GitignoreTemplates.AIOS_BASE);
+      expect(templates).toContain(GitignoreTemplates.AIOX_BASE);
       expect(templates).toContain(GitignoreTemplates.PYTHON);
     });
 
     it('should include multiple templates for multi-stack', () => {
       const templates = getTemplatesForStacks([TechStack.NODE, TechStack.PYTHON]);
 
-      expect(templates).toContain(GitignoreTemplates.AIOS_BASE);
+      expect(templates).toContain(GitignoreTemplates.AIOX_BASE);
       expect(templates).toContain(GitignoreTemplates.NODE);
       expect(templates).toContain(GitignoreTemplates.PYTHON);
     });
@@ -152,7 +152,7 @@ describe('Gitignore Generator', () => {
 
       expect(content).toContain('test-app');
       expect(content).toContain('node_modules/');
-      expect(content).toContain('.aios-core/local/');
+      expect(content).toContain('.aiox-core/local/');
     });
 
     it('should generate gitignore for Python project', () => {
@@ -160,7 +160,7 @@ describe('Gitignore Generator', () => {
       const content = generateGitignore(markers);
 
       expect(content).toContain('__pycache__/');
-      expect(content).toContain('.aios-core/local/');
+      expect(content).toContain('.aiox-core/local/');
     });
 
     it('should include generation date', () => {
@@ -180,17 +180,17 @@ describe('Gitignore Generator', () => {
   });
 
   describe('mergeGitignore', () => {
-    it('should append AIOS section to existing content', () => {
+    it('should append AIOX section to existing content', () => {
       const existing = '# My project\nnode_modules/\n';
       const merged = mergeGitignore(existing);
 
       expect(merged).toContain('# My project');
       expect(merged).toContain('node_modules/');
-      expect(merged).toContain('AIOS Integration Section');
+      expect(merged).toContain('AIOX Integration Section');
     });
 
-    it('should skip if AIOS section already exists', () => {
-      const existing = '# AIOS Integration Section\n.aios-core/\n';
+    it('should skip if AIOX section already exists', () => {
+      const existing = '# AIOX Integration Section\n.aiox-core/\n';
       const merged = mergeGitignore(existing);
 
       expect(merged).toBe(existing);
@@ -224,7 +224,7 @@ describe('Gitignore Generator', () => {
       expect(result.success).toBe(true);
       expect(result.mode).toBe('merged');
       expect(result.content).toContain('# Existing');
-      expect(result.content).toContain('AIOS Integration Section');
+      expect(result.content).toContain('AIOX Integration Section');
     });
 
     it('should support dry run mode', () => {
@@ -245,30 +245,30 @@ describe('Gitignore Generator', () => {
     });
   });
 
-  describe('hasAiosIntegration', () => {
+  describe('hasAioxIntegration', () => {
     it('should return false for empty directory', () => {
-      expect(hasAiosIntegration(tempDir)).toBe(false);
+      expect(hasAioxIntegration(tempDir)).toBe(false);
     });
 
-    it('should return true if AIOS section exists', () => {
+    it('should return true if AIOX section exists', () => {
       fs.writeFileSync(
         path.join(tempDir, '.gitignore'),
-        '# AIOS Integration Section\n.aios-core/\n',
+        '# AIOX Integration Section\n.aiox-core/\n',
       );
 
-      expect(hasAiosIntegration(tempDir)).toBe(true);
+      expect(hasAioxIntegration(tempDir)).toBe(true);
     });
 
-    it('should return true if .aios-core/ pattern exists', () => {
-      fs.writeFileSync(path.join(tempDir, '.gitignore'), '.aios-core/local/\n');
+    it('should return true if .aiox-core/ pattern exists', () => {
+      fs.writeFileSync(path.join(tempDir, '.gitignore'), '.aiox-core/local/\n');
 
-      expect(hasAiosIntegration(tempDir)).toBe(true);
+      expect(hasAioxIntegration(tempDir)).toBe(true);
     });
 
     it('should return false for unrelated gitignore', () => {
       fs.writeFileSync(path.join(tempDir, '.gitignore'), 'node_modules/\n');
 
-      expect(hasAiosIntegration(tempDir)).toBe(false);
+      expect(hasAioxIntegration(tempDir)).toBe(false);
     });
   });
 
@@ -288,30 +288,30 @@ describe('Gitignore Generator', () => {
       expect(parsed.comments).toHaveLength(2);
     });
 
-    it('should identify AIOS section', () => {
+    it('should identify AIOX section', () => {
       const content = `# Header
 node_modules/
-# AIOS Integration Section
-.aios-core/
-# End of AIOS Integration Section
+# AIOX Integration Section
+.aiox-core/
+# End of AIOX Integration Section
 `;
       const parsed = parseGitignore(content);
 
-      expect(parsed.aiosSection).toBeDefined();
-      expect(parsed.aiosSection.start).toBeGreaterThan(0);
+      expect(parsed.aioxSection).toBeDefined();
+      expect(parsed.aioxSection.start).toBeGreaterThan(0);
     });
 
-    it('should return null aiosSection when not present', () => {
+    it('should return null aioxSection when not present', () => {
       const content = 'node_modules/\n';
       const parsed = parseGitignore(content);
 
-      expect(parsed.aiosSection).toBeNull();
+      expect(parsed.aioxSection).toBeNull();
     });
   });
 
   describe('GitignoreTemplates enum', () => {
     it('should have all required templates', () => {
-      expect(GitignoreTemplates.AIOS_BASE).toBe('gitignore-aios-base.tmpl');
+      expect(GitignoreTemplates.AIOX_BASE).toBe('gitignore-aiox-base.tmpl');
       expect(GitignoreTemplates.NODE).toBe('gitignore-node.tmpl');
       expect(GitignoreTemplates.PYTHON).toBe('gitignore-python.tmpl');
       expect(GitignoreTemplates.BROWNFIELD_MERGE).toBe('gitignore-brownfield-merge.tmpl');

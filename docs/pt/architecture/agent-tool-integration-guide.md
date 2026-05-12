@@ -12,7 +12,7 @@
 
 ## Visão Geral
 
-Este guia explica como ferramentas são integradas com agentes AIOS. Ferramentas estendem as capacidades dos agentes fornecendo acesso a serviços externos, APIs e recursos do sistema.
+Este guia explica como ferramentas são integradas com agentes AIOX. Ferramentas estendem as capacidades dos agentes fornecendo acesso a serviços externos, APIs e recursos do sistema.
 
 ---
 
@@ -53,13 +53,13 @@ Agentes declaram suas dependências no bloco YAML dentro de seu arquivo de defin
 | Tipo           | Descrição                           | Localização                        |
 | -------------- | ----------------------------------- | ---------------------------------- |
 | `tools`        | Ferramentas CLI e serviços externos | PATH do sistema ou MCP             |
-| `tasks`        | Arquivos de workflow de tarefas     | `.aios-core/development/tasks/`    |
-| `checklists`   | Checklists de validação             | `.aios-core/product/checklists/`   |
+| `tasks`        | Arquivos de workflow de tarefas     | `.aiox-core/development/tasks/`    |
+| `checklists`   | Checklists de validação             | `.aiox-core/product/checklists/`   |
 
 ### Exemplo de Declaração
 
 ```yaml
-# Do arquivo .aios-core/development/agents/dev.md
+# Do arquivo .aiox-core/development/agents/dev.md
 dependencies:
   checklists:
     - story-dod-checklist.md
@@ -200,7 +200,7 @@ Antes de marcar a story como "Pronto para Revisão":
 
 ## Arquitetura de Restrições de Git
 
-AIOS implementa governança rigorosa de operações git:
+AIOX implementa governança rigorosa de operações git:
 
 ### Permissões do Agente @dev
 
@@ -327,7 +327,7 @@ Ative o agente e verifique que a ferramenta é acessível e funcional.
 
 - [Gerenciamento de Chaves de API do MCP](./mcp-api-keys-management.md)
 - [Regras de Uso de MCP](../../../.claude/rules/mcp-usage.md)
-- [Definições de Agentes](../../../.aios-core/development/agents/)
+- [Definições de Agentes](../../../.aiox-core/development/agents/)
 
 ---
 

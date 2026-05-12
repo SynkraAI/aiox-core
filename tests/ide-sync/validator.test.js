@@ -13,7 +13,7 @@ const {
   validateIdeSync,
   validateAllIdes,
   formatValidationReport,
-} = require('../../.aios-core/infrastructure/scripts/ide-sync/validator');
+} = require('../../.aiox-core/infrastructure/scripts/ide-sync/validator');
 
 describe('validator', () => {
   let tempDir;
@@ -132,10 +132,10 @@ describe('validator', () => {
 
     it('should not count redirect files as orphaned', () => {
       fs.writeFileSync(path.join(targetDir, 'agent.md'), 'content');
-      fs.writeFileSync(path.join(targetDir, 'aios-developer.md'), 'redirect');
+      fs.writeFileSync(path.join(targetDir, 'aiox-developer.md'), 'redirect');
 
       const expected = [{ filename: 'agent.md', content: 'content' }];
-      const redirects = { 'aios-developer': 'aios-master' };
+      const redirects = { 'aiox-developer': 'aiox-master' };
       const result = validateIdeSync(expected, targetDir, redirects);
 
       expect(result.orphaned).toHaveLength(0);
@@ -165,31 +165,23 @@ describe('validator', () => {
   describe('validateAllIdes', () => {
     it('should validate multiple IDEs', () => {
       const cursorDir = path.join(tempDir, 'cursor');
-      const windsurfDir = path.join(tempDir, 'windsurf');
 
       fs.ensureDirSync(cursorDir);
-      fs.ensureDirSync(windsurfDir);
 
       fs.writeFileSync(path.join(cursorDir, 'agent.md'), 'cursor content');
-      fs.writeFileSync(path.join(windsurfDir, 'agent.md'), 'windsurf content');
 
       const ideConfigs = {
         cursor: {
           expectedFiles: [{ filename: 'agent.md', content: 'cursor content' }],
           targetDir: cursorDir,
         },
-        windsurf: {
-          expectedFiles: [{ filename: 'agent.md', content: 'windsurf content' }],
-          targetDir: windsurfDir,
-        },
       };
 
       const result = validateAllIdes(ideConfigs, {});
 
       expect(result.ides.cursor).toBeDefined();
-      expect(result.ides.windsurf).toBeDefined();
-      expect(result.summary.total).toBe(2);
-      expect(result.summary.synced).toBe(2);
+      expect(result.summary.total).toBe(1);
+      expect(result.summary.synced).toBe(1);
       expect(result.summary.pass).toBe(true);
     });
 

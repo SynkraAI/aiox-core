@@ -104,7 +104,7 @@
 ### Novos Arquivos de Tarefa
 
 ```
-.aios-core/development/tasks/
+.aiox-core/development/tasks/
 ├── squad-creator-analyze.md     # NOVO: *analyze-squad
 └── squad-creator-extend.md      # NOVO: *extend-squad
 ```
@@ -112,7 +112,7 @@
 ### Novos Arquivos de Script
 
 ```
-.aios-core/development/scripts/squad/
+.aiox-core/development/scripts/squad/
 ├── squad-analyzer.js            # NOVO: Lógica de análise
 └── squad-extender.js            # NOVO: Lógica de extensão
 ```
@@ -120,8 +120,8 @@
 ### Arquivos Atualizados
 
 ```
-.aios-core/development/agents/squad-creator.md  # Adicionar novos comandos
-.aios-core/schemas/squad-schema.json            # (sem alterações necessárias)
+.aiox-core/development/agents/squad-creator.md  # Adicionar novos comandos
+.aiox-core/schemas/squad-schema.json            # (sem alterações necessárias)
 ```
 
 ---
@@ -181,7 +181,7 @@
    - Atualizar epic-sqs-squad-system.md
 
 10. **Criar Story**
-    - `docs/stories/v2.1/sprint-XX/story-sqs-11-squad-improvement.md`
+    - `docs/stories/v4.0.4/sprint-XX/story-sqs-11-squad-improvement.md`
 
 ---
 
@@ -356,7 +356,7 @@ outputs:
 ## Próximos Passos
 
 1. **Revisar e aprovar** esta abordagem
-2. **Criar Story SQS-11** em `docs/stories/v2.1/sprint-XX/`
+2. **Criar Story SQS-11** em `docs/stories/v4.0.4/sprint-XX/`
 3. **Executar `*create-service squad-analyzer`** para criar estrutura (ou criação manual)
 4. **Iniciar implementação** com @dev
 

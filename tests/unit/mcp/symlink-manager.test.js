@@ -14,7 +14,7 @@ jest.mock('os');
 jest.mock('child_process');
 
 // Import os-detector first to mock it
-jest.mock('../../../.aios-core/core/mcp/os-detector', () => ({
+jest.mock('../../../.aiox-core/core/mcp/os-detector', () => ({
   isWindows: jest.fn(),
   getGlobalMcpDir: jest.fn(),
   getLinkType: jest.fn(),
@@ -28,14 +28,14 @@ const {
   checkLinkStatus,
   createLink,
   removeLink,
-} = require('../../../.aios-core/core/mcp/symlink-manager');
+} = require('../../../.aiox-core/core/mcp/symlink-manager');
 
-const osDetector = require('../../../.aios-core/core/mcp/os-detector');
+const osDetector = require('../../../.aiox-core/core/mcp/os-detector');
 
 describe('Symlink Manager', () => {
   const mockProjectRoot = '/mock/project';
-  const mockGlobalMcpDir = '/mock/home/.aios/mcp';
-  const mockLinkPath = path.join(mockProjectRoot, '.aios-core', 'tools', 'mcp');
+  const mockGlobalMcpDir = '/mock/home/.aiox/mcp';
+  const mockLinkPath = path.join(mockProjectRoot, '.aiox-core', 'tools', 'mcp');
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -56,13 +56,13 @@ describe('Symlink Manager', () => {
   describe('getProjectMcpPath', () => {
     it('should return correct path for project root', () => {
       const result = getProjectMcpPath(mockProjectRoot);
-      expect(result).toBe(path.join(mockProjectRoot, '.aios-core', 'tools', 'mcp'));
+      expect(result).toBe(path.join(mockProjectRoot, '.aiox-core', 'tools', 'mcp'));
     });
 
     it('should use current directory when no root provided', () => {
       const cwd = process.cwd();
       const result = getProjectMcpPath();
-      expect(result).toBe(path.join(cwd, '.aios-core', 'tools', 'mcp'));
+      expect(result).toBe(path.join(cwd, '.aiox-core', 'tools', 'mcp'));
     });
   });
 

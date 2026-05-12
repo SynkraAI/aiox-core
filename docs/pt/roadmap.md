@@ -1,18 +1,18 @@
-# Roadmap do AIOS
+# Roadmap do AIOX
 
 > 🇺🇸 [English Version](ROADMAP.md)
 
-Este documento descreve a direção de desenvolvimento planejada para o AIOS.
+Este documento descreve a direção de desenvolvimento planejada para o AIOX.
 
 > Para rastreamento detalhado, veja nosso [Projeto GitHub](https://github.com/orgs/SynkraAI/projects/1)
 
 ## Visão
 
-O AIOS visa ser o framework de agentes IA open-source mais abrangente, permitindo que desenvolvedores construam aplicações sofisticadas com equipes de agentes especializados (Squads) e integração perfeita com IDEs.
+O AIOX visa ser o framework de agentes IA open-source mais abrangente, permitindo que desenvolvedores construam aplicações sofisticadas com equipes de agentes especializados (Squads) e integração perfeita com IDEs.
 
 ## Foco Atual (Q1 2026)
 
-### Release v2.1
+### Release v4.2
 
 Estabilização do framework principal e infraestrutura da comunidade:
 
@@ -63,11 +63,11 @@ Aceitamos contribuição da comunidade sobre nossa direção! Veja como particip
 
 ### 1. Vote em Ideias
 
-Reaja com :+1: em [Ideias nas Discussões](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) existentes para mostrar apoio.
+Reaja com :+1: em [Ideias nas Discussões](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas) existentes para mostrar apoio.
 
 ### 2. Proponha Features
 
-Tem uma nova ideia? Abra uma [Discussão de Ideia](https://github.com/SynkraAI/aios-core/discussions/new?category=ideas) para compartilhar com a comunidade.
+Tem uma nova ideia? Abra uma [Discussão de Ideia](https://github.com/SynkraAI/aiox-core/discussions/new?category=ideas) para compartilhar com a comunidade.
 
 ### 3. Escreva um RFC
 
@@ -90,7 +90,7 @@ Este roadmap é revisado e atualizado mensalmente pelos mantenedores do projeto.
 2. Atualizar status de itens concluídos/em progresso
 3. Adicionar features recém-aprovadas das discussões da comunidade
 4. Remover itens cancelados ou despriorizados
-5. Comunicar mudanças significativas via [Anúncios](https://github.com/SynkraAI/aios-core/discussions/categories/announcements)
+5. Comunicar mudanças significativas via [Anúncios](https://github.com/SynkraAI/aiox-core/discussions/categories/announcements)
 
 **Responsáveis:** Agentes @pm (Morgan) ou @po (Pax), com supervisão dos mantenedores.
 
@@ -105,7 +105,7 @@ Este roadmap público é sincronizado com nosso planejamento interno de sprints:
 | Timeline trimestral | Execução baseada em sprints |
 
 **Checklist de Sincronização (Mensal):**
-- [ ] Revisar sprints concluídos em `docs/stories/v2.1/`
+- [ ] Revisar sprints concluídos em `docs/stories/v4.0.4/`
 - [ ] Atualizar status dos itens do Projeto GitHub (Done/In Progress)
 - [ ] Adicionar novas features aprovadas do backlog ao Projeto
 - [ ] Atualizar este ROADMAP.md com o progresso mais recente

@@ -10,18 +10,18 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const { createBackup, verifyBackup } = require('../../.aios-core/cli/commands/migrate/backup');
-const { detectV2Structure, analyzeMigrationPlan } = require('../../.aios-core/cli/commands/migrate/analyze');
-const { executeMigration } = require('../../.aios-core/cli/commands/migrate/execute');
-const { updateAllImports, verifyImports } = require('../../.aios-core/cli/commands/migrate/update-imports');
-const { validateStructure } = require('../../.aios-core/cli/commands/migrate/validate');
-const { executeRollback, canRollback } = require('../../.aios-core/cli/commands/migrate/rollback');
+const { createBackup, verifyBackup } = require('../../.aiox-core/cli/commands/migrate/backup');
+const { detectV2Structure, analyzeMigrationPlan } = require('../../.aiox-core/cli/commands/migrate/analyze');
+const { executeMigration } = require('../../.aiox-core/cli/commands/migrate/execute');
+const { updateAllImports, verifyImports } = require('../../.aiox-core/cli/commands/migrate/update-imports');
+const { validateStructure } = require('../../.aiox-core/cli/commands/migrate/validate');
+const { executeRollback, canRollback } = require('../../.aiox-core/cli/commands/migrate/rollback');
 
 describe('Full Migration Integration', () => {
   let testDir;
 
   beforeEach(async () => {
-    testDir = path.join(os.tmpdir(), `aios-full-migration-test-${Date.now()}`);
+    testDir = path.join(os.tmpdir(), `aiox-full-migration-test-${Date.now()}`);
     await fs.promises.mkdir(testDir, { recursive: true });
   });
 
@@ -35,71 +35,71 @@ describe('Full Migration Integration', () => {
    * Create a mock v2.0 project structure for testing
    */
   async function createMockV20Project(dir) {
-    const aiosCoreDir = path.join(dir, '.aios-core');
+    const aioxCoreDir = path.join(dir, '.aiox-core');
 
     // Create development directories
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'agents'), { recursive: true });
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'tasks'), { recursive: true });
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'templates'), { recursive: true });
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'checklists'), { recursive: true });
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'scripts'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'agents'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'tasks'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'templates'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'checklists'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'scripts'), { recursive: true });
 
     // Create core directories
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'registry'), { recursive: true });
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'utils'), { recursive: true });
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'config'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'registry'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'utils'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'config'), { recursive: true });
 
     // Create product directories
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'cli', 'commands'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'cli', 'commands'), { recursive: true });
 
     // Create infrastructure directories
-    await fs.promises.mkdir(path.join(aiosCoreDir, 'hooks'), { recursive: true });
+    await fs.promises.mkdir(path.join(aioxCoreDir, 'hooks'), { recursive: true });
 
     // Create sample files
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'agents', 'dev.md'),
+      path.join(aioxCoreDir, 'agents', 'dev.md'),
       '# Dev Agent\nDeveloper persona',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'agents', 'qa.md'),
+      path.join(aioxCoreDir, 'agents', 'qa.md'),
       '# QA Agent\nQuality assurance',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'tasks', 'build.md'),
+      path.join(aioxCoreDir, 'tasks', 'build.md'),
       '# Build Task\nBuild workflow',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'registry', 'index.js'),
+      path.join(aioxCoreDir, 'registry', 'index.js'),
       'const fs = require(\'fs\');\nconst utils = require(\'../utils\');\nmodule.exports = {};',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'utils', 'helpers.js'),
+      path.join(aioxCoreDir, 'utils', 'helpers.js'),
       'module.exports = { helper: () => true };',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'cli', 'index.js'),
+      path.join(aioxCoreDir, 'cli', 'index.js'),
       'const registry = require(\'../registry\');\nconst { Command } = require(\'commander\');\nmodule.exports = {};',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'cli', 'commands', 'run.js'),
+      path.join(aioxCoreDir, 'cli', 'commands', 'run.js'),
       'module.exports = { run: () => {} };',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'hooks', 'pre-commit.js'),
+      path.join(aioxCoreDir, 'hooks', 'pre-commit.js'),
       'module.exports = { hook: () => {} };',
     );
     await fs.promises.writeFile(
-      path.join(aiosCoreDir, 'index.js'),
+      path.join(aioxCoreDir, 'index.js'),
       'module.exports = require("./registry");',
     );
 
     // Create config file
     await fs.promises.writeFile(
-      path.join(dir, 'aios.config.js'),
+      path.join(dir, 'aiox.config.js'),
       'module.exports = { name: "test-project" };',
     );
 
-    return aiosCoreDir;
+    return aioxCoreDir;
   }
 
   describe('MIG-01: Backup Created', () => {
@@ -152,8 +152,8 @@ describe('Full Migration Integration', () => {
       const result = await executeMigration(plan, { cleanupOriginals: false });
 
       expect(result.success).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core', 'registry', 'index.js'))).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core', 'utils', 'helpers.js'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'core', 'registry', 'index.js'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'core', 'utils', 'helpers.js'))).toBe(true);
     });
   });
 
@@ -165,8 +165,8 @@ describe('Full Migration Integration', () => {
       const result = await executeMigration(plan, { cleanupOriginals: false });
 
       expect(result.success).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'development', 'agents', 'dev.md'))).toBe(true);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'development', 'tasks', 'build.md'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'development', 'agents', 'dev.md'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'development', 'tasks', 'build.md'))).toBe(true);
     });
   });
 
@@ -177,8 +177,8 @@ describe('Full Migration Integration', () => {
 
       await executeMigration(plan, { cleanupOriginals: false });
 
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      const importResult = await verifyImports(aiosCoreDir);
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      const importResult = await verifyImports(aioxCoreDir);
 
       // In a migrated structure, imports may need updating
       // This test verifies the import verification runs
@@ -194,8 +194,8 @@ describe('Full Migration Integration', () => {
 
       await executeMigration(plan, { cleanupOriginals: false });
 
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      const validation = await validateStructure(aiosCoreDir);
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      const validation = await validateStructure(aioxCoreDir);
 
       expect(validation.modules.core.exists).toBe(true);
       expect(validation.modules.development.exists).toBe(true);
@@ -214,7 +214,7 @@ describe('Full Migration Integration', () => {
       await executeMigration(plan, { cleanupOriginals: true });
 
       // Verify v2.1 structure exists
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'development'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'development'))).toBe(true);
 
       // Check rollback is possible
       const status = await canRollback(testDir);
@@ -225,7 +225,7 @@ describe('Full Migration Integration', () => {
 
       expect(rollbackResult.success).toBe(true);
       // Original v2.0 structure should be restored
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'agents', 'dev.md'))).toBe(true);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'agents', 'dev.md'))).toBe(true);
     });
   });
 
@@ -238,8 +238,8 @@ describe('Full Migration Integration', () => {
 
       expect(result.dryRun).toBe(true);
       // V2.1 directories should NOT exist
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'development'))).toBe(false);
-      expect(fs.existsSync(path.join(testDir, '.aios-core', 'core'))).toBe(false);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'development'))).toBe(false);
+      expect(fs.existsSync(path.join(testDir, '.aiox-core', 'core'))).toBe(false);
     });
   });
 
@@ -248,7 +248,7 @@ describe('Full Migration Integration', () => {
       await createMockV20Project(testDir);
 
       // Add a conflict
-      await fs.promises.mkdir(path.join(testDir, '.aios-core', 'core'), { recursive: true });
+      await fs.promises.mkdir(path.join(testDir, '.aiox-core', 'core'), { recursive: true });
 
       const plan = await analyzeMigrationPlan(testDir);
 
@@ -261,13 +261,13 @@ describe('Full Migration Integration', () => {
     it('should preserve file permissions during migration', async () => {
       await createMockV20Project(testDir);
 
-      const originalFile = path.join(testDir, '.aios-core', 'cli', 'index.js');
+      const originalFile = path.join(testDir, '.aiox-core', 'cli', 'index.js');
       const originalStats = await fs.promises.stat(originalFile);
 
       const plan = await analyzeMigrationPlan(testDir);
       await executeMigration(plan, { cleanupOriginals: false });
 
-      const migratedFile = path.join(testDir, '.aios-core', 'product', 'cli', 'index.js');
+      const migratedFile = path.join(testDir, '.aiox-core', 'product', 'cli', 'index.js');
       const migratedStats = await fs.promises.stat(migratedFile);
 
       // Permissions should match
@@ -301,12 +301,12 @@ describe('Full Migration Integration', () => {
       expect(migrationResult.success).toBe(true);
 
       // Step 6: Update imports
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      const importResult = await updateAllImports(aiosCoreDir, plan);
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      const importResult = await updateAllImports(aioxCoreDir, plan);
       expect(importResult.totalFiles).toBeGreaterThan(0);
 
       // Step 7: Validate structure
-      const structureValidation = await validateStructure(aiosCoreDir);
+      const structureValidation = await validateStructure(aioxCoreDir);
       expect(structureValidation.modules.core.exists).toBe(true);
       expect(structureValidation.modules.development.exists).toBe(true);
       expect(structureValidation.modules.product.exists).toBe(true);

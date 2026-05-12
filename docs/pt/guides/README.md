@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guias AIOS
+# Guias AIOX
 
 > 🌐 [EN](../../guides/README.md) | **PT** | [ES](../../es/guides/README.md)
 
 ---
 
-Índice completo de documentação para os guias do sistema AIOS.
+Índice completo de documentação para os guias do sistema AIOX.
 
 ---
 
@@ -42,11 +42,11 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 | **[Guia de Setup Global MCP](./mcp-global-setup.md)**                             | Configuração global de servidor MCP | 10 min | Todos os usuários |
 | **[Gerenciamento de Chaves API MCP](../architecture/mcp-api-keys-management.md)** | Manuseio seguro de credenciais      | 10 min | DevOps            |
 
-> **Nota:** A documentação do 1MCP foi descontinuada. O AIOS agora usa exclusivamente o Docker MCP Toolkit (Story 5.11). Documentos arquivados disponíveis em `.github/deprecated-docs/guides/`.
+> **Nota:** A documentação do 1MCP foi descontinuada. O AIOX agora usa exclusivamente o Docker MCP Toolkit (Story 5.11). Documentos arquivados disponíveis em `.github/deprecated-docs/guides/`.
 
 ---
 
-## Documentação do Framework v2.1
+## Documentação do Framework v4.2
 
 **Status:** Completo (Story 2.16)
 **Versão:** 2.1.0
@@ -56,9 +56,9 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 
 | Guia                                                                      | Propósito                               | Tempo  | Público                       |
 | ------------------------------------------------------------------------- | --------------------------------------- | ------ | ----------------------------- |
-| **[Arquitetura do Sistema de Módulos](../architecture/module-system.md)** | Arquitetura modular v2.1 (4 módulos)    | 15 min | Arquitetos, Desenvolvedores   |
+| **[Arquitetura do Sistema de Módulos](../architecture/module-system.md)** | Arquitetura modular v4.2 (4 módulos)    | 15 min | Arquitetos, Desenvolvedores   |
 | **[Guia de Service Discovery](./service-discovery.md)**                   | Descoberta de workers e API do registro | 10 min | Desenvolvedores               |
-| **[Guia de Migração v2.0→v2.1](../../migration/v2.0-to-v2.1.md)**         | Instruções passo a passo de migração    | 20 min | Todos os usuários atualizando |
+| **[Guia de Migração v2.0→v4.0.4](../../migration/migration-guide.md)**         | Instruções passo a passo de migração    | 20 min | Todos os usuários atualizando |
 
 ### Configuração do Sistema
 
@@ -74,7 +74,7 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 | ------------------------------------------------- | ------------------------------ | ------ | --------------- |
 | **[Template Engine v2](./template-engine-v2.md)** | Motor de geração de documentos | 10 min | Desenvolvedores |
 
-### Navegação Rápida (v2.1)
+### Navegação Rápida (v4)
 
 **...entender a arquitetura de 4 módulos**
 → [`module-system.md`](../architecture/module-system.md) (15 min)
@@ -82,8 +82,8 @@ Use o agente DevOps: `@devops` e então `*setup-mcp-docker`
 **...descobrir workers e tasks disponíveis**
 → [`service-discovery.md`](./service-discovery.md) (10 min)
 
-**...migrar de v2.0 para v2.1**
-→ [`v2.0-to-v2.1.md`](../../migration/v2.0-to-v2.1.md) (20 min)
+**...migrar de v2.0 para v4.0.4**
+→ [`migration-guide.md`](../../migration/migration-guide.md) (20 min)
 
 **...configurar quality gates**
 → [`quality-gates.md`](./quality-gates.md) (15 min)

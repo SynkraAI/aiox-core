@@ -26,8 +26,8 @@ describe('errors', () => {
     it('should include activation instructions in message', () => {
       const error = new ProFeatureError('pro.squads.premium', 'Premium Squads');
 
-      expect(error.message).toContain('Premium Squads requires an active AIOS Pro license');
-      expect(error.message).toContain('aios pro activate --key <KEY>');
+      expect(error.message).toContain('Premium Squads requires an active AIOX Pro license');
+      expect(error.message).toContain('aiox pro activate --key <KEY>');
       expect(error.message).toContain('https://synkra.ai/pro');
     });
 
@@ -81,7 +81,7 @@ describe('errors', () => {
         const error = new ProFeatureError('pro.squads.premium', 'Premium Squads');
         const cliMsg = error.toCliMessage();
 
-        expect(cliMsg).toContain('Premium Squads requires an active AIOS Pro license');
+        expect(cliMsg).toContain('Premium Squads requires an active AIOX Pro license');
         expect(cliMsg).toContain('Your data and configurations are preserved');
         expect(cliMsg).toContain('Activate:');
         expect(cliMsg).toContain('Purchase:');
@@ -96,7 +96,7 @@ describe('errors', () => {
         expect(json.error).toBe('ProFeatureError');
         expect(json.featureId).toBe('pro.squads.premium');
         expect(json.friendlyName).toBe('Premium Squads');
-        expect(json.message).toContain('requires an active AIOS Pro license');
+        expect(json.message).toContain('requires an active AIOX Pro license');
         expect(json.activateCommand).toBeTruthy();
         expect(json.purchaseUrl).toBeTruthy();
       });

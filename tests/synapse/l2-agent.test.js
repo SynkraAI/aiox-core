@@ -10,8 +10,8 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const LayerProcessor = require('../../.aios-core/core/synapse/layers/layer-processor');
-const L2AgentProcessor = require('../../.aios-core/core/synapse/layers/l2-agent');
+const LayerProcessor = require('../../.aiox-core/core/synapse/layers/layer-processor');
+const L2AgentProcessor = require('../../.aiox-core/core/synapse/layers/l2-agent');
 
 jest.setTimeout(30000);
 

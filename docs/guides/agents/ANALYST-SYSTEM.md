@@ -1,4 +1,4 @@
-# Sistema do Agente Analyst (@analyst) - AIOS
+# Sistema do Agente Analyst (@analyst) - AIOX
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
@@ -55,53 +55,53 @@ O agente Analyst e projetado para:
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/analyst.md` | Definicao core do agente Analyst |
-| `.claude/commands/AIOS/agents/analyst.md` | Comando Claude Code para ativar @analyst |
+| `.aiox-core/development/agents/analyst.md` | Definicao core do agente Analyst |
+| `.claude/commands/AIOX/agents/analyst.md` | Comando Claude Code para ativar @analyst |
 
 ### Tasks do Analyst
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/facilitate-brainstorming-session.md` | `*brainstorm {topic}` | Task principal - facilita sessoes de brainstorming estruturadas |
-| `.aios-core/development/tasks/analyst-facilitate-brainstorming.md` | `*brainstorm {topic}` | Variante interativa da task de brainstorming |
-| `.aios-core/development/tasks/create-deep-research-prompt.md` | `*research-prompt {topic}` | Gera prompts de pesquisa profunda para investigacao |
-| `.aios-core/development/tasks/advanced-elicitation.md` | `*elicit` | Sessao avancada de elicitacao de requisitos |
-| `.aios-core/development/tasks/create-doc.md` | `*doc-out` | Criacao de documentos a partir de templates YAML |
-| `.aios-core/development/tasks/document-project.md` | `*create-project-brief` | Documentacao de projetos existentes |
-| `.aios-core/development/tasks/calculate-roi.md` | (relacionada) | Calculo de ROI e economia de custos |
+| `.aiox-core/development/tasks/facilitate-brainstorming-session.md` | `*brainstorm {topic}` | Task principal - facilita sessoes de brainstorming estruturadas |
+| `.aiox-core/development/tasks/analyst-facilitate-brainstorming.md` | `*brainstorm {topic}` | Variante interativa da task de brainstorming |
+| `.aiox-core/development/tasks/create-deep-research-prompt.md` | `*research-prompt {topic}` | Gera prompts de pesquisa profunda para investigacao |
+| `.aiox-core/development/tasks/advanced-elicitation.md` | `*elicit` | Sessao avancada de elicitacao de requisitos |
+| `.aiox-core/development/tasks/create-doc.md` | `*doc-out` | Criacao de documentos a partir de templates YAML |
+| `.aiox-core/development/tasks/document-project.md` | `*create-project-brief` | Documentacao de projetos existentes |
+| `.aiox-core/development/tasks/calculate-roi.md` | (relacionada) | Calculo de ROI e economia de custos |
 
 ### Tasks Relacionadas de Analise
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/tasks/analyze-brownfield.md` | Analise de projetos brownfield |
-| `.aios-core/development/tasks/analyze-framework.md` | Analise de frameworks existentes |
-| `.aios-core/development/tasks/analyze-performance.md` | Analise de performance |
-| `.aios-core/development/tasks/analyze-project-structure.md` | Analise de estrutura de projeto |
-| `.aios-core/development/tasks/analyze-cross-artifact.md` | Analise cross-artifact |
+| `.aiox-core/development/tasks/analyze-brownfield.md` | Analise de projetos brownfield |
+| `.aiox-core/development/tasks/analyze-framework.md` | Analise de frameworks existentes |
+| `.aiox-core/development/tasks/analyze-performance.md` | Analise de performance |
+| `.aiox-core/development/tasks/analyze-project-structure.md` | Analise de estrutura de projeto |
+| `.aiox-core/development/tasks/analyze-cross-artifact.md` | Analise cross-artifact |
 
 ### Templates do Analyst
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/product/templates/project-brief-tmpl.yaml` | Template para Project Brief |
-| `.aios-core/product/templates/market-research-tmpl.yaml` | Template para Pesquisa de Mercado |
-| `.aios-core/product/templates/competitor-analysis-tmpl.yaml` | Template para Analise Competitiva |
-| `.aios-core/product/templates/brainstorming-output-tmpl.yaml` | Template para output de sessoes de brainstorming |
+| `.aiox-core/product/templates/project-brief-tmpl.yaml` | Template para Project Brief |
+| `.aiox-core/product/templates/market-research-tmpl.yaml` | Template para Pesquisa de Mercado |
+| `.aiox-core/product/templates/competitor-analysis-tmpl.yaml` | Template para Analise Competitiva |
+| `.aiox-core/product/templates/brainstorming-output-tmpl.yaml` | Template para output de sessoes de brainstorming |
 
 ### Arquivos de Dados
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/data/aios-kb.md` | Knowledge base do AIOS |
-| `.aios-core/development/data/brainstorming-techniques.md` | Tecnicas de brainstorming disponiveis |
+| `.aiox-core/development/data/aiox-kb.md` | Knowledge base do AIOX |
+| `.aiox-core/development/data/brainstorming-techniques.md` | Tecnicas de brainstorming disponiveis |
 
 ### Workflows que Usam o Analyst
 
 | Arquivo | Fase | Proposito |
 |---------|------|-----------|
-| `.aios-core/development/workflows/greenfield-fullstack.yaml` | Fase 1 | Discovery & Planning - cria project-brief.md |
-| `.aios-core/development/workflows/brownfield-discovery.yaml` | Fase 9 | Relatorio Executivo de Awareness |
+| `.aiox-core/development/workflows/greenfield-fullstack.yaml` | Fase 1 | Discovery & Planning - cria project-brief.md |
+| `.aiox-core/development/workflows/brownfield-discovery.yaml` | Fase 9 | Relatorio Executivo de Awareness |
 
 ---
 
@@ -623,27 +623,27 @@ template:
 
 ### Tasks Principais
 
-- [Task: facilitate-brainstorming-session.md](.aios-core/development/tasks/facilitate-brainstorming-session.md)
-- [Task: create-deep-research-prompt.md](.aios-core/development/tasks/create-deep-research-prompt.md)
-- [Task: advanced-elicitation.md](.aios-core/development/tasks/advanced-elicitation.md)
-- [Task: create-doc.md](.aios-core/development/tasks/create-doc.md)
-- [Task: document-project.md](.aios-core/development/tasks/document-project.md)
+- [Task: facilitate-brainstorming-session.md](.aiox-core/development/tasks/facilitate-brainstorming-session.md)
+- [Task: create-deep-research-prompt.md](.aiox-core/development/tasks/create-deep-research-prompt.md)
+- [Task: advanced-elicitation.md](.aiox-core/development/tasks/advanced-elicitation.md)
+- [Task: create-doc.md](.aiox-core/development/tasks/create-doc.md)
+- [Task: document-project.md](.aiox-core/development/tasks/document-project.md)
 
 ### Templates
 
-- [Template: project-brief-tmpl.yaml](.aios-core/product/templates/project-brief-tmpl.yaml)
-- [Template: market-research-tmpl.yaml](.aios-core/product/templates/market-research-tmpl.yaml)
-- [Template: competitor-analysis-tmpl.yaml](.aios-core/product/templates/competitor-analysis-tmpl.yaml)
-- [Template: brainstorming-output-tmpl.yaml](.aios-core/product/templates/brainstorming-output-tmpl.yaml)
+- [Template: project-brief-tmpl.yaml](.aiox-core/product/templates/project-brief-tmpl.yaml)
+- [Template: market-research-tmpl.yaml](.aiox-core/product/templates/market-research-tmpl.yaml)
+- [Template: competitor-analysis-tmpl.yaml](.aiox-core/product/templates/competitor-analysis-tmpl.yaml)
+- [Template: brainstorming-output-tmpl.yaml](.aiox-core/product/templates/brainstorming-output-tmpl.yaml)
 
 ### Workflows
 
-- [Workflow: greenfield-fullstack.yaml](.aios-core/development/workflows/greenfield-fullstack.yaml)
-- [Workflow: brownfield-discovery.yaml](.aios-core/development/workflows/brownfield-discovery.yaml)
+- [Workflow: greenfield-fullstack.yaml](.aiox-core/development/workflows/greenfield-fullstack.yaml)
+- [Workflow: brownfield-discovery.yaml](.aiox-core/development/workflows/brownfield-discovery.yaml)
 
 ### Agente
 
-- [Agent: analyst.md](.aios-core/development/agents/analyst.md)
+- [Agent: analyst.md](.aiox-core/development/agents/analyst.md)
 
 ---
 

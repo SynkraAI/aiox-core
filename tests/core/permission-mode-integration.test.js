@@ -15,8 +15,8 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 
-const { PermissionMode } = require('../../.aios-core/core/permissions/permission-mode');
-const { OperationGuard } = require('../../.aios-core/core/permissions/operation-guard');
+const { PermissionMode } = require('../../.aiox-core/core/permissions/permission-mode');
+const { OperationGuard } = require('../../.aiox-core/core/permissions/operation-guard');
 const {
   createGuard,
   checkOperation,
@@ -24,7 +24,7 @@ const {
   setMode,
   cycleMode,
   enforcePermission,
-} = require('../../.aios-core/core/permissions');
+} = require('../../.aiox-core/core/permissions');
 
 describe('Permission Mode Integration (Story ACT-4)', () => {
   let tempDir;
@@ -32,9 +32,9 @@ describe('Permission Mode Integration (Story ACT-4)', () => {
 
   beforeEach(() => {
     tempDir = path.join(os.tmpdir(), `permission-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
-    const aiosDir = path.join(tempDir, '.aios');
-    fs.mkdirSync(aiosDir, { recursive: true });
-    configPath = path.join(aiosDir, 'config.yaml');
+    const aioxDir = path.join(tempDir, '.aiox');
+    fs.mkdirSync(aioxDir, { recursive: true });
+    configPath = path.join(aioxDir, 'config.yaml');
   });
 
   afterEach(() => {

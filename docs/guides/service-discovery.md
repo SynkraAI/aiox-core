@@ -1,10 +1,10 @@
-# AIOS Service Discovery Guide
+# AIOX Service Discovery Guide
 
 > **EN** | [PT](../pt/guides/service-discovery.md) | [ES](../es/guides/service-discovery.md)
 
 ---
 
-> How to discover, query, and use workers in the AIOS framework.
+> How to discover, query, and use workers in the AIOX framework.
 
 **Version:** 2.1.0
 **Last Updated:** 2025-12-01
@@ -13,7 +13,7 @@
 
 ## Overview
 
-The Service Discovery system enables finding and using workers (tasks, templates, scripts, workflows) across the AIOS framework. The **Service Registry** is the central catalog containing metadata about all available workers.
+The Service Discovery system enables finding and using workers (tasks, templates, scripts, workflows) across the AIOX framework. The **Service Registry** is the central catalog containing metadata about all available workers.
 
 ### Key Concepts
 
@@ -31,7 +31,7 @@ The Service Discovery system enables finding and using workers (tasks, templates
 ### Loading the Registry
 
 ```javascript
-const { getRegistry, loadRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry, loadRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 // Quick load (returns registry data)
 const registry = await loadRegistry();
@@ -55,7 +55,7 @@ console.log(worker);
 //   id: 'create-story',
 //   name: 'Create Story',
 //   category: 'task',
-//   path: '.aios-core/development/tasks/po-create-story.md',
+//   path: '.aiox-core/development/tasks/po-create-story.md',
 //   tags: ['task', 'creation', 'story', 'product'],
 //   agents: ['po']
 // }
@@ -131,25 +131,25 @@ const count = await registry.count();
 
 ## CLI Commands
 
-### `aios discover`
+### `aiox discover`
 
 Search for workers in the registry.
 
 ```bash
 # Search by text
-aios discover "create story"
+aiox discover "create story"
 
 # Search by category
-aios discover --category task
+aiox discover --category task
 
 # Search by tag
-aios discover --tag testing
+aiox discover --tag testing
 
 # Search for agent
-aios discover --agent dev
+aiox discover --agent dev
 
 # Combine filters
-aios discover --category task --tag development --agent dev
+aiox discover --category task --tag development --agent dev
 ```
 
 **Output:**
@@ -158,28 +158,28 @@ aios discover --category task --tag development --agent dev
 Found 5 workers matching "create story":
 
   [task] po-create-story
-         Path: .aios-core/development/tasks/po-create-story.md
+         Path: .aiox-core/development/tasks/po-create-story.md
          Tags: task, creation, story, product
          Agents: po
 
   [task] dev-create-brownfield-story
-         Path: .aios-core/development/tasks/dev-create-brownfield-story.md
+         Path: .aiox-core/development/tasks/dev-create-brownfield-story.md
          Tags: task, creation, brownfield
          Agents: dev
 
   ...
 ```
 
-### `aios info`
+### `aiox info`
 
 Get detailed information about a specific worker.
 
 ```bash
 # Get worker info by ID
-aios info create-story
+aiox info create-story
 
 # Get worker info with full path
-aios info --path .aios-core/development/tasks/po-create-story.md
+aiox info --path .aiox-core/development/tasks/po-create-story.md
 ```
 
 **Output:**
@@ -189,7 +189,7 @@ Worker: create-story
 ========================
 Name:        Create Story
 Category:    task
-Path:        .aios-core/development/tasks/po-create-story.md
+Path:        .aiox-core/development/tasks/po-create-story.md
 
 Description:
   Creates a new user story from template with proper formatting
@@ -215,22 +215,22 @@ Performance:
   Parallelizable: No
 ```
 
-### `aios list`
+### `aiox list`
 
 List workers by category or agent.
 
 ```bash
 # List all tasks
-aios list tasks
+aiox list tasks
 
 # List all templates
-aios list templates
+aiox list templates
 
 # List workers for agent
-aios list --agent dev
+aiox list --agent dev
 
 # List with pagination
-aios list tasks --page 1 --limit 20
+aiox list tasks --page 1 --limit 20
 ```
 
 ---
@@ -264,7 +264,7 @@ steps:
     action: template-render
 ```
 
-**Location:** `.aios-core/development/tasks/`
+**Location:** `.aiox-core/development/tasks/`
 
 ### Templates
 
@@ -278,7 +278,7 @@ Document and code templates for generation.
 | `component-react-tmpl.tsx` | React component template  |
 | `ide-rules/*.md`           | IDE-specific rules        |
 
-**Location:** `.aios-core/product/templates/`
+**Location:** `.aiox-core/product/templates/`
 
 ### Scripts
 
@@ -291,7 +291,7 @@ JavaScript utilities for automation.
 | `git-wrapper.js`      | Git operations            |
 | `security-checker.js` | Security validation       |
 
-**Location:** `.aios-core/infrastructure/scripts/`
+**Location:** `.aiox-core/infrastructure/scripts/`
 
 ### Workflows
 
@@ -304,7 +304,7 @@ Multi-step development processes.
 | `greenfield-service.yaml`   | New backend service           |
 | `brownfield-ui.yaml`        | Existing frontend enhancement |
 
-**Location:** `.aios-core/development/workflows/`
+**Location:** `.aiox-core/development/workflows/`
 
 ### Checklists
 
@@ -317,7 +317,7 @@ Quality validation checklists.
 | `architect-checklist.md` | Architecture review      |
 | `release-checklist.md`   | Release validation       |
 
-**Location:** `.aios-core/product/checklists/`
+**Location:** `.aiox-core/product/checklists/`
 
 ---
 
@@ -329,17 +329,17 @@ Workers are automatically registered when the registry is built:
 
 ```bash
 # Rebuild registry
-node .aios-core/core/registry/build-registry.js
+node .aiox-core/core/registry/build-registry.js
 ```
 
 The builder scans:
 
-- `.aios-core/development/tasks/**/*.md`
-- `.aios-core/product/templates/**/*`
-- `.aios-core/infrastructure/scripts/**/*.js`
-- `.aios-core/product/checklists/**/*.md`
-- `.aios-core/development/workflows/**/*.yaml`
-- `.aios-core/core/data/**/*`
+- `.aiox-core/development/tasks/**/*.md`
+- `.aiox-core/product/templates/**/*`
+- `.aiox-core/infrastructure/scripts/**/*.js`
+- `.aiox-core/product/checklists/**/*.md`
+- `.aiox-core/development/workflows/**/*.yaml`
+- `.aiox-core/core/data/**/*`
 
 ### Worker Entry Schema
 
@@ -353,7 +353,7 @@ The builder scans:
   "inputs": ["story-title", "epic-id"],
   "outputs": ["story-file-path"],
   "tags": ["task", "creation", "story", "product"],
-  "path": ".aios-core/development/tasks/po-create-story.md",
+  "path": ".aiox-core/development/tasks/po-create-story.md",
   "taskFormat": "TASK-FORMAT-V1",
   "executorTypes": ["Agent", "Worker"],
   "performance": {
@@ -404,7 +404,7 @@ const isCached = registry.isCached();
 ### Find All Tasks for an Agent
 
 ```javascript
-const { getRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 async function getAgentTasks(agentId) {
   const registry = getRegistry();
@@ -421,8 +421,8 @@ console.log(`Dev agent has ${devTasks.length} tasks`);
 ### Search and Execute Task
 
 ```javascript
-const { getRegistry } = require('./.aios-core/core/registry/registry-loader');
-const { TaskExecutor } = require('./.aios-core/development/scripts/task-executor');
+const { getRegistry } = require('./.aiox-core/core/registry/registry-loader');
+const { TaskExecutor } = require('./.aiox-core/development/scripts/task-executor');
 
 async function findAndExecute(searchTerm, inputs) {
   const registry = getRegistry();
@@ -450,7 +450,7 @@ await findAndExecute('create story', {
 ### List Workers by Category
 
 ```javascript
-const { getRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 async function listByCategory() {
   const registry = getRegistry();
@@ -478,13 +478,13 @@ async function listByCategory() {
 
 ```bash
 # Verify registry file exists
-ls .aios-core/core/registry/service-registry.json
+ls .aiox-core/core/registry/service-registry.json
 
 # Rebuild registry
-node .aios-core/core/registry/build-registry.js
+node .aiox-core/core/registry/build-registry.js
 
 # Validate registry
-node .aios-core/core/registry/validate-registry.js
+node .aiox-core/core/registry/validate-registry.js
 ```
 
 ### Worker Not Found
@@ -515,4 +515,4 @@ await registry.load(true);
 
 ---
 
-_Synkra AIOS v2.1 Service Discovery Guide_
+_Synkra AIOX v4 Service Discovery Guide_

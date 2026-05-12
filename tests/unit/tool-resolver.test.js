@@ -1,19 +1,19 @@
 // Mock dependencies before requiring
 jest.mock('fs-extra');
-jest.mock('glob', () => ({
+jest.mock('fast-glob', () => ({
   sync: jest.fn().mockReturnValue([]),
 }));
 
 describe('ToolResolver', () => {
   let resolver;
   let fs;
-  let glob;
+  let fg;
   let path;
 
   beforeAll(() => {
     // Require modules inside beforeAll to avoid module-level issues
     fs = require('fs-extra');
-    glob = require('glob');
+    fg = require('fast-glob');
     path = require('path');
 
     // Require ToolResolver after all other modules are loaded
@@ -74,8 +74,8 @@ tool:
     // Clear all mocks
     jest.clearAllMocks();
 
-    // Reset glob.sync to return empty array by default
-    glob.sync.mockReturnValue([]);
+    // Reset fg.sync to return empty array by default
+    fg.sync.mockReturnValue([]);
 
     // Clear cache before each test
     if (resolver.cache) {
@@ -86,7 +86,7 @@ tool:
   describe('Cache Mechanism', () => {
     test('should cache tool after first resolution', async () => {
       // Mock file system
-      glob.sync.mockReturnValue(['aios-core/tools/test-simple.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/test-simple.yaml']);
       fs.readFile.mockResolvedValue(simpleToolYaml);
 
       // First call - should read from file
@@ -103,8 +103,8 @@ tool:
       expect(tool1).toBe(tool2);
     });
 
-    test('should use different cache keys for different expansion packs', async () => {
-      glob.sync.mockReturnValue(['expansion-packs/pack1/tools/test-tool.yaml']);
+    test('should use different cache keys for different squads', async () => {
+      fg.sync.mockReturnValue(['squads/pack1/tools/test-tool.yaml']);
       fs.readFile.mockResolvedValue(simpleToolYaml);
 
       const tool1 = await resolver.resolveTool('test-simple', { expansionPack: 'pack1' });
@@ -126,7 +126,7 @@ tool:
     });
 
     test('should provide cache stats', async () => {
-      glob.sync.mockReturnValue(['aios-core/tools/test-simple.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/test-simple.yaml']);
       fs.readFile.mockResolvedValue(simpleToolYaml);
 
       await resolver.resolveTool('test-simple');
@@ -141,11 +141,11 @@ tool:
   });
 
   describe('Search Path Priority', () => {
-    test('should prioritize expansion pack tools over core tools', async () => {
-      // Mock expansion pack tool found first
-      glob.sync.mockImplementation((pattern) => {
-        if (pattern.includes('expansion-packs/my-pack')) {
-          return ['expansion-packs/my-pack/tools/test-simple.yaml'];
+    test('should prioritize squad tools over core tools', async () => {
+      // Mock squad tool found first
+      fg.sync.mockImplementation((pattern) => {
+        if (pattern.includes('squads/my-pack')) {
+          return ['squads/my-pack/tools/test-simple.yaml'];
         }
         return [];
       });
@@ -154,22 +154,22 @@ tool:
 
       const tool = await resolver.resolveTool('test-simple', { expansionPack: 'my-pack' });
 
-      // Should have searched expansion pack first
-      expect(glob.sync).toHaveBeenCalledWith(
-        expect.stringContaining('expansion-packs/my-pack/tools'),
+      // Should have searched squad first
+      expect(fg.sync).toHaveBeenCalledWith(
+        expect.stringContaining('squads/my-pack/tools'),
       );
 
       expect(tool.id).toBe('test-simple');
     });
 
-    test('should fall back to core when expansion pack tool not found', async () => {
-      // Mock: expansion pack returns empty, core returns tool
-      glob.sync.mockImplementation((pattern) => {
-        if (pattern.includes('expansion-packs')) {
+    test('should fall back to core when squad tool not found', async () => {
+      // Mock: squad returns empty, core returns tool
+      fg.sync.mockImplementation((pattern) => {
+        if (pattern.includes('squads')) {
           return [];
         }
-        if (pattern.includes('aios-core/tools')) {
-          return ['aios-core/tools/test-simple.yaml'];
+        if (pattern.includes('aiox-core/tools')) {
+          return ['aiox-core/tools/test-simple.yaml'];
         }
         return [];
       });
@@ -179,12 +179,12 @@ tool:
       const tool = await resolver.resolveTool('test-simple', { expansionPack: 'my-pack' });
 
       // Should have tried both paths
-      expect(glob.sync).toHaveBeenCalledTimes(2);
+      expect(fg.sync).toHaveBeenCalledTimes(2);
       expect(tool.id).toBe('test-simple');
     });
 
     test('should search common/tools directory', async () => {
-      glob.sync.mockImplementation((pattern) => {
+      fg.sync.mockImplementation((pattern) => {
         if (pattern.includes('common/tools')) {
           return ['common/tools/test-tool.yaml'];
         }
@@ -196,7 +196,7 @@ tool:
       await resolver.resolveTool('test-simple');
 
       // Should have searched common directory
-      expect(glob.sync).toHaveBeenCalledWith(
+      expect(fg.sync).toHaveBeenCalledWith(
         expect.stringContaining('common/tools'),
       );
     });
@@ -204,7 +204,7 @@ tool:
 
   describe('Tool Not Found Error', () => {
     test('should throw error when tool not found', async () => {
-      glob.sync.mockReturnValue([]);
+      fg.sync.mockReturnValue([]);
 
       await expect(resolver.resolveTool('nonexistent-tool')).rejects.toThrow(
         /Tool 'nonexistent-tool' not found/,
@@ -212,7 +212,7 @@ tool:
     });
 
     test('should provide helpful error message with search paths', async () => {
-      glob.sync.mockReturnValue([]);
+      fg.sync.mockReturnValue([]);
 
       try {
         await resolver.resolveTool('missing-tool');
@@ -227,7 +227,7 @@ tool:
 
   describe('Schema Validation', () => {
     test('should validate required fields', async () => {
-      glob.sync.mockReturnValue(['aios-core/tools/invalid.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/invalid.yaml']);
       fs.readFile.mockResolvedValue(invalidToolYaml);
 
       await expect(resolver.resolveTool('invalid-tool')).rejects.toThrow(
@@ -236,7 +236,7 @@ tool:
     });
 
     test('should validate v1.0 tool schema', async () => {
-      glob.sync.mockReturnValue(['aios-core/tools/simple.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/simple.yaml']);
       fs.readFile.mockResolvedValue(simpleToolYaml);
 
       const tool = await resolver.resolveTool('test-simple');
@@ -250,7 +250,7 @@ tool:
     });
 
     test('should validate v2.0 tool schema with executable knowledge', async () => {
-      glob.sync.mockReturnValue(['aios-core/tools/complex.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/complex.yaml']);
       fs.readFile.mockResolvedValue(complexToolYaml);
 
       const tool = await resolver.resolveTool('test-complex');
@@ -262,7 +262,7 @@ tool:
     });
 
     test('should reject invalid YAML syntax', async () => {
-      glob.sync.mockReturnValue(['aios-core/tools/broken.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/broken.yaml']);
       fs.readFile.mockResolvedValue('invalid: yaml: syntax: [');
 
       await expect(resolver.resolveTool('broken-tool')).rejects.toThrow();
@@ -271,7 +271,7 @@ tool:
 
   describe('Auto-Detection Logic', () => {
     test('should detect v1.0 for simple tools', async () => {
-      glob.sync.mockReturnValue(['aios-core/tools/simple.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/simple.yaml']);
       fs.readFile.mockResolvedValue(simpleToolYaml);
 
       const tool = await resolver.resolveTool('test-simple');
@@ -298,7 +298,7 @@ tool:
     server_command: npx -y test
 `;
 
-      glob.sync.mockReturnValue(['aios-core/tools/auto.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/auto.yaml']);
       fs.readFile.mockResolvedValue(autoDetectToolYaml);
 
       const tool = await resolver.resolveTool('auto-detect');
@@ -321,7 +321,7 @@ tool:
         description: test quirk
 `;
 
-      glob.sync.mockReturnValue(['aios-core/tools/api.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/api.yaml']);
       fs.readFile.mockResolvedValue(apiComplexToolYaml);
 
       const tool = await resolver.resolveTool('api-complex');
@@ -341,7 +341,7 @@ tool:
       description: Incorrect usage
 `;
 
-      glob.sync.mockReturnValue(['aios-core/tools/anti.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/anti.yaml']);
       fs.readFile.mockResolvedValue(antiPatternsToolYaml);
 
       const tool = await resolver.resolveTool('anti-patterns');
@@ -365,7 +365,7 @@ tool:
     timeout: 5000
 `;
 
-      glob.sync.mockReturnValue(['aios-core/tools/health.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/health.yaml']);
       fs.readFile.mockResolvedValue(healthCheckToolYaml);
 
       const tool = await resolver.resolveTool('health-tool');
@@ -388,7 +388,7 @@ tool:
     expected_status: 200
 `;
 
-      glob.sync.mockReturnValue(['aios-core/tools/http-health.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/http-health.yaml']);
       fs.readFile.mockResolvedValue(httpHealthToolYaml);
 
       const tool = await resolver.resolveTool('http-health-tool');
@@ -414,7 +414,7 @@ tool:
       }
 `;
 
-      glob.sync.mockReturnValue(['aios-core/tools/function-health.yaml']);
+      fg.sync.mockReturnValue(['aiox-core/tools/function-health.yaml']);
       fs.readFile.mockResolvedValue(functionHealthToolYaml);
 
       const tool = await resolver.resolveTool('function-health-tool');
@@ -427,9 +427,9 @@ tool:
 
   describe('Additional Methods', () => {
     test('should list all available tools', async () => {
-      glob.sync.mockReturnValue([
-        'aios-core/tools/tool1.yaml',
-        'aios-core/tools/tool2.yaml',
+      fg.sync.mockReturnValue([
+        'aiox-core/tools/tool1.yaml',
+        'aiox-core/tools/tool2.yaml',
         'common/tools/tool3.yaml',
       ]);
 
@@ -441,9 +441,9 @@ tool:
 
     test('should check if tool exists without loading', async () => {
       // Mock implementation that returns results only for 'exists' tool (not 'not-exists')
-      glob.sync.mockImplementation((pattern) => {
+      fg.sync.mockImplementation((pattern) => {
         if (pattern.includes('/exists.yaml')) {
-          return ['aios-core/tools/exists.yaml'];
+          return ['aiox-core/tools/exists.yaml'];
         }
         return [];
       });

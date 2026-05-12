@@ -10,7 +10,7 @@
 
 ---
 
-Este guia fornece instruções completas para desinstalar o Synkra AIOS do seu sistema.
+Este guia fornece instruções completas para desinstalar o Synkra AIOX do seu sistema.
 
 ## Índice
 
@@ -28,7 +28,7 @@ Este guia fornece instruções completas para desinstalar o Synkra AIOS do seu s
 
 ### Considerações Importantes
 
-**Aviso**: Desinstalar o Synkra AIOS irá:
+**Aviso**: Desinstalar o Synkra AIOX irá:
 
 - Remover todos os arquivos do framework
 - Excluir configurações de agentes (a menos que preservadas)
@@ -49,33 +49,33 @@ Este guia fornece instruções completas para desinstalar o Synkra AIOS do seu s
 
 ```bash
 # Criar backup completo
-npx @synkra/aios-core backup --complete
+npx aiox-core backup --complete
 
 # Ou fazer backup manual dos diretórios importantes
-tar -czf aios-backup-$(date +%Y%m%d).tar.gz \
-  .aios/ \
+tar -czf aiox-backup-$(date +%Y%m%d).tar.gz \
+  .aiox/ \
   agents/ \
   workflows/ \
   tasks/ \
-  --exclude=.aios/logs \
-  --exclude=.aios/cache
+  --exclude=.aiox/logs \
+  --exclude=.aiox/cache
 ```
 
 ## Desinstalação Rápida
 
 ### Usando o Desinstalador Integrado
 
-A forma mais rápida de desinstalar o Synkra AIOS:
+A forma mais rápida de desinstalar o Synkra AIOX:
 
 ```bash
 # Desinstalação básica (preserva dados do usuário)
-npx @synkra/aios-core uninstall
+npx aiox-core uninstall
 
 # Desinstalação completa (remove tudo)
-npx @synkra/aios-core uninstall --complete
+npx aiox-core uninstall --complete
 
 # Desinstalação com preservação de dados
-npx @synkra/aios-core uninstall --keep-data
+npx aiox-core uninstall --keep-data
 ```
 
 ### Desinstalação Interativa
@@ -83,7 +83,7 @@ npx @synkra/aios-core uninstall --keep-data
 Para desinstalação guiada:
 
 ```bash
-npx @synkra/aios-core uninstall --interactive
+npx aiox-core uninstall --interactive
 ```
 
 Isso solicitará:
@@ -127,14 +127,14 @@ Isso solicitará:
 
 ```bash
 # Remoção completa
-npx @synkra/aios-core uninstall --complete --no-backup
+npx aiox-core uninstall --complete --no-backup
 ```
 
 ### Etapa 4: Remover Instalação Global
 
 ```bash
 # Remover pacote npm global
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aiox-core
 
 # Remover cache do npx
 npm cache clean --force
@@ -146,27 +146,27 @@ npm cache clean --force
 
 ```powershell
 # Remover arquivos do AppData
-Remove-Item -Recurse -Force "$env:APPDATA\@synkra/aios-core"
+Remove-Item -Recurse -Force "$env:APPDATA\aiox-core"
 
 # Remover arquivos temporários
-Remove-Item -Recurse -Force "$env:TEMP\aios-*"
+Remove-Item -Recurse -Force "$env:TEMP\aiox-*"
 
 # Remover entradas do registro (se houver)
-Remove-Item -Path "HKCU:\Software\Synkra AIOS" -Recurse
+Remove-Item -Path "HKCU:\Software\Synkra AIOX" -Recurse
 ```
 
 #### macOS/Linux
 
 ```bash
 # Remover arquivos de configuração
-rm -rf ~/.aios
-rm -rf ~/.config/@synkra/aios-core
+rm -rf ~/.aiox
+rm -rf ~/.config/aiox-core
 
 # Remover cache
-rm -rf ~/.cache/@synkra/aios-core
+rm -rf ~/.cache/aiox-core
 
 # Remover arquivos temporários
-rm -rf /tmp/aios-*
+rm -rf /tmp/aiox-*
 ```
 
 ## Desinstalação Seletiva
@@ -175,13 +175,13 @@ rm -rf /tmp/aios-*
 
 ```bash
 # Remover apenas agentes
-npx @synkra/aios-core uninstall agents
+npx aiox-core uninstall agents
 
 # Remover apenas workflows
-npx @synkra/aios-core uninstall workflows
+npx aiox-core uninstall workflows
 
 # Remover camada de memória
-npx @synkra/aios-core uninstall memory-layer
+npx aiox-core uninstall memory-layer
 
 # Remover agente específico
 *uninstall agent-name
@@ -210,15 +210,15 @@ Antes de desinstalar, identifique o que você quer preservar:
 
    ```bash
    # Copiar agentes personalizados
-   cp -r agents/custom/ ~/aios-backup/agents/
+   cp -r agents/custom/ ~/aiox-backup/agents/
    ```
 
 2. **Workflows e Tasks**
 
    ```bash
    # Copiar workflows
-   cp -r workflows/ ~/aios-backup/workflows/
-   cp -r tasks/ ~/aios-backup/tasks/
+   cp -r workflows/ ~/aiox-backup/workflows/
+   cp -r tasks/ ~/aiox-backup/tasks/
    ```
 
 3. **Dados de Memória**
@@ -226,21 +226,21 @@ Antes de desinstalar, identifique o que você quer preservar:
    ```bash
    # Exportar banco de dados de memória
    *memory export --format sqlite \
-     --destination ~/aios-backup/memory.db
+     --destination ~/aiox-backup/memory.db
    ```
 
 4. **Configurações**
 
    ```bash
    # Copiar todos os arquivos de configuração
-   cp .aios/config.json ~/aios-backup/
-   cp .env ~/aios-backup/
+   cp .aiox/config.json ~/aiox-backup/
+   cp .env ~/aiox-backup/
    ```
 
 5. **Código Personalizado**
    ```bash
    # Encontrar e fazer backup de arquivos personalizados
-   find . -name "*.custom.*" -exec cp {} ~/aios-backup/custom/ \;
+   find . -name "*.custom.*" -exec cp {} ~/aiox-backup/custom/ \;
    ```
 
 ### Script de Preservação
@@ -249,7 +249,7 @@ Crie `preserve-data.sh`:
 
 ```bash
 #!/bin/bash
-BACKUP_DIR="$HOME/aios-backup-$(date +%Y%m%d-%H%M%S)"
+BACKUP_DIR="$HOME/aiox-backup-$(date +%Y%m%d-%H%M%S)"
 
 echo "Criando diretório de backup: $BACKUP_DIR"
 mkdir -p "$BACKUP_DIR"
@@ -263,7 +263,7 @@ backup_if_exists() {
 }
 
 # Backup de todos os dados importantes
-backup_if_exists ".aios"
+backup_if_exists ".aiox"
 backup_if_exists "agents"
 backup_if_exists "workflows"
 backup_if_exists "tasks"
@@ -282,11 +282,11 @@ Crie `clean-uninstall.sh`:
 
 ```bash
 #!/bin/bash
-echo "Desinstalação Completa do Synkra AIOS"
+echo "Desinstalação Completa do Synkra AIOX"
 echo "================================="
 
 # Confirmação
-read -p "Isso removerá TODOS os dados do Synkra AIOS. Continuar? (y/N) " -n 1 -r
+read -p "Isso removerá TODOS os dados do Synkra AIOX. Continuar? (y/N) " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
@@ -294,28 +294,28 @@ fi
 
 # Parar todos os processos
 echo "Parando todos os processos..."
-pkill -f "@synkra/aios-core" || true
-pkill -f "aios-developer" || true
+pkill -f "aiox-core" || true
+pkill -f "aiox-developer" || true
 
 # Remover arquivos do projeto
 echo "Removendo arquivos do projeto..."
-rm -rf .aios/
+rm -rf .aiox/
 rm -rf agents/
 rm -rf workflows/
 rm -rf tasks/
 rm -rf templates/
 rm -rf Squads/
-rm -rf node_modules/@synkra/aios-core/
+rm -rf node_modules/aiox-core/
 
 # Remover arquivos globais
 echo "Removendo arquivos globais..."
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aiox-core
 
 # Remover dados do usuário
 echo "Removendo dados do usuário..."
-rm -rf ~/.aios
-rm -rf ~/.config/@synkra/aios-core
-rm -rf ~/.cache/@synkra/aios-core
+rm -rf ~/.aiox
+rm -rf ~/.config/aiox-core
+rm -rf ~/.cache/aiox-core
 
 # Limpar cache do npm
 echo "Limpando cache do npm..."
@@ -323,9 +323,9 @@ npm cache clean --force
 
 # Remover do package.json
 echo "Atualizando package.json..."
-npm uninstall @synkra/aios-core/core
-npm uninstall @synkra/aios-core/memory
-npm uninstall @synkra/aios-core/meta-agent
+npm uninstall aiox-core/core
+npm uninstall aiox-core/memory
+npm uninstall aiox-core/meta-agent
 
 echo "Desinstalação concluída!"
 ```
@@ -334,18 +334,18 @@ echo "Desinstalação concluída!"
 
 ```powershell
 # Script PowerShell para limpeza no Windows
-Write-Host "Limpando Synkra AIOS do Registro do Windows..."
+Write-Host "Limpando Synkra AIOX do Registro do Windows..."
 
 # Remover do PATH
 $path = [Environment]::GetEnvironmentVariable("PATH", "User")
-$newPath = ($path.Split(';') | Where-Object { $_ -notmatch '@synkra/aios-core' }) -join ';'
+$newPath = ($path.Split(';') | Where-Object { $_ -notmatch 'aiox-core' }) -join ';'
 [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
 
 # Remover chaves do registro
-Remove-ItemProperty -Path "HKCU:\Environment" -Name "AIOS_*" -ErrorAction SilentlyContinue
+Remove-ItemProperty -Path "HKCU:\Environment" -Name "AIOX_*" -ErrorAction SilentlyContinue
 
 # Remover associações de arquivo
-Remove-Item -Path "HKCU:\Software\Classes\.aios" -Recurse -ErrorAction SilentlyContinue
+Remove-Item -Path "HKCU:\Software\Classes\.aiox" -Recurse -ErrorAction SilentlyContinue
 
 Write-Host "Limpeza do registro concluída!"
 ```
@@ -358,10 +358,10 @@ Write-Host "Limpeza do registro concluída!"
 
 ```bash
 # Linux/macOS
-sudo npx @synkra/aios-core uninstall --complete
+sudo npx aiox-core uninstall --complete
 
 # Windows (Executar como Administrador)
-npx @synkra/aios-core uninstall --complete
+npx aiox-core uninstall --complete
 ```
 
 #### 2. Processo Ainda em Execução
@@ -370,11 +370,11 @@ npx @synkra/aios-core uninstall --complete
 # Forçar parada de todos os processos
 # Linux/macOS
 killall -9 node
-killall -9 @synkra/aios-core
+killall -9 aiox-core
 
 # Windows
 taskkill /F /IM node.exe
-taskkill /F /IM @synkra/aios-core.exe
+taskkill /F /IM aiox-core.exe
 ```
 
 #### 3. Arquivos Bloqueados
@@ -382,18 +382,18 @@ taskkill /F /IM @synkra/aios-core.exe
 ```bash
 # Encontrar processos usando os arquivos
 # Linux/macOS
-lsof | grep aios
+lsof | grep aiox
 
 # Windows (PowerShell)
-Get-Process | Where-Object {$_.Path -like "*aios*"}
+Get-Process | Where-Object {$_.Path -like "*aiox*"}
 ```
 
 #### 4. Remoção Incompleta
 
 ```bash
 # Limpeza manual
-find . -name "*aios*" -type d -exec rm -rf {} +
-find . -name "*.aios*" -type f -delete
+find . -name "*aiox*" -type d -exec rm -rf {} +
+find . -name "*.aiox*" -type f -delete
 ```
 
 ### Desinstalação Forçada
@@ -403,20 +403,20 @@ Se a desinstalação normal falhar:
 ```bash
 #!/bin/bash
 # force-uninstall.sh
-echo "Desinstalação forçada do Synkra AIOS..."
+echo "Desinstalação forçada do Synkra AIOX..."
 
 # Matar todos os processos relacionados
-pkill -9 -f aios || true
+pkill -9 -f aiox || true
 
 # Remover todos os arquivos
-rm -rf .aios* aios* *aios*
+rm -rf .aiox* aiox* *aiox*
 rm -rf agents workflows tasks templates
-rm -rf node_modules/@synkra/aios-core
-rm -rf ~/.aios* ~/.config/aios* ~/.cache/aios*
+rm -rf node_modules/aiox-core
+rm -rf ~/.aiox* ~/.config/aiox* ~/.cache/aiox*
 
 # Limpar npm
 npm cache clean --force
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aiox-core
 
 echo "Desinstalação forçada concluída!"
 ```
@@ -427,26 +427,26 @@ echo "Desinstalação forçada concluída!"
 
 ```bash
 # Verificar arquivos restantes
-find . -name "*aios*" 2>/dev/null
-find ~ -name "*aios*" 2>/dev/null
+find . -name "*aiox*" 2>/dev/null
+find ~ -name "*aiox*" 2>/dev/null
 
 # Verificar pacotes npm
-npm list -g | grep aios
-npm list | grep aios
+npm list -g | grep aiox
+npm list | grep aiox
 
 # Verificar processos em execução
-ps aux | grep aios
+ps aux | grep aiox
 ```
 
 ### 2. Limpar Variáveis de Ambiente
 
 ```bash
 # Remover do .bashrc/.zshrc
-sed -i '/AIOS_/d' ~/.bashrc
-sed -i '/@synkra/aios-core/d' ~/.bashrc
+sed -i '/AIOX_/d' ~/.bashrc
+sed -i '/aiox-core/d' ~/.bashrc
 
 # Remover de arquivos .env
-find . -name ".env*" -exec sed -i '/AIOS_/d' {} \;
+find . -name ".env*" -exec sed -i '/AIOX_/d' {} \;
 ```
 
 ### 3. Atualizar Arquivos do Projeto
@@ -456,8 +456,8 @@ find . -name ".env*" -exec sed -i '/AIOS_/d' {} \;
 {
   "scripts": {
     // Remover estas entradas
-    "aios": "@synkra/aios-core",
-    "meta-agent": "@synkra/aios-core meta-agent"
+    "aiox": "aiox-core",
+    "meta-agent": "aiox-core meta-agent"
   }
 }
 ```
@@ -465,23 +465,23 @@ find . -name ".env*" -exec sed -i '/AIOS_/d' {} \;
 ### 4. Limpar Repositório Git
 
 ```bash
-# Remover hooks git específicos do AIOS
-rm -f .git/hooks/*aios*
+# Remover hooks git específicos do AIOX
+rm -f .git/hooks/*aiox*
 
 # Atualizar .gitignore
-sed -i '/.aios/d' .gitignore
-sed -i '/aios-/d' .gitignore
+sed -i '/.aiox/d' .gitignore
+sed -i '/aiox-/d' .gitignore
 
 # Commitar remoção
 git add -A
-git commit -m "Remove Synkra AIOS"
+git commit -m "Remove Synkra AIOX"
 ```
 
 ## Reinstalação
 
 ### Após Desinstalação Completa
 
-Se você quiser reinstalar o Synkra AIOS:
+Se você quiser reinstalar o Synkra AIOX:
 
 1. **Aguardar a limpeza**
 
@@ -498,7 +498,7 @@ Se você quiser reinstalar o Synkra AIOS:
 
 3. **Instalação limpa**
    ```bash
-   npx @synkra/aios-core@latest init my-project
+   npx aiox-core@latest init my-project
    ```
 
 ### Restaurar a partir do Backup
@@ -508,13 +508,13 @@ Se você quiser reinstalar o Synkra AIOS:
 cd my-project
 
 # Restaurar configurações
-cp ~/aios-backup/config.json .aios/
+cp ~/aiox-backup/config.json .aiox/
 
 # Restaurar agentes
-cp -r ~/aios-backup/agents/* ./agents/
+cp -r ~/aiox-backup/agents/* ./agents/
 
 # Importar memória
-*memory import ~/aios-backup/memory.zip
+*memory import ~/aiox-backup/memory.zip
 
 # Verificar restauração
 *doctor --verify-restore
@@ -522,7 +522,7 @@ cp -r ~/aios-backup/agents/* ./agents/
 
 ## Checklist de Verificação de Desinstalação
 
-- [ ] Todos os processos AIOS parados
+- [ ] Todos os processos AIOX parados
 - [ ] Arquivos do projeto removidos
 - [ ] Pacote npm global desinstalado
 - [ ] Arquivos de configuração do usuário excluídos
@@ -530,7 +530,7 @@ cp -r ~/aios-backup/agents/* ./agents/
 - [ ] Variáveis de ambiente removidas
 - [ ] Entradas do registro limpas (Windows)
 - [ ] Repositório git atualizado
-- [ ] Nenhum arquivo AIOS restante encontrado
+- [ ] Nenhum arquivo AIOX restante encontrado
 - [ ] PATH do sistema atualizado
 
 ## Obtendo Ajuda
@@ -538,8 +538,8 @@ cp -r ~/aios-backup/agents/* ./agents/
 Se você encontrar problemas durante a desinstalação:
 
 1. **Consulte a Documentação**
-   - [FAQ](https://github.com/SynkraAI/aios-core/wiki/faq#uninstall)
-   - [Resolução de Problemas](https://github.com/SynkraAI/aios-core/wiki/troubleshooting)
+   - [FAQ](https://github.com/SynkraAI/aiox-core/wiki/faq#uninstall)
+   - [Resolução de Problemas](https://github.com/SynkraAI/aiox-core/wiki/troubleshooting)
 
 2. **Suporte da Comunidade**
    - Discord: #uninstall-help
@@ -548,7 +548,7 @@ Se você encontrar problemas durante a desinstalação:
 3. **Suporte de Emergência**
    ```bash
    # Gerar relatório de desinstalação
-   npx @synkra/aios-core diagnose --uninstall > uninstall-report.log
+   npx aiox-core diagnose --uninstall > uninstall-report.log
    ```
 
 ---

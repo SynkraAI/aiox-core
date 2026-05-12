@@ -1,7 +1,7 @@
 # @pm (Morgan) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/pm.md`
+> Agent definition: `.aiox-core/development/agents/pm.md`
 
 ## 1. Activation Trace
 
@@ -9,12 +9,12 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/pm.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, storyBacklog |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 6 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/pm.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, storyBacklog |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 6 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 **Note:** As of Story ACT-8, PM loads `coding-standards.md` (25KB) and `tech-stack.md` (30KB) at activation for technical context. Both files are high-priority cached, so subsequent activations hit cache. Performance target remains <100ms.
 
@@ -119,7 +119,7 @@ pm:
 
 | Task File | Used By | Status |
 |-----------|---------|--------|
-| `correct-course.md` | Delegated to @aios-master | EXISTS |
+| `correct-course.md` | Delegated to @aiox-master | EXISTS |
 | `execute-checklist.md` | Checklist execution | EXISTS |
 
 ---
@@ -128,16 +128,16 @@ pm:
 
 ### `*create-prd`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/prd-tmpl.yaml` (MISSING in development/templates/)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/prd-tmpl.yaml` (MISSING in development/templates/)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `prd-tmpl.yaml` | Template | MISSING in development/templates/ |
-| `.aios-core/product/templates/prd-tmpl.yaml` | Template | EXISTS (fallback) |
-| `.aios-core/data/elicitation-methods` | Data | Referenced by create-doc |
+| `.aiox-core/product/templates/prd-tmpl.yaml` | Template | EXISTS (fallback) |
+| `.aiox-core/data/elicitation-methods` | Data | Referenced by create-doc |
 
 **Execution flow:**
 
@@ -162,15 +162,15 @@ flowchart TD
 
 ### `*create-brownfield-prd`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/brownfield-prd-tmpl.yaml` (MISSING in development/templates/)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/brownfield-prd-tmpl.yaml` (MISSING in development/templates/)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `brownfield-prd-tmpl.yaml` | Template | MISSING in development/templates/ |
-| `.aios-core/product/templates/brownfield-prd-tmpl.yaml` | Template | EXISTS (fallback) |
+| `.aiox-core/product/templates/brownfield-prd-tmpl.yaml` | Template | EXISTS (fallback) |
 
 Same flow as `*create-prd` with brownfield-specific template that includes existing project context analysis.
 
@@ -178,14 +178,14 @@ Same flow as `*create-prd` with brownfield-specific template that includes exist
 
 ### `*create-epic`
 
-**Task file:** `.aios-core/development/tasks/brownfield-create-epic.md`
+**Task file:** `.aiox-core/development/tasks/brownfield-create-epic.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `brownfield-create-epic.md` | Task | EXISTS |
-| `.aios-core/product/templates/prd-tmpl.yaml` | Template | EXISTS (epic structure) |
-| `.aios-core/product/checklists/pm-checklist.md` | Checklist | EXISTS |
+| `.aiox-core/product/templates/prd-tmpl.yaml` | Template | EXISTS (epic structure) |
+| `.aiox-core/product/checklists/pm-checklist.md` | Checklist | EXISTS |
 
 **Execution flow:**
 
@@ -206,13 +206,13 @@ flowchart TD
 
 ### `*create-story`
 
-**Task file:** `.aios-core/development/tasks/brownfield-create-story.md`
+**Task file:** `.aiox-core/development/tasks/brownfield-create-story.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `brownfield-create-story.md` | Task | EXISTS |
-| `.aios-core/product/templates/story-tmpl.yaml` | Template | EXISTS (in product/templates/) |
+| `.aiox-core/product/templates/story-tmpl.yaml` | Template | EXISTS (in product/templates/) |
 
 **Execution flow:**
 
@@ -231,7 +231,7 @@ flowchart TD
 
 ### `*research`
 
-**Task file:** `.aios-core/development/tasks/create-deep-research-prompt.md`
+**Task file:** `.aiox-core/development/tasks/create-deep-research-prompt.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -257,7 +257,7 @@ flowchart TD
 
 ### `*gather-requirements`
 
-**Task file:** `.aios-core/development/tasks/spec-gather-requirements.md`
+**Task file:** `.aiox-core/development/tasks/spec-gather-requirements.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -283,7 +283,7 @@ flowchart TD
 
 ### `*write-spec`
 
-**Task file:** `.aios-core/development/tasks/spec-write-spec.md`
+**Task file:** `.aiox-core/development/tasks/spec-write-spec.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -309,7 +309,7 @@ flowchart TD
 
 ### `*shard-prd`
 
-**Task file:** `.aios-core/development/tasks/shard-doc.md`
+**Task file:** `.aiox-core/development/tasks/shard-doc.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -459,10 +459,10 @@ graph TD
 | @pm -> @sm | Delegate | Story creation via `*draft` |
 | @pm -> @analyst | Delegate | Deep research via `*research` |
 | @pm -> @architect | Collaborate | Technical architecture decisions |
-| @pm -> @aios-master | Escalate | Course corrections via `*correct-course` |
+| @pm -> @aiox-master | Escalate | Course corrections via `*correct-course` |
 | @pm -> @devops | Delegate | Git push operations, PR creation |
 | @analyst -> @pm | Receives | Project brief for PRD creation |
-| @aios-master -> @pm | Receives | Framework modification requests |
+| @aiox-master -> @pm | Receives | Framework modification requests |
 
 ### Delegation Rules (from agent definition)
 
@@ -481,9 +481,9 @@ PM must NEVER emulate other agents within its context window. When a task requir
 **Integration modules:**
 | Module | Path | Status |
 |--------|------|--------|
-| TerminalSpawner | `.aios-core/core/orchestration/terminal-spawner.js` | EXISTS |
-| ExecutorAssignment | `.aios-core/core/orchestration/executor-assignment.js` | EXISTS |
-| PM Script | `.aios-core/scripts/pm.sh` | EXISTS |
+| TerminalSpawner | `.aiox-core/core/orchestration/terminal-spawner.js` | EXISTS |
+| ExecutorAssignment | `.aiox-core/core/orchestration/executor-assignment.js` | EXISTS |
+| PM Script | `.aiox-core/scripts/pm.sh` | EXISTS |
 
 **Delegates to @sm when:**
 - Story creation from epics
@@ -498,7 +498,7 @@ PM must NEVER emulate other agents within its context window. When a task requir
 - Technical architecture decisions
 - Technology selection
 
-**Escalates to @aios-master when:**
+**Escalates to @aiox-master when:**
 - Course corrections detected
 - Framework modifications needed
 
@@ -525,8 +525,8 @@ PM must NEVER emulate other agents within its context window. When a task requir
 | `pm-checklist.md` | Checklist | `execute-checklist.md` (in development/checklists/) | Falls back to product/checklists/ (EXISTS there) |
 | `change-checklist.md` | Checklist | `execute-checklist.md` (in development/checklists/) | Falls back to product/checklists/ (EXISTS there) |
 
-**Note:** All 9 task files referenced in dependencies exist in `.aios-core/development/tasks/`. The 2 templates and 2 checklists are missing from `development/` but exist in `product/` as fallback locations.
+**Note:** All 9 task files referenced in dependencies exist in `.aiox-core/development/tasks/`. The 2 templates and 2 checklists are missing from `development/` but exist in `product/` as fallback locations.
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

@@ -6,7 +6,7 @@
  * Tests:
  * - Each of 12 agents activates through unified pipeline
  * - Identical context structure for all agents
- * - Parallel loading of 5 loaders
+ * - Parallel loading of 4 loaders (NOG-18: projectStatus removed)
  * - Sequential steps with data dependencies
  * - Timeout protection and fallback behavior
  * - Backward compatibility (generate-greeting.js still works)
@@ -27,7 +27,7 @@ const mockCoreConfig = {
       sessionDetection: 'hybrid',
     },
   },
-  dataLocation: '.aios-core/data',
+  dataLocation: '.aiox-core/data',
   devStoryLocation: 'docs/stories',
   projectStatus: { enabled: true },
 };
@@ -125,10 +125,10 @@ jest.mock('fs', () => {
 });
 
 // Mock agent-config-loader
-jest.mock('../../.aios-core/development/scripts/agent-config-loader', () => ({
+jest.mock('../../.aiox-core/development/scripts/agent-config-loader', () => ({
   AgentConfigLoader: jest.fn().mockImplementation(() => ({
     loadComplete: jest.fn().mockResolvedValue({
-      config: { dataLocation: '.aios-core/data' },
+      config: { dataLocation: '.aiox-core/data' },
       definition: mockAgentDefinition,
       agent: mockAgentDefinition.agent,
       persona_profile: mockAgentDefinition.persona_profile,
@@ -138,26 +138,26 @@ jest.mock('../../.aios-core/development/scripts/agent-config-loader', () => ({
 }));
 
 // Mock session context loader
-jest.mock('../../.aios-core/core/session/context-loader', () => {
+jest.mock('../../.aiox-core/core/session/context-loader', () => {
   return jest.fn().mockImplementation(() => ({
     loadContext: jest.fn().mockReturnValue(mockSessionContext),
   }));
 });
 
 // Mock project status loader
-jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader', () => ({
+jest.mock('../../.aiox-core/infrastructure/scripts/project-status-loader', () => ({
   loadProjectStatus: jest.fn().mockResolvedValue(mockProjectStatus),
 }));
 
 // Mock git config detector
-jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector', () => {
+jest.mock('../../.aiox-core/infrastructure/scripts/git-config-detector', () => {
   return jest.fn().mockImplementation(() => ({
     get: jest.fn().mockReturnValue(mockGitConfig),
   }));
 });
 
 // Mock permission mode
-jest.mock('../../.aios-core/core/permissions', () => ({
+jest.mock('../../.aiox-core/core/permissions', () => ({
   PermissionMode: jest.fn().mockImplementation(() => ({
     currentMode: 'ask',
     load: jest.fn().mockResolvedValue('ask'),
@@ -168,14 +168,14 @@ jest.mock('../../.aios-core/core/permissions', () => ({
 }));
 
 // Mock config-resolver
-jest.mock('../../.aios-core/core/config/config-resolver', () => ({
+jest.mock('../../.aiox-core/core/config/config-resolver', () => ({
   resolveConfig: jest.fn().mockReturnValue({
     config: mockCoreConfig,
   }),
 }));
 
 // Mock validate-user-profile
-jest.mock('../../.aios-core/infrastructure/scripts/validate-user-profile', () => ({
+jest.mock('../../.aiox-core/infrastructure/scripts/validate-user-profile', () => ({
   validateUserProfile: jest.fn().mockReturnValue({
     valid: true,
     value: 'advanced',
@@ -184,21 +184,21 @@ jest.mock('../../.aios-core/infrastructure/scripts/validate-user-profile', () =>
 }));
 
 // Mock greeting-preference-manager
-jest.mock('../../.aios-core/development/scripts/greeting-preference-manager', () => {
+jest.mock('../../.aiox-core/development/scripts/greeting-preference-manager', () => {
   return jest.fn().mockImplementation(() => ({
     getPreference: jest.fn().mockReturnValue('auto'),
   }));
 });
 
 // Mock context-detector
-jest.mock('../../.aios-core/core/session/context-detector', () => {
+jest.mock('../../.aiox-core/core/session/context-detector', () => {
   return jest.fn().mockImplementation(() => ({
     detectSessionType: jest.fn().mockReturnValue('new'),
   }));
 });
 
 // Mock workflow-navigator
-jest.mock('../../.aios-core/development/scripts/workflow-navigator', () => {
+jest.mock('../../.aiox-core/development/scripts/workflow-navigator', () => {
   return jest.fn().mockImplementation(() => ({
     detectWorkflowState: jest.fn().mockReturnValue(null),
     getNextSteps: jest.fn().mockReturnValue([]),
@@ -211,7 +211,7 @@ jest.mock('../../.aios-core/development/scripts/workflow-navigator', () => {
 });
 
 // Mock config cache
-jest.mock('../../.aios-core/core/config/config-cache', () => ({
+jest.mock('../../.aiox-core/core/config/config-cache', () => ({
   globalConfigCache: {
     get: jest.fn().mockReturnValue(null),
     set: jest.fn(),
@@ -220,17 +220,17 @@ jest.mock('../../.aios-core/core/config/config-cache', () => ({
 }));
 
 // Mock performance tracker
-jest.mock('../../.aios-core/infrastructure/scripts/performance-tracker', () => ({
+jest.mock('../../.aiox-core/infrastructure/scripts/performance-tracker', () => ({
   trackConfigLoad: jest.fn(),
 }));
 
 // --- Require modules AFTER mocks ---
-const { UnifiedActivationPipeline, ALL_AGENT_IDS, LOADER_TIERS, DEFAULT_PIPELINE_TIMEOUT_MS, FALLBACK_PHRASE } = require('../../.aios-core/development/scripts/unified-activation-pipeline');
-const { AgentConfigLoader } = require('../../.aios-core/development/scripts/agent-config-loader');
-const SessionContextLoader = require('../../.aios-core/core/session/context-loader');
-const { loadProjectStatus } = require('../../.aios-core/infrastructure/scripts/project-status-loader');
-const GitConfigDetector = require('../../.aios-core/infrastructure/scripts/git-config-detector');
-const { PermissionMode } = require('../../.aios-core/core/permissions');
+const { UnifiedActivationPipeline, ALL_AGENT_IDS, LOADER_TIERS, DEFAULT_PIPELINE_TIMEOUT_MS, FALLBACK_PHRASE } = require('../../.aiox-core/development/scripts/unified-activation-pipeline');
+const { AgentConfigLoader } = require('../../.aiox-core/development/scripts/agent-config-loader');
+const SessionContextLoader = require('../../.aiox-core/core/session/context-loader');
+const { loadProjectStatus } = require('../../.aiox-core/infrastructure/scripts/project-status-loader');
+const GitConfigDetector = require('../../.aiox-core/infrastructure/scripts/git-config-detector');
+const { PermissionMode } = require('../../.aiox-core/core/permissions');
 
 // Track mock timers to prevent Jest worker exit warnings from orphaned setTimeout calls
 const _pendingMockTimers = [];
@@ -249,7 +249,7 @@ describe('UnifiedActivationPipeline', () => {
     // jest.clearAllMocks() only clears call history, NOT implementations set via mockImplementation().
     AgentConfigLoader.mockImplementation(() => ({
       loadComplete: jest.fn().mockResolvedValue({
-        config: { dataLocation: '.aios-core/data' },
+        config: { dataLocation: '.aiox-core/data' },
         definition: mockAgentDefinition,
         agent: mockAgentDefinition.agent,
         persona_profile: mockAgentDefinition.persona_profile,
@@ -274,7 +274,7 @@ describe('UnifiedActivationPipeline', () => {
       _loaded: false,
     }));
 
-    const ContextDetector = require('../../.aios-core/core/session/context-detector');
+    const ContextDetector = require('../../.aiox-core/core/session/context-detector');
     ContextDetector.mockImplementation(() => ({
       detectSessionType: jest.fn().mockReturnValue('new'),
     }));
@@ -330,7 +330,7 @@ describe('UnifiedActivationPipeline', () => {
         // Adjust mock to return the agent's ID
         AgentConfigLoader.mockImplementation(() => ({
           loadComplete: jest.fn().mockResolvedValue({
-            config: { dataLocation: '.aios-core/data' },
+            config: { dataLocation: '.aiox-core/data' },
             definition: {
               ...mockAgentDefinition,
               agent: { ...mockAgentDefinition.agent, id: agentId },
@@ -388,7 +388,7 @@ describe('UnifiedActivationPipeline', () => {
   // 3. Parallel Loading
   // -----------------------------------------------------------
   describe('parallel loading', () => {
-    it('should call all 5 loaders', async () => {
+    it('should call all 4 loaders (NOG-18: projectStatus removed)', async () => {
       await pipeline.activate('dev');
 
       // AgentConfigLoader called
@@ -397,8 +397,8 @@ describe('UnifiedActivationPipeline', () => {
       // SessionContextLoader called
       expect(SessionContextLoader).toHaveBeenCalled();
 
-      // ProjectStatusLoader called
-      expect(loadProjectStatus).toHaveBeenCalled();
+      // NOG-18: ProjectStatusLoader no longer called — gitStatus is native in Claude Code
+      // expect(loadProjectStatus).toHaveBeenCalled();
 
       // GitConfigDetector called
       expect(GitConfigDetector).toHaveBeenCalled();
@@ -407,15 +407,17 @@ describe('UnifiedActivationPipeline', () => {
       expect(PermissionMode).toHaveBeenCalled();
     });
 
-    it('should load all 5 loaders even if one is slow', async () => {
-      // Make one loader slow but still within timeout
-      loadProjectStatus.mockImplementation(() =>
-        new Promise(resolve => setTimeout(() => resolve(mockProjectStatus), 50)),
-      );
+    it('should load all 4 loaders even if one is slow (NOG-18: projectStatus removed)', async () => {
+      // Make sessionContext loader slow but still within timeout
+      SessionContextLoader.mockImplementation(() => ({
+        loadContext: jest.fn().mockImplementation(() =>
+          new Promise(resolve => setTimeout(() => resolve(mockSessionContext), 50)),
+        ),
+      }));
 
       const result = await pipeline.activate('dev');
       expect(result.greeting).toBeTruthy();
-      expect(result.context.projectStatus).toEqual(mockProjectStatus);
+      expect(result.context.session).toBeDefined();
     });
   });
 
@@ -534,9 +536,10 @@ describe('UnifiedActivationPipeline', () => {
       expect(result.context.sessionType).toBe('new');
     });
 
-    it('should include project status in context', async () => {
+    it('should include project status as null in context (NOG-18: removed)', async () => {
       const result = await pipeline.activate('dev');
-      expect(result.context.projectStatus).toEqual(mockProjectStatus);
+      // NOG-18: projectStatus loader removed — always null (gitStatus is native in Claude Code)
+      expect(result.context.projectStatus).toBeNull();
     });
 
     it('should include git config in context', async () => {
@@ -600,7 +603,7 @@ describe('UnifiedActivationPipeline', () => {
     });
 
     it('should prefer conversation history over session context for detection', async () => {
-      const ContextDetector = require('../../.aios-core/core/session/context-detector');
+      const ContextDetector = require('../../.aiox-core/core/session/context-detector');
       ContextDetector.mockImplementation(() => ({
         detectSessionType: jest.fn().mockReturnValue('workflow'),
       }));
@@ -656,14 +659,14 @@ describe('UnifiedActivationPipeline', () => {
       expect(ids).toContain('data-engineer');
       expect(ids).toContain('ux-design-expert');
       expect(ids).toContain('devops');
-      expect(ids).toContain('aios-master');
+      expect(ids).toContain('aiox-master');
       expect(ids).toContain('squad-creator');
     });
 
     it('isValidAgentId() should return true for valid IDs', () => {
       expect(UnifiedActivationPipeline.isValidAgentId('dev')).toBe(true);
       expect(UnifiedActivationPipeline.isValidAgentId('qa')).toBe(true);
-      expect(UnifiedActivationPipeline.isValidAgentId('aios-master')).toBe(true);
+      expect(UnifiedActivationPipeline.isValidAgentId('aiox-master')).toBe(true);
     });
 
     it('isValidAgentId() should return false for invalid IDs', () => {
@@ -679,7 +682,7 @@ describe('UnifiedActivationPipeline', () => {
   describe('default icon mapping', () => {
     it('should return correct icons for known agents', () => {
       expect(pipeline._getDefaultIcon('dev')).toBe('\uD83D\uDCBB');
-      expect(pipeline._getDefaultIcon('aios-master')).toBe('\uD83D\uDC51');
+      expect(pipeline._getDefaultIcon('aiox-master')).toBe('\uD83D\uDC51');
     });
 
     it('should return default robot icon for unknown agents', () => {
@@ -800,7 +803,7 @@ describe('UnifiedActivationPipeline', () => {
   // -----------------------------------------------------------
   describe('generate-greeting.js backward compatibility', () => {
     it('should export generateGreeting function', () => {
-      const { generateGreeting } = require('../../.aios-core/development/scripts/generate-greeting');
+      const { generateGreeting } = require('../../.aiox-core/development/scripts/generate-greeting');
       expect(typeof generateGreeting).toBe('function');
     });
   });
@@ -913,7 +916,8 @@ describe('UnifiedActivationPipeline', () => {
       expect(LOADER_TIERS.high.loaders).toContain('permissionMode');
       expect(LOADER_TIERS.high.loaders).toContain('gitConfig');
       expect(LOADER_TIERS.bestEffort.loaders).toContain('sessionContext');
-      expect(LOADER_TIERS.bestEffort.loaders).toContain('projectStatus');
+      // NOG-18: projectStatus removed from bestEffort tier
+      expect(LOADER_TIERS.bestEffort.loaders).not.toContain('projectStatus');
     });
 
     it('should return quality "full" when all loaders succeed', async () => {
@@ -973,14 +977,15 @@ describe('UnifiedActivationPipeline', () => {
       expect(result.metrics.loaders).toBeDefined();
     });
 
-    it('should record timing data for all 5 loaders', async () => {
+    it('should record timing data for all 4 loaders (NOG-18: projectStatus removed)', async () => {
       const result = await pipeline.activate('dev');
       const loaderNames = Object.keys(result.metrics.loaders);
       expect(loaderNames).toContain('agentConfig');
       expect(loaderNames).toContain('permissionMode');
       expect(loaderNames).toContain('gitConfig');
       expect(loaderNames).toContain('sessionContext');
-      expect(loaderNames).toContain('projectStatus');
+      // NOG-18: projectStatus no longer profiled
+      expect(loaderNames).not.toContain('projectStatus');
     });
 
     it('should record duration and status for each loader', async () => {
@@ -996,11 +1001,14 @@ describe('UnifiedActivationPipeline', () => {
     });
 
     it('should record error message on loader failure', async () => {
-      loadProjectStatus.mockRejectedValue(new Error('git status failed'));
+      // NOG-18: Use gitConfig loader instead of removed projectStatus
+      GitConfigDetector.mockImplementation(() => ({
+        get: jest.fn().mockImplementation(() => { throw new Error('git config failed'); }),
+      }));
       const freshPipeline = new UnifiedActivationPipeline();
       const result = await freshPipeline.activate('dev');
-      expect(result.metrics.loaders.projectStatus.status).toBe('error');
-      expect(result.metrics.loaders.projectStatus.error).toContain('git status failed');
+      expect(result.metrics.loaders.gitConfig.status).toBe('error');
+      expect(result.metrics.loaders.gitConfig.error).toContain('git config failed');
     });
   });
 
@@ -1043,31 +1051,31 @@ describe('UnifiedActivationPipeline', () => {
     });
 
     it('should use env var over config value', () => {
-      const originalEnv = process.env.AIOS_PIPELINE_TIMEOUT;
-      process.env.AIOS_PIPELINE_TIMEOUT = '800';
+      const originalEnv = process.env.AIOX_PIPELINE_TIMEOUT;
+      process.env.AIOX_PIPELINE_TIMEOUT = '800';
       try {
         const timeout = pipeline._resolvePipelineTimeout({ pipeline: { timeout_ms: 300 } });
         expect(timeout).toBe(800);
       } finally {
         if (originalEnv !== undefined) {
-          process.env.AIOS_PIPELINE_TIMEOUT = originalEnv;
+          process.env.AIOX_PIPELINE_TIMEOUT = originalEnv;
         } else {
-          delete process.env.AIOS_PIPELINE_TIMEOUT;
+          delete process.env.AIOX_PIPELINE_TIMEOUT;
         }
       }
     });
 
     it('should ignore invalid env var values', () => {
-      const originalEnv = process.env.AIOS_PIPELINE_TIMEOUT;
-      process.env.AIOS_PIPELINE_TIMEOUT = 'not-a-number';
+      const originalEnv = process.env.AIOX_PIPELINE_TIMEOUT;
+      process.env.AIOX_PIPELINE_TIMEOUT = 'not-a-number';
       try {
         const timeout = pipeline._resolvePipelineTimeout({});
         expect(timeout).toBe(DEFAULT_PIPELINE_TIMEOUT_MS);
       } finally {
         if (originalEnv !== undefined) {
-          process.env.AIOS_PIPELINE_TIMEOUT = originalEnv;
+          process.env.AIOX_PIPELINE_TIMEOUT = originalEnv;
         } else {
-          delete process.env.AIOS_PIPELINE_TIMEOUT;
+          delete process.env.AIOX_PIPELINE_TIMEOUT;
         }
       }
     });
@@ -1124,13 +1132,11 @@ describe('UnifiedActivationPipeline', () => {
       expect(result.fallback).toBe(false);
     });
 
-    it('ProjectStatus slow → partial greeting (everything else present)', async () => {
-      loadProjectStatus.mockImplementation(() =>
-        new Promise((_, reject) => {
-          const id = setTimeout(() => reject(new Error('slow')), 300);
-          _pendingMockTimers.push(id);
-        }),
-      );
+    it('GitConfig slow → partial greeting (everything else present, NOG-18)', async () => {
+      // NOG-18: projectStatus removed; use gitConfig to trigger partial quality
+      GitConfigDetector.mockImplementation(() => ({
+        get: jest.fn().mockImplementation(() => { throw new Error('slow'); }),
+      }));
 
       const freshPipeline = new UnifiedActivationPipeline();
       const result = await freshPipeline.activate('dev');
@@ -1223,7 +1229,7 @@ describe('UnifiedActivationPipeline', () => {
       it(`@${agentId} should not produce fallback greeting`, async () => {
         AgentConfigLoader.mockImplementation(() => ({
           loadComplete: jest.fn().mockResolvedValue({
-            config: { dataLocation: '.aios-core/data' },
+            config: { dataLocation: '.aiox-core/data' },
             definition: {
               ...mockAgentDefinition,
               agent: { ...mockAgentDefinition.agent, id: agentId },

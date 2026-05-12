@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * AIOS Installer Performance Benchmark
+ * AIOX Installer Performance Benchmark
  * Story INS-2: Installer Performance Optimization
  *
  * Measures baseline performance metrics for the installer to track optimization progress.
@@ -34,7 +34,7 @@ process.argv.slice(2).forEach((arg, i, arr) => {
   if (arg === '--verbose' || arg === '-v') CONFIG.verbose = true;
   if (arg === '--help' || arg === '-h') {
     console.log(`
-AIOS Installer Performance Benchmark
+AIOX Installer Performance Benchmark
 
 Usage: node performance-benchmark.js [options]
 
@@ -124,11 +124,11 @@ function log(msg) {
 }
 
 /**
- * Get the .aios-core directory for benchmarking
+ * Get the .aiox-core directory for benchmarking
  */
-function getAiosCoreDir() {
+function getAioxCoreDir() {
   const projectRoot = path.resolve(__dirname, '../../../../');
-  return path.join(projectRoot, '.aios-core');
+  return path.join(projectRoot, '.aiox-core');
 }
 
 /**
@@ -249,19 +249,19 @@ function collectFiles(dir, maxFiles = 1000) {
  * Run all benchmarks
  */
 async function runBenchmarks() {
-  const aiosCoreDir = getAiosCoreDir();
+  const aioxCoreDir = getAioxCoreDir();
 
-  if (!fs.existsSync(aiosCoreDir)) {
-    console.error(`Error: .aios-core directory not found at ${aiosCoreDir}`);
+  if (!fs.existsSync(aioxCoreDir)) {
+    console.error(`Error: .aiox-core directory not found at ${aioxCoreDir}`);
     process.exit(1);
   }
 
   log(`Starting benchmark with ${CONFIG.runs} runs`);
-  log(`Using .aios-core at: ${aiosCoreDir}`);
+  log(`Using .aiox-core at: ${aioxCoreDir}`);
 
   // Collect files for benchmarking
   log('Collecting files...');
-  const allFiles = collectFiles(aiosCoreDir, CONFIG.testProjectSize);
+  const allFiles = collectFiles(aioxCoreDir, CONFIG.testProjectSize);
   log(`Collected ${allFiles.length} files`);
 
   results.fileCount = allFiles.length;
@@ -271,7 +271,7 @@ async function runBenchmarks() {
     log(`\n--- Run ${run}/${CONFIG.runs} ---`);
 
     // Directory read benchmarks
-    const agentsDir = path.join(aiosCoreDir, 'development', 'agents');
+    const agentsDir = path.join(aioxCoreDir, 'development', 'agents');
     if (fs.existsSync(agentsDir)) {
       log('Benchmarking directory read...');
       await benchmarkDirectoryRead(agentsDir);
@@ -290,7 +290,7 @@ async function runBenchmarks() {
     timers.totalInstallSimulation.begin();
 
     // Simulate full install: read dirs + hash files
-    const devDir = path.join(aiosCoreDir, 'development');
+    const devDir = path.join(aioxCoreDir, 'development');
     if (fs.existsSync(devDir)) {
       const subdirs = fs.readdirSync(devDir, { withFileTypes: true });
       for (const subdir of subdirs) {
@@ -357,7 +357,7 @@ async function runBenchmarks() {
 
   // Print summary to stderr for visibility
   console.error('\n' + '='.repeat(60));
-  console.error('AIOS Installer Performance Baseline');
+  console.error('AIOX Installer Performance Baseline');
   console.error('='.repeat(60));
   console.error(`Files analyzed: ${results.fileCount}`);
   console.error(`Runs: ${CONFIG.runs}`);

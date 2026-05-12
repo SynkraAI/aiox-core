@@ -16,7 +16,7 @@ const {
   verifyBackup,
   findLatestBackup,
   listBackups,
-} = require('../../.aios-core/cli/commands/migrate/backup');
+} = require('../../.aiox-core/cli/commands/migrate/backup');
 
 /**
  * Cleanup helper with retry logic for flaky file system operations
@@ -51,7 +51,7 @@ describe('Migration Backup Module', () => {
   beforeEach(async () => {
     // Create a unique temporary test directory with random suffix to avoid collisions
     testId = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
-    testDir = path.join(os.tmpdir(), `aios-backup-test-${testId}`);
+    testDir = path.join(os.tmpdir(), `aiox-backup-test-${testId}`);
     await fs.promises.mkdir(testDir, { recursive: true });
   });
 
@@ -65,13 +65,13 @@ describe('Migration Backup Module', () => {
   describe('createBackupDirName', () => {
     it('should create backup directory name with date format', () => {
       const name = createBackupDirName();
-      expect(name).toMatch(/^\.aios-backup-\d{4}-\d{2}-\d{2}$/);
+      expect(name).toMatch(/^\.aiox-backup-\d{4}-\d{2}-\d{2}$/);
     });
 
     it('should use current date', () => {
       const name = createBackupDirName();
       const today = new Date().toISOString().split('T')[0];
-      expect(name).toBe(`.aios-backup-${today}`);
+      expect(name).toBe(`.aiox-backup-${today}`);
     });
   });
 
@@ -149,12 +149,12 @@ describe('Migration Backup Module', () => {
   });
 
   describe('createBackup', () => {
-    it('should create backup of .aios-core directory', async () => {
-      // Create mock .aios-core structure
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'agents'), { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'test.md'), 'Agent content');
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'index.js'), 'module.exports = {}');
+    it('should create backup of .aiox-core directory', async () => {
+      // Create mock .aiox-core structure
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'agents'), { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'agents', 'test.md'), 'Agent content');
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'index.js'), 'module.exports = {}');
 
       const result = await createBackup(testDir);
 
@@ -164,14 +164,14 @@ describe('Migration Backup Module', () => {
       expect(result.manifest.totalFiles).toBeGreaterThan(0);
     });
 
-    it('should fail if .aios-core does not exist', async () => {
-      await expect(createBackup(testDir)).rejects.toThrow(/No .aios-core directory/);
+    it('should fail if .aiox-core does not exist', async () => {
+      await expect(createBackup(testDir)).rejects.toThrow(/No .aiox-core directory/);
     });
 
     it('should include backup manifest', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(aiosCoreDir, { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'test.js'), 'test');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(aioxCoreDir, { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'test.js'), 'test');
 
       const result = await createBackup(testDir);
       const manifestPath = path.join(result.backupDir, 'backup-manifest.json');
@@ -188,9 +188,9 @@ describe('Migration Backup Module', () => {
   describe('verifyBackup', () => {
     it('should verify valid backup', async () => {
       // Create and verify a backup
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(aiosCoreDir, { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'test.js'), 'test content');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(aioxCoreDir, { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'test.js'), 'test content');
 
       const backupResult = await createBackup(testDir);
       const verification = await verifyBackup(backupResult.backupDir);
@@ -201,14 +201,14 @@ describe('Migration Backup Module', () => {
     });
 
     it('should detect corrupted files', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(aiosCoreDir, { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'test.js'), 'original');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(aioxCoreDir, { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'test.js'), 'original');
 
       const backupResult = await createBackup(testDir);
 
       // Corrupt a file in backup
-      const backedUpFile = path.join(backupResult.backupDir, '.aios-core', 'test.js');
+      const backedUpFile = path.join(backupResult.backupDir, '.aiox-core', 'test.js');
       await fs.promises.writeFile(backedUpFile, 'corrupted');
 
       const verification = await verifyBackup(backupResult.backupDir);
@@ -221,9 +221,9 @@ describe('Migration Backup Module', () => {
   describe('findLatestBackup', () => {
     it('should find the most recent backup', async () => {
       // Create mock backup directories
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(aiosCoreDir, { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'test.js'), 'test');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(aioxCoreDir, { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'test.js'), 'test');
 
       // Create first backup
       await createBackup(testDir);
@@ -231,7 +231,7 @@ describe('Migration Backup Module', () => {
       const latest = await findLatestBackup(testDir);
 
       expect(latest).not.toBeNull();
-      expect(latest.name).toMatch(/^\.aios-backup-/);
+      expect(latest.name).toMatch(/^\.aiox-backup-/);
     });
 
     it('should return null if no backups exist', async () => {
@@ -242,9 +242,9 @@ describe('Migration Backup Module', () => {
 
   describe('listBackups', () => {
     it('should list all backups', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(aiosCoreDir, { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'test.js'), 'test');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(aioxCoreDir, { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'test.js'), 'test');
 
       await createBackup(testDir);
 

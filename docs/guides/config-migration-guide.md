@@ -9,14 +9,14 @@ Migrate from monolithic `core-config.yaml` to the layered configuration hierarch
 
 ## Overview
 
-AIOS v3.12+ introduces a 4-level configuration hierarchy that replaces the single `core-config.yaml` file:
+AIOX v3.12+ introduces a 4-level configuration hierarchy that replaces the single `core-config.yaml` file:
 
 | Level | File | Git Status | Purpose |
 |-------|------|------------|---------|
 | **L1** Framework | `framework-config.yaml` | Committed (read-only) | Framework defaults, resource locations |
 | **L2** Project | `project-config.yaml` | Committed | Project metadata, integrations, squads |
-| **Pro** Extension | `pro/pro-config.yaml` | Submodule | Premium features (aios-pro) |
-| **L3** App | `apps/<name>/aios-app.config.yaml` | Committed | Per-app overrides |
+| **Pro** Extension | `pro/pro-config.yaml` | Submodule | Premium features (aiox-pro) |
+| **L3** App | `apps/<name>/aiox-app.config.yaml` | Committed | Per-app overrides |
 | **L4** Local | `local-config.yaml` | Gitignored | IDE, MCP, secrets, machine-specific |
 
 Resolution order: L1 → L2 → Pro → L3 → L4 (last wins for scalars, deep merge for objects).
@@ -29,21 +29,21 @@ Resolution order: L1 → L2 → Pro → L3 → L4 (last wins for scalars, deep m
 
 ```bash
 # Preview what will happen
-aios config migrate --dry-run
+aiox config migrate --dry-run
 
 # Run migration
-aios config migrate
+aiox config migrate
 
 # Verify
-aios config validate
-aios config show --debug
+aiox config validate
+aiox config show --debug
 ```
 
 ### Manual
 
 1. Copy the template for local config:
    ```bash
-   aios config init-local
+   aiox config init-local
    ```
 
 2. The framework and project configs are already in place. Edit `project-config.yaml` for project-specific values.
@@ -93,7 +93,7 @@ mcp:
       url: "${MCP_GATEWAY_URL:-http://localhost:8080/mcp}"
 ```
 
-If `${...}` patterns are found in L1 or L2, `aios config validate` will warn — these files are committed to git and should not contain environment-specific values.
+If `${...}` patterns are found in L1 or L2, `aiox config validate` will warn — these files are committed to git and should not contain environment-specific values.
 
 ---
 
@@ -109,7 +109,7 @@ The monolithic `core-config.yaml` continues to work. If it exists and no `framew
 | **v3.13.0** | Deprecation warnings when legacy mode detected |
 | **v4.0.0** | Monolithic support removed |
 
-To suppress deprecation warnings: `AIOS_SUPPRESS_DEPRECATION=1`
+To suppress deprecation warnings: `AIOX_SUPPRESS_DEPRECATION=1`
 
 ---
 
@@ -119,7 +119,7 @@ To suppress deprecation warnings: `AIOS_SUPPRESS_DEPRECATION=1`
 
 ```bash
 # Check which mode is active
-aios config show --debug
+aiox config show --debug
 # Look for "[Legacy]" vs "[L1]", "[L2]", "[L4]" annotations
 ```
 
@@ -127,27 +127,27 @@ aios config show --debug
 
 ```bash
 # Compare levels to find where a value is set
-aios config diff --levels L1,L2
+aiox config diff --levels L1,L2
 
 # Check a specific level
-aios config show --level L2
+aiox config show --level L2
 ```
 
 ### YAML syntax errors
 
 ```bash
 # Validate all levels
-aios config validate
+aiox config validate
 
 # Validate specific level
-aios config validate --level L4
+aiox config validate --level L4
 ```
 
 ### Local config not working
 
 1. Ensure `local-config.yaml` exists (not just the template):
    ```bash
-   aios config init-local
+   aiox config init-local
    ```
 2. Check it's not accidentally committed — it should be in `.gitignore`.
 
@@ -163,14 +163,14 @@ aios config validate --level L4
 
 | Command | Description |
 |---------|-------------|
-| `aios config show` | Show fully resolved configuration |
-| `aios config show --level L2` | Show single level (raw, no merge) |
-| `aios config show --debug` | Show with source annotations per value |
-| `aios config diff --levels L1,L2` | Compare two levels |
-| `aios config migrate` | Migrate monolithic to layered |
-| `aios config migrate --dry-run` | Preview migration without changes |
-| `aios config validate` | Validate YAML syntax and patterns |
-| `aios config init-local` | Create local-config.yaml from template |
+| `aiox config show` | Show fully resolved configuration |
+| `aiox config show --level L2` | Show single level (raw, no merge) |
+| `aiox config show --debug` | Show with source annotations per value |
+| `aiox config diff --levels L1,L2` | Compare two levels |
+| `aiox config migrate` | Migrate monolithic to layered |
+| `aiox config migrate --dry-run` | Preview migration without changes |
+| `aiox config validate` | Validate YAML syntax and patterns |
+| `aiox config init-local` | Create local-config.yaml from template |
 
 ---
 
@@ -185,7 +185,7 @@ A: Yes. IDE selection is in L4 (local-config.yaml), which is gitignored. Each de
 **Q: What if I need a setting that doesn't fit any level?**
 A: Use L2 (project-config.yaml) for shared settings, L4 (local-config.yaml) for personal/secret settings.
 
-**Q: How does aios-pro config work?**
+**Q: How does aiox-pro config work?**
 A: Pro config (`pro/pro-config.yaml`) merges between L2 and L3. When the `pro/` submodule is absent, the resolution skips it silently.
 
 ---

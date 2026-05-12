@@ -20,7 +20,7 @@ describe('feature-gate', () => {
 
   beforeEach(() => {
     // Create temp directory for each test
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-feature-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-feature-test-'));
 
     // Mock process.cwd to return our test directory
     originalCwd = process.cwd;
@@ -148,7 +148,7 @@ describe('feature-gate', () => {
         expect(error.featureId).toBe('pro.squads.premium');
         expect(error.friendlyName).toBe('Premium Squads');
         expect(error.message).toContain('Premium Squads');
-        expect(error.message).toContain('requires an active AIOS Pro license');
+        expect(error.message).toContain('requires an active AIOX Pro license');
       }
     });
 

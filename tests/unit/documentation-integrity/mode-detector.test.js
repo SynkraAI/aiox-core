@@ -12,20 +12,20 @@ const os = require('os');
 const {
   detectInstallationMode,
   collectMarkers,
-  isAiosCoreRepository,
+  isAioxCoreRepository,
   mapLegacyTypeToMode,
   validateModeSelection,
   getModeOptions,
   InstallationMode,
   LegacyProjectType,
-} = require('../../../.aios-core/infrastructure/scripts/documentation-integrity/mode-detector');
+} = require('../../../.aiox-core/infrastructure/scripts/documentation-integrity/mode-detector');
 
 describe('Mode Detector', () => {
   let tempDir;
 
   beforeEach(() => {
     // Create unique temp directory for each test
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-test-'));
   });
 
   afterEach(() => {
@@ -92,15 +92,15 @@ describe('Mode Detector', () => {
       expect(result.markers.hasCargoToml).toBe(true);
     });
 
-    it('should detect FRAMEWORK_DEV mode for aios-core repository', () => {
-      // Create .aios-core directory
-      fs.mkdirSync(path.join(tempDir, '.aios-core'));
+    it('should detect FRAMEWORK_DEV mode for aiox-core repository', () => {
+      // Create .aiox-core directory
+      fs.mkdirSync(path.join(tempDir, '.aiox-core'));
 
-      // Create package.json with aios-core name
+      // Create package.json with aiox-core name
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
         JSON.stringify({
-          name: '@aios/core',
+          name: '@aiox/core',
           workspaces: ['packages/*'],
         }),
       );
@@ -108,14 +108,14 @@ describe('Mode Detector', () => {
       const result = detectInstallationMode(tempDir);
 
       expect(result.mode).toBe(InstallationMode.FRAMEWORK_DEV);
-      expect(result.legacyType).toBe(LegacyProjectType.EXISTING_AIOS);
+      expect(result.legacyType).toBe(LegacyProjectType.EXISTING_AIOX);
       expect(result.confidence).toBe(100);
-      expect(result.markers.isAiosCoreRepo).toBe(true);
+      expect(result.markers.isAioxCoreRepo).toBe(true);
     });
 
-    it('should detect BROWNFIELD mode for user project with existing AIOS', () => {
-      // Create .aios-core directory
-      fs.mkdirSync(path.join(tempDir, '.aios-core'));
+    it('should detect BROWNFIELD mode for user project with existing AIOX', () => {
+      // Create .aiox-core directory
+      fs.mkdirSync(path.join(tempDir, '.aiox-core'));
 
       // Create package.json with different name (user project)
       fs.writeFileSync(
@@ -126,7 +126,7 @@ describe('Mode Detector', () => {
       const result = detectInstallationMode(tempDir);
 
       expect(result.mode).toBe(InstallationMode.BROWNFIELD);
-      expect(result.legacyType).toBe(LegacyProjectType.EXISTING_AIOS);
+      expect(result.legacyType).toBe(LegacyProjectType.EXISTING_AIOX);
       expect(result.confidence).toBe(95);
     });
 
@@ -187,44 +187,44 @@ describe('Mode Detector', () => {
     });
   });
 
-  describe('isAiosCoreRepository', () => {
-    it('should return true for @aios/core package', () => {
+  describe('isAioxCoreRepository', () => {
+    it('should return true for @aiox/core package', () => {
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: '@aios/core' }),
+        JSON.stringify({ name: '@aiox/core' }),
       );
 
-      expect(isAiosCoreRepository(tempDir)).toBe(true);
+      expect(isAioxCoreRepository(tempDir)).toBe(true);
     });
 
-    it('should return true for aios-core package', () => {
+    it('should return true for aiox-core package', () => {
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
-        JSON.stringify({ name: 'aios-core' }),
+        JSON.stringify({ name: 'aiox-core' }),
       );
 
-      expect(isAiosCoreRepository(tempDir)).toBe(true);
+      expect(isAioxCoreRepository(tempDir)).toBe(true);
     });
 
     it('should return false for generic monorepo with workspaces pattern only', () => {
-      // Generic monorepos should NOT be detected as aios-core
+      // Generic monorepos should NOT be detected as aiox-core
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
         JSON.stringify({ name: 'something', workspaces: ['packages/*'] }),
       );
 
-      expect(isAiosCoreRepository(tempDir)).toBe(false);
+      expect(isAioxCoreRepository(tempDir)).toBe(false);
     });
 
-    it('should return true for workspaces pattern with aios marker', () => {
-      // Workspaces + .aios-core/infrastructure marker = aios-core repo
+    it('should return true for workspaces pattern with aiox marker', () => {
+      // Workspaces + .aiox-core/infrastructure marker = aiox-core repo
       fs.writeFileSync(
         path.join(tempDir, 'package.json'),
         JSON.stringify({ name: 'something', workspaces: ['packages/*'] }),
       );
-      fs.mkdirSync(path.join(tempDir, '.aios-core', 'infrastructure'), { recursive: true });
+      fs.mkdirSync(path.join(tempDir, '.aiox-core', 'infrastructure'), { recursive: true });
 
-      expect(isAiosCoreRepository(tempDir)).toBe(true);
+      expect(isAioxCoreRepository(tempDir)).toBe(true);
     });
 
     it('should return false for regular package', () => {
@@ -233,36 +233,36 @@ describe('Mode Detector', () => {
         JSON.stringify({ name: 'my-app' }),
       );
 
-      expect(isAiosCoreRepository(tempDir)).toBe(false);
+      expect(isAioxCoreRepository(tempDir)).toBe(false);
     });
 
     it('should return false when no package.json', () => {
-      expect(isAiosCoreRepository(tempDir)).toBe(false);
+      expect(isAioxCoreRepository(tempDir)).toBe(false);
     });
 
     it('should return false for invalid JSON', () => {
       fs.writeFileSync(path.join(tempDir, 'package.json'), 'invalid json');
 
-      expect(isAiosCoreRepository(tempDir)).toBe(false);
+      expect(isAioxCoreRepository(tempDir)).toBe(false);
     });
   });
 
   describe('mapLegacyTypeToMode', () => {
-    it('should map EXISTING_AIOS to BROWNFIELD by default (safer)', () => {
-      // Without context, EXISTING_AIOS defaults to BROWNFIELD (won't skip project setup)
-      expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOS)).toBe(
+    it('should map EXISTING_AIOX to BROWNFIELD by default (safer)', () => {
+      // Without context, EXISTING_AIOX defaults to BROWNFIELD (won't skip project setup)
+      expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOX)).toBe(
         InstallationMode.BROWNFIELD,
       );
     });
 
-    it('should map EXISTING_AIOS to FRAMEWORK_DEV with isAiosCoreRepo context', () => {
-      expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOS, { isAiosCoreRepo: true })).toBe(
+    it('should map EXISTING_AIOX to FRAMEWORK_DEV with isAioxCoreRepo context', () => {
+      expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOX, { isAioxCoreRepo: true })).toBe(
         InstallationMode.FRAMEWORK_DEV,
       );
     });
 
-    it('should map EXISTING_AIOS to BROWNFIELD with non-aios-core context', () => {
-      expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOS, { isAiosCoreRepo: false })).toBe(
+    it('should map EXISTING_AIOX to BROWNFIELD with non-aiox-core context', () => {
+      expect(mapLegacyTypeToMode(LegacyProjectType.EXISTING_AIOX, { isAioxCoreRepo: false })).toBe(
         InstallationMode.BROWNFIELD,
       );
     });
@@ -309,16 +309,16 @@ describe('Mode Detector', () => {
       expect(result.warnings[0]).toContain('directory is not empty');
     });
 
-    it('should warn when selecting framework-dev for non-aios-core repo', () => {
+    it('should warn when selecting framework-dev for non-aiox-core repo', () => {
       const detected = {
         mode: InstallationMode.BROWNFIELD,
-        markers: { isAiosCoreRepo: false },
+        markers: { isAioxCoreRepo: false },
       };
 
       const result = validateModeSelection(InstallationMode.FRAMEWORK_DEV, detected);
 
       expect(result.warnings).toHaveLength(1);
-      expect(result.warnings[0]).toContain('aios-core repository');
+      expect(result.warnings[0]).toContain('aiox-core repository');
     });
 
     it('should suggest greenfield when selecting brownfield for empty directory', () => {
@@ -405,7 +405,7 @@ describe('Mode Detector', () => {
 
   describe('LegacyProjectType enum', () => {
     it('should have all legacy types', () => {
-      expect(LegacyProjectType.EXISTING_AIOS).toBe('EXISTING_AIOS');
+      expect(LegacyProjectType.EXISTING_AIOX).toBe('EXISTING_AIOX');
       expect(LegacyProjectType.GREENFIELD).toBe('GREENFIELD');
       expect(LegacyProjectType.BROWNFIELD).toBe('BROWNFIELD');
       expect(LegacyProjectType.UNKNOWN).toBe('UNKNOWN');

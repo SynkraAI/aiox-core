@@ -7,7 +7,7 @@
  * @story SYN-4 - Layer Processors L0-L3
  */
 
-const LayerProcessor = require('../../.aios-core/core/synapse/layers/layer-processor');
+const LayerProcessor = require('../../.aiox-core/core/synapse/layers/layer-processor');
 
 jest.setTimeout(30000);
 

@@ -12,7 +12,7 @@ const os = require('os');
 const {
   resolveSynapsePath,
   resolveDomainPath,
-} = require('../../.aios-core/core/synapse/utils/paths');
+} = require('../../.aiox-core/core/synapse/utils/paths');
 
 // Set timeout for all tests
 jest.setTimeout(30000);

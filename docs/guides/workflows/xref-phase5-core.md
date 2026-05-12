@@ -1,7 +1,7 @@
 # Cross-Reference Analysis -- Phase 5: Core Module Dependency Graph
 
 **Generated:** 2026-02-05
-**Scope:** `.aios-core/core/` -- 130 JavaScript files across 14 subsystems
+**Scope:** `.aiox-core/core/` -- 130 JavaScript files across 14 subsystems
 **Method:** Full file reads, import/require analysis, external consumer grep
 
 ---
@@ -46,7 +46,7 @@ Interactive elicitation system for component creation (agents, tasks, workflows)
 
 | File | Purpose | Internal Deps | External Consumers | Orphan? |
 |------|---------|---------------|-------------------|---------|
-| `elicitation-engine.js` | Core interactive elicitation engine (inquirer-based) | session-manager.js; optional: infrastructure/scripts/security-checker | core/index.js, .aios-core/index.js, tests/core/, tests/security/ | No |
+| `elicitation-engine.js` | Core interactive elicitation engine (inquirer-based) | session-manager.js; optional: infrastructure/scripts/security-checker | core/index.js, .aiox-core/index.js, tests/core/, tests/security/ | No |
 | `session-manager.js` | Elicitation session persistence (save/resume) | None (fs-extra, crypto) | elicitation-engine.js, core/index.js, tests/security/ | No |
 | `agent-elicitation.js` | Step definitions for agent creation flow | None (pure data) | core/index.js | No |
 | `task-elicitation.js` | Step definitions for task creation flow | None (pure data) | core/index.js | No |
@@ -100,7 +100,7 @@ Comprehensive health check system with 5 domains.
 | Domain | Files | Parent Index | All Extend |
 |--------|-------|-------------|-----------|
 | `checks/index.js` | Aggregates 5 domain indices | project/, local/, repository/, deployment/, services/ | -- |
-| `checks/project/` | 8 checks: package-json, node-version, dependencies, aios-directory, agent-config, framework-config, task-definitions, workflow-dependencies | project/index.js | base-check.js |
+| `checks/project/` | 8 checks: package-json, node-version, dependencies, aiox-directory, agent-config, framework-config, task-definitions, workflow-dependencies | project/index.js | base-check.js |
 | `checks/local/` | 8 checks: git-install, npm-install, shell-environment, memory, disk-space, network, ide-detection, environment-vars | local/index.js | base-check.js |
 | `checks/repository/` | 8 checks: git-repo, git-status, gitignore, conflicts, branch-protection, commit-history, large-files, lockfile-integrity | repository/index.js | base-check.js |
 | `checks/deployment/` | 5 checks: env-file, docker-config, ci-config, build-config, deployment-readiness | deployment/index.js | base-check.js |
@@ -138,7 +138,7 @@ MCP (Model Context Protocol) global configuration management.
 |------|---------|---------------|-------------------|---------|
 | `index.js` | Barrel spread-export of all MCP modules | os-detector, global-config-manager, symlink-manager, config-migrator | tests/integration/mcp-setup.test.js | No |
 | `os-detector.js` | Cross-platform OS detection + path helpers | None (os, path) | global-config-manager.js, symlink-manager.js, CLI mcp/* | No |
-| `global-config-manager.js` | Manages ~/.aios/mcp/ global config | os-detector.js | config-migrator.js, CLI mcp/add, mcp/status, mcp/setup, mcp/link, tests/ | No |
+| `global-config-manager.js` | Manages ~/.aiox/mcp/ global config | os-detector.js | config-migrator.js, CLI mcp/add, mcp/status, mcp/setup, mcp/link, tests/ | No |
 | `symlink-manager.js` | Cross-platform symlink/junction management | os-detector.js | config-migrator.js, CLI mcp/status, mcp/link, tests/ | No |
 | `config-migrator.js` | Migrates project MCP configs to global | global-config-manager.js, symlink-manager.js | CLI mcp/status, mcp/link, tests/ | No |
 
@@ -174,7 +174,7 @@ Multi-agent workflow orchestration and ADE (Autonomous Development Engine).
 | `parallel-executor.js` | Concurrent phase execution with max concurrency | None (chalk) | workflow-orchestrator.js, orchestration/index.js | No |
 | `tech-stack-detector.js` | Pre-flight project tech stack detection | None (fs-extra) | workflow-orchestrator.js, master-orchestrator.js, orchestration/index.js | No |
 | `condition-evaluator.js` | Evaluates workflow conditions against tech stack profile | None | workflow-orchestrator.js, orchestration/index.js | No |
-| `skill-dispatcher.js` | Maps agent IDs to AIOS Skill invocations | None | workflow-orchestrator.js, orchestration/index.js | No |
+| `skill-dispatcher.js` | Maps agent IDs to AIOX Skill invocations | None | workflow-orchestrator.js, orchestration/index.js | No |
 | `recovery-handler.js` | Story 0.5: Auto error recovery (retry, rollback, skip, escalate) | None (fs-extra, EventEmitter) | master-orchestrator.js, orchestration/index.js, tests/core/ | No |
 | `gate-evaluator.js` | Story 0.6: Quality gates between epics | None (fs-extra, js-yaml) | master-orchestrator.js, orchestration/index.js, tests/core/ | No |
 | `agent-invoker.js` | Story 0.7: Agent invocation interface for orchestration | None (fs-extra, EventEmitter) | master-orchestrator.js, orchestration/index.js, tests/core/ | No |
@@ -227,7 +227,7 @@ Service registry for worker/task discovery.
 | File | Purpose | Internal Deps | External Consumers | Orphan? |
 |------|---------|---------------|-------------------|---------|
 | `registry-loader.js` | Loads and queries service registry JSON with caching | None | core/index.js, CLI workers/* (list, info, search-keyword, search-semantic), tests/ | No |
-| `build-registry.js` | Scans AIOS modules and builds registry JSON | None (glob) | **None found** (standalone script) | **Partial** -- used as CLI script |
+| `build-registry.js` | Scans AIOX modules and builds registry JSON | None (glob) | **None found** (standalone script) | **Partial** -- used as CLI script |
 | `validate-registry.js` | Validates registry JSON against schema (smoke tests REG-01..06) | None (ajv, ajv-formats) | **None found** (standalone script) | **Partial** -- used as CLI script |
 
 ### 2.14 session/ (2 files)
@@ -237,7 +237,7 @@ Session detection and context continuity.
 | File | Purpose | Internal Deps | External Consumers | Orphan? |
 |------|---------|---------------|-------------------|---------|
 | `context-detector.js` | Hybrid session type detection (new/existing/workflow) | None | context-loader.js, core/index.js, tests/unit/, tests/integration/ | No |
-| `context-loader.js` | Multi-agent session context loader | context-detector.js | core/index.js, .aios-core/scripts/session-context-loader.js | No |
+| `context-loader.js` | Multi-agent session context loader | context-detector.js | core/index.js, .aiox-core/scripts/session-context-loader.js | No |
 
 ### 2.15 utils/ (3 files)
 
@@ -290,7 +290,7 @@ Shared utility modules.
    | (5 files)  |     | (19 files)     |     | gates/  |
    +-----+------+     +-------+--------+     | (9 files)
          |                     |              +----+----+
-    .aios-core/index.js        |                   |
+    .aiox-core/index.js        |                   |
                                |              CLI qa/*
                           CLI orchestrate
                           + tests/core/
@@ -348,21 +348,21 @@ Shared utility modules.
 
 ## 4. External Integration Points
 
-### 4.1 CLI Commands (`.aios-core/cli/commands/`)
+### 4.1 CLI Commands (`.aiox-core/cli/commands/`)
 
 | CLI Command | Core Module(s) Used |
 |-------------|-------------------|
-| `aios workers list/info/search-keyword/search-semantic` | `registry/registry-loader` |
-| `aios manifest validate` | `manifest/manifest-validator` |
-| `aios manifest regenerate` | `manifest/manifest-generator` |
-| `aios qa run/status` | `quality-gates/quality-gate-manager` |
-| `aios mcp add` | `mcp/global-config-manager`, `mcp/os-detector` |
-| `aios mcp status` | `mcp/global-config-manager`, `mcp/symlink-manager`, `mcp/os-detector`, `mcp/config-migrator` |
-| `aios mcp setup` | `mcp/global-config-manager`, `mcp/os-detector` |
-| `aios mcp link` | `mcp/symlink-manager`, `mcp/global-config-manager`, `mcp/os-detector`, `mcp/config-migrator` |
-| `aios config show/diff/migrate/validate/init-local` | `config/config-resolver`, `config/merge-utils`, `config/env-interpolator` |
+| `aiox workers list/info/search-keyword/search-semantic` | `registry/registry-loader` |
+| `aiox manifest validate` | `manifest/manifest-validator` |
+| `aiox manifest regenerate` | `manifest/manifest-generator` |
+| `aiox qa run/status` | `quality-gates/quality-gate-manager` |
+| `aiox mcp add` | `mcp/global-config-manager`, `mcp/os-detector` |
+| `aiox mcp status` | `mcp/global-config-manager`, `mcp/symlink-manager`, `mcp/os-detector`, `mcp/config-migrator` |
+| `aiox mcp setup` | `mcp/global-config-manager`, `mcp/os-detector` |
+| `aiox mcp link` | `mcp/symlink-manager`, `mcp/global-config-manager`, `mcp/os-detector`, `mcp/config-migrator` |
+| `aiox config show/diff/migrate/validate/init-local` | `config/config-resolver`, `config/merge-utils`, `config/env-interpolator` |
 
-### 4.2 Development Scripts (`.aios-core/development/scripts/`)
+### 4.2 Development Scripts (`.aiox-core/development/scripts/`)
 
 | Script | Core Module(s) Used |
 |--------|-------------------|
@@ -371,11 +371,11 @@ Shared utility modules.
 | `verify-workflow-gaps.js` | `elicitation/workflow-elicitation` |
 | `session-context-loader.js` (deprecated shim) | `session/context-loader` |
 
-### 4.3 Package Entry Point (`.aios-core/index.js`)
+### 4.3 Package Entry Point (`.aiox-core/index.js`)
 
 | Entry Point | Core Module(s) Used |
 |-------------|-------------------|
-| `.aios-core/index.js` (npm package) | `elicitation/elicitation-engine` |
+| `.aiox-core/index.js` (npm package) | `elicitation/elicitation-engine` |
 
 ### 4.4 Test Files
 
@@ -414,7 +414,7 @@ These modules are referenced via `require()` but do not exist on disk. All are g
 |----------------|-----------------|--------|
 | `../memory/memory-query` | execution/context-injector.js, execution/subagent-dispatcher.js | **Does not exist** -- feature not yet implemented |
 | `../memory/session-memory` | execution/context-injector.js | **Does not exist** -- feature not yet implemented |
-| `../../infrastructure/scripts/security-checker` | elicitation/elicitation-engine.js | Exists outside core/ at `.aios-core/infrastructure/scripts/` |
+| `../../infrastructure/scripts/security-checker` | elicitation/elicitation-engine.js | Exists outside core/ at `.aiox-core/infrastructure/scripts/` |
 
 ---
 
@@ -425,7 +425,7 @@ High-level view of which subsystems depend on other subsystems:
 | Subsystem | Depends On | Depended Upon By |
 |-----------|-----------|-----------------|
 | config | (none) | CLI config, development/scripts, core/index |
-| elicitation | (none internally) | core/index, .aios-core/index, development/scripts |
+| elicitation | (none internally) | core/index, .aiox-core/index, development/scripts |
 | events | (none) | orchestration |
 | execution | memory (soft), workflow-intelligence (soft, external) | tests only |
 | health-check | (self-contained) | core/index |

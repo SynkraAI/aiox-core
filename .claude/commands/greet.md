@@ -7,7 +7,7 @@ Generate contextual agent greeting using GreetingBuilder infrastructure.
 ## What This Command Does
 
 When activated, this command:
-1. Loads the GreetingBuilder module from `.aios-core/development/scripts/greeting-builder.js`
+1. Loads the GreetingBuilder module from `.aiox-core/development/scripts/greeting-builder.js`
 2. Extracts agent definition from the calling agent (name, icon, persona_profile, commands)
 3. Analyzes conversation history to detect session type (new/existing/workflow)
 4. Generates intelligent greeting based on:
@@ -24,7 +24,7 @@ When activated, this command:
 Execute the greeting builder and return the formatted greeting:
 
 ```javascript
-const GreetingBuilder = require('./.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('./.aiox-core/development/scripts/greeting-builder');
 const builder = new GreetingBuilder();
 
 // Extract agent definition from current agent context

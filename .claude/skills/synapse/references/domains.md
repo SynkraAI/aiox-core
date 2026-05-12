@@ -53,7 +53,7 @@ DOMAINPREFIX_RULE_1=Second rule text
 ```
 # SYNAPSE Agent Domain: @dev (L2)
 # Agent-scoped rules for developer agent
-# Source: .aios-core/development/agents/dev.md
+# Source: .aiox-core/development/agents/dev.md
 
 AGENT_DEV_RULE_0=Follow story tasks sequentially — read task, implement, test, mark [x]
 AGENT_DEV_RULE_1=ONLY update Dev Agent Record sections in story files
@@ -123,4 +123,4 @@ For the manifest entry template, see: `.claude/commands/synapse/templates/manife
 |------|---------|
 | `.synapse/manifest` | Central domain registry |
 | `.synapse/*` | Domain content files |
-| `.aios-core/core/synapse/domain/domain-loader.js` | Domain parser (SYN-1) |
+| `.aiox-core/core/synapse/domain/domain-loader.js` | Domain parser (SYN-1) |

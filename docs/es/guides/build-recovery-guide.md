@@ -172,7 +172,7 @@ Para detectar y manejar:
 ## Uso Programatico
 
 ```javascript
-const { BuildStateManager, BuildStatus } = require('.aios-core/core/execution/build-state-manager');
+const { BuildStateManager, BuildStatus } = require('.aiox-core/core/execution/build-state-manager');
 
 // Crear manager
 const manager = new BuildStateManager('story-8.4', {

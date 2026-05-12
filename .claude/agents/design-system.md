@@ -31,9 +31,9 @@ Read `.claude/commands/Design/agents/brad-frost.md` and adopt the persona of **B
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Design-relevant: Design, Tokens, Components, Tailwind)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Design-relevant: Design, Tokens, Components, Tailwind)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 
 Do NOT display context loading — just absorb and proceed.
 

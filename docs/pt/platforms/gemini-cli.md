@@ -1,4 +1,4 @@
-# Guia AIOS para Gemini CLI
+# Guia AIOX para Gemini CLI
 
 > 🌐 [EN](../../platforms/gemini-cli.md) | **PT** | [ES](../../es/platforms/gemini-cli.md)
 
@@ -14,7 +14,7 @@
 
 Gemini CLI é a interface de linha de comando do Google para interagir com modelos Gemini AI. Ele fornece aos desenvolvedores acesso direto via terminal às capacidades de IA do Google, incluindo suporte multimodal para texto, código e imagens.
 
-### Por que usar AIOS com Gemini CLI?
+### Por que usar AIOX com Gemini CLI?
 
 O Gemini CLI oferece capacidades únicas:
 
@@ -80,11 +80,11 @@ gemini auth login
 export GOOGLE_AI_API_KEY="sua-chave-api"
 ```
 
-### Passo 3: Instalar o AIOS
+### Passo 3: Instalar o AIOX
 
 ```bash
 cd seu-projeto
-npx @anthropic/aios init
+npx @anthropic/aiox init
 # Selecione "Gemini CLI" quando solicitado
 ```
 
@@ -114,7 +114,7 @@ Estrutura esperada:
 **Localização:** `.gemini/rules.md`
 
 ```markdown
-# Regras Synkra AIOS para Gemini CLI
+# Regras Synkra AIOX para Gemini CLI
 
 ## Sistema de Agentes
 - Inclua contexto de agente em seus prompts
@@ -149,7 +149,7 @@ Estrutura esperada:
 # Agente Desenvolvedor
 
 ## Ativação
-Inclua "Como agente AIOS dev" no seu prompt.
+Inclua "Como agente AIOX dev" no seu prompt.
 
 ## Persona
 Desenvolvedor Full Stack Sênior com expertise em:
@@ -181,19 +181,19 @@ gemini "Explique este código"
 gemini --file src/main.ts "Revise este código"
 ```
 
-### Ativando Agentes AIOS
+### Ativando Agentes AIOX
 
 Inclua contexto de agente nos prompts:
 
 ```bash
 # Agente desenvolvedor
-gemini "Como agente AIOS dev, implemente a feature de login"
+gemini "Como agente AIOX dev, implemente a feature de login"
 
 # Agente QA
-gemini "Como agente AIOS qa, revise este código para segurança"
+gemini "Como agente AIOX qa, revise este código para segurança"
 
 # Agente arquiteto
-gemini "Como agente AIOS architect, projete o schema do banco de dados"
+gemini "Como agente AIOX architect, projete o schema do banco de dados"
 ```
 
 ### Com Arquivos de Contexto
@@ -210,7 +210,7 @@ gemini --context .gemini/agents/dev.md "Crie modelo de usuário"
 
 ```bash
 # Pipe código para revisão
-cat src/auth.ts | gemini "Como AIOS qa, revise este código"
+cat src/auth.ts | gemini "Como AIOX qa, revise este código"
 
 # Gerar código
 gemini "Crie um endpoint REST API" > src/api/users.ts
@@ -252,7 +252,7 @@ gemini sessions list
 ```bash
 # Processar múltiplos arquivos
 for file in src/*.ts; do
-  gemini --file "$file" "Como AIOS qa, revise este arquivo" >> reviews.md
+  gemini --file "$file" "Como AIOX qa, revise este arquivo" >> reviews.md
 done
 ```
 
@@ -313,7 +313,7 @@ gemini --stream "Escreva uma explicação longa"
 
 ```mermaid
 flowchart LR
-    Source["AIOS Core<br/>.aios-core/development/agents"] --> Parser["Parser de Agente"]
+    Source["AIOX Core<br/>.aiox-core/development/agents"] --> Parser["Parser de Agente"]
     Parser --> Transform["Transformador Gemini"]
     Transform --> Output[".gemini/agents/"]
 ```
@@ -322,10 +322,10 @@ flowchart LR
 
 ```bash
 # Sincronizar todos os agentes
-npm run sync:agents
+npm run sync:ide
 
 # Sincronizar para Gemini CLI
-npm run sync:agents -- --ide gemini-cli
+npm run sync:ide -- --ide gemini
 ```
 
 ### Formato de Agente
@@ -335,10 +335,10 @@ O Gemini CLI usa markdown otimizado para prompt:
 ```markdown
 # Agente Desenvolvedor
 
-**Frase de Ativação:** "Como agente AIOS dev"
+**Frase de Ativação:** "Como agente AIOX dev"
 
 ## Papel
-Você é um Desenvolvedor Full Stack Sênior trabalhando com Synkra AIOS.
+Você é um Desenvolvedor Full Stack Sênior trabalhando com Synkra AIOX.
 
 ## Expertise
 - TypeScript/JavaScript
@@ -454,15 +454,15 @@ R: Use aliases do shell ou inclua contexto de agente nos prompts.
 
 ### Do Claude Code para Gemini CLI
 
-1. Instale AIOS para Gemini CLI:
+1. Instale AIOX para Gemini CLI:
    ```bash
-   npx @anthropic/aios init --ide gemini-cli
+   npx @anthropic/aiox init --ide gemini-cli
    ```
 2. Agentes transformam para formato baseado em prompt
 
 ### Do Gemini CLI para Outras IDEs
 
-1. Agentes AIOS em `.aios-core/` são portáveis
+1. Agentes AIOX em `.aiox-core/` são portáveis
 2. Inicialize para a IDE de destino
 3. Agentes transformam automaticamente
 
@@ -478,4 +478,4 @@ R: Use aliases do shell ou inclua contexto de agente nos prompts.
 
 ---
 
-*Synkra AIOS - Guia da Plataforma Gemini CLI v1.0*
+*Synkra AIOX - Guia da Plataforma Gemini CLI v1.0*

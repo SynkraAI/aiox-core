@@ -7,7 +7,7 @@ metadata:
 entities:
   tasks:
     create-doc:
-      path: ".aios-core/development/tasks/create-doc.md"
+      path: ".aiox-core/development/tasks/create-doc.md"
       type: "task"
       purpose: "Create documentation files from templates"
       keywords: ["create", "doc", "documentation", "template"]
@@ -20,7 +20,7 @@ entities:
       checksum: "sha256:a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
       lastVerified: "2026-02-08T00:00:00Z"
     validate-story:
-      path: ".aios-core/development/tasks/validate-next-story.md"
+      path: ".aiox-core/development/tasks/validate-next-story.md"
       type: "task"
       purpose: "Validate story drafts before implementation"
       keywords: ["validate", "story", "quality", "checklist"]
@@ -34,7 +34,7 @@ entities:
       lastVerified: "2026-02-08T00:00:00Z"
   scripts:
     template-engine:
-      path: ".aios-core/core/utils/template-engine.js"
+      path: ".aiox-core/core/utils/template-engine.js"
       type: "script"
       purpose: "Render Handlebars templates for document generation"
       keywords: ["template", "render", "handlebars", "engine"]
@@ -48,7 +48,7 @@ entities:
       lastVerified: "2026-02-08T00:00:00Z"
   agents:
     po:
-      path: ".aios-core/development/agents/po.md"
+      path: ".aiox-core/development/agents/po.md"
       type: "agent"
       purpose: "Product Owner agent - backlog management and story validation"
       keywords: ["product", "owner", "backlog", "stories", "validation"]
@@ -61,7 +61,7 @@ entities:
       checksum: "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210"
       lastVerified: "2026-02-08T00:00:00Z"
     sm:
-      path: ".aios-core/development/agents/sm.md"
+      path: ".aiox-core/development/agents/sm.md"
       type: "agent"
       purpose: "Scrum Master agent - story creation and sprint management"
       keywords: ["scrum", "master", "sprint", "story", "creation"]
@@ -77,10 +77,10 @@ entities:
 categories:
   - id: tasks
     description: "Executable task workflows for agent operations"
-    basePath: ".aios-core/development/tasks"
+    basePath: ".aiox-core/development/tasks"
   - id: scripts
     description: "Utility and automation scripts"
-    basePath: ".aios-core/development/scripts"
+    basePath: ".aiox-core/development/scripts"
   - id: agents
     description: "Agent persona definitions and configurations"
-    basePath: ".aios-core/development/agents"
+    basePath: ".aiox-core/development/agents"

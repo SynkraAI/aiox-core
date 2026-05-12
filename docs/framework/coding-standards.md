@@ -1,11 +1,11 @@
-# AIOS Coding Standards
+# AIOX Coding Standards
 
 > 🌐 **EN** | [PT](../pt/framework/coding-standards.md) | [ES](../es/framework/coding-standards.md)
 
 **Version:** 1.1
 **Last Updated:** 2025-12-14
 **Status:** Official Framework Standard
-**Migration Notice:** This document will migrate to `SynkraAI/aios-core` repository in Q2 2026 (see Decision 005)
+**Migration Notice:** This document will migrate to `SynkraAI/aiox-core` repository in Q2 2026 (see Decision 005)
 
 ---
 
@@ -25,7 +25,7 @@
 
 ## Overview
 
-This document defines the official coding standards for AIOS framework development. All code contributions must adhere to these standards to ensure consistency, maintainability, and quality.
+This document defines the official coding standards for AIOX framework development. All code contributions must adhere to these standards to ensure consistency, maintainability, and quality.
 
 **Enforcement:**
 
@@ -237,7 +237,7 @@ async function executeTask(taskName) {
 ### Directory Structure
 
 ```
-.aios-core/
+.aiox-core/
 ├── agents/              # Agent definitions (YAML + Markdown)
 ├── tasks/               # Task workflows (Markdown)
 ├── templates/           # Document templates (YAML/Markdown)
@@ -535,7 +535,7 @@ if (!taskSchema.validate(taskData)) {
 
 ```javascript
 /**
- * Loads and executes an AIOS agent
+ * Loads and executes an AIOX agent
  *
  * @param {string} agentId - Unique identifier for the agent
  * @param {Object} args - Agent execution arguments
@@ -585,7 +585,7 @@ Every module/directory should have a README.md:
 ```markdown
 # Agent Executor
 
-**Purpose:** Loads and executes AIOS agents with configuration management.
+**Purpose:** Loads and executes AIOX agents with configuration management.
 
 ## Usage
 
@@ -775,7 +775,7 @@ function executeCommand(command) {
 const path = require('path');
 
 function loadFile(filePath) {
-  const basePath = path.resolve(__dirname, '.aios-core');
+  const basePath = path.resolve(__dirname, '.aiox-core');
   const resolvedPath = path.resolve(basePath, filePath);
 
   // Prevent directory traversal
@@ -870,7 +870,7 @@ All PRs automatically reviewed by CodeRabbit for:
 | Version | Date       | Changes                                                     | Author           |
 | ------- | ---------- | ----------------------------------------------------------- | ---------------- |
 | 1.0     | 2025-01-15 | Initial coding standards document                           | Aria (architect) |
-| 1.1     | 2025-12-14 | Updated migration notice to SynkraAI/aios-core [Story 6.10] | Dex (dev)        |
+| 1.1     | 2025-12-14 | Updated migration notice to SynkraAI/aiox-core [Story 6.10] | Dex (dev)        |
 
 ---
 
@@ -881,4 +881,4 @@ All PRs automatically reviewed by CodeRabbit for:
 
 ---
 
-_This is an official AIOS framework standard. All code contributions must comply._
+_This is an official AIOX framework standard. All code contributions must comply._

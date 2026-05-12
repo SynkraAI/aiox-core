@@ -10,12 +10,12 @@
  * @story TD-6 - CI Stability & Test Coverage Improvements
  */
 
-const HealthCheckEngine = require('../../.aios-core/core/health-check/engine');
+const HealthCheckEngine = require('../../.aiox-core/core/health-check/engine');
 const {
   BaseCheck,
   CheckSeverity,
   CheckStatus,
-} = require('../../.aios-core/core/health-check/base-check');
+} = require('../../.aiox-core/core/health-check/base-check');
 
 // Set timeout for all tests in this file
 jest.setTimeout(30000);

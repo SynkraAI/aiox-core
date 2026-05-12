@@ -1,8 +1,8 @@
-# Comunidad de Synkra AIOS
+# Comunidad de Synkra AIOX
 
 > 🇧🇷 [Versão em Português](COMMUNITY-PT.md)
 
-¡Bienvenido a la comunidad de Synkra AIOS!
+¡Bienvenido a la comunidad de Synkra AIOX!
 
 Estamos construyendo juntos el futuro del desarrollo orquestado por IA.
 
@@ -20,37 +20,37 @@ Estamos construyendo juntos el futuro del desarrollo orquestado por IA.
 1. Dale una estrella al repositorio
 2. Lee el [README](README.md)
 3. Configura tu [entorno de desarrollo](CONTRIBUTING.md#getting-started)
-4. Preséntate en [Discussions](https://github.com/SynkraAI/aios-core/discussions)
+4. Preséntate en [Discussions](https://github.com/SynkraAI/aiox-core/discussions)
 
 ### Encuentra tu Primera Contribución
 
-- Busca issues etiquetados como [`good-first-issue`](https://github.com/SynkraAI/aios-core/labels/good-first-issue)
-- Revisa [`help-wanted`](https://github.com/SynkraAI/aios-core/labels/help-wanted) para tareas más complejas
-- Explora las [Discussions abiertas](https://github.com/SynkraAI/aios-core/discussions) para ayudar a otros
+- Busca issues etiquetados como [`good-first-issue`](https://github.com/SynkraAI/aiox-core/labels/good-first-issue)
+- Revisa [`help-wanted`](https://github.com/SynkraAI/aiox-core/labels/help-wanted) para tareas más complejas
+- Explora las [Discussions abiertas](https://github.com/SynkraAI/aiox-core/discussions) para ayudar a otros
 
 ## Canales de Comunicación
 
 ### GitHub Discussions (Principal)
 
-Nuestro centro de comunicación principal para todos los repositorios AIOS:
+Nuestro centro de comunicación principal para todos los repositorios AIOX:
 
 - **Announcements** - Actualizaciones del proyecto de los mantenedores
-- **General** - Discusiones generales sobre AIOS
+- **General** - Discusiones generales sobre AIOX
 - **Ideas** - Propón nuevas características y mejoras
 - **Q&A** - Obtén ayuda con preguntas técnicas
-- **Show and Tell** - Comparte tus proyectos usando AIOS
+- **Show and Tell** - Comparte tus proyectos usando AIOX
 - **Troubleshooting** - Obtén ayuda con problemas
-- **Squads** - Discusiones sobre AIOS Squads (equipos de agentes modulares)
+- **Squads** - Discusiones sobre AIOX Squads (equipos de agentes modulares)
 - **MCP Ecosystem** - Discusiones sobre herramientas e integraciones MCP
 
-[Únete a la Discusión](https://github.com/SynkraAI/aios-core/discussions)
+[Únete a la Discusión](https://github.com/SynkraAI/aiox-core/discussions)
 
 ### Issue Tracker
 
 Para reportes de bugs y solicitudes de características:
 
-- [aios-core Issues](https://github.com/SynkraAI/aios-core/issues) - Framework principal
-- [aios-squads Issues](https://github.com/SynkraAI/aios-squads/issues) - AIOS Squads
+- [aiox-core Issues](https://github.com/SynkraAI/aiox-core/issues) - Framework principal
+- [aiox-squads Issues](https://github.com/SynkraAI/aiox-squads/issues) - AIOX Squads
 - [mcp-ecosystem Issues](https://github.com/SynkraAI/mcp-ecosystem/issues) - Herramientas MCP
 
 ## Cómo Contribuir
@@ -90,8 +90,8 @@ Consulta [docs/Squads.md](docs/Squads.md) para detalles sobre cómo crear tu pro
 
 ### Contribuidores
 
-Cualquiera que haya contribuido a AIOS de cualquier manera.
-- Listados en nuestra [página de Contribuidores](https://github.com/SynkraAI/aios-core/graphs/contributors)
+Cualquiera que haya contribuido a AIOX de cualquier manera.
+- Listados en nuestra [página de Contribuidores](https://github.com/SynkraAI/aiox-core/graphs/contributors)
 - Mencionados en las notas de lanzamiento por contribuciones significativas
 
 ### Mantenedores
@@ -111,7 +111,7 @@ Los contribuidores activos pueden ser invitados a convertirse en mantenedores. B
 
 ### Muro de Contribuidores
 
-Todos los contribuidores son reconocidos en nuestra [página de Contribuidores](https://github.com/SynkraAI/aios-core/graphs/contributors).
+Todos los contribuidores son reconocidos en nuestra [página de Contribuidores](https://github.com/SynkraAI/aiox-core/graphs/contributors).
 
 ### Créditos de Lanzamiento
 
@@ -145,31 +145,31 @@ Reporta violaciones a: conduct@SynkraAI.com
 ### ¿Atascado en algo?
 
 1. Revisa la [Documentación](docs/)
-2. Busca en [Discussions existentes](https://github.com/SynkraAI/aios-core/discussions)
+2. Busca en [Discussions existentes](https://github.com/SynkraAI/aiox-core/discussions)
 3. Pregunta en Q&A Discussions
 4. Abre una discusión de Troubleshooting
 
 ### ¿Encontraste un bug?
 
-1. Busca en [issues existentes](https://github.com/SynkraAI/aios-core/issues)
-2. Si es nuevo, [abre un reporte de bug](https://github.com/SynkraAI/aios-core/issues/new?template=bug_report.md)
+1. Busca en [issues existentes](https://github.com/SynkraAI/aiox-core/issues)
+2. Si es nuevo, [abre un reporte de bug](https://github.com/SynkraAI/aiox-core/issues/new?template=bug_report.md)
 
 ### ¿Tienes una idea?
 
-1. Verifica si existe en [Ideas](https://github.com/SynkraAI/aios-core/discussions/categories/ideas)
-2. Si es nueva, [comparte tu idea](https://github.com/SynkraAI/aios-core/discussions/new?category=ideas)
+1. Verifica si existe en [Ideas](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas)
+2. Si es nueva, [comparte tu idea](https://github.com/SynkraAI/aiox-core/discussions/new?category=ideas)
 3. Lee nuestro [Proceso de Solicitud de Características](docs/FEATURE_PROCESS.md) para guías detalladas
 
 ## Hoja de Ruta del Proyecto
 
-¿Quieres saber hacia dónde se dirige AIOS? Consulta nuestra hoja de ruta pública:
+¿Quieres saber hacia dónde se dirige AIOX? Consulta nuestra hoja de ruta pública:
 
 - [ROADMAP.md](ROADMAP.md) - Visión de alto nivel y características planificadas
 - [GitHub Project](https://github.com/orgs/SynkraAI/projects/1) - Tablero de seguimiento detallado
 
 La hoja de ruta se actualiza mensualmente y refleja la opinión de la comunidad. Puedes influir en nuestra dirección mediante:
 
-1. **Votando** en ideas en [Discussions](https://github.com/SynkraAI/aios-core/discussions/categories/ideas)
+1. **Votando** en ideas en [Discussions](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas)
 2. **Proponiendo** nuevas características a través del [proceso RFC](/.github/RFC_TEMPLATE.md)
 3. **Contribuyendo** directamente a características planificadas
 
@@ -188,15 +188,15 @@ Consulta [Proceso de Solicitud de Características](docs/FEATURE_PROCESS.md) par
 
 ## Recursos
 
-### Aprendiendo AIOS
+### Aprendiendo AIOX
 
 - [Guía de Inicio](docs/getting-started.md)
 - [Visión General de Arquitectura](docs/architecture.md)
-- [Guía de Usuario](.aios-core/user-guide.md)
+- [Guía de Usuario](.aiox-core/user-guide.md)
 
 ### Recursos Externos
 
-- [Organización de AIOS en GitHub](https://github.com/SynkraAI)
+- [Organización de AIOX en GitHub](https://github.com/SynkraAI)
 - [Registro de Cambios](CHANGELOG.md)
 
 ## Internacionalización
@@ -209,7 +209,7 @@ Consulta [Proceso de Solicitud de Características](docs/FEATURE_PROCESS.md) par
 
 ## Estado del Proyecto
 
-- Versión Actual: Ver [releases](https://github.com/SynkraAI/aios-core/releases)
+- Versión Actual: Ver [releases](https://github.com/SynkraAI/aiox-core/releases)
 - Registro de Cambios: [CHANGELOG.md](CHANGELOG.md)
 
 ---
@@ -219,9 +219,9 @@ Consulta [Proceso de Solicitud de Características](docs/FEATURE_PROCESS.md) par
 ¿No puedes encontrar lo que buscas?
 ¡Abre una Discussion o contacta a la comunidad!
 
-**¡Gracias por ser parte de la comunidad AIOS!**
+**¡Gracias por ser parte de la comunidad AIOX!**
 
 ---
 
-*Este documento es mantenido por la comunidad AIOS.*
+*Este documento es mantenido por la comunidad AIOX.*
 *Última actualización: 2025-12-09*

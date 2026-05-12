@@ -13,7 +13,7 @@
 
 'use strict';
 
-const { MessageFormatter, createMessageFormatter } = require('../../../.aios-core/core/orchestration/message-formatter');
+const { MessageFormatter, createMessageFormatter } = require('../../../.aiox-core/core/orchestration/message-formatter');
 
 describe('MessageFormatter', () => {
   describe('constructor', () => {

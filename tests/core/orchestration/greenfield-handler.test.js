@@ -25,7 +25,7 @@ const {
   PhaseFailureAction,
   DEFAULT_GREENFIELD_INDICATORS,
   PHASE_1_SEQUENCE,
-} = require('../../../.aios-core/core/orchestration/greenfield-handler');
+} = require('../../../.aiox-core/core/orchestration/greenfield-handler');
 
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              TEST SETUP
@@ -47,7 +47,7 @@ const mockTerminalSpawner = {
   isSpawnerAvailable: jest.fn().mockReturnValue(false),
   spawnAgent: jest.fn().mockResolvedValue({ success: true, pid: 1234 }),
 };
-jest.mock('../../../.aios-core/core/orchestration/terminal-spawner', () => mockTerminalSpawner);
+jest.mock('../../../.aiox-core/core/orchestration/terminal-spawner', () => mockTerminalSpawner);
 
 // Mock dependencies
 const mockWorkflowExecutor = {

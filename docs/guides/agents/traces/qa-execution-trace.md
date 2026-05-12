@@ -1,7 +1,7 @@
 # @qa (Quinn) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/qa.md`
+> Agent definition: `.aiox-core/development/agents/qa.md`
 
 ## 1. Activation Trace
 
@@ -9,15 +9,15 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/qa.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: qaLocation, dataLocation, storyBacklog |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
-| 6 | `.aios-core/product/data/test-levels-framework.md` | AgentConfigLoader.loadFile() | Test levels framework (always loaded, 8KB) |
-| 7 | `.aios-core/product/data/test-priorities-matrix.md` | AgentConfigLoader.loadFile() | Test priorities matrix (always loaded, 6KB) |
-| 8 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 9 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/qa.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: qaLocation, dataLocation, storyBacklog |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
+| 6 | `.aiox-core/product/data/test-levels-framework.md` | AgentConfigLoader.loadFile() | Test levels framework (always loaded, 8KB) |
+| 7 | `.aiox-core/product/data/test-priorities-matrix.md` | AgentConfigLoader.loadFile() | Test priorities matrix (always loaded, 6KB) |
+| 8 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 9 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -75,13 +75,13 @@ qa:
     - dataLocation
     - storyBacklog
   files_loaded:
-    - path: .aios-core/data/technical-preferences.md
+    - path: .aiox-core/data/technical-preferences.md
       lazy: false
       size: 15KB
-    - path: .aios-core/product/data/test-levels-framework.md
+    - path: .aiox-core/product/data/test-levels-framework.md
       lazy: false
       size: 8KB
-    - path: .aios-core/product/data/test-priorities-matrix.md
+    - path: .aiox-core/product/data/test-priorities-matrix.md
       lazy: false
       size: 6KB
   lazy_loading:
@@ -137,7 +137,7 @@ qa:
 
 ### `*code-review {scope}`
 
-**Task file:** `.aios-core/development/tasks/qa-run-tests.md`
+**Task file:** `.aiox-core/development/tasks/qa-run-tests.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -164,15 +164,15 @@ flowchart TD
 
 ### `*review {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-review-story.md`
+**Task file:** `.aiox-core/development/tasks/qa-review-story.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `qa-review-story.md` | Task | EXISTS |
 | `docs/stories/{storyId}` | Input | Required (story file) |
-| `.aios-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
-| `.aios-core/product/data/test-priorities-matrix.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-priorities-matrix.md` | Data | Loaded at activation |
 
 **Execution flow:**
 
@@ -196,15 +196,15 @@ flowchart TD
 
 ### `*review-build {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-review-build.md`
+**Task file:** `.aiox-core/development/tasks/qa-review-build.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `qa-review-build.md` | Task | EXISTS |
 | `docs/stories/{storyId}` | Input | Required |
-| `.aios-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
-| `.aios-core/product/data/test-priorities-matrix.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-priorities-matrix.md` | Data | Loaded at activation |
 
 **Execution flow:**
 
@@ -230,14 +230,14 @@ flowchart TD
 
 ### `*gate {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-gate.md`
-**Template:** `.aios-core/product/templates/qa-gate-tmpl.yaml` (EXISTS in product/templates)
+**Task file:** `.aiox-core/development/tasks/qa-gate.md`
+**Template:** `.aiox-core/product/templates/qa-gate-tmpl.yaml` (EXISTS in product/templates)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `qa-gate.md` | Task | EXISTS |
-| `qa-gate-tmpl.yaml` | Template | EXISTS (in `.aios-core/product/templates/`) |
+| `qa-gate-tmpl.yaml` | Template | EXISTS (in `.aiox-core/product/templates/`) |
 | `docs/stories/{storyId}` | Input | Required |
 
 **Execution flow:**
@@ -267,7 +267,7 @@ flowchart TD
 
 ### `*nfr-assess {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-nfr-assess.md`
+**Task file:** `.aiox-core/development/tasks/qa-nfr-assess.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -293,7 +293,7 @@ flowchart TD
 
 ### `*risk-profile {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-risk-profile.md`
+**Task file:** `.aiox-core/development/tasks/qa-risk-profile.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -319,7 +319,7 @@ flowchart TD
 
 ### `*create-fix-request {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-create-fix-request.md`
+**Task file:** `.aiox-core/development/tasks/qa-create-fix-request.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -346,7 +346,7 @@ flowchart TD
 
 ### `*validate-libraries {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-library-validation.md`
+**Task file:** `.aiox-core/development/tasks/qa-library-validation.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -372,7 +372,7 @@ flowchart TD
 
 ### `*security-check {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-security-checklist.md`
+**Task file:** `.aiox-core/development/tasks/qa-security-checklist.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -401,7 +401,7 @@ flowchart TD
 
 ### `*validate-migrations {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-migration-validation.md`
+**Task file:** `.aiox-core/development/tasks/qa-migration-validation.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -427,7 +427,7 @@ flowchart TD
 
 ### `*evidence-check {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-evidence-requirements.md`
+**Task file:** `.aiox-core/development/tasks/qa-evidence-requirements.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -450,7 +450,7 @@ flowchart TD
 
 ### `*false-positive-check {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-false-positive-detection.md`
+**Task file:** `.aiox-core/development/tasks/qa-false-positive-detection.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -476,7 +476,7 @@ flowchart TD
 
 ### `*console-check {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-browser-console-check.md`
+**Task file:** `.aiox-core/development/tasks/qa-browser-console-check.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -502,14 +502,14 @@ flowchart TD
 
 ### `*test-design {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-test-design.md`
+**Task file:** `.aiox-core/development/tasks/qa-test-design.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `qa-test-design.md` | Task | EXISTS |
-| `.aios-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
-| `.aios-core/product/data/test-priorities-matrix.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-priorities-matrix.md` | Data | Loaded at activation |
 
 **Execution flow:**
 
@@ -529,7 +529,7 @@ flowchart TD
 
 ### `*trace {story}`
 
-**Task file:** `.aios-core/development/tasks/qa-trace-requirements.md`
+**Task file:** `.aiox-core/development/tasks/qa-trace-requirements.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -556,13 +556,13 @@ flowchart TD
 
 ### `*create-suite {story}`
 
-**Task file:** `.aios-core/development/tasks/create-suite.md`
+**Task file:** `.aiox-core/development/tasks/create-suite.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-suite.md` | Task | EXISTS |
-| `.aios-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
+| `.aiox-core/product/data/test-levels-framework.md` | Data | Loaded at activation |
 
 **Execution flow:**
 
@@ -583,7 +583,7 @@ flowchart TD
 
 ### `*critique-spec {story}`
 
-**Task file:** `.aios-core/development/tasks/spec-critique.md`
+**Task file:** `.aiox-core/development/tasks/spec-critique.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -611,7 +611,7 @@ flowchart TD
 
 ### `*backlog-add`, `*backlog-update`, `*backlog-review`
 
-**Task file:** `.aios-core/development/tasks/manage-story-backlog.md` (MISSING)
+**Task file:** `.aiox-core/development/tasks/manage-story-backlog.md` (MISSING)
 
 **Note:** All 3 backlog commands reference `manage-story-backlog.md` which does not exist on disk. The PO agent has `po-manage-story-backlog.md` but no QA-specific variant exists. These commands are non-functional.
 
@@ -835,13 +835,13 @@ self_healing:
 | File | Type | Referenced By | Impact |
 |------|------|---------------|--------|
 | `manage-story-backlog.md` | Task | `*backlog-add`, `*backlog-update`, `*backlog-review` | 3 commands non-functional |
-| `qa-gate-tmpl.yaml` | Template | `*gate` (in `dependencies.templates`) | EXISTS in `.aios-core/product/templates/` but NOT in `.aios-core/development/templates/` per IDE-FILE-RESOLUTION |
-| `story-tmpl.yaml` | Template | (in `dependencies.templates`) | EXISTS in `.aios-core/product/templates/` but NOT in `.aios-core/development/templates/` per IDE-FILE-RESOLUTION |
-| `test-levels-framework.md` | Data | `agent-config-requirements.yaml` | EXISTS at `.aios-core/product/data/` (NOT in `.aios-core/data/` where `dependencies.data` resolves) |
-| `test-priorities-matrix.md` | Data | `agent-config-requirements.yaml` | EXISTS at `.aios-core/product/data/` (NOT in `.aios-core/data/` where `dependencies.data` resolves) |
+| `qa-gate-tmpl.yaml` | Template | `*gate` (in `dependencies.templates`) | EXISTS in `.aiox-core/product/templates/` but NOT in `.aiox-core/development/templates/` per IDE-FILE-RESOLUTION |
+| `story-tmpl.yaml` | Template | (in `dependencies.templates`) | EXISTS in `.aiox-core/product/templates/` but NOT in `.aiox-core/development/templates/` per IDE-FILE-RESOLUTION |
+| `test-levels-framework.md` | Data | `agent-config-requirements.yaml` | EXISTS at `.aiox-core/product/data/` (NOT in `.aiox-core/data/` where `dependencies.data` resolves) |
+| `test-priorities-matrix.md` | Data | `agent-config-requirements.yaml` | EXISTS at `.aiox-core/product/data/` (NOT in `.aiox-core/data/` where `dependencies.data` resolves) |
 
-**Path Resolution Note:** The `IDE-FILE-RESOLUTION` rule in the agent definition maps `dependencies` to `.aios-core/development/{type}/{name}`. However, 2 templates and 2 data files exist under `.aios-core/product/` instead. The `agent-config-requirements.yaml` correctly references the full paths under `.aios-core/product/data/`, but the agent definition's `dependencies` block uses short names that resolve to `.aios-core/development/templates/` and `.aios-core/development/data/` respectively, where these files do not exist. Actual runtime loading uses `agent-config-requirements.yaml` paths, so functionality is preserved.
+**Path Resolution Note:** The `IDE-FILE-RESOLUTION` rule in the agent definition maps `dependencies` to `.aiox-core/development/{type}/{name}`. However, 2 templates and 2 data files exist under `.aiox-core/product/` instead. The `agent-config-requirements.yaml` correctly references the full paths under `.aiox-core/product/data/`, but the agent definition's `dependencies` block uses short names that resolve to `.aiox-core/development/templates/` and `.aiox-core/development/data/` respectively, where these files do not exist. Actual runtime loading uses `agent-config-requirements.yaml` paths, so functionality is preserved.
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

@@ -6,7 +6,7 @@ set -euo pipefail
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 TEST_NAME="AC9: Security Compliance"
-LOG_FILE="/tmp/aios-test-security-$(date +%Y%m%d-%H%M%S).log"
+LOG_FILE="/tmp/aiox-test-security-$(date +%Y%m%d-%H%M%S).log"
 
 log_info() { echo -e "${GREEN}[INFO]${NC} $1" | tee -a "$LOG_FILE"; }
 log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1" | tee -a "$LOG_FILE"; }
@@ -45,7 +45,7 @@ test_code_signing() {
 test_permissions_prompts() {
     log_info "Test 3: TCC (Transparency, Consent, and Control) permissions..."
 
-    # Check if AIOS has requested any permissions
+    # Check if AIOX has requested any permissions
     # Note: This would typically show in System Preferences > Security & Privacy > Privacy
 
     # List permissions databases (read-only check)
@@ -57,7 +57,7 @@ test_permissions_prompts() {
         log_info "TCC database not directly readable (expected for security)"
     fi
 
-    log_info "Standard AIOS operations should not trigger security prompts"
+    log_info "Standard AIOX operations should not trigger security prompts"
     pass_test "Permission system awareness confirmed"
 }
 
@@ -81,7 +81,7 @@ test_firewall_compatibility() {
 
     log_info "Firewall status: $FIREWALL_STATUS"
 
-    # AIOS should work with firewall enabled
+    # AIOX should work with firewall enabled
     pass_test "Firewall compatibility noted"
 }
 
@@ -89,7 +89,7 @@ test_quarantine_attributes() {
     log_info "Test 6: Quarantine attribute handling..."
 
     # Check if downloaded files have quarantine attribute
-    TEST_FILE="/tmp/aios-quarantine-test-$$.txt"
+    TEST_FILE="/tmp/aiox-quarantine-test-$$.txt"
     echo "test" > "$TEST_FILE"
 
     # Check extended attributes

@@ -1,22 +1,22 @@
-# AIOS Pro Developer Workflow
+# AIOX Pro Developer Workflow
 
-This guide covers the two developer workflows for working with the AIOS Open Core architecture.
+This guide covers the two developer workflows for working with the AIOX Open Core architecture.
 
 ## Architecture Overview
 
-AIOS uses a dual-repository Open Core model:
+AIOX uses a dual-repository Open Core model:
 
-- **aios-core** (public) — Open-source framework, available to everyone
-- **aios-pro** (private) — Premium features, available to team members and licensees
+- **aiox-core** (public) — Open-source framework, available to everyone
+- **aiox-pro** (private) — Premium features, available to team members and licensees
 
-The `pro/` directory in aios-core is a git submodule pointing to the aios-pro repository.
+The `pro/` directory in aiox-core is a git submodule pointing to the aiox-pro repository.
 
 ```
-aios-core/
+aiox-core/
 ├── bin/
 ├── src/
 ├── packages/
-├── pro/ ─── git submodule ──► SynkraAI/aios-pro (private)
+├── pro/ ─── git submodule ──► SynkraAI/aiox-pro (private)
 ├── squads/ (community)
 └── package.json
 ```
@@ -31,11 +31,11 @@ This is the default workflow. The pro/ submodule is not needed.
 
 ```bash
 # Fork via GitHub UI, then clone your fork
-git clone https://github.com/YOUR_USERNAME/aios-core.git
-cd aios-core
+git clone https://github.com/YOUR_USERNAME/aiox-core.git
+cd aiox-core
 
 # Add upstream remote
-git remote add upstream https://github.com/SynkraAI/aios-core.git
+git remote add upstream https://github.com/SynkraAI/aiox-core.git
 
 # Install dependencies
 npm install
@@ -68,20 +68,20 @@ git push origin feature/my-feature
 - All core tests pass without `pro/` present
 - `bin/utils/pro-detector.js` returns `isProAvailable() === false`
 - No features are degraded for core-only developers
-- You do NOT need access to SynkraAI/aios-pro
+- You do NOT need access to SynkraAI/aiox-pro
 
 ---
 
 ## Workflow 2: Pro Developer (Team Member with Access)
 
-Team members with access to the private aios-pro repository can work on both repos.
+Team members with access to the private aiox-pro repository can work on both repos.
 
 ### Initial Setup (New Clone)
 
 ```bash
 # Clone with submodules
-git clone --recurse-submodules https://github.com/SynkraAI/aios-core.git
-cd aios-core
+git clone --recurse-submodules https://github.com/SynkraAI/aiox-core.git
+cd aiox-core
 
 # Install dependencies
 npm install
@@ -94,7 +94,7 @@ node -e "const p = require('./bin/utils/pro-detector'); console.log(p.getProInfo
 ### Adding Pro to Existing Clone
 
 ```bash
-cd aios-core
+cd aiox-core
 
 # Initialize the submodule
 git submodule update --init pro
@@ -107,7 +107,7 @@ ls pro/package.json
 
 ```bash
 # (Coming in a future story)
-aios setup --pro
+aiox setup --pro
 ```
 
 ### Working on Pro Modules
@@ -128,8 +128,8 @@ git push origin main
 ### Working on Core + Pro Together
 
 ```bash
-# From aios-core root
-cd aios-core
+# From aiox-core root
+cd aiox-core
 
 # Make core changes
 # Edit bin/utils/some-file.js
@@ -165,9 +165,9 @@ git commit -m "chore: update pro submodule ref"
 
 Always push in this order:
 1. Push `pro/` changes first: `cd pro && git push`
-2. Push `aios-core` changes second: `cd .. && git push`
+2. Push `aiox-core` changes second: `cd .. && git push`
 
-This ensures the submodule pointer in aios-core references a valid commit in aios-pro.
+This ensures the submodule pointer in aiox-core references a valid commit in aiox-pro.
 
 ---
 
@@ -180,7 +180,7 @@ const { isProAvailable, loadProModule, getProVersion } = require('./bin/utils/pr
 
 // Check if pro is available
 if (isProAvailable()) {
-  console.log('AIOS Pro v' + getProVersion() + ' detected');
+  console.log('AIOX Pro v' + getProVersion() + ' detected');
 
   // Load a pro module safely (returns null if not found)
   const proSquads = loadProModule('squads/squad-creator-pro');
@@ -196,8 +196,8 @@ if (isProAvailable()) {
 
 | Repository | Checkout | Tests | Publish |
 |------------|----------|-------|---------|
-| **aios-core** | Without submodules | Core-only (pro/ absent) | npm (excludes pro/) |
-| **aios-pro** | With aios-core cloned | Integration (pro/ symlinked) | GitHub Packages |
+| **aiox-core** | Without submodules | Core-only (pro/ absent) | npm (excludes pro/) |
+| **aiox-pro** | With aiox-core cloned | Integration (pro/ symlinked) | GitHub Packages |
 
 ---
 
@@ -212,7 +212,7 @@ git submodule update --init pro
 
 ### Permission denied when cloning submodule
 
-You need access to `SynkraAI/aios-pro`. Contact the team lead.
+You need access to `SynkraAI/aiox-pro`. Contact the team lead.
 
 ### Tests fail with pro/ present
 
@@ -233,4 +233,4 @@ git submodule update pro
 ## Reference
 
 - [ADR-PRO-001: Repository Strategy](../../architecture/adr/adr-pro-001-repository-strategy.md)
-- [Story PRO-5: Repository Bootstrap](../../stories/epics/epic-pro-aios-pro-architecture/story-pro-5-repo-bootstrap.md)
+- [Story PRO-5: Repository Bootstrap](../../stories/epics/epic-pro-aiox-pro-architecture/story-pro-5-repo-bootstrap.md)

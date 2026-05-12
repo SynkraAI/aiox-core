@@ -38,11 +38,11 @@ jest.mock('chalk', () => ({
 }));
 
 // Mock the security checker to force using BasicInputValidator
-jest.mock('../../.aios-core/infrastructure/scripts/security-checker', () => {
+jest.mock('../../.aiox-core/infrastructure/scripts/security-checker', () => {
   throw new Error('Not found');
 });
 
-const ElicitationEngine = require('../../.aios-core/core/elicitation/elicitation-engine');
+const ElicitationEngine = require('../../.aiox-core/core/elicitation/elicitation-engine');
 
 // Set timeout for all tests
 jest.setTimeout(30000);

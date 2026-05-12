@@ -1,18 +1,18 @@
 /**
  * Visual Feedback Helpers
  *
- * Spinners, progress bars, and status indicators using AIOS Color System v2.1
+ * Spinners, progress bars, and status indicators using AIOX Color System v4.0.4
  *
  * @module wizard/feedback
  */
 
 const ora = require('ora');
 const cliProgress = require('cli-progress');
-const { colors, status, headings } = require('../utils/aios-colors');
+const { colors, status, headings } = require('../utils/aiox-colors');
 const { t } = require('./i18n');
 
 /**
- * Create and start a spinner with AIOS styling
+ * Create and start a spinner with AIOX styling
  *
  * @param {string} text - Spinner text
  * @param {Object} options - Spinner options
@@ -73,7 +73,7 @@ function showTip(message) {
 }
 
 /**
- * Create progress bar with AIOS styling
+ * Create progress bar with AIOX styling
  *
  * @param {number} total - Total steps
  * @param {Object} options - Progress bar options
@@ -119,15 +119,15 @@ function completeProgress(progressBar) {
 }
 
 /**
- * ASCII Art Banner for Synkra AIOS
+ * ASCII Art Banner for Synkra AIOX
  */
 const BANNER = `
-  █████╗ ██╗ ██████╗ ███████╗      ███████╗██╗   ██╗██╗     ██╗     ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ██╔══██╗██║██╔═══██╗██╔════╝      ██╔════╝██║   ██║██║     ██║     ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
- ███████║██║██║   ██║███████╗█████╗█████╗  ██║   ██║██║     ██║     ███████╗   ██║   ███████║██║     █████╔╝
- ██╔══██║██║██║   ██║╚════██║╚════╝██╔══╝  ██║   ██║██║     ██║     ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
- ██║  ██║██║╚██████╔╝███████║      ██║     ╚██████╔╝███████╗███████╗███████║   ██║   ██║  ██║╚██████╗██║  ██╗
- ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚══════╝      ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
+  █████╗ ██╗ ██████╗ ██╗  ██╗     ███████╗ ██████╗ ██╗   ██╗ █████╗ ██████╗
+ ██╔══██╗██║██╔═══██╗╚██╗██╔╝     ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔══██╗
+ ███████║██║██║   ██║ ╚███╔╝█████╗███████╗██║   ██║██║   ██║███████║██║  ██║
+ ██╔══██║██║██║   ██║ ██╔██╗╚════╝╚════██║██║▄▄ ██║██║   ██║██╔══██║██║  ██║
+ ██║  ██║██║╚██████╔╝██╔╝ ██╗     ███████║╚██████╔╝╚██████╔╝██║  ██║██████╔╝
+ ╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝     ╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝
 `;
 
 /**

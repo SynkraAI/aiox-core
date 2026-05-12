@@ -9,7 +9,7 @@ describe('PatternValidator (Unit)', () => {
   let PatternValidator, createPatternValidator, DEFAULT_VALIDATION_RULES, KNOWN_COMMANDS;
 
   beforeAll(() => {
-    const module = require('../../../.aios-core/workflow-intelligence/learning/pattern-validator');
+    const module = require('../../../.aiox-core/workflow-intelligence/learning/pattern-validator');
     PatternValidator = module.PatternValidator;
     createPatternValidator = module.createPatternValidator;
     DEFAULT_VALIDATION_RULES = module.DEFAULT_VALIDATION_RULES;

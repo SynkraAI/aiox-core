@@ -1,566 +1,311 @@
-# Getting Started with Synkra AIOS
+# Getting Started with Synkra AIOX
 
-> 🌐 **EN** | [PT](./pt/getting-started.md) | [ES](./es/getting-started.md)
+> **EN** | [PT](./pt/getting-started.md) | [ES](./es/getting-started.md)
 
 ---
 
-Welcome to Synkra AIOS! This guide will walk you through your first steps with the AI-powered self-modifying development framework.
+Welcome to Synkra AIOX. This guide is optimized for first-value in 10 minutes.
 
 ## Table of Contents
 
-1. [Installation](#installation)
-2. [Your First Project](#your-first-project)
-3. [Understanding the Meta-Agent](#understanding-the-meta-agent)
+1. [10-Minute Quick Path](#10-minute-quick-path)
+2. [Installation](#installation)
+3. [Your First Project](#your-first-project)
 4. [Basic Commands](#basic-commands)
-5. [Creating Your First Agent](#creating-your-first-agent)
-6. [Working with Tasks](#working-with-tasks)
-7. [Memory Layer Basics](#memory-layer-basics)
-8. [Best Practices](#best-practices)
-9. [Common Patterns](#common-patterns)
-10. [Next Steps](#next-steps)
+5. [IDE Compatibility](#ide-compatibility)
+6. [Brownfield: Existing Projects](#brownfield-existing-projects)
+7. [Advanced Path](#advanced-path)
+8. [Troubleshooting](#troubleshooting)
+9. [Next Steps](#next-steps)
+
+## 10-Minute Quick Path
+
+Use this exact flow if you are new:
+
+### Step 1: Install AIOX
+
+```bash
+# New project
+npx aiox-core init my-first-project
+cd my-first-project
+
+# Existing project
+# cd existing-project
+# npx aiox-core install
+```
+
+### Step 2: Pick your IDE activation path
+
+- Claude Code: `/agent-name`
+- Gemini CLI: `/aiox-menu` then `/aiox-<agent>`
+- Codex CLI: `/skills` then `aiox-<agent-id>`
+- Cursor/Copilot/AntiGravity: follow constraints in `docs/ide-integration.md`
+
+### Step 3: Validate first value
+
+First value is achieved when all 3 conditions are true:
+1. You activate one AIOX agent.
+2. You receive a valid greeting/activation response.
+3. You run one starter command (`*help` or equivalent) and get useful output.
+
+PASS rule: complete all 3 conditions in <= 10 minutes.
 
 ## Installation
 
 ### Prerequisites
 
-Before installing Synkra AIOS, ensure you have:
-
-- **Node.js** version 14.0.0 or higher
-- **npm** version 6.0.0 or higher
+- **Node.js** version 18.0.0 or higher (v20+ recommended)
+- **npm** version 9.0.0 or higher
 - **Git** (optional, but recommended)
-- At least **1GB** of free disk space
 
 ### Quick Installation
 
-The fastest way to get started is using npx:
-
 ```bash
 # Create a new project
-npx @synkra/aios-core init my-first-project
+npx aiox-core init my-first-project
 
 # Navigate to your project
 cd my-first-project
 
-# Start the meta-agent
-npx @synkra/aios-core
+# Start using AIOX agents in your IDE
+# (see Step 2 above for IDE-specific activation)
 ```
 
 ### Installation Options
 
-Synkra AIOS offers flexible installation options:
-
 ```bash
 # 1. Create new project with custom template
-npx @synkra/aios-core init my-project --template enterprise
+npx aiox-core init my-project --template enterprise
 
 # 2. Install in existing project
 cd existing-project
-npx @synkra/aios-core install
+npx aiox-core install
 
 # 3. Force installation in non-empty directory
-npx @synkra/aios-core init my-project --force
+npx aiox-core init my-project --force
 
 # 4. Skip dependency installation (manual install later)
-npx @synkra/aios-core init my-project --skip-install
+npx aiox-core init my-project --skip-install
 ```
 
 ## Your First Project
 
 ### Project Structure
 
-After installation, your project will have this structure:
+After installation, your project will include:
 
 ```
 my-first-project/
-├── .aios/                    # Framework configuration
-│   ├── config.json          # Main configuration file
-│   ├── memory-config.json   # Memory layer settings
-│   ├── cache/              # Performance cache
-│   └── logs/               # System logs
-├── agents/                  # AI agents directory
-│   └── sample-agent.yaml   # Example agent
-├── components/             # Application components
-├── workflows/              # Automated workflows
-├── tasks/                  # Reusable tasks
-├── tests/                  # Test suites
-├── .env                    # Environment variables
-└── package.json           # Project dependencies
+├── .aiox-core/                 # AIOX framework core
+│   ├── core/                   # Orchestration, memory, config
+│   ├── data/                   # Knowledge base, entity registry
+│   ├── development/            # Agents, tasks, templates, scripts
+│   └── infrastructure/         # CI/CD templates, validation scripts
+├── .claude/                    # Claude Code integration (if enabled)
+├── .codex/                     # Codex CLI integration (if enabled)
+├── .gemini/                    # Gemini CLI integration (if enabled)
+├── docs/                       # Documentation
+│   └── stories/                # Development stories
+├── packages/                   # Shared packages
+├── tests/                      # Test suites
+└── package.json                # Project dependencies
 ```
 
 ### Configuration
 
-The main configuration file (`.aios/config.json`) contains:
+AIOX configuration lives in `.aiox-core/core/config/`. The installer handles initial setup. To verify your installation:
 
-```json
-{
-  "version": "1.0.0",
-  "projectName": "my-first-project",
-  "features": [
-    "meta-agent",
-    "memory-layer",
-    "self-modification",
-    "telemetry"
-  ],
-  "ai": {
-    "provider": "openai",
-    "model": "gpt-4"
-  },
-  "environment": "development"
-}
-```
-
-### Environment Setup
-
-Configure your AI provider in the `.env` file:
-
-```env
-# AI Provider Configuration
-OPENAI_API_KEY=your-openai-api-key
-# or
-ANTHROPIC_API_KEY=your-anthropic-api-key
-
-# Framework Settings
-NODE_ENV=development
-AIOS_TELEMETRY=enabled
-```
-
-## Understanding the Meta-Agent
-
-The meta-agent is the core of Synkra AIOS - an AI that understands and can modify its own codebase.
-
-### Key Capabilities
-
-1. **Self-Analysis**: Examines its own code structure
-2. **Code Generation**: Creates optimized components
-3. **Pattern Learning**: Learns from your development style
-4. **Auto-Evolution**: Improves based on usage
-5. **Smart Refactoring**: Suggests and implements improvements
-
-### How It Works
-
-```mermaid
-graph TD
-    A[User Command] --> B[Meta-Agent]
-    B --> C{Analyze Request}
-    C --> D[Memory Layer]
-    C --> E[Code Analysis]
-    C --> F[Pattern Recognition]
-    D --> G[Context Retrieval]
-    E --> H[Generate Solution]
-    F --> H
-    G --> H
-    H --> I[Execute Changes]
-    I --> J[Update Memory]
-    J --> K[Learn & Improve]
+```bash
+npx aiox-core doctor
 ```
 
 ## Basic Commands
 
-### Starting the Meta-Agent
+### Agent Activation
+
+AIOX agents are activated through your IDE. Once activated, agents respond to commands prefixed with `*`:
 
 ```bash
-# Start in current directory
-npx @synkra/aios-core
+# Universal commands (work in any agent)
+*help                    # Show available commands for this agent
+*guide                   # Show detailed usage guide
+*session-info            # Display current session details
+*exit                    # Exit agent mode
 
-# Or use the shorthand
-npx aios
+# Agent-specific examples
+@dev *help               # Developer agent commands
+@qa *review STORY-42     # QA agent reviews a story
+@pm *create-epic         # PM agent creates an epic
+@sm *draft               # Scrum Master drafts a story
 ```
 
-### Essential Commands
+### Available Agents
 
-Once the meta-agent is running, use these commands:
+| Agent | Name | Focus |
+| --- | --- | --- |
+| `@dev` | Dex | Code implementation, bug fixes, refactoring |
+| `@qa` | Quinn | Testing, quality gates, code review |
+| `@architect` | Aria | System design, technical decisions |
+| `@pm` | Bob | PRDs, strategy, roadmap |
+| `@po` | Pax | Backlog, story validation, prioritization |
+| `@sm` | River | Story creation, sprint planning |
+| `@analyst` | Alex | Research, competitive analysis |
+| `@data-engineer` | Dara | Database design, migrations |
+| `@ux-design-expert` | Uma | UI/UX design, accessibility |
+| `@devops` | Gage | Git operations, CI/CD, deployments |
+
+### Typical Workflow
+
+```
+1. @pm creates a PRD          → *create-epic
+2. @sm drafts stories          → *draft
+3. @po validates stories       → *validate-story-draft
+4. @dev implements             → (works from story file)
+5. @qa reviews                 → *review STORY-ID
+6. @devops pushes              → *push (only agent with push authority)
+7. @po closes story            → *close-story STORY-ID
+```
+
+## IDE Compatibility
+
+Not all IDEs support AIOX features equally. See the full comparison at [`docs/ide-integration.md`](./ide-integration.md).
+
+Summary:
+
+| IDE/CLI | Overall Status | How to Activate |
+| --- | --- | --- |
+| Claude Code | Works | `/agent-name` commands |
+| Gemini CLI | Works | `/aiox-menu` then `/aiox-<agent>` |
+| Codex CLI | Limited | `/skills` then `aiox-<agent-id>` |
+| Cursor | Limited | `@agent` + synced rules |
+| GitHub Copilot | Limited | chat modes + repo instructions |
+| AntiGravity | Limited | workflow-driven activation |
+
+- **Works**: fully recommended for new users.
+- **Limited**: usable with documented workarounds.
+
+## Brownfield: Existing Projects
+
+Already have a codebase? AIOX handles brownfield projects with a dedicated workflow.
+
+### Quick Brownfield Setup
 
 ```bash
-# Help and Information
-*help                    # Show all available commands
-*status                  # Display system status
-*config                  # View current configuration
+# Navigate to your existing project
+cd my-existing-project
 
-# Agent Management
-*list-agents             # Show all available agents
-*activate <agent-name>   # Activate specific agent
-*deactivate <agent-name> # Deactivate agent
+# Install AIOX (non-destructive, preserves your config)
+npx aiox-core install
 
-# Basic Operations
-*analyze                 # Analyze current codebase
-*suggest                 # Get improvement suggestions
-*learn                   # Learn from recent changes
+# Run doctor to verify compatibility
+npx aiox-core doctor
 ```
 
-## Creating Your First Agent
+### What Happens on First Run
 
-### Step 1: Use the Creation Command
+When you first activate an AIOX agent in an existing project:
+
+1. **Detection**: AIOX detects code but no AIOX docs
+2. **Offer**: "I can analyze your codebase. This takes 4-8 hours."
+3. **Discovery**: Multi-agent technical debt assessment (optional)
+4. **Output**: System architecture docs + technical debt report
+
+### Brownfield Workflow Options
+
+| Your Situation | Recommended Workflow |
+|----------------|---------------------|
+| Add major feature to existing project | `@pm → *create-doc brownfield-prd` |
+| Audit legacy codebase | `brownfield-discovery.yaml` (full workflow) |
+| Quick enhancement | `@pm → *brownfield-create-epic` |
+| Single bug fix | `@pm → *brownfield-create-story` |
+
+### Safety Guarantees
+
+- **Non-destructive**: AIOX creates files, never overwrites existing
+- **Rollback**: `git checkout HEAD~1 -- .` restores pre-AIOX state
+- **Config preservation**: Your `.eslintrc`, `tsconfig.json`, etc. stay intact
+
+### Resources
+
+- **[Working in the Brownfield Guide](.aiox-core/working-in-the-brownfield.md)** - Complete brownfield documentation
+- **[Compatibility Checklist](.aiox-core/development/checklists/brownfield-compatibility-checklist.md)** - Pre/post migration checks
+- **[Risk Report Template](.aiox-core/product/templates/brownfield-risk-report-tmpl.yaml)** - Phase-by-phase risk assessment
+
+---
+
+## Advanced Path
+
+For experienced users who want to go deeper:
+
+### Sync and Validation
 
 ```bash
-*create-agent my-helper
+# Sync agents to all configured IDEs
+npm run sync:ide
+
+# Validate cross-IDE parity
+npm run validate:parity
+
+# Run all quality checks
+npm run lint && npm run typecheck && npm test
 ```
 
-The meta-agent will guide you through the creation process:
+### Story-Driven Development
 
-1. **Name**: Choose a descriptive name
-2. **Type**: Select agent type (assistant, analyzer, generator)
-3. **Capabilities**: Define what the agent can do
-4. **Instructions**: Provide behavioral guidelines
+All AIOX development follows stories in `docs/stories/`. Each story contains:
+- Acceptance criteria with checkboxes
+- Tasks mapped to specific ACs
+- CodeRabbit integration for automated review
+- Quality gate assignments
 
-### Step 2: Agent Definition
+See the [User Guide](./guides/user-guide.md) for the complete workflow.
 
-The meta-agent will create a YAML file like this:
+### Squad Expansions
 
-```yaml
-# agents/my-helper.yaml
-name: my-helper
-version: 1.0.0
-description: A helpful assistant for daily tasks
-type: assistant
+Squads extend AIOX beyond software development into any domain. See [Squads Guide](./guides/squads-guide.md).
 
-capabilities:
-  - name: summarize
-    description: Summarize text content
-    parameters:
-      - name: text
-        type: string
-        required: true
-      - name: maxLength
-        type: number
-        required: false
-        default: 100
+## Troubleshooting
 
-  - name: translate
-    description: Translate text between languages
-    parameters:
-      - name: text
-        type: string
-        required: true
-      - name: targetLanguage
-        type: string
-        required: true
-
-instructions: |
-  You are a helpful assistant that summarizes and translates text.
-  Be concise, accurate, and maintain the original meaning.
-  
-examples:
-  - input: "*my-helper summarize 'Long text here...'"
-    output: "Summary: Key points from the text"
-  
-  - input: "*my-helper translate 'Hello' --targetLanguage spanish"
-    output: "Translation: Hola"
-```
-
-### Step 3: Test Your Agent
+### Installation Issues
 
 ```bash
-# Activate the agent
-*activate my-helper
+# Check Node.js version
+node --version  # Should be >= 18.0.0
 
-# Test summarization
-*my-helper summarize "This is a long text that needs summarization..."
+# Run diagnostics
+npx aiox-core doctor
 
-# Test translation
-*my-helper translate "Hello world" --targetLanguage french
+# Auto-fix common issues
+npx aiox-core doctor --fix
 ```
 
-## Working with Tasks
+### Agent Not Responding
 
-Tasks are reusable operations that agents can perform.
+1. Verify your IDE is supported (see [IDE Compatibility](#ide-compatibility)).
+2. Run `npm run sync:ide` to refresh agent files.
+3. Restart your IDE/CLI session.
 
-### Creating a Task
+### Sync Issues
 
 ```bash
-*create-task data-processor
-```
+# Preview what would change
+npm run sync:ide -- --dry-run
 
-This creates a task template:
+# Force re-sync
+npm run sync:ide
 
-```markdown
-# tasks/data-processor.md
-
-## Purpose
-Process and transform data according to specifications
-
-## Command Pattern
-```
-*data-processor <input> [options]
-```
-
-## Parameters
-- `input`: Data to process
-- `--format`: Output format (json, csv, xml)
-- `--transform`: Transformation type
-
-## Implementation
-```javascript
-class DataProcessor {
-  async execute(params) {
-    const { input, format = 'json', transform } = params;
-    
-    // Processing logic here
-    let processed = this.transform(input, transform);
-    
-    return this.format(processed, format);
-  }
-}
-```
-```
-
-### Using Tasks in Workflows
-
-```yaml
-# workflows/data-pipeline.yaml
-name: data-pipeline
-description: Automated data processing pipeline
-
-triggers:
-  - type: schedule
-    cron: "0 */6 * * *"  # Every 6 hours
-
-steps:
-  - task: fetch-data
-    params:
-      source: "api/endpoint"
-  
-  - task: data-processor
-    params:
-      transform: "normalize"
-      format: "json"
-  
-  - task: save-results
-    params:
-      destination: "processed/data"
-```
-
-## Memory Layer Basics
-
-The memory layer powered by LlamaIndex provides intelligent context management.
-
-### How Memory Works
-
-1. **Indexing**: All code and documentation is indexed
-2. **Semantic Search**: Find code by meaning, not just keywords
-3. **Context Building**: Relevant context is retrieved for each operation
-4. **Learning**: Patterns and preferences are remembered
-
-### Memory Commands
-
-```bash
-# Memory operations
-*memory status          # Check memory layer status
-*memory search <query>  # Search semantic memory
-*memory clear-cache     # Clear memory cache
-*memory rebuild         # Rebuild memory index
-```
-
-### Example: Semantic Search
-
-```bash
-# Traditional search (keyword-based)
-*search "getUserData"
-
-# Semantic search (meaning-based)
-*memory search "function that retrieves user information from database"
-```
-
-## Best Practices
-
-### 1. Start Small
-
-Begin with simple tasks and agents before creating complex systems:
-
-```bash
-# Good: Start with focused agents
-*create-agent code-formatter
-*create-agent test-generator
-
-# Avoid: Overly complex initial agents
-*create-agent do-everything-ai
-```
-
-### 2. Use Descriptive Names
-
-Choose clear, descriptive names for agents and tasks:
-
-```bash
-# Good naming
-*create-agent api-endpoint-validator
-*create-task validate-user-input
-
-# Poor naming
-*create-agent helper1
-*create-task task123
-```
-
-### 3. Leverage the Memory Layer
-
-Let the meta-agent learn from your patterns:
-
-```bash
-# After making changes
-*learn --from recent-changes
-
-# Before starting new feature
-*suggest --based-on similar-features
-```
-
-### 4. Regular Analysis
-
-Periodically analyze your codebase:
-
-```bash
-# Weekly analysis
-*analyze-framework --depth full
-
-# Quick daily check
-*analyze-framework --depth surface
-```
-
-### 5. Document Your Agents
-
-Always provide clear instructions and examples:
-
-```yaml
-# Good agent documentation
-instructions: |
-  This agent validates API responses against OpenAPI schemas.
-  It checks for:
-  - Required fields presence
-  - Data type correctness
-  - Format compliance
-  - Business rule validation
-
-examples:
-  - input: "*validate-api POST /users response"
-    output: "✓ All validations passed"
-```
-
-## Common Patterns
-
-### Pattern 1: Component Generation
-
-```bash
-# Generate a new React component
-*create-component Dashboard --type react --features "charts,filters,export"
-
-# The meta-agent will:
-# 1. Analyze existing components
-# 2. Apply consistent patterns
-# 3. Generate optimized code
-# 4. Create tests
-# 5. Update documentation
-```
-
-### Pattern 2: Code Quality Improvement
-
-```bash
-# Improve specific file
-*improve-code-quality src/services/api.js
-
-# Improve entire module
-*improve-code-quality src/services/ --recursive
-
-# Get suggestions first
-*suggest-improvements src/services/api.js
-```
-
-### Pattern 3: Test Generation
-
-```bash
-# Generate tests for a component
-*generate-tests src/components/UserProfile.js
-
-# Generate integration tests
-*generate-tests src/api/ --type integration
-
-# Generate based on usage patterns
-*generate-tests --from-usage-analysis
-```
-
-### Pattern 4: Documentation
-
-```bash
-# Document a module
-*document src/utils/
-
-# Generate API documentation
-*generate-api-docs src/api/
-
-# Create user guide
-*create-documentation --type user-guide
+# Validate after sync
+npm run validate:parity
 ```
 
 ## Next Steps
 
-### Immediate Actions
-
-1. **Configure AI Provider**: Set up your API keys in `.env`
-2. **Run First Analysis**: Execute `*analyze-framework`
-3. **Create Custom Agent**: Design an agent for your specific needs
-4. **Explore Examples**: Check the `examples/` directory
-
-### Learning Resources
-
-- **[Meta-Agent Commands Reference](./meta-agent-commands.md)**: Complete command list
-- **[Architecture Overview](./core-architecture.md)**: Technical deep dive
-- **[Troubleshooting Guide](./troubleshooting.md)**: Common issues and solutions
-- **[Video Tutorials](https://@synkra/aios-core.dev/tutorials)**: Visual learning
-
-### Advanced Topics
-
-Once comfortable with basics, explore:
-
-1. **Custom Workflows**: Automate complex processes
-2. **Plugin Development**: Extend framework capabilities
-3. **Performance Optimization**: Tune for your use case
-4. **Team Collaboration**: Multi-developer workflows
-
-### Community
-
-Join our community for support and updates:
-
-- **Discord**: [Join our server](https://discord.gg/gk8jAdXWmj)
-- **GitHub Discussions**: Share ideas and get help
-- **Twitter**: Follow [@aiosfullstack](https://twitter.com/aiosfullstack)
-
-## Troubleshooting Quick Reference
-
-### Common Issues
-
-**Meta-agent won't start**
-```bash
-# Check Node.js version
-node --version  # Should be >= 14.0.0
-
-# Verify installation
-npx @synkra/aios-core doctor
-
-# Fix common issues
-npx @synkra/aios-core doctor --fix
-```
-
-**API Key errors**
-```bash
-# Verify .env file exists
-ls -la .env
-
-# Check key format
-# Should be: OPENAI_API_KEY=sk-...
-```
-
-**Memory layer issues**
-```bash
-# Rebuild index
-*memory rebuild
-
-# Check status
-*memory status
-
-# Clear and rebuild
-*memory clear-cache && *memory rebuild
-```
+- **[User Guide](./guides/user-guide.md)** - Complete workflow from planning to delivery
+- **[IDE Integration](./ide-integration.md)** - Detailed setup per IDE
+- **[Architecture](./architecture/ARCHITECTURE-INDEX.md)** - Technical deep dive
+- **[Squads Guide](./guides/squads-guide.md)** - Extend AIOX to any domain
+- **[Troubleshooting](./troubleshooting.md)** - Common issues and solutions
 
 ---
 
-**Ready to build something amazing?** The meta-agent is waiting to help you create, improve, and evolve your code. Start with `*help` and explore the possibilities!
-
-Remember: Synkra AIOS learns and improves with use. The more you interact with it, the better it understands your development style and needs.
-
-Happy coding with Synkra AIOS! 🚀
+_Synkra AIOX Getting Started Guide v4.2.11_

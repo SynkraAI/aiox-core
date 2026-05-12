@@ -166,7 +166,7 @@ To detect and handle:
 ## Programmatic Usage
 
 ```javascript
-const { BuildStateManager, BuildStatus } = require('.aios-core/core/execution/build-state-manager');
+const { BuildStateManager, BuildStatus } = require('.aiox-core/core/execution/build-state-manager');
 
 // Create manager
 const manager = new BuildStateManager('story-8.4', {

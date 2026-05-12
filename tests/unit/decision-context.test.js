@@ -3,14 +3,14 @@
  *
  * Tests the DecisionContext class for tracking decisions, files, and tests.
  *
- * @see .aios-core/scripts/decision-context.js
+ * @see .aiox-core/scripts/decision-context.js
  */
 
 const {
   DecisionContext,
   DECISION_TYPES,
   PRIORITY_LEVELS,
-} = require('../../.aios-core/development/scripts/decision-context');
+} = require('../../.aiox-core/development/scripts/decision-context');
 
 describe('DecisionContext', () => {
   let context;

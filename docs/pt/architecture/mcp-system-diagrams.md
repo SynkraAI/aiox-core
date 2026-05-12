@@ -24,10 +24,10 @@ sequenceDiagram
 
     User->>CLI: mcp setup [--servers]
     CLI->>Detector: getGlobalMcpDir()
-    Detector-->>CLI: ~home/.aios/mcp
+    Detector-->>CLI: ~home/.aiox/mcp
     CLI->>Mgr: createGlobalStructure()
-    Mgr->>FS: mkdir ~/.aios/mcp/servers
-    Mgr->>FS: mkdir ~/.aios/mcp/cache
+    Mgr->>FS: mkdir ~/.aiox/mcp/servers
+    Mgr->>FS: mkdir ~/.aiox/mcp/cache
     Mgr->>FS: touch .gitignore
     FS-->>Mgr: criado
     CLI->>Mgr: createGlobalConfig(servers)
@@ -67,7 +67,7 @@ sequenceDiagram
         Mgr-->>Migrator: sucesso
     end
     CLI->>Symlink: createLink(projectRoot)
-    Symlink->>FS: criar symlink/junction ./mcp → ~/.aios/mcp
+    Symlink->>FS: criar symlink/junction ./mcp → ~/.aiox/mcp
     FS-->>Symlink: linkado
     Symlink-->>CLI: sucesso
     CLI-->>User: ✓ Projeto linkado à config global

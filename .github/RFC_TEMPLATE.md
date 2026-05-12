@@ -41,7 +41,7 @@
 
 > Explain the design in enough detail that:
 >
-> - Someone familiar with AIOS can understand
+> - Someone familiar with AIOX can understand
 > - Someone familiar with the implementation can implement it
 
 ### Overview
@@ -236,4 +236,4 @@ This RFC is open for comments until: **YYYY-MM-DD**
 
 ---
 
-**Note:** This template follows the AIOS RFC process. For questions about the process, see [CONTRIBUTING.md](/CONTRIBUTING.md).
+**Note:** This template follows the AIOX RFC process. For questions about the process, see [CONTRIBUTING.md](/CONTRIBUTING.md).

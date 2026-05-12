@@ -94,13 +94,13 @@ function calcStats(values) {
 
 async function runBenchmark(options) {
   const { SynapseEngine } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js'),
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js'),
   );
   const { loadSession } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'session', 'session-manager.js'),
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'session', 'session-manager.js'),
   );
   const { parseManifest } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
   );
 
   const manifestPath = path.join(SYNAPSE_PATH, 'manifest');
@@ -119,7 +119,7 @@ async function runBenchmark(options) {
   }
 
   const { formatSynapseRules } = require(
-    path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'output', 'formatter.js'),
+    path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'output', 'formatter.js'),
   );
 
   // Measure startup (manifest parse + engine construction)

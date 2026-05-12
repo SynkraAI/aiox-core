@@ -1,5 +1,5 @@
 /**
- * CLI tests for `aios config` subcommands
+ * CLI tests for `aiox config` subcommands
  * Story PRO-4 — Config Hierarchy (Task 5.3)
  *
  * Tests the Commander.js config command in-process using Jest mocks
@@ -10,8 +10,8 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { Command } = require('commander');
-const { createConfigCommand } = require('../../.aios-core/cli/commands/config');
-const { globalConfigCache } = require('../../.aios-core/core/config/config-cache');
+const { createConfigCommand } = require('../../.aiox-core/cli/commands/config');
+const { globalConfigCache } = require('../../.aiox-core/core/config/config-cache');
 
 const FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
@@ -19,9 +19,9 @@ const FIXTURES_DIR = path.join(__dirname, 'fixtures');
  * Create a temp project with config fixtures.
  */
 function createTempProject(files = {}) {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-cli-test-'));
-  const aiosCoreDir = path.join(tmpDir, '.aios-core');
-  fs.mkdirSync(aiosCoreDir, { recursive: true });
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-cli-test-'));
+  const aioxCoreDir = path.join(tmpDir, '.aiox-core');
+  fs.mkdirSync(aioxCoreDir, { recursive: true });
 
   for (const [relativePath, content] of Object.entries(files)) {
     const fullPath = path.join(tmpDir, relativePath);
@@ -84,7 +84,7 @@ describe('config CLI commands', () => {
   });
 
   /**
-   * Run `aios config <subArgs>` in-process via Commander.
+   * Run `aiox config <subArgs>` in-process via Commander.
    * Returns captured stdout/stderr as strings and whether process.exit was called.
    */
   async function runConfigCmd(subArgs) {
@@ -94,7 +94,7 @@ describe('config CLI commands', () => {
 
     let exitCode = 0;
     try {
-      await program.parseAsync(['node', 'aios', ...subArgs]);
+      await program.parseAsync(['node', 'aiox', ...subArgs]);
     } catch (err) {
       if (err instanceof ProcessExitError) {
         exitCode = err.exitCode;
@@ -118,14 +118,14 @@ describe('config CLI commands', () => {
   }
 
   // -----------------------------------------------------------------------
-  // aios config show
+  // aiox config show
   // -----------------------------------------------------------------------
 
-  describe('aios config show', () => {
+  describe('aiox config show', () => {
     test('shows resolved config as YAML', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -133,7 +133,7 @@ describe('config CLI commands', () => {
         const { exitCode, stdout } = await runConfigCmd(['config', 'show']);
         expect(exitCode).toBe(0);
         expect(stdout).toContain('metadata');
-        expect(stdout).toContain('AIOS-FullStack');
+        expect(stdout).toContain('AIOX-FullStack');
       } finally {
         cleanupTempDir(tmpDir);
       }
@@ -141,8 +141,8 @@ describe('config CLI commands', () => {
 
     test('shows specific level with --level', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -157,8 +157,8 @@ describe('config CLI commands', () => {
 
     test('shows debug annotations with --debug', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -173,14 +173,14 @@ describe('config CLI commands', () => {
   });
 
   // -----------------------------------------------------------------------
-  // aios config validate
+  // aiox config validate
   // -----------------------------------------------------------------------
 
-  describe('aios config validate', () => {
+  describe('aiox config validate', () => {
     test('validates existing config files', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -196,7 +196,7 @@ describe('config CLI commands', () => {
 
     test('validates specific level with --level', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       try {
@@ -210,14 +210,14 @@ describe('config CLI commands', () => {
   });
 
   // -----------------------------------------------------------------------
-  // aios config diff
+  // aiox config diff
   // -----------------------------------------------------------------------
 
-  describe('aios config diff', () => {
+  describe('aiox config diff', () => {
     test('shows diff between two levels', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -232,10 +232,10 @@ describe('config CLI commands', () => {
   });
 
   // -----------------------------------------------------------------------
-  // aios config migrate
+  // aiox config migrate
   // -----------------------------------------------------------------------
 
-  describe('aios config migrate', () => {
+  describe('aiox config migrate', () => {
     const LEGACY_CONFIG = [
       'project:',
       '  name: "test-project"',
@@ -245,7 +245,7 @@ describe('config CLI commands', () => {
       '    - vscode',
       'mcp:',
       '  enabled: false',
-      'toolsLocation: .aios-core/tools',
+      'toolsLocation: .aiox-core/tools',
       'lazyLoading:',
       '  enabled: true',
       '',
@@ -253,7 +253,7 @@ describe('config CLI commands', () => {
 
     test('--dry-run shows preview without writing files', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': LEGACY_CONFIG,
+        '.aiox-core/core-config.yaml': LEGACY_CONFIG,
       });
 
       try {
@@ -263,8 +263,8 @@ describe('config CLI commands', () => {
         expect(stdout).toContain('DRY RUN');
         expect(stdout).toContain('framework-config.yaml');
         // No split files should have been created
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'framework-config.yaml'))).toBe(false);
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'project-config.yaml'))).toBe(false);
+        expect(fs.existsSync(path.join(tmpDir, '.aiox-core', 'framework-config.yaml'))).toBe(false);
+        expect(fs.existsSync(path.join(tmpDir, '.aiox-core', 'project-config.yaml'))).toBe(false);
       } finally {
         cleanupTempDir(tmpDir);
       }
@@ -272,7 +272,7 @@ describe('config CLI commands', () => {
 
     test('full migration creates split files and backup', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': LEGACY_CONFIG,
+        '.aiox-core/core-config.yaml': LEGACY_CONFIG,
         '.gitignore': '# existing\nnode_modules\n',
       });
 
@@ -283,12 +283,12 @@ describe('config CLI commands', () => {
         expect(stdout).toContain('Migration complete');
 
         // Split files created
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'framework-config.yaml'))).toBe(true);
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'project-config.yaml'))).toBe(true);
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'local-config.yaml'))).toBe(true);
+        expect(fs.existsSync(path.join(tmpDir, '.aiox-core', 'framework-config.yaml'))).toBe(true);
+        expect(fs.existsSync(path.join(tmpDir, '.aiox-core', 'project-config.yaml'))).toBe(true);
+        expect(fs.existsSync(path.join(tmpDir, '.aiox-core', 'local-config.yaml'))).toBe(true);
 
         // Backup created
-        expect(fs.existsSync(path.join(tmpDir, '.aios-core', 'core-config.yaml.backup'))).toBe(true);
+        expect(fs.existsSync(path.join(tmpDir, '.aiox-core', 'core-config.yaml.backup'))).toBe(true);
       } finally {
         cleanupTempDir(tmpDir);
       }
@@ -296,8 +296,8 @@ describe('config CLI commands', () => {
 
     test('reports nothing to migrate when already layered', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -312,13 +312,13 @@ describe('config CLI commands', () => {
   });
 
   // -----------------------------------------------------------------------
-  // aios config validate — error paths
+  // aiox config validate — error paths
   // -----------------------------------------------------------------------
 
-  describe('aios config validate — error paths', () => {
+  describe('aiox config validate — error paths', () => {
     test('reports malformed YAML syntax error', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': 'metadata:\n  name: "test\n  bad_indent: [unmatched',
+        '.aiox-core/framework-config.yaml': 'metadata:\n  name: "test\n  bad_indent: [unmatched',
       });
 
       try {
@@ -334,13 +334,13 @@ describe('config CLI commands', () => {
   });
 
   // -----------------------------------------------------------------------
-  // aios config init-local
+  // aiox config init-local
   // -----------------------------------------------------------------------
 
-  describe('aios config init-local', () => {
+  describe('aiox config init-local', () => {
     test('creates local-config.yaml from template', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/local-config.yaml.template': 'ide:\n  selected:\n    - vscode\n',
+        '.aiox-core/local-config.yaml.template': 'ide:\n  selected:\n    - vscode\n',
       });
 
       try {
@@ -348,7 +348,7 @@ describe('config CLI commands', () => {
         const { exitCode } = await runConfigCmd(['config', 'init-local']);
         expect(exitCode).toBe(0);
 
-        const localConfig = path.join(tmpDir, '.aios-core', 'local-config.yaml');
+        const localConfig = path.join(tmpDir, '.aiox-core', 'local-config.yaml');
         expect(fs.existsSync(localConfig)).toBe(true);
       } finally {
         cleanupTempDir(tmpDir);
@@ -357,8 +357,8 @@ describe('config CLI commands', () => {
 
     test('warns if local-config.yaml already exists', async () => {
       const tmpDir = createTempProject({
-        '.aios-core/local-config.yaml.template': 'ide:\n  selected:\n    - vscode\n',
-        '.aios-core/local-config.yaml': 'existing: true\n',
+        '.aiox-core/local-config.yaml.template': 'ide:\n  selected:\n    - vscode\n',
+        '.aiox-core/local-config.yaml': 'existing: true\n',
       });
 
       try {

@@ -9,8 +9,8 @@ const path = require('path');
 const fs = require('fs-extra');
 
 // Import the modules under test
-const ElicitationEngine = require('../../.aios-core/core/elicitation/elicitation-engine');
-const ElicitationSessionManager = require('../../.aios-core/core/elicitation/session-manager');
+const ElicitationEngine = require('../../.aiox-core/core/elicitation/elicitation-engine');
+const ElicitationSessionManager = require('../../.aiox-core/core/elicitation/session-manager');
 
 describe('Core Security Tests (Story 3.0)', () => {
   let tempDir;

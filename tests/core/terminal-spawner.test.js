@@ -14,7 +14,7 @@ const fs = require('fs').promises;
 const os = require('os');
 
 // Module under test
-const TerminalSpawner = require('../../.aios-core/core/orchestration/terminal-spawner');
+const TerminalSpawner = require('../../.aiox-core/core/orchestration/terminal-spawner');
 
 describe('TerminalSpawner', () => {
   const tmpDir = os.tmpdir();
@@ -111,7 +111,7 @@ describe('TerminalSpawner', () => {
       const contextPath = await TerminalSpawner.createContextFile(context, tmpDir);
 
       try {
-        expect(contextPath).toContain('aios-context-');
+        expect(contextPath).toContain('aiox-context-');
         expect(contextPath.endsWith('.json')).toBe(true);
 
         const content = await fs.readFile(contextPath, 'utf8');
@@ -169,7 +169,7 @@ describe('TerminalSpawner', () => {
     test('should return output when lock file is missing', async () => {
       // Create output file without lock
       const timestamp = Date.now();
-      const outputPath = path.join(tmpDir, `aios-output-${timestamp}.md`);
+      const outputPath = path.join(tmpDir, `aiox-output-${timestamp}.md`);
       await fs.writeFile(outputPath, 'Test output content');
 
       try {
@@ -181,16 +181,16 @@ describe('TerminalSpawner', () => {
     });
 
     test('should return "No output captured" if file does not exist and no lock', async () => {
-      const fakePath = path.join(tmpDir, `aios-output-nonexistent-${Date.now()}.md`);
+      const fakePath = path.join(tmpDir, `aiox-output-nonexistent-${Date.now()}.md`);
       const result = await TerminalSpawner.pollForOutput(fakePath, 500);
       expect(result).toBe('No output captured');
     });
 
     test('should timeout when lock file persists', async () => {
       const timestamp = Date.now();
-      const outputPath = path.join(tmpDir, `aios-output-${timestamp}.md`);
+      const outputPath = path.join(tmpDir, `aiox-output-${timestamp}.md`);
       // Lock file path is derived by replacing 'output' with 'lock' in pollForOutput
-      const lockPath = path.join(tmpDir, `aios-lock-${timestamp}.md`);
+      const lockPath = path.join(tmpDir, `aiox-lock-${timestamp}.md`);
 
       // Create lock file
       await fs.writeFile(lockPath, '');
@@ -206,8 +206,8 @@ describe('TerminalSpawner', () => {
 
     test('should return output after lock is removed', async () => {
       const timestamp = Date.now();
-      const outputPath = path.join(tmpDir, `aios-output-${timestamp}.md`);
-      const lockPath = path.join(tmpDir, `aios-lock-${timestamp}.lock`);
+      const outputPath = path.join(tmpDir, `aiox-output-${timestamp}.md`);
+      const lockPath = path.join(tmpDir, `aiox-lock-${timestamp}.lock`);
 
       // Create both files
       await fs.writeFile(lockPath, '');
@@ -231,12 +231,12 @@ describe('TerminalSpawner', () => {
   // Cleanup Tests (Task 2.4)
   // ============================================
   describe('cleanupOldFiles', () => {
-    test('should clean old AIOS temp files', async () => {
+    test('should clean old AIOX temp files', async () => {
       // Create old files (mock old timestamp by naming)
       const oldTimestamp = Date.now() - 7200000; // 2 hours ago
-      const oldOutputPath = path.join(tmpDir, `aios-output-${oldTimestamp}.md`);
-      const oldLockPath = path.join(tmpDir, `aios-lock-${oldTimestamp}.lock`);
-      const oldContextPath = path.join(tmpDir, `aios-context-${oldTimestamp}.json`);
+      const oldOutputPath = path.join(tmpDir, `aiox-output-${oldTimestamp}.md`);
+      const oldLockPath = path.join(tmpDir, `aiox-lock-${oldTimestamp}.lock`);
+      const oldContextPath = path.join(tmpDir, `aiox-context-${oldTimestamp}.json`);
 
       await fs.writeFile(oldOutputPath, 'old output');
       await fs.writeFile(oldLockPath, '');
@@ -255,7 +255,7 @@ describe('TerminalSpawner', () => {
 
     test('should not clean recent files', async () => {
       const recentTimestamp = Date.now();
-      const recentPath = path.join(tmpDir, `aios-output-${recentTimestamp}.md`);
+      const recentPath = path.join(tmpDir, `aiox-output-${recentTimestamp}.md`);
       await fs.writeFile(recentPath, 'recent output');
 
       try {
@@ -325,7 +325,7 @@ describe('TerminalSpawner', () => {
   // ============================================
   describe('Index Integration', () => {
     test('should be exported from orchestration index', () => {
-      const orchestration = require('../../.aios-core/core/orchestration');
+      const orchestration = require('../../.aiox-core/core/orchestration');
 
       expect(orchestration.TerminalSpawner).toBeDefined();
       expect(orchestration.spawnAgent).toBeDefined();
@@ -337,7 +337,7 @@ describe('TerminalSpawner', () => {
     });
 
     test('exported functions should be callable', () => {
-      const orchestration = require('../../.aios-core/core/orchestration');
+      const orchestration = require('../../.aiox-core/core/orchestration');
 
       expect(typeof orchestration.spawnAgent).toBe('function');
       expect(typeof orchestration.createContextFile).toBe('function');
@@ -357,7 +357,7 @@ describe('pm.sh Script', () => {
 
   test('should display help with --help flag', () => {
     const result = execSync(`bash "${scriptPath}" --help`, { encoding: 'utf8' });
-    expect(result).toContain('AIOS Multi-Modal Orchestration Script');
+    expect(result).toContain('AIOX Multi-Modal Orchestration Script');
     expect(result).toContain('Usage:');
     expect(result).toContain('Arguments:');
     expect(result).toContain('Options:');

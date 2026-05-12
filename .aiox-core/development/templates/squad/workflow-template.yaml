@@ -1,0 +1,123 @@
+# {{COMPONENTNAME}} Workflow
+#
+# {{DESCRIPTION}}
+#
+# Created: {{CREATEDAT}}
+# Story: {{STORYID}}
+
+workflow:
+  id: "{{COMPONENTNAME}}"
+  name: "{{COMPONENTNAME}}"
+  version: "1.0.0"
+  description: "{{DESCRIPTION}}"
+  type: development
+  scope: "{{SQUADNAME}}"
+
+  metadata:
+    created: "{{CREATEDAT}}"
+    author: squad-creator
+    story: "{{STORYID}}"
+    tags:
+      - workflow
+      - "{{SQUADNAME}}"
+
+  triggers:
+    - type: manual
+      command: "*{{COMPONENTNAME}}"
+    # - type: event
+    #   event: some-event-name
+    # - type: schedule
+    #   cron: "0 0 * * *"
+
+  inputs:
+    - name: param1
+      type: string
+      required: true
+      description: "Description of parameter 1"
+    - name: param2
+      type: string
+      required: false
+      default: "default-value"
+      description: "Description of parameter 2"
+
+  # Optional compatibility metadata for non-executable phase grouping.
+  phases:
+    - phase_1: Initialize
+    - phase_2: Process
+    - phase_3: Finalize
+
+  # Canonical executable contract (official): workflow.sequence[]
+  sequence:
+    - step: initialize
+      id: init
+      phase: 1
+      phase_name: "Initialize"
+      agent: "{{SQUADNAME}}-chief"
+      action: "Initialize the workflow"
+      task: "task-name-1"
+      inputs:
+        param: "{{inputs.param1}}"
+      outputs:
+        - init_output
+      next: process
+      on_failure: abort
+
+    - step: process
+      id: process
+      phase: 2
+      phase_name: "Process"
+      agent: "{{SQUADNAME}}-chief"
+      action: "Execute main processing step"
+      task: "task-name-2"
+      requires: init
+      inputs:
+        data: "{{init_output}}"
+      outputs:
+        - process_output
+      next: finalize
+      on_failure: retry
+
+    - step: finalize
+      id: finalize
+      phase: 3
+      phase_name: "Finalize"
+      agent: "{{SQUADNAME}}-chief"
+      action: "Finalize workflow execution"
+      task: "task-name-3"
+      requires: process
+      inputs:
+        data: "{{process_output}}"
+      outputs:
+        - workflow_result
+      on_complete:
+        status: success
+
+    - workflow_end: true
+      id: complete
+      action: "workflow_complete"
+
+  outputs:
+    - name: result
+      from: "{{workflow_result}}"
+      description: "Final workflow result"
+
+  handoff_prompts:
+    init_to_process: "Initialization complete. Proceeding to processing."
+    process_to_finalize: "Processing complete. Proceeding to finalization."
+
+  completion:
+    on_success:
+      message: "Workflow '{{COMPONENTNAME}}' completed successfully"
+      notify: false
+    on_failure:
+      message: "Workflow '{{COMPONENTNAME}}' failed"
+      notify: true
+      rollback: true
+
+  validation:
+    pre_run:
+      - "Check all required inputs are provided"
+      - "Validate input formats"
+    post_run:
+      - "Verify output is valid"
+      - "Log completion metrics"

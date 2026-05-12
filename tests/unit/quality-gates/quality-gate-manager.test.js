@@ -4,7 +4,7 @@
  * @story 2.10 - Quality Gate Manager
  */
 
-const { QualityGateManager } = require('../../../.aios-core/core/quality-gates/quality-gate-manager');
+const { QualityGateManager } = require('../../../.aiox-core/core/quality-gates/quality-gate-manager');
 
 describe('QualityGateManager', () => {
   let manager;

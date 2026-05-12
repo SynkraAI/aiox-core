@@ -12,33 +12,33 @@
 
 ## 📖 Visão Geral
 
-O Sistema de Greeting Contextual é uma melhoria de UX que torna os greetings dos agentes AIOS inteligentes e adaptativos, mostrando informações e comandos relevantes baseados no contexto da sessão.
+O Sistema de Greeting Contextual é uma melhoria de UX que torna os greetings dos agentes AIOX inteligentes e adaptativos, mostrando informações e comandos relevantes baseados no contexto da sessão.
 
 ## 🎯 O Que Foi Implementado
 
 ### ✅ Componentes Core (Story 6.1.2.5)
 
-1. **ContextDetector** (`.aios-core/core/session/context-detector.js`)
+1. **ContextDetector** (`.aiox-core/core/session/context-detector.js`)
    - Detecta tipo de sessão: `new`, `existing`, ou `workflow`
    - Abordagem híbrida: histórico de conversação (preferido) + arquivo de sessão (fallback)
    - TTL de 1 hora para sessões inativas
 
-2. **GitConfigDetector** (`.aios-core/infrastructure/scripts/git-config-detector.js`)
+2. **GitConfigDetector** (`.aiox-core/infrastructure/scripts/git-config-detector.js`)
    - Detecta configuração do git do projeto
    - Cache com TTL de 5 minutos
    - Timeout protection de 1000ms
 
-3. **GreetingBuilder** (`.aios-core/development/scripts/greeting-builder.js`)
+3. **GreetingBuilder** (`.aiox-core/development/scripts/greeting-builder.js`)
    - Monta greetings contextuais baseados no tipo de sessão
    - Filtra comandos por visibilidade (full/quick/key)
    - Timeout de 150ms com fallback gracioso
 
-4. **WorkflowNavigator** (`.aios-core/development/scripts/workflow-navigator.js`)
+4. **WorkflowNavigator** (`.aiox-core/development/scripts/workflow-navigator.js`)
    - Detecta estado do workflow atual
    - Sugere próximos comandos baseado no estado
    - Pre-popula comandos com contexto (story path, branch)
 
-5. **Workflow Patterns** (`.aios-core/data/workflow-patterns.yaml`)
+5. **Workflow Patterns** (`.aiox-core/data/workflow-patterns.yaml`)
    - 10 workflows comuns definidos
    - Transições de estado com sugestões de próximos passos
    - Padrões validados contra uso real do projeto
@@ -237,7 +237,7 @@ story_development:
 ### Opção 1: Script de Teste Automático
 
 ```bash
-node .aios-core/development/scripts/test-greeting-system.js
+node .aiox-core/development/scripts/test-greeting-system.js
 ```
 
 Este script testa os 4 cenários:
@@ -249,7 +249,7 @@ Este script testa os 4 cenários:
 ### Opção 2: Teste Manual via Node REPL
 
 ```javascript
-const GreetingBuilder = require('./.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('./.aiox-core/development/scripts/greeting-builder');
 const builder = new GreetingBuilder();
 
 // Mock agent
@@ -285,14 +285,14 @@ Quando a integração com o processo de ativação estiver implementada (Story 6
 ## 📁 Arquivos Relacionados
 
 ### Scripts Core
-- `.aios-core/core/session/context-detector.js` - Detecção de tipo de sessão
-- `.aios-core/infrastructure/scripts/git-config-detector.js` - Detecção de git config
-- `.aios-core/development/scripts/greeting-builder.js` - Montagem do greeting
-- `.aios-core/development/scripts/workflow-navigator.js` - Navegação de workflow
-- `.aios-core/development/scripts/agent-exit-hooks.js` - Hooks de saída (para persistência)
+- `.aiox-core/core/session/context-detector.js` - Detecção de tipo de sessão
+- `.aiox-core/infrastructure/scripts/git-config-detector.js` - Detecção de git config
+- `.aiox-core/development/scripts/greeting-builder.js` - Montagem do greeting
+- `.aiox-core/development/scripts/workflow-navigator.js` - Navegação de workflow
+- `.aiox-core/development/scripts/agent-exit-hooks.js` - Hooks de saída (para persistência)
 
 ### Data Files
-- `.aios-core/data/workflow-patterns.yaml` - Definições de workflows
+- `.aiox-core/data/workflow-patterns.yaml` - Definições de workflows
 
 ### Tests
 - `tests/unit/context-detector.test.js` - 23 testes
@@ -301,12 +301,12 @@ Quando a integração com o processo de ativação estiver implementada (Story 6
 - `tests/integration/performance.test.js` - Performance validation
 
 ### Configuration
-- `.aios-core/core-config.yaml` - Configuração global (git + agentIdentity sections)
+- `.aiox-core/core-config.yaml` - Configuração global (git + agentIdentity sections)
 
 ### Agents (Updated)
-- `.aios-core/agents/dev.md` - ✅ Command visibility metadata
-- `.aios-core/agents/po.md` - ✅ Command visibility metadata
-- `.aios-core/agents/*.md` - ⏳ Remaining 9 agents (pending update)
+- `.aiox-core/agents/dev.md` - ✅ Command visibility metadata
+- `.aiox-core/agents/po.md` - ✅ Command visibility metadata
+- `.aiox-core/agents/*.md` - ⏳ Remaining 9 agents (pending update)
 
 ## 🎯 Próximos Passos
 
@@ -363,7 +363,7 @@ A: A integração com o processo de ativação ainda não foi implementada. Os c
 A: Em uma story futura (provavelmente 6.1.4 ou 6.1.6). Depende do sistema de configuração de agentes.
 
 **Q: Como posso testar agora?**
-A: Use o script de teste: `node .aios-core/development/scripts/test-greeting-system.js`
+A: Use o script de teste: `node .aiox-core/development/scripts/test-greeting-system.js`
 
 **Q: O que acontece se um agente não tiver metadata de visibilidade?**
 A: Fallback: mostra todos os comandos (max 12). Não quebra nada.

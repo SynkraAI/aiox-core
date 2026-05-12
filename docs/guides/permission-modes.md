@@ -1,12 +1,12 @@
 # Permission Modes Guide
 
-> Control how much autonomy AIOS agents have over your system.
+> Control how much autonomy AIOX agents have over your system.
 
 ---
 
 ## Overview
 
-Permission Modes let you control the level of autonomy AIOS agents have. Whether you're exploring a new codebase or running fully autonomous builds, there's a mode for your workflow.
+Permission Modes let you control the level of autonomy AIOX agents have. Whether you're exploring a new codebase or running fully autonomous builds, there's a mode for your workflow.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -142,7 +142,7 @@ The badge shows:
 
 ## Configuration
 
-Mode is persisted in `.aios/config.yaml`:
+Mode is persisted in `.aiox/config.yaml`:
 
 ```yaml
 permissions:
@@ -237,11 +237,11 @@ The following 5 operations will be executed:
 Set mode in automation:
 
 ```yaml
-# .github/workflows/aios.yml
-- name: Run AIOS
+# .github/workflows/aiox.yml
+- name: Run AIOX
   run: |
-    echo "permissions:\n  mode: auto" > .aios/config.yaml
-    aios run build
+    echo "permissions:\n  mode: auto" > .aiox/config.yaml
+    aiox run build
 ```
 
 ### For Teams
@@ -264,10 +264,10 @@ Switch to a less restrictive mode:
 
 ### Mode not persisting
 
-Check `.aios/config.yaml` exists and is writable:
+Check `.aiox/config.yaml` exists and is writable:
 
 ```bash
-ls -la .aios/config.yaml
+ls -la .aiox/config.yaml
 ```
 
 ### Confirmations too frequent
@@ -285,7 +285,7 @@ Or use batch approval in ADE workflows.
 ## API Reference
 
 ```javascript
-const { PermissionMode, OperationGuard } = require('./.aios-core/core/permissions');
+const { PermissionMode, OperationGuard } = require('./.aiox-core/core/permissions');
 
 // Load current mode
 const mode = new PermissionMode();

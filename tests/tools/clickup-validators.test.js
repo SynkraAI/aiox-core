@@ -20,8 +20,8 @@ describeIntegration('ClickUp Tool Validators', () => {
   let clickupTool;
 
   beforeAll(async () => {
-    // Set search path to aios-core/tools
-    const toolsPath = path.join(__dirname, '../../aios-core/tools');
+    // Set search path to aiox-core/tools
+    const toolsPath = path.join(__dirname, '../../aiox-core/tools');
     toolResolver.setSearchPaths([toolsPath]);
 
     // Resolve ClickUp tool
@@ -37,7 +37,7 @@ describeIntegration('ClickUp Tool Validators', () => {
   });
 
   describeIntegration('Tool Resolution', () => {
-    test('should resolve clickup tool from aios-core/tools/mcp', async () => {
+    test('should resolve clickup tool from aiox-core/tools/mcp', async () => {
       expect(clickupTool).toBeDefined();
       expect(clickupTool.id).toBe('clickup');
       expect(clickupTool.type).toBe('mcp');

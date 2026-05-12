@@ -15,7 +15,7 @@ const {
   writeLicenseCache,
   readLicenseCache,
   getCachePath,
-  getAiosDir,
+  getAioxDir,
 } = require('../../pro/license/license-cache');
 const { FeatureGate, featureGate } = require('../../pro/license/feature-gate');
 const { generateMachineId, deriveCacheKey, generateSalt } = require('../../pro/license/license-crypto');
@@ -24,7 +24,7 @@ describe('Performance Tests (AC-13)', () => {
   let testDir;
 
   beforeEach(() => {
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-perf-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-perf-test-'));
     // Reset the singleton for each test
     featureGate._reset();
   });
@@ -200,7 +200,7 @@ describe('Performance Tests (AC-13)', () => {
     });
 
     it('should handle cache miss quickly (< 5ms)', () => {
-      const emptyDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-perf-empty-'));
+      const emptyDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-perf-empty-'));
       try {
         const result = measureTime(() => {
           readLicenseCache(emptyDir);
@@ -215,7 +215,7 @@ describe('Performance Tests (AC-13)', () => {
 
     it('should write cache in reasonable time (< 100ms)', () => {
       const data = createTestCacheData();
-      const writeDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-perf-write-'));
+      const writeDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-perf-write-'));
 
       try {
         const result = measureTime(() => {
@@ -284,7 +284,7 @@ describe('Performance Tests (AC-13)', () => {
           }, 150);
         });
 
-      const activationDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-perf-act-'));
+      const activationDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-perf-act-'));
 
       try {
         const result = await measureTimeAsync(async () => {
@@ -383,7 +383,7 @@ describe('Performance Tests (AC-13)', () => {
 
       // Perform many operations
       for (let i = 0; i < 100; i++) {
-        const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), `aios-mem-${i}-`));
+        const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), `aiox-mem-${i}-`));
         try {
           writeLicenseCache(data, tempDir);
           readLicenseCache(tempDir);

@@ -333,4 +333,4 @@ echo "~/.docker/mcp/" >> ~/.gitignore_global
 
 ---
 
-_Docker Gateway MCP Tutorial v1.0.0 - AIOS Framework_
+_Docker Gateway MCP Tutorial v1.0.0 - AIOX Framework_

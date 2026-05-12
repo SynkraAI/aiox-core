@@ -12,7 +12,7 @@
 1. [Visao Geral](#visao-geral)
 2. [Diagrama de Arquitetura Completo](#diagrama-de-arquitetura-completo)
 3. [Camada 1: Claude Code Nativo](#camada-1-claude-code-nativo)
-4. [Camada 2: AIOS Framework](#camada-2-aios-framework)
+4. [Camada 2: AIOX Framework](#camada-2-aiox-framework)
 5. [Fluxo de Ativacao de Agente (Memory Load)](#fluxo-de-ativacao-de-agente-memory-load)
 6. [Fluxo de Persistencia (Memory Save)](#fluxo-de-persistencia-memory-save)
 7. [Fluxo de Session Lifecycle](#fluxo-de-session-lifecycle)
@@ -29,19 +29,19 @@
 
 ## Visao Geral
 
-O sistema de memoria do AIOS opera em **duas camadas independentes** que coexistem mas **nao se comunicam entre si**:
+O sistema de memoria do AIOX opera em **duas camadas independentes** que coexistem mas **nao se comunicam entre si**:
 
 | Camada | Gerenciado Por | Escopo |
 |--------|---------------|--------|
 | **Camada 1: Claude Code Nativo** | Claude Code CLI | Auto Memory, CLAUDE.md, Session Transcripts |
-| **Camada 2: AIOS Framework** | Scripts JS em `.aios-core/` | Gotchas, Session State, Context Snapshots, Timeline |
+| **Camada 2: AIOX Framework** | Scripts JS em `.aiox-core/` | Gotchas, Session State, Context Snapshots, Timeline |
 
 ### Principios Chave
 
 - **Nao existe session-digest automatico** — Quando uma sessao do Claude Code fecha, nenhuma sumarizacao acontece
 - **Nao existe memory-flush automatico** — O MEMORY.md so e atualizado durante a sessao, pelo Claude
 - **Hooks de sessao existem para Gemini** mas nao estao wired no Claude Code
-- **Cada camada persiste de forma independente** — `.claude/` vs `.aios/`
+- **Cada camada persiste de forma independente** — `.claude/` vs `.aiox/`
 
 ---
 
@@ -55,7 +55,7 @@ flowchart TB
         direction TB
         CLAUDE_MD_G["CLAUDE.md Global<br/>~/.claude/CLAUDE.md"]
         CLAUDE_MD_W["CLAUDE.md Workspace<br/>Workspaces/.claude/CLAUDE.md"]
-        CLAUDE_MD_P["CLAUDE.md Projeto<br/>aios-core/.claude/CLAUDE.md"]
+        CLAUDE_MD_P["CLAUDE.md Projeto<br/>aiox-core/.claude/CLAUDE.md"]
         RULES["Rules/*.md<br/>5 arquivos de regras"]
         AUTO_MEM["Auto Memory<br/>~/.claude/projects/.../memory/MEMORY.md<br/>Primeiras 200 linhas no system prompt"]
         COMPOUND["Compound Analysis<br/>memory/compound-analysis/<br/>11 arquivos (9 conteudo + manifest + summary)"]
@@ -64,17 +64,17 @@ flowchart TB
         SESSIONS_IDX["Sessions Index<br/>sessions-index.json"]
     end
 
-    subgraph AIOS_FRAMEWORK["Camada 2: AIOS Framework"]
+    subgraph AIOX_FRAMEWORK["Camada 2: AIOX Framework"]
         direction TB
-        GOTCHAS["Gotchas Memory<br/>.aios-core/core/memory/gotchas-memory.js"]
-        CTX_SNAP["Context Snapshot<br/>.aios-core/core/memory/context-snapshot.js"]
-        FILE_EVO["File Evolution Tracker<br/>.aios-core/core/memory/file-evolution-tracker.js"]
-        TIMELINE["Timeline Manager<br/>.aios-core/core/memory/timeline-manager.js"]
-        CTX_LOADER["Session Context Loader<br/>.aios-core/core/session/context-loader.js"]
-        CTX_DETECT["Context Detector<br/>.aios-core/core/session/context-detector.js"]
-        SESS_STATE["Session State<br/>.aios-core/core/orchestration/session-state.js"]
-        HOOKS_GEM["Gemini Hooks<br/>.aios-core/hooks/gemini/"]
-        HOOKS_UNI["Unified Hooks<br/>.aios-core/hooks/unified/"]
+        GOTCHAS["Gotchas Memory<br/>.aiox-core/core/memory/gotchas-memory.js"]
+        CTX_SNAP["Context Snapshot<br/>.aiox-core/core/memory/context-snapshot.js"]
+        FILE_EVO["File Evolution Tracker<br/>.aiox-core/core/memory/file-evolution-tracker.js"]
+        TIMELINE["Timeline Manager<br/>.aiox-core/core/memory/timeline-manager.js"]
+        CTX_LOADER["Session Context Loader<br/>.aiox-core/core/session/context-loader.js"]
+        CTX_DETECT["Context Detector<br/>.aiox-core/core/session/context-detector.js"]
+        SESS_STATE["Session State<br/>.aiox-core/core/orchestration/session-state.js"]
+        HOOKS_GEM["Gemini Hooks<br/>.aiox-core/hooks/gemini/"]
+        HOOKS_UNI["Unified Hooks<br/>.aiox-core/hooks/unified/"]
     end
 
     subgraph STORAGE_CLAUDE["Storage Claude Code"]
@@ -83,13 +83,13 @@ flowchart TB
         S_AGENT_MEM[".claude/agent-memory/"]
     end
 
-    subgraph STORAGE_AIOS["Storage AIOS (.aios/)"]
-        S_GOTCHAS[".aios/gotchas.json + .md"]
-        S_ERRORS[".aios/error-tracking.json"]
-        S_SNAPSHOTS[".aios/snapshots/"]
-        S_TIMELINE[".aios/timeline/"]
-        S_FILE_EVO[".aios/file-evolution/"]
-        S_SESSION[".aios/session-state.json"]
+    subgraph STORAGE_AIOX["Storage AIOX (.aiox/)"]
+        S_GOTCHAS[".aiox/gotchas.json + .md"]
+        S_ERRORS[".aiox/error-tracking.json"]
+        S_SNAPSHOTS[".aiox/snapshots/"]
+        S_TIMELINE[".aiox/timeline/"]
+        S_FILE_EVO[".aiox/file-evolution/"]
+        S_SESSION[".aiox/session-state.json"]
         S_EPIC_STATE["docs/stories/.session-state.yaml"]
     end
 
@@ -106,37 +106,37 @@ flowchart TB
     SESS_STATE --> S_EPIC_STATE
 
     style CLAUDE_NATIVE fill:#E3F2FD,stroke:#1565C0
-    style AIOS_FRAMEWORK fill:#FFF3E0,stroke:#E65100
+    style AIOX_FRAMEWORK fill:#FFF3E0,stroke:#E65100
     style STORAGE_CLAUDE fill:#E8F5E9,stroke:#2E7D32
-    style STORAGE_AIOS fill:#FCE4EC,stroke:#C62828
+    style STORAGE_AIOX fill:#FCE4EC,stroke:#C62828
 ```
 
 ### Relacionamento entre Scripts
 
 ```mermaid
 flowchart LR
-    subgraph MEMORY_LAYER["Memory Layer (.aios-core/core/memory/)"]
+    subgraph MEMORY_LAYER["Memory Layer (.aiox-core/core/memory/)"]
         TM["timeline-manager.js"]
         FET["file-evolution-tracker.js"]
         CS["context-snapshot.js"]
         GM["gotchas-memory.js"]
     end
 
-    subgraph SESSION_LAYER["Session Layer (.aios-core/core/session/)"]
+    subgraph SESSION_LAYER["Session Layer (.aiox-core/core/session/)"]
         CL["context-loader.js"]
         CD["context-detector.js"]
     end
 
-    subgraph ORCHESTRATION["Orchestration (.aios-core/core/orchestration/)"]
+    subgraph ORCHESTRATION["Orchestration (.aiox-core/core/orchestration/)"]
         SS["session-state.js"]
     end
 
-    subgraph ACTIVATION["Activation Pipeline (.aios-core/development/scripts/)"]
+    subgraph ACTIVATION["Activation Pipeline (.aiox-core/development/scripts/)"]
         UAP["unified-activation-pipeline.js"]
         GB["greeting-builder.js"]
     end
 
-    subgraph HOOKS["Hooks System (.aios-core/hooks/)"]
+    subgraph HOOKS["Hooks System (.aiox-core/hooks/)"]
         HS["gemini/session-start.js"]
         HE["gemini/session-end.js"]
         HI["unified/hook-interface.js"]
@@ -173,8 +173,8 @@ flowchart TD
     subgraph LOAD["Carregamento Automatico — Ordem Fixa"]
         LOAD_GLOBAL["1. ~/.claude/CLAUDE.md<br/>Instrucoes globais do usuario"]
         LOAD_WORKSPACE["2. Workspaces/.claude/CLAUDE.md<br/>Instrucoes nivel workspace"]
-        LOAD_PROJECT["3. aios-core/.claude/CLAUDE.md<br/>Instrucoes nivel projeto"]
-        LOAD_RULES["4. aios-core/.claude/rules/*.md<br/>5 arquivos de regras detalhadas"]
+        LOAD_PROJECT["3. aiox-core/.claude/CLAUDE.md<br/>Instrucoes nivel projeto"]
+        LOAD_RULES["4. aiox-core/.claude/rules/*.md<br/>5 arquivos de regras detalhadas"]
         LOAD_MEMORY["5. ~/.claude/projects/.../memory/MEMORY.md<br/>Auto Memory (primeiras 200 linhas)"]
     end
 
@@ -227,8 +227,8 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph AGENT_MEM[".claude/agent-memory/"]
-        AM1["aios-architect/MEMORY.md"]
-        AM2["aios-dev/MEMORY.md"]
+        AM1["aiox-architect/MEMORY.md"]
+        AM2["aiox-dev/MEMORY.md"]
         AM3["oalanicolas/MEMORY.md"]
         AM4["pedro-valerio/MEMORY.md"]
         AM5["sop-extractor/MEMORY.md"]
@@ -237,7 +237,7 @@ flowchart LR
 
     SQUAD_AGENTS["Agentes de Squad<br/>(Claude Code Agents)"] -->|"frontmatter<br/>memory: project"| AGENT_MEM
 
-    NOTE["NOTA: Apenas agentes<br/>definidos em .claude/agents/<br/>usam esta memoria.<br/>Agentes AIOS (.aios-core/<br/>development/agents/)<br/>NAO usam."]
+    NOTE["NOTA: Apenas agentes<br/>definidos em .claude/agents/<br/>usam esta memoria.<br/>Agentes AIOX (.aiox-core/<br/>development/agents/)<br/>NAO usam."]
 
     style AGENT_MEM fill:#F3E5F5,stroke:#7B1FA2
     style NOTE fill:#FFF9C4,stroke:#F9A825
@@ -245,7 +245,7 @@ flowchart LR
 
 ---
 
-## Camada 2: AIOS Framework
+## Camada 2: AIOX Framework
 
 ### Visao dos 4 Modulos de Memoria
 
@@ -256,7 +256,7 @@ flowchart TD
         G2["Manual: *gotcha {desc}"]
         G3["Consulta: *gotchas"]
         G4["Injecao: getContextForTask()"]
-        G5[("Persiste em:<br/>.aios/gotchas.json<br/>.aios/gotchas.md<br/>.aios/error-tracking.json")]
+        G5[("Persiste em:<br/>.aiox/gotchas.json<br/>.aiox/gotchas.md<br/>.aiox/error-tracking.json")]
     end
 
     subgraph SNAPSHOTS["context-snapshot.js — Story 12.6"]
@@ -264,21 +264,21 @@ flowchart TD
         S2["restore(): recupera snapshot"]
         S3["list(): lista snapshots"]
         S4["cleanup(): max 50, 7 dias"]
-        S5[("Persiste em:<br/>.aios/snapshots/{id}.json")]
+        S5[("Persiste em:<br/>.aiox/snapshots/{id}.json")]
     end
 
     subgraph FILE_EVO["file-evolution-tracker.js"]
         F1["trackChange(): registra mudanca"]
         F2["detectDrift(): conflitos potenciais"]
         F3["getEvolution(): historico de arquivo"]
-        F4[("Persiste em:<br/>.aios/file-evolution/<br/>evolution-index.json")]
+        F4[("Persiste em:<br/>.aiox/file-evolution/<br/>evolution-index.json")]
     end
 
     subgraph TIMELINE_MGR["timeline-manager.js — Facade Unificada"]
         T1["getUnifiedTimeline(): todas as fontes"]
         T2["addEvent(): evento manual"]
         T3["autoSync(): sync periodico (60s)"]
-        T4[("Persiste em:<br/>.aios/timeline/<br/>unified-timeline.json")]
+        T4[("Persiste em:<br/>.aiox/timeline/<br/>unified-timeline.json")]
     end
 
     TIMELINE_MGR -->|"integra"| SNAPSHOTS
@@ -298,7 +298,7 @@ flowchart TD
         CD1["detectSessionType()"]
         CD2{"Conversation<br/>history?"}
         CD3["Analisa comandos recentes"]
-        CD4["Le .aios/session-state.json"]
+        CD4["Le .aiox/session-state.json"]
         CD5["Retorna: new | existing | workflow"]
         CD6{"TTL expirado?<br/>(1 hora)"}
 
@@ -320,7 +320,7 @@ flowchart TD
         CL6["Retorna: tipo, msg, agente anterior,<br/>comandos, workflow ativo"]
         CL7["updateSessionState()"]
         CL8["onTaskComplete()"]
-        CL9[("Persiste em:<br/>.aios/session-state.json<br/>TTL: 1 hora")]
+        CL9[("Persiste em:<br/>.aiox/session-state.json<br/>TTL: 1 hora")]
 
         CL1 --> CL2
         CL2 --> CL3
@@ -421,7 +421,7 @@ sequenceDiagram
 
     UAP-->>CC: {greeting, quality: full|partial|fallback}
 
-    Note over CC: NENHUMA memoria AIOS<br/>e carregada automaticamente<br/>no system prompt.<br/>Apenas contexto de sessao<br/>aparece no greeting.
+    Note over CC: NENHUMA memoria AIOX<br/>e carregada automaticamente<br/>no system prompt.<br/>Apenas contexto de sessao<br/>aparece no greeting.
 ```
 
 ---
@@ -446,14 +446,14 @@ flowchart TD
     end
 
     subgraph SAVES["O Que e Salvo"]
-        S1[".aios/session-state.json<br/>Agente atual, comandos, workflow"]
-        S2[".aios/error-tracking.json<br/>Ocorrencia do erro"]
-        S3[".aios/gotchas.json<br/>Nova gotcha auto-capturada"]
-        S4[".aios/gotchas.json<br/>Gotcha manual adicionada"]
+        S1[".aiox/session-state.json<br/>Agente atual, comandos, workflow"]
+        S2[".aiox/error-tracking.json<br/>Ocorrencia do erro"]
+        S3[".aiox/gotchas.json<br/>Nova gotcha auto-capturada"]
+        S4[".aiox/gotchas.json<br/>Gotcha manual adicionada"]
         S5["docs/stories/.session-state.yaml<br/>Phase atualizada"]
         S6["docs/stories/.session-state.yaml<br/>Story marcada done"]
-        S7[".aios/snapshots/{id}.json<br/>Contexto capturado"]
-        S8[".aios/file-evolution/<br/>Evolucao registrada"]
+        S7[".aiox/snapshots/{id}.json<br/>Contexto capturado"]
+        S8[".aiox/file-evolution/<br/>Evolucao registrada"]
     end
 
     T1 --> S1
@@ -480,7 +480,7 @@ sequenceDiagram
     participant FS as FileSystem
 
     Agent->>CL: updateSessionState(agentId, command)
-    CL->>FS: Le .aios/session-state.json
+    CL->>FS: Le .aiox/session-state.json
     FS-->>CL: estado atual (ou vazio)
 
     CL->>CL: Atualiza lastActivity
@@ -488,7 +488,7 @@ sequenceDiagram
     CL->>CL: Adiciona comando a lastCommands (max 10)
     CL->>CL: Infere workflowState do comando
 
-    CL->>FS: Escreve .aios/session-state.json
+    CL->>FS: Escreve .aiox/session-state.json
     FS-->>CL: OK
 
     Note over Agent,FS: Inferencia de workflow:<br/>36 mapeamentos task→state<br/>Ex: validate-next-story →<br/>{workflow: story_development,<br/>state: validated}
@@ -496,7 +496,7 @@ sequenceDiagram
     Agent->>CL: onTaskComplete(taskName, result)
     CL->>CL: Adiciona a taskHistory (max 20)
     CL->>CL: Atualiza workflowState
-    CL->>FS: Escreve .aios/session-state.json
+    CL->>FS: Escreve .aiox/session-state.json
 ```
 
 ---
@@ -598,7 +598,7 @@ flowchart TD
 flowchart TD
     subgraph ERROR_FLOW["Fluxo de Auto-Capture"]
         ERR([Erro Ocorre]) --> TRACK["gotchasMemory.trackError()"]
-        TRACK --> READ_ET["Le .aios/error-tracking.json"]
+        TRACK --> READ_ET["Le .aiox/error-tracking.json"]
         READ_ET --> NORMALIZE["Normaliza mensagem do erro"]
         NORMALIZE --> HASH["Gera hash da mensagem"]
         HASH --> INCREMENT["Incrementa contador"]
@@ -612,8 +612,8 @@ flowchart TD
 
         AUTO_CAPTURE --> CREATE["Cria gotcha com:<br/>- id: gotcha-{hash}<br/>- source: auto_detected<br/>- category: inferida<br/>- severity: inferida"]
 
-        CREATE --> SAVE_JSON["Salva .aios/gotchas.json"]
-        SAVE_JSON --> SAVE_MD["Gera .aios/gotchas.md"]
+        CREATE --> SAVE_JSON["Salva .aiox/gotchas.json"]
+        SAVE_JSON --> SAVE_MD["Gera .aiox/gotchas.md"]
         SAVE_MD --> EMIT["Emite evento 'gotchaAdded'"]
     end
 
@@ -639,7 +639,7 @@ flowchart TD
 ```mermaid
 classDiagram
     class GotchasStore {
-        +string schema = "aios-gotchas-memory-v1"
+        +string schema = "aiox-gotchas-memory-v1"
         +string version = "1.0.0"
         +string projectId
         +string lastUpdated
@@ -686,19 +686,19 @@ flowchart TD
         C1(["snapshot.capture(context)"]) --> C2["Gera ID unico (crypto)"]
         C2 --> C3["Captura estado git:<br/>branch, commit, dirty files"]
         C3 --> C4["Registra:<br/>storyId, agent, subtask,<br/>working directory"]
-        C4 --> C5["Salva .aios/snapshots/{id}.json"]
+        C4 --> C5["Salva .aiox/snapshots/{id}.json"]
         C5 --> C6{"autoCleanup?"}
         C6 -->|"Sim"| C7["Remove snapshots:<br/>- > 50 existentes<br/>- > 7 dias de idade"]
     end
 
     subgraph RESTORE["Restore — Recuperacao"]
-        R1(["snapshot.restore(id)"]) --> R2["Le .aios/snapshots/{id}.json"]
+        R1(["snapshot.restore(id)"]) --> R2["Le .aiox/snapshots/{id}.json"]
         R2 --> R3["Retorna contexto completo"]
         R3 --> R4["Agente pode retomar<br/>de onde parou"]
     end
 
     subgraph LIST["List — Consulta"]
-        L1(["snapshot.list()"]) --> L2["Lista todos em .aios/snapshots/"]
+        L1(["snapshot.list()"]) --> L2["Lista todos em .aiox/snapshots/"]
         L2 --> L3["Ordena por timestamp"]
         L3 --> L4["Retorna array de metadata"]
     end
@@ -715,8 +715,8 @@ flowchart TD
 ```mermaid
 flowchart TD
     subgraph SOURCES["Fontes de Dados"]
-        SRC1["FileEvolutionTracker<br/>.aios/file-evolution/"]
-        SRC2["ContextSnapshot<br/>.aios/snapshots/"]
+        SRC1["FileEvolutionTracker<br/>.aiox/file-evolution/"]
+        SRC2["ContextSnapshot<br/>.aiox/snapshots/"]
         SRC3["BuildStateManager<br/>(opcional)"]
         SRC4["Eventos manuais"]
     end
@@ -731,7 +731,7 @@ flowchart TD
     end
 
     subgraph STORAGE["Storage"]
-        ST1[(".aios/timeline/<br/>unified-timeline.json")]
+        ST1[(".aiox/timeline/<br/>unified-timeline.json")]
     end
 
     SRC1 --> TM2
@@ -758,7 +758,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    subgraph AIOS_EVENTS["Eventos AIOS"]
+    subgraph AIOX_EVENTS["Eventos AIOX"]
         E1["sessionStart"]
         E2["beforeAgent"]
         E3["beforeTool"]
@@ -829,35 +829,35 @@ flowchart TD
 
 | Arquivo | Modulo | Story/Epic | Funcao |
 |---------|--------|------------|--------|
-| `.aios-core/core/memory/gotchas-memory.js` | Memory | Epic 9, Story 9.4 | Auto-capture de erros repetidos, gotchas manuais, injecao em tasks |
-| `.aios-core/core/memory/context-snapshot.js` | Memory | Story 12.6 | Captura e restaura contexto de desenvolvimento |
-| `.aios-core/core/memory/file-evolution-tracker.js` | Memory | Gap impl | Rastreia evolucao de arquivos, detecta drift |
-| `.aios-core/core/memory/timeline-manager.js` | Memory | Gap impl | Facade unificada para timeline cross-session |
-| `.aios-core/core/session/context-loader.js` | Session | Story 2.2, 6.1.2.5 | Continuidade inter-agente, handoff de contexto |
-| `.aios-core/core/session/context-detector.js` | Session | Story 2.2 | Deteccao hibrida de tipo de sessao (new/existing/workflow) |
-| `.aios-core/core/orchestration/session-state.js` | Orchestration | Story 11.5 | Estado persistente de epic/story, crash recovery |
-| `.aios-core/core/orchestration/context-manager.js` | Orchestration | Legacy | Estado de workflow entre fases (migrado para session-state) |
-| `.aios-core/core/elicitation/session-manager.js` | Elicitation | — | Sessions de elicitacao save/load |
+| `.aiox-core/core/memory/gotchas-memory.js` | Memory | Epic 9, Story 9.4 | Auto-capture de erros repetidos, gotchas manuais, injecao em tasks |
+| `.aiox-core/core/memory/context-snapshot.js` | Memory | Story 12.6 | Captura e restaura contexto de desenvolvimento |
+| `.aiox-core/core/memory/file-evolution-tracker.js` | Memory | Gap impl | Rastreia evolucao de arquivos, detecta drift |
+| `.aiox-core/core/memory/timeline-manager.js` | Memory | Gap impl | Facade unificada para timeline cross-session |
+| `.aiox-core/core/session/context-loader.js` | Session | Story 2.2, 6.1.2.5 | Continuidade inter-agente, handoff de contexto |
+| `.aiox-core/core/session/context-detector.js` | Session | Story 2.2 | Deteccao hibrida de tipo de sessao (new/existing/workflow) |
+| `.aiox-core/core/orchestration/session-state.js` | Orchestration | Story 11.5 | Estado persistente de epic/story, crash recovery |
+| `.aiox-core/core/orchestration/context-manager.js` | Orchestration | Legacy | Estado de workflow entre fases (migrado para session-state) |
+| `.aiox-core/core/elicitation/session-manager.js` | Elicitation | — | Sessions de elicitacao save/load |
 
 ### Scripts de Ativacao (consomem memoria)
 
 | Arquivo | Funcao |
 |---------|--------|
-| `.aios-core/development/scripts/unified-activation-pipeline.js` | Orchestrador principal — carrega sessao no Tier 3 |
-| `.aios-core/development/scripts/greeting-builder.js` | Monta greeting com contexto de sessao/memoria |
+| `.aiox-core/development/scripts/unified-activation-pipeline.js` | Orchestrador principal — carrega sessao no Tier 3 |
+| `.aiox-core/development/scripts/greeting-builder.js` | Monta greeting com contexto de sessao/memoria |
 
 ### Hooks (persistencia de sessao)
 
 | Arquivo | CLI | Funcao |
 |---------|-----|--------|
-| `.aios-core/hooks/gemini/session-start.js` | Gemini | Carrega contexto AIOS no inicio da sessao |
-| `.aios-core/hooks/gemini/session-end.js` | Gemini | Persiste sumario da sessao em `.aios/sessions/` |
-| `.aios-core/hooks/gemini/before-agent.js` | Gemini | Pre-processamento antes de agente |
-| `.aios-core/hooks/gemini/before-tool.js` | Ambos | Pre-processamento antes de tool |
-| `.aios-core/hooks/gemini/after-tool.js` | Ambos | Pos-processamento apos tool |
-| `.aios-core/hooks/unified/hook-interface.js` | Ambos | Classe base UnifiedHook + EVENT_MAPPING |
-| `.aios-core/hooks/unified/hook-registry.js` | Ambos | Registro central de hooks |
-| `.aios-core/hooks/unified/index.js` | Ambos | Entry point do sistema unificado |
+| `.aiox-core/hooks/gemini/session-start.js` | Gemini | Carrega contexto AIOX no inicio da sessao |
+| `.aiox-core/hooks/gemini/session-end.js` | Gemini | Persiste sumario da sessao em `.aiox/sessions/` |
+| `.aiox-core/hooks/gemini/before-agent.js` | Gemini | Pre-processamento antes de agente |
+| `.aiox-core/hooks/gemini/before-tool.js` | Ambos | Pre-processamento antes de tool |
+| `.aiox-core/hooks/gemini/after-tool.js` | Ambos | Pos-processamento apos tool |
+| `.aiox-core/hooks/unified/hook-interface.js` | Ambos | Classe base UnifiedHook + EVENT_MAPPING |
+| `.aiox-core/hooks/unified/hook-registry.js` | Ambos | Registro central de hooks |
+| `.aiox-core/hooks/unified/index.js` | Ambos | Entry point do sistema unificado |
 
 ### Arquivos Claude Code (memoria nativa)
 
@@ -865,8 +865,8 @@ flowchart TD
 |---------|--------|
 | `~/.claude/CLAUDE.md` | Instrucoes globais (carregado sempre) |
 | `Workspaces/.claude/CLAUDE.md` | Instrucoes workspace (carregado sempre) |
-| `aios-core/.claude/CLAUDE.md` | Instrucoes projeto (carregado sempre) |
-| `aios-core/.claude/rules/*.md` | 5 arquivos de regras (carregados sempre) |
+| `aiox-core/.claude/CLAUDE.md` | Instrucoes projeto (carregado sempre) |
+| `aiox-core/.claude/rules/*.md` | 5 arquivos de regras (carregados sempre) |
 | `~/.claude/projects/.../memory/MEMORY.md` | Auto memory (primeiras 200 linhas, carregado sempre) |
 | `~/.claude/projects/.../memory/compound-analysis/*.md` | 9 arquivos de analise sintetizada (referenciados do MEMORY.md) |
 | `.claude/agent-memory/{agent}/MEMORY.md` | Memoria por agente de squad (6 agentes) |
@@ -877,7 +877,7 @@ flowchart TD
 ## Mapa de Storage Persistente
 
 ```
-.aios/                                        # Runtime state (gitignored)
+.aiox/                                        # Runtime state (gitignored)
 ├── session-state.json                        # [context-loader] Sessao inter-agente (TTL: 1h)
 ├── gotchas.json                              # [gotchas-memory] Gotchas estruturadas
 ├── gotchas.md                                # [gotchas-memory] Gotchas legivel
@@ -917,8 +917,8 @@ docs/stories/
 └── {session-id}.jsonl                        # [Claude Code] Transcricao completa
 
 .claude/agent-memory/                         # [Claude Code Agents] Memoria por agente
-├── aios-architect/MEMORY.md
-├── aios-dev/MEMORY.md
+├── aiox-architect/MEMORY.md
+├── aiox-dev/MEMORY.md
 ├── oalanicolas/MEMORY.md
 ├── pedro-valerio/MEMORY.md
 ├── sop-extractor/MEMORY.md
@@ -947,7 +947,7 @@ Quando uma sessao fecha, o conhecimento contextual e **perdido** exceto:
 IMPACTO: HIGH
 ```
 
-Os modulos AIOS (gotchas, snapshots, timeline) **nao fazem flush** automatico ao final da sessao. Dados em memoria podem se perder se o processo terminar abruptamente.
+Os modulos AIOX (gotchas, snapshots, timeline) **nao fazem flush** automatico ao final da sessao. Dados em memoria podem se perder se o processo terminar abruptamente.
 
 ### Gap 3: Hooks Gemini Nao Portados
 
@@ -963,7 +963,7 @@ IMPACTO: MEDIUM
 IMPACTO: MEDIUM
 ```
 
-Claude auto-memory (`MEMORY.md`) e AIOS memory (`.aios/`) nunca se sincronizam. Gotchas capturadas pelo AIOS nao aparecem no MEMORY.md e vice-versa.
+Claude auto-memory (`MEMORY.md`) e AIOX memory (`.aiox/`) nunca se sincronizam. Gotchas capturadas pelo AIOX nao aparecem no MEMORY.md e vice-versa.
 
 ### Gap 5: compound-analysis Estatico
 
@@ -980,23 +980,23 @@ Os 9 arquivos em `memory/compound-analysis/` foram gerados por ferramenta extern
 | Recurso | Caminho |
 |---------|---------|
 | Activation Pipeline Guide | `docs/guides/agents/traces/00-shared-activation-pipeline.md` |
-| Gotchas Memory Script | `.aios-core/core/memory/gotchas-memory.js` |
-| Context Snapshot Script | `.aios-core/core/memory/context-snapshot.js` |
-| File Evolution Tracker | `.aios-core/core/memory/file-evolution-tracker.js` |
-| Timeline Manager | `.aios-core/core/memory/timeline-manager.js` |
-| Session Context Loader | `.aios-core/core/session/context-loader.js` |
-| Context Detector | `.aios-core/core/session/context-detector.js` |
-| Session State | `.aios-core/core/orchestration/session-state.js` |
-| Unified Hook Interface | `.aios-core/hooks/unified/hook-interface.js` |
-| Hook Registry | `.aios-core/hooks/unified/hook-registry.js` |
-| Gemini Session Start | `.aios-core/hooks/gemini/session-start.js` |
-| Gemini Session End | `.aios-core/hooks/gemini/session-end.js` |
-| Core Config | `.aios-core/core-config.yaml` |
+| Gotchas Memory Script | `.aiox-core/core/memory/gotchas-memory.js` |
+| Context Snapshot Script | `.aiox-core/core/memory/context-snapshot.js` |
+| File Evolution Tracker | `.aiox-core/core/memory/file-evolution-tracker.js` |
+| Timeline Manager | `.aiox-core/core/memory/timeline-manager.js` |
+| Session Context Loader | `.aiox-core/core/session/context-loader.js` |
+| Context Detector | `.aiox-core/core/session/context-detector.js` |
+| Session State | `.aiox-core/core/orchestration/session-state.js` |
+| Unified Hook Interface | `.aiox-core/hooks/unified/hook-interface.js` |
+| Hook Registry | `.aiox-core/hooks/unified/hook-registry.js` |
+| Gemini Session Start | `.aiox-core/hooks/gemini/session-start.js` |
+| Gemini Session End | `.aiox-core/hooks/gemini/session-end.js` |
+| Core Config | `.aiox-core/core-config.yaml` |
 | Claude Settings | `~/.claude/settings.json` |
 | Story Development Cycle | `docs/guides/workflows/STORY-DEVELOPMENT-CYCLE-WORKFLOW.md` |
 
 ---
 
-*AIOS Memory System Architecture Guide v1.0*
+*AIOX Memory System Architecture Guide v1.0*
 *Traced from source code, not documentation.*
 *@architect (Aria) — arquitetando o futuro*

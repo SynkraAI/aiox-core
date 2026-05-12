@@ -1,0 +1,79 @@
+{
+  "$schema": "https://geminicli.com/schemas/settings.json",
+  "previewFeatures": true,
+  "folderTrust": {
+    "enabled": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-session-init",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/session-start.js",
+            "timeout": 5000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-context-inject",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/before-agent.js",
+            "timeout": 3000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "write_file|replace|shell",
+        "hooks": [
+          {
+            "name": "aiox-security-check",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/before-tool.js",
+            "timeout": 2000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-audit-log",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/after-tool.js",
+            "timeout": 2000,
+            "enabled": false
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-session-persist",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/session-end.js",
+            "timeout": 5000,
+            "enabled": false
+          }
+        ]
+      }
+    ]
+  }
+}

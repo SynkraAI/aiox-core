@@ -1,4 +1,4 @@
-# AIOS-Core Installation & Troubleshooting Guide
+# AIOX-Core Installation & Troubleshooting Guide
 
 > **EN** | [PT](../pt/guides/installation-troubleshooting.md) | [ES](../es/guides/installation-troubleshooting.md)
 
@@ -7,10 +7,10 @@
 ## Quick Start
 
 ```bash
-npx aios-core@latest
+npx aiox-core@latest
 ```
 
-This command downloads and runs the latest version of AIOS-Core installer.
+This command downloads and runs the latest version of AIOX-Core installer.
 
 ## System Requirements
 
@@ -34,29 +34,29 @@ This command downloads and runs the latest version of AIOS-Core installer.
 
 ```bash
 # Install in current directory
-npx aios-core@latest
+npx aiox-core@latest
 
 # Install with specific version
-npx aios-core@2.2.0
+npx aiox-core@2.2.0
 
 # Show version
-npx aios-core@latest --version
+npx aiox-core@latest --version
 
 # Show help
-npx aios-core@latest --help
+npx aiox-core@latest --help
 ```
 
 ### Method 2: From GitHub
 
 ```bash
-npx github:SynkraAI/aios-core install
+npx github:SynkraAI/aiox-core install
 ```
 
 ### Method 3: Global Installation
 
 ```bash
-npm install -g aios-core
-aios-core
+npm install -g aiox-core
+aiox-core
 ```
 
 ---
@@ -67,17 +67,17 @@ If you're having installation issues, run our diagnostic tool:
 
 ### Windows (CMD)
 ```cmd
-curl -o diagnose.cmd https://raw.githubusercontent.com/SynkraAI/aios-core/main/tools/quick-diagnose.cmd && diagnose.cmd
+curl -o diagnose.cmd https://raw.githubusercontent.com/SynkraAI/aiox-core/main/tools/quick-diagnose.cmd && diagnose.cmd
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/SynkraAI/aios-core/main/tools/quick-diagnose.ps1 | iex
+irm https://raw.githubusercontent.com/SynkraAI/aiox-core/main/tools/quick-diagnose.ps1 | iex
 ```
 
 ### macOS/Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SynkraAI/aios-core/main/tools/diagnose-installation.js | node
+curl -fsSL https://raw.githubusercontent.com/SynkraAI/aiox-core/main/tools/diagnose-installation.js | node
 ```
 
 ---
@@ -219,7 +219,7 @@ npm cache clean --force
 rm -rf node_modules
 
 # Try again
-npx aios-core@latest
+npx aiox-core@latest
 ```
 
 ---
@@ -247,10 +247,10 @@ npm config set cafile /path/to/certificate.pem
 npx clear-npx-cache
 
 # Or force fresh download
-npx --ignore-existing aios-core@latest
+npx --ignore-existing aiox-core@latest
 
 # Or use specific version
-npx aios-core@2.2.0
+npx aiox-core@2.2.0
 ```
 
 ---
@@ -270,10 +270,10 @@ npm --version
 npx --version
 
 # 4. Check npm registry access
-npm view aios-core version
+npm view aiox-core version
 
 # 5. Test installation
-npx aios-core@latest --version
+npx aiox-core@latest --version
 ```
 
 **Expected output:**
@@ -291,9 +291,9 @@ v22.x.x (or v18+/v20+)
 
 If you're still having issues:
 
-1. **GitHub Issues**: https://github.com/SynkraAI/aios-core/issues
-2. **Run diagnostics**: `npx aios-core@latest doctor`
-3. **Check system info**: `npx aios-core@latest info`
+1. **GitHub Issues**: https://github.com/SynkraAI/aiox-core/issues
+2. **Run diagnostics**: `npx aiox-core@latest doctor`
+3. **Check system info**: `npx aiox-core@latest info`
 
 When reporting issues, please include:
 - Operating system and version
@@ -308,14 +308,14 @@ When reporting issues, please include:
 
 | Command | Description |
 |---------|-------------|
-| `npx aios-core@latest` | Install/run wizard |
-| `npx aios-core@latest --version` | Show version |
-| `npx aios-core@latest --help` | Show help |
-| `npx aios-core@latest install` | Install in current dir |
-| `npx aios-core@latest init <name>` | Create new project |
-| `npx aios-core@latest doctor` | Run diagnostics |
-| `npx aios-core@latest info` | Show system info |
+| `npx aiox-core@latest` | Install/run wizard |
+| `npx aiox-core@latest --version` | Show version |
+| `npx aiox-core@latest --help` | Show help |
+| `npx aiox-core@latest install` | Install in current dir |
+| `npx aiox-core@latest init <name>` | Create new project |
+| `npx aiox-core@latest doctor` | Run diagnostics |
+| `npx aiox-core@latest info` | Show system info |
 
 ---
 
-*Last updated: December 2025 | AIOS-Core v2.2.0*
+*Last updated: December 2025 | AIOX-Core v2.2.0*

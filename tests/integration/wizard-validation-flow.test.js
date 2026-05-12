@@ -12,13 +12,13 @@ describe('Wizard Validation Flow', () => {
       files: {
         ideConfigs: [],
         env: '.env',
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
         mcpConfig: '.mcp.json',
       },
       configs: {
         env: { envCreated: true, coreConfigCreated: true },
         mcps: {},
-        coreConfig: '.aios-core/core-config.yaml',
+        coreConfig: '.aiox-core/core-config.yaml',
       },
       dependencies: {
         success: true,

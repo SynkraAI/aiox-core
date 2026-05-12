@@ -13,7 +13,7 @@
 
 ## Contexto
 
-AIOS precisa de um sistema abrangente de health check para:
+AIOX precisa de um sistema abrangente de health check para:
 
 1. **Diagnosticar problemas** em configuração do projeto, ambiente e integrações
 2. **Habilitar auto-correção** para problemas comuns sem intervenção manual
@@ -86,7 +86,7 @@ Implementaremos um **Sistema Híbrido de Health Check** com a seguinte arquitetu
 **Estrutura:**
 
 ```
-.aios-core/core/health-check/
+.aiox-core/core/health-check/
 ├── checks/           # Checks JavaScript core (33 checks)
 │   ├── project/
 │   ├── local/
@@ -95,7 +95,7 @@ Implementaremos um **Sistema Híbrido de Health Check** com a seguinte arquitetu
 │   └── services/
 └── ...
 
-.aios/
+.aiox/
 └── custom-checks.yaml  # Checks YAML específicos do projeto
 ```
 
@@ -326,11 +326,11 @@ tools/
 
 **Contras:**
 
-- Sem checks específicos do AIOS
+- Sem checks específicos do AIOX
 - Capacidades limitadas de auto-correção
 - Dependência de projeto externo
 
-**Veredito:** ❌ Rejeitado - Não atende requisitos específicos do AIOS
+**Veredito:** ❌ Rejeitado - Não atende requisitos específicos do AIOX
 
 ---
 

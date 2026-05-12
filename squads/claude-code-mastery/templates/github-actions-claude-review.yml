@@ -1,0 +1,179 @@
+# GitHub Actions Workflow — Automated PR Review with Claude Code
+# Squad: claude-code-mastery
+# Template: Drop into .github/workflows/ and configure secrets
+#
+# Prerequisites:
+#   1. Store ANTHROPIC_API_KEY in GitHub repository secrets
+#   2. Enable "Allow GitHub Actions to create and approve pull requests" in repo settings
+#
+# Usage:
+#   Automatically triggered on PR open/update. Posts a review comment with findings.
+
+name: Claude Code PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+    # Optionally limit to specific paths:
+    # paths:
+    #   - 'src/**'
+    #   - 'packages/**'
+
+# Required permissions for posting PR comments
+permissions:
+  contents: read
+  pull-requests: write
+
+# Prevent concurrent reviews on the same PR
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Claude Code Review
+    # Skip draft PRs and bot-authored PRs
+    if: |
+      !github.event.pull_request.draft &&
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      github.event.pull_request.user.login != 'claude-code[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Get PR Context
+        id: pr-context
+        run: |
+          # Get the diff between base and head
+          git diff origin/${{ github.base_ref }}...HEAD > /tmp/pr-diff.txt
+          DIFF_SIZE=$(wc -c < /tmp/pr-diff.txt)
+          FILES_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l)
+          echo "diff_size=$DIFF_SIZE" >> $GITHUB_OUTPUT
+          echo "files_changed=$FILES_CHANGED" >> $GITHUB_OUTPUT
+
+          # Get the file list for context
+          git diff --name-only origin/${{ github.base_ref }}...HEAD > /tmp/files-changed.txt
+
+      - name: Skip Large PRs
+        if: steps.pr-context.outputs.diff_size > 200000
+        run: |
+          echo "PR diff is too large (${{ steps.pr-context.outputs.diff_size }} bytes). Skipping automated review."
+          echo "Consider breaking this PR into smaller changes."
+          exit 0
+
+      - name: Run Claude Review
+        id: review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # Truncate diff to avoid token limits (50KB)
+          head -c 50000 /tmp/pr-diff.txt > /tmp/pr-diff-truncated.txt
+
+          PROMPT="You are a senior code reviewer. Review this pull request diff and provide actionable feedback.
+
+          PR Title: ${{ github.event.pull_request.title }}
+          PR Description: ${{ github.event.pull_request.body }}
+          Files Changed: ${{ steps.pr-context.outputs.files_changed }}
+          Changed Files: $(cat /tmp/files-changed.txt)
+
+          Focus on:
+          1. Bugs and logic errors
+          2. Security vulnerabilities
+          3. Performance issues
+          4. Code quality and maintainability
+          5. Missing error handling
+          6. Test coverage gaps
+
+          Format your response as:
+          ## Summary
+          [1-2 sentence summary]
+
+          ## Findings
+          For each finding:
+          - **[SEVERITY]** File: description
+            Suggestion: how to fix
+
+          Severity levels: CRITICAL, HIGH, MEDIUM, LOW, INFO
+
+          ## Verdict
+          APPROVE / REQUEST_CHANGES / COMMENT
+
+          Diff:
+          $(cat /tmp/pr-diff-truncated.txt)"
+
+          claude -p \
+            --output-format text \
+            --max-turns 3 \
+            "$PROMPT" > /tmp/review-output.txt 2>/tmp/review-error.txt || true
+
+          # Check if review was generated
+          if [ -s /tmp/review-output.txt ]; then
+            echo "review_success=true" >> $GITHUB_OUTPUT
+          else
+            echo "review_success=false" >> $GITHUB_OUTPUT
+            echo "Review generation failed. Error output:"
+            cat /tmp/review-error.txt
+          fi
+
+      - name: Post Review Comment
+        if: steps.review.outputs.review_success == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const review = fs.readFileSync('/tmp/review-output.txt', 'utf8');
+
+            // Check for existing Claude review comment and update it
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existingComment = comments.find(c =>
+              c.body.includes('<!-- claude-code-review -->')
+            );
+
+            const body = `<!-- claude-code-review -->
+            ## Claude Code Review
+
+            ${review}
+
+            ---
+            *Automated review by [Claude Code](https://claude.ai/code) | Commit: \`${context.sha.substring(0, 7)}\` | Files: ${process.env.FILES_CHANGED}*`;
+
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body,
+              });
+            }
+        env:
+          FILES_CHANGED: ${{ steps.pr-context.outputs.files_changed }}
+
+      - name: Review Failed
+        if: steps.review.outputs.review_success == 'false'
+        run: |
+          echo "::warning::Claude Code review could not be generated. This is non-blocking."

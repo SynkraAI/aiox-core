@@ -27,7 +27,7 @@ const {
   hasExecutor,
   getAvailableEpics,
   EXECUTOR_MAP,
-} = require('../../.aios-core/core/orchestration/executors');
+} = require('../../.aiox-core/core/orchestration/executors');
 
 describe('Epic Executors (Story 0.3)', () => {
   let tempDir;

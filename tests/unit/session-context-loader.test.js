@@ -7,11 +7,11 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const SessionContextLoader = require('../../.aios-core/scripts/session-context-loader');
+const SessionContextLoader = require('../../.aiox-core/scripts/session-context-loader');
 
 describe('SessionContextLoader', () => {
   let loader;
-  const testSessionPath = path.join(process.cwd(), '.aios', 'session-state-test.json');
+  const testSessionPath = path.join(process.cwd(), '.aiox', 'session-state-test.json');
 
   beforeEach(() => {
     loader = new SessionContextLoader();

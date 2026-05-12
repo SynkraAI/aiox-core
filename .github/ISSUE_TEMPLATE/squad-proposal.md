@@ -1,6 +1,6 @@
 ---
 name: Squad Proposal
-about: Propose a new AIOS Squad for the framework
+about: Propose a new AIOX Squad for the framework
 title: '[SQUAD] '
 labels: ['squad', 'new-squad', 'needs-triage']
 assignees: ''
@@ -15,9 +15,9 @@ assignees: ''
 - **Author:** (Your name/org)
 
 ### 📋 Description
-A clear and concise description of what this AIOS Squad does and what domain it covers.
+A clear and concise description of what this AIOX Squad does and what domain it covers.
 
-> AIOS Squads are modular teams of AI agents that work together to accomplish specialized tasks.
+> AIOX Squads are modular teams of AI agents that work together to accomplish specialized tasks.
 
 ### 🎯 Purpose
 What problem does this squad solve? What domain or use case does it address?
@@ -40,7 +40,7 @@ What problem does this squad solve? What domain or use case does it address?
 
 ### 🔗 Integration Points
 How does this squad integrate with:
-- Core AIOS framework (aios-core)?
+- Core AIOX framework (aiox-core)?
 - Other squads (ETL, Creator, MMOS)?
 - External services/APIs?
 
@@ -57,16 +57,16 @@ Provide 2-3 concrete use cases:
 *task-1 --option value
 
 # Or via CLI
-aios squad activate my-domain
+aiox squad activate my-domain
 ```
 
 ### 📦 Dependencies
-- **Core Framework:** Required aios-core version?
-- **Other Squads:** Any dependencies on other AIOS Squads?
+- **Core Framework:** Required aiox-core version?
+- **Other Squads:** Any dependencies on other AIOX Squads?
 - **External Services:** Any API keys or external services needed?
 
 ### 🔒 License & Distribution
-- [ ] This squad will be open-source (MIT) in `aios-squads` repo
+- [ ] This squad will be open-source (MIT) in `aiox-squads` repo
 - [ ] This squad requires proprietary license
 - [ ] This squad will be community-contributed
 
@@ -77,7 +77,7 @@ aios squad activate my-domain
 - [ ] Integration guide with existing squads
 
 ### ✅ Checklist
-- [ ] Squad follows AIOS structure (`{squad}/agents/`, `{squad}/tasks/`, etc.)
+- [ ] Squad follows AIOX structure (`{squad}/agents/`, `{squad}/tasks/`, etc.)
 - [ ] All agents follow naming convention (`{agent-name}.md`)
 - [ ] All tasks have proper YAML frontmatter
 - [ ] pack.yaml manifest is included
@@ -96,6 +96,6 @@ aios squad activate my-domain
 
 ---
 
-**Note:** All squad proposals are reviewed by maintainers. Approved squads may be included in the official `aios-squads` repository.
+**Note:** All squad proposals are reviewed by maintainers. Approved squads may be included in the official `aiox-squads` repository.
 
-**Tagline:** *AIOS Squads: Equipes de AI agents trabalhando com você* 🤖
+**Tagline:** *AIOX Squads: Equipes de AI agents trabalhando com você* 🤖

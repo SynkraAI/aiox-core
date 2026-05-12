@@ -16,7 +16,7 @@ const {
   configureEnvironment,
 } = require('../../packages/installer/src/config/configure-environment');
 const { generateIDEConfigs } = require('../../packages/installer/src/wizard/ide-config-generator');
-const { installAiosCore, hasPackageJson } = require('../../packages/installer/src/installer/aios-core-installer');
+const { installAioxCore, hasPackageJson } = require('../../packages/installer/src/installer/aiox-core-installer');
 
 // Mock dependencies
 jest.mock('inquirer');
@@ -24,7 +24,7 @@ jest.mock('fs-extra');
 jest.mock('../../packages/installer/src/installer/dependency-installer');
 jest.mock('../../packages/installer/src/config/configure-environment');
 jest.mock('../../packages/installer/src/wizard/ide-config-generator');
-jest.mock('../../packages/installer/src/installer/aios-core-installer');
+jest.mock('../../packages/installer/src/installer/aiox-core-installer');
 jest.mock('../../bin/modules/mcp-installer', () => ({
   installProjectMCPs: jest.fn().mockResolvedValue({
     success: true,
@@ -75,8 +75,8 @@ describe('Wizard Integration - Story 1.7', () => {
       errors: [],
     });
 
-    // Mock AIOS core installer
-    installAiosCore.mockResolvedValue({
+    // Mock AIOX core installer
+    installAioxCore.mockResolvedValue({
       success: true,
       installedFiles: ['agents/dev.md', 'tasks/create-story.yaml'],
       installedFolders: ['agents', 'tasks', 'workflows', 'templates'],
@@ -118,17 +118,17 @@ describe('Wizard Integration - Story 1.7', () => {
       expect(answers.depsResult.success).toBe(true);
     });
 
-    it('should install AIOS core before IDE configs', async () => {
+    it('should install AIOX core before IDE configs', async () => {
       await runWizard();
 
-      // Verify AIOS core was installed
-      expect(installAiosCore).toHaveBeenCalled();
+      // Verify AIOX core was installed
+      expect(installAioxCore).toHaveBeenCalled();
 
-      // Verify order: AIOS core before IDE configs
-      const aiosCoreCallOrder = installAiosCore.mock.invocationCallOrder[0];
+      // Verify order: AIOX core before IDE configs
+      const aioxCoreCallOrder = installAioxCore.mock.invocationCallOrder[0];
       const ideConfigCallOrder = generateIDEConfigs.mock.invocationCallOrder[0];
 
-      expect(aiosCoreCallOrder).toBeLessThan(ideConfigCallOrder);
+      expect(aioxCoreCallOrder).toBeLessThan(ideConfigCallOrder);
     });
 
     it('should install dependencies after env configuration', async () => {
@@ -424,7 +424,7 @@ describe('Wizard Integration - Story 1.7', () => {
       expect(answers.envConfigured).toBeDefined(); // Story 1.6
       expect(answers.packageManager).toBeDefined(); // Story 1.7 (auto-detected)
       expect(answers.depsInstalled).toBeDefined(); // Story 1.7
-      expect(answers.aiosCoreInstalled).toBeDefined(); // Story 1.4 - AIOS core
+      expect(answers.aioxCoreInstalled).toBeDefined(); // Story 1.4 - AIOX core
     });
 
     it('should handle environment config failure gracefully', async () => {
@@ -450,12 +450,12 @@ describe('Wizard Integration - Story 1.7', () => {
       expect(installDependencies).toHaveBeenCalled();
     });
 
-    it('should handle AIOS core installation failure gracefully', async () => {
-      installAiosCore.mockRejectedValue(new Error('AIOS core installation failed'));
+    it('should handle AIOX core installation failure gracefully', async () => {
+      installAioxCore.mockRejectedValue(new Error('AIOX core installation failed'));
 
       const answers = await runWizard();
 
-      expect(answers.aiosCoreInstalled).toBe(false);
+      expect(answers.aioxCoreInstalled).toBe(false);
       // Should still proceed to other steps
       expect(configureEnvironment).toHaveBeenCalled();
     });

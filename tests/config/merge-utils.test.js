@@ -3,7 +3,7 @@
  * Story PRO-4 — Config Hierarchy
  */
 
-const { deepMerge, mergeAll, isPlainObject } = require('../../.aios-core/core/config/merge-utils');
+const { deepMerge, mergeAll, isPlainObject } = require('../../.aiox-core/core/config/merge-utils');
 
 describe('merge-utils', () => {
   describe('isPlainObject', () => {

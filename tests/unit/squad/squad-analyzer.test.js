@@ -19,7 +19,7 @@ const {
   SquadAnalyzerError,
   ErrorCodes,
   COMPONENT_DIRECTORIES,
-} = require('../../../.aios-core/development/scripts/squad/squad-analyzer');
+} = require('../../../.aiox-core/development/scripts/squad/squad-analyzer');
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');

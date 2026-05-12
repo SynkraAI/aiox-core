@@ -135,7 +135,7 @@ async function validateEnvFile(results) {
  * Validate core-config.yaml
  * @private
  */
-async function validateCoreConfig(results, configPath = '.aios-core/core-config.yaml') {
+async function validateCoreConfig(results, configPath = '.aiox-core/core-config.yaml') {
   if (!fs.existsSync(configPath)) {
     results.warnings.push({
       severity: 'medium',
@@ -294,7 +294,7 @@ async function validateGitignore(results) {
 
     // Critical entries - .env is always critical, node_modules is critical but has variations
     const criticalEntries = ['.env'];
-    const recommendedEntries = ['.env.local', '*.key', '*.pem', '.aios/install-log.txt'];
+    const recommendedEntries = ['.env.local', '*.key', '*.pem', '.aiox/install-log.txt'];
 
     // Check critical entries
     for (const entry of criticalEntries) {

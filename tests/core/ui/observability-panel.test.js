@@ -24,9 +24,9 @@ const {
   PanelMode,
   PipelineStage,
   createDefaultState,
-} = require('../../../.aios-core/core/ui/observability-panel');
+} = require('../../../.aiox-core/core/ui/observability-panel');
 
-const { PanelRenderer, BOX, STATUS } = require('../../../.aios-core/core/ui/panel-renderer');
+const { PanelRenderer, BOX, STATUS } = require('../../../.aiox-core/core/ui/panel-renderer');
 
 describe('ObservabilityPanel', () => {
   describe('createPanel', () => {

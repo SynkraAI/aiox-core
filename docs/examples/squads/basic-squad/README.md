@@ -1,6 +1,6 @@
 # Basic Squad Example
 
-A minimal squad demonstrating the essential structure required for AIOS squads.
+A minimal squad demonstrating the essential structure required for AIOX squads.
 
 ## Structure
 

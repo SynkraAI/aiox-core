@@ -23,8 +23,8 @@ const {
   CONFIG_FILES,
   LEVELS,
   VALID_USER_PROFILES,
-} = require('../../.aios-core/core/config/config-resolver');
-const { globalConfigCache } = require('../../.aios-core/core/config/config-cache');
+} = require('../../.aiox-core/core/config/config-resolver');
+const { globalConfigCache } = require('../../.aiox-core/core/config/config-cache');
 
 const FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
@@ -32,9 +32,9 @@ const FIXTURES_DIR = path.join(__dirname, 'fixtures');
  * Create a temporary project directory with specific config files.
  */
 function createTempProject(files = {}) {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-config-test-'));
-  const aiosCoreDir = path.join(tmpDir, '.aios-core');
-  fs.mkdirSync(aiosCoreDir, { recursive: true });
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-config-test-'));
+  const aioxCoreDir = path.join(tmpDir, '.aiox-core');
+  fs.mkdirSync(aioxCoreDir, { recursive: true });
 
   for (const [relativePath, content] of Object.entries(files)) {
     const fullPath = path.join(tmpDir, relativePath);
@@ -75,8 +75,8 @@ describe('config-resolver', () => {
       expect(CONFIG_FILES).toHaveProperty('user');
     });
 
-    test('CONFIG_FILES.user points to ~/.aios/user-config.yaml', () => {
-      const expected = path.join(os.homedir(), '.aios', 'user-config.yaml');
+    test('CONFIG_FILES.user points to ~/.aiox/user-config.yaml', () => {
+      const expected = path.join(os.homedir(), '.aiox', 'user-config.yaml');
       expect(CONFIG_FILES.user).toBe(expected);
     });
 
@@ -100,7 +100,7 @@ describe('config-resolver', () => {
   describe('isLegacyMode', () => {
     test('returns true when core-config.yaml exists but framework-config.yaml does not', () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': 'project:\n  name: legacy\n',
+        '.aiox-core/core-config.yaml': 'project:\n  name: legacy\n',
       });
 
       try {
@@ -112,8 +112,8 @@ describe('config-resolver', () => {
 
     test('returns false when framework-config.yaml exists', () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': 'project:\n  name: legacy\n',
-        '.aios-core/framework-config.yaml': 'metadata:\n  version: "1.0"\n',
+        '.aiox-core/core-config.yaml': 'project:\n  name: legacy\n',
+        '.aiox-core/framework-config.yaml': 'metadata:\n  version: "1.0"\n',
       });
 
       try {
@@ -137,13 +137,13 @@ describe('config-resolver', () => {
   describe('getConfigAtLevel', () => {
     test('loads framework config at L1', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       try {
         const config = getConfigAtLevel(tmpDir, 'L1');
         expect(config).toBeTruthy();
-        expect(config.metadata.framework_name).toBe('AIOS-FullStack');
+        expect(config.metadata.framework_name).toBe('AIOX-FullStack');
       } finally {
         cleanupTempDir(tmpDir);
       }
@@ -151,7 +151,7 @@ describe('config-resolver', () => {
 
     test('loads project config at L2', () => {
       const tmpDir = createTempProject({
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -189,7 +189,7 @@ describe('config-resolver', () => {
 
     test('supports string aliases (1, 2, L1, L2, etc.)', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       try {
@@ -208,7 +208,7 @@ describe('config-resolver', () => {
   describe('loadLegacyConfig', () => {
     test('loads monolithic core-config.yaml', () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
+        '.aiox-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
       });
 
       try {
@@ -221,42 +221,42 @@ describe('config-resolver', () => {
 
     test('includes deprecation warning', () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
+        '.aiox-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
       });
-      const origEnv = process.env.AIOS_SUPPRESS_DEPRECATION;
+      const origEnv = process.env.AIOX_SUPPRESS_DEPRECATION;
 
       try {
-        delete process.env.AIOS_SUPPRESS_DEPRECATION;
+        delete process.env.AIOX_SUPPRESS_DEPRECATION;
 
         const result = loadLegacyConfig(tmpDir);
         expect(result.warnings.length).toBeGreaterThan(0);
         expect(result.warnings[0]).toContain('DEPRECATION');
       } finally {
         if (origEnv === undefined) {
-          delete process.env.AIOS_SUPPRESS_DEPRECATION;
+          delete process.env.AIOX_SUPPRESS_DEPRECATION;
         } else {
-          process.env.AIOS_SUPPRESS_DEPRECATION = origEnv;
+          process.env.AIOX_SUPPRESS_DEPRECATION = origEnv;
         }
         cleanupTempDir(tmpDir);
       }
     });
 
-    test('suppresses deprecation when AIOS_SUPPRESS_DEPRECATION=true', () => {
+    test('suppresses deprecation when AIOX_SUPPRESS_DEPRECATION=true', () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
+        '.aiox-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
       });
-      const origEnv = process.env.AIOS_SUPPRESS_DEPRECATION;
+      const origEnv = process.env.AIOX_SUPPRESS_DEPRECATION;
 
       try {
-        process.env.AIOS_SUPPRESS_DEPRECATION = 'true';
+        process.env.AIOX_SUPPRESS_DEPRECATION = 'true';
 
         const result = loadLegacyConfig(tmpDir);
         expect(result.warnings).toHaveLength(0);
       } finally {
         if (origEnv === undefined) {
-          delete process.env.AIOS_SUPPRESS_DEPRECATION;
+          delete process.env.AIOX_SUPPRESS_DEPRECATION;
         } else {
-          process.env.AIOS_SUPPRESS_DEPRECATION = origEnv;
+          process.env.AIOX_SUPPRESS_DEPRECATION = origEnv;
         }
         cleanupTempDir(tmpDir);
       }
@@ -276,14 +276,14 @@ describe('config-resolver', () => {
   describe('loadLayeredConfig — 4-level resolution', () => {
     test('merges L1 and L2 correctly', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
         const result = loadLayeredConfig(tmpDir);
         // L1 values present
-        expect(result.config.metadata.framework_name).toBe('AIOS-FullStack');
+        expect(result.config.metadata.framework_name).toBe('AIOX-FullStack');
         // L2 overrides L1
         expect(result.config.performance_defaults.max_concurrent_operations).toBe(8);
         // L2 additions
@@ -295,9 +295,9 @@ describe('config-resolver', () => {
 
     test('merges L1 + L2 + L4 correctly', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
-        '.aios-core/local-config.yaml': { fixture: 'local-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/local-config.yaml': { fixture: 'local-config.yaml' },
       });
 
       try {
@@ -307,7 +307,7 @@ describe('config-resolver', () => {
         // L4 additions
         expect(result.config.ide.selected).toEqual(['vscode', 'claude-code']);
         // L1 values preserved
-        expect(result.config.metadata.framework_name).toBe('AIOS-FullStack');
+        expect(result.config.metadata.framework_name).toBe('AIOX-FullStack');
       } finally {
         cleanupTempDir(tmpDir);
       }
@@ -315,8 +315,8 @@ describe('config-resolver', () => {
 
     test('includes Pro extension when present', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
         'pro/pro-config.yaml': { fixture: 'pro-config.yaml' },
       });
 
@@ -334,8 +334,8 @@ describe('config-resolver', () => {
 
     test('silently skips missing Pro extension', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -350,8 +350,8 @@ describe('config-resolver', () => {
 
     test('debug mode tracks sources', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
@@ -372,8 +372,8 @@ describe('config-resolver', () => {
 
     test('lints L1 and L2 for env patterns', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': 'url: "${API_URL}"\n',
-        '.aios-core/project-config.yaml': 'name: "clean"\n',
+        '.aiox-core/framework-config.yaml': 'url: "${API_URL}"\n',
+        '.aiox-core/project-config.yaml': 'name: "clean"\n',
       });
 
       try {
@@ -389,7 +389,7 @@ describe('config-resolver', () => {
   describe('resolveConfig — main entry point', () => {
     test('auto-detects legacy mode', () => {
       const tmpDir = createTempProject({
-        '.aios-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
+        '.aiox-core/core-config.yaml': { fixture: 'legacy-core-config.yaml' },
       });
 
       try {
@@ -403,14 +403,14 @@ describe('config-resolver', () => {
 
     test('auto-detects layered mode', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       try {
         const result = resolveConfig(tmpDir, { skipCache: true });
         expect(result.legacy).toBe(false);
-        expect(result.config.metadata.framework_name).toBe('AIOS-FullStack');
+        expect(result.config.metadata.framework_name).toBe('AIOX-FullStack');
       } finally {
         cleanupTempDir(tmpDir);
       }
@@ -418,8 +418,8 @@ describe('config-resolver', () => {
 
     test('interpolates env vars after merge', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': 'metadata:\n  name: "test"\n',
-        '.aios-core/local-config.yaml': 'api_url: "${TEST_API_URL:-http://localhost}"\n',
+        '.aiox-core/framework-config.yaml': 'metadata:\n  name: "test"\n',
+        '.aiox-core/local-config.yaml': 'api_url: "${TEST_API_URL:-http://localhost}"\n',
       });
       const origTestApiUrl = process.env.TEST_API_URL;
 
@@ -439,7 +439,7 @@ describe('config-resolver', () => {
 
     test('caches resolved config', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       try {
@@ -454,7 +454,7 @@ describe('config-resolver', () => {
 
     test('skipCache bypasses cache', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       try {
@@ -481,9 +481,9 @@ describe('config-resolver', () => {
 
     test(`cold start resolution < ${COLD_START_LIMIT}ms`, () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
-        '.aios-core/local-config.yaml': { fixture: 'local-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/local-config.yaml': { fixture: 'local-config.yaml' },
       });
 
       try {
@@ -502,9 +502,9 @@ describe('config-resolver', () => {
 
     test(`cached read < ${CACHED_READ_LIMIT}ms`, () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
-        '.aios-core/local-config.yaml': { fixture: 'local-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/local-config.yaml': { fixture: 'local-config.yaml' },
       });
 
       try {
@@ -534,7 +534,7 @@ describe('config-resolver', () => {
     beforeEach(() => {
       // Save original CONFIG_FILES.user and redirect to temp directory
       originalUserConfigPath = CONFIG_FILES.user;
-      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-user-config-test-'));
+      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-user-config-test-'));
       CONFIG_FILES.user = path.join(tempUserDir, 'user-config.yaml');
       globalConfigCache.clear();
     });
@@ -548,8 +548,8 @@ describe('config-resolver', () => {
 
     test('loadLayeredConfig merges L5 user config after L4', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': { fixture: 'project-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': { fixture: 'project-config.yaml' },
       });
 
       // Create user config
@@ -568,8 +568,8 @@ describe('config-resolver', () => {
 
     test('L5 overrides L4 values', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/local-config.yaml': 'user_profile: "advanced"\n',
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/local-config.yaml': 'user_profile: "advanced"\n',
       });
 
       // L5 overrides L4
@@ -585,7 +585,7 @@ describe('config-resolver', () => {
 
     test('graceful when user config file does not exist', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       try {
@@ -600,7 +600,7 @@ describe('config-resolver', () => {
 
     test('graceful when user config file is malformed YAML', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       // Write invalid YAML
@@ -617,7 +617,7 @@ describe('config-resolver', () => {
 
     test('debug mode tracks L5 sources', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       fs.writeFileSync(CONFIG_FILES.user, 'user_profile: "bob"\n', 'utf8');
@@ -635,7 +635,7 @@ describe('config-resolver', () => {
 
     test('resolveConfig includes L5 in final config', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       fs.writeFileSync(CONFIG_FILES.user, 'user_profile: "bob"\n', 'utf8');
@@ -682,7 +682,7 @@ describe('config-resolver', () => {
 
     beforeEach(() => {
       originalUserConfigPath = CONFIG_FILES.user;
-      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-user-write-test-'));
+      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-user-write-test-'));
       CONFIG_FILES.user = path.join(tempUserDir, 'user-config.yaml');
       globalConfigCache.clear();
     });
@@ -754,7 +754,7 @@ describe('config-resolver', () => {
 
     beforeEach(() => {
       originalUserConfigPath = CONFIG_FILES.user;
-      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-toggle-test-'));
+      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-toggle-test-'));
       CONFIG_FILES.user = path.join(tempUserDir, 'user-config.yaml');
       globalConfigCache.clear();
     });
@@ -824,7 +824,7 @@ describe('config-resolver', () => {
 
     beforeEach(() => {
       originalUserConfigPath = CONFIG_FILES.user;
-      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-l5-integration-test-'));
+      tempUserDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-l5-integration-test-'));
       CONFIG_FILES.user = path.join(tempUserDir, 'user-config.yaml');
       globalConfigCache.clear();
     });
@@ -837,8 +837,8 @@ describe('config-resolver', () => {
 
     test('resolveConfig returns user_profile from L5 overriding lower levels', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
-        '.aios-core/project-config.yaml': 'user_profile: "advanced"\nproject:\n  name: test\n',
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/project-config.yaml': 'user_profile: "advanced"\nproject:\n  name: test\n',
       });
 
       fs.writeFileSync(CONFIG_FILES.user, 'user_profile: "bob"\n', 'utf8');
@@ -854,7 +854,7 @@ describe('config-resolver', () => {
 
     test('toggle reflects in next resolveConfig call', () => {
       const tmpDir = createTempProject({
-        '.aios-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
+        '.aiox-core/framework-config.yaml': { fixture: 'framework-config.yaml' },
       });
 
       fs.writeFileSync(CONFIG_FILES.user, 'user_profile: "advanced"\n', 'utf8');

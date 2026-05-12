@@ -6,7 +6,7 @@
 
 ---
 
-Todas as alteracoes notaveis do Synkra AIOS serao documentadas neste arquivo.
+Todas as alteracoes notaveis do Synkra AIOX serao documentadas neste arquivo.
 
 O formato e baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semantico](https://semver.org/lang/pt-BR/).
@@ -18,7 +18,7 @@ e este projeto adere ao [Versionamento Semantico](https://semver.org/lang/pt-BR/
 ### Adicionado
 
 - **Assistente de Instalacao Interativo**: Configuracao guiada passo a passo com selecao de componentes
-- **Suporte Multi-IDE**: Adicionado suporte para 8 IDEs (Claude Code, Cursor, Windsurf, Trae, Roo Code, Cline, Gemini CLI, GitHub Copilot)
+- **Suporte Multi-IDE**: Adicionado suporte para 4 IDEs (Claude Code, Cursor, Gemini CLI, GitHub Copilot)
 - **Sistema de Squads**: Add-ons modulares incluindo HybridOps para integracao com ClickUp
 - **Testes Multiplataforma**: Cobertura completa de testes para Windows, macOS e Linux
 - **Tratamento de Erros e Rollback**: Rollback automatico em caso de falha na instalacao com sugestoes de recuperacao
@@ -30,18 +30,18 @@ e este projeto adere ao [Versionamento Semantico](https://semver.org/lang/pt-BR/
 - **Suite de Documentacao**:
   - Guia de Solucao de Problemas com 23 problemas documentados
   - FAQ com 22 perguntas e respostas
-  - Guia de Migracao v2.0 para v2.1
+  - Guia de Migracao v2.0 para v4.0.4
 
 ### Alterado
 
-- **Estrutura de Diretorios**: Renomeado `.bmad-core/` para `.aios-core/`
+- **Estrutura de Diretorios**: Renomeado `.legacy-core/` para `.aiox-core/`
 - **Formato de Configuracao**: `core-config.yaml` aprimorado com novas secoes para git, projectStatus e opcoes de sharding
 - **Formato de Agentes**: Esquema YAML de agentes atualizado com persona_profile, visibilidade de comandos e campos whenToUse
-- **Configuracao de IDE**: Agentes do Claude Code movidos para `.claude/commands/AIOS/agents/`
+- **Configuracao de IDE**: Agentes do Claude Code movidos para `.claude/commands/AIOX/agents/`
 - **Localizacao de Arquivos**:
   - `docs/architecture/coding-standards.md` -> `docs/framework/coding-standards.md`
   - `docs/architecture/tech-stack.md` -> `docs/framework/tech-stack.md`
-  - `.aios-core/utils/` -> `.aios-core/scripts/`
+  - `.aiox-core/utils/` -> `.aiox-core/scripts/`
 
 ### Corrigido
 
@@ -52,8 +52,8 @@ e este projeto adere ao [Versionamento Semantico](https://semver.org/lang/pt-BR/
 
 ### Descontinuado
 
-- Processo de instalacao manual (use `npx @synkra/aios-core install` em vez disso)
-- Nome do diretorio `.bmad-core/` (migrado automaticamente)
+- Processo de instalacao manual (use `npx aiox-core install` em vez disso)
+- Nome do diretorio `.legacy-core/` (migrado automaticamente)
 
 ### Seguranca
 
@@ -66,7 +66,7 @@ e este projeto adere ao [Versionamento Semantico](https://semver.org/lang/pt-BR/
 
 ### Adicionado
 
-- Lancamento publico inicial do Synkra AIOS
+- Lancamento publico inicial do Synkra AIOX
 - 11 agentes de IA especializados (dev, qa, architect, pm, po, sm, analyst, ux-expert, data-engineer, devops, db-sage)
 - Sistema de fluxo de tarefas com mais de 60 tarefas pre-construidas
 - Sistema de templates com mais de 20 modelos de documentos
@@ -99,11 +99,11 @@ e este projeto adere ao [Versionamento Semantico](https://semver.org/lang/pt-BR/
 **Atualizacao rapida:**
 
 ```bash
-npx @synkra/aios-core install --force-upgrade
+npx aiox-core install --force-upgrade
 ```
 
 **Principais alteracoes:**
-1. Diretorio renomeado: `.bmad-core/` -> `.aios-core/`
+1. Diretorio renomeado: `.legacy-core/` -> `.aiox-core/`
 2. Atualizar `core-config.yaml` com novos campos
 3. Executar novamente a configuracao do IDE
 
@@ -113,5 +113,5 @@ npx @synkra/aios-core install --force-upgrade
 
 - [Solucao de Problemas](./installation/troubleshooting.md)
 - [FAQ](./installation/faq.md)
-- [Repositorio GitHub](https://github.com/SynkraAI/aios-core)
-- [Rastreador de Issues](https://github.com/SynkraAI/aios-core/issues)
+- [Repositorio GitHub](https://github.com/SynkraAI/aiox-core)
+- [Rastreador de Issues](https://github.com/SynkraAI/aiox-core/issues)

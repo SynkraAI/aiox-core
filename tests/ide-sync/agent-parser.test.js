@@ -14,7 +14,7 @@ const {
   parseAllAgents,
   getVisibleCommands,
   formatCommandsList,
-} = require('../../.aios-core/infrastructure/scripts/ide-sync/agent-parser');
+} = require('../../.aiox-core/infrastructure/scripts/ide-sync/agent-parser');
 
 describe('agent-parser', () => {
   let tempDir;

@@ -11,7 +11,7 @@ const { mapStatusToClickUp, mapStatusFromClickUp } = require('../../common/utils
 const { updateStoryStatus, updateEpicStatus } = require('../../common/utils/clickup-helpers');
 
 describe('Status Mapper - Bidirectional Mapping', () => {
-  describe('AIOS to ClickUp Mapping', () => {
+  describe('AIOX to ClickUp Mapping', () => {
     test('should map Draft status correctly', () => {
       expect(mapStatusToClickUp('Draft')).toBe('Draft');
     });
@@ -42,7 +42,7 @@ describe('Status Mapper - Bidirectional Mapping', () => {
     });
   });
 
-  describe('ClickUp to AIOS Mapping', () => {
+  describe('ClickUp to AIOX Mapping', () => {
     test('should map Draft status correctly', () => {
       expect(mapStatusFromClickUp('Draft')).toBe('Draft');
     });

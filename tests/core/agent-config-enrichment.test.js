@@ -9,7 +9,7 @@
  * - Performance targets documented for all agents
  * - source-tree.md governance section contains all required files
  * - update-source-tree.md task file exists
- * - aios-master has *update-source-tree command
+ * - aiox-master has *update-source-tree command
  */
 
 const fs = require('fs');
@@ -47,7 +47,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
   let agentConfig;
 
   beforeAll(() => {
-    agentConfig = loadYaml('.aios-core/data/agent-config-requirements.yaml');
+    agentConfig = loadYaml('.aiox-core/data/agent-config-requirements.yaml');
   });
 
   describe('YAML Validity', () => {
@@ -59,10 +59,10 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
 
     test('all expected agents have entries', () => {
       const expectedAgents = [
-        'aios-master', 'dev', 'qa', 'devops', 'github-devops',
+        'aiox-master', 'dev', 'qa', 'devops', 'github-devops',
         'architect', 'po', 'sm', 'data-engineer', 'db-sage',
         'pm', 'analyst', 'ux-design-expert', 'squad-creator',
-        'aios-developer', 'aios-orchestrator', 'default',
+        'aiox-developer', 'aiox-orchestrator', 'default',
       ];
 
       for (const agentId of expectedAgents) {
@@ -75,11 +75,11 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
     const requiredFiles = [
       { path: 'docs/framework/coding-standards.md', owner: '@dev' },
       { path: 'docs/framework/tech-stack.md', owner: '@architect' },
-      { path: '.aios-core/data/technical-preferences.md', owner: '@architect' },
-      { path: '.aios-core/product/data/test-levels-framework.md', owner: '@qa' },
-      { path: '.aios-core/product/data/test-priorities-matrix.md', owner: '@qa' },
-      { path: '.aios-core/product/data/brainstorming-techniques.md', owner: '@analyst' },
-      { path: '.aios-core/product/data/elicitation-methods.md', owner: '@po' },
+      { path: '.aiox-core/data/technical-preferences.md', owner: '@architect' },
+      { path: '.aiox-core/product/data/test-levels-framework.md', owner: '@qa' },
+      { path: '.aiox-core/product/data/test-priorities-matrix.md', owner: '@qa' },
+      { path: '.aiox-core/product/data/brainstorming-techniques.md', owner: '@analyst' },
+      { path: '.aiox-core/product/data/elicitation-methods.md', owner: '@po' },
     ];
 
     test.each(requiredFiles)('$path exists on disk (owner: $owner)', ({ path: filePath }) => {
@@ -143,7 +143,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       expect(analyst.files_loaded.length).toBe(3);
 
       const paths = analyst.files_loaded.map(f => f.path);
-      expect(paths).toContain('.aios-core/product/data/brainstorming-techniques.md');
+      expect(paths).toContain('.aiox-core/product/data/brainstorming-techniques.md');
       expect(paths).toContain('docs/framework/tech-stack.md');
       expect(paths).toContain('docs/framework/source-tree.md');
     });
@@ -160,8 +160,8 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
       expect(sm.files_loaded.length).toBe(3);
 
       const paths = sm.files_loaded.map(f => f.path);
-      expect(paths).toContain('.aios-core/product/data/mode-selection-best-practices.md');
-      expect(paths).toContain('.aios-core/data/workflow-patterns.yaml');
+      expect(paths).toContain('.aiox-core/product/data/mode-selection-best-practices.md');
+      expect(paths).toContain('.aiox-core/data/workflow-patterns.yaml');
       expect(paths).toContain('docs/framework/coding-standards.md');
     });
 
@@ -180,7 +180,7 @@ describe('Story ACT-8: Agent Config Enrichment', () => {
     test('squad-creator has lazy loading for registry and manifest', () => {
       const sc = agentConfig.agents['squad-creator'];
       expect(sc.lazy_loading).toHaveProperty('agent_registry', true);
-      expect(sc.lazy_loading).toHaveProperty('expansion_pack_manifest', true);
+      expect(sc.lazy_loading).toHaveProperty('squad_manifest', true);
     });
 
     test('squad-creator performance target is <150ms', () => {
@@ -276,11 +276,11 @@ describe('Story ACT-8: Document Governance', () => {
 
   describe('Governance Task', () => {
     test('update-source-tree.md task file exists', () => {
-      expect(fileExists('.aios-core/development/tasks/update-source-tree.md')).toBe(true);
+      expect(fileExists('.aiox-core/development/tasks/update-source-tree.md')).toBe(true);
     });
 
     test('task file contains expected sections', () => {
-      const content = readFile('.aios-core/development/tasks/update-source-tree.md');
+      const content = readFile('.aiox-core/development/tasks/update-source-tree.md');
       expect(content).toContain('Update Source Tree Task');
       expect(content).toContain('Validate document governance');
       expect(content).toContain('agent-config-requirements.yaml');
@@ -288,15 +288,15 @@ describe('Story ACT-8: Document Governance', () => {
     });
   });
 
-  describe('aios-master Command', () => {
-    test('aios-master.md contains *update-source-tree command', () => {
-      const content = readFile('.aios-core/development/agents/aios-master.md');
+  describe('aiox-master Command', () => {
+    test('aiox-master.md contains *update-source-tree command', () => {
+      const content = readFile('.aiox-core/development/agents/aiox-master.md');
       expect(content).toContain('update-source-tree');
       expect(content).toContain('Validate data file governance');
     });
 
-    test('aios-master dependencies include update-source-tree.md', () => {
-      const content = readFile('.aios-core/development/agents/aios-master.md');
+    test('aiox-master dependencies include update-source-tree.md', () => {
+      const content = readFile('.aiox-core/development/agents/aiox-master.md');
       expect(content).toContain('update-source-tree.md');
     });
   });

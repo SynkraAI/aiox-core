@@ -30,18 +30,18 @@ const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 
 // Pipeline module paths for cache clearing (cold-start)
 const PIPELINE_MODULES = [
-  '.aios-core/development/scripts/unified-activation-pipeline',
-  '.aios-core/development/scripts/greeting-builder',
-  '.aios-core/development/scripts/agent-config-loader',
-  '.aios-core/development/scripts/greeting-preference-manager',
-  '.aios-core/development/scripts/workflow-navigator',
-  '.aios-core/core/session/context-loader',
-  '.aios-core/core/session/context-detector',
-  '.aios-core/core/permissions',
-  '.aios-core/infrastructure/scripts/project-status-loader',
-  '.aios-core/infrastructure/scripts/git-config-detector',
-  '.aios-core/core/config/config-resolver',
-  '.aios-core/core/config/config-cache',
+  '.aiox-core/development/scripts/unified-activation-pipeline',
+  '.aiox-core/development/scripts/greeting-builder',
+  '.aiox-core/development/scripts/agent-config-loader',
+  '.aiox-core/development/scripts/greeting-preference-manager',
+  '.aiox-core/development/scripts/workflow-navigator',
+  '.aiox-core/core/session/context-loader',
+  '.aiox-core/core/session/context-detector',
+  '.aiox-core/core/permissions',
+  '.aiox-core/infrastructure/scripts/project-status-loader',
+  '.aiox-core/infrastructure/scripts/git-config-detector',
+  '.aiox-core/core/config/config-resolver',
+  '.aiox-core/core/config/config-cache',
 ];
 
 function parseArgs() {
@@ -91,7 +91,7 @@ function clearPipelineCache() {
 
 async function runBenchmark(options) {
   const pipelinePath = path.resolve(
-    PROJECT_ROOT, '.aios-core/development/scripts/unified-activation-pipeline',
+    PROJECT_ROOT, '.aiox-core/development/scripts/unified-activation-pipeline',
   );
   const { ALL_AGENT_IDS } = require(pipelinePath);
   let { UnifiedActivationPipeline } = require(pipelinePath);

@@ -22,9 +22,9 @@ This guide explains how the Memory Intelligence System integrates with the Unifi
 
 ### Extension Point Pattern
 
-The integration follows the AIOS Open Core model:
-- **aios-core:** Extension point in UnifiedActivationPipeline (this guide)
-- **aios-pro:** Memory intelligence implementation (retrieval, scoring, learning)
+The integration follows the AIOX Open Core model:
+- **aiox-core:** Extension point in UnifiedActivationPipeline (this guide)
+- **aiox-pro:** Memory intelligence implementation (retrieval, scoring, learning)
 
 ```
 UnifiedActivationPipeline (Tier 2 Enrich)
@@ -224,7 +224,7 @@ const defaultBudget = 2000;
 Configure per-agent budgets in agent config:
 
 ```yaml
-# .aios-core/development/agents/dev.md
+# .aiox-core/development/agents/dev.md
 agent:
   id: dev
   config:
@@ -267,7 +267,7 @@ isProAvailable() === false
 
 ```javascript
 isProAvailable() === true
-// but .aios/session-digests/ is empty
+// but .aiox/session-digests/ is empty
 ```
 
 **Behavior:**
@@ -279,7 +279,7 @@ isProAvailable() === true
 
 ```javascript
 isProAvailable() === true
-// and .aios/session-digests/ contains memory digests
+// and .aiox/session-digests/ contains memory digests
 ```
 
 **Behavior:**
@@ -395,7 +395,7 @@ console.log('Memory enabled:', featureGate.isAvailable('pro.memory.extended'));
 
 // Check digests directory
 const fs = require('fs');
-const digests = fs.readdirSync('.aios/session-digests');
+const digests = fs.readdirSync('.aiox/session-digests');
 console.log('Digests:', digests.length);
 ```
 
@@ -413,7 +413,7 @@ result.metrics.loaders.memories.duration > 500
 ```
 
 **Solutions:**
-1. Reduce digest count (archive old digests to `.aios/session-digests/archive/`)
+1. Reduce digest count (archive old digests to `.aiox/session-digests/archive/`)
 2. Increase timeout (in `unified-activation-pipeline.js`): `memoryTimeout = 1000`
 3. Rebuild memory index: `node pro/memory/rebuild-index.js`
 

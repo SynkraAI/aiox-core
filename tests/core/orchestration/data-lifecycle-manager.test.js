@@ -14,13 +14,13 @@ const {
   runStartupCleanup,
   STALE_SESSION_DAYS,
   STALE_SNAPSHOT_DAYS,
-} = require('../../../.aios-core/core/orchestration/data-lifecycle-manager');
+} = require('../../../.aiox-core/core/orchestration/data-lifecycle-manager');
 
 // Test fixtures
 const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project-lifecycle');
 
 // Mock LockManager
-jest.mock('../../../.aios-core/core/orchestration/lock-manager', () => {
+jest.mock('../../../.aiox-core/core/orchestration/lock-manager', () => {
   const mockCleanupStaleLocks = jest.fn().mockResolvedValue(2);
   return jest.fn().mockImplementation(() => ({
     cleanupStaleLocks: mockCleanupStaleLocks,
@@ -44,8 +44,8 @@ describe('DataLifecycleManager', () => {
 
     // Create base directories
     await fs.mkdir(path.join(TEST_PROJECT_ROOT, 'docs/stories'), { recursive: true });
-    await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.aios/locks'), { recursive: true });
-    await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.aios/snapshots'), { recursive: true });
+    await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.aiox/locks'), { recursive: true });
+    await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.aiox/snapshots'), { recursive: true });
 
     manager = new DataLifecycleManager(TEST_PROJECT_ROOT);
   });
@@ -145,7 +145,7 @@ describe('DataLifecycleManager', () => {
       expect(fsSync.existsSync(sessionPath)).toBe(false);
 
       // Check archive exists
-      const archiveDir = path.join(TEST_PROJECT_ROOT, '.aios/archive/sessions');
+      const archiveDir = path.join(TEST_PROJECT_ROOT, '.aiox/archive/sessions');
       expect(fsSync.existsSync(archiveDir)).toBe(true);
 
       const archiveFiles = await fs.readdir(archiveDir);
@@ -189,7 +189,7 @@ describe('DataLifecycleManager', () => {
   describe('cleanupStaleSnapshots', () => {
     it('should return 0 when no snapshots directory exists', async () => {
       // Given - remove snapshots dir
-      await fs.rm(path.join(TEST_PROJECT_ROOT, '.aios/snapshots'), { recursive: true });
+      await fs.rm(path.join(TEST_PROJECT_ROOT, '.aiox/snapshots'), { recursive: true });
 
       // When
       const result = await manager.cleanupStaleSnapshots();
@@ -205,7 +205,7 @@ describe('DataLifecycleManager', () => {
 
     it('should not remove snapshot if age < 90 days', async () => {
       // Given - snapshot created 30 days ago
-      const snapshotPath = path.join(TEST_PROJECT_ROOT, '.aios/snapshots/snapshot-recent.json');
+      const snapshotPath = path.join(TEST_PROJECT_ROOT, '.aiox/snapshots/snapshot-recent.json');
       await fs.writeFile(snapshotPath, JSON.stringify({ epic_id: 'test', story_id: '1.0' }));
 
       // Modify the mtime to 30 days ago
@@ -223,7 +223,7 @@ describe('DataLifecycleManager', () => {
 
     it('should remove snapshot if age > 90 days and update index.json (AC10)', async () => {
       // Given - snapshot created 100 days ago
-      const snapshotPath = path.join(TEST_PROJECT_ROOT, '.aios/snapshots/snapshot-old.json');
+      const snapshotPath = path.join(TEST_PROJECT_ROOT, '.aiox/snapshots/snapshot-old.json');
       await fs.writeFile(snapshotPath, JSON.stringify({ epic_id: 'test', story_id: '1.0' }));
 
       // Modify the mtime to 100 days ago
@@ -239,7 +239,7 @@ describe('DataLifecycleManager', () => {
       expect(fsSync.existsSync(snapshotPath)).toBe(false);
 
       // Check index.json was updated
-      const indexPath = path.join(TEST_PROJECT_ROOT, '.aios/snapshots/index.json');
+      const indexPath = path.join(TEST_PROJECT_ROOT, '.aiox/snapshots/index.json');
       expect(fsSync.existsSync(indexPath)).toBe(true);
 
       const index = JSON.parse(await fs.readFile(indexPath, 'utf8'));
@@ -250,7 +250,7 @@ describe('DataLifecycleManager', () => {
 
     it('should not remove index.json itself', async () => {
       // Given - index.json in snapshots
-      const indexPath = path.join(TEST_PROJECT_ROOT, '.aios/snapshots/index.json');
+      const indexPath = path.join(TEST_PROJECT_ROOT, '.aiox/snapshots/index.json');
       await fs.writeFile(indexPath, JSON.stringify({ removed_snapshots: [] }));
 
       // Modify the mtime to 100 days ago

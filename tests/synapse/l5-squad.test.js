@@ -11,8 +11,8 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const LayerProcessor = require('../../.aios-core/core/synapse/layers/layer-processor');
-const L5SquadProcessor = require('../../.aios-core/core/synapse/layers/l5-squad');
+const LayerProcessor = require('../../.aiox-core/core/synapse/layers/layer-processor');
+const L5SquadProcessor = require('../../.aiox-core/core/synapse/layers/l5-squad');
 
 jest.setTimeout(30000);
 

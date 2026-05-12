@@ -1,10 +1,10 @@
-# Synkra AIOS Troubleshooting Guide
+# Synkra AIOX Troubleshooting Guide
 
 > 🌐 **EN** | [PT](./pt/troubleshooting.md) | [ES](./es/troubleshooting.md)
 
 ---
 
-This comprehensive guide helps you diagnose and resolve common issues with Synkra AIOS.
+This comprehensive guide helps you diagnose and resolve common issues with Synkra AIOX.
 
 ## Table of Contents
 
@@ -27,16 +27,16 @@ Always start with the built-in diagnostics:
 
 ```bash
 # Basic diagnostic
-npx @synkra/aios-core doctor
+npx aiox-core doctor
 
 # Auto-fix common issues
-npx @synkra/aios-core doctor --fix
+npx aiox-core doctor --fix
 
 # Verbose output
-npx @synkra/aios-core doctor --verbose
+npx aiox-core doctor --verbose
 
 # Check specific component
-npx @synkra/aios-core doctor --component memory-layer
+npx aiox-core doctor --component memory-layer
 ```
 
 ### Common Quick Fixes
@@ -52,7 +52,7 @@ npx @synkra/aios-core doctor --component memory-layer
 *config --reset
 
 # Update to latest version
-npx @synkra/aios-core update
+npx aiox-core update
 ```
 
 ## Installation Issues
@@ -73,7 +73,7 @@ npm --version
 npm install -g npx
 
 # Or use npm directly
-npm exec @synkra/aios-core init my-project
+npm exec aiox-core init my-project
 ```
 
 ### Issue: Installation fails with permission errors
@@ -104,14 +104,14 @@ source ~/.bashrc
 ```bash
 # Install in user directory
 cd ~
-npx @synkra/aios-core init my-project
+npx aiox-core init my-project
 ```
 
 ### Issue: Node.js version error
 
 **Symptoms:**
 ```
-Error: Node.js version 14.0.0 or higher required
+Error: Node.js version 18.0.0 or higher required
 ```
 
 **Solution:**
@@ -154,7 +154,7 @@ npm cache clean --force
 npm config set fetch-timeout 60000
 
 # Skip dependency installation
-npx @synkra/aios-core init my-project --skip-install
+npx aiox-core init my-project --skip-install
 
 # Then install manually
 cd my-project
@@ -201,14 +201,14 @@ Error: Failed to initialize meta-agent
 1. **Check configuration:**
 ```bash
 # Verify config exists
-ls -la .aios/config.json
+ls -la .aiox/config.json
 
 # Validate configuration
-npx @synkra/aios-core doctor --component config
+npx aiox-core doctor --component config
 
 # Reset if corrupted
-rm .aios/config.json
-npx @synkra/aios-core doctor --fix
+rm .aiox/config.json
+npx aiox-core doctor --fix
 ```
 
 2. **Check dependencies:**
@@ -264,7 +264,7 @@ create-agent my-agent   # ✗ Wrong
 
 # Or restart meta-agent
 exit
-npx @synkra/aios-core
+npx aiox-core
 ```
 
 ### Issue: Agent creation fails
@@ -327,7 +327,7 @@ rm agents/duplicate-agent.yaml
 2. **Verify memory configuration:**
 ```bash
 # Check config
-cat .aios/memory-config.json
+cat .aiox/memory-config.json
 
 # Reset to defaults
 *memory reset-config
@@ -352,7 +352,7 @@ cat .aios/memory-config.json
 
 1. **Adjust memory settings:**
 ```javascript
-// Edit .aios/memory-config.json
+// Edit .aiox/memory-config.json
 {
   "maxDocuments": 5000,      // Reduce from 10000
   "chunkSize": 256,          // Reduce from 512
@@ -376,7 +376,7 @@ cat .aios/memory-config.json
 export NODE_OPTIONS="--max-old-space-size=1024"
 
 # Run with limited memory
-npx @synkra/aios-core
+npx aiox-core
 ```
 
 ### Issue: LlamaIndex errors
@@ -400,7 +400,7 @@ curl https://api.openai.com/v1/models \
 
 2. **Use local embeddings:**
 ```javascript
-// .aios/memory-config.json
+// .aiox/memory-config.json
 {
   "embedModel": "local",
   "localModelPath": "./models/embeddings"
@@ -437,7 +437,7 @@ npm install llamaindex@latest
 
 2. **Optimize configuration:**
 ```javascript
-// .aios/config.json
+// .aiox/config.json
 {
   "performance": {
     "enableCache": true,
@@ -627,7 +627,7 @@ cat .gitignore | grep .env
 
 # Add if missing
 echo ".env" >> .gitignore
-echo ".aios/logs/" >> .gitignore
+echo ".aiox/logs/" >> .gitignore
 ```
 
 2. **Enable secure mode:**
@@ -642,7 +642,7 @@ echo ".aios/logs/" >> .gitignore
 # Generate new keys from providers
 # Update .env file
 # Clear logs
-rm -rf .aios/logs/*
+rm -rf .aiox/logs/*
 ```
 
 ## Platform-Specific Issues
@@ -662,7 +662,7 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 # Or use shorter paths
 cd C:\
-npx @synkra/aios-core init myapp
+npx aiox-core init myapp
 ```
 
 #### Issue: Scripts disabled
@@ -691,7 +691,7 @@ xcode-select --install
 
 #### Issue: Gatekeeper blocks execution
 ```
-Error: "@synkra/aios-core" cannot be opened
+Error: "aiox-core" cannot be opened
 ```
 
 **Solution:**
@@ -700,7 +700,7 @@ Error: "@synkra/aios-core" cannot be opened
 sudo spctl --master-disable
 
 # Or remove quarantine
-xattr -d com.apple.quarantine /usr/local/bin/@synkra/aios-core
+xattr -d com.apple.quarantine /usr/local/bin/aiox-core
 ```
 
 ### Linux Issues
@@ -729,21 +729,21 @@ sudo pacman -S openssl
 
 ```bash
 # Full debug output
-export DEBUG=aios:*
-npx @synkra/aios-core
+export DEBUG=aiox:*
+npx aiox-core
 
 # Specific components
-export DEBUG=aios:memory,aios:agent
+export DEBUG=aiox:memory,aiox:agent
 ```
 
 ### Analyze Logs
 
 ```bash
 # View recent logs
-tail -f .aios/logs/aios.log
+tail -f .aiox/logs/aiox.log
 
 # Search for errors
-grep -i error .aios/logs/*.log
+grep -i error .aiox/logs/*.log
 
 # View structured logs
 *logs --format json --level error
@@ -753,13 +753,13 @@ grep -i error .aios/logs/*.log
 
 ```bash
 # Generate full diagnostic
-npx @synkra/aios-core doctor --report diagnostic.json
+npx aiox-core doctor --report diagnostic.json
 
 # Include system info
-npx @synkra/aios-core info --detailed >> diagnostic.json
+npx aiox-core info --detailed >> diagnostic.json
 
 # Create support bundle
-tar -czf aios-support.tar.gz .aios/logs diagnostic.json
+tar -czf aiox-support.tar.gz .aiox/logs diagnostic.json
 ```
 
 ### Performance Profiling
@@ -769,14 +769,14 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 {
   "debug": {
     "profiling": true,
-    "profileOutput": ".aios/profiles/"
+    "profileOutput": ".aiox/profiles/"
   }
 }
 ```
 
 ```bash
 # Analyze profile
-*debug analyze-profile .aios/profiles/latest.cpuprofile
+*debug analyze-profile .aiox/profiles/latest.cpuprofile
 ```
 
 ### Memory Dump Analysis
@@ -798,18 +798,18 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 
 1. **Run diagnostics:**
    ```bash
-   npx @synkra/aios-core doctor --verbose > diagnostic.log
+   npx aiox-core doctor --verbose > diagnostic.log
    ```
 
 2. **Collect information:**
    - Node.js version: `node --version`
    - NPM version: `npm --version`
    - OS and version: `uname -a` or `ver`
-   - AIOS version: `npx @synkra/aios-core version`
+   - AIOX version: `npx aiox-core version`
 
 3. **Check existing issues:**
-   - [GitHub Issues](https://github.com/@synkra/aios-core/@synkra/aios-core/issues)
-   - [Discussions](https://github.com/@synkra/aios-core/@synkra/aios-core/discussions)
+   - [GitHub Issues](https://github.com/aiox-core/aiox-core/issues)
+   - [Discussions](https://github.com/aiox-core/aiox-core/discussions)
 
 ### Community Support
 
@@ -820,7 +820,7 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 
 - **GitHub Discussions**: Technical questions and feature requests
 
-- **Stack Overflow**: Tag questions with `@synkra/aios-core`
+- **Stack Overflow**: Tag questions with `aiox-core`
 
 ### Reporting Bugs
 
@@ -830,10 +830,10 @@ Create detailed bug reports:
 ## Environment
 - OS: macOS 13.0
 - Node: 18.17.0
-- AIOS: 1.0.0
+- AIOX: 1.0.0
 
 ## Steps to Reproduce
-1. Run `npx @synkra/aios-core init test`
+1. Run `npx aiox-core init test`
 2. Select "enterprise" template
 3. Error occurs during installation
 
@@ -856,24 +856,24 @@ If all else fails:
 
 ```bash
 # Backup current state
-cp -r .aios .aios.backup
+cp -r .aiox .aiox.backup
 
 # Complete reset
-rm -rf .aios node_modules package-lock.json
+rm -rf .aiox node_modules package-lock.json
 npm cache clean --force
 
 # Fresh install
 npm install
-npx @synkra/aios-core doctor --fix
+npx aiox-core doctor --fix
 
 # Restore data if needed
-cp .aios.backup/memory.db .aios/
+cp .aiox.backup/memory.db .aiox/
 ```
 
 ---
 
 **Remember**: Most issues can be resolved with:
-1. `npx @synkra/aios-core doctor --fix`
+1. `npx aiox-core doctor --fix`
 2. Clearing caches
 3. Updating to latest version
 4. Checking permissions

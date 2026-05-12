@@ -10,8 +10,8 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const LayerProcessor = require('../../.aios-core/core/synapse/layers/layer-processor');
-const L7StarCommandProcessor = require('../../.aios-core/core/synapse/layers/l7-star-command');
+const LayerProcessor = require('../../.aiox-core/core/synapse/layers/layer-processor');
+const L7StarCommandProcessor = require('../../.aiox-core/core/synapse/layers/l7-star-command');
 
 jest.setTimeout(30000);
 

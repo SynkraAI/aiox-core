@@ -1,6 +1,6 @@
 /**
- * AIOS Updater
- * Intelligent update system for AIOS-Core installations
+ * AIOX Updater
+ * Intelligent update system for AIOX-Core installations
  *
  * @module packages/installer/src/updater
  * @story Epic 7 - CLI Update Command
@@ -47,12 +47,12 @@ const FileAction = {
 };
 
 /**
- * AIOS Updater Class
+ * AIOX Updater Class
  * Handles intelligent updates while preserving user customizations
  */
-class AIOSUpdater {
+class AIOXUpdater {
   /**
-   * Create a new AIOSUpdater instance
+   * Create a new AIOXUpdater instance
    *
    * @param {string} projectRoot - Project root directory
    * @param {Object} [options] - Update options
@@ -63,8 +63,8 @@ class AIOSUpdater {
    */
   constructor(projectRoot, options = {}) {
     this.projectRoot = path.resolve(projectRoot);
-    this.aiosCoreDir = path.join(this.projectRoot, '.aios-core');
-    this.aiosConfigDir = path.join(this.projectRoot, '.aios');
+    this.aioxCoreDir = path.join(this.projectRoot, '.aiox-core');
+    this.aioxConfigDir = path.join(this.projectRoot, '.aiox');
 
     this.options = {
       verbose: options.verbose === true,
@@ -104,7 +104,7 @@ class AIOSUpdater {
       result.installedAt = this.installedVersion?.installedAt || null;
 
       if (!result.installed) {
-        result.error = 'AIOS not installed or version info not found';
+        result.error = 'AIOX not installed or version info not found';
         return result;
       }
 
@@ -118,7 +118,7 @@ class AIOSUpdater {
         if (!isOnline) {
           result.error = 'You appear to be offline. Please check your internet connection.';
         } else {
-          result.error = 'Package @synkra/aios-core not found on npm registry. This may be a local development installation.';
+          result.error = 'Package aiox-core not found on npm registry. This may be a local development installation.';
         }
         return result;
       }
@@ -153,7 +153,7 @@ class AIOSUpdater {
    */
   async getInstalledVersion() {
     // Try version.json first (new format)
-    const versionJsonPath = path.join(this.aiosCoreDir, 'version.json');
+    const versionJsonPath = path.join(this.aioxCoreDir, 'version.json');
     if (fs.existsSync(versionJsonPath)) {
       try {
         const versionInfo = await fs.readJson(versionJsonPath);
@@ -165,7 +165,7 @@ class AIOSUpdater {
     }
 
     // Fallback to package.json
-    const packageJsonPath = path.join(this.projectRoot, 'node_modules', '@synkra', 'aios-core', 'package.json');
+    const packageJsonPath = path.join(this.projectRoot, 'node_modules', 'aiox-core', 'package.json');
     if (fs.existsSync(packageJsonPath)) {
       try {
         const pkg = await fs.readJson(packageJsonPath);
@@ -180,7 +180,7 @@ class AIOSUpdater {
     if (fs.existsSync(localPackageJsonPath)) {
       try {
         const pkg = await fs.readJson(localPackageJsonPath);
-        if (pkg.name === '@synkra/aios-core' || pkg.name === 'aios-core') {
+        if (pkg.name === '@synkra/aiox-core' || pkg.name === 'aiox-core') {
           return { version: pkg.version, installedAt: null, mode: 'framework-development' };
         }
       } catch (error) {
@@ -199,7 +199,7 @@ class AIOSUpdater {
   async getLatestVersion() {
     return new Promise((resolve) => {
       const request = https.get(
-        'https://registry.npmjs.org/@synkra/aios-core/latest',
+        'https://registry.npmjs.org/aiox-core/latest',
         { timeout: this.options.timeout },
         (res) => {
           let data = '';
@@ -306,7 +306,7 @@ class AIOSUpdater {
     // Need version.json with fileHashes
     if (!this.versionInfo?.fileHashes) {
       // Try to load it
-      const versionJsonPath = path.join(this.aiosCoreDir, 'version.json');
+      const versionJsonPath = path.join(this.aioxCoreDir, 'version.json');
       if (fs.existsSync(versionJsonPath)) {
         try {
           this.versionInfo = await fs.readJson(versionJsonPath);
@@ -327,7 +327,7 @@ class AIOSUpdater {
 
     // Compare each file
     for (const [relativePath, originalHash] of Object.entries(this.versionInfo.fileHashes)) {
-      const absolutePath = path.join(this.aiosCoreDir, relativePath);
+      const absolutePath = path.join(this.aioxCoreDir, relativePath);
 
       if (!fs.existsSync(absolutePath)) {
         result.missing.push(relativePath);
@@ -518,7 +518,7 @@ class AIOSUpdater {
    * @returns {Promise<void>}
    */
   async createBackup() {
-    this.backupDir = path.join(this.aiosConfigDir, 'backup', `pre-update-${Date.now()}`);
+    this.backupDir = path.join(this.aioxConfigDir, 'backup', `pre-update-${Date.now()}`);
     await fs.ensureDir(this.backupDir);
 
     // Copy critical files
@@ -528,7 +528,7 @@ class AIOSUpdater {
     ];
 
     for (const file of filesToBackup) {
-      const src = path.join(this.aiosCoreDir, file);
+      const src = path.join(this.aioxCoreDir, file);
       const dest = path.join(this.backupDir, file);
       if (fs.existsSync(src)) {
         await fs.copy(src, dest);
@@ -552,7 +552,7 @@ class AIOSUpdater {
     const backupFiles = await fs.readdir(this.backupDir);
     for (const file of backupFiles) {
       const src = path.join(this.backupDir, file);
-      const dest = path.join(this.aiosCoreDir, file);
+      const dest = path.join(this.aioxCoreDir, file);
       await fs.copy(src, dest, { overwrite: true });
     }
 
@@ -587,7 +587,7 @@ class AIOSUpdater {
 
     try {
       // Use npm to update the package
-      const cmd = `npm install @synkra/aios-core@${targetVersion} --save-exact`;
+      const cmd = `npm install aiox-core@${targetVersion} --save-exact`;
       this.log(`Running: ${cmd}`);
 
       execSync(cmd, {
@@ -599,7 +599,7 @@ class AIOSUpdater {
       result.success = true;
       result.filesUpdated = 1; // At least package updated
 
-      // TODO: Copy new files from node_modules to .aios-core
+      // TODO: Copy new files from node_modules to .aiox-core
       // preserving customizedFiles
 
       return result;
@@ -616,7 +616,7 @@ class AIOSUpdater {
    * @returns {Promise<void>}
    */
   async updateVersionInfo(newVersion) {
-    const versionJsonPath = path.join(this.aiosCoreDir, 'version.json');
+    const versionJsonPath = path.join(this.aioxCoreDir, 'version.json');
 
     const versionInfo = {
       version: newVersion,
@@ -679,7 +679,7 @@ class AIOSUpdater {
    */
   log(message) {
     if (this.options.verbose) {
-      console.log(`[AIOSUpdater] ${message}`);
+      console.log(`[AIOXUpdater] ${message}`);
     }
   }
 }
@@ -707,7 +707,7 @@ function formatCheckResult(result, options = {}) {
   const lines = [];
 
   lines.push('');
-  lines.push(`${c.bold}🔍 AIOS Update Check${c.reset}`);
+  lines.push(`${c.bold}🔍 AIOX Update Check${c.reset}`);
   lines.push('');
 
   if (result.installed) {
@@ -728,7 +728,7 @@ function formatCheckResult(result, options = {}) {
       break;
     case UpdateStatus.UPDATE_AVAILABLE:
       lines.push(`${c.yellow}⬆ Update available!${c.reset}`);
-      lines.push(`  Run ${c.cyan}npx aios-core update${c.reset} to update.`);
+      lines.push(`  Run ${c.cyan}npx aiox-core update${c.reset} to update.`);
       break;
     case UpdateStatus.UPDATE_REQUIRED:
       lines.push(`${c.red}⚠ Breaking update available!${c.reset}`);
@@ -787,7 +787,7 @@ function formatUpdateResult(result, options = {}) {
     }
 
     lines.push('');
-    lines.push(`Run ${c.cyan}npx aios-core validate${c.reset} to verify installation.`);
+    lines.push(`Run ${c.cyan}npx aiox-core validate${c.reset} to verify installation.`);
   } else {
     lines.push(`${c.red}${c.bold}✗ Update failed${c.reset}`);
     lines.push('');
@@ -804,7 +804,7 @@ function formatUpdateResult(result, options = {}) {
 }
 
 module.exports = {
-  AIOSUpdater,
+  AIOXUpdater,
   UpdateStatus,
   FileAction,
   formatCheckResult,

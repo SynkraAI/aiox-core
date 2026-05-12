@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { RegistryLoader } = require('../../../.aios-core/core/ids/registry-loader');
+const { RegistryLoader } = require('../../../.aiox-core/core/ids/registry-loader');
 const {
   IncrementalDecisionEngine,
   STOP_WORDS,
@@ -11,7 +11,7 @@ const {
   PURPOSE_SIMILARITY_WEIGHT,
   MAX_RESULTS,
   CACHE_TTL_MS,
-} = require('../../../.aios-core/core/ids/incremental-decision-engine');
+} = require('../../../.aiox-core/core/ids/incremental-decision-engine');
 
 const FIXTURES = path.resolve(__dirname, 'fixtures');
 const VALID_REGISTRY = path.join(FIXTURES, 'valid-registry.yaml');
@@ -754,7 +754,7 @@ describe('IncrementalDecisionEngine', () => {
 
   describe('CLI command integration', () => {
     const { execSync } = require('child_process');
-    const cliPath = path.resolve(__dirname, '..', '..', '..', 'bin', 'aios-ids.js');
+    const cliPath = path.resolve(__dirname, '..', '..', '..', 'bin', 'aiox-ids.js');
 
     it('shows help when called without arguments', () => {
       const output = execSync(`node "${cliPath}" --help`, { encoding: 'utf8' });

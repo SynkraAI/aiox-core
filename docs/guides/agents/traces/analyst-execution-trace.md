@@ -1,7 +1,7 @@
 # @analyst (Atlas) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/analyst.md`
+> Agent definition: `.aiox-core/development/agents/analyst.md`
 
 ## 1. Activation Trace
 
@@ -9,13 +9,13 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/analyst.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, analyticsLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/product/data/brainstorming-techniques.md` | AgentConfigLoader.loadFile() | Brainstorming techniques (always loaded, 2KB) |
-| 6 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 7 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/analyst.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, analyticsLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/product/data/brainstorming-techniques.md` | AgentConfigLoader.loadFile() | Brainstorming techniques (always loaded, 2KB) |
+| 6 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 7 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -72,7 +72,7 @@ analyst:
     - dataLocation
     - analyticsLocation
   files_loaded:
-    - path: .aios-core/product/data/brainstorming-techniques.md
+    - path: .aiox-core/product/data/brainstorming-techniques.md
       lazy: false
       size: 2KB
     - path: docs/framework/tech-stack.md          # Added in Story ACT-8
@@ -123,16 +123,16 @@ analyst:
 
 ### `*create-project-brief`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/product/templates/project-brief-tmpl.yaml` (EXISTS)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/product/templates/project-brief-tmpl.yaml` (EXISTS)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `project-brief-tmpl.yaml` | Template | EXISTS |
-| `.aios-core/product/data/elicitation-methods.md` | Data | Referenced by create-doc |
-| `.aios-core/product/templates/` | Templates dir | Scanned dynamically |
+| `.aiox-core/product/data/elicitation-methods.md` | Data | Referenced by create-doc |
+| `.aiox-core/product/templates/` | Templates dir | Scanned dynamically |
 
 **Execution flow:**
 
@@ -156,15 +156,15 @@ flowchart TD
 
 ### `*perform-market-research`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/product/templates/market-research-tmpl.yaml` (EXISTS)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/product/templates/market-research-tmpl.yaml` (EXISTS)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `market-research-tmpl.yaml` | Template | EXISTS |
-| `.aios-core/product/data/elicitation-methods.md` | Data | Referenced by create-doc |
+| `.aiox-core/product/data/elicitation-methods.md` | Data | Referenced by create-doc |
 
 **Execution flow:**
 
@@ -191,15 +191,15 @@ flowchart TD
 
 ### `*create-competitor-analysis`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/product/templates/competitor-analysis-tmpl.yaml` (EXISTS)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/product/templates/competitor-analysis-tmpl.yaml` (EXISTS)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `competitor-analysis-tmpl.yaml` | Template | EXISTS |
-| `.aios-core/product/data/elicitation-methods.md` | Data | Referenced by create-doc |
+| `.aiox-core/product/data/elicitation-methods.md` | Data | Referenced by create-doc |
 
 **Execution flow:**
 
@@ -226,7 +226,7 @@ flowchart TD
 
 ### `*research-prompt`
 
-**Task file:** `.aios-core/development/tasks/create-deep-research-prompt.md`
+**Task file:** `.aiox-core/development/tasks/create-deep-research-prompt.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -253,9 +253,9 @@ flowchart TD
 
 ### `*brainstorm`
 
-**Task file:** `.aios-core/development/tasks/facilitate-brainstorming-session.md`
-**Template:** `.aios-core/product/templates/brainstorming-output-tmpl.yaml` (EXISTS)
-**Data file:** `.aios-core/product/data/brainstorming-techniques.md` (EXISTS)
+**Task file:** `.aiox-core/development/tasks/facilitate-brainstorming-session.md`
+**Template:** `.aiox-core/product/templates/brainstorming-output-tmpl.yaml` (EXISTS)
+**Data file:** `.aiox-core/product/data/brainstorming-techniques.md` (EXISTS)
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -297,13 +297,13 @@ flowchart TD
 
 ### `*elicit`
 
-**Task file:** `.aios-core/development/tasks/advanced-elicitation.md`
+**Task file:** `.aiox-core/development/tasks/advanced-elicitation.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `advanced-elicitation.md` | Task | EXISTS |
-| `.aios-core/product/data/elicitation-methods.md` | Data | EXISTS |
+| `.aiox-core/product/data/elicitation-methods.md` | Data | EXISTS |
 
 **Execution flow:**
 
@@ -323,7 +323,7 @@ flowchart TD
 
 ### `*research-deps`
 
-**Task file:** `.aios-core/development/tasks/spec-research-dependencies.md`
+**Task file:** `.aiox-core/development/tasks/spec-research-dependencies.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -350,7 +350,7 @@ flowchart TD
 
 ### `*extract-patterns`
 
-**Script:** `.aios-core/infrastructure/scripts/pattern-extractor.js` (EXISTS)
+**Script:** `.aiox-core/infrastructure/scripts/pattern-extractor.js` (EXISTS)
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -431,7 +431,7 @@ graph TD
     subgraph "Data Files"
         D1[brainstorming-techniques.md]
         D2[elicitation-methods.md]
-        D3[aios-kb.md]
+        D3[aiox-kb.md]
     end
 
     subgraph "Scripts"
@@ -535,4 +535,4 @@ graph TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

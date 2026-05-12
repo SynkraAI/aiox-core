@@ -31,15 +31,15 @@ const configLoader = require('../../tools/installer/lib/config-loader');
 
 describe('v2.1 Module Structure Tests', () => {
   describe('INS-01: Source Path Configuration', () => {
-    it('should point getAiosCorePath to .aios-core directory', () => {
-      const aiosCorePath = resourceLocator.getAiosCorePath();
-      expect(aiosCorePath).toContain('.aios-core');
-      expect(aiosCorePath).not.toMatch(/[^.]aios-core$/);
+    it('should point getAioxCorePath to .aiox-core directory', () => {
+      const aioxCorePath = resourceLocator.getAioxCorePath();
+      expect(aioxCorePath).toContain('.aiox-core');
+      expect(aioxCorePath).not.toMatch(/[^.]aiox-core$/);
     });
 
-    it('should have .aios-core as source for config-loader', () => {
-      const aiosCorePath = configLoader.getAiosCorePath();
-      expect(aiosCorePath).toContain('.aios-core');
+    it('should have .aiox-core as source for config-loader', () => {
+      const aioxCorePath = configLoader.getAioxCorePath();
+      expect(aioxCorePath).toContain('.aiox-core');
     });
   });
 
@@ -57,7 +57,7 @@ describe('v2.1 Module Structure Tests', () => {
 
       // All agent files should reference the v2.1 path
       for (const agent of agents) {
-        expect(agent.file).toContain('.aios-core/development/agents/');
+        expect(agent.file).toContain('.aiox-core/development/agents/');
       }
     });
   });
@@ -82,8 +82,8 @@ describe('v2.1 Module Structure Tests', () => {
 
       // Dependencies should use v2.1 module paths
       for (const depPath of deps.all) {
-        // Should not have flat structure paths like .aios-core/tasks/
-        expect(depPath).not.toMatch(/\.aios-core\/(tasks|templates|checklists|workflows|utils|data)\//);
+        // Should not have flat structure paths like .aiox-core/tasks/
+        expect(depPath).not.toMatch(/\.aiox-core\/(tasks|templates|checklists|workflows|utils|data)\//);
 
         // Should have modular paths
         const hasModularPath =
@@ -98,26 +98,26 @@ describe('v2.1 Module Structure Tests', () => {
   });
 
   describe('INS-05: Manifest Files Location', () => {
-    it('should have manifests directory in .aios-core', async () => {
-      const manifestsPath = path.join(resourceLocator.getAiosCorePath(), 'manifests');
+    it('should have manifests directory in .aiox-core', async () => {
+      const manifestsPath = path.join(resourceLocator.getAioxCorePath(), 'manifests');
       const exists = await fs.pathExists(manifestsPath);
       expect(exists).toBe(true);
     });
 
     it('should have agents.csv manifest', async () => {
-      const agentsCsvPath = path.join(resourceLocator.getAiosCorePath(), 'manifests', 'agents.csv');
+      const agentsCsvPath = path.join(resourceLocator.getAioxCorePath(), 'manifests', 'agents.csv');
       const exists = await fs.pathExists(agentsCsvPath);
       expect(exists).toBe(true);
     });
 
     it('should have tasks.csv manifest', async () => {
-      const tasksCsvPath = path.join(resourceLocator.getAiosCorePath(), 'manifests', 'tasks.csv');
+      const tasksCsvPath = path.join(resourceLocator.getAioxCorePath(), 'manifests', 'tasks.csv');
       const exists = await fs.pathExists(tasksCsvPath);
       expect(exists).toBe(true);
     });
 
     it('should have workers.csv manifest', async () => {
-      const workersCsvPath = path.join(resourceLocator.getAiosCorePath(), 'manifests', 'workers.csv');
+      const workersCsvPath = path.join(resourceLocator.getAioxCorePath(), 'manifests', 'workers.csv');
       const exists = await fs.pathExists(workersCsvPath);
       expect(exists).toBe(true);
     });
@@ -125,37 +125,37 @@ describe('v2.1 Module Structure Tests', () => {
 
   describe('INS-06: Module Directory Structure Verification', () => {
     it('should have development module with agents subdirectory', async () => {
-      const developmentAgents = path.join(resourceLocator.getAiosCorePath(), 'development', 'agents');
+      const developmentAgents = path.join(resourceLocator.getAioxCorePath(), 'development', 'agents');
       const exists = await fs.pathExists(developmentAgents);
       expect(exists).toBe(true);
     });
 
     it('should have development module with tasks subdirectory', async () => {
-      const developmentTasks = path.join(resourceLocator.getAiosCorePath(), 'development', 'tasks');
+      const developmentTasks = path.join(resourceLocator.getAioxCorePath(), 'development', 'tasks');
       const exists = await fs.pathExists(developmentTasks);
       expect(exists).toBe(true);
     });
 
     it('should have product module with templates subdirectory', async () => {
-      const productTemplates = path.join(resourceLocator.getAiosCorePath(), 'product', 'templates');
+      const productTemplates = path.join(resourceLocator.getAioxCorePath(), 'product', 'templates');
       const exists = await fs.pathExists(productTemplates);
       expect(exists).toBe(true);
     });
 
     it('should have product module with checklists subdirectory', async () => {
-      const productChecklists = path.join(resourceLocator.getAiosCorePath(), 'product', 'checklists');
+      const productChecklists = path.join(resourceLocator.getAioxCorePath(), 'product', 'checklists');
       const exists = await fs.pathExists(productChecklists);
       expect(exists).toBe(true);
     });
 
     it('should have core module with utils subdirectory', async () => {
-      const coreUtils = path.join(resourceLocator.getAiosCorePath(), 'core', 'utils');
+      const coreUtils = path.join(resourceLocator.getAioxCorePath(), 'core', 'utils');
       const exists = await fs.pathExists(coreUtils);
       expect(exists).toBe(true);
     });
 
     it('should have infrastructure module', async () => {
-      const infrastructure = path.join(resourceLocator.getAiosCorePath(), 'infrastructure');
+      const infrastructure = path.join(resourceLocator.getAioxCorePath(), 'infrastructure');
       const exists = await fs.pathExists(infrastructure);
       expect(exists).toBe(true);
     });
@@ -202,7 +202,7 @@ describe('Legacy Flag Support (--legacy)', () => {
       installType: 'full',
       directory: '.',
       ides: [],
-      expansionPacks: [],
+      squads: [],
       legacyStructure: true,
     };
 
@@ -214,7 +214,7 @@ describe('Legacy Flag Support (--legacy)', () => {
       installType: 'full',
       directory: '.',
       ides: [],
-      expansionPacks: [],
+      squads: [],
       legacyStructure: false,
     };
 

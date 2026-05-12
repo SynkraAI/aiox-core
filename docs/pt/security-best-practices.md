@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Melhores Práticas de Segurança do Synkra AIOS
+# Melhores Práticas de Segurança do Synkra AIOX
 
 > 🌐 [EN](../security-best-practices.md) | **PT** | [ES](../es/security-best-practices.md)
 
 ---
 
-Este guia fornece recomendações abrangentes de segurança para implantação e manutenção do Synkra AIOS em ambientes de produção.
+Este guia fornece recomendações abrangentes de segurança para implantação e manutenção do Synkra AIOX em ambientes de produção.
 
 ## Índice
 
@@ -27,7 +27,7 @@ Este guia fornece recomendações abrangentes de segurança para implantação e
 
 ## Visão Geral da Arquitetura de Segurança
 
-O Synkra AIOS implementa uma abordagem de segurança em múltiplas camadas:
+O Synkra AIOX implementa uma abordagem de segurança em múltiplas camadas:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -223,7 +223,7 @@ CORS_ORIGIN=https://yourdomain.com
 # Logging de auditoria
 AUDIT_LOG_ENABLED=true
 AUDIT_LOG_LEVEL=info
-AUDIT_LOG_FILE=/var/log/aios/audit.log
+AUDIT_LOG_FILE=/var/log/aiox/audit.log
 ```
 
 ### Permissões de Arquivo
@@ -231,10 +231,10 @@ AUDIT_LOG_FILE=/var/log/aios/audit.log
 ```bash
 # Permissões de arquivo seguras
 chmod 600 .env
-chmod 600 .aios/config.json
-chmod 600 .aios/users.json
-chmod 600 .aios/sessions.json
-chmod 700 .aios/
+chmod 600 .aiox/config.json
+chmod 600 .aiox/users.json
+chmod 600 .aiox/sessions.json
+chmod 700 .aiox/
 chmod 700 security/
 ```
 
@@ -610,4 +610,4 @@ const emergencyConfig = {
 
 **Lembre-se**: Segurança não é uma implementação única, mas um processo contínuo. Revisões, atualizações e melhorias regulares são essenciais para manter um sistema seguro.
 
-Para dúvidas ou preocupações de segurança, contate: security@synkra/aios-core.dev
+Para dúvidas ou preocupações de segurança, abra uma issue em: https://github.com/SynkraAI/aiox-core/issues

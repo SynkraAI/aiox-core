@@ -41,7 +41,7 @@ const {
  * @returns {Object|null} - Parsed manifest or null if not found
  */
 function loadManifest() {
-  const manifestPath = path.join(__dirname, '..', '.aios-core', 'install-manifest.yaml');
+  const manifestPath = path.join(__dirname, '..', '.aiox-core', 'install-manifest.yaml');
 
   if (!fs.existsSync(manifestPath)) {
     return null;
@@ -56,21 +56,21 @@ function loadManifest() {
  * @returns {Map<string, Object>} - Map of relativePath -> file metadata
  */
 function getCurrentFiles() {
-  const aiosCoreDir = path.join(__dirname, '..', '.aios-core');
+  const aioxCoreDir = path.join(__dirname, '..', '.aiox-core');
   const filesMap = new Map();
 
   // Scan folders
   const allFiles = [];
   for (const folder of FOLDERS_TO_COPY) {
-    const folderPath = path.join(aiosCoreDir, folder);
+    const folderPath = path.join(aioxCoreDir, folder);
     if (fs.existsSync(folderPath)) {
-      scanDirectory(folderPath, aiosCoreDir, allFiles);
+      scanDirectory(folderPath, aioxCoreDir, allFiles);
     }
   }
 
   // Add root files
   for (const file of ROOT_FILES_TO_COPY) {
-    const filePath = path.join(aiosCoreDir, file);
+    const filePath = path.join(aioxCoreDir, file);
     if (fs.existsSync(filePath)) {
       allFiles.push(filePath);
     }
@@ -78,7 +78,7 @@ function getCurrentFiles() {
 
   // Build map
   for (const fullPath of allFiles) {
-    const relativePath = path.relative(aiosCoreDir, fullPath).replace(/\\/g, '/');
+    const relativePath = path.relative(aioxCoreDir, fullPath).replace(/\\/g, '/');
     try {
       const hash = hashFile(fullPath);
       filesMap.set(relativePath, {
@@ -170,7 +170,7 @@ function validateManifest() {
  */
 function printReport(result) {
   console.log('='.repeat(60));
-  console.log('AIOS-Core Manifest Validation Report');
+  console.log('AIOX-Core Manifest Validation Report');
   console.log('='.repeat(60));
   console.log('');
 

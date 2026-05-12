@@ -1,0 +1,25 @@
+# Issue Labeler Workflow
+# Auto-labels issues based on body content regex matching
+#
+# Story: GHIM-001 - GitHub Issue Management
+# Reference: https://github.com/github/issue-labeler
+
+name: Issue Labeler
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: github/issue-labeler@v3.4
+        with:
+          configuration-path: .github/issue-labeler.yml
+          enable-versioned-regex: 0
+          repo-token: ${{ github.token }}

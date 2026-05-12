@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-26
 -->
 
-# Documentación del Framework AIOS
+# Documentación del Framework AIOX
 
 > 🌐 [EN](../../framework/README.md) | [PT](../../pt/framework/README.md) | **ES**
 
@@ -12,13 +12,13 @@
 
 **Estado:** Estándares Oficiales del Framework
 **Creado:** 2025-01-16 (Story 6.1.2.6)
-**Objetivo de Migración:** Q2 2026 → repositorio `SynkraAI/aios-core`
+**Objetivo de Migración:** Q2 2026 → repositorio `SynkraAI/aiox-core`
 
 ---
 
 ## Descripción General
 
-Este directorio contiene la **documentación oficial del framework AIOS** que define estándares, patrones y estructuras aplicables a todos los proyectos AIOS (greenfield y brownfield).
+Este directorio contiene la **documentación oficial del framework AIOX** que define estándares, patrones y estructuras aplicables a todos los proyectos AIOX (greenfield y brownfield).
 
 **Propósito**: Separar la documentación a nivel de framework de los detalles de implementación específicos del proyecto.
 
@@ -36,12 +36,12 @@ Este directorio contiene la **documentación oficial del framework AIOS** que de
 
 ## Aviso de Migración
 
-**IMPORTANTE**: Estos documentos ahora están en el repositorio `SynkraAI/aios-core`. La migración desde la antigua organización `aios/aios-core` se completó en diciembre de 2024 como parte del OSR-9 (Rebranding).
+**IMPORTANTE**: Estos documentos ahora están en el repositorio `SynkraAI/aiox-core`. La migración desde la antigua organización `aiox/aiox-core` se completó en diciembre de 2024 como parte del OSR-9 (Rebranding).
 
 ### Cronograma de Migración
 
 - **Fase 1 (Q1 2026 - Story 6.1.2.6):** Documentación del framework separada en `docs/framework/`
-- **Fase 2 (Q4 2024):** Repositorio migrado a `SynkraAI/aios-core` (OSR-9)
+- **Fase 2 (Q4 2024):** Repositorio migrado a `SynkraAI/aiox-core` (OSR-9)
 - **Fase 3 (Q3 2026):** Copias antiguas de `docs/architecture/` eliminadas del proyecto brownfield
 
 ### Compatibilidad hacia Atrás
@@ -59,9 +59,9 @@ Para compatibilidad hacia atrás, la documentación del framework permanece acce
 
 ### Documentación del Framework (`docs/framework/`)
 
-- **Alcance**: Portable a través de todos los proyectos AIOS
+- **Alcance**: Portable a través de todos los proyectos AIOX
 - **Ejemplos**: Estándares de codificación, stack tecnológico, estructura del árbol de código fuente
-- **Ciclo de vida**: Reside en el repositorio `SynkraAI/aios-core`
+- **Ciclo de vida**: Reside en el repositorio `SynkraAI/aiox-core`
 - **Cambios**: Requieren aprobación a nivel de framework
 
 ### Documentación del Proyecto (`docs/architecture/project-decisions/`)
@@ -77,7 +77,7 @@ Para compatibilidad hacia atrás, la documentación del framework permanece acce
 
 ### Para Desarrolladores
 
-1. **Lea la documentación del framework durante la incorporación** - Comprenda los estándares de AIOS
+1. **Lea la documentación del framework durante la incorporación** - Comprenda los estándares de AIOX
 2. **Consulte durante el desarrollo** - Asegure el cumplimiento con los patrones del framework
 3. **Proponga cambios mediante PRs** - Los estándares del framework evolucionan con aportes de la comunidad
 
@@ -87,7 +87,7 @@ Para compatibilidad hacia atrás, la documentación del framework permanece acce
 2. **Revise PRs para cumplimiento** - Asegure que el código siga los estándares documentados
 3. **Planifique la migración** - Prepárese para la separación del repositorio en Q2 2026
 
-### Para Mantenedores del Framework AIOS
+### Para Mantenedores del Framework AIOX
 
 1. **Control de versiones** - Rastree cambios en los estándares del framework
 2. **Preparación para la migración** - Asegure que la documentación esté lista para la separación del repositorio
@@ -96,4 +96,4 @@ Para compatibilidad hacia atrás, la documentación del framework permanece acce
 ---
 
 **Última Actualización**: 2025-12-14
-**Mantenedor**: Equipo del Framework AIOS
+**Mantenedor**: Equipo del Framework AIOX

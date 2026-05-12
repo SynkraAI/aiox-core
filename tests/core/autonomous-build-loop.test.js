@@ -44,15 +44,15 @@ const mockStateInstance = {
   formatStatus: jest.fn().mockReturnValue('Status: OK'),
 };
 
-jest.mock('../../.aios-core/core/execution/build-state-manager', () => ({
+jest.mock('../../.aiox-core/core/execution/build-state-manager', () => ({
   BuildStateManager: jest.fn().mockImplementation(() => ({ ...mockStateInstance })),
 }));
 
 // Mock optional dependencies to not load
-jest.mock('../../.aios-core/infrastructure/scripts/recovery-tracker', () => {
+jest.mock('../../.aiox-core/infrastructure/scripts/recovery-tracker', () => {
   throw new Error('not available');
 });
-jest.mock('../../.aios-core/infrastructure/scripts/worktree-manager', () => {
+jest.mock('../../.aiox-core/infrastructure/scripts/worktree-manager', () => {
   throw new Error('not available');
 });
 
@@ -61,9 +61,9 @@ const {
   BuildEvent,
   SubtaskResult,
   DEFAULT_CONFIG,
-} = require('../../.aios-core/core/execution/autonomous-build-loop');
+} = require('../../.aiox-core/core/execution/autonomous-build-loop');
 
-const { BuildStateManager } = require('../../.aios-core/core/execution/build-state-manager');
+const { BuildStateManager } = require('../../.aiox-core/core/execution/build-state-manager');
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 

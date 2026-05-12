@@ -67,7 +67,7 @@ const _writeDigest = isProAvailable ? extractorModule._writeDigest : undefined;
       const digestPath = await extractSessionDigest(context);
 
       // Check path contains correct components (cross-platform)
-      expect(digestPath).toContain('.aios');
+      expect(digestPath).toContain('.aiox');
       expect(digestPath).toContain('session-digests');
       expect(digestPath).toContain('test-session-123');
       expect(digestPath).toMatch(/\.yaml$/);
@@ -251,7 +251,7 @@ const _writeDigest = isProAvailable ? extractorModule._writeDigest : undefined;
       await _writeDigest(projectDir, sessionId, digest);
 
       expect(fs.promises.mkdir).toHaveBeenCalledWith(
-        expect.stringContaining('.aios'),
+        expect.stringContaining('.aiox'),
         { recursive: true },
       );
     });

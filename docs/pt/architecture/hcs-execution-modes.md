@@ -27,7 +27,7 @@
 
 ## Resumo Executivo
 
-Este documento define os modos de execução para o Sistema de Verificação de Saúde do AIOS (HCS), baseado em pesquisa de melhores práticas da indústria do Kubernetes, VS Code, Terraform, npm/yarn e padrões CLI "doctor" (Flutter, Homebrew, WP-CLI).
+Este documento define os modos de execução para o Sistema de Verificação de Saúde do AIOX (HCS), baseado em pesquisa de melhores práticas da indústria do Kubernetes, VS Code, Terraform, npm/yarn e padrões CLI "doctor" (Flutter, Homebrew, WP-CLI).
 
 ### Principais Recomendações
 
@@ -95,7 +95,7 @@ Este documento define os modos de execução para o Sistema de Verificação de 
 | **CI Agendado**              | Cron/workflow      | 60-300s | Nenhum                         | Monitoramento contínuo  | ✅ **Secundário**            |
 | **Trigger pós-merge**        | Merge de PR        | 60-120s | Nenhum                         | Validação pós-mudança   | ✅ **Terciário**             |
 | **Background na IDE**        | Save/intervalo     | 5-15s   | Indicadores sutis              | Feedback em tempo real  | ⚠️ Apenas usuários avançados |
-| **Na instalação/bootstrap**  | `npx aios install` | 60-120s | Esperado                       | Validação de setup      | ✅ **Obrigatório**           |
+| **Na instalação/bootstrap**  | `npx aiox install` | 60-120s | Esperado                       | Validação de setup      | ✅ **Obrigatório**           |
 
 ### Avaliação Detalhada
 
@@ -176,11 +176,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npx aios health-check --mode=full --report
+      - run: npx aiox health-check --mode=full --report
       - uses: actions/upload-artifact@v4
         with:
           name: health-report
-          path: .aios/reports/health-check-*.md
+          path: .aiox/reports/health-check-*.md
 ```
 
 #### ✅ Trigger Pós-merge - TERCIÁRIO
@@ -225,7 +225,7 @@ jobs:
 
 - Apenas uma vez
 
-**Veredito:** Obrigatório. Parte do `npx aios install` e `*bootstrap-setup`.
+**Veredito:** Obrigatório. Parte do `npx aiox install` e `*bootstrap-setup`.
 
 ---
 
@@ -234,7 +234,7 @@ jobs:
 ### Configuração Padrão
 
 ```yaml
-# .aios-core/core-config.yaml
+# .aiox-core/core-config.yaml
 healthCheck:
   enabled: true
 
@@ -335,7 +335,7 @@ healthCheck:
 
 ```yaml
 # .github/workflows/health-check.yml
-name: AIOS Health Check
+name: AIOX Health Check
 
 on:
   schedule:
@@ -364,7 +364,7 @@ jobs:
 
       - name: Executar Health Check
         run: |
-          npx aios health-check \
+          npx aiox health-check \
             --mode=${{ inputs.mode || 'full' }} \
             --report \
             --json
@@ -373,7 +373,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: health-check-report-${{ github.run_id }}
-          path: .aios/reports/
+          path: .aiox/reports/
 
       - name: Postar no Slack (em caso de falha)
         if: failure()
@@ -381,7 +381,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "⚠️ AIOS Health Check Falhou",
+              "text": "⚠️ AIOX Health Check Falhou",
               "blocks": [
                 {
                   "type": "section",
@@ -407,7 +407,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npx aios health-check --mode=quick
+      - run: npx aiox health-check --mode=quick
 ```
 
 ### 4. Modo Background na IDE (Opcional)
@@ -417,10 +417,10 @@ jobs:
 ```json
 // .vscode/settings.json
 {
-  "aios.healthCheck.enabled": true,
-  "aios.healthCheck.interval": 300,
-  "aios.healthCheck.mode": "quick",
-  "aios.healthCheck.showNotifications": true
+  "aiox.healthCheck.enabled": true,
+  "aiox.healthCheck.interval": 300,
+  "aiox.healthCheck.mode": "quick",
+  "aiox.healthCheck.showNotifications": true
 }
 ```
 

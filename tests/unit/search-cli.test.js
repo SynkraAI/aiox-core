@@ -9,11 +9,11 @@
 const path = require('path');
 
 // Test modules
-const { searchKeyword, fuzzyMatchScore, levenshteinDistance } = require('../../.aios-core/cli/commands/workers/search-keyword');
-const { applyFilters, filterByCategory, filterByTags } = require('../../.aios-core/cli/commands/workers/search-filters');
-const { formatOutput, formatTable, formatJSON, formatYAML } = require('../../.aios-core/cli/utils/output-formatter-cli');
-const { calculateScores, sortByScore, calculateSearchAccuracy } = require('../../.aios-core/cli/utils/score-calculator');
-const { isSemanticAvailable, cosineSimilarity, buildSearchText } = require('../../.aios-core/cli/commands/workers/search-semantic');
+const { searchKeyword, fuzzyMatchScore, levenshteinDistance } = require('../../.aiox-core/cli/commands/workers/search-keyword');
+const { applyFilters, filterByCategory, filterByTags } = require('../../.aiox-core/cli/commands/workers/search-filters');
+const { formatOutput, formatTable, formatJSON, formatYAML } = require('../../.aiox-core/cli/utils/output-formatter-cli');
+const { calculateScores, sortByScore, calculateSearchAccuracy } = require('../../.aiox-core/cli/utils/score-calculator');
+const { isSemanticAvailable, cosineSimilarity, buildSearchText } = require('../../.aiox-core/cli/commands/workers/search-semantic');
 
 // Mock workers for testing
 const mockWorkers = [
@@ -24,7 +24,7 @@ const mockWorkers = [
     category: 'data',
     subcategory: 'transformation',
     tags: ['etl', 'data', 'json', 'csv'],
-    path: '.aios-core/development/tasks/data/json-csv-transformer.md',
+    path: '.aiox-core/development/tasks/data/json-csv-transformer.md',
   },
   {
     id: 'csv-json-transformer',
@@ -33,7 +33,7 @@ const mockWorkers = [
     category: 'data',
     subcategory: 'transformation',
     tags: ['etl', 'data', 'json', 'csv'],
-    path: '.aios-core/development/tasks/data/csv-json-transformer.md',
+    path: '.aiox-core/development/tasks/data/csv-json-transformer.md',
   },
   {
     id: 'json-validator',
@@ -42,7 +42,7 @@ const mockWorkers = [
     category: 'validation',
     subcategory: 'schema',
     tags: ['validation', 'schema', 'json'],
-    path: '.aios-core/development/tasks/validation/json-validator.md',
+    path: '.aiox-core/development/tasks/validation/json-validator.md',
   },
   {
     id: 'api-generator',
@@ -51,7 +51,7 @@ const mockWorkers = [
     category: 'code',
     subcategory: 'generation',
     tags: ['api', 'rest', 'generator', 'openapi'],
-    path: '.aios-core/development/tasks/code/api-generator.md',
+    path: '.aiox-core/development/tasks/code/api-generator.md',
   },
   {
     id: 'test-runner',
@@ -60,7 +60,7 @@ const mockWorkers = [
     category: 'testing',
     subcategory: 'execution',
     tags: ['testing', 'unit', 'integration', 'jest'],
-    path: '.aios-core/development/tasks/testing/test-runner.md',
+    path: '.aiox-core/development/tasks/testing/test-runner.md',
   },
 ];
 
@@ -165,7 +165,7 @@ describe('Output Formatter', () => {
       category: 'data',
       tags: ['etl', 'json', 'csv'],
       score: 95,
-      path: '.aios-core/tasks/json-csv-transformer.md',
+      path: '.aiox-core/tasks/json-csv-transformer.md',
     },
   ];
 

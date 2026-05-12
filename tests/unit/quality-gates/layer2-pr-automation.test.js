@@ -4,7 +4,7 @@
  * @story 2.10 - Quality Gate Manager
  */
 
-const { Layer2PRAutomation } = require('../../../.aios-core/core/quality-gates/layer2-pr-automation');
+const { Layer2PRAutomation } = require('../../../.aiox-core/core/quality-gates/layer2-pr-automation');
 
 describe('Layer2PRAutomation', () => {
   let layer;

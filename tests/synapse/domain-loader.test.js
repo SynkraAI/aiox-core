@@ -19,7 +19,7 @@ const {
   domainNameToFile,
   KNOWN_SUFFIXES,
   GLOBAL_KEYS,
-} = require('../../.aios-core/core/synapse/domain/domain-loader');
+} = require('../../.aiox-core/core/synapse/domain/domain-loader');
 
 // Set timeout for all tests
 jest.setTimeout(30000);

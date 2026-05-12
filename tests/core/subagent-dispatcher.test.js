@@ -14,9 +14,9 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock gotchas-memory (exists but exports object, not constructor directly)
-jest.mock('../../.aios-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
+jest.mock('../../.aiox-core/core/memory/gotchas-memory', () => { throw new Error('mocked'); });
 
-const { SubagentDispatcher } = require('../../.aios-core/core/execution/subagent-dispatcher');
+const { SubagentDispatcher } = require('../../.aiox-core/core/execution/subagent-dispatcher');
 
 describe('SubagentDispatcher', () => {
   // ── Constructor ─────────────────────────────────────────────────────

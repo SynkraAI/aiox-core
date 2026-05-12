@@ -4,7 +4,7 @@
 > **Criado:** 2026-02-04
 > **Tipo:** Desenvolvimento Brownfield
 > **Status:** Documentacao Oficial
-> **Arquivo Fonte:** `.aios-core/development/workflows/brownfield-fullstack.yaml`
+> **Arquivo Fonte:** `.aiox-core/development/workflows/brownfield-fullstack.yaml`
 
 ---
 
@@ -236,7 +236,7 @@ O analista determina a complexidade do enhancement para rotear ao caminho apropr
 
 Capturar o estado atual do sistema, divida tecnica e restricoes. Os achados sao passados para a criacao do PRD.
 
-**Arquivo de Task:** `.aios-core/development/tasks/document-project.md`
+**Arquivo de Task:** `.aiox-core/development/tasks/document-project.md`
 
 ---
 
@@ -301,7 +301,7 @@ Crie documento de arquitetura APENAS para mudancas arquiteturais significativas.
 | **Input** | Todos os artefatos criados |
 | **Output** | Validacao ou lista de issues |
 
-**Arquivo de Checklist:** `.aios-core/product/checklists/po-master-checklist.md`
+**Arquivo de Checklist:** `.aiox-core/product/checklists/po-master-checklist.md`
 
 **Processo:**
 
@@ -344,7 +344,7 @@ Valida todos os documentos quanto a:
 - **Opcao A**: Use agente PO para shard: `@po` e peca para fragmentar `docs/prd.md`
 - **Opcao B**: Manual: Arraste a task `shard-doc` + `docs/prd.md` no chat
 
-**Arquivo de Task:** `.aios-core/development/tasks/shard-doc.md`
+**Arquivo de Task:** `.aiox-core/development/tasks/shard-doc.md`
 
 ---
 
@@ -365,8 +365,8 @@ Valida todos os documentos quanto a:
 | Brownfield Docs | `create-brownfield-story` |
 
 **Arquivos de Task:**
-- `.aios-core/development/tasks/create-next-story.md`
-- `.aios-core/development/tasks/create-brownfield-story.md`
+- `.aiox-core/development/tasks/create-next-story.md`
+- `.aiox-core/development/tasks/create-brownfield-story.md`
 
 ---
 
@@ -463,7 +463,7 @@ Continua ate que todas as stories no PRD estejam completas.
 
 **Status:** Todas as stories implementadas e revisadas
 
-**Referencia:** `.aios-core/data/aios-kb.md#IDE Development Workflow`
+**Referencia:** `.aiox-core/data/aiox-kb.md#IDE Development Workflow`
 
 ---
 
@@ -518,7 +518,7 @@ Antes de iniciar este workflow, certifique-se de:
 
 - [ ] GitHub CLI configurado (`gh auth status`)
 - [ ] Acesso ao PM tool (ClickUp/GitHub/Jira) se aplicavel
-- [ ] Core config AIOS configurado (`.aios-core/core-config.yaml`)
+- [ ] Core config AIOX configurado (`.aiox-core/core-config.yaml`)
 
 ---
 
@@ -796,26 +796,26 @@ stateDiagram-v2
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/workflows/brownfield-fullstack.yaml` | Definicao do workflow |
-| `.aios-core/development/tasks/brownfield-create-story.md` | Task para criar story simples |
-| `.aios-core/development/tasks/brownfield-create-epic.md` | Task para criar epic |
-| `.aios-core/development/tasks/document-project.md` | Task para documentar projeto existente |
-| `.aios-core/development/tasks/shard-doc.md` | Task para fragmentar documentos |
-| `.aios-core/development/tasks/create-brownfield-story.md` | Task para criar story brownfield |
-| `.aios-core/development/tasks/create-next-story.md` | Task para criar story de PRD |
-| `.aios-core/product/checklists/po-master-checklist.md` | Checklist de validacao PO |
+| `.aiox-core/development/workflows/brownfield-fullstack.yaml` | Definicao do workflow |
+| `.aiox-core/development/tasks/brownfield-create-story.md` | Task para criar story simples |
+| `.aiox-core/development/tasks/brownfield-create-epic.md` | Task para criar epic |
+| `.aiox-core/development/tasks/document-project.md` | Task para documentar projeto existente |
+| `.aiox-core/development/tasks/shard-doc.md` | Task para fragmentar documentos |
+| `.aiox-core/development/tasks/create-brownfield-story.md` | Task para criar story brownfield |
+| `.aiox-core/development/tasks/create-next-story.md` | Task para criar story de PRD |
+| `.aiox-core/product/checklists/po-master-checklist.md` | Checklist de validacao PO |
 
 ### Arquivos de Agentes
 
 | Arquivo | Agente |
 |---------|--------|
-| `.aios-core/development/agents/analyst.md` | @analyst (Atlas) |
-| `.aios-core/development/agents/architect.md` | @architect (Aria) |
-| `.aios-core/development/agents/pm.md` | @pm (Morgan) |
-| `.aios-core/development/agents/po.md` | @po (Pax) |
-| `.aios-core/development/agents/sm.md` | @sm (River) |
-| `.aios-core/development/agents/dev.md` | @dev (Dex) |
-| `.aios-core/development/agents/qa.md` | @qa (Quinn) |
+| `.aiox-core/development/agents/analyst.md` | @analyst (Atlas) |
+| `.aiox-core/development/agents/architect.md` | @architect (Aria) |
+| `.aiox-core/development/agents/pm.md` | @pm (Morgan) |
+| `.aiox-core/development/agents/po.md` | @po (Pax) |
+| `.aiox-core/development/agents/sm.md` | @sm (River) |
+| `.aiox-core/development/agents/dev.md` | @dev (Dex) |
+| `.aiox-core/development/agents/qa.md` | @qa (Quinn) |
 
 ### Documentacao Relacionada
 
@@ -823,7 +823,7 @@ stateDiagram-v2
 |-----------|-----------|
 | `docs/guides/BACKLOG-MANAGEMENT-SYSTEM.md` | Sistema de gestao de backlog |
 | `docs/guides/workflows/GREENFIELD-SERVICE-WORKFLOW.md` | Workflow para projetos greenfield |
-| `.aios-core/working-in-the-brownfield.md` | Guia de trabalho brownfield |
+| `.aiox-core/working-in-the-brownfield.md` | Guia de trabalho brownfield |
 
 ---
 

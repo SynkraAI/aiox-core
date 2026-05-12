@@ -29,7 +29,7 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 // Import after mocks are set up
-const GreetingPreferenceManager = require('../../.aios-core/development/scripts/greeting-preference-manager');
+const GreetingPreferenceManager = require('../../.aiox-core/development/scripts/greeting-preference-manager');
 
 // Set timeout for all tests
 jest.setTimeout(30000);

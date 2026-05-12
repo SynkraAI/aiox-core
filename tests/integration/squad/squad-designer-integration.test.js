@@ -17,7 +17,7 @@ const {
   SquadDesigner,
   SquadGenerator,
   SquadValidator,
-} = require('../../../.aios-core/development/scripts/squad');
+} = require('../../../.aiox-core/development/scripts/squad');
 
 describe('Squad Designer Integration', () => {
   let tempDir;

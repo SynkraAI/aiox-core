@@ -2,7 +2,7 @@
 
 **Versao:** 1.0
 **Tipo:** Workflow Generico
-**Autor:** Orion (AIOS Master)
+**Autor:** Orion (AIOX Master)
 **Data de Criacao:** 2025-01-30
 **Tags:** story, development-cycle, quality-gate, agile, generic
 
@@ -10,7 +10,7 @@
 
 ## Visao Geral
 
-O **Story Development Cycle** e o workflow central do AIOS para desenvolvimento de stories. Ele automatiza o fluxo completo desde a criacao ate a entrega com quality gate integrado, seguindo a sequencia: **criar -> validar -> implementar -> QA review**.
+O **Story Development Cycle** e o workflow central do AIOX para desenvolvimento de stories. Ele automatiza o fluxo completo desde a criacao ate a entrega com quality gate integrado, seguindo a sequencia: **criar -> validar -> implementar -> QA review**.
 
 ### Objetivo
 
@@ -549,13 +549,13 @@ graph TD
 
 ### Configuracao do Projeto
 
-1. **core-config.yaml** - Arquivo de configuracao AIOS obrigatorio
+1. **core-config.yaml** - Arquivo de configuracao AIOX obrigatorio
    - `devStoryLocation` - Local das stories
    - `prd.*` - Configuracao do PRD
    - `architecture.*` - Configuracao da arquitetura
    - `qa.qaLocation` - Local dos artefatos de QA
 
-2. **Story Template** - `story-tmpl.yaml` disponivel em `.aios-core/development/templates/`
+2. **Story Template** - `story-tmpl.yaml` disponivel em `.aiox-core/development/templates/`
 
 3. **Checklists** - Checklists obrigatorios disponiveis:
    - `story-draft-checklist.md`
@@ -591,7 +591,7 @@ graph TD
 | Epic requirements | Documento | `docs/stories/epic-X/` | Requisitos do epic |
 | PRD | Documento | Conforme config | Product Requirements |
 | Architecture docs | Documentos | `docs/architecture/` | Especificacoes tecnicas |
-| Story template | YAML | `.aios-core/development/templates/` | Template padrao |
+| Story template | YAML | `.aiox-core/development/templates/` | Template padrao |
 
 ### Saidas do Workflow
 
@@ -704,7 +704,7 @@ best_for: Requisitos ambiguos e trabalho critico
 **Solucao:**
 ```bash
 # Verificar se core-config.yaml existe
-cat .aios-core/core-config.yaml
+cat .aiox-core/core-config.yaml
 
 # Verificar estrutura de epics
 ls docs/stories/epic-*/
@@ -739,7 +739,7 @@ cat docs/prd/PRD.md  # ou localizado conforme config
 **Solucao:**
 ```bash
 # Verificar output do CodeRabbit
-wsl bash -c 'cd /mnt/c/.../@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
 
 # Corrigir issues manualmente
 # Depois re-executar *develop
@@ -813,16 +813,16 @@ cat docs/stories/{story-file}.md | grep "status:"
 
 | Arquivo | Caminho |
 |---------|---------|
-| Workflow Definition | `.aios-core/development/workflows/story-development-cycle.yaml` |
-| SM Agent | `.aios-core/development/agents/sm.md` |
-| PO Agent | `.aios-core/development/agents/po.md` |
-| Dev Agent | `.aios-core/development/agents/dev.md` |
-| QA Agent | `.aios-core/development/agents/qa.md` |
-| Create Story Task | `.aios-core/development/tasks/create-next-story.md` |
-| Validate Story Task | `.aios-core/development/tasks/validate-next-story.md` |
-| Develop Story Task | `.aios-core/development/tasks/dev-develop-story.md` |
-| QA Gate Task | `.aios-core/development/tasks/qa-gate.md` |
-| Story Template | `.aios-core/development/templates/story-tmpl.yaml` |
+| Workflow Definition | `.aiox-core/development/workflows/story-development-cycle.yaml` |
+| SM Agent | `.aiox-core/development/agents/sm.md` |
+| PO Agent | `.aiox-core/development/agents/po.md` |
+| Dev Agent | `.aiox-core/development/agents/dev.md` |
+| QA Agent | `.aiox-core/development/agents/qa.md` |
+| Create Story Task | `.aiox-core/development/tasks/create-next-story.md` |
+| Validate Story Task | `.aiox-core/development/tasks/validate-next-story.md` |
+| Develop Story Task | `.aiox-core/development/tasks/dev-develop-story.md` |
+| QA Gate Task | `.aiox-core/development/tasks/qa-gate.md` |
+| Story Template | `.aiox-core/development/templates/story-tmpl.yaml` |
 
 ### Documentacao Adicional
 

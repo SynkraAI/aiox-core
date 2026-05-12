@@ -4,7 +4,7 @@
 
 ---
 
-Complete guide for developers who want to contribute to the Synkra AIOS project.
+Complete guide for developers who want to contribute to the Synkra AIOX project.
 
 **Version:** 1.0.0
 **Last Updated:** 2026-01-29
@@ -42,8 +42,8 @@ Before starting, ensure you have the following installed:
 
 | Tool                 | Purpose                                 |
 | -------------------- | --------------------------------------- |
-| **Claude Code**      | AI-powered development with AIOS agents |
-| **VS Code / Cursor** | IDE with AIOS integration               |
+| **Claude Code**      | AI-powered development with AIOX agents |
+| **VS Code / Cursor** | IDE with AIOX integration               |
 | **Docker Desktop**   | MCP servers and containerized tools     |
 
 ### Installing Prerequisites
@@ -94,7 +94,7 @@ gh auth login
 
 ### Step 1: Fork the Repository
 
-1. Navigate to [github.com/SynkraAI/aios-core](https://github.com/SynkraAI/aios-core)
+1. Navigate to [github.com/SynkraAI/aiox-core](https://github.com/SynkraAI/aiox-core)
 2. Click the **Fork** button in the top-right corner
 3. Select your GitHub account as the destination
 
@@ -102,18 +102,18 @@ gh auth login
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/aios-core.git
-cd aios-core
+git clone https://github.com/YOUR_USERNAME/aiox-core.git
+cd aiox-core
 
 # Add upstream remote
-git remote add upstream https://github.com/SynkraAI/aios-core.git
+git remote add upstream https://github.com/SynkraAI/aiox-core.git
 
 # Verify remotes
 git remote -v
-# origin    https://github.com/YOUR_USERNAME/aios-core.git (fetch)
-# origin    https://github.com/YOUR_USERNAME/aios-core.git (push)
-# upstream  https://github.com/SynkraAI/aios-core.git (fetch)
-# upstream  https://github.com/SynkraAI/aios-core.git (push)
+# origin    https://github.com/YOUR_USERNAME/aiox-core.git (fetch)
+# origin    https://github.com/YOUR_USERNAME/aiox-core.git (push)
+# upstream  https://github.com/SynkraAI/aiox-core.git (fetch)
+# upstream  https://github.com/SynkraAI/aiox-core.git (push)
 ```
 
 ### Step 3: Stay Updated
@@ -158,7 +158,7 @@ OPENAI_API_KEY=your-openai-api-key
 
 # Framework Settings
 NODE_ENV=development
-AIOS_DEBUG=false
+AIOX_DEBUG=false
 
 # Optional: MCP Configuration
 SYNKRA_API_TOKEN=your-synkra-token
@@ -182,7 +182,7 @@ npm run validate:structure
 
 ### Step 4: IDE Integration (Optional)
 
-Sync AIOS agents to your IDE:
+Sync AIOX agents to your IDE:
 
 ```bash
 # Sync to all supported IDEs
@@ -190,7 +190,6 @@ npm run sync:ide
 
 # Sync to specific IDE
 npm run sync:ide:cursor
-npm run sync:ide:windsurf
 
 # Validate sync
 npm run sync:ide:validate
@@ -200,11 +199,11 @@ npm run sync:ide:validate
 
 ## Project Structure
 
-Understanding the `aios-core` directory structure:
+Understanding the `aiox-core` directory structure:
 
 ```
-aios-core/
-├── .aios-core/                    # Framework source (committed)
+aiox-core/
+├── .aiox-core/                    # Framework source (committed)
 │   ├── core/                      # Core utilities and config
 │   │   ├── config/                # Framework configuration files
 │   │   ├── docs/                  # Internal documentation
@@ -226,13 +225,13 @@ aios-core/
 │       └── checklists/            # Product checklists
 │
 ├── .claude/                       # Claude Code configuration
-│   ├── commands/AIOS/agents/      # Agent skill commands
+│   ├── commands/AIOX/agents/      # Agent skill commands
 │   ├── hooks/                     # Governance hooks
 │   └── rules/                     # AI behavior rules
 │
 ├── bin/                           # CLI entry points
-│   ├── aios.js                    # Main CLI
-│   └── aios-minimal.js            # Minimal CLI
+│   ├── aiox.js                    # Main CLI
+│   └── aiox-minimal.js            # Minimal CLI
 │
 ├── docs/                          # All documentation
 │   ├── architecture/              # System architecture
@@ -266,9 +265,9 @@ aios-core/
 
 | Directory                           | Purpose                      | When to Modify          |
 | ----------------------------------- | ---------------------------- | ----------------------- |
-| `.aios-core/development/agents/`    | Agent personas and behaviors | Adding/modifying agents |
-| `.aios-core/development/tasks/`     | Executable task workflows    | Adding/modifying tasks  |
-| `.aios-core/development/workflows/` | Multi-step orchestrations    | Creating workflows      |
+| `.aiox-core/development/agents/`    | Agent personas and behaviors | Adding/modifying agents |
+| `.aiox-core/development/tasks/`     | Executable task workflows    | Adding/modifying tasks  |
+| `.aiox-core/development/workflows/` | Multi-step orchestrations    | Creating workflows      |
 | `.claude/rules/`                    | AI behavior rules            | Adding constraints      |
 | `docs/stories/`                     | Development stories          | Working on features     |
 | `src/`                              | Framework source code        | Core functionality      |
@@ -357,10 +356,10 @@ Agents are AI personas that provide specialized capabilities. Each agent is defi
 
 ### Step 2: Create Agent File
 
-Create a new file in `.aios-core/development/agents/`:
+Create a new file in `.aiox-core/development/agents/`:
 
 ```bash
-# File: .aios-core/development/agents/my-agent.md
+# File: .aiox-core/development/agents/my-agent.md
 ```
 
 ### Step 3: Agent Template
@@ -454,9 +453,9 @@ If your agent uses tasks or checklists, ensure they exist:
 ```yaml
 dependencies:
   tasks:
-    - my-agent-task.md       # Create in .aios-core/development/tasks/
+    - my-agent-task.md       # Create in .aiox-core/development/tasks/
   checklists:
-    - my-agent-checklist.md  # Create in .aios-core/development/checklists/
+    - my-agent-checklist.md  # Create in .aiox-core/development/checklists/
   tools:
     - git
     - context7
@@ -490,7 +489,7 @@ Tasks are executable workflows that agents use to perform actions.
 
 ### Step 2: Create Task File
 
-Create a new file in `.aios-core/development/tasks/`:
+Create a new file in `.aiox-core/development/tasks/`:
 
 ```bash
 # Naming conventions:
@@ -498,8 +497,8 @@ Create a new file in `.aios-core/development/tasks/`:
 # Shared: {task-name}.md
 
 # Examples:
-# .aios-core/development/tasks/dev-build-component.md  (dev agent)
-# .aios-core/development/tasks/create-doc.md          (shared)
+# .aiox-core/development/tasks/dev-build-component.md  (dev agent)
+# .aiox-core/development/tasks/create-doc.md          (shared)
 ```
 
 ### Step 3: Task Template
@@ -527,7 +526,7 @@ Create a new file in `.aios-core/development/tasks/`:
 
 ---
 
-## Task Definition (AIOS Task Format V1.0)
+## Task Definition (AIOX Task Format V1.0)
 
 ```yaml
 task: myTaskFunction()
@@ -660,10 +659,10 @@ Workflows orchestrate multiple agents and tasks for complex operations.
 
 ### Step 2: Create Workflow File
 
-Create a new file in `.aios-core/development/workflows/`:
+Create a new file in `.aiox-core/development/workflows/`:
 
 ```bash
-# File: .aios-core/development/workflows/my-workflow.yaml
+# File: .aiox-core/development/workflows/my-workflow.yaml
 ```
 
 ### Step 3: Workflow Template
@@ -948,7 +947,7 @@ EOF
 
 ```bash
 # Set environment variable
-export AIOS_DEBUG=true
+export AIOX_DEBUG=true
 
 # Run with debug output
 npm test -- --verbose
@@ -958,10 +957,10 @@ npm test -- --verbose
 
 ```bash
 # Check agent execution logs
-ls -la .aios/logs/
+ls -la .aiox/logs/
 
 # Tail agent log
-tail -f .aios/logs/agent.log
+tail -f .aiox/logs/agent.log
 ```
 
 ### Common Issues
@@ -1017,10 +1016,10 @@ npm run lint
 
 ```bash
 # Validate agent file YAML
-npx js-yaml .aios-core/development/agents/my-agent.md
+npx js-yaml .aiox-core/development/agents/my-agent.md
 
 # Check dependencies exist
-ls .aios-core/development/tasks/my-task.md
+ls .aiox-core/development/tasks/my-task.md
 ```
 
 #### Issue: IDE not showing agent commands
@@ -1038,7 +1037,6 @@ npm run sync:ide:validate
 
 # Check IDE-specific directory
 ls .cursor/  # For Cursor
-ls .windsurf/  # For Windsurf
 ```
 
 #### Issue: Pre-commit hooks not running
@@ -1059,10 +1057,10 @@ ls -la .husky/
 
 ```bash
 # Trace workflow execution
-AIOS_DEBUG=true npm run trace -- workflow-name
+AIOX_DEBUG=true npm run trace -- workflow-name
 
 # Check workflow state
-cat .aios/state/workflow-state.json
+cat .aiox/state/workflow-state.json
 ```
 
 ### Performance Profiling
@@ -1081,8 +1079,8 @@ node --inspect node_modules/.bin/jest
 
 ### Resources
 
-- **GitHub Discussions:** [github.com/SynkraAI/aios-core/discussions](https://github.com/SynkraAI/aios-core/discussions)
-- **Issue Tracker:** [github.com/SynkraAI/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **GitHub Discussions:** [github.com/SynkraAI/aiox-core/discussions](https://github.com/SynkraAI/aiox-core/discussions)
+- **Issue Tracker:** [github.com/SynkraAI/aiox-core/issues](https://github.com/SynkraAI/aiox-core/issues)
 - **Discord:** [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
 
 ### Issue Labels
@@ -1112,5 +1110,5 @@ node --inspect node_modules/.bin/jest
 
 ---
 
-_Synkra AIOS Development Setup Guide v1.0.0_
+_Synkra AIOX Development Setup Guide v1.0.0_
 _Last Updated: 2026-01-29_

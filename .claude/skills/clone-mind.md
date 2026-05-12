@@ -309,14 +309,14 @@ outputs/minds/{slug}/
 | Quality score < 90% | Identify gaps, supplement research |
 | Pipeline failure | Save state, enable resume |
 
-## Coexistence with AIOS
+## Coexistence with AIOX
 
-This skill coexists with the AIOS `*map` command:
+This skill coexists with the AIOX `*map` command:
 
 | Entry Point | System | Command |
 |-------------|--------|---------|
 | Claude Code | Skill | `/clone-mind {slug}` |
-| AIOS | Task | `*map {slug}` |
+| AIOX | Task | `*map {slug}` |
 
 Both use the same infrastructure:
 - `squads/mmos/lib/*.py` - Python utilities

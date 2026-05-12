@@ -8,8 +8,8 @@ on:
     branches:
       - main
     paths:
-      - '.aios-core/scripts/pm.sh'
-      - '.aios-core/core/orchestration/terminal-spawner.js'
+      - '.aiox-core/scripts/pm.sh'
+      - '.aiox-core/core/orchestration/terminal-spawner.js'
       - 'tests/core/orchestration/terminal-spawner.test.js'
 
 concurrency:
@@ -53,11 +53,11 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           echo "=== pm.sh Validation (${{ matrix.os }}) ==="
-          if [ -f ".aios-core/scripts/pm.sh" ]; then
+          if [ -f ".aiox-core/scripts/pm.sh" ]; then
             echo "✅ pm.sh found"
-            chmod +x .aios-core/scripts/pm.sh
+            chmod +x .aiox-core/scripts/pm.sh
             # Syntax check only (don't execute — requires full environment)
-            bash -n .aios-core/scripts/pm.sh && echo "✅ pm.sh syntax valid" || echo "❌ pm.sh syntax error"
+            bash -n .aiox-core/scripts/pm.sh && echo "✅ pm.sh syntax valid" || echo "❌ pm.sh syntax error"
           else
             echo "❌ pm.sh not found"
             exit 1
@@ -68,7 +68,7 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "=== Fallback Inline Validation (Windows) ==="
-          if (Test-Path ".aios-core/scripts/pm.sh") {
+          if (Test-Path ".aiox-core/scripts/pm.sh") {
             Write-Host "✅ pm.sh found (will use fallback inline on Windows)"
           } else {
             Write-Host "❌ pm.sh not found"

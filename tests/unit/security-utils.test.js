@@ -8,7 +8,7 @@
  * - Rate limiting
  * - Safe path construction
  *
- * @see .aios-core/core/utils/security-utils.js
+ * @see .aiox-core/core/utils/security-utils.js
  */
 
 const {
@@ -19,7 +19,7 @@ const {
   safePath,
   isSafeString,
   getObjectDepth,
-} = require('../../.aios-core/core/utils/security-utils');
+} = require('../../.aiox-core/core/utils/security-utils');
 
 describe('security-utils', () => {
   describe('validatePath', () => {

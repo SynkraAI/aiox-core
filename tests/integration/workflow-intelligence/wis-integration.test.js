@@ -12,7 +12,7 @@ describe('WIS Integration', () => {
   let wis;
 
   beforeAll(() => {
-    wis = require('../../../.aios-core/workflow-intelligence');
+    wis = require('../../../.aiox-core/workflow-intelligence');
   });
 
   describe('Full Suggestion Flow', () => {
@@ -211,7 +211,7 @@ describe('WIS Performance', () => {
   let wis;
 
   beforeAll(() => {
-    wis = require('../../../.aios-core/workflow-intelligence');
+    wis = require('../../../.aiox-core/workflow-intelligence');
   });
 
   it('should complete getSuggestions within 100ms', () => {

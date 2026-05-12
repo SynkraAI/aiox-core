@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-26
 -->
 
-# Preguntas Frecuentes de Synkra AIOS
+# Preguntas Frecuentes de Synkra AIOX
 
 > 🌐 [EN](../../installation/faq.md) | [PT](../../pt/installation/faq.md) | **ES**
 
@@ -31,7 +31,7 @@
 
 ### P1: ¿Por qué npx en lugar de npm install -g?
 
-**Respuesta:** Recomendamos `npx @synkra/aios-core install` en lugar de instalación global por varias razones:
+**Respuesta:** Recomendamos `npx aiox-core install` en lugar de instalación global por varias razones:
 
 1. **Siempre la Última Versión**: npx obtiene la última versión automáticamente
 2. **Sin Contaminación Global**: No agrega a sus paquetes npm globales
@@ -42,8 +42,8 @@
 **Si prefiere instalación global:**
 
 ```bash
-npm install -g @synkra/aios-core
-@synkra/aios-core install
+npm install -g aiox-core
+aiox-core install
 ```
 
 ---
@@ -69,20 +69,20 @@ npm --version   # Debe ser 9+
 
 ---
 
-### P3: ¿Puedo instalar AIOS en un proyecto existente?
+### P3: ¿Puedo instalar AIOX en un proyecto existente?
 
-**Respuesta:** ¡Sí! AIOS está diseñado tanto para proyectos nuevos como existentes.
+**Respuesta:** ¡Sí! AIOX está diseñado tanto para proyectos nuevos como existentes.
 
 **Para proyectos existentes:**
 
 ```bash
 cd /path/to/existing-project
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 El instalador:
 
-- Creará el directorio `.aios-core/` (archivos del framework)
+- Creará el directorio `.aiox-core/` (archivos del framework)
 - Creará la configuración del IDE (`.claude/`, `.cursor/`, etc.)
 - NO modificará su código fuente existente
 - NO sobrescribirá documentación existente a menos que lo elija
@@ -110,13 +110,13 @@ Factores que afectan el tiempo de instalación:
 
 ---
 
-### P5: ¿Qué archivos crea AIOS en mi proyecto?
+### P5: ¿Qué archivos crea AIOX en mi proyecto?
 
-**Respuesta:** AIOS crea la siguiente estructura:
+**Respuesta:** AIOX crea la siguiente estructura:
 
 ```
 your-project/
-├── .aios-core/                 # Núcleo del framework (200+ archivos)
+├── .aiox-core/                 # Núcleo del framework (200+ archivos)
 │   ├── agents/                 # 11+ definiciones de agentes
 │   ├── tasks/                  # 60+ flujos de trabajo de tareas
 │   ├── templates/              # 20+ plantillas de documentos
@@ -125,7 +125,7 @@ your-project/
 │   └── core-config.yaml        # Configuración del framework
 │
 ├── .claude/                    # Claude Code (si se seleccionó)
-│   └── commands/AIOS/agents/   # Comandos slash de agentes
+│   └── commands/AIOX/agents/   # Comandos slash de agentes
 │
 ├── .cursor/                    # Cursor (si se seleccionó)
 │   └── rules/                  # Reglas de agentes
@@ -143,24 +143,24 @@ your-project/
 
 ## Actualizaciones y Mantenimiento
 
-### P6: ¿Cómo actualizo AIOS a la última versión?
+### P6: ¿Cómo actualizo AIOX a la última versión?
 
 **Respuesta:**
 
 ```bash
 # Actualizar vía npx (recomendado)
-npx @synkra/aios-core update
+npx aiox-core update
 
 # O reinstalar la última
-npx @synkra/aios-core install --force-upgrade
+npx aiox-core install --force-upgrade
 
 # Verificar versión actual
-npx @synkra/aios-core status
+npx aiox-core status
 ```
 
 **Qué se actualiza:**
 
-- Archivos de `.aios-core/` (agentes, tareas, plantillas)
+- Archivos de `.aiox-core/` (agentes, tareas, plantillas)
 - Configuraciones del IDE
 - Paquetes de expansión (si están instalados)
 
@@ -178,15 +178,15 @@ npx @synkra/aios-core status
 
 | Tipo de Actualización          | Frecuencia   | Comando                     |
 | -------------------- | ----------- | --------------------------- |
-| **Parches de seguridad** | Inmediatamente | `npx @synkra/aios-core update` |
-| **Actualizaciones menores**    | Mensualmente     | `npx @synkra/aios-core update` |
+| **Parches de seguridad** | Inmediatamente | `npx aiox-core update` |
+| **Actualizaciones menores**    | Mensualmente     | `npx aiox-core update` |
 | **Versiones mayores**   | Trimestralmente   | Revise el changelog primero      |
 
 **Verificar actualizaciones:**
 
 ```bash
-npm show @synkra/aios-core version
-npx @synkra/aios-core status
+npm show aiox-core version
+npx aiox-core status
 ```
 
 ---
@@ -198,29 +198,29 @@ npx @synkra/aios-core status
 **Opción 1: Reinstalar versión específica**
 
 ```bash
-npx @synkra/aios-core@1.1.0 install --force-upgrade
+npx aiox-core@1.1.0 install --force-upgrade
 ```
 
 **Opción 2: Usar Git para restaurar**
 
 ```bash
-# Si .aios-core está rastreado en git
-git checkout HEAD~1 -- .aios-core/
+# Si .aiox-core está rastreado en git
+git checkout HEAD~1 -- .aiox-core/
 ```
 
 **Opción 3: Restaurar desde copia de seguridad**
 
 ```bash
 # El instalador crea copias de seguridad
-mv .aios-core .aios-core.failed
-mv .aios-core.backup .aios-core
+mv .aiox-core .aiox-core.failed
+mv .aiox-core.backup .aiox-core
 ```
 
 ---
 
 ## Uso Offline y en Entornos Aislados
 
-### P9: ¿Puedo usar AIOS sin internet?
+### P9: ¿Puedo usar AIOX sin internet?
 
 **Respuesta:** Sí, con algo de preparación:
 
@@ -228,19 +228,19 @@ mv .aios-core.backup .aios-core
 
 ```bash
 # Instalar una vez con internet
-npx @synkra/aios-core install
+npx aiox-core install
 
 # Empaquetar para uso offline
-tar -czvf aios-offline.tar.gz .aios-core/ .claude/ .cursor/
+tar -czvf aiox-offline.tar.gz .aiox-core/ .claude/ .cursor/
 ```
 
 **En máquina aislada:**
 
 ```bash
 # Extraer el paquete
-tar -xzvf aios-offline.tar.gz
+tar -xzvf aiox-offline.tar.gz
 
-# Los agentes de AIOS funcionan sin internet
+# Los agentes de AIOX funcionan sin internet
 # (No requieren llamadas a API externas)
 ```
 
@@ -252,7 +252,7 @@ tar -xzvf aios-offline.tar.gz
 
 ---
 
-### P10: ¿Cómo transfiero AIOS a un entorno aislado?
+### P10: ¿Cómo transfiero AIOX a un entorno aislado?
 
 **Respuesta:**
 
@@ -260,9 +260,9 @@ tar -xzvf aios-offline.tar.gz
 
    ```bash
    # Instalar y empaquetar
-   npx @synkra/aios-core install
+   npx aiox-core install
    cd your-project
-   tar -czvf aios-transfer.tar.gz .aios-core/ .claude/ .cursor/ docs/
+   tar -czvf aiox-transfer.tar.gz .aiox-core/ .claude/ .cursor/ docs/
    ```
 
 2. **Transferir el archivo** vía USB, transferencia segura, etc.
@@ -271,7 +271,7 @@ tar -xzvf aios-offline.tar.gz
 
    ```bash
    cd your-project
-   tar -xzvf aios-transfer.tar.gz
+   tar -xzvf aiox-transfer.tar.gz
    ```
 
 4. **Configurar IDE manualmente** si es necesario (las rutas pueden diferir)
@@ -280,7 +280,7 @@ tar -xzvf aios-offline.tar.gz
 
 ## IDE y Configuración
 
-### P11: ¿Qué IDEs soporta AIOS?
+### P11: ¿Qué IDEs soporta AIOX?
 
 **Respuesta:**
 
@@ -288,10 +288,6 @@ tar -xzvf aios-offline.tar.gz
 | ------------------ | ------------ | ------------------- |
 | **Claude Code**    | Soporte Completo | `/dev`, `/qa`, etc. |
 | **Cursor**         | Soporte Completo | `@dev`, `@qa`, etc. |
-| **Windsurf**       | Soporte Completo | `@dev`, `@qa`, etc. |
-| **Trae**           | Soporte Completo | `@dev`, `@qa`, etc. |
-| **Roo Code**       | Soporte Completo | Selector de modo       |
-| **Cline**          | Soporte Completo | `@dev`, `@qa`, etc. |
 | **Gemini CLI**     | Soporte Completo | Mención en prompt   |
 | **GitHub Copilot** | Soporte Completo | Modos de chat          |
 
@@ -299,7 +295,7 @@ tar -xzvf aios-offline.tar.gz
 
 ---
 
-### P12: ¿Puedo configurar AIOS para múltiples IDEs?
+### P12: ¿Puedo configurar AIOX para múltiples IDEs?
 
 **Respuesta:** ¡Sí! Seleccione múltiples IDEs durante la instalación:
 
@@ -309,28 +305,25 @@ tar -xzvf aios-offline.tar.gz
 ? ¿Qué IDE(s) quiere configurar?
 ❯ ◉ Cursor
   ◉ Claude Code
-  ◯ Windsurf
 ```
 
 **Línea de comandos:**
 
 ```bash
-npx @synkra/aios-core install --ide cursor claude-code windsurf
 ```
 
 Cada IDE obtiene su propio directorio de configuración:
 
 - `.cursor/rules/` para Cursor
 - `.claude/commands/` para Claude Code
-- `.windsurf/rules/` para Windsurf
 
 ---
 
-### P13: ¿Cómo configuro AIOS para un nuevo miembro del equipo?
+### P13: ¿Cómo configuro AIOX para un nuevo miembro del equipo?
 
 **Respuesta:**
 
-Si `.aios-core/` está commiteado en su repositorio:
+Si `.aiox-core/` está commiteado en su repositorio:
 
 ```bash
 # El nuevo miembro solo clona
@@ -338,18 +331,18 @@ git clone your-repo
 cd your-repo
 
 # Opcionalmente configurar su IDE preferido
-npx @synkra/aios-core install --ide cursor
+npx aiox-core install --ide cursor
 ```
 
-Si `.aios-core/` no está commiteado:
+Si `.aiox-core/` no está commiteado:
 
 ```bash
 git clone your-repo
 cd your-repo
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
-**Mejor práctica:** Commitear `.aios-core/` para compartir configuraciones de agentes consistentes.
+**Mejor práctica:** Commitear `.aiox-core/` para compartir configuraciones de agentes consistentes.
 
 ---
 
@@ -357,7 +350,7 @@ npx @synkra/aios-core install
 
 ### P14: ¿Qué agentes están incluidos?
 
-**Respuesta:** AIOS incluye 11+ agentes especializados:
+**Respuesta:** AIOX incluye 11+ agentes especializados:
 
 | Agente           | Rol                 | Ideal Para                        |
 | --------------- | -------------------- | ------------------------------- |
@@ -382,7 +375,7 @@ npx @synkra/aios-core install
 1. **Copiar un agente existente:**
 
    ```bash
-   cp .aios-core/agents/dev.md .aios-core/agents/my-agent.md
+   cp .aiox-core/agents/dev.md .aiox-core/agents/my-agent.md
    ```
 
 2. **Editar el frontmatter YAML:**
@@ -402,7 +395,7 @@ npx @synkra/aios-core install
 3. **Agregar a la configuración del IDE:**
 
    ```bash
-   npx @synkra/aios-core install --ide claude-code
+   npx aiox-core install --ide claude-code
    ```
 
 4. **Activar:** `/my-agent` o `@my-agent`
@@ -443,7 +436,7 @@ npx @synkra/aios-core install
 
 ### P17: ¿Qué son los Squads?
 
-**Respuesta:** Los paquetes de expansión son complementos opcionales que extienden las capacidades de AIOS:
+**Respuesta:** Los paquetes de expansión son complementos opcionales que extienden las capacidades de AIOX:
 
 | Paquete           | Características                                                       |
 | -------------- | -------------------------------------------------------------- |
@@ -452,13 +445,13 @@ npx @synkra/aios-core install
 **Instalar un Squad:**
 
 ```bash
-npx @synkra/aios-core install --Squads hybrid-ops
+npx aiox-core install --Squads hybrid-ops
 ```
 
 **Listar paquetes disponibles:**
 
 ```bash
-npx @synkra/aios-core list:expansions
+npx aiox-core install
 ```
 
 ---
@@ -488,7 +481,7 @@ name: my-expansion
 version: 1.0.0
 description: Mi Squad personalizado
 dependencies:
-  aios-core: ">=1.0.0"
+  aiox-core: ">=1.0.0"
 agents:
   - my-agent
 tasks:
@@ -499,14 +492,14 @@ tasks:
 
 ## Uso Avanzado
 
-### P19: ¿Cómo integro AIOS con CI/CD?
+### P19: ¿Cómo integro AIOX con CI/CD?
 
 **Respuesta:**
 
 **Ejemplo de GitHub Actions:**
 
 ```yaml
-name: CI with AIOS
+name: CI with AIOX
 on: [push]
 jobs:
   test:
@@ -516,7 +509,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - run: npx @synkra/aios-core install --full --ide claude-code
+      - run: npx aiox-core install --full --ide claude-code
       - run: npm test
 ```
 
@@ -526,7 +519,7 @@ jobs:
 test:
   image: node:18
   script:
-    - npx @synkra/aios-core install --full
+    - npx aiox-core install --full
     - npm test
 ```
 
@@ -565,11 +558,11 @@ projectStatus:
 
 ---
 
-### P21: ¿Cómo contribuyo a AIOS?
+### P21: ¿Cómo contribuyo a AIOX?
 
 **Respuesta:**
 
-1. **Haga fork del repositorio:** https://github.com/SynkraAI/aios-core
+1. **Haga fork del repositorio:** https://github.com/SynkraAI/aiox-core
 
 2. **Cree una rama de feature:**
 
@@ -605,8 +598,8 @@ projectStatus:
 | ------------------- | ---------------------------------------------------------- |
 | **Documentación**   | `docs/` en su proyecto                                    |
 | **Solución de Problemas** | [troubleshooting.md](./troubleshooting.md)                 |
-| **Issues de GitHub**   | https://github.com/SynkraAI/aios-core/issues |
-| **Código Fuente**     | https://github.com/SynkraAI/aios-core        |
+| **Issues de GitHub**   | https://github.com/SynkraAI/aiox-core/issues |
+| **Código Fuente**     | https://github.com/SynkraAI/aiox-core        |
 
 **Antes de pedir ayuda:**
 

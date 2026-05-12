@@ -15,7 +15,7 @@
 
 ## Resumen Ejecutivo
 
-Este documento define límites claros de responsabilidad para todos los agentes AIOS, con enfoque particular en:
+Este documento define límites claros de responsabilidad para todos los agentes AIOX, con enfoque particular en:
 1. **Centralización de GitHub DevOps** - Solo @github-devops puede hacer push al repositorio remoto
 2. **Especialización de Arquitectura de Datos** - @data-architect maneja base de datos/ciencia de datos
 3. **División de Gestión de Ramas** - @sm (local) vs @github-devops (remoto)
@@ -50,13 +50,13 @@ Este documento define límites claros de responsabilidad para todos los agentes 
 
 1. **Hook Git Pre-Push** (Aplicación Primaria)
    - Ubicación: `.git/hooks/pre-push`
-   - Verifica: Variable de entorno `$AIOS_ACTIVE_AGENT`
+   - Verifica: Variable de entorno `$AIOX_ACTIVE_AGENT`
    - Acción: Bloquea push si agente != "github-devops"
 
 2. **Variables de Entorno** (Detección en Tiempo de Ejecución)
    ```bash
-   export AIOS_ACTIVE_AGENT="github-devops"
-   export AIOS_GIT_PUSH_ALLOWED="true"
+   export AIOX_ACTIVE_AGENT="github-devops"
+   export AIOX_GIT_PUSH_ALLOWED="true"
    ```
 
 3. **Definiciones de Agentes** (Documentación + Restricciones)
@@ -378,7 +378,7 @@ gh pr merge
 
 - [ ] **Crear Hook Git Pre-Push**
   - Ubicación: `.git/hooks/pre-push`
-  - Contenido: Verificar `$AIOS_ACTIVE_AGENT`, bloquear si != "github-devops"
+  - Contenido: Verificar `$AIOX_ACTIVE_AGENT`, bloquear si != "github-devops"
   - Hacer ejecutable: `chmod +x .git/hooks/pre-push`
 
 - [ ] **Actualizar Todas las Definiciones de Agentes** (HECHO ✅)
@@ -390,8 +390,8 @@ gh pr merge
   - [x] @data-architect - Creado con especialización en datos
 
 - [ ] **Actualizar Scripts de Activación de Agentes**
-  - Agregar configuración de variable de entorno: `AIOS_ACTIVE_AGENT={agent_id}`
-  - Configurar `AIOS_GIT_PUSH_ALLOWED` apropiadamente
+  - Agregar configuración de variable de entorno: `AIOX_ACTIVE_AGENT={agent_id}`
+  - Configurar `AIOX_GIT_PUSH_ALLOWED` apropiadamente
 
 - [ ] **Configuración de IDE** (.claude/settings.json)
   - Agregar `agents.{id}.blockedOperations` para cada agente

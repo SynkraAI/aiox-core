@@ -28,7 +28,7 @@
 
 ## Resumo Executivo
 
-Este documento especifica as capacidades de auto-recuperação do Sistema de Verificação de Saúde do AIOS (HCS). A auto-recuperação permite que o sistema corrija automaticamente certos problemas enquanto mantém a segurança e o controle do usuário.
+Este documento especifica as capacidades de auto-recuperação do Sistema de Verificação de Saúde do AIOX (HCS). A auto-recuperação permite que o sistema corrija automaticamente certos problemas enquanto mantém a segurança e o controle do usuário.
 
 ### Princípios Fundamentais
 
@@ -105,8 +105,8 @@ silenciosamente  │ modifica dados/ │
 
 | Ação                   | Descrição                                                | Backup        |
 | ---------------------- | -------------------------------------------------------- | ------------- |
-| `recreate_config`      | Recriar `.aios/config.yaml` ausente a partir do template | Sim           |
-| `clear_cache`          | Limpar arquivos de cache obsoletos em `.aios/cache/`     | Sim           |
+| `recreate_config`      | Recriar `.aiox/config.yaml` ausente a partir do template | Sim           |
+| `clear_cache`          | Limpar arquivos de cache obsoletos em `.aiox/cache/`     | Sim           |
 | `create_dirs`          | Criar diretórios de framework ausentes                   | Não (aditivo) |
 | `fix_permissions`      | Corrigir permissões de arquivos do framework             | Sim           |
 | `regenerate_lockfile`  | Regenerar integridade do lockfile de pacotes             | Sim           |
@@ -118,7 +118,7 @@ silenciosamente  │ modifica dados/ │
 ```yaml
 # Problemas de Nível 1 - auto-corrigir silenciosamente
 - id: PC-001
-  description: '.aios/config.yaml ausente'
+  description: '.aiox/config.yaml ausente'
   severity: CRITICAL
   tier: 1
   action: recreate_config
@@ -143,9 +143,9 @@ silenciosamente  │ modifica dados/ │
 
 ```
 ✅ 3 problemas auto-corrigidos:
-   • Recriado .aios/config.yaml (backup: .aios/backups/config.yaml.1735564800)
+   • Recriado .aiox/config.yaml (backup: .aiox/backups/config.yaml.1735564800)
    • Reiniciado servidor MCP context7
-   • Adicionado .aios/cache/ ao .gitignore
+   • Adicionado .aiox/cache/ ao .gitignore
 ```
 
 ---
@@ -255,10 +255,10 @@ silenciosamente  │ modifica dados/ │
   guide:
     title: 'Corrigir Referência de Agente Inválida'
     steps:
-      - 'Abrir .aios-core/development/tasks/deploy.md'
+      - 'Abrir .aiox-core/development/tasks/deploy.md'
       - 'Encontrar linha: agent: legacy-dev'
       - 'Substituir por: agent: devops'
-      - 'Verificar com: npx aios task validate deploy'
+      - 'Verificar com: npx aiox task validate deploy'
     suggested_agent: '@architect'
 
 - id: RH-007
@@ -315,10 +315,10 @@ Sugerido: Ativar @devops para assistência
 Tarefa 'deploy' referencia agente inexistente 'legacy-dev'.
 
 Passos para resolver:
-  1. Abrir .aios-core/development/tasks/deploy.md
+  1. Abrir .aiox-core/development/tasks/deploy.md
   2. Encontrar linha: agent: legacy-dev
   3. Substituir por: agent: devops
-  4. Verificar com: npx aios task validate deploy
+  4. Verificar com: npx aiox task validate deploy
 
 Sugerido: Ativar @architect para revisão
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -336,7 +336,7 @@ Os seguintes tipos de arquivos/operações **NUNCA** são auto-corrigidos:
 neverAutoFix:
   files:
     - '**/*.{js,ts,jsx,tsx,py,go,rs}' # Código fonte
-    - '**/*.{json,yaml,yml}' # Config do usuário (fora de .aios/)
+    - '**/*.{json,yaml,yml}' # Config do usuário (fora de .aiox/)
     - '.env*' # Arquivos de ambiente
     - '**/secrets/**' # Segredos
     - '**/credentials*' # Credenciais
@@ -366,8 +366,8 @@ Apenas estes padrões são candidatos para auto-correção:
 ```yaml
 safeToAutoFix:
   paths:
-    - '.aios/**' # Arquivos de workspace do AIOS
-    - '.aios-core/**/*.yaml' # YAML do framework (cuidado)
+    - '.aiox/**' # Arquivos de workspace do AIOX
+    - '.aiox-core/**/*.yaml' # YAML do framework (cuidado)
     - '.claude/**' # Configuração do Claude
     - '.vscode/settings.json' # Apenas configurações da IDE
     - '.cursor/**' # Config da IDE Cursor
@@ -422,7 +422,7 @@ async function validateFix(check, action) {
 ### Local do Backup
 
 ```
-.aios/
+.aiox/
 ├── backups/
 │   ├── health-check-2025-12-30T10-30-00/
 │   │   ├── manifest.json           # O que foi backed up
@@ -444,21 +444,21 @@ async function validateFix(check, action) {
   "issuesFixed": 3,
   "files": [
     {
-      "original": ".aios/config.yaml",
+      "original": ".aiox/config.yaml",
       "backup": "config.yaml",
       "action": "recreate_config",
       "checksum": "sha256:abc123...",
       "size": 2048
     }
   ],
-  "rollbackCommand": "npx aios health-check --rollback health-check-2025-12-30T10-30-00"
+  "rollbackCommand": "npx aiox health-check --rollback health-check-2025-12-30T10-30-00"
 }
 ```
 
 ### Política de Retenção
 
 ```yaml
-# .aios/backups/.retention
+# .aiox/backups/.retention
 retention:
   maxBackups: 10 # Manter últimos 10 backups
   maxAge: 7 # dias
@@ -471,7 +471,7 @@ retention:
 ```javascript
 async function createBackup(action) {
   const backupId = `health-check-${new Date().toISOString().replace(/[:.]/g, '-')}`;
-  const backupDir = path.join('.aios', 'backups', backupId);
+  const backupDir = path.join('.aiox', 'backups', backupId);
 
   await fs.ensureDir(backupDir);
 
@@ -534,20 +534,20 @@ async function applyFixWithRollback(check, action) {
 
 ```bash
 # Rollback de backup específico
-npx aios health-check --rollback health-check-2025-12-30T10-30-00
+npx aiox health-check --rollback health-check-2025-12-30T10-30-00
 
 # Listar backups disponíveis
-npx aios health-check --list-backups
+npx aiox health-check --list-backups
 
 # Rollback do último backup
-npx aios health-check --rollback-last
+npx aiox health-check --rollback-last
 ```
 
 ### Processo de Rollback
 
 ```javascript
 async function rollback(backupId) {
-  const backupDir = path.join('.aios', 'backups', backupId);
+  const backupDir = path.join('.aiox', 'backups', backupId);
   const manifest = await fs.readJson(path.join(backupDir, 'manifest.json'));
 
   console.log(`Fazendo rollback de ${manifest.files.length} arquivos...`);
@@ -577,7 +577,7 @@ async function rollback(backupId) {
 ### Estrutura do Motor de Auto-Recuperação
 
 ```
-.aios-core/core/health-check/
+.aiox-core/core/health-check/
 ├── healers/
 │   ├── index.js              # Registro de healers
 │   ├── tier1/
@@ -641,17 +641,17 @@ class RecreateConfigHealer extends BaseHealer {
   }
 
   async canHeal(issue) {
-    return issue.id === 'PC-001' && !(await fs.pathExists('.aios/config.yaml'));
+    return issue.id === 'PC-001' && !(await fs.pathExists('.aiox/config.yaml'));
   }
 
   async heal(issue, context) {
-    const template = await fs.readFile('.aios-core/templates/config-template.yaml');
-    await fs.writeFile('.aios/config.yaml', template);
+    const template = await fs.readFile('.aiox-core/templates/config-template.yaml');
+    await fs.writeFile('.aiox/config.yaml', template);
     return { success: true, message: 'Config recriado a partir do template' };
   }
 
   async verify(issue) {
-    return await fs.pathExists('.aios/config.yaml');
+    return await fs.pathExists('.aiox/config.yaml');
   }
 }
 ```
@@ -659,10 +659,10 @@ class RecreateConfigHealer extends BaseHealer {
 ### Registrando Todas as Ações de Recuperação
 
 ```javascript
-// .aios/logs/self-healing.log
+// .aiox/logs/self-healing.log
 const healingLog = {
   append: async (entry) => {
-    const logPath = '.aios/logs/self-healing.log';
+    const logPath = '.aiox/logs/self-healing.log';
     const logEntry = {
       timestamp: new Date().toISOString(),
       ...entry,

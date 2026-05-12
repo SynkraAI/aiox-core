@@ -1,4 +1,4 @@
-# Sistema do Agente Product Manager (PM) - AIOS
+# Sistema do Agente Product Manager (PM) - AIOX
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-Este documento descreve o sistema completo do agente Product Manager (PM) do AIOS, incluindo todos os arquivos envolvidos, fluxos de trabalho, comandos disponiveis e integracoes entre agentes.
+Este documento descreve o sistema completo do agente Product Manager (PM) do AIOX, incluindo todos os arquivos envolvidos, fluxos de trabalho, comandos disponiveis e integracoes entre agentes.
 
 O agente PM e projetado para:
 - Criar e gerenciar Product Requirements Documents (PRDs) para projetos greenfield e brownfield
@@ -40,40 +40,40 @@ O agente PM e projetado para:
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/pm.md` | Definicao core do agente PM |
-| `.claude/commands/AIOS/agents/pm.md` | Comando Claude Code para ativar @pm |
+| `.aiox-core/development/agents/pm.md` | Definicao core do agente PM |
+| `.claude/commands/AIOX/agents/pm.md` | Comando Claude Code para ativar @pm |
 
 ### Tasks do @pm
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/create-doc.md` | `*create-prd` | Cria documentos a partir de templates YAML |
-| `.aios-core/development/tasks/correct-course.md` | `*correct-course` | Analisa e corrige desvios de projeto |
-| `.aios-core/development/tasks/create-deep-research-prompt.md` | `*research` | Gera prompts de pesquisa profunda |
-| `.aios-core/development/tasks/brownfield-create-epic.md` | `*create-epic` | Cria epics para projetos brownfield |
-| `.aios-core/development/tasks/brownfield-create-story.md` | `*create-story` | Cria stories para brownfield |
-| `.aios-core/development/tasks/execute-checklist.md` | `*checklist` | Executa validacao de checklists |
-| `.aios-core/development/tasks/shard-doc.md` | `*shard-prd` | Fragmenta documentos grandes |
+| `.aiox-core/development/tasks/create-doc.md` | `*create-prd` | Cria documentos a partir de templates YAML |
+| `.aiox-core/development/tasks/correct-course.md` | `*correct-course` | Analisa e corrige desvios de projeto |
+| `.aiox-core/development/tasks/create-deep-research-prompt.md` | `*research` | Gera prompts de pesquisa profunda |
+| `.aiox-core/development/tasks/brownfield-create-epic.md` | `*create-epic` | Cria epics para projetos brownfield |
+| `.aiox-core/development/tasks/brownfield-create-story.md` | `*create-story` | Cria stories para brownfield |
+| `.aiox-core/development/tasks/execute-checklist.md` | `*checklist` | Executa validacao de checklists |
+| `.aiox-core/development/tasks/shard-doc.md` | `*shard-prd` | Fragmenta documentos grandes |
 
 ### Templates do @pm
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/product/templates/prd-tmpl.yaml` | Template PRD para projetos greenfield |
-| `.aios-core/product/templates/brownfield-prd-tmpl.yaml` | Template PRD para projetos brownfield |
+| `.aiox-core/product/templates/prd-tmpl.yaml` | Template PRD para projetos greenfield |
+| `.aiox-core/product/templates/brownfield-prd-tmpl.yaml` | Template PRD para projetos brownfield |
 
 ### Checklists do @pm
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/product/checklists/pm-checklist.md` | Checklist de validacao de PRD |
-| `.aios-core/product/checklists/change-checklist.md` | Checklist para navegacao de mudancas |
+| `.aiox-core/product/checklists/pm-checklist.md` | Checklist de validacao de PRD |
+| `.aiox-core/product/checklists/change-checklist.md` | Checklist para navegacao de mudancas |
 
 ### Workflows que Utilizam o @pm
 
 | Arquivo | Fase | Proposito |
 |---------|------|-----------|
-| `.aios-core/development/workflows/brownfield-discovery.yaml` | Fase 10 | Criacao de epics e stories pos-discovery |
+| `.aiox-core/development/workflows/brownfield-discovery.yaml` | Fase 10 | Criacao de epics e stories pos-discovery |
 
 ---
 
@@ -681,7 +681,7 @@ flowchart LR
 - Template renomeado
 
 **Solucao:**
-- Verifique `.aios-core/product/templates/`
+- Verifique `.aiox-core/product/templates/`
 - Liste templates disponiveis com create-doc
 - Atualize referencia no agente se necessario
 
@@ -689,15 +689,15 @@ flowchart LR
 
 ## Referencias
 
-- [Agent Definition: pm.md](.aios-core/development/agents/pm.md)
-- [Task: create-doc.md](.aios-core/development/tasks/create-doc.md)
-- [Task: brownfield-create-epic.md](.aios-core/development/tasks/brownfield-create-epic.md)
-- [Task: correct-course.md](.aios-core/development/tasks/correct-course.md)
-- [Template: prd-tmpl.yaml](.aios-core/product/templates/prd-tmpl.yaml)
-- [Template: brownfield-prd-tmpl.yaml](.aios-core/product/templates/brownfield-prd-tmpl.yaml)
-- [Checklist: pm-checklist.md](.aios-core/product/checklists/pm-checklist.md)
-- [Checklist: change-checklist.md](.aios-core/product/checklists/change-checklist.md)
-- [Workflow: brownfield-discovery.yaml](.aios-core/development/workflows/brownfield-discovery.yaml)
+- [Agent Definition: pm.md](.aiox-core/development/agents/pm.md)
+- [Task: create-doc.md](.aiox-core/development/tasks/create-doc.md)
+- [Task: brownfield-create-epic.md](.aiox-core/development/tasks/brownfield-create-epic.md)
+- [Task: correct-course.md](.aiox-core/development/tasks/correct-course.md)
+- [Template: prd-tmpl.yaml](.aiox-core/product/templates/prd-tmpl.yaml)
+- [Template: brownfield-prd-tmpl.yaml](.aiox-core/product/templates/brownfield-prd-tmpl.yaml)
+- [Checklist: pm-checklist.md](.aiox-core/product/checklists/pm-checklist.md)
+- [Checklist: change-checklist.md](.aiox-core/product/checklists/change-checklist.md)
+- [Workflow: brownfield-discovery.yaml](.aiox-core/development/workflows/brownfield-discovery.yaml)
 
 ---
 

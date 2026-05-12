@@ -4,11 +4,11 @@
 
 ---
 
-How to migrate legacy squads to AIOS 2.1 format.
+How to migrate legacy squads to AIOX 2.1 format.
 
 ## Overview
 
-AIOS 2.1 introduced a new squad format with:
+AIOX 2.1 introduced a new squad format with:
 - Task-first architecture
 - JSON Schema validation
 - Three-level distribution
@@ -23,8 +23,8 @@ Legacy squads using `config.yaml` or older formats need migration.
 | Indicator | Legacy | Current (2.1+) |
 |-----------|--------|----------------|
 | Manifest file | `config.yaml` | `squad.yaml` |
-| AIOS type field | Missing | `aios.type: squad` |
-| Min version | Missing | `aios.minVersion: "2.1.0"` |
+| AIOX type field | Missing | `aiox.type: squad` |
+| Min version | Missing | `aiox.minVersion: "2.1.0"` |
 | Structure | Agent-first | Task-first |
 
 ### Check Command
@@ -78,7 +78,7 @@ config.yaml → squad.yaml
 
 ```yaml
 # These fields are added if missing
-aios:
+aiox:
   minVersion: "2.1.0"
   type: squad
 ```
@@ -192,7 +192,7 @@ my-squad/
 ```
 
 **Result:**
-- Adds missing `aios` fields to manifest
+- Adds missing `aiox` fields to manifest
 - Converts remaining YAML files
 - Skips already-migrated files
 
@@ -223,7 +223,7 @@ cp -r ./squads/my-squad/.backup/pre-migration-2025-12-26/. ./squads/my-squad/
 ### Programmatic Rollback
 
 ```javascript
-const { SquadMigrator } = require('./.aios-core/development/scripts/squad');
+const { SquadMigrator } = require('./.aiox-core/development/scripts/squad');
 
 const migrator = new SquadMigrator();
 await migrator.rollback('./squads/my-squad');
@@ -245,7 +245,7 @@ name: my-squad
 version: 1.0.0
 description: My squad
 
-aios:
+aiox:
   minVersion: "2.1.0"
   type: squad
 
@@ -292,8 +292,8 @@ Warning: Some files could not be migrated
 After migration, verify:
 
 - [ ] `squad.yaml` exists and is valid
-- [ ] `aios.type` is `"squad"`
-- [ ] `aios.minVersion` is `"2.1.0"` or higher
+- [ ] `aiox.type` is `"squad"`
+- [ ] `aiox.minVersion` is `"2.1.0"` or higher
 - [ ] All agents are in `agents/` folder
 - [ ] All tasks are in `tasks/` folder
 - [ ] Agent files are in Markdown format
@@ -303,7 +303,7 @@ After migration, verify:
 ## Programmatic Migration
 
 ```javascript
-const { SquadMigrator } = require('./.aios-core/development/scripts/squad');
+const { SquadMigrator } = require('./.aiox-core/development/scripts/squad');
 
 const migrator = new SquadMigrator({
   verbose: true,
@@ -329,7 +329,7 @@ console.log(result);
 
 - [Squad Development Guide](./squads-guide.md)
 - [Contributing Squads Guide](./contributing-squads.md)
-- [@squad-creator Agent](../../.aios-core/development/agents/squad-creator.md)
+- [@squad-creator Agent](../../.aiox-core/development/agents/squad-creator.md)
 
 ---
 

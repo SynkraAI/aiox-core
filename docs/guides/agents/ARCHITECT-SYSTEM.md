@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-O agente **@architect** (Aria) e o **Holistic System Architect & Full-Stack Technical Leader** do AIOS. Este agente e responsavel por:
+O agente **@architect** (Aria) e o **Holistic System Architect & Full-Stack Technical Leader** do AIOX. Este agente e responsavel por:
 
 - **Arquitetura de sistemas completos** (microservices, monolith, serverless, hybrid)
 - **Selecao de stack tecnologico** (frameworks, linguagens, plataformas)
@@ -43,47 +43,47 @@ O agente **@architect** (Aria) e o **Holistic System Architect & Full-Stack Tech
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/architect-analyze-impact.md` | `*analyze-impact` | Analisa impacto de modificacoes em componentes do framework |
-| `.aios-core/development/tasks/document-project.md` | `*document-project` | Gera documentacao brownfield de projeto existente |
-| `.aios-core/development/tasks/create-doc.md` | `*create-doc` | Cria documentos a partir de templates YAML |
-| `.aios-core/development/tasks/collaborative-edit.md` | `*collaborative-edit` | Gerencia sessoes de edicao colaborativa |
-| `.aios-core/development/tasks/create-deep-research-prompt.md` | `*research` | Gera prompts de pesquisa profunda |
-| `.aios-core/development/tasks/execute-checklist.md` | `*execute-checklist` | Executa checklists de validacao |
-| `.aios-core/development/tasks/spec-assess-complexity.md` | `*assess-complexity` | Avalia complexidade de stories (Spec Pipeline) |
+| `.aiox-core/development/tasks/architect-analyze-impact.md` | `*analyze-impact` | Analisa impacto de modificacoes em componentes do framework |
+| `.aiox-core/development/tasks/document-project.md` | `*document-project` | Gera documentacao brownfield de projeto existente |
+| `.aiox-core/development/tasks/create-doc.md` | `*create-doc` | Cria documentos a partir de templates YAML |
+| `.aiox-core/development/tasks/collaborative-edit.md` | `*collaborative-edit` | Gerencia sessoes de edicao colaborativa |
+| `.aiox-core/development/tasks/create-deep-research-prompt.md` | `*research` | Gera prompts de pesquisa profunda |
+| `.aiox-core/development/tasks/execute-checklist.md` | `*execute-checklist` | Executa checklists de validacao |
+| `.aiox-core/development/tasks/spec-assess-complexity.md` | `*assess-complexity` | Avalia complexidade de stories (Spec Pipeline) |
 
 ### Arquivos de Definicao do Agente
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/architect.md` | Definicao core do agente Architect |
-| `.claude/commands/AIOS/agents/architect.md` | Comando Claude Code para ativar @architect |
+| `.aiox-core/development/agents/architect.md` | Definicao core do agente Architect |
+| `.claude/commands/AIOX/agents/architect.md` | Comando Claude Code para ativar @architect |
 
 ### Arquivos de Templates do @architect
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/product/templates/architecture-tmpl.yaml` | Template para arquitetura backend |
-| `.aios-core/product/templates/front-end-architecture-tmpl.yaml` | Template para arquitetura frontend |
-| `.aios-core/product/templates/fullstack-architecture-tmpl.yaml` | Template para arquitetura fullstack |
-| `.aios-core/product/templates/brownfield-architecture-tmpl.yaml` | Template para projetos brownfield |
+| `.aiox-core/product/templates/architecture-tmpl.yaml` | Template para arquitetura backend |
+| `.aiox-core/product/templates/front-end-architecture-tmpl.yaml` | Template para arquitetura frontend |
+| `.aiox-core/product/templates/fullstack-architecture-tmpl.yaml` | Template para arquitetura fullstack |
+| `.aiox-core/product/templates/brownfield-architecture-tmpl.yaml` | Template para projetos brownfield |
 
 ### Arquivos de Dados de Suporte
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/data/technical-preferences.md` | Preferencias tecnicas padrao do AIOS |
+| `.aiox-core/development/data/technical-preferences.md` | Preferencias tecnicas padrao do AIOX |
 
 ### Arquivos Relacionados de Outros Agentes
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.aios-core/development/tasks/spec-gather-requirements.md` | @pm | Coleta requisitos que alimentam arquitetura |
-| `.aios-core/development/tasks/spec-research-dependencies.md` | @analyst | Pesquisa dependencias para arquitetura |
-| `.aios-core/development/tasks/spec-critique.md` | @qa | Valida specs que impactam arquitetura |
-| `.aios-core/development/tasks/plan-create-implementation.md` | @architect | Cria plano de implementacao pos-spec |
-| `.aios-core/development/agents/db-sage.md` | @db-sage | Colabora em arquitetura de dados |
-| `.aios-core/development/agents/ux-design-expert.md` | @ux-design-expert | Colabora em arquitetura frontend |
-| `.aios-core/development/agents/devops.md` | @devops | Colabora em infraestrutura |
+| `.aiox-core/development/tasks/spec-gather-requirements.md` | @pm | Coleta requisitos que alimentam arquitetura |
+| `.aiox-core/development/tasks/spec-research-dependencies.md` | @analyst | Pesquisa dependencias para arquitetura |
+| `.aiox-core/development/tasks/spec-critique.md` | @qa | Valida specs que impactam arquitetura |
+| `.aiox-core/development/tasks/plan-create-implementation.md` | @architect | Cria plano de implementacao pos-spec |
+| `.aiox-core/development/agents/db-sage.md` | @db-sage | Colabora em arquitetura de dados |
+| `.aiox-core/development/agents/ux-design-expert.md` | @ux-design-expert | Colabora em arquitetura frontend |
+| `.aiox-core/development/agents/devops.md` | @devops | Colabora em infraestrutura |
 
 ---
 
@@ -254,7 +254,7 @@ sequenceDiagram
 
 ### 1. Greenfield Fullstack Workflow
 
-**Arquivo:** `.aios-core/development/workflows/greenfield-fullstack.yaml`
+**Arquivo:** `.aiox-core/development/workflows/greenfield-fullstack.yaml`
 
 ```mermaid
 flowchart LR
@@ -277,7 +277,7 @@ flowchart LR
 
 ### 2. Brownfield Fullstack Workflow
 
-**Arquivo:** `.aios-core/development/workflows/brownfield-fullstack.yaml`
+**Arquivo:** `.aiox-core/development/workflows/brownfield-fullstack.yaml`
 
 ```mermaid
 flowchart LR
@@ -301,7 +301,7 @@ flowchart LR
 
 ### 3. Spec Pipeline Workflow
 
-**Arquivo:** `.aios-core/development/workflows/spec-pipeline.yaml`
+**Arquivo:** `.aiox-core/development/workflows/spec-pipeline.yaml`
 
 ```mermaid
 flowchart LR
@@ -321,7 +321,7 @@ flowchart LR
 
 ### 4. QA Loop (Escalation)
 
-**Arquivo:** `.aios-core/development/workflows/qa-loop.yaml`
+**Arquivo:** `.aiox-core/development/workflows/qa-loop.yaml`
 
 **Papel do @architect:**
 - Recebe escalacoes de specs BLOCKED pelo QA
@@ -447,16 +447,16 @@ flowchart TB
 
 ```bash
 # Analise basica
-*analyze-impact modify .aios-core/agents/weather-agent.md
+*analyze-impact modify .aiox-core/agents/weather-agent.md
 
 # Analise profunda com testes
-*analyze-impact modify .aios-core/agents/weather-agent.md --depth deep --include-tests
+*analyze-impact modify .aiox-core/agents/weather-agent.md --depth deep --include-tests
 
 # Deprecacao com output visual
-*analyze-impact deprecate .aios-core/scripts/old-helper.js --output-format visual --save-report reports/deprecation.html
+*analyze-impact deprecate .aiox-core/scripts/old-helper.js --output-format visual --save-report reports/deprecation.html
 
 # Refatoracao com threshold de risco
-*analyze-impact refactor .aios-core/tasks/process-data.md --depth shallow --risk-threshold medium
+*analyze-impact refactor .aiox-core/tasks/process-data.md --depth shallow --risk-threshold medium
 ```
 
 ### Niveis de Risco
@@ -527,8 +527,8 @@ graph TD
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/core-config.yaml` | Configuracao central do framework |
-| `.aios/project-registry.yaml` | Registro de projetos |
+| `.aiox-core/core-config.yaml` | Configuracao central do framework |
+| `.aiox/project-registry.yaml` | Registro de projetos |
 | `technical-preferences.md` | Preferencias tecnicas (stack, patterns) |
 
 ### Tools Disponiveis para @architect
@@ -636,7 +636,7 @@ wsl bash -c 'cd /mnt/c/... && ~/.local/bin/coderabbit --prompt-only --base main'
 **Causa:** Template nao existe no path especificado
 
 **Solucao:**
-1. Verificar `.aios-core/product/templates/`
+1. Verificar `.aiox-core/product/templates/`
 2. Usar `*create-doc` sem template e escolher da lista
 3. Criar template customizado se necessario
 
@@ -678,31 +678,31 @@ Ative @github-devops para operacoes de push:
 
 ### Tasks Core
 
-- [architect-analyze-impact.md](.aios-core/development/tasks/architect-analyze-impact.md)
-- [document-project.md](.aios-core/development/tasks/document-project.md)
-- [create-doc.md](.aios-core/development/tasks/create-doc.md)
-- [execute-checklist.md](.aios-core/development/tasks/execute-checklist.md)
-- [spec-assess-complexity.md](.aios-core/development/tasks/spec-assess-complexity.md)
+- [architect-analyze-impact.md](.aiox-core/development/tasks/architect-analyze-impact.md)
+- [document-project.md](.aiox-core/development/tasks/document-project.md)
+- [create-doc.md](.aiox-core/development/tasks/create-doc.md)
+- [execute-checklist.md](.aiox-core/development/tasks/execute-checklist.md)
+- [spec-assess-complexity.md](.aiox-core/development/tasks/spec-assess-complexity.md)
 
 ### Templates de Arquitetura
 
-- [fullstack-architecture-tmpl.yaml](.aios-core/product/templates/fullstack-architecture-tmpl.yaml)
-- [architecture-tmpl.yaml](.aios-core/product/templates/architecture-tmpl.yaml)
-- [front-end-architecture-tmpl.yaml](.aios-core/product/templates/front-end-architecture-tmpl.yaml)
-- [brownfield-architecture-tmpl.yaml](.aios-core/product/templates/brownfield-architecture-tmpl.yaml)
+- [fullstack-architecture-tmpl.yaml](.aiox-core/product/templates/fullstack-architecture-tmpl.yaml)
+- [architecture-tmpl.yaml](.aiox-core/product/templates/architecture-tmpl.yaml)
+- [front-end-architecture-tmpl.yaml](.aiox-core/product/templates/front-end-architecture-tmpl.yaml)
+- [brownfield-architecture-tmpl.yaml](.aiox-core/product/templates/brownfield-architecture-tmpl.yaml)
 
 ### Workflows Relacionados
 
-- [greenfield-fullstack.yaml](.aios-core/development/workflows/greenfield-fullstack.yaml)
-- [brownfield-fullstack.yaml](.aios-core/development/workflows/brownfield-fullstack.yaml)
-- [spec-pipeline.yaml](.aios-core/development/workflows/spec-pipeline.yaml)
+- [greenfield-fullstack.yaml](.aiox-core/development/workflows/greenfield-fullstack.yaml)
+- [brownfield-fullstack.yaml](.aiox-core/development/workflows/brownfield-fullstack.yaml)
+- [spec-pipeline.yaml](.aiox-core/development/workflows/spec-pipeline.yaml)
 
 ### Agentes Colaboradores
 
-- [@db-sage](.aios-core/development/agents/db-sage.md) - Arquitetura de dados
-- [@ux-design-expert](.aios-core/development/agents/ux-design-expert.md) - Arquitetura frontend
-- [@pm](.aios-core/development/agents/pm.md) - Requisitos e PRD
-- [@devops](.aios-core/development/agents/devops.md) - Git push e infraestrutura
+- [@db-sage](.aiox-core/development/agents/db-sage.md) - Arquitetura de dados
+- [@ux-design-expert](.aiox-core/development/agents/ux-design-expert.md) - Arquitetura frontend
+- [@pm](.aiox-core/development/agents/pm.md) - Requisitos e PRD
+- [@devops](.aiox-core/development/agents/devops.md) - Git push e infraestrutura
 
 ---
 

@@ -32,9 +32,9 @@ Read `.claude/commands/Legal/agents/legal-chief.md` and adopt the persona of **L
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Legal-relevant: Contract, Tax, Labor, Corporate, Compliance)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Legal-relevant: Contract, Tax, Labor, Corporate, Compliance)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 5. **Legal KB**: Read `squads/legal/data/legal-kb.md` if exists
 
 Do NOT display context loading — just absorb and proceed.
@@ -107,7 +107,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | `team` | Show full team organized by tier |
 
 **Path resolution**:
-- Tasks at `squads/legal/tasks/` or `.aios-core/development/tasks/`
+- Tasks at `squads/legal/tasks/` or `.aiox-core/development/tasks/`
 - Checklists at `squads/legal/checklists/`
 - Data at `squads/legal/data/`
 

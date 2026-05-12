@@ -10,7 +10,7 @@
 
 ## Visão Geral
 
-O AIOS-Core utiliza GitHub Actions para integração contínua e implantação. Este documento descreve a arquitetura de workflow otimizada implementada na Story 6.1.
+O AIOX-Core utiliza GitHub Actions para integração contínua e implantação. Este documento descreve a arquitetura de workflow otimizada implementada na Story 6.1.
 
 ## Hierarquia de Workflows
 
@@ -64,7 +64,7 @@ Workflows ignoram execuções desnecessárias para mudanças apenas em documenta
 paths-ignore:
   - 'docs/**'
   - '*.md'
-  - '.aios/**'
+  - '.aiox/**'
   - 'squads/**'
   - 'LICENSE'
   - '.gitignore'

@@ -25,8 +25,8 @@ describeIntegration('Backward Compatibility - No-Validator Pass-Through', () => 
   const _v2ComplexTools = ['clickup', 'google-workspace', 'n8n', 'supabase'];
 
   beforeAll(() => {
-    simpleToolsPath = path.join(__dirname, '../../aios-core/tools');
-    complexToolsPath = path.join(__dirname, '../../aios-core/tools');
+    simpleToolsPath = path.join(__dirname, '../../aiox-core/tools');
+    complexToolsPath = path.join(__dirname, '../../aiox-core/tools');
     toolResolver.setSearchPaths([simpleToolsPath, complexToolsPath]);
   });
 

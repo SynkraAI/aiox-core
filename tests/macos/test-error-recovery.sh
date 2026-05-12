@@ -6,7 +6,7 @@ set -euo pipefail
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 TEST_NAME="AC10: Error Recovery"
-LOG_FILE="/tmp/aios-test-recovery-$(date +%Y%m%d-%H%M%S).log"
+LOG_FILE="/tmp/aiox-test-recovery-$(date +%Y%m%d-%H%M%S).log"
 
 log_info() { echo -e "${GREEN}[INFO]${NC} $1" | tee -a "$LOG_FILE"; }
 log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1" | tee -a "$LOG_FILE"; }
@@ -17,7 +17,7 @@ test_rollback_capability() {
     log_info "Test 1: Testing rollback capability..."
 
     # Create test backup directory
-    TEST_DIR="$HOME/.aios-test-rollback"
+    TEST_DIR="$HOME/.aiox-test-rollback"
     mkdir -p "$TEST_DIR"
 
     # Simulate config file
@@ -137,7 +137,7 @@ test_cleanup_on_failure() {
     log_info "Test 5: Testing cleanup on installation failure..."
 
     # Create test installation directory
-    TEST_INSTALL="$HOME/.aios-test-install"
+    TEST_INSTALL="$HOME/.aiox-test-install"
     mkdir -p "$TEST_INSTALL/temp"
     echo "test" > "$TEST_INSTALL/temp/file.txt"
 
@@ -166,7 +166,7 @@ test_cleanup_on_failure() {
 test_partial_recovery() {
     log_info "Test 6: Testing recovery from partial installation..."
 
-    TEST_DIR="$HOME/.aios-test-partial"
+    TEST_DIR="$HOME/.aiox-test-partial"
     mkdir -p "$TEST_DIR"
 
     # Simulate partial installation

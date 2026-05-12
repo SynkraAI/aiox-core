@@ -1,7 +1,7 @@
 # @dev (Dex) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/dev.md`
+> Agent definition: `.aiox-core/development/agents/dev.md`
 
 ## 1. Activation Trace
 
@@ -9,16 +9,16 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/dev.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration + devLoadAlwaysFiles list |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devLoadAlwaysFiles, devStoryLocation, dataLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 1 | `.aiox-core/development/agents/dev.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration + devLoadAlwaysFiles list |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devLoadAlwaysFiles, devStoryLocation, dataLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
 | 5 | `docs/framework/coding-standards.md` | AgentConfigLoader.loadFile() | Coding standards (always loaded, 25KB) |
 | 6 | `docs/framework/tech-stack.md` | AgentConfigLoader.loadFile() | Tech stack reference (always loaded, 30KB) |
 | 7 | `docs/framework/source-tree.md` | AgentConfigLoader.loadFile() | Source tree map (always loaded, 20KB) |
-| 8 | `.aios-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
-| 9 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 10 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 8 | `.aiox-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
+| 9 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 10 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -87,7 +87,7 @@ dev:
     - path: docs/framework/source-tree.md
       lazy: false
       size: 20KB
-    - path: .aios-core/data/technical-preferences.md
+    - path: .aiox-core/data/technical-preferences.md
       lazy: false
       size: 15KB
   lazy_loading:
@@ -152,7 +152,7 @@ dev:
 
 ### `*develop` (Story Development - Primary Workflow)
 
-**Task file:** `.aios-core/development/tasks/dev-develop-story.md`
+**Task file:** `.aiox-core/development/tasks/dev-develop-story.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -193,7 +193,7 @@ flowchart TD
 
 ### `*execute-subtask` (ADE Coder Agent - 13-Step Workflow)
 
-**Task file:** `.aios-core/development/tasks/plan-execute-subtask.md`
+**Task file:** `.aiox-core/development/tasks/plan-execute-subtask.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -231,7 +231,7 @@ flowchart TD
 
 ### `*build-autonomous` (Epic 8 - Autonomous Build Loop)
 
-**Task file:** `.aios-core/development/tasks/build-autonomous.md`
+**Task file:** `.aiox-core/development/tasks/build-autonomous.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -294,7 +294,7 @@ flowchart TD
 
 ### `*gotcha` / `*gotchas` (Gotchas Memory System)
 
-**Task files:** `.aios-core/development/tasks/gotcha.md`, `.aios-core/development/tasks/gotchas.md`
+**Task files:** `.aiox-core/development/tasks/gotcha.md`, `.aiox-core/development/tasks/gotchas.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -326,7 +326,7 @@ flowchart TD
 
 ### `*worktree-create` / `*worktree-list` / `*worktree-cleanup` / `*worktree-merge`
 
-**Task files:** `.aios-core/development/tasks/create-worktree.md`, `list-worktrees.md`, `remove-worktree.md`
+**Task files:** `.aiox-core/development/tasks/create-worktree.md`, `list-worktrees.md`, `remove-worktree.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -359,7 +359,7 @@ flowchart TD
 
 ### `*fix-qa-issues` (Epic 6 - QA Fix Loop)
 
-**Task file:** `.aios-core/development/tasks/qa-fix-issues.md`
+**Task file:** `.aiox-core/development/tasks/qa-fix-issues.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -386,7 +386,7 @@ flowchart TD
 
 ### `*waves` (WIS-4 - Workflow Intelligence)
 
-**Task file:** `.aios-core/development/tasks/waves.md`
+**Task file:** `.aiox-core/development/tasks/waves.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -412,7 +412,7 @@ flowchart TD
 
 ### `*create-service` (WIS-11 - Service Generation)
 
-**Task file:** `.aios-core/development/tasks/create-service.md`
+**Task file:** `.aiox-core/development/tasks/create-service.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -708,4 +708,4 @@ flowchart TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

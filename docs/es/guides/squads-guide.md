@@ -10,9 +10,9 @@
 
 ---
 
-Guia completa para crear, validar, publicar y gestionar Squads en AIOS.
+Guia completa para crear, validar, publicar y gestionar Squads en AIOX.
 
-> **AIOS Squads:** Equipos de agentes de IA trabajando contigo
+> **AIOX Squads:** Equipos de agentes de IA trabajando contigo
 
 ## Tabla de Contenidos
 
@@ -33,7 +33,7 @@ Guia completa para crear, validar, publicar y gestionar Squads en AIOS.
 
 ## Que es un Squad?
 
-Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad de AIOS. Cada squad es un paquete autocontenido que incluye:
+Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad de AIOX. Cada squad es un paquete autocontenido que incluye:
 
 | Componente        | Proposito                                                 |
 | ----------------- | --------------------------------------------------------- |
@@ -51,7 +51,7 @@ Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad
 │                    DISTRIBUCION DE SQUAD                      │
 ├─────────────────────────────────────────────────────────────┤
 │  Nivel 1: LOCAL        → ./squads/           (Privado)       │
-│  Nivel 2: AIOS-SQUADS  → github.com/SynkraAI (Publico/Gratis)│
+│  Nivel 2: AIOX-SQUADS  → github.com/SynkraAI (Publico/Gratis)│
 │  Nivel 3: SYNKRA API   → api.synkra.dev      (Marketplace)   │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -60,8 +60,8 @@ Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad
 
 | Squad                                                                      | Version | Descripcion                           |
 | -------------------------------------------------------------------------- | ------- | ------------------------------------- |
-| [etl-squad](https://github.com/SynkraAI/aios-squads/tree/main/etl)         | 2.0.0   | Recoleccion y transformacion de datos |
-| [creator-squad](https://github.com/SynkraAI/aios-squads/tree/main/creator) | 1.0.0   | Utilidades de generacion de contenido |
+| [etl-squad](https://github.com/SynkraAI/aiox-squads/tree/main/etl)         | 2.0.0   | Recoleccion y transformacion de datos |
+| [creator-squad](https://github.com/SynkraAI/aiox-squads/tree/main/creator) | 1.0.0   | Utilidades de generacion de contenido |
 
 ---
 
@@ -70,7 +70,7 @@ Los Squads son equipos modulares de agentes de IA que extienden la funcionalidad
 ### Prerequisitos
 
 - Node.js 18+
-- Proyecto AIOS inicializado (`.aios-core/` existe)
+- Proyecto AIOX inicializado (`.aiox-core/` existe)
 - Git para control de versiones
 
 ### Opcion 1: Diseno Guiado (Recomendado)
@@ -147,8 +147,8 @@ author: Tu Nombre <email@example.com>
 license: MIT
 slashPrefix: my # Prefijo de comando para IDE
 
-# Compatibilidad AIOS
-aios:
+# Compatibilidad AIOX
+aiox:
   minVersion: '2.1.0'
   type: squad
 
@@ -193,7 +193,7 @@ Solicitud del Usuario → Tarea → Ejecucion del Agente → Salida
                      Workflow (si es multi-paso)
 ```
 
-Las tareas deben seguir [TASK-FORMAT-SPECIFICATION-V1](../../../.aios-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md).
+Las tareas deben seguir [TASK-FORMAT-SPECIFICATION-V1](../../../.aiox-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md).
 
 ---
 
@@ -232,7 +232,7 @@ Las tareas deben seguir [TASK-FORMAT-SPECIFICATION-V1](../../../.aios-core/docs/
 
 | Modo       | Comportamiento                                     |
 | ---------- | -------------------------------------------------- |
-| `extend`   | Agregar reglas del squad a las reglas base de AIOS |
+| `extend`   | Agregar reglas del squad a las reglas base de AIOX |
 | `override` | Reemplazar reglas base con reglas del squad        |
 | `none`     | Configuracion independiente                        |
 
@@ -445,8 +445,8 @@ Siguientes pasos:
 ### Uso Programatico
 
 ```javascript
-const { SquadAnalyzer } = require('./.aios-core/development/scripts/squad/squad-analyzer');
-const { SquadExtender } = require('./.aios-core/development/scripts/squad/squad-extender');
+const { SquadAnalyzer } = require('./.aiox-core/development/scripts/squad/squad-analyzer');
+const { SquadExtender } = require('./.aiox-core/development/scripts/squad/squad-extender');
 
 // Analizar squad
 const analyzer = new SquadAnalyzer({ squadsPath: './squads' });
@@ -517,7 +517,7 @@ Resumen: VALIDO (3 advertencias)
 ### Validacion Programatica
 
 ```javascript
-const { SquadValidator } = require('./.aios-core/development/scripts/squad');
+const { SquadValidator } = require('./.aiox-core/development/scripts/squad');
 
 const validator = new SquadValidator({ strict: false });
 const result = await validator.validate('./squads/my-squad');
@@ -539,7 +539,7 @@ Los Squads en `./squads/` estan automaticamente disponibles para tu proyecto.
 *list-squads
 ```
 
-### Nivel 2: Repositorio aios-squads (Publico)
+### Nivel 2: Repositorio aiox-squads (Publico)
 
 ```bash
 @squad-creator
@@ -551,7 +551,7 @@ Los Squads en `./squads/` estan automaticamente disponibles para tu proyecto.
 *publish-squad ./squads/my-squad
 ```
 
-Esto crea un PR a [SynkraAI/aios-squads](https://github.com/SynkraAI/aios-squads).
+Esto crea un PR a [SynkraAI/aiox-squads](https://github.com/SynkraAI/aiox-squads).
 
 ### Nivel 3: Marketplace de Synkra
 
@@ -586,8 +586,8 @@ export SYNKRA_API_TOKEN="your-token"
 
 Los squads legacy usan `config.yaml` en lugar de `squad.yaml` y pueden faltar:
 
-- Campo `aios.type`
-- Campo `aios.minVersion`
+- Campo `aiox.type`
+- Campo `aiox.minVersion`
 - Estructura task-first
 
 ### Comando de Migracion
@@ -609,7 +609,7 @@ Los squads legacy usan `config.yaml` en lugar de `squad.yaml` y pueden faltar:
 
 1. **Respaldo** - Crea `.backup/pre-migration-{timestamp}/`
 2. **Renombrar** - `config.yaml` → `squad.yaml`
-3. **Agregar Campos** - `aios.type`, `aios.minVersion`
+3. **Agregar Campos** - `aiox.type`, `aiox.minVersion`
 4. **Reestructurar** - Organizar en diseño task-first
 5. **Validar** - Ejecutar validacion en el squad migrado
 
@@ -632,7 +632,7 @@ El Cargador de Squad resuelve squads en este orden:
 
 ```
 1. Local     → ./squads/{name}/
-2. npm       → node_modules/@aios-squads/{name}/
+2. npm       → node_modules/@aiox-squads/{name}/
 3. Workspace → ../{name}/ (monorepo)
 4. Registry  → api.synkra.dev/squads/{name}
 ```
@@ -640,7 +640,7 @@ El Cargador de Squad resuelve squads en este orden:
 ### Uso Programatico
 
 ```javascript
-const { SquadLoader } = require('./.aios-core/development/scripts/squad');
+const { SquadLoader } = require('./.aiox-core/development/scripts/squad');
 
 const loader = new SquadLoader({
   squadsPath: './squads',
@@ -661,7 +661,7 @@ const squads = await loader.listLocal();
 ### Manejo de Errores
 
 ```javascript
-const { SquadLoader, SquadLoaderError } = require('./.aios-core/development/scripts/squad');
+const { SquadLoader, SquadLoaderError } = require('./.aiox-core/development/scripts/squad');
 
 try {
   await loader.resolve('non-existent');
@@ -709,8 +709,8 @@ cat ./squads/my-squad/squad.yaml
 # Correcciones comunes:
 # - name: debe ser kebab-case
 # - version: debe ser semver (x.y.z)
-# - aios.type: debe ser "squad"
-# - aios.minVersion: debe ser semver valido
+# - aiox.type: debe ser "squad"
+# - aiox.minVersion: debe ser semver valido
 ```
 
 ### Errores de Parseo YAML
@@ -754,9 +754,9 @@ gh auth status
 
 ## Preguntas Frecuentes
 
-### Cual es la diferencia entre un Squad y un Expansion Pack?
+### Cual es la diferencia entre un Squad y formatos legados de squad en AIOX?
 
-**Squads** son el nuevo estandar (AIOS 2.1+) que reemplaza a los Expansion Packs. Los Squads tienen:
+**Squads** son el formato estandar en AIOX 2.1+ con:
 
 - Arquitectura task-first
 - Validacion con JSON Schema
@@ -788,12 +788,12 @@ dependencies:
 - **Nivel 1**: Mantener en `./squads/` (sin commit) - agregar a `.gitignore`
 - **Nivel 3**: Sincronizar con bandera `--private`: `*sync-squad-synkra my-squad --private`
 
-### Cual es la version minima de AIOS para Squads?
+### Cual es la version minima de AIOX para Squads?
 
-Los Squads requieren AIOS 2.1.0+. Configurar en el manifiesto:
+Los Squads requieren AIOX 2.1.0+. Configurar en el manifiesto:
 
 ```yaml
-aios:
+aiox:
   minVersion: '2.1.0'
 ```
 
@@ -815,22 +815,22 @@ npm test -- tests/squads/my-squad/
 
 ## Recursos Relacionados
 
-- [TASK-FORMAT-SPECIFICATION-V1](../../../.aios-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
+- [TASK-FORMAT-SPECIFICATION-V1](../../../.aiox-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
 - [Guia de Contribucion de Squads](./contributing-squads.md)
 - [Guia de Migracion de Squad](./squad-migration.md)
 - [Referencia de API de Squads](../api/squads-api.md)
-- [Agente @squad-creator](../../../.aios-core/development/agents/squad-creator.md)
-- [Repositorio aios-squads](https://github.com/SynkraAI/aios-squads)
+- [Agente @squad-creator](../../../.aiox-core/development/agents/squad-creator.md)
+- [Repositorio aiox-squads](https://github.com/SynkraAI/aiox-squads)
 
 ---
 
 ## Obteniendo Ayuda
 
-- [Discusiones de GitHub](https://github.com/SynkraAI/aios-core/discussions)
-- [Rastreador de Issues](https://github.com/SynkraAI/aios-core/issues)
+- [Discusiones de GitHub](https://github.com/SynkraAI/aiox-core/discussions)
+- [Rastreador de Issues](https://github.com/SynkraAI/aiox-core/issues)
 
 ---
 
-_AIOS Squads: Equipos de agentes de IA trabajando contigo_
+_AIOX Squads: Equipos de agentes de IA trabajando contigo_
 
 **Version:** 2.1.0 | **Actualizado:** 2025-12-26 | **Stories:** SQS-8, SQS-11

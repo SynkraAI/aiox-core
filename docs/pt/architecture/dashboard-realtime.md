@@ -1,4 +1,4 @@
-# 🔴 AIOS Dashboard - Arquitetura de Observabilidade em Tempo Real
+# 🔴 AIOX Dashboard - Arquitetura de Observabilidade em Tempo Real
 
 > **PT** | [EN](../architecture/dashboard-realtime.md) | [ES](../es/architecture/dashboard-realtime.md)
 
@@ -27,7 +27,7 @@
 
 ## Visão Geral
 
-Este documento descreve a arquitetura para **observabilidade em tempo real** do AIOS Dashboard, permitindo que usuários acompanhem comandos executados no CLI com máximo detalhe visual.
+Este documento descreve a arquitetura para **observabilidade em tempo real** do AIOX Dashboard, permitindo que usuários acompanhem comandos executados no CLI com máximo detalhe visual.
 
 ### Caso de Uso Principal
 
@@ -108,7 +108,7 @@ Usuário executa comandos no CLI → Dashboard mostra TUDO em tempo real
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         CLI / AIOS AGENTS                                │
+│                         CLI / AIOX AGENTS                                │
 │  ┌─────────────────────────────────────────────────────────────────┐    │
 │  │                      Claude Code Session                         │    │
 │  │  @architect → *create-architecture → [thinking...] → [file ops] │    │
@@ -117,7 +117,7 @@ Usuário executa comandos no CLI → Dashboard mostra TUDO em tempo real
 │                                   │ EMIT EVENTS                          │
 │                                   ▼                                      │
 │  ┌─────────────────────────────────────────────────────────────────┐    │
-│  │               .aios/dashboard/events.jsonl (append-only)         │    │
+│  │               .aiox/dashboard/events.jsonl (append-only)         │    │
 │  │  {"type":"agent:activated","agent":"architect","ts":"..."}      │    │
 │  │  {"type":"command:start","cmd":"*create-architecture","ts":"..."}│   │
 │  │  {"type":"llm:thinking","duration":0,"ts":"..."}                │    │
@@ -181,13 +181,13 @@ Usuário executa comandos no CLI → Dashboard mostra TUDO em tempo real
 ### Localização
 
 ```
-.aios-core/core/events/dashboard-emitter.ts
+.aiox-core/core/events/dashboard-emitter.ts
 ```
 
 ### Interface
 
 ```typescript
-// .aios-core/core/events/types.ts
+// .aiox-core/core/events/types.ts
 
 /**
  * Apenas eventos de alto nível (Decision #2)
@@ -223,14 +223,14 @@ export interface DashboardEvent {
 ### Implementação
 
 ```typescript
-// .aios-core/core/events/dashboard-emitter.ts
+// .aiox-core/core/events/dashboard-emitter.ts
 
 import { appendFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { randomUUID } from 'crypto';
 import type { DashboardEvent, DashboardEventType } from './types';
 
-const EVENTS_DIR = '.aios/dashboard';
+const EVENTS_DIR = '.aiox/dashboard';
 const EVENTS_FILE = 'events.jsonl';
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // rotação de 10MB
 
@@ -347,7 +347,7 @@ export function initDashboardEmitter(projectRoot: string): DashboardEmitter {
 ### Integração com Claude Code Hooks
 
 ```typescript
-// .aios-core/integrations/claude-code/hooks.ts
+// .aiox-core/integrations/claude-code/hooks.ts
 
 import { getDashboardEmitter } from '../core/events/dashboard-emitter';
 
@@ -400,7 +400,7 @@ export function onStoryStatusChange(storyId: string, oldStatus: string, newStatu
 ### Localização do Arquivo
 
 ```
-.aios/dashboard/events.jsonl
+.aiox/dashboard/events.jsonl
 ```
 
 ### Formato
@@ -433,7 +433,7 @@ JSON Lines (JSONL) - um objeto JSON por linha, apenas append.
   "timestamp": "...",
   "agentId": "architect",
   "data": {
-    "storyId": "AIOS-123",
+    "storyId": "AIOX-123",
     "oldStatus": "in-progress",
     "newStatus": "review"
   }
@@ -478,9 +478,9 @@ import { watch, existsSync, readFileSync, statSync } from 'fs';
 import { join } from 'path';
 import { Readable } from 'stream';
 
-const AIOS_DIR = process.env.AIOS_PROJECT_ROOT || process.cwd();
-const STATUS_FILE = join(AIOS_DIR, '.aios/dashboard/status.json');
-const EVENTS_FILE = join(AIOS_DIR, '.aios/dashboard/events.jsonl');
+const AIOX_DIR = process.env.AIOX_PROJECT_ROOT || process.cwd();
+const STATUS_FILE = join(AIOX_DIR, '.aiox/dashboard/status.json');
+const EVENTS_FILE = join(AIOX_DIR, '.aiox/dashboard/events.jsonl');
 
 interface SSEEvent {
   type: string;
@@ -1089,7 +1089,7 @@ export function SessionIndicator() {
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    2. EVENTS WRITTEN TO FILESYSTEM                           │
 │                                                                              │
-│  .aios/dashboard/events.jsonl (HIGH-LEVEL ONLY)                             │
+│  .aiox/dashboard/events.jsonl (HIGH-LEVEL ONLY)                             │
 │  ─────────────────────────────────────────────────────                      │
 │  {"type":"session:start","data":{"sessionId":"uuid"},"ts":"..."}            │
 │  {"type":"agent:activated","data":{"agentId":"architect"},"ts":"..."}       │
@@ -1250,4 +1250,4 @@ const DEFAULT_RETENTION: EventRetentionSettings = {
 
 ---
 
-_Documentação gerada por @architect (Aria) - AIOS Core v2.0_
+_Documentação gerada por @architect (Aria) - AIOX Core v2.0_

@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-26
 -->
 
-# Estrutura do Source Tree AIOS
+# Estrutura do Source Tree AIOX
 
 > 🌐 [EN](../../framework/source-tree.md) | **PT** | [ES](../../es/framework/source-tree.md)
 
@@ -13,7 +13,7 @@
 **Versão:** 2.0
 **Última Atualização:** 2025-12-15
 **Status:** Padrão Oficial do Framework
-**Repositório:** SynkraAI/aios-core
+**Repositório:** SynkraAI/aiox-core
 
 ---
 
@@ -21,7 +21,7 @@
 
 - [Visão Geral](#visão-geral)
 - [Arquitetura Modular](#arquitetura-modular)
-- [Framework Core (.aios-core/)](#framework-core-aios-core)
+- [Framework Core (.aiox-core/)](#framework-core-aiox-core)
 - [Detalhes dos Módulos](#detalhes-dos-módulos)
 - [Documentação (docs/)](#documentação-docs)
 - [Sistema de Squads](#sistema-de-squads)
@@ -32,9 +32,9 @@
 
 ## Visão Geral
 
-O AIOS usa uma **arquitetura modular** com clara separação de responsabilidades:
+O AIOX usa uma **arquitetura modular** com clara separação de responsabilidades:
 
-1. **Framework Core** (`.aios-core/`) - Componentes portáveis do framework organizados por domínio
+1. **Framework Core** (`.aiox-core/`) - Componentes portáveis do framework organizados por domínio
 2. **Project Workspace** (root) - Implementação específica do projeto
 
 **Filosofia:**
@@ -48,8 +48,8 @@ O AIOS usa uma **arquitetura modular** com clara separação de responsabilidade
 ## Arquitetura Modular
 
 ```
-aios-core/                             # Root project
-├── .aios-core/                        # Framework core (modular)
+aiox-core/                             # Root project
+├── .aiox-core/                        # Framework core (modular)
 │   ├── cli/                           # CLI commands and utilities
 │   ├── core/                          # Framework essentials
 │   ├── data/                          # Shared data files
@@ -74,7 +74,7 @@ aios-core/                             # Root project
 │   └── squad/                         # Squad template (see docs/guides/squads-guide.md)
 │
 ├── bin/                               # CLI executables
-│   └── aios.js                        # Main CLI entry point
+│   └── aiox.js                        # Main CLI entry point
 │
 ├── tools/                             # Build and utility tools
 │   ├── cli.js                         # CLI builder
@@ -97,14 +97,14 @@ aios-core/                             # Root project
 
 ---
 
-## Framework Core (.aios-core/)
+## Framework Core (.aiox-core/)
 
 **Propósito:** Componentes portáveis do framework organizados por domínio para clara separação de responsabilidades.
 
 ### Estrutura de Diretórios (v2.0 Modular)
 
 ```
-.aios-core/
+.aiox-core/
 ├── cli/                               # Sistema CLI
 │   ├── commands/                      # Implementações de comandos CLI
 │   │   ├── generate/                  # Comandos de geração de código
@@ -130,11 +130,11 @@ aios-core/                             # Root project
 │   └── utils/                         # Utilitários core
 │
 ├── data/                              # Dados Compartilhados
-│   └── aios-kb.md                     # Base de conhecimento AIOS
+│   └── aiox-kb.md                     # Base de conhecimento AIOX
 │
 ├── development/                       # Assets de Desenvolvimento
 │   ├── agents/                        # Definições de agentes (11 agentes core)
-│   │   ├── aios-master.md             # Orquestrador master
+│   │   ├── aiox-master.md             # Orquestrador master
 │   │   ├── dev.md                     # Agente desenvolvedor
 │   │   ├── qa.md                      # Agente engenheiro QA
 │   │   ├── architect.md               # Agente arquiteto de sistemas
@@ -208,49 +208,49 @@ aios-core/                             # Root project
 
 ```yaml
 Agents:
-  Location: .aios-core/development/agents/
+  Location: .aiox-core/development/agents/
   Format: Markdown with YAML frontmatter
   Naming: {agent-name}.md (kebab-case)
   Example: dev.md, qa.md, architect.md
 
 Tasks:
-  Location: .aios-core/development/tasks/
+  Location: .aiox-core/development/tasks/
   Format: Markdown workflow
   Naming: {task-name}.md (kebab-case)
   Example: create-next-story.md, develop-story.md
 
 Templates:
-  Location: .aios-core/product/templates/
+  Location: .aiox-core/product/templates/
   Format: YAML or Markdown
   Naming: {template-name}-tmpl.{yaml|md}
   Example: story-tmpl.yaml, prd-tmpl.md
 
 Workflows:
-  Location: .aios-core/development/workflows/
+  Location: .aiox-core/development/workflows/
   Format: YAML
   Naming: {workflow-type}-{scope}.yaml
   Example: greenfield-fullstack.yaml, brownfield-service.yaml
 
 Checklists:
-  Location: .aios-core/product/checklists/
+  Location: .aiox-core/product/checklists/
   Format: Markdown
   Naming: {checklist-name}-checklist.md
   Example: story-draft-checklist.md, architect-checklist.md
 
 Core Utilities:
-  Location: .aios-core/core/utils/
+  Location: .aiox-core/core/utils/
   Format: JavaScript (CommonJS)
   Naming: {utility-name}.js (kebab-case)
   Example: component-generator.js, story-manager.js
 
 CLI Commands:
-  Location: .aios-core/cli/commands/{category}/
+  Location: .aiox-core/cli/commands/{category}/
   Format: JavaScript (CommonJS)
   Naming: {command-name}.js (kebab-case)
   Example: generate/agent.js, manifest/install.js
 
 Infrastructure Scripts:
-  Location: .aios-core/infrastructure/scripts/{category}/
+  Location: .aiox-core/infrastructure/scripts/{category}/
   Format: JavaScript
   Naming: {script-name}.js (kebab-case)
   Example: documentation-integrity/link-verifier.js
@@ -279,7 +279,7 @@ docs/
 │   └── README.md                      # Aviso de migração
 │
 ├── stories/                           # Stories de desenvolvimento
-│   ├── aios migration/                # Stories de migração AIOS
+│   ├── aiox migration/                # Stories de migração AIOX
 │   │   ├── story-6.1.2.1.md
 │   │   ├── story-6.1.2.2.md
 │   │   ├── story-6.1.2.3.md
@@ -354,7 +354,7 @@ docs/
 
 ### Visão Geral
 
-Squads são extensões modulares que adicionam capacidades especializadas ao AIOS. Diferente dos Squads deprecados, Squads seguem uma estrutura de template padronizada.
+Squads são extensões modulares que adicionam capacidades especializadas ao AIOX. Diferente dos Squads deprecados, Squads seguem uma estrutura de template padronizada.
 
 ### Localização do Template de Squad
 
@@ -381,7 +381,7 @@ templates/squad/                       # Template de squad para criar extensões
 
 ```bash
 # Future CLI (planejado):
-npx create-aios-squad my-squad-name
+npx create-aiox-squad my-squad-name
 
 # Método atual:
 cp -r templates/squad/ squads/my-squad-name/
@@ -411,7 +411,7 @@ workflows:
 
 # Dependencies
 dependencies:
-  aios-core: '>=2.1.0'
+  aiox-core: '>=2.1.0'
 ```
 
 ### Migração de Squads
@@ -419,7 +419,7 @@ dependencies:
 | Legado (Deprecado)              | Atual (Squads)                  |
 | ------------------------------- | ------------------------------- |
 | `Squads/` directory             | `templates/squad/` template     |
-| `expansionPacksLocation` config | `squadsTemplateLocation` config |
+| `legacyPacksLocation` config | `squadsTemplateLocation` config |
 | `pack.yaml` manifest            | `squad.yaml` manifest           |
 | Direct loading                  | Template-based creation         |
 
@@ -429,11 +429,11 @@ dependencies:
 
 **Decision 005 define 5 repositórios separados:**
 
-### REPO 1: SynkraAI/aios-core (Commons Clause)
+### REPO 1: SynkraAI/aiox-core (MIT)
 
 ```
-aios-core/
-├── .aios-core/                        # Framework assets (modular v2.0)
+aiox-core/
+├── .aiox-core/                        # Framework assets (modular v2.0)
 │   ├── cli/                           # CLI commands and utilities
 │   ├── core/                          # Framework essentials
 │   │   ├── config/                    # Configuration system
@@ -453,7 +453,7 @@ aios-core/
 │   └── ...
 │
 ├── bin/                               # CLI entry points
-│   └── aios.js                        # Main CLI
+│   └── aiox.js                        # Main CLI
 │
 ├── tools/                             # Build and utility tools
 │   ├── cli.js                         # CLI builder
@@ -483,7 +483,7 @@ aios-core/
 
 ```
 squads/
-├── verified/                          # Squads curados pelo AIOS
+├── verified/                          # Squads curados pelo AIOX
 │   ├── github-devops/
 │   ├── db-sage/
 │   └── coderabbit-workflow/
@@ -498,7 +498,7 @@ squads/
 │   └── agent-squad/
 │
 └── tools/                             # Ferramentas de desenvolvimento de squad
-    └── create-aios-squad/
+    └── create-aiox-squad/
 ```
 
 ### REPO 3: SynkraAI/mcp-ecosystem (Apache 2.0)
@@ -506,9 +506,9 @@ squads/
 ```
 mcp-ecosystem/
 ├── presets/                           # MCP presets (Docker MCP Toolkit)
-│   ├── aios-dev/
-│   ├── aios-research/
-│   └── aios-docker/
+│   ├── aiox-dev/
+│   ├── aiox-research/
+│   └── aiox-docker/
 │
 ├── mcps/                              # Base MCP configs
 │   ├── exa/
@@ -563,10 +563,10 @@ mmos/
 
 ```yaml
 Directories: kebab-case (minúsculas, separado por hífen)
-  ✅ .aios-core/
+  ✅ .aiox-core/
   ✅ Squads/
-  ❌ .AIOS-Core/
-  ❌ expansionPacks/
+  ❌ .AIOX-Core/
+  ❌ legacy-packs/
 
 Files (Code): kebab-case com extensão
   ✅ agent-executor.js
@@ -619,44 +619,44 @@ Checklists:
 
 ```yaml
 # Estou criando um novo agente:
-Location: .aios-core/development/agents/{agent-name}.md
-Example: .aios-core/development/agents/security-expert.md
+Location: .aiox-core/development/agents/{agent-name}.md
+Example: .aiox-core/development/agents/security-expert.md
 
 # Estou criando uma nova task:
-Location: .aios-core/development/tasks/{task-name}.md
-Example: .aios-core/development/tasks/deploy-to-production.md
+Location: .aiox-core/development/tasks/{task-name}.md
+Example: .aiox-core/development/tasks/deploy-to-production.md
 
 # Estou criando um novo workflow:
-Location: .aios-core/development/workflows/{workflow-name}.yaml
-Example: .aios-core/development/workflows/continuous-deployment.yaml
+Location: .aiox-core/development/workflows/{workflow-name}.yaml
+Example: .aiox-core/development/workflows/continuous-deployment.yaml
 
 # Estou criando um novo template:
-Location: .aios-core/product/templates/{template-name}-tmpl.{yaml|md}
-Example: .aios-core/product/templates/deployment-plan-tmpl.yaml
+Location: .aiox-core/product/templates/{template-name}-tmpl.{yaml|md}
+Example: .aiox-core/product/templates/deployment-plan-tmpl.yaml
 
 # Estou criando um novo checklist:
-Location: .aios-core/product/checklists/{checklist-name}-checklist.md
-Example: .aios-core/product/checklists/security-review-checklist.md
+Location: .aiox-core/product/checklists/{checklist-name}-checklist.md
+Example: .aiox-core/product/checklists/security-review-checklist.md
 
 # Estou criando um comando CLI:
-Location: .aios-core/cli/commands/{category}/{command-name}.js
-Example: .aios-core/cli/commands/generate/workflow.js
+Location: .aiox-core/cli/commands/{category}/{command-name}.js
+Example: .aiox-core/cli/commands/generate/workflow.js
 
 # Estou criando um utilitário core:
-Location: .aios-core/core/utils/{utility-name}.js
-Example: .aios-core/core/utils/performance-monitor.js
+Location: .aiox-core/core/utils/{utility-name}.js
+Example: .aiox-core/core/utils/performance-monitor.js
 
 # Estou criando um script de infraestrutura:
-Location: .aios-core/infrastructure/scripts/{category}/{script-name}.js
-Example: .aios-core/infrastructure/scripts/llm-routing/router.js
+Location: .aiox-core/infrastructure/scripts/{category}/{script-name}.js
+Example: .aiox-core/infrastructure/scripts/llm-routing/router.js
 
 # Estou adicionando um adapter de ferramenta PM:
-Location: .aios-core/infrastructure/integrations/pm-adapters/{adapter-name}.js
-Example: .aios-core/infrastructure/integrations/pm-adapters/monday-adapter.js
+Location: .aiox-core/infrastructure/integrations/pm-adapters/{adapter-name}.js
+Example: .aiox-core/infrastructure/integrations/pm-adapters/monday-adapter.js
 
 # Estou escrevendo uma story (docs internos de dev - gitignored):
 Location: docs/stories/{sprint-context}/{story-file}.md
-Example: docs/stories/v2.1/sprint-6/story-6.14-new-feature.md
+Example: docs/stories/v4.0.4/sprint-6/story-6.14-new-feature.md
 
 # Estou criando documentação oficial do framework:
 Location: docs/framework/{doc-name}.md
@@ -724,4 +724,4 @@ outputs/                               # Runtime outputs (gitignored)
 
 ---
 
-_Este é um padrão oficial do framework AIOS. Todo posicionamento de arquivos deve seguir esta estrutura._
+_Este é um padrão oficial do framework AIOX. Todo posicionamento de arquivos deve seguir esta estrutura._

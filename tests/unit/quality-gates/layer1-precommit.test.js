@@ -4,7 +4,7 @@
  * @story 2.10 - Quality Gate Manager
  */
 
-const { Layer1PreCommit } = require('../../../.aios-core/core/quality-gates/layer1-precommit');
+const { Layer1PreCommit } = require('../../../.aiox-core/core/quality-gates/layer1-precommit');
 
 describe('Layer1PreCommit', () => {
   let layer;

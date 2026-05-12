@@ -1,10 +1,10 @@
-# AIOS API Reference
+# AIOX API Reference
 
 > **EN** | [PT](../pt/guides/api-reference.md) | [ES](../es/guides/api-reference.md)
 
 ---
 
-Complete API reference for Synkra AIOS - the AI-Orchestrated System for Full Stack Development.
+Complete API reference for Synkra AIOX - the AI-Orchestrated System for Full Stack Development.
 
 **Version:** 2.1.0
 **Last Updated:** 2026-01-29
@@ -29,14 +29,14 @@ Complete API reference for Synkra AIOS - the AI-Orchestrated System for Full Sta
 
 ### API Architecture
 
-AIOS provides a unified API for interacting with specialized AI agents through two primary mechanisms:
+AIOX provides a unified API for interacting with specialized AI agents through two primary mechanisms:
 
 1. **Agent Activation** - Using `@` prefix to activate specialized agents
 2. **Command Execution** - Using `*` prefix to execute agent commands
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      AIOS API Layer                          │
+│                      AIOX API Layer                          │
 ├─────────────────────────────────────────────────────────────┤
 │  @agent         →  Activates agent persona                   │
 │  *command       →  Executes agent command                    │
@@ -47,7 +47,7 @@ AIOS provides a unified API for interacting with specialized AI agents through t
 ┌─────────────────────────────────────────────────────────────┐
 │                    Agent Resolution                          │
 ├─────────────────────────────────────────────────────────────┤
-│  .aios-core/development/agents/{agent-id}.md                 │
+│  .aiox-core/development/agents/{agent-id}.md                 │
 │  Dependencies: tasks, templates, checklists, scripts         │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -87,13 +87,13 @@ AIOS provides a unified API for interacting with specialized AI agents through t
 | `@data-engineer` | Dara   | Architect    | Database schema, migrations, queries     |
 | `@devops`        | Gage   | Optimizer    | CI/CD, deployment, git operations        |
 | `@ux-expert`     | Uma    | Creator      | UI/UX design, wireframes                 |
-| `@aios-master`   | Orion  | Orchestrator | Framework orchestration, meta-operations |
+| `@aiox-master`   | Orion  | Orchestrator | Framework orchestration, meta-operations |
 
 ### Activation Behavior
 
 When an agent is activated:
 
-1. Agent definition file is loaded from `.aios-core/development/agents/{id}.md`
+1. Agent definition file is loaded from `.aiox-core/development/agents/{id}.md`
 2. Persona is adopted (tone, vocabulary, greeting)
 3. Context greeting is displayed based on session type
 4. Agent halts and awaits user input
@@ -155,7 +155,7 @@ Commands resolve to task files in the agent's dependencies:
 *develop story-1.2.3
     │
     ▼
-.aios-core/development/tasks/dev-develop-story.md
+.aiox-core/development/tasks/dev-develop-story.md
     │
     ▼
 Task execution with arguments: { story: "story-1.2.3" }
@@ -391,13 +391,13 @@ Task execution with arguments: { story: "story-1.2.3" }
 
 ---
 
-### @aios-master (Orchestrator)
+### @aiox-master (Orchestrator)
 
 **Framework Development:**
 
 | Command                | Arguments       | Description                                 |
 | ---------------------- | --------------- | ------------------------------------------- |
-| `*create`              | `{type} {name}` | Create AIOS component (agent/task/workflow) |
+| `*create`              | `{type} {name}` | Create AIOX component (agent/task/workflow) |
 | `*modify`              | `{type} {name}` | Modify existing component                   |
 | `*validate-component`  | `{name}`        | Validate component security                 |
 | `*deprecate-component` | `{name}`        | Deprecate with migration path               |
@@ -415,7 +415,7 @@ Task execution with arguments: { story: "story-1.2.3" }
 | Command | Arguments                  | Description                            |
 | ------- | -------------------------- | -------------------------------------- |
 | `*plan` | `[create\|status\|update]` | Workflow planning                      |
-| `*kb`   | -                          | Toggle KB mode (AIOS Method knowledge) |
+| `*kb`   | -                          | Toggle KB mode (AIOX Method knowledge) |
 
 **Document Operations:**
 
@@ -445,7 +445,7 @@ Task execution with arguments: { story: "story-1.2.3" }
 
 ```bash
 # Start workflow
-@aios-master *workflow greenfield-fullstack
+@aiox-master *workflow greenfield-fullstack
 
 # With parameters
 *workflow brownfield-service --target=./services/auth
@@ -532,7 +532,7 @@ phases:
 
 | Category             | Description                     | Resolution                             |
 | -------------------- | ------------------------------- | -------------------------------------- |
-| `AGENT_NOT_FOUND`    | Agent definition missing        | Check `.aios-core/development/agents/` |
+| `AGENT_NOT_FOUND`    | Agent definition missing        | Check `.aiox-core/development/agents/` |
 | `TASK_NOT_FOUND`     | Task definition missing         | Check agent dependencies               |
 | `STORY_NOT_FOUND`    | Story file not found            | Verify `docs/stories/` path            |
 | `VALIDATION_FAILED`  | Pre-condition not met           | Check prerequisites                    |
@@ -574,22 +574,19 @@ phases:
 | ----------- | ------------ | ----------------- | ------------- |
 | Claude Code | `.claude/`   | Markdown          | Full          |
 | Cursor      | `.cursor/`   | MDC (frontmatter) | Full          |
-| Windsurf    | `.windsurf/` | Markdown          | Full          |
-| Cline       | `.cline/`    | Markdown          | Full          |
 | VS Code     | `.vscode/`   | JSON              | Partial       |
 | Gemini      | `.gemini/`   | Markdown          | Basic         |
 
 ### IDE Configuration
 
 ```yaml
-# .aios-sync.yaml
+# .aiox-sync.yaml
 version: 1.0.0
 active_ides:
   - claude
   - cursor
-  - windsurf
 
-pack_aliases:
+squad_aliases:
   legal: Legal
   copy: Copy
   hr: HR
@@ -627,7 +624,7 @@ Claude Code is the primary supported IDE with full integration:
 /dev          → Activates @dev agent
 /qa           → Activates @qa agent
 /architect    → Activates @architect agent
-/aios-master  → Activates @aios-master agent
+/aiox-master  → Activates @aiox-master agent
 ```
 
 **Directory Structure:**
@@ -635,7 +632,7 @@ Claude Code is the primary supported IDE with full integration:
 ```
 .claude/
 ├── commands/
-│   └── AIOS/
+│   └── AIOX/
 │       └── agents/
 │           ├── dev.md
 │           ├── qa.md
@@ -669,10 +666,8 @@ alwaysApply: false
 # Agent content...
 ```
 
-### Windsurf Integration
 
 ```
-.windsurf/
 └── agents/
     ├── dev.md
     ├── qa.md
@@ -787,7 +782,7 @@ alwaysApply: false
 
 ```bash
 # 1. Activate master orchestrator
-@aios-master
+@aiox-master
 
 # 2. Enable knowledge base
 *kb
@@ -838,7 +833,7 @@ What do you need?
 │  └─ @ux-expert
 │
 └─ Framework/Orchestration?
-   └─ @aios-master
+   └─ @aiox-master
 ```
 
 ---
@@ -892,13 +887,13 @@ For parallel development:
 
 ## Related Documentation
 
-- [User Guide](./user-guide.md) - Getting started with AIOS
+- [User Guide](./user-guide.md) - Getting started with AIOX
 - [Agent Selection Guide](./agent-selection-guide.md) - Choosing the right agent
 - [ADE Guide](./ade-guide.md) - Autonomous Development Engine
 - [Quality Gates](./quality-gates.md) - Quality assurance workflows
 - [IDE Sync Guide](./ide-sync-guide.md) - Multi-IDE synchronization
-- [Squads Guide](./squads-guide.md) - Extending AIOS with squads
+- [Squads Guide](./squads-guide.md) - Extending AIOX with squads
 
 ---
 
-_Synkra AIOS API Reference v2.1.0_
+_Synkra AIOX API Reference v4.0.4_

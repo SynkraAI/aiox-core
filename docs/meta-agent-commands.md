@@ -4,7 +4,7 @@
 
 ---
 
-Complete reference guide for all Synkra AIOS meta-agent commands.
+Complete reference guide for all Synkra AIOX meta-agent commands.
 
 ## Table of Contents
 
@@ -709,7 +709,7 @@ Examples:
 
 ### *update
 
-Update Synkra AIOS.
+Update Synkra AIOX.
 
 ```bash
 *update [options]
@@ -931,10 +931,10 @@ Enter interactive mode for continuous commands:
 ```bash
 *interactive
 
-AIOS> create-agent helper
-AIOS> activate helper
-AIOS> helper translate "Hello" --to spanish
-AIOS> exit
+AIOX> create-agent helper
+AIOX> activate helper
+AIOX> helper translate "Hello" --to spanish
+AIOX> exit
 ```
 
 ## Environment Variables
@@ -942,12 +942,12 @@ AIOS> exit
 Control behavior with environment variables:
 
 ```bash
-AIOS_AI_PROVIDER=openai          # AI provider
-AIOS_AI_MODEL=gpt-4             # AI model
-AIOS_LOG_LEVEL=debug            # Log level
-AIOS_TELEMETRY=disabled         # Telemetry setting
-AIOS_TIMEOUT=30000             # Command timeout (ms)
-AIOS_MEMORY_CACHE=true         # Memory caching
+AIOX_AI_PROVIDER=openai          # AI provider
+AIOX_AI_MODEL=gpt-4             # AI model
+AIOX_LOG_LEVEL=debug            # Log level
+AIOX_TELEMETRY=disabled         # Telemetry setting
+AIOX_TIMEOUT=30000             # Command timeout (ms)
+AIOX_MEMORY_CACHE=true         # Memory caching
 ```
 
 ## Error Handling

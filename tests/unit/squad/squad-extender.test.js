@@ -21,7 +21,7 @@ const {
   SquadExtenderError,
   ErrorCodes,
   COMPONENT_CONFIG,
-} = require('../../../.aios-core/development/scripts/squad/squad-extender');
+} = require('../../../.aiox-core/development/scripts/squad/squad-extender');
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');

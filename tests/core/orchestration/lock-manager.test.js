@@ -8,11 +8,11 @@ const fs = require('fs').promises;
 const fsSync = require('fs');
 const yaml = require('js-yaml');
 
-const LockManager = require('../../../.aios-core/core/orchestration/lock-manager');
+const LockManager = require('../../../.aiox-core/core/orchestration/lock-manager');
 
 // Test fixtures
 const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project-locks');
-const LOCKS_DIR = path.join(TEST_PROJECT_ROOT, '.aios/locks');
+const LOCKS_DIR = path.join(TEST_PROJECT_ROOT, '.aiox/locks');
 
 describe('LockManager', () => {
   let lockManager;

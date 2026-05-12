@@ -1,24 +1,24 @@
 <!-- Tradução: PT-BR | Original: /docs/en/agents/archetype-rationale.md | Sincronização: 2026-01-26 -->
 
-# Justificativa dos Arquétipos dos Agentes AIOS
+# Justificativa dos Arquétipos dos Agentes AIOX
 
 **Versão:** 1.0
 **Criado:** 2025-01-14
 **Autor:** @ux-design-expert (Uma) + @architect (Aria)
-**Propósito:** Documentar decisões de design, considerações de sensibilidade cultural e opções alternativas para o sistema de personas dos agentes AIOS
+**Propósito:** Documentar decisões de design, considerações de sensibilidade cultural e opções alternativas para o sistema de personas dos agentes AIOX
 
 ---
 
 ## Resumo Executivo
 
-Este documento fornece a justificativa completa para o sistema de personas dos agentes AIOS, incluindo:
+Este documento fornece a justificativa completa para o sistema de personas dos agentes AIOX, incluindo:
 - Por que escolhemos arquétipos do zodíaco
 - Processo de decisão de design
 - Validação de sensibilidade cultural
 - Opções alternativas consideradas
 - Evidências de pesquisa que suportam a abordagem
 
-**Decisão Principal:** Usar arquétipos do zodíaco (12 signos) como framework de personalidade para 12 agentes AIOS, com equilíbrio elementar perfeito e adequação cultural global.
+**Decisão Principal:** Usar arquétipos do zodíaco (12 signos) como framework de personalidade para 12 agentes AIOX, com equilíbrio elementar perfeito e adequação cultural global.
 
 ---
 
@@ -259,7 +259,7 @@ Após avaliar múltiplos sistemas de arquétipos, selecionamos os signos do zod�
 
 **Prós:**
 - Controle completo
-- Perfeitamente combinado com AIOS
+- Perfeitamente combinado com AIOX
 - Sem bagagem cultural
 
 **Contras:**
@@ -539,7 +539,7 @@ greeting = `${icon} ${name} the ${role} (${zodiac_symbol} ${archetype}) ready to
 
 ## Conclusão
 
-**Arquétipos do zodíaco fornecem o framework ideal para personas de agentes AIOS porque:**
+**Arquétipos do zodíaco fornecem o framework ideal para personas de agentes AIOX porque:**
 
 1. Reconhecimento universal entre culturas
 2. Mapeamento perfeito 12:12 para nossa contagem de agentes

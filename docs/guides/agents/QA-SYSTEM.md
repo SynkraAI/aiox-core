@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do AIOS. Seu papel e fornecer analise abrangente de qualidade, decisoes de quality gates e recomendacoes acionaveis para equipes de desenvolvimento.
+O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do AIOX. Seu papel e fornecer analise abrangente de qualidade, decisoes de quality gates e recomendacoes acionaveis para equipes de desenvolvimento.
 
 **Arquetipo:** Guardian (Virgem)
 **Tom de Comunicacao:** Analitico, sistematico, educacional, pragmatico
@@ -34,49 +34,49 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do AIOS. Seu papel
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/qa-gate.md` | `*gate {story}` | Criar arquivo de decisao de quality gate |
-| `.aios-core/development/tasks/qa-review-story.md` | `*review {story}` | Revisao completa de story com decisao de gate |
-| `.aios-core/development/tasks/qa-test-design.md` | `*test-design {story}` | Criar cenarios de teste abrangentes |
-| `.aios-core/development/tasks/qa-risk-profile.md` | `*risk-profile {story}` | Gerar matriz de avaliacao de risco |
-| `.aios-core/development/tasks/qa-nfr-assess.md` | `*nfr-assess {story}` | Validar requisitos nao-funcionais |
-| `.aios-core/development/tasks/qa-trace-requirements.md` | `*trace {story}` | Mapear requisitos para testes (Given-When-Then) |
-| `.aios-core/development/tasks/qa-generate-tests.md` | `*generate-tests` | Gerar suites de teste automaticamente |
-| `.aios-core/development/tasks/qa-run-tests.md` | `*run-tests` | Executar suite de testes com gate de qualidade |
-| `.aios-core/development/tasks/qa-backlog-add-followup.md` | `*backlog-add` | Adicionar follow-ups ao backlog |
-| `.aios-core/development/tasks/qa-create-fix-request.md` | `*create-fix-request {story}` | Gerar documento de fix request para @dev |
+| `.aiox-core/development/tasks/qa-gate.md` | `*gate {story}` | Criar arquivo de decisao de quality gate |
+| `.aiox-core/development/tasks/qa-review-story.md` | `*review {story}` | Revisao completa de story com decisao de gate |
+| `.aiox-core/development/tasks/qa-test-design.md` | `*test-design {story}` | Criar cenarios de teste abrangentes |
+| `.aiox-core/development/tasks/qa-risk-profile.md` | `*risk-profile {story}` | Gerar matriz de avaliacao de risco |
+| `.aiox-core/development/tasks/qa-nfr-assess.md` | `*nfr-assess {story}` | Validar requisitos nao-funcionais |
+| `.aiox-core/development/tasks/qa-trace-requirements.md` | `*trace {story}` | Mapear requisitos para testes (Given-When-Then) |
+| `.aiox-core/development/tasks/qa-generate-tests.md` | `*generate-tests` | Gerar suites de teste automaticamente |
+| `.aiox-core/development/tasks/qa-run-tests.md` | `*run-tests` | Executar suite de testes com gate de qualidade |
+| `.aiox-core/development/tasks/qa-backlog-add-followup.md` | `*backlog-add` | Adicionar follow-ups ao backlog |
+| `.aiox-core/development/tasks/qa-create-fix-request.md` | `*create-fix-request {story}` | Gerar documento de fix request para @dev |
 
 ### Arquivos de Tasks Secundarias do @qa
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/tasks/qa-browser-console-check.md` | Verificar erros no console do browser |
-| `.aios-core/development/tasks/qa-evidence-requirements.md` | Requisitos de evidencia para QA |
-| `.aios-core/development/tasks/qa-false-positive-detection.md` | Deteccao de falsos positivos |
-| `.aios-core/development/tasks/qa-fix-issues.md` | Task para @dev aplicar fixes de QA |
-| `.aios-core/development/tasks/qa-library-validation.md` | Validacao de bibliotecas |
-| `.aios-core/development/tasks/qa-migration-validation.md` | Validacao de migracoes |
-| `.aios-core/development/tasks/qa-review-build.md` | Revisao de builds |
-| `.aios-core/development/tasks/qa-security-checklist.md` | Checklist de seguranca |
-| `.aios-core/development/tasks/qa-review-proposal.md` | Revisao de propostas |
+| `.aiox-core/development/tasks/qa-browser-console-check.md` | Verificar erros no console do browser |
+| `.aiox-core/development/tasks/qa-evidence-requirements.md` | Requisitos de evidencia para QA |
+| `.aiox-core/development/tasks/qa-false-positive-detection.md` | Deteccao de falsos positivos |
+| `.aiox-core/development/tasks/qa-fix-issues.md` | Task para @dev aplicar fixes de QA |
+| `.aiox-core/development/tasks/qa-library-validation.md` | Validacao de bibliotecas |
+| `.aiox-core/development/tasks/qa-migration-validation.md` | Validacao de migracoes |
+| `.aiox-core/development/tasks/qa-review-build.md` | Revisao de builds |
+| `.aiox-core/development/tasks/qa-security-checklist.md` | Checklist de seguranca |
+| `.aiox-core/development/tasks/qa-review-proposal.md` | Revisao de propostas |
 
 ### Arquivos de Definicao do Agente
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/qa.md` | Definicao completa do agente QA |
-| `.claude/commands/AIOS/agents/qa.md` | Comando Claude Code para ativar @qa |
+| `.aiox-core/development/agents/qa.md` | Definicao completa do agente QA |
+| `.claude/commands/AIOX/agents/qa.md` | Comando Claude Code para ativar @qa |
 
 ### Arquivos de Workflow
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/workflows/qa-loop.yaml` | Orquestrador do loop QA (Review -> Fix -> Re-review) |
+| `.aiox-core/development/workflows/qa-loop.yaml` | Orquestrador do loop QA (Review -> Fix -> Re-review) |
 
 ### Arquivos de Time
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agent-teams/team-qa-focused.yaml` | Configuracao do time focado em QA (@dev, @qa, @github-devops) |
+| `.aiox-core/development/agent-teams/team-qa-focused.yaml` | Configuracao do time focado em QA (@dev, @qa, @github-devops) |
 
 ### Arquivos de Dados (Outputs)
 
@@ -91,8 +91,8 @@ O agente **@qa (Quinn)** e o Test Architect & Quality Advisor do AIOS. Seu papel
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/core-config.yaml` | Configuracao central (qa.qaLocation, etc.) |
-| `.aios-core/development/data/technical-preferences.md` | Preferencias tecnicas para QA |
+| `.aiox-core/core-config.yaml` | Configuracao central (qa.qaLocation, etc.) |
+| `.aiox-core/development/data/technical-preferences.md` | Preferencias tecnicas para QA |
 
 ---
 
@@ -375,10 +375,10 @@ coderabbit_integration:
 
 ```bash
 # Pre-review (uncommitted changes)
-wsl bash -c 'cd /mnt/c/.../@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
 
 # Story review (committed changes vs main)
-wsl bash -c 'cd /mnt/c/.../@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
 ```
 
 ### Fluxo de Self-Healing
@@ -600,24 +600,24 @@ wsl bash -c '~/.local/bin/coderabbit --version'
 
 ### Tasks Core
 
-- [qa-gate.md](/.aios-core/development/tasks/qa-gate.md)
-- [qa-review-story.md](/.aios-core/development/tasks/qa-review-story.md)
-- [qa-test-design.md](/.aios-core/development/tasks/qa-test-design.md)
-- [qa-risk-profile.md](/.aios-core/development/tasks/qa-risk-profile.md)
-- [qa-nfr-assess.md](/.aios-core/development/tasks/qa-nfr-assess.md)
-- [qa-trace-requirements.md](/.aios-core/development/tasks/qa-trace-requirements.md)
+- [qa-gate.md](/.aiox-core/development/tasks/qa-gate.md)
+- [qa-review-story.md](/.aiox-core/development/tasks/qa-review-story.md)
+- [qa-test-design.md](/.aiox-core/development/tasks/qa-test-design.md)
+- [qa-risk-profile.md](/.aiox-core/development/tasks/qa-risk-profile.md)
+- [qa-nfr-assess.md](/.aiox-core/development/tasks/qa-nfr-assess.md)
+- [qa-trace-requirements.md](/.aiox-core/development/tasks/qa-trace-requirements.md)
 
 ### Workflows
 
-- [qa-loop.yaml](/.aios-core/development/workflows/qa-loop.yaml)
+- [qa-loop.yaml](/.aiox-core/development/workflows/qa-loop.yaml)
 
 ### Teams
 
-- [team-qa-focused.yaml](/.aios-core/development/agent-teams/team-qa-focused.yaml)
+- [team-qa-focused.yaml](/.aiox-core/development/agent-teams/team-qa-focused.yaml)
 
 ### Agente
 
-- [qa.md](/.aios-core/development/agents/qa.md)
+- [qa.md](/.aiox-core/development/agents/qa.md)
 
 ### Documentos Relacionados
 

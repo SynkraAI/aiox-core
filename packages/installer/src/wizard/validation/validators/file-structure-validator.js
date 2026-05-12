@@ -104,7 +104,7 @@ async function validateFiles(fileContext = {}) {
     }
 
     // Validate core-config.yaml (Story 1.6)
-    const coreConfigPath = fileContext.coreConfig || '.aios-core/core-config.yaml';
+    const coreConfigPath = fileContext.coreConfig || '.aiox-core/core-config.yaml';
     const coreConfigExists = fs.existsSync(coreConfigPath);
     results.checks.push({
       component: 'Core Config',
@@ -135,8 +135,8 @@ async function validateFiles(fileContext = {}) {
     }
     // Note: .mcp.json is optional, no warning if missing
 
-    // Validate directory structure - only .aios-core is required
-    const requiredDirs = ['.aios-core'];
+    // Validate directory structure - only .aiox-core is required
+    const requiredDirs = ['.aiox-core'];
     for (const dir of requiredDirs) {
       if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
         results.checks.push({

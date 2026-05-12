@@ -1,7 +1,7 @@
 name: valid-squad
 version: 1.0.0
 description: A valid test squad for unit tests
-author: AIOS Test Suite
+author: AIOX Test Suite
 
 agents:
   - test-agent

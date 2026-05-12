@@ -23,7 +23,7 @@ const {
   BOB_STATUS_VERSION,
   DEFAULT_PIPELINE_STAGES,
   createDefaultBobStatus,
-} = require('../../../.aios-core/core/orchestration/bob-status-writer');
+} = require('../../../.aiox-core/core/orchestration/bob-status-writer');
 
 describe('BobStatusWriter', () => {
   let tempDir;
@@ -49,8 +49,8 @@ describe('BobStatusWriter', () => {
 
     it('should set correct paths', () => {
       expect(writer.projectRoot).toBe(tempDir);
-      expect(writer.dashboardDir).toBe(path.join(tempDir, '.aios', 'dashboard'));
-      expect(writer.statusPath).toBe(path.join(tempDir, '.aios', 'dashboard', 'bob-status.json'));
+      expect(writer.dashboardDir).toBe(path.join(tempDir, '.aiox', 'dashboard'));
+      expect(writer.statusPath).toBe(path.join(tempDir, '.aiox', 'dashboard', 'bob-status.json'));
     });
   });
 

@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-29
 -->
 
-# Guía de Instalación Windows para Synkra AIOS
+# Guía de Instalación Windows para Synkra AIOX
 
 > 🌐 [EN](../../installation/windows.md) | [PT](../../pt/installation/windows.md) | **ES**
 
@@ -131,7 +131,7 @@ winget install Microsoft.WindowsTerminal
 3. Ejecute el instalador:
 
    ```powershell
-   npx github:SynkraAI/aios-core install
+   npx github:SynkraAI/aiox-core install
    ```
 
 ### Qué Hace el Instalador
@@ -143,7 +143,6 @@ El instalador automáticamente:
 - ✅ Configura rutas de IDE para ubicaciones Windows:
   - Cursor: `%APPDATA%\Cursor\`
   - Claude: `%USERPROFILE%\.claude\`
-  - Windsurf: `%APPDATA%\Windsurf\`
 - ✅ Maneja separadores de ruta Windows (barras invertidas)
 - ✅ Configura terminaciones de línea correctamente (CRLF para batch, LF para scripts)
 - ✅ Configura scripts npm compatibles con cmd.exe y PowerShell
@@ -168,14 +167,11 @@ El instalador automáticamente:
    npm install -g @anthropic-ai/claude-code
    ```
 
-2. Comandos se instalan en `.claude\commands\AIOS\`
+2. Comandos se instalan en `.claude\commands\AIOX\`
 3. Use `/nombre-del-agente` para activar agentes
 
-### Windsurf
 
-1. Descargue desde [codeium.com/windsurf](https://codeium.com/windsurf)
 2. Ejecute el instalador
-3. Reglas se instalan en `.windsurf\rules\`
 4. Use `@nombre-del-agente` para activar agentes
 
 ---
@@ -282,7 +278,7 @@ wsl --install -d Ubuntu
 # Reinicie el computador cuando se solicite
 ```
 
-### Configurar AIOS con WSL
+### Configurar AIOX con WSL
 
 ```bash
 # Dentro de WSL, siga la guía de instalación Linux
@@ -303,11 +299,11 @@ Para actualizar una instalación existente:
 
 ```powershell
 # Usando npx (recomendado)
-npx github:SynkraAI/aios-core install
+npx github:SynkraAI/aiox-core install
 
 # El actualizador:
 # - Detectará instalación existente
-# - Hará respaldo de personalizaciones en .aios-backup\
+# - Hará respaldo de personalizaciones en .aiox-backup\
 # - Actualizará solo archivos modificados
 # - Preservará configuraciones
 ```
@@ -343,4 +339,4 @@ npx github:SynkraAI/aios-core install
 - [Guía de Solución de Problemas](troubleshooting.md)
 - [FAQ](faq.md)
 - [Comunidad Discord](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SynkraAI/aios-core/issues)
+- [GitHub Issues](https://github.com/SynkraAI/aiox-core/issues)

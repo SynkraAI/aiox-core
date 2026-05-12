@@ -8,7 +8,7 @@ const {
   EVENT_MAPPING,
   createContext,
   formatResult,
-} = require('../../../.aios-core/hooks/unified/hook-interface');
+} = require('../../../.aiox-core/hooks/unified/hook-interface');
 
 describe('Unified Hook Interface', () => {
   describe('EVENT_MAPPING', () => {

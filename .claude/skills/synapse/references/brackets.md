@@ -4,7 +4,7 @@
 
 Context brackets control how much content SYNAPSE injects per prompt based on how much context window remains. As the conversation progresses and context fills up, SYNAPSE adapts by changing which layers are active and how many tokens it injects.
 
-The bracket system is implemented in `.aios-core/core/synapse/context/context-tracker.js`.
+The bracket system is implemented in `.aiox-core/core/synapse/context/context-tracker.js`.
 
 ## The 4 Brackets
 
@@ -78,7 +78,7 @@ The `.synapse/context` domain file contains rules that vary by bracket:
 
 ## Token Budget Enforcement
 
-The output formatter (`.aios-core/core/synapse/output/formatter.js`) enforces token budgets:
+The output formatter (`.aiox-core/core/synapse/output/formatter.js`) enforces token budgets:
 
 1. Each bracket has a max token budget (800 / 1500 / 2000 / 2500)
 2. Sections are rendered in priority order (CONSTITUTION first, SUMMARY last)
@@ -95,6 +95,6 @@ Constitution (L0) is never truncated.
 
 | File | Purpose |
 |------|---------|
-| `.aios-core/core/synapse/context/context-tracker.js` | Bracket calculation, token budgets, layer configs |
+| `.aiox-core/core/synapse/context/context-tracker.js` | Bracket calculation, token budgets, layer configs |
 | `.synapse/context` | Bracket-specific context rules (L1) |
-| `.aios-core/core/synapse/output/formatter.js` | Token budget enforcement + truncation |
+| `.aiox-core/core/synapse/output/formatter.js` | Token budget enforcement + truncation |

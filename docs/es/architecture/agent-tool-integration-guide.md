@@ -12,7 +12,7 @@
 
 ## Descripción General
 
-Esta guía explica cómo se integran las herramientas con los agentes AIOS. Las herramientas amplían las capacidades de los agentes proporcionando acceso a servicios externos, APIs y recursos del sistema.
+Esta guía explica cómo se integran las herramientas con los agentes AIOX. Las herramientas amplían las capacidades de los agentes proporcionando acceso a servicios externos, APIs y recursos del sistema.
 
 ---
 
@@ -53,13 +53,13 @@ Los agentes declaran sus dependencias en el bloque YAML dentro de su archivo de 
 | Tipo         | Descripción                           | Ubicación                        |
 | ------------ | ------------------------------------- | -------------------------------- |
 | `tools`      | Herramientas CLI y servicios externos | System PATH o MCP                |
-| `tasks`      | Archivos de flujo de trabajo          | `.aios-core/development/tasks/`  |
-| `checklists` | Listas de validación                  | `.aios-core/product/checklists/` |
+| `tasks`      | Archivos de flujo de trabajo          | `.aiox-core/development/tasks/`  |
+| `checklists` | Listas de validación                  | `.aiox-core/product/checklists/` |
 
 ### Ejemplo de Declaración
 
 ```yaml
-# De .aios-core/development/agents/dev.md
+# De .aiox-core/development/agents/dev.md
 dependencies:
   checklists:
     - story-dod-checklist.md
@@ -200,7 +200,7 @@ Antes de marcar la historia como "Lista para Revisión":
 
 ## Arquitectura de Restricciones de Git
 
-AIOS implementa gobernanza estricta de operaciones de git:
+AIOX implementa gobernanza estricta de operaciones de git:
 
 ### Permisos del Agente @dev
 
@@ -327,7 +327,7 @@ Activar el agente y verificar que la herramienta es accesible y funcional.
 
 - [Gestión de Claves API de MCP](./mcp-api-keys-management.md)
 - [Reglas de Uso de MCP](../../../.claude/rules/mcp-usage.md)
-- [Definiciones de Agentes](../../../.aios-core/development/agents/)
+- [Definiciones de Agentes](../../../.aiox-core/development/agents/)
 
 ---
 

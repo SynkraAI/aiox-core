@@ -47,7 +47,7 @@ let failedCount = 0;
 
 utilities.forEach(util => {
   try {
-    const utilPath = path.join(__dirname, '../../aios-core/utils', `${util}.js`);
+    const utilPath = path.join(__dirname, '../../aiox-core/utils', `${util}.js`);
     require(utilPath);
     loadResults[util] = 'PASS';
     loadedCount++;
@@ -117,10 +117,10 @@ console.log('\n\n👥 TEST 4: Agent Load Test (4 agents)\n');
 console.log('-'.repeat(60));
 
 const agents = [
-  { name: 'qa', path: '.aios-core/development/agents/qa.md' },
-  { name: 'po', path: '.aios-core/development/agents/po.md' },
-  { name: 'devops', path: '.aios-core/development/agents/devops.md' },
-  { name: 'dev', path: '.aios-core/development/agents/dev.md' },
+  { name: 'qa', path: '.aiox-core/development/agents/qa.md' },
+  { name: 'po', path: '.aiox-core/development/agents/po.md' },
+  { name: 'devops', path: '.aiox-core/development/agents/devops.md' },
+  { name: 'dev', path: '.aiox-core/development/agents/dev.md' },
 ];
 
 let agentCheckCount = 0;

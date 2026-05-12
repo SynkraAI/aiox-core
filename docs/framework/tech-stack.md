@@ -1,11 +1,11 @@
-# AIOS Technology Stack
+# AIOX Technology Stack
 
 > 🌐 **EN** | [PT](../pt/framework/tech-stack.md) | [ES](../es/framework/tech-stack.md)
 
 **Version:** 1.1
 **Last Updated:** 2025-12-14
 **Status:** Official Framework Standard
-**Migration Notice:** This document will migrate to `SynkraAI/aios-core` repository in Q2 2026 (see Decision 005)
+**Migration Notice:** This document will migrate to `SynkraAI/aiox-core` repository in Q2 2026 (see Decision 005)
 
 ---
 
@@ -25,7 +25,7 @@
 
 ## Overview
 
-AIOS is built on modern JavaScript/TypeScript with Node.js runtime, optimized for cross-platform CLI development with interactive UX and agent orchestration capabilities.
+AIOX is built on modern JavaScript/TypeScript with Node.js runtime, optimized for cross-platform CLI development with interactive UX and agent orchestration capabilities.
 
 **Philosophy:**
 
@@ -522,7 +522,7 @@ npm run publish:stable         # Publish latest tag
 
 ### MCP Servers
 
-AIOS integrates with Model Context Protocol (MCP) servers:
+AIOX integrates with Model Context Protocol (MCP) servers:
 
 ```yaml
 MCP Servers:
@@ -715,7 +715,7 @@ Optimization Strategy:
 ### Memory Usage
 
 ```yaml
-Baseline: 30MB (Node.js + AIOS core)
+Baseline: 30MB (Node.js + AIOX core)
 Agent Execution: +10MB (per agent)
 Story Processing: +20MB (markdown parsing)
 Peak: ~100MB (typical workflow)
@@ -757,10 +757,10 @@ Node.js: nvm, apt, yum, or official binaries
 ## Environment Variables
 
 ```bash
-# AIOS Configuration
-AIOS_DEBUG=true                    # Enable debug logging
-AIOS_CONFIG_PATH=/custom/path      # Custom config location
-AIOS_YOLO_MODE=true               # Force yolo mode
+# AIOX Configuration
+AIOX_DEBUG=true                    # Enable debug logging
+AIOX_CONFIG_PATH=/custom/path      # Custom config location
+AIOX_YOLO_MODE=true               # Force yolo mode
 
 # Node.js
 NODE_ENV=production                # Production mode
@@ -787,8 +787,8 @@ SUPABASE_ACCESS_TOKEN=xxx         # Supabase CLI auth
 | Version | Date       | Changes                                                                                  | Author           |
 | ------- | ---------- | ---------------------------------------------------------------------------------------- | ---------------- |
 | 1.0     | 2025-01-15 | Initial tech stack documentation                                                         | Aria (architect) |
-| 1.1     | 2025-12-14 | Updated migration notice to SynkraAI/aios-core, semantic-release to v25.0.2 [Story 6.10] | Dex (dev)        |
+| 1.1     | 2025-12-14 | Updated migration notice to SynkraAI/aiox-core, semantic-release to v25.0.2 [Story 6.10] | Dex (dev)        |
 
 ---
 
-_This is an official AIOS framework standard. All technology choices must align with this stack._
+_This is an official AIOX framework standard. All technology choices must align with this stack._

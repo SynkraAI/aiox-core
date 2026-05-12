@@ -10,7 +10,7 @@
 'use strict';
 
 const path = require('path');
-const { TemplateEngine } = require('../../.aios-core/product/templates/engine');
+const { TemplateEngine } = require('../../.aiox-core/product/templates/engine');
 
 describe('PMDR Template', () => {
   let engine;

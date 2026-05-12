@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guia de Configuração Global MCP do AIOS
+# Guia de Configuração Global MCP do AIOX
 
 > 🌐 [EN](../../guides/mcp-global-setup.md) | **PT** | [ES](../../es/guides/mcp-global-setup.md)
 
 ---
 
-> Configure servidores MCP (Model Context Protocol) globais para Synkra AIOS.
+> Configure servidores MCP (Model Context Protocol) globais para Synkra AIOX.
 
 **Versão:** 2.1.1
 **Última Atualização:** 2025-12-23
@@ -19,7 +19,7 @@
 
 ## Visão Geral
 
-O Sistema Global MCP permite que você configure servidores MCP uma única vez e os compartilhe entre todos os projetos AIOS. Isso elimina a necessidade de configurar os mesmos servidores em cada projeto.
+O Sistema Global MCP permite que você configure servidores MCP uma única vez e os compartilhe entre todos os projetos AIOX. Isso elimina a necessidade de configurar os mesmos servidores em cada projeto.
 
 ### Benefícios
 
@@ -33,7 +33,7 @@ O Sistema Global MCP permite que você configure servidores MCP uma única vez e
 ### Estrutura de Diretórios Global
 
 ```
-~/.aios/
+~/.aiox/
 ├── mcp/
 │   ├── global-config.json    # Arquivo de configuração principal
 │   ├── servers/              # Configurações individuais de servidores
@@ -52,25 +52,25 @@ O Sistema Global MCP permite que você configure servidores MCP uma única vez e
 ### Windows
 
 ```
-C:\Users\<username>\.aios\mcp\global-config.json
-C:\Users\<username>\.aios\mcp\servers\
-C:\Users\<username>\.aios\credentials\
+C:\Users\<username>\.aiox\mcp\global-config.json
+C:\Users\<username>\.aiox\mcp\servers\
+C:\Users\<username>\.aiox\credentials\
 ```
 
 ### macOS
 
 ```
-/Users/<username>/.aios/mcp/global-config.json
-/Users/<username>/.aios/mcp/servers/
-/Users/<username>/.aios/credentials/
+/Users/<username>/.aiox/mcp/global-config.json
+/Users/<username>/.aiox/mcp/servers/
+/Users/<username>/.aiox/credentials/
 ```
 
 ### Linux
 
 ```
-/home/<username>/.aios/mcp/global-config.json
-/home/<username>/.aios/mcp/servers/
-/home/<username>/.aios/credentials/
+/home/<username>/.aiox/mcp/global-config.json
+/home/<username>/.aiox/mcp/servers/
+/home/<username>/.aiox/credentials/
 ```
 
 ---
@@ -81,23 +81,23 @@ C:\Users\<username>\.aios\credentials\
 
 ```bash
 # Create global directory and config
-aios mcp setup
+aiox mcp setup
 ```
 
 **Isso cria:**
 
-- `~/.aios/` - Diretório global do AIOS
-- `~/.aios/mcp/` - Diretório de configuração MCP
-- `~/.aios/mcp/global-config.json` - Arquivo de configuração principal
-- `~/.aios/mcp/servers/` - Configurações individuais de servidores
-- `~/.aios/mcp/cache/` - Cache de respostas
-- `~/.aios/credentials/` - Armazenamento seguro de credenciais
+- `~/.aiox/` - Diretório global do AIOX
+- `~/.aiox/mcp/` - Diretório de configuração MCP
+- `~/.aiox/mcp/global-config.json` - Arquivo de configuração principal
+- `~/.aiox/mcp/servers/` - Configurações individuais de servidores
+- `~/.aiox/mcp/cache/` - Cache de respostas
+- `~/.aiox/credentials/` - Armazenamento seguro de credenciais
 
 ### Passo 2: Verificar Configuração
 
 ```bash
 # Check global config exists
-aios mcp status
+aiox mcp status
 ```
 
 **Saída Esperada:**
@@ -106,13 +106,13 @@ aios mcp status
 MCP Global Configuration
 ========================
 
-Location: ~/.aios/mcp/global-config.json
+Location: ~/.aiox/mcp/global-config.json
 Status:   ✓ Configured
 
 Servers: 0 configured
 Cache:   Empty
 
-Run 'aios mcp add <server>' to add servers.
+Run 'aiox mcp add <server>' to add servers.
 ```
 
 ---
@@ -121,17 +121,17 @@ Run 'aios mcp add <server>' to add servers.
 
 ### Usando Templates
 
-O AIOS inclui templates para servidores MCP populares:
+O AIOX inclui templates para servidores MCP populares:
 
 ```bash
 # Add from template
-aios mcp add context7
-aios mcp add exa
-aios mcp add github
-aios mcp add puppeteer
-aios mcp add filesystem
-aios mcp add memory
-aios mcp add desktop-commander
+aiox mcp add context7
+aiox mcp add exa
+aiox mcp add github
+aiox mcp add puppeteer
+aiox mcp add filesystem
+aiox mcp add memory
+aiox mcp add desktop-commander
 ```
 
 ### Templates Disponíveis
@@ -150,71 +150,71 @@ aios mcp add desktop-commander
 
 ```bash
 # Add custom server with JSON config
-aios mcp add my-server --config='{"command":"npx","args":["-y","my-mcp-server"]}'
+aiox mcp add my-server --config='{"command":"npx","args":["-y","my-mcp-server"]}'
 
 # Add from config file
-aios mcp add my-server --config-file=./my-server-config.json
+aiox mcp add my-server --config-file=./my-server-config.json
 ```
 
 ---
 
 ## Comandos CLI
 
-### `aios mcp setup`
+### `aiox mcp setup`
 
 Inicializa a configuração global MCP.
 
 ```bash
 # Create global structure
-aios mcp setup
+aiox mcp setup
 
 # Force recreate (backup existing)
-aios mcp setup --force
+aiox mcp setup --force
 
 # Specify custom location
-aios mcp setup --path=/custom/path
+aiox mcp setup --path=/custom/path
 ```
 
-### `aios mcp add`
+### `aiox mcp add`
 
 Adiciona um novo servidor MCP.
 
 ```bash
 # Add from template
-aios mcp add context7
+aiox mcp add context7
 
 # Add with custom config
-aios mcp add custom-server --config='{"command":"npx","args":["-y","package"]}'
+aiox mcp add custom-server --config='{"command":"npx","args":["-y","package"]}'
 
 # Add with environment variables
-aios mcp add exa --env='EXA_API_KEY=your-key'
+aiox mcp add exa --env='EXA_API_KEY=your-key'
 ```
 
-### `aios mcp remove`
+### `aiox mcp remove`
 
 Remove um servidor MCP.
 
 ```bash
 # Remove server
-aios mcp remove context7
+aiox mcp remove context7
 
 # Remove with confirmation skip
-aios mcp remove context7 --yes
+aiox mcp remove context7 --yes
 ```
 
-### `aios mcp list`
+### `aiox mcp list`
 
 Lista servidores configurados.
 
 ```bash
 # List all servers
-aios mcp list
+aiox mcp list
 
 # List with details
-aios mcp list --verbose
+aiox mcp list --verbose
 
 # List only enabled
-aios mcp list --enabled
+aiox mcp list --enabled
 ```
 
 **Saída:**
@@ -230,43 +230,43 @@ Configured MCP Servers
 Total: 3 servers (2 enabled, 1 disabled)
 ```
 
-### `aios mcp enable/disable`
+### `aiox mcp enable/disable`
 
 Habilita ou desabilita servidores.
 
 ```bash
 # Disable server
-aios mcp disable github
+aiox mcp disable github
 
 # Enable server
-aios mcp enable github
+aiox mcp enable github
 
 # Toggle
-aios mcp toggle github
+aiox mcp toggle github
 ```
 
-### `aios mcp status`
+### `aiox mcp status`
 
 Mostra status global do MCP.
 
 ```bash
 # Full status
-aios mcp status
+aiox mcp status
 
 # JSON output
-aios mcp status --json
+aiox mcp status --json
 ```
 
-### `aios mcp sync`
+### `aiox mcp sync`
 
 Sincroniza configuração global para o projeto.
 
 ```bash
 # Sync to current project
-aios mcp sync
+aiox mcp sync
 
 # Sync specific servers only
-aios mcp sync --servers=context7,exa
+aiox mcp sync --servers=context7,exa
 ```
 
 ---
@@ -315,7 +315,7 @@ Arquivo de configuração principal com todas as definições de servidores.
 Cada servidor também possui seu próprio arquivo de configuração em `servers/`:
 
 ```json
-// ~/.aios/mcp/servers/context7.json
+// ~/.aiox/mcp/servers/context7.json
 {
   "type": "sse",
   "url": "https://mcp.context7.com/sse",
@@ -426,23 +426,23 @@ export GITHUB_TOKEN="your-github-token"
 
 ### Armazenamento Seguro
 
-Credenciais são armazenadas em `~/.aios/credentials/` com um `.gitignore` para prevenir commits acidentais.
+Credenciais são armazenadas em `~/.aiox/credentials/` com um `.gitignore` para prevenir commits acidentais.
 
 ```bash
 # Add credential
-aios mcp credential set EXA_API_KEY "your-api-key"
+aiox mcp credential set EXA_API_KEY "your-api-key"
 
 # Get credential
-aios mcp credential get EXA_API_KEY
+aiox mcp credential get EXA_API_KEY
 
 # List credentials (masked)
-aios mcp credential list
+aiox mcp credential list
 ```
 
 ### Formato do Arquivo de Credenciais
 
 ```json
-// ~/.aios/credentials/api-keys.json
+// ~/.aiox/credentials/api-keys.json
 {
   "EXA_API_KEY": "encrypted-value",
   "GITHUB_TOKEN": "encrypted-value"
@@ -464,7 +464,7 @@ const {
   addServer,
   removeServer,
   listServers,
-} = require('./.aios-core/core/mcp/global-config-manager');
+} = require('./.aiox-core/core/mcp/global-config-manager');
 
 // Check if setup exists
 if (!globalDirExists()) {
@@ -496,14 +496,14 @@ const {
   isLinux,
   getGlobalMcpDir,
   getGlobalConfigPath,
-} = require('./.aios-core/core/mcp/os-detector');
+} = require('./.aiox-core/core/mcp/os-detector');
 
 // Get OS type
 console.log(detectOS()); // 'windows' | 'macos' | 'linux'
 
 // Get paths
-console.log(getGlobalMcpDir()); // ~/.aios/mcp/
-console.log(getGlobalConfigPath()); // ~/.aios/mcp/global-config.json
+console.log(getGlobalMcpDir()); // ~/.aiox/mcp/
+console.log(getGlobalConfigPath()); // ~/.aiox/mcp/global-config.json
 ```
 
 ---
@@ -515,7 +515,7 @@ console.log(getGlobalConfigPath()); // ~/.aios/mcp/global-config.json
 | Problema               | Solução                                                                   |
 | ---------------------- | ------------------------------------------------------------------------- |
 | Permissão negada       | Execute o terminal como Administrador (Windows) ou use sudo (macOS/Linux) |
-| Diretório já existe    | Use `aios mcp setup --force` para recriar                                 |
+| Diretório já existe    | Use `aiox mcp setup --force` para recriar                                 |
 | Caminho não encontrado | Certifique-se de que o diretório home existe                              |
 
 ### Problemas de Servidor
@@ -539,13 +539,13 @@ console.log(getGlobalConfigPath()); // ~/.aios/mcp/global-config.json
 
 ```bash
 # Reset global config
-aios mcp setup --force
+aiox mcp setup --force
 
 # Clear cache
-rm -rf ~/.aios/mcp/cache/*
+rm -rf ~/.aiox/mcp/cache/*
 
 # Verify config
-aios mcp status --verbose
+aiox mcp status --verbose
 
 # Test server manually
 npx -y @modelcontextprotocol/server-github
@@ -602,8 +602,8 @@ Adicione às configurações do Claude Desktop:
 ```json
 {
   "mcpServers": {
-    "aios-global": {
-      "command": "aios",
+    "aiox-global": {
+      "command": "aiox",
       "args": ["mcp", "serve", "--global"]
     }
   }
@@ -616,8 +616,8 @@ Configure em `.vscode/settings.json`:
 
 ```json
 {
-  "aios.mcp.useGlobal": true,
-  "aios.mcp.globalPath": "~/.aios/mcp/global-config.json"
+  "aiox.mcp.useGlobal": true,
+  "aiox.mcp.globalPath": "~/.aiox/mcp/global-config.json"
 }
 ```
 
@@ -660,4 +660,4 @@ Crie `.mcp.json` na raiz do projeto para sobrescrever configurações globais:
 
 ---
 
-_Synkra AIOS v2.1 Guia de Configuração Global MCP_
+_Synkra AIOX v4 Guia de Configuração Global MCP_

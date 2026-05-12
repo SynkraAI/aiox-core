@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guia de Solução de Problemas do Synkra AIOS
+# Guia de Solução de Problemas do Synkra AIOX
 
 > 🌐 [EN](../../installation/troubleshooting.md) | **PT** | [ES](../../es/installation/troubleshooting.md)
 
@@ -34,7 +34,7 @@
 Execute este comando de diagnóstico primeiro para identificar problemas comuns:
 
 ```bash
-npx @synkra/aios-core status
+npx aiox-core status
 ```
 
 Se o comando de status falhar, trabalhe através das seções abaixo baseado na sua mensagem de erro.
@@ -43,7 +43,7 @@ Se o comando de status falhar, trabalhe através das seções abaixo baseado na 
 
 ## Problemas de Instalação
 
-### Problema 1: "npx @synkra/aios-core is not recognized"
+### Problema 1: "npx aiox-core is not recognized"
 
 **Sintomas:**
 
@@ -81,7 +81,7 @@ npm --version
 
 Current directory: /Users/username
 
-Synkra AIOS should be installed in your project directory,
+Synkra AIOX should be installed in your project directory,
 not in your home directory or temporary locations.
 ```
 
@@ -94,7 +94,7 @@ not in your home directory or temporary locations.
 cd /path/to/your/project
 
 # Então execute o instalador
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -119,7 +119,7 @@ mkdir -p /path/to/your/project
 cd /path/to/your/project
 
 # Execute o instalador
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -129,7 +129,7 @@ npx @synkra/aios-core install
 **Sintomas:**
 
 ```
-Error: Synkra AIOS requires Node.js 18.0.0 or higher
+Error: Synkra AIOX requires Node.js 18.0.0 or higher
 Current version: 14.17.0
 ```
 
@@ -156,7 +156,7 @@ nvm use 18
 
 ```
 npm ERR! code E404
-npm ERR! 404 Not Found - GET https://registry.npmjs.org/@synkra/aios-core
+npm ERR! 404 Not Found - GET https://registry.npmjs.org/aiox-core
 ```
 
 **Causa:** Pacote não encontrado no registro npm (problema de rede ou erro de digitação).
@@ -175,7 +175,7 @@ npm config get registry
 npm config set registry https://registry.npmjs.org/
 
 # Tente a instalação novamente
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -200,7 +200,7 @@ export PATH=~/.npm-global/bin:$PATH
 # Adicione a linha de export ao ~/.bashrc ou ~/.zshrc
 
 # Opção 2: Usar npx ao invés de instalação global (recomendado)
-npx @synkra/aios-core install
+npx aiox-core install
 
 # Opção 3: Usar nvm para gerenciar Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -218,7 +218,7 @@ nvm install 18
 ```
 npm ERR! code ETIMEDOUT
 npm ERR! errno ETIMEDOUT
-npm ERR! network request to https://registry.npmjs.org/@synkra/aios-core failed
+npm ERR! network request to https://registry.npmjs.org/aiox-core failed
 ```
 
 **Causa:** Problema de conectividade de rede, firewall, ou proxy bloqueando npm.
@@ -237,7 +237,7 @@ npm config set https-proxy http://proxy.company.com:8080
 npm config set strict-ssl false
 
 # Tente novamente com logging verboso
-npm install @synkra/aios-core --verbose
+npm install aiox-core --verbose
 ```
 
 ---
@@ -264,7 +264,7 @@ npm config set strict-ssl false
 
 # Verifique e tente novamente
 npm config get strict-ssl
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -294,7 +294,7 @@ npm ERR! network This is a problem related to network connectivity.
 
 # Tente novamente com timeout maior
 npm config set fetch-timeout 60000
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -324,7 +324,7 @@ lsof +D /path/to/project
 kill -9 <PID>
 
 # Tente a instalação novamente
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -351,7 +351,7 @@ mount | grep /path/to/project
 
 # Instale em um diretório com permissão de escrita
 cd ~/projects/my-project
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -361,7 +361,7 @@ npx @synkra/aios-core install
 **Sintomas:**
 
 ```
-Error: ENOTEMPTY: directory not empty, rmdir '.aios-core'
+Error: ENOTEMPTY: directory not empty, rmdir '.aiox-core'
 ```
 
 **Causa:** Instalação existente com arquivos modificados.
@@ -370,13 +370,13 @@ Error: ENOTEMPTY: directory not empty, rmdir '.aios-core'
 
 ```bash
 # Faça backup da instalação existente
-mv .aios-core .aios-core.backup
+mv .aiox-core .aiox-core.backup
 
 # Execute o instalador com flag force
-npx @synkra/aios-core install --force-upgrade
+npx aiox-core install --force-upgrade
 
 # Se necessário, restaure arquivos customizados do backup
-cp .aios-core.backup/custom-files/* .aios-core/
+cp .aiox-core.backup/custom-files/* .aiox-core/
 ```
 
 ---
@@ -404,7 +404,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # Ou use CMD ao invés de PowerShell
 cmd
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 #### Problema 14: "Path too long"
@@ -424,7 +424,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /
 
 # Ou use um caminho de projeto mais curto
 cd C:\dev\proj
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 #### Problema 15: "npm not found in Git Bash"
@@ -465,7 +465,7 @@ xcode-select --install
 
 # Siga o diálogo de instalação
 # Então tente novamente
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 #### Problema 17: "Apple Silicon (M1/M2) compatibility"
@@ -487,7 +487,7 @@ softwareupdate --install-rosetta
 # Use versão x86 do Node.js (se necessário)
 arch -x86_64 /bin/bash
 nvm install 18
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ---
@@ -514,7 +514,7 @@ sudo dnf install vips-devel
 
 # Limpe o cache npm e reinstale
 npm cache clean --force
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 #### Problema 19: "GLIBC version too old"
@@ -554,7 +554,7 @@ nvm use 16
 
    ```bash
    # Claude Code
-   ls .claude/commands/AIOS/agents/
+   ls .claude/commands/AIOX/agents/
 
    # Cursor
    ls .cursor/rules/
@@ -563,7 +563,7 @@ nvm use 16
 3. Verifique se as configurações da IDE permitem comandos customizados
 4. Re-execute a instalação para IDE específica:
    ```bash
-   npx @synkra/aios-core install --ide claude-code
+   npx aiox-core install --ide claude-code
    ```
 
 ---
@@ -588,20 +588,20 @@ nvm use 16
 **Sintomas:**
 
 ```
-Error: Agent 'dev' not found in .aios-core/agents/
+Error: Agent 'dev' not found in .aiox-core/agents/
 ```
 
 **Solução:**
 
 ```bash
 # Verifique se os arquivos de agentes existem
-ls .aios-core/agents/
+ls .aiox-core/agents/
 
 # Se estiverem faltando, reinstale o core
-npx @synkra/aios-core install --full
+npx aiox-core install --full
 
 # Verifique se core-config.yaml é válido
-cat .aios-core/core-config.yaml
+cat .aiox-core/core-config.yaml
 ```
 
 ---
@@ -618,7 +618,7 @@ YAMLException: bad indentation of a mapping entry
 
 ```bash
 # Valide a sintaxe YAML
-npx yaml-lint .aios-core/agents/dev.md
+npx yaml-lint .aiox-core/agents/dev.md
 
 # Correções comuns:
 # - Use espaços, não tabs
@@ -626,8 +626,8 @@ npx yaml-lint .aios-core/agents/dev.md
 # - Verifique caracteres especiais em strings (use aspas)
 
 # Reinstale para obter arquivos de agentes limpos
-mv .aios-core/agents/dev.md .aios-core/agents/dev.md.backup
-npx @synkra/aios-core install --full
+mv .aiox-core/agents/dev.md .aiox-core/agents/dev.md.backup
+npx aiox-core install --full
 ```
 
 ---
@@ -637,17 +637,17 @@ npx @synkra/aios-core install --full
 ### Diagnósticos Gerais
 
 ```bash
-# Verifique status da instalação AIOS
-npx @synkra/aios-core status
+# Verifique status da instalação AIOX
+npx aiox-core status
 
 # Liste Squads disponíveis
-npx @synkra/aios-core list:expansions
+npx aiox-core install
 
 # Atualize instalação existente
-npx @synkra/aios-core update
+npx aiox-core update
 
 # Mostre logging verboso
-npx @synkra/aios-core install --verbose
+npx aiox-core install --verbose
 ```
 
 ### Informações do Sistema
@@ -670,15 +670,15 @@ df -h .
 ### Verificação de Arquivos
 
 ```bash
-# Verifique estrutura .aios-core
-find .aios-core -type f | wc -l
+# Verifique estrutura .aiox-core
+find .aiox-core -type f | wc -l
 # Esperado: 200+ arquivos
 
 # Verifique YAML corrompido
-for f in .aios-core/**/*.yaml; do npx yaml-lint "$f"; done
+for f in .aiox-core/**/*.yaml; do npx yaml-lint "$f"; done
 
 # Verifique permissões
-ls -la .aios-core/
+ls -la .aiox-core/
 ```
 
 ---
@@ -687,9 +687,9 @@ ls -la .aios-core/
 
 ### Antes de Solicitar Ajuda
 
-1. Execute `npx @synkra/aios-core status` e anote a saída
+1. Execute `npx aiox-core status` e anote a saída
 2. Consulte este guia de solução de problemas
-3. Pesquise [Issues existentes no GitHub](https://github.com/SynkraAI/aios-core/issues)
+3. Pesquise [Issues existentes no GitHub](https://github.com/SynkraAI/aiox-core/issues)
 
 ### Informações para Incluir em Relatórios de Bug
 
@@ -724,7 +724,7 @@ ls -la .aios-core/
 
 ### Canais de Suporte
 
-- **Issues no GitHub**: [@synkra/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **Issues no GitHub**: [aiox-core/issues](https://github.com/SynkraAI/aiox-core/issues)
 - **Documentação**: [docs/installation/](./README.md)
 - **FAQ**: [faq.md](./faq.md)
 

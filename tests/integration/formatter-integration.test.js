@@ -5,8 +5,8 @@
  * Tests formatter integration with real task execution
  */
 
-const PersonalizedOutputFormatter = require('../../.aios-core/infrastructure/scripts/output-formatter');
-const OutputPatternValidator = require('../../.aios-core/infrastructure/scripts/validate-output-pattern');
+const PersonalizedOutputFormatter = require('../../.aiox-core/infrastructure/scripts/output-formatter');
+const OutputPatternValidator = require('../../.aiox-core/infrastructure/scripts/validate-output-pattern');
 const fs = require('fs');
 const path = require('path');
 
@@ -39,9 +39,9 @@ describe('Formatter Integration', () => {
       tokens: { total: 1800 },
       success: true,
       output: `Created files:
-- .aios-core/scripts/output-formatter.js
-- .aios-core/scripts/validate-output-pattern.js
-- .aios-core/templates/task-execution-report.md
+- .aiox-core/scripts/output-formatter.js
+- .aiox-core/scripts/validate-output-pattern.js
+- .aiox-core/templates/task-execution-report.md
 
 All tests passing.`,
       tests: { passed: 50, total: 50 },

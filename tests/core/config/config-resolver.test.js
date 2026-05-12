@@ -20,7 +20,7 @@ const FAKE_HOME = '/fake/home';
 
 // Load real schema files before mocking fs
 const realFs = jest.requireActual('fs');
-const SCHEMAS_DIR = path.join(__dirname, '..', '..', '..', '.aios-core', 'core', 'config', 'schemas');
+const SCHEMAS_DIR = path.join(__dirname, '..', '..', '..', '.aiox-core', 'core', 'config', 'schemas');
 const REAL_SCHEMAS = {};
 for (const file of realFs.readdirSync(SCHEMAS_DIR)) {
   if (file.endsWith('.schema.json')) {
@@ -36,7 +36,7 @@ jest.mock('os', () => ({
 }));
 
 // Mock config-cache to avoid setInterval issues
-jest.mock('../../../.aios-core/core/config/config-cache', () => {
+jest.mock('../../../.aiox-core/core/config/config-cache', () => {
   const cache = new Map();
   const timestamps = new Map();
   return {
@@ -61,8 +61,8 @@ const {
   CONFIG_FILES,
   LEVELS,
   SCHEMA_FILES,
-} = require('../../../.aios-core/core/config/config-resolver');
-const { globalConfigCache } = require('../../../.aios-core/core/config/config-cache');
+} = require('../../../.aiox-core/core/config/config-resolver');
+const { globalConfigCache } = require('../../../.aiox-core/core/config/config-cache');
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -178,9 +178,9 @@ describe('validateConfig', () => {
       expect(warnings).toEqual([]);
     });
 
-    it('should return warning for invalid project_type enum', () => {
-      // Given
-      const data = { project_type: 'invalid_type' };
+    it('should return warning for invalid project.type enum', () => {
+      // Given — project.type is an enum field with additionalProperties: false
+      const data = { project: { type: 'invalid_type' } };
 
       // When
       const warnings = validateConfig('project', data, 'project-config.yaml');
@@ -229,7 +229,7 @@ describe('validateConfig', () => {
 describe('loadLayeredConfig', () => {
   it('should load L5 user config and merge it last', () => {
     // Given
-    const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
+    const userConfigPath = path.join(FAKE_HOME, '.aiox', 'user-config.yaml');
     setupFileSystem({
       'framework-config.yaml': 'version: "1.0"\nuser_profile: default',
       [userConfigPath]: 'user_profile: bob\neducational_mode: true',
@@ -260,7 +260,7 @@ describe('loadLayeredConfig', () => {
 
   it('should allow L5 to override L4 values', () => {
     // Given
-    const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
+    const userConfigPath = path.join(FAKE_HOME, '.aiox', 'user-config.yaml');
     setupFileSystem({
       'framework-config.yaml': 'version: "1.0"',
       'local-config.yaml': 'user_profile: advanced',
@@ -275,20 +275,20 @@ describe('loadLayeredConfig', () => {
   });
 
   it('should collect schema validation warnings', () => {
-    // Given
-    const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
+    // Given — framework-config uses valid schema properties to avoid L1 warnings
+    const userConfigPath = path.join(FAKE_HOME, '.aiox', 'user-config.yaml');
     setupFileSystem({
-      'framework-config.yaml': 'version: "1.0"',
+      'framework-config.yaml': 'markdownExploder: true',
       [userConfigPath]: 'default_model: claude-sonnet',  // missing required user_profile
     });
 
     // When
     const result = loadLayeredConfig(FAKE_PROJECT);
 
-    // Then
+    // Then — user config missing user_profile should produce a schema warning
     const schemaWarnings = result.warnings.filter((w) => w.includes('[SCHEMA]'));
     expect(schemaWarnings.length).toBeGreaterThan(0);
-    expect(schemaWarnings[0]).toContain('user_profile');
+    expect(schemaWarnings.some((w) => w.includes('user_profile'))).toBe(true);
   });
 
   it('should return empty config when no files exist', () => {
@@ -365,7 +365,7 @@ describe('resolveConfig — legacy mode', () => {
 describe('getConfigAtLevel', () => {
   it('should return L5 user config data', () => {
     // Given
-    const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
+    const userConfigPath = path.join(FAKE_HOME, '.aiox', 'user-config.yaml');
     setupFileSystem({
       [userConfigPath]: 'user_profile: bob\neducational_mode: false',
     });
@@ -389,7 +389,7 @@ describe('getConfigAtLevel', () => {
 
   it('should accept level aliases: L5, 5, user', () => {
     // Given
-    const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
+    const userConfigPath = path.join(FAKE_HOME, '.aiox', 'user-config.yaml');
     setupFileSystem({
       [userConfigPath]: 'user_profile: advanced',
     });

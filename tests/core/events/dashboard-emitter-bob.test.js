@@ -15,8 +15,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const os = require('os');
 
-const { DashboardEmitter, getDashboardEmitter } = require('../../../.aios-core/core/events/dashboard-emitter');
-const { DashboardEventType } = require('../../../.aios-core/core/events/types');
+const { DashboardEmitter, getDashboardEmitter } = require('../../../.aiox-core/core/events/dashboard-emitter');
+const { DashboardEventType } = require('../../../.aiox-core/core/events/types');
 
 describe('DashboardEmitter Bob-specific methods', () => {
   let emitter;
@@ -32,7 +32,7 @@ describe('DashboardEmitter Bob-specific methods', () => {
     emitter = new DashboardEmitter();
     emitter.enabled = true;
     emitter.projectRoot = tempDir;
-    emitter.fallbackPath = path.join(tempDir, '.aios', 'dashboard', 'events.jsonl');
+    emitter.fallbackPath = path.join(tempDir, '.aiox', 'dashboard', 'events.jsonl');
   });
 
   afterEach(async () => {

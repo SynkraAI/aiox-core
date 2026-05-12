@@ -1,7 +1,7 @@
-# AIOS Cross-Reference Phase 6: Supporting Systems Analysis
+# AIOX Cross-Reference Phase 6: Supporting Systems Analysis
 
 > **Generated:** 2026-02-05
-> **Scope:** All supporting systems in `.aios-core/`
+> **Scope:** All supporting systems in `.aiox-core/`
 > **Total Files Analyzed:** ~130 files across 12 subsystems
 
 ---
@@ -28,9 +28,9 @@
 
 ## 1. Workflow Intelligence System
 
-**Location:** `.aios-core/workflow-intelligence/`
+**Location:** `.aiox-core/workflow-intelligence/`
 **Total Files:** 19
-**Purpose:** Provides intelligent workflow analysis, suggestions, pattern learning, and confidence scoring for the AIOS agent orchestration system.
+**Purpose:** Provides intelligent workflow analysis, suggestions, pattern learning, and confidence scoring for the AIOX agent orchestration system.
 
 ### Architecture
 
@@ -57,7 +57,7 @@ The Workflow Intelligence System (WIS) is organized into three submodules:
 | `learning/gotcha-registry.js` | Stores common pitfalls and gotchas per workflow | `learning/index.js` | Referenced by QA feedback | No |
 | `learning/qa-feedback.js` | Integrates QA feedback into learning system | `learning/index.js` | References `gotcha-registry` | No |
 | `learning/semantic-search.js` | Semantic search over captured patterns | `learning/index.js` | Used by suggestion engine | No |
-| `registry/workflow-registry.js` | Central registry of all available workflows | `index.js`, `suggestion-engine.js` | Loads from `.aios-core/development/workflows/` | No |
+| `registry/workflow-registry.js` | Central registry of all available workflows | `index.js`, `suggestion-engine.js` | Loads from `.aiox-core/development/workflows/` | No |
 | `__tests__/confidence-scorer.test.js` | Unit tests for confidence scorer | Test runner | Tests `engine/confidence-scorer.js` | No |
 | `__tests__/wave-analyzer.test.js` | Unit tests for wave analyzer | Test runner | Tests `engine/wave-analyzer.js` | No |
 | `__tests__/workflow-registry.test.js` | Unit tests for workflow registry | Test runner | Tests `registry/workflow-registry.js` | No |
@@ -76,7 +76,7 @@ The Workflow Intelligence System (WIS) is organized into three submodules:
 
 ## 2. Monitor Hooks System
 
-**Location:** `.aios-core/monitor/hooks/`
+**Location:** `.aiox-core/monitor/hooks/`
 **Total Files:** 10
 **Purpose:** Python-based event hooks for Claude Code monitoring. Sends telemetry events to an external monitor server during Claude Code sessions.
 
@@ -113,7 +113,7 @@ This system is **self-contained** and interfaces with an external monitor server
 
 ## 3. Quality Gates System
 
-**Location:** `.aios-core/core/quality-gates/` (10 files) and `.aios-core/quality/` (4 files)
+**Location:** `.aiox-core/core/quality-gates/` (10 files) and `.aiox-core/quality/` (4 files)
 **Total Files:** 14
 **Purpose:** Implements the 3-layer quality gate system (pre-commit, PR automation, human review) with metrics collection.
 
@@ -145,9 +145,9 @@ All layers extend `base-layer.js` and are managed by `quality-gate-manager.js`. 
 
 | File | Purpose | Consumers | Cross-refs | Orphan? |
 |------|---------|-----------|------------|---------|
-| `metrics-collector.js` | Collects and aggregates quality metrics across layers | `metrics-hook.js`, CLI metrics commands | Stores to `.aios/data/quality-metrics.json` | No |
+| `metrics-collector.js` | Collects and aggregates quality metrics across layers | `metrics-hook.js`, CLI metrics commands | Stores to `.aiox/data/quality-metrics.json` | No |
 | `metrics-hook.js` | Hook functions for recording metrics from workflows | Pre-commit hooks, PR automation, `.github/workflows/pr-automation.yml` | Imports `MetricsCollector` | No |
-| `seed-metrics.js` | Seeds initial demo metrics data | CLI `aios metrics seed` command | Uses `MetricsCollector` | No |
+| `seed-metrics.js` | Seeds initial demo metrics data | CLI `aiox metrics seed` command | Uses `MetricsCollector` | No |
 | `schemas/quality-metrics.schema.json` | JSON Schema for quality metrics data validation | `metrics-collector.js` | Ajv-based validation | No |
 
 ### External References (30+ files reference this system)
@@ -164,7 +164,7 @@ All layers extend `base-layer.js` and are managed by `quality-gate-manager.js`. 
 
 ## 4. Schemas System
 
-**Location:** `.aios-core/schemas/`
+**Location:** `.aiox-core/schemas/`
 **Total Files:** 6
 **Purpose:** JSON schemas for validating agent, task, and squad definitions. Includes a V3 schema validator script.
 
@@ -191,13 +191,13 @@ All layers extend `base-layer.js` and are managed by `quality-gate-manager.js`. 
 
 ## 5. CLI Commands System
 
-**Location:** `.aios-core/cli/commands/`
+**Location:** `.aiox-core/cli/commands/`
 **Total Files:** 37 (across 8 command groups)
-**Purpose:** Commander.js-based CLI commands for the `aios` executable. Provides the CLI-first interface for all framework operations.
+**Purpose:** Commander.js-based CLI commands for the `aiox` executable. Provides the CLI-first interface for all framework operations.
 
 ### Architecture
 
-Commands are organized by domain into subdirectories, each with an `index.js` entry point. Registered in the main CLI (`cli/index.js`) and invoked via `bin/aios.js`.
+Commands are organized by domain into subdirectories, each with an `index.js` entry point. Registered in the main CLI (`cli/index.js`) and invoked via `bin/aiox.js`.
 
 ### Command Group Inventory
 
@@ -205,7 +205,7 @@ Commands are organized by domain into subdirectories, each with an `index.js` en
 
 | File | Purpose | Consumers | Cross-refs | Orphan? |
 |------|---------|-----------|------------|---------|
-| `config/index.js` | Config hierarchy management: show, diff, migrate, validate, init-local | `cli/index.js`, `bin/aios.js` | Uses `core/config/config-resolver.js`, `merge-utils.js`, `env-interpolator.js` | No |
+| `config/index.js` | Config hierarchy management: show, diff, migrate, validate, init-local | `cli/index.js`, `bin/aiox.js` | Uses `core/config/config-resolver.js`, `merge-utils.js`, `env-interpolator.js` | No |
 
 #### generate/ (1 file)
 
@@ -281,12 +281,12 @@ Commands are organized by domain into subdirectories, each with an `index.js` en
 
 | File | Purpose | Consumers | Cross-refs | Orphan? |
 |------|---------|-----------|------------|---------|
-| `validate/index.js` | Validate AIOS installation integrity | `cli/index.js` | Uses `install-manifest.yaml` | No |
+| `validate/index.js` | Validate AIOX installation integrity | `cli/index.js` | Uses `install-manifest.yaml` | No |
 
 ### External References (20+ files reference CLI commands)
 
 - **Main CLI:** `cli/index.js` registers all command groups
-- **Entry point:** `bin/aios.js` creates the Commander program
+- **Entry point:** `bin/aiox.js` creates the Commander program
 - **Tests:** `tests/unit/` and `tests/config/` directories
 - **Architecture docs:** `docs/architecture/mcp-system-diagrams.md`
 - **Source tree:** `docs/framework/source-tree.md`
@@ -295,20 +295,20 @@ Commands are organized by domain into subdirectories, each with an `index.js` en
 
 ## 6. Agent Teams System
 
-**Location:** `.aios-core/agent-teams/`
+**Location:** `.aiox-core/agent-teams/`
 **Total Files:** 0 (directory does not exist or is empty)
 **Purpose:** Was intended to hold agent team configurations.
 
 ### Status: DOES NOT EXIST
 
-The `agent-teams/` directory was not found in the `.aios-core/` directory. However, references to "agent-teams" exist in:
+The `agent-teams/` directory was not found in the `.aiox-core/` directory. However, references to "agent-teams" exist in:
 
 - `install-manifest.yaml`
 - `scripts/generate-install-manifest.js`
 - `docs/framework/source-tree.md` and translations
 - `docs/core-architecture.md`
 - `development/README.md`
-- `data/aios-kb.md`
+- `data/aiox-kb.md`
 - QA system docs
 
 ### Assessment
@@ -319,13 +319,13 @@ This appears to be a **planned feature** or possibly a directory that exists in 
 
 ## 7. Tools Config System
 
-**Location:** `.aios-core/tools/`
+**Location:** `.aiox-core/tools/`
 **Total Files:** 0 (directory is empty or does not contain files)
 **Purpose:** Intended to hold tool configuration files.
 
 ### Status: DIRECTORY EMPTY
 
-The `tools/` directory exists (referenced in `core-config.yaml` as `toolsLocation: .aios-core/tools`) but contains no files. Tool configurations may have been:
+The `tools/` directory exists (referenced in `core-config.yaml` as `toolsLocation: .aiox-core/tools`) but contains no files. Tool configurations may have been:
 
 1. Moved to `core/tools/` or integrated into other modules
 2. Never populated (planned feature)
@@ -333,17 +333,17 @@ The `tools/` directory exists (referenced in `core-config.yaml` as `toolsLocatio
 
 ### References
 
-- `core-config.yaml`: `toolsLocation: .aios-core/tools`
-- `framework-config.yaml`: `tools_dir: ".aios-core/tools"`
+- `core-config.yaml`: `toolsLocation: .aiox-core/tools`
+- `framework-config.yaml`: `tools_dir: ".aiox-core/tools"`
 - `infrastructure/scripts/tool-resolver.js` -- resolves tool locations
 
 ---
 
 ## 8. Manifests System
 
-**Location:** `.aios-core/manifests/`
+**Location:** `.aiox-core/manifests/`
 **Total Files:** 4
-**Purpose:** CSV-based registry of all agents, tasks, and workers with JSON schema validation. Acts as the central inventory of all AIOS components.
+**Purpose:** CSV-based registry of all agents, tasks, and workers with JSON schema validation. Acts as the central inventory of all AIOX components.
 
 ### File Inventory
 
@@ -372,7 +372,7 @@ The `tools/` directory exists (referenced in `core-config.yaml` as `toolsLocatio
 
 ## 9. Elicitation System
 
-**Location:** `.aios-core/core/elicitation/` (5 files) and `.aios-core/elicitation/` (3 files)
+**Location:** `.aiox-core/core/elicitation/` (5 files) and `.aiox-core/elicitation/` (3 files)
 **Total Files:** 8
 **Purpose:** Interactive progressive disclosure system for creating agents, tasks, and workflows through guided wizards.
 
@@ -389,7 +389,7 @@ The engine uses `inquirer` for interactive prompts, supports smart defaults, con
 | File | Purpose | Consumers | Cross-refs | Orphan? |
 |------|---------|-----------|------------|---------|
 | `elicitation-engine.js` | Main elicitation engine with progressive disclosure, validation, security checks | `create-agent` task, `create-task` task, `create-workflow` task | Uses `session-manager.js`, optional `security-checker` | No |
-| `session-manager.js` | Manages elicitation session persistence (save/load/resume) | `elicitation-engine.js` | Stores sessions in `.aios-sessions/` | No |
+| `session-manager.js` | Manages elicitation session persistence (save/load/resume) | `elicitation-engine.js` | Stores sessions in `.aiox-sessions/` | No |
 | `agent-elicitation.js` | Agent-specific elicitation steps (duplicate of sibling?) | `elicitation-engine.js` | Defines agent creation wizard steps | Possible duplicate |
 | `task-elicitation.js` | Task-specific elicitation steps (duplicate of sibling?) | `elicitation-engine.js` | Defines task creation wizard steps | Possible duplicate |
 | `workflow-elicitation.js` | Workflow-specific elicitation steps (duplicate of sibling?) | `elicitation-engine.js` | Defines workflow creation wizard steps | Possible duplicate |
@@ -405,8 +405,8 @@ The engine uses `inquirer` for interactive prompts, supports smart defaults, con
 ### External References (30+ files reference elicitation)
 
 - **All agent definitions:** Every agent in `development/agents/` references elicitation in their workflows
-- **Core config:** `core-config.yaml` has `elicitationLocation: .aios-core/elicitation`
-- **Framework config:** `framework-config.yaml` has `elicitation_dir: ".aios-core/elicitation"`
+- **Core config:** `core-config.yaml` has `elicitationLocation: .aiox-core/elicitation`
+- **Framework config:** `framework-config.yaml` has `elicitation_dir: ".aiox-core/elicitation"`
 - **Package.json:** `exports` includes `"./elicitation": "./elicitation/"`
 - **Tasks:** `spec-gather-requirements.md`, `create-agent.md`, `create-task.md`, `create-workflow.md`, `advanced-elicitation.md`
 - **Config CLI:** `cli/commands/config/index.js`
@@ -419,7 +419,7 @@ There appears to be **duplication** between `core/elicitation/` (3 domain files)
 
 ## 10. Docs/Standards System
 
-**Location:** `.aios-core/docs/standards/`
+**Location:** `.aiox-core/docs/standards/`
 **Total Files:** 16
 **Purpose:** Official framework standards documentation, including the "Livro de Ouro" (Golden Book), quality gates specification, story templates, color palettes, and more.
 
@@ -428,56 +428,56 @@ There appears to be **duplication** between `core/elicitation/` (3 domain files)
 | File | Purpose | Consumers | Cross-refs | Orphan? |
 |------|---------|-----------|------------|---------|
 | `STANDARDS-INDEX.md` | Navigation index for all standards documents | All team members, agent definitions | References all standard docs | No |
-| `AIOS-LIVRO-DE-OURO-V2.1-COMPLETE.md` | **PRIMARY** -- Complete v2.1 framework guide (consolidated) | All agents, onboarding | Supersedes all legacy Livro docs | No |
+| `AIOX-LIVRO-DE-OURO-V2.1-COMPLETE.md` | **PRIMARY** -- Complete v4.0.4 framework guide (consolidated) | All agents, onboarding | Supersedes all legacy Livro docs | No |
 | `QUALITY-GATES-SPECIFICATION.md` | 3-layer quality gates system specification | QA agent, devops, quality gate code | Referenced by `core/quality-gates/` | No |
 | `STORY-TEMPLATE-V2-SPECIFICATION.md` | Story template v2.0 specification | PO, SM, story creation tasks | Referenced by story creation workflows | No |
 | `TASK-FORMAT-SPECIFICATION-V1.md` | Task-First architecture format specification | All agents creating tasks | Referenced by task templates | No |
 | `EXECUTOR-DECISION-TREE.md` | Decision tree for Human/Worker/Agent/Clone routing | Orchestration engine | Referenced by workflow patterns | No |
 | `AGENT-PERSONALIZATION-STANDARD-V1.md` | Agent personality and personalization system | Agent creation tasks | Referenced by agent templates | No |
-| `AIOS-COLOR-PALETTE-V2.1.md` | Complete color system for AIOS branding | Dashboard, UI components | Referenced by UX agent | No |
-| `AIOS-COLOR-PALETTE-QUICK-REFERENCE.md` | Quick reference for color palette | Developers, designers | Subset of full palette doc | No |
+| `AIOX-COLOR-PALETTE-V2.1.md` | Complete color system for AIOX branding | Dashboard, UI components | Referenced by UX agent | No |
+| `AIOX-COLOR-PALETTE-QUICK-REFERENCE.md` | Quick reference for color palette | Developers, designers | Subset of full palette doc | No |
 | `OPEN-SOURCE-VS-SERVICE-DIFFERENCES.md` | Business model documentation (OSS vs service) | Product decisions | Needs update per index | No |
 | `V3-ARCHITECTURAL-DECISIONS.md` | Old architectural decisions (archive candidate) | Historical reference | Superseded by ADR system | Yes (Archive) |
-| `AIOS-LIVRO-DE-OURO.md` | v2.0 base document (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
-| `AIOS-LIVRO-DE-OURO-V2.1.md` | v2.1 delta document (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
-| `AIOS-LIVRO-DE-OURO-V2.1-SUMMARY.md` | v2.1 summary (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
-| `AIOS-LIVRO-DE-OURO-V2.2-SUMMARY.md` | Future v2.2 planning (DRAFT) | Planning only | Not yet active | No (Draft) |
-| `AIOS-FRAMEWORK-MASTER.md` | v2.0 framework doc (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
+| `AIOX-LIVRO-DE-OURO.md` | v2.0 base document (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
+| `AIOX-LIVRO-DE-OURO-V2.1.md` | v4.0.4 delta document (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
+| `AIOX-LIVRO-DE-OURO-V2.1-SUMMARY.md` | v4.0.4 summary (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
+| `AIOX-LIVRO-DE-OURO-V2.2-SUMMARY.md` | Future v2.2 planning (DRAFT) | Planning only | Not yet active | No (Draft) |
+| `AIOX-FRAMEWORK-MASTER.md` | v2.0 framework doc (DEPRECATED) | Historical reference | Superseded by V2.1-COMPLETE | Yes (Legacy) |
 
 ### External References (20+ files reference docs/standards)
 
 - **Install manifest:** `install-manifest.yaml`
 - **Guides:** `docs/guides/squads-guide.md`, `docs/guides/coderabbit/README.md`
 - **Architecture:** `docs/architecture/high-level-architecture.md`
-- **Migration docs:** `docs/migration/v2.0-to-v2.1.md`
+- **Migration docs:** `docs/migration/migration-guide.md`
 - **Templates:** Various personalized templates
 
 ### Deprecation Summary
 
-4 files are explicitly deprecated (superseded by `AIOS-LIVRO-DE-OURO-V2.1-COMPLETE.md`), 1 is an archive candidate. These should be cleaned up or moved to an `archive/` directory.
+4 files are explicitly deprecated (superseded by `AIOX-LIVRO-DE-OURO-V2.1-COMPLETE.md`), 1 is an archive candidate. These should be cleaned up or moved to an `archive/` directory.
 
 ---
 
 ## 11. Processes System
 
-**Location:** `.aios-core/processes/`
+**Location:** `.aiox-core/processes/`
 **Total Files:** 0 (directory does not exist)
 **Purpose:** Was intended to hold process definitions.
 
 ### Status: DOES NOT EXIST
 
-No `processes/` directory was found under `.aios-core/`. This may be:
+No `processes/` directory was found under `.aiox-core/`. This may be:
 - A planned feature that was never implemented
 - Functionality that was absorbed into the `workflows/` system
 - A naming difference from the expected directory
 
-No references to `.aios-core/processes/` were found in the codebase.
+No references to `.aiox-core/processes/` were found in the codebase.
 
 ---
 
 ## 12. Root Config System
 
-**Location:** `.aios-core/` (root-level files)
+**Location:** `.aiox-core/` (root-level files)
 **Total Files:** 8
 **Purpose:** Framework-level configuration, constitution, user guide, and package definition.
 
@@ -490,10 +490,10 @@ No references to `.aios-core/processes/` were found in the codebase.
 | `framework-config.yaml` | **NEW** L1 Framework config (read-only, shipped with npm) | `core/config/config-resolver.js`, config CLI | Part of ADR-PRO-002 config hierarchy; duplicates framework portions of `core-config.yaml` | No |
 | `project-config.yaml` | **NEW** L2 Project config (team-shared, committed) | `core/config/config-resolver.js`, config CLI | Part of ADR-PRO-002; duplicates project portions of `core-config.yaml` | No |
 | `local-config.yaml.template` | **NEW** L4 Local config template (machine-specific, gitignored) | Developers copy to `local-config.yaml` | Part of ADR-PRO-002; secrets and IDE preferences | No |
-| `install-manifest.yaml` | Complete inventory of all files in the framework | Installer, validator, upgrader | Lists every file in `.aios-core/` | No |
-| `user-guide.md` | User guide for Synkra AIOS | Users, onboarding | Referenced by workflows, brownfield guide | No |
+| `install-manifest.yaml` | Complete inventory of all files in the framework | Installer, validator, upgrader | Lists every file in `.aiox-core/` | No |
+| `user-guide.md` | User guide for Synkra AIOX | Users, onboarding | Referenced by workflows, brownfield guide | No |
 | `working-in-the-brownfield.md` | Guide for brownfield (existing project) development | Brownfield workflows | Referenced by agent definitions, brownfield tasks | No |
-| `package.json` | npm package definition for `@aios-fullstack/core` (v4.31.0) | npm, build system | Defines dependencies, exports, scripts | No |
+| `package.json` | npm package definition for `@aiox-fullstack/core` (v4.31.0) | npm, build system | Defines dependencies, exports, scripts | No |
 
 ### Configuration Hierarchy (ADR-PRO-002)
 
@@ -535,7 +535,7 @@ The `core-config.yaml` continues to function as the primary config (legacy mode)
 | 10 | Elicitation | `core/elicitation/` + `elicitation/` | 8 | Active | Has duplication between two directories |
 | 11 | Docs/Standards | `docs/standards/` | 16 | Active | Has 4 deprecated + 1 archive candidate |
 | 12 | Processes | `processes/` | 0 | **Missing** | Does not exist |
-| 13 | Root Config | `.aios-core/` root | 8 | Active | In migration (monolithic to layered) |
+| 13 | Root Config | `.aiox-core/` root | 8 | Active | In migration (monolithic to layered) |
 
 ### File Count Summary
 
@@ -555,10 +555,10 @@ The `core-config.yaml` continues to function as the primary config (legacy mode)
 
 | File | System | Reason | Recommendation |
 |------|--------|--------|----------------|
-| `docs/standards/AIOS-LIVRO-DE-OURO.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
-| `docs/standards/AIOS-LIVRO-DE-OURO-V2.1.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
-| `docs/standards/AIOS-LIVRO-DE-OURO-V2.1-SUMMARY.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
-| `docs/standards/AIOS-FRAMEWORK-MASTER.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
+| `docs/standards/AIOX-LIVRO-DE-OURO.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
+| `docs/standards/AIOX-LIVRO-DE-OURO-V2.1.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
+| `docs/standards/AIOX-LIVRO-DE-OURO-V2.1-SUMMARY.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
+| `docs/standards/AIOX-FRAMEWORK-MASTER.md` | Docs/Standards | Superseded by V2.1-COMPLETE | Move to archive/ |
 | `docs/standards/V3-ARCHITECTURAL-DECISIONS.md` | Docs/Standards | Archive candidate per STANDARDS-INDEX | Move to archive/ |
 
 ### Duplication Issues
@@ -573,9 +573,9 @@ The `core-config.yaml` continues to function as the primary config (legacy mode)
 
 | Directory | Referenced By | Status |
 |-----------|---------------|--------|
-| `.aios-core/agent-teams/` | install-manifest, source-tree docs, core-architecture, data/aios-kb.md | Directory does not exist |
-| `.aios-core/tools/` (content) | core-config.yaml, framework-config.yaml | Directory exists but is empty |
-| `.aios-core/processes/` | Not referenced | Does not exist |
+| `.aiox-core/agent-teams/` | install-manifest, source-tree docs, core-architecture, data/aiox-kb.md | Directory does not exist |
+| `.aiox-core/tools/` (content) | core-config.yaml, framework-config.yaml | Directory exists but is empty |
+| `.aiox-core/processes/` | Not referenced | Does not exist |
 
 ---
 
@@ -656,7 +656,7 @@ The `core-config.yaml` continues to function as the primary config (legacy mode)
 
 1. **Root Config is the Hub:** `core-config.yaml` (and its layered replacements) is consumed by virtually every system. It defines resource locations, feature flags, and integration settings.
 
-2. **Manifests are the Registry:** `manifests/workers.csv` contains 204 entries covering all AIOS components. The CLI `workers` commands are the primary consumer.
+2. **Manifests are the Registry:** `manifests/workers.csv` contains 204 entries covering all AIOX components. The CLI `workers` commands are the primary consumer.
 
 3. **Quality Gates span two directories:** `core/quality-gates/` provides the gate logic while `quality/` provides metrics. They connect via the `metrics-hook.js` and are exposed through the `metrics` CLI.
 
@@ -676,7 +676,7 @@ The `core-config.yaml` continues to function as the primary config (legacy mode)
 User Request
     |
     v
-CLI Commands (bin/aios.js)
+CLI Commands (bin/aiox.js)
     |
     +---> config show/diff/migrate ---> Config Resolver ---> L1/L2/L4 configs
     +---> manifest validate/regen ----> Manifest System ---> agents.csv, tasks.csv, workers.csv

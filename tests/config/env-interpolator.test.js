@@ -8,7 +8,7 @@ const {
   interpolateString,
   lintEnvPatterns,
   ENV_VAR_PATTERN,
-} = require('../../.aios-core/core/config/env-interpolator');
+} = require('../../.aiox-core/core/config/env-interpolator');
 
 describe('env-interpolator', () => {
   const originalEnv = { ...process.env };

@@ -6,8 +6,8 @@
 # This prevents silent version mismatches (e.g., v1.0 agent + v2.0 task).
 #
 # Usage:
-#   Run manually: .aios-core/hooks/pre-commit-version-check.sh
-#   Install: .aios-core/hooks/install-hooks.sh
+#   Run manually: .aiox-core/hooks/pre-commit-version-check.sh
+#   Install: .aiox-core/hooks/install-hooks.sh
 #
 # Story: STORY-3.10 (Version Alignment & Compatibility Checks)
 

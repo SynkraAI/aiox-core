@@ -6,8 +6,8 @@
  * Tests end-to-end agent activation with session context
  */
 
-const DevContextLoader = require('../../.aios-core/development/scripts/dev-context-loader');
-const SessionContextLoader = require('../../.aios-core/scripts/session-context-loader');
+const DevContextLoader = require('../../.aiox-core/development/scripts/dev-context-loader');
+const SessionContextLoader = require('../../.aiox-core/scripts/session-context-loader');
 
 describeIntegration('Agent Activation Performance (Integration)', () => {
   let devLoader;

@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guia do Sistema de Quality Gates AIOS
+# Guia do Sistema de Quality Gates AIOX
 
 > 🌐 [EN](../../guides/quality-gates.md) | **PT** | [ES](../../es/guides/quality-gates.md)
 
 ---
 
-> Guia completo para o sistema de quality gates de 3 camadas do Synkra AIOS.
+> Guia completo para o sistema de quality gates de 3 camadas do Synkra AIOX.
 
 **Versão:** 2.1.0
 **Última Atualização:** 2025-12-01
@@ -19,7 +19,7 @@
 
 ## Visão Geral
 
-O Sistema de Quality Gates do AIOS fornece garantia de qualidade automatizada através de três camadas progressivas de validação. Cada camada captura diferentes tipos de problemas no estágio apropriado do desenvolvimento.
+O Sistema de Quality Gates do AIOX fornece garantia de qualidade automatizada através de três camadas progressivas de validação. Cada camada captura diferentes tipos de problemas no estágio apropriado do desenvolvimento.
 
 ### A Arquitetura de 3 Camadas
 
@@ -70,7 +70,7 @@ Verificações rápidas e locais que executam antes do código ser commitado. Ca
 ### Configuração
 
 ```yaml
-# .aios-core/core/quality-gates/quality-gate-config.yaml
+# .aiox-core/core/quality-gates/quality-gate-config.yaml
 layer1:
   enabled: true
   failFast: true # Parar na primeira falha
@@ -97,15 +97,15 @@ layer1:
 
 ```bash
 # Executar todas as verificações da Camada 1
-aios qa run --layer=1
+aiox qa run --layer=1
 
 # Executar verificação específica
-aios qa run --layer=1 --check=lint
-aios qa run --layer=1 --check=test
-aios qa run --layer=1 --check=typecheck
+aiox qa run --layer=1 --check=lint
+aiox qa run --layer=1 --check=test
+aiox qa run --layer=1 --check=typecheck
 
 # Executar com saída detalhada
-aios qa run --layer=1 --verbose
+aiox qa run --layer=1 --verbose
 ```
 
 ### Saída Esperada
@@ -150,7 +150,7 @@ Code review assistido por IA que executa em pull requests. Captura problemas mai
 ### Configuração
 
 ```yaml
-# .aios-core/core/quality-gates/quality-gate-config.yaml
+# .aiox-core/core/quality-gates/quality-gate-config.yaml
 layer2:
   enabled: true
   coderabbit:
@@ -168,7 +168,7 @@ layer2:
   quinn:
     enabled: true
     autoReview: true
-    agentPath: '.claude/commands/AIOS/agents/qa.md'
+    agentPath: '.claude/commands/AIOX/agents/qa.md'
     severity:
       block: ['CRITICAL']
       warn: ['HIGH', 'MEDIUM']
@@ -178,13 +178,13 @@ layer2:
 
 ```bash
 # Executar todas as verificações da Camada 2
-aios qa run --layer=2
+aiox qa run --layer=2
 
 # Executar apenas CodeRabbit
-aios qa run --layer=2 --tool=coderabbit
+aiox qa run --layer=2 --tool=coderabbit
 
 # Executar revisão do Quinn (@qa)
-aios qa run --layer=2 --tool=quinn
+aiox qa run --layer=2 --tool=quinn
 ```
 
 ### Níveis de Severidade
@@ -225,7 +225,7 @@ O agente QA realiza revisão automatizada focando em:
 
 ```javascript
 // Invocação programática do Quinn
-const QualityGateManager = require('./.aios-core/core/quality-gates/quality-gate-manager');
+const QualityGateManager = require('./.aiox-core/core/quality-gates/quality-gate-manager');
 const manager = new QualityGateManager();
 const result = await manager.runQuinnReview(pullRequestId);
 ```
@@ -241,7 +241,7 @@ Revisão humana estratégica para aprovação final. Garante que os requisitos d
 ### Configuração
 
 ```yaml
-# .aios-core/core/quality-gates/quality-gate-config.yaml
+# .aiox-core/core/quality-gates/quality-gate-config.yaml
 layer3:
   enabled: true
   requireSignoff: true
@@ -300,51 +300,51 @@ O checklist de revisão estratégica garante que revisores cubram áreas-chave:
 
 ```bash
 # Solicitar revisão humana
-aios qa request-review --pr=123
+aiox qa request-review --pr=123
 
 # Aprovar revisão
-aios qa signoff --pr=123 --reviewer="@architect"
+aiox qa signoff --pr=123 --reviewer="@architect"
 
 # Verificar status de aprovação
-aios qa signoff-status --pr=123
+aiox qa signoff-status --pr=123
 ```
 
 ---
 
 ## Comandos CLI
 
-### `aios qa run`
+### `aiox qa run`
 
 Executar verificações de quality gate.
 
 ```bash
 # Executar todas as camadas sequencialmente
-aios qa run
+aiox qa run
 
 # Executar camada específica
-aios qa run --layer=1
-aios qa run --layer=2
-aios qa run --layer=3
+aiox qa run --layer=1
+aiox qa run --layer=2
+aiox qa run --layer=3
 
 # Executar com opções
-aios qa run --verbose          # Saída detalhada
-aios qa run --fail-fast        # Parar na primeira falha
-aios qa run --continue-on-fail # Continuar apesar de falhas
+aiox qa run --verbose          # Saída detalhada
+aiox qa run --fail-fast        # Parar na primeira falha
+aiox qa run --continue-on-fail # Continuar apesar de falhas
 ```
 
-### `aios qa status`
+### `aiox qa status`
 
 Verificar status atual do quality gate.
 
 ```bash
 # Obter status geral
-aios qa status
+aiox qa status
 
 # Obter status para camada específica
-aios qa status --layer=1
+aiox qa status --layer=1
 
 # Obter status para PR
-aios qa status --pr=123
+aiox qa status --pr=123
 ```
 
 **Saída:**
@@ -370,31 +370,31 @@ Camada 3: Revisão Humana
 Geral: AGUARDANDO REVISÃO
 ```
 
-### `aios qa report`
+### `aiox qa report`
 
 Gerar relatório de quality gate.
 
 ```bash
 # Gerar relatório
-aios qa report
+aiox qa report
 
 # Exportar para arquivo
-aios qa report --output=qa-report.json
-aios qa report --format=markdown --output=qa-report.md
+aiox qa report --output=qa-report.json
+aiox qa report --format=markdown --output=qa-report.md
 ```
 
-### `aios qa configure`
+### `aiox qa configure`
 
 Configurar settings do quality gate.
 
 ```bash
 # Configuração interativa
-aios qa configure
+aiox qa configure
 
 # Definir opções específicas
-aios qa configure --layer1.coverage.minimum=90
-aios qa configure --layer2.coderabbit.enabled=false
-aios qa configure --layer3.requireSignoff=true
+aiox qa configure --layer1.coverage.minimum=90
+aiox qa configure --layer2.coderabbit.enabled=false
+aiox qa configure --layer3.requireSignoff=true
 ```
 
 ---
@@ -421,7 +421,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm ci
-      - run: aios qa run --layer=1
+      - run: aiox qa run --layer=1
 
   layer2:
     name: Camada 2 - Automação de PR
@@ -433,7 +433,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm ci
-      - run: aios qa run --layer=2
+      - run: aiox qa run --layer=2
         env:
           CODERABBIT_API_KEY: ${{ secrets.CODERABBIT_API_KEY }}
 
@@ -443,7 +443,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: aios qa request-review --pr=${{ github.event.pull_request.number }}
+      - run: aiox qa request-review --pr=${{ github.event.pull_request.number }}
 ```
 
 ### GitLab CI
@@ -459,20 +459,20 @@ layer1:
   stage: layer1
   script:
     - npm ci
-    - aios qa run --layer=1
+    - aiox qa run --layer=1
 
 layer2:
   stage: layer2
   script:
     - npm ci
-    - aios qa run --layer=2
+    - aiox qa run --layer=2
   needs:
     - layer1
 
 layer3:
   stage: layer3
   script:
-    - aios qa request-review
+    - aiox qa request-review
   needs:
     - layer2
   when: manual
@@ -485,7 +485,7 @@ layer3:
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-aios qa run --layer=1 --fail-fast
+aiox qa run --layer=1 --fail-fast
 ```
 
 ---
@@ -534,7 +534,7 @@ layer2:
   quinn:
     enabled: true
     autoReview: true
-    agentPath: '.claude/commands/AIOS/agents/qa.md'
+    agentPath: '.claude/commands/AIOX/agents/qa.md'
     severity:
       block: [CRITICAL]
       warn: [HIGH, MEDIUM]
@@ -555,14 +555,14 @@ layer3:
 
 # Relatórios
 reports:
-  location: '.aios/qa-reports'
+  location: '.aiox/qa-reports'
   format: 'json'
   retention: 30
   includeMetrics: true
 
 # Persistência de status
 status:
-  location: '.aios/qa-status.json'
+  location: '.aiox/qa-status.json'
   updateOnChange: true
 
 # Saída detalhada
@@ -611,4 +611,4 @@ verbose:
 
 ---
 
-_Guia do Sistema de Quality Gates Synkra AIOS v2.1_
+_Guia do Sistema de Quality Gates Synkra AIOX v4_

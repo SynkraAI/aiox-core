@@ -9,7 +9,7 @@ describe('PatternCapture (Unit)', () => {
   let PatternCapture, createPatternCapture, DEFAULT_MIN_SEQUENCE_LENGTH, KEY_WORKFLOW_COMMANDS;
 
   beforeAll(() => {
-    const module = require('../../../.aios-core/workflow-intelligence/learning/pattern-capture');
+    const module = require('../../../.aiox-core/workflow-intelligence/learning/pattern-capture');
     PatternCapture = module.PatternCapture;
     createPatternCapture = module.createPatternCapture;
     DEFAULT_MIN_SEQUENCE_LENGTH = module.DEFAULT_MIN_SEQUENCE_LENGTH;

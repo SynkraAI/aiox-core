@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guia de Service Discovery AIOS
+# Guia de Service Discovery AIOX
 
 > 🌐 [EN](../../guides/service-discovery.md) | **PT** | [ES](../../es/guides/service-discovery.md)
 
 ---
 
-> Como descobrir, consultar e usar workers no framework AIOS.
+> Como descobrir, consultar e usar workers no framework AIOX.
 
 **Versão:** 2.1.0
 **Última Atualização:** 2025-12-01
@@ -19,7 +19,7 @@
 
 ## Visão Geral
 
-O sistema de Service Discovery permite encontrar e usar workers (tasks, templates, scripts, workflows) em todo o framework AIOS. O **Service Registry** é o catálogo central contendo metadados sobre todos os workers disponíveis.
+O sistema de Service Discovery permite encontrar e usar workers (tasks, templates, scripts, workflows) em todo o framework AIOX. O **Service Registry** é o catálogo central contendo metadados sobre todos os workers disponíveis.
 
 ### Conceitos Principais
 
@@ -37,7 +37,7 @@ O sistema de Service Discovery permite encontrar e usar workers (tasks, template
 ### Carregando o Registry
 
 ```javascript
-const { getRegistry, loadRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry, loadRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 // Carregamento rápido (retorna dados do registry)
 const registry = await loadRegistry();
@@ -61,7 +61,7 @@ console.log(worker);
 //   id: 'create-story',
 //   name: 'Create Story',
 //   category: 'task',
-//   path: '.aios-core/development/tasks/po-create-story.md',
+//   path: '.aiox-core/development/tasks/po-create-story.md',
 //   tags: ['task', 'creation', 'story', 'product'],
 //   agents: ['po']
 // }
@@ -137,25 +137,25 @@ const count = await registry.count();
 
 ## Comandos CLI
 
-### `aios discover`
+### `aiox discover`
 
 Pesquisar workers no registry.
 
 ```bash
 # Pesquisar por texto
-aios discover "create story"
+aiox discover "create story"
 
 # Pesquisar por categoria
-aios discover --category task
+aiox discover --category task
 
 # Pesquisar por tag
-aios discover --tag testing
+aiox discover --tag testing
 
 # Pesquisar para agente
-aios discover --agent dev
+aiox discover --agent dev
 
 # Combinar filtros
-aios discover --category task --tag development --agent dev
+aiox discover --category task --tag development --agent dev
 ```
 
 **Saída:**
@@ -164,28 +164,28 @@ aios discover --category task --tag development --agent dev
 Encontrados 5 workers correspondendo a "create story":
 
   [task] po-create-story
-         Path: .aios-core/development/tasks/po-create-story.md
+         Path: .aiox-core/development/tasks/po-create-story.md
          Tags: task, creation, story, product
          Agents: po
 
   [task] dev-create-brownfield-story
-         Path: .aios-core/development/tasks/dev-create-brownfield-story.md
+         Path: .aiox-core/development/tasks/dev-create-brownfield-story.md
          Tags: task, creation, brownfield
          Agents: dev
 
   ...
 ```
 
-### `aios info`
+### `aiox info`
 
 Obter informações detalhadas sobre um worker específico.
 
 ```bash
 # Obter info do worker por ID
-aios info create-story
+aiox info create-story
 
 # Obter info do worker com path completo
-aios info --path .aios-core/development/tasks/po-create-story.md
+aiox info --path .aiox-core/development/tasks/po-create-story.md
 ```
 
 **Saída:**
@@ -195,7 +195,7 @@ Worker: create-story
 ========================
 Nome:        Create Story
 Categoria:   task
-Path:        .aios-core/development/tasks/po-create-story.md
+Path:        .aiox-core/development/tasks/po-create-story.md
 
 Descrição:
   Cria uma nova user story a partir de template com formatação
@@ -221,22 +221,22 @@ Performance:
   Paralelizável: Não
 ```
 
-### `aios list`
+### `aiox list`
 
 Listar workers por categoria ou agente.
 
 ```bash
 # Listar todas as tasks
-aios list tasks
+aiox list tasks
 
 # Listar todos os templates
-aios list templates
+aiox list templates
 
 # Listar workers para agente
-aios list --agent dev
+aiox list --agent dev
 
 # Listar com paginação
-aios list tasks --page 1 --limit 20
+aiox list tasks --page 1 --limit 20
 ```
 
 ---
@@ -270,7 +270,7 @@ steps:
     action: template-render
 ```
 
-**Localização:** `.aios-core/development/tasks/`
+**Localização:** `.aiox-core/development/tasks/`
 
 ### Templates
 
@@ -284,7 +284,7 @@ Templates de documento e código para geração.
 | `component-react-tmpl.tsx` | Template de componente React         |
 | `ide-rules/*.md`           | Regras específicas por IDE           |
 
-**Localização:** `.aios-core/product/templates/`
+**Localização:** `.aiox-core/product/templates/`
 
 ### Scripts
 
@@ -297,7 +297,7 @@ Utilitários JavaScript para automação.
 | `git-wrapper.js`      | Operações Git               |
 | `security-checker.js` | Validação de segurança      |
 
-**Localização:** `.aios-core/infrastructure/scripts/`
+**Localização:** `.aiox-core/infrastructure/scripts/`
 
 ### Workflows
 
@@ -310,7 +310,7 @@ Processos de desenvolvimento multi-etapas.
 | `greenfield-service.yaml`   | Novo serviço backend                |
 | `brownfield-ui.yaml`        | Aprimoramento de frontend existente |
 
-**Localização:** `.aios-core/development/workflows/`
+**Localização:** `.aiox-core/development/workflows/`
 
 ### Checklists
 
@@ -323,7 +323,7 @@ Checklists de validação de qualidade.
 | `architect-checklist.md` | Revisão de arquitetura      |
 | `release-checklist.md`   | Validação de release        |
 
-**Localização:** `.aios-core/product/checklists/`
+**Localização:** `.aiox-core/product/checklists/`
 
 ---
 
@@ -335,17 +335,17 @@ Workers são automaticamente registrados quando o registry é construído:
 
 ```bash
 # Reconstruir registry
-node .aios-core/core/registry/build-registry.js
+node .aiox-core/core/registry/build-registry.js
 ```
 
 O builder escaneia:
 
-- `.aios-core/development/tasks/**/*.md`
-- `.aios-core/product/templates/**/*`
-- `.aios-core/infrastructure/scripts/**/*.js`
-- `.aios-core/product/checklists/**/*.md`
-- `.aios-core/development/workflows/**/*.yaml`
-- `.aios-core/core/data/**/*`
+- `.aiox-core/development/tasks/**/*.md`
+- `.aiox-core/product/templates/**/*`
+- `.aiox-core/infrastructure/scripts/**/*.js`
+- `.aiox-core/product/checklists/**/*.md`
+- `.aiox-core/development/workflows/**/*.yaml`
+- `.aiox-core/core/data/**/*`
 
 ### Schema de Entrada de Worker
 
@@ -359,7 +359,7 @@ O builder escaneia:
   "inputs": ["story-title", "epic-id"],
   "outputs": ["story-file-path"],
   "tags": ["task", "creation", "story", "product"],
-  "path": ".aios-core/development/tasks/po-create-story.md",
+  "path": ".aiox-core/development/tasks/po-create-story.md",
   "taskFormat": "TASK-FORMAT-V1",
   "executorTypes": ["Agent", "Worker"],
   "performance": {
@@ -410,7 +410,7 @@ const isCached = registry.isCached();
 ### Encontrar Todas as Tasks para um Agente
 
 ```javascript
-const { getRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 async function getAgentTasks(agentId) {
   const registry = getRegistry();
@@ -427,8 +427,8 @@ console.log(`Agente dev tem ${devTasks.length} tasks`);
 ### Pesquisar e Executar Task
 
 ```javascript
-const { getRegistry } = require('./.aios-core/core/registry/registry-loader');
-const { TaskExecutor } = require('./.aios-core/development/scripts/task-executor');
+const { getRegistry } = require('./.aiox-core/core/registry/registry-loader');
+const { TaskExecutor } = require('./.aiox-core/development/scripts/task-executor');
 
 async function findAndExecute(searchTerm, inputs) {
   const registry = getRegistry();
@@ -456,7 +456,7 @@ await findAndExecute('create story', {
 ### Listar Workers por Categoria
 
 ```javascript
-const { getRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 async function listByCategory() {
   const registry = getRegistry();
@@ -484,13 +484,13 @@ async function listByCategory() {
 
 ```bash
 # Verificar se o arquivo do registry existe
-ls .aios-core/core/registry/service-registry.json
+ls .aiox-core/core/registry/service-registry.json
 
 # Reconstruir registry
-node .aios-core/core/registry/build-registry.js
+node .aiox-core/core/registry/build-registry.js
 
 # Validar registry
-node .aios-core/core/registry/validate-registry.js
+node .aiox-core/core/registry/validate-registry.js
 ```
 
 ### Worker Não Encontrado
@@ -521,4 +521,4 @@ await registry.load(true);
 
 ---
 
-_Guia de Service Discovery Synkra AIOS v2.1_
+_Guia de Service Discovery Synkra AIOX v4_

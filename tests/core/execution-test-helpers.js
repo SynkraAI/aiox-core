@@ -1,6 +1,6 @@
 /**
  * Execution System - Shared Test Helpers
- * Story EXC-1 - Test Coverage for .aios-core/core/execution/
+ * Story EXC-1 - Test Coverage for .aiox-core/core/execution/
  *
  * Mock factories and utilities shared across all 9 execution test files.
  * Follows patterns from build-state-manager.test.js.

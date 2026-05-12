@@ -1,5 +1,5 @@
-# Agent Template for AIOS-FULLSTACK
-# This template is used by aios-developer to create new agents
+# Agent Template for AIOX-FULLSTACK
+# This template is used by aiox-developer to create new agents
 # Variables are replaced during generation: {{VARIABLE_NAME}}
 
 agent:

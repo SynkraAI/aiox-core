@@ -1,7 +1,7 @@
 # @sm (River) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/sm.md`
+> Agent definition: `.aiox-core/development/agents/sm.md`
 
 ## 1. Activation Trace
 
@@ -9,13 +9,13 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/sm.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, storyBacklog, dataLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/product/data/mode-selection-best-practices.md` | AgentConfigLoader.loadFile() | Mode selection best practices (always loaded, 10KB) |
-| 6 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 7 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/sm.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, storyBacklog, dataLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/product/data/mode-selection-best-practices.md` | AgentConfigLoader.loadFile() | Mode selection best practices (always loaded, 10KB) |
+| 6 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 7 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -73,10 +73,10 @@ sm:
     - storyBacklog
     - dataLocation
   files_loaded:
-    - path: .aios-core/product/data/mode-selection-best-practices.md
+    - path: .aiox-core/product/data/mode-selection-best-practices.md
       lazy: false
       size: 10KB
-    - path: .aios-core/data/workflow-patterns.yaml
+    - path: .aiox-core/data/workflow-patterns.yaml
       lazy: false
       size: 8KB
     - path: docs/framework/coding-standards.md    # Added in Story ACT-8
@@ -120,16 +120,16 @@ sm:
 
 ### `*draft`
 
-**Task file:** `.aios-core/development/tasks/sm-create-next-story.md`
-**Template:** `.aios-core/development/templates/story-tmpl.yaml` (MISSING in development/, EXISTS in `.aios-core/product/templates/story-tmpl.yaml`)
+**Task file:** `.aiox-core/development/tasks/sm-create-next-story.md`
+**Template:** `.aiox-core/development/templates/story-tmpl.yaml` (MISSING in development/, EXISTS in `.aiox-core/product/templates/story-tmpl.yaml`)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `sm-create-next-story.md` | Task | EXISTS |
 | `story-tmpl.yaml` | Template | MISSING in development/, EXISTS in product/templates/ |
-| `.aios-core/product/data/mode-selection-best-practices.md` | Data | Referenced by sm config |
-| `.aios-core/product/templates/` | Templates dir | Scanned dynamically |
+| `.aiox-core/product/data/mode-selection-best-practices.md` | Data | Referenced by sm config |
+| `.aiox-core/product/templates/` | Templates dir | Scanned dynamically |
 
 **Execution flow:**
 
@@ -155,22 +155,22 @@ flowchart TD
 
 ### `*story-checklist`
 
-**Task file:** `.aios-core/development/tasks/execute-checklist.md`
-**Checklist:** `.aios-core/development/checklists/story-draft-checklist.md` (MISSING in development/, EXISTS in `.aios-core/product/checklists/story-draft-checklist.md`)
+**Task file:** `.aiox-core/development/tasks/execute-checklist.md`
+**Checklist:** `.aiox-core/development/checklists/story-draft-checklist.md` (MISSING in development/, EXISTS in `.aiox-core/product/checklists/story-draft-checklist.md`)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `execute-checklist.md` | Task | EXISTS |
 | `story-draft-checklist.md` | Checklist | MISSING in development/, EXISTS in product/checklists/ |
-| `.aios-core/scripts/execute-task.js` | Script | Referenced |
+| `.aiox-core/scripts/execute-task.js` | Script | Referenced |
 
 **Execution flow:**
 
 ```mermaid
 flowchart TD
     A["*story-checklist"] --> B[Load execute-checklist.md task]
-    B --> C[Resolve checklist file from .aios-core/product/checklists/]
+    B --> C[Resolve checklist file from .aiox-core/product/checklists/]
     C --> D{Checklist exists?}
     D -->|yes| E[Parse checklist items]
     D -->|no| F[Error: checklist not found]
@@ -330,8 +330,8 @@ graph TD
 - Pull request creation and management
 - Remote branch operations
 
-**Escalates to @aios-master when:**
-- Course corrections needed (`@aios-master *correct-course`)
+**Escalates to @aiox-master when:**
+- Course corrections needed (`@aiox-master *correct-course`)
 
 **Git restrictions:**
 - ALLOWED: `git status`, `git log`, `git diff`, `git branch`, `git branch -d`, `git checkout -b`, `git checkout`, `git merge`
@@ -343,8 +343,8 @@ graph TD
 
 | File | Type | Referenced By | Impact |
 |------|------|---------------|--------|
-| `story-tmpl.yaml` | Template | `*draft` (sm-create-next-story.md) | MISSING in `.aios-core/development/templates/`, EXISTS in `.aios-core/product/templates/story-tmpl.yaml` |
-| `story-draft-checklist.md` | Checklist | `*story-checklist` (execute-checklist.md) | MISSING in `.aios-core/development/checklists/`, EXISTS in `.aios-core/product/checklists/story-draft-checklist.md` |
+| `story-tmpl.yaml` | Template | `*draft` (sm-create-next-story.md) | MISSING in `.aiox-core/development/templates/`, EXISTS in `.aiox-core/product/templates/story-tmpl.yaml` |
+| `story-draft-checklist.md` | Checklist | `*story-checklist` (execute-checklist.md) | MISSING in `.aiox-core/development/checklists/`, EXISTS in `.aiox-core/product/checklists/story-draft-checklist.md` |
 
 ---
 
@@ -358,4 +358,4 @@ graph TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

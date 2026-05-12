@@ -16,7 +16,7 @@ const {
   estimateTokens,
   SECTION_ORDER,
   LAYER_TO_SECTION,
-} = require('../../.aios-core/core/synapse/output/formatter');
+} = require('../../.aiox-core/core/synapse/output/formatter');
 
 // =============================================================================
 // estimateTokens

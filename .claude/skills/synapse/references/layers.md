@@ -2,7 +2,7 @@
 
 ## Overview
 
-SYNAPSE processes rules through an 8-layer pipeline executed sequentially on every prompt. Each layer has a specific purpose, trigger condition, and priority level. The engine orchestrator (`.aios-core/core/synapse/engine.js`) chains all layers and the output formatter produces the final `<synapse-rules>` XML block.
+SYNAPSE processes rules through an 8-layer pipeline executed sequentially on every prompt. Each layer has a specific purpose, trigger condition, and priority level. The engine orchestrator (`.aiox-core/core/synapse/engine.js`) chains all layers and the output formatter produces the final `<synapse-rules>` XML block.
 
 ## Layer Pipeline
 
@@ -22,8 +22,8 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | Always active (`ALWAYS_ON=true`, `NON_NEGOTIABLE=true`) |
 | **Priority** | Highest — cannot be overridden by any other layer |
 | **Domain file** | `.synapse/constitution` |
-| **Source** | Auto-generated from `.aios-core/constitution.md` via `generate-constitution.js` |
-| **Implementation** | `.aios-core/core/synapse/layers/l0-constitution.js` |
+| **Source** | Auto-generated from `.aiox-core/constitution.md` via `generate-constitution.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l0-constitution.js` |
 
 **Articles:** CLI First, Agent Authority, Story-Driven Development, No Invention, Quality First, Absolute Imports.
 
@@ -35,7 +35,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | Always active (`ALWAYS_ON=true`) |
 | **Priority** | High — applies to every prompt regardless of context |
 | **Domain files** | `.synapse/global`, `.synapse/context` |
-| **Implementation** | `.aios-core/core/synapse/layers/l1-global.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l1-global.js` |
 
 **Content:** Coding standards, import rules, TypeScript rules, error handling patterns, bracket-specific context rules.
 
@@ -47,9 +47,9 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | `AGENT_TRIGGER` matches active agent ID from session |
 | **Priority** | Medium-high — only active when agent is activated |
 | **Domain files** | `.synapse/agent-dev`, `.synapse/agent-qa`, `.synapse/agent-architect`, etc. (12 total) |
-| **Implementation** | `.aios-core/core/synapse/layers/l2-agent.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l2-agent.js` |
 
-**Agents covered:** dev, qa, architect, pm, po, sm, devops, analyst, data-engineer, ux (ux-design-expert), aios-master, squad-creator.
+**Agents covered:** dev, qa, architect, pm, po, sm, devops, analyst, data-engineer, ux (ux-design-expert), aiox-master, squad-creator.
 
 ### L3: Workflow-Scoped
 
@@ -59,7 +59,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | `WORKFLOW_TRIGGER` matches active workflow from session |
 | **Priority** | Medium — active during specific development workflows |
 | **Domain files** | `.synapse/workflow-story-dev`, `.synapse/workflow-epic-create`, `.synapse/workflow-arch-review` |
-| **Implementation** | `.aios-core/core/synapse/layers/l3-workflow.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l3-workflow.js` |
 
 ### L4: Task Context
 
@@ -69,7 +69,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | Active task detected in session state |
 | **Priority** | Medium — active during task execution |
 | **Domain files** | Dynamic (injected from session context) |
-| **Implementation** | `.aios-core/core/synapse/layers/l4-task.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l4-task.js` |
 
 ### L5: Squad Discovery
 
@@ -79,7 +79,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | Squad is active in session |
 | **Priority** | Medium-low — only when working with squads |
 | **Domain files** | Squad-specific domains (discovered at runtime) |
-| **Implementation** | `.aios-core/core/synapse/layers/l5-squad.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l5-squad.js` |
 
 ### L6: Keyword (RECALL)
 
@@ -89,7 +89,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | User prompt contains keyword listed in domain's `RECALL` field |
 | **Priority** | Low — optional, skipped in DEPLETED bracket to conserve tokens |
 | **Domain files** | Any domain with `RECALL` key in manifest |
-| **Implementation** | `.aios-core/core/synapse/layers/l6-keyword.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l6-keyword.js` |
 
 ### L7: Star-Command
 
@@ -99,7 +99,7 @@ Layers execute in order. Each layer's output is collected and passed to the form
 | **Trigger** | User types `*command` in prompt |
 | **Priority** | Highest for explicit commands — user intent is paramount |
 | **Domain file** | `.synapse/commands` |
-| **Implementation** | `.aios-core/core/synapse/layers/l7-star-command.js` |
+| **Implementation** | `.aiox-core/core/synapse/layers/l7-star-command.js` |
 
 ## Pipeline Execution Flow
 
@@ -172,15 +172,15 @@ The formatter produces XML output:
 
 | File | Purpose |
 |------|---------|
-| `.aios-core/core/synapse/engine.js` | SynapseEngine orchestrator |
-| `.aios-core/core/synapse/layers/l0-constitution.js` | L0 processor |
-| `.aios-core/core/synapse/layers/l1-global.js` | L1 processor |
-| `.aios-core/core/synapse/layers/l2-agent.js` | L2 processor |
-| `.aios-core/core/synapse/layers/l3-workflow.js` | L3 processor |
-| `.aios-core/core/synapse/layers/l4-task.js` | L4 processor |
-| `.aios-core/core/synapse/layers/l5-squad.js` | L5 processor |
-| `.aios-core/core/synapse/layers/l6-keyword.js` | L6 processor |
-| `.aios-core/core/synapse/layers/l7-star-command.js` | L7 processor |
-| `.aios-core/core/synapse/layers/layer-processor.js` | Abstract base class |
-| `.aios-core/core/synapse/output/formatter.js` | XML formatter + token budget |
+| `.aiox-core/core/synapse/engine.js` | SynapseEngine orchestrator |
+| `.aiox-core/core/synapse/layers/l0-constitution.js` | L0 processor |
+| `.aiox-core/core/synapse/layers/l1-global.js` | L1 processor |
+| `.aiox-core/core/synapse/layers/l2-agent.js` | L2 processor |
+| `.aiox-core/core/synapse/layers/l3-workflow.js` | L3 processor |
+| `.aiox-core/core/synapse/layers/l4-task.js` | L4 processor |
+| `.aiox-core/core/synapse/layers/l5-squad.js` | L5 processor |
+| `.aiox-core/core/synapse/layers/l6-keyword.js` | L6 processor |
+| `.aiox-core/core/synapse/layers/l7-star-command.js` | L7 processor |
+| `.aiox-core/core/synapse/layers/layer-processor.js` | Abstract base class |
+| `.aiox-core/core/synapse/output/formatter.js` | XML formatter + token budget |
 | `.claude/hooks/synapse-engine.js` | Hook entry point |

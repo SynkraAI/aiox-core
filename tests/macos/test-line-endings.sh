@@ -6,7 +6,7 @@ set -euo pipefail
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; NC='\033[0m'
 TEST_NAME="AC5: Line Endings"
-LOG_FILE="/tmp/aios-test-lineend-$(date +%Y%m%d-%H%M%S).log"
+LOG_FILE="/tmp/aiox-test-lineend-$(date +%Y%m%d-%H%M%S).log"
 
 log_info() { echo -e "${GREEN}[INFO]${NC} $1" | tee -a "$LOG_FILE"; }
 pass_test() { echo -e "${GREEN}[PASS]${NC} $1" | tee -a "$LOG_FILE"; }
@@ -15,10 +15,10 @@ fail_test() { echo -e "${RED}[FAIL]${NC} $1" | tee -a "$LOG_FILE"; exit 1; }
 test_generated_files() {
     log_info "Test 1: Checking generated file line endings..."
 
-    # Check common AIOS files
+    # Check common AIOX files
     FILES_TO_CHECK=(
-        "$HOME/.aios/config.json"
-        "$HOME/.aios/.aiosrc"
+        "$HOME/.aiox/config.json"
+        "$HOME/.aiox/.aioxrc"
     )
 
     for FILE in "${FILES_TO_CHECK[@]}"; do

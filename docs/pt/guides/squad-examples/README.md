@@ -61,4 +61,4 @@ Tem um padrao de squad util? Aceitamos contribuicoes!
 
 ---
 
-_AIOS Squads: Equipes de agentes de IA trabalhando com voce_
+_AIOX Squads: Equipes de agentes de IA trabalhando com voce_

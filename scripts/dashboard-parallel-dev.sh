@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# AIOS Dashboard Parallel Dev - v2.0
+# AIOX Dashboard Parallel Dev - v2.0
 # =============================================================================
 # Launches multiple Claude Code instances in tmux for parallel story development
 # Based on ralph-tmux-swarm.sh patterns
@@ -15,7 +15,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 DASHBOARD_DIR="$PROJECT_DIR/apps/dashboard"
-SESSION_NAME="aios-dashboard"
+SESSION_NAME="aiox-dashboard"
 
 # Colors
 GREEN='\033[0;32m'
@@ -30,9 +30,9 @@ NC='\033[0m'
 # =============================================================================
 
 declare -a STORIES=(
-    "0.3|Layout Shell|docs/stories/aios-dashboard/epic-0-foundation.md|apps/dashboard/src/components/layout/|Create Sidebar.tsx, AppShell.tsx following Auto-Claude layout"
-    "0.1|Status Reader|docs/stories/aios-dashboard/epic-0-foundation.md|apps/dashboard/src/app/api/status/|Create API route that reads .aios/dashboard/status.json"
-    "1.2|Story Card|docs/stories/aios-dashboard/epic-1-story-board.md|apps/dashboard/src/components/stories/|Create StoryCard.tsx with badges, progress, agent indicator"
+    "0.3|Layout Shell|docs/stories/aiox-dashboard/epic-0-foundation.md|apps/dashboard/src/components/layout/|Create Sidebar.tsx, AppShell.tsx following Auto-Claude layout"
+    "0.1|Status Reader|docs/stories/aiox-dashboard/epic-0-foundation.md|apps/dashboard/src/app/api/status/|Create API route that reads .aiox/dashboard/status.json"
+    "1.2|Story Card|docs/stories/aiox-dashboard/epic-1-story-board.md|apps/dashboard/src/components/stories/|Create StoryCard.tsx with badges, progress, agent indicator"
 )
 
 NUM_WORKERS=${#STORIES[@]}
@@ -59,7 +59,7 @@ tmux kill-session -t "$SESSION_NAME" 2>/dev/null || true
 
 echo ""
 echo -e "${CYAN}╔═══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║     ${YELLOW}AIOS Dashboard Parallel Dev v2.0${NC}                     ${CYAN}║${NC}"
+echo -e "${CYAN}║     ${YELLOW}AIOX Dashboard Parallel Dev v2.0${NC}                     ${CYAN}║${NC}"
 echo -e "${CYAN}╠═══════════════════════════════════════════════════════════╣${NC}"
 echo -e "${CYAN}║${NC}  Phase:      ${GREEN}2 - Foundation Components${NC}                   ${CYAN}║${NC}"
 echo -e "${CYAN}║${NC}  Workers:    ${GREEN}$NUM_WORKERS${NC}                                            ${CYAN}║${NC}"

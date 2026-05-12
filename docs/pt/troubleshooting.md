@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Guia de Solução de Problemas do Synkra AIOS
+# Guia de Solução de Problemas do Synkra AIOX
 
 > 🌐 [EN](../troubleshooting.md) | **PT** | [ES](../es/troubleshooting.md)
 
 ---
 
-Este guia abrangente ajuda você a diagnosticar e resolver problemas comuns com o Synkra AIOS.
+Este guia abrangente ajuda você a diagnosticar e resolver problemas comuns com o Synkra AIOX.
 
 ## Índice
 
@@ -33,16 +33,16 @@ Sempre comece com o diagnóstico integrado:
 
 ```bash
 # Diagnóstico básico
-npx @synkra/aios-core doctor
+npx aiox-core doctor
 
 # Corrigir automaticamente problemas comuns
-npx @synkra/aios-core doctor --fix
+npx aiox-core doctor --fix
 
 # Saída detalhada
-npx @synkra/aios-core doctor --verbose
+npx aiox-core doctor --verbose
 
 # Verificar componente específico
-npx @synkra/aios-core doctor --component memory-layer
+npx aiox-core doctor --component memory-layer
 ```
 
 ### Correções Rápidas Comuns
@@ -58,7 +58,7 @@ npx @synkra/aios-core doctor --component memory-layer
 *config --reset
 
 # Atualizar para última versão
-npx @synkra/aios-core update
+npx aiox-core update
 ```
 
 ## Problemas de Instalação
@@ -79,7 +79,7 @@ npm --version
 npm install -g npx
 
 # Ou usar npm diretamente
-npm exec @synkra/aios-core init my-project
+npm exec aiox-core init my-project
 ```
 
 ### Problema: Instalação falha com erros de permissão
@@ -110,14 +110,14 @@ source ~/.bashrc
 ```bash
 # Instalar no diretório do usuário
 cd ~
-npx @synkra/aios-core init my-project
+npx aiox-core init my-project
 ```
 
 ### Problema: Erro de versão do Node.js
 
 **Sintomas:**
 ```
-Error: Node.js version 14.0.0 or higher required
+Error: Node.js version 18.0.0 or higher required
 ```
 
 **Solução:**
@@ -160,7 +160,7 @@ npm cache clean --force
 npm config set fetch-timeout 60000
 
 # Pular instalação de dependências
-npx @synkra/aios-core init my-project --skip-install
+npx aiox-core init my-project --skip-install
 
 # Então instalar manualmente
 cd my-project
@@ -207,14 +207,14 @@ Error: Failed to initialize meta-agent
 1. **Verificar configuração:**
 ```bash
 # Verificar se config existe
-ls -la .aios/config.json
+ls -la .aiox/config.json
 
 # Validar configuração
-npx @synkra/aios-core doctor --component config
+npx aiox-core doctor --component config
 
 # Resetar se corrompido
-rm .aios/config.json
-npx @synkra/aios-core doctor --fix
+rm .aiox/config.json
+npx aiox-core doctor --fix
 ```
 
 2. **Verificar dependências:**
@@ -270,7 +270,7 @@ create-agent my-agent   # ✗ Errado
 
 # Ou reiniciar meta-agent
 exit
-npx @synkra/aios-core
+npx aiox-core
 ```
 
 ### Problema: Criação de agente falha
@@ -333,7 +333,7 @@ rm agents/duplicate-agent.yaml
 2. **Verificar configuração de memória:**
 ```bash
 # Verificar config
-cat .aios/memory-config.json
+cat .aiox/memory-config.json
 
 # Resetar para padrões
 *memory reset-config
@@ -358,7 +358,7 @@ cat .aios/memory-config.json
 
 1. **Ajustar configurações de memória:**
 ```javascript
-// Editar .aios/memory-config.json
+// Editar .aiox/memory-config.json
 {
   "maxDocuments": 5000,      // Reduzir de 10000
   "chunkSize": 256,          // Reduzir de 512
@@ -382,7 +382,7 @@ cat .aios/memory-config.json
 export NODE_OPTIONS="--max-old-space-size=1024"
 
 # Executar com memória limitada
-npx @synkra/aios-core
+npx aiox-core
 ```
 
 ### Problema: Erros do LlamaIndex
@@ -406,7 +406,7 @@ curl https://api.openai.com/v1/models \
 
 2. **Usar embeddings locais:**
 ```javascript
-// .aios/memory-config.json
+// .aiox/memory-config.json
 {
   "embedModel": "local",
   "localModelPath": "./models/embeddings"
@@ -443,7 +443,7 @@ npm install llamaindex@latest
 
 2. **Otimizar configuração:**
 ```javascript
-// .aios/config.json
+// .aiox/config.json
 {
   "performance": {
     "enableCache": true,
@@ -633,7 +633,7 @@ cat .gitignore | grep .env
 
 # Adicionar se ausente
 echo ".env" >> .gitignore
-echo ".aios/logs/" >> .gitignore
+echo ".aiox/logs/" >> .gitignore
 ```
 
 2. **Habilitar modo seguro:**
@@ -648,7 +648,7 @@ echo ".aios/logs/" >> .gitignore
 # Gerar novas chaves dos provedores
 # Atualizar arquivo .env
 # Limpar logs
-rm -rf .aios/logs/*
+rm -rf .aiox/logs/*
 ```
 
 ## Problemas Específicos de Plataforma
@@ -668,7 +668,7 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 # Ou usar caminhos mais curtos
 cd C:\
-npx @synkra/aios-core init myapp
+npx aiox-core init myapp
 ```
 
 #### Problema: Scripts desabilitados
@@ -697,7 +697,7 @@ xcode-select --install
 
 #### Problema: Gatekeeper bloqueia execução
 ```
-Error: "@synkra/aios-core" cannot be opened
+Error: "aiox-core" cannot be opened
 ```
 
 **Solução:**
@@ -706,7 +706,7 @@ Error: "@synkra/aios-core" cannot be opened
 sudo spctl --master-disable
 
 # Ou remover quarentena
-xattr -d com.apple.quarantine /usr/local/bin/@synkra/aios-core
+xattr -d com.apple.quarantine /usr/local/bin/aiox-core
 ```
 
 ### Problemas do Linux
@@ -735,21 +735,21 @@ sudo pacman -S openssl
 
 ```bash
 # Saída de debug completa
-export DEBUG=aios:*
-npx @synkra/aios-core
+export DEBUG=aiox:*
+npx aiox-core
 
 # Componentes específicos
-export DEBUG=aios:memory,aios:agent
+export DEBUG=aiox:memory,aiox:agent
 ```
 
 ### Analisar Logs
 
 ```bash
 # Ver logs recentes
-tail -f .aios/logs/aios.log
+tail -f .aiox/logs/aiox.log
 
 # Buscar por erros
-grep -i error .aios/logs/*.log
+grep -i error .aiox/logs/*.log
 
 # Ver logs estruturados
 *logs --format json --level error
@@ -759,13 +759,13 @@ grep -i error .aios/logs/*.log
 
 ```bash
 # Gerar diagnóstico completo
-npx @synkra/aios-core doctor --report diagnostic.json
+npx aiox-core doctor --report diagnostic.json
 
 # Incluir informações do sistema
-npx @synkra/aios-core info --detailed >> diagnostic.json
+npx aiox-core info --detailed >> diagnostic.json
 
 # Criar pacote de suporte
-tar -czf aios-support.tar.gz .aios/logs diagnostic.json
+tar -czf aiox-support.tar.gz .aiox/logs diagnostic.json
 ```
 
 ### Perfilamento de Performance
@@ -775,14 +775,14 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 {
   "debug": {
     "profiling": true,
-    "profileOutput": ".aios/profiles/"
+    "profileOutput": ".aiox/profiles/"
   }
 }
 ```
 
 ```bash
 # Analisar perfil
-*debug analyze-profile .aios/profiles/latest.cpuprofile
+*debug analyze-profile .aiox/profiles/latest.cpuprofile
 ```
 
 ### Análise de Dump de Memória
@@ -804,18 +804,18 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 
 1. **Execute diagnósticos:**
    ```bash
-   npx @synkra/aios-core doctor --verbose > diagnostic.log
+   npx aiox-core doctor --verbose > diagnostic.log
    ```
 
 2. **Colete informações:**
    - Versão do Node.js: `node --version`
    - Versão do NPM: `npm --version`
    - SO e versão: `uname -a` ou `ver`
-   - Versão do AIOS: `npx @synkra/aios-core version`
+   - Versão do AIOX: `npx aiox-core version`
 
 3. **Verifique issues existentes:**
-   - [GitHub Issues](https://github.com/@synkra/aios-core/@synkra/aios-core/issues)
-   - [Discussions](https://github.com/@synkra/aios-core/@synkra/aios-core/discussions)
+   - [GitHub Issues](https://github.com/aiox-core/aiox-core/issues)
+   - [Discussions](https://github.com/aiox-core/aiox-core/discussions)
 
 ### Suporte da Comunidade
 
@@ -826,7 +826,7 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 
 - **GitHub Discussions**: Perguntas técnicas e solicitações de funcionalidades
 
-- **Stack Overflow**: Marque perguntas com `@synkra/aios-core`
+- **Stack Overflow**: Marque perguntas com `aiox-core`
 
 ### Reportando Bugs
 
@@ -836,10 +836,10 @@ Crie relatórios de bug detalhados:
 ## Ambiente
 - SO: macOS 13.0
 - Node: 18.17.0
-- AIOS: 1.0.0
+- AIOX: 1.0.0
 
 ## Passos para Reproduzir
-1. Executar `npx @synkra/aios-core init test`
+1. Executar `npx aiox-core init test`
 2. Selecionar template "enterprise"
 3. Erro ocorre durante instalação
 
@@ -862,24 +862,24 @@ Se tudo mais falhar:
 
 ```bash
 # Fazer backup do estado atual
-cp -r .aios .aios.backup
+cp -r .aiox .aiox.backup
 
 # Reset completo
-rm -rf .aios node_modules package-lock.json
+rm -rf .aiox node_modules package-lock.json
 npm cache clean --force
 
 # Instalação limpa
 npm install
-npx @synkra/aios-core doctor --fix
+npx aiox-core doctor --fix
 
 # Restaurar dados se necessário
-cp .aios.backup/memory.db .aios/
+cp .aiox.backup/memory.db .aiox/
 ```
 
 ---
 
 **Lembre-se**: A maioria dos problemas pode ser resolvida com:
-1. `npx @synkra/aios-core doctor --fix`
+1. `npx aiox-core doctor --fix`
 2. Limpando caches
 3. Atualizando para a última versão
 4. Verificando permissões

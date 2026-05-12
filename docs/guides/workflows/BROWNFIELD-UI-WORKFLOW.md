@@ -527,8 +527,8 @@ graph TB
 | Requisito | Descricao | Verificacao |
 |-----------|-----------|-------------|
 | **Aplicacao Existente** | Frontend ativo para analise | Codebase acessivel |
-| **Templates AIOS** | Templates instalados | Verificar `.aios-core/development/templates/` |
-| **Agentes Configurados** | Todos os agentes do workflow | Verificar `.aios-core/development/agents/` |
+| **Templates AIOX** | Templates instalados | Verificar `.aiox-core/development/templates/` |
+| **Agentes Configurados** | Todos os agentes do workflow | Verificar `.aiox-core/development/agents/` |
 | **Git Configurado** | Controle de versao | `git status` funcional |
 | **Node.js** | Runtime para scripts | `node --version` >= 18 |
 
@@ -536,11 +536,11 @@ graph TB
 
 | Documento | Localizacao | Necessario Para |
 |-----------|-------------|-----------------|
-| Templates de PRD | `.aios-core/development/templates/brownfield-prd-tmpl.yaml` | Step 2 |
-| Template Frontend | `.aios-core/development/templates/front-end-spec-tmpl.yaml` | Step 3 |
-| Template Arquitetura | `.aios-core/development/templates/brownfield-architecture-tmpl.yaml` | Step 4 |
-| Checklist PO | `.aios-core/development/checklists/po-master-checklist.md` | Step 5 |
-| Template Story | `.aios-core/development/templates/story-tmpl.yaml` | Step 8 |
+| Templates de PRD | `.aiox-core/development/templates/brownfield-prd-tmpl.yaml` | Step 2 |
+| Template Frontend | `.aiox-core/development/templates/front-end-spec-tmpl.yaml` | Step 3 |
+| Template Arquitetura | `.aiox-core/development/templates/brownfield-architecture-tmpl.yaml` | Step 4 |
+| Checklist PO | `.aiox-core/development/checklists/po-master-checklist.md` | Step 5 |
+| Template Story | `.aiox-core/development/templates/story-tmpl.yaml` | Step 8 |
 
 ### Dados de Entrada Recomendados
 
@@ -720,11 +720,11 @@ flowchart TD
 **Solucao:**
 1. Verificar se templates existem:
 ```bash
-ls .aios-core/development/templates/
+ls .aiox-core/development/templates/
 ```
 
 2. Verificar nome correto do template no workflow
-3. Se necessario, reinstalar templates do AIOS core
+3. Se necessario, reinstalar templates do AIOX core
 
 ---
 
@@ -793,8 +793,8 @@ ls .aios-core/development/templates/
 #### Verificar Status do Projeto
 
 ```bash
-# Via AIOS
-@aios-master
+# Via AIOX
+@aiox-master
 *status
 
 # Via Git
@@ -829,25 +829,25 @@ ls docs/architecture/
 
 | Documento | Localizacao | Descricao |
 |-----------|-------------|-----------|
-| AIOS Knowledge Base | `.aios-core/data/aios-kb.md` | Base de conhecimento AIOS |
-| IDE Development Workflow | `.aios-core/data/aios-kb.md#IDE Development Workflow` | Workflow de desenvolvimento IDE |
-| Brownfield PRD Template | `.aios-core/development/templates/brownfield-prd-tmpl.yaml` | Template PRD brownfield |
-| Frontend Spec Template | `.aios-core/development/templates/front-end-spec-tmpl.yaml` | Template especificacao frontend |
-| Brownfield Architecture Template | `.aios-core/development/templates/brownfield-architecture-tmpl.yaml` | Template arquitetura brownfield |
-| PO Master Checklist | `.aios-core/development/checklists/po-master-checklist.md` | Checklist de validacao PO |
+| AIOX Knowledge Base | `.aiox-core/data/aiox-kb.md` | Base de conhecimento AIOX |
+| IDE Development Workflow | `.aiox-core/data/aiox-kb.md#IDE Development Workflow` | Workflow de desenvolvimento IDE |
+| Brownfield PRD Template | `.aiox-core/development/templates/brownfield-prd-tmpl.yaml` | Template PRD brownfield |
+| Frontend Spec Template | `.aiox-core/development/templates/front-end-spec-tmpl.yaml` | Template especificacao frontend |
+| Brownfield Architecture Template | `.aiox-core/development/templates/brownfield-architecture-tmpl.yaml` | Template arquitetura brownfield |
+| PO Master Checklist | `.aiox-core/development/checklists/po-master-checklist.md` | Checklist de validacao PO |
 
 ### Agentes
 
 | Agente | Arquivo | Documentacao |
 |--------|---------|--------------|
-| @architect | `.aios-core/development/agents/architect.md` | Aria - Holistic System Architect |
-| @pm | `.aios-core/development/agents/pm.md` | Morgan - Product Manager |
-| @ux-expert | `.aios-core/development/agents/ux-design-expert.md` | Uma - UX/UI Designer |
-| @po | `.aios-core/development/agents/po.md` | Pax - Product Owner |
-| @sm | `.aios-core/development/agents/sm.md` | River - Scrum Master |
-| @analyst | `.aios-core/development/agents/analyst.md` | Atlas - Business Analyst |
-| @dev | `.aios-core/development/agents/dev.md` | Dex - Full Stack Developer |
-| @qa | `.aios-core/development/agents/qa.md` | Quinn - Test Architect |
+| @architect | `.aiox-core/development/agents/architect.md` | Aria - Holistic System Architect |
+| @pm | `.aiox-core/development/agents/pm.md` | Morgan - Product Manager |
+| @ux-expert | `.aiox-core/development/agents/ux-design-expert.md` | Uma - UX/UI Designer |
+| @po | `.aiox-core/development/agents/po.md` | Pax - Product Owner |
+| @sm | `.aiox-core/development/agents/sm.md` | River - Scrum Master |
+| @analyst | `.aiox-core/development/agents/analyst.md` | Atlas - Business Analyst |
+| @dev | `.aiox-core/development/agents/dev.md` | Dex - Full Stack Developer |
+| @qa | `.aiox-core/development/agents/qa.md` | Quinn - Test Architect |
 
 ### Handoff Prompts
 
@@ -886,6 +886,6 @@ Os seguintes prompts sao usados para transicoes entre agentes:
 
 ---
 
-*Documentacao gerada automaticamente a partir de `.aios-core/development/workflows/brownfield-ui.yaml`*
+*Documentacao gerada automaticamente a partir de `.aiox-core/development/workflows/brownfield-ui.yaml`*
 
 *Ultima atualizacao: 2026-02-04*

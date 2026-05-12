@@ -1,4 +1,4 @@
-# Guia de Workflows de AIOS
+# Guia de Workflows de AIOX
 
 **Version:** 1.0.0
 **Ultima Actualizacion:** 2026-02-02
@@ -8,7 +8,7 @@
 
 ## Descripcion General
 
-Los Workflows de AIOS son secuencias orquestadas de actividades de agents que automatizan procesos de desarrollo complejos. Proporcionan patrones estructurados y repetibles para escenarios de desarrollo comunes.
+Los Workflows de AIOX son secuencias orquestadas de actividades de agents que automatizan procesos de desarrollo complejos. Proporcionan patrones estructurados y repetibles para escenarios de desarrollo comunes.
 
 ### Conceptos Clave
 
@@ -223,7 +223,7 @@ workflow:
 ### Step 5: Ubicacion de Salida
 
 Los workflows se guardan segun el contexto:
-- **Core**: `.aios-core/development/workflows/{name}.yaml`
+- **Core**: `.aiox-core/development/workflows/{name}.yaml`
 - **Squad**: `squads/{squad}/workflows/{name}.yaml`
 - **Hybrid**: `squads/{squad}/workflows/{name}.yaml`
 
@@ -259,7 +259,7 @@ Los workflows se guardan segun el contexto:
 
 ### State del Workflow
 
-El state se persiste en `.aios/{instance-id}-state.yaml`:
+El state se persiste en `.aiox/{instance-id}-state.yaml`:
 
 ```yaml
 instance_id: "wf-abc123"
@@ -284,7 +284,7 @@ steps:
 Los workflows persisten entre sesiones de Claude Code:
 
 1. Usuario inicia nueva sesion
-2. Activa @aios-master
+2. Activa @aiox-master
 3. Ejecuta `*run-workflow {name} continue`
 4. El sistema carga el state, muestra el step actual
 5. Usuario ejecuta el step
@@ -294,7 +294,7 @@ Los workflows persisten entre sesiones de Claude Code:
 
 ## Patrones de Workflow
 
-AIOS detecta patrones comunes de workflow basados en el historial de comandos:
+AIOX detecta patrones comunes de workflow basados en el historial de comandos:
 
 ### Patrones Detectados
 
@@ -347,7 +347,7 @@ El sistema usa `workflow-patterns.yaml` para:
 | **Alcance** | Multiples steps, multiples agents | Un solo step, un solo agent |
 | **State** | Persistido entre sesiones | Sin estado |
 | **Caso de Uso** | Procesos complejos | Operaciones atomicas |
-| **Ubicacion** | `.aios-core/development/workflows/` | `.aios-core/development/tasks/` |
+| **Ubicacion** | `.aiox-core/development/workflows/` | `.aiox-core/development/tasks/` |
 
 ---
 
@@ -378,13 +378,13 @@ Error: Cannot skip non-optional step
 
 ```bash
 # Listar workflows disponibles
-ls .aios-core/development/workflows/
+ls .aiox-core/development/workflows/
 
 # Validar un workflow
 *validate-workflow {name}
 
 # Ver detalles del workflow
-cat .aios-core/development/workflows/{name}.yaml
+cat .aiox-core/development/workflows/{name}.yaml
 ```
 
 ---
@@ -397,4 +397,4 @@ cat .aios-core/development/workflows/{name}.yaml
 
 ---
 
-*Guia de Workflows de AIOS v1.0 - Orquestando la Colaboracion IA-Humano*
+*Guia de Workflows de AIOX v1.0 - Orquestando la Colaboracion IA-Humano*

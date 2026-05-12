@@ -14,7 +14,7 @@ const {
   RateLimitManager,
   withRateLimit,
   getGlobalManager,
-} = require('../../.aios-core/core/execution/rate-limit-manager');
+} = require('../../.aiox-core/core/execution/rate-limit-manager');
 
 describe('RateLimitManager', () => {
   // ── Constructor ─────────────────────────────────────────────────────

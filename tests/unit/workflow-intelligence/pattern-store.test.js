@@ -14,7 +14,7 @@ describe('PatternStore (Unit)', () => {
   let testStoragePath;
 
   beforeAll(() => {
-    const module = require('../../../.aios-core/workflow-intelligence/learning/pattern-store');
+    const module = require('../../../.aiox-core/workflow-intelligence/learning/pattern-store');
     PatternStore = module.PatternStore;
     createPatternStore = module.createPatternStore;
     DEFAULT_MAX_PATTERNS = module.DEFAULT_MAX_PATTERNS;

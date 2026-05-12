@@ -13,7 +13,7 @@ We release patches for security vulnerabilities in the following versions:
 
 ## Reporting a Vulnerability
 
-We take security seriously at SynkraAI. If you discover a security vulnerability in AIOS, please report it responsibly.
+We take security seriously at SynkraAI. If you discover a security vulnerability in AIOX, please report it responsibly.
 
 ### How to Report
 
@@ -22,12 +22,12 @@ We take security seriously at SynkraAI. If you discover a security vulnerability
 Instead, please report security vulnerabilities through one of these channels:
 
 1. **GitHub Security Advisories** (Preferred)
-   - Go to [Security Advisories](https://github.com/SynkraAI/aios-core/security/advisories)
+   - Go to [Security Advisories](https://github.com/SynkraAI/aiox-core/security/advisories)
    - Click "Report a vulnerability"
    - Fill out the form with details
 
-2. **Email**
-   - Send an email to: security@synkra.ai
+2. **GitHub Issues (Private)**
+   - Open a [private security advisory](https://github.com/SynkraAI/aiox-core/security/advisories)
    - Use subject line: `[SECURITY] Brief description`
 
 ### What to Include
@@ -61,7 +61,7 @@ We will not pursue civil action or initiate a complaint to law enforcement for a
 
 ## Security Best Practices
 
-When using AIOS Framework, we recommend:
+When using AIOX Framework, we recommend:
 
 ### Environment Variables
 
@@ -92,7 +92,7 @@ When using AIOS Framework, we recommend:
 
 ### Framework Architecture
 
-AIOS Framework executes AI-generated code and commands. Users should:
+AIOX Framework executes AI-generated code and commands. Users should:
 
 - Understand that AI agents can execute arbitrary code
 - Use appropriate sandboxing for untrusted environments
@@ -100,7 +100,7 @@ AIOS Framework executes AI-generated code and commands. Users should:
 
 ### Data Handling
 
-- AIOS may process sensitive data through AI providers
+- AIOX may process sensitive data through AI providers
 - Review your AI provider's data handling policies
 - Consider data classification when using AI features
 
@@ -108,7 +108,7 @@ AIOS Framework executes AI-generated code and commands. Users should:
 
 Security updates are announced through:
 
-- [GitHub Security Advisories](https://github.com/SynkraAI/aios-core/security/advisories)
+- [GitHub Security Advisories](https://github.com/SynkraAI/aiox-core/security/advisories)
 - [CHANGELOG.md](./CHANGELOG.md)
 - GitHub Releases
 

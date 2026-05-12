@@ -1,7 +1,7 @@
 // Integration/Performance test - uses describeIntegration
 /**
  * STORY-1.1: NPX Integration Tests
- * Tests for npx @synkra/aios-core@latest execution
+ * Tests for npx aiox-core@latest execution
  */
 
 const { spawn } = require('child_process');
@@ -17,8 +17,8 @@ describeIntegration('npx Execution', () => {
       const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
       expect(packageJson.bin).toBeDefined();
-      expect(packageJson.bin['aios']).toBe('./bin/aios.js');
-      expect(packageJson.bin['@synkra/aios-core']).toBe('./bin/aios.js');
+      expect(packageJson.bin['aiox']).toBe('./bin/aiox.js');
+      expect(packageJson.bin['aiox-core']).toBe('./bin/aiox.js');
     });
 
     it('should have preferGlobal set to false', () => {
@@ -34,11 +34,11 @@ describeIntegration('npx Execution', () => {
 
       expect(packageJson.files).toContain('bin/');
       expect(packageJson.files).toContain('index.js');
-      // Note: .aios-core/ should be included if it exists
-      const hasAiosCore = packageJson.files.some(f => 
-        f === '.aios-core/' || f === 'aios-core/',
+      // Note: .aiox-core/ should be included if it exists
+      const hasAioxCore = packageJson.files.some(f => 
+        f === '.aiox-core/' || f === 'aiox-core/',
       );
-      expect(hasAiosCore).toBe(true);
+      expect(hasAioxCore).toBe(true);
     });
 
     it('should have Node.js engine requirement >= 18', () => {
@@ -51,8 +51,8 @@ describeIntegration('npx Execution', () => {
   });
 
   describeIntegration('CLI Execution', () => {
-    it('should execute aios command with --version', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+    it('should execute aiox command with --version', (done) => {
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, '--version']);
 
       let output = '';
@@ -67,8 +67,8 @@ describeIntegration('npx Execution', () => {
       });
     }, timeout);
 
-    it('should execute aios command with --help', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+    it('should execute aiox command with --help', (done) => {
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, '--help']);
 
       let output = '';
@@ -79,13 +79,13 @@ describeIntegration('npx Execution', () => {
       child.on('close', (code) => {
         expect(code).toBe(0);
         expect(output).toContain('USAGE');
-        expect(output).toContain('@synkra/aios-core');
+        expect(output).toContain('aiox-core');
         done();
       });
     }, timeout);
 
-    it('should execute aios info command', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+    it('should execute aiox info command', (done) => {
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, 'info']);
 
       let output = '';
@@ -101,7 +101,7 @@ describeIntegration('npx Execution', () => {
     }, timeout);
 
     it('should fail with unknown command', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, 'invalid-command']);
 
       let stderr = '';
@@ -127,13 +127,13 @@ describeIntegration('npx Execution', () => {
       expect(indexContent).toContain('init'); // Exported in module.exports
     });
 
-    it('should maintain AIOS class export in source', () => {
+    it('should maintain AIOX class export in source', () => {
       const indexPath = path.join(__dirname, '../../index.js');
       const indexContent = fs.readFileSync(indexPath, 'utf8');
 
-      // Verify AIOS class exists in exports
-      expect(indexContent).toContain('AIOS');
-      expect(indexContent).toContain('class AIOS');
+      // Verify AIOX class exists in exports
+      expect(indexContent).toContain('AIOX');
+      expect(indexContent).toContain('class AIOX');
     });
 
     it('should export core modules in source', () => {
@@ -151,7 +151,7 @@ describeIntegration('npx Execution', () => {
 
   describeIntegration('Cross-Platform Compatibility', () => {
     it('should work on current platform', () => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       
       // Verify file exists
       expect(fs.existsSync(cliPath)).toBe(true);
@@ -162,7 +162,7 @@ describeIntegration('npx Execution', () => {
     });
 
     it('should report current platform in info command', (done) => {
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, 'info']);
 
       let output = '';
@@ -182,7 +182,7 @@ describeIntegration('npx Execution', () => {
   describeIntegration('Performance', () => {
     it('should execute --version in under 5 seconds', (done) => {
       const startTime = Date.now();
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, '--version']);
 
       child.on('close', () => {
@@ -194,7 +194,7 @@ describeIntegration('npx Execution', () => {
 
     it('should execute info command in under 5 seconds', (done) => {
       const startTime = Date.now();
-      const cliPath = path.join(__dirname, '../../bin/aios.js');
+      const cliPath = path.join(__dirname, '../../bin/aiox.js');
       const child = spawn('node', [cliPath, 'info']);
 
       child.on('close', () => {

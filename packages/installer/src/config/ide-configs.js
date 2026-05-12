@@ -25,10 +25,11 @@ const path = require('path');
 /**
  * IDE Configuration Metadata
  *
- * Synkra AIOS v2.1 supports 5 main IDEs:
+ * Synkra AIOX v4 supports 6 main IDEs:
  * - Claude Code (Anthropic's official CLI) - Recommended
+ * - Codex CLI (OpenAI coding CLI)
+ * - Gemini CLI (Google AI coding CLI)
  * - Cursor (AI-first code editor)
- * - Windsurf (AI-powered development)
  * - GitHub Copilot (GitHub's AI pair programmer)
  * - AntiGravity (Google agentic platform)
  */
@@ -41,7 +42,26 @@ const IDE_CONFIGS = {
     requiresDirectory: true,
     format: 'text',
     recommended: true,
-    agentFolder: path.join('.claude', 'commands', 'AIOS', 'agents'),
+    agentFolder: path.join('.claude', 'commands', 'AIOX', 'agents'),
+  },
+  codex: {
+    name: 'Codex CLI',
+    description: '',
+    configFile: 'AGENTS.md',
+    template: 'ide-rules/codex-rules.md',
+    requiresDirectory: false,
+    format: 'text',
+    recommended: true,
+    agentFolder: path.join('.codex', 'agents'),
+  },
+  gemini: {
+    name: 'Gemini CLI',
+    description: '',
+    configFile: path.join('.gemini', 'rules.md'),
+    template: 'ide-rules/gemini-rules.md',
+    requiresDirectory: true,
+    format: 'text',
+    agentFolder: path.join('.gemini', 'rules', 'AIOX', 'agents'),
   },
   cursor: {
     name: 'Cursor',
@@ -51,15 +71,6 @@ const IDE_CONFIGS = {
     requiresDirectory: true,
     format: 'text',
     agentFolder: path.join('.cursor', 'rules'),
-  },
-  windsurf: {
-    name: 'Windsurf',
-    description: '',
-    configFile: '.windsurfrules',
-    template: 'ide-rules/windsurf-rules.md',
-    requiresDirectory: false,
-    format: 'text',
-    agentFolder: path.join('.windsurf', 'rules'),
   },
   'github-copilot': {
     name: 'GitHub Copilot',
@@ -118,7 +129,7 @@ function isValidIDE(ideKey) {
  * @returns {Array<{name: string, value: string, checked?: boolean}>} Inquirer-compatible choices
  */
 function getIDEChoices() {
-  const { colors } = require('../utils/aios-colors');
+  const { colors } = require('../utils/aiox-colors');
   const { t } = require('../wizard/i18n');
 
   return getIDEKeys().map((key) => {

@@ -32,9 +32,9 @@ Read `.claude/commands/Cybersecurity/agents/cyber-chief.md` and adopt the person
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Security-relevant: Security, Vulnerability, Pentest, AppSec)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Security-relevant: Security, Vulnerability, Pentest, AppSec)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 
 Do NOT display context loading — just absorb and proceed.
 
@@ -104,7 +104,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | `secrets-scan` | `secrets-detection.md` | Find leaked secrets |
 
 **Path resolution**:
-- Tasks at `squads/cybersecurity/tasks/` or `.aios-core/development/tasks/`
+- Tasks at `squads/cybersecurity/tasks/` or `.aiox-core/development/tasks/`
 - Checklists at `squads/cybersecurity/checklists/`
 - Data at `squads/cybersecurity/data/`
 

@@ -19,9 +19,9 @@
 
 ---
 
-## AIOS Integration Overview
+## AIOX Integration Overview
 
-In AIOS, CodeRabbit is integrated into the Quality Gates system as part of **Layer 2: PR Automation**.
+In AIOX, CodeRabbit is integrated into the Quality Gates system as part of **Layer 2: PR Automation**.
 
 ```
 Quality Gates 3 Layers
@@ -109,11 +109,11 @@ wsl bash -c '~/.local/bin/coderabbit --version'
 wsl bash -c '~/.local/bin/coderabbit auth status'
 ```
 
-### AIOS Agent Configuration
+### AIOX Agent Configuration
 
 CodeRabbit is configured in agent definition files:
 
-**Location:** `.aios-core/development/agents/qa.md` and `devops.md`
+**Location:** `.aiox-core/development/agents/qa.md` and `devops.md`
 
 ```yaml
 coderabbit_integration:
@@ -122,7 +122,7 @@ coderabbit_integration:
   wsl_config:
     distribution: Ubuntu
     installation_path: ~/.local/bin/coderabbit
-    working_directory: /mnt/c/Users/.../aios-core
+    working_directory: /mnt/c/Users/.../aiox-core
 ```
 
 ---
@@ -139,7 +139,7 @@ Reviews changes not yet committed (working directory).
 *code-review uncommitted
 
 # Direct command (if needed)
-wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
 ```
 
 ### Review Committed Changes
@@ -152,7 +152,7 @@ Reviews committed changes against main branch.
 *code-review committed
 
 # Direct command
-wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
 ```
 
 ### Pre-PR Review
@@ -165,7 +165,7 @@ Reviews all changes before creating a pull request.
 *pre-push
 
 # Direct command
-wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only --base main'
+wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only --base main'
 ```
 
 ---
@@ -174,7 +174,7 @@ wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only --
 
 CodeRabbit categorizes issues by severity:
 
-| Severity     | Description                               | AIOS Action                      |
+| Severity     | Description                               | AIOX Action                      |
 | ------------ | ----------------------------------------- | -------------------------------- |
 | **CRITICAL** | Security vulnerabilities, data loss risks | Block, auto-fix (3 attempts max) |
 | **HIGH**     | Significant bugs, performance issues      | Block, auto-fix recommended      |
@@ -317,7 +317,7 @@ wsl bash -c 'cd /path/to/repo && ~/.local/bin/coderabbit --prompt-only --base ma
 
 ---
 
-## Integration with AIOS Workflow
+## Integration with AIOX Workflow
 
 ### Standard Development Flow
 
@@ -388,10 +388,10 @@ docs/qa/coderabbit-reports/
 
 ## Related Documentation
 
-- [Quality Gates Specification](../../../.aios-core/docs/standards/QUALITY-GATES-SPECIFICATION.md)
-- [@qa Agent Definition](../../../.aios-core/development/agents/qa.md)
-- [@devops Agent Definition](../../../.aios-core/development/agents/devops.md)
-- [Pre-Push Quality Gate Task](../../../.aios-core/development/tasks/github-devops-pre-push-quality-gate.md)
+- [Quality Gates Specification](../../../.aiox-core/docs/standards/QUALITY-GATES-SPECIFICATION.md)
+- [@qa Agent Definition](../../../.aiox-core/development/agents/qa.md)
+- [@devops Agent Definition](../../../.aiox-core/development/agents/devops.md)
+- [Pre-Push Quality Gate Task](../../../.aiox-core/development/tasks/github-devops-pre-push-quality-gate.md)
 
 ---
 
@@ -403,4 +403,4 @@ docs/qa/coderabbit-reports/
 
 ---
 
-_Last Updated: 2026-01-28 | AIOS Framework Team_
+_Last Updated: 2026-01-28 | AIOX Framework Team_

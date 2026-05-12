@@ -35,7 +35,7 @@ const {
   getPlanProgress,
   updateAfterSubtask,
   CONFIG,
-} = require('../../.aios-core/infrastructure/scripts/plan-tracker');
+} = require('../../.aiox-core/infrastructure/scripts/plan-tracker');
 
 describe('PlanTracker', () => {
   const projectRoot = '/test/project';

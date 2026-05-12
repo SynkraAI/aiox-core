@@ -1,10 +1,10 @@
 #!/bin/bash
-# Install AIOS Git Hooks
+# Install AIOX Git Hooks
 # Version: 1.0
 
 set -e
 
-echo "🔧 Installing AIOS Git Hooks..."
+echo "🔧 Installing AIOX Git Hooks..."
 
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -20,7 +20,7 @@ fi
 
 # Install pre-commit hook (MMOS architecture guard)
 echo "Installing pre-commit hook (MMOS architecture guard)..."
-ln -sf ../../.aios-core/hooks/pre-commit-mmos-guard.sh "$HOOKS_DIR/pre-commit"
+ln -sf ../../.aiox-core/hooks/pre-commit-mmos-guard.sh "$HOOKS_DIR/pre-commit"
 chmod +x "$HOOKS_DIR/pre-commit"
 
 echo "✅ Pre-commit hook installed"
@@ -35,7 +35,7 @@ echo "Installed hooks:"
 echo "  - pre-commit: MMOS architecture guard"
 echo ""
 echo "To test:"
-echo "  .aios-core/hooks/pre-commit-mmos-guard.sh"
+echo "  .aiox-core/hooks/pre-commit-mmos-guard.sh"
 echo ""
 echo "To uninstall:"
 echo "  rm .git/hooks/pre-commit"

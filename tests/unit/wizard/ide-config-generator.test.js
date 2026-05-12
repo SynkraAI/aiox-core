@@ -12,6 +12,7 @@ const {
   validateConfigContent,
   generateTemplateVariables,
   generateIDEConfigs,
+  linkGeminiExtension,
 } = require('../../../packages/installer/src/wizard/ide-config-generator');
 
 describe('IDE Config Generator', () => {
@@ -97,7 +98,7 @@ describe('IDE Config Generator', () => {
       expect(variables).toHaveProperty('projectName');
       expect(variables).toHaveProperty('projectType');
       expect(variables).toHaveProperty('timestamp');
-      expect(variables).toHaveProperty('aiosVersion');
+      expect(variables).toHaveProperty('aioxVersion');
     });
 
     it('should use projectName from wizard state', () => {
@@ -128,12 +129,12 @@ describe('IDE Config Generator', () => {
       expect(variables.timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
     });
 
-    it('should include AIOS version', () => {
+    it('should include AIOX version', () => {
       const wizardState = {};
       const variables = generateTemplateVariables(wizardState);
 
-      expect(variables.aiosVersion).toBeDefined();
-      expect(typeof variables.aiosVersion).toBe('string');
+      expect(variables.aioxVersion).toBeDefined();
+      expect(typeof variables.aioxVersion).toBe('string');
     });
   });
 
@@ -172,7 +173,7 @@ describe('IDE Config Generator', () => {
     });
 
     it('should create config files for multiple IDEs', async () => {
-      const selectedIDEs = ['cursor', 'windsurf'];
+      const selectedIDEs = ['cursor', 'gemini'];
       const wizardState = { projectName: 'test', projectType: 'greenfield' };
 
       const result = await generateIDEConfigs(selectedIDEs, wizardState, {
@@ -183,13 +184,13 @@ describe('IDE Config Generator', () => {
       // Now includes config files + agent files for each IDE
       expect(result.files.length).toBeGreaterThanOrEqual(2);
 
-      // v2.1: Cursor uses .cursor/rules.md, Windsurf uses .windsurfrules
+      // v2.1: Cursor and Gemini use directory-based rules files
       expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules.md'))).toBe(true);
-      expect(await fs.pathExists(path.join(testDir, '.windsurfrules'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules.md'))).toBe(true);
 
       // Agent folders should also exist
       expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules'))).toBe(true);
-      expect(await fs.pathExists(path.join(testDir, '.windsurf', 'rules'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOX', 'agents'))).toBe(true);
     });
 
     it('should create directory for IDEs that require it', async () => {
@@ -219,9 +220,9 @@ describe('IDE Config Generator', () => {
       const configPath = path.join(testDir, '.cursor', 'rules.md');
       const content = await fs.readFile(configPath, 'utf8');
 
-      // v2.1 templates use static content from .aios-core/templates/ide-rules/
-      // They contain Synkra AIOS standard rules
-      expect(content).toContain('Synkra AIOS');
+      // v2.1 templates use static content from .aiox-core/templates/ide-rules/
+      // They contain Synkra AIOX standard rules
+      expect(content).toContain('Synkra AIOX');
       expect(content).toContain('Development Rules');
     });
 
@@ -239,8 +240,8 @@ describe('IDE Config Generator', () => {
       expect(await fs.pathExists(configPath)).toBe(true);
 
       const content = await fs.readFile(configPath, 'utf8');
-      // Should contain AIOS rules content
-      expect(content).toContain('Synkra AIOS');
+      // Should contain AIOX rules content
+      expect(content).toContain('Synkra AIOX');
     });
 
     it('should create text config files successfully', async () => {
@@ -256,6 +257,35 @@ describe('IDE Config Generator', () => {
 
       const configPath = path.join(testDir, '.antigravity', 'rules.md');
       expect(await fs.pathExists(configPath)).toBe(true);
+    });
+
+    it('should configure Gemini hooks and settings with active AIOX hooks', async () => {
+      const selectedIDEs = ['gemini'];
+      const wizardState = { projectName: 'test', projectType: 'greenfield' };
+
+      const result = await generateIDEConfigs(selectedIDEs, wizardState, {
+        projectRoot: testDir,
+      });
+
+      expect(result.success).toBe(true);
+
+      const hooksDir = path.join(testDir, '.gemini', 'hooks');
+      const settingsPath = path.join(testDir, '.gemini', 'settings.json');
+      expect(await fs.pathExists(hooksDir)).toBe(true);
+      expect(await fs.pathExists(path.join(hooksDir, 'before-agent.js'))).toBe(true);
+      expect(await fs.pathExists(path.join(hooksDir, 'session-start.js'))).toBe(true);
+      expect(await fs.pathExists(settingsPath)).toBe(true);
+
+      const settings = JSON.parse(await fs.readFile(settingsPath, 'utf8'));
+      expect(settings.hooks).toBeDefined();
+      expect(Array.isArray(settings.hooks.BeforeAgent)).toBe(true);
+      const beforeAgentWrapper = settings.hooks.BeforeAgent.find(
+        (w) => Array.isArray(w.hooks) && w.hooks.some((h) => h.name === 'aiox-context-inject'),
+      );
+      expect(beforeAgentWrapper).toBeDefined();
+      const hook = beforeAgentWrapper.hooks.find((h) => h.name === 'aiox-context-inject');
+      expect(hook.enabled).toBe(true);
+      expect(hook.command).toContain('.gemini/hooks/before-agent.js');
     });
 
     it('should handle invalid IDE key gracefully', async () => {
@@ -276,6 +306,23 @@ describe('IDE Config Generator', () => {
       // This test would require mocking to force an error mid-generation
       // For now, we verify the rollback logic exists in the code
       expect(generateIDEConfigs).toBeDefined();
+    });
+  });
+
+  describe('linkGeminiExtension', () => {
+    const testDir = path.join(__dirname, '..', '..', '..', '.test-temp-link-gemini');
+
+    beforeEach(async () => {
+      await fs.ensureDir(testDir);
+    });
+
+    afterEach(async () => {
+      await fs.remove(testDir);
+    });
+
+    it('should skip when extension directory does not exist', async () => {
+      const result = await linkGeminiExtension(testDir);
+      expect(result).toEqual({ status: 'skipped', reason: 'extension-dir-not-found' });
     });
   });
 });

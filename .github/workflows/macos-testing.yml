@@ -32,6 +32,9 @@ concurrency:
   group: macos-testing-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   # Job 1: Intel Mac Testing
   test-intel-mac:
@@ -98,7 +101,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-logs-intel
-          path: /tmp/aios-test-*.log
+          path: /tmp/aiox-test-*.log
           retention-days: 30
 
   # Job 2: Apple Silicon Testing
@@ -173,7 +176,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-logs-apple-silicon
-          path: /tmp/aios-test-*.log
+          path: /tmp/aiox-test-*.log
           retention-days: 30
 
   # Job 3: Error Recovery Testing
@@ -204,7 +207,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-logs-error-recovery
-          path: /tmp/aios-test-*.log
+          path: /tmp/aiox-test-*.log
           retention-days: 30
 
   # Job 4: Generate Test Report
@@ -213,6 +216,9 @@ jobs:
     runs-on: macos-latest
     needs: [test-intel-mac, test-apple-silicon, test-error-recovery]
     if: always()
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout repository

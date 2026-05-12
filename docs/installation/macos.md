@@ -1,4 +1,4 @@
-# macOS Installation Guide for Synkra AIOS
+# macOS Installation Guide for Synkra AIOX
 
 > 🌐 **EN** | [PT](../pt/installation/macos.md) | [ES](../es/installation/macos.md)
 
@@ -64,7 +64,7 @@ Download from [cli.github.com](https://cli.github.com/)
 
 3. Run the installer:
    ```bash
-   npx github:SynkraAI/aios-core install
+   npx github:SynkraAI/aiox-core install
    ```
 
 ### What the Installer Does
@@ -76,7 +76,6 @@ The installer automatically:
 - ✅ Configures IDE paths for macOS locations:
   - Cursor: `~/Library/Application Support/Cursor/`
   - Claude: `~/.claude/`
-  - Windsurf: `~/Library/Application Support/Windsurf/`
 - ✅ Sets up shell scripts with Unix line endings
 - ✅ Handles case-sensitive filesystems properly
 
@@ -90,12 +89,10 @@ The installer automatically:
 
 ### Claude Code
 
-1. Commands are installed to `.claude/commands/AIOS/`
+1. Commands are installed to `.claude/commands/AIOX/`
 2. Use `/agent-name` to activate agents
 
-### Windsurf
 
-1. Rules are installed to `.windsurf/rules/`
 2. Use `@agent-name` to activate agents
 
 ## Troubleshooting
@@ -109,7 +106,7 @@ If you encounter permission errors:
 sudo chown -R $(whoami) ~/.npm
 
 # Fix project permissions
-sudo chown -R $(whoami) .aios-core
+sudo chown -R $(whoami) .aiox-core
 ```
 
 ### GitHub CLI Authentication
@@ -145,14 +142,14 @@ macOS filesystems can be case-insensitive by default. If you experience issues:
    diskutil info / | grep "File System"
    ```
 
-2. Synkra AIOS handles both case-sensitive and case-insensitive filesystems automatically
+2. Synkra AIOX handles both case-sensitive and case-insensitive filesystems automatically
 
 ## Updating
 
 To update an existing installation:
 
 ```bash
-npx github:SynkraAI/aios-core install
+npx github:SynkraAI/aiox-core install
 ```
 
 The updater will:

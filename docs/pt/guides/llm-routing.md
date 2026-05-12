@@ -32,20 +32,20 @@ O Roteamento de LLM fornece dois comandos para diferentes casos de uso:
 
 ### Instalação
 
-**Opção 1: Se você tem o aios-core clonado**
+**Opção 1: Se você tem o aiox-core clonado**
 ```bash
-# Do diretório aios-core
-node .aios-core/infrastructure/scripts/llm-routing/install-llm-routing.js
+# Do diretório aiox-core
+node .aiox-core/infrastructure/scripts/llm-routing/install-llm-routing.js
 ```
 
 **Opção 2: Instalação nova**
 ```bash
 # Clone o repositório
-git clone https://github.com/SynkraAI/aios-core.git
-cd aios-core
+git clone https://github.com/SynkraAI/aiox-core.git
+cd aiox-core
 
 # Execute o instalador
-node .aios-core/infrastructure/scripts/llm-routing/install-llm-routing.js
+node .aiox-core/infrastructure/scripts/llm-routing/install-llm-routing.js
 ```
 
 ### Configurar Chave API do DeepSeek
@@ -246,8 +246,8 @@ O endpoint `/anthropic` do DeepSeek suporta chamada de ferramentas. Se as ferram
 
 Edite os arquivos de template se precisar de modelos diferentes:
 
-**Windows:** `.aios-core/infrastructure/scripts/llm-routing/templates/claude-free.cmd`
-**Unix:** `.aios-core/infrastructure/scripts/llm-routing/templates/claude-free.sh`
+**Windows:** `.aiox-core/infrastructure/scripts/llm-routing/templates/claude-free.cmd`
+**Unix:** `.aiox-core/infrastructure/scripts/llm-routing/templates/claude-free.sh`
 
 Altere:
 ```bash
@@ -286,9 +286,9 @@ rm ~/bin/claude-max
 
 ## Recursos Relacionados
 
-- **Definição da Ferramenta:** `.aios-core/infrastructure/tools/cli/llm-routing.yaml`
-- **Script de Instalação:** `.aios-core/infrastructure/scripts/llm-routing/install-llm-routing.js`
-- **Definição de Tarefa:** `.aios-core/development/tasks/setup-llm-routing.md`
+- **Definição da Ferramenta:** `.aiox-core/infrastructure/tools/cli/llm-routing.yaml`
+- **Script de Instalação:** `.aiox-core/infrastructure/scripts/llm-routing/install-llm-routing.js`
+- **Definição de Tarefa:** `.aiox-core/development/tasks/setup-llm-routing.md`
 - **API DeepSeek:** <https://platform.deepseek.com/api_keys>
 
 ---
@@ -309,4 +309,4 @@ R: As chaves são carregadas de arquivos `.env` (não faça commit deles!) ou va
 
 ---
 
-*Gerado pelo AIOS Framework - Story 6.7*
+*Gerado pelo AIOX Framework - Story 6.7*

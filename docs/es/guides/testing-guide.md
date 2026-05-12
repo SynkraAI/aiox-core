@@ -1,10 +1,10 @@
-# Guia de Testing de Synkra AIOS
+# Guia de Testing de Synkra AIOX
 
 > [EN](../../guides/testing-guide.md) | [PT](../../pt/guides/testing-guide.md) | **ES**
 
 ---
 
-> Guia completa de la estrategia de testing, herramientas y mejores practicas para Synkra AIOS.
+> Guia completa de la estrategia de testing, herramientas y mejores practicas para Synkra AIOX.
 
 **Version:** 2.1.0
 **Ultima Actualizacion:** 2026-01-29
@@ -31,7 +31,7 @@
 
 ## Vision General
 
-AIOS sigue una estrategia de testing integral que asegura la calidad del codigo en todas las capas del framework. Nuestra filosofia de testing esta construida sobre:
+AIOX sigue una estrategia de testing integral que asegura la calidad del codigo en todas las capas del framework. Nuestra filosofia de testing esta construida sobre:
 
 - **Desarrollo Guiado por Tests (TDD)** para funcionalidad core
 - **Testing por Capas** con tests unitarios, de integracion y E2E
@@ -119,7 +119,7 @@ module.exports = {
   testMatch: [
     '**/tests/**/*.test.js',
     '**/tests/**/*.spec.js',
-    '**/.aios-core/**/__tests__/**/*.test.js',
+    '**/.aiox-core/**/__tests__/**/*.test.js',
   ],
 
   testTimeout: 30000,
@@ -134,7 +134,7 @@ module.exports = {
       lines: 30,
       statements: 30,
     },
-    '.aios-core/core/': {
+    '.aiox-core/core/': {
       lines: 45,
     },
   },
@@ -152,7 +152,7 @@ module.exports = {
 
 const {
   QualityGateManager,
-} = require('../../../.aios-core/core/quality-gates/quality-gate-manager');
+} = require('../../../.aiox-core/core/quality-gates/quality-gate-manager');
 
 describe('QualityGateManager', () => {
   let manager;
@@ -244,7 +244,7 @@ Los tests de integracion verifican que multiples componentes funcionen correctam
 ```javascript
 // tests/setup.js
 process.env.NODE_ENV = 'test';
-process.env.AIOS_DEBUG = 'false';
+process.env.AIOX_DEBUG = 'false';
 
 // Omitir tests de integracion por defecto
 if (process.env.SKIP_INTEGRATION_TESTS === undefined) {
@@ -274,7 +274,7 @@ global.testIntegration = process.env.SKIP_INTEGRATION_TESTS === 'true' ? test.sk
  * - Escenarios de fallback
  */
 
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
 
 describe('Tests de Integracion de Saludo Contextual', () => {
   let builder;
@@ -405,10 +405,10 @@ Probar agentes IA requiere consideraciones especiales para comportamiento de per
 /**
  * Tests de Compatibilidad Retroactiva de Agentes
  *
- * Asegura que agentes de versiones anteriores de AIOS continuen funcionando.
+ * Asegura que agentes de versiones anteriores de AIOX continuen funcionando.
  */
 
-const { loadAgent } = require('../../.aios-core/core/registry/agent-loader');
+const { loadAgent } = require('../../.aiox-core/core/registry/agent-loader');
 
 describe('Compatibilidad Retroactiva de Agentes', () => {
   describe('Formato de Agente Legacy (v1.x)', () => {
@@ -471,7 +471,7 @@ describe('Comandos de Agentes', () => {
 
 ## Testing Cross-Platform
 
-AIOS soporta Windows, macOS y Linux. El testing cross-platform asegura comportamiento consistente.
+AIOX soporta Windows, macOS y Linux. El testing cross-platform asegura comportamiento consistente.
 
 ### Archivos de Test Especificos por Plataforma
 
@@ -512,7 +512,7 @@ function normalizePath(p) {
 
 // Obtener directorio temporal apropiado para la plataforma
 function getTempDir() {
-  return path.join(os.tmpdir(), 'aios-tests');
+  return path.join(os.tmpdir(), 'aiox-tests');
 }
 
 module.exports = {
@@ -599,7 +599,7 @@ jobs:
 module.exports = {
   collectCoverageFrom: [
     'src/**/*.js',
-    '.aios-core/**/*.js',
+    '.aiox-core/**/*.js',
     'bin/**/*.js',
     'packages/**/*.js',
     'scripts/**/*.js',
@@ -610,15 +610,15 @@ module.exports = {
     '!**/*.test.js',
     '!**/*.spec.js',
     // Excluir templates y archivos generados
-    '!.aios-core/development/templates/**',
-    '!.aios-core/product/templates/**',
+    '!.aiox-core/development/templates/**',
+    '!.aiox-core/product/templates/**',
     '!**/dist/**',
     // Excluir modulos con I/O intensivo (mejor para tests de integracion)
-    '!.aios-core/core/health-check/checks/**',
-    '!.aios-core/core/config/**',
-    '!.aios-core/core/manifest/**',
-    '!.aios-core/core/registry/**',
-    '!.aios-core/core/utils/**',
+    '!.aiox-core/core/health-check/checks/**',
+    '!.aiox-core/core/config/**',
+    '!.aiox-core/core/manifest/**',
+    '!.aiox-core/core/registry/**',
+    '!.aiox-core/core/utils/**',
   ],
 
   coverageThreshold: {
@@ -628,7 +628,7 @@ module.exports = {
       lines: 30,
       statements: 30,
     },
-    '.aios-core/core/': {
+    '.aiox-core/core/': {
       lines: 45,
     },
   },
@@ -668,7 +668,7 @@ xdg-open coverage/lcov-report/index.html
 coverage/
 ├── lcov-report/          # Reporte HTML
 │   ├── index.html        # Vista general
-│   └── .aios-core/       # Cobertura por modulo
+│   └── .aiox-core/       # Cobertura por modulo
 ├── lcov.info             # Formato LCOV (para CI)
 ├── coverage-summary.json # Resumen JSON
 └── clover.xml            # Formato Clover
@@ -778,7 +778,7 @@ npm test -- --passWithNoTests --testPathIgnorePatterns=integration,e2e
 
 ### Integracion con Quality Gate
 
-El Sistema de Quality Gate de AIOS (ver [Guia de Quality Gates](./quality-gates.md)) integra testing en multiples capas:
+El Sistema de Quality Gate de AIOX (ver [Guia de Quality Gates](./quality-gates.md)) integra testing en multiples capas:
 
 | Capa        | Tipo de Test                  | Cuando         |
 | ----------- | ----------------------------- | -------------- |
@@ -993,8 +993,8 @@ describe('AgentLoader', () => {
 
 ```javascript
 // Mock de API de ClickUp
-jest.mock('../../.aios-core/integrations/clickup-client');
-const clickupClient = require('../../.aios-core/integrations/clickup-client');
+jest.mock('../../.aiox-core/integrations/clickup-client');
+const clickupClient = require('../../.aiox-core/integrations/clickup-client');
 
 describe('Sincronizacion de Story', () => {
   beforeEach(() => {
@@ -1212,4 +1212,4 @@ module.exports = {
 
 ---
 
-_Guia de Testing de Synkra AIOS v2.1_
+_Guia de Testing de Synkra AIOX v4_

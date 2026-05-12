@@ -11,7 +11,7 @@
 
 ## Contexto
 
-Seguindo a [Auditoria do Estado Atual](./ADR-COLLAB-1-current-state-audit.md), este documento propõe alterações de configuração específicas para habilitar contribuições externas seguras ao AIOS.
+Seguindo a [Auditoria do Estado Atual](./ADR-COLLAB-1-current-state-audit.md), este documento propõe alterações de configuração específicas para habilitar contribuições externas seguras ao AIOX.
 
 ---
 
@@ -69,7 +69,7 @@ branch_protection:
 **Comando de Implementação:**
 
 ```bash
-gh api repos/SynkraAI/aios-core/branches/main/protection -X PUT \
+gh api repos/SynkraAI/aiox-core/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build","test","validation-summary"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":1}' \
@@ -85,7 +85,7 @@ gh api repos/SynkraAI/aios-core/branches/main/protection -X PUT \
 
 ```yaml
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-# Configuração CodeRabbit do AIOS
+# Configuração CodeRabbit do AIOX
 # Story: COLLAB-1
 
 language: 'en-US'
@@ -110,29 +110,29 @@ reviews:
   # Instruções de revisão específicas por caminho
   path_instructions:
     # Definições de agentes - validação rigorosa
-    '.aios-core/development/agents/**':
-      - 'Verificar se agente segue estrutura YAML de agente AIOS (persona_profile, commands, dependencies)'
+    '.aiox-core/development/agents/**':
+      - 'Verificar se agente segue estrutura YAML de agente AIOX (persona_profile, commands, dependencies)'
       - 'Verificar se persona_profile inclui archetype, communication style e greeting_levels'
       - 'Validar se todos os comandos listados têm dependências de tarefa correspondentes'
       - 'Garantir que agente tem metadados de visibilidade apropriados para comandos'
       - 'Verificar segurança: sem credenciais hardcoded ou dados sensíveis'
 
     # Definições de tarefas
-    '.aios-core/development/tasks/**':
-      - 'Verificar se tarefa segue formato de tarefa AIOS com pontos de elicitação claros'
+    '.aiox-core/development/tasks/**':
+      - 'Verificar se tarefa segue formato de tarefa AIOX com pontos de elicitação claros'
       - 'Verificar se deliverables estão bem definidos'
       - 'Validar se quaisquer dependências referenciadas existem no codebase'
       - 'Garantir que tarefa tem orientação apropriada de tratamento de erros'
 
     # Definições de workflows
-    '.aios-core/development/workflows/**':
+    '.aiox-core/development/workflows/**':
       - 'Verificar se estrutura YAML do workflow é válida'
       - 'Verificar se ordenação e dependências de passos fazem sentido lógico'
       - 'Validar se agentes e tarefas referenciados existem'
 
     # Arquivos de template
-    '.aios-core/product/templates/**':
-      - 'Garantir que template segue convenções de template AIOS'
+    '.aiox-core/product/templates/**':
+      - 'Garantir que template segue convenções de template AIOX'
       - 'Verificar se sintaxe de placeholder é consistente'
       - 'Validar se template produz saída válida'
 
@@ -148,7 +148,7 @@ reviews:
       - 'Verificar boas práticas de async/await'
       - 'Verificar se tratamento de erros é abrangente'
       - 'Procurar potenciais vulnerabilidades de segurança'
-      - 'Garantir que código segue padrões de codificação AIOS'
+      - 'Garantir que código segue padrões de codificação AIOX'
 
     '**/*.ts':
       - 'Verificar se tipos TypeScript estão definidos corretamente'
@@ -197,7 +197,7 @@ abort_on_close: true
 **Arquivo:** `.github/CODEOWNERS`
 
 ```codeowners
-# AIOS Code Owners
+# AIOX Code Owners
 # Story: COLLAB-1
 # Última Atualização: 2025-12-30
 #
@@ -214,21 +214,21 @@ abort_on_close: true
 # Framework Core
 # ============================================
 # Definições de agentes - requer revisão do core team
-.aios-core/development/agents/ @SynkraAI/core-team
+.aiox-core/development/agents/ @SynkraAI/core-team
 
 # Definições de tarefas - requer revisão do core team
-.aios-core/development/tasks/ @SynkraAI/core-team
+.aiox-core/development/tasks/ @SynkraAI/core-team
 
 # Definições de workflows - requer revisão do core team
-.aios-core/development/workflows/ @SynkraAI/core-team
+.aiox-core/development/workflows/ @SynkraAI/core-team
 
 # Templates - requer revisão de architect/core team
-.aios-core/product/templates/ @SynkraAI/core-team
+.aiox-core/product/templates/ @SynkraAI/core-team
 templates/ @SynkraAI/core-team
 
 # Utilitários core - requer revisão sênior
-.aios-core/core/ @SynkraAI/core-team
-.aios-core/cli/ @SynkraAI/core-team
+.aiox-core/core/ @SynkraAI/core-team
+.aiox-core/cli/ @SynkraAI/core-team
 
 # ============================================
 # Infraestrutura
@@ -240,7 +240,7 @@ templates/ @SynkraAI/core-team
 .docker/ @SynkraAI/devops
 
 # Arquivos de configuração
-.aios-core/core-config.yaml @SynkraAI/core-team
+.aiox-core/core-config.yaml @SynkraAI/core-team
 package.json @SynkraAI/maintainers
 package-lock.json @SynkraAI/maintainers
 
@@ -324,7 +324,7 @@ docs/guides/ @SynkraAI/maintainers
 
 #### Obrigatório
 
-- [ ] Agente segue estrutura YAML de agente AIOS
+- [ ] Agente segue estrutura YAML de agente AIOX
 - [ ] `persona_profile` está completo (archetype, communication, greeting_levels)
 - [ ] Todos os comandos têm dependências de tarefa correspondentes
 - [ ] Sem credenciais hardcoded ou dados sensíveis
@@ -370,7 +370,7 @@ _Ao submeter este PR, confirmo que li as [Diretrizes de Contribuição](../../..
 
 #### Obrigatório
 
-- [ ] Tarefa segue formato de tarefa AIOS
+- [ ] Tarefa segue formato de tarefa AIOX
 - [ ] Pontos de elicitação são claros e acionáveis
 - [ ] Deliverables estão bem definidos
 - [ ] Orientação de tratamento de erros incluída
@@ -444,10 +444,10 @@ _Ao submeter este PR, confirmo que li as [Diretrizes de Contribuição](../../..
 
 ```bash
 # Remover toda proteção de branch (apenas emergência)
-gh api -X DELETE repos/SynkraAI/aios-core/branches/main/protection
+gh api -X DELETE repos/SynkraAI/aiox-core/branches/main/protection
 
 # Restaurar proteção mínima
-gh api repos/SynkraAI/aios-core/branches/main/protection -X PUT \
+gh api repos/SynkraAI/aiox-core/branches/main/protection -X PUT \
   -F required_status_checks='{"strict":true,"contexts":["lint","typecheck","build"]}' \
   -F enforce_admins=false \
   -F required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":0}' \

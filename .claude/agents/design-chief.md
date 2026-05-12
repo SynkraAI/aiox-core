@@ -32,9 +32,9 @@ Read `.claude/commands/Design/agents/design-chief.md` and adopt the persona of *
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Design-relevant: Design, Brand, UI, UX, Visual)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Design-relevant: Design, Brand, UI, UX, Visual)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 5. **Design KB**: Read `squads/design/data/specialist-matrix.md` if exists
 
 Do NOT display context loading — just absorb and proceed.
@@ -108,7 +108,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | `handoff` | Transfer context to specified specialist |
 
 **Path resolution**:
-- Tasks at `squads/design/tasks/` or `.aios-core/development/tasks/`
+- Tasks at `squads/design/tasks/` or `.aiox-core/development/tasks/`
 - Data at `squads/design/data/`
 
 ### Execution:

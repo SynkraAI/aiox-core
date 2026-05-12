@@ -1,12 +1,12 @@
 <!-- Tradução: PT-BR | Original: /docs/en/architecture/module-system.md | Sincronização: 2026-01-26 -->
 
-# Arquitetura do Sistema de Módulos do AIOS
+# Arquitetura do Sistema de Módulos do AIOX
 
 > 🌐 [EN](../../architecture/module-system.md) | **PT** | [ES](../../es/architecture/module-system.md)
 
 ---
 
-> Guia completo para a arquitetura modular v2.1 do Synkra AIOS.
+> Guia completo para a arquitetura modular v4.2 do Synkra AIOX.
 
 **Versão:** 2.1.0
 **Última Atualização:** 2025-12-01
@@ -17,9 +17,9 @@
 
 ### Por Que Arquitetura Modular?
 
-A arquitetura modular v2.1 aborda vários desafios da estrutura flat da v2.0:
+A arquitetura modular v4.2 aborda vários desafios da estrutura flat da v2.0:
 
-| Desafio            | Problema v2.0                       | Solução v2.1                          |
+| Desafio            | Problema v2.0                       | Solução v4.2                          |
 | ------------------ | ----------------------------------- | ------------------------------------- |
 | **Descoberta**     | 200+ arquivos em diretórios mistos  | Organizado por responsabilidade       |
 | **Manutenção**     | Propriedade pouco clara             | Limites de módulo definem propriedade |
@@ -39,10 +39,10 @@ A arquitetura modular v2.1 aborda vários desafios da estrutura flat da v2.0:
 
 ## Estrutura de Módulos
 
-O Synkra AIOS organiza o diretório `.aios-core/` em quatro módulos principais:
+O Synkra AIOX organiza o diretório `.aiox-core/` em quatro módulos principais:
 
 ```
-.aios-core/
+.aiox-core/
 ├── core/              # Fundamentos do framework
 ├── development/       # Artefatos de desenvolvimento
 ├── product/           # Templates voltados ao usuário
@@ -53,7 +53,7 @@ O Synkra AIOS organiza o diretório `.aios-core/` em quatro módulos principais:
 
 ```mermaid
 graph TB
-    subgraph "Framework AIOS v2.1"
+    subgraph "Framework AIOX v4"
         CLI[CLI / Ferramentas]
 
         subgraph "Módulo Product"
@@ -104,7 +104,7 @@ graph TB
 
 ## Módulo Core
 
-**Caminho:** `.aios-core/core/`
+**Caminho:** `.aiox-core/core/`
 **Propósito:** Fundamentos do framework - configuração, sessão, elicitation e componentes essenciais de runtime.
 
 ### Conteúdos
@@ -112,7 +112,7 @@ graph TB
 | Diretório        | Conteúdos                                        | Descrição                                   |
 | ---------------- | ------------------------------------------------ | ------------------------------------------- |
 | `config/`        | `config-cache.js`, `config-loader.js`            | Gerenciamento de configuração com cache TTL |
-| `data/`          | `aios-kb.md`, `workflow-patterns.yaml`           | Base de conhecimento do framework           |
+| `data/`          | `aiox-kb.md`, `workflow-patterns.yaml`           | Base de conhecimento do framework           |
 | `docs/`          | Documentação interna                             | Guias de componentes, troubleshooting       |
 | `elicitation/`   | `elicitation-engine.js`, `session-manager.js`    | Sistema de prompting interativo             |
 | `session/`       | `context-detector.js`, `context-loader.js`       | Gerenciamento de contexto de sessão         |
@@ -127,19 +127,19 @@ graph TB
 
 ```javascript
 // Configuração
-const { loadAgentConfig, globalConfigCache } = require('./.aios-core/core');
+const { loadAgentConfig, globalConfigCache } = require('./.aiox-core/core');
 
 // Sessão
-const { ContextDetector, SessionContextLoader } = require('./.aios-core/core');
+const { ContextDetector, SessionContextLoader } = require('./.aiox-core/core');
 
 // Elicitation
-const { ElicitationEngine, ElicitationSessionManager } = require('./.aios-core/core');
+const { ElicitationEngine, ElicitationSessionManager } = require('./.aiox-core/core');
 
 // Registry
-const { getRegistry, loadRegistry } = require('./.aios-core/core/registry/registry-loader');
+const { getRegistry, loadRegistry } = require('./.aiox-core/core/registry/registry-loader');
 
 // Quality Gates
-const QualityGateManager = require('./.aios-core/core/quality-gates/quality-gate-manager');
+const QualityGateManager = require('./.aiox-core/core/quality-gates/quality-gate-manager');
 ```
 
 ### Dependências
@@ -151,7 +151,7 @@ const QualityGateManager = require('./.aios-core/core/quality-gates/quality-gate
 
 ## Módulo Development
 
-**Caminho:** `.aios-core/development/`
+**Caminho:** `.aiox-core/development/`
 **Propósito:** Assets relacionados a agentes - definições de agentes, tarefas, workflows e scripts de desenvolvimento.
 
 ### Conteúdos
@@ -168,7 +168,7 @@ const QualityGateManager = require('./.aios-core/core/quality-gates/quality-gate
 
 | Agente          | ID                 | Responsabilidade          |
 | --------------- | ------------------ | ------------------------- |
-| AIOS Master     | `aios-master`      | Orquestração do framework |
+| AIOX Master     | `aiox-master`      | Orquestração do framework |
 | Developer       | `dev`              | Implementação de código   |
 | QA              | `qa`               | Garantia de qualidade     |
 | Architect       | `architect`        | Arquitetura técnica       |
@@ -198,7 +198,7 @@ const QualityGateManager = require('./.aios-core/core/quality-gates/quality-gate
 
 ## Módulo Product
 
-**Caminho:** `.aios-core/product/`
+**Caminho:** `.aiox-core/product/`
 **Propósito:** Assets PM/PO - templates, checklists e dados de referência para geração de documentos.
 
 ### Conteúdos
@@ -237,7 +237,7 @@ const QualityGateManager = require('./.aios-core/core/quality-gates/quality-gate
 
 ## Módulo Infrastructure
 
-**Caminho:** `.aios-core/infrastructure/`
+**Caminho:** `.aiox-core/infrastructure/`
 **Propósito:** Configuração do sistema - scripts, ferramentas e integrações externas.
 
 ### Conteúdos
@@ -356,16 +356,16 @@ Para projetos atualizando da estrutura flat v2.0:
 
 ```bash
 # Dry run para visualizar mudanças
-aios migrate --dry-run
+aiox migrate --dry-run
 
 # Executar migração
-aios migrate --from=2.0 --to=2.1
+aiox migrate --from=2.0 --to=2.1
 
 # Validar migração
-aios migrate --validate
+aiox migrate --validate
 ```
 
-Veja o [Guia de Migração](../../migration/v2.0-to-v2.1.md) para instruções detalhadas.
+Veja o [Guia de Migração](../../migration/migration-guide.md) para instruções detalhadas.
 
 ---
 
@@ -374,9 +374,9 @@ Veja o [Guia de Migração](../../migration/v2.0-to-v2.1.md) para instruções d
 - [Guia de Service Discovery](../guides/service-discovery.md)
 - [Guia de Quality Gates](../guides/quality-gates.md)
 - [Guia de Setup Global MCP](../guides/mcp-global-setup.md)
-- [Guia de Migração](../../migration/v2.0-to-v2.1.md)
+- [Guia de Migração](../../migration/migration-guide.md)
 - [ADR-002: Mapa de Migração](../../architecture/adr/ADR-002-migration-map.md)
 
 ---
 
-_Arquitetura do Sistema de Módulos Synkra AIOS v2.1_
+_Arquitetura do Sistema de Módulos Synkra AIOX v4_

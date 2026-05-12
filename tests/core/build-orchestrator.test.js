@@ -22,16 +22,16 @@ const {
 } = require('./execution-test-helpers');
 
 // Mock optional modules to prevent constructor errors
-jest.mock('../../.aios-core/workflow-intelligence/engine/wave-analyzer', () => null);
-jest.mock('../../.aios-core/infrastructure/scripts/worktree-manager', () => { throw new Error('not available'); });
-jest.mock('../../.aios-core/core/memory/gotchas-memory', () => { throw new Error('not available'); });
+jest.mock('../../.aiox-core/workflow-intelligence/engine/wave-analyzer', () => null);
+jest.mock('../../.aiox-core/infrastructure/scripts/worktree-manager', () => { throw new Error('not available'); });
+jest.mock('../../.aiox-core/core/memory/gotchas-memory', () => { throw new Error('not available'); });
 
 const {
   BuildOrchestrator,
   OrchestratorEvent,
   Phase,
   DEFAULT_CONFIG,
-} = require('../../.aios-core/core/execution/build-orchestrator');
+} = require('../../.aiox-core/core/execution/build-orchestrator');
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //                              ENUMS & CONFIG

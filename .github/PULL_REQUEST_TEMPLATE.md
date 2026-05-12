@@ -3,7 +3,7 @@
 ## 📋 Description
 A clear and concise description of what this PR does and why it's needed.
 
-## 🎯 AIOS Story Reference
+## 🎯 AIOX Story Reference
 <!-- REQUIRED: Link to the story this PR implements -->
 **Story ID:** <!-- e.g., 3.3-3.4 -->
 **Story File:** <!-- e.g., docs/stories/v2.1/sprint-3/story-3.3-3.4-pr-automation.md -->
@@ -26,8 +26,8 @@ Closes #(issue number)
 - [ ] 🧪 Test update
 
 ## 🎯 Scope
-- [ ] Core framework (`aios-core/`)
-- [ ] Expansion pack (`expansion-packs/`)
+- [ ] Core framework (`aiox-core/`)
+- [ ] Squad (`squads/`)
 - [ ] Tools (`tools/`)
 - [ ] Documentation (`docs/`)
 - [ ] CI/CD (`.github/`)
@@ -93,7 +93,7 @@ Add screenshots to help explain your changes.
 
 ## 👥 Reviewers
 Tag relevant reviewers:
-- @SynkraAI (PO - required for expansion-pack changes)
+- @SynkraAI (PO - required for squad changes)
 
 ## 🚀 Deployment Notes
 Any special deployment considerations or migration steps needed?
@@ -101,4 +101,3 @@ Any special deployment considerations or migration steps needed?
 ---
 
 **Note:** For expansion-pack related PRs, Product Owner (PO) approval is required before merge.
-

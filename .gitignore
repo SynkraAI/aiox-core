@@ -13,10 +13,10 @@ npm-debug.log*
 .cache/
 
 # Installation logs and backups (Story 1.9 - Error Handling & Rollback)
-.aios-install.log
-.aios-install.log.*
-.aios-backup/
-.aios-core.backup*/                # Backup directories (any timestamp)
+.aiox-install.log
+.aiox-install.log.*
+.aiox-backup/
+.aiox-core.backup*/                # Backup directories (any timestamp)
 
 # Build output
 build/*.txt
@@ -53,8 +53,12 @@ credentials/
 .claude/commands/mmosMapper/
 .claude/commands/hybridOps/
 
-# Private local expansion packs/squads (not for repository)
-expansion-packs/
+# Private local squads (not for repository)
+squads/*
+!squads/.gitkeep
+!squads/_example/
+# Published squads (whitelisted for repository)
+!squads/claude-code-mastery/
 keys/
 *.secret
 *.credentials
@@ -79,13 +83,19 @@ sync-*.sh                     # Agent sync scripts
 
 # AI assistant files
 CLAUDE.md
-.claude
+.claude/*
 !.claude/commands/
-!.claude/commands/AIOS/
-!.claude/commands/AIOS/agents/
+!.claude/commands/AIOX/
+!.claude/commands/AIOX/agents/
 !.claude/CLAUDE.md
 !.claude/rules/
+!.claude/settings.json
 .gemini
+!.gemini/
+!.gemini/rules/
+!.gemini/rules/AIOX/
+!.gemini/rules/AIOX/agents/
+!.gemini/rules/AIOX/agents/*.md
 
 # AI Session Artifacts (Story 6.1.2.6 - Decision Logging)
 # Auto-generated decision logs from yolo mode executions
@@ -93,26 +103,26 @@ CLAUDE.md
 *.decision-log.md
 
 # Project-specific
-# Note: .aios-core is SOURCE CODE for framework-development mode
+# Note: .aiox-core is SOURCE CODE for framework-development mode
 # It should NOT be ignored in the main repository
-.aios-core.backup*/                # Only ignore backup directories
+.aiox-core.backup*/                # Only ignore backup directories
 test-project-install/*
 sample-project/*
 
-# Expansion Projects (separate from core AIOS-FULLSTACK)
+# Expansion Projects (separate from core AIOX-FULLSTACK)
 # These folders are from other projects and should NOT be in this repository
-.aios/                        # AIOS expansion project files
-.aios/project-status.yaml     # Project status cache (Story 6.1.2.4 - auto-generated)
+.aiox/                        # AIOX expansion project files
+.aiox/project-status.yaml     # Project status cache (Story 6.1.2.4 - auto-generated)
 .cursor/                      # Cursor IDE project files
-aios-memory-layer-mvp/        # Separate memory layer project
-memory/                       # Memory expansion package
-performance/                  # Performance expansion package
+aiox-memory-layer-mvp/        # Separate memory layer project
+memory/                       # Memory squad
+performance/                  # Performance squad
 scripts/                      # Project-specific scripts (not part of core)
-security/                     # Security expansion package
-telemetry/                    # Telemetry expansion package
+security/                     # Security squad
+telemetry/                    # Telemetry squad
 tests/                        # Test files for expansion projects
 
-# AIOS Development Artifacts (generated during workflow execution)
+# AIOX Development Artifacts (generated during workflow execution)
 # These files are created by agents during development and should NOT be in version control
 # NOTE: docs/prd/ is TRACKED - it contains important product documentation
 qa/                           # Test artifacts and quality assurance files
@@ -127,21 +137,21 @@ coverage/
 *.lcov
 lcov-report/
 
-# AIOS temporary build/analysis files
-.aios/reports/
-.aios/temp-*.js
+# AIOX temporary build/analysis files
+.aiox/reports/
+.aiox/temp-*.js
 
 # Build outputs (generated from source)
-aios-core/index.d.ts
-aios-core/index.esm.js
-aios-core/*.map
+aiox-core/index.d.ts
+aiox-core/index.esm.js
+aiox-core/*.map
 
 # Applications (separate deployments, NOT part of npm package)
 apps/
 !shapeai/apps/
 
 # External projects (separate repositories)
-aios-guide-app/
+aiox-guide-app/
 examples/
 !docs/examples/
 supabase/
@@ -155,18 +165,8 @@ tests/*/__fixtures__/
 # UI/UX design artifacts
 docs/ui-prompts.pdf
 
-# Keep these main planning documents (DO commit these)
-# docs/prd.md
-# docs/architecture.md
-# docs/front-end-spec.md
-# docs/project-brief.md
-# docs/epics/          - Epic definitions
-# docs/stories/        - Story files (v2.1, v2.2, etc)
-# docs/qa/             - QA gates and reports
-# docs/architecture/   - Architecture decisions and reviews
-# docs/decisions/      - Decision logs and learnings (except roundtables)
-# NOTE: docs/standards/ is IGNORED - contains proprietary methodology (see below)
-# NOTE: docs/one-pagers/ is IGNORED - contains internal business decisions (see below)
+# NOTE: docs/ internal directories are gitignored in the
+# "INTERNAL DOCS" section below. Only public docs ship.
 
 # Windows reserved device names
 NUL
@@ -179,17 +179,17 @@ PRN
 # ============================================
 
 # Framework runtime artifacts
-.aios-core/.session/
-.aios-core/manifests/*.csv
-.aios-core/core/registry/service-registry.json
+.aiox-core/.session/
+.aiox-core/manifests/*.csv
+.aiox-core/core/registry/service-registry.json
 
 # Quality metrics (generated during testing)
-.aios/data/quality-metrics.json
-.aios-core/quality/metrics-*.json
-.aios-core/data/quality-metrics.json
+.aiox/data/quality-metrics.json
+.aiox-core/quality/metrics-*.json
+.aiox-core/data/quality-metrics.json
 
 # Session data
-.aios-core/.session/current-session.json
+.aiox-core/.session/current-session.json
 
 # ============================================
 # ARCHIVED DOCUMENTATION (Story 6.12)
@@ -221,42 +221,47 @@ test-sample-*.md
 .tsbuildinfo
 *.tsbuildinfo
 
+# Runtime AIOX artifacts (explicit rules without inline comments)
+.aiox/
+.aiox/project-status.yaml
+.aiox/notifications/
+.aiox/sessions/
+
 # ESLint cache
 .eslintcache
 
 # ============================================
-# PROPRIETARY/INTERNAL CONTENT (Story TD-5)
+# INTERNAL DOCS (not for GitHub or npm install)
 # ============================================
-# Content that is NOT part of the public aios-core framework
-# These are SynkraAI-specific methodologies and business documents
+# Development artifacts, internal strategy, and proprietary content.
+# These stay local only — not published to GitHub or npm.
 
-# Proprietary Process Mapping Frameworks (Pedro Valério methodology)
-docs/standards/
-
-# Internal Business Decisions and Strategy
-docs/one-pagers/
-
-# Internal PRDs (product requirements - internal development plans)
-docs/prd/
-
-# Internal Decisions (business strategy, architecture decisions)
-docs/decisions/
-
-# Internal Development Stories (sprint backlogs, story tracking)
-# Users don't need development history - only documentation
 docs/stories/
-
-# Internal QA Reports and Assessments
+docs/research/
 docs/qa/
-
-# Internal Epics (roadmap, partner strategies, business plans)
-# Contains sensitive info: partner names, financials, timelines
 docs/epics/
+docs/prd/
+docs/decisions/
+docs/one-pagers/
+docs/strategy/
+docs/handoffs/
+docs/requirements/
+docs/releases/
+docs/standards/
+docs/architecture/
+docs/agents/
+docs/private/
 
 # Squad Design Files (test artifacts)
 squads/.designs/
 
 # ============================================
+# MCP Configuration (contains API keys)
+.mcp.json
+
+# Nogic (code intelligence - local config)
+.nogic/
+
 # MCP/PLAYWRIGHT ARTIFACTS
 # ============================================
 # Screenshots and sensitive data from MCP tools
@@ -267,49 +272,49 @@ npm-recovery-codes.txt
 # ============================================
 # PRO SUBMODULE (ADR-PRO-001 — git submodule, NOT ignored)
 # ============================================
-# pro/ is a git submodule pointing to SynkraAI/aios-pro (private)
+# pro/ is a git submodule pointing to SynkraAI/aiox-pro (private)
 # It is tracked by git via .gitmodules — do NOT add pro/ to gitignore
 # Pro submodule contents excluded from npm publish (not in package.json files array)
 
 # ============================================
 # LOCAL CONFIG (ADR-PRO-002 — machine-specific secrets, never committed)
 # ============================================
-.aios-core/local-config.yaml
+.aiox-core/local-config.yaml
 
 # ============================================
 # IDS REGISTRY (Story IDS-3 — Self-Updating Registry)
 # ============================================
-.aios-core/data/registry-backups/
-.aios-core/data/.entity-registry.lock
-.aios-core/data/registry-update-log.jsonl
+.aiox-core/data/registry-backups/
+.aiox-core/data/.entity-registry.lock
+.aiox-core/data/registry-update-log.jsonl
 
 # ============================================
-# .AIOS-CORE INTERNAL/GENERATED FILES
+# .AIOX-CORE INTERNAL/GENERATED FILES
 # ============================================
 
 # Deprecated documentation (superseded by V2.1-COMPLETE)
-.aios-core/docs/standards/AIOS-LIVRO-DE-OURO.md
-.aios-core/docs/standards/AIOS-LIVRO-DE-OURO-V2.1.md
-.aios-core/docs/standards/AIOS-LIVRO-DE-OURO-V2.1-SUMMARY.md
-.aios-core/docs/standards/AIOS-FRAMEWORK-MASTER.md
-.aios-core/docs/standards/V3-ARCHITECTURAL-DECISIONS.md
+.aiox-core/docs/standards/AIOX-LIVRO-DE-OURO.md
+.aiox-core/docs/standards/AIOX-LIVRO-DE-OURO-V2.1.md
+.aiox-core/docs/standards/AIOX-LIVRO-DE-OURO-V2.1-SUMMARY.md
+.aiox-core/docs/standards/AIOX-FRAMEWORK-MASTER.md
+.aiox-core/docs/standards/V3-ARCHITECTURAL-DECISIONS.md
 
-# Duplicate docs (originals in .aios-core/core/docs/)
-.aios-core/docs/SHARD-TRANSLATION-GUIDE.md
-.aios-core/docs/component-creation-guide.md
-.aios-core/docs/template-syntax.md
-.aios-core/docs/troubleshooting-guide.md
-.aios-core/docs/session-update-pattern.md
+# Duplicate docs (originals in .aiox-core/core/docs/)
+.aiox-core/docs/SHARD-TRANSLATION-GUIDE.md
+.aiox-core/docs/component-creation-guide.md
+.aiox-core/docs/template-syntax.md
+.aiox-core/docs/troubleshooting-guide.md
+.aiox-core/docs/session-update-pattern.md
 
 # Generated runtime files
-.aios-core/.session/
-.aios-core/.session/current-session.json
+.aiox-core/.session/
+.aiox-core/.session/current-session.json
 
 # Generated manifests (created by framework)
-.aios-core/manifests/*.csv
+.aiox-core/manifests/*.csv
 
 # Internal audit results
-.aios-core/infrastructure/tests/utilities-audit-results.json
+.aiox-core/infrastructure/tests/utilities-audit-results.json
 
 # ============================================
 # TEMPORARY FILES
@@ -324,6 +329,13 @@ C:Users*
 # ============================================
 .synapse/sessions/
 .synapse/cache/
+.synapse/metrics/
+
+# ============================================
+# SYNAPSE PACKAGE (generated by scripts/package-synapse.js)
+# ============================================
+synapse-package.zip
+.synapse-package/
 
 # ============================================
 # MMOS IMPORT (TEMPORARY - Story MMOS-Sync)
@@ -331,11 +343,28 @@ C:Users*
 # ============================================
 scripts/glue/
 .claude/skills/
-.claude/hooks/
-!.claude/hooks/synapse-engine.js
+!.claude/hooks/
 .claude/templates/
 .claude/agents/
 .claude/agent-memory/
 .claude/setup/
-docs/guides/aios-workflows/
-docs/guides/glue-script-guide.md
+docs/guides/aiox-workflows/
+
+# Local Gemini project rules generated/managed per workspace
+.gemini/rules.md
+
+# Dependencies (AIOX)
+node_modules
+
+# Build & Logs (AIOX)
+dist/
+build/
+
+# IDE & OS (AIOX)
+.idea/
+*.swp
+
+# AIOX Local (AIOX)
+.aiox-core/local/
+.claude/settings.local.json
+.aiox/install-log.txt

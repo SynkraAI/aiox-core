@@ -13,7 +13,7 @@ const {
   MetricsCollector,
   createEmptyMetrics,
   DEFAULT_RETENTION_DAYS,
-} = require('../../../.aios-core/quality/metrics-collector');
+} = require('../../../.aiox-core/quality/metrics-collector');
 
 // Test data directory
 const TEST_DATA_DIR = path.join(__dirname, '../../fixtures/quality');

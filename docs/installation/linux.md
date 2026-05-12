@@ -1,4 +1,4 @@
-# Linux Installation Guide for Synkra AIOS
+# Linux Installation Guide for Synkra AIOX
 
 > 🌐 [EN](linux.md) | [PT](../pt/installation/linux.md) | [ES](../es/installation/linux.md)
 
@@ -153,7 +153,7 @@ sudo pacman -S base-devel
 3. Run the installer:
 
    ```bash
-   npx github:SynkraAI/aios-core install
+   npx github:SynkraAI/aiox-core install
    ```
 
 ### Manual Installation
@@ -162,16 +162,16 @@ If the quick install fails, try manual installation:
 
 ```bash
 # Clone the repository
-git clone https://github.com/SynkraAI/aios-core.git ~/.aios-core-source
+git clone https://github.com/SynkraAI/aiox-core.git ~/.aiox-core-source
 
 # Navigate to the source
-cd ~/.aios-core-source
+cd ~/.aiox-core-source
 
 # Install dependencies
 npm install
 
 # Run installer for your project
-node bin/aios-init.js ~/projects/my-project
+node bin/aiox-init.js ~/projects/my-project
 ```
 
 ### What the Installer Does
@@ -183,7 +183,6 @@ The installer automatically:
 - ✅ Configures IDE paths for Linux:
   - Cursor: `~/.config/Cursor/`
   - Claude: `~/.claude/`
-  - Windsurf: `~/.config/Windsurf/`
 - ✅ Sets up shell scripts with Unix line endings (LF)
 - ✅ Respects XDG Base Directory specification
 - ✅ Handles symbolic links properly
@@ -214,19 +213,16 @@ The installer automatically:
    npm install -g @anthropic-ai/claude-code
    ```
 
-2. Commands are installed to `.claude/commands/AIOS/`
+2. Commands are installed to `.claude/commands/AIOX/`
 3. Use `/agent-name` to activate agents
 
-### Windsurf
 
-1. Install from [codeium.com/windsurf](https://codeium.com/windsurf)
-2. Rules are installed to `.windsurf/rules/`
 3. Use `@agent-name` to activate agents
 
 ### VS Code (with Continue extension)
 
 1. Install Continue extension
-2. Configure AIOS rules in `.continue/`
+2. Configure AIOX rules in `.continue/`
 
 ---
 
@@ -256,7 +252,7 @@ npm config set prefix '~/.local'
 export PATH="$HOME/.local/bin:$PATH"
 
 # Option 2: Fix project permissions
-chmod -R u+rwX .aios-core
+chmod -R u+rwX .aiox-core
 chmod -R u+rwX .claude
 ```
 
@@ -335,9 +331,9 @@ export NVM_DIR="$HOME/.nvm"
 # npm global packages
 export PATH="$HOME/.npm-global/bin:$PATH"
 
-# AIOS configuration
-export AIOS_HOME="$HOME/.aios-core"
-export PATH="$AIOS_HOME/bin:$PATH"
+# AIOX configuration
+export AIOX_HOME="$HOME/.aiox-core"
+export PATH="$AIOX_HOME/bin:$PATH"
 
 # Editor preference (for git commits, etc.)
 export EDITOR=vim  # or code, nano, etc.
@@ -345,13 +341,13 @@ export EDITOR=vim  # or code, nano, etc.
 
 ### XDG Base Directory Compliance
 
-Synkra AIOS respects XDG directories:
+Synkra AIOX respects XDG directories:
 
 ```bash
-# Data files: ~/.local/share/aios/
-# Config files: ~/.config/aios/
-# Cache: ~/.cache/aios/
-# State: ~/.local/state/aios/
+# Data files: ~/.local/share/aiox/
+# Config files: ~/.config/aiox/
+# Cache: ~/.cache/aiox/
+# State: ~/.local/state/aiox/
 ```
 
 ---
@@ -362,19 +358,19 @@ To update an existing installation:
 
 ```bash
 # Using npx (recommended)
-npx github:SynkraAI/aios-core install
+npx github:SynkraAI/aiox-core install
 
 # Manual update
-cd ~/.aios-core-source
+cd ~/.aiox-core-source
 git pull
 npm install
-node bin/aios-init.js ~/projects/my-project --update
+node bin/aiox-init.js ~/projects/my-project --update
 ```
 
 The updater will:
 
 - Detect your existing installation
-- Back up any customizations to `.aios-backup/`
+- Back up any customizations to `.aiox-backup/`
 - Update only changed files
 - Preserve your configurations
 
@@ -387,11 +383,11 @@ See the complete [Uninstallation Guide](../uninstallation.md) for detailed steps
 Quick uninstall:
 
 ```bash
-# Remove AIOS from a project
-rm -rf .aios-core .claude/commands/AIOS
+# Remove AIOX from a project
+rm -rf .aiox-core .claude/commands/AIOX
 
 # Remove global installation
-rm -rf ~/.aios-core-source ~/.npm-global/lib/node_modules/@synkra
+rm -rf ~/.aiox-core-source ~/.npm-global/lib/node_modules/@synkra
 ```
 
 ---
@@ -449,4 +445,4 @@ rm -rf ~/.aios-core-source ~/.npm-global/lib/node_modules/@synkra
 - [Troubleshooting Guide](troubleshooting.md)
 - [FAQ](faq.md)
 - [Discord Community](https://discord.gg/gk8jAdXWmj)
-- [GitHub Issues](https://github.com/SynkraAI/aios-core/issues)
+- [GitHub Issues](https://github.com/SynkraAI/aiox-core/issues)

@@ -3,13 +3,13 @@
 **Versao:** 1.0.0
 **Tipo:** Greenfield
 **Ultima Atualizacao:** 2026-02-04
-**Arquivo Fonte:** `.aios-core/development/workflows/greenfield-fullstack.yaml`
+**Arquivo Fonte:** `.aiox-core/development/workflows/greenfield-fullstack.yaml`
 
 ---
 
 ## Visao Geral
 
-O **Greenfield Full-Stack Workflow** e o fluxo de trabalho principal do AIOS para construcao de aplicacoes full-stack desde o conceito ate o desenvolvimento. Este workflow suporta tanto planejamento abrangente para projetos complexos quanto prototipagem rapida para projetos simples.
+O **Greenfield Full-Stack Workflow** e o fluxo de trabalho principal do AIOX para construcao de aplicacoes full-stack desde o conceito ate o desenvolvimento. Este workflow suporta tanto planejamento abrangente para projetos complexos quanto prototipagem rapida para projetos simples.
 
 ### Tipos de Projeto Suportados
 
@@ -141,7 +141,7 @@ flowchart TD
     subgraph FASE0["FASE 0: Environment Bootstrap"]
         START([Inicio]) --> CHECK{Ambiente pronto?}
 
-        CHECK -->|Verificar| ENV_REPORT[".aios/environment-report.json existe?"]
+        CHECK -->|Verificar| ENV_REPORT[".aiox/environment-report.json existe?"]
         ENV_REPORT -->|Sim| SKIP[Pular bootstrap]
         ENV_REPORT -->|Nao| BOOTSTRAP
 
@@ -166,14 +166,14 @@ flowchart TD
 
 | Step | Agente | Task | Entrada | Saida | Obrigatorio |
 |------|--------|------|---------|-------|-------------|
-| 1 | @devops (Gage) | `environment-bootstrap.md` | `project_name`, `project_path`, `github_org` | `.aios/config.yaml`, `.aios/environment-report.json`, `.gitignore`, `README.md`, `package.json` | Sim |
+| 1 | @devops (Gage) | `environment-bootstrap.md` | `project_name`, `project_path`, `github_org` | `.aiox/config.yaml`, `.aiox/environment-report.json`, `.gitignore`, `README.md`, `package.json` | Sim |
 
 ### Artefatos Criados
 
 | Arquivo | Descricao |
 |---------|-----------|
-| `.aios/config.yaml` | Configuracao do projeto AIOS |
-| `.aios/environment-report.json` | Relatorio completo do ambiente |
+| `.aiox/config.yaml` | Configuracao do projeto AIOX |
+| `.aiox/environment-report.json` | Relatorio completo do ambiente |
 | `.gitignore` | Regras de ignore do Git |
 | `README.md` | Documentacao inicial do projeto |
 | `package.json` | Configuracao NPM |
@@ -195,7 +195,7 @@ flowchart TD
 
 ### Condicoes de Pulo
 
-- Pular apenas se o projeto ja tiver `.aios/environment-report.json`
+- Pular apenas se o projeto ja tiver `.aiox/environment-report.json`
 - Re-executar ao trocar de maquina ou quando novos membros entrarem no projeto
 
 ---
@@ -576,7 +576,7 @@ flowchart LR
     end
 
     subgraph Fase0["Fase 0"]
-        E1[.aios/config.yaml]
+        E1[.aiox/config.yaml]
         E2[Repositorio GitHub]
     end
 
@@ -637,7 +637,7 @@ flowchart LR
 
 | Fase | Entrada | Saida |
 |------|---------|-------|
-| 0 | Nome do projeto, organizacao GitHub | Config AIOS, repo Git, estrutura de pastas |
+| 0 | Nome do projeto, organizacao GitHub | Config AIOX, repo Git, estrutura de pastas |
 | 1 | Requisitos, pesquisa | Brief, PRD, specs, arquitetura |
 | 2 | PRD, arquitetura | Documentos fragmentados, indexes |
 | 3 | Stories, docs fragmentados | Codigo, testes, aplicacao |
@@ -650,7 +650,7 @@ flowchart LR
 
 | Fase | Ponto de Decisao | Opcoes | Criterio |
 |------|------------------|--------|----------|
-| 0 | Ambiente pronto? | Pular / Executar bootstrap | Existencia de `.aios/environment-report.json` |
+| 0 | Ambiente pronto? | Pular / Executar bootstrap | Existencia de `.aiox/environment-report.json` |
 | 1 | Gerar prompt v0? | Sim / Nao | Usuario quer geracao de UI com IA |
 | 1 | Arquitetura sugere mudancas? | Atualizar PRD / Continuar | Recomendacao do arquiteto |
 | 1 | PO encontrou problemas? | Corrigir / Aprovar | Resultado do checklist |
@@ -664,7 +664,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     D1{Ambiente pronto?}
-    D1 -->|Verificar .aios/environment-report.json| D1_CHECK
+    D1 -->|Verificar .aiox/environment-report.json| D1_CHECK
     D1_CHECK -->|Existe| SKIP[Pular Fase 0]
     D1_CHECK -->|Nao existe| RUN[Executar Bootstrap]
 
@@ -700,7 +700,7 @@ flowchart TD
 
 | Problema | Causa | Solucao |
 |----------|-------|---------|
-| Template nao encontrado | Caminho incorreto | Verificar `.aios-core/development/templates/` |
+| Template nao encontrado | Caminho incorreto | Verificar `.aiox-core/development/templates/` |
 | Conflito entre PRD e arquitetura | Requisitos divergentes | Reunir PM e Architect para alinhar |
 | Checklist falha | Artefatos incompletos | Retornar ao agente responsavel |
 
@@ -725,7 +725,7 @@ flowchart TD
 
 ```bash
 # Verificar ambiente
-cat .aios/environment-report.json
+cat .aiox/environment-report.json
 
 # Verificar CLIs
 git --version && gh --version && node --version
@@ -736,7 +736,7 @@ supabase projects list
 railway whoami
 
 # Verificar estrutura do projeto
-ls -la .aios/
+ls -la .aiox/
 ls -la docs/
 ```
 
@@ -765,13 +765,13 @@ ls -la docs/
 
 | Tipo | Arquivo | Descricao |
 |------|---------|-----------|
-| Workflow | `.aios-core/development/workflows/greenfield-fullstack.yaml` | Definicao do workflow |
-| Task | `.aios-core/development/tasks/environment-bootstrap.md` | Bootstrap do ambiente |
-| Task | `.aios-core/development/tasks/shard-doc.md` | Fragmentacao de documentos |
-| Task | `.aios-core/development/tasks/sm-create-next-story.md` | Criacao de stories |
-| Agente | `.aios-core/development/agents/*.md` | Definicoes de agentes |
-| Template | `.aios-core/development/templates/*.yaml` | Templates de documentos |
-| Checklist | `.aios-core/development/checklists/*.md` | Checklists de validacao |
+| Workflow | `.aiox-core/development/workflows/greenfield-fullstack.yaml` | Definicao do workflow |
+| Task | `.aiox-core/development/tasks/environment-bootstrap.md` | Bootstrap do ambiente |
+| Task | `.aiox-core/development/tasks/shard-doc.md` | Fragmentacao de documentos |
+| Task | `.aiox-core/development/tasks/sm-create-next-story.md` | Criacao de stories |
+| Agente | `.aiox-core/development/agents/*.md` | Definicoes de agentes |
+| Template | `.aiox-core/development/templates/*.yaml` | Templates de documentos |
+| Checklist | `.aiox-core/development/checklists/*.md` | Checklists de validacao |
 
 ### Documentacao Externa
 
@@ -792,5 +792,5 @@ ls -la docs/
 
 ---
 
-**Mantido por:** AIOS Development Team
+**Mantido por:** AIOX Development Team
 **Ultima Revisao:** 2026-02-04

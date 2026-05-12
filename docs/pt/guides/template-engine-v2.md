@@ -10,7 +10,7 @@
 
 ---
 
-> Motor de geração de documentos e substituição de variáveis para Synkra AIOS.
+> Motor de geração de documentos e substituição de variáveis para Synkra AIOX.
 
 **Versão:** 2.0
 **Última Atualização:** 2025-12-05
@@ -19,7 +19,7 @@
 
 ## Visão Geral
 
-O Template Engine fornece uma forma consistente de gerar documentos (PRDs, ADRs, Stories, etc.) com substituição de variáveis, condicionais e loops. Ele alimenta todas as tarefas de geração de documentos no AIOS.
+O Template Engine fornece uma forma consistente de gerar documentos (PRDs, ADRs, Stories, etc.) com substituição de variáveis, condicionais e loops. Ele alimenta todas as tarefas de geração de documentos no AIOX.
 
 ### Funcionalidades Principais
 
@@ -38,7 +38,7 @@ O Template Engine fornece uma forma consistente de gerar documentos (PRDs, ADRs,
 ### Uso Básico
 
 ```javascript
-const TemplateEngine = require('./.aios-core/infrastructure/scripts/template-engine');
+const TemplateEngine = require('./.aiox-core/infrastructure/scripts/template-engine');
 
 const engine = new TemplateEngine();
 
@@ -83,7 +83,7 @@ This is a generated document.
 ### Classe TemplateEngine
 
 ```javascript
-const TemplateEngine = require('./.aios-core/infrastructure/scripts/template-engine');
+const TemplateEngine = require('./.aiox-core/infrastructure/scripts/template-engine');
 const engine = new TemplateEngine();
 ```
 
@@ -117,7 +117,7 @@ Carrega um arquivo de template e o processa.
 **Retorna:** `Promise<string>` - Template processado
 
 ```javascript
-const result = await engine.loadAndProcess('.aios-core/product/templates/story-tmpl.md', {
+const result = await engine.loadAndProcess('.aiox-core/product/templates/story-tmpl.md', {
   STORY_ID: '3.12',
   TITLE: 'Documentation',
 });
@@ -198,7 +198,7 @@ Email: {{project.owner.email}}
 ```javascript
 const variables = {
   project: {
-    name: 'AIOS',
+    name: 'AIOX',
     owner: {
       name: 'Pedro',
       email: 'pedro@example.com',
@@ -289,7 +289,7 @@ Saída: `To use variables, write {{VARIABLE_NAME}}.`
 Todos os templates são armazenados em:
 
 ```
-.aios-core/product/templates/
+.aiox-core/product/templates/
 ```
 
 ---
@@ -481,4 +481,4 @@ console.log('Validation result:', validation);
 
 ---
 
-_Synkra AIOS Template Engine v2.0_
+_Synkra AIOX Template Engine v2.0_

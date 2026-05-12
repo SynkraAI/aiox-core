@@ -2,4 +2,4 @@
 
 # IDS Registry Sync (Story IDS-3)
 # Ensures entity registry is up-to-date before push (sync, non-blocking).
-node .aios-core/hooks/ids-pre-push.js || true
+node .aiox-core/hooks/ids-pre-push.js || true

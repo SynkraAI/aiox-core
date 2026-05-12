@@ -1,6 +1,6 @@
 <!-- Traducción: ES | Original: /docs/platforms/en/cursor.md | Sincronización: 2026-01-26 -->
 
-# Guía de AIOS para Cursor
+# Guía de AIOX para Cursor
 
 > 🌐 [EN](../../platforms/cursor.md) | [PT](../../pt/platforms/cursor.md) | **ES**
 
@@ -16,9 +16,9 @@
 
 Cursor es un editor de código basado en IA construido sobre VS Code, diseñado para hacer que los desarrolladores sean más productivos con asistencia de IA integrada. Combina características familiares de VS Code con poderosas capacidades de IA incluyendo generación de código, edición y conversación.
 
-### ¿Por qué usar AIOS con Cursor?
+### ¿Por qué usar AIOX con Cursor?
 
-Cursor es uno de los **IDEs de IA más populares** con excelente integración de AIOS:
+Cursor es uno de los **IDEs de IA más populares** con excelente integración de AIOX:
 
 - **Base de Usuarios Grande**: Comunidad activa y actualizaciones continuas
 - **Activación @mention**: Activación natural de agentes con sintaxis @
@@ -29,7 +29,6 @@ Cursor es uno de los **IDEs de IA más populares** con excelente integración de
 
 ### Comparación con Otras Plataformas
 
-| Característica        | Cursor |      Claude Code      | Windsurf |
 | --------------------- | :----: | :-------------------: | :------: |
 | Interfaz GUI          |   Sí   |          No           |    Sí    |
 | Activación @mention   |   Sí   |       /comando        |    Sí    |
@@ -49,7 +48,7 @@ Cursor es uno de los **IDEs de IA más populares** con excelente integración de
 | **RAM**              | 4GB                              | 8GB+        |
 | **Espacio en Disco** | 500MB                            | 1GB+        |
 | **SO**               | macOS 10.15+, Windows 10+, Linux | Último      |
-| **Node.js**          | 18.0+ (para AIOS)                | 20.0+       |
+| **Node.js**          | 18.0+ (para AIOX)                | 20.0+       |
 
 ### Requisitos de Cuenta
 
@@ -87,21 +86,21 @@ Abrir Configuración de Cursor (`Cmd/Ctrl + ,`):
 2. **Modelos** > Seleccionar modelo preferido (Claude, GPT-4, etc.)
 3. **Reglas** > Habilitar reglas personalizadas
 
-### Paso 3: Instalar AIOS
+### Paso 3: Instalar AIOX
 
 ```bash
 # Navegar a tu proyecto
 cd tu-proyecto
 
-# Inicializar AIOS
-npx @anthropic/aios init
+# Inicializar AIOX
+npx @anthropic/aiox init
 
 # Seleccionar "Cursor" cuando se solicite el IDE
 ```
 
 ### Paso 4: Verificar Instalación
 
-Verificar que se crearon los archivos de AIOS:
+Verificar que se crearon los archivos de AIOX:
 
 ```bash
 ls -la .cursor/
@@ -133,7 +132,7 @@ Este archivo contiene:
 - Reglas específicas del proyecto y contexto
 - Instrucciones de activación de agentes
 - Estándares de desarrollo
-- Integración del marco AIOS
+- Integración del marco AIOX
 
 ### Carpeta de Reglas de Agentes
 
@@ -185,13 +184,13 @@ Cada agente tiene un archivo dedicado:
 
 ## Uso Básico
 
-### Iniciando Cursor con AIOS
+### Iniciando Cursor con AIOX
 
 1. Abrir tu proyecto en Cursor
 2. Las reglas en `.cursor/rules.md` se cargan automáticamente
 3. Usar el panel de chat de IA (`Cmd/Ctrl + L`)
 
-### Activando Agentes AIOS
+### Activando Agentes AIOX
 
 Los agentes se activan usando @mentions en el chat:
 
@@ -349,7 +348,7 @@ Usar estos en chat o Composer:
 | `@folder`     | Contenidos de carpeta          |
 | `@docs`       | Documentación                  |
 | `@web`        | Búsqueda web                   |
-| `@agent-name` | Agente AIOS                    |
+| `@agent-name` | Agente AIOX                    |
 
 ### Selección de Modelo
 
@@ -370,7 +369,7 @@ Cambiar modelos según la tarea:
 
 ```mermaid
 flowchart LR
-    Source["AIOS Core<br/>.aios-core/development/agents"] --> Parser["Analizador de Agentes"]
+    Source["AIOX Core<br/>.aiox-core/development/agents"] --> Parser["Analizador de Agentes"]
     Parser --> Transform["Transformador de Cursor"]
     Transform --> Output[".cursor/rules/"]
 ```
@@ -379,13 +378,13 @@ flowchart LR
 
 ```bash
 # Sincronizar todos los agentes
-npm run sync:agents
+npm run sync:ide
 
 # Sincronizar agente específico
-npm run sync:agents -- --agent dev
+npm run sync:ide
 
 # Forzar resincronización
-npm run sync:agents -- --force
+npm run sync:ide
 ```
 
 ### Formato de Archivo de Agente
@@ -513,7 +512,7 @@ Problema: @dev no activa el agente
 
 ```bash
 # Resincronizar agentes
-npm run sync:agents
+npm run sync:ide
 
 # Verificar que archivo de agente existe
 ls .cursor/rules/dev.md
@@ -537,8 +536,8 @@ tail -f ~/Library/Application\ Support/Cursor/logs/main.log
 # Hacer copia de seguridad de configuración actual
 cp -r .cursor/ .cursor-backup/
 
-# Reinicializar AIOS
-npx @anthropic/aios init --ide cursor --force
+# Reinicializar AIOX
+npx @anthropic/aiox init --ide cursor --force
 ```
 
 ---
@@ -556,7 +555,7 @@ R: Sí, puedes configurar claves de API de OpenAI o Anthropic en la configuraci�
 **P: ¿Funciona Cursor sin conexión?**
 R: La edición básica funciona sin conexión, pero las características de IA requieren internet.
 
-### Preguntas Específicas de AIOS
+### Preguntas Específicas de AIOX
 
 **P: ¿Cómo cambio entre agentes?**
 R: Usar @mentions en chat: `@dev`, `@qa`, `@architect`, etc.
@@ -568,7 +567,7 @@ R: Sí, pero se recomienda usar un agente por tarea para mayor claridad.
 R: En `.cursor/rules/` después de sincronizar.
 
 **P: ¿Cómo actualizo los agentes?**
-R: Ejecutar `npm run sync:agents` después de actualizaciones de AIOS.
+R: Ejecutar `npm run sync:ide` después de actualizaciones de AIOX.
 
 ---
 
@@ -577,9 +576,9 @@ R: Ejecutar `npm run sync:agents` después de actualizaciones de AIOS.
 ### De VS Code a Cursor
 
 1. Cursor importa configuración de VS Code automáticamente
-2. Instalar AIOS:
+2. Instalar AIOX:
    ```bash
-   npx @anthropic/aios init --ide cursor
+   npx @anthropic/aiox init --ide cursor
    ```
 3. Tus extensiones de VS Code deberían funcionar en Cursor
 
@@ -591,15 +590,14 @@ R: Ejecutar `npm run sync:agents` después de actualizaciones de AIOS.
    cp -r .cursor/rules/ cursor-rules-backup/
    ```
 
-2. Inicializar AIOS para Claude Code:
+2. Inicializar AIOX para Claude Code:
 
    ```bash
-   npx @anthropic/aios init --ide claude-code
+   npx @anthropic/aiox init --ide claude-code
    ```
 
 3. Los agentes se sincronizan automáticamente al nuevo formato
 
-### De Cursor a Windsurf
 
 1. Exportar configuración:
 
@@ -607,13 +605,10 @@ R: Ejecutar `npm run sync:agents` después de actualizaciones de AIOS.
    cp .cursor/rules.md cursor-rules-backup.md
    ```
 
-2. Inicializar AIOS para Windsurf:
 
    ```bash
-   npx @anthropic/aios init --ide windsurf
    ```
 
-3. Las reglas se transforman al formato etiquetado en XML de Windsurf
 
 ---
 
@@ -633,8 +628,8 @@ R: Ejecutar `npm run sync:agents` después de actualizaciones de AIOS.
 ### Tutoriales
 
 - [Consejos y Trucos de Cursor](https://cursor.com/tips)
-- [Guía de Integración de AIOS](../README.md)
+- [Guía de Integración de AIOX](../README.md)
 
 ---
 
-_Synkra AIOS - Guía de Plataforma Cursor v1.0_
+_Synkra AIOX - Guía de Plataforma Cursor v1.0_

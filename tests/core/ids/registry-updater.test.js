@@ -5,7 +5,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const os = require('os');
 
-const { RegistryUpdater, AUDIT_LOG_PATH, LOCK_FILE, BACKUP_DIR } = require('../../../.aios-core/core/ids/registry-updater');
+const { RegistryUpdater, AUDIT_LOG_PATH, LOCK_FILE, BACKUP_DIR } = require('../../../.aiox-core/core/ids/registry-updater');
 
 const FIXTURES = path.resolve(__dirname, 'fixtures');
 const TEMP_DIR = path.join(os.tmpdir(), 'ids-updater-test-' + Date.now());
@@ -35,7 +35,7 @@ function getBaseRegistry() {
     entities: {
       tasks: {
         'test-task': {
-          path: '.aios-core/development/tasks/test-task.md',
+          path: '.aiox-core/development/tasks/test-task.md',
           type: 'task',
           purpose: 'A test task for registry updater tests',
           keywords: ['test', 'task'],
@@ -48,7 +48,7 @@ function getBaseRegistry() {
       },
       scripts: {
         'test-script': {
-          path: '.aios-core/development/scripts/test-script.js',
+          path: '.aiox-core/development/scripts/test-script.js',
           type: 'script',
           purpose: 'A test script for registry updater tests',
           keywords: ['test', 'script'],
@@ -61,8 +61,8 @@ function getBaseRegistry() {
       },
     },
     categories: [
-      { id: 'tasks', description: 'Task workflows', basePath: '.aios-core/development/tasks' },
-      { id: 'scripts', description: 'Scripts', basePath: '.aios-core/development/scripts' },
+      { id: 'tasks', description: 'Task workflows', basePath: '.aiox-core/development/tasks' },
+      { id: 'scripts', description: 'Scripts', basePath: '.aiox-core/development/scripts' },
     ],
   };
 }
@@ -143,7 +143,7 @@ describe('RegistryUpdater', () => {
     it('adds new entity to registry when file is created', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/new-task.md',
+        '.aiox-core/development/tasks/new-task.md',
         '# New Task\n\n## Purpose\nA brand new task for testing.\n',
       );
 
@@ -162,7 +162,7 @@ describe('RegistryUpdater', () => {
     it('sets correct adaptability score by entity type', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/scripts/helper.js',
+        '.aiox-core/development/scripts/helper.js',
         '// Helper script\nmodule.exports = {};\n',
       );
 
@@ -176,7 +176,7 @@ describe('RegistryUpdater', () => {
     it('extracts keywords from file content', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/deploy-automation.md',
+        '.aiox-core/development/tasks/deploy-automation.md',
         '# Deploy Automation Task\n\n## Purpose\nAutomate deployment pipeline.\n',
       );
 
@@ -191,7 +191,7 @@ describe('RegistryUpdater', () => {
     it('detects dependencies from require statements', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/scripts/consumer.js',
+        '.aiox-core/development/scripts/consumer.js',
         "const helper = require('./helper');\nmodule.exports = {};\n",
       );
 
@@ -211,7 +211,7 @@ describe('RegistryUpdater', () => {
 
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/core/utils/new-module.js',
+        '.aiox-core/core/utils/new-module.js',
         '// New module\nmodule.exports = {};\n',
       );
 
@@ -229,7 +229,7 @@ describe('RegistryUpdater', () => {
 
       // Create a task file that matches existing entity
       const filePath = createTempFile(
-        '.aios-core/development/tasks/test-task.md',
+        '.aiox-core/development/tasks/test-task.md',
         '# Test Task Updated\n\n## Purpose\nUpdated purpose for the test task.\n',
       );
 
@@ -246,7 +246,7 @@ describe('RegistryUpdater', () => {
     it('updates lastVerified timestamp on modification', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/test-task.md',
+        '.aiox-core/development/tasks/test-task.md',
         '# Test Task\n\n## Purpose\nSame content.\n',
       );
 
@@ -260,7 +260,7 @@ describe('RegistryUpdater', () => {
     it('creates entity if modified file was not in registry', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/brand-new.md',
+        '.aiox-core/development/tasks/brand-new.md',
         '# Brand New Task\n\n## Purpose\nThis was not tracked before.\n',
       );
 
@@ -273,7 +273,7 @@ describe('RegistryUpdater', () => {
     it('re-extracts keywords when content changes', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/test-task.md',
+        '.aiox-core/development/tasks/test-task.md',
         '# Deployment Orchestration\n\n## Purpose\nOrchestrate deployment workflows.\n',
       );
 
@@ -288,7 +288,7 @@ describe('RegistryUpdater', () => {
   describe('File deletion handling (AC: 4)', () => {
     it('removes entity from registry when file is deleted', async () => {
       const updater = createUpdater();
-      const filePath = path.join(TEMP_DIR, '.aios-core/development/tasks/test-task.md');
+      const filePath = path.join(TEMP_DIR, '.aiox-core/development/tasks/test-task.md');
 
       const result = await updater.processChanges([{ action: 'unlink', filePath }]);
 
@@ -303,7 +303,7 @@ describe('RegistryUpdater', () => {
       const baseReg = getBaseRegistry();
       baseReg.entities.scripts['test-script'].usedBy = ['dependent-task'];
       baseReg.entities.tasks['dependent-task'] = {
-        path: '.aios-core/development/tasks/dependent-task.md',
+        path: '.aiox-core/development/tasks/dependent-task.md',
         type: 'task',
         purpose: 'Depends on test-script',
         keywords: ['dependent'],
@@ -316,7 +316,7 @@ describe('RegistryUpdater', () => {
       createTempRegistry(baseReg);
 
       const updater = createUpdater();
-      const filePath = path.join(TEMP_DIR, '.aios-core/development/tasks/dependent-task.md');
+      const filePath = path.join(TEMP_DIR, '.aiox-core/development/tasks/dependent-task.md');
 
       await updater.processChanges([{ action: 'unlink', filePath }]);
 
@@ -328,7 +328,7 @@ describe('RegistryUpdater', () => {
 
     it('handles deletion of non-existent entity gracefully', async () => {
       const updater = createUpdater();
-      const filePath = path.join(TEMP_DIR, '.aios-core/development/tasks/nonexistent.md');
+      const filePath = path.join(TEMP_DIR, '.aiox-core/development/tasks/nonexistent.md');
 
       const result = await updater.processChanges([{ action: 'unlink', filePath }]);
 
@@ -338,7 +338,7 @@ describe('RegistryUpdater', () => {
 
     it('updates entity count after deletion', async () => {
       const updater = createUpdater();
-      const filePath = path.join(TEMP_DIR, '.aios-core/development/tasks/test-task.md');
+      const filePath = path.join(TEMP_DIR, '.aiox-core/development/tasks/test-task.md');
 
       await updater.processChanges([{ action: 'unlink', filePath }]);
 
@@ -352,14 +352,14 @@ describe('RegistryUpdater', () => {
       const updater = createUpdater();
 
       const file1 = createTempFile(
-        '.aios-core/development/tasks/batch-task-1.md',
+        '.aiox-core/development/tasks/batch-task-1.md',
         '# Batch Task 1\n\n## Purpose\nFirst batch task.\n',
       );
       const file2 = createTempFile(
-        '.aios-core/development/tasks/batch-task-2.md',
+        '.aiox-core/development/tasks/batch-task-2.md',
         '# Batch Task 2\n\n## Purpose\nSecond batch task.\n',
       );
-      const deleteFile = path.join(TEMP_DIR, '.aios-core/development/tasks/test-task.md');
+      const deleteFile = path.join(TEMP_DIR, '.aiox-core/development/tasks/test-task.md');
 
       const result = await updater.processChanges([
         { action: 'add', filePath: file1 },
@@ -380,7 +380,7 @@ describe('RegistryUpdater', () => {
     it('ignores test files (*.test.js)', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/scripts/something.test.js',
+        '.aiox-core/development/scripts/something.test.js',
         '// test file\n',
       );
 
@@ -392,7 +392,7 @@ describe('RegistryUpdater', () => {
     it('ignores node_modules', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/core/node_modules/pkg/index.js',
+        '.aiox-core/core/node_modules/pkg/index.js',
         '// node module\n',
       );
 
@@ -404,7 +404,7 @@ describe('RegistryUpdater', () => {
     it('ignores README.md files', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/README.md',
+        '.aiox-core/development/tasks/README.md',
         '# README\n',
       );
 
@@ -425,7 +425,7 @@ describe('RegistryUpdater', () => {
     it('ignores unsupported file extensions', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/image.png',
+        '.aiox-core/development/tasks/image.png',
         'binary content',
       );
 
@@ -439,7 +439,7 @@ describe('RegistryUpdater', () => {
     it('handles EACCES error gracefully during file read', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/locked-file.md',
+        '.aiox-core/development/tasks/locked-file.md',
         '# Locked File\n',
       );
 
@@ -462,7 +462,7 @@ describe('RegistryUpdater', () => {
     it('processes artifacts from agent task completion', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/agent-output.md',
+        '.aiox-core/development/tasks/agent-output.md',
         '# Agent Output\n\n## Purpose\nGenerated by agent.\n',
       );
 
@@ -477,7 +477,7 @@ describe('RegistryUpdater', () => {
 
     it('handles deleted artifacts in task completion', async () => {
       const updater = createUpdater();
-      const missingPath = path.join(TEMP_DIR, '.aios-core/development/tasks/deleted-file.md');
+      const missingPath = path.join(TEMP_DIR, '.aiox-core/development/tasks/deleted-file.md');
 
       const task = { id: 'TASK-43', agent: '@dev' };
       const result = await updater.onAgentTaskComplete(task, [missingPath]);
@@ -497,7 +497,7 @@ describe('RegistryUpdater', () => {
     it('updates lastUpdated timestamp after changes', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/ts-check.md',
+        '.aiox-core/development/tasks/ts-check.md',
         '# Timestamp Check\n\n## Purpose\nVerify timestamps.\n',
       );
 
@@ -511,7 +511,7 @@ describe('RegistryUpdater', () => {
     it('updates entity count after changes', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/count-check.md',
+        '.aiox-core/development/tasks/count-check.md',
         '# Count Check\n',
       );
 
@@ -526,8 +526,8 @@ describe('RegistryUpdater', () => {
     it('tracks total updates across multiple processChanges calls', async () => {
       const updater = createUpdater();
 
-      const file1 = createTempFile('.aios-core/development/tasks/stat1.md', '# Stat 1\n');
-      const file2 = createTempFile('.aios-core/development/tasks/stat2.md', '# Stat 2\n');
+      const file1 = createTempFile('.aiox-core/development/tasks/stat1.md', '# Stat 1\n');
+      const file2 = createTempFile('.aiox-core/development/tasks/stat2.md', '# Stat 2\n');
 
       await updater.processChanges([{ action: 'add', filePath: file1 }]);
       await updater.processChanges([{ action: 'add', filePath: file2 }]);
@@ -544,13 +544,13 @@ describe('RegistryUpdater', () => {
 
       // Create a script that is depended upon
       createTempFile(
-        '.aios-core/development/scripts/test-script.js',
+        '.aiox-core/development/scripts/test-script.js',
         '// Test script\nmodule.exports = {};\n',
       );
 
       // Create a task that depends on test-script
       const consumerPath = createTempFile(
-        '.aios-core/development/tasks/consumer.md',
+        '.aiox-core/development/tasks/consumer.md',
         '# Consumer Task\n\ndependencies:\n  - test-script\n',
       );
 
@@ -568,7 +568,7 @@ describe('RegistryUpdater', () => {
     it('writes JSONL entries on processChanges', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/audit-test.md',
+        '.aiox-core/development/tasks/audit-test.md',
         '# Audit Test\n\n## Purpose\nTest audit logging.\n',
       );
 
@@ -584,7 +584,7 @@ describe('RegistryUpdater', () => {
     it('filters audit log entries by action', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/filter-test.md',
+        '.aiox-core/development/tasks/filter-test.md',
         '# Filter Test\n',
       );
 
@@ -599,8 +599,8 @@ describe('RegistryUpdater', () => {
 
     it('filters audit log entries by path', async () => {
       const updater = createUpdater();
-      const file1 = createTempFile('.aios-core/development/tasks/pathA.md', '# Path A\n');
-      const file2 = createTempFile('.aios-core/development/tasks/pathB.md', '# Path B\n');
+      const file1 = createTempFile('.aiox-core/development/tasks/pathA.md', '# Path A\n');
+      const file2 = createTempFile('.aiox-core/development/tasks/pathB.md', '# Path B\n');
 
       await updater.processChanges([
         { action: 'add', filePath: file1 },
@@ -626,7 +626,7 @@ describe('RegistryUpdater', () => {
       fs.writeFileSync(TEMP_AUDIT_LOG, bigContent, 'utf8');
 
       const filePath = createTempFile(
-        '.aios-core/development/tasks/rotation-trigger.md',
+        '.aiox-core/development/tasks/rotation-trigger.md',
         '# Rotation Trigger\n\n## Purpose\nTrigger log rotation.\n',
       );
 
@@ -652,7 +652,7 @@ describe('RegistryUpdater', () => {
       for (let i = 0; i < 5; i++) {
         files.push(
           createTempFile(
-            `.aios-core/development/tasks/concurrent-${i}.md`,
+            `.aiox-core/development/tasks/concurrent-${i}.md`,
             `# Concurrent ${i}\n\n## Purpose\nConcurrent test ${i}.\n`,
           ),
         );
@@ -681,11 +681,11 @@ describe('RegistryUpdater', () => {
       const updater2 = createUpdater();
 
       const file1 = createTempFile(
-        '.aios-core/development/tasks/instance-a.md',
+        '.aiox-core/development/tasks/instance-a.md',
         '# Instance A\n\n## Purpose\nFrom updater 1.\n',
       );
       const file2 = createTempFile(
-        '.aios-core/development/tasks/instance-b.md',
+        '.aiox-core/development/tasks/instance-b.md',
         '# Instance B\n\n## Purpose\nFrom updater 2.\n',
       );
 
@@ -709,7 +709,7 @@ describe('RegistryUpdater', () => {
     it('processes single file update in <5 seconds', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
-        '.aios-core/development/tasks/perf-single.md',
+        '.aiox-core/development/tasks/perf-single.md',
         '# Performance Single\n\n## Purpose\nBenchmark single file.\n',
       );
 
@@ -725,7 +725,7 @@ describe('RegistryUpdater', () => {
       const changes = [];
       for (let i = 0; i < 10; i++) {
         const fp = createTempFile(
-          `.aios-core/development/tasks/perf-batch-${i}.md`,
+          `.aiox-core/development/tasks/perf-batch-${i}.md`,
           `# Perf Batch ${i}\n\n## Purpose\nBenchmark batch ${i}.\n`,
         );
         changes.push({ action: 'add', filePath: fp });

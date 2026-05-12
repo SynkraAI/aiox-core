@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-26
 -->
 
-# Guía de Flujo de Trabajo Git de AIOS
+# Guía de Flujo de Trabajo Git de AIOX
 
 > 🌐 [EN](../git-workflow-guide.md) | [PT](../pt/git-workflow-guide.md) | **ES**
 
@@ -26,7 +26,7 @@ _Story: 2.2-git-workflow-implementation.yaml_
 
 ## Descripción General
 
-Synkra AIOS implementa una estrategia de validación de **Defensa en Profundidad** con tres capas progresivas que detectan problemas tempranamente y aseguran la calidad del código antes del merge.
+Synkra AIOX implementa una estrategia de validación de **Defensa en Profundidad** con tres capas progresivas que detectan problemas tempranamente y aseguran la calidad del código antes del merge.
 
 ### ¿Por Qué Tres Capas?
 
@@ -279,11 +279,11 @@ git commit --no-verify
 
 ```bash
 # Validación manual
-node .aios-core/utils/aios-validator.js pre-push
-node .aios-core/utils/aios-validator.js stories
+node .aiox-core/utils/aiox-validator.js pre-push
+node .aiox-core/utils/aiox-validator.js stories
 
 # Validar una sola story
-node .aios-core/utils/aios-validator.js story docs/stories/1.1-story.yaml
+node .aiox-core/utils/aiox-validator.js story docs/stories/1.1-story.yaml
 
 # Saltar hook (NO recomendado)
 git push --no-verify
@@ -291,7 +291,7 @@ git push --no-verify
 
 ### Validador de Stories
 
-**Ubicación:** `.aios-core/utils/aios-validator.js`
+**Ubicación:** `.aiox-core/utils/aiox-validator.js`
 
 **Características:**
 
@@ -444,7 +444,7 @@ Advertencia si falta.
 
 ```yaml
 - name: Validate story checkboxes
-  run: node .aios-core/utils/aios-validator.js stories
+  run: node .aiox-core/utils/aiox-validator.js stories
 ```
 
 - Se ejecuta en Ubuntu latest
@@ -638,13 +638,13 @@ git commit -m "fix: resolve type errors"
 
 ```bash
 # Verificar stories
-node .aios-core/utils/aios-validator.js stories
+node .aiox-core/utils/aiox-validator.js stories
 
 # Corregir archivo de story
 code docs/stories/X.X-story.yaml
 
 # Verificar corrección
-node .aios-core/utils/aios-validator.js story docs/stories/X.X-story.yaml
+node .aiox-core/utils/aiox-validator.js story docs/stories/X.X-story.yaml
 
 # Commit de corrección
 git add docs/stories/
@@ -939,7 +939,7 @@ git commit -m "docs: update [skip ci]"
 1. **Crear función validadora:**
 
 ```javascript
-// .aios-core/utils/custom-validator.js
+// .aiox-core/utils/custom-validator.js
 module.exports = async function validateCustom() {
   // Tu lógica de validación
   return { success: true, errors: [] };
@@ -950,8 +950,8 @@ module.exports = async function validateCustom() {
 
 ```bash
 # .husky/pre-commit
-node .aios-core/utils/aios-validator.js pre-commit
-node .aios-core/utils/custom-validator.js
+node .aiox-core/utils/aiox-validator.js pre-commit
+node .aiox-core/utils/custom-validator.js
 ```
 
 3. **Agregar a CI:**
@@ -959,7 +959,7 @@ node .aios-core/utils/custom-validator.js
 ```yaml
 # .github/workflows/ci.yml
 - name: Custom validation
-  run: node .aios-core/utils/custom-validator.js
+  run: node .aiox-core/utils/custom-validator.js
 ```
 
 ### Soporte para Monorepo
@@ -984,12 +984,12 @@ strategy:
 
 ## Referencias
 
-- **AIOS Validator:** [.aios-core/utils/aios-validator.js](../../.aios-core/utils/aios-validator.js)
+- **AIOX Validator:** [.aiox-core/utils/aiox-validator.js](../../.aiox-core/utils/aiox-validator.js)
 - **CI Workflow:** [.github/workflows/ci.yml](../../.github/workflows/ci.yml)
 
 ---
 
 **¿Preguntas? ¿Problemas?**
 
-- [Abrir un Issue](https://github.com/SynkraAI/aios-core/issues)
+- [Abrir un Issue](https://github.com/SynkraAI/aiox-core/issues)
 - [Unirse a Discord](https://discord.gg/gk8jAdXWmj)

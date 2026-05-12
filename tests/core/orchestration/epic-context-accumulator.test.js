@@ -17,7 +17,7 @@ const {
   TOKEN_LIMIT,
   HARD_CAP_PER_STORY,
   CHARS_PER_TOKEN,
-} = require('../../../.aios-core/core/orchestration/epic-context-accumulator');
+} = require('../../../.aiox-core/core/orchestration/epic-context-accumulator');
 
 // Helper: create a mock SessionState with stories_done
 function createMockSessionState(storiesDone = [], extraContext = {}) {

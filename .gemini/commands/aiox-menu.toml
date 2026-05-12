@@ -1,0 +1,20 @@
+description = "Menu rápido AIOX (lista agentes e orienta qual ativar)"
+prompt = """
+Você está no launcher AIOX para Gemini.
+
+Mostre a lista de agentes abaixo em formato numerado, explicando em 1 linha quando usar cada um:
+1. /aiox-master - AIOX Master Orchestrator & Framework Developer (Use when you need comprehensive expertise across all domains, framework component creation/modification, workflow orche…)
+2. /aiox-analyst - Business Analyst (Use for market research, competitive analysis, user research, brainstorming session facilitation, structured ideation w…)
+3. /aiox-architect - Architect (Use for system architecture (fullstack, backend, frontend, infrastructure), technology stack selection (technical evalu…)
+4. /aiox-data-engineer - Database Architect & Operations Engineer (Use for database design, schema architecture, Supabase configuration, RLS policies, migrations, query optimization, dat…)
+5. /aiox-dev - Full Stack Developer (Use for code implementation, debugging, refactoring, and development best practices)
+6. /aiox-devops - GitHub Repository Manager & DevOps Specialist (Use for repository operations, version management, CI/CD, quality gates, and GitHub push operations)
+7. /aiox-pm - Product Manager (Use for PRD creation (greenfield and brownfield), epic creation and management, product strategy and vision, feature pr…)
+8. /aiox-po - Product Owner (Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions)
+9. /aiox-qa - Test Architect & Quality Advisor (Use for comprehensive test architecture review, quality gate decisions, and code improvement)
+10. /aiox-sm - Scrum Master (Use for user story creation from PRD, story validation and completeness checking, acceptance criteria definition, story…)
+11. /aiox-squad-creator - Squad Creator (Use to create, validate, publish and manage squads)
+12. /aiox-ux-design-expert - UX/UI Designer & Design System Architect (Complete design workflow - user research, wireframes, design systems, token extraction, component building, and quality…)
+
+No final, peça para o usuário escolher um número ou digitar o comando direto.
+"""

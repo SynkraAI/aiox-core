@@ -10,17 +10,17 @@
 
 ---
 
-Este documento lista todas as variáveis de ambiente usadas pelo Synkra AIOS e seus componentes.
+Este documento lista todas as variáveis de ambiente usadas pelo Synkra AIOX e seus componentes.
 
 ## Visão Geral
 
-O Synkra AIOS usa variáveis de ambiente para configuração, chaves de API e informações sensíveis. **Nunca faça commit de variáveis de ambiente no repositório.**
+O Synkra AIOX usa variáveis de ambiente para configuração, chaves de API e informações sensíveis. **Nunca faça commit de variáveis de ambiente no repositório.**
 
 ## Variáveis de Ambiente Obrigatórias
 
 ### Core do Framework
 
-Atualmente, o Synkra AIOS não requer nenhuma variável de ambiente obrigatória para operação básica. Toda a configuração é feita através do `core-config.yaml` e arquivos de configuração dos Squads.
+Atualmente, o Synkra AIOX não requer nenhuma variável de ambiente obrigatória para operação básica. Toda a configuração é feita através do `core-config.yaml` e arquivos de configuração dos Squads.
 
 ## Variáveis de Ambiente Opcionais
 
@@ -49,7 +49,7 @@ TWITTER_API_KEY=your_twitter_api_key
 
 #### Squads Privados
 
-Squads privados (no repositório `aios-Squads`) podem requerer variáveis de ambiente adicionais. Consulte a documentação de cada Squad.
+Squads privados (no repositório `aiox-Squads`) podem requerer variáveis de ambiente adicionais. Consulte a documentação de cada Squad.
 
 ## Configuração do Arquivo de Ambiente
 
@@ -74,7 +74,7 @@ Squads privados (no repositório `aios-Squads`) podem requerer variáveis de amb
 
 ### Carregando Variáveis de Ambiente
 
-O Synkra AIOS usa `dotenv` (se instalado) ou o suporte nativo a variáveis de ambiente do Node.js. As variáveis de ambiente são carregadas automaticamente dos arquivos `.env` na raiz do projeto.
+O Synkra AIOX usa `dotenv` (se instalado) ou o suporte nativo a variáveis de ambiente do Node.js. As variáveis de ambiente são carregadas automaticamente dos arquivos `.env` na raiz do projeto.
 
 **Importante:** O arquivo `.env` está no gitignore e nunca será commitado no repositório.
 

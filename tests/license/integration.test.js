@@ -67,7 +67,7 @@ describe('License System Integration', () => {
 
   beforeEach(() => {
     // Create temp directory for each test
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-integration-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-integration-test-'));
 
     // Mock process.cwd to return our test directory
     originalCwd = process.cwd;
@@ -183,7 +183,7 @@ describe('License System Integration', () => {
       const graceStatus = getDegradationStatus();
       expect(graceStatus.degraded).toBe(false);
       expect(graceStatus.reason).toContain('grace');
-      expect(graceStatus.action).toBe('aios pro validate');
+      expect(graceStatus.action).toBe('aiox pro validate');
 
       // Phase 3: Past grace period (Expired)
       deleteLicenseCache(testDir);
@@ -295,7 +295,7 @@ describe('License System Integration', () => {
       expect(featureGate.getLicenseState()).toBe('Active');
 
       // Corrupt the cache file
-      const cachePath = path.join(testDir, '.aios', 'license.cache');
+      const cachePath = path.join(testDir, '.aiox', 'license.cache');
       const cacheContent = fs.readFileSync(cachePath, 'utf8');
       const cacheJson = JSON.parse(cacheContent);
 
@@ -322,7 +322,7 @@ describe('License System Integration', () => {
       writeLicenseCache(createTestCache(['pro.squads.*']), testDir);
 
       // Overwrite with invalid JSON
-      const cachePath = path.join(testDir, '.aios', 'license.cache');
+      const cachePath = path.join(testDir, '.aiox', 'license.cache');
       fs.writeFileSync(cachePath, 'not valid json {{{');
 
       // Reload and verify graceful handling
@@ -332,7 +332,7 @@ describe('License System Integration', () => {
 
     it('should handle missing cache file', () => {
       // Ensure no cache exists
-      const cachePath = path.join(testDir, '.aios', 'license.cache');
+      const cachePath = path.join(testDir, '.aiox', 'license.cache');
       if (fs.existsSync(cachePath)) {
         fs.unlinkSync(cachePath);
       }

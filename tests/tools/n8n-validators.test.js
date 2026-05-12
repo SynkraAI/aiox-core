@@ -16,8 +16,8 @@ describeIntegration('n8n Tool Validators', () => {
   let n8nTool;
 
   beforeAll(async () => {
-    // Set search path to aios-core/tools
-    const toolsPath = path.join(__dirname, '../../aios-core/tools');
+    // Set search path to aiox-core/tools
+    const toolsPath = path.join(__dirname, '../../aiox-core/tools');
     toolResolver.setSearchPaths([toolsPath]);
 
     // Resolve n8n tool
@@ -33,7 +33,7 @@ describeIntegration('n8n Tool Validators', () => {
   });
 
   describeIntegration('Tool Resolution', () => {
-    test('should resolve n8n tool from aios-core/tools/mcp', async () => {
+    test('should resolve n8n tool from aiox-core/tools/mcp', async () => {
       expect(n8nTool).toBeDefined();
       expect(n8nTool.id).toBe('n8n');
       expect(n8nTool.type).toBe('mcp');

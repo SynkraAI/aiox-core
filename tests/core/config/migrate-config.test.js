@@ -30,7 +30,7 @@ const {
   writeProjectConfig,
   USER_FIELDS,
   PROJECT_FIELDS,
-} = require('../../../.aios-core/core/config/migrate-config');
+} = require('../../../.aiox-core/core/config/migrate-config');
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -41,7 +41,7 @@ const FAKE_HOME = '/fake/home';
 
 const LEGACY_CONFIG_YAML = `
 project:
-  type: EXISTING_AIOS
+  type: EXISTING_AIOX
   installedAt: "2025-01-14"
   version: "2.1.0"
 user_profile: advanced
@@ -153,21 +153,21 @@ describe('extractProjectFields', () => {
   it('should extract project.type from nested project object', () => {
     // Given
     const legacyConfig = {
-      project: { type: 'EXISTING_AIOS', version: '2.1.0' },
+      project: { type: 'EXISTING_AIOX', version: '2.1.0' },
     };
 
     // When
     const projectFields = extractProjectFields(legacyConfig);
 
     // Then
-    expect(projectFields.project_type).toBe('EXISTING_AIOS');
+    expect(projectFields.project_type).toBe('EXISTING_AIOX');
   });
 
   it('should not override explicit project_type with nested project.type', () => {
     // Given
     const legacyConfig = {
       project_type: 'fullstack',
-      project: { type: 'EXISTING_AIOS' },
+      project: { type: 'EXISTING_AIOX' },
     };
 
     // When
@@ -279,7 +279,7 @@ describe('migrateConfig', () => {
 
   it('should be idempotent: re-running does not duplicate', () => {
     // Given — legacy exists, and user/project config already exist
-    const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
+    const userConfigPath = path.join(FAKE_HOME, '.aiox', 'user-config.yaml');
     setupFileSystem({
       'core-config.yaml': LEGACY_CONFIG_YAML,
       'core-config.backup.yaml': LEGACY_CONFIG_YAML,
@@ -317,7 +317,7 @@ describe('migrateConfig', () => {
 // ---------------------------------------------------------------------------
 
 describe('ensureUserConfigDir', () => {
-  it('should create ~/.aios/ directory if it does not exist', () => {
+  it('should create ~/.aiox/ directory if it does not exist', () => {
     // Given
     fs.existsSync.mockReturnValue(false);
 
@@ -326,7 +326,7 @@ describe('ensureUserConfigDir', () => {
 
     // Then
     expect(fs.mkdirSync).toHaveBeenCalledWith(
-      expect.stringContaining('.aios'),
+      expect.stringContaining('.aiox'),
       expect.objectContaining({ recursive: true }),
     );
   });

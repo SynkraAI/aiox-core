@@ -1,0 +1,89 @@
+# AIOX Module Mapping v2.0 → v4.0.4
+# Story 2.14 - Migration Script
+
+version: "1.0.0"
+
+# Mapping of v2.0 directories to v4.0.4 modules
+mapping:
+  core:
+    source: ".aiox-core/"
+    target: ".aiox-core/core/"
+    files:
+      - registry/**
+      - quality-gates/**
+      - manifest/**
+      - utils/**
+      - elicitation/**
+      - session/**
+      - config/**
+      - mcp/**
+      - data/**
+      - docs/**
+    root_files: true  # Include root-level files
+
+  development:
+    source: ".aiox-core/"
+    target: ".aiox-core/development/"
+    files:
+      - agents/**
+      - tasks/**
+      - templates/**
+      - checklists/**
+      - scripts/**
+      - personas/**
+
+  product:
+    source: ".aiox-core/"
+    target: ".aiox-core/product/"
+    files:
+      - cli/**
+      - api/**
+
+  infrastructure:
+    source: ".aiox-core/"
+    target: ".aiox-core/infrastructure/"
+    files:
+      - hooks/**
+      - telemetry/**
+      - integrations/**
+
+# Import path transformations
+import_transforms:
+  patterns:
+    # Old pattern → New pattern
+    - from: "../../registry/"
+      to: "../../core/registry/"
+    - from: "../../agents/"
+      to: "../../development/agents/"
+    - from: "../../tasks/"
+      to: "../../development/tasks/"
+    - from: "../../cli/"
+      to: "../../product/cli/"
+    - from: "../utils/"
+      to: "../core/utils/"
+
+  file_extensions:
+    - .js
+    - .ts
+    - .mjs
+    - .cjs
+    - .jsx
+    - .tsx
+
+# Files to skip during migration
+exclusions:
+  files:
+    - "*.md"           # Documentation stays in place
+    - "*.yaml"         # Config files handled separately
+    - "*.json"         # JSON configs handled separately
+  directories:
+    - node_modules
+    - .git
+    - dist
+    - build
+
+# Post-migration cleanup
+cleanup:
+  removeEmptyDirs: true
+  removeOldStructure: true
+  preserveGitHistory: true

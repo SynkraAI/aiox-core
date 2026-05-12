@@ -1,7 +1,7 @@
 # @ux-design-expert (Uma) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/ux-design-expert.md`
+> Agent definition: `.aiox-core/development/agents/ux-design-expert.md`
 
 ## 1. Activation Trace
 
@@ -9,12 +9,12 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/ux-design-expert.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | generate-greeting.js (fs.readFile + yaml.load) | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, uxLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios/session-state.json` | SessionContextLoader.loadContext() | Session type detection (sessionType, previousAgent, lastCommands) |
-| 6 | `.aios/project-status.yaml` | loadProjectStatus() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/ux-design-expert.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | generate-greeting.js (fs.readFile + yaml.load) | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, uxLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox/session-state.json` | SessionContextLoader.loadContext() | Session type detection (sessionType, previousAgent, lastCommands) |
+| 6 | `.aiox/project-status.yaml` | loadProjectStatus() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -139,7 +139,7 @@ ux-design-expert:
 | `*a11y-check` | accessibility-wcag-checklist.md (checklist) | Phase 5: Quality | Optional |
 | `*calculate-roi` | calculate-roi.md | Phase 5: Quality | No |
 | `*scan {path\|url}` | ux-ds-scan-artifact.md | Universal | Yes |
-| `*integrate {pack}` | integrate-Squad.md (MISSING - see Section 6) | Universal | Yes |
+| `*integrate {squad}` | integrate-Squad.md (MISSING - see Section 6) | Universal | Yes |
 
 ---
 
@@ -147,7 +147,7 @@ ux-design-expert:
 
 ### `*research`
 
-**Task file:** `.aios-core/development/tasks/ux-user-research.md`
+**Task file:** `.aiox-core/development/tasks/ux-user-research.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -172,7 +172,7 @@ flowchart TD
 
 ### `*wireframe {fidelity}`
 
-**Task file:** `.aios-core/development/tasks/ux-create-wireframe.md`
+**Task file:** `.aiox-core/development/tasks/ux-create-wireframe.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -196,7 +196,7 @@ flowchart TD
 
 ### `*generate-ui-prompt`
 
-**Task file:** `.aios-core/development/tasks/generate-ai-frontend-prompt.md`
+**Task file:** `.aiox-core/development/tasks/generate-ai-frontend-prompt.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -218,8 +218,8 @@ flowchart TD
 
 ### `*create-front-end-spec`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/product/templates/front-end-spec-tmpl.yaml`
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/product/templates/front-end-spec-tmpl.yaml`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -246,7 +246,7 @@ flowchart TD
 
 ### `*audit {path}`
 
-**Task file:** `.aios-core/development/tasks/audit-codebase.md`
+**Task file:** `.aiox-core/development/tasks/audit-codebase.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -273,7 +273,7 @@ flowchart TD
 
 ### `*consolidate`
 
-**Task file:** `.aios-core/development/tasks/consolidate-patterns.md`
+**Task file:** `.aiox-core/development/tasks/consolidate-patterns.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -301,8 +301,8 @@ flowchart TD
 
 ### `*shock-report`
 
-**Task file:** `.aios-core/development/tasks/generate-shock-report.md`
-**Template:** `.aios-core/product/templates/shock-report-tmpl.html`
+**Task file:** `.aiox-core/development/tasks/generate-shock-report.md`
+**Template:** `.aiox-core/product/templates/shock-report-tmpl.html`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -329,8 +329,8 @@ flowchart TD
 
 ### `*tokenize`
 
-**Task file:** `.aios-core/development/tasks/extract-tokens.md`
-**Template:** `.aios-core/product/templates/tokens-schema-tmpl.yaml`
+**Task file:** `.aiox-core/development/tasks/extract-tokens.md`
+**Template:** `.aiox-core/product/templates/tokens-schema-tmpl.yaml`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -356,7 +356,7 @@ flowchart TD
 
 ### `*setup`
 
-**Task file:** `.aios-core/development/tasks/setup-design-system.md`
+**Task file:** `.aiox-core/development/tasks/setup-design-system.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -380,8 +380,8 @@ flowchart TD
 
 ### `*migrate`
 
-**Task file:** `.aios-core/development/tasks/generate-migration-strategy.md`
-**Template:** `.aios-core/product/templates/migration-strategy-tmpl.md`
+**Task file:** `.aiox-core/development/tasks/generate-migration-strategy.md`
+**Template:** `.aiox-core/product/templates/migration-strategy-tmpl.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -409,7 +409,7 @@ flowchart TD
 
 ### `*upgrade-tailwind`
 
-**Task file:** `.aios-core/development/tasks/tailwind-upgrade.md`
+**Task file:** `.aiox-core/development/tasks/tailwind-upgrade.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -432,7 +432,7 @@ flowchart TD
 
 ### `*audit-tailwind-config`
 
-**Task file:** `.aios-core/development/tasks/audit-tailwind-config.md`
+**Task file:** `.aiox-core/development/tasks/audit-tailwind-config.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -454,8 +454,8 @@ flowchart TD
 
 ### `*export-dtcg`
 
-**Task file:** `.aios-core/development/tasks/export-design-tokens-dtcg.md`
-**Templates:** `.aios-core/product/templates/token-exports-css-tmpl.css`, `.aios-core/product/templates/token-exports-tailwind-tmpl.js`
+**Task file:** `.aiox-core/development/tasks/export-design-tokens-dtcg.md`
+**Templates:** `.aiox-core/product/templates/token-exports-css-tmpl.css`, `.aiox-core/product/templates/token-exports-tailwind-tmpl.js`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -480,7 +480,7 @@ flowchart TD
 
 ### `*bootstrap-shadcn`
 
-**Task file:** `.aios-core/development/tasks/bootstrap-shadcn-library.md`
+**Task file:** `.aiox-core/development/tasks/bootstrap-shadcn-library.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -503,8 +503,8 @@ flowchart TD
 
 ### `*build {component}`
 
-**Task file:** `.aios-core/development/tasks/build-component.md`
-**Template:** `.aios-core/product/templates/component-react-tmpl.tsx`
+**Task file:** `.aiox-core/development/tasks/build-component.md`
+**Template:** `.aiox-core/product/templates/component-react-tmpl.tsx`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -534,7 +534,7 @@ flowchart TD
 
 ### `*compose {molecule}`
 
-**Task file:** `.aios-core/development/tasks/compose-molecule.md`
+**Task file:** `.aiox-core/development/tasks/compose-molecule.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -557,7 +557,7 @@ flowchart TD
 
 ### `*extend {component}`
 
-**Task file:** `.aios-core/development/tasks/extend-pattern.md`
+**Task file:** `.aiox-core/development/tasks/extend-pattern.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -580,7 +580,7 @@ flowchart TD
 
 ### `*document`
 
-**Task file:** `.aios-core/development/tasks/generate-documentation.md`
+**Task file:** `.aiox-core/development/tasks/generate-documentation.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -605,7 +605,7 @@ flowchart TD
 
 ### `*a11y-check`
 
-**Checklist file:** `.aios-core/product/checklists/accessibility-wcag-checklist.md`
+**Checklist file:** `.aiox-core/product/checklists/accessibility-wcag-checklist.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -632,7 +632,7 @@ flowchart TD
 
 ### `*calculate-roi`
 
-**Task file:** `.aios-core/development/tasks/calculate-roi.md`
+**Task file:** `.aiox-core/development/tasks/calculate-roi.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -657,8 +657,8 @@ flowchart TD
 
 ### `*scan {path|url}`
 
-**Task file:** `.aios-core/development/tasks/ux-ds-scan-artifact.md`
-**Template:** `.aios-core/product/templates/ds-artifact-analysis.md`
+**Task file:** `.aiox-core/development/tasks/ux-ds-scan-artifact.md`
+**Template:** `.aiox-core/product/templates/ds-artifact-analysis.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -685,18 +685,18 @@ flowchart TD
 
 ---
 
-### `*integrate {pack}`
+### `*integrate {squad}`
 
-**Task file:** `.aios-core/development/tasks/integrate-Squad.md` (MISSING)
+**Task file:** `.aiox-core/development/tasks/integrate-Squad.md` (MISSING)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `integrate-Squad.md` | Task | MISSING |
-| `integrate-expansion-pack.md` | Task | EXISTS (possible intended file) |
+| `integrate-squad.md` | Task | EXISTS (possible intended file) |
 | `integration-patterns.md` | Data | EXISTS (product/data/) |
 
-**Note:** The agent definition references `integrate-Squad.md` but only `integrate-expansion-pack.md` exists on disk. This may cause a runtime error or the task loader may fall back.
+**Note:** The agent definition references `integrate-Squad.md` but only `integrate-squad.md` exists on disk. This may cause a runtime error or the task loader may fall back.
 
 ---
 
@@ -925,20 +925,20 @@ graph TD
 
 | File | Type | Referenced By | Impact |
 |------|------|---------------|--------|
-| `integrate-Squad.md` | Task | `*integrate {pack}` | Command non-functional; `integrate-expansion-pack.md` exists as possible substitute |
+| `integrate-Squad.md` | Task | `*integrate {squad}` | Command non-functional; `integrate-squad.md` exists as possible substitute |
 
 ### Notes on Dependency Locations
 
-The agent definition references dependencies using short names (e.g., `aios-core/tasks/...`). The actual resolution paths are:
+The agent definition references dependencies using short names (e.g., `aiox-core/tasks/...`). The actual resolution paths are:
 
 | Dependency Type | Agent Definition Path | Actual Disk Location |
 |-----------------|----------------------|---------------------|
-| Tasks | `aios-core/tasks/{name}` | `.aios-core/development/tasks/{name}` |
-| Templates | `aios-core/templates/{name}` | `.aios-core/product/templates/{name}` |
-| Checklists | `aios-core/checklists/{name}` | `.aios-core/product/checklists/{name}` |
-| Data | `aios-core/data/{name}` | `.aios-core/data/{name}` or `.aios-core/product/data/{name}` |
+| Tasks | `aiox-core/tasks/{name}` | `.aiox-core/development/tasks/{name}` |
+| Templates | `aiox-core/templates/{name}` | `.aiox-core/product/templates/{name}` |
+| Checklists | `aiox-core/checklists/{name}` | `.aiox-core/product/checklists/{name}` |
+| Data | `aiox-core/data/{name}` | `.aiox-core/data/{name}` or `.aiox-core/product/data/{name}` |
 
-All 9 templates, all 4 checklists, and all 7 data files resolve correctly to files in `product/` directories. The `development/data/` directory does not exist; data files live under `.aios-core/data/` and `.aios-core/product/data/`.
+All 9 templates, all 4 checklists, and all 7 data files resolve correctly to files in `product/` directories. The `development/data/` directory does not exist; data files live under `.aiox-core/data/` and `.aiox-core/product/data/`.
 
 ---
 
@@ -969,7 +969,7 @@ current_phase: research | audit | tokenize | build | quality
 workflow_type: greenfield | brownfield | complete
 ```
 
-**Template for state persistence:** `.aios-core/product/templates/state-persistence-tmpl.yaml` (EXISTS)
+**Template for state persistence:** `.aiox-core/product/templates/state-persistence-tmpl.yaml` (EXISTS)
 
 ---
 
@@ -993,4 +993,4 @@ workflow_type: greenfield | brownfield | complete
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

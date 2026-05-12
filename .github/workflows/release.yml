@@ -72,17 +72,17 @@ jobs:
           echo "" >> CHANGELOG.md
           echo "| Package | Description | Installation |" >> CHANGELOG.md
           echo "|---------|-------------|--------------|" >> CHANGELOG.md
-          echo "| [aios-core](https://www.npmjs.com/package/aios-core) | AI-Orchestrated System for Full Stack Development | \`npm install -g aios-core\` |" >> CHANGELOG.md
+          echo "| [aiox-core](https://www.npmjs.com/package/aiox-core) | AI-Orchestrated System for Full Stack Development | \`npm install -g aiox-core\` |" >> CHANGELOG.md
 
           echo "" >> CHANGELOG.md
           echo "## 🚀 Quick Start" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "\`\`\`bash" >> CHANGELOG.md
           echo "# Install globally" >> CHANGELOG.md
-          echo "npm install -g aios-core" >> CHANGELOG.md
+          echo "npm install -g aiox-core" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "# Initialize in your project" >> CHANGELOG.md
-          echo "aios init" >> CHANGELOG.md
+          echo "aiox init" >> CHANGELOG.md
           echo "\`\`\`" >> CHANGELOG.md
 
       - name: Create Release
@@ -92,7 +92,7 @@ jobs:
         run: |
           # Create the release using GitHub CLI
           gh release create "${{ steps.version.outputs.tag }}" \
-            --title "AIOS-FullStack ${{ steps.version.outputs.tag }}" \
+            --title "AIOX-FullStack ${{ steps.version.outputs.tag }}" \
             --notes-file CHANGELOG.md \
             --verify-tag || true
           
@@ -120,7 +120,7 @@ jobs:
       - name: Prepare packages
         run: |
           # Create lib directories for packages that need them
-          for pkg in .aios-core memory security performance telemetry; do
+          for pkg in .aiox-core memory security performance telemetry; do
             if [ -d "$pkg" ]; then
               mkdir -p "$pkg/lib"
             fi
@@ -131,10 +131,10 @@ jobs:
           VERSION="${{ needs.create-release.outputs.version }}"
 
           # Create output directory
-          mkdir -p @synkra
+          mkdir -p dist
 
           # Use tar with || true to ignore "file changed" warnings
-          tar -czf @synkra/aios-core-${VERSION}.tar.gz \
+          tar -czf aiox-core-${VERSION}.tar.gz \
             --exclude=node_modules \
             --exclude=.git \
             --exclude=tests \
@@ -145,13 +145,13 @@ jobs:
             . || true
 
           # Verify tar was created
-          if [ ! -f "@synkra/aios-core-${VERSION}.tar.gz" ]; then
+          if [ ! -f "aiox-core-${VERSION}.tar.gz" ]; then
             echo "❌ Failed to create tar archive"
             exit 1
           fi
 
           # Create source code zip
-          zip -r @synkra/aios-core-${VERSION}-source.zip . \
+          zip -r aiox-core-${VERSION}-source.zip . \
             -x "node_modules/*" ".git/*" "tests/*" "*.log" ".github/*" "*.tar.gz" "*.zip"
 
       - name: Upload Release Assets
@@ -163,12 +163,12 @@ jobs:
 
           # Upload tar.gz file
           gh release upload "${TAG}" \
-            "@synkra/aios-core-${VERSION}.tar.gz" \
+            "aiox-core-${VERSION}.tar.gz" \
             --clobber
 
           # Upload source zip file
           gh release upload "${TAG}" \
-            "@synkra/aios-core-${VERSION}-source.zip" \
+            "aiox-core-${VERSION}-source.zip" \
             --clobber
 
   trigger-npm-publish:

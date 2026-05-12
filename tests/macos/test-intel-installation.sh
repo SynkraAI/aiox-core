@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 # Test metadata
 TEST_NAME="AC1: Intel Mac Installation"
 TEST_SCRIPT="test-intel-installation.sh"
-LOG_FILE="/tmp/aios-test-intel-$(date +%Y%m%d-%H%M%S).log"
+LOG_FILE="/tmp/aiox-test-intel-$(date +%Y%m%d-%H%M%S).log"
 
 # Utility functions
 log_info() {
@@ -85,20 +85,20 @@ check_prerequisites() {
 
 # Test 1: Clean installation
 test_clean_installation() {
-    log_info "Test 1: Clean AIOS installation on Intel Mac..."
+    log_info "Test 1: Clean AIOX installation on Intel Mac..."
 
-    # Backup existing AIOS config if present
-    if [[ -d "$HOME/.aios" ]]; then
-        log_warning "Existing .aios directory found. Backing up..."
-        mv "$HOME/.aios" "$HOME/.aios.backup.$(date +%Y%m%d-%H%M%S)"
+    # Backup existing AIOX config if present
+    if [[ -d "$HOME/.aiox" ]]; then
+        log_warning "Existing .aiox directory found. Backing up..."
+        mv "$HOME/.aiox" "$HOME/.aiox.backup.$(date +%Y%m%d-%H%M%S)"
     fi
 
     # Run installer
-    log_info "Running: npx @synkraai/aios@latest init"
+    log_info "Running: npx @synkraai/aiox@latest init"
 
     # Note: This will require manual interaction for now
     # In automated CI, we'll need to provide inputs programmatically
-    if npx @synkraai/aios@latest init; then
+    if npx @synkraai/aiox@latest init; then
         pass_test "Installation completed without errors"
     else
         fail_test "Installation failed with exit code $?"
@@ -109,14 +109,14 @@ test_clean_installation() {
 test_mcp_health() {
     log_info "Test 2: Verifying MCP health checks..."
 
-    # Check if aios command is available
-    if ! command -v aios &> /dev/null; then
-        fail_test "aios command not found in PATH"
+    # Check if aiox command is available
+    if ! command -v aiox &> /dev/null; then
+        fail_test "aiox command not found in PATH"
     fi
 
     # Run health check
-    log_info "Running: aios health"
-    HEALTH_OUTPUT=$(aios health 2>&1)
+    log_info "Running: aiox health"
+    HEALTH_OUTPUT=$(aiox health 2>&1)
 
     echo "$HEALTH_OUTPUT" | tee -a "$LOG_FILE"
 
@@ -138,20 +138,20 @@ test_mcp_health() {
 test_cli_commands() {
     log_info "Test 3: Testing CLI commands..."
 
-    # Test aios --version
-    if aios --version &> /dev/null; then
-        VERSION=$(aios --version)
-        log_info "AIOS version: $VERSION"
-        pass_test "aios --version works"
+    # Test aiox --version
+    if aiox --version &> /dev/null; then
+        VERSION=$(aiox --version)
+        log_info "AIOX version: $VERSION"
+        pass_test "aiox --version works"
     else
-        fail_test "aios --version failed"
+        fail_test "aiox --version failed"
     fi
 
-    # Test aios --help
-    if aios --help &> /dev/null; then
-        pass_test "aios --help works"
+    # Test aiox --help
+    if aiox --help &> /dev/null; then
+        pass_test "aiox --help works"
     else
-        fail_test "aios --help failed"
+        fail_test "aiox --help failed"
     fi
 }
 

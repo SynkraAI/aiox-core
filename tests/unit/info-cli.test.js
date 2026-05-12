@@ -16,9 +16,9 @@ const {
   formatInfoYAML,
   formatNotFoundError,
   wrapText,
-} = require('../../.aios-core/cli/commands/workers/formatters/info-formatter');
-const { findSuggestions, findRelatedWorkers } = require('../../.aios-core/cli/commands/workers/info');
-const { levenshteinDistance } = require('../../.aios-core/cli/commands/workers/search-keyword');
+} = require('../../.aiox-core/cli/commands/workers/formatters/info-formatter');
+const { findSuggestions, findRelatedWorkers } = require('../../.aiox-core/cli/commands/workers/info');
+const { levenshteinDistance } = require('../../.aiox-core/cli/commands/workers/search-keyword');
 
 // Mock worker for testing
 const mockWorker = {
@@ -30,7 +30,7 @@ const mockWorker = {
   inputs: ['json (object|array) - JSON data to transform'],
   outputs: ['csv (string) - CSV formatted data'],
   tags: ['etl', 'data', 'json', 'csv', 'transformation'],
-  path: '.aios-core/development/tasks/data/json-csv-transformer.md',
+  path: '.aiox-core/development/tasks/data/json-csv-transformer.md',
   taskFormat: 'TASK-FORMAT-V1',
   executorTypes: ['Worker', 'Agent'],
   performance: {
@@ -89,7 +89,7 @@ describe('Info Formatter - Pretty Output', () => {
   test('formatInfoPretty includes usage example', () => {
     const output = formatInfoPretty(mockWorker, {});
     expect(output).toContain('Usage Example');
-    expect(output).toContain('aios task run json-csv-transformer');
+    expect(output).toContain('aiox task run json-csv-transformer');
   });
 
   test('formatInfoPretty includes related workers when provided', () => {
@@ -189,7 +189,7 @@ describe('Not Found Error Formatter', () => {
 
   test('formatNotFoundError includes search hint', () => {
     const output = formatNotFoundError('invalid', []);
-    expect(output).toContain('aios workers search invalid');
+    expect(output).toContain('aiox workers search invalid');
   });
 });
 

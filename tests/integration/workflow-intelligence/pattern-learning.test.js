@@ -14,7 +14,7 @@ describe('Pattern Learning Integration', () => {
   let testStoragePath;
 
   beforeAll(() => {
-    learningModule = require('../../../.aios-core/workflow-intelligence/learning');
+    learningModule = require('../../../.aiox-core/workflow-intelligence/learning');
   });
 
   beforeEach(() => {
@@ -305,7 +305,7 @@ describe('Pattern Learning Integration', () => {
     let captureHook;
 
     beforeAll(() => {
-      captureHook = require('../../../.aios-core/workflow-intelligence/learning/capture-hook');
+      captureHook = require('../../../.aiox-core/workflow-intelligence/learning/capture-hook');
     });
 
     it('should export hook functions', () => {
@@ -317,10 +317,10 @@ describe('Pattern Learning Integration', () => {
 
     it('should handle disabled state gracefully', async () => {
       // Save original env
-      const originalEnv = process.env.AIOS_PATTERN_CAPTURE;
+      const originalEnv = process.env.AIOX_PATTERN_CAPTURE;
 
       try {
-        process.env.AIOS_PATTERN_CAPTURE = 'false';
+        process.env.AIOX_PATTERN_CAPTURE = 'false';
         captureHook.reset();
 
         const result = await captureHook.onTaskComplete('develop', {});
@@ -329,9 +329,9 @@ describe('Pattern Learning Integration', () => {
       } finally {
         // Restore env
         if (originalEnv !== undefined) {
-          process.env.AIOS_PATTERN_CAPTURE = originalEnv;
+          process.env.AIOX_PATTERN_CAPTURE = originalEnv;
         } else {
-          delete process.env.AIOS_PATTERN_CAPTURE;
+          delete process.env.AIOX_PATTERN_CAPTURE;
         }
         captureHook.reset();
       }
@@ -340,7 +340,7 @@ describe('Pattern Learning Integration', () => {
 
   describe('WIS Integration', () => {
     it('should be accessible from main WIS module', () => {
-      const wis = require('../../../.aios-core/workflow-intelligence');
+      const wis = require('../../../.aiox-core/workflow-intelligence');
 
       expect(wis.learning).toBeDefined();
       expect(wis.learning.createPatternCapture).toBeDefined();

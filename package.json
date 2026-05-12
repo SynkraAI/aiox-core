@@ -1,11 +1,12 @@
 {
-  "name": "aios-core",
-  "version": "4.0.4",
-  "description": "Synkra AIOS: AI-Orchestrated System for Full Stack Development - Core Framework",
+  "name": "aiox-core",
+  "version": "5.0.3",
+  "description": "Synkra AIOX: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
-    "aios": "bin/aios.js",
-    "aios-core": "bin/aios.js",
-    "aios-minimal": "bin/aios-minimal.js"
+    "aiox": "bin/aiox.js",
+    "aiox-core": "bin/aiox.js",
+    "aiox-minimal": "bin/aiox-minimal.js",
+    "aiox-graph": "bin/aiox-graph.js"
   },
   "preferGlobal": false,
   "workspaces": [
@@ -15,10 +16,30 @@
     "bin/",
     "scripts/",
     "packages/",
-    ".aios-core/",
+    ".aiox-core/",
     ".claude/CLAUDE.md",
     ".claude/rules/",
     ".claude/hooks/",
+    "pro/license/",
+    "pro/squads/",
+    "pro/pro-config.yaml",
+    "pro/feature-registry.yaml",
+    "pro/package.json",
+    "pro/README.md",
+    "docs/guides/",
+    "docs/installation/",
+    "docs/examples/",
+    "docs/community/",
+    "docs/legal/",
+    "docs/security/",
+    "docs/aiox-workflows/",
+    "docs/aiox-agent-flows/",
+    "docs/framework/",
+    "docs/en/",
+    "docs/es/",
+    "docs/pt/",
+    "docs/zh/",
+    "docs/*.md",
     "README.md",
     "LICENSE"
   ],
@@ -34,14 +55,34 @@
     "release:test": "semantic-release --dry-run --no-ci || echo 'Config test complete - authentication errors are expected locally'",
     "generate:manifest": "node scripts/generate-install-manifest.js",
     "validate:manifest": "node scripts/validate-manifest.js",
-    "validate:structure": "node .aios-core/infrastructure/scripts/source-tree-guardian/index.js",
-    "validate:agents": "node .aios-core/infrastructure/scripts/validate-agents.js",
-    "sync:ide": "node .aios-core/infrastructure/scripts/ide-sync/index.js sync",
-    "sync:ide:validate": "node .aios-core/infrastructure/scripts/ide-sync/index.js validate",
-    "sync:ide:check": "node .aios-core/infrastructure/scripts/ide-sync/index.js validate --strict",
-    "sync:ide:cursor": "node .aios-core/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
-    "sync:ide:windsurf": "node .aios-core/infrastructure/scripts/ide-sync/index.js sync --ide windsurf",
-    "prepublishOnly": "npm run generate:manifest && npm run validate:manifest",
+    "validate:structure": "node .aiox-core/infrastructure/scripts/source-tree-guardian/index.js",
+    "validate:agents": "node .aiox-core/infrastructure/scripts/validate-agents.js",
+    "sync:ide": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync",
+    "sync:ide:validate": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate",
+    "sync:ide:check": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate --strict",
+    "sync:ide:claude": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide claude-code",
+    "sync:ide:codex": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide codex",
+    "sync:ide:gemini": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide gemini",
+    "sync:ide:github-copilot": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide github-copilot",
+    "sync:ide:antigravity": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide antigravity",
+    "validate:claude-sync": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate --ide claude-code --strict",
+    "validate:claude-integration": "node .aiox-core/infrastructure/scripts/validate-claude-integration.js",
+    "validate:codex-sync": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate --ide codex --strict",
+    "validate:codex-integration": "node .aiox-core/infrastructure/scripts/validate-codex-integration.js",
+    "validate:gemini-sync": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate --ide gemini --strict",
+    "validate:github-copilot-sync": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate --ide github-copilot --strict",
+    "validate:antigravity-sync": "node .aiox-core/infrastructure/scripts/ide-sync/index.js validate --ide antigravity --strict",
+    "validate:gemini-integration": "node .aiox-core/infrastructure/scripts/validate-gemini-integration.js",
+    "sync:skills:codex": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js",
+    "sync:skills:codex:global": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js --global --global-only",
+    "validate:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict",
+    "validate:paths": "node .aiox-core/infrastructure/scripts/validate-paths.js",
+    "validate:parity": "node .aiox-core/infrastructure/scripts/validate-parity.js",
+    "validate:semantic-lint": "node scripts/semantic-lint.js",
+    "manifest:ensure": "node scripts/ensure-manifest.js",
+    "sync:ide:cursor": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
+    "validate:publish": "node bin/utils/validate-publish.js",
+    "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
     "prepare": "husky"
   },
   "dependencies": {
@@ -50,6 +91,7 @@
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "ansi-to-html": "^0.7.2",
+    "asciichart": "^1.5.25",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "cli-progress": "^3.12.0",
@@ -69,7 +111,7 @@
   },
   "keywords": [
     "ai",
-    "aios",
+    "aiox",
     "agile",
     "agents",
     "orchestrator",
@@ -83,16 +125,16 @@
     "vite-style",
     "automation"
   ],
-  "author": "Synkra AIOS Team",
+  "author": "Synkra AIOX Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SynkraAI/aios-core.git"
+    "url": "git+https://github.com/SynkraAI/aiox-core.git"
   },
   "bugs": {
-    "url": "https://github.com/SynkraAI/aios-core/issues"
+    "url": "https://github.com/SynkraAI/aiox-core/issues"
   },
-  "homepage": "https://github.com/SynkraAI/aios-core#readme",
+  "homepage": "https://github.com/SynkraAI/aiox-core#readme",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
@@ -120,9 +162,10 @@
       "prettier --write"
     ],
     "*.md": [
-      "prettier --write"
+      "prettier --write",
+      "node scripts/semantic-lint.js --staged"
     ],
-    ".aios-core/development/agents/*.md": [
+    ".aiox-core/development/agents/*.md": [
       "npm run sync:ide"
     ]
   },

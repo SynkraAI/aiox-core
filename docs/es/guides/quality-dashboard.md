@@ -185,7 +185,7 @@ Mayor es mejor - significa que más problemas se detectan automáticamente antes
 Las métricas se almacenan en:
 
 ```
-.aios/data/quality-metrics.json
+.aiox/data/quality-metrics.json
 ```
 
 ### Formato de Datos
@@ -253,14 +253,14 @@ Las métricas se almacenan en:
 El dashboard lee métricas de la carpeta pública. Para actualizar:
 
 ```bash
-# Sincronizar desde .aios/data al dashboard
+# Sincronizar desde .aiox/data al dashboard
 npm run sync-metrics
 
 # O usar el comando combinado
 npm run dev:sync
 ```
 
-Esto copia `.aios/data/quality-metrics.json` a `tools/quality-dashboard/public/.aios/data/`.
+Esto copia `.aiox/data/quality-metrics.json` a `tools/quality-dashboard/public/.aiox/data/`.
 
 ---
 
@@ -336,10 +336,10 @@ Asegúrese de que el recolector de métricas se haya ejecutado:
 
 ```bash
 # Verificar si el archivo de métricas existe
-ls -la .aios/data/quality-metrics.json
+ls -la .aiox/data/quality-metrics.json
 
 # Si falta, sembrar con datos de ejemplo
-npx aios metrics seed
+npx aiox metrics seed
 ```
 
 ### Los Gráficos No Se Renderizan
@@ -364,4 +364,4 @@ La auto-actualización se pausa cuando:
 
 ---
 
-_Synkra AIOS Quality Dashboard v1.0_
+_Synkra AIOX Quality Dashboard v1.0_

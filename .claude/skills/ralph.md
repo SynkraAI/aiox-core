@@ -104,7 +104,7 @@ dependencies:
 knowledge_areas:
   - Ralph autonomous loop methodology
   - ai-dev-tasks PRD structure (9 sections)
-  - AIOS Story-Driven Development
+  - AIOX Story-Driven Development
   - Quality Gates validation
   - Dev Agent Record tracking
   - Codebase Patterns compounding

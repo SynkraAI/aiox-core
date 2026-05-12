@@ -28,8 +28,8 @@ describeIntegration('Validation System Performance', () => {
   };
 
   beforeAll(async () => {
-    // Set search path to aios-core/tools
-    const toolsPath = path.join(__dirname, '../../aios-core/tools');
+    // Set search path to aiox-core/tools
+    const toolsPath = path.join(__dirname, '../../aiox-core/tools');
     toolResolver.setSearchPaths([toolsPath]);
 
     // Resolve all 4 complex tools

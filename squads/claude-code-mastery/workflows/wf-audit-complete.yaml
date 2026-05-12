@@ -1,0 +1,140 @@
+# ============================================================================
+# Workflow: Complete Audit
+# Squad: claude-code-mastery
+# Version: 1.0.0
+# Purpose: Full audit of Claude Code setup using all specialist agents
+# ============================================================================
+
+workflow:
+  id: wf-audit-complete
+  name: "Complete Claude Code Audit"
+  version: "1.0.0"
+  description: |
+    Comprehensive audit that leverages all specialist agents to evaluate
+    every aspect of a Claude Code setup. Produces a detailed report with
+    scores per domain and actionable recommendations.
+
+  trigger: "*full-audit"
+  entry_agent: claude-mastery-chief
+  estimated_duration: "20-40 minutes"
+
+# ────────────────────────────────────────────────────────────────────────────
+# PHASES
+# ────────────────────────────────────────────────────────────────────────────
+
+phases:
+
+  # ─── PHASE 0: Baseline Scan ──────────────────────────────────────────────
+  - id: phase_0
+    name: "Baseline Scan"
+    agent: claude-mastery-chief
+    task: audit-setup.md
+    description: "Quick audit to establish baseline score and identify areas needing deep review."
+    outputs:
+      - baseline_score: "number (0-100)"
+      - areas_needing_review: "array of domain names"
+    checkpoint:
+      gate: "Baseline scan completed with score > 0"
+      veto: "If .claude/ directory does not exist, abort — no Claude Code setup to audit"
+
+  # ─── PHASE 1: Parallel Domain Audits ─────────────────────────────────────
+  - id: phase_1
+    name: "Domain-Specific Audits"
+    depends_on: [phase_0]
+    parallel: true
+    description: "Run domain audits in parallel for efficiency."
+    sub_phases:
+
+      - id: phase_1a
+        name: "Configuration Audit"
+        agent: config-engineer
+        task: audit-settings.md
+        description: "Audit settings hierarchy, permissions, deny rules."
+        outputs:
+          - config_score: "number (0-100)"
+          - config_issues: "array"
+        checkpoint:
+          gate: "Settings files parsed without errors"
+          veto: "If settings.json has syntax errors, fix before continuing"
+
+      - id: phase_1b
+        name: "Context Rot Audit"
+        agent: project-integrator
+        task: context-rot-audit.md
+        description: "Check CLAUDE.md and rules for staleness and bloat."
+        outputs:
+          - rot_score: "number (0-100, lower = more rot)"
+          - stale_entries: "array"
+        checkpoint:
+          gate: "CLAUDE.md and rules files accessible"
+          veto: "If rot_score < 20, flag as CRITICAL before continuing"
+
+      - id: phase_1c
+        name: "MCP Audit"
+        agent: mcp-integrator
+        task: mcp-workflow.md
+        description: "Verify MCP servers are configured, responsive, and within context budget."
+        outputs:
+          - mcp_score: "number (0-100)"
+          - context_budget_usage: "number (tokens)"
+        checkpoint:
+          gate: "MCP configuration readable"
+          veto: "If context_budget > 15K tokens, flag as WARNING"
+
+  # ─── PHASE 2: Synthesis ─────────────────────────────────────────────────
+  - id: phase_2
+    name: "Audit Synthesis"
+    agent: claude-mastery-chief
+    depends_on: [phase_1]
+    description: "Synthesize all domain audits into a comprehensive report."
+    steps:
+      - "Aggregate scores from all domain audits"
+      - "Calculate weighted overall score"
+      - "Rank issues by severity and impact"
+      - "Generate prioritized recommendation list"
+      - "Produce executive summary"
+    outputs:
+      - overall_score: "number (0-100)"
+      - grade: "string (A-F)"
+      - top_recommendations: "array (max 5)"
+      - full_report: "markdown"
+    checkpoint:
+      gate: "All domain scores aggregated and report generated"
+      veto: "If any domain score is 0 (audit failed to run), re-run that domain"
+
+# ────────────────────────────────────────────────────────────────────────────
+# VETO CONDITIONS (workflow-level)
+# ────────────────────────────────────────────────────────────────────────────
+
+veto_conditions:
+  - "No .claude/ directory — nothing to audit"
+  - "settings.json with syntax errors — fix first"
+  - "Critical security issue found — address before generating report"
+
+# ────────────────────────────────────────────────────────────────────────────
+# SCORING WEIGHTS
+# ────────────────────────────────────────────────────────────────────────────
+
+scoring:
+  weights:
+    configuration: 0.30
+    context_health: 0.25
+    mcp_integration: 0.20
+    baseline: 0.25
+
+  grade_thresholds:
+    A: 90
+    B: 80
+    C: 70
+    D: 60
+    F: 0
+
+# ────────────────────────────────────────────────────────────────────────────
+# COMPLETION CRITERIA
+# ────────────────────────────────────────────────────────────────────────────
+
+completion_criteria:
+  - "All domain audits completed"
+  - "Overall score calculated"
+  - "Top 5 recommendations generated"
+  - "Full report produced"

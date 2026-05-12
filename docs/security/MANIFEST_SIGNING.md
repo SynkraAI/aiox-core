@@ -1,10 +1,10 @@
 # Manifest Signing Guide
 
-This document explains how to set up and use the cryptographic signing system for AIOS-Core install manifests.
+This document explains how to set up and use the cryptographic signing system for AIOX-Core install manifests.
 
 ## Overview
 
-AIOS-Core uses **Ed25519 digital signatures** (via minisign format) to verify the integrity and authenticity of the `install-manifest.yaml` file. This ensures that:
+AIOX-Core uses **Ed25519 digital signatures** (via minisign format) to verify the integrity and authenticity of the `install-manifest.yaml` file. This ensures that:
 
 1. The manifest has not been tampered with after signing
 2. The manifest was signed by a party in possession of the authorized signing key
@@ -22,7 +22,7 @@ AIOS-Core uses **Ed25519 digital signatures** (via minisign format) to verify th
 │  Signing Environment (Secure Machine)                            │
 │  ┌──────────────────┐    ┌───────────────────────────────────┐  │
 │  │ SECRET KEY       │───▶│ minisign -Sm install-manifest.yaml│  │
-│  │ (aios-core.key)  │    │         -s aios-core.key          │  │
+│  │ (aiox-core.key)  │    │         -s aiox-core.key          │  │
 │  │ NEVER SHARE!     │    └───────────────────────────────────┘  │
 │  └──────────────────┘                    │                       │
 │                                          ▼                       │
@@ -78,22 +78,22 @@ scoop install minisign
 
 ```bash
 # Generate a new Ed25519 key pair
-minisign -G -p aios-core.pub -s aios-core.key
+minisign -G -p aiox-core.pub -s aiox-core.key
 
 # You will be prompted for a password to protect the secret key
 # CHOOSE A STRONG PASSWORD!
 
 # Output:
-#   aios-core.pub  - PUBLIC key (safe to share, will be hardcoded)
-#   aios-core.key  - SECRET key (NEVER share, store securely)
+#   aiox-core.pub  - PUBLIC key (safe to share, will be hardcoded)
+#   aiox-core.key  - SECRET key (NEVER share, store securely)
 ```
 
 ### 3. View Public Key
 
 ```bash
-cat aios-core.pub
+cat aiox-core.pub
 # Output example:
-# untrusted comment: minisign public key AIOS0001
+# untrusted comment: minisign public key AIOX0001
 # RWQf6LRCGA9i8VYn7sGv...base64...
 ```
 
@@ -104,8 +104,8 @@ Edit `src/installer/manifest-signature.js`:
 ```javascript
 const PINNED_PUBLIC_KEY = {
   // Key ID from the public key file comment
-  keyId: 'AIOS0001',
-  // Base64 public key (the second line of aios-core.pub)
+  keyId: 'AIOX0001',
+  // Base64 public key (the second line of aiox-core.pub)
   publicKey: 'RWQf6LRCGA9i8VYn7sGv...your-actual-key...',
   algorithm: 'Ed25519',
 };
@@ -115,12 +115,12 @@ const PINNED_PUBLIC_KEY = {
 
 ### 5. Secure the Secret Key
 
-- Store `aios-core.key` in a secure location (password manager, HSM, etc.)
+- Store `aiox-core.key` in a secure location (password manager, HSM, etc.)
 - NEVER commit it to git
 - Add to `.gitignore`:
   ```gitignore
   *.key
-  aios-core.key
+  aiox-core.key
   ```
 - Consider using a hardware security key for additional protection
 
@@ -131,15 +131,15 @@ const PINNED_PUBLIC_KEY = {
 1. **Generate/Update Manifest**
 
    ```bash
-   node bin/aios.js manifest:generate
-   # Creates .aios-core/install-manifest.yaml with all file hashes
+   node bin/aiox.js manifest:generate
+   # Creates .aiox-core/install-manifest.yaml with all file hashes
    ```
 
 2. **Sign the Manifest**
 
    ```bash
-   cd .aios-core
-   minisign -Sm install-manifest.yaml -s /path/to/aios-core.key
+   cd .aiox-core
+   minisign -Sm install-manifest.yaml -s /path/to/aiox-core.key
 
    # Enter your password when prompted
    # Creates: install-manifest.yaml.minisig
@@ -148,15 +148,15 @@ const PINNED_PUBLIC_KEY = {
 3. **Verify Signature (Optional but Recommended)**
 
    ```bash
-   minisign -Vm install-manifest.yaml -p /path/to/aios-core.pub
+   minisign -Vm install-manifest.yaml -p /path/to/aiox-core.pub
    # Should output: Signature and comment signature verified
    ```
 
 4. **Commit Both Files**
 
    ```bash
-   git add .aios-core/install-manifest.yaml
-   git add .aios-core/install-manifest.yaml.minisig
+   git add .aiox-core/install-manifest.yaml
+   git add .aiox-core/install-manifest.yaml.minisig
    git commit -m "chore: update manifest and signature for vX.Y.Z"
    ```
 
@@ -219,7 +219,7 @@ This option exists **exclusively** for local development environments. Productio
 The signature file is missing. The party in possession of the signing key must sign the manifest:
 
 ```bash
-minisign -Sm .aios-core/install-manifest.yaml -s /path/to/aios-core.key
+minisign -Sm .aiox-core/install-manifest.yaml -s /path/to/aiox-core.key
 ```
 
 ### "Key ID mismatch"
@@ -231,8 +231,8 @@ The manifest was signed with a different key than the one pinned in the code. En
 The manifest content has been modified after signing. Regenerate and re-sign:
 
 ```bash
-node bin/aios.js manifest:generate
-minisign -Sm .aios-core/install-manifest.yaml -s /path/to/aios-core.key
+node bin/aiox.js manifest:generate
+minisign -Sm .aiox-core/install-manifest.yaml -s /path/to/aiox-core.key
 ```
 
 ### "Unsupported signature algorithm"

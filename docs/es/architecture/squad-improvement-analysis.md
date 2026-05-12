@@ -17,9 +17,9 @@
 
 | Aspecto | Valor |
 |--------|-------|
-| Framework | AIOS-FullStack |
+| Framework | AIOX-FullStack |
 | Lenguaje Principal | TypeScript/JavaScript |
-| Sistema de Squads | v2.1 (Arquitectura Task-First) |
+| Sistema de Squads | v4.2 (Arquitectura Task-First) |
 | Tareas Existentes | 8 tareas de squad-creator |
 | Framework de Testing | Jest |
 
@@ -35,7 +35,7 @@
 | **Nombre** | Craft |
 | **Título** | Squad Creator |
 | **Icono** | 🏗️ |
-| **Archivo** | `.aios-core/development/agents/squad-creator.md` |
+| **Archivo** | `.aiox-core/development/agents/squad-creator.md` |
 
 ### Tareas Existentes
 
@@ -47,7 +47,7 @@
 | `*list-squads` | squad-creator-list.md | ✅ Hecho | Listar squads locales |
 | `*migrate-squad` | squad-creator-migrate.md | ✅ Hecho | Migrar formato legacy |
 | `*download-squad` | squad-creator-download.md | ⏳ Placeholder | Descargar desde registro |
-| `*publish-squad` | squad-creator-publish.md | ⏳ Placeholder | Publicar a aios-squads |
+| `*publish-squad` | squad-creator-publish.md | ⏳ Placeholder | Publicar a aiox-squads |
 | `*sync-squad-synkra` | squad-creator-sync-synkra.md | ⏳ Placeholder | Sincronizar al marketplace |
 
 ### Scripts Existentes
@@ -60,7 +60,7 @@
 | SquadDesigner | squad-designer.js | Diseñar desde docs |
 | SquadMigrator | squad-migrator.js | Migrar formato legacy |
 | SquadDownloader | squad-downloader.js | Descargar desde registro |
-| SquadPublisher | squad-publisher.js | Publicar a aios-squads |
+| SquadPublisher | squad-publisher.js | Publicar a aiox-squads |
 
 ---
 

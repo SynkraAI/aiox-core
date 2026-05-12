@@ -1,13 +1,70 @@
 # Changelog
 
-All notable changes to Synkra AIOS will be documented in this file.
+All notable changes to Synkra AIOX will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.11] - 2026-02-16
+
+### Added
+
+- Squad agent commands are now automatically installed to active IDEs during pro scaffolding (`installSquadCommands`).
+- Supports Claude Code (`.claude/commands/{squad}/`), Codex CLI (`.codex/agents/`), Gemini CLI (`.gemini/rules/{squad}/`), and Cursor (`.cursor/rules/`).
+- Installed files are tracked in `pro-installed-manifest.yaml` and `pro-version.json`.
+
+## [4.2.10] - 2026-02-16
+
+### Fixed
+
+- Handle `ALREADY_ACTIVATED` license status gracefully instead of throwing error.
+- Fix error envelope parsing in pro license client — correctly extracts error messages from API responses.
+
+## [4.2.9] - 2026-02-16
+
+### Fixed
+
+- Pass `targetDir` correctly to `runProWizard` — fixes pro install failing in non-CWD projects.
+- Surface pro install errors to user instead of silently swallowing them.
+
+## [4.2.8] - 2026-02-16
+
+### Fixed
+
+- Exclude `mmos-squad` (private) from pro scaffolding via `SCAFFOLD_EXCLUDES`.
+- Merge `pro-config.yaml` sections into `core-config.yaml` during pro install (`mergeProConfig`).
+
+## [4.2.7] - 2026-02-16
+
+### Fixed
+
+- Pro wizard (`npx aiox-core install`) now auto-installs `@aiox-fullstack/pro` package during Step 2, fixing "Pro package not found" error in greenfield and brownfield projects.
+- Greenfield projects without `package.json` now get `npm init -y` automatically before pro install.
+- Removed unused `headings` import in `pro-setup.js`.
+
 ## [Unreleased]
 
-*Nothing unreleased at this time.*
+### Added
+
+- `docs/glossary.md` with official AIOX taxonomy terms:
+  - `squad`
+  - `flow-state`
+  - `confidence gate`
+  - `execution profile`
+- `scripts/semantic-lint.js` for semantic terminology regression checks.
+- `tests/unit/semantic-lint.test.js` for semantic lint rule validation.
+
+### Changed
+
+- CI now includes a `Semantic Lint` job (`npm run validate:semantic-lint`).
+- Pre-commit markdown pipeline now runs semantic lint through `lint-staged`.
+
+### Migration Notes
+
+- Deprecated terminology replacements:
+  - `expansion pack` -> `squad`
+  - `permission mode` -> `execution profile`
+  - `workflow state` -> `flow-state` (warning-level migration)
 
 ---
 
@@ -57,7 +114,7 @@ This release introduces **Squad Continuous Improvement** capabilities with analy
 
 ### Highlights
 
-This release marks the **Open-Source Community Readiness** milestone, preparing AIOS for public contribution while introducing the **Squad System** for extensibility.
+This release marks the **Open-Source Community Readiness** milestone, preparing AIOX for public contribution while introducing the **Squad System** for extensibility.
 
 ### Added
 
@@ -124,7 +181,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
   - Resolved path resolution issues across platforms
 
 - **Scripts Path Consolidation** (6.16)
-  - Standardized script locations under `.aios-core/scripts/`
+  - Standardized script locations under `.aiox-core/scripts/`
 
 - **Semantic Release Automation** (6.17)
   - Automated versioning on merge to main
@@ -132,7 +189,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
   - Automatic CHANGELOG generation
 
 - **Agent Command Rationalization** (Story 6.1.2.3)
-  - Command consolidation: `aios-master` 44→30 commands (32% reduction)
+  - Command consolidation: `aiox-master` 44→30 commands (32% reduction)
   - Command consolidation: `data-engineer` 31→28 commands (9.7% reduction)
   - New consolidated tasks: `security-audit`, `analyze-performance`, `test-as-user`, `setup-database`
   - Migration guide: `docs/guides/command-migration-guide.md`
@@ -148,7 +205,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 
 - **Agent Delegation Guidance** - All agents now include "NOT for" sections in `whenToUse`
 - **PR Title Format** - DevOps `*create-pr` now generates Conventional Commits format titles
-- **Scripts Location** - Consolidated under `.aios-core/scripts/` for consistency
+- **Scripts Location** - Consolidated under `.aiox-core/scripts/` for consistency
 - **MCP Configuration** - Unified rules in `.claude/rules/mcp-usage.md`
 
 ### Fixed
@@ -173,46 +230,46 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 ## [4.32.0] - 2025-11-12
 
 ### Removed
-- **Private expansion packs** - Moved to separate private repository (`aios-expansion-packs`)
-  - Removed `expansion-packs/creator/` (CreatorOS)
-  - Removed `expansion-packs/innerlens/`
-  - Removed `expansion-packs/mmos-mapper/`
-  - Removed `expansion-packs/aios-infrastructure-devops/`
-  - Removed `expansion-packs/meeting-notes/`
-  - Repository: https://github.com/SynkraAI/aios-expansion-packs (PRIVATE)
-- **Internal development tools** - Moved to separate private repository (`aios-dev-tools`)
+- **Private squads** - Moved to separate private repository (`aiox-squads`)
+  - Removed `squads/creator/` (CreatorOS)
+  - Removed `squads/innerlens/`
+  - Removed `squads/mmos-mapper/`
+  - Removed `squads/aiox-infrastructure-devops/`
+  - Removed `squads/meeting-notes/`
+  - Repository: https://github.com/SynkraAI/aiox-squads (PRIVATE)
+- **Internal development tools** - Moved to separate private repository (`aiox-dev-tools`)
   - Removed analysis scripts: `analyze-batches.js`, `analyze-decision-patterns.js`, `analyze-epic3.js`, etc.
   - Removed consolidation scripts: `consolidate-entities.js`, `consolidate-results.js`, etc.
   - Removed extraction scripts: `extract-all-claude-backups.js`, `extract-claude-history.js`
   - Removed generation scripts: `generate-entity-summary.js`, `generate-entity-table.js`
-  - Repository: https://github.com/SynkraAI/aios-dev-tools (PRIVATE)
-- **hybrid-ops expansion pack** - Moved to separate repository for independent maintenance
-  - Removed `expansion-packs/hybrid-ops/` directory
+  - Repository: https://github.com/SynkraAI/aiox-dev-tools (PRIVATE)
+- **hybrid-ops squad** - Moved to separate repository for independent maintenance
+  - Removed `squads/hybrid-ops/` directory
   - Removed `.hybrid-ops/` directory
   - Updated `core-config.yaml` to reference external repository
   - Updated `install-manifest.yaml` (removed 47 file entries)
-  - Repository: https://github.com/SynkraAI/aios-hybrid-ops-pedro-valerio
+  - Repository: https://github.com/SynkraAI/aiox-hybrid-ops-pedro-valerio
 
 ### Changed
-- README.md - hybrid-ops now listed under "Expansion Packs Externos"
-- Expansion pack can now be installed independently via GitHub
-- **Expansion-packs naming convention** - Applied consistent `{agent-id}-` prefix to agent-specific tasks across all 6 expansion-packs
+- README.md - hybrid-ops now listed under "Squads Externos"
+- Squad can now be installed independently via GitHub
+- **Squad naming convention** - Applied consistent `{agent-id}-` prefix to agent-specific tasks across all 6 squads
   - ETL pack: 4 tasks renamed (youtube-specialist, social-specialist, web-specialist)
   - Creator pack: 4 tasks already renamed (pre-existing migration)
   - Innerlens pack: 4 tasks renamed (fragment-extractor, psychologist, quality-assurance)
   - Mmos-mapper pack: 7 tasks renamed (cognitive-analyst, research-specialist, system-prompt-architect, emulator, mind-pm)
-  - Aios-infrastructure-devops pack: 2 tasks already renamed (pre-existing)
+  - Aiox-infrastructure-devops pack: 2 tasks already renamed (pre-existing)
   - Meeting-notes pack: 1 task already renamed (pre-existing)
   - All agent dependencies updated to reference new task names
   - Shared tasks correctly have NO prefix (conservative approach)
 
 ### Technical
 - Story: 4.6 - Move Hybrid-Ops to Separate Repository
-- Breaking Change: hybrid-ops no longer bundled with @synkra/aios-core
-- Migration: Users can install from external repo to `expansion-packs/hybrid-ops/`
-- Story: 4.7 - Removed `expansion-packs/hybrid-ops.legacy/` directory (legacy backup no longer needed)
-- Story: 4.5.3 - Expansion-Packs Naming Convention Migration
-  - Applied naming convention from Story 4.5.2 to all 6 expansion-packs
+- Breaking Change: hybrid-ops no longer bundled with aiox-core
+- Migration: Users can install from external repo to `squads/hybrid-ops/`
+- Story: 4.7 - Removed `squads/hybrid-ops.legacy/` directory (legacy backup no longer needed)
+- Story: 4.5.3 - Squads Naming Convention Migration
+  - Applied naming convention from Story 4.5.2 to all 6 squads
   - Total: 15 tasks renamed (11 new + 4 pre-existing)
   - 18 agent files updated with new dependencies
   - Validation: 100% compliance, 0 broken references
@@ -221,8 +278,8 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 
 ### Added
 - NPX temporary directory detection with defense-in-depth architecture
-- PRIMARY detection layer in `tools/aios-npx-wrapper.js` using `__dirname`
-- SECONDARY fallback detection in `tools/installer/bin/aios.js` using `process.cwd()`
+- PRIMARY detection layer in `tools/aiox-npx-wrapper.js` using `__dirname`
+- SECONDARY fallback detection in `tools/installer/bin/aiox.js` using `process.cwd()`
 - User-friendly help message with chalk styling when NPX temp directory detected
 - Regex patterns to identify macOS NPX temporary paths (`/private/var/folders/.*/npx-/`, `/.npm/_npx/`)
 - JSDoc documentation for NPX detection functions
@@ -230,11 +287,11 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 ### Fixed
 - NPX installation from temporary directory no longer attempts IDE detection
 - Clear error message guides users to correct installation directory
-- Prevents confusion when running `npx @synkra/aios-core install` from home directory
+- Prevents confusion when running `npx aiox-core install` from home directory
 
 ### Changed
 - Early exit with `process.exit(1)` when NPX temporary context detected
-- Help message provides actionable solution: `cd /path/to/your/project && npx @synkra/aios-core install`
+- Help message provides actionable solution: `cd /path/to/your/project && npx aiox-core install`
 
 ### Technical
 - Story: 2.3 - NPX Installation Context Detection & Help Text (macOS)

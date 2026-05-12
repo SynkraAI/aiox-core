@@ -9,16 +9,16 @@
  * - No regression vs baseline
  */
 
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
-const ContextDetector = require('../../.aios-core/core/session/context-detector');
-const GitConfigDetector = require('../../.aios-core/infrastructure/scripts/git-config-detector');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
+const ContextDetector = require('../../.aiox-core/core/session/context-detector');
+const GitConfigDetector = require('../../.aiox-core/infrastructure/scripts/git-config-detector');
 
 // Mock dependencies for consistent testing
-jest.mock('../../.aios-core/core/session/context-detector');
-jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector');
-jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader');
+jest.mock('../../.aiox-core/core/session/context-detector');
+jest.mock('../../.aiox-core/infrastructure/scripts/git-config-detector');
+jest.mock('../../.aiox-core/infrastructure/scripts/project-status-loader');
 
-const { loadProjectStatus } = require('../../.aios-core/infrastructure/scripts/project-status-loader');
+const { loadProjectStatus } = require('../../.aiox-core/infrastructure/scripts/project-status-loader');
 
 describeIntegration('Greeting Performance Tests', () => {
   let builder;

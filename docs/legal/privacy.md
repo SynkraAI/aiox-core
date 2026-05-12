@@ -6,13 +6,13 @@
 
 ## Overview
 
-AIOS (AI-Orchestrated System) is an open-source project maintained by SynkraAI Inc. This privacy policy explains how we handle any data that may be collected when you use Synkra AIOS.
+AIOX (AI-Orchestrated System) is an open-source project maintained by SynkraAI Inc. This privacy policy explains how we handle any data that may be collected when you use Synkra AIOX.
 
 ## Data Collection
 
 ### What We Don't Collect
 
-Synkra AIOS does **NOT** collect:
+Synkra AIOX does **NOT** collect:
 
 - Personal identification information
 - Usage analytics or telemetry data
@@ -22,7 +22,7 @@ Synkra AIOS does **NOT** collect:
 
 ### What May Be Collected (Consent-Based)
 
-Synkra AIOS uses a **consent-based telemetry system**. The system is designed as follows:
+Synkra AIOX uses a **consent-based telemetry system**. The system is designed as follows:
 
 - **Consent Manager**: A consent management component is initialized by default to handle user preferences
 - **No automatic collection**: No data is collected until you explicitly grant consent
@@ -39,19 +39,19 @@ If you grant consent, the following may be collected:
 **To completely disable the consent manager**, set `telemetry.enabled: false` in your configuration:
 
 ```javascript
-const aios = new AIOS({
+const aiox = new AIOX({
   telemetry: { enabled: false },
 });
 ```
 
-You can also revoke consent at any time through the consent management interface or by deleting the `.aios/telemetry/` directory.
+You can also revoke consent at any time through the consent management interface or by deleting the `.aiox/telemetry/` directory.
 
 ## Local Data Storage
 
-Synkra AIOS stores some data locally on your machine:
+Synkra AIOX stores some data locally on your machine:
 
-- Configuration files (`.aios/`, `.aios-core/`)
-- Project status cache (`.aios/project-status.yaml`)
+- Configuration files (`.aiox/`, `.aiox-core/`)
+- Project status cache (`.aiox/project-status.yaml`)
 - Decision logs (`.ai/` directory)
 - Story files and documentation
 
@@ -59,7 +59,7 @@ This data never leaves your local machine unless you explicitly share it (e.g., 
 
 ## Third-Party Services
 
-When using Synkra AIOS, you may interact with third-party services:
+When using Synkra AIOX, you may interact with third-party services:
 
 | Service          | Purpose                                   | Privacy Policy                                                                                     |
 | ---------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
@@ -68,14 +68,14 @@ When using Synkra AIOS, you may interact with third-party services:
 | **AI Providers** | Claude, OpenAI, etc. (configured by user) | See respective provider policies                                                                   |
 | **MCP Servers**  | Tool integrations (user-configured)       | Varies by server                                                                                   |
 
-**Important:** Your interactions with these services are governed by their respective privacy policies. Synkra AIOS does not control or have access to data you share with these services.
+**Important:** Your interactions with these services are governed by their respective privacy policies. Synkra AIOX does not control or have access to data you share with these services.
 
 ## Your Rights
 
 You have the right to:
 
 - **Opt-out** of any data collection at any time
-- **Delete** all local data by removing the `.aios/` and `.ai/` directories
+- **Delete** all local data by removing the `.aiox/` and `.ai/` directories
 - **Inspect** all stored data (it's stored in plain text/YAML format)
 - **Request information** about any data collected (if telemetry is enabled)
 
@@ -83,13 +83,13 @@ You have the right to:
 
 As an open-source project, all code is publicly available for inspection:
 
-- Repository: [github.com/SynkraAI/aios-core](https://github.com/SynkraAI/aios-core)
+- Repository: [github.com/SynkraAI/aiox-core](https://github.com/SynkraAI/aiox-core)
 - No hidden data collection mechanisms
 - All configuration options are documented
 
 ## Children's Privacy
 
-Synkra AIOS is a development tool intended for professional use. We do not knowingly collect any information from children under 13 years of age.
+Synkra AIOX is a development tool intended for professional use. We do not knowingly collect any information from children under 13 years of age.
 
 ## Security
 
@@ -97,16 +97,16 @@ We take security seriously:
 
 - No sensitive data transmission by default
 - Local-first architecture
-- API keys and credentials are never stored by AIOS (users manage their own)
+- API keys and credentials are never stored by AIOX (users manage their own)
 - Regular security audits of the codebase
 
-For security vulnerabilities, please [open an issue](https://github.com/SynkraAI/aios-core/issues) or email security@SynkraAI.com.
+For security vulnerabilities, please [open an issue](https://github.com/SynkraAI/aiox-core/issues) or email security@SynkraAI.com.
 
 ## Contact
 
 For privacy concerns or questions:
 
-- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/aios-core/issues)
+- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/aiox-core/issues)
 - **Email:** privacy@SynkraAI.com
 - **Discord:** [Community Server](https://discord.gg/gk8jAdXWmj)
 

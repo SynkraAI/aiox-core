@@ -7,8 +7,8 @@ on:
     branches:
       - main
     paths:
-      - '.aios-core/core/orchestration/**'
-      - '.aios-core/core/events/**'
+      - '.aiox-core/core/orchestration/**'
+      - '.aiox-core/core/events/**'
       - 'tests/core/orchestration/**'
 
 concurrency:
@@ -95,6 +95,6 @@ jobs:
       - name: Lint orchestration modules
         run: |
           echo "=== Linting Bob Orchestration ==="
-          npx eslint .aios-core/core/orchestration/ --cache --cache-location .eslintcache --no-error-on-unmatched-pattern || true
-          npx eslint .aios-core/core/events/ --cache --cache-location .eslintcache --no-error-on-unmatched-pattern || true
+          npx eslint .aiox-core/core/orchestration/ --cache --cache-location .eslintcache --no-error-on-unmatched-pattern || true
+          npx eslint .aiox-core/core/events/ --cache --cache-location .eslintcache --no-error-on-unmatched-pattern || true
           echo "✅ Orchestration lint passed"

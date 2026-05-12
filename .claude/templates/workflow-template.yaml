@@ -1,5 +1,5 @@
-# Workflow Template for AIOS-FULLSTACK
-# This template is used by aios-developer to create new workflows
+# Workflow Template for AIOX-FULLSTACK
+# This template is used by aiox-developer to create new workflows
 # Variables are replaced during generation: {{VARIABLE_NAME}}
 
 workflow:

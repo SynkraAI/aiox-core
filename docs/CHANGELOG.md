@@ -4,7 +4,7 @@
 
 ---
 
-All notable changes to Synkra AIOS will be documented in this file.
+All notable changes to Synkra AIOX will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **🤖 AIOS Autonomous Development Engine (ADE)**: Complete autonomous development system with 7 Epics:
+- **🤖 AIOX Autonomous Development Engine (ADE)**: Complete autonomous development system with 7 Epics:
   - **Epic 1 - Worktree Manager**: Git worktree isolation for parallel story development
   - **Epic 2 - Migration V2→V3**: autoClaude V3 format with capability flags
   - **Epic 3 - Spec Pipeline**: Transform requirements into executable specifications
@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Agent Format**: All 12 agents migrated to autoClaude V3 format with capability flags
-- **Agent Sync**: All agents now synced between `.aios-core/development/agents/` and `.claude/commands/AIOS/agents/`
+- **Agent Sync**: All agents now synced between `.aiox-core/development/agents/` and `.claude/commands/AIOX/agents/`
 
 ### Fixed
 
@@ -85,7 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Interactive Installation Wizard**: Step-by-step guided setup with component selection
-- **Multi-IDE Support**: Added support for 8 IDEs (Claude Code, Cursor, Windsurf, Trae, Roo Code, Cline, Gemini CLI, GitHub Copilot)
+- **Multi-IDE Support**: Added support for 4 IDEs (Claude Code, Cursor, Gemini CLI, GitHub Copilot)
 - **Squads System**: Modular add-ons including HybridOps for ClickUp integration
 - **Cross-Platform Testing**: Full test coverage for Windows, macOS, and Linux
 - **Error Handling & Rollback**: Automatic rollback on installation failure with recovery suggestions
@@ -97,18 +97,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation Suite**:
   - Troubleshooting Guide with 23 documented issues
   - FAQ with 22 Q&As
-  - Migration Guide v2.0 to v2.1
+  - Migration Guide v2.0 to v4.0.4
 
 ### Changed
 
-- **Directory Structure**: Renamed `.bmad-core/` to `.aios-core/`
+- **Directory Structure**: Renamed `.legacy-core/` to `.aiox-core/`
 - **Configuration Format**: Enhanced `core-config.yaml` with new sections for git, projectStatus, and sharding options
 - **Agent Format**: Updated agent YAML schema with persona_profile, commands visibility, and whenToUse fields
-- **IDE Configuration**: Claude Code agents moved to `.claude/commands/AIOS/agents/`
+- **IDE Configuration**: Claude Code agents moved to `.claude/commands/AIOX/agents/`
 - **File Locations**:
   - `docs/architecture/coding-standards.md` → `docs/framework/coding-standards.md`
   - `docs/architecture/tech-stack.md` → `docs/framework/tech-stack.md`
-  - `.aios-core/utils/` → `.aios-core/scripts/`
+  - `.aiox-core/utils/` → `.aiox-core/scripts/`
 
 ### Fixed
 
@@ -119,8 +119,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
-- Manual installation process (use `npx @synkra/aios-core install` instead)
-- `.bmad-core/` directory name (automatically migrated)
+- Manual installation process (use `npx aiox-core install` instead)
+- `.legacy-core/` directory name (automatically migrated)
 
 ### Security
 
@@ -133,7 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial public release of Synkra AIOS
+- Initial public release of Synkra AIOX
 - 11 specialized AI agents (dev, qa, architect, pm, po, sm, analyst, ux-expert, data-engineer, devops, db-sage)
 - Task workflow system with 60+ pre-built tasks
 - Template system with 20+ document templates
@@ -165,12 +165,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Quick upgrade:**
 
 ```bash
-npx @synkra/aios-core install --force-upgrade
+npx aiox-core install --force-upgrade
 ```
 
 **Key changes:**
 
-1. Directory renamed: `.bmad-core/` → `.aios-core/`
+1. Directory renamed: `.legacy-core/` → `.aiox-core/`
 2. Update `core-config.yaml` with new fields
 3. Re-run IDE configuration
 
@@ -180,5 +180,5 @@ npx @synkra/aios-core install --force-upgrade
 
 - [Troubleshooting](./installation/troubleshooting.md)
 - [FAQ](./installation/faq.md)
-- [GitHub Repository](https://github.com/SynkraAI/aios-core)
-- [Issue Tracker](https://github.com/SynkraAI/aios-core/issues)
+- [GitHub Repository](https://github.com/SynkraAI/aiox-core)
+- [Issue Tracker](https://github.com/SynkraAI/aiox-core/issues)

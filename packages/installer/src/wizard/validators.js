@@ -4,7 +4,7 @@
  * OWASP-compliant validators for all wizard inputs
  * Protects against: command injection, path traversal, XSS, buffer overflow
  * 
- * @see docs/stories/v2.1/sprint-1/story-1.2-interactive-wizard-foundation.md
+ * @see docs/stories/v4.0.4/sprint-1/story-1.2-interactive-wizard-foundation.md
  * @module wizard/validators
  */
 

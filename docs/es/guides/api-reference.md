@@ -1,10 +1,10 @@
-# Referencia de API AIOS
+# Referencia de API AIOX
 
 > [EN](../../guides/api-reference.md) | [PT](../../pt/guides/api-reference.md) | **ES**
 
 ---
 
-Referencia completa de la API para Synkra AIOS - el Sistema Orquestado por IA para Desarrollo Full Stack.
+Referencia completa de la API para Synkra AIOX - el Sistema Orquestado por IA para Desarrollo Full Stack.
 
 **Versión:** 2.1.0
 **Última Actualización:** 2026-01-29
@@ -29,14 +29,14 @@ Referencia completa de la API para Synkra AIOS - el Sistema Orquestado por IA pa
 
 ### Arquitectura de la API
 
-AIOS proporciona una API unificada para interactuar con agentes de IA especializados a través de dos mecanismos principales:
+AIOX proporciona una API unificada para interactuar con agentes de IA especializados a través de dos mecanismos principales:
 
 1. **Activación de Agentes** - Usando el prefijo `@` para activar agentes especializados
 2. **Ejecución de Comandos** - Usando el prefijo `*` para ejecutar comandos de agentes
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      AIOS API Layer                          │
+│                      AIOX API Layer                          │
 ├─────────────────────────────────────────────────────────────┤
 │  @agent         →  Activa la persona del agente              │
 │  *command       →  Ejecuta comando del agente                │
@@ -47,7 +47,7 @@ AIOS proporciona una API unificada para interactuar con agentes de IA especializ
 ┌─────────────────────────────────────────────────────────────┐
 │                    Agent Resolution                          │
 ├─────────────────────────────────────────────────────────────┤
-│  .aios-core/development/agents/{agent-id}.md                 │
+│  .aiox-core/development/agents/{agent-id}.md                 │
 │  Dependencies: tasks, templates, checklists, scripts         │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -87,13 +87,13 @@ AIOS proporciona una API unificada para interactuar con agentes de IA especializ
 | `@data-engineer` | Dara   | Architect    | Esquema de BD, migraciones, consultas          |
 | `@devops`        | Gage   | Optimizer    | CI/CD, despliegue, operaciones git             |
 | `@ux-expert`     | Uma    | Creator      | Diseño UI/UX, wireframes                       |
-| `@aios-master`   | Orion  | Orchestrator | Orquestación del framework, meta-operaciones   |
+| `@aiox-master`   | Orion  | Orchestrator | Orquestación del framework, meta-operaciones   |
 
 ### Comportamiento de Activación
 
 Cuando se activa un agente:
 
-1. Se carga el archivo de definición del agente desde `.aios-core/development/agents/{id}.md`
+1. Se carga el archivo de definición del agente desde `.aiox-core/development/agents/{id}.md`
 2. Se adopta la persona (tono, vocabulario, saludo)
 3. Se muestra el saludo contextual basado en el tipo de sesión
 4. El agente se detiene y espera la entrada del usuario
@@ -155,7 +155,7 @@ Los comandos se resuelven a archivos de tareas en las dependencias del agente:
 *develop story-1.2.3
     │
     ▼
-.aios-core/development/tasks/dev-develop-story.md
+.aiox-core/development/tasks/dev-develop-story.md
     │
     ▼
 Ejecución de tarea con argumentos: { story: "story-1.2.3" }
@@ -391,13 +391,13 @@ Ejecución de tarea con argumentos: { story: "story-1.2.3" }
 
 ---
 
-### @aios-master (Orquestador)
+### @aiox-master (Orquestador)
 
 **Desarrollo del Framework:**
 
 | Comando                | Argumentos      | Descripción                                    |
 | ---------------------- | --------------- | ---------------------------------------------- |
-| `*create`              | `{type} {name}` | Crear componente AIOS (agent/task/workflow)    |
+| `*create`              | `{type} {name}` | Crear componente AIOX (agent/task/workflow)    |
 | `*modify`              | `{type} {name}` | Modificar componente existente                 |
 | `*validate-component`  | `{name}`        | Validar seguridad del componente               |
 | `*deprecate-component` | `{name}`        | Deprecar con ruta de migración                 |
@@ -415,7 +415,7 @@ Ejecución de tarea con argumentos: { story: "story-1.2.3" }
 | Comando | Argumentos                 | Descripción                                   |
 | ------- | -------------------------- | --------------------------------------------- |
 | `*plan` | `[create\|status\|update]` | Planificación de workflow                     |
-| `*kb`   | -                          | Alternar modo KB (conocimiento AIOS Method)   |
+| `*kb`   | -                          | Alternar modo KB (conocimiento AIOX Method)   |
 
 **Operaciones de Documentos:**
 
@@ -445,7 +445,7 @@ Ejecución de tarea con argumentos: { story: "story-1.2.3" }
 
 ```bash
 # Iniciar workflow
-@aios-master *workflow greenfield-fullstack
+@aiox-master *workflow greenfield-fullstack
 
 # Con parámetros
 *workflow brownfield-service --target=./services/auth
@@ -532,7 +532,7 @@ phases:
 
 | Categoría            | Descripción                        | Resolución                             |
 | -------------------- | ---------------------------------- | -------------------------------------- |
-| `AGENT_NOT_FOUND`    | Definición de agente faltante      | Verificar `.aios-core/development/agents/` |
+| `AGENT_NOT_FOUND`    | Definición de agente faltante      | Verificar `.aiox-core/development/agents/` |
 | `TASK_NOT_FOUND`     | Definición de tarea faltante       | Verificar dependencias del agente      |
 | `STORY_NOT_FOUND`    | Archivo de story no encontrado     | Verificar ruta `docs/stories/`         |
 | `VALIDATION_FAILED`  | Pre-condición no cumplida          | Verificar prerrequisitos               |
@@ -574,22 +574,19 @@ phases:
 | ----------- | ------------ | ----------------- | ---------------- |
 | Claude Code | `.claude/`   | Markdown          | Completo         |
 | Cursor      | `.cursor/`   | MDC (frontmatter) | Completo         |
-| Windsurf    | `.windsurf/` | Markdown          | Completo         |
-| Cline       | `.cline/`    | Markdown          | Completo         |
 | VS Code     | `.vscode/`   | JSON              | Parcial          |
 | Gemini      | `.gemini/`   | Markdown          | Básico           |
 
 ### Configuración de IDE
 
 ```yaml
-# .aios-sync.yaml
+# .aiox-sync.yaml
 version: 1.0.0
 active_ides:
   - claude
   - cursor
-  - windsurf
 
-pack_aliases:
+squad_aliases:
   legal: Legal
   copy: Copy
   hr: HR
@@ -627,7 +624,7 @@ Claude Code es el IDE principal soportado con integración completa:
 /dev          → Activa agente @dev
 /qa           → Activa agente @qa
 /architect    → Activa agente @architect
-/aios-master  → Activa agente @aios-master
+/aiox-master  → Activa agente @aiox-master
 ```
 
 **Estructura de Directorios:**
@@ -635,7 +632,7 @@ Claude Code es el IDE principal soportado con integración completa:
 ```
 .claude/
 ├── commands/
-│   └── AIOS/
+│   └── AIOX/
 │       └── agents/
 │           ├── dev.md
 │           ├── qa.md
@@ -669,10 +666,8 @@ alwaysApply: false
 # Contenido del agente...
 ```
 
-### Integración con Windsurf
 
 ```
-.windsurf/
 └── agents/
     ├── dev.md
     ├── qa.md
@@ -787,7 +782,7 @@ alwaysApply: false
 
 ```bash
 # 1. Activar orquestador maestro
-@aios-master
+@aiox-master
 
 # 2. Habilitar base de conocimiento
 *kb
@@ -838,7 +833,7 @@ Usa este árbol de decisión para seleccionar el agente correcto:
 │  └─ @ux-expert
 │
 └─ ¿Framework/Orquestación?
-   └─ @aios-master
+   └─ @aiox-master
 ```
 
 ---
@@ -892,13 +887,13 @@ Para desarrollo paralelo:
 
 ## Documentación Relacionada
 
-- [Guía de Usuario](./user-guide.md) - Comenzando con AIOS
+- [Guía de Usuario](./user-guide.md) - Comenzando con AIOX
 - [Guía de Selección de Agentes](./agent-selection-guide.md) - Eligiendo el agente correcto
 - [Guía ADE](./ade-guide.md) - Motor de Desarrollo Autónomo
 - [Gates de Calidad](./quality-gates.md) - Workflows de aseguramiento de calidad
 - [Guía de Sincronización de IDEs](./ide-sync-guide.md) - Sincronización multi-IDE
-- [Guía de Squads](./squads-guide.md) - Extendiendo AIOS con squads
+- [Guía de Squads](./squads-guide.md) - Extendiendo AIOX con squads
 
 ---
 
-_Synkra AIOS API Reference v2.1.0_
+_Synkra AIOX API Reference v4.2.11_

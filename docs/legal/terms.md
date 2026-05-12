@@ -6,11 +6,14 @@
 
 ## Acceptance of Terms
 
-By using Synkra AIOS ("the Software"), you agree to be bound by these Terms of Use. If you do not agree to these terms, do not use the Software.
+By using Synkra AIOX ("the Software"), you agree to be bound by these Terms of Use. If you do not agree to these terms, do not use the Software.
 
 ## License
 
-Synkra AIOS is released under the **MIT License**. See the [LICENSE](LICENSE) file for the full license text.
+Synkra AIOX is released under the **MIT License**. See the [LICENSE](LICENSE) file for the full license text.
+
+For licensing scope between open-source core and private modules, see:
+- [License Clarification (Core vs Pro)](./license-clarification.md)
 
 ### Summary of MIT License Rights
 
@@ -64,7 +67,7 @@ This limitation applies to:
 
 ## Contributions
 
-By contributing to Synkra AIOS, you agree that:
+By contributing to Synkra AIOX, you agree that:
 
 1. **License Grant:** Your contributions will be licensed under the same MIT License
 2. **Original Work:** Your contributions are your original work or you have the right to submit them
@@ -77,8 +80,8 @@ For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 The following are trademarks or registered trademarks of SynkraAI Inc.:
 
-- "AIOS"
-- "Synkra AIOS"
+- "AIOX"
+- "Synkra AIOX"
 - "Synkra"
 - Associated logos and branding
 
@@ -101,7 +104,7 @@ For trademark licensing inquiries, contact: legal@SynkraAI.com
 
 ## Third-Party Dependencies
 
-Synkra AIOS includes third-party open-source components. Each component is subject to its own license terms:
+Synkra AIOX includes third-party open-source components. Each component is subject to its own license terms:
 
 - See `package.json` for a list of dependencies
 - Run `npm ls` to view the complete dependency tree
@@ -109,7 +112,7 @@ Synkra AIOS includes third-party open-source components. Each component is subje
 
 ## AI-Generated Content
 
-When using AI providers (Claude, OpenAI, etc.) through Synkra AIOS:
+When using AI providers (Claude, OpenAI, etc.) through Synkra AIOX:
 
 1. **User Responsibility:** You are responsible for content generated
 2. **Provider Terms:** AI interactions are subject to provider terms of service
@@ -145,13 +148,13 @@ If any provision of these terms is found to be unenforceable, the remaining prov
 
 ## Entire Agreement
 
-These Terms of Use, together with the [LICENSE](LICENSE), [Privacy Policy](PRIVACY.md), and [Code of Conduct](CODE_OF_CONDUCT.md), constitute the entire agreement between you and SynkraAI Inc. regarding use of Synkra AIOS.
+These Terms of Use, together with the [LICENSE](LICENSE), [Privacy Policy](PRIVACY.md), and [Code of Conduct](CODE_OF_CONDUCT.md), constitute the entire agreement between you and SynkraAI Inc. regarding use of Synkra AIOX.
 
 ## Contact
 
 For questions about these terms:
 
-- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/aios-core/issues)
+- **GitHub Issues:** [Open an issue](https://github.com/SynkraAI/aiox-core/issues)
 - **Email:** legal@SynkraAI.com
 - **Discord:** [Community Server](https://discord.gg/gk8jAdXWmj)
 

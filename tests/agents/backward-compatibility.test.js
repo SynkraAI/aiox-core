@@ -19,7 +19,7 @@ const yaml = require('js-yaml');
  * 4. Workflows using agents without tools work correctly
  */
 describeIntegration('Agent Backward Compatibility - Missing Tools Field', () => {
-  const agentsPath = path.join(__dirname, '../../aios-core/agents');
+  const agentsPath = path.join(__dirname, '../../aiox-core/agents');
 
   // Agents WITH dependencies.tools (migrated)
   const agentsWithTools = ['dev', 'qa', 'architect', 'po', 'sm'];

@@ -5,7 +5,7 @@
  * @jest-environment node
  */
 
-const { formatDuration, formatDurationShort } = require('../../.aios-core/utils/format-duration');
+const { formatDuration, formatDurationShort } = require('../../.aiox-core/utils/format-duration');
 
 describe('formatDuration', () => {
   describe('basic conversions', () => {

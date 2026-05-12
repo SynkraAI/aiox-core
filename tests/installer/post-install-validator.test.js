@@ -33,12 +33,12 @@ describe('PostInstallValidator Security Tests', () => {
 
   beforeEach(async () => {
     // Create isolated test directory
-    testDir = path.join(os.tmpdir(), `aios-validator-test-${Date.now()}`);
+    testDir = path.join(os.tmpdir(), `aiox-validator-test-${Date.now()}`);
     targetDir = path.join(testDir, 'target');
     sourceDir = path.join(testDir, 'source');
 
-    await fs.ensureDir(path.join(targetDir, '.aios-core'));
-    await fs.ensureDir(path.join(sourceDir, '.aios-core'));
+    await fs.ensureDir(path.join(targetDir, '.aiox-core'));
+    await fs.ensureDir(path.join(sourceDir, '.aiox-core'));
   });
 
   afterEach(async () => {
@@ -163,8 +163,8 @@ describe('PostInstallValidator Security Tests', () => {
   describe('Symlink Rejection', () => {
     test('should reject symlinks during validation', async () => {
       // Create a regular file and a symlink to it
-      const realFile = path.join(targetDir, '.aios-core', 'real.txt');
-      const symlink = path.join(targetDir, '.aios-core', 'link.txt');
+      const realFile = path.join(targetDir, '.aiox-core', 'real.txt');
+      const symlink = path.join(targetDir, '.aiox-core', 'link.txt');
 
       await fs.writeFile(realFile, 'content');
 
@@ -186,7 +186,7 @@ describe('PostInstallValidator Security Tests', () => {
         files: [{ path: 'link.txt', hash: null, size: null }],
       };
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: link.txt',
       );
 
@@ -208,7 +208,7 @@ describe('PostInstallValidator Security Tests', () => {
     test('should fail when signature is required but missing', async () => {
       // Create manifest without signature
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt',
       );
 
@@ -229,10 +229,10 @@ describe('PostInstallValidator Security Tests', () => {
     test('should allow validation without signature in dev mode', async () => {
       // Create valid manifest and file
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt\n    size: 4',
       );
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'test.txt'), 'test');
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'test.txt'), 'test');
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false, // Dev mode
@@ -251,10 +251,10 @@ describe('PostInstallValidator Security Tests', () => {
     test('should fail when size is missing in quick mode', async () => {
       // Create manifest without size
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt',
       );
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'test.txt'), 'content');
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'test.txt'), 'content');
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -271,10 +271,10 @@ describe('PostInstallValidator Security Tests', () => {
     test('should fail on size mismatch in quick mode', async () => {
       // Create manifest with wrong size
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt\n    size: 999',
       );
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'test.txt'), 'small');
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'test.txt'), 'small');
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -293,10 +293,10 @@ describe('PostInstallValidator Security Tests', () => {
     test('should fail when hash is missing but verifyHashes is true', async () => {
       // Create manifest without hash but with size
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt\n    size: 7',
       );
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'test.txt'), 'content');
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'test.txt'), 'content');
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -317,10 +317,10 @@ describe('PostInstallValidator Security Tests', () => {
       // Create manifest with empty hash (YAML null becomes empty after FAILSAFE parsing)
       // Using explicit empty string to test falsy hash values
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt\n    hash: ""\n    size: 7',
       );
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'test.txt'), 'content');
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'test.txt'), 'content');
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -338,10 +338,10 @@ describe('PostInstallValidator Security Tests', () => {
     test('should pass when hash is missing but verifyHashes is false (quick mode)', async () => {
       // Create manifest without hash but with size
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: test.txt\n    size: 7',
       );
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'test.txt'), 'content');
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'test.txt'), 'content');
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -375,7 +375,7 @@ describe('PostInstallValidator Security Tests', () => {
     test('should refuse repair without verified manifest', async () => {
       // Setup manifest
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         `version: "1.0.0"\nfiles:\n  - path: test.txt\n    hash: "sha256:${'a'.repeat(64)}"\n    size: 4`,
       );
 
@@ -396,7 +396,7 @@ describe('PostInstallValidator Security Tests', () => {
 
     test('should verify source hash before copying', async () => {
       // Create source file with different content than manifest hash
-      const sourceFile = path.join(sourceDir, '.aios-core', 'test.txt');
+      const sourceFile = path.join(sourceDir, '.aiox-core', 'test.txt');
       await fs.writeFile(sourceFile, 'wrong content');
 
       // Create manifest with different hash
@@ -406,8 +406,8 @@ files:
     hash: "sha256:${'a'.repeat(64)}"
     size: 13`;
 
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'install-manifest.yaml'), manifest);
-      await fs.writeFile(path.join(sourceDir, '.aios-core', 'install-manifest.yaml'), manifest);
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'install-manifest.yaml'), manifest);
+      await fs.writeFile(path.join(sourceDir, '.aiox-core', 'install-manifest.yaml'), manifest);
 
       const validator = new PostInstallValidator(targetDir, sourceDir, {
         requireSignature: false, // For testing
@@ -445,11 +445,11 @@ files:
   describe('Hash Error Handling (H3)', () => {
     test('should treat hash errors as failures', async () => {
       // Create a file that will cause hash error (e.g., directory instead of file)
-      const dirPath = path.join(targetDir, '.aios-core', 'notafile');
+      const dirPath = path.join(targetDir, '.aiox-core', 'notafile');
       await fs.ensureDir(dirPath);
 
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         `version: "1.0.0"\nfiles:\n  - path: notafile\n    hash: "sha256:${'a'.repeat(64)}"\n    size: 0`,
       );
 
@@ -477,7 +477,7 @@ files:
       }
 
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         `version: "1.0.0"\nfiles:\n${files.join('\n')}`,
       );
 
@@ -497,7 +497,7 @@ files:
       // Create oversized manifest
       const bigContent = 'a'.repeat(SecurityLimits.MAX_MANIFEST_SIZE + 1);
 
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'install-manifest.yaml'), bigContent);
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'install-manifest.yaml'), bigContent);
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -522,7 +522,7 @@ files:
         SecurityLimits.MAX_MANIFEST_SIZE,
       );
 
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'install-manifest.yaml'), emojiContent);
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'install-manifest.yaml'), emojiContent);
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -542,7 +542,7 @@ files:
       // We create an oversized file and ensure it's rejected before full read
       const bigContent = 'x'.repeat(SecurityLimits.MAX_MANIFEST_SIZE + 100);
 
-      await fs.writeFile(path.join(targetDir, '.aios-core', 'install-manifest.yaml'), bigContent);
+      await fs.writeFile(path.join(targetDir, '.aiox-core', 'install-manifest.yaml'), bigContent);
 
       const validator = new PostInstallValidator(targetDir, null, {
         requireSignature: false,
@@ -560,7 +560,7 @@ files:
   describe('Issue Model (H4)', () => {
     test('should store relativePath in issue objects', async () => {
       await fs.writeFile(
-        path.join(targetDir, '.aios-core', 'install-manifest.yaml'),
+        path.join(targetDir, '.aiox-core', 'install-manifest.yaml'),
         'version: "1.0.0"\nfiles:\n  - path: missing.txt\n    size: 10',
       );
 

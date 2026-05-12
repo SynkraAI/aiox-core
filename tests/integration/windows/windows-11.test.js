@@ -16,11 +16,11 @@ describeOnWindows('Windows 11 Installation', () => {
     async () => {
       const startTime = Date.now();
 
-      // Note: This test requires running npx @synkraai/aios@latest init
+      // Note: This test requires running npx @synkraai/aiox@latest init
       // in a fresh directory. Run manually for end-to-end validation.
 
       // For CI/CD, verify installer exists and is executable
-      const installerPath = path.join(__dirname, '../../../bin/aios-init.js');
+      const installerPath = path.join(__dirname, '../../../bin/aiox-init.js');
       const installerExists = await fs
         .access(installerPath)
         .then(() => true)
@@ -63,7 +63,7 @@ describeOnWindows('Windows 11 Installation', () => {
 
   it('should handle backslash paths correctly', async () => {
     // Test path.join() usage in installer
-    const installerPath = path.join(__dirname, '../../../bin/aios-init.js');
+    const installerPath = path.join(__dirname, '../../../bin/aiox-init.js');
     const installerContent = await fs.readFile(installerPath, 'utf-8');
 
     // Verify path.join() is used (not string concatenation)

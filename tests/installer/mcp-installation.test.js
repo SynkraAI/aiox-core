@@ -233,7 +233,7 @@ describe('MCP Installation Module', () => {
     });
 
     test('should create installation logs', async () => {
-      const logPath = path.join(tempDir, '.aios', 'install-log.txt');
+      const logPath = path.join(tempDir, '.aiox', 'install-log.txt');
 
       await installProjectMCPs({
         selectedMCPs: ['browser'],
@@ -307,7 +307,7 @@ describe('MCP Installation Module', () => {
 
   describe('Error Handling', () => {
     test('should log errors to error log', async () => {
-      const errorLogPath = path.join(tempDir, '.aios', 'install-errors.log');
+      const errorLogPath = path.join(tempDir, '.aiox', 'install-errors.log');
 
       await installProjectMCPs({
         selectedMCPs: ['unknown-mcp'],

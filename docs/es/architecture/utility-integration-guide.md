@@ -9,13 +9,13 @@
 **Versión:** 1.0.0
 **Creado:** 2025-10-29
 **Autores:** Sarah (@po), Winston (@architect)
-**Propósito:** Definir patrones estándar para integrar scripts de utilidades en el framework AIOS
+**Propósito:** Definir patrones estándar para integrar scripts de utilidades en el framework AIOX
 
 ---
 
 ## ¿Qué es la Integración de Utilidades?
 
-**Definición:** La integración de utilidades es el proceso de hacer que un script de utilidad huérfano sea **descubrible, documentado y utilizable** dentro del framework AIOS.
+**Definición:** La integración de utilidades es el proceso de hacer que un script de utilidad huérfano sea **descubrible, documentado y utilizable** dentro del framework AIOX.
 
 Una utilidad se considera **completamente integrada** cuando:
 1. ✅ **Registrada** en core-config.yaml
@@ -41,7 +41,7 @@ Una utilidad se considera **completamente integrada** cuando:
 **Ejemplo: util-batch-creator**
 
 ```yaml
-# .aios-core/agents/dev.yaml
+# .aiox-core/agents/dev.yaml
 id: dev
 name: Development Agent
 dependencies:
@@ -51,9 +51,9 @@ dependencies:
 ```
 
 **Archivos Modificados:**
-- `.aios-core/agents/{agent}.yaml` (agregar a dependencies.utils)
-- `.aios-core/core-config.yaml` (registrar si es necesario)
-- `.aios-core/utils/README.md` (documentar utilidad)
+- `.aiox-core/agents/{agent}.yaml` (agregar a dependencies.utils)
+- `.aiox-core/core-config.yaml` (registrar si es necesario)
+- `.aiox-core/utils/README.md` (documentar utilidad)
 
 ---
 
@@ -71,7 +71,7 @@ dependencies:
 **Ejemplo: util-commit-message-generator**
 
 ```yaml
-# .aios-core/tasks/generate-commit-message.md
+# .aiox-core/tasks/generate-commit-message.md
 id: generate-commit-message
 name: Generate Commit Message
 execution:
@@ -84,10 +84,10 @@ execution:
 ```
 
 **Archivos Modificados:**
-- `.aios-core/tasks/{task}.md` (agregar execution.utils)
-- `.aios-core/agents/{agent}.yaml` (agregar tarea a lista executes)
-- `.aios-core/core-config.yaml` (registrar si es necesario)
-- `.aios-core/utils/README.md` (documentar utilidad)
+- `.aiox-core/tasks/{task}.md` (agregar execution.utils)
+- `.aiox-core/agents/{agent}.yaml` (agregar tarea a lista executes)
+- `.aiox-core/core-config.yaml` (registrar si es necesario)
+- `.aiox-core/utils/README.md` (documentar utilidad)
 
 ---
 
@@ -104,16 +104,16 @@ execution:
 **Ejemplo: util-elicitation-engine**
 
 ```yaml
-# .aios-core/core-config.yaml
+# .aiox-core/core-config.yaml
 utils:
   framework:
     - elicitation-engine  # Usado por flujo de trabajo de creación de agentes
-    - aios-validator
+    - aiox-validator
 ```
 
 **Archivos Modificados:**
-- `.aios-core/core-config.yaml` (registrar bajo framework)
-- `.aios-core/utils/README.md` (documentar como utilidad de framework)
+- `.aiox-core/core-config.yaml` (registrar bajo framework)
+- `.aiox-core/utils/README.md` (documentar como utilidad de framework)
 - Documentación del framework (si aplica)
 
 ---
@@ -131,7 +131,7 @@ utils:
 **Ejemplo: util-documentation-synchronizer**
 
 ```yaml
-# .aios-core/agents/architect.yaml
+# .aiox-core/agents/architect.yaml
 dependencies:
   utils:
     - documentation-synchronizer  # Mantiene docs sincronizados con código
@@ -139,10 +139,10 @@ dependencies:
 ```
 
 **Archivos Modificados:**
-- `.aios-core/agents/{agent}.yaml`
-- `.aios-core/tasks/{task}.md` (si se crea tarea)
-- `.aios-core/core-config.yaml`
-- `.aios-core/utils/README.md`
+- `.aiox-core/agents/{agent}.yaml`
+- `.aiox-core/tasks/{task}.md` (si se crea tarea)
+- `.aiox-core/core-config.yaml`
+- `.aiox-core/utils/README.md`
 
 ---
 
@@ -188,7 +188,7 @@ Las utilidades deberían categorizarse para integración más fácil:
 ### Categoría 1: Calidad de Código
 **Propósito:** Analizar, mejorar, validar código
 **Patrón:** Auxiliar de Agente (agentes dev, qa)
-**Ejemplos:** aios-validator, code-quality-improver, coverage-analyzer
+**Ejemplos:** aiox-validator, code-quality-improver, coverage-analyzer
 
 ### Categoría 2: Git/Flujo de Trabajo
 **Propósito:** Operaciones Git, automatización de flujo de trabajo
@@ -219,7 +219,7 @@ Las utilidades deberían categorizarse para integración más fácil:
 **1. Prueba de Carga**
 ```javascript
 // Verificar que utilidad carga sin errores
-const utility = require('.aios-core/utils/{utility-name}');
+const utility = require('.aiox-core/utils/{utility-name}');
 // No debería lanzar excepción
 ```
 
@@ -260,7 +260,7 @@ const agent = loadAgent('agent-name');
 
 **Patrón de Integración:** {nombre-del-patrón}
 
-**Ubicación:** `.aios-core/utils/{name}.js`
+**Ubicación:** `.aiox-core/utils/{name}.js`
 
 **Ejemplo de Uso:**
 \`\`\`javascript
@@ -290,7 +290,7 @@ utils:
   # Utilidades de infraestructura del framework
   framework:
     - elicitation-engine
-    - aios-validator
+    - aiox-validator
 
   # Utilidades de análisis/documentación
   analyzers:

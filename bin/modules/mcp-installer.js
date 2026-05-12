@@ -1,5 +1,5 @@
 /**
- * AIOS-FullStack MCP Installation Module
+ * AIOX-FullStack MCP Installation Module
  * Story 1.5: MCP Installation (Project-Level)
  *
  * Installs 4 essential MCPs at project level:
@@ -160,12 +160,12 @@ async function installProjectMCPs(options = {}) {
     errors: [],
   };
 
-  // Create .aios directory for logs
-  const aiosDir = path.join(projectPath, '.aios');
-  await fse.ensureDir(aiosDir);
+  // Create .aiox directory for logs
+  const aioxDir = path.join(projectPath, '.aiox');
+  await fse.ensureDir(aioxDir);
 
-  const logPath = path.join(aiosDir, 'install-log.txt');
-  const errorLogPath = path.join(aiosDir, 'install-errors.log');
+  const logPath = path.join(aioxDir, 'install-log.txt');
+  const errorLogPath = path.join(aioxDir, 'install-errors.log');
 
   // Initialize logs
   await appendLog(logPath, `[${new Date().toISOString()}] [INFO] Starting MCP installation...`);
@@ -371,7 +371,7 @@ function displayInstallationStatus(results) {
   }
 
   console.log(chalk.gray(`📁 Configuration: ${results.configPath}`));
-  console.log(chalk.gray('📋 Installation log: .aios/install-log.txt'));
+  console.log(chalk.gray('📋 Installation log: .aiox/install-log.txt'));
   console.log('');
 }
  

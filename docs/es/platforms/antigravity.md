@@ -1,6 +1,6 @@
 <!-- Traducción: ES | Original: /docs/platforms/en/antigravity.md | Sincronización: 2026-01-26 -->
 
-# Guía AIOS para AntiGravity
+# Guía AIOX para AntiGravity
 
 > 🌐 [EN](../../platforms/antigravity.md) | [PT](../../pt/platforms/antigravity.md) | **ES**
 
@@ -16,7 +16,7 @@
 
 AntiGravity es la plataforma de desarrollo agentic de Google que permite a los desarrolladores construir y orquestar flujos de trabajo impulsados por IA. Cuenta con un enfoque único basado en flujos de trabajo para la activación de agentes y una integración profunda con los servicios de Google Cloud.
 
-### ¿Por qué usar AIOS con AntiGravity?
+### ¿Por qué usar AIOX con AntiGravity?
 
 AntiGravity ofrece capacidades distintivas:
 
@@ -77,11 +77,11 @@ antigravity auth login
 export GOOGLE_APPLICATION_CREDENTIALS="ruta/a/credenciales.json"
 ```
 
-### Paso 3: Instalar AIOS
+### Paso 3: Instalar AIOX
 
 ```bash
 cd tu-proyecto
-npx @anthropic/aios init
+npx @anthropic/aiox init
 # Selecciona "AntiGravity" cuando se te solicite
 ```
 
@@ -137,7 +137,7 @@ proyecto/
 **Ubicación:** `.antigravity/rules.md`
 
 ```markdown
-# Reglas de Synkra AIOS para AntiGravity
+# Reglas de Synkra AIOX para AntiGravity
 
 ## Sistema de Agentes
 - Usa @nombre-agente o flujos de trabajo para activación
@@ -350,7 +350,7 @@ exports.handleRequest = AntiGravity.createFunction({
 
 ```mermaid
 flowchart LR
-    Source["AIOS Core<br/>.aios-core/development/agents"] --> Parser["Analizador de Agentes"]
+    Source["AIOX Core<br/>.aiox-core/development/agents"] --> Parser["Analizador de Agentes"]
     Parser --> Transform["Transformador AntiGravity"]
     Transform --> Agents[".antigravity/agents/"]
     Transform --> Workflows[".agent/workflows/"]
@@ -360,10 +360,10 @@ flowchart LR
 
 ```bash
 # Sincronizar todos los agentes y flujos de trabajo
-npm run sync:agents
+npm run sync:ide
 
 # Sincronizar para AntiGravity
-npm run sync:agents -- --ide antigravity
+npm run sync:ide -- --ide antigravity
 ```
 
 ### Formato de Agente
@@ -449,7 +449,7 @@ Error: Unknown agent '@xyz'
 **Solución:**
 ```bash
 # Resincronizar agentes
-npm run sync:agents
+npm run sync:ide
 
 # Verificar configuración de agente
 cat .antigravity/antigravity.json
@@ -484,16 +484,16 @@ R: Los agentes son personas con experiencia; los flujos de trabajo orquestan acc
 
 ### De Claude Code a AntiGravity
 
-1. Tus agentes en `.aios-core/` son portables
+1. Tus agentes en `.aiox-core/` son portables
 2. Inicializa AntiGravity:
    ```bash
-   npx @anthropic/aios init --ide antigravity
+   npx @anthropic/aiox init --ide antigravity
    ```
 3. Los archivos de flujo de trabajo se generan automáticamente
 
 ### De AntiGravity a Otros IDEs
 
-1. Los agentes de AIOS permanecen en `.aios-core/`
+1. Los agentes de AIOX permanecen en `.aiox-core/`
 2. Inicializa para el IDE destino
 3. Las configuraciones específicas de la plataforma se generan
 
@@ -507,4 +507,4 @@ R: Los agentes son personas con experiencia; los flujos de trabajo orquestan acc
 
 ---
 
-*Synkra AIOS - Guía de Plataforma AntiGravity v1.0*
+*Synkra AIOX - Guía de Plataforma AntiGravity v1.0*

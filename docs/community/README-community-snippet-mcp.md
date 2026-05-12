@@ -10,15 +10,15 @@
 
 For discussions, questions, and community interaction, visit our central hub:
 
-👉 **[AIOS Community Discussions](https://github.com/SynkraAI/aios-core/discussions)**
+👉 **[AIOX Community Discussions](https://github.com/SynkraAI/aiox-core/discussions)**
 
 | Need                         | Where to Go                                                                                                    |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 🔧 **MCP questions?**        | Use the ["MCP Ecosystem" category](https://github.com/SynkraAI/aios-core/discussions/categories/mcp-ecosystem) |
-| 💡 **Feature ideas?**        | Start a [Discussion in "Ideas"](https://github.com/SynkraAI/aios-core/discussions/categories/ideas)            |
+| 🔧 **MCP questions?**        | Use the ["MCP Ecosystem" category](https://github.com/SynkraAI/aiox-core/discussions/categories/mcp-ecosystem) |
+| 💡 **Feature ideas?**        | Start a [Discussion in "Ideas"](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas)            |
 | 🐛 **Found a bug?**          | [Open an issue](https://github.com/SynkraAI/mcp-ecosystem/issues/new/choose) in **this repository**            |
-| 🙏 **Need help?**            | Ask in ["Q&A"](https://github.com/SynkraAI/aios-core/discussions/categories/q-a)                               |
-| 🙌 **Built something cool?** | Share in ["Show and Tell"](https://github.com/SynkraAI/aios-core/discussions/categories/show-and-tell)         |
+| 🙏 **Need help?**            | Ask in ["Q&A"](https://github.com/SynkraAI/aiox-core/discussions/categories/q-a)                               |
+| 🙌 **Built something cool?** | Share in ["Show and Tell"](https://github.com/SynkraAI/aiox-core/discussions/categories/show-and-tell)         |
 
 ### What's in this Repository?
 
@@ -42,7 +42,7 @@ Have an idea for a new MCP server configuration?
 
 1. Check existing [MCP proposals](https://github.com/SynkraAI/mcp-ecosystem/labels/mcp-server)
 2. Open an issue with the `mcp-server` label
-3. Discuss in the [MCP Ecosystem category](https://github.com/SynkraAI/aios-core/discussions/categories/mcp-ecosystem)
+3. Discuss in the [MCP Ecosystem category](https://github.com/SynkraAI/aiox-core/discussions/categories/mcp-ecosystem)
 
 ---
 

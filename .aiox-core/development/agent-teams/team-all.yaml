@@ -1,0 +1,15 @@
+bundle:
+  name: Team All
+  icon: 👥
+  description: Includes every core system agent.
+agents:
+  - aiox-orchestrator
+  - aiox-developer
+  - '*'
+workflows:
+  - brownfield-fullstack.yaml
+  - brownfield-service.yaml
+  - brownfield-ui.yaml
+  - greenfield-fullstack.yaml
+  - greenfield-service.yaml
+  - greenfield-ui.yaml

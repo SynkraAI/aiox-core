@@ -11,7 +11,7 @@ const {
   collectEvents,
 } = require('./execution-test-helpers');
 
-const { ParallelMonitor, getMonitor } = require('../../.aios-core/core/execution/parallel-monitor');
+const { ParallelMonitor, getMonitor } = require('../../.aiox-core/core/execution/parallel-monitor');
 
 describe('ParallelMonitor', () => {
   let monitor;

@@ -10,13 +10,13 @@ const fsSync = require('fs');
 const {
   BobOrchestrator,
   ProjectState,
-} = require('../../../.aios-core/core/orchestration/bob-orchestrator');
+} = require('../../../.aiox-core/core/orchestration/bob-orchestrator');
 
 // Test fixtures
 const TEST_PROJECT_ROOT = path.join(__dirname, '../../fixtures/test-project-bob');
 
 // Mock Epic 11 modules
-jest.mock('../../../.aios-core/core/config/config-resolver', () => ({
+jest.mock('../../../.aiox-core/core/config/config-resolver', () => ({
   resolveConfig: jest.fn(),
   isLegacyMode: jest.fn(),
   setUserConfigValue: jest.fn(),
@@ -25,7 +25,7 @@ jest.mock('../../../.aios-core/core/config/config-resolver', () => ({
 }));
 
 // Story 12.7: Mock MessageFormatter
-jest.mock('../../../.aios-core/core/orchestration/message-formatter', () => ({
+jest.mock('../../../.aiox-core/core/orchestration/message-formatter', () => ({
   MessageFormatter: jest.fn().mockImplementation(() => ({
     format: jest.fn().mockReturnValue('formatted message'),
     formatEducational: jest.fn().mockReturnValue('educational message'),
@@ -39,7 +39,7 @@ jest.mock('../../../.aios-core/core/orchestration/message-formatter', () => ({
 }));
 
 // Story 12.8: Mock BrownfieldHandler
-jest.mock('../../../.aios-core/core/orchestration/brownfield-handler', () => ({
+jest.mock('../../../.aiox-core/core/orchestration/brownfield-handler', () => ({
   BrownfieldHandler: jest.fn().mockImplementation(() => ({
     handle: jest.fn().mockResolvedValue({
       action: 'brownfield_welcome',
@@ -57,7 +57,7 @@ jest.mock('../../../.aios-core/core/orchestration/brownfield-handler', () => ({
   PhaseFailureAction: {},
 }));
 
-jest.mock('../../../.aios-core/core/orchestration/executor-assignment', () => ({
+jest.mock('../../../.aiox-core/core/orchestration/executor-assignment', () => ({
   assignExecutorFromContent: jest.fn().mockReturnValue({
     executor: '@dev',
     quality_gate: '@architect',
@@ -70,12 +70,12 @@ jest.mock('../../../.aios-core/core/orchestration/executor-assignment', () => ({
   DEFAULT_ASSIGNMENT: {},
 }));
 
-jest.mock('../../../.aios-core/core/orchestration/terminal-spawner', () => ({
+jest.mock('../../../.aiox-core/core/orchestration/terminal-spawner', () => ({
   spawnAgent: jest.fn().mockResolvedValue({ success: true, output: 'done' }),
   isSpawnerAvailable: jest.fn().mockReturnValue(true),
 }));
 
-jest.mock('../../../.aios-core/core/orchestration/workflow-executor', () => {
+jest.mock('../../../.aiox-core/core/orchestration/workflow-executor', () => {
   return {
     WorkflowExecutor: jest.fn().mockImplementation(() => ({
       execute: jest.fn().mockResolvedValue({ success: true, state: {}, phaseResults: {} }),
@@ -93,7 +93,7 @@ jest.mock('../../../.aios-core/core/orchestration/workflow-executor', () => {
 });
 
 // Story 12.6: Mock UI components
-jest.mock('../../../.aios-core/core/ui/observability-panel', () => ({
+jest.mock('../../../.aiox-core/core/ui/observability-panel', () => ({
   ObservabilityPanel: jest.fn().mockImplementation(() => ({
     setStage: jest.fn(),
     setPipelineStage: jest.fn(),
@@ -111,7 +111,7 @@ jest.mock('../../../.aios-core/core/ui/observability-panel', () => ({
   PanelMode: { MINIMAL: 'minimal', DETAILED: 'detailed' },
 }));
 
-jest.mock('../../../.aios-core/core/orchestration/bob-status-writer', () => ({
+jest.mock('../../../.aiox-core/core/orchestration/bob-status-writer', () => ({
   BobStatusWriter: jest.fn().mockImplementation(() => ({
     initialize: jest.fn().mockResolvedValue(undefined),
     writeStatus: jest.fn().mockResolvedValue(undefined),
@@ -126,7 +126,7 @@ jest.mock('../../../.aios-core/core/orchestration/bob-status-writer', () => ({
   })),
 }));
 
-jest.mock('../../../.aios-core/core/events/dashboard-emitter', () => ({
+jest.mock('../../../.aiox-core/core/events/dashboard-emitter', () => ({
   getDashboardEmitter: jest.fn().mockReturnValue({
     emit: jest.fn(),
     on: jest.fn(),
@@ -135,7 +135,7 @@ jest.mock('../../../.aios-core/core/events/dashboard-emitter', () => ({
   }),
 }));
 
-jest.mock('../../../.aios-core/core/orchestration/surface-checker', () => {
+jest.mock('../../../.aiox-core/core/orchestration/surface-checker', () => {
   const mockShouldSurface = jest.fn().mockReturnValue({
     should_surface: false,
     criterion_id: null,
@@ -155,7 +155,7 @@ jest.mock('../../../.aios-core/core/orchestration/surface-checker', () => {
   };
 });
 
-jest.mock('../../../.aios-core/core/orchestration/session-state', () => {
+jest.mock('../../../.aiox-core/core/orchestration/session-state', () => {
   const mockExists = jest.fn().mockResolvedValue(false);
   const mockLoad = jest.fn().mockResolvedValue(null);
   const mockDetectCrash = jest.fn().mockResolvedValue({ isCrash: false });
@@ -192,7 +192,7 @@ jest.mock('../../../.aios-core/core/orchestration/session-state', () => {
   };
 });
 
-jest.mock('../../../.aios-core/core/orchestration/lock-manager', () => {
+jest.mock('../../../.aiox-core/core/orchestration/lock-manager', () => {
   const mockAcquire = jest.fn().mockResolvedValue(true);
   const mockRelease = jest.fn().mockResolvedValue(true);
   const mockCleanup = jest.fn().mockResolvedValue(0);
@@ -205,7 +205,7 @@ jest.mock('../../../.aios-core/core/orchestration/lock-manager', () => {
 });
 
 // Story 12.5: Mock DataLifecycleManager
-jest.mock('../../../.aios-core/core/orchestration/data-lifecycle-manager', () => {
+jest.mock('../../../.aiox-core/core/orchestration/data-lifecycle-manager', () => {
   const mockRunStartupCleanup = jest.fn().mockResolvedValue({
     locksRemoved: 0,
     sessionsArchived: 0,
@@ -223,7 +223,7 @@ jest.mock('../../../.aios-core/core/orchestration/data-lifecycle-manager', () =>
   };
 });
 
-const { resolveConfig } = require('../../../.aios-core/core/config/config-resolver');
+const { resolveConfig } = require('../../../.aiox-core/core/config/config-resolver');
 
 describe('BobOrchestrator', () => {
   let orchestrator;
@@ -240,7 +240,7 @@ describe('BobOrchestrator', () => {
 
     // Default: project with config and docs
     await fs.mkdir(path.join(TEST_PROJECT_ROOT, 'docs/architecture'), { recursive: true });
-    await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.aios/locks'), { recursive: true });
+    await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.aiox/locks'), { recursive: true });
     await fs.writeFile(path.join(TEST_PROJECT_ROOT, 'package.json'), '{}');
     await fs.mkdir(path.join(TEST_PROJECT_ROOT, '.git'), { recursive: true });
 
@@ -369,7 +369,7 @@ describe('BobOrchestrator', () => {
   describe('orchestrate', () => {
     it('should return lock_failed when lock cannot be acquired', async () => {
       // Given
-      const LockManager = require('../../../.aios-core/core/orchestration/lock-manager');
+      const LockManager = require('../../../.aiox-core/core/orchestration/lock-manager');
       const mockInstance = new LockManager();
       mockInstance.acquireLock.mockResolvedValueOnce(false);
       orchestrator.lockManager = mockInstance;
@@ -502,7 +502,7 @@ describe('BobOrchestrator', () => {
       // Given — read the source file
       const sourcePath = path.join(
         __dirname,
-        '../../../.aios-core/core/orchestration/bob-orchestrator.js',
+        '../../../.aiox-core/core/orchestration/bob-orchestrator.js',
       );
       const source = await fs.readFile(sourcePath, 'utf8');
       const lines = source.split('\n');
@@ -938,7 +938,7 @@ describe('BobOrchestrator', () => {
 
       it('should persist to user config for permanent type', async () => {
         // Given
-        const { setUserConfigValue } = require('../../../.aios-core/core/config/config-resolver');
+        const { setUserConfigValue } = require('../../../.aiox-core/core/config/config-resolver');
 
         // When
         await orchestrator.handleEducationalModeToggle(true, 'permanent');

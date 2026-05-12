@@ -1,4 +1,4 @@
-# 🏛️ AIOS Dashboard - Arquitectura Completa
+# 🏛️ AIOX Dashboard - Arquitectura Completa
 
 > **Versión:** 2.0.0
 > **Fecha:** 2026-01-29
@@ -32,12 +32,12 @@
 
 ## Visión General
 
-El AIOS Dashboard es una aplicación Next.js que proporciona una interfaz visual para monitorear y gestionar el sistema AIOS. Se comunica con el CLI/AIOS a través de archivos de estado en el sistema de archivos y Server-Sent Events (SSE).
+El AIOX Dashboard es una aplicación Next.js que proporciona una interfaz visual para monitorear y gestionar el sistema AIOX. Se comunica con el CLI/AIOX a través de archivos de estado en el sistema de archivos y Server-Sent Events (SSE).
 
 ### Principios Arquitectónicos
 
 1. **CLI-First**: Dashboard es complementario al CLI, no sustituto
-2. **File-Based Communication**: Estado a través de `.aios/dashboard/status.json`
+2. **File-Based Communication**: Estado a través de `.aiox/dashboard/status.json`
 3. **Real-Time Updates**: SSE con fallback a polling
 4. **Offline-Capable**: Funciona con datos mock en desarrollo
 5. **Type-Safe**: TypeScript en toda la pila
@@ -46,7 +46,7 @@ El AIOS Dashboard es una aplicación Next.js que proporciona una interfaz visual
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                           AIOS DASHBOARD                                 │
+│                           AIOX DASHBOARD                                 │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
 │  ┌──────────────────────────────────────────────────────────────────┐   │
@@ -81,7 +81,7 @@ El AIOS Dashboard es una aplicación Next.js que proporciona una interfaz visual
 │  │                         DATA LAYER (SWR + Hooks)                  │   │
 │  │  ┌────────────────┐ ┌────────────────┐ ┌────────────────────────┐│   │
 │  │  │  useStories()  │ │  useAgents()   │ │  useRealtimeStatus()   ││   │
-│  │  │  useAiosStatus │ │                │ │  (SSE + Polling)       ││   │
+│  │  │  useAioxStatus │ │                │ │  (SSE + Polling)       ││   │
 │  │  └────────────────┘ └────────────────┘ └────────────────────────┘│   │
 │  └──────────────────────────────────────────────────────────────────┘   │
 │                                                                          │
@@ -98,7 +98,7 @@ El AIOS Dashboard es una aplicación Next.js que proporciona una interfaz visual
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                              FILESYSTEM                                  │
 │  ┌──────────────────────────┐  ┌──────────────────────────────────────┐ │
-│  │ .aios/dashboard/         │  │ docs/stories/                        │ │
+│  │ .aiox/dashboard/         │  │ docs/stories/                        │ │
 │  │   status.json (CLI→UI)   │  │   *.md (Stories Markdown)            │ │
 │  └──────────────────────────┘  └──────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -106,7 +106,7 @@ El AIOS Dashboard es una aplicación Next.js que proporciona una interfaz visual
                                      │ Write
                                      │
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         CLI / AIOS AGENTS                                │
+│                         CLI / AIOX AGENTS                                │
 │  @dev │ @qa │ @architect │ @pm │ @po │ @analyst │ @devops               │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
@@ -167,7 +167,7 @@ apps/dashboard/
 │   │   │   ├── github/route.ts       # Proxy de API GitHub
 │   │   │   ├── logs/route.ts         # Streaming de logs
 │   │   │   ├── qa/metrics/route.ts   # Métricas QA
-│   │   │   ├── status/route.ts       # Polling de estado AIOS
+│   │   │   ├── status/route.ts       # Polling de estado AIOX
 │   │   │   └── stories/              # CRUD de stories
 │   │   │       ├── route.ts          # GET/POST /api/stories
 │   │   │       └── [id]/route.ts     # GET/PUT/DELETE /api/stories/:id
@@ -241,7 +241,7 @@ apps/dashboard/
 │   ├── hooks/                        # Custom React hooks
 │   │   ├── index.ts
 │   │   ├── use-agents.ts             # Datos de agentes + polling
-│   │   ├── use-aios-status.ts        # Estado con SWR
+│   │   ├── use-aiox-status.ts        # Estado con SWR
 │   │   ├── use-realtime-status.ts    # Conexión SSE
 │   │   └── use-stories.ts            # Obtención de datos de stories
 │   │
@@ -427,10 +427,10 @@ interface KanbanBoardProps {
 
 | Store            | Clave de localStorage          | Lo que persiste                   |
 | ---------------- | ----------------------------- | -------------------------------- |
-| `story-store`    | `aios-stories`            | `storyOrder` (orden de las columnas) |
-| `ui-store`       | `aios-ui`                 | `sidebarCollapsed`, `activeView` |
-| `projects-store` | `aios-projects`           | `projects`, `activeProjectId`    |
-| `settings-store` | `aios-dashboard-settings` | Todo el objeto `settings`         |
+| `story-store`    | `aiox-stories`            | `storyOrder` (orden de las columnas) |
+| `ui-store`       | `aiox-ui`                 | `sidebarCollapsed`, `activeView` |
+| `projects-store` | `aiox-projects`           | `projects`, `activeProjectId`    |
+| `settings-store` | `aiox-dashboard-settings` | Todo el objeto `settings`         |
 
 ### Patrón de Listeners
 
@@ -455,10 +455,10 @@ unsubscribe();
 #### GET /api/status
 
 ```typescript
-// Retorna estado actual de AIOS
-// Lee de: .aios/dashboard/status.json
+// Retorna estado actual de AIOX
+// Lee de: .aiox/dashboard/status.json
 
-interface AiosStatus {
+interface AioxStatus {
   version: string;
   updatedAt: string;
   connected: boolean;
@@ -491,7 +491,7 @@ interface AiosStatus {
 ```typescript
 // Server-Sent Events para actualizaciones en tiempo real
 // Eventos:
-//   - status:update     → AiosStatus
+//   - status:update     → AioxStatus
 //   - connection:status → { connected: boolean }
 //   - heartbeat         → { alive: true }
 //   - error             → { message: string }
@@ -536,13 +536,13 @@ interface CreateStoryRequest {
 
 ```
 ┌─────────────┐                              ┌──────────────────┐
-│   CLI/AIOS  │                              │    Dashboard     │
+│   CLI/AIOX  │                              │    Dashboard     │
 │   (Claude)  │                              │    (Next.js)     │
 └──────┬──────┘                              └────────┬─────────┘
        │                                              │
        │  1. Agente activado                         │
        │  ─────────────────────────────────────────▶  │
-       │     Escribe .aios/dashboard/status.json      │
+       │     Escribe .aiox/dashboard/status.json      │
        │                                              │
        │                                              │ 2. Dashboard detecta
        │                                              │    (SSE poll 2s)
@@ -568,11 +568,11 @@ interface CreateStoryRequest {
 
 ### Hooks de Obtención de Datos
 
-#### useAiosStatus
+#### useAioxStatus
 
 ```typescript
 // Polling basado en SWR del estado
-const { status, isLoading, isConnected, statusError, mutate } = useAiosStatus({
+const { status, isLoading, isConnected, statusError, mutate } = useAioxStatus({
   interval: 5000, // Poll cada 5s
   paused: false, // Pausar polling
 });
@@ -923,4 +923,4 @@ export { StoryDetailModal } from './StoryDetailModal';
 
 ---
 
-_Documentación generada por @architect (Aria) - AIOS Core v2.0_
+_Documentación generada por @architect (Aria) - AIOX Core v2.0_

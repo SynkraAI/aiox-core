@@ -1,11 +1,11 @@
 ## Task Contribution
 
-<!-- Thank you for contributing a task to AIOS! Please fill out this template. -->
+<!-- Thank you for contributing a task to AIOX! Please fill out this template. -->
 
 ### Task Information
 
 - **Task Name:** <!-- e.g., db-validate-kiss -->
-- **Task File:** <!-- e.g., .aios-core/development/tasks/db-validate-kiss.md -->
+- **Task File:** <!-- e.g., .aiox-core/development/tasks/db-validate-kiss.md -->
 - **Related Agent(s):** <!-- e.g., @data-engineer -->
 
 ### Changes Made
@@ -23,7 +23,7 @@
 
 #### Required
 
-- [ ] Task follows AIOS task format
+- [ ] Task follows AIOX task format
 - [ ] Elicitation points are clear and actionable
 - [ ] Deliverables are well-defined
 - [ ] Error handling guidance included

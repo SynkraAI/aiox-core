@@ -6,11 +6,11 @@
 
 # Guia de Sincronização de IDE
 
-Sincronize agentes, tasks, workflows e checklists do AIOS entre múltiplas configurações de IDE.
+Sincronize agentes, tasks, workflows e checklists do AIOX entre múltiplas configurações de IDE.
 
 ## Visão Geral
 
-A task `*command` automatiza a sincronização de componentes do AIOS para todos os diretórios de IDE configurados (`.claude/`, `.cursor/`, `.gemini/`, etc.), eliminando operações manuais de cópia.
+A task `*command` automatiza a sincronização de componentes do AIOX para todos os diretórios de IDE configurados (`.claude/`, `.cursor/`, `.gemini/`, etc.), eliminando operações manuais de cópia.
 
 ## Início Rápido
 
@@ -19,12 +19,12 @@ A task `*command` automatiza a sincronização de componentes do AIOS para todos
 Copie o template para a raiz do seu projeto:
 
 ```bash
-cp .aios-core/infrastructure/templates/aios-sync.yaml.template .aios-sync.yaml
+cp .aiox-core/infrastructure/templates/aiox-sync.yaml.template .aiox-sync.yaml
 ```
 
 ### 2. Configurar IDEs
 
-Edite `.aios-sync.yaml` para habilitar suas IDEs:
+Edite `.aiox-sync.yaml` para habilitar suas IDEs:
 
 ```yaml
 active_ides:
@@ -33,12 +33,12 @@ active_ides:
   # - gemini    # Google Gemini (.gemini/)
 ```
 
-### 3. Adicionar Aliases de Pack
+### 3. Adicionar Aliases de Squad
 
 Mapeie seus diretórios de squad para prefixos de comando:
 
 ```yaml
-pack_aliases:
+squad_aliases:
   legal: Legal # squads/legal/ → .claude/commands/Legal/
   copy: Copy # squads/copy/ → .claude/commands/Copy/
   hr: HR # squads/hr/ → .claude/commands/HR/
@@ -82,7 +82,7 @@ squads/legal/agents/legal-chief.md
 ┌─────────────────────────────────────────────────────┐
 │                 *command sync                        │
 │                                                      │
-│  1. Ler configuração .aios-sync.yaml                 │
+│  1. Ler configuração .aiox-sync.yaml                 │
 │  2. Verificar se componente existe em squads/        │
 │  3. Aplicar transformações de wrapper (se necessário)│
 │  4. Copiar para cada destino de IDE ativo            │
@@ -102,7 +102,6 @@ squads/legal/agents/legal-chief.md
 
 Mapeamentos padrão para tipos de componentes:
 
-| Tipo de Componente | Claude | Cursor | Gemini | Windsurf |
 | ------------------ | ------ | ------ | ------ | -------- |
 | Agents             | ✅     | ✅     | ✅     | ✅       |
 | Tasks              | ✅     | -      | -      | -        |
@@ -135,7 +134,7 @@ alwaysApply: false
 
 ```
 seu-projeto/
-├── .aios-sync.yaml           # Configuração de sincronização
+├── .aiox-sync.yaml           # Configuração de sincronização
 ├── squads/                   # Fonte da verdade
 │   └── legal/
 │       ├── config.yaml
@@ -171,16 +170,16 @@ Erro: Componente 'my-agent' não encontrado em squads/
 
 **Solução**: Verifique se o agente existe em `squads/*/agents/my-agent.md`
 
-### Alias de Pack Ausente
+### Alias de Squad Ausente
 
 ```
-Aviso: Nenhum alias de pack para 'new-squad'
+Aviso: Nenhum alias de squad para 'new-squad'
 ```
 
-**Solução**: Adicione o alias em `.aios-sync.yaml`:
+**Solução**: Adicione o alias em `.aiox-sync.yaml`:
 
 ```yaml
-pack_aliases:
+squad_aliases:
   new-squad: NewSquad
 ```
 
@@ -192,4 +191,4 @@ Verifique se a IDE está habilitada na seção `active_ides`.
 
 - [Visão Geral de Squads](./squads-overview.md)
 - [Referência de Agentes](../agent-reference-guide.md)
-- [Arquitetura AIOS](../core-architecture.md)
+- [Arquitetura AIOX](../core-architecture.md)

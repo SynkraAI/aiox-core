@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Começando com o Synkra AIOS
+# Começando com o Synkra AIOX
 
 > 🌐 [EN](../getting-started.md) | **PT** | [ES](../es/getting-started.md)
 
 ---
 
-Bem-vindo ao Synkra AIOS! Este guia irá orientá-lo nos seus primeiros passos com o framework de desenvolvimento auto-modificável alimentado por IA.
+Bem-vindo ao Synkra AIOX! Este guia irá orientá-lo nos seus primeiros passos com o framework de desenvolvimento auto-modificável alimentado por IA.
 
 ## Índice
 
@@ -29,7 +29,7 @@ Bem-vindo ao Synkra AIOS! Este guia irá orientá-lo nos seus primeiros passos c
 
 ### Pré-requisitos
 
-Antes de instalar o Synkra AIOS, certifique-se de ter:
+Antes de instalar o Synkra AIOX, certifique-se de ter:
 
 - **Node.js** versão 14.0.0 ou superior
 - **npm** versão 6.0.0 ou superior
@@ -42,32 +42,32 @@ A forma mais rápida de começar é usando npx:
 
 ```bash
 # Criar um novo projeto
-npx @synkra/aios-core init my-first-project
+npx aiox-core init my-first-project
 
 # Navegar até seu projeto
 cd my-first-project
 
 # Iniciar o meta-agent
-npx @synkra/aios-core
+npx aiox-core
 ```
 
 ### Opções de Instalação
 
-O Synkra AIOS oferece opções flexíveis de instalação:
+O Synkra AIOX oferece opções flexíveis de instalação:
 
 ```bash
 # 1. Criar novo projeto com template personalizado
-npx @synkra/aios-core init my-project --template enterprise
+npx aiox-core init my-project --template enterprise
 
 # 2. Instalar em projeto existente
 cd existing-project
-npx @synkra/aios-core install
+npx aiox-core install
 
 # 3. Forçar instalação em diretório não vazio
-npx @synkra/aios-core init my-project --force
+npx aiox-core init my-project --force
 
 # 4. Pular instalação de dependências (instalar manualmente depois)
-npx @synkra/aios-core init my-project --skip-install
+npx aiox-core init my-project --skip-install
 ```
 
 ## Seu Primeiro Projeto
@@ -78,7 +78,7 @@ Após a instalação, seu projeto terá esta estrutura:
 
 ```
 my-first-project/
-├── .aios/                    # Configuração do framework
+├── .aiox/                    # Configuração do framework
 │   ├── config.json          # Arquivo principal de configuração
 │   ├── memory-config.json   # Configurações da camada de memória
 │   ├── cache/              # Cache de performance
@@ -95,7 +95,7 @@ my-first-project/
 
 ### Configuração
 
-O arquivo principal de configuração (`.aios/config.json`) contém:
+O arquivo principal de configuração (`.aiox/config.json`) contém:
 
 ```json
 {
@@ -127,12 +127,12 @@ ANTHROPIC_API_KEY=your-anthropic-api-key
 
 # Configurações do Framework
 NODE_ENV=development
-AIOS_TELEMETRY=enabled
+AIOX_TELEMETRY=enabled
 ```
 
 ## Entendendo o Meta-Agent
 
-O meta-agent é o núcleo do Synkra AIOS - uma IA que entende e pode modificar sua própria base de código.
+O meta-agent é o núcleo do Synkra AIOX - uma IA que entende e pode modificar sua própria base de código.
 
 ### Capacidades Principais
 
@@ -166,10 +166,10 @@ graph TD
 
 ```bash
 # Iniciar no diretório atual
-npx @synkra/aios-core
+npx aiox-core
 
 # Ou usar o atalho
-npx aios
+npx aiox
 ```
 
 ### Comandos Essenciais
@@ -507,7 +507,7 @@ examples:
 - **[Referência de Comandos do Meta-Agent](./meta-agent-commands.md)**: Lista completa de comandos
 - **[Visão Geral da Arquitetura](./core-architecture.md)**: Aprofundamento técnico
 - **[Guia de Solução de Problemas](./troubleshooting.md)**: Problemas comuns e soluções
-- **[Tutoriais em Vídeo](https://@synkra/aios-core.dev/tutorials)**: Aprendizado visual
+- **[Tutoriais em Vídeo](https://aiox-core.dev/tutorials)**: Aprendizado visual
 
 ### Tópicos Avançados
 
@@ -524,7 +524,7 @@ Junte-se à nossa comunidade para suporte e atualizações:
 
 - **Discord**: [Entre no nosso servidor](https://discord.gg/gk8jAdXWmj)
 - **GitHub Discussions**: Compartilhe ideias e obtenha ajuda
-- **Twitter**: Siga [@aiosfullstack](https://twitter.com/aiosfullstack)
+- **Twitter**: Siga [@aioxfullstack](https://twitter.com/aioxfullstack)
 
 ## Referência Rápida de Solução de Problemas
 
@@ -533,13 +533,13 @@ Junte-se à nossa comunidade para suporte e atualizações:
 **Meta-agent não inicia**
 ```bash
 # Verificar versão do Node.js
-node --version  # Deve ser >= 14.0.0
+node --version  # Deve ser >= 18.0.0
 
 # Verificar instalação
-npx @synkra/aios-core doctor
+npx aiox-core doctor
 
 # Corrigir problemas comuns
-npx @synkra/aios-core doctor --fix
+npx aiox-core doctor --fix
 ```
 
 **Erros de chave de API**
@@ -567,6 +567,6 @@ ls -la .env
 
 **Pronto para construir algo incrível?** O meta-agent está esperando para ajudá-lo a criar, melhorar e evoluir seu código. Comece com `*help` e explore as possibilidades!
 
-Lembre-se: O Synkra AIOS aprende e melhora com o uso. Quanto mais você interagir com ele, melhor ele entenderá seu estilo e necessidades de desenvolvimento.
+Lembre-se: O Synkra AIOX aprende e melhora com o uso. Quanto mais você interagir com ele, melhor ele entenderá seu estilo e necessidades de desenvolvimento.
 
-Bom código com o Synkra AIOS!
+Bom código com o Synkra AIOX!

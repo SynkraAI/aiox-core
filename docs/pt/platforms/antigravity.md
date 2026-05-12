@@ -1,4 +1,4 @@
-# Guia AIOS para AntiGravity
+# Guia AIOX para AntiGravity
 
 > 🌐 [EN](../../platforms/antigravity.md) | **PT** | [ES](../../es/platforms/antigravity.md)
 
@@ -14,7 +14,7 @@
 
 AntiGravity é a plataforma de desenvolvimento agêntico do Google que permite que desenvolvedores construam e orquestrem workflows com IA. Ele apresenta uma abordagem única baseada em workflows para ativação de agentes e integração profunda com serviços do Google Cloud.
 
-### Por que usar AIOS com AntiGravity?
+### Por que usar AIOX com AntiGravity?
 
 O AntiGravity oferece capacidades distintas:
 
@@ -75,11 +75,11 @@ antigravity auth login
 export GOOGLE_APPLICATION_CREDENTIALS="caminho/para/credentials.json"
 ```
 
-### Passo 3: Instalar o AIOS
+### Passo 3: Instalar o AIOX
 
 ```bash
 cd seu-projeto
-npx @anthropic/aios init
+npx @anthropic/aiox init
 # Selecione "AntiGravity" quando solicitado
 ```
 
@@ -135,7 +135,7 @@ projeto/
 **Localização:** `.antigravity/rules.md`
 
 ```markdown
-# Regras Synkra AIOS para AntiGravity
+# Regras Synkra AIOX para AntiGravity
 
 ## Sistema de Agentes
 - Use @nome-agente ou workflows para ativação
@@ -348,7 +348,7 @@ exports.handleRequest = AntiGravity.createFunction({
 
 ```mermaid
 flowchart LR
-    Source["AIOS Core<br/>.aios-core/development/agents"] --> Parser["Parser de Agente"]
+    Source["AIOX Core<br/>.aiox-core/development/agents"] --> Parser["Parser de Agente"]
     Parser --> Transform["Transformador AntiGravity"]
     Transform --> Agents[".antigravity/agents/"]
     Transform --> Workflows[".agent/workflows/"]
@@ -358,10 +358,10 @@ flowchart LR
 
 ```bash
 # Sincronizar todos os agentes e workflows
-npm run sync:agents
+npm run sync:ide
 
 # Sincronizar para AntiGravity
-npm run sync:agents -- --ide antigravity
+npm run sync:ide -- --ide antigravity
 ```
 
 ### Formato de Agente
@@ -447,7 +447,7 @@ Error: Unknown agent '@xyz'
 **Solução:**
 ```bash
 # Ressincronizar agentes
-npm run sync:agents
+npm run sync:ide
 
 # Verificar config do agente
 cat .antigravity/antigravity.json
@@ -482,16 +482,16 @@ R: Agentes são personas com expertise; workflows orquestram ações de agentes 
 
 ### Do Claude Code para AntiGravity
 
-1. Seus agentes em `.aios-core/` são portáveis
+1. Seus agentes em `.aiox-core/` são portáveis
 2. Inicialize AntiGravity:
    ```bash
-   npx @anthropic/aios init --ide antigravity
+   npx @anthropic/aiox init --ide antigravity
    ```
 3. Arquivos de workflow são gerados automaticamente
 
 ### Do AntiGravity para Outras IDEs
 
-1. Agentes AIOS permanecem em `.aios-core/`
+1. Agentes AIOX permanecem em `.aiox-core/`
 2. Inicialize para a IDE de destino
 3. Configs específicas da plataforma são geradas
 
@@ -505,4 +505,4 @@ R: Agentes são personas com expertise; workflows orquestram ações de agentes 
 
 ---
 
-*Synkra AIOS - Guia da Plataforma AntiGravity v1.0*
+*Synkra AIOX - Guia da Plataforma AntiGravity v1.0*

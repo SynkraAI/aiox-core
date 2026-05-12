@@ -32,9 +32,9 @@ Read `.claude/commands/Copy/agents/copy-chief.md` and adopt the persona of **Cop
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Copy-relevant: Copywriting, Sales, Marketing, Launch)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Copy-relevant: Copywriting, Sales, Marketing, Launch)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 5. **Copy KB**: Read `squads/copy/data/copywriting-kb.md` if exists
 
 Do NOT display context loading — just absorb and proceed.
@@ -96,7 +96,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | `team` | Show full team organized by tier |
 
 **Path resolution**:
-- Tasks at `squads/copy/tasks/` or `.aios-core/development/tasks/`
+- Tasks at `squads/copy/tasks/` or `.aiox-core/development/tasks/`
 - Templates at `squads/copy/templates/`
 - Checklists at `squads/copy/checklists/`
 - Data at `squads/copy/data/`

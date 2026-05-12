@@ -3,7 +3,7 @@
  * @description Unit tests for Git worktree management functionality
  */
 
-const WorktreeManager = require('../../.aios-core/infrastructure/scripts/worktree-manager');
+const WorktreeManager = require('../../.aiox-core/infrastructure/scripts/worktree-manager');
 const path = require('path');
 
 // Mock execa
@@ -51,7 +51,7 @@ describe('WorktreeManager', () => {
       const mgr = new WorktreeManager(projectRoot);
       expect(mgr.projectRoot).toBe(projectRoot);
       expect(mgr.maxWorktrees).toBe(10);
-      expect(mgr.worktreeDir).toBe('.aios/worktrees');
+      expect(mgr.worktreeDir).toBe('.aiox/worktrees');
       expect(mgr.branchPrefix).toBe('auto-claude/');
       expect(mgr.staleDays).toBe(30);
     });
@@ -78,7 +78,7 @@ describe('WorktreeManager', () => {
   describe('getWorktreePath', () => {
     it('should return correct path for story ID', () => {
       const result = manager.getWorktreePath('STORY-42');
-      expect(result).toBe(path.join(projectRoot, '.aios/worktrees', 'STORY-42'));
+      expect(result).toBe(path.join(projectRoot, '.aiox/worktrees', 'STORY-42'));
     });
   });
 
@@ -96,7 +96,7 @@ describe('WorktreeManager', () => {
       const result = await manager.exists('STORY-42');
 
       expect(result).toBe(true);
-      expect(fs.access).toHaveBeenCalledWith(path.join(projectRoot, '.aios/worktrees', 'STORY-42'));
+      expect(fs.access).toHaveBeenCalledWith(path.join(projectRoot, '.aiox/worktrees', 'STORY-42'));
     });
 
     it('should return false when worktree directory does not exist', async () => {
@@ -125,7 +125,7 @@ describe('WorktreeManager', () => {
 
       const result = await manager.create('STORY-42');
 
-      expect(fs.mkdir).toHaveBeenCalledWith(path.join(projectRoot, '.aios/worktrees'), {
+      expect(fs.mkdir).toHaveBeenCalledWith(path.join(projectRoot, '.aiox/worktrees'), {
         recursive: true,
       });
       expect(execa).toHaveBeenCalledWith(
@@ -133,7 +133,7 @@ describe('WorktreeManager', () => {
         [
           'worktree',
           'add',
-          path.join(projectRoot, '.aios/worktrees', 'STORY-42'),
+          path.join(projectRoot, '.aiox/worktrees', 'STORY-42'),
           '-b',
           'auto-claude/STORY-42',
         ],
@@ -157,7 +157,7 @@ describe('WorktreeManager', () => {
           .fill(null)
           .map(
             (_, i) =>
-              `worktree /test/project/.aios/worktrees/STORY-${i}\nbranch refs/heads/auto-claude/STORY-${i}`,
+              `worktree /test/project/.aiox/worktrees/STORY-${i}\nbranch refs/heads/auto-claude/STORY-${i}`,
           )
           .join('\n\n'),
         stderr: '',
@@ -192,7 +192,7 @@ describe('WorktreeManager', () => {
 
       expect(execa).toHaveBeenCalledWith(
         'git',
-        ['worktree', 'remove', path.join(projectRoot, '.aios/worktrees', 'STORY-42')],
+        ['worktree', 'remove', path.join(projectRoot, '.aiox/worktrees', 'STORY-42')],
         expect.objectContaining({ cwd: projectRoot }),
       );
       expect(execa).toHaveBeenCalledWith(
@@ -208,7 +208,7 @@ describe('WorktreeManager', () => {
 
       expect(execa).toHaveBeenCalledWith(
         'git',
-        ['worktree', 'remove', path.join(projectRoot, '.aios/worktrees', 'STORY-42'), '--force'],
+        ['worktree', 'remove', path.join(projectRoot, '.aiox/worktrees', 'STORY-42'), '--force'],
         expect.objectContaining({ cwd: projectRoot }),
       );
       expect(execa).toHaveBeenCalledWith(
@@ -240,10 +240,10 @@ describe('WorktreeManager', () => {
       const porcelainOutput = `worktree /test/project
 branch refs/heads/main
 
-worktree /test/project/.aios/worktrees/STORY-42
+worktree /test/project/.aiox/worktrees/STORY-42
 branch refs/heads/auto-claude/STORY-42
 
-worktree /test/project/.aios/worktrees/STORY-43
+worktree /test/project/.aiox/worktrees/STORY-43
 branch refs/heads/auto-claude/STORY-43`;
 
       execa.mockResolvedValue({ stdout: porcelainOutput, stderr: '' });
@@ -267,10 +267,10 @@ branch refs/heads/auto-claude/STORY-43`;
       const oldDate = new Date(now - 45 * 24 * 60 * 60 * 1000); // 45 days ago
       const recentDate = new Date(now - 5 * 24 * 60 * 60 * 1000); // 5 days ago
 
-      const porcelainOutput = `worktree /test/project/.aios/worktrees/STORY-OLD
+      const porcelainOutput = `worktree /test/project/.aiox/worktrees/STORY-OLD
 branch refs/heads/auto-claude/STORY-OLD
 
-worktree /test/project/.aios/worktrees/STORY-NEW
+worktree /test/project/.aiox/worktrees/STORY-NEW
 branch refs/heads/auto-claude/STORY-NEW`;
 
       execa.mockResolvedValue({ stdout: porcelainOutput, stderr: '' });
@@ -334,7 +334,7 @@ branch refs/heads/auto-claude/STORY-NEW`;
     it('should remove stale worktrees', async () => {
       const oldDate = new Date(Date.now() - 45 * 24 * 60 * 60 * 1000);
 
-      const porcelainOutput = `worktree /test/project/.aios/worktrees/STORY-OLD
+      const porcelainOutput = `worktree /test/project/.aiox/worktrees/STORY-OLD
 branch refs/heads/auto-claude/STORY-OLD`;
 
       execa.mockResolvedValue({ stdout: porcelainOutput, stderr: '' });

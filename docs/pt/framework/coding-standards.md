@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-26
 -->
 
-# Padrões de Código AIOS
+# Padrões de Código AIOX
 
 > 🌐 [EN](../../framework/coding-standards.md) | **PT** | [ES](../../es/framework/coding-standards.md)
 
@@ -13,7 +13,7 @@
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** Padrão Oficial do Framework
-**Aviso de Migração:** Este documento migrará para o repositório `SynkraAI/aios-core` em Q2 2026 (veja Decision 005)
+**Aviso de Migração:** Este documento migrará para o repositório `SynkraAI/aiox-core` em Q2 2026 (veja Decision 005)
 
 ---
 
@@ -33,7 +33,7 @@
 
 ## Visão Geral
 
-Este documento define os padrões de código oficiais para desenvolvimento do framework AIOS. Todas as contribuições de código devem aderir a estes padrões para garantir consistência, manutenibilidade e qualidade.
+Este documento define os padrões de código oficiais para desenvolvimento do framework AIOX. Todas as contribuições de código devem aderir a estes padrões para garantir consistência, manutenibilidade e qualidade.
 
 **Aplicação:**
 
@@ -245,7 +245,7 @@ async function executeTask(taskName) {
 ### Estrutura de Diretórios
 
 ```
-.aios-core/
+.aiox-core/
 ├── agents/              # Definições de agentes (YAML + Markdown)
 ├── tasks/               # Workflows de tarefas (Markdown)
 ├── templates/           # Templates de documentos (YAML/Markdown)
@@ -543,7 +543,7 @@ if (!taskSchema.validate(taskData)) {
 
 ```javascript
 /**
- * Carrega e executa um agente AIOS
+ * Carrega e executa um agente AIOX
  *
  * @param {string} agentId - Identificador único do agente
  * @param {Object} args - Argumentos de execução do agente
@@ -593,7 +593,7 @@ Todo módulo/diretório deve ter um README.md:
 ```markdown
 # Agent Executor
 
-**Propósito:** Carrega e executa agentes AIOS com gerenciamento de configuração.
+**Propósito:** Carrega e executa agentes AIOX com gerenciamento de configuração.
 
 ## Uso
 
@@ -783,7 +783,7 @@ function executeCommand(command) {
 const path = require('path');
 
 function loadFile(filePath) {
-  const basePath = path.resolve(__dirname, '.aios-core');
+  const basePath = path.resolve(__dirname, '.aiox-core');
   const resolvedPath = path.resolve(basePath, filePath);
 
   // Prevent directory traversal
@@ -878,7 +878,7 @@ Todos os PRs são automaticamente revisados pelo CodeRabbit para:
 | Versão | Data       | Alterações                                                        | Autor            |
 | ------ | ---------- | ----------------------------------------------------------------- | ---------------- |
 | 1.0    | 2025-01-15 | Documento inicial de padrões de código                            | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/aios-core [Story 6.10] | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/aiox-core [Story 6.10] | Dex (dev)        |
 
 ---
 
@@ -889,4 +889,4 @@ Todos os PRs são automaticamente revisados pelo CodeRabbit para:
 
 ---
 
-_Este é um padrão oficial do framework AIOS. Todas as contribuições de código devem estar em conformidade._
+_Este é um padrão oficial do framework AIOX. Todas as contribuições de código devem estar em conformidade._

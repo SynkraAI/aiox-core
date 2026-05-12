@@ -3,13 +3,13 @@
 > **De:** Quinn (@qa) - QA Agent
 > **Para:** Sage (@architect) - Solution Architect
 > **Data:** 2026-01-28
-> **Projeto:** AIOS Autonomous Development Engine (ADE)
+> **Projeto:** AIOX Autonomous Development Engine (ADE)
 
 ---
 
 ## Resumo Executivo
 
-O ADE é um projeto de **Prompt Engineering + Infraestrutura** para habilitar execução autônoma de desenvolvimento no AIOS. Aproximadamente **60% do trabalho é criação de tasks .md, workflows .yaml e templates** - não código tradicional.
+O ADE é um projeto de **Prompt Engineering + Infraestrutura** para habilitar execução autônoma de desenvolvimento no AIOX. Aproximadamente **60% do trabalho é criação de tasks .md, workflows .yaml e templates** - não código tradicional.
 
 **Você é o líder técnico deste projeto.** @dev será acionado apenas para scripts JS específicos.
 
@@ -256,20 +256,20 @@ Semanas 9-10: Epic 7 (Memory Layer)
 
 ### PRD
 
-- `docs/prd/aios-autonomous-development-engine.md`
+- `docs/prd/aiox-autonomous-development-engine.md`
 
 ### Stories
 
-- `docs/stories/aios-core-ade/` (7 arquivos de epic + README)
+- `docs/stories/aiox-core-ade/` (7 arquivos de epic + README)
 
 ### Quality Gates
 
-- `docs/qa/gates/aios-core-ade/` (7 arquivos de gate + README)
+- `docs/qa/gates/aiox-core-ade/` (7 arquivos de gate + README)
 
 ### Referência
 
 - `docs/architecture/AUTO-CLAUDE-ANALYSIS-COMPLETE.md` (patterns do Auto-Claude)
-- `.aios-core/core-config.yaml` (configuração central)
+- `.aiox-core/core-config.yaml` (configuração central)
 
 ---
 
@@ -319,7 +319,7 @@ Não há dependência do Dashboard para o ADE funcionar.
 
 ## Primeiros Passos Recomendados
 
-1. **Ler o PRD completo** - `docs/prd/aios-autonomous-development-engine.md`
+1. **Ler o PRD completo** - `docs/prd/aiox-autonomous-development-engine.md`
 2. **Ler o Auto-Claude Analysis** - `docs/architecture/AUTO-CLAUDE-ANALYSIS-COMPLETE.md`
 3. **Iniciar Epic 1.1** - worktree-manager.js (delegar para @dev)
 4. **Em paralelo, desenhar os schemas V3** (Epic 2.3)

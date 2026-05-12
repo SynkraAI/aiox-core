@@ -19,27 +19,27 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 // Mock all external dependencies before requiring modules
-jest.mock('../../.aios-core/core/session/context-detector');
-jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector');
-jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader', () => ({
+jest.mock('../../.aiox-core/core/session/context-detector');
+jest.mock('../../.aiox-core/infrastructure/scripts/git-config-detector');
+jest.mock('../../.aiox-core/infrastructure/scripts/project-status-loader', () => ({
   loadProjectStatus: jest.fn(),
   formatStatusDisplay: jest.fn(),
 }));
-jest.mock('../../.aios-core/core/config/config-resolver', () => ({
+jest.mock('../../.aiox-core/core/config/config-resolver', () => ({
   resolveConfig: jest.fn(() => ({
     config: { user_profile: 'advanced' },
     warnings: [],
     legacy: false,
   })),
 }));
-jest.mock('../../.aios-core/development/scripts/greeting-preference-manager', () => {
+jest.mock('../../.aiox-core/development/scripts/greeting-preference-manager', () => {
   return jest.fn().mockImplementation(() => ({
     getPreference: jest.fn().mockReturnValue('auto'),
     setPreference: jest.fn(),
     getConfig: jest.fn().mockReturnValue({}),
   }));
 });
-jest.mock('../../.aios-core/core/permissions', () => ({
+jest.mock('../../.aiox-core/core/permissions', () => ({
   PermissionMode: jest.fn().mockImplementation(() => ({
     load: jest.fn().mockResolvedValue(undefined),
     getBadge: jest.fn().mockReturnValue('[Ask]'),
@@ -48,7 +48,7 @@ jest.mock('../../.aios-core/core/permissions', () => ({
 }));
 
 // Mock SessionState
-jest.mock('../../.aios-core/core/orchestration/session-state', () => ({
+jest.mock('../../.aiox-core/core/orchestration/session-state', () => ({
   SessionState: jest.fn().mockImplementation(() => ({
     getStateFilePath: jest.fn().mockReturnValue('/mock/path/.session-state.yaml'),
     exists: jest.fn().mockResolvedValue(false),
@@ -60,7 +60,7 @@ jest.mock('../../.aios-core/core/orchestration/session-state', () => ({
 }));
 
 // Mock SurfaceChecker
-jest.mock('../../.aios-core/core/orchestration/surface-checker', () => ({
+jest.mock('../../.aiox-core/core/orchestration/surface-checker', () => ({
   SurfaceChecker: jest.fn().mockImplementation(() => ({
     load: jest.fn().mockReturnValue(false),
     shouldSurface: jest.fn().mockReturnValue({
@@ -75,12 +75,12 @@ jest.mock('../../.aios-core/core/orchestration/surface-checker', () => ({
   shouldSurface: jest.fn(),
 }));
 
-const ContextDetector = require('../../.aios-core/core/session/context-detector');
-const GitConfigDetector = require('../../.aios-core/infrastructure/scripts/git-config-detector');
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
-const WorkflowNavigator = require('../../.aios-core/development/scripts/workflow-navigator');
-const { SessionState } = require('../../.aios-core/core/orchestration/session-state');
-const { SurfaceChecker } = require('../../.aios-core/core/orchestration/surface-checker');
+const ContextDetector = require('../../.aiox-core/core/session/context-detector');
+const GitConfigDetector = require('../../.aiox-core/infrastructure/scripts/git-config-detector');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
+const WorkflowNavigator = require('../../.aiox-core/development/scripts/workflow-navigator');
+const { SessionState } = require('../../.aiox-core/core/orchestration/session-state');
+const { SurfaceChecker } = require('../../.aiox-core/core/orchestration/surface-checker');
 
 describe('WorkflowNavigator Integration (Story ACT-5)', () => {
   let builder;
@@ -512,7 +512,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
     beforeAll(() => {
       const patternsPath = path.join(
         __dirname,
-        '../../.aios-core/data/workflow-patterns.yaml',
+        '../../.aiox-core/data/workflow-patterns.yaml',
       );
       const content = fs.readFileSync(patternsPath, 'utf8');
       patterns = yaml.load(content);
@@ -837,38 +837,38 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       jest.resetModules();
 
       // Re-mock everything needed for the pipeline
-      jest.mock('../../.aios-core/development/scripts/greeting-builder');
-      jest.mock('../../.aios-core/development/scripts/agent-config-loader', () => ({
+      jest.mock('../../.aiox-core/development/scripts/greeting-builder');
+      jest.mock('../../.aiox-core/development/scripts/agent-config-loader', () => ({
         AgentConfigLoader: jest.fn().mockImplementation(() => ({
           loadComplete: jest.fn().mockResolvedValue(null),
         })),
       }));
-      jest.mock('../../.aios-core/core/session/context-loader', () => {
+      jest.mock('../../.aiox-core/core/session/context-loader', () => {
         return jest.fn().mockImplementation(() => ({
           loadContext: jest.fn().mockResolvedValue(null),
         }));
       });
-      jest.mock('../../.aios-core/infrastructure/scripts/project-status-loader', () => ({
+      jest.mock('../../.aiox-core/infrastructure/scripts/project-status-loader', () => ({
         loadProjectStatus: jest.fn().mockResolvedValue(null),
       }));
-      jest.mock('../../.aios-core/infrastructure/scripts/git-config-detector');
-      jest.mock('../../.aios-core/core/permissions', () => ({
+      jest.mock('../../.aiox-core/infrastructure/scripts/git-config-detector');
+      jest.mock('../../.aiox-core/core/permissions', () => ({
         PermissionMode: jest.fn().mockImplementation(() => ({
           load: jest.fn().mockResolvedValue(undefined),
           getBadge: jest.fn().mockReturnValue('[Ask]'),
           currentMode: 'ask',
         })),
       }));
-      jest.mock('../../.aios-core/development/scripts/greeting-preference-manager', () => {
+      jest.mock('../../.aiox-core/development/scripts/greeting-preference-manager', () => {
         return jest.fn().mockImplementation(() => ({
           getPreference: jest.fn().mockReturnValue('auto'),
         }));
       });
-      jest.mock('../../.aios-core/core/session/context-detector');
-      jest.mock('../../.aios-core/development/scripts/workflow-navigator');
+      jest.mock('../../.aiox-core/core/session/context-detector');
+      jest.mock('../../.aiox-core/development/scripts/workflow-navigator');
 
-      const { UnifiedActivationPipeline } = require('../../.aios-core/development/scripts/unified-activation-pipeline');
-      const MockWorkflowNavigator = require('../../.aios-core/development/scripts/workflow-navigator');
+      const { UnifiedActivationPipeline } = require('../../.aiox-core/development/scripts/unified-activation-pipeline');
+      const MockWorkflowNavigator = require('../../.aiox-core/development/scripts/workflow-navigator');
 
       MockWorkflowNavigator.mockImplementation(() => ({
         detectWorkflowState: jest.fn().mockReturnValue({

@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-# AIOS Post-Commit Hook (Story ACT-3)
+# AIOX Post-Commit Hook (Story ACT-3)
 # Clears project status cache so next agent activation sees fresh data.
 # Uses Node.js for cross-platform compatibility.
 
-node .aios-core/infrastructure/scripts/git-hooks/post-commit.js 2>/dev/null || true
+node .aiox-core/infrastructure/scripts/git-hooks/post-commit.js 2>/dev/null || true
 
 # IDS Registry Auto-Update (Story IDS-3)
 # Updates entity registry with committed file changes (async, non-blocking).
-node .aios-core/hooks/ids-post-commit.js 2>/dev/null || true
+node .aiox-core/hooks/ids-post-commit.js 2>/dev/null || true

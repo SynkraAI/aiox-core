@@ -14,14 +14,14 @@ const {
   saveMigrationState,
   loadMigrationState,
   clearMigrationState,
-} = require('../../.aios-core/cli/commands/migrate/execute');
-const { analyzeMigrationPlan } = require('../../.aios-core/cli/commands/migrate/analyze');
+} = require('../../.aiox-core/cli/commands/migrate/execute');
+const { analyzeMigrationPlan } = require('../../.aiox-core/cli/commands/migrate/analyze');
 
 describe('Migration Execute Module', () => {
   let testDir;
 
   beforeEach(async () => {
-    testDir = path.join(os.tmpdir(), `aios-execute-test-${Date.now()}`);
+    testDir = path.join(os.tmpdir(), `aiox-execute-test-${Date.now()}`);
     await fs.promises.mkdir(testDir, { recursive: true });
   });
 
@@ -33,91 +33,91 @@ describe('Migration Execute Module', () => {
 
   describe('createModuleDirectories', () => {
     it('should create all four module directories', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(aiosCoreDir, { recursive: true });
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(aioxCoreDir, { recursive: true });
 
-      const result = await createModuleDirectories(aiosCoreDir);
+      const result = await createModuleDirectories(aioxCoreDir);
 
-      expect(fs.existsSync(path.join(aiosCoreDir, 'core'))).toBe(true);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'development'))).toBe(true);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'product'))).toBe(true);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'infrastructure'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'core'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'development'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'product'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'infrastructure'))).toBe(true);
       expect(result.modules).toContain('core');
     });
 
     it('should not fail if directories already exist', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'core'), { recursive: true });
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'core'), { recursive: true });
 
-      const result = await createModuleDirectories(aiosCoreDir);
+      const result = await createModuleDirectories(aioxCoreDir);
 
-      expect(result.created).not.toContain(path.join(aiosCoreDir, 'core'));
+      expect(result.created).not.toContain(path.join(aioxCoreDir, 'core'));
     });
   });
 
   describe('migrateModule', () => {
     it('should migrate files to module directory', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'agents'), { recursive: true });
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'development'), { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'dev.md'), 'Agent');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'agents'), { recursive: true });
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'development'), { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'agents', 'dev.md'), 'Agent');
 
       const moduleData = {
         files: [{
-          sourcePath: path.join(aiosCoreDir, 'agents', 'dev.md'),
+          sourcePath: path.join(aioxCoreDir, 'agents', 'dev.md'),
           relativePath: path.join('agents', 'dev.md'),
           size: 5,
         }],
       };
 
-      const result = await migrateModule(moduleData, 'development', aiosCoreDir);
+      const result = await migrateModule(moduleData, 'development', aioxCoreDir);
 
       expect(result.migratedFiles).toHaveLength(1);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'development', 'agents', 'dev.md'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'development', 'agents', 'dev.md'))).toBe(true);
     });
 
     it('should support dry run mode', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'agents'), { recursive: true });
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'development'), { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'dev.md'), 'Agent');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'agents'), { recursive: true });
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'development'), { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'agents', 'dev.md'), 'Agent');
 
       const moduleData = {
         files: [{
-          sourcePath: path.join(aiosCoreDir, 'agents', 'dev.md'),
+          sourcePath: path.join(aioxCoreDir, 'agents', 'dev.md'),
           relativePath: path.join('agents', 'dev.md'),
           size: 5,
         }],
       };
 
-      const result = await migrateModule(moduleData, 'development', aiosCoreDir, { dryRun: true });
+      const result = await migrateModule(moduleData, 'development', aioxCoreDir, { dryRun: true });
 
       expect(result.migratedFiles).toHaveLength(1);
       expect(result.migratedFiles[0].dryRun).toBe(true);
       // File should NOT be copied in dry run
-      expect(fs.existsSync(path.join(aiosCoreDir, 'development', 'agents', 'dev.md'))).toBe(false);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'development', 'agents', 'dev.md'))).toBe(false);
     });
   });
 
   describe('executeMigration', () => {
     it('should execute full migration', async () => {
       // Create v2.0 structure
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'agents'), { recursive: true });
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'registry'), { recursive: true });
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'cli'), { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'dev.md'), 'Agent');
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'registry', 'index.js'), 'Registry');
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'cli', 'index.js'), 'CLI');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'agents'), { recursive: true });
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'registry'), { recursive: true });
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'cli'), { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'agents', 'dev.md'), 'Agent');
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'registry', 'index.js'), 'Registry');
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'cli', 'index.js'), 'CLI');
 
       const plan = await analyzeMigrationPlan(testDir);
       const result = await executeMigration(plan, { cleanupOriginals: false });
 
       expect(result.success).toBe(true);
       expect(result.totalFiles).toBe(3);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'development', 'agents', 'dev.md'))).toBe(true);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'core', 'registry', 'index.js'))).toBe(true);
-      expect(fs.existsSync(path.join(aiosCoreDir, 'product', 'cli', 'index.js'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'development', 'agents', 'dev.md'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'core', 'registry', 'index.js'))).toBe(true);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'product', 'cli', 'index.js'))).toBe(true);
     });
 
     it('should return error for non-migratable plan', async () => {
@@ -129,16 +129,16 @@ describe('Migration Execute Module', () => {
     });
 
     it('should support dry run', async () => {
-      const aiosCoreDir = path.join(testDir, '.aios-core');
-      await fs.promises.mkdir(path.join(aiosCoreDir, 'agents'), { recursive: true });
-      await fs.promises.writeFile(path.join(aiosCoreDir, 'agents', 'dev.md'), 'Agent');
+      const aioxCoreDir = path.join(testDir, '.aiox-core');
+      await fs.promises.mkdir(path.join(aioxCoreDir, 'agents'), { recursive: true });
+      await fs.promises.writeFile(path.join(aioxCoreDir, 'agents', 'dev.md'), 'Agent');
 
       const plan = await analyzeMigrationPlan(testDir);
       const result = await executeMigration(plan, { dryRun: true });
 
       expect(result.dryRun).toBe(true);
       // Directories should not be created in dry run
-      expect(fs.existsSync(path.join(aiosCoreDir, 'development'))).toBe(false);
+      expect(fs.existsSync(path.join(aioxCoreDir, 'development'))).toBe(false);
     });
   });
 

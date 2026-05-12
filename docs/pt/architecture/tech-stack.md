@@ -1,6 +1,6 @@
 <!-- Tradução: PT-BR | Original: /docs/en/architecture/tech-stack.md | Sincronização: 2026-01-26 -->
 
-# Stack de Tecnologia AIOS
+# Stack de Tecnologia AIOX
 
 > 🌐 [EN](../../architecture/tech-stack.md) | **PT** | [ES](../../es/architecture/tech-stack.md)
 
@@ -14,12 +14,12 @@
 
 ---
 
-# Stack de Tecnologia AIOS
+# Stack de Tecnologia AIOX
 
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** DESCONTINUADO - Veja docs/framework/tech-stack.md
-**Aviso de Migração:** Este documento será migrado para o repositório `SynkraAI/aios-core` no Q2 2026 (veja Decisão 005)
+**Aviso de Migração:** Este documento será migrado para o repositório `SynkraAI/aiox-core` no Q2 2026 (veja Decisão 005)
 
 ---
 
@@ -39,7 +39,7 @@
 
 ## Visão Geral
 
-AIOS é construído em JavaScript/TypeScript moderno com runtime Node.js, otimizado para desenvolvimento de CLI cross-platform com UX interativa e capacidades de orquestração de agentes.
+AIOX é construído em JavaScript/TypeScript moderno com runtime Node.js, otimizado para desenvolvimento de CLI cross-platform com UX interativa e capacidades de orquestração de agentes.
 
 **Filosofia:**
 
@@ -536,7 +536,7 @@ npm run publish:stable         # Publicar com tag latest
 
 ### Servidores MCP
 
-AIOS integra com servidores Model Context Protocol (MCP):
+AIOX integra com servidores Model Context Protocol (MCP):
 
 ```yaml
 Servidores MCP:
@@ -729,7 +729,7 @@ Estratégia de Otimização:
 ### Uso de Memória
 
 ```yaml
-Baseline: 30MB (Node.js + AIOS core)
+Baseline: 30MB (Node.js + AIOX core)
 Execução de Agente: +10MB (por agente)
 Processamento de Story: +20MB (parsing markdown)
 Pico: ~100MB (workflow típico)
@@ -771,10 +771,10 @@ Node.js: nvm, apt, yum ou binários oficiais
 ## Variáveis de Ambiente
 
 ```bash
-# Configuração AIOS
-AIOS_DEBUG=true                    # Habilitar logging de debug
-AIOS_CONFIG_PATH=/custom/path      # Localização customizada de config
-AIOS_YOLO_MODE=true               # Forçar modo yolo
+# Configuração AIOX
+AIOX_DEBUG=true                    # Habilitar logging de debug
+AIOX_CONFIG_PATH=/custom/path      # Localização customizada de config
+AIOX_YOLO_MODE=true               # Forçar modo yolo
 
 # Node.js
 NODE_ENV=production                # Modo produção
@@ -801,8 +801,8 @@ SUPABASE_ACCESS_TOKEN=xxx         # Auth Supabase CLI
 | Versão | Data       | Alterações                                                                                       | Autor            |
 | ------ | ---------- | ------------------------------------------------------------------------------------------------ | ---------------- |
 | 1.0    | 2025-01-15 | Documentação inicial do tech stack                                                               | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/aios-core, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/aiox-core, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
 
 ---
 
-_Este é um padrão oficial do framework AIOS. Todas as escolhas de tecnologia devem estar alinhadas com este stack._
+_Este é um padrão oficial do framework AIOX. Todas as escolhas de tecnologia devem estar alinhadas com este stack._

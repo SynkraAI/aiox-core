@@ -12,4 +12,4 @@ entities:
 categories:
   - id: tasks
     description: "Executable task workflows"
-    basePath: ".aios-core/development/tasks"
+    basePath: ".aiox-core/development/tasks"

@@ -60,4 +60,4 @@ Have a useful squad pattern? We welcome contributions!
 
 ---
 
-*AIOS Squads: Equipes de AI agents trabalhando com você* 🤖
+*AIOX Squads: Equipes de AI agents trabalhando com você* 🤖

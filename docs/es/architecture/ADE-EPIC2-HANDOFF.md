@@ -19,11 +19,11 @@ Epic 2 (Migración V2→V3) está **100% completo** y aprobado por el QA Gate. M
 
 | Artefacto            | Ruta                                                     | Tipo        | Estado |
 | -------------------- | -------------------------------------------------------- | ----------- | ------ |
-| asset-inventory.js   | `.aios-core/infrastructure/scripts/asset-inventory.js`   | JS Script   | OK     |
-| path-analyzer.js     | `.aios-core/infrastructure/scripts/path-analyzer.js`     | JS Script   | OK     |
-| migrate-agent.js     | `.aios-core/infrastructure/scripts/migrate-agent.js`     | JS Script   | OK     |
-| agent-v3-schema.json | `.aios-core/infrastructure/schemas/agent-v3-schema.json` | JSON Schema | OK     |
-| task-v3-schema.json  | `.aios-core/infrastructure/schemas/task-v3-schema.json`  | JSON Schema | OK     |
+| asset-inventory.js   | `.aiox-core/infrastructure/scripts/asset-inventory.js`   | JS Script   | OK     |
+| path-analyzer.js     | `.aiox-core/infrastructure/scripts/path-analyzer.js`     | JS Script   | OK     |
+| migrate-agent.js     | `.aiox-core/infrastructure/scripts/migrate-agent.js`     | JS Script   | OK     |
+| agent-v3-schema.json | `.aiox-core/infrastructure/schemas/agent-v3-schema.json` | JSON Schema | OK     |
+| task-v3-schema.json  | `.aiox-core/infrastructure/schemas/task-v3-schema.json`  | JSON Schema | OK     |
 
 ---
 
@@ -92,7 +92,7 @@ autoClaude:
 
 - **12 agents** migrados al formato V3
 - **Todos los agents** tienen `autoClaude.version: "3.0"`
-- **Todos los agents** sincronizados a `.claude/commands/AIOS/agents/`
+- **Todos los agents** sincronizados a `.claude/commands/AIOX/agents/`
 
 ---
 

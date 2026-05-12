@@ -22,7 +22,7 @@ const {
   MANIFEST_FILES,
   DEFAULT_SQUADS_PATH,
   ErrorCodes,
-} = require('../../../.aios-core/development/scripts/squad');
+} = require('../../../.aiox-core/development/scripts/squad');
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');

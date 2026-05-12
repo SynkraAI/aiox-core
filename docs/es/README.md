@@ -1,24 +1,25 @@
 <!--
   Traducción: ES
   Original: /docs/README.md
-  Última sincronización: 2026-01-28
+  Última sincronización: 2026-02-23
 -->
 
-# Documentación de Synkra AIOS
+# Documentación de Synkra AIOX
 
-> 🌐 [EN](../README.md) | [PT](../pt/README.md) | **ES**
+> 🌐 [EN](../README.md) | [PT](../pt/README.md) | **ES** | [ZH](../zh/README.md)
 
 > **Sistema Orquestado por IA para Desarrollo Full Stack**
 
 ---
 
-## 🌐 Seleccione el Idioma / Select Language / Selecione o Idioma
+## 🌐 Seleccione el Idioma / Select Language / Selecione o Idioma / 选择语言
 
-| Idioma        | Estado      | Enlace                                                   |
-| ------------- | ----------- | -------------------------------------------------------- |
-| **English**   | ✅ Completo | [📖 English Documentation](../getting-started.md)        |
-| **Português** | ✅ Completo | [📖 Documentação em Português](../pt/getting-started.md) |
-| **Español**   | ✅ Completo | [📖 Documentación en Español](./getting-started.md)      |
+| Idioma              | Estado         | Enlace                                                   |
+| ------------------- | -------------- | -------------------------------------------------------- |
+| **English**         | ✅ Completo    | [📖 English Documentation](../getting-started.md)        |
+| **Português**       | ✅ Completo    | [📖 Documentação em Português](../pt/getting-started.md) |
+| **Español**         | ✅ Completo    | [📖 Documentación en Español](./getting-started.md)      |
+| **中文（简体）**    | 🟡 En progreso | [📖 Documentación en Chino](../zh/getting-started.md)    |
 
 ---
 
@@ -39,10 +40,15 @@ docs/
 │   ├── platforms/
 │   └── ...
 │
-└── es/                        # Español (traducciones)
+├── es/                        # Español (traducciones)
+│   ├── getting-started.md
+│   ├── guides/
+│   ├── platforms/
+│   └── ...
+│
+└── zh/                        # 中文（简体）(traducciones)
     ├── getting-started.md
     ├── guides/
-    ├── platforms/
     └── ...
 ```
 
@@ -54,8 +60,8 @@ docs/
 
 - [Getting Started](../getting-started.md)
 - [Installation Guide](../installation/README.md)
-- [Architecture Overview](../architecture/ARCHITECTURE-INDEX.md)
-- [Agent Reference](../agent-reference-guide.md)
+- [Architecture Overview](../core-architecture.md)
+- [Meta-Agent Commands](../meta-agent-commands.md)
 - [Troubleshooting](../troubleshooting.md)
 
 ### Português
@@ -64,6 +70,8 @@ docs/
 - [Guia de Instalação](../pt/installation/README.md)
 - [Visão Geral da Arquitetura](../pt/architecture/ARCHITECTURE-INDEX.md)
 - [Referência de Agentes](../pt/agent-reference-guide.md)
+- [Documentação do Sistema de Agentes](../aiox-agent-flows/README.md)
+- [Documentação de Workflows](../aiox-workflows/README.md)
 - [Solução de Problemas](../pt/troubleshooting.md)
 
 ### Español
@@ -72,7 +80,17 @@ docs/
 - [Guía de Instalación](./installation/README.md)
 - [Visión General de la Arquitectura](./architecture/ARCHITECTURE-INDEX.md)
 - [Referencia de Agentes](./agent-reference-guide.md)
+- [Documentación del Sistema de Agentes](./aiox-agent-flows/README.md)
+- [Documentación de Workflows](./aiox-workflows/README.md)
 - [Solución de Problemas](./troubleshooting.md)
+
+### 中文（简体）
+
+- [快速入门](../zh/getting-started.md)
+- [安装指南](../zh/installation/README.md)
+- [架构总览](../zh/architecture/ARCHITECTURE-INDEX.md)
+- [代理参考](../zh/agent-reference-guide.md)
+- [故障排查](../zh/troubleshooting.md)
 
 ---
 
@@ -83,12 +101,12 @@ docs/
 Seguimos prácticas estándar de la industria para i18n:
 
 1. El contenido en inglés se encuentra en la raíz (`docs/`)
-2. Las traducciones van en carpetas de idioma (`docs/pt/`, `docs/es/`)
+2. Las traducciones van en carpetas de idioma (`docs/pt/`, `docs/es/`, `docs/zh/`)
 3. La estructura de archivos refleja la versión en inglés
 4. Agregue el encabezado de traducción a cada archivo:
    ```markdown
    <!--
-     Traducción: PT | ES
+     Traducción: PT | ES | ZH
      Original: /docs/[nombre-archivo].md
      Última sincronización: AAAA-MM-DD
    -->
@@ -96,21 +114,21 @@ Seguimos prácticas estándar de la industria para i18n:
 
 ### Estado de las Traducciones
 
-| Sección         | EN  | PT  | ES  |
-| --------------- | --- | --- | --- |
-| Getting Started | ✅  | ✅  | ✅  |
-| Guides          | ✅  | ✅  | ✅  |
-| Installation    | ✅  | ✅  | ✅  |
-| Architecture    | ✅  | ✅  | ✅  |
-| Framework       | ✅  | ✅  | ✅  |
-| Platforms       | ✅  | ✅  | ✅  |
+| Sección         | EN  | PT  | ES  | ZH  |
+| --------------- | --- | --- | --- | --- |
+| Getting Started | ✅  | ✅  | ✅  | 🟡  |
+| Guides          | ✅  | ✅  | ✅  | 🟡  |
+| Installation    | ✅  | ✅  | ✅  | 🟡  |
+| Architecture    | ✅  | ✅  | ✅  | 🟡  |
+| Framework       | ✅  | ✅  | ✅  | 🟡  |
+| Platforms       | ✅  | ✅  | ✅  | ❌  |
 
 ---
 
 ## 📄 Licencia
 
-Esta documentación es parte de Synkra AIOS, licenciada bajo [Licencia MIT](../../LICENSE).
+Esta documentación es parte de Synkra AIOX, licenciada bajo [Licencia MIT](../../LICENSE).
 
 ---
 
-_Synkra AIOS - Orquestando IA para un Mejor Desarrollo de Software_
+_Synkra AIOX - Orquestando IA para un Mejor Desarrollo de Software_

@@ -26,7 +26,7 @@ jest.mock('child_process', () => ({
 jest.mock('execa', () => jest.fn());
 
 // Mock WorktreeManager
-jest.mock('../../.aios-core/infrastructure/scripts/worktree-manager', () => {
+jest.mock('../../.aiox-core/infrastructure/scripts/worktree-manager', () => {
   return jest.fn().mockImplementation(() => ({
     list: jest.fn().mockResolvedValue([]),
   }));
@@ -65,7 +65,7 @@ const { execSync } = require('child_process');
 const execa = require('execa');
 const fs = require('fs');
 const yaml = require('js-yaml');
-const WorktreeManager = require('../../.aios-core/infrastructure/scripts/worktree-manager');
+const WorktreeManager = require('../../.aiox-core/infrastructure/scripts/worktree-manager');
 const {
   ProjectStatusLoader,
   loadProjectStatus,
@@ -75,7 +75,7 @@ const {
   LOCK_STALE_MS,
   ACTIVE_SESSION_TTL,
   IDLE_TTL,
-} = require('../../.aios-core/infrastructure/scripts/project-status-loader');
+} = require('../../.aiox-core/infrastructure/scripts/project-status-loader');
 
 describe('ProjectStatusLoader', () => {
   const projectRoot = '/test/project';
@@ -290,7 +290,7 @@ def5678 fix: bug fix`;
         list: jest.fn().mockResolvedValue([
           {
             storyId: 'STORY-42',
-            path: '/project/.aios/worktrees/STORY-42',
+            path: '/project/.aiox/worktrees/STORY-42',
             branch: 'auto-claude/STORY-42',
             createdAt: new Date('2026-01-29'),
             uncommittedChanges: 3,
@@ -1029,7 +1029,7 @@ def5678 fix: bug fix`;
 
         const newLoader = new ProjectStatusLoader(projectRoot);
         expect(newLoader.cacheFile).toBe(
-          path.join(projectRoot, '.aios', 'project-status.yaml'),
+          path.join(projectRoot, '.aiox', 'project-status.yaml'),
         );
       });
 
@@ -1045,7 +1045,7 @@ def5678 fix: bug fix`;
         expect(newLoader.cacheFile).toContain('project-status-');
         expect(newLoader.cacheFile).toContain('.yaml');
         expect(newLoader.cacheFile).not.toBe(
-          path.join(projectRoot, '.aios', 'project-status.yaml'),
+          path.join(projectRoot, '.aiox', 'project-status.yaml'),
         );
       });
 
@@ -1056,7 +1056,7 @@ def5678 fix: bug fix`;
 
         const newLoader = new ProjectStatusLoader(projectRoot);
         expect(newLoader.cacheFile).toBe(
-          path.join(projectRoot, '.aios', 'project-status.yaml'),
+          path.join(projectRoot, '.aiox', 'project-status.yaml'),
         );
       });
     });
@@ -1265,7 +1265,7 @@ describe('ACT-3: Git post-commit hook (AC5)', () => {
       __dirname,
       '..',
       '..',
-      '.aios-core',
+      '.aiox-core',
       'infrastructure',
       'scripts',
       'git-hooks',

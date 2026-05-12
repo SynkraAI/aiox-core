@@ -17,13 +17,13 @@ const {
   analyzeDirectoryStructure,
   generateRecommendations,
   formatMigrationReport,
-} = require('../../../.aios-core/infrastructure/scripts/documentation-integrity/brownfield-analyzer');
+} = require('../../../.aiox-core/infrastructure/scripts/documentation-integrity/brownfield-analyzer');
 
 describe('Brownfield Analyzer', () => {
   let tempDir;
 
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-brownfield-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-brownfield-test-'));
   });
 
   afterEach(() => {

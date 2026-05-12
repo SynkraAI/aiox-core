@@ -63,7 +63,7 @@ async function configureEnvironment(options = {}) {
     const envPath = path.join(targetDir, '.env');
     const envExists = await fs.pathExists(envPath);
     let envAction = 'create'; // 'create', 'merge', 'overwrite', 'skip'
-    const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_AIOS';
+    const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_AIOX';
     const canMerge = !noMerge && hasMergeStrategy(envPath);
 
     if (envExists) {
@@ -108,12 +108,12 @@ async function configureEnvironment(options = {}) {
       }
     }
 
-    // Step 2: API keys are configured later via .env or aios-master
+    // Step 2: API keys are configured later via .env or aiox-master
     // Skipping prompts during installation for better UX
     const apiKeys = {};
 
     if (!skipPrompts) {
-      console.log('\n💡 API keys can be configured later in .env file or via aios-master');
+      console.log('\n💡 API keys can be configured later in .env file or via aiox-master');
     }
 
     // Step 3: Generate .env content
@@ -168,7 +168,7 @@ async function configureEnvironment(options = {}) {
     console.log('✅ Updated .gitignore');
 
     // Step 6: Generate and write core-config.yaml
-    const coreConfigDir = path.join(targetDir, '.aios-core');
+    const coreConfigDir = path.join(targetDir, '.aiox-core');
     await fs.ensureDir(coreConfigDir);
 
     const coreConfigContent = generateCoreConfig({
@@ -176,7 +176,7 @@ async function configureEnvironment(options = {}) {
       selectedIDEs,
       mcpServers,
       userProfile,
-      aiosVersion: '2.1.0',
+      aioxVersion: '2.1.0',
     });
 
     // Validate YAML syntax
@@ -196,7 +196,7 @@ async function configureEnvironment(options = {}) {
     const coreConfigPath = path.join(coreConfigDir, 'core-config.yaml');
     await fs.writeFile(coreConfigPath, coreConfigContent, { encoding: 'utf8' });
     results.coreConfigCreated = true;
-    console.log('✅ Created .aios-core/core-config.yaml');
+    console.log('✅ Created .aiox-core/core-config.yaml');
 
     return results;
   } catch (error) {
@@ -307,7 +307,7 @@ async function collectApiKeys() {
 }
 
 /**
- * Update .gitignore to include critical entries for AIOS projects
+ * Update .gitignore to include critical entries for AIOX projects
  *
  * @param {string} targetDir - Target directory
  * @returns {Promise<void>}
@@ -327,7 +327,7 @@ async function updateGitignore(targetDir) {
     'Dependencies': ['node_modules/', 'node_modules'],
     'Build & Logs': ['dist/', 'build/', '*.log', 'logs/'],
     'IDE & OS': ['.DS_Store', 'Thumbs.db', '.idea/', '*.swp'],
-    'AIOS Local': ['.aios-core/local/', '.claude/settings.local.json', '.aios/install-log.txt'],
+    'AIOX Local': ['.aiox-core/local/', '.claude/settings.local.json', '.aiox/install-log.txt'],
   };
 
   const lines = gitignoreContent.split('\n').map(line => line.trim());
@@ -354,7 +354,7 @@ async function updateGitignore(targetDir) {
     let newContent = gitignoreContent.trim();
 
     for (const { category, entries } of entriesToAdd) {
-      const section = `\n\n# ${category} (AIOS)\n${entries.join('\n')}`;
+      const section = `\n\n# ${category} (AIOX)\n${entries.join('\n')}`;
       newContent += section;
     }
 

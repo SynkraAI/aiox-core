@@ -10,11 +10,11 @@
 
 ---
 
-Como migrar squads legados para o formato AIOS 2.1.
+Como migrar squads legados para o formato AIOX 2.1.
 
 ## Visão Geral
 
-AIOS 2.1 introduziu um novo formato de squad com:
+AIOX 2.1 introduziu um novo formato de squad com:
 
 - Arquitetura task-first
 - Validação JSON Schema
@@ -30,8 +30,8 @@ Squads legados usando `config.yaml` ou formatos mais antigos precisam de migraç
 | Indicador            | Legado        | Atual (2.1+)               |
 | -------------------- | ------------- | -------------------------- |
 | Arquivo de manifesto | `config.yaml` | `squad.yaml`               |
-| Campo AIOS type      | Ausente       | `aios.type: squad`         |
-| Versão mínima        | Ausente       | `aios.minVersion: "2.1.0"` |
+| Campo AIOX type      | Ausente       | `aiox.type: squad`         |
+| Versão mínima        | Ausente       | `aiox.minVersion: "2.1.0"` |
 | Estrutura            | Agent-first   | Task-first                 |
 
 ### Comando de Verificação
@@ -85,7 +85,7 @@ config.yaml → squad.yaml
 
 ```yaml
 # Estes campos são adicionados se ausentes
-aios:
+aiox:
   minVersion: '2.1.0'
   type: squad
 ```
@@ -209,7 +209,7 @@ my-squad/
 
 **Resultado:**
 
-- Adiciona campos `aios` ausentes ao manifesto
+- Adiciona campos `aiox` ausentes ao manifesto
 - Converte arquivos YAML restantes
 - Pula arquivos já migrados
 
@@ -240,7 +240,7 @@ cp -r ./squads/my-squad/.backup/pre-migration-2025-12-26/. ./squads/my-squad/
 ### Rollback Programático
 
 ```javascript
-const { SquadMigrator } = require('./.aios-core/development/scripts/squad');
+const { SquadMigrator } = require('./.aiox-core/development/scripts/squad');
 
 const migrator = new SquadMigrator();
 await migrator.rollback('./squads/my-squad');
@@ -262,7 +262,7 @@ name: my-squad
 version: 1.0.0
 description: Meu squad
 
-aios:
+aiox:
   minVersion: '2.1.0'
   type: squad
 
@@ -312,8 +312,8 @@ Warning: Some files could not be migrated
 Após migração, verifique:
 
 - [ ] `squad.yaml` existe e é válido
-- [ ] `aios.type` é `"squad"`
-- [ ] `aios.minVersion` é `"2.1.0"` ou superior
+- [ ] `aiox.type` é `"squad"`
+- [ ] `aiox.minVersion` é `"2.1.0"` ou superior
 - [ ] Todos os agents estão na pasta `agents/`
 - [ ] Todas as tasks estão na pasta `tasks/`
 - [ ] Arquivos de agent estão em formato Markdown
@@ -323,7 +323,7 @@ Após migração, verifique:
 ## Migração Programática
 
 ```javascript
-const { SquadMigrator } = require('./.aios-core/development/scripts/squad');
+const { SquadMigrator } = require('./.aiox-core/development/scripts/squad');
 
 const migrator = new SquadMigrator({
   verbose: true,
@@ -349,7 +349,7 @@ console.log(result);
 
 - [Guia de Desenvolvimento de Squad](./squads-guide.md)
 - [Guia de Contribuição de Squads](./contributing-squads.md)
-- [Agente @squad-creator](../../../.aios-core/development/agents/squad-creator.md)
+- [Agente @squad-creator](../../../.aiox-core/development/agents/squad-creator.md)
 
 ---
 

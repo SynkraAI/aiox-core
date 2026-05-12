@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-26
 -->
 
-# Método AIOS: Arquitectura Central
+# Método AIOX: Arquitectura Central
 
 > 🌐 [EN](../core-architecture.md) | [PT](../pt/core-architecture.md) | **ES**
 
@@ -12,7 +12,7 @@
 
 ## 1. Descripción General
 
-El Método AIOS está diseñado para proporcionar modos agénticos, tareas y plantillas que permiten flujos de trabajo repetibles y útiles, ya sea para desarrollo ágil con agentes o expansión hacia dominios muy diferentes. El propósito central del proyecto es proporcionar un conjunto estructurado pero flexible de prompts, plantillas y flujos de trabajo que los usuarios pueden emplear para guiar agentes de IA (como Gemini, Claude o ChatGPT) para realizar tareas complejas, discusiones guiadas u otros flujos específicos de dominio de manera predecible y de alta calidad.
+El Método AIOX está diseñado para proporcionar modos agénticos, tareas y plantillas que permiten flujos de trabajo repetibles y útiles, ya sea para desarrollo ágil con agentes o expansión hacia dominios muy diferentes. El propósito central del proyecto es proporcionar un conjunto estructurado pero flexible de prompts, plantillas y flujos de trabajo que los usuarios pueden emplear para guiar agentes de IA (como Gemini, Claude o ChatGPT) para realizar tareas complejas, discusiones guiadas u otros flujos específicos de dominio de manera predecible y de alta calidad.
 
 El módulo central del sistema facilita un ciclo de vida de desarrollo completo adaptado a los desafíos de las herramientas modernas de IA agéntica:
 
@@ -22,13 +22,13 @@ El módulo central del sistema facilita un ciclo de vida de desarrollo completo 
 
 ## 2. Diagrama de Arquitectura del Sistema
 
-Todo el ecosistema del Método AIOS está diseñado alrededor del directorio `aios-core` instalado, que actúa como el cerebro de la operación. El directorio `tools` proporciona los medios para procesar y empaquetar este cerebro para diferentes entornos.
+Todo el ecosistema del Método AIOX está diseñado alrededor del directorio `aiox-core` instalado, que actúa como el cerebro de la operación. El directorio `tools` proporciona los medios para procesar y empaquetar este cerebro para diferentes entornos.
 
 ```mermaid
 graph TD
-    subgraph AIOS Method Project
+    subgraph AIOX Method Project
         subgraph Core Framework
-            A["aios-core"]
+            A["aiox-core"]
             A --> B["agents"]
             A --> C["agent-teams"]
             A --> D["workflows"]
@@ -71,24 +71,24 @@ graph TD
 
 ## 3. Componentes Centrales
 
-El directorio `aios-core` contiene todas las definiciones y recursos que dan a los agentes sus capacidades.
+El directorio `aiox-core` contiene todas las definiciones y recursos que dan a los agentes sus capacidades.
 
-### 3.1. Agentes (`aios-core/agents/`)
+### 3.1. Agentes (`aiox-core/agents/`)
 
-- **Propósito**: Estos son los bloques de construcción fundamentales del sistema. Cada archivo markdown (por ejemplo, `aios-master.md`, `pm.md`, `dev.md`) define la persona, capacidades y dependencias de un único agente de IA.
+- **Propósito**: Estos son los bloques de construcción fundamentales del sistema. Cada archivo markdown (por ejemplo, `aiox-master.md`, `pm.md`, `dev.md`) define la persona, capacidades y dependencias de un único agente de IA.
 - **Estructura**: Un archivo de agente contiene un encabezado YAML que especifica su rol, persona, dependencias e instrucciones de inicio. Estas dependencias son listas de tareas, plantillas, checklists y archivos de datos que el agente tiene permitido usar.
 - **Instrucciones de Inicio**: Los agentes pueden incluir secuencias de inicio que cargan documentación específica del proyecto desde la carpeta `docs/`, como estándares de código, especificaciones de API o documentos de estructura del proyecto. Esto proporciona contexto inmediato del proyecto al momento de la activación.
 - **Integración de Documentos**: Los agentes pueden referenciar y cargar documentos desde la carpeta `docs/` del proyecto como parte de tareas, flujos de trabajo o secuencias de inicio. Los usuarios también pueden arrastrar documentos directamente a las interfaces de chat para proporcionar contexto adicional.
-- **Ejemplo**: El agente `aios-master` lista sus dependencias, lo que indica a la herramienta de construcción qué archivos incluir en un paquete web e informa al agente de sus propias capacidades.
+- **Ejemplo**: El agente `aiox-master` lista sus dependencias, lo que indica a la herramienta de construcción qué archivos incluir en un paquete web e informa al agente de sus propias capacidades.
 
-### 3.2. Equipos de Agentes (`aios-core/agent-teams/`)
+### 3.2. Equipos de Agentes (`aiox-core/agent-teams/`)
 
 - **Propósito**: Los archivos de equipo (por ejemplo, `team-all.yaml`) definen colecciones de agentes y flujos de trabajo que se empaquetan juntos para un propósito específico, como "desarrollo full-stack" o "solo backend". Esto crea un contexto pre-empaquetado más grande para entornos de UI web.
 - **Estructura**: Un archivo de equipo lista los agentes a incluir. Puede usar comodines, como `"*"` para incluir todos los agentes. Esto permite la creación de paquetes completos como `team-all`.
 
-### 3.3. Flujos de Trabajo (`aios-core/workflows/`)
+### 3.3. Flujos de Trabajo (`aiox-core/workflows/`)
 
-- **Propósito**: Los flujos de trabajo son archivos YAML (por ejemplo, `greenfield-fullstack.yaml`) que definen una secuencia prescrita de pasos e interacciones de agentes para un tipo de proyecto específico. Actúan como una guía estratégica para el usuario y el agente `aios-orchestrator`.
+- **Propósito**: Los flujos de trabajo son archivos YAML (por ejemplo, `greenfield-fullstack.yaml`) que definen una secuencia prescrita de pasos e interacciones de agentes para un tipo de proyecto específico. Actúan como una guía estratégica para el usuario y el agente `aiox-orchestrator`.
 - **Estructura**: Un flujo de trabajo define secuencias tanto para proyectos complejos como simples, lista los agentes involucrados en cada paso, los artefactos que crean y las condiciones para pasar de un paso al siguiente. A menudo incluye un diagrama Mermaid para visualización.
 
 ### 3.4. Recursos Reutilizables (`templates`, `tasks`, `checklists`, `data`)
@@ -97,25 +97,25 @@ El directorio `aios-core` contiene todas las definiciones y recursos que dan a l
   - **`templates/`**: Contiene plantillas markdown para documentos comunes como PRDs, especificaciones de arquitectura e historias de usuario.
   - **`tasks/`**: Define las instrucciones para llevar a cabo acciones específicas y repetibles como "shard-doc" o "create-next-story".
   - **`checklists/`**: Proporciona checklists de aseguramiento de calidad para agentes como el Product Owner (`po`) o Arquitecto.
-  - **`data/`**: Contiene la base de conocimientos central (`aios-kb.md`), preferencias técnicas (`technical-preferences.md`) y otros archivos de datos clave.
+  - **`data/`**: Contiene la base de conocimientos central (`aiox-kb.md`), preferencias técnicas (`technical-preferences.md`) y otros archivos de datos clave.
 
 #### 3.4.1. Sistema de Procesamiento de Plantillas
 
-Un principio arquitectónico clave de AIOS es que las plantillas son autónomas e interactivas - incorporan tanto la salida de documento deseada como las instrucciones LLM necesarias para trabajar con los usuarios. Esto significa que en muchos casos, no se necesita una tarea separada para la creación de documentos, ya que la plantilla misma contiene toda la lógica de procesamiento.
+Un principio arquitectónico clave de AIOX es que las plantillas son autónomas e interactivas - incorporan tanto la salida de documento deseada como las instrucciones LLM necesarias para trabajar con los usuarios. Esto significa que en muchos casos, no se necesita una tarea separada para la creación de documentos, ya que la plantilla misma contiene toda la lógica de procesamiento.
 
-El framework AIOS emplea un sistema sofisticado de procesamiento de plantillas orquestado por tres componentes clave:
+El framework AIOX emplea un sistema sofisticado de procesamiento de plantillas orquestado por tres componentes clave:
 
-- **`template-format.md`** (`aios-core/utils/`): Define el lenguaje de marcado fundamental usado en todas las plantillas de AIOS. Esta especificación establece reglas de sintaxis para sustitución de variables (`{{placeholders}}`), directivas de procesamiento solo para IA (`[[LLM: instructions]]`) y bloques de lógica condicional. Las plantillas siguen este formato para asegurar un procesamiento consistente en todo el sistema.
+- **`template-format.md`** (`aiox-core/utils/`): Define el lenguaje de marcado fundamental usado en todas las plantillas de AIOX. Esta especificación establece reglas de sintaxis para sustitución de variables (`{{placeholders}}`), directivas de procesamiento solo para IA (`[[LLM: instructions]]`) y bloques de lógica condicional. Las plantillas siguen este formato para asegurar un procesamiento consistente en todo el sistema.
 
-- **`create-doc.md`** (`aios-core/tasks/`): Actúa como el motor de orquestación que gestiona todo el flujo de trabajo de generación de documentos. Esta tarea coordina la selección de plantillas, gestiona los modos de interacción del usuario (generación incremental vs. rápida), aplica las reglas de procesamiento de template-format y maneja la validación. Sirve como la interfaz principal entre usuarios y el sistema de plantillas.
+- **`create-doc.md`** (`aiox-core/tasks/`): Actúa como el motor de orquestación que gestiona todo el flujo de trabajo de generación de documentos. Esta tarea coordina la selección de plantillas, gestiona los modos de interacción del usuario (generación incremental vs. rápida), aplica las reglas de procesamiento de template-format y maneja la validación. Sirve como la interfaz principal entre usuarios y el sistema de plantillas.
 
-- **`advanced-elicitation.md`** (`aios-core/tasks/`): Proporciona una capa de refinamiento interactivo que puede ser incorporada dentro de plantillas a través de bloques `[[LLM: instructions]]`. Este componente ofrece 10 acciones estructuradas de lluvia de ideas, capacidades de revisión sección por sección y flujos de trabajo de mejora iterativa para mejorar la calidad del contenido.
+- **`advanced-elicitation.md`** (`aiox-core/tasks/`): Proporciona una capa de refinamiento interactivo que puede ser incorporada dentro de plantillas a través de bloques `[[LLM: instructions]]`. Este componente ofrece 10 acciones estructuradas de lluvia de ideas, capacidades de revisión sección por sección y flujos de trabajo de mejora iterativa para mejorar la calidad del contenido.
 
 El sistema mantiene una clara separación de responsabilidades: el marcado de plantillas es procesado internamente por agentes de IA pero nunca se expone a los usuarios, mientras proporciona capacidades sofisticadas de procesamiento de IA a través de inteligencia incorporada dentro de las propias plantillas.
 
 #### 3.4.2. Sistema de Preferencias Técnicas
 
-AIOS incluye una capa de personalización a través del archivo `technical-preferences.md` en `aios-core/data/`. Este archivo sirve como un perfil técnico persistente que influye en el comportamiento de los agentes en todos los proyectos.
+AIOX incluye una capa de personalización a través del archivo `technical-preferences.md` en `aiox-core/data/`. Este archivo sirve como un perfil técnico persistente que influye en el comportamiento de los agentes en todos los proyectos.
 
 **Propósito y Beneficios:**
 
@@ -152,14 +152,14 @@ El framework está diseñado para dos entornos principales: IDEs locales e inter
 
 ### 4.2. Uso Específico por Entorno
 
-- **Para IDEs**: Los usuarios interactúan con los agentes directamente a través de sus archivos markdown en `aios-core/agents/`. La integración del IDE (para Cursor, Claude Code, etc.) sabe cómo llamar a estos agentes.
+- **Para IDEs**: Los usuarios interactúan con los agentes directamente a través de sus archivos markdown en `aiox-core/agents/`. La integración del IDE (para Cursor, Claude Code, etc.) sabe cómo llamar a estos agentes.
 - **Para UIs Web**: Los usuarios suben un paquete pre-construido desde `dist`. Este único archivo proporciona a la IA el contexto de todo el equipo y todas sus herramientas y conocimientos requeridos.
 
-## 5. Flujos de Trabajo de AIOS
+## 5. Flujos de Trabajo de AIOX
 
 ### 5.1. El Flujo de Trabajo de Planificación
 
-Antes de que comience el desarrollo, AIOS sigue un flujo de trabajo de planificación estructurado que establece la base para la ejecución exitosa del proyecto:
+Antes de que comience el desarrollo, AIOX sigue un flujo de trabajo de planificación estructurado que establece la base para la ejecución exitosa del proyecto:
 
 ```mermaid
 graph TD
@@ -196,11 +196,11 @@ graph TD
 7. **Transición de Entorno**: Cambio crítico desde UI web hacia IDE para el flujo de desarrollo
 8. **Preparación de Documentos**: El PO fragmenta documentos grandes para consumo del desarrollo
 
-**Orquestación del Flujo de Trabajo**: El agente `aios-orchestrator` usa estas definiciones de flujo de trabajo para guiar a los usuarios a través del proceso completo, asegurando transiciones apropiadas entre las fases de planificación (UI web) y desarrollo (IDE).
+**Orquestación del Flujo de Trabajo**: El agente `aiox-orchestrator` usa estas definiciones de flujo de trabajo para guiar a los usuarios a través del proceso completo, asegurando transiciones apropiadas entre las fases de planificación (UI web) y desarrollo (IDE).
 
 ### 5.2. El Ciclo Central de Desarrollo
 
-Una vez que las fases iniciales de planificación y arquitectura están completas, el proyecto pasa a un flujo de trabajo de desarrollo cíclico, como se detalla en `aios-kb.md`. Esto asegura un proceso de implementación constante, secuencial y con control de calidad.
+Una vez que las fases iniciales de planificación y arquitectura están completas, el proyecto pasa a un flujo de trabajo de desarrollo cíclico, como se detalla en `aiox-kb.md`. Esto asegura un proceso de implementación constante, secuencial y con control de calidad.
 
 ```mermaid
 graph TD

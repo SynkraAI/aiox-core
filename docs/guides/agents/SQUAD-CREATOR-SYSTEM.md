@@ -1,4 +1,4 @@
-# Sistema de Criacao e Gerenciamento de Squads AIOS
+# Sistema de Criacao e Gerenciamento de Squads AIOX
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
@@ -9,16 +9,16 @@
 
 ## Visao Geral
 
-O **Squad Creator** (Craft) e o agente especializado do AIOS para criacao, validacao, publicacao e gerenciamento de squads. Squads sao pacotes modulares de agentes, tasks, workflows e recursos que podem ser reutilizados entre projetos.
+O **Squad Creator** (Craft) e o agente especializado do AIOX para criacao, validacao, publicacao e gerenciamento de squads. Squads sao pacotes modulares de agentes, tasks, workflows e recursos que podem ser reutilizados entre projetos.
 
-Este sistema implementa a **arquitetura task-first** do AIOS, onde tasks sao o ponto de entrada principal para execucao, e agentes orquestram essas tasks.
+Este sistema implementa a **arquitetura task-first** do AIOX, onde tasks sao o ponto de entrada principal para execucao, e agentes orquestram essas tasks.
 
 ### Propositos do Sistema
 
-- **Criar squads** seguindo padroes e estrutura do AIOS
+- **Criar squads** seguindo padroes e estrutura do AIOX
 - **Validar squads** contra JSON Schema e especificacoes de task
 - **Listar squads** locais do projeto
-- **Distribuir squads** em 3 niveis (Local, aios-squads, Synkra API)
+- **Distribuir squads** em 3 niveis (Local, aiox-squads, Synkra API)
 - **Migrar squads** para formato v2 com orquestracao e skills
 - **Analisar e estender** squads existentes
 
@@ -27,8 +27,8 @@ Este sistema implementa a **arquitetura task-first** do AIOS, onde tasks sao o p
 1. **Task-First Architecture**: Tasks sao o ponto de entrada, agentes orquestram
 2. **Validacao Obrigatoria**: Sempre validar antes de distribuir
 3. **JSON Schema**: Manifests validados contra schema
-4. **3 Niveis de Distribuicao**: Local, Publico (aios-squads), Marketplace (Synkra API)
-5. **Integracao com aios-core**: Squads trabalham em sinergia com o framework
+4. **3 Niveis de Distribuicao**: Local, Publico (aiox-squads), Marketplace (Synkra API)
+5. **Integracao com aiox-core**: Squads trabalham em sinergia com o framework
 
 ---
 
@@ -38,54 +38,54 @@ Este sistema implementa a **arquitetura task-first** do AIOS, onde tasks sao o p
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/squad-creator.md` | Definicao core do agente Squad Creator |
-| `.claude/commands/AIOS/agents/squad-creator.md` | Comando Claude Code para ativar @squad-creator |
+| `.aiox-core/development/agents/squad-creator.md` | Definicao core do agente Squad Creator |
+| `.claude/commands/AIOX/agents/squad-creator.md` | Comando Claude Code para ativar @squad-creator |
 
 ### Arquivos de Tasks do @squad-creator
 
 | Arquivo | Comando | Proposito | Status |
 |---------|---------|-----------|--------|
-| `.aios-core/development/tasks/squad-creator-create.md` | `*create-squad` | Cria novo squad com estrutura completa | Ativo |
-| `.aios-core/development/tasks/squad-creator-design.md` | `*design-squad` | Analisa documentacao e gera blueprint | Ativo |
-| `.aios-core/development/tasks/squad-creator-validate.md` | `*validate-squad` | Valida squad contra schema e padroes | Ativo |
-| `.aios-core/development/tasks/squad-creator-list.md` | `*list-squads` | Lista squads locais | Ativo |
-| `.aios-core/development/tasks/squad-creator-analyze.md` | `*analyze-squad` | Analisa estrutura e sugere melhorias | Ativo |
-| `.aios-core/development/tasks/squad-creator-extend.md` | `*extend-squad` | Estende squad com novos componentes | Ativo |
-| `.aios-core/development/tasks/squad-creator-migrate.md` | `*migrate-to-v2` | Migra squad para formato v2 | Ativo |
-| `.aios-core/development/tasks/squad-generate-skills.md` | `*generate-skills` | Gera skills de conhecimento do squad | Ativo |
-| `.aios-core/development/tasks/squad-generate-workflow.md` | `*generate-workflow` | Gera workflow de orquestracao YAML | Ativo |
-| `.aios-core/development/tasks/squad-creator-download.md` | `*download-squad` | Baixa squad do repositorio publico | Placeholder (Sprint 8) |
-| `.aios-core/development/tasks/squad-creator-publish.md` | `*publish-squad` | Publica squad no aios-squads | Placeholder (Sprint 8) |
-| `.aios-core/development/tasks/squad-creator-sync-synkra.md` | `*sync-squad-synkra` | Sincroniza squad com Synkra API | Placeholder (Sprint 8) |
+| `.aiox-core/development/tasks/squad-creator-create.md` | `*create-squad` | Cria novo squad com estrutura completa | Ativo |
+| `.aiox-core/development/tasks/squad-creator-design.md` | `*design-squad` | Analisa documentacao e gera blueprint | Ativo |
+| `.aiox-core/development/tasks/squad-creator-validate.md` | `*validate-squad` | Valida squad contra schema e padroes | Ativo |
+| `.aiox-core/development/tasks/squad-creator-list.md` | `*list-squads` | Lista squads locais | Ativo |
+| `.aiox-core/development/tasks/squad-creator-analyze.md` | `*analyze-squad` | Analisa estrutura e sugere melhorias | Ativo |
+| `.aiox-core/development/tasks/squad-creator-extend.md` | `*extend-squad` | Estende squad com novos componentes | Ativo |
+| `.aiox-core/development/tasks/squad-creator-migrate.md` | `*migrate-to-v2` | Migra squad para formato v2 | Ativo |
+| `.aiox-core/development/tasks/squad-generate-skills.md` | `*generate-skills` | Gera skills de conhecimento do squad | Ativo |
+| `.aiox-core/development/tasks/squad-generate-workflow.md` | `*generate-workflow` | Gera workflow de orquestracao YAML | Ativo |
+| `.aiox-core/development/tasks/squad-creator-download.md` | `*download-squad` | Baixa squad do repositorio publico | Placeholder (Sprint 8) |
+| `.aiox-core/development/tasks/squad-creator-publish.md` | `*publish-squad` | Publica squad no aiox-squads | Placeholder (Sprint 8) |
+| `.aiox-core/development/tasks/squad-creator-sync-synkra.md` | `*sync-squad-synkra` | Sincroniza squad com Synkra API | Placeholder (Sprint 8) |
 
 ### Arquivos de Tasks Relacionadas
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/create-agent.md` | `*create-agent` | Cria definicao de agente individual |
-| `.aios-core/development/tasks/create-task.md` | `*create-task` | Cria arquivo de task individual |
-| `.aios-core/development/tasks/create-workflow.md` | `*create-workflow` | Cria workflow de orquestracao |
+| `.aiox-core/development/tasks/create-agent.md` | `*create-agent` | Cria definicao de agente individual |
+| `.aiox-core/development/tasks/create-task.md` | `*create-task` | Cria arquivo de task individual |
+| `.aiox-core/development/tasks/create-workflow.md` | `*create-workflow` | Cria workflow de orquestracao |
 
 ### Scripts de Suporte
 
 | Arquivo | Classe/Funcao | Proposito |
 |---------|---------------|-----------|
-| `.aios-core/development/scripts/squad/squad-generator.js` | `SquadGenerator` | Gera estrutura de squad completa |
-| `.aios-core/development/scripts/squad/squad-validator.js` | `SquadValidator` | Valida squad contra schema e padroes |
-| `.aios-core/development/scripts/squad/squad-loader.js` | `SquadLoader` | Carrega e resolve squads |
-| `.aios-core/development/scripts/squad/squad-designer.js` | `SquadDesigner` | Analisa docs e gera blueprints |
-| `.aios-core/development/scripts/squad/squad-analyzer.js` | `SquadAnalyzer` | Analisa estrutura de squads |
-| `.aios-core/development/scripts/squad/squad-extender.js` | `SquadExtender` | Estende squads existentes |
-| `.aios-core/development/scripts/squad/squad-migrator.js` | `SquadMigrator` | Migra squads para v2 |
-| `.aios-core/development/scripts/squad/squad-downloader.js` | `SquadDownloader` | Baixa squads do repositorio |
-| `.aios-core/development/scripts/squad/squad-publisher.js` | `SquadPublisher` | Publica squads |
+| `.aiox-core/development/scripts/squad/squad-generator.js` | `SquadGenerator` | Gera estrutura de squad completa |
+| `.aiox-core/development/scripts/squad/squad-validator.js` | `SquadValidator` | Valida squad contra schema e padroes |
+| `.aiox-core/development/scripts/squad/squad-loader.js` | `SquadLoader` | Carrega e resolve squads |
+| `.aiox-core/development/scripts/squad/squad-designer.js` | `SquadDesigner` | Analisa docs e gera blueprints |
+| `.aiox-core/development/scripts/squad/squad-analyzer.js` | `SquadAnalyzer` | Analisa estrutura de squads |
+| `.aiox-core/development/scripts/squad/squad-extender.js` | `SquadExtender` | Estende squads existentes |
+| `.aiox-core/development/scripts/squad/squad-migrator.js` | `SquadMigrator` | Migra squads para v2 |
+| `.aiox-core/development/scripts/squad/squad-downloader.js` | `SquadDownloader` | Baixa squads do repositorio |
+| `.aiox-core/development/scripts/squad/squad-publisher.js` | `SquadPublisher` | Publica squads |
 
 ### Schemas JSON
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/schemas/squad-schema.json` | Schema de validacao do squad.yaml |
-| `.aios-core/schemas/squad-design-schema.json` | Schema de validacao de blueprints |
+| `.aiox-core/schemas/squad-schema.json` | Schema de validacao do squad.yaml |
+| `.aiox-core/schemas/squad-design-schema.json` | Schema de validacao de blueprints |
 
 ### Arquivos de Output (Squads Gerados)
 
@@ -156,7 +156,7 @@ flowchart TB
 
     subgraph DISTRIBUTE["🚀 DISTRIBUTION"]
         LOCAL["📂 Local<br/>./squads/"]
-        PUBLIC["🌐 Public<br/>github.com/SynkraAI/aios-squads"]
+        PUBLIC["🌐 Public<br/>github.com/SynkraAI/aiox-squads"]
         MARKET["💰 Marketplace<br/>api.synkra.dev/squads"]
     end
 
@@ -348,8 +348,8 @@ flowchart TB
 
 | Comando | Task File | Operacao |
 |---------|-----------|----------|
-| `*download-squad` | `squad-creator-download.md` | DOWNLOAD squad do aios-squads |
-| `*publish-squad` | `squad-creator-publish.md` | PUBLISH squad para aios-squads |
+| `*download-squad` | `squad-creator-download.md` | DOWNLOAD squad do aiox-squads |
+| `*publish-squad` | `squad-creator-publish.md` | PUBLISH squad para aiox-squads |
 | `*sync-squad-synkra` | `squad-creator-sync-synkra.md` | SYNC squad para Synkra API |
 
 ### Comandos de Componentes Individuais
@@ -455,13 +455,13 @@ flowchart LR
     SQUAD_CREATOR -->|"Validacao pre-publish"| DEVOPS
 
     SQUADS[("📦 ./squads/")]
-    AIOS_SQUADS[("🌐 aios-squads")]
+    AIOX_SQUADS[("🌐 aiox-squads")]
     SYNKRA[("💰 Synkra API")]
 
     SC_CREATE --> SQUADS
     SC_VALIDATE --> SQUADS
     SC_LIST --> SQUADS
-    DEVOPS_PUB --> AIOS_SQUADS
+    DEVOPS_PUB --> AIOX_SQUADS
     DEVOPS_PUB --> SYNKRA
 
     style SQUAD_CREATOR fill:#e3f2fd
@@ -509,8 +509,8 @@ license: MIT | Apache-2.0 | ISC | GPL-3.0 | UNLICENSED
 slashPrefix: string   # prefixo para comandos
 tags: string[]        # keywords para descoberta
 
-aios:
-  minVersion: string  # versao minima do AIOS
+aiox:
+  minVersion: string  # versao minima do AIOX
   type: squad
 
 components:
@@ -564,7 +564,7 @@ flowchart LR
     end
 
     subgraph PUBLIC["🌐 Nivel 2: Publico"]
-        P_REPO["github.com/SynkraAI/aios-squads"]
+        P_REPO["github.com/SynkraAI/aiox-squads"]
         P_DESC["Squads da comunidade (gratuitos)"]
         P_CMD["*publish-squad"]
     end
@@ -661,14 +661,14 @@ flowchart LR
 
 ## Referencias
 
-- [Task: squad-creator-create.md](.aios-core/development/tasks/squad-creator-create.md)
-- [Task: squad-creator-validate.md](.aios-core/development/tasks/squad-creator-validate.md)
-- [Task: squad-creator-design.md](.aios-core/development/tasks/squad-creator-design.md)
-- [Script: squad-generator.js](.aios-core/development/scripts/squad/squad-generator.js)
-- [Script: squad-validator.js](.aios-core/development/scripts/squad/squad-validator.js)
-- [Schema: squad-schema.json](.aios-core/schemas/squad-schema.json)
-- [Agent: squad-creator.md](.aios-core/development/agents/squad-creator.md)
-- [Command: squad-creator.md](.claude/commands/AIOS/agents/squad-creator.md)
+- [Task: squad-creator-create.md](.aiox-core/development/tasks/squad-creator-create.md)
+- [Task: squad-creator-validate.md](.aiox-core/development/tasks/squad-creator-validate.md)
+- [Task: squad-creator-design.md](.aiox-core/development/tasks/squad-creator-design.md)
+- [Script: squad-generator.js](.aiox-core/development/scripts/squad/squad-generator.js)
+- [Script: squad-validator.js](.aiox-core/development/scripts/squad/squad-validator.js)
+- [Schema: squad-schema.json](.aiox-core/schemas/squad-schema.json)
+- [Agent: squad-creator.md](.aiox-core/development/agents/squad-creator.md)
+- [Command: squad-creator.md](.claude/commands/AIOX/agents/squad-creator.md)
 
 ---
 
@@ -683,7 +683,7 @@ flowchart LR
 | **Schemas** | 2 (squad-schema, squad-design-schema) |
 | **Templates** | 3 (basic, etl, agent-only) |
 | **Versoes Template** | 2 (v1 legacy, v2 orchestration) |
-| **Niveis Distribuicao** | 3 (Local, aios-squads, Synkra API) |
+| **Niveis Distribuicao** | 3 (Local, aiox-squads, Synkra API) |
 
 ---
 

@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-O agente **@data-engineer (Dara)** e o Database Architect & Operations Engineer do AIOS, responsavel pelo design de schemas, migracoes, seguranca (RLS), otimizacao de performance e operacoes de DBA. Este agente atua como um **Sage** que modela dominios de negocio, implementa migracoes seguras com snapshots e rollback, e garante integridade e seguranca dos dados.
+O agente **@data-engineer (Dara)** e o Database Architect & Operations Engineer do AIOX, responsavel pelo design de schemas, migracoes, seguranca (RLS), otimizacao de performance e operacoes de DBA. Este agente atua como um **Sage** que modela dominios de negocio, implementa migracoes seguras com snapshots e rollback, e garante integridade e seguranca dos dados.
 
 ### Caracteristicas Principais
 
@@ -51,26 +51,26 @@ O agente **@data-engineer (Dara)** e o Database Architect & Operations Engineer 
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/db-domain-modeling.md` | `*model-domain` | Sessao interativa de modelagem de dominio |
-| `.aios-core/development/tasks/setup-database.md` | `*setup-database [type]` | Setup de projeto de database (Supabase, PostgreSQL, MongoDB, MySQL, SQLite) |
-| `.aios-core/development/tasks/db-bootstrap.md` | `*bootstrap` | Cria estrutura padrao de projeto Supabase |
-| `.aios-core/development/tasks/db-env-check.md` | `*env-check` | Valida variaveis de ambiente do database |
-| `.aios-core/development/tasks/db-apply-migration.md` | `*apply-migration {path}` | Aplica migracao com snapshot e lock advisory |
-| `.aios-core/development/tasks/db-dry-run.md` | `*dry-run {path}` | Testa migracao sem commit |
-| `.aios-core/development/tasks/db-seed.md` | `*seed {path}` | Aplica seed data (idempotent) |
-| `.aios-core/development/tasks/db-snapshot.md` | `*snapshot {label}` | Cria snapshot do schema |
-| `.aios-core/development/tasks/db-rollback.md` | `*rollback {snapshot_or_file}` | Restaura snapshot ou executa rollback |
-| `.aios-core/development/tasks/db-smoke-test.md` | `*smoke-test {version}` | Testes abrangentes de database |
-| `.aios-core/development/tasks/security-audit.md` | `*security-audit {scope}` | Auditoria de seguranca (rls, schema, full) |
-| `.aios-core/development/tasks/analyze-performance.md` | `*analyze-performance {type}` | Analise de performance (query, hotpaths, interactive) |
-| `.aios-core/development/tasks/db-policy-apply.md` | `*policy-apply {table} {mode}` | Instala politica RLS (KISS ou granular) |
-| `.aios-core/development/tasks/test-as-user.md` | `*test-as-user {user_id}` | Emula usuario para testar RLS |
-| `.aios-core/development/tasks/db-verify-order.md` | `*verify-order {path}` | Valida ordenacao DDL para dependencias |
-| `.aios-core/development/tasks/db-load-csv.md` | `*load-csv {table} {file}` | Carregador seguro de CSV (staging->merge) |
-| `.aios-core/development/tasks/db-run-sql.md` | `*run-sql {file_or_inline}` | Executa SQL raw com transacao |
-| `.aios-core/development/tasks/create-deep-research-prompt.md` | `*research {topic}` | Gera prompt de pesquisa profunda |
-| `.aios-core/development/tasks/execute-checklist.md` | `*execute-checklist {checklist}` | Executa checklist DBA |
-| `.aios-core/development/tasks/create-doc.md` | `*doc-out` | Output de documento completo |
+| `.aiox-core/development/tasks/db-domain-modeling.md` | `*model-domain` | Sessao interativa de modelagem de dominio |
+| `.aiox-core/development/tasks/setup-database.md` | `*setup-database [type]` | Setup de projeto de database (Supabase, PostgreSQL, MongoDB, MySQL, SQLite) |
+| `.aiox-core/development/tasks/db-bootstrap.md` | `*bootstrap` | Cria estrutura padrao de projeto Supabase |
+| `.aiox-core/development/tasks/db-env-check.md` | `*env-check` | Valida variaveis de ambiente do database |
+| `.aiox-core/development/tasks/db-apply-migration.md` | `*apply-migration {path}` | Aplica migracao com snapshot e lock advisory |
+| `.aiox-core/development/tasks/db-dry-run.md` | `*dry-run {path}` | Testa migracao sem commit |
+| `.aiox-core/development/tasks/db-seed.md` | `*seed {path}` | Aplica seed data (idempotent) |
+| `.aiox-core/development/tasks/db-snapshot.md` | `*snapshot {label}` | Cria snapshot do schema |
+| `.aiox-core/development/tasks/db-rollback.md` | `*rollback {snapshot_or_file}` | Restaura snapshot ou executa rollback |
+| `.aiox-core/development/tasks/db-smoke-test.md` | `*smoke-test {version}` | Testes abrangentes de database |
+| `.aiox-core/development/tasks/security-audit.md` | `*security-audit {scope}` | Auditoria de seguranca (rls, schema, full) |
+| `.aiox-core/development/tasks/analyze-performance.md` | `*analyze-performance {type}` | Analise de performance (query, hotpaths, interactive) |
+| `.aiox-core/development/tasks/db-policy-apply.md` | `*policy-apply {table} {mode}` | Instala politica RLS (KISS ou granular) |
+| `.aiox-core/development/tasks/test-as-user.md` | `*test-as-user {user_id}` | Emula usuario para testar RLS |
+| `.aiox-core/development/tasks/db-verify-order.md` | `*verify-order {path}` | Valida ordenacao DDL para dependencias |
+| `.aiox-core/development/tasks/db-load-csv.md` | `*load-csv {table} {file}` | Carregador seguro de CSV (staging->merge) |
+| `.aiox-core/development/tasks/db-run-sql.md` | `*run-sql {file_or_inline}` | Executa SQL raw com transacao |
+| `.aiox-core/development/tasks/create-deep-research-prompt.md` | `*research {topic}` | Gera prompt de pesquisa profunda |
+| `.aiox-core/development/tasks/execute-checklist.md` | `*execute-checklist {checklist}` | Executa checklist DBA |
+| `.aiox-core/development/tasks/create-doc.md` | `*doc-out` | Output de documento completo |
 
 ### Tasks Depreciadas (Backward Compatibility v2.0->v3.0)
 
@@ -88,8 +88,8 @@ O agente **@data-engineer (Dara)** e o Database Architect & Operations Engineer 
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/data-engineer.md` | Definicao core do agente @data-engineer (persona, comandos, workflows) |
-| `.claude/commands/AIOS/agents/data-engineer.md` | Comando Claude Code para ativar @data-engineer |
+| `.aiox-core/development/agents/data-engineer.md` | Definicao core do agente @data-engineer (persona, comandos, workflows) |
+| `.claude/commands/AIOX/agents/data-engineer.md` | Comando Claude Code para ativar @data-engineer |
 
 ### Arquivos de Templates SQL
 
@@ -130,7 +130,7 @@ O agente **@data-engineer (Dara)** e o Database Architect & Operations Engineer 
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/workflows/brownfield-discovery.yaml` | Workflow de discovery brownfield (Fase 2 e 5) |
+| `.aiox-core/development/workflows/brownfield-discovery.yaml` | Workflow de discovery brownfield (Fase 2 e 5) |
 
 ---
 
@@ -748,22 +748,22 @@ Erro: Another migration is running
 
 ### Tasks do @data-engineer
 
-- [db-domain-modeling.md](.aios-core/development/tasks/db-domain-modeling.md)
-- [setup-database.md](.aios-core/development/tasks/setup-database.md)
-- [db-apply-migration.md](.aios-core/development/tasks/db-apply-migration.md)
-- [security-audit.md](.aios-core/development/tasks/security-audit.md)
-- [analyze-performance.md](.aios-core/development/tasks/analyze-performance.md)
-- [db-snapshot.md](.aios-core/development/tasks/db-snapshot.md)
-- [db-rollback.md](.aios-core/development/tasks/db-rollback.md)
-- [db-bootstrap.md](.aios-core/development/tasks/db-bootstrap.md)
+- [db-domain-modeling.md](.aiox-core/development/tasks/db-domain-modeling.md)
+- [setup-database.md](.aiox-core/development/tasks/setup-database.md)
+- [db-apply-migration.md](.aiox-core/development/tasks/db-apply-migration.md)
+- [security-audit.md](.aiox-core/development/tasks/security-audit.md)
+- [analyze-performance.md](.aiox-core/development/tasks/analyze-performance.md)
+- [db-snapshot.md](.aiox-core/development/tasks/db-snapshot.md)
+- [db-rollback.md](.aiox-core/development/tasks/db-rollback.md)
+- [db-bootstrap.md](.aiox-core/development/tasks/db-bootstrap.md)
 
 ### Agente
 
-- [data-engineer.md](.aios-core/development/agents/data-engineer.md)
+- [data-engineer.md](.aiox-core/development/agents/data-engineer.md)
 
 ### Workflows
 
-- [brownfield-discovery.yaml](.aios-core/development/workflows/brownfield-discovery.yaml)
+- [brownfield-discovery.yaml](.aiox-core/development/workflows/brownfield-discovery.yaml)
 
 ### Relacionados
 

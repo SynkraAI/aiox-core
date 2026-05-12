@@ -1,0 +1,205 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Squad: Claude Code Mastery
+# Domain: Claude Code — Full Spectrum Expertise
+# Created: 2026-03-01
+# Version: 1.0.0
+# ═══════════════════════════════════════════════════════════════════════════════
+
+squad:
+  name: claude-code-mastery
+  display_name: "Claude Code Mastery Squad"
+  version: "1.0.0"
+  domain: "Claude Code — Full Spectrum Expertise"
+  description: |
+    Squad especialista em todas as dimensões do Claude Code: hooks, skills,
+    subagents, MCP, plugins, agent teams, customização, integração com projetos,
+    roadmap tracking, e AIOX-core architecture awareness.
+
+  philosophy: |
+    "Master the tool to master the craft."
+    Cada agent é baseado em elite minds reais com frameworks documentados
+    no ecossistema Claude Code. O squad cobre desde automação com hooks
+    até orquestração multi-agente e engenharia de contexto.
+
+  keywords:
+    - claude-code
+    - hooks
+    - skills
+    - subagents
+    - mcp
+    - plugins
+    - agent-teams
+    - customization
+    - integration
+    - context-engineering
+    - roadmap
+    - aiox
+
+  entry_agent: claude-mastery-chief
+  created_by: "squad-creator-pro"
+  created_at: "2026-03-01"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TIER ARCHITECTURE
+# ─────────────────────────────────────────────────────────────────────────────
+
+tiers:
+  tier_0:
+    name: "Diagnosis & Routing"
+    agents:
+      - claude-mastery-chief
+    purpose: "Triage requests, route to specialist, maintain squad coherence"
+
+  tier_1:
+    name: "Core Mastery"
+    agents:
+      - hooks-architect
+      - mcp-integrator
+      - swarm-orchestrator
+      - config-engineer
+    purpose: "Deep expertise in Claude Code feature domains"
+
+  tier_2:
+    name: "Strategic & Context"
+    agents:
+      - skill-craftsman
+      - project-integrator
+      - roadmap-sentinel
+    purpose: "Cross-cutting expertise: skills, project integration, roadmap awareness"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AGENT REGISTRY
+# ─────────────────────────────────────────────────────────────────────────────
+
+agents:
+  claude-mastery-chief:
+    file: agents/claude-mastery-chief.md
+    tier: 0
+    based_on: "Original (Orchestrator)"
+    icon: "🧠"
+    focus: "Triage, routing, AIOX-core awareness"
+
+  hooks-architect:
+    file: agents/hooks-architect.md
+    tier: 1
+    based_on: "disler (Hooks Mastery)"
+    icon: "🪝"
+    focus: "17 hook events, automation pipelines, meta-agent patterns"
+
+  mcp-integrator:
+    file: agents/mcp-integrator.md
+    tier: 1
+    based_on: "Peter Steinberger (@steipete)"
+    icon: "🔌"
+    focus: "MCP servers, tool discovery, agent-as-MCP, integration patterns"
+
+  swarm-orchestrator:
+    file: agents/swarm-orchestrator.md
+    tier: 1
+    based_on: "Kieran Klaassen + Reuven Cohen"
+    icon: "🐝"
+    focus: "Agent Teams, subagents, multi-session coordination, worktrees"
+
+  config-engineer:
+    file: agents/config-engineer.md
+    tier: 1
+    based_on: "SuperClaude-Org"
+    icon: "⚙️"
+    focus: "Settings, permissions, CLAUDE.md, rules, managed policies, personas"
+
+  skill-craftsman:
+    file: agents/skill-craftsman.md
+    tier: 2
+    based_on: "BMAD-CODE-ORG + community"
+    icon: "🛠️"
+    focus: "Skills, commands, plugins, context engineering, spec-driven dev"
+
+  project-integrator:
+    file: agents/project-integrator.md
+    tier: 2
+    based_on: "Daniel Miessler (PAI)"
+    icon: "📦"
+    focus: "Project integration, repository setup, AIOX-core awareness, Unix philosophy"
+
+  roadmap-sentinel:
+    file: agents/roadmap-sentinel.md
+    tier: 2
+    based_on: "Boris Cherny (philosophy) + Official sources"
+    icon: "🔭"
+    focus: "Roadmap tracking, changelog monitoring, feature adoption, plan-first"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HANDOFF MATRIX
+# ─────────────────────────────────────────────────────────────────────────────
+
+handoffs:
+  claude-mastery-chief:
+    routes_to: [hooks-architect, mcp-integrator, swarm-orchestrator, config-engineer, skill-craftsman, project-integrator, roadmap-sentinel]
+
+  hooks-architect:
+    collaborates_with: [config-engineer, skill-craftsman]
+    escalates_to: [claude-mastery-chief]
+
+  mcp-integrator:
+    collaborates_with: [hooks-architect, project-integrator]
+    escalates_to: [claude-mastery-chief]
+
+  swarm-orchestrator:
+    collaborates_with: [hooks-architect, config-engineer]
+    escalates_to: [claude-mastery-chief]
+
+  config-engineer:
+    collaborates_with: [hooks-architect, skill-craftsman, project-integrator]
+    escalates_to: [claude-mastery-chief]
+
+  skill-craftsman:
+    collaborates_with: [hooks-architect, config-engineer]
+    escalates_to: [claude-mastery-chief]
+
+  project-integrator:
+    collaborates_with: [config-engineer, mcp-integrator, roadmap-sentinel]
+    escalates_to: [claude-mastery-chief]
+
+  roadmap-sentinel:
+    collaborates_with: [project-integrator, claude-mastery-chief]
+    escalates_to: [claude-mastery-chief]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CROSS-CUTTING CONCERNS
+# ─────────────────────────────────────────────────────────────────────────────
+
+cross_cutting:
+  aiox_awareness:
+    description: "ALL agents understand AIOX-core architecture"
+    context_files:
+      - ".claude/CLAUDE.md"
+      - ".aiox-core/core-config.yaml"
+      - ".aiox-core/data/entity-registry.yaml"
+
+  update_knowledge:
+    description: "Command to refresh from Claude Code changelog and roadmap"
+    command: "*update-knowledge"
+    sources:
+      - "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"
+      - "https://code.claude.com/docs/en/overview"
+      - "https://github.com/anthropics/claude-code/releases"
+
+  quality_standards:
+    min_score: 7.0
+    smoke_tests: 3
+    voice_dna_required: true
+    thinking_dna_required: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SETTINGS
+# ─────────────────────────────────────────────────────────────────────────────
+
+settings:
+  greeting:
+    level: archetypal
+    show_project_status: true
+    show_aiox_context: true
+
+  activation:
+    prefix: "claude-code-mastery"
+    example: "@claude-code-mastery:hooks-architect"

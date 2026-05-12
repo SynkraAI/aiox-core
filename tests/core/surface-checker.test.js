@@ -14,7 +14,7 @@ const {
   SurfaceChecker,
   createSurfaceChecker,
   shouldSurface,
-} = require('../../.aios-core/core/orchestration/surface-checker');
+} = require('../../.aiox-core/core/orchestration/surface-checker');
 
 describe('SurfaceChecker', () => {
   let checker;

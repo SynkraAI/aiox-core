@@ -1,4 +1,4 @@
-# AIOS Workflows Guide
+# AIOX Workflows Guide
 
 **Version:** 1.0.0
 **Last Updated:** 2026-02-02
@@ -8,7 +8,7 @@
 
 ## Overview
 
-AIOS Workflows are orchestrated sequences of agent activities that automate complex development processes. They provide structured, repeatable patterns for common development scenarios.
+AIOX Workflows are orchestrated sequences of agent activities that automate complex development processes. They provide structured, repeatable patterns for common development scenarios.
 
 ### Key Concepts
 
@@ -223,7 +223,7 @@ workflow:
 ### Step 5: Output Location
 
 Workflows are saved based on context:
-- **Core**: `.aios-core/development/workflows/{name}.yaml`
+- **Core**: `.aiox-core/development/workflows/{name}.yaml`
 - **Squad**: `squads/{squad}/workflows/{name}.yaml`
 - **Hybrid**: `squads/{squad}/workflows/{name}.yaml`
 
@@ -259,7 +259,7 @@ Workflows are saved based on context:
 
 ### Workflow State
 
-State is persisted in `.aios/{instance-id}-state.yaml`:
+State is persisted in `.aiox/{instance-id}-state.yaml`:
 
 ```yaml
 instance_id: "wf-abc123"
@@ -284,7 +284,7 @@ steps:
 Workflows persist across Claude Code sessions:
 
 1. User starts new session
-2. Activates @aios-master
+2. Activates @aiox-master
 3. Runs `*run-workflow {name} continue`
 4. System loads state, shows current step
 5. User executes step
@@ -294,7 +294,7 @@ Workflows persist across Claude Code sessions:
 
 ## Workflow Patterns
 
-AIOS detects common workflow patterns based on command history:
+AIOX detects common workflow patterns based on command history:
 
 ### Detected Patterns
 
@@ -347,7 +347,7 @@ The system uses `workflow-patterns.yaml` to:
 | **Scope** | Multiple steps, multiple agents | Single step, single agent |
 | **State** | Persisted across sessions | Stateless |
 | **Use Case** | Complex processes | Atomic operations |
-| **Location** | `.aios-core/development/workflows/` | `.aios-core/development/tasks/` |
+| **Location** | `.aiox-core/development/workflows/` | `.aiox-core/development/tasks/` |
 
 ---
 
@@ -378,13 +378,13 @@ Error: Cannot skip non-optional step
 
 ```bash
 # List available workflows
-ls .aios-core/development/workflows/
+ls .aiox-core/development/workflows/
 
 # Validate a workflow
 *validate-workflow {name}
 
 # View workflow details
-cat .aios-core/development/workflows/{name}.yaml
+cat .aiox-core/development/workflows/{name}.yaml
 ```
 
 ---
@@ -393,7 +393,7 @@ cat .aios-core/development/workflows/{name}.yaml
 
 For complete documentation for each workflow, including detailed step-by-step guides, flowcharts, and implementation details, see:
 
-- [AIOS Workflows](../aios-workflows/README.md) - Complete documentation for each workflow
+- [AIOX Workflows](../aiox-workflows/README.md) - Complete documentation for each workflow
 
 ---
 
@@ -405,4 +405,4 @@ For complete documentation for each workflow, including detailed step-by-step gu
 
 ---
 
-*AIOS Workflows Guide v1.0 - Orchestrating AI-Human Collaboration*
+*AIOX Workflows Guide v1.0 - Orchestrating AI-Human Collaboration*

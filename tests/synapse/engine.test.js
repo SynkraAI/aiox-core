@@ -15,7 +15,7 @@ jest.setTimeout(30000);
 // ---------------------------------------------------------------------------
 
 // Mock context-tracker (SYN-3)
-jest.mock('../../.aios-core/core/synapse/context/context-tracker', () => ({
+jest.mock('../../.aiox-core/core/synapse/context/context-tracker', () => ({
   estimateContextPercent: jest.fn(() => 85),
   calculateBracket: jest.fn(() => 'FRESH'),
   getActiveLayers: jest.fn(() => ({ layers: [0, 1, 2, 7], memoryHints: false, handoffWarning: false })),
@@ -25,14 +25,14 @@ jest.mock('../../.aios-core/core/synapse/context/context-tracker', () => ({
 }));
 
 // Mock formatter
-jest.mock('../../.aios-core/core/synapse/output/formatter', () => ({
+jest.mock('../../.aiox-core/core/synapse/output/formatter', () => ({
   formatSynapseRules: jest.fn(() => '<synapse-rules>\nmocked\n</synapse-rules>'),
 }));
 
 // Mock layer modules — provide fake layer classes
 const mockLayerModules = {};
 
-jest.mock('../../.aios-core/core/synapse/layers/l0-constitution', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l0-constitution', () => {
   const cls = class MockL0 {
     constructor() { this.name = 'constitution'; this.layer = 0; this.timeout = 5; }
     _safeProcess(ctx) { return { rules: ['ART.I: CLI First'], metadata: { layer: 0, source: 'constitution' } }; }
@@ -41,7 +41,7 @@ jest.mock('../../.aios-core/core/synapse/layers/l0-constitution', () => {
   return cls;
 }, { virtual: true });
 
-jest.mock('../../.aios-core/core/synapse/layers/l1-global', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l1-global', () => {
   const cls = class MockL1 {
     constructor() { this.name = 'global'; this.layer = 1; this.timeout = 10; }
     _safeProcess(ctx) { return { rules: ['Global rule 1'], metadata: { layer: 1, source: 'global' } }; }
@@ -50,7 +50,7 @@ jest.mock('../../.aios-core/core/synapse/layers/l1-global', () => {
   return cls;
 }, { virtual: true });
 
-jest.mock('../../.aios-core/core/synapse/layers/l2-agent', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l2-agent', () => {
   const cls = class MockL2 {
     constructor() { this.name = 'agent'; this.layer = 2; this.timeout = 10; }
     _safeProcess(ctx) { return { rules: ['Agent rule 1'], metadata: { layer: 2, source: 'agent' } }; }
@@ -59,7 +59,7 @@ jest.mock('../../.aios-core/core/synapse/layers/l2-agent', () => {
   return cls;
 }, { virtual: true });
 
-jest.mock('../../.aios-core/core/synapse/layers/l3-workflow', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l3-workflow', () => {
   const cls = class MockL3 {
     constructor() { this.name = 'workflow'; this.layer = 3; this.timeout = 10; }
     _safeProcess(ctx) { return { rules: ['Workflow rule 1'], metadata: { layer: 3, source: 'workflow' } }; }
@@ -69,25 +69,25 @@ jest.mock('../../.aios-core/core/synapse/layers/l3-workflow', () => {
 }, { virtual: true });
 
 // L4-L7: simulate missing modules (MODULE_NOT_FOUND with proper code)
-jest.mock('../../.aios-core/core/synapse/layers/l4-task', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l4-task', () => {
   const err = new Error("Cannot find module './layers/l4-task'");
   err.code = 'MODULE_NOT_FOUND';
   throw err;
 }, { virtual: true });
 
-jest.mock('../../.aios-core/core/synapse/layers/l5-squad', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l5-squad', () => {
   const err = new Error("Cannot find module './layers/l5-squad'");
   err.code = 'MODULE_NOT_FOUND';
   throw err;
 }, { virtual: true });
 
-jest.mock('../../.aios-core/core/synapse/layers/l6-keyword', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l6-keyword', () => {
   const err = new Error("Cannot find module './layers/l6-keyword'");
   err.code = 'MODULE_NOT_FOUND';
   throw err;
 }, { virtual: true });
 
-jest.mock('../../.aios-core/core/synapse/layers/l7-star-command', () => {
+jest.mock('../../.aiox-core/core/synapse/layers/l7-star-command', () => {
   const err = new Error("Cannot find module './layers/l7-star-command'");
   err.code = 'MODULE_NOT_FOUND';
   throw err;
@@ -95,7 +95,7 @@ jest.mock('../../.aios-core/core/synapse/layers/l7-star-command', () => {
 
 // Mock memory bridge (SYN-10)
 const mockGetMemoryHints = jest.fn(() => Promise.resolve([]));
-jest.mock('../../.aios-core/core/synapse/memory/memory-bridge', () => ({
+jest.mock('../../.aiox-core/core/synapse/memory/memory-bridge', () => ({
   MemoryBridge: jest.fn().mockImplementation(() => ({
     getMemoryHints: mockGetMemoryHints,
     clearCache: jest.fn(),
@@ -109,9 +109,9 @@ jest.mock('../../.aios-core/core/synapse/memory/memory-bridge', () => ({
 // Imports (after mocks)
 // ---------------------------------------------------------------------------
 
-const { SynapseEngine, PipelineMetrics, PIPELINE_TIMEOUT_MS } = require('../../.aios-core/core/synapse/engine');
-const contextTracker = require('../../.aios-core/core/synapse/context/context-tracker');
-const formatter = require('../../.aios-core/core/synapse/output/formatter');
+const { SynapseEngine, PipelineMetrics, PIPELINE_TIMEOUT_MS } = require('../../.aiox-core/core/synapse/engine');
+const contextTracker = require('../../.aiox-core/core/synapse/context/context-tracker');
+const formatter = require('../../.aiox-core/core/synapse/output/formatter');
 
 // =============================================================================
 // PipelineMetrics
@@ -134,7 +134,7 @@ describe('PipelineMetrics', () => {
     metrics.startLayer('constitution');
     expect(metrics.layers.constitution).toBeDefined();
     expect(metrics.layers.constitution.status).toBe('running');
-    expect(typeof metrics.layers.constitution.start).toBe('number');
+    expect(typeof metrics.layers.constitution.start).toBe('bigint');
   });
 
   test('endLayer() should record duration and rules count', () => {
@@ -179,8 +179,8 @@ describe('PipelineMetrics', () => {
   });
 
   test('getSummary() should return correct totals', () => {
-    metrics.totalStart = 1000;
-    metrics.totalEnd = 1050;
+    metrics.totalStart = BigInt(1000000000);
+    metrics.totalEnd = BigInt(1050000000);
 
     metrics.startLayer('l0');
     metrics.endLayer('l0', 6);
@@ -271,10 +271,12 @@ describe('SynapseEngine', () => {
       expect(contextTracker.calculateBracket).toHaveBeenCalledWith(72);
     });
 
-    test('should call getActiveLayers with bracket', async () => {
+    test('should NOT call getActiveLayers in non-legacy mode (NOG-18)', async () => {
+      // NOG-18: In non-legacy mode, activeLayers = DEFAULT_ACTIVE_LAYERS [0,1,2]
+      // getActiveLayers is only called in SYNAPSE_LEGACY_MODE=true
       contextTracker.calculateBracket.mockReturnValue('MODERATE');
       await engine.process('test', {});
-      expect(contextTracker.getActiveLayers).toHaveBeenCalledWith('MODERATE');
+      expect(contextTracker.getActiveLayers).not.toHaveBeenCalled();
     });
 
     test('should call formatSynapseRules with correct args', async () => {
@@ -316,7 +318,9 @@ describe('SynapseEngine', () => {
       }
     });
 
-    test('should execute all L0-L7 in MODERATE bracket', async () => {
+    test('should only execute L0-L2 in non-legacy mode (NOG-18)', async () => {
+      // NOG-18: In non-legacy mode, only L0-L2 are active regardless of bracket.
+      // getActiveLayers mock is overridden by DEFAULT_ACTIVE_LAYERS = [0,1,2].
       contextTracker.getActiveLayers.mockReturnValue({
         layers: [0, 1, 2, 3, 4, 5, 6, 7],
         memoryHints: false,
@@ -324,8 +328,15 @@ describe('SynapseEngine', () => {
       });
 
       const result = await engine.process('test', { prompt_count: 30 });
-      // L0, L1, L2 should be loaded; L3 also since MODERATE allows it
-      expect(result.metrics.layers_loaded).toBeGreaterThanOrEqual(3);
+
+      // NOG-18: Only L0-L2 active — max 3 layers loaded
+      expect(result.metrics.layers_loaded).toBeLessThanOrEqual(3);
+
+      // Verify L3+ layers are skipped
+      const workflowEntry = result.metrics.per_layer.workflow;
+      if (workflowEntry) {
+        expect(workflowEntry.status).toBe('skipped');
+      }
     });
   });
 
@@ -473,6 +484,35 @@ describe('SynapseEngine', () => {
       await engine.process('test', { prompt_count: 50, active_agent: 'qa' });
 
       expect(mockGetMemoryHints).toHaveBeenCalledWith('qa', 'DEPLETED', 300);
+    });
+  });
+
+  describe('process() — bracket in return value (QW-1)', () => {
+    test('should return bracket field in result', async () => {
+      contextTracker.calculateBracket.mockReturnValue('FRESH');
+      const result = await engine.process('test', { prompt_count: 0 });
+      expect(result.bracket).toBe('FRESH');
+    });
+
+    test('should return MODERATE bracket when context is 55%', async () => {
+      contextTracker.estimateContextPercent.mockReturnValue(55);
+      contextTracker.calculateBracket.mockReturnValue('MODERATE');
+      const result = await engine.process('test', { prompt_count: 60 });
+      expect(result.bracket).toBe('MODERATE');
+    });
+
+    test('should return DEPLETED bracket when context is 30%', async () => {
+      contextTracker.estimateContextPercent.mockReturnValue(30);
+      contextTracker.calculateBracket.mockReturnValue('DEPLETED');
+      const result = await engine.process('test', { prompt_count: 100 });
+      expect(result.bracket).toBe('DEPLETED');
+    });
+
+    test('should return CRITICAL bracket when context is 10%', async () => {
+      contextTracker.estimateContextPercent.mockReturnValue(10);
+      contextTracker.calculateBracket.mockReturnValue('CRITICAL');
+      const result = await engine.process('test', { prompt_count: 120 });
+      expect(result.bracket).toBe('CRITICAL');
     });
   });
 

@@ -59,7 +59,7 @@ function findCommonWords(text, limit = 10) {
     .map(([word, count]) => ({ word, count }));
 }
 
-// Tool export format for AIOS
+// Tool export format for AIOX
 module.exports = {
   name: 'text-analyzer',
   version: '1.0.0',

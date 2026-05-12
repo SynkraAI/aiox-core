@@ -9,15 +9,15 @@ body:
         ## 🐛 Troubleshooting Help
         Running into a problem? Let's figure it out together!
 
-        **Note:** If you've confirmed this is a bug, please [open an issue](https://github.com/SynkraAI/aios-core/issues/new/choose) instead.
+        **Note:** If you've confirmed this is a bug, please [open an issue](https://github.com/SynkraAI/aiox-core/issues/new/choose) instead.
 
   - type: dropdown
     id: repo-scope
     attributes:
       label: Which repository is affected?
       options:
-        - aios-core (Core Framework)
-        - aios-squads (AIOS Squads)
+        - aiox-core (Core Framework)
+        - aiox-squads (AIOX Squads)
         - mcp-ecosystem (Docker MCP Toolkit)
         - Multiple / Not sure
     validations:
@@ -81,7 +81,7 @@ body:
       placeholder: |
         - OS: Windows 11 / macOS 14 / Ubuntu 22.04
         - Node.js: v20.x
-        - AIOS version: x.x.x
+        - AIOX version: x.x.x
         - IDE: VS Code / Cursor / Other
     validations:
       required: true

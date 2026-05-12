@@ -27,9 +27,9 @@ const {
   CONFIG_MODES,
   isValidSquadName,
   getGitUserName,
-} = require('../../../.aios-core/development/scripts/squad');
+} = require('../../../.aiox-core/development/scripts/squad');
 
-const { SquadValidator } = require('../../../.aios-core/development/scripts/squad');
+const { SquadValidator } = require('../../../.aiox-core/development/scripts/squad');
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');

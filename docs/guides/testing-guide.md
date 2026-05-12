@@ -1,10 +1,10 @@
-# Synkra AIOS Testing Guide
+# Synkra AIOX Testing Guide
 
 > **EN** | [PT](../pt/guides/testing-guide.md) | [ES](../es/guides/testing-guide.md)
 
 ---
 
-> Comprehensive guide to the testing strategy, tools, and best practices for Synkra AIOS.
+> Comprehensive guide to the testing strategy, tools, and best practices for Synkra AIOX.
 
 **Version:** 2.1.0
 **Last Updated:** 2026-01-29
@@ -31,7 +31,7 @@
 
 ## Overview
 
-AIOS follows a comprehensive testing strategy that ensures code quality across all layers of the framework. Our testing philosophy is built on:
+AIOX follows a comprehensive testing strategy that ensures code quality across all layers of the framework. Our testing philosophy is built on:
 
 - **Test-Driven Development (TDD)** for core functionality
 - **Layered Testing** with unit, integration, and E2E tests
@@ -119,7 +119,7 @@ module.exports = {
   testMatch: [
     '**/tests/**/*.test.js',
     '**/tests/**/*.spec.js',
-    '**/.aios-core/**/__tests__/**/*.test.js',
+    '**/.aiox-core/**/__tests__/**/*.test.js',
   ],
 
   testTimeout: 30000,
@@ -134,7 +134,7 @@ module.exports = {
       lines: 30,
       statements: 30,
     },
-    '.aios-core/core/': {
+    '.aiox-core/core/': {
       lines: 45,
     },
   },
@@ -152,7 +152,7 @@ module.exports = {
 
 const {
   QualityGateManager,
-} = require('../../../.aios-core/core/quality-gates/quality-gate-manager');
+} = require('../../../.aiox-core/core/quality-gates/quality-gate-manager');
 
 describe('QualityGateManager', () => {
   let manager;
@@ -244,7 +244,7 @@ Integration tests verify that multiple components work together correctly.
 ```javascript
 // tests/setup.js
 process.env.NODE_ENV = 'test';
-process.env.AIOS_DEBUG = 'false';
+process.env.AIOX_DEBUG = 'false';
 
 // Skip integration tests by default
 if (process.env.SKIP_INTEGRATION_TESTS === undefined) {
@@ -274,7 +274,7 @@ global.testIntegration = process.env.SKIP_INTEGRATION_TESTS === 'true' ? test.sk
  * - Fallback scenarios
  */
 
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
 
 describe('Contextual Greeting Integration Tests', () => {
   let builder;
@@ -405,10 +405,10 @@ Testing AI agents requires special considerations for persona behavior and comma
 /**
  * Agent Backward Compatibility Tests
  *
- * Ensures agents from previous AIOS versions continue to work.
+ * Ensures agents from previous AIOX versions continue to work.
  */
 
-const { loadAgent } = require('../../.aios-core/core/registry/agent-loader');
+const { loadAgent } = require('../../.aiox-core/core/registry/agent-loader');
 
 describe('Agent Backward Compatibility', () => {
   describe('Legacy Agent Format (v1.x)', () => {
@@ -471,7 +471,7 @@ describe('Agent Commands', () => {
 
 ## Cross-Platform Testing
 
-AIOS supports Windows, macOS, and Linux. Cross-platform testing ensures consistent behavior.
+AIOX supports Windows, macOS, and Linux. Cross-platform testing ensures consistent behavior.
 
 ### Platform-Specific Test Files
 
@@ -512,7 +512,7 @@ function normalizePath(p) {
 
 // Get platform-appropriate temp directory
 function getTempDir() {
-  return path.join(os.tmpdir(), 'aios-tests');
+  return path.join(os.tmpdir(), 'aiox-tests');
 }
 
 module.exports = {
@@ -599,7 +599,7 @@ jobs:
 module.exports = {
   collectCoverageFrom: [
     'src/**/*.js',
-    '.aios-core/**/*.js',
+    '.aiox-core/**/*.js',
     'bin/**/*.js',
     'packages/**/*.js',
     'scripts/**/*.js',
@@ -610,15 +610,15 @@ module.exports = {
     '!**/*.test.js',
     '!**/*.spec.js',
     // Exclude templates and generated files
-    '!.aios-core/development/templates/**',
-    '!.aios-core/product/templates/**',
+    '!.aiox-core/development/templates/**',
+    '!.aiox-core/product/templates/**',
     '!**/dist/**',
     // Exclude I/O-heavy modules (better for integration tests)
-    '!.aios-core/core/health-check/checks/**',
-    '!.aios-core/core/config/**',
-    '!.aios-core/core/manifest/**',
-    '!.aios-core/core/registry/**',
-    '!.aios-core/core/utils/**',
+    '!.aiox-core/core/health-check/checks/**',
+    '!.aiox-core/core/config/**',
+    '!.aiox-core/core/manifest/**',
+    '!.aiox-core/core/registry/**',
+    '!.aiox-core/core/utils/**',
   ],
 
   coverageThreshold: {
@@ -628,7 +628,7 @@ module.exports = {
       lines: 30,
       statements: 30,
     },
-    '.aios-core/core/': {
+    '.aiox-core/core/': {
       lines: 45,
     },
   },
@@ -668,7 +668,7 @@ xdg-open coverage/lcov-report/index.html
 coverage/
 ├── lcov-report/          # HTML report
 │   ├── index.html        # Overview
-│   └── .aios-core/       # Per-module coverage
+│   └── .aiox-core/       # Per-module coverage
 ├── lcov.info             # LCOV format (for CI)
 ├── coverage-summary.json # JSON summary
 └── clover.xml            # Clover format
@@ -778,7 +778,7 @@ npm test -- --passWithNoTests --testPathIgnorePatterns=integration,e2e
 
 ### Quality Gate Integration
 
-The AIOS Quality Gate System (see [Quality Gates Guide](./quality-gates.md)) integrates testing at multiple layers:
+The AIOX Quality Gate System (see [Quality Gates Guide](./quality-gates.md)) integrates testing at multiple layers:
 
 | Layer       | Test Type               | When         |
 | ----------- | ----------------------- | ------------ |
@@ -993,8 +993,8 @@ describe('AgentLoader', () => {
 
 ```javascript
 // Mock ClickUp API
-jest.mock('../../.aios-core/integrations/clickup-client');
-const clickupClient = require('../../.aios-core/integrations/clickup-client');
+jest.mock('../../.aiox-core/integrations/clickup-client');
+const clickupClient = require('../../.aiox-core/integrations/clickup-client');
 
 describe('Story Sync', () => {
   beforeEach(() => {
@@ -1212,4 +1212,4 @@ module.exports = {
 
 ---
 
-_Synkra AIOS v2.1 Testing Guide_
+_Synkra AIOX v4 Testing Guide_

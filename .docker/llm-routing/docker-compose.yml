@@ -1,4 +1,4 @@
-# Docker Compose for AIOS LLM Routing
+# Docker Compose for AIOX LLM Routing
 # Version: 1.0.0
 # Usage: docker compose up -d
 
@@ -6,7 +6,7 @@ services:
   litellm-proxy:
     # Pin to stable version for reproducible builds
     image: ghcr.io/berriai/litellm:v1.55.10-stable
-    container_name: aios-litellm-proxy
+    container_name: aiox-litellm-proxy
     ports:
       - "4000:4000"
     volumes:
@@ -18,7 +18,7 @@ services:
       - GROQ_API_KEY=${GROQ_API_KEY:-}
 
       # LiteLLM Settings
-      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-aios-litellm-default}
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-aiox-litellm-default}
       - LITELLM_DROP_PARAMS=true
 
       # Logging
@@ -32,8 +32,8 @@ services:
       start_period: 10s
     restart: unless-stopped
     networks:
-      - aios-network
+      - aiox-network
 
 networks:
-  aios-network:
+  aiox-network:
     driver: bridge

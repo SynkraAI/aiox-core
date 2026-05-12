@@ -29,7 +29,7 @@ describe('degradation', () => {
 
   beforeEach(() => {
     // Create temp directory for each test
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-degradation-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-degradation-test-'));
 
     // Mock process.cwd to return our test directory
     originalCwd = process.cwd;
@@ -103,7 +103,7 @@ describe('degradation', () => {
 
       expect(consoleLogSpy).toHaveBeenCalled();
       const logOutput = consoleLogSpy.mock.calls.map(c => c[0]).join(' ');
-      expect(logOutput).toContain('requires an active AIOS Pro license');
+      expect(logOutput).toContain('requires an active AIOX Pro license');
     });
 
     it('should not log when silent option is true', () => {
@@ -115,7 +115,7 @@ describe('degradation', () => {
       );
 
       const logOutput = consoleLogSpy.mock.calls.map(c => c[0] || '').join(' ');
-      expect(logOutput).not.toContain('requires an active AIOS Pro license');
+      expect(logOutput).not.toContain('requires an active AIOX Pro license');
     });
 
     it('should return null when no fallback provided', () => {
@@ -218,7 +218,7 @@ describe('degradation', () => {
 
       expect(status.degraded).toBe(false);
       expect(status.reason).toContain('grace');
-      expect(status.action).toBe('aios pro validate');
+      expect(status.action).toBe('aiox pro validate');
     });
 
     it('should return degraded for expired license', () => {

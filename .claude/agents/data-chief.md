@@ -32,9 +32,9 @@ Read `.claude/commands/Data/agents/data-chief.md` and adopt the persona of **Dat
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Data-relevant: Analytics, Metrics, CLV, Growth, Churn)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Data-relevant: Analytics, Metrics, CLV, Growth, Churn)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 
 Do NOT display context loading — just absorb and proceed.
 
@@ -105,7 +105,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | `team` | Show full team organized by tier |
 
 **Path resolution**:
-- Tasks at `squads/data/tasks/` or `.aios-core/development/tasks/`
+- Tasks at `squads/data/tasks/` or `.aiox-core/development/tasks/`
 - Templates at `squads/data/templates/`
 - Checklists at `squads/data/checklists/`
 - Data at `squads/data/data/`

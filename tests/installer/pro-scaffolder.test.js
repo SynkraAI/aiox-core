@@ -31,7 +31,7 @@ beforeEach(async () => {
   proSourceDir = path.join(tmpDir, 'pro-package');
 
   // Create target project structure
-  await fs.ensureDir(path.join(targetDir, '.aios-core'));
+  await fs.ensureDir(path.join(targetDir, '.aiox-core'));
 
   // Create mock pro source package
   await fs.ensureDir(path.join(proSourceDir, 'squads', 'devops-squad'));
@@ -49,7 +49,7 @@ beforeEach(async () => {
   );
   await fs.writeJson(
     path.join(proSourceDir, 'package.json'),
-    { name: '@aios-fullstack/pro', version: '2.0.0' }
+    { name: '@aiox-fullstack/pro', version: '2.0.0' }
   );
 });
 
@@ -70,14 +70,14 @@ describe('scaffoldProContent', () => {
       path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml')
     )).toBe(true);
 
-    // AC2: pro-config.yaml exists in .aios-core/
+    // AC2: pro-config.yaml exists in .aiox-core/
     expect(await fs.pathExists(
-      path.join(targetDir, '.aios-core', 'pro-config.yaml')
+      path.join(targetDir, '.aiox-core', 'pro-config.yaml')
     )).toBe(true);
 
-    // AC3: feature-registry.yaml exists in .aios-core/
+    // AC3: feature-registry.yaml exists in .aiox-core/
     expect(await fs.pathExists(
-      path.join(targetDir, '.aios-core', 'feature-registry.yaml')
+      path.join(targetDir, '.aiox-core', 'feature-registry.yaml')
     )).toBe(true);
   });
 
@@ -119,7 +119,7 @@ describe('scaffoldProContent', () => {
 
     // Verify file content is still correct (not corrupted)
     const configContent = yaml.load(
-      await fs.readFile(path.join(targetDir, '.aios-core', 'pro-config.yaml'), 'utf8')
+      await fs.readFile(path.join(targetDir, '.aiox-core', 'pro-config.yaml'), 'utf8')
     );
     expect(configContent.pro.enabled).toBe(true);
   });

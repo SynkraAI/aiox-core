@@ -14,7 +14,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const os = require('os');
 
-const MasterOrchestrator = require('../../.aios-core/core/orchestration/master-orchestrator');
+const MasterOrchestrator = require('../../.aiox-core/core/orchestration/master-orchestrator');
 const { OrchestratorState, EpicStatus, EPIC_CONFIG } = MasterOrchestrator;
 
 describe('MasterOrchestrator', () => {
@@ -26,8 +26,8 @@ describe('MasterOrchestrator', () => {
     tempDir = path.join(os.tmpdir(), `master-orchestrator-test-${Date.now()}`);
     await fs.ensureDir(tempDir);
 
-    // Create .aios/dashboard directory for dashboard integration
-    await fs.ensureDir(path.join(tempDir, '.aios', 'dashboard'));
+    // Create .aiox/dashboard directory for dashboard integration
+    await fs.ensureDir(path.join(tempDir, '.aiox', 'dashboard'));
 
     // Create a minimal package.json for tech stack detection
     await fs.writeJson(path.join(tempDir, 'package.json'), {
@@ -253,7 +253,7 @@ describe('MasterOrchestrator', () => {
         const statePath = orchestrator.statePath;
         // Normalize path separators for cross-platform compatibility (Windows uses \, Unix uses /)
         const normalizedPath = statePath.replace(/\\/g, '/');
-        expect(normalizedPath).toContain('.aios/master-orchestrator/TEST-001.json');
+        expect(normalizedPath).toContain('.aiox/master-orchestrator/TEST-001.json');
         expect(await fs.pathExists(statePath)).toBe(true);
       });
 

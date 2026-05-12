@@ -7,7 +7,7 @@ const {
   GeminiModelSelector,
   MODELS,
   AGENT_OVERRIDES,
-} = require('../../../.aios-core/core/orchestration/gemini-model-selector');
+} = require('../../../.aiox-core/core/orchestration/gemini-model-selector');
 
 describe('GeminiModelSelector', () => {
   let selector;

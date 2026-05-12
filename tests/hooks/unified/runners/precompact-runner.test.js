@@ -3,7 +3,7 @@
  * Story MIS-3: Session Digest (PreCompact Hook)
  */
 
-const { onPreCompact, getHookConfig } = require('../../../../.aios-core/hooks/unified/runners/precompact-runner');
+const { onPreCompact, getHookConfig } = require('../../../../.aiox-core/hooks/unified/runners/precompact-runner');
 const proDetector = require('../../../../bin/utils/pro-detector');
 
 // Mock pro-detector
@@ -39,7 +39,7 @@ describe('PreCompact Hook Runner', () => {
       expect(duration).toBeLessThan(10);
     });
 
-    it('should gracefully no-op when aios-pro not available', async () => {
+    it('should gracefully no-op when aiox-pro not available', async () => {
       proDetector.isProAvailable.mockReturnValue(false);
 
       const context = {
@@ -50,7 +50,7 @@ describe('PreCompact Hook Runner', () => {
       await onPreCompact(context);
 
       expect(console.log).toHaveBeenCalledWith(
-        '[PreCompact] aios-pro not available, skipping session digest',
+        '[PreCompact] aiox-pro not available, skipping session digest',
       );
     });
 

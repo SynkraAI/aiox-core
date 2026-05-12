@@ -1,10 +1,10 @@
-# Guia de Testes do Synkra AIOS
+# Guia de Testes do Synkra AIOX
 
 > [EN](../../guides/testing-guide.md) | **PT** | [ES](../../es/guides/testing-guide.md)
 
 ---
 
-> Guia completo sobre a estratégia de testes, ferramentas e melhores práticas do Synkra AIOS.
+> Guia completo sobre a estratégia de testes, ferramentas e melhores práticas do Synkra AIOX.
 
 **Versão:** 2.1.0
 **Última Atualização:** 2026-01-29
@@ -31,7 +31,7 @@
 
 ## Visão Geral
 
-O AIOS segue uma estratégia abrangente de testes que garante qualidade de código em todas as camadas do framework. Nossa filosofia de testes é baseada em:
+O AIOX segue uma estratégia abrangente de testes que garante qualidade de código em todas as camadas do framework. Nossa filosofia de testes é baseada em:
 
 - **Test-Driven Development (TDD)** para funcionalidades core
 - **Testes em Camadas** com testes unitários, de integração e E2E
@@ -119,7 +119,7 @@ module.exports = {
   testMatch: [
     '**/tests/**/*.test.js',
     '**/tests/**/*.spec.js',
-    '**/.aios-core/**/__tests__/**/*.test.js',
+    '**/.aiox-core/**/__tests__/**/*.test.js',
   ],
 
   testTimeout: 30000,
@@ -134,7 +134,7 @@ module.exports = {
       lines: 30,
       statements: 30,
     },
-    '.aios-core/core/': {
+    '.aiox-core/core/': {
       lines: 45,
     },
   },
@@ -152,7 +152,7 @@ module.exports = {
 
 const {
   QualityGateManager,
-} = require('../../../.aios-core/core/quality-gates/quality-gate-manager');
+} = require('../../../.aiox-core/core/quality-gates/quality-gate-manager');
 
 describe('QualityGateManager', () => {
   let manager;
@@ -244,7 +244,7 @@ Testes de integração verificam se múltiplos componentes funcionam corretament
 ```javascript
 // tests/setup.js
 process.env.NODE_ENV = 'test';
-process.env.AIOS_DEBUG = 'false';
+process.env.AIOX_DEBUG = 'false';
 
 // Pular testes de integração por padrão
 if (process.env.SKIP_INTEGRATION_TESTS === undefined) {
@@ -274,7 +274,7 @@ global.testIntegration = process.env.SKIP_INTEGRATION_TESTS === 'true' ? test.sk
  * - Cenários de fallback
  */
 
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
 
 describe('Testes de Integração de Saudação Contextual', () => {
   let builder;
@@ -405,10 +405,10 @@ Testar agentes de IA requer considerações especiais para comportamento de pers
 /**
  * Testes de Compatibilidade Retroativa de Agentes
  *
- * Garante que agentes de versões anteriores do AIOS continuem funcionando.
+ * Garante que agentes de versões anteriores do AIOX continuem funcionando.
  */
 
-const { loadAgent } = require('../../.aios-core/core/registry/agent-loader');
+const { loadAgent } = require('../../.aiox-core/core/registry/agent-loader');
 
 describe('Compatibilidade Retroativa de Agentes', () => {
   describe('Formato de Agente Legado (v1.x)', () => {
@@ -471,7 +471,7 @@ describe('Comandos de Agentes', () => {
 
 ## Testes Cross-Platform
 
-O AIOS suporta Windows, macOS e Linux. Testes cross-platform garantem comportamento consistente.
+O AIOX suporta Windows, macOS e Linux. Testes cross-platform garantem comportamento consistente.
 
 ### Arquivos de Teste Específicos por Plataforma
 
@@ -512,7 +512,7 @@ function normalizePath(p) {
 
 // Obter diretório temporário apropriado para a plataforma
 function getTempDir() {
-  return path.join(os.tmpdir(), 'aios-tests');
+  return path.join(os.tmpdir(), 'aiox-tests');
 }
 
 module.exports = {
@@ -599,7 +599,7 @@ jobs:
 module.exports = {
   collectCoverageFrom: [
     'src/**/*.js',
-    '.aios-core/**/*.js',
+    '.aiox-core/**/*.js',
     'bin/**/*.js',
     'packages/**/*.js',
     'scripts/**/*.js',
@@ -610,15 +610,15 @@ module.exports = {
     '!**/*.test.js',
     '!**/*.spec.js',
     // Excluir templates e arquivos gerados
-    '!.aios-core/development/templates/**',
-    '!.aios-core/product/templates/**',
+    '!.aiox-core/development/templates/**',
+    '!.aiox-core/product/templates/**',
     '!**/dist/**',
     // Excluir módulos com I/O pesado (melhor para testes de integração)
-    '!.aios-core/core/health-check/checks/**',
-    '!.aios-core/core/config/**',
-    '!.aios-core/core/manifest/**',
-    '!.aios-core/core/registry/**',
-    '!.aios-core/core/utils/**',
+    '!.aiox-core/core/health-check/checks/**',
+    '!.aiox-core/core/config/**',
+    '!.aiox-core/core/manifest/**',
+    '!.aiox-core/core/registry/**',
+    '!.aiox-core/core/utils/**',
   ],
 
   coverageThreshold: {
@@ -628,7 +628,7 @@ module.exports = {
       lines: 30,
       statements: 30,
     },
-    '.aios-core/core/': {
+    '.aiox-core/core/': {
       lines: 45,
     },
   },
@@ -668,7 +668,7 @@ xdg-open coverage/lcov-report/index.html
 coverage/
 ├── lcov-report/          # Relatório HTML
 │   ├── index.html        # Visão geral
-│   └── .aios-core/       # Cobertura por módulo
+│   └── .aiox-core/       # Cobertura por módulo
 ├── lcov.info             # Formato LCOV (para CI)
 ├── coverage-summary.json # Resumo em JSON
 └── clover.xml            # Formato Clover
@@ -778,7 +778,7 @@ npm test -- --passWithNoTests --testPathIgnorePatterns=integration,e2e
 
 ### Integração com Quality Gate
 
-O Sistema de Quality Gate do AIOS (veja [Guia de Quality Gates](./quality-gates.md)) integra testes em múltiplas camadas:
+O Sistema de Quality Gate do AIOX (veja [Guia de Quality Gates](./quality-gates.md)) integra testes em múltiplas camadas:
 
 | Camada      | Tipo de Teste                 | Quando          |
 | ----------- | ----------------------------- | --------------- |
@@ -993,8 +993,8 @@ describe('AgentLoader', () => {
 
 ```javascript
 // Mock da API do ClickUp
-jest.mock('../../.aios-core/integrations/clickup-client');
-const clickupClient = require('../../.aios-core/integrations/clickup-client');
+jest.mock('../../.aiox-core/integrations/clickup-client');
+const clickupClient = require('../../.aiox-core/integrations/clickup-client');
 
 describe('Story Sync', () => {
   beforeEach(() => {
@@ -1212,4 +1212,4 @@ module.exports = {
 
 ---
 
-_Synkra AIOS v2.1 Guia de Testes_
+_Synkra AIOX v4 Guia de Testes_

@@ -52,7 +52,7 @@
 | **@po** (Pax)                | 🎯    | Gestión de backlog, criterios de aceptación, priorización                                                             | Creación de epic, arquitectura                     |
 | **@ux-design-expert** (Nova) | 🎨    | Diseño UI/UX, wireframes, design systems                                                                              | Implementación                                     |
 | **@devops** (Gage)           | ⚙️    | Git ops, creación de PR, deploy, CI/CD, gestión de worktrees, migraciones                                             | Git local, implementación                          |
-| **@aios-master** (Orion)     | 👑    | Desarrollo del framework, orquestación multi-agente                                                                   | Tareas rutinarias (usar agentes especializados)    |
+| **@aiox-master** (Orion)     | 👑    | Desarrollo del framework, orquestación multi-agente                                                                   | Tareas rutinarias (usar agentes especializados)    |
 
 ---
 
@@ -160,7 +160,7 @@
 | Comando | Descripción |
 |---------|-------------|
 | `*capture-insights` | Capturar insights de la sesión (descubrimientos, patrones, gotchas) |
-| `*list-gotchas` | Listar gotchas conocidos de .aios/gotchas.md |
+| `*list-gotchas` | Listar gotchas conocidos de .aiox/gotchas.md |
 
 ---
 

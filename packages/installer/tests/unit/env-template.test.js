@@ -13,11 +13,11 @@ describe('.env Template Generator', () => {
       const content = generateEnvContent();
 
       expect(content).toContain('NODE_ENV=development');
-      // Version-agnostic: check AIOS_VERSION exists with valid semver format
-      expect(content).toMatch(/AIOS_VERSION=\d+\.\d+\.\d+/);
+      // Version-agnostic: check AIOX_VERSION exists with valid semver format
+      expect(content).toMatch(/AIOX_VERSION=\d+\.\d+\.\d+/);
       expect(content).toContain('OPENAI_API_KEY=');
       expect(content).toContain('ANTHROPIC_API_KEY=');
-      expect(content).toContain('# Synkra AIOS Environment Configuration');
+      expect(content).toContain('# Synkra AIOX Environment Configuration');
     });
 
     it('should generate .env with provided API keys', () => {
@@ -84,8 +84,8 @@ describe('.env Template Generator', () => {
       const content = generateEnvExample();
 
       expect(content).toContain('NODE_ENV=development');
-      // Version-agnostic: check AIOS_VERSION exists with valid semver format
-      expect(content).toMatch(/AIOS_VERSION=\d+\.\d+\.\d+/);
+      // Version-agnostic: check AIOX_VERSION exists with valid semver format
+      expect(content).toMatch(/AIOX_VERSION=\d+\.\d+\.\d+/);
       expect(content).toContain('OPENAI_API_KEY=');
       expect(content).toContain('ANTHROPIC_API_KEY=');
       expect(content).toContain('CLICKUP_API_KEY=');
@@ -171,7 +171,7 @@ describe('.env Template Generator', () => {
       const content = generateEnvContent();
 
       // Should have clear section headers
-      expect(content).toContain('# AIOS Core Configuration');
+      expect(content).toContain('# AIOX Core Configuration');
       expect(content).toContain('# LLM Providers');
       expect(content).toContain('# Search & Research Tools');
     });

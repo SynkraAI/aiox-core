@@ -1,7 +1,7 @@
-# macOS Testing Suite for AIOS
+# macOS Testing Suite for AIOX
 **Story 1.10b - macOS Testing & Validation**
 
-Comprehensive test automation framework for validating AIOS installation on macOS (Intel and Apple Silicon).
+Comprehensive test automation framework for validating AIOX installation on macOS (Intel and Apple Silicon).
 
 ---
 
@@ -106,7 +106,7 @@ Each test produces:
    - Summary statistics
 
 2. **Log Files:**
-   - Location: `/tmp/aios-test-*.log`
+   - Location: `/tmp/aiox-test-*.log`
    - Timestamped filenames
    - Complete system information
    - Detailed test results
@@ -144,7 +144,7 @@ Location: `.github/workflows/macos-testing.yml`
 
 ```bash
 ./run-all-tests.sh
-# View report at: /tmp/aios-macos-test-report-*.txt
+# View report at: /tmp/aiox-macos-test-report-*.txt
 ```
 
 ### Run Specific AC Test
@@ -190,7 +190,7 @@ This is **expected behavior**.
 
 ```bash
 # Run tests from your home directory or user-writable location
-cd ~/path/to/@synkra/aios-core/tests/macos
+cd ~/path/to/aiox-core/tests/macos
 ./run-all-tests.sh
 ```
 
@@ -218,7 +218,7 @@ brew install node@20
    ```
 
 2. **Test Logs:**
-   - Attach all `/tmp/aios-test-*.log` files
+   - Attach all `/tmp/aiox-test-*.log` files
 
 3. **Test Output:**
    - Copy complete console output

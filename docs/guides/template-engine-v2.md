@@ -4,7 +4,7 @@
 
 ---
 
-> Document generation and variable substitution engine for Synkra AIOS.
+> Document generation and variable substitution engine for Synkra AIOX.
 
 **Version:** 2.0
 **Last Updated:** 2025-12-05
@@ -13,7 +13,7 @@
 
 ## Overview
 
-The Template Engine provides a consistent way to generate documents (PRDs, ADRs, Stories, etc.) with variable substitution, conditionals, and loops. It powers all document generation tasks in AIOS.
+The Template Engine provides a consistent way to generate documents (PRDs, ADRs, Stories, etc.) with variable substitution, conditionals, and loops. It powers all document generation tasks in AIOX.
 
 ### Key Features
 
@@ -32,7 +32,7 @@ The Template Engine provides a consistent way to generate documents (PRDs, ADRs,
 ### Basic Usage
 
 ```javascript
-const TemplateEngine = require('./.aios-core/infrastructure/scripts/template-engine');
+const TemplateEngine = require('./.aiox-core/infrastructure/scripts/template-engine');
 
 const engine = new TemplateEngine();
 
@@ -77,7 +77,7 @@ This is a generated document.
 ### TemplateEngine Class
 
 ```javascript
-const TemplateEngine = require('./.aios-core/infrastructure/scripts/template-engine');
+const TemplateEngine = require('./.aiox-core/infrastructure/scripts/template-engine');
 const engine = new TemplateEngine();
 ```
 
@@ -111,7 +111,7 @@ Load a template file and process it.
 **Returns:** `Promise<string>` - Processed template
 
 ```javascript
-const result = await engine.loadAndProcess('.aios-core/product/templates/story-tmpl.md', {
+const result = await engine.loadAndProcess('.aiox-core/product/templates/story-tmpl.md', {
   STORY_ID: '3.12',
   TITLE: 'Documentation',
 });
@@ -192,7 +192,7 @@ Email: {{project.owner.email}}
 ```javascript
 const variables = {
   project: {
-    name: 'AIOS',
+    name: 'AIOX',
     owner: {
       name: 'Pedro',
       email: 'pedro@example.com',
@@ -283,7 +283,7 @@ Output: `To use variables, write {{VARIABLE_NAME}}.`
 All templates are stored in:
 
 ```
-.aios-core/product/templates/
+.aiox-core/product/templates/
 ```
 
 ---
@@ -475,4 +475,4 @@ console.log('Validation result:', validation);
 
 ---
 
-_Synkra AIOS Template Engine v2.0_
+_Synkra AIOX Template Engine v2.0_

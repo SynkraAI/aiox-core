@@ -1,7 +1,7 @@
 # Cross-Reference Phase 3: Development Scripts & Greeting System
 
 > **Generated:** 2026-02-05
-> **Scope:** `.aios-core/development/scripts/` (38 files)
+> **Scope:** `.aiox-core/development/scripts/` (38 files)
 > **Methodology:** Full source reading + codebase-wide grep for each script filename
 
 ---
@@ -47,7 +47,7 @@
 | 23 | `migrate-task-to-v2.js` | Semi-automated V1.0 to V2.0 task migration helper | `fs`, `path` | 9 files: `validate-task-v2.js`, docs | @dev migration | Low-use |
 | 24 | `workflow-navigator.js` | Provides intelligent next-step command suggestions from workflow patterns | `fs`, `path`, `js-yaml` | 18 files: `greeting-builder.js`, tasks, docs | All (via greeting-builder) | No |
 | 25 | `workflow-state-manager.js` | File-based state persistence for guided workflow automation across sessions | `fs.promises`, `path`, `js-yaml` | 18 files: `run-workflow.md`, `run-workflow-engine.md`, tasks | @sm, @pm | No |
-| 26 | `workflow-validator.js` | Validates workflow YAML files against AIOS conventions (9 checks) | `fs.promises`, `path`, `js-yaml` | 18 files: `validate-workflow.md`, `squad-validator.js`, tasks | @qa, @architect | No |
+| 26 | `workflow-validator.js` | Validates workflow YAML files against AIOX conventions (9 checks) | `fs.promises`, `path`, `js-yaml` | 18 files: `validate-workflow.md`, `squad-validator.js`, tasks | @qa, @architect | No |
 | 27 | `verify-workflow-gaps.js` | Verification script for workflow gap fixes (GAP 1, 2, 3) | `fs`, `path`, `js-yaml` | 18 files: docs, `install-manifest.yaml` | Verification tool | Low-use |
 | 28 | `decision-context.js` | (See #13 above -- same file) | -- | -- | -- | -- |
 
@@ -60,9 +60,9 @@
 | S3 | `squad-validator.js` | Validates squad structure against JSON schema, task format, agent defs (SQS-3) | `ajv`, `fs.promises`, `path`, `js-yaml`, squad-schema.json | `index.js`, `squad-creator-validate.md`, tests, `workflow-validator.js` | @squad-creator, @qa | No |
 | S4 | `squad-generator.js` | Generates squad structure following task-first architecture (SQS-4) | `fs.promises`, `path`, `child_process`, `js-yaml` | `index.js`, `squad-creator-create.md`, tests | @squad-creator | No |
 | S5 | `squad-designer.js` | Analyzes documentation and generates squad blueprints with recommendations (SQS-9) | `fs.promises`, `path`, `js-yaml` | `index.js`, `squad-creator-design.md`, tests | @squad-creator | No |
-| S6 | `squad-migrator.js` | Migrates legacy squad formats to AIOS 2.1 standard (SQS-7) | `fs.promises`, `path`, `js-yaml` | `index.js`, `squad-creator-migrate.md`, tests | @squad-creator | No |
-| S7 | `squad-downloader.js` | Downloads squads from aios-squads GitHub repository (SQS-6) | `https`, `fs.promises`, `path` | `index.js`, `squad-creator-download.md`, tests | @squad-creator | No |
-| S8 | `squad-publisher.js` | Publishes squads to aios-squads GitHub repo via PR (SQS-6) | `child_process`, `fs.promises`, `path` | `index.js`, `squad-creator-publish.md`, tests | @squad-creator | No |
+| S6 | `squad-migrator.js` | Migrates legacy squad formats to AIOX 2.1 standard (SQS-7) | `fs.promises`, `path`, `js-yaml` | `index.js`, `squad-creator-migrate.md`, tests | @squad-creator | No |
+| S7 | `squad-downloader.js` | Downloads squads from aiox-squads GitHub repository (SQS-6) | `https`, `fs.promises`, `path` | `index.js`, `squad-creator-download.md`, tests | @squad-creator | No |
+| S8 | `squad-publisher.js` | Publishes squads to aiox-squads GitHub repo via PR (SQS-6) | `child_process`, `fs.promises`, `path` | `index.js`, `squad-creator-publish.md`, tests | @squad-creator | No |
 | S9 | `squad-analyzer.js` | Analyzes existing squads with component inventory, coverage metrics (SQS-11) | `fs.promises`, `path`, `js-yaml` | `squad-creator-analyze.md`, tests | @squad-creator | No |
 | S10 | `squad-extender.js` | Extends existing squads with new components and manifest updates (SQS-11) | `fs.promises`, `path`, `js-yaml` | `squad-creator-extend.md`, tests | @squad-creator | No |
 
@@ -74,7 +74,7 @@
 
 ### 2.1 Overview
 
-The AIOS greeting system generates contextual, session-aware greetings when agents are activated. It consists of **8 greeting-related files** in the development scripts directory plus supporting infrastructure.
+The AIOX greeting system generates contextual, session-aware greetings when agents are activated. It consists of **8 greeting-related files** in the development scripts directory plus supporting infrastructure.
 
 ### 2.2 All Greeting-Related Files
 
@@ -86,10 +86,10 @@ The AIOS greeting system generates contextual, session-aware greetings when agen
 | `greeting-config-cli.js` | CLI Tool | ~85 | Standalone CLI for `get`/`set` greeting preferences |
 | `test-greeting-system.js` | Test Script | ~100+ | Manual test script with mock agent definitions |
 | `apply-inline-greeting-all-agents.js` | Migration Batch | ~147 | One-time batch script to update agent activation instructions |
-| `.aios-core/product/templates/activation-instructions-inline-greeting.yaml` | Template | ~64 | YAML template for inline greeting logic in agent files |
+| `.aiox-core/product/templates/activation-instructions-inline-greeting.yaml` | Template | ~64 | YAML template for inline greeting logic in agent files |
 | `.claude/commands/greet.md` | Slash Command | ~102 | `/greet` slash command definition for Claude Code |
 
-**External copies (in `.claude/commands/AIOS/scripts/`):**
+**External copies (in `.claude/commands/AIOX/scripts/`):**
 | File | Purpose |
 |------|---------|
 | `greeting-builder.js` | Copy of core GreetingBuilder for Claude Code slash commands |
@@ -116,19 +116,19 @@ persona_profile:
 | `named` | Always `greeting_levels.named` |
 | `archetypal` | Always `greeting_levels.archetypal` |
 
-The preference is stored in `.aios-core/core-config.yaml` under `agentIdentity.greeting.preference`.
+The preference is stored in `.aiox-core/core-config.yaml` under `agentIdentity.greeting.preference`.
 
 ### 2.4 How Greetings are Generated Per-Agent
 
 All 12 agents reference the greeting system in their `activation-instructions` STEP 3:
 
 **Pattern A: Direct Class Invocation (9 agents)**
-Used by: @dev, @qa, @architect, @pm, @po, @sm, @analyst, @aios-master, @squad-creator
+Used by: @dev, @qa, @architect, @pm, @po, @sm, @analyst, @aiox-master, @squad-creator
 
 ```yaml
 activation-instructions:
   - STEP 3: |
-      Build intelligent greeting using .aios-core/development/scripts/greeting-builder.js
+      Build intelligent greeting using .aiox-core/development/scripts/greeting-builder.js
       The buildGreeting(agentDefinition, conversationHistory) method:
         - Detects session type (new/existing/workflow) via context analysis
         - Checks git configuration status (with 5min cache)
@@ -211,7 +211,7 @@ All agents share the same GreetingBuilder logic but differ in:
 | @devops (Gage) | `\u2699\ufe0f` | Automator | Aries | "Gage the Automator ready!" |
 | @data-engineer (Dara) | `\U0001f4ca` | Sage | Taurus | "Dara the Sage ready!" |
 | @ux-design-expert (Uma) | `\U0001f3a8` | Empathizer | Pisces | "Uma the Empathizer ready!" |
-| @aios-master | `\U0001f9e0` | Orchestrator | Leo | "AIOS Master Orchestrator ready!" |
+| @aiox-master | `\U0001f9e0` | Orchestrator | Leo | "AIOX Master Orchestrator ready!" |
 | @squad-creator | `\U0001f4e6` | Assembler | -- | "Squad Creator ready!" |
 
 Each agent's greeting levels are defined in its `.md` persona file under `persona_profile.greeting_levels` (or `persona_profile.communication.greeting_levels`).
@@ -220,19 +220,19 @@ Each agent's greeting levels are defined in its `.md` persona file under `person
 
 ```
 greeting-builder.js
-  |-- context-detector.js          (.aios-core/core/session/)
-  |-- git-config-detector.js       (.aios-core/infrastructure/scripts/)
+  |-- context-detector.js          (.aiox-core/core/session/)
+  |-- git-config-detector.js       (.aiox-core/infrastructure/scripts/)
   |-- workflow-navigator.js        (sibling in development/scripts/)
   |-- greeting-preference-manager.js (sibling)
-  |-- project-status-loader.js     (.aios-core/infrastructure/scripts/)
-  |-- PermissionMode               (.aios-core/core/permissions/)
+  |-- project-status-loader.js     (.aiox-core/infrastructure/scripts/)
+  |-- PermissionMode               (.aiox-core/core/permissions/)
   |-- js-yaml
   |-- fs, path
 
 generate-greeting.js
   |-- greeting-builder.js          (sibling)
-  |-- session-context-loader.js    (.aios-core/scripts/)
-  |-- project-status-loader.js     (.aios-core/infrastructure/scripts/)
+  |-- session-context-loader.js    (.aiox-core/scripts/)
+  |-- project-status-loader.js     (.aiox-core/infrastructure/scripts/)
   |-- agent-config-loader.js       (sibling)
   |-- js-yaml
   |-- fs.promises, path
@@ -445,7 +445,7 @@ No scripts are truly orphaned -- all have at least one reference in the `install
 | @devops | greeting-builder, generate-greeting, agent-config-loader | 3 |
 | @data-engineer | greeting-builder, generate-greeting, agent-config-loader | 3 |
 | @ux-design-expert | greeting-builder, generate-greeting, agent-config-loader | 3 |
-| @aios-master | greeting-builder, agent-config-loader | 2 |
+| @aiox-master | greeting-builder, agent-config-loader | 2 |
 | @squad-creator | greeting-builder, agent-config-loader, squad/* (10 scripts) | 12 |
 
 ---
@@ -454,56 +454,56 @@ No scripts are truly orphaned -- all have at least one reference in the `install
 
 All scripts are located under:
 ```
-C:\Users\AllFluence-User\Workspaces\AIOS\SynkraAI\aios-core\.aios-core\development\scripts\
+C:\Users\AllFluence-User\Workspaces\AIOX\SynkraAI\aiox-core\.aiox-core\development\scripts\
 ```
 
 Full absolute paths for top-level scripts:
 ```
-.aios-core/development/scripts/agent-assignment-resolver.js
-.aios-core/development/scripts/agent-config-loader.js
-.aios-core/development/scripts/agent-exit-hooks.js
-.aios-core/development/scripts/apply-inline-greeting-all-agents.js
-.aios-core/development/scripts/audit-agent-config.js
-.aios-core/development/scripts/backlog-manager.js
-.aios-core/development/scripts/batch-update-agents-session-context.js
-.aios-core/development/scripts/decision-context.js
-.aios-core/development/scripts/decision-log-generator.js
-.aios-core/development/scripts/decision-log-indexer.js
-.aios-core/development/scripts/decision-recorder.js
-.aios-core/development/scripts/dev-context-loader.js
-.aios-core/development/scripts/generate-greeting.js
-.aios-core/development/scripts/greeting-builder.js
-.aios-core/development/scripts/greeting-config-cli.js
-.aios-core/development/scripts/greeting-preference-manager.js
-.aios-core/development/scripts/migrate-task-to-v2.js
-.aios-core/development/scripts/story-index-generator.js
-.aios-core/development/scripts/story-manager.js
-.aios-core/development/scripts/story-update-hook.js
-.aios-core/development/scripts/task-identifier-resolver.js
-.aios-core/development/scripts/test-greeting-system.js
-.aios-core/development/scripts/validate-task-v2.js
-.aios-core/development/scripts/verify-workflow-gaps.js
-.aios-core/development/scripts/workflow-navigator.js
-.aios-core/development/scripts/workflow-state-manager.js
-.aios-core/development/scripts/workflow-validator.js
+.aiox-core/development/scripts/agent-assignment-resolver.js
+.aiox-core/development/scripts/agent-config-loader.js
+.aiox-core/development/scripts/agent-exit-hooks.js
+.aiox-core/development/scripts/apply-inline-greeting-all-agents.js
+.aiox-core/development/scripts/audit-agent-config.js
+.aiox-core/development/scripts/backlog-manager.js
+.aiox-core/development/scripts/batch-update-agents-session-context.js
+.aiox-core/development/scripts/decision-context.js
+.aiox-core/development/scripts/decision-log-generator.js
+.aiox-core/development/scripts/decision-log-indexer.js
+.aiox-core/development/scripts/decision-recorder.js
+.aiox-core/development/scripts/dev-context-loader.js
+.aiox-core/development/scripts/generate-greeting.js
+.aiox-core/development/scripts/greeting-builder.js
+.aiox-core/development/scripts/greeting-config-cli.js
+.aiox-core/development/scripts/greeting-preference-manager.js
+.aiox-core/development/scripts/migrate-task-to-v2.js
+.aiox-core/development/scripts/story-index-generator.js
+.aiox-core/development/scripts/story-manager.js
+.aiox-core/development/scripts/story-update-hook.js
+.aiox-core/development/scripts/task-identifier-resolver.js
+.aiox-core/development/scripts/test-greeting-system.js
+.aiox-core/development/scripts/validate-task-v2.js
+.aiox-core/development/scripts/verify-workflow-gaps.js
+.aiox-core/development/scripts/workflow-navigator.js
+.aiox-core/development/scripts/workflow-state-manager.js
+.aiox-core/development/scripts/workflow-validator.js
 ```
 
 Squad sub-module:
 ```
-.aios-core/development/scripts/squad/index.js
-.aios-core/development/scripts/squad/squad-analyzer.js
-.aios-core/development/scripts/squad/squad-designer.js
-.aios-core/development/scripts/squad/squad-downloader.js
-.aios-core/development/scripts/squad/squad-extender.js
-.aios-core/development/scripts/squad/squad-generator.js
-.aios-core/development/scripts/squad/squad-loader.js
-.aios-core/development/scripts/squad/squad-migrator.js
-.aios-core/development/scripts/squad/squad-publisher.js
-.aios-core/development/scripts/squad/squad-validator.js
+.aiox-core/development/scripts/squad/index.js
+.aiox-core/development/scripts/squad/squad-analyzer.js
+.aiox-core/development/scripts/squad/squad-designer.js
+.aiox-core/development/scripts/squad/squad-downloader.js
+.aiox-core/development/scripts/squad/squad-extender.js
+.aiox-core/development/scripts/squad/squad-generator.js
+.aiox-core/development/scripts/squad/squad-loader.js
+.aiox-core/development/scripts/squad/squad-migrator.js
+.aiox-core/development/scripts/squad/squad-publisher.js
+.aiox-core/development/scripts/squad/squad-validator.js
 ```
 
 ---
 
-*Cross-Reference Phase 3 Analysis - AIOS Framework*
+*Cross-Reference Phase 3 Analysis - AIOX Framework*
 *Generated: 2026-02-05*
 *Total scripts analyzed: 37 (.js files) + 1 README.md*

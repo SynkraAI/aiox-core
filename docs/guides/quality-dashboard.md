@@ -179,7 +179,7 @@ Higher is better - means more issues are caught automatically before human revie
 Metrics are stored in:
 
 ```
-.aios/data/quality-metrics.json
+.aiox/data/quality-metrics.json
 ```
 
 ### Data Format
@@ -247,14 +247,14 @@ Metrics are stored in:
 The dashboard reads metrics from the public folder. To update:
 
 ```bash
-# Sync from .aios/data to dashboard
+# Sync from .aiox/data to dashboard
 npm run sync-metrics
 
 # Or use the combined command
 npm run dev:sync
 ```
 
-This copies `.aios/data/quality-metrics.json` to `tools/quality-dashboard/public/.aios/data/`.
+This copies `.aiox/data/quality-metrics.json` to `tools/quality-dashboard/public/.aiox/data/`.
 
 ---
 
@@ -330,10 +330,10 @@ Ensure the metrics collector has run:
 
 ```bash
 # Check if metrics file exists
-ls -la .aios/data/quality-metrics.json
+ls -la .aiox/data/quality-metrics.json
 
 # If missing, seed with sample data
-npx aios metrics seed
+npx aiox metrics seed
 ```
 
 ### Charts Not Rendering
@@ -358,4 +358,4 @@ The auto-refresh pauses when:
 
 ---
 
-_Synkra AIOS Quality Dashboard v1.0_
+_Synkra AIOX Quality Dashboard v1.0_

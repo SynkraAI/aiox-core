@@ -18,7 +18,7 @@ const {
   GateEvaluator,
   GateVerdict,
   DEFAULT_GATE_CONFIG,
-} = require('../../.aios-core/core/orchestration/gate-evaluator');
+} = require('../../.aiox-core/core/orchestration/gate-evaluator');
 
 describe('Gate Evaluator (Story 0.6)', () => {
   let tempDir;
@@ -375,7 +375,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should integrate GateEvaluator with MasterOrchestrator', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
@@ -387,7 +387,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should expose getGateEvaluator method', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
@@ -399,7 +399,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should respect strictGates option', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',

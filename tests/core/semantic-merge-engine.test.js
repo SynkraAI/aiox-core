@@ -24,7 +24,7 @@ const {
   MergeStrategy,
   ConflictSeverity,
   MergeDecision,
-} = require('../../.aios-core/core/execution/semantic-merge-engine');
+} = require('../../.aiox-core/core/execution/semantic-merge-engine');
 
 // ── Tests ────────────────────────────────────────────────────────────────────
 
@@ -336,7 +336,7 @@ describe('SemanticMergeEngine Module', () => {
 
     test('constructor sets paths', () => {
       expect(loader.rootPath).toBe(tmpDir);
-      expect(loader.rulesPath).toContain('.aios');
+      expect(loader.rulesPath).toContain('.aiox');
     });
 
     test('loadCustomRules returns null when no file', () => {
@@ -613,7 +613,7 @@ class MyClass:
     test('saveReport writes JSON and MD files', async () => {
       const engine = new SemanticMergeEngine({
         rootPath: tmpDir,
-        storageDir: path.join(tmpDir, '.aios', 'merge'),
+        storageDir: path.join(tmpDir, '.aiox', 'merge'),
       });
 
       const report = {
@@ -625,7 +625,7 @@ class MyClass:
 
       await engine.saveReport(report);
 
-      const mergeDir = path.join(tmpDir, '.aios', 'merge');
+      const mergeDir = path.join(tmpDir, '.aiox', 'merge');
       expect(fs.existsSync(mergeDir)).toBe(true);
 
       const latestPath = path.join(mergeDir, 'merge-report-latest.json');

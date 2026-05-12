@@ -20,7 +20,7 @@ const {
   orchestrateStop,
   orchestrateResume,
   commands,
-} = require('../../.aios-core/core/orchestration/cli-commands');
+} = require('../../.aiox-core/core/orchestration/cli-commands');
 
 describe('CLI Commands (Story 0.9)', () => {
   let tempDir;
@@ -123,7 +123,7 @@ describe('CLI Commands (Story 0.9)', () => {
 
     it('should show status when state exists', async () => {
       // Create state file
-      const statePath = path.join(tempDir, '.aios', 'master-orchestrator', 'TEST-001.json');
+      const statePath = path.join(tempDir, '.aiox', 'master-orchestrator', 'TEST-001.json');
       await fs.ensureDir(path.dirname(statePath));
       await fs.writeJson(statePath, {
         status: 'in_progress',
@@ -165,7 +165,7 @@ describe('CLI Commands (Story 0.9)', () => {
 
     it('should stop execution and update state', async () => {
       // Create state file
-      const statePath = path.join(tempDir, '.aios', 'master-orchestrator', 'TEST-001.json');
+      const statePath = path.join(tempDir, '.aiox', 'master-orchestrator', 'TEST-001.json');
       await fs.ensureDir(path.dirname(statePath));
       await fs.writeJson(statePath, {
         status: 'in_progress',
@@ -201,7 +201,7 @@ describe('CLI Commands (Story 0.9)', () => {
 
     it('should not resume completed stories', async () => {
       // Create completed state
-      const statePath = path.join(tempDir, '.aios', 'master-orchestrator', 'TEST-001.json');
+      const statePath = path.join(tempDir, '.aiox', 'master-orchestrator', 'TEST-001.json');
       await fs.ensureDir(path.dirname(statePath));
       await fs.writeJson(statePath, {
         status: 'complete',
@@ -223,7 +223,7 @@ describe('CLI Commands (Story 0.9)', () => {
 
     it('should resume from stopped state', async () => {
       // Create stopped state
-      const statePath = path.join(tempDir, '.aios', 'master-orchestrator', 'TEST-001.json');
+      const statePath = path.join(tempDir, '.aiox', 'master-orchestrator', 'TEST-001.json');
       await fs.ensureDir(path.dirname(statePath));
       await fs.writeJson(statePath, {
         status: 'stopped',

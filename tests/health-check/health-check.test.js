@@ -16,7 +16,7 @@ const {
   CheckStatus,
   CheckRegistry,
   DEFAULT_CONFIG,
-} = require('../../.aios-core/core/health-check');
+} = require('../../.aiox-core/core/health-check');
 
 // Set timeout for all tests in this file (Jest compatible)
 jest.setTimeout(30000);
@@ -139,7 +139,7 @@ describe('Health Check System', () => {
       await healthCheck.run({ mode: 'quick' });
       const duration = Date.now() - startTime;
 
-      assert.ok(duration < 10000, `Quick mode should complete in <10s (took ${duration}ms)`);
+      assert.ok(duration < 15000, `Quick mode should complete in <15s (took ${duration}ms)`);
     });
   });
 

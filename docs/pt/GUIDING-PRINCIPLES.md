@@ -4,13 +4,13 @@
   Última sincronização: 2026-01-26
 -->
 
-# Princípios Orientadores do Método AIOS
+# Princípios Orientadores do Método AIOX
 
 > 🌐 [EN](../GUIDING-PRINCIPLES.md) | **PT** | [ES](../es/GUIDING-PRINCIPLES.md)
 
 ---
 
-O Método AIOS é um framework em linguagem natural para desenvolvimento de software assistido por IA. Estes princípios garantem que as contribuições mantenham a efetividade do método.
+O Método AIOX é um framework em linguagem natural para desenvolvimento de software assistido por IA. Estes princípios garantem que as contribuições mantenham a efetividade do método.
 
 ## Princípios Fundamentais
 
@@ -75,7 +75,7 @@ Veja o [Visão Geral de Squads](../guides/squads-overview.md) para exemplos deta
 
 ### Regras de Templates
 
-Templates seguem a especificação do [AIOS Document Template](../../common/utils/aios-doc-template.md) usando formato YAML:
+Templates seguem a especificação do [AIOX Document Template](../../common/utils/aiox-doc-template.md) usando formato YAML:
 
 1. **Estrutura**: Templates são definidos em YAML com metadados claros, configuração de workflow e hierarquia de seções
 2. **Separação de Responsabilidades**: Instruções para LLMs estão em campos `instruction`, separadas do conteúdo
@@ -98,4 +98,4 @@ Templates seguem a especificação do [AIOS Document Template](../../common/util
 - O poder está na orquestração em linguagem natural, não no código
 - Dev agents codificam, planning agents planejam
 - Mantenha dev agents enxutos para máxima eficiência de codificação
-- Expansion packs lidam com domínios especializados
+- Starter squads lidam com domínios especializados

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-# AIOS CodeRabbit Configuration
+# AIOX CodeRabbit Configuration
 # Story: COLLAB-1, 12.11
 # Created: 2025-12-30
 # Updated: 2026-02-05 (Story 12.11 - Bob CI/CD Pipeline)
@@ -28,7 +28,7 @@ reviews:
 
   # Path-specific review instructions (array format per schema)
   path_instructions:
-    - path: ".aios-core/core/**"
+    - path: ".aiox-core/core/**"
       instructions: |
         CRITICAL PATH: Core framework modules require thorough review.
         Verify error handling is comprehensive with proper try/catch and error context.
@@ -39,7 +39,7 @@ reviews:
         Verify test coverage exists for new/modified functions.
         Flag any hardcoded paths, credentials, or environment-specific values.
 
-    - path: ".aios-core/core/orchestration/**"
+    - path: ".aiox-core/core/orchestration/**"
       instructions: |
         Bob orchestration modules — highest scrutiny required.
         Verify bob-orchestrator.js maintains single-responsibility for workflow dispatch.
@@ -49,30 +49,30 @@ reviews:
         Check session-state.js for thread-safety and state corruption prevention.
         Verify message-formatter.js output is consistent across all message types.
 
-    - path: ".aios-core/development/agents/**"
+    - path: ".aiox-core/development/agents/**"
       instructions: |
-        Verify agent follows AIOS agent YAML structure (persona_profile, commands, dependencies).
+        Verify agent follows AIOX agent YAML structure (persona_profile, commands, dependencies).
         Check that persona_profile includes archetype, communication style, and greeting_levels.
         Validate all commands listed have corresponding task dependencies.
         Ensure agent has proper visibility metadata for commands.
         Check for security: no hardcoded credentials or sensitive data.
 
-    - path: ".aios-core/development/tasks/**"
+    - path: ".aiox-core/development/tasks/**"
       instructions: |
-        Verify task follows AIOS task format with clear elicitation points.
+        Verify task follows AIOX task format with clear elicitation points.
         Check that deliverables are well-defined.
         Validate any referenced dependencies exist in the codebase.
         Ensure task has proper error handling guidance.
 
-    - path: ".aios-core/development/workflows/**"
+    - path: ".aiox-core/development/workflows/**"
       instructions: |
         Verify workflow YAML structure is valid.
         Check step ordering and dependencies make logical sense.
         Validate referenced agents and tasks exist.
 
-    - path: ".aios-core/product/templates/**"
+    - path: ".aiox-core/product/templates/**"
       instructions: |
-        Ensure template follows AIOS template conventions.
+        Ensure template follows AIOX template conventions.
         Check placeholder syntax is consistent.
         Validate template produces valid output.
 
@@ -88,7 +88,7 @@ reviews:
         Check for async/await best practices.
         Verify error handling is comprehensive.
         Look for potential security vulnerabilities.
-        Ensure code follows AIOS coding standards (ES2022, single quotes, 2-space indent).
+        Ensure code follows AIOX coding standards (ES2022, single quotes, 2-space indent).
 
     - path: "**/*.ts"
       instructions: |

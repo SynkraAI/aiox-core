@@ -14,7 +14,7 @@
 
 - [Visão Geral](#visão-geral)
 - [Estrutura de Repositórios](#estrutura-de-repositórios)
-- [Repositório Principal (aios-core)](#repositório-principal-aios-core)
+- [Repositório Principal (aiox-core)](#repositório-principal-aiox-core)
 - [Repositórios de Squads](#repositórios-de-squads)
 - [Repositório de Ecossistema MCP](#repositório-de-ecossistema-mcp)
 - [Repositórios Privados](#repositórios-privados)
@@ -26,7 +26,7 @@
 
 ## Visão Geral
 
-AIOS v2.1 adota uma **estratégia multi-repositório** para viabilizar desenvolvimento modular, contribuições comunitárias e separação clara entre framework principal, extensões (squads) e componentes proprietários.
+AIOX v4 adota uma **estratégia multi-repositório** para viabilizar desenvolvimento modular, contribuições comunitárias e separação clara entre framework principal, extensões (squads) e componentes proprietários.
 
 ### Objetivos de Design
 
@@ -45,8 +45,8 @@ AIOS v2.1 adota uma **estratégia multi-repositório** para viabilizar desenvolv
 ```
 Organização SynkraAI
 ├── REPOSITÓRIOS PÚBLICOS
-│   ├── aios-core          # Framework principal (Commons Clause)
-│   ├── aios-squads        # Squads comunitárias (MIT)
+│   ├── aiox-core          # Framework principal (MIT)
+│   ├── aiox-squads        # Squads comunitárias (MIT)
 │   └── mcp-ecosystem      # Configurações MCP (Apache 2.0)
 │
 └── REPOSITÓRIOS PRIVADOS
@@ -65,8 +65,8 @@ Organização SynkraAI
 │                                                                          │
 │   ┌────────────────────┐     ┌────────────────────┐                     │
 │   │  SynkraAI/         │     │  SynkraAI/         │                     │
-│   │  aios-core         │     │  aios-squads       │                     │
-│   │  (Commons Clause)  │◄────│  (MIT)             │                     │
+│   │  aiox-core         │     │  aiox-squads       │                     │
+│   │  (MIT)  │◄────│  (MIT)             │                     │
 │   │                    │     │                    │                     │
 │   │  - Framework Core  │     │  - Squad ETL       │                     │
 │   │  - 11 Agentes Base │     │  - Squad Creator   │                     │
@@ -102,30 +102,30 @@ Organização SynkraAI
 
 ---
 
-## Repositório Principal (aios-core)
+## Repositório Principal (aiox-core)
 
 ### Propósito
 
-O repositório principal contém o framework AIOS fundamental que todos os projetos dependem.
+O repositório principal contém o framework AIOX fundamental que todos os projetos dependem.
 
 ### Conteúdo
 
 | Diretório                    | Descrição                                                |
 | ---------------------------- | -------------------------------------------------------- |
-| `.aios-core/core/`           | Fundações do framework (config, registry, gates de qualidade) |
-| `.aios-core/development/`    | Definições de agentes, tarefas, workflows                |
-| `.aios-core/product/`        | Templates, checklists, dados de PM                       |
-| `.aios-core/infrastructure/` | Scripts, ferramentas, integrações                        |
+| `.aiox-core/core/`           | Fundações do framework (config, registry, gates de qualidade) |
+| `.aiox-core/development/`    | Definições de agentes, tarefas, workflows                |
+| `.aiox-core/product/`        | Templates, checklists, dados de PM                       |
+| `.aiox-core/infrastructure/` | Scripts, ferramentas, integrações                        |
 | `docs/`                      | Documentação do framework                                |
 
 ### Licença
 
-**Commons Clause** - Livre para uso, hospedagem/revenda comercial requer licença.
+**MIT** - Licença permissiva para uso, modificação e distribuição do core.
 
 ### Pacote npm
 
 ```bash
-npm install @aios/core
+npm install @aiox/core
 ```
 
 ---
@@ -134,12 +134,12 @@ npm install @aios/core
 
 ### Visão Geral
 
-Squads são extensões modulares que adicionam capacidades especializadas ao AIOS.
+Squads são extensões modulares que adicionam capacidades especializadas ao AIOX.
 
-### Repositório aios-squads
+### Repositório aiox-squads
 
 ```
-aios-squads/
+aiox-squads/
 ├── etl/                    # Squad de processamento ETL
 │   ├── squad.yaml          # Manifesto da squad
 │   ├── agents/             # Agentes específicos da squad
@@ -169,7 +169,7 @@ description: Squad de processamento ETL para pipelines de dados
 license: MIT
 
 peerDependencies:
-  '@aios/core': '^2.1.0'
+  '@aiox/core': '^2.1.0'
 
 agents:
   - id: data-engineer
@@ -192,9 +192,9 @@ exports:
 ### Pacotes npm
 
 ```bash
-npm install @aios/squad-etl
-npm install @aios/squad-creator
-npm install @aios/squad-mmos
+npm install @aiox/squad-etl
+npm install @aiox/squad-creator
+npm install @aiox/squad-mmos
 ```
 
 ---
@@ -216,7 +216,6 @@ mcp-ecosystem/
 ├── ide-configs/            # Configurações específicas de IDE
 │   ├── claude-code/
 │   ├── cursor/
-│   ├── windsurf/
 │   └── vscode/
 │
 └── presets/                # Bundles MCP pré-configurados
@@ -232,7 +231,7 @@ mcp-ecosystem/
 ### Pacote npm
 
 ```bash
-npm install @aios/mcp-presets
+npm install @aiox/mcp-presets
 ```
 
 ---
@@ -252,7 +251,7 @@ Contém componentes proprietários MMOS (Mental Model Operating System):
 
 ### SynkraAI/certified-partners (Proprietário)
 
-Recursos para parceiros AIOS certificados:
+Recursos para parceiros AIOX certificados:
 
 - Implementações de squads premium
 - Acesso ao portal de parceiros
@@ -269,7 +268,7 @@ Recursos para parceiros AIOS certificados:
 
 ```
 ┌──────────────┐     depende de      ┌──────────────┐
-│  aios-squads │ ──────────────────► │  aios-core   │
+│  aiox-squads │ ──────────────────► │  aiox-core   │
 └──────────────┘                     └──────────────┘
        │                                    │
        │                                    │
@@ -283,7 +282,7 @@ Recursos para parceiros AIOS certificados:
 
 ### Compatibilidade de Versões
 
-| aios-core | aios-squads | mcp-ecosystem |
+| aiox-core | aiox-squads | mcp-ecosystem |
 | --------- | ----------- | ------------- |
 | ^2.1.0    | ^1.0.0      | ^1.0.0        |
 | ^3.0.0    | ^2.0.0      | ^1.x.x        |
@@ -294,7 +293,7 @@ Para projetos que precisam de múltiplos repositórios:
 
 ```bash
 # Adicionar squads como submódulo
-git submodule add https://github.com/SynkraAI/aios-squads.git squads
+git submodule add https://github.com/SynkraAI/aiox-squads.git squads
 
 # Adicionar ecossistema MCP como submódulo
 git submodule add https://github.com/SynkraAI/mcp-ecosystem.git mcp
@@ -305,9 +304,9 @@ git submodule add https://github.com/SynkraAI/mcp-ecosystem.git mcp
 ```json
 {
   "dependencies": {
-    "@aios/core": "^2.1.0",
-    "@aios/squad-etl": "^1.0.0",
-    "@aios/mcp-presets": "^1.0.0"
+    "@aiox/core": "^2.1.0",
+    "@aiox/squad-etl": "^1.0.0",
+    "@aiox/mcp-presets": "^1.0.0"
   }
 }
 ```
@@ -320,19 +319,19 @@ git submodule add https://github.com/SynkraAI/mcp-ecosystem.git mcp
 
 | Pacote               | Registry   | Licença        | Repositório   |
 | -------------------- | ---------- | -------------- | ------------- |
-| `@aios/core`         | npm public | Commons Clause | aios-core     |
-| `@aios/squad-etl`    | npm public | MIT            | aios-squads   |
-| `@aios/squad-creator`| npm public | MIT            | aios-squads   |
-| `@aios/squad-mmos`   | npm public | MIT            | aios-squads   |
-| `@aios/mcp-presets`  | npm public | Apache 2.0     | mcp-ecosystem |
+| `@aiox/core`         | npm public | MIT            | aiox-core     |
+| `@aiox/squad-etl`    | npm public | MIT            | aiox-squads   |
+| `@aiox/squad-creator`| npm public | MIT            | aiox-squads   |
+| `@aiox/squad-mmos`   | npm public | MIT            | aiox-squads   |
+| `@aiox/mcp-presets`  | npm public | Apache 2.0     | mcp-ecosystem |
 
 ### Workflow de Publicação
 
 ```bash
-# A partir de aios-core
+# A partir de aiox-core
 npm publish --access public
 
-# A partir de aios-squads/etl
+# A partir de aiox-squads/etl
 cd etl && npm publish --access public
 
 # A partir de mcp-ecosystem
@@ -353,7 +352,7 @@ npm publish --access public
 ### Para Desenvolvedores de Squads
 
 1. **Manifesto Primeiro** - Defina squad.yaml antes de implementar
-2. **Dependências de Pares** - Especifique requisitos exatos de versão aios-core
+2. **Dependências de Pares** - Especifique requisitos exatos de versão aiox-core
 3. **Testes Independentes** - Squads devem ter seus próprios suites de testes
 4. **Padrões README** - Inclua exemplos de uso e requisitos
 
@@ -379,9 +378,9 @@ npm publish --access public
 
 - [Arquitetura de Alto Nível](./high-level-architecture.md)
 - [Sistema de Módulos](./module-system.md)
-- [Guia de Migração v2.0 para v2.1](../migration/v2.0-to-v2.1.md)
+- [Guia de Migração v2.0 para v4.0.4](../migration/migration-guide.md)
 - [Guia de Squads](../guides/squads-guide.md)
 
 ---
 
-_Última Atualização: 2026-01-28 | Time do Framework AIOS_
+_Última Atualização: 2026-01-28 | Time do Framework AIOX_

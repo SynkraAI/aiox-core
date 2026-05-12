@@ -6,11 +6,11 @@
 
 ---
 
-Este documento captura el estado actual del codebase de **Synkra AIOS**, sirviendo como la arquitectura de referencia para el desarrollo de la **Fase 1 de Synkra AIOS (MVP hasta el FR4)**. Describe los patrones, componentes y tecnologías existentes sobre los cuales se construirán las nuevas funcionalidades.
+Este documento captura el estado actual del codebase de **Synkra AIOX**, sirviendo como la arquitectura de referencia para el desarrollo de la **Fase 1 de Synkra AIOX (MVP hasta el FR4)**. Describe los patrones, componentes y tecnologías existentes sobre los cuales se construirán las nuevas funcionalidades.
 
 ## Alcance del Documento
 
-Documentación completa del framework Synkra AIOS para servir como baseline para el MVP de AIOS, que incluye: Rebranding, Workflow de Setup de IDE, Capa de Memoria con LlamaIndex y el Meta-Agente `aios-developer`.
+Documentación completa del framework Synkra AIOX para servir como baseline para el MVP de AIOX, que incluye: Rebranding, Workflow de Setup de IDE, Capa de Memoria con LlamaIndex y el Meta-Agente `aiox-developer`.
 
 ## Registro de Cambios
 

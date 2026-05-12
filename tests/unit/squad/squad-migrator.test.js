@@ -25,7 +25,7 @@ const {
   SquadMigrator,
   SquadMigratorError,
   MigratorErrorCodes,
-} = require('../../../.aios-core/development/scripts/squad');
+} = require('../../../.aiox-core/development/scripts/squad');
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');
@@ -153,25 +153,25 @@ describe('SquadMigrator', () => {
       expect(analysis.actions.some((a) => a.type === 'CREATE_DIRECTORIES')).toBe(true);
     });
 
-    it('should detect missing aios.type field (AC 5)', async () => {
+    it('should detect missing aiox.type field (AC 5)', async () => {
       const squadPath = path.join(FIXTURES_PATH, 'legacy-squad');
       const analysis = await migrator.analyze(squadPath);
 
       expect(analysis.needsMigration).toBe(true);
-      expect(analysis.issues.some((i) => i.type === 'MISSING_AIOS_TYPE')).toBe(true);
-      expect(analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aios.type')).toBe(
+      expect(analysis.issues.some((i) => i.type === 'MISSING_AIOX_TYPE')).toBe(true);
+      expect(analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aiox.type')).toBe(
         true,
       );
     });
 
-    it('should detect missing aios.minVersion field (AC 5)', async () => {
+    it('should detect missing aiox.minVersion field (AC 5)', async () => {
       const squadPath = path.join(FIXTURES_PATH, 'legacy-squad');
       const analysis = await migrator.analyze(squadPath);
 
       expect(analysis.needsMigration).toBe(true);
       expect(analysis.issues.some((i) => i.type === 'MISSING_MIN_VERSION')).toBe(true);
       expect(
-        analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aios.minVersion'),
+        analysis.actions.some((a) => a.type === 'ADD_FIELD' && a.path === 'aiox.minVersion'),
       ).toBe(true);
     });
 
@@ -186,7 +186,7 @@ describe('SquadMigrator', () => {
       // Create compliant manifest
       const yaml = require('js-yaml');
       const manifest = {
-        aios: { type: 'squad', minVersion: '2.1.0' },
+        aiox: { type: 'squad', minVersion: '2.1.0' },
         name: 'up-to-date-squad',
         version: '1.0.0',
         description: 'A fully compliant squad',
@@ -265,7 +265,7 @@ describe('SquadMigrator', () => {
       // Create compliant manifest
       const yaml = require('js-yaml');
       const manifest = {
-        aios: { type: 'squad', minVersion: '2.1.0' },
+        aiox: { type: 'squad', minVersion: '2.1.0' },
         name: 'migrate-uptodate-squad',
         version: '1.0.0',
         description: 'A fully compliant squad',
@@ -321,7 +321,7 @@ describe('SquadMigrator', () => {
       expect(agentsExists).toBe(true);
     });
 
-    it('should add missing aios.type and aios.minVersion fields (AC 5)', async () => {
+    it('should add missing aiox.type and aiox.minVersion fields (AC 5)', async () => {
       // Copy legacy squad to temp dir
       const srcPath = path.join(FIXTURES_PATH, 'legacy-squad');
       const testPath = path.join(tempDir, 'migrate-fields-test');
@@ -334,8 +334,8 @@ describe('SquadMigrator', () => {
       const content = await fs.readFile(path.join(testPath, 'squad.yaml'), 'utf-8');
       const manifest = yaml.load(content);
 
-      expect(manifest.aios?.type).toBe('squad');
-      expect(manifest.aios?.minVersion).toBe('2.1.0');
+      expect(manifest.aiox?.type).toBe('squad');
+      expect(manifest.aiox?.minVersion).toBe('2.1.0');
     });
 
     it('should return success with executed actions', async () => {
@@ -505,7 +505,7 @@ describe('SquadMigrator', () => {
 
       const yaml = require('js-yaml');
       const manifest = {
-        aios: { type: 'squad', minVersion: '2.1.0' },
+        aiox: { type: 'squad', minVersion: '2.1.0' },
         version: '1.0.0',
         // name is missing
       };
@@ -528,7 +528,7 @@ describe('SquadMigrator', () => {
 
       const yaml = require('js-yaml');
       const manifest = {
-        aios: { type: 'squad', minVersion: '2.1.0' },
+        aiox: { type: 'squad', minVersion: '2.1.0' },
         name: 'test-squad',
         // version is missing
       };
@@ -557,7 +557,7 @@ describe('SquadMigrator', () => {
       // Create compliant manifest
       const yaml = require('js-yaml');
       const manifest = {
-        aios: { type: 'squad', minVersion: '2.1.0' },
+        aiox: { type: 'squad', minVersion: '2.1.0' },
         name: 'move-test-squad',
         version: '1.0.0',
       };

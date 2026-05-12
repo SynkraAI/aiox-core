@@ -9,7 +9,7 @@
  * - Backwards compatibility
  */
 
-const GreetingBuilder = require('../../.aios-core/development/scripts/greeting-builder');
+const GreetingBuilder = require('../../.aiox-core/development/scripts/greeting-builder');
 
 describe('Contextual Greeting Integration Tests', () => {
   let builder;

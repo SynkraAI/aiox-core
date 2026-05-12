@@ -10,13 +10,13 @@
 
 ---
 
-Como contribuir squads al ecosistema AIOS.
+Como contribuir squads al ecosistema AIOX.
 
 ## Descripcion General
 
 Hay dos formas de compartir tu squad con la comunidad:
 
-1. **Repositorio aios-squads** - Squads gratuitos y de codigo abierto en GitHub
+1. **Repositorio aiox-squads** - Squads gratuitos y de codigo abierto en GitHub
 2. **Marketplace de Synkra** - Squads premium via API de Synkra
 
 ## Estandares de Calidad
@@ -30,7 +30,7 @@ Todos los squads contribuidos deben cumplir estos estandares:
 | **Manifiesto valido** | `squad.yaml` pasa la validacion de JSON Schema |
 | **Documentacion** | README.md con instrucciones de uso |
 | **Licencia** | Licencia de codigo abierto (MIT, Apache 2.0, etc.) |
-| **Compatibilidad AIOS** | `aios.minVersion: "2.1.0"` o superior |
+| **Compatibilidad AIOX** | `aiox.minVersion: "2.1.0"` o superior |
 | **Arquitectura task-first** | Tareas como puntos de entrada principales |
 
 ### Recomendados
@@ -71,7 +71,7 @@ name: my-squad
 version: 1.0.0              # Versionado semantico
 description: Descripcion clara de lo que hace este squad
 
-aios:
+aiox:
   minVersion: "2.1.0"
   type: squad
 
@@ -139,7 +139,7 @@ Problemas comunes y soluciones.
 Informacion de licencia.
 ```
 
-## Publicando en aios-squads
+## Publicando en aiox-squads
 
 ### Prerequisitos
 
@@ -159,7 +159,7 @@ Informacion de licencia.
 ```
 
 Esto:
-1. Hara fork de `SynkraAI/aios-squads` (si es necesario)
+1. Hara fork de `SynkraAI/aiox-squads` (si es necesario)
 2. Creara branch con tu squad
 3. Abrira PR para revision
 
@@ -229,7 +229,7 @@ Seguir versionado semantico:
 - Probar tu squad antes de publicar
 - Responder a issues y feedback
 - Mantener dependencias al minimo
-- Seguir convenciones de AIOS
+- Seguir convenciones de AIOX
 
 ### No Hacer
 
@@ -241,15 +241,15 @@ Seguir versionado semantico:
 
 ## Obteniendo Ayuda
 
-- **Preguntas**: [Discusiones de GitHub](https://github.com/SynkraAI/aios-core/discussions)
-- **Issues**: [Rastreador de Issues](https://github.com/SynkraAI/aios-core/issues)
+- **Preguntas**: [Discusiones de GitHub](https://github.com/SynkraAI/aiox-core/discussions)
+- **Issues**: [Rastreador de Issues](https://github.com/SynkraAI/aiox-core/issues)
 - **Guias**: Este documento
 
 ## Recursos Relacionados
 
 - [Guia de Desarrollo de Squad](./squads-guide.md)
 - [Guia de Migracion de Squad](./squad-migration.md)
-- [Repositorio aios-squads](https://github.com/SynkraAI/aios-squads)
+- [Repositorio aiox-squads](https://github.com/SynkraAI/aiox-squads)
 
 ---
 

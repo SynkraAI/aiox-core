@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Markdown Link Checker for AIOS Documentation
+Markdown Link Checker for AIOX Documentation
 
 Validates internal markdown links and tracks documentation status.
 Inspired by Obsidian's broken link checker.
@@ -279,7 +279,7 @@ def print_summary(results: dict):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Check markdown links in AIOS documentation",
+        description="Check markdown links in AIOX documentation",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__
     )

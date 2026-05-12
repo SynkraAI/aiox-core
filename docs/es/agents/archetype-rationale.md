@@ -1,24 +1,24 @@
 <!-- Traduccion: ES | Original: /docs/en/agents/archetype-rationale.md | Sincronizacion: 2026-01-26 -->
 
-# Fundamentos de los Arquetipos de Agentes AIOS
+# Fundamentos de los Arquetipos de Agentes AIOX
 
 **Version:** 1.0
 **Creado:** 2025-01-14
 **Autor:** @ux-design-expert (Uma) + @architect (Aria)
-**Proposito:** Documentar las decisiones de diseno, consideraciones de sensibilidad cultural y opciones alternativas para el sistema de personas de agentes AIOS
+**Proposito:** Documentar las decisiones de diseno, consideraciones de sensibilidad cultural y opciones alternativas para el sistema de personas de agentes AIOX
 
 ---
 
 ## Resumen Ejecutivo
 
-Este documento proporciona la fundamentacion completa para el sistema de personas de agentes AIOS, incluyendo:
+Este documento proporciona la fundamentacion completa para el sistema de personas de agentes AIOX, incluyendo:
 - Por que elegimos arquetipos zodiacales
 - Proceso de decision de diseno
 - Validacion de sensibilidad cultural
 - Opciones alternativas consideradas
 - Evidencia de investigacion que respalda el enfoque
 
-**Decision Clave:** Usar arquetipos zodiacales (12 signos) como marco de personalidad para 12 agentes AIOS, con equilibrio elemental perfecto y adecuacion cultural global.
+**Decision Clave:** Usar arquetipos zodiacales (12 signos) como marco de personalidad para 12 agentes AIOX, con equilibrio elemental perfecto y adecuacion cultural global.
 
 ---
 
@@ -259,7 +259,7 @@ Despues de evaluar multiples sistemas de arquetipos, seleccionamos los signos zo
 
 **Pros:**
 - Control completo
-- Perfectamente adaptado a AIOS
+- Perfectamente adaptado a AIOX
 - Sin bagaje cultural
 
 **Contras:**
@@ -539,7 +539,7 @@ greeting = `${icon} ${name} el ${role} (${zodiac_symbol} ${archetype}) listo par
 
 ## Conclusion
 
-**Los arquetipos zodiacales proporcionan el marco ideal para personas de agentes AIOS porque:**
+**Los arquetipos zodiacales proporcionan el marco ideal para personas de agentes AIOX porque:**
 
 1. Reconocimiento universal a traves de culturas
 2. Mapeo perfecto 12:12 a nuestro conteo de agentes

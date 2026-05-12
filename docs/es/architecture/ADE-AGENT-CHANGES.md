@@ -1,4 +1,4 @@
-# Cambios en los Agentes ADE - Alteraciones en los Agentes AIOS
+# Cambios en los Agentes ADE - Alteraciones en los Agentes AIOX
 
 > **Documento:** Registro de las alteraciones realizadas en los agentes para soportar ADE
 > **Fecha:** 2026-01-29
@@ -9,12 +9,12 @@
 
 ## Descripción General
 
-Este documento registra todas las alteraciones realizadas en los archivos de definición de los agentes AIOS para soportar el AIOS Autonomous Development Engine (ADE).
+Este documento registra todas las alteraciones realizadas en los archivos de definición de los agentes AIOX para soportar el AIOX Autonomous Development Engine (ADE).
 
 **Archivos modificados:**
 
-- `.aios-core/development/agents/*.md` (fuente)
-- `.claude/commands/AIOS/agents/*.md` (sincronizado)
+- `.aiox-core/development/agents/*.md` (fuente)
+- `.claude/commands/AIOX/agents/*.md` (sincronizado)
 
 ---
 
@@ -71,7 +71,7 @@ autoClaude:
 
 ### @devops (Gage)
 
-**Archivo:** `.aios-core/development/agents/devops.md`
+**Archivo:** `.aiox-core/development/agents/devops.md`
 
 **Comandos Añadidos:**
 
@@ -125,7 +125,7 @@ dependencies:
 
 ### @pm (Morgan)
 
-**Archivo:** `.aios-core/development/agents/pm.md`
+**Archivo:** `.aiox-core/development/agents/pm.md`
 
 **Comandos Añadidos:**
 
@@ -162,7 +162,7 @@ dependencies:
 
 ### @architect (Aria)
 
-**Archivo:** `.aios-core/development/agents/architect.md`
+**Archivo:** `.aiox-core/development/agents/architect.md`
 
 **Comandos Añadidos:**
 
@@ -215,7 +215,7 @@ dependencies:
 
 ### @analyst (Atlas)
 
-**Archivo:** `.aios-core/development/agents/analyst.md`
+**Archivo:** `.aiox-core/development/agents/analyst.md`
 
 **Comandos Añadidos:**
 
@@ -260,7 +260,7 @@ dependencies:
 
 ### @qa (Quinn)
 
-**Archivo:** `.aios-core/development/agents/qa.md`
+**Archivo:** `.aiox-core/development/agents/qa.md`
 
 **Comandos Añadidos:**
 
@@ -314,7 +314,7 @@ dependencies:
 
 ### @dev (Dexter)
 
-**Archivo:** `.aios-core/development/agents/dev.md`
+**Archivo:** `.aiox-core/development/agents/dev.md`
 
 **Comandos Añadidos:**
 
@@ -343,7 +343,7 @@ dependencies:
   description: 'Capturar insights de sesión (descubrimientos, patrones, gotchas, decisiones)'
 - name: list-gotchas
   visibility: [full, quick]
-  description: 'Listar gotchas conocidos de .aios/gotchas.md'
+  description: 'Listar gotchas conocidos de .aiox/gotchas.md'
 ```
 
 **Capacidades autoClaude:**
@@ -430,7 +430,7 @@ dependencies:
 Todos los agentes fueron sincronizados entre:
 
 ```
-.aios-core/development/agents/   →   .claude/commands/AIOS/agents/
+.aiox-core/development/agents/   →   .claude/commands/AIOX/agents/
          (fuente)                           (sincronizado)
 ```
 
@@ -446,7 +446,7 @@ Todos los agentes fueron sincronizados entre:
 - sm.md
 - ux-design-expert.md
 - data-engineer.md
-- aios-master.md
+- aiox-master.md
 - squad-creator.md
 
 ---
@@ -455,12 +455,12 @@ Todos los agentes fueron sincronizados entre:
 
 Todos los agentes validan contra:
 
-- `.aios-core/infrastructure/schemas/agent-v3-schema.json`
+- `.aiox-core/infrastructure/schemas/agent-v3-schema.json`
 
 **Comando para validar:**
 
 ```bash
-node .aios-core/infrastructure/scripts/migrate-agent.js --validate
+node .aiox-core/infrastructure/scripts/migrate-agent.js --validate
 ```
 
 ---

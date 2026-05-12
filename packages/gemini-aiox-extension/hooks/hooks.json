@@ -1,0 +1,70 @@
+{
+  "$schema": "https://geminicli.com/schemas/hooks.json",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-session-init",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/session-start.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-context-inject",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/before-agent.js",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "write_file|replace|shell|bash|execute",
+        "hooks": [
+          {
+            "name": "aiox-security-check",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/before-tool.js",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-audit-log",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/after-tool.js",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "aiox-session-persist",
+            "type": "command",
+            "command": "node .aiox-core/hooks/gemini/session-end.js",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

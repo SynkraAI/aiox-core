@@ -47,7 +47,7 @@ Este workflow executa ate um maximo de iteracoes configuravel (padrao: 5), rastr
 
 ### Tipos de Projeto Suportados
 
-- `aios-development`
+- `aiox-development`
 - `autonomous-development`
 - `qa-automation`
 
@@ -483,7 +483,7 @@ Responsabilidades:
 
 ### 1. qa-review-story.md
 
-**Localizacao:** `.aios-core/development/tasks/qa-review-story.md`
+**Localizacao:** `.aiox-core/development/tasks/qa-review-story.md`
 
 **Proposito:** Realizar revisao arquitetural de testes com decisao de quality gate.
 
@@ -536,7 +536,7 @@ flowchart TD
 
 ### 2. qa-create-fix-request.md
 
-**Localizacao:** `.aios-core/development/tasks/qa-create-fix-request.md`
+**Localizacao:** `.aiox-core/development/tasks/qa-create-fix-request.md`
 
 **Proposito:** Gerar documento estruturado `QA_FIX_REQUEST.md` para @dev baseado nos findings de QA.
 
@@ -602,7 +602,7 @@ flowchart LR
 
 ### 3. dev-apply-qa-fixes.md
 
-**Localizacao:** `.aios-core/development/tasks/dev-apply-qa-fixes.md`
+**Localizacao:** `.aiox-core/development/tasks/dev-apply-qa-fixes.md`
 
 **Proposito:** Aplicar fixes baseados no feedback de QA e gate review.
 
@@ -792,8 +792,8 @@ config:
   statusFile: qa/loop-status.json
 
   # Integracao com Dashboard (AC7)
-  dashboardStatusPath: .aios/dashboard/status.json
-  legacyStatusPath: .aios/status.json
+  dashboardStatusPath: .aiox/dashboard/status.json
+  legacyStatusPath: .aiox/status.json
 
   # Timeout por fase (milliseconds)
   reviewTimeout: 1800000    # 30 minutos
@@ -806,7 +806,7 @@ config:
 
 ### Customizacao por Projeto
 
-No arquivo `.aios-core/core-config.yaml`:
+No arquivo `.aiox-core/core-config.yaml`:
 
 ```yaml
 autoClaude:
@@ -1075,12 +1075,12 @@ mv qa/loop-status.json qa/loop-status.json.bak
 
 | Arquivo | Localizacao |
 |---------|-------------|
-| Workflow Definition | `.aios-core/development/workflows/qa-loop.yaml` |
-| QA Review Task | `.aios-core/development/tasks/qa-review-story.md` |
-| Create Fix Request Task | `.aios-core/development/tasks/qa-create-fix-request.md` |
-| Apply QA Fixes Task | `.aios-core/development/tasks/dev-apply-qa-fixes.md` |
-| QA Agent | `.aios-core/development/agents/qa.md` |
-| Dev Agent | `.aios-core/development/agents/dev.md` |
+| Workflow Definition | `.aiox-core/development/workflows/qa-loop.yaml` |
+| QA Review Task | `.aiox-core/development/tasks/qa-review-story.md` |
+| Create Fix Request Task | `.aiox-core/development/tasks/qa-create-fix-request.md` |
+| Apply QA Fixes Task | `.aiox-core/development/tasks/dev-apply-qa-fixes.md` |
+| QA Agent | `.aiox-core/development/agents/qa.md` |
+| Dev Agent | `.aiox-core/development/agents/dev.md` |
 
 ### Documentacao Relacionada
 
@@ -1095,8 +1095,8 @@ mv qa/loop-status.json qa/loop-status.json.bak
 
 | Template | Localizacao | Uso |
 |----------|-------------|-----|
-| `qa-gate-tmpl.yaml` | `.aios-core/development/templates/` | Gate file structure |
-| `story-tmpl.yaml` | `.aios-core/development/templates/` | Story file structure |
+| `qa-gate-tmpl.yaml` | `.aiox-core/development/templates/` | Gate file structure |
+| `story-tmpl.yaml` | `.aiox-core/development/templates/` | Story file structure |
 
 ---
 

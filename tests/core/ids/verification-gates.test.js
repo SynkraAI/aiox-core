@@ -5,27 +5,27 @@ const path = require('path');
 // Module paths
 const CIRCUIT_BREAKER_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/circuit-breaker.js',
+  '../../../.aiox-core/core/ids/circuit-breaker.js',
 );
 const VERIFICATION_GATE_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/verification-gate.js',
+  '../../../.aiox-core/core/ids/verification-gate.js',
 );
 const G1_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/gates/g1-epic-creation.js',
+  '../../../.aiox-core/core/ids/gates/g1-epic-creation.js',
 );
 const G2_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/gates/g2-story-creation.js',
+  '../../../.aiox-core/core/ids/gates/g2-story-creation.js',
 );
 const G3_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/gates/g3-story-validation.js',
+  '../../../.aiox-core/core/ids/gates/g3-story-validation.js',
 );
 const G4_PATH = path.resolve(
   __dirname,
-  '../../../.aios-core/core/ids/gates/g4-dev-context.js',
+  '../../../.aiox-core/core/ids/gates/g4-dev-context.js',
 );
 
 const {

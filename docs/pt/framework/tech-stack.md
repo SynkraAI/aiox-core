@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-26
 -->
 
-# Stack de Tecnologia AIOS
+# Stack de Tecnologia AIOX
 
 > 🌐 [EN](../../framework/tech-stack.md) | **PT** | [ES](../../es/framework/tech-stack.md)
 
@@ -13,7 +13,7 @@
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** Padrão Oficial do Framework
-**Aviso de Migração:** Este documento migrará para o repositório `SynkraAI/aios-core` em Q2 2026 (veja Decision 005)
+**Aviso de Migração:** Este documento migrará para o repositório `SynkraAI/aiox-core` em Q2 2026 (veja Decision 005)
 
 ---
 
@@ -33,7 +33,7 @@
 
 ## Visão Geral
 
-O AIOS é construído com JavaScript/TypeScript moderno com runtime Node.js, otimizado para desenvolvimento de CLI multiplataforma com UX interativa e capacidades de orquestração de agentes.
+O AIOX é construído com JavaScript/TypeScript moderno com runtime Node.js, otimizado para desenvolvimento de CLI multiplataforma com UX interativa e capacidades de orquestração de agentes.
 
 **Filosofia:**
 
@@ -530,7 +530,7 @@ npm run publish:stable         # Publish latest tag
 
 ### Servidores MCP
 
-O AIOS integra com servidores Model Context Protocol (MCP):
+O AIOX integra com servidores Model Context Protocol (MCP):
 
 ```yaml
 MCP Servers:
@@ -723,7 +723,7 @@ Optimization Strategy:
 ### Uso de Memória
 
 ```yaml
-Baseline: 30MB (Node.js + AIOS core)
+Baseline: 30MB (Node.js + AIOX core)
 Agent Execution: +10MB (per agent)
 Story Processing: +20MB (markdown parsing)
 Peak: ~100MB (typical workflow)
@@ -765,10 +765,10 @@ Node.js: nvm, apt, yum, or official binaries
 ## Variáveis de Ambiente
 
 ```bash
-# AIOS Configuration
-AIOS_DEBUG=true                    # Enable debug logging
-AIOS_CONFIG_PATH=/custom/path      # Custom config location
-AIOS_YOLO_MODE=true               # Force yolo mode
+# AIOX Configuration
+AIOX_DEBUG=true                    # Enable debug logging
+AIOX_CONFIG_PATH=/custom/path      # Custom config location
+AIOX_YOLO_MODE=true               # Force yolo mode
 
 # Node.js
 NODE_ENV=production                # Production mode
@@ -795,8 +795,8 @@ SUPABASE_ACCESS_TOKEN=xxx         # Supabase CLI auth
 | Versão | Data       | Alterações                                                                                       | Autor            |
 | ------ | ---------- | ------------------------------------------------------------------------------------------------ | ---------------- |
 | 1.0    | 2025-01-15 | Documentação inicial do tech stack                                                               | Aria (architect) |
-| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/aios-core, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
+| 1.1    | 2025-12-14 | Atualizado aviso de migração para SynkraAI/aiox-core, semantic-release para v25.0.2 [Story 6.10] | Dex (dev)        |
 
 ---
 
-_Este é um padrão oficial do framework AIOS. Todas as escolhas de tecnologia devem estar alinhadas com este stack._
+_Este é um padrão oficial do framework AIOX. Todas as escolhas de tecnologia devem estar alinhadas com este stack._

@@ -20,7 +20,7 @@ const ToolValidationHelper = require('../../common/utils/tool-validation-helper'
  * 5. No regressions in existing functionality
  */
 describeIntegration('Tools Migration Regression Suite', () => {
-  const toolsPath = path.join(__dirname, '../../.aios-core/tools');
+  const toolsPath = path.join(__dirname, '../../.aiox-core/tools');
 
   // All 12 tools (8 v1.0 + 4 v2.0)
   const allTools = [

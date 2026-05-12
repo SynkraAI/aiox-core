@@ -18,11 +18,11 @@ const {
   SquadPublisher,
   SquadPublisherError,
   PublisherErrorCodes,
-  AIOS_SQUADS_REPO,
+  AIOX_SQUADS_REPO,
   SAFE_NAME_PATTERN,
   sanitizeForShell,
   isValidName,
-} = require('../../../.aios-core/development/scripts/squad');
+} = require('../../../.aiox-core/development/scripts/squad');
 
 // Mock child_process
 jest.mock('child_process', () => ({
@@ -74,8 +74,8 @@ describe('SquadPublisher', () => {
   });
 
   describe('Constants', () => {
-    it('should export AIOS_SQUADS_REPO', () => {
-      expect(AIOS_SQUADS_REPO).toBe('SynkraAI/aios-squads');
+    it('should export AIOX_SQUADS_REPO', () => {
+      expect(AIOX_SQUADS_REPO).toBe('SynkraAI/aiox-squads');
     });
 
     it('should export PublisherErrorCodes enum', () => {
@@ -169,7 +169,7 @@ describe('SquadPublisher', () => {
 
     it('should use default repo when not specified', () => {
       const defaultPublisher = new SquadPublisher();
-      expect(defaultPublisher.repo).toBe(AIOS_SQUADS_REPO);
+      expect(defaultPublisher.repo).toBe(AIOX_SQUADS_REPO);
     });
 
     it('should use custom repo when specified', () => {
@@ -316,7 +316,7 @@ describe('SquadPublisher', () => {
 
       const result = await dryRunPublisher.publish(validSquadPath);
 
-      expect(result.preview.repo).toBe(AIOS_SQUADS_REPO);
+      expect(result.preview.repo).toBe(AIOX_SQUADS_REPO);
       expect(result.preview.category).toBe('community');
       expect(result.preview.body).toBeDefined();
     });
@@ -433,7 +433,7 @@ describe('SquadPublisher', () => {
       const body = publisher.generatePRBody(manifest);
 
       expect(body).toContain('### Pre-submission Checklist');
-      expect(body).toContain('[x] Squad follows AIOS task-first architecture');
+      expect(body).toContain('[x] Squad follows AIOX task-first architecture');
       expect(body).toContain('[ ] No sensitive data included');
     });
 
@@ -446,7 +446,7 @@ describe('SquadPublisher', () => {
       const body = publisher.generatePRBody(manifest);
 
       expect(body).toContain('*publish-squad');
-      expect(body).toContain('AIOS-FullStack');
+      expect(body).toContain('AIOX-FullStack');
     });
   });
 

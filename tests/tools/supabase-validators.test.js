@@ -18,8 +18,8 @@ describeIntegration('Supabase Tool Validators', () => {
   let supabaseTool;
 
   beforeAll(async () => {
-    // Set search path to aios-core/tools
-    const toolsPath = path.join(__dirname, '../../aios-core/tools');
+    // Set search path to aiox-core/tools
+    const toolsPath = path.join(__dirname, '../../aiox-core/tools');
     toolResolver.setSearchPaths([toolsPath]);
 
     // Resolve supabase tool
@@ -35,7 +35,7 @@ describeIntegration('Supabase Tool Validators', () => {
   });
 
   describeIntegration('Tool Resolution', () => {
-    test('should resolve supabase tool from aios-core/tools/mcp', async () => {
+    test('should resolve supabase tool from aiox-core/tools/mcp', async () => {
       expect(supabaseTool).toBeDefined();
       expect(supabaseTool.id).toBe('supabase');
       expect(supabaseTool.type).toBe('mcp');

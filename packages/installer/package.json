@@ -1,10 +1,10 @@
 {
-  "name": "@aios/installer",
+  "name": "@aiox/installer",
   "version": "3.2.1",
-  "description": "AIOS Installer - Automated setup wizard for AIOS projects (greenfield & brownfield)",
+  "description": "AIOX Installer - Automated setup wizard for AIOX projects (greenfield & brownfield)",
   "main": "src/index.js",
   "bin": {
-    "aios-installer": "./src/index.js"
+    "aiox-installer": "./src/index.js"
   },
   "scripts": {
     "test": "jest",
@@ -14,7 +14,7 @@
     "test:integration": "jest tests/integration"
   },
   "keywords": [
-    "aios",
+    "aiox",
     "installer",
     "wizard",
     "cli",
@@ -22,7 +22,7 @@
     "greenfield",
     "brownfield"
   ],
-  "author": "AIOS Fullstack Team",
+  "author": "AIOX Fullstack Team",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"

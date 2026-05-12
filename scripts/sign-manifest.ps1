@@ -2,7 +2,7 @@
 # sign-manifest.ps1 - Helper script to sign the install manifest (Windows)
 #
 # Usage:
-#   .\scripts\sign-manifest.ps1 -SecretKey C:\path\to\aios-core.key
+#   .\scripts\sign-manifest.ps1 -SecretKey C:\path\to\aiox-core.key
 #
 # Prerequisites:
 #   - minisign installed (scoop install minisign)
@@ -29,11 +29,11 @@ function Write-ColorOutput($ForegroundColor) {
 # Paths
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectRoot = Split-Path -Parent $ScriptDir
-$ManifestPath = Join-Path $ProjectRoot ".aios-core\install-manifest.yaml"
+$ManifestPath = Join-Path $ProjectRoot ".aiox-core\install-manifest.yaml"
 $SignaturePath = "$ManifestPath.minisig"
 
 Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
-Write-Host "  AIOS-Core Manifest Signing Tool (Windows)" -ForegroundColor Yellow
+Write-Host "  AIOX-Core Manifest Signing Tool (Windows)" -ForegroundColor Yellow
 Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Yellow
 Write-Host ""
 
@@ -57,7 +57,7 @@ if (-not (Test-Path $ManifestPath)) {
     Write-Host "Error: Manifest not found: $ManifestPath" -ForegroundColor Red
     Write-Host ""
     Write-Host "Generate manifest first with:"
-    Write-Host "  node bin\aios.js manifest:generate"
+    Write-Host "  node bin\aiox.js manifest:generate"
     exit 1
 }
 
@@ -79,7 +79,7 @@ if (Test-Path $SignaturePath) {
 Write-Host "Signing manifest..." -ForegroundColor Green
 Write-Host ""
 
-Push-Location (Join-Path $ProjectRoot ".aios-core")
+Push-Location (Join-Path $ProjectRoot ".aiox-core")
 try {
     & minisign -Sm install-manifest.yaml -s $SecretKey
     if ($LASTEXITCODE -ne 0) {
@@ -96,7 +96,7 @@ Write-Host "Verifying signature..." -ForegroundColor Green
 
 $PublicKey = $SecretKey -replace '\.key$', '.pub'
 if (Test-Path $PublicKey) {
-    Push-Location (Join-Path $ProjectRoot ".aios-core")
+    Push-Location (Join-Path $ProjectRoot ".aiox-core")
     try {
         & minisign -Vm install-manifest.yaml -p $PublicKey
         if ($LASTEXITCODE -eq 0) {
@@ -124,7 +124,7 @@ Write-Host ""
 Write-Host "Created: $SignaturePath"
 Write-Host ""
 Write-Host "Next steps:"
-Write-Host "  1. git add .aios-core\install-manifest.yaml.minisig"
+Write-Host "  1. git add .aiox-core\install-manifest.yaml.minisig"
 Write-Host "  2. git commit -m 'chore: sign manifest for release'"
 Write-Host "  3. npm publish"
 Write-Host ""

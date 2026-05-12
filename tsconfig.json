@@ -20,13 +20,13 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@synkra/aios-core": ["./.aios-core/core"],
-      "@synkra/aios-core/*": ["./.aios-core/core/*"]
+      "aiox-core": ["./.aiox-core/core"],
+      "aiox-core/*": ["./.aiox-core/core/*"]
     }
   },
   "include": [
     "types/**/*.d.ts",
-    ".aios-core/**/*",
+    ".aiox-core/**/*",
     "tools/**/*",
     "scripts/**/*",
     "src/**/*",
@@ -43,11 +43,11 @@
     "**/*-tmpl.*",
     "**/*.tmpl.*",
     "**/*-template.*",
-    ".aios-core/development/templates/**",
-    ".aios-core.backup*/**",
-    "aios-core.backup*/**",
-    "aios-core-deprecated/**",
-    "aios-core-depracated/**",
+    ".aiox-core/development/templates/**",
+    ".aiox-core.backup*/**",
+    "aiox-core.backup*/**",
+    "aiox-core-deprecated/**",
+    "aiox-core-depracated/**",
     "eslint.config.js"
   ]
 }

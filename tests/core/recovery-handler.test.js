@@ -18,7 +18,7 @@ const {
   RecoveryHandler,
   RecoveryStrategy,
   RecoveryResult,
-} = require('../../.aios-core/core/orchestration/recovery-handler');
+} = require('../../.aiox-core/core/orchestration/recovery-handler');
 
 describe('Recovery Handler (Story 0.5)', () => {
   let tempDir;
@@ -178,7 +178,7 @@ describe('Recovery Handler (Story 0.5)', () => {
       const result = await handler.handleEpicFailure(3, new Error('Fatal error'));
 
       if (result.escalated) {
-        const reportsDir = path.join(tempDir, '.aios', 'escalations');
+        const reportsDir = path.join(tempDir, '.aiox', 'escalations');
         const exists = await fs.pathExists(reportsDir);
         expect(exists).toBe(true);
       }
@@ -302,7 +302,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should integrate RecoveryHandler with MasterOrchestrator', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',
@@ -317,7 +317,7 @@ describe('Integration with MasterOrchestrator', () => {
   });
 
   it('should expose getRecoveryHandler method', async () => {
-    const { MasterOrchestrator } = require('../../.aios-core/core/orchestration');
+    const { MasterOrchestrator } = require('../../.aiox-core/core/orchestration');
 
     const orchestrator = new MasterOrchestrator(tempDir, {
       storyId: 'TEST-001',

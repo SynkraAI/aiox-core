@@ -1,6 +1,6 @@
 # GitHub Actions Workflows
 
-This directory contains automated workflows for the AIOS project.
+This directory contains automated workflows for the AIOX project.
 
 ---
 
@@ -72,7 +72,7 @@ The report includes Docker MCP Toolkit metrics:
 - Token savings estimate
 - MCP governance status
 
-> **Note:** Legacy 1MCP metrics have been deprecated. AIOS now uses Docker MCP Toolkit exclusively (Story 5.11).
+> **Note:** Legacy 1MCP metrics have been deprecated. AIOX now uses Docker MCP Toolkit exclusively (Story 5.11).
 
 ### Maintenance
 

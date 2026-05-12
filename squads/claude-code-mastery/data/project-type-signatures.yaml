@@ -1,0 +1,335 @@
+# Project Type Signatures — Detection & Configuration Recommendations
+# Squad: claude-code-mastery
+# Last updated: 2026-03-02
+
+version: "1.0.0"
+
+# Each project type defines detection signals and recommended Claude Code configuration.
+# Used by config-engineer and project-integrator agents to bootstrap projects.
+
+project_types:
+
+  # ---------------------------------------------------------------------------
+  monorepo:
+    display_name: "Monorepo (Turborepo / Nx / Lerna)"
+    detection_files:
+      - turbo.json
+      - nx.json
+      - lerna.json
+      - pnpm-workspace.yaml
+    detection_patterns:
+      - file: package.json
+        field: workspaces
+        description: "Has 'workspaces' field in root package.json"
+      - file: package.json
+        field: "scripts.build"
+        contains: "turbo"
+    recommended_claude_md_template: claude-md-monorepo.md
+    recommended_rules:
+      - name: monorepo-boundaries
+        description: "Enforce package boundaries, prevent cross-package direct imports"
+        path_pattern: "packages/**"
+      - name: shared-deps
+        description: "Validate shared dependency versions across packages"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+        description: "Run eslint on modified files after edits"
+      - pattern: damage-control
+        event: PreToolUse
+        description: "Block destructive commands"
+
+  # ---------------------------------------------------------------------------
+  fullstack-nextjs:
+    display_name: "Fullstack Next.js (App Router)"
+    detection_files:
+      - next.config.js
+      - next.config.mjs
+      - next.config.ts
+    detection_patterns:
+      - file: package.json
+        field: "dependencies.next"
+        description: "Has 'next' in dependencies"
+      - file: package.json
+        field: "dependencies.react"
+        description: "Has 'react' in dependencies"
+      - directory: app/
+        description: "Uses App Router (app/ directory)"
+      - directory: src/app/
+        description: "Uses App Router with src/ prefix"
+    recommended_claude_md_template: claude-md-fullstack.md
+    recommended_rules:
+      - name: server-client-boundary
+        description: "Enforce 'use client' / 'use server' directives"
+        path_pattern: "src/app/**"
+      - name: api-route-patterns
+        description: "Validate API route handler signatures"
+        path_pattern: "src/app/api/**"
+      - name: component-patterns
+        description: "Enforce component file structure and naming"
+        path_pattern: "src/components/**"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+      - playwright
+      - supabase
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+        description: "Run eslint + prettier on save"
+      - pattern: damage-control
+        event: PreToolUse
+        description: "Block rm -rf, git push --force"
+
+  # ---------------------------------------------------------------------------
+  react-library:
+    display_name: "React Component Library / Design System"
+    detection_files:
+      - rollup.config.js
+      - rollup.config.mjs
+      - tsup.config.ts
+      - vite.config.ts
+    detection_patterns:
+      - file: package.json
+        field: "peerDependencies.react"
+        description: "React as peer dependency (library pattern)"
+      - file: package.json
+        field: main
+        description: "Has 'main' entry point for distribution"
+      - file: package.json
+        field: exports
+        description: "Has 'exports' map for ESM/CJS"
+      - directory: src/components/
+        description: "Component source directory"
+    recommended_claude_md_template: claude-md-library.md
+    recommended_rules:
+      - name: public-api-surface
+        description: "Track public exports, prevent breaking changes"
+        path_pattern: "src/index.ts"
+      - name: peer-dep-ranges
+        description: "Validate peer dependency version ranges"
+      - name: storybook-coverage
+        description: "Ensure every exported component has a story"
+        path_pattern: "src/**/*.stories.tsx"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+      - pattern: api-surface-check
+        event: PostToolUse
+        description: "Warn if public API changes detected"
+
+  # ---------------------------------------------------------------------------
+  python-api:
+    display_name: "Python API (FastAPI / Django / Flask)"
+    detection_files:
+      - requirements.txt
+      - pyproject.toml
+      - setup.py
+      - Pipfile
+      - poetry.lock
+    detection_patterns:
+      - file: pyproject.toml
+        field: "tool.poetry"
+        description: "Uses Poetry for dependency management"
+      - file: requirements.txt
+        contains: "fastapi"
+        description: "FastAPI dependency detected"
+      - file: requirements.txt
+        contains: "django"
+        description: "Django dependency detected"
+      - file: requirements.txt
+        contains: "flask"
+        description: "Flask dependency detected"
+      - directory: app/
+        description: "Application directory"
+    recommended_claude_md_template: claude-md-python-api.md
+    recommended_rules:
+      - name: type-hints
+        description: "Enforce type hints on all function signatures"
+        path_pattern: "**/*.py"
+      - name: docstrings
+        description: "Require docstrings on public functions/classes"
+        path_pattern: "**/*.py"
+      - name: migration-safety
+        description: "Validate Alembic/Django migrations"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+      - postgres
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+        description: "Run ruff/black on modified Python files"
+      - pattern: security-gate
+        event: PreToolUse
+        description: "Block exposure of .env, secrets"
+
+  # ---------------------------------------------------------------------------
+  mobile-react-native:
+    display_name: "Mobile (React Native / Expo)"
+    detection_files:
+      - app.json
+      - app.config.js
+      - app.config.ts
+      - metro.config.js
+      - react-native.config.js
+    detection_patterns:
+      - file: package.json
+        field: "dependencies.react-native"
+        description: "Has 'react-native' dependency"
+      - file: package.json
+        field: "dependencies.expo"
+        description: "Has 'expo' dependency"
+      - directory: ios/
+        description: "iOS native directory"
+      - directory: android/
+        description: "Android native directory"
+    recommended_claude_md_template: claude-md-mobile.md
+    recommended_rules:
+      - name: platform-imports
+        description: "Validate platform-specific imports (.ios.ts, .android.ts)"
+        path_pattern: "src/**"
+      - name: navigation-patterns
+        description: "Enforce React Navigation patterns"
+        path_pattern: "src/navigation/**"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+    recommended_hooks:
+      - pattern: damage-control
+        event: PreToolUse
+        description: "Block destructive native directory operations"
+
+  # ---------------------------------------------------------------------------
+  rust-project:
+    display_name: "Rust Project (Cargo)"
+    detection_files:
+      - Cargo.toml
+      - Cargo.lock
+    detection_patterns:
+      - directory: src/
+        description: "Rust source directory"
+      - file: Cargo.toml
+        field: "[workspace]"
+        description: "Cargo workspace (monorepo)"
+    recommended_claude_md_template: claude-md-rust.md
+    recommended_rules:
+      - name: unsafe-audit
+        description: "Flag all unsafe blocks for review"
+        path_pattern: "src/**/*.rs"
+      - name: clippy-compliance
+        description: "Ensure clippy warnings are addressed"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+        description: "Run cargo fmt on modified .rs files"
+      - pattern: damage-control
+        event: PreToolUse
+
+  # ---------------------------------------------------------------------------
+  go-project:
+    display_name: "Go Project"
+    detection_files:
+      - go.mod
+      - go.sum
+    detection_patterns:
+      - file: go.mod
+        field: module
+        description: "Go module declaration"
+      - directory: cmd/
+        description: "Go command directory pattern"
+      - directory: internal/
+        description: "Go internal packages"
+    recommended_claude_md_template: claude-md-go.md
+    recommended_rules:
+      - name: go-conventions
+        description: "Enforce Go naming and package conventions"
+        path_pattern: "**/*.go"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+        description: "Run gofmt on modified .go files"
+
+  # ---------------------------------------------------------------------------
+  static-site:
+    display_name: "Static Site (Astro / Hugo / Gatsby / 11ty)"
+    detection_files:
+      - astro.config.mjs
+      - gatsby-config.js
+      - hugo.toml
+      - .eleventy.js
+      - eleventy.config.js
+    detection_patterns:
+      - file: package.json
+        field: "dependencies.astro"
+      - directory: content/
+        description: "Content directory for static sites"
+      - directory: src/pages/
+        description: "Pages directory"
+    recommended_claude_md_template: claude-md-static-site.md
+    recommended_rules:
+      - name: content-frontmatter
+        description: "Validate frontmatter in markdown content files"
+        path_pattern: "content/**/*.md"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+    recommended_hooks:
+      - pattern: auto-lint
+        event: PostToolUse
+
+  # ---------------------------------------------------------------------------
+  aiox-project:
+    display_name: "AIOX-Managed Project"
+    detection_files:
+      - .aiox-core/core-config.yaml
+      - .aiox-core/constitution.md
+    detection_patterns:
+      - directory: .aiox-core/
+        description: "AIOX core framework directory"
+      - directory: .claude/commands/AIOX/
+        description: "AIOX agent commands for Claude"
+      - file: .claude/settings.json
+        contains: "AIOX"
+    recommended_claude_md_template: null
+    note: "AIOX projects already have CLAUDE.md managed by the framework"
+    recommended_rules:
+      - name: framework-boundary
+        description: "Enforce L1-L4 layer protection"
+      - name: agent-authority
+        description: "Enforce agent delegation matrix"
+      - name: story-lifecycle
+        description: "Enforce story status transitions"
+    recommended_mcp_servers:
+      - filesystem
+      - git
+      - context7
+      - coderabbit
+      - supabase
+    recommended_hooks:
+      - pattern: damage-control
+        event: PreToolUse
+      - pattern: auto-lint
+        event: PostToolUse
+      - pattern: context-preservation
+        event: PreCompact

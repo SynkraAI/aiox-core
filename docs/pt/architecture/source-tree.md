@@ -1,6 +1,6 @@
 <!-- Tradução: PT-BR | Original: /docs/en/architecture/source-tree.md | Sincronização: 2026-01-26 -->
 
-# Estrutura da Árvore de Código AIOS
+# Estrutura da Árvore de Código AIOX
 
 > 🌐 [EN](../../architecture/source-tree.md) | **PT** | [ES](../../es/architecture/source-tree.md)
 
@@ -14,20 +14,20 @@
 
 ---
 
-# Estrutura da Árvore de Código AIOS
+# Estrutura da Árvore de Código AIOX
 
 **Versão:** 1.1
 **Última Atualização:** 2025-12-14
 **Status:** DESCONTINUADO - Veja docs/framework/source-tree.md
-**Aviso de Migração:** Este documento será migrado para o repositório `SynkraAI/aios-core` no Q2 2026 (veja Decisão 005)
+**Aviso de Migração:** Este documento será migrado para o repositório `SynkraAI/aiox-core` no Q2 2026 (veja Decisão 005)
 
 ---
 
 ## 📋 Índice
 
 - [Visão Geral](#visão-geral)
-- [Estrutura Atual (aios-core Brownfield)](#estrutura-atual-aios-core-brownfield)
-- [Framework Core (.aios-core/)](#framework-core-aios-core)
+- [Estrutura Atual (aiox-core Brownfield)](#estrutura-atual-aiox-core-brownfield)
+- [Framework Core (.aiox-core/)](#framework-core-aiox-core)
 - [Documentação (docs/)](#documentação-docs)
 - [Sistema de Squads](#sistema-de-squads)
 - [Estrutura Futura (Pós-Migração Q2 2026)](#estrutura-futura-pós-migração-q2-2026)
@@ -38,9 +38,9 @@
 
 ## Visão Geral
 
-AIOS utiliza uma **arquitetura de camada dupla**:
+AIOX utiliza uma **arquitetura de camada dupla**:
 
-1. **Framework Core** (`.aios-core/`) - Componentes portáteis do framework
+1. **Framework Core** (`.aiox-core/`) - Componentes portáteis do framework
 2. **Workspace do Projeto** (raiz) - Implementação específica do projeto
 
 **Filosofia:**
@@ -51,19 +51,19 @@ AIOS utiliza uma **arquitetura de camada dupla**:
 
 ---
 
-## Estrutura Atual (aios-core Brownfield)
+## Estrutura Atual (aiox-core Brownfield)
 
 ```
-aios-core/                             # Raiz (projeto brownfield)
-├── .aios-core/                        # Core do framework (portátil)
-│   ├── core/                          # Essenciais do framework (v2.1)
+aiox-core/                             # Raiz (projeto brownfield)
+├── .aiox-core/                        # Core do framework (portátil)
+│   ├── core/                          # Essenciais do framework (v4)
 │   │   ├── config/                    # Sistema de configuração
 │   │   ├── data/                      # Base de conhecimento core
 │   │   ├── docs/                      # Documentação core
 │   │   ├── elicitation/               # Motor de prompting interativo
 │   │   ├── session/                   # Gerenciamento de estado em runtime
 │   │   └── utils/                     # Utilitários core
-│   ├── product/                       # Ativos PM/PO (v2.1)
+│   ├── product/                       # Ativos PM/PO (v4)
 │   │   ├── templates/                 # Templates de documentos (52+ arquivos)
 │   │   ├── checklists/                # Checklists de validação (6 arquivos)
 │   │   └── data/                      # Dados específicos de PM (6 arquivos)
@@ -88,8 +88,8 @@ aios-core/                             # Raiz (projeto brownfield)
 │   └── squad/                         # Template de squad para extensões (veja docs/guides/squads-guide.md)
 │
 ├── bin/                               # Executáveis CLI
-│   ├── @synkra/aios-core.js              # Ponto de entrada principal da CLI
-│   └── aios-minimal.js                # CLI mínima
+│   ├── aiox-core.js              # Ponto de entrada principal da CLI
+│   └── aiox-minimal.js                # CLI mínima
 │
 ├── tools/                             # Ferramentas de build e utilitários
 │   ├── cli.js                         # Builder da CLI
@@ -125,16 +125,16 @@ aios-core/                             # Raiz (projeto brownfield)
 
 ---
 
-## Framework Core (.aios-core/)
+## Framework Core (.aiox-core/)
 
-**Propósito:** Componentes portáteis do framework que funcionam em qualquer projeto AIOS.
+**Propósito:** Componentes portáteis do framework que funcionam em qualquer projeto AIOX.
 
 ### Estrutura de Diretórios
 
 ```
-.aios-core/
+.aiox-core/
 ├── agents/                            # 145 definições de agentes
-│   ├── aios-master.md                 # Orquestrador master
+│   ├── aiox-master.md                 # Orquestrador master
 │   ├── dev.md                         # Agente desenvolvedor
 │   ├── qa.md                          # Agente engenheiro de QA
 │   ├── architect.md                   # Agente arquiteto de sistema
@@ -188,7 +188,7 @@ aios-core/                             # Raiz (projeto brownfield)
 │   └── change-checklist.md            # Checklist de gerenciamento de mudanças
 │
 ├── data/                              # 6 arquivos de base de conhecimento
-│   ├── aios-kb.md                     # Base de conhecimento AIOS
+│   ├── aiox-kb.md                     # Base de conhecimento AIOX
 │   ├── technical-preferences.md       # Preferências de tech stack
 │   ├── elicitation-methods.md         # Técnicas de elicitação
 │   ├── brainstorming-techniques.md    # Métodos de brainstorming
@@ -231,37 +231,37 @@ aios-core/                             # Raiz (projeto brownfield)
 
 ```yaml
 Agents:
-  Location: .aios-core/agents/
+  Location: .aiox-core/agents/
   Format: Markdown com frontmatter YAML
   Naming: {agent-name}.md (kebab-case)
   Example: developer.md, qa-engineer.md
 
 Tasks:
-  Location: .aios-core/tasks/
+  Location: .aiox-core/tasks/
   Format: Workflow Markdown
   Naming: {task-name}.md (kebab-case)
   Example: create-next-story.md, develop-story.md
 
 Templates:
-  Location: .aios-core/product/templates/
+  Location: .aiox-core/product/templates/
   Format: YAML ou Markdown
   Naming: {template-name}-tmpl.{yaml|md}
   Example: story-tmpl.yaml, prd-tmpl.md
 
 Workflows:
-  Location: .aios-core/workflows/
+  Location: .aiox-core/workflows/
   Format: YAML
   Naming: {workflow-type}-{scope}.yaml
   Example: greenfield-fullstack.yaml, brownfield-service.yaml
 
 Checklists:
-  Location: .aios-core/product/checklists/
+  Location: .aiox-core/product/checklists/
   Format: Markdown
   Naming: {checklist-name}-checklist.md
   Example: story-draft-checklist.md, architect-checklist.md
 
 Utilities:
-  Location: .aios-core/utils/
+  Location: .aiox-core/utils/
   Format: JavaScript (CommonJS)
   Naming: {utility-name}.js (kebab-case)
   Example: component-generator.js, story-manager.js
@@ -290,7 +290,7 @@ docs/
 │   └── README.md                      # Aviso de migração
 │
 ├── stories/                           # Stories de desenvolvimento
-│   ├── aios migration/                # Stories de migração AIOS
+│   ├── aiox migration/                # Stories de migração AIOX
 │   │   ├── story-6.1.2.1.md
 │   │   ├── story-6.1.2.2.md
 │   │   ├── story-6.1.2.3.md
@@ -365,7 +365,7 @@ docs/
 
 ### Visão Geral
 
-Squads são extensões modulares que adicionam capacidades especializadas ao AIOS. Diferente dos Squads descontinuados, Squads seguem uma estrutura de template padronizada.
+Squads são extensões modulares que adicionam capacidades especializadas ao AIOX. Diferente dos Squads descontinuados, Squads seguem uma estrutura de template padronizada.
 
 ### Localização do Template de Squad
 
@@ -392,7 +392,7 @@ templates/squad/                       # Template de squad para criar extensões
 
 ```bash
 # CLI futura (planejada):
-npx create-aios-squad my-squad-name
+npx create-aiox-squad my-squad-name
 
 # Método atual:
 cp -r templates/squad/ squads/my-squad-name/
@@ -422,7 +422,7 @@ workflows:
 
 # Dependências
 dependencies:
-  aios-core: '>=2.1.0'
+  aiox-core: '>=2.1.0'
 ```
 
 ### Migração de Squads
@@ -430,7 +430,7 @@ dependencies:
 | Legado (Descontinuado)          | Atual (Squads)                  |
 | ------------------------------- | ------------------------------- |
 | Diretório `Squads/`             | Template `templates/squad/`     |
-| Config `expansionPacksLocation` | Config `squadsTemplateLocation` |
+| Config `legacyPacksLocation` | Config `squadsTemplateLocation` |
 | Manifesto `pack.yaml`           | Manifesto `squad.yaml`          |
 | Carregamento direto             | Criação baseada em template     |
 
@@ -440,10 +440,10 @@ dependencies:
 
 **Decisão 005 define 5 repositórios separados:**
 
-### REPO 1: SynkraAI/aios-core (Commons Clause)
+### REPO 1: SynkraAI/aiox-core (MIT)
 
 ```
-aios-core/
+aiox-core/
 ├── src/                               # Código fonte
 │   ├── core/                          # Motor de orquestração core
 │   │   ├── agent-executor.js
@@ -454,7 +454,7 @@ aios-core/
 │   │   └── ide/                       # Integração com IDE
 │   └── cli/                           # Interface CLI
 │
-├── .aios-core/                        # Ativos do framework (estrutura atual)
+├── .aiox-core/                        # Ativos do framework (estrutura atual)
 │   ├── agents/
 │   ├── tasks/
 │   ├── templates/
@@ -481,7 +481,7 @@ aios-core/
 
 ```
 squads/
-├── verified/                          # Squads curados pelo AIOS
+├── verified/                          # Squads curados pelo AIOX
 │   ├── github-devops/
 │   ├── db-sage/
 │   └── coderabbit-workflow/
@@ -496,7 +496,7 @@ squads/
 │   └── agent-squad/
 │
 └── tools/                             # Ferramentas de desenvolvimento de squad
-    └── create-aios-squad/
+    └── create-aiox-squad/
 ```
 
 ### REPO 3: SynkraAI/mcp-ecosystem (Apache 2.0)
@@ -504,9 +504,9 @@ squads/
 ```
 mcp-ecosystem/
 ├── presets/                           # Presets MCP (Docker MCP Toolkit)
-│   ├── aios-dev/
-│   ├── aios-research/
-│   └── aios-docker/
+│   ├── aiox-dev/
+│   ├── aiox-research/
+│   └── aiox-docker/
 │
 ├── mcps/                              # Configurações base de MCP
 │   ├── exa/
@@ -561,10 +561,10 @@ mmos/
 
 ```yaml
 Diretórios: kebab-case (minúsculas, separados por hífen)
-  ✅ .aios-core/
+  ✅ .aiox-core/
   ✅ Squads/
-  ❌ .AIOS-Core/
-  ❌ expansionPacks/
+  ❌ .AIOX-Core/
+  ❌ legacy-packs/
 
 Arquivos (Código): kebab-case com extensão
   ✅ agent-executor.js
@@ -617,24 +617,24 @@ Checklists:
 
 ```yaml
 # Estou criando um novo agente:
-Localização: .aios-core/agents/{agent-name}.md
-Exemplo: .aios-core/agents/security-expert.md
+Localização: .aiox-core/agents/{agent-name}.md
+Exemplo: .aiox-core/agents/security-expert.md
 
 # Estou criando uma nova tarefa:
-Localização: .aios-core/tasks/{task-name}.md
-Exemplo: .aios-core/tasks/deploy-to-production.md
+Localização: .aiox-core/tasks/{task-name}.md
+Exemplo: .aiox-core/tasks/deploy-to-production.md
 
 # Estou criando um novo workflow:
-Localização: .aios-core/workflows/{workflow-name}.yaml
-Exemplo: .aios-core/workflows/continuous-deployment.yaml
+Localização: .aiox-core/workflows/{workflow-name}.yaml
+Exemplo: .aiox-core/workflows/continuous-deployment.yaml
 
 # Estou criando um novo template:
-Localização: .aios-core/product/templates/{template-name}-tmpl.{yaml|md}
-Exemplo: .aios-core/product/templates/deployment-plan-tmpl.yaml
+Localização: .aiox-core/product/templates/{template-name}-tmpl.{yaml|md}
+Exemplo: .aiox-core/product/templates/deployment-plan-tmpl.yaml
 
 # Estou escrevendo uma story:
 Localização: docs/stories/{epic-context}/{story-file}.md
-Exemplo: docs/stories/aios migration/story-6.1.2.6.md
+Exemplo: docs/stories/aiox migration/story-6.1.2.6.md
 
 # Estou documentando uma decisão de arquitetura:
 Localização: docs/architecture/project-decisions/{decision-file}.md
@@ -645,8 +645,8 @@ Localização: docs/framework/{doc-name}.md
 Exemplo: docs/framework/agent-development-guide.md
 
 # Estou criando um script utilitário:
-Localização: .aios-core/utils/{utility-name}.js
-Exemplo: .aios-core/utils/performance-monitor.js
+Localização: .aiox-core/utils/{utility-name}.js
+Exemplo: .aiox-core/utils/performance-monitor.js
 
 # Estou criando um teste:
 Localização: tests/{type}/{test-name}.test.js
@@ -709,4 +709,4 @@ outputs/                               # Saídas em runtime (gitignored)
 
 ---
 
-_Este é um padrão oficial do framework AIOS. Todo posicionamento de arquivos deve seguir esta estrutura._
+_Este é um padrão oficial do framework AIOX. Todo posicionamento de arquivos deve seguir esta estrutura._

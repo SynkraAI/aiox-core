@@ -6,9 +6,9 @@
  * Tests the complete integration of decision logging with yolo mode development.
  * Validates end-to-end workflow from initialization to log generation.
  *
- * @see .aios-core/scripts/decision-recorder.js
- * @see .aios-core/scripts/decision-log-generator.js
- * @see .aios-core/scripts/decision-log-indexer.js
+ * @see .aiox-core/scripts/decision-recorder.js
+ * @see .aiox-core/scripts/decision-log-generator.js
+ * @see .aiox-core/scripts/decision-log-indexer.js
  */
 
 const fs = require('fs').promises;
@@ -21,7 +21,7 @@ const {
   updateMetrics,
   completeDecisionLogging,
   getCurrentContext,
-} = require('../../.aios-core/development/scripts/decision-recorder');
+} = require('../../.aiox-core/development/scripts/decision-recorder');
 
 describeIntegration('Decision Logging + Yolo Mode Integration', () => {
   const testStoryPath = 'docs/stories/test-integration-story.md';

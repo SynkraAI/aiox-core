@@ -30,11 +30,11 @@ Read `.claude/commands/db-sage/agents/db-sage.md` and adopt the persona of **DB 
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for DB-relevant: Database, Schema, Migration, RLS, Supabase)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
-5. **DB Best Practices**: Read `.aios-core/data/database-best-practices.md`
-6. **Supabase Patterns**: Read `.aios-core/data/supabase-patterns.md`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for DB-relevant: Database, Schema, Migration, RLS, Supabase)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
+5. **DB Best Practices**: Read `.aiox-core/data/database-best-practices.md`
+6. **Supabase Patterns**: Read `.aiox-core/data/supabase-patterns.md`
 7. **Database Connection**: Test connection and load schema context
 
 Do NOT display context loading — just absorb and proceed.
@@ -106,11 +106,11 @@ Parse `## Mission:` from your spawn prompt and match:
 | `setup-supabase` | `supabase-setup.md` | — |
 
 **Path resolution**:
-- Tasks at `.aios-core/development/tasks/`
-- Workflows at `.aios-core/development/workflows/`
-- Checklists at `.aios-core/product/checklists/` or `.aios-core/development/checklists/`
-- Templates at `.aios-core/product/templates/`
-- Data at `.aios-core/data/`
+- Tasks at `.aiox-core/development/tasks/`
+- Workflows at `.aiox-core/development/workflows/`
+- Checklists at `.aiox-core/product/checklists/` or `.aiox-core/development/checklists/`
+- Templates at `.aiox-core/product/templates/`
+- Data at `.aiox-core/data/`
 
 ### Execution:
 1. Read the COMPLETE task file (no partial reads)

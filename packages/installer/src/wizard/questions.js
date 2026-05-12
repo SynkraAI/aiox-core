@@ -1,13 +1,13 @@
 /**
  * Wizard Questions Definitions
  *
- * Modular question system for AIOS installation wizard
+ * Modular question system for AIOX installation wizard
  * Questions from Stories 1.3-1.6 will be added here
  *
  * @module wizard/questions
  */
 
-const { colors } = require('../utils/aios-colors');
+const { colors } = require('../utils/aiox-colors');
 const { createInquirerValidator, validateProjectType } = require('./validators');
 const { t, getLanguageChoices, setLanguage: _setLanguage } = require('./i18n');
 
@@ -28,7 +28,7 @@ function getLanguageQuestion() {
 /**
  * Get user profile question (Story 10.2 - Epic 10: User Profile System)
  * Asks user about their ability to detect AI-generated code errors
- * PRD: AIOS v2.0 "Projeto Bob" - Seção 2.4
+ * PRD: AIOX v2.0 "Projeto Bob" - Seção 2.4
  *
  * @returns {Object} Inquirer question object
  */
@@ -161,7 +161,7 @@ function getMCPQuestions() {
         return true;
       },
     },
-    // Note: API keys are configured later via aios-master or directly in .env
+    // Note: API keys are configured later via aiox-master or directly in .env
   ];
 }
 
@@ -193,10 +193,10 @@ function getEnvironmentQuestions() {
  * - etl: ETL pipeline for knowledge base creation
  *
  * Note: This function is currently DISABLED. Squad selection is handled
- * directly in aios-init.js using the squads/ directory.
+ * directly in aiox-init.js using the squads/ directory.
  *
  * @returns {Object[]} Array of inquirer question objects
- * @deprecated Use squads/ directory directly in aios-init.js
+ * @deprecated Use squads/ directory directly in aiox-init.js
  */
 function getSquadQuestions() {
   return [
@@ -244,11 +244,31 @@ function getTechPresetQuestion() {
         {
           name:
             colors.highlight('nextjs-react') +
-            colors.dim(' - Next.js 14+, React, TypeScript, Tailwind, Zustand'),
+            colors.dim(' - Next.js 16+, React, TypeScript, Tailwind, Zustand'),
           value: 'nextjs-react',
         },
         {
-          name: 'None' + colors.dim(' - Let AIOS decide based on project'),
+          name: colors.highlight('go') + colors.dim(' - Go services and microservices'),
+          value: 'go',
+        },
+        {
+          name: colors.highlight('java') + colors.dim(' - Java 21+ with Spring Boot'),
+          value: 'java',
+        },
+        {
+          name: colors.highlight('rust') + colors.dim(' - High-reliability Rust services'),
+          value: 'rust',
+        },
+        {
+          name: colors.highlight('csharp') + colors.dim(' - .NET 9+ ASP.NET Core services'),
+          value: 'csharp',
+        },
+        {
+          name: colors.highlight('php') + colors.dim(' - PHP 8.3+ with Laravel'),
+          value: 'php',
+        },
+        {
+          name: 'None' + colors.dim(' - Let AIOX decide based on project'),
           value: 'none',
         },
       ],
@@ -281,7 +301,7 @@ function buildQuestionSequence(_context = {}) {
   // TODO: Remove entirely in future version - each project has unique MCP needs
   // questions.push(...getMCPQuestions());
 
-  // Squad Selection - DISABLED: Handled directly in aios-init.js
+  // Squad Selection - DISABLED: Handled directly in aiox-init.js
   // TODO: Consider removing getSquadQuestions() entirely in future version
   // questions.push(...getSquadQuestions());
 

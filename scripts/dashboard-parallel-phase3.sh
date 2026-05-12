@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# AIOS Dashboard Parallel Dev - Phase 3 (4 workers)
+# AIOX Dashboard Parallel Dev - Phase 3 (4 workers)
 # =============================================================================
 # Prerequisites: Phase 2 complete (Layout Shell ready)
 # =============================================================================
@@ -9,7 +9,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-SESSION_NAME="aios-dash-p3"
+SESSION_NAME="aiox-dash-p3"
 
 # Colors
 GREEN='\033[0;32m'
@@ -24,10 +24,10 @@ NC='\033[0m'
 # =============================================================================
 
 declare -a STORIES=(
-    "0.4|Project Tabs|docs/stories/aios-dashboard/epic-0-foundation.md|apps/dashboard/src/components/layout/|Create draggable ProjectTabs.tsx using @dnd-kit, create projectsStore.ts"
-    "0.5|Status Bar|docs/stories/aios-dashboard/epic-0-foundation.md|apps/dashboard/src/components/layout/|Create StatusBar.tsx showing auth, rate limit, claude status, active agent"
-    "1.1|Kanban Layout|docs/stories/aios-dashboard/epic-1-story-board.md|apps/dashboard/src/components/kanban/|Create KanbanBoard.tsx with 7 columns, create storyStore.ts"
-    "1.6|Story Wizard|docs/stories/aios-dashboard/epic-1-story-board.md|apps/dashboard/src/components/stories/|Create StoryWizard.tsx modal with multi-step form, draft auto-save"
+    "0.4|Project Tabs|docs/stories/aiox-dashboard/epic-0-foundation.md|apps/dashboard/src/components/layout/|Create draggable ProjectTabs.tsx using @dnd-kit, create projectsStore.ts"
+    "0.5|Status Bar|docs/stories/aiox-dashboard/epic-0-foundation.md|apps/dashboard/src/components/layout/|Create StatusBar.tsx showing auth, rate limit, claude status, active agent"
+    "1.1|Kanban Layout|docs/stories/aiox-dashboard/epic-1-story-board.md|apps/dashboard/src/components/kanban/|Create KanbanBoard.tsx with 7 columns, create storyStore.ts"
+    "1.6|Story Wizard|docs/stories/aiox-dashboard/epic-1-story-board.md|apps/dashboard/src/components/stories/|Create StoryWizard.tsx modal with multi-step form, draft auto-save"
 )
 
 NUM_WORKERS=${#STORIES[@]}
@@ -47,7 +47,7 @@ tmux kill-session -t "$SESSION_NAME" 2>/dev/null || true
 
 echo ""
 echo -e "${CYAN}╔═══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║     ${YELLOW}AIOS Dashboard Phase 3${NC}                                ${CYAN}║${NC}"
+echo -e "${CYAN}║     ${YELLOW}AIOX Dashboard Phase 3${NC}                                ${CYAN}║${NC}"
 echo -e "${CYAN}╠═══════════════════════════════════════════════════════════╣${NC}"
 echo -e "${CYAN}║${NC}  Phase:      ${GREEN}3 - Views & Features${NC}                        ${CYAN}║${NC}"
 echo -e "${CYAN}║${NC}  Workers:    ${GREEN}$NUM_WORKERS${NC}                                            ${CYAN}║${NC}"

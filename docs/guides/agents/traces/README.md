@@ -1,10 +1,10 @@
-# AIOS Agent Execution Traces - Index
+# AIOX Agent Execution Traces - Index
 
-> **Story:** AIOS-TRACE-001 | **Traced from source code, not documentation.**
+> **Story:** AIOX-TRACE-001 | **Traced from source code, not documentation.**
 
 ## Overview
 
-This directory contains comprehensive runtime execution trace documentation for all 12 AIOS agents. Each document shows **exactly** what files are loaded, in what order, and why - from agent activation through every command execution.
+This directory contains comprehensive runtime execution trace documentation for all 12 AIOX agents. Each document shows **exactly** what files are loaded, in what order, and why - from agent activation through every command execution.
 
 ---
 
@@ -23,7 +23,7 @@ This directory contains comprehensive runtime execution trace documentation for 
 | @architect | Aria (Visionary) | 21 | Direct | [architect-execution-trace.md](./architect-execution-trace.md) |
 | @dev | Dex (Builder) | 36 | Direct | [dev-execution-trace.md](./dev-execution-trace.md) |
 | @qa | Quinn (Guardian) | 25 | Direct | [qa-execution-trace.md](./qa-execution-trace.md) |
-| @aios-master | Nova (Orchestrator) | 33 | Direct | [aios-master-execution-trace.md](./aios-master-execution-trace.md) |
+| @aiox-master | Nova (Orchestrator) | 33 | Direct | [aiox-master-execution-trace.md](./aiox-master-execution-trace.md) |
 | @devops | Gage (Pipeline) | 30 | CLI Wrapper | [devops-execution-trace.md](./devops-execution-trace.md) |
 | @data-engineer | Dara (Architect) | 27 | CLI Wrapper | [data-engineer-execution-trace.md](./data-engineer-execution-trace.md) |
 | @ux-design-expert | Uma (Harmonizer) | 24 | CLI Wrapper | [ux-design-expert-execution-trace.md](./ux-design-expert-execution-trace.md) |
@@ -43,7 +43,7 @@ graph LR
         A1[@architect] --> GB[GreetingBuilder.buildGreeting]
         A2[@dev] --> GB
         A3[@qa] --> GB
-        A4[@aios-master] --> GB
+        A4[@aiox-master] --> GB
         A5[@po] --> GB
         A6[@pm] --> GB
         A7[@sm] --> GB
@@ -71,7 +71,7 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Orchestration Layer"
-        MASTER[@aios-master<br/>Nova]
+        MASTER[@aiox-master<br/>Nova]
     end
 
     subgraph "Management Layer"
@@ -135,7 +135,7 @@ graph TD
 
 | Agent | Priority | Config Sections | Files Loaded | Perf Target |
 |-------|----------|-----------------|--------------|-------------|
-| @aios-master | Critical | dataLocation, registry | aios-kb.md (lazy) | <30ms |
+| @aiox-master | Critical | dataLocation, registry | aiox-kb.md (lazy) | <30ms |
 | @dev | High | devLoadAlwaysFiles, devStoryLocation, dataLocation | coding-standards.md, tech-stack.md, source-tree.md, technical-preferences.md | <50ms |
 | @qa | High | qaLocation, dataLocation, storyBacklog | technical-preferences.md, test-levels-framework.md, test-priorities-matrix.md | <50ms |
 | @devops | High | dataLocation, cicdLocation | technical-preferences.md | <50ms |
@@ -148,7 +148,7 @@ graph TD
 | @ux-design-expert | Low | dataLocation, uxLocation | (none) | <100ms |
 | @squad-creator | Default | dataLocation | (none) | <150ms |
 
-Source: `.aios-core/data/agent-config-requirements.yaml`
+Source: `.aiox-core/data/agent-config-requirements.yaml`
 
 ---
 
@@ -198,16 +198,16 @@ Each agent trace document follows this structure:
 
 | File | Purpose | Lines |
 |------|---------|-------|
-| `.aios-core/development/scripts/greeting-builder.js` | Main activation pipeline | 949 |
-| `.aios-core/development/scripts/agent-config-loader.js` | Config loading per agent | ~400 |
-| `.aios-core/development/scripts/generate-greeting.js` | CLI wrapper (3 agents) | 173 |
-| `.aios-core/core/session/context-detector.js` | Session type detection | ~100 |
-| `.aios-core/infrastructure/scripts/project-status-loader.js` | Git/project status | ~524 |
-| `.aios-core/infrastructure/scripts/git-config-detector.js` | Git config detection | ~294 |
-| `.aios-core/development/scripts/greeting-preference-manager.js` | Greeting level preference | ~146 |
-| `.aios-core/development/scripts/workflow-navigator.js` | Workflow suggestions | ~200 |
-| `.aios-core/core/permissions/index.js` | Permission mode badge | ~100 |
-| `.aios-core/data/agent-config-requirements.yaml` | Per-agent config requirements | 369 |
+| `.aiox-core/development/scripts/greeting-builder.js` | Main activation pipeline | 949 |
+| `.aiox-core/development/scripts/agent-config-loader.js` | Config loading per agent | ~400 |
+| `.aiox-core/development/scripts/generate-greeting.js` | CLI wrapper (3 agents) | 173 |
+| `.aiox-core/core/session/context-detector.js` | Session type detection | ~100 |
+| `.aiox-core/infrastructure/scripts/project-status-loader.js` | Git/project status | ~524 |
+| `.aiox-core/infrastructure/scripts/git-config-detector.js` | Git config detection | ~294 |
+| `.aiox-core/development/scripts/greeting-preference-manager.js` | Greeting level preference | ~146 |
+| `.aiox-core/development/scripts/workflow-navigator.js` | Workflow suggestions | ~200 |
+| `.aiox-core/core/permissions/index.js` | Permission mode badge | ~100 |
+| `.aiox-core/data/agent-config-requirements.yaml` | Per-agent config requirements | 369 |
 
 ---
 
@@ -227,7 +227,7 @@ Multiple agents reference dependencies using `development/{templates,checklists}
 | @sm | story-draft-checklist.md in `product/checklists/` |
 | @analyst | 4 templates in `product/templates/` |
 
-**Resolution:** The `AgentConfigLoader` resolves dependencies by searching multiple paths: `development/`, `product/`, and root `.aios-core/` directories. The path mismatch does not cause runtime failures but is documented for accuracy.
+**Resolution:** The `AgentConfigLoader` resolves dependencies by searching multiple paths: `development/`, `product/`, and root `.aiox-core/` directories. The path mismatch does not cause runtime failures but is documented for accuracy.
 
 ### Missing Dependencies
 
@@ -236,8 +236,8 @@ Each trace documents files referenced but not found on disk:
 | Agent | Missing File | Impact |
 |-------|--------------|--------|
 | @dev | 9 scripts (recovery-tracker.js, stuck-detector.js, etc.), 1 checklist | Non-functional commands |
-| @aios-master | add-tech-doc.md | `*add-tech-doc` command non-functional |
-| @ux-design-expert | integrate-Squad.md | Only `integrate-expansion-pack.md` exists |
+| @aiox-master | add-tech-doc.md | `*add-tech-doc` command non-functional |
+| @ux-design-expert | integrate-Squad.md | Only `integrate-squad.md` exists |
 | @devops | gitignore-manager, version-tracker | Referenced tools not found |
 
 ---
@@ -253,4 +253,4 @@ All traces were created by reading actual source code, **NOT** from documentatio
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

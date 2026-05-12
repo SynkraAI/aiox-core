@@ -10,7 +10,7 @@
 
 ---
 
-Introdução aos AIOS Squads - equipes modulares de agentes de IA que estendem a funcionalidade do framework.
+Introdução aos AIOX Squads - equipes modulares de agentes de IA que estendem a funcionalidade do framework.
 
 **Versão:** 2.1.0
 **Última Atualização:** 2026-01-28
@@ -19,9 +19,9 @@ Introdução aos AIOS Squads - equipes modulares de agentes de IA que estendem a
 
 ## O que são Squads?
 
-Squads são equipes modulares de agentes de IA que estendem a funcionalidade do AIOS para domínios ou casos de uso específicos. Cada squad é um pacote autocontido que pode ser instalado, compartilhado e composto com outros squads.
+Squads são equipes modulares de agentes de IA que estendem a funcionalidade do AIOX para domínios ou casos de uso específicos. Cada squad é um pacote autocontido que pode ser instalado, compartilhado e composto com outros squads.
 
-> **AIOS Squads:** Equipes de agentes de IA trabalhando com você
+> **AIOX Squads:** Equipes de agentes de IA trabalhando com você
 
 ### Características Principais
 
@@ -35,7 +35,7 @@ Squads são equipes modulares de agentes de IA que estendem a funcionalidade do 
 
 ### Squad vs. Agentes Tradicionais
 
-| Agentes Tradicionais   | AIOS Squads                  |
+| Agentes Tradicionais   | AIOX Squads                  |
 | ---------------------- | ---------------------------- |
 | Agentes individuais    | Equipe coordenada de agentes |
 | Propósito único        | Workflows focados em domínio |
@@ -91,8 +91,8 @@ author: Seu Nome <email@exemplo.com>
 license: MIT
 slashPrefix: my # Prefixo de comando para IDE
 
-# Compatibilidade AIOS
-aios:
+# Compatibilidade AIOX
+aiox:
   minVersion: '2.1.0'
   type: squad
 
@@ -172,8 +172,8 @@ tags:
 
 | Squad             | Versão | Descrição                          | Repositório                                                                      |
 | ----------------- | ------ | ---------------------------------- | -------------------------------------------------------------------------------- |
-| **etl-squad**     | 2.0.0  | Coleta e transformação de dados    | [aios-squads/etl](https://github.com/SynkraAI/aios-squads/tree/main/etl)         |
-| **creator-squad** | 1.0.0  | Utilitários de geração de conteúdo | [aios-squads/creator](https://github.com/SynkraAI/aios-squads/tree/main/creator) |
+| **etl-squad**     | 2.0.0  | Coleta e transformação de dados    | [aiox-squads/etl](https://github.com/SynkraAI/aiox-squads/tree/main/etl)         |
+| **creator-squad** | 1.0.0  | Utilitários de geração de conteúdo | [aiox-squads/creator](https://github.com/SynkraAI/aiox-squads/tree/main/creator) |
 
 ### Níveis de Distribuição
 
@@ -182,7 +182,7 @@ tags:
 │                    DISTRIBUIÇÃO DE SQUADS                     │
 ├─────────────────────────────────────────────────────────────┤
 │  Nível 1: LOCAL        --> ./squads/           (Privado)     │
-│  Nível 2: AIOS-SQUADS  --> github.com/SynkraAI (Público)     │
+│  Nível 2: AIOX-SQUADS  --> github.com/SynkraAI (Público)     │
 │  Nível 3: SYNKRA API   --> api.synkra.dev      (Marketplace) │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -191,7 +191,7 @@ tags:
 
 ```bash
 # Listar squads disponíveis
-aios squads list
+aiox squads list
 
 # Baixar do repositório oficial
 *download-squad etl-squad
@@ -217,14 +217,14 @@ Requisição do Usuário --> Task --> Execução do Agente --> Saída
                       Workflow (se multi-etapa)
 ```
 
-Tasks devem seguir [TASK-FORMAT-SPECIFICATION-V1](../../../.aios-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md).
+Tasks devem seguir [TASK-FORMAT-SPECIFICATION-V1](../../../.aiox-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md).
 
 ### 2. Use Herança de Configuração com Sabedoria
 
 | Modo       | Comportamento                           |
 | ---------- | --------------------------------------- |
-| `extend`   | Adiciona regras do squad às regras AIOS |
-| `override` | Substitui regras AIOS pelas do squad    |
+| `extend`   | Adiciona regras do squad às regras AIOX |
+| `override` | Substitui regras AIOX pelas do squad    |
 | `none`     | Configuração independente               |
 
 ### 3. Valide Antes de Publicar
@@ -276,9 +276,9 @@ Use versionamento semântico:
 ## Próximos Passos
 
 - **Crie Seu Primeiro Squad:** Siga o [Guia de Squads](./squads-guide.md) para instruções detalhadas
-- **Explore Squads Oficiais:** Confira o [repositório aios-squads](https://github.com/SynkraAI/aios-squads)
+- **Explore Squads Oficiais:** Confira o [repositório aiox-squads](https://github.com/SynkraAI/aiox-squads)
 - **Contribua:** Veja o [Guia de Contribuição de Squads](./contributing-squads.md)
-- **Aprenda o Formato de Task:** Leia [TASK-FORMAT-SPECIFICATION-V1](../../../.aios-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
+- **Aprenda o Formato de Task:** Leia [TASK-FORMAT-SPECIFICATION-V1](../../../.aiox-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
 
 ---
 
@@ -286,16 +286,16 @@ Use versionamento semântico:
 
 - [Guia de Desenvolvimento de Squads](./squads-guide.md) - Guia completo para criar e gerenciar squads
 - [Guia de Migração de Squad](./squad-migration.md) - Migrando do formato legado
-- [Especificação de Formato de Task](../../../.aios-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
-- [Agente @squad-creator](../../../.aios-core/development/agents/squad-creator.md)
+- [Especificação de Formato de Task](../../../.aiox-core/docs/standards/TASK-FORMAT-SPECIFICATION-V1.md)
+- [Agente @squad-creator](../../../.aiox-core/development/agents/squad-creator.md)
 
 ---
 
 ## FAQ
 
-### Qual a diferença entre um Squad e um Expansion Pack?
+### Qual a diferença entre um Squad e formatos legados de squad no AIOX?
 
-**Squads** são o novo padrão (AIOS 2.1+) substituindo Expansion Packs. Squads têm:
+**Squads** são o padrão no AIOX 2.1+ com:
 
 - Arquitetura task-first
 - Validação JSON Schema
@@ -316,17 +316,17 @@ dependencies:
     - etl-squad@^2.0.0
 ```
 
-### Qual a versão mínima do AIOS para Squads?
+### Qual a versão mínima do AIOX para Squads?
 
-Squads requerem AIOS 2.1.0+. Defina no manifesto:
+Squads requerem AIOX 2.1.0+. Defina no manifesto:
 
 ```yaml
-aios:
+aiox:
   minVersion: '2.1.0'
 ```
 
 ---
 
-_AIOS Squads: Equipes de agentes de IA trabalhando com você_
+_AIOX Squads: Equipes de agentes de IA trabalhando com você_
 
 _Versão: 2.1.0 | Atualizado: 2026-01-28_

@@ -4,28 +4,77 @@
 
 ---
 
-Guide for integrating AIOS with supported IDEs and AI development platforms.
+Guide for integrating AIOX with supported IDEs and AI development platforms.
 
-**Version:** 2.1.0
-**Last Updated:** 2026-01-28
+**Version:** 4.2.11
+**Last Updated:** 2026-02-16
+
+---
+
+## Compatibility Contract (AIOX 4.2.11)
+
+The IDE matrix is enforced by a versioned contract:
+
+- Contract file: `.aiox-core/infrastructure/contracts/compatibility/aiox-4.2.11.yaml`
+- Validator: `npm run validate:parity`
+
+If matrix claims in this document diverge from validator results, parity validation fails.
 
 ---
 
 ## Supported IDEs
 
-AIOS supports 9 AI-powered development platforms. Choose the one that best fits your workflow.
+AIOX supports multiple AI-powered development platforms. Choose the one that best fits your workflow.
 
-### Quick Comparison Table
+### Quick Status Matrix (AIOX 4.2.11)
 
-| Feature              | Claude Code |  Cursor  | Windsurf |  Cline   | Copilot | AntiGravity | Roo Code | Gemini CLI |   Trae   |
-| -------------------- | :---------: | :------: | :------: | :------: | :-----: | :---------: | :------: | :--------: | :------: |
-| **Agent Activation** |  /command   | @mention | @mention | @mention | 4 Modes |  Workflow   |   Mode   |   Prompt   | @mention |
-| **MCP Support**      |   Native    |  Config  |  Config  | Limited  |   Yes   |   Native    |    No    |     No     | Limited  |
-| **Subagent Tasks**   |     Yes     |    No    |    No    |    No    |   Yes   |     Yes     |    No    |     No     |    No    |
-| **Auto-sync**        |     Yes     |   Yes    |   Yes    |   Yes    |   Yes   |     Yes     |   Yes    |    Yes     |   Yes    |
-| **Hooks System**     |     Yes     |    No    |    No    |    No    |   No    |     No      |    No    |     No     |    No    |
-| **Skills/Commands**  |   Native    |    No    |    No    |    No    |   No    |     No      |    No    |     No     |    No    |
-| **Recommendation**   |    Best     |   Best   |   Good   |   Good   |  Good   |    Good     |  Basic   |   Basic    |  Basic   |
+| IDE/CLI | Overall Status | How to Activate an Agent | Auto-Checks Before/After Actions | Workaround if Limited |
+| --- | --- | --- | --- | --- |
+| Claude Code | Works | `/agent-name` commands | Works (full) | -- |
+| Gemini CLI | Works | `/aiox-menu` then `/aiox-<agent>` | Works (minor differences in event handling) | -- |
+| Codex CLI | Limited | `/skills` then `aiox-<agent-id>` | Limited (some checks need manual sync) | Run `npm run sync:ide:codex` and follow `/skills` flow |
+| Cursor | Limited | `@agent` + synced rules | Not available | Follow synced rules and run validators manually (`npm run validate:parity`) |
+| GitHub Copilot | Limited | chat modes + repo instructions | Not available | Use repo instructions and VS Code MCP config for context |
+| AntiGravity | Limited | workflow-driven activation | Not available | Use generated workflows and run validators manually |
+
+Legend:
+- `Works`: fully recommended for new users in AIOX 4.2.11.
+- `Limited`: usable with the documented workaround.
+- `Not available`: this IDE does not offer this capability; use the workaround instead.
+
+### What You Lose Without Full Auto-Checks
+
+Some IDEs run automatic checks before and after each action (e.g., validating context, enforcing rules). Where this is not available, you compensate manually:
+
+| IDE | Auto-Check Level | What Is Reduced | How to Compensate |
+| --- | --- | --- | --- |
+| Claude Code | Full | Nothing | Built-in checks handle everything |
+| Gemini CLI | High | Minor timing differences in checks | Gemini native checks cover most scenarios |
+| Codex CLI | Partial | Less automatic session tracking; some pre/post-action checks need manual trigger | Use `AGENTS.md` + `/skills` + sync/validation scripts |
+| Cursor | None | No automatic pre/post-action checks; no automatic audit trail | Follow synced rules, use MCP for context, run validators |
+| GitHub Copilot | None | Same as Cursor, plus more reliance on manual workflow | Use repo instructions, chat modes, VS Code MCP |
+| AntiGravity | None | No automatic check equivalents | Use generated workflows and run validators |
+
+### Beginner Decision Guide
+
+If your goal is to get started as fast as possible:
+
+1. **Best option:** Use `Claude Code` or `Gemini CLI` -- they have the most automation and fewest manual steps.
+2. **Good option:** Use `Codex CLI` if you prefer a terminal-first workflow and can follow the `/skills` activation flow.
+3. **Usable with extra steps:** Use `Cursor`, `Copilot`, or `AntiGravity` -- they work but require more manual validation steps (see workarounds in the table above).
+
+### Practical Consequences by Capability
+
+- **Session tracking** (automatic start/end detection):
+  - Automatic on Claude Code and Gemini CLI.
+  - Manual or partial on Codex, Cursor, Copilot, and AntiGravity.
+- **Pre/post-action guardrails** (checks that run before and after each tool use):
+  - Full on Claude Code and Gemini CLI.
+  - Partial on Codex CLI (run sync scripts to compensate).
+  - Not available on Cursor, Copilot, and AntiGravity (run validators manually).
+- **Automatic audit trail** (record of what happened in each session):
+  - Richest on Claude Code and Gemini CLI.
+  - Reduced on other IDEs (compensate with manual logging or validator output).
 
 ---
 
@@ -33,11 +82,11 @@ AIOS supports 9 AI-powered development platforms. Choose the one that best fits 
 
 ### Claude Code
 
-**Recommendation Level:** Best AIOS integration
+**Recommendation Level:** Best AIOX integration
 
 ```yaml
 config_file: .claude/CLAUDE.md
-agent_folder: .claude/commands/AIOS/agents
+agent_folder: .claude/commands/AIOX/agents
 activation: /agent-name (slash commands)
 format: full-markdown-yaml
 mcp_support: native
@@ -51,18 +100,61 @@ special_features:
 
 **Setup:**
 
-1. AIOS automatically creates `.claude/` directory on init
+1. AIOX automatically creates `.claude/` directory on init
 2. Agents are available as slash commands: `/dev`, `/qa`, `/architect`
 3. Configure MCP servers in `~/.claude.json`
 
 **Configuration:**
 
 ```bash
-# Sync agents to Claude Code
-npm run sync:agents -- --platform claude
+# Sync all enabled IDE targets (including Claude)
+npm run sync:ide
 
 # Verify setup
-ls -la .claude/commands/AIOS/agents/
+ls -la .claude/commands/AIOX/agents/
+```
+
+---
+
+### Codex CLI
+
+**Recommendation Level:** Best (terminal-first workflow)
+
+```yaml
+config_file: AGENTS.md
+agent_folder: .codex/agents
+activation: terminal instructions
+skills_folder: .codex/skills (source), ~/.codex/skills (Codex menu)
+format: markdown
+mcp_support: native via Codex tooling
+special_features:
+  - AGENTS.md project instructions
+  - /skills activators (aiox-<agent-id>)
+  - Strong CLI workflow support
+  - Easy integration with repository scripts
+  - Notify command plus emerging tool hooks in recent Codex releases
+```
+
+**Setup:**
+
+1. Keep `AGENTS.md` at repository root
+2. Run `npm run sync:ide:codex` to sync auxiliary agent files
+3. Run `npm run sync:skills:codex` to generate project-local skills in `.codex/skills`
+4. Use `/skills` and choose `aiox-architect`, `aiox-dev`, etc.
+5. Use `npm run sync:skills:codex:global` only when you explicitly want global installation
+
+**Configuration:**
+
+```bash
+# Sync Codex support files
+npm run sync:ide:codex
+npm run sync:skills:codex
+npm run validate:codex-sync
+npm run validate:codex-integration
+npm run validate:codex-skills
+
+# Verify setup
+ls -la AGENTS.md .codex/agents/ .codex/skills/
 ```
 
 ---
@@ -82,19 +174,21 @@ special_features:
   - Chat modes
   - @codebase context
   - Multi-file editing
+  - Subagents and cloud handoff support (latest Cursor releases)
+  - Long-running agent workflows (research preview)
 ```
 
 **Setup:**
 
-1. AIOS creates `.cursor/` directory on init
+1. AIOX creates `.cursor/` directory on init
 2. Agents activated with @mention: `@dev`, `@qa`
 3. Rules synchronized to `.cursor/rules/`
 
 **Configuration:**
 
 ```bash
-# Sync agents to Cursor
-npm run sync:agents -- --platform cursor
+# Sync Cursor only
+npm run sync:ide:cursor
 
 # Verify setup
 ls -la .cursor/rules/
@@ -114,75 +208,6 @@ ls -la .cursor/rules/
 
 ---
 
-### Windsurf
-
-**Recommendation Level:** Good (Cascade flow)
-
-```yaml
-config_file: .windsurfrules
-agent_folder: .windsurf/rules
-activation: @agent-name
-format: xml-tagged-markdown
-mcp_support: via configuration
-special_features:
-  - Cascade flow
-  - Supercomplete
-  - Flows system
-```
-
-**Setup:**
-
-1. AIOS creates `.windsurf/` directory and `.windsurfrules` file
-2. Agents activated with @mention
-3. Supports Cascade flow for multi-step tasks
-
-**Configuration:**
-
-```bash
-# Sync agents to Windsurf
-npm run sync:agents -- --platform windsurf
-
-# Verify setup
-cat .windsurfrules
-ls -la .windsurf/rules/
-```
-
----
-
-### Cline
-
-**Recommendation Level:** Good (VS Code integration)
-
-```yaml
-config_file: .cline/rules.md
-agent_folder: .cline/agents
-activation: @agent-name
-format: condensed-rules
-mcp_support: limited
-special_features:
-  - VS Code integration
-  - Extension ecosystem
-  - Inline suggestions
-```
-
-**Setup:**
-
-1. Install Cline VS Code extension
-2. AIOS creates `.cline/` directory on init
-3. Agents synchronized to `.cline/agents/`
-
-**Configuration:**
-
-```bash
-# Sync agents to Cline
-npm run sync:agents -- --platform cline
-
-# Verify setup
-ls -la .cline/agents/
-```
-
----
-
 ### GitHub Copilot
 
 **Recommendation Level:** Good (GitHub integration)
@@ -192,24 +217,25 @@ config_file: .github/copilot-instructions.md
 agent_folder: .github/agents
 activation: chat modes
 format: text
-mcp_support: none
+mcp_support: via VS Code MCP config
 special_features:
   - GitHub integration
   - PR assistance
   - Code review
+  - Works with repo instructions and VS Code MCP config
 ```
 
 **Setup:**
 
 1. Enable GitHub Copilot in your repository
-2. AIOS creates `.github/copilot-instructions.md`
+2. AIOX creates `.github/copilot-instructions.md`
 3. Agent instructions synchronized
 
 **Configuration:**
 
 ```bash
-# Sync agents to GitHub Copilot
-npm run sync:agents -- --platform github-copilot
+# Sync all enabled IDE targets
+npm run sync:ide
 
 # Verify setup
 cat .github/copilot-instructions.md
@@ -236,63 +262,52 @@ special_features:
 
 **Setup:**
 
-1. AIOS creates `.antigravity/` directory
+1. AIOX creates `.antigravity/` directory
 2. Configure Google Cloud credentials
 3. Agents synchronized as workflows
 
 ---
 
-### Roo Code
-
-**Recommendation Level:** Basic
-
-```yaml
-config_file: .roo/rules.md
-agent_folder: .roo/agents
-activation: mode selector
-format: text
-mcp_support: none
-special_features:
-  - Mode-based workflow
-  - VS Code extension
-  - Custom modes
-```
-
----
-
 ### Gemini CLI
 
-**Recommendation Level:** Basic
+**Recommendation Level:** Good
 
 ```yaml
 config_file: .gemini/rules.md
-agent_folder: .gemini/agents
-activation: prompt mention
+agent_folder: .gemini/rules/AIOX/agents
+activation: slash launcher commands
 format: text
-mcp_support: none
+mcp_support: native
 special_features:
   - Google AI models
   - CLI-based workflow
   - Multimodal support
+  - Native hooks events and hook commands
+  - Native MCP server support
+  - Rapidly evolving command/tooling UX
 ```
 
----
+**Setup:**
 
-### Trae
+1. Run installer flow selecting `gemini` in IDE selection (wizard path)
+2. AIOX creates:
+   - `.gemini/rules.md`
+   - `.gemini/rules/AIOX/agents/*.md`
+   - `.gemini/commands/*.toml` (`/aiox-menu`, `/aiox-<agent>`)
+   - `.gemini/hooks/*.js`
+   - `.gemini/settings.json` (hooks enabled)
+3. Validate integration:
 
-**Recommendation Level:** Basic
-
-```yaml
-config_file: .trae/rules.md
-agent_folder: .trae/agents
-activation: @agent-name
-format: project-rules
-mcp_support: limited
-special_features:
-  - Modern UI
-  - Fast iteration
-  - Builder mode
+```bash
+npm run sync:ide:gemini
+npm run validate:gemini-sync
+npm run validate:gemini-integration
 ```
+
+4. Quick agent activation (recommended):
+   - `/aiox-menu` to list shortcuts
+   - `/aiox-dev`, `/aiox-architect`, `/aiox-qa`, etc.
+   - `/aiox-agent <agent-id>` for generic launcher
 
 ---
 
@@ -300,54 +315,52 @@ special_features:
 
 ### How Sync Works
 
-AIOS maintains a single source of truth for agent definitions and synchronizes them to all configured IDEs:
+AIOX maintains a single source of truth for agent definitions and synchronizes them to all configured IDEs:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                    AIOS Core                         │
-│  .aios-core/development/agents/  (Source of Truth)  │
+│                    AIOX Core                         │
+│  .aiox-core/development/agents/  (Source of Truth)  │
 │                        │                             │
 │            ┌───────────┼───────────┐                │
 │            ▼           ▼           ▼                │
-│  .claude/     .cursor/     .windsurf/               │
-│  .cline/      .github/     .antigravity/            │
-│  .roo/        .gemini/     .trae/                   │
+│  .claude/     .codex/      .cursor/                  │
+│  .antigravity/ .gemini/                              │
 └─────────────────────────────────────────────────────┘
 ```
 
 ### Sync Commands
 
 ```bash
-# Sync all agents to all platforms
-npm run sync:agents
+# Sync all IDE targets
+npm run sync:ide
 
-# Sync to specific platform
-npm run sync:agents -- --platform cursor
+# Sync only Gemini
+npm run sync:ide:gemini
+npm run sync:ide:github-copilot
+npm run sync:ide:antigravity
 
-# Sync specific agent
-npm run sync:agents -- --agent dev
-
-# Dry run (preview changes)
-npm run sync:agents -- --dry-run
-
-# Force sync (overwrite)
-npm run sync:agents -- --force
+# Validate sync
+npm run sync:ide:check
 ```
 
 ### Automatic Sync
 
-AIOS can be configured to automatically sync on agent changes:
+AIOX can be configured to automatically sync on agent changes:
 
 ```yaml
-# .aios-core/core/config/sync.yaml
+# .aiox-core/core/config/sync.yaml
 auto_sync:
   enabled: true
   watch_paths:
-    - .aios-core/development/agents/
+    - .aiox-core/development/agents/
   platforms:
     - claude
+    - codex
+    - github-copilot
     - cursor
-    - windsurf
+    - gemini
+    - antigravity
 ```
 
 ---
@@ -358,32 +371,34 @@ auto_sync:
 
 ```bash
 # Verify agent exists in source
-ls .aios-core/development/agents/
+ls .aiox-core/development/agents/
 
-# Force sync
-npm run sync:agents -- --force
+# Sync and validate
+npm run sync:ide
+npm run sync:ide:check
 
 # Check platform-specific directory
-ls .cursor/rules/  # For Cursor
-ls .claude/commands/AIOS/agents/  # For Claude Code
+ls .cursor/rules/agents/               # Cursor
+ls .claude/commands/AIOX/agents/       # Claude Code
+ls .gemini/rules/AIOX/agents/          # Gemini CLI
 ```
 
 ### Sync Conflicts
 
 ```bash
 # Preview what would change
-npm run sync:agents -- --dry-run
+npm run sync:ide -- --dry-run
 
 # Backup before force sync
 cp -r .cursor/rules/ .cursor/rules.backup/
-npm run sync:agents -- --force
+npm run sync:ide
 ```
 
 ### MCP Not Working
 
 ```bash
 # Check MCP status
-aios mcp status
+aiox mcp status
 
 # Verify MCP configuration for IDE
 cat ~/.claude.json  # For Claude Code
@@ -402,32 +417,24 @@ cat .cursor/mcp.json  # For Cursor
 - Restart Cursor after sync
 - Check `.cursor/rules/` permissions
 
-**Windsurf:**
-
-- Verify `.windsurfrules` exists at root
-- Check syntax with YAML validator
-
----
-
 ## Platform Decision Guide
 
 Use this guide to choose the right platform:
 
 ```
 Do you use Claude/Anthropic API?
-├── Yes --> Claude Code (Best AIOS integration)
+├── Yes --> Claude Code (Best AIOX integration)
 └── No
     └── Do you prefer VS Code?
         ├── Yes --> Want an extension?
-        │   ├── Yes --> Cline (Full VS Code integration)
+        │   ├── Yes --> GitHub Copilot (Native GitHub features)
         │   └── No --> GitHub Copilot (Native GitHub features)
         └── No --> Want a dedicated AI IDE?
             ├── Yes --> Which model do you prefer?
             │   ├── Claude/GPT --> Cursor (Most popular AI IDE)
-            │   └── Multiple --> Windsurf (Cascade flow)
             └── No --> Use Google Cloud?
                 ├── Yes --> AntiGravity (Google integration)
-                └── No --> Gemini CLI / Trae / Roo (Specialized)
+                └── No --> Gemini CLI (Specialized)
 ```
 
 ---
@@ -441,17 +448,17 @@ Do you use Claude/Anthropic API?
 cp -r .cursor/rules/ ./rules-backup/
 
 # Initialize Claude Code
-npm run sync:agents -- --platform claude
+npm run sync:ide
 
 # Verify migration
-diff -r ./rules-backup/ .claude/commands/AIOS/agents/
+diff -r ./rules-backup/ .claude/commands/AIOX/agents/
 ```
 
 ### From Claude Code to Cursor
 
 ```bash
 # Sync to Cursor
-npm run sync:agents -- --platform cursor
+npm run sync:ide:cursor
 
 # Configure MCP (if needed)
 # Copy MCP config to .cursor/mcp.json
@@ -461,12 +468,11 @@ npm run sync:agents -- --platform cursor
 
 ## Related Documentation
 
-- [Platform Guides](./platforms/README.md)
-- [Claude Code Guide](./platforms/claude-code.md)
-- [Cursor Guide](./platforms/cursor.md)
-- [Agent Reference Guide](./agent-reference-guide.md)
+- [Claude Code Guide](./pt/platforms/claude-code.md)
+- [Cursor Guide](./pt/platforms/cursor.md)
+- [Agent Selection Guide](./guides/agent-selection-guide.md)
 - [MCP Global Setup](./guides/mcp-global-setup.md)
 
 ---
 
-_Synkra AIOS IDE Integration Guide v2.1.0_
+_Synkra AIOX IDE Integration Guide v4.2.11_

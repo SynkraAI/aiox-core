@@ -18,7 +18,7 @@ const toolResolver = require('../../common/utils/tool-resolver');
  * 4. No errors or warnings for v1.0 tools
  */
 describeIntegration('Schema Detection & v1.0 Backward Compatibility', () => {
-  const toolsPath = path.join(__dirname, '../../aios-core/tools');
+  const toolsPath = path.join(__dirname, '../../aiox-core/tools');
 
   // v1.0 simple tools (8 total)
   const v1SimpleTools = [

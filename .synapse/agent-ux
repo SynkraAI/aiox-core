@@ -1,6 +1,6 @@
 # SYNAPSE Agent Domain: @ux-design-expert (Uma)
 # Layer 2: Agent-scoped rules
-# Source: .claude/rules/agent-authority.md, .aios-core/development/agents/ux-design-expert.md
+# Source: .claude/rules/agent-authority.md, .aiox-core/development/agents/ux-design-expert.md
 
 # Authority Boundaries
 AGENT_UX_AUTH_0=ALLOWED: Frontend architecture, UI/UX design

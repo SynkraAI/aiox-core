@@ -1,7 +1,7 @@
 # Cross-Reference Phase 2: Templates, Checklists & Data Files
 
 **Generated:** 2026-02-05
-**Scope:** All templates, checklists, and data files in `.aios-core/` mapped to consuming tasks, agents, and workflows.
+**Scope:** All templates, checklists, and data files in `.aiox-core/` mapped to consuming tasks, agents, and workflows.
 
 ---
 
@@ -21,7 +21,7 @@
 12. [Development Templates (Other)](#12-development-templates---other)
 13. [Product Checklists](#13-product-checklists)
 14. [Product Data Files](#14-product-data-files)
-15. [Framework Data Files (.aios-core/data/)](#15-framework-data-files)
+15. [Framework Data Files (.aiox-core/data/)](#15-framework-data-files)
 16. [Summary Statistics](#16-summary-statistics)
 17. [Orphaned Files](#17-orphaned-files)
 
@@ -29,38 +29,38 @@
 
 ## 1. Product Templates - YAML Document Templates
 
-Location: `.aios-core/product/templates/`
+Location: `.aiox-core/product/templates/`
 
 These are YAML-based document generation templates used by the `create-doc` task and the template engine.
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `architecture-tmpl.yaml` | create-doc | architect, aios-master | greenfield-service (architecture step) | No |
-| 2 | `brainstorming-output-tmpl.yaml` | analyst-facilitate-brainstorming | analyst, aios-master | -- | No |
-| 3 | `brownfield-architecture-tmpl.yaml` | create-doc | architect, aios-master | brownfield-ui, brownfield-service, brownfield-fullstack | No |
-| 4 | `brownfield-prd-tmpl.yaml` | create-doc | pm, aios-master | brownfield-ui, brownfield-service, brownfield-fullstack | No |
-| 5 | `competitor-analysis-tmpl.yaml` | create-doc | analyst, aios-master | -- | No |
+| 1 | `architecture-tmpl.yaml` | create-doc | architect, aiox-master | greenfield-service (architecture step) | No |
+| 2 | `brainstorming-output-tmpl.yaml` | analyst-facilitate-brainstorming | analyst, aiox-master | -- | No |
+| 3 | `brownfield-architecture-tmpl.yaml` | create-doc | architect, aiox-master | brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 4 | `brownfield-prd-tmpl.yaml` | create-doc | pm, aiox-master | brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 5 | `competitor-analysis-tmpl.yaml` | create-doc | analyst, aiox-master | -- | No |
 | 6 | `design-story-tmpl.yaml` | create-doc (implicit) | -- | -- | **WEAK** |
-| 7 | `front-end-architecture-tmpl.yaml` | create-doc | architect, aios-master, ux-design-expert | greenfield-ui, greenfield-fullstack | No |
-| 8 | `front-end-spec-tmpl.yaml` | create-doc | ux-design-expert, aios-master | greenfield-ui, greenfield-fullstack, brownfield-ui | No |
-| 9 | `fullstack-architecture-tmpl.yaml` | create-doc | architect, aios-master | greenfield-fullstack | No |
+| 7 | `front-end-architecture-tmpl.yaml` | create-doc | architect, aiox-master, ux-design-expert | greenfield-ui, greenfield-fullstack | No |
+| 8 | `front-end-spec-tmpl.yaml` | create-doc | ux-design-expert, aiox-master | greenfield-ui, greenfield-fullstack, brownfield-ui | No |
+| 9 | `fullstack-architecture-tmpl.yaml` | create-doc | architect, aiox-master | greenfield-fullstack | No |
 | 10 | `index-strategy-tmpl.yaml` | create-doc | data-engineer | -- | No |
-| 11 | `market-research-tmpl.yaml` | create-doc | analyst, aios-master | -- | No |
+| 11 | `market-research-tmpl.yaml` | create-doc | analyst, aiox-master | -- | No |
 | 12 | `migration-plan-tmpl.yaml` | create-doc | data-engineer | -- | No |
-| 13 | `prd-tmpl.yaml` | create-doc | pm, aios-master | greenfield-ui, greenfield-service, greenfield-fullstack (implicit) | No |
-| 14 | `project-brief-tmpl.yaml` | create-doc | analyst, aios-master | -- | No |
+| 13 | `prd-tmpl.yaml` | create-doc | pm, aiox-master | greenfield-ui, greenfield-service, greenfield-fullstack (implicit) | No |
+| 14 | `project-brief-tmpl.yaml` | create-doc | analyst, aiox-master | -- | No |
 | 15 | `qa-gate-tmpl.yaml` | qa-run-tests, qa-review-story | qa | qa-loop | No |
 | 16 | `rls-policies-tmpl.yaml` | create-doc | data-engineer | -- | No |
 | 17 | `schema-design-tmpl.yaml` | db-domain-modeling, create-doc | data-engineer | -- | No |
 | 18 | `state-persistence-tmpl.yaml` | create-doc | ux-design-expert | -- | No |
-| 19 | `story-tmpl.yaml` | create-doc, create-next-story, sm-create-next-story, dev-validate-next-story, validate-next-story | po, sm, qa, aios-master | story-development-cycle (implicit) | No |
+| 19 | `story-tmpl.yaml` | create-doc, create-next-story, sm-create-next-story, dev-validate-next-story, validate-next-story | po, sm, qa, aiox-master | story-development-cycle (implicit) | No |
 | 20 | `tokens-schema-tmpl.yaml` | create-doc | ux-design-expert | -- | No |
 
 ---
 
 ## 2. Product Templates - Handlebars (HBS)
 
-Location: `.aios-core/product/templates/`
+Location: `.aiox-core/product/templates/`
 
 These are Handlebars templates rendered by the template engine for structured document generation.
 
@@ -73,7 +73,7 @@ These are Handlebars templates rendered by the template engine for structured do
 | 5 | `prd.hbs` | create-doc (via template engine) | pm (implicit) | -- | **WEAK** |
 | 6 | `prd-v2.0.hbs` | create-doc (via template engine/loader) | pm (implicit) | -- | **WEAK** |
 | 7 | `story.hbs` | create-doc (via template engine) | po, sm (implicit) | -- | **WEAK** |
-| 8 | `task.hbs` | create-doc (via template engine) | aios-master (implicit) | -- | **WEAK** |
+| 8 | `task.hbs` | create-doc (via template engine) | aiox-master (implicit) | -- | **WEAK** |
 
 **Note:** HBS templates are loaded dynamically by the template engine (`loader.js`). They are paired with schemas in `engine/schemas/`. References are implicit through the `create-doc` task which selects templates at runtime based on user input. The engine handles versioned templates (e.g., `prd-v2` resolves to `prd-v2.0.hbs`).
 
@@ -81,7 +81,7 @@ These are Handlebars templates rendered by the template engine for structured do
 
 ## 3. Product Templates - SQL
 
-Location: `.aios-core/product/templates/`
+Location: `.aiox-core/product/templates/`
 
 SQL templates for database operations, used by the data-engineer agent.
 
@@ -109,7 +109,7 @@ SQL templates for database operations, used by the data-engineer agent.
 
 ## 4. Product Templates - IDE Rules
 
-Location: `.aios-core/product/templates/ide-rules/`
+Location: `.aiox-core/product/templates/ide-rules/`
 
 IDE-specific rule files generated during project setup. Referenced in service-registry and workers.csv but not directly consumed by any task or agent.
 
@@ -117,11 +117,8 @@ IDE-specific rule files generated during project setup. Referenced in service-re
 |---|------|--------------------|---------------------|-------------|---------|
 | 1 | `antigravity-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
 | 2 | `claude-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
-| 3 | `cline-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
 | 4 | `copilot-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
 | 5 | `cursor-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
-| 6 | `roo-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
-| 7 | `windsurf-rules.md` | -- (service-registry, workers.csv) | -- | -- | **WEAK** |
 
 **Note:** IDE rules are output artifacts deployed to target projects. They are registered in the service-registry and workers.csv, which means they are available for lookup and discovery, but no task or agent currently automates their deployment. They likely serve as reference content or are deployed manually/externally.
 
@@ -129,13 +126,13 @@ IDE-specific rule files generated during project setup. Referenced in service-re
 
 ## 5. Product Templates - Personalization
 
-Location: `.aios-core/product/templates/`
+Location: `.aiox-core/product/templates/`
 
 Meta-templates used for creating personalized framework components.
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `personalized-agent-template.md` | create-doc (implicit), modify-agent | aios-master (implicit) | -- | No |
+| 1 | `personalized-agent-template.md` | create-doc (implicit), modify-agent | aiox-master (implicit) | -- | No |
 | 2 | `personalized-checklist-template.md` | create-doc (implicit) | -- | -- | **WEAK** |
 | 3 | `personalized-task-template.md` | create-doc (implicit), create-task | -- | -- | **WEAK** |
 | 4 | `personalized-task-template-v2.md` | create-doc (implicit) | -- | -- | **WEAK** |
@@ -148,15 +145,15 @@ Meta-templates used for creating personalized framework components.
 
 ## 6. Product Templates - Meta / Structural
 
-Location: `.aios-core/product/templates/`
+Location: `.aiox-core/product/templates/`
 
 Templates that define the structure of framework components (agents, tasks, workflows).
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `agent-template.yaml` | modify-agent, create-doc | aios-master | -- | No |
-| 2 | `task-template.md` | create-task (implicit), squad-creator-extend | aios-master | -- | No |
-| 3 | `workflow-template.yaml` | squad-creator-extend, verify-workflow-gaps (script) | aios-master | -- | No |
+| 1 | `agent-template.yaml` | modify-agent, create-doc | aiox-master | -- | No |
+| 2 | `task-template.md` | create-task (implicit), squad-creator-extend | aiox-master | -- | No |
+| 3 | `workflow-template.yaml` | squad-creator-extend, verify-workflow-gaps (script) | aiox-master | -- | No |
 | 4 | `activation-instructions-template.md` | -- (service-registry) | -- | -- | **WEAK** |
 | 5 | `activation-instructions-inline-greeting.yaml` | -- | -- | -- | **WEAK** |
 | 6 | `task-execution-report.md` | validate-task-v2 (script), personalized-workflow-template | -- | -- | **WEAK** |
@@ -166,7 +163,7 @@ Templates that define the structure of framework components (agents, tasks, work
 
 ## 7. Product Templates - Code / Config
 
-Location: `.aios-core/product/templates/`
+Location: `.aiox-core/product/templates/`
 
 Code and configuration templates for specific technical purposes.
 
@@ -193,7 +190,7 @@ Code and configuration templates for specific technical purposes.
 
 ## 8. Product Templates - Template Engine
 
-Location: `.aios-core/product/templates/engine/`
+Location: `.aiox-core/product/templates/engine/`
 
 Engine files that power template loading, rendering, validation and elicitation.
 
@@ -217,7 +214,7 @@ Engine files that power template loading, rendering, validation and elicitation.
 
 ## 9. Development Templates - Squad
 
-Location: `.aios-core/development/templates/squad/`
+Location: `.aiox-core/development/templates/squad/`
 
 Templates used by the squad-creator agent for extending squads with new components.
 
@@ -236,7 +233,7 @@ Templates used by the squad-creator agent for extending squads with new componen
 
 ## 10. Development Templates - Service Template
 
-Location: `.aios-core/development/templates/service-template/`
+Location: `.aiox-core/development/templates/service-template/`
 
 Scaffold templates for creating new microservice packages.
 
@@ -256,9 +253,9 @@ Scaffold templates for creating new microservice packages.
 
 ## 11. Development Templates - Squad-Template Scaffold
 
-Location: `.aios-core/development/templates/squad-template/`
+Location: `.aiox-core/development/templates/squad-template/`
 
-Full project scaffold used when creating new expansion packs (squads).
+Full project scaffold used when creating new squads (squads).
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
@@ -277,27 +274,27 @@ Full project scaffold used when creating new expansion packs (squads).
 
 ## 12. Development Templates - Other
 
-Location: `.aios-core/development/templates/`
+Location: `.aiox-core/development/templates/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `aios-doc-template.md` | create-doc (implicit) | -- | -- | **WEAK** |
-| 2 | `subagent-step-prompt.md` | run-workflow-engine | aios-master | -- | No |
+| 1 | `aiox-doc-template.md` | create-doc (implicit) | -- | -- | **WEAK** |
+| 2 | `subagent-step-prompt.md` | run-workflow-engine | aiox-master | -- | No |
 
 ---
 
 ## 13. Product Checklists
 
-Location: `.aios-core/product/checklists/`
+Location: `.aiox-core/product/checklists/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `architect-checklist.md` | execute-checklist, analyze-cross-artifact | architect, aios-master | -- | No |
-| 2 | `change-checklist.md` | correct-course, modify-agent, modify-task, modify-workflow, update-manifest, qa-review-proposal, propose-modification, brownfield-create-epic | pm, po, aios-master | -- | No |
-| 3 | `pm-checklist.md` | execute-checklist (via prd-tmpl.yaml), analyze-cross-artifact | pm, aios-master | -- | No |
-| 4 | `po-master-checklist.md` | execute-checklist, validate-next-story, create-next-story, sm-create-next-story, create-brownfield-story, brownfield-create-story, brownfield-create-epic, qa-trace-requirements, dev-validate-next-story, po-sync-story-to-clickup, po-pull-story-from-clickup | po, aios-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
-| 5 | `story-dod-checklist.md` | execute-checklist, dev-develop-story, analyze-cross-artifact, build-autonomous | dev, aios-master | story-development-cycle (implicit) | No |
-| 6 | `story-draft-checklist.md` | create-next-story, sm-create-next-story, analyze-cross-artifact | sm, aios-master | -- | No |
+| 1 | `architect-checklist.md` | execute-checklist, analyze-cross-artifact | architect, aiox-master | -- | No |
+| 2 | `change-checklist.md` | correct-course, modify-agent, modify-task, modify-workflow, update-manifest, qa-review-proposal, propose-modification, brownfield-create-epic | pm, po, aiox-master | -- | No |
+| 3 | `pm-checklist.md` | execute-checklist (via prd-tmpl.yaml), analyze-cross-artifact | pm, aiox-master | -- | No |
+| 4 | `po-master-checklist.md` | execute-checklist, validate-next-story, create-next-story, sm-create-next-story, create-brownfield-story, brownfield-create-story, brownfield-create-epic, qa-trace-requirements, dev-validate-next-story, po-sync-story-to-clickup, po-pull-story-from-clickup | po, aiox-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 5 | `story-dod-checklist.md` | execute-checklist, dev-develop-story, analyze-cross-artifact, build-autonomous | dev, aiox-master | story-development-cycle (implicit) | No |
+| 6 | `story-draft-checklist.md` | create-next-story, sm-create-next-story, analyze-cross-artifact | sm, aiox-master | -- | No |
 | 7 | `self-critique-checklist.md` | plan-execute-subtask, build-autonomous, document-gotchas | dev | -- | No |
 | 8 | `release-checklist.md` | execute-checklist (implicit) | devops | -- | No |
 | 9 | `pre-push-checklist.md` | execute-checklist (implicit) | devops | -- | No |
@@ -313,12 +310,12 @@ Location: `.aios-core/product/checklists/`
 
 ## 14. Product Data Files
 
-Location: `.aios-core/product/data/`
+Location: `.aiox-core/product/data/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `brainstorming-techniques.md` | analyst-facilitate-brainstorming | analyst, aios-master | -- | No |
-| 2 | `elicitation-methods.md` | advanced-elicitation, create-doc | aios-master | -- | No |
+| 1 | `brainstorming-techniques.md` | analyst-facilitate-brainstorming | analyst, aiox-master | -- | No |
+| 2 | `elicitation-methods.md` | advanced-elicitation, create-doc | aiox-master | -- | No |
 | 3 | `mode-selection-best-practices.md` | -- (agent-config-requirements) | -- | -- | **WEAK** |
 | 4 | `atomic-design-principles.md` | -- | ux-design-expert | -- | No |
 | 5 | `consolidation-algorithms.md` | -- | ux-design-expert | -- | No |
@@ -338,16 +335,16 @@ Location: `.aios-core/product/data/`
 
 ## 15. Framework Data Files
 
-Location: `.aios-core/data/`
+Location: `.aiox-core/data/`
 
 | # | File | Consuming Task(s) | Consuming Agent(s) | Workflow(s) | Orphan? |
 |---|------|--------------------|---------------------|-------------|---------|
-| 1 | `aios-kb.md` | -- (knowledge base) | analyst, aios-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 1 | `aiox-kb.md` | -- (knowledge base) | analyst, aiox-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
 | 2 | `agent-config-requirements.yaml` | -- (config-loader, agent-config-loader scripts) | All agents (configuration) | -- | No |
 | 3 | `learned-patterns.yaml` | patterns (learn-patterns) | -- | -- | No |
 | 4 | `workflow-patterns.yaml` | -- (workflow-registry, workflow-navigator scripts) | sm (via agent-config-requirements) | All workflows (runtime) | No |
 | 5 | `workflow-state-schema.yaml` | -- (referenced by workflow-patterns.yaml, verify-workflow-gaps script) | -- | All workflows (schema) | No |
-| 6 | `technical-preferences.md` | qa-nfr-assess, qa-review-story, spec-research-dependencies | architect, pm, qa, ux-design-expert, aios-master | -- | No |
+| 6 | `technical-preferences.md` | qa-nfr-assess, qa-review-story, spec-research-dependencies | architect, pm, qa, ux-design-expert, aiox-master | -- | No |
 | 7 | `tech-presets/_template.md` | validate-tech-preset | -- | -- | No |
 | 8 | `tech-presets/nextjs-react.md` | validate-tech-preset | -- | -- | No |
 
@@ -381,7 +378,7 @@ Location: `.aios-core/data/`
 - **YES (7 files):** No references found outside install-manifest. These files exist in the codebase but are never consumed by any task, agent, or workflow.
 - **WEAK (27 files):** Referenced only in passive registries (install-manifest, service-registry, workers.csv, documentation) but not actively consumed by any task execution path. These include:
   - HBS templates (loaded dynamically by the template engine, so they ARE used at runtime through `create-doc`)
-  - IDE rules (deployed to target projects, not consumed by AIOS agents)
+  - IDE rules (deployed to target projects, not consumed by AIOX agents)
   - Personalization templates (meta-templates used as structural references)
 
 ### Most-Connected Files
@@ -403,7 +400,7 @@ Location: `.aios-core/data/`
 
 | Agent | Templates Used | Checklists Used | Data Files Used |
 |-------|----------------|-----------------|-----------------|
-| aios-master | 14 | 5 | 4 |
+| aiox-master | 14 | 5 | 4 |
 | ux-design-expert | 8 | 4 | 6 |
 | data-engineer | 7 | 3 | 5 |
 | architect | 4 | 1 | 1 |
@@ -422,7 +419,7 @@ Location: `.aios-core/data/`
 
 ### Confirmed Orphans (7 files)
 
-These files exist in `.aios-core/product/templates/` and are listed in the install-manifest, but are not referenced by any task, agent, workflow, or script:
+These files exist in `.aiox-core/product/templates/` and are listed in the install-manifest, but are not referenced by any task, agent, workflow, or script:
 
 | # | File | Category | Notes |
 |---|------|----------|-------|
@@ -443,7 +440,7 @@ These files exist in `.aios-core/product/templates/` and are listed in the insta
 
 These files exist in registries but lack direct task/agent consumption paths. Most are:
 - **HBS templates (8):** Actually consumed dynamically by the template engine at runtime. Not truly orphaned.
-- **IDE rules (7):** Output artifacts for target projects. Consumed externally, not by AIOS tasks.
+- **IDE rules (7):** Output artifacts for target projects. Consumed externally, not by AIOX tasks.
 - **Personalization templates (5):** Meta-templates used as structural blueprints.
 - **Other (7):** Various structural/documentation templates with registry-only references.
 
@@ -451,7 +448,7 @@ These files exist in registries but lack direct task/agent consumption paths. Mo
 
 ## Appendix: Template-to-Task Mapping via `create-doc`
 
-The `create-doc.md` task is the primary template consumer. It dynamically loads templates from `.aios-core/product/templates/` based on user selection at runtime. The following templates are consumable through `create-doc`:
+The `create-doc.md` task is the primary template consumer. It dynamically loads templates from `.aiox-core/product/templates/` based on user selection at runtime. The following templates are consumable through `create-doc`:
 
 All YAML templates (`*-tmpl.yaml`) and all HBS templates (`*.hbs`) can be selected through the `create-doc` task's interactive template picker. The template engine (`engine/`) handles loading, validation, elicitation, and rendering.
 

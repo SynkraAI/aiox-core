@@ -19,7 +19,7 @@ describe('InstallTransaction', () => {
 
   beforeEach(async () => {
     // Create temp directory for each test
-    tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'aios-test-'));
+    tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'aiox-test-'));
     testFile = path.join(tempDir, 'test.txt');
     testDir = path.join(tempDir, 'test-dir');
 
@@ -33,8 +33,8 @@ describe('InstallTransaction', () => {
     // Use simple timestamp for testing (avoid Windows path issues)
     const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\./g, '-').replace('T', '_');
     transaction = new InstallTransaction({
-      backupDir: path.join(tempDir, '.aios-backup', timestamp),
-      logFile: path.join(tempDir, '.aios-install.log'),
+      backupDir: path.join(tempDir, '.aiox-backup', timestamp),
+      logFile: path.join(tempDir, '.aiox-install.log'),
     });
   });
 

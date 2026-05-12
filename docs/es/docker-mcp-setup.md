@@ -4,7 +4,7 @@
 
 ---
 
-Guía para configurar servidores MCP (Model Context Protocol) basados en Docker con AIOS.
+Guía para configurar servidores MCP (Model Context Protocol) basados en Docker con AIOX.
 
 **Versión:** 2.1.0
 **Última Actualización:** 2026-01-28
@@ -17,7 +17,7 @@ Antes de configurar Docker MCP, asegúrate de tener:
 
 - **Docker Desktop** instalado y en ejecución
 - **Node.js** 18+ instalado
-- Proyecto **AIOS** inicializado
+- Proyecto **AIOX** inicializado
 - Claves API para los servicios MCP deseados (EXA, Apify, etc.)
 
 ---
@@ -38,23 +38,23 @@ docker mcp --version
 
 ```bash
 # Crear estructura MCP global
-aios mcp setup
+aiox mcp setup
 ```
 
 Esto crea:
 
-- `~/.aios/mcp/` - Directorio de configuración MCP
-- `~/.aios/mcp/global-config.json` - Archivo de configuración principal
-- `~/.aios/mcp/servers/` - Configuraciones de servidores individuales
-- `~/.aios/credentials/` - Almacenamiento seguro de credenciales
+- `~/.aiox/mcp/` - Directorio de configuración MCP
+- `~/.aiox/mcp/global-config.json` - Archivo de configuración principal
+- `~/.aiox/mcp/servers/` - Configuraciones de servidores individuales
+- `~/.aiox/credentials/` - Almacenamiento seguro de credenciales
 
 ### Paso 3: Agregar Servidores MCP
 
 ```bash
 # Agregar servidores desde plantillas
-aios mcp add context7
-aios mcp add exa
-aios mcp add github
+aiox mcp add context7
+aiox mcp add exa
+aiox mcp add github
 ```
 
 ---
@@ -63,7 +63,7 @@ aios mcp add github
 
 ### Arquitectura MCP
 
-AIOS usa Docker MCP Toolkit como infraestructura MCP principal:
+AIOX usa Docker MCP Toolkit como infraestructura MCP principal:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -134,7 +134,7 @@ AIOS usa Docker MCP Toolkit como infraestructura MCP principal:
 
 ```bash
 # Agregar Context7
-aios mcp add context7
+aiox mcp add context7
 
 # Uso
 mcp__context7__resolve-library-id
@@ -151,7 +151,7 @@ mcp__context7__query-docs
 
 ```bash
 # Agregar EXA
-aios mcp add exa
+aiox mcp add exa
 
 # Configurar clave API
 export EXA_API_KEY="your-api-key"
@@ -172,7 +172,7 @@ mcp__exa__get_code_context_exa
 
 ```bash
 # Agregar Apify
-aios mcp add apify
+aiox mcp add apify
 
 # Configurar token API
 export APIFY_TOKEN="your-token"
@@ -193,7 +193,7 @@ mcp__docker-gateway__call-actor
 
 ```bash
 # Agregar GitHub
-aios mcp add github
+aiox mcp add github
 
 # Configurar token
 export GITHUB_TOKEN="your-token"
@@ -209,7 +209,7 @@ export GITHUB_TOKEN="your-token"
 
 ```bash
 # Agregar Playwright
-aios mcp add puppeteer
+aiox mcp add puppeteer
 ```
 
 **Usar para:**
@@ -227,40 +227,40 @@ aios mcp add puppeteer
 
 ```bash
 # Inicializar configuración MCP global
-aios mcp setup
+aiox mcp setup
 
 # Forzar recreación (respaldar existente)
-aios mcp setup --force
+aiox mcp setup --force
 ```
 
 ### Gestión de Servidores
 
 ```bash
 # Agregar servidor desde plantilla
-aios mcp add <server-name>
+aiox mcp add <server-name>
 
 # Agregar con configuración personalizada
-aios mcp add custom-server --config='{"command":"npx","args":["-y","package"]}'
+aiox mcp add custom-server --config='{"command":"npx","args":["-y","package"]}'
 
 # Eliminar servidor
-aios mcp remove <server-name>
+aiox mcp remove <server-name>
 
 # Habilitar/deshabilitar servidores
-aios mcp enable <server-name>
-aios mcp disable <server-name>
+aiox mcp enable <server-name>
+aiox mcp disable <server-name>
 ```
 
 ### Estado y Listado
 
 ```bash
 # Listar servidores configurados
-aios mcp list
+aiox mcp list
 
 # Mostrar estado detallado
-aios mcp status
+aiox mcp status
 
 # Sincronizar al proyecto
-aios mcp sync
+aiox mcp sync
 ```
 
 ---
@@ -299,13 +299,13 @@ export APIFY_TOKEN="your-apify-token"
 
 ```bash
 # Agregar credencial
-aios mcp credential set EXA_API_KEY "your-api-key"
+aiox mcp credential set EXA_API_KEY "your-api-key"
 
 # Obtener credencial
-aios mcp credential get EXA_API_KEY
+aiox mcp credential get EXA_API_KEY
 
 # Listar credenciales (enmascaradas)
-aios mcp credential list
+aiox mcp credential list
 ```
 
 ---
@@ -358,13 +358,13 @@ apify-mcp-server:
 
 ```bash
 # Resetear configuración global
-aios mcp setup --force
+aiox mcp setup --force
 
 # Limpiar caché
-rm -rf ~/.aios/mcp/cache/*
+rm -rf ~/.aiox/mcp/cache/*
 
 # Verificar configuración
-aios mcp status --verbose
+aiox mcp status --verbose
 
 # Probar servidor manualmente
 npx -y @modelcontextprotocol/server-github
@@ -419,8 +419,8 @@ Solo usar docker-gateway cuando:
 - [Guía MCP Desktop Commander](./guides/mcp/desktop-commander.md)
 - [Guía de Configuración Global MCP](./guides/mcp-global-setup.md)
 - [Diagramas de Arquitectura MCP](./architecture/mcp-system-diagrams.md)
-- [Agente DevOps](../.aios-core/development/agents/devops.md)
+- [Agente DevOps](../.aiox-core/development/agents/devops.md)
 
 ---
 
-_Guía de Configuración de Docker MCP de Synkra AIOS v2.1.0_
+_Guía de Configuración de Docker MCP de Synkra AIOX v4.0_

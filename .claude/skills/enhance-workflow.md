@@ -16,7 +16,7 @@ domain_roundtable_map:
   code_app:
     keywords: [app, api, database, frontend, backend, feature, refactor, bug]
     agents: [architect, data-engineer, devops, ux]
-    agent_files: [AIOS/agents/architect.md, AIOS/agents/data-engineer.md, AIOS/agents/devops.md, AIOS/agents/ux-design-expert.md]
+    agent_files: [AIOX/agents/architect.md, AIOX/agents/data-engineer.md, AIOX/agents/devops.md, AIOX/agents/ux-design-expert.md]
 
   # Copywriting & Marketing
   copy_marketing:
@@ -34,7 +34,7 @@ domain_roundtable_map:
   design_brand:
     keywords: [design, ui, ux, brand, visual, logo, design system, component]
     agents: [design-chief, brad-frost, marty-neumeier, ux]
-    agent_files: [Design/agents/design-chief.md, Design/agents/brad-frost.md, Design/agents/marty-neumeier.md, AIOS/agents/ux-design-expert.md]
+    agent_files: [Design/agents/design-chief.md, Design/agents/brad-frost.md, Design/agents/marty-neumeier.md, AIOX/agents/ux-design-expert.md]
 
   # Storytelling & Content
   storytelling_content:
@@ -88,7 +88,7 @@ domain_roundtable_map:
   squad_workflow:
     keywords: [squad, skill, workflow, agent, pipeline, orchestration]
     agents: [pedro-valerio, squad-architect, qa, devops]
-    agent_files: [squad-creator/agents/pedro-valerio.md, squad-creator/agents/squad-architect.md, AIOS/agents/qa.md, AIOS/agents/devops.md]
+    agent_files: [squad-creator/agents/pedro-valerio.md, squad-creator/agents/squad-architect.md, AIOX/agents/qa.md, AIOX/agents/devops.md]
 
   # Strategic Advisory
   advisory_strategy:
@@ -310,7 +310,7 @@ Após cada fase completar:
 
 ### Phase 1: Discovery (@architect)
 
-**Spawn agent** com prompt incluindo Context Preamble do AIOS.
+**Spawn agent** com prompt incluindo Context Preamble do AIOX.
 
 Após completar:
 - Checkpoint: `{ "phases": { "discovery": { "status": "completed", "artifact_hash": "..." } } }`
@@ -353,8 +353,8 @@ Após todos completarem, consolidar em `03-roundtable.md`.
 **Spawn qa** para validar o Epic:
 
 ```
-Você é Quinn, o QA do AIOS. Leia seu agent file em:
-.claude/commands/AIOS/agents/qa.md
+Você é Quinn, o QA do AIOX. Leia seu agent file em:
+.claude/commands/AIOX/agents/qa.md
 
 Execute *review no Epic gerado:
 

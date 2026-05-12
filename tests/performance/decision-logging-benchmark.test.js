@@ -6,7 +6,7 @@
  * Validates that decision logging overhead meets the <50ms requirement (AC8).
  * Tests individual operations and full workflow performance.
  *
- * @see .aios-core/scripts/decision-recorder.js
+ * @see .aiox-core/scripts/decision-recorder.js
  */
 
 const fs = require('fs').promises;
@@ -17,7 +17,7 @@ const {
   trackTest,
   updateMetrics,
   completeDecisionLogging,
-} = require('../../.aios-core/development/scripts/decision-recorder');
+} = require('../../.aiox-core/development/scripts/decision-recorder');
 
 describeIntegration('Decision Logging Performance Benchmarks', () => {
   const testStoryPath = 'docs/stories/benchmark-test.md';

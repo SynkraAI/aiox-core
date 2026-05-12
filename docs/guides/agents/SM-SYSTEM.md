@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-O agente **@sm (River)** e o Scrum Master tecnico do AIOS, especializado em preparacao de stories e facilitacao de processos ageis. Seu papel principal e criar stories detalhadas e acionaveis que agentes desenvolvedores possam implementar com minima necessidade de pesquisa adicional.
+O agente **@sm (River)** e o Scrum Master tecnico do AIOX, especializado em preparacao de stories e facilitacao de processos ageis. Seu papel principal e criar stories detalhadas e acionaveis que agentes desenvolvedores possam implementar com minima necessidade de pesquisa adicional.
 
 **Responsabilidades Principais:**
 - Criacao e refinamento de user stories
@@ -31,19 +31,19 @@ O agente **@sm (River)** e o Scrum Master tecnico do AIOS, especializado em prep
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/sm-create-next-story.md` | `*draft` | Task principal para criar proxima story do backlog |
-| `.aios-core/development/tasks/create-next-story.md` | `*draft` | Versao completa da task de criacao de story |
-| `.aios-core/development/tasks/execute-checklist.md` | `*story-checklist` | Executa checklist de validacao de story draft |
-| `.aios-core/development/tasks/correct-course.md` | `*correct-course` | Analisa e corrige desvios de processo |
-| `.aios-core/development/tasks/collaborative-edit.md` | - | Edicao colaborativa de documentos |
-| `.aios-core/development/tasks/init-project-status.md` | - | Inicializacao de status do projeto |
+| `.aiox-core/development/tasks/sm-create-next-story.md` | `*draft` | Task principal para criar proxima story do backlog |
+| `.aiox-core/development/tasks/create-next-story.md` | `*draft` | Versao completa da task de criacao de story |
+| `.aiox-core/development/tasks/execute-checklist.md` | `*story-checklist` | Executa checklist de validacao de story draft |
+| `.aiox-core/development/tasks/correct-course.md` | `*correct-course` | Analisa e corrige desvios de processo |
+| `.aiox-core/development/tasks/collaborative-edit.md` | - | Edicao colaborativa de documentos |
+| `.aiox-core/development/tasks/init-project-status.md` | - | Inicializacao de status do projeto |
 
 ### Arquivos de Definicao do Agente
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/sm.md` | Definicao core do agente SM |
-| `.claude/commands/AIOS/agents/sm.md` | Comando Claude Code para ativar @sm |
+| `.aiox-core/development/agents/sm.md` | Definicao core do agente SM |
+| `.claude/commands/AIOX/agents/sm.md` | Comando Claude Code para ativar @sm |
 | `.cursor/rules/sm.md` | Regras para Cursor IDE |
 | `.cursor/rules/sm.mdc` | Regras compiladas para Cursor |
 
@@ -51,40 +51,40 @@ O agente **@sm (River)** e o Scrum Master tecnico do AIOS, especializado em prep
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/product/checklists/story-draft-checklist.md` | Valida qualidade e completude de story drafts |
-| `.aios-core/product/checklists/story-dod-checklist.md` | Definition of Done para stories |
-| `.aios-core/product/checklists/change-checklist.md` | Navegacao de mudancas e correcao de curso |
-| `.aios-core/product/checklists/po-master-checklist.md` | Checklist mestre usado em validacao |
+| `.aiox-core/product/checklists/story-draft-checklist.md` | Valida qualidade e completude de story drafts |
+| `.aiox-core/product/checklists/story-dod-checklist.md` | Definition of Done para stories |
+| `.aiox-core/product/checklists/change-checklist.md` | Navegacao de mudancas e correcao de curso |
+| `.aiox-core/product/checklists/po-master-checklist.md` | Checklist mestre usado em validacao |
 
 ### Arquivos Relacionados de Outros Agentes
 
 | Arquivo | Agente | Proposito |
 |---------|--------|-----------|
-| `.aios-core/development/agents/po.md` | @po | Coordena com @sm em backlog e sprint planning |
-| `.aios-core/development/agents/dev.md` | @dev | Recebe stories do @sm para implementacao |
-| `.aios-core/development/agents/pm.md` | @pm | Cria epics que @sm quebra em stories |
-| `.aios-core/development/agents/devops.md` | @github-devops | Recebe stories completas para push/PR |
-| `.aios-core/development/agents/qa.md` | @qa | Coordena em risk profiling |
+| `.aiox-core/development/agents/po.md` | @po | Coordena com @sm em backlog e sprint planning |
+| `.aiox-core/development/agents/dev.md` | @dev | Recebe stories do @sm para implementacao |
+| `.aiox-core/development/agents/pm.md` | @pm | Cria epics que @sm quebra em stories |
+| `.aiox-core/development/agents/devops.md` | @github-devops | Recebe stories completas para push/PR |
+| `.aiox-core/development/agents/qa.md` | @qa | Coordena em risk profiling |
 
 ### Arquivos de Workflows que Utilizam @sm
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/workflows/story-development-cycle.yaml` | Ciclo completo de desenvolvimento de stories |
-| `.aios-core/development/workflows/greenfield-fullstack.yaml` | Workflow greenfield full-stack |
-| `.aios-core/development/workflows/greenfield-service.yaml` | Workflow greenfield service |
-| `.aios-core/development/workflows/greenfield-ui.yaml` | Workflow greenfield UI |
-| `.aios-core/development/workflows/brownfield-fullstack.yaml` | Workflow brownfield full-stack |
-| `.aios-core/development/workflows/brownfield-service.yaml` | Workflow brownfield service |
-| `.aios-core/development/workflows/brownfield-ui.yaml` | Workflow brownfield UI |
+| `.aiox-core/development/workflows/story-development-cycle.yaml` | Ciclo completo de desenvolvimento de stories |
+| `.aiox-core/development/workflows/greenfield-fullstack.yaml` | Workflow greenfield full-stack |
+| `.aiox-core/development/workflows/greenfield-service.yaml` | Workflow greenfield service |
+| `.aiox-core/development/workflows/greenfield-ui.yaml` | Workflow greenfield UI |
+| `.aiox-core/development/workflows/brownfield-fullstack.yaml` | Workflow brownfield full-stack |
+| `.aiox-core/development/workflows/brownfield-service.yaml` | Workflow brownfield service |
+| `.aiox-core/development/workflows/brownfield-ui.yaml` | Workflow brownfield UI |
 
 ### Arquivos de Configuracao
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/core-config.yaml` | Configuracao central (devStoryLocation, etc.) |
-| `.aios-core/development/scripts/greeting-builder.js` | Script de saudacao inteligente |
-| `.aios-core/development/scripts/agent-assignment-resolver.js` | Resolucao de assignment de agentes |
+| `.aiox-core/core-config.yaml` | Configuracao central (devStoryLocation, etc.) |
+| `.aiox-core/development/scripts/greeting-builder.js` | Script de saudacao inteligente |
+| `.aiox-core/development/scripts/agent-assignment-resolver.js` | Resolucao de assignment de agentes |
 
 ---
 
@@ -405,8 +405,8 @@ dependencies:
 **Sintoma:** Task halts com mensagem de arquivo nao encontrado
 
 **Solucao:**
-1. Copiar de `GITHUB aios-core/core-config.yaml`
-2. Ou executar AIOS installer: `npm run aios:install`
+1. Copiar de `GITHUB aiox-core/core-config.yaml`
+2. Ou executar AIOX installer: `npm run aiox:install`
 3. Configurar `devStoryLocation`, `prdSharded`, etc.
 
 ### Checklist retorna FAIL em multiplas categorias
@@ -444,23 +444,23 @@ dependencies:
 ## Referencias
 
 ### Arquivos do Agente
-- [Agent: sm.md](.aios-core/development/agents/sm.md)
-- [Task: create-next-story.md](.aios-core/development/tasks/create-next-story.md)
-- [Task: execute-checklist.md](.aios-core/development/tasks/execute-checklist.md)
-- [Task: correct-course.md](.aios-core/development/tasks/correct-course.md)
+- [Agent: sm.md](.aiox-core/development/agents/sm.md)
+- [Task: create-next-story.md](.aiox-core/development/tasks/create-next-story.md)
+- [Task: execute-checklist.md](.aiox-core/development/tasks/execute-checklist.md)
+- [Task: correct-course.md](.aiox-core/development/tasks/correct-course.md)
 
 ### Checklists
-- [Checklist: story-draft-checklist.md](.aios-core/product/checklists/story-draft-checklist.md)
-- [Checklist: story-dod-checklist.md](.aios-core/product/checklists/story-dod-checklist.md)
-- [Checklist: change-checklist.md](.aios-core/product/checklists/change-checklist.md)
+- [Checklist: story-draft-checklist.md](.aiox-core/product/checklists/story-draft-checklist.md)
+- [Checklist: story-dod-checklist.md](.aiox-core/product/checklists/story-dod-checklist.md)
+- [Checklist: change-checklist.md](.aiox-core/product/checklists/change-checklist.md)
 
 ### Workflows
-- [Workflow: story-development-cycle.yaml](.aios-core/development/workflows/story-development-cycle.yaml)
-- [Workflow: greenfield-fullstack.yaml](.aios-core/development/workflows/greenfield-fullstack.yaml)
-- [Workflow: brownfield-fullstack.yaml](.aios-core/development/workflows/brownfield-fullstack.yaml)
+- [Workflow: story-development-cycle.yaml](.aiox-core/development/workflows/story-development-cycle.yaml)
+- [Workflow: greenfield-fullstack.yaml](.aiox-core/development/workflows/greenfield-fullstack.yaml)
+- [Workflow: brownfield-fullstack.yaml](.aiox-core/development/workflows/brownfield-fullstack.yaml)
 
 ### Configuracao
-- [Core Config](../.aios-core/core-config.yaml)
+- [Core Config](../.aiox-core/core-config.yaml)
 
 ### Documentacao Relacionada
 - [Backlog Management System](../BACKLOG-MANAGEMENT-SYSTEM.md)

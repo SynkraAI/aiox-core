@@ -1,4 +1,4 @@
-# [P0] Missing AIOS Core module: utils/repository-detector - Blocks Linux Installation
+# [P0] Missing AIOX Core module: utils/repository-detector - Blocks Linux Installation
 
 ## 🔴 Priority: P0 (CRITICAL - Installation Blocked)
 
@@ -13,7 +13,7 @@
 
 ## 📋 Description
 
-The AIOS installer fails immediately on Linux systems with a module not found error, preventing any installation or testing. The installer cannot locate the AIOS Core module `utils/repository-detector`, blocking all Linux platform validation for Story 1.10c.
+The AIOX installer fails immediately on Linux systems with a module not found error, preventing any installation or testing. The installer cannot locate the AIOX Core module `utils/repository-detector`, blocking all Linux platform validation for Story 1.10c.
 
 **Impact:** This is a **CRITICAL BLOCKER** for Sprint 1 completion, as Story 1.10c cannot proceed without a working installer on Linux.
 
@@ -24,17 +24,17 @@ The AIOS installer fails immediately on Linux systems with a module not found er
 ### Error Message
 
 ```
-Error: Cannot find AIOS Core module: utils/repository-detector
-Searched: ${PROJECT_ROOT}/.aios-core/utils/repository-detector
-Please ensure @synkra/aios-core is installed correctly.
-    at loadAIOSCore (${PROJECT_ROOT}/bin/aios-init.js:43:11)
+Error: Cannot find AIOX Core module: utils/repository-detector
+Searched: ${PROJECT_ROOT}/.aiox-core/utils/repository-detector
+Please ensure aiox-core is installed correctly.
+    at loadAIOXCore (${PROJECT_ROOT}/bin/aiox-init.js:43:11)
 ```
 
 ### Stack Trace Location
 
-- **File:** `bin/aios-init.js`
+- **File:** `bin/aiox-init.js`
 - **Line:** 43
-- **Function:** `loadAIOSCore`
+- **Function:** `loadAIOXCore`
 
 ---
 
@@ -44,7 +44,7 @@ Please ensure @synkra/aios-core is installed correctly.
 
 - Ubuntu 24.04 LTS (WSL) or native Linux
 - Node.js v18.20.8+
-- AIOS-Fullstack repository cloned
+- AIOX-Fullstack repository cloned
 
 ### Steps to Reproduce
 
@@ -52,21 +52,21 @@ Please ensure @synkra/aios-core is installed correctly.
 2. Create test directory:
 
    ```bash
-   mkdir -p /tmp/aios-test-install
-   cd /tmp/aios-test-install
+   mkdir -p /tmp/aiox-test-install
+   cd /tmp/aiox-test-install
    ```
 
 3. Execute installer:
 
    ```bash
-   node ${PROJECT_ROOT}/bin/aios-init.js --help
+   node ${PROJECT_ROOT}/bin/aiox-init.js --help
    ```
 
 4. **Observe:** Installation fails with module not found error
 
 ### Expected Behavior
 
-- Installer should locate AIOS Core module successfully
+- Installer should locate AIOX Core module successfully
 - Help text should display (with `--help` flag)
 - Installation wizard should launch (without flags)
 - Installation should proceed normally
@@ -116,7 +116,7 @@ Please ensure @synkra/aios-core is installed correctly.
    - Cross-platform path separator issues (Windows `\` vs Linux `/`)
 
 2. **Missing File/Directory**
-   - `.aios-core/utils/repository-detector.js` may not exist in repository
+   - `.aiox-core/utils/repository-detector.js` may not exist in repository
    - Module may have been renamed or moved in recent commits
    - Build/install process may not create required directory structure
 
@@ -127,8 +127,8 @@ Please ensure @synkra/aios-core is installed correctly.
 
 ### Investigation Needed
 
-- [ ] Verify `.aios-core/utils/repository-detector.js` exists in repo
-- [ ] Check `bin/aios-init.js:43` for path construction logic
+- [ ] Verify `.aiox-core/utils/repository-detector.js` exists in repo
+- [ ] Check `bin/aiox-init.js:43` for path construction logic
 - [ ] Review recent commits for module renames/moves
 - [ ] Test module loading on Windows vs Linux
 - [ ] Verify build process creates required directory structure
@@ -142,18 +142,18 @@ Please ensure @synkra/aios-core is installed correctly.
 1. **Verify module exists:**
 
    ```bash
-   ls -la .aios-core/utils/repository-detector.js
+   ls -la .aiox-core/utils/repository-detector.js
    ```
 
-2. **Fix path resolution in `bin/aios-init.js:43`:**
+2. **Fix path resolution in `bin/aiox-init.js:43`:**
 
    ```javascript
    // Before (suspected):
-   const detector = require('./.aios-core/utils/repository-detector');
+   const detector = require('./.aiox-core/utils/repository-detector');
 
    // After (cross-platform):
    const path = require('path');
-   const detectorPath = path.resolve(__dirname, '..', '.aios-core', 'utils', 'repository-detector');
+   const detectorPath = path.resolve(__dirname, '..', '.aiox-core', 'utils', 'repository-detector');
    const detector = require(detectorPath);
    ```
 
@@ -162,7 +162,7 @@ Please ensure @synkra/aios-core is installed correctly.
    ```javascript
    const fs = require('fs');
    if (!fs.existsSync(detectorPath + '.js')) {
-     console.error('AIOS Core module not found.');
+     console.error('AIOX Core module not found.');
      console.error('Please run: npm install');
      process.exit(1);
    }
@@ -170,7 +170,7 @@ Please ensure @synkra/aios-core is installed correctly.
 
 4. **Test in WSL Ubuntu:**
    ```bash
-   wsl bash -c "cd /tmp/aios-test-install && node /mnt/c/.../bin/aios-init.js --help"
+   wsl bash -c "cd /tmp/aiox-test-install && node /mnt/c/.../bin/aiox-init.js --help"
    ```
 
 ### Long-Term (Prevention)
@@ -226,8 +226,8 @@ Please ensure @synkra/aios-core is installed correctly.
 
 ### Code References
 
-- **Installer:** `bin/aios-init.js:43` (error location)
-- **Missing Module:** `.aios-core/utils/repository-detector` (expected location)
+- **Installer:** `bin/aiox-init.js:43` (error location)
+- **Missing Module:** `.aiox-core/utils/repository-detector` (expected location)
 
 ### Related Stories
 

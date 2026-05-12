@@ -6,7 +6,7 @@ set -euo pipefail
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 TEST_NAME="AC4: Path Handling"
-LOG_FILE="/tmp/aios-test-path-$(date +%Y%m%d-%H%M%S).log"
+LOG_FILE="/tmp/aiox-test-path-$(date +%Y%m%d-%H%M%S).log"
 
 log_info() { echo -e "${GREEN}[INFO]${NC} $1" | tee -a "$LOG_FILE"; }
 pass_test() { echo -e "${GREEN}[PASS]${NC} $1" | tee -a "$LOG_FILE"; }
@@ -16,7 +16,7 @@ test_forward_slashes() {
     log_info "Test 1: Forward slash usage..."
 
     # Create test path
-    TEST_DIR="$HOME/aios-path-test"
+    TEST_DIR="$HOME/aiox-path-test"
     mkdir -p "$TEST_DIR/sub/dir"
 
     # Verify path uses forward slashes
@@ -46,7 +46,7 @@ test_home_expansion() {
 test_symlinks() {
     log_info "Test 3: Symlink resolution..."
 
-    TEST_DIR="$HOME/aios-symlink-test"
+    TEST_DIR="$HOME/aiox-symlink-test"
     mkdir -p "$TEST_DIR"
 
     # Create test file and symlink
@@ -78,7 +78,7 @@ test_special_characters() {
     log_info "Test 4: Special characters in paths..."
 
     # Test space handling
-    TEST_DIR="$HOME/aios test with spaces"
+    TEST_DIR="$HOME/aiox test with spaces"
     mkdir -p "$TEST_DIR"
 
     if [[ -d "$TEST_DIR" ]]; then

@@ -145,18 +145,18 @@ heal:
 
 ## Domínio 1: Coerência do Projeto
 
-**Propósito:** Verificar se os arquivos do framework AIOS estão corretamente configurados e consistentes.
+**Propósito:** Verificar se os arquivos do framework AIOX estão corretamente configurados e consistentes.
 
 ### Verificações
 
 | ID     | Nome                           | Severidade | Nível | Modo  | Timeout | Descrição                                            |
 | ------ | ------------------------------ | ---------- | ----- | ----- | ------- | ---------------------------------------------------- |
-| PC-001 | Config existe                  | CRITICAL   | 1     | quick | 100ms   | `.aios/config.yaml` existe e é YAML válido           |
+| PC-001 | Config existe                  | CRITICAL   | 1     | quick | 100ms   | `.aiox/config.yaml` existe e é YAML válido           |
 | PC-002 | Referências de agentes válidas | HIGH       | 3     | full  | 2s      | Tarefas referenciam agentes existentes               |
 | PC-003 | Coding standards existe        | MEDIUM     | 2     | full  | 100ms   | `docs/framework/coding-standards.md` existe          |
 | PC-004 | Tech stack existe              | MEDIUM     | 2     | full  | 100ms   | `docs/framework/tech-stack.md` existe                |
 | PC-005 | Source tree existe             | MEDIUM     | 2     | full  | 100ms   | `docs/framework/source-tree.md` existe               |
-| PC-006 | Sem arquivos órfãos            | LOW        | 3     | full  | 5s      | Todos os arquivos em `.aios-core/` são referenciados |
+| PC-006 | Sem arquivos órfãos            | LOW        | 3     | full  | 5s      | Todos os arquivos em `.aiox-core/` são referenciados |
 | PC-007 | Manifestos válidos             | HIGH       | 3     | quick | 1s      | Todos os manifestos YAML parseiam corretamente       |
 | PC-008 | Caminhos de templates válidos  | MEDIUM     | 3     | full  | 2s      | Templates referenciam arquivos existentes            |
 
@@ -178,12 +178,12 @@ class ConfigExistsCheck extends BaseCheck {
   }
 
   async check(context) {
-    const configPath = path.join(context.projectRoot, '.aios', 'config.yaml');
+    const configPath = path.join(context.projectRoot, '.aiox', 'config.yaml');
 
     if (!(await fs.pathExists(configPath))) {
       return {
         passed: false,
-        message: '.aios/config.yaml não encontrado',
+        message: '.aiox/config.yaml não encontrado',
         autoFixAvailable: true,
       };
     }
@@ -202,8 +202,8 @@ class ConfigExistsCheck extends BaseCheck {
   }
 
   async heal(context) {
-    const templatePath = '.aios-core/infrastructure/templates/core-config/config-template.yaml';
-    const configPath = path.join(context.projectRoot, '.aios', 'config.yaml');
+    const templatePath = '.aiox-core/infrastructure/templates/core-config/config-template.yaml';
+    const configPath = path.join(context.projectRoot, '.aiox', 'config.yaml');
 
     await fs.ensureDir(path.dirname(configPath));
     await fs.copy(templatePath, configPath);
@@ -644,7 +644,6 @@ class GitHubApiCheck extends BaseCheck {
 | --------------- | ---------------------------- | ------------------- | -------------------------- |
 | **VS Code**     | `.vscode/settings.json`      | Arquivo existe      | JSON schema                |
 | **Cursor**      | `.cursorrules`               | Arquivo existe      | Padrões de conteúdo        |
-| **Windsurf**    | `.windsurf/rules/`           | Diretório existe    | TBD                        |
 | **Claude Code** | `.claude/CLAUDE.md`          | Arquivo existe      | Seções obrigatórias        |
 | **MCPs**        | `.claude.json` / `.mcp.json` | Arquivo existe      | Ping de saúde MCP          |
 | **Git**         | `.gitconfig`                 | `git config --list` | Configurações obrigatórias |
@@ -657,7 +656,7 @@ class GitHubApiCheck extends BaseCheck {
 ```javascript
 // Seções obrigatórias no CLAUDE.md
 const requiredSections = [
-  'Project Overview', // ou 'AIOS-FULLSTACK Development Rules'
+  'Project Overview', // ou 'AIOX-FULLSTACK Development Rules'
   'Agent System', // ou 'Workflow Execution'
   'Git Conventions', // ou 'Best Practices'
 ];
@@ -686,7 +685,7 @@ async function validateClaudeMd(content) {
 ### Verificações de Configuração da IDE
 
 ```yaml
-# .aios-core/health-check/checks/ide-checks.yaml
+# .aiox-core/health-check/checks/ide-checks.yaml
 checks:
   - id: IDE-VSCODE
     name: 'Configuração do VS Code'
@@ -695,11 +694,11 @@ checks:
       - file: '.vscode/extensions.json'
     validation:
       type: json-schema
-      schema: '.aios-core/schemas/vscode-settings.json'
+      schema: '.aiox-core/schemas/vscode-settings.json'
     autoFix:
       tier: 2
       action: 'create-from-template'
-      template: '.aios-core/infrastructure/templates/ide/vscode-settings.json'
+      template: '.aiox-core/infrastructure/templates/ide/vscode-settings.json'
 
   - id: IDE-CURSOR
     name: 'Configuração do Cursor'
@@ -710,7 +709,7 @@ checks:
       type: content-pattern
       patterns:
         - 'You are'
-        - 'AIOS'
+        - 'AIOX'
     autoFix:
       tier: 2
       action: 'create-from-template'
@@ -733,10 +732,10 @@ checks:
 
 ### Verificações Customizadas Baseadas em YAML
 
-Usuários podem definir verificações específicas do projeto em `.aios/custom-checks.yaml`:
+Usuários podem definir verificações específicas do projeto em `.aiox/custom-checks.yaml`:
 
 ```yaml
-# .aios/custom-checks.yaml
+# .aiox/custom-checks.yaml
 version: 1.0
 
 checks:
@@ -750,7 +749,7 @@ checks:
     mode: quick
     autoFix:
       action: create-from-template
-      template: '.aios-core/infrastructure/templates/project-docs/readme-template.md'
+      template: '.aiox-core/infrastructure/templates/project-docs/readme-template.md'
 
   # Verificação de padrão de conteúdo
   - id: CUSTOM-002
@@ -792,7 +791,7 @@ checks:
     name: 'Package.json válido'
     type: json-schema
     path: 'package.json'
-    schema: '.aios-core/schemas/package-json.json'
+    schema: '.aiox-core/schemas/package-json.json'
     severity: CRITICAL
     tier: 3
     mode: quick

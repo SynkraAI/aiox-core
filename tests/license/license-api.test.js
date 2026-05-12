@@ -50,7 +50,7 @@ describe('license-api', () => {
 
   beforeEach(() => {
     // Create temp directory for pending deactivation tests
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-api-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-api-test-'));
     originalCwd = process.cwd;
     process.cwd = () => testDir;
   });
@@ -70,7 +70,7 @@ describe('license-api', () => {
     it('should use default config', () => {
       const client = new LicenseApiClient();
 
-      expect(client.baseUrl).toBe(process.env.AIOS_LICENSE_API_URL || 'https://api.synkra.ai');
+      expect(client.baseUrl).toBe(process.env.AIOX_LICENSE_API_URL || 'https://aiox-license-server.vercel.app');
       expect(client.timeoutMs).toBe(10000);
     });
 
@@ -106,7 +106,7 @@ describe('license-api', () => {
           const data = JSON.parse(body);
           expect(data.key).toBe('PRO-TEST-1234-5678-ABCD');
           expect(data.machineId).toBe('test-machine-id');
-          expect(data.aiosCoreVersion).toBe('3.0.0');
+          expect(data.aioxCoreVersion).toBe('3.0.0');
 
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify(mockResponse));

@@ -19,13 +19,13 @@ Epic 1 (Worktree Manager) está **100% completo** e aprovado pelo QA Gate. Forne
 
 | Artefato                 | Caminho                                                      | Tipo      | Status |
 | ------------------------ | ------------------------------------------------------------ | --------- | ------ |
-| worktree-manager.js      | `.aios-core/infrastructure/scripts/worktree-manager.js`      | JS Script | ✅     |
-| story-worktree-hooks.js  | `.aios-core/infrastructure/scripts/story-worktree-hooks.js`  | JS Script | ✅     |
-| project-status-loader.js | `.aios-core/infrastructure/scripts/project-status-loader.js` | JS Script | ✅     |
-| auto-worktree.yaml       | `.aios-core/development/workflows/auto-worktree.yaml`        | Workflow  | ✅     |
-| worktree-create.md       | `.aios-core/development/tasks/worktree-create.md`            | Task      | ✅     |
-| worktree-list.md         | `.aios-core/development/tasks/worktree-list.md`              | Task      | ✅     |
-| worktree-merge.md        | `.aios-core/development/tasks/worktree-merge.md`             | Task      | ✅     |
+| worktree-manager.js      | `.aiox-core/infrastructure/scripts/worktree-manager.js`      | JS Script | ✅     |
+| story-worktree-hooks.js  | `.aiox-core/infrastructure/scripts/story-worktree-hooks.js`  | JS Script | ✅     |
+| project-status-loader.js | `.aiox-core/infrastructure/scripts/project-status-loader.js` | JS Script | ✅     |
+| auto-worktree.yaml       | `.aiox-core/development/workflows/auto-worktree.yaml`        | Workflow  | ✅     |
+| worktree-create.md       | `.aiox-core/development/tasks/worktree-create.md`            | Task      | ✅     |
+| worktree-list.md         | `.aiox-core/development/tasks/worktree-list.md`              | Task      | ✅     |
+| worktree-merge.md        | `.aiox-core/development/tasks/worktree-merge.md`             | Task      | ✅     |
 
 ---
 
@@ -48,7 +48,7 @@ Epic 1 (Worktree Manager) está **100% completo** e aprovado pelo QA Gate. Forne
 ### Classe WorktreeManager
 
 ```javascript
-const { WorktreeManager } = require('.aios-core/infrastructure/scripts/worktree-manager.js');
+const { WorktreeManager } = require('.aiox-core/infrastructure/scripts/worktree-manager.js');
 
 const manager = new WorktreeManager(projectRoot);
 
@@ -69,8 +69,8 @@ await manager.cleanup();
 
 ## Pontos de Integração
 
-- **status.json**: Status do worktree rastreado em `.aios/status.json`
-- **Dashboard**: API do WorktreeManager consumida pelo AIOS Dashboard
+- **status.json**: Status do worktree rastreado em `.aiox/status.json`
+- **Dashboard**: API do WorktreeManager consumida pelo AIOX Dashboard
 - **Epic 4**: Execution Engine usa worktrees para desenvolvimento isolado
 
 ---

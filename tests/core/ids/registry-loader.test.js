@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { RegistryLoader } = require('../../../.aios-core/core/ids/registry-loader');
+const { RegistryLoader } = require('../../../.aiox-core/core/ids/registry-loader');
 
 const FIXTURES = path.resolve(__dirname, 'fixtures');
 const VALID_REGISTRY = path.join(FIXTURES, 'valid-registry.yaml');

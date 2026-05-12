@@ -1,0 +1,265 @@
+---
+# Health Check Task Definition
+# Story: INS-4.8 - Unify Health-Check + Doctor v2
+# Version: 3.0.0 — Delegates to `aiox doctor --json` (unified)
+
+name: health-check
+id: health-check
+version: "3.0"
+description: |
+  Unified health diagnostic for AIOX projects.
+  Invokes `aiox doctor --json` internally via Bash tool and adds governance
+  interpretation with Constitution context and remediation guidance.
+
+  NOTE: This task delegates ALL check logic to `aiox doctor` (15 checks).
+  It does NOT have its own list of health checks — single source of truth.
+
+category: development
+owner: devops
+
+# CLI integration
+command: "*health-check"
+aliases:
+  - "*hc"
+# NOTE: *doctor alias REMOVED (INS-4.8) to avoid confusion with CLI `aiox doctor`
+
+# Task parameters
+parameters:
+  - name: fix
+    type: boolean
+    default: false
+    description: "Pass --fix to aiox doctor for auto-remediation"
+
+  - name: verbose
+    type: boolean
+    default: false
+    description: "Show all checks including passed ones"
+
+# Execution instructions
+instructions: |
+  ## How to Execute This Task
+
+  This task is executed by an agent using Claude Code native tools (Bash, Read).
+  It does NOT run a script — it provides instructions for the agent to follow.
+
+  ### Step 1: Run aiox doctor --json
+
+  Use the Bash tool to run:
+
+  ```bash
+  npx aiox-core doctor --json
+  ```
+
+  If `--fix` was requested, run instead:
+
+  ```bash
+  npx aiox-core doctor --json --fix
+  ```
+
+  NOTE: Always use `npx aiox-core` (not `node bin/aiox.js`) — this works in both
+  framework-dev mode (resolves local bin) and project-dev/brownfield mode
+  (resolves from node_modules/.bin/).
+
+  Capture the JSON output.
+
+  ### Step 2: Parse JSON Output
+
+  The output is a JSON object with structure:
+  ```json
+  {
+    "summary": { "total": 15, "pass": 12, "warn": 2, "fail": 1, "info": 0 },
+    "checks": [
+      { "check": "settings-json", "status": "PASS", "message": "...", "fixCommand": null },
+      { "check": "rules-files", "status": "FAIL", "message": "...", "fixCommand": "aiox doctor --fix" }
+    ]
+  }
+  ```
+
+  ### Step 3: Apply Governance Interpretation
+
+  For each check result, map to the Constitution article and provide remediation context
+  using the governance map below.
+
+  ### Step 4: Format Output as Markdown
+
+  Present results as a readable markdown report:
+
+  ```markdown
+  ## AIOX Health Check
+
+  Summary: {pass} PASS | {warn} WARN | {fail} FAIL | {info} INFO
+
+  ### Issues Requiring Attention
+
+  **[FAIL] {check-name}** — {message}
+  - Constitution Impact: Article {N} ({article-name}) — {governance-note}
+  - Remediation: {fixCommand or manual instruction}
+
+  **[WARN] {check-name}** — {message}
+  - Constitution Impact: Article {N} ({article-name}) — {governance-note}
+  - Remediation: {fixCommand or manual instruction}
+
+  ### All Checks
+  | Check | Status | Note |
+  |-------|--------|------|
+  | {check} | {status} | {message} |
+  ```
+
+  If `--verbose` is false, only show FAIL and WARN items in the issues section.
+  Always show the summary line and the full table.
+
+# Governance Interpretation Map (Constitution → Check)
+governance_map:
+  settings-json:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Boundary protection — deny rules enforce framework immutability"
+    remediation: "aiox doctor --fix"
+
+  rules-files:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent authority rules provide behavioral constraints"
+    remediation: "aiox doctor --fix"
+
+  agent-memory:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent identity persistence across sessions"
+    remediation: "aiox doctor --fix"
+
+  entity-registry:
+    article: "III"
+    article_name: "Story-Driven Development"
+    governance_note: "Code intelligence registry for entity-aware development"
+    remediation: "aiox doctor --fix"
+
+  git-hooks:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Quality gates enforced at git operations"
+    remediation: "aiox doctor --fix"
+
+  core-config:
+    article: "I"
+    article_name: "CLI First"
+    governance_note: "Configuration integrity — core-config.yaml drives CLI behavior"
+    remediation: "aiox doctor --fix"
+
+  claude-md:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent context — CLAUDE.md provides system prompt foundation"
+    remediation: "aiox doctor --fix"
+
+  ide-sync:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent consistency across IDE configurations"
+    remediation: "aiox doctor --fix"
+
+  graph-dashboard:
+    article: "I"
+    article_name: "CLI First"
+    governance_note: "CLI observability dashboard availability"
+    remediation: "Manual — install graph-dashboard package"
+
+  code-intel:
+    article: "III"
+    article_name: "Story-Driven Development"
+    governance_note: "Code intelligence for entity-aware development workflows"
+    remediation: "aiox doctor --fix"
+
+  node-version:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Runtime requirements — Node.js 18+ required"
+    remediation: "Manual — upgrade Node.js to 18+"
+
+  npm-packages:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Dependencies installed and consistent"
+    remediation: "npm install"
+
+  skills-count:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent capabilities — skills extend agent functionality"
+    remediation: "npx aiox-core install --force"
+
+  commands-count:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent action vocabulary — commands define what agents can do"
+    remediation: "npx aiox-core install --force"
+
+  hooks-claude-count:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Quality gates — hooks enforce governance at runtime"
+    remediation: "npx aiox-core install --force"
+
+# Output schema
+output:
+  type: object
+  properties:
+    summary:
+      type: string
+      description: "PASS/WARN/FAIL count summary"
+    issues:
+      type: array
+      description: "List of FAIL and WARN items with governance context"
+    report:
+      type: string
+      description: "Full markdown report"
+
+# Examples
+examples:
+  - name: "Quick health check"
+    command: "*health-check"
+    description: "Run all 15 doctor checks with governance interpretation"
+
+  - name: "Health check with auto-fix"
+    command: "*health-check --fix"
+    description: "Run checks and auto-fix where possible"
+
+  - name: "Verbose output"
+    command: "*health-check --verbose"
+    description: "Show all checks including passed ones"
+
+# Help text
+help: |
+  ## AIOX Health Check (Unified)
+
+  Runs `aiox doctor --json` internally and adds governance context.
+  15 checks across configuration, environment, and agent readiness.
+
+  ### Quick Start
+
+  ```bash
+  *health-check              # Run all checks
+  *health-check --fix        # Auto-fix issues
+  *health-check --verbose    # Show all checks
+  ```
+
+  ### What It Checks
+
+  The task delegates to `aiox doctor` which runs 15 modular checks:
+  settings-json, rules-files, agent-memory, entity-registry, git-hooks,
+  core-config, claude-md, ide-sync, graph-dashboard, code-intel,
+  node-version, npm-packages, skills-count, commands-count, hooks-claude-count.
+
+  ### Governance Interpretation
+
+  Each FAIL/WARN result is mapped to a Constitution article:
+  - **Article I** (CLI First): core-config, graph-dashboard
+  - **Article II** (Agent Authority): settings-json, rules-files, agent-memory, claude-md, ide-sync, skills-count, commands-count
+  - **Article III** (Story-Driven Dev): entity-registry, code-intel
+  - **Article V** (Quality First): git-hooks, node-version, npm-packages, hooks-claude-count
+
+  ### Relationship to Other Tools
+
+  - `aiox doctor` = CLI tool (standalone, technical output)
+  - `*health-check` = This task (contextual, governance-aware, agent-facing)
+  - `core/health-check/` = Legacy HCS-2 system (separate, not used by this task)

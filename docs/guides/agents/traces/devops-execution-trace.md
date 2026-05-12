@@ -1,7 +1,7 @@
 # @devops (Gage) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/devops.md`
+> Agent definition: `.aiox-core/development/agents/devops.md`
 
 ## 1. Activation Trace
 
@@ -9,13 +9,13 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/devops.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, cicdLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
-| 6 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 7 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/devops.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, cicdLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
+| 6 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 7 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -78,7 +78,7 @@ devops:
     - dataLocation
     - cicdLocation
   files_loaded:
-    - path: .aios-core/data/technical-preferences.md
+    - path: .aiox-core/data/technical-preferences.md
       lazy: false
       size: 15KB
   lazy_loading: {}
@@ -137,13 +137,13 @@ devops:
 
 ### `*pre-push`
 
-**Task file:** `.aios-core/development/tasks/github-devops-pre-push-quality-gate.md`
+**Task file:** `.aiox-core/development/tasks/github-devops-pre-push-quality-gate.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `github-devops-pre-push-quality-gate.md` | Task | EXISTS |
-| `pre-push-checklist.md` | Checklist | EXISTS (at `.aios-core/product/checklists/`) |
+| `pre-push-checklist.md` | Checklist | EXISTS (at `.aiox-core/product/checklists/`) |
 
 **Execution flow:**
 
@@ -176,7 +176,7 @@ flowchart TD
 | File | Type | Status |
 |------|------|--------|
 | `github-devops-pre-push-quality-gate.md` | Task | EXISTS |
-| `repository-detector.js` | Script | EXISTS (at `.aios-core/infrastructure/scripts/`) |
+| `repository-detector.js` | Script | EXISTS (at `.aiox-core/infrastructure/scripts/`) |
 
 **Execution flow:**
 
@@ -204,13 +204,13 @@ flowchart TD
 
 ### `*create-pr`
 
-**Task file:** `.aios-core/development/tasks/github-devops-github-pr-automation.md`
+**Task file:** `.aiox-core/development/tasks/github-devops-github-pr-automation.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `github-devops-github-pr-automation.md` | Task | EXISTS |
-| `github-pr-template.md` | Template | EXISTS (at `.aios-core/product/templates/`) |
+| `github-pr-template.md` | Template | EXISTS (at `.aiox-core/product/templates/`) |
 
 **Execution flow:**
 
@@ -236,7 +236,7 @@ flowchart TD
 
 ### `*version-check`
 
-**Task file:** `.aios-core/development/tasks/github-devops-version-management.md`
+**Task file:** `.aiox-core/development/tasks/github-devops-version-management.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -265,14 +265,14 @@ flowchart TD
 
 ### `*release`
 
-**Task file:** `.aios-core/development/tasks/release-management.md`
+**Task file:** `.aiox-core/development/tasks/release-management.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `release-management.md` | Task | EXISTS |
-| `changelog-template.md` | Template | EXISTS (at `.aios-core/product/templates/`) |
-| `release-checklist.md` | Checklist | EXISTS (at `.aios-core/product/checklists/`) |
+| `changelog-template.md` | Template | EXISTS (at `.aiox-core/product/templates/`) |
+| `release-checklist.md` | Checklist | EXISTS (at `.aiox-core/product/checklists/`) |
 
 **Execution flow:**
 
@@ -298,14 +298,14 @@ flowchart TD
 
 ### `*configure-ci`
 
-**Task file:** `.aios-core/development/tasks/ci-cd-configuration.md`
+**Task file:** `.aiox-core/development/tasks/ci-cd-configuration.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `ci-cd-configuration.md` | Task | EXISTS |
-| `github-actions-ci.yml` | Template | EXISTS (at `.aios-core/product/templates/`) |
-| `github-actions-cd.yml` | Template | EXISTS (at `.aios-core/product/templates/`) |
+| `github-actions-ci.yml` | Template | EXISTS (at `.aiox-core/product/templates/`) |
+| `github-actions-cd.yml` | Template | EXISTS (at `.aiox-core/product/templates/`) |
 
 **Execution flow:**
 
@@ -326,13 +326,13 @@ flowchart TD
 
 ### `*cleanup`
 
-**Task file:** `.aios-core/development/tasks/github-devops-repository-cleanup.md`
+**Task file:** `.aiox-core/development/tasks/github-devops-repository-cleanup.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `github-devops-repository-cleanup.md` | Task | EXISTS |
-| `branch-manager.js` | Script | EXISTS (at `.aios-core/infrastructure/scripts/`) |
+| `branch-manager.js` | Script | EXISTS (at `.aiox-core/infrastructure/scripts/`) |
 
 **Execution flow:**
 
@@ -354,7 +354,7 @@ flowchart TD
 
 ### `*environment-bootstrap`
 
-**Task file:** `.aios-core/development/tasks/environment-bootstrap.md`
+**Task file:** `.aiox-core/development/tasks/environment-bootstrap.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -379,14 +379,14 @@ flowchart TD
 
 ### `*setup-github`
 
-**Task file:** `.aios-core/development/tasks/setup-github.md`
+**Task file:** `.aiox-core/development/tasks/setup-github.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `setup-github.md` | Task | EXISTS |
-| `github-actions-ci.yml` | Template | EXISTS (at `.aios-core/product/templates/`) |
-| `github-actions-cd.yml` | Template | EXISTS (at `.aios-core/product/templates/`) |
+| `github-actions-ci.yml` | Template | EXISTS (at `.aiox-core/product/templates/`) |
+| `github-actions-cd.yml` | Template | EXISTS (at `.aiox-core/product/templates/`) |
 
 **Execution flow:**
 
@@ -429,7 +429,7 @@ flowchart TD
 
 ### `*check-docs`
 
-**Task file:** `.aios-core/development/tasks/check-docs-links.md`
+**Task file:** `.aiox-core/development/tasks/check-docs-links.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -456,7 +456,7 @@ flowchart TD
 
 **All tasks:** EXISTS
 
-**Workflow file:** `.aios-core/development/workflows/auto-worktree.yaml` (EXISTS)
+**Workflow file:** `.aiox-core/development/workflows/auto-worktree.yaml` (EXISTS)
 
 **Execution flow (representative -- `*create-worktree`):**
 
@@ -489,7 +489,7 @@ flowchart TD
 
 ### `*inventory-assets`, `*analyze-paths`, `*migrate-agent`, `*migrate-batch`
 
-**Scripts:** `.aios-core/infrastructure/scripts/asset-inventory.js`, `path-analyzer.js`, `migrate-agent.js`
+**Scripts:** `.aiox-core/infrastructure/scripts/asset-inventory.js`, `path-analyzer.js`, `migrate-agent.js`
 
 **All scripts:** EXISTS
 
@@ -511,7 +511,7 @@ flowchart TD
 
 ### `*init-project-status`
 
-**Task file:** `.aios-core/development/tasks/init-project-status.md`
+**Task file:** `.aiox-core/development/tasks/init-project-status.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -525,7 +525,7 @@ flowchart TD
     A["*init-project-status"] --> B[Load init-project-status.md]
     B --> C[Detect project structure]
     C --> D[Scan for stories, branches, open PRs]
-    D --> E["Create: .aios/project-status.yaml"]
+    D --> E["Create: .aiox/project-status.yaml"]
     E --> F[Report project status initialized]
 ```
 
@@ -739,7 +739,7 @@ graph TD
 
 **Enforcement mechanism:**
 - Git pre-push hook at `.git/hooks/pre-push`
-- Checks `$AIOS_ACTIVE_AGENT` environment variable
+- Checks `$AIOX_ACTIVE_AGENT` environment variable
 - Blocks push if agent != "github-devops"
 
 ---
@@ -748,17 +748,17 @@ graph TD
 
 | File | Type | Declared Location | Actual Location | Impact |
 |------|------|-------------------|-----------------|--------|
-| `github-pr-template.md` | Template | `.aios-core/development/templates/` | `.aios-core/product/templates/` | Path mismatch -- file exists but at different path |
-| `github-actions-ci.yml` | Template | `.aios-core/development/templates/` | `.aios-core/product/templates/` | Path mismatch -- file exists but at different path |
-| `github-actions-cd.yml` | Template | `.aios-core/development/templates/` | `.aios-core/product/templates/` | Path mismatch -- file exists but at different path |
-| `changelog-template.md` | Template | `.aios-core/development/templates/` | `.aios-core/product/templates/` | Path mismatch -- file exists but at different path |
-| `pre-push-checklist.md` | Checklist | `.aios-core/development/checklists/` | `.aios-core/product/checklists/` | Path mismatch -- file exists but at different path |
-| `release-checklist.md` | Checklist | `.aios-core/development/checklists/` | `.aios-core/product/checklists/` | Path mismatch -- file exists but at different path |
-| `gitignore-manager` | Util | `.aios-core/development/utils/` | (not found anywhere) | MISSING -- command may fall back to manual gitignore handling |
-| `version-tracker` | Util | `.aios-core/development/utils/` | (not found anywhere) | MISSING -- version tracking relies on git tags and package.json |
+| `github-pr-template.md` | Template | `.aiox-core/development/templates/` | `.aiox-core/product/templates/` | Path mismatch -- file exists but at different path |
+| `github-actions-ci.yml` | Template | `.aiox-core/development/templates/` | `.aiox-core/product/templates/` | Path mismatch -- file exists but at different path |
+| `github-actions-cd.yml` | Template | `.aiox-core/development/templates/` | `.aiox-core/product/templates/` | Path mismatch -- file exists but at different path |
+| `changelog-template.md` | Template | `.aiox-core/development/templates/` | `.aiox-core/product/templates/` | Path mismatch -- file exists but at different path |
+| `pre-push-checklist.md` | Checklist | `.aiox-core/development/checklists/` | `.aiox-core/product/checklists/` | Path mismatch -- file exists but at different path |
+| `release-checklist.md` | Checklist | `.aiox-core/development/checklists/` | `.aiox-core/product/checklists/` | Path mismatch -- file exists but at different path |
+| `gitignore-manager` | Util | `.aiox-core/development/utils/` | (not found anywhere) | MISSING -- command may fall back to manual gitignore handling |
+| `version-tracker` | Util | `.aiox-core/development/utils/` | (not found anywhere) | MISSING -- version tracking relies on git tags and package.json |
 
-**Note on path resolution:** The `dependencies.templates` and `dependencies.checklists` in the agent YAML resolve via `IDE-FILE-RESOLUTION` to `.aios-core/development/{type}/{name}`. However, all 4 templates and 2 checklists actually reside in `.aios-core/product/{type}/`. The 3 infrastructure scripts (`asset-inventory.js`, `path-analyzer.js`, `migrate-agent.js`) and 3 utils (`branch-manager.js`, `repository-detector.js`, `git-wrapper.js`) exist at `.aios-core/infrastructure/scripts/`, not at the declared path.
+**Note on path resolution:** The `dependencies.templates` and `dependencies.checklists` in the agent YAML resolve via `IDE-FILE-RESOLUTION` to `.aiox-core/development/{type}/{name}`. However, all 4 templates and 2 checklists actually reside in `.aiox-core/product/{type}/`. The 3 infrastructure scripts (`asset-inventory.js`, `path-analyzer.js`, `migrate-agent.js`) and 3 utils (`branch-manager.js`, `repository-detector.js`, `git-wrapper.js`) exist at `.aiox-core/infrastructure/scripts/`, not at the declared path.
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

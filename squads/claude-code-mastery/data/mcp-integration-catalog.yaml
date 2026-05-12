@@ -1,0 +1,323 @@
+# MCP Integration Catalog — Recommended Servers by Use Case
+# Squad: claude-code-mastery
+# Last updated: 2026-03-02
+
+version: "1.0.0"
+
+# MCP (Model Context Protocol) servers extend Claude Code with external capabilities.
+# This catalog organizes servers by use case with installation and cost estimates.
+
+categories:
+
+  # ---------------------------------------------------------------------------
+  # DEVELOPMENT — Core dev workflow tools
+  # ---------------------------------------------------------------------------
+  development:
+    description: "Core development workflow tools"
+    servers:
+      - name: filesystem
+        package: "@modelcontextprotocol/server-filesystem"
+        transport: stdio
+        context_cost_estimate: low
+        install_command: "npx -y @modelcontextprotocol/server-filesystem /path/to/allowed/dir"
+        use_cases:
+          - "Read/write files in sandboxed directories"
+          - "List directory contents"
+          - "Search files by pattern"
+        config_example: |
+          {
+            "mcpServers": {
+              "filesystem": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/me/projects"]
+              }
+            }
+          }
+        notes: "Redundant with native Read/Write/Glob tools in Claude Code. Use only for sandboxed access."
+
+      - name: git
+        package: "@modelcontextprotocol/server-git"
+        transport: stdio
+        context_cost_estimate: low
+        install_command: "npx -y @modelcontextprotocol/server-git"
+        use_cases:
+          - "Git operations (status, diff, log, commit)"
+          - "Branch management"
+          - "Blame and history analysis"
+        notes: "Native Bash tool with git CLI is usually sufficient."
+
+      - name: docker
+        package: "@modelcontextprotocol/server-docker"
+        transport: stdio
+        context_cost_estimate: low
+        install_command: "npx -y @modelcontextprotocol/server-docker"
+        use_cases:
+          - "Container management (start, stop, list)"
+          - "Image management"
+          - "Docker Compose operations"
+
+      - name: github
+        package: "@modelcontextprotocol/server-github"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @modelcontextprotocol/server-github"
+        use_cases:
+          - "PR management (create, review, merge)"
+          - "Issue tracking"
+          - "Repository operations"
+          - "Code search across repos"
+        env_vars:
+          - GITHUB_PERSONAL_ACCESS_TOKEN
+        notes: "Alternative to gh CLI. Provides structured API access."
+
+  # ---------------------------------------------------------------------------
+  # RESEARCH — Information gathering and documentation
+  # ---------------------------------------------------------------------------
+  research:
+    description: "Information gathering and documentation lookup"
+    servers:
+      - name: exa
+        package: "exa-mcp-server"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y exa-mcp-server"
+        use_cases:
+          - "Web search with AI-optimized results"
+          - "Research and competitive analysis"
+          - "Finding code examples and documentation"
+          - "Current events and news"
+        env_vars:
+          - EXA_API_KEY
+        config_example: |
+          {
+            "mcpServers": {
+              "exa": {
+                "command": "npx",
+                "args": ["-y", "exa-mcp-server"],
+                "env": { "EXA_API_KEY": "your-key-here" }
+              }
+            }
+          }
+
+      - name: context7
+        package: "@upstash/context7-mcp"
+        transport: stdio
+        context_cost_estimate: low
+        install_command: "npx -y @upstash/context7-mcp"
+        use_cases:
+          - "Library documentation lookup (React, Next.js, etc.)"
+          - "API reference for any npm/pip package"
+          - "Up-to-date docs without web search"
+        config_example: |
+          {
+            "mcpServers": {
+              "context7": {
+                "command": "npx",
+                "args": ["-y", "@upstash/context7-mcp"]
+              }
+            }
+          }
+        notes: "No API key required. Free tier available."
+
+      - name: web-search
+        package: "@anthropic-ai/web-search-mcp"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @anthropic-ai/web-search-mcp"
+        use_cases:
+          - "General web search"
+          - "Real-time information lookup"
+
+  # ---------------------------------------------------------------------------
+  # COMMUNICATION — Team notifications and messaging
+  # ---------------------------------------------------------------------------
+  communication:
+    description: "Team communication and notification tools"
+    servers:
+      - name: slack
+        package: "@modelcontextprotocol/server-slack"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @modelcontextprotocol/server-slack"
+        use_cases:
+          - "Send messages to Slack channels"
+          - "Read channel history for context"
+          - "Post build/deploy notifications"
+          - "Team standup automation"
+        env_vars:
+          - SLACK_BOT_TOKEN
+          - SLACK_TEAM_ID
+
+      - name: email
+        package: "mcp-server-email"
+        transport: stdio
+        context_cost_estimate: low
+        install_command: "npx -y mcp-server-email"
+        use_cases:
+          - "Send email notifications"
+          - "Read emails for context"
+          - "Draft email responses"
+        env_vars:
+          - EMAIL_SMTP_HOST
+          - EMAIL_SMTP_USER
+          - EMAIL_SMTP_PASS
+
+  # ---------------------------------------------------------------------------
+  # DATABASE — Data storage and query
+  # ---------------------------------------------------------------------------
+  database:
+    description: "Database access and management"
+    servers:
+      - name: supabase
+        package: "@supabase/mcp-server-supabase"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @supabase/mcp-server-supabase"
+        use_cases:
+          - "Database queries and mutations"
+          - "Schema inspection"
+          - "Migration management"
+          - "RLS policy management"
+          - "Edge function deployment"
+        env_vars:
+          - SUPABASE_ACCESS_TOKEN
+        config_example: |
+          {
+            "mcpServers": {
+              "supabase": {
+                "command": "npx",
+                "args": ["-y", "@supabase/mcp-server-supabase", "--access-token", "your-token"]
+              }
+            }
+          }
+
+      - name: postgres
+        package: "@modelcontextprotocol/server-postgres"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @modelcontextprotocol/server-postgres"
+        use_cases:
+          - "Direct PostgreSQL queries"
+          - "Schema inspection and analysis"
+          - "Data exploration"
+        env_vars:
+          - POSTGRES_CONNECTION_STRING
+
+      - name: sqlite
+        package: "@modelcontextprotocol/server-sqlite"
+        transport: stdio
+        context_cost_estimate: low
+        install_command: "npx -y @modelcontextprotocol/server-sqlite"
+        use_cases:
+          - "Local SQLite database queries"
+          - "Embedded database development"
+          - "Prototyping data models"
+
+  # ---------------------------------------------------------------------------
+  # BROWSER — Web automation and testing
+  # ---------------------------------------------------------------------------
+  browser:
+    description: "Browser automation, testing, and web interaction"
+    servers:
+      - name: playwright
+        package: "@anthropic-ai/mcp-server-playwright"
+        transport: stdio
+        context_cost_estimate: high
+        install_command: "npx -y @anthropic-ai/mcp-server-playwright"
+        use_cases:
+          - "Browser automation and testing"
+          - "Screenshot capture for visual verification"
+          - "Form filling and interaction testing"
+          - "Console log inspection"
+          - "E2E test execution"
+        notes: "High context cost due to DOM snapshots. Use judiciously."
+        config_example: |
+          {
+            "mcpServers": {
+              "playwright": {
+                "command": "npx",
+                "args": ["-y", "@anthropic-ai/mcp-server-playwright"]
+              }
+            }
+          }
+
+      - name: puppeteer
+        package: "@anthropic-ai/mcp-server-puppeteer"
+        transport: stdio
+        context_cost_estimate: high
+        install_command: "npx -y @anthropic-ai/mcp-server-puppeteer"
+        use_cases:
+          - "Headless browser automation"
+          - "PDF generation"
+          - "Screenshot capture"
+        notes: "Playwright is generally preferred over Puppeteer for new projects."
+
+  # ---------------------------------------------------------------------------
+  # DESIGN — UI/UX tools
+  # ---------------------------------------------------------------------------
+  design:
+    description: "Design and UI/UX tools"
+    servers:
+      - name: 21st-dev-magic
+        package: "@21st-dev/magic-mcp"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @21st-dev/magic-mcp"
+        use_cases:
+          - "Generate UI components from descriptions"
+          - "Design system integration"
+          - "Component library search"
+        env_vars:
+          - TWENTY_FIRST_API_KEY
+
+      - name: figma
+        package: "figma-mcp-server"
+        transport: stdio
+        context_cost_estimate: high
+        install_command: "npx -y figma-mcp-server"
+        use_cases:
+          - "Extract design tokens from Figma files"
+          - "Read component specifications"
+          - "Design-to-code translation"
+        env_vars:
+          - FIGMA_ACCESS_TOKEN
+
+  # ---------------------------------------------------------------------------
+  # MONITORING — Observability and error tracking
+  # ---------------------------------------------------------------------------
+  monitoring:
+    description: "Application monitoring and error tracking"
+    servers:
+      - name: sentry
+        package: "@sentry/mcp-server"
+        transport: stdio
+        context_cost_estimate: medium
+        install_command: "npx -y @sentry/mcp-server"
+        use_cases:
+          - "Query error events and stack traces"
+          - "Analyze error frequency and impact"
+          - "Debug production issues with context"
+        env_vars:
+          - SENTRY_AUTH_TOKEN
+
+# ---------------------------------------------------------------------------
+# TRANSPORT SELECTION GUIDE
+# ---------------------------------------------------------------------------
+transport_guide:
+  stdio:
+    description: "Local process communication via stdin/stdout"
+    when_to_use: "Local servers, npm packages, most common"
+    pros: ["Simple setup", "No network overhead", "Works offline"]
+    cons: ["Cannot share across machines", "Process lifecycle management"]
+
+  http_streamable:
+    description: "HTTP-based communication (newer protocol)"
+    when_to_use: "Remote servers, cloud-hosted services, team-shared servers"
+    pros: ["Shareable", "Language agnostic", "Stateless"]
+    cons: ["Network latency", "Requires running server"]
+
+  sse:
+    description: "Server-Sent Events (legacy)"
+    when_to_use: "Legacy servers not yet migrated to HTTP Streamable"
+    pros: ["Wide support"]
+    cons: ["Being deprecated", "One-directional streaming"]

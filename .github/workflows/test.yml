@@ -9,13 +9,16 @@ on:
     paths-ignore:
       - 'docs/**'
       - '*.md'
-      - '.aios/**'
+      - '.aiox/**'
       - 'squads/**'
   workflow_dispatch:
 
 concurrency:
   group: test-${{ github.ref }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 env:
   NODE_VERSION: '20'
@@ -68,7 +71,7 @@ jobs:
 
       - name: Test workspace package
         run: |
-          echo "Testing workspace package: aios-core"
+          echo "Testing workspace package: aiox-core"
 
           # Check if package.json exists
           if [ -f "package.json" ]; then
@@ -124,20 +127,20 @@ jobs:
           # Test that CLI entry point works
           node -e "
             try {
-              // Test bin/aios-init.js exists
+              // Test bin/aiox-init.js exists
               const fs = require('fs');
-              if (fs.existsSync('./bin/aios-init.js')) {
-                console.log('✅ aios-init.js exists');
+              if (fs.existsSync('./bin/aiox-init.js')) {
+                console.log('✅ aiox-init.js exists');
               } else {
-                console.log('❌ aios-init.js not found');
+                console.log('❌ aiox-init.js not found');
                 process.exit(1);
               }
 
-              // Test bin/aios.js exists
-              if (fs.existsSync('./bin/aios.js')) {
-                console.log('✅ aios.js exists');
+              // Test bin/aiox.js exists
+              if (fs.existsSync('./bin/aiox.js')) {
+                console.log('✅ aiox.js exists');
               } else {
-                console.log('❌ aios.js not found');
+                console.log('❌ aiox.js not found');
                 process.exit(1);
               }
 
@@ -152,12 +155,12 @@ jobs:
         run: |
           # Test core scripts are loadable
           for script in health-check greeting-builder agent-parser; do
-            SCRIPT_PATH=".aios-core/development/scripts/${script}.js"
+            SCRIPT_PATH=".aiox-core/development/scripts/${script}.js"
             if [ -f "$SCRIPT_PATH" ]; then
               echo "✅ Found: $SCRIPT_PATH"
             else
               # Check alternative locations
-              ALT_PATH=".aios-core/core/${script}.js"
+              ALT_PATH=".aiox-core/core/${script}.js"
               if [ -f "$ALT_PATH" ]; then
                 echo "✅ Found: $ALT_PATH"
               else
@@ -189,10 +192,10 @@ jobs:
           echo "Running basic performance checks..."
 
           # Check file count in critical directories
-          AGENT_COUNT=$(find .aios-core/development/agents -name "*.md" | wc -l)
+          AGENT_COUNT=$(find .aiox-core/development/agents -name "*.md" | wc -l)
           echo "✅ Agent definitions: $AGENT_COUNT"
 
-          TASK_COUNT=$(find .aios-core/development/tasks -name "*.md" | wc -l)
+          TASK_COUNT=$(find .aiox-core/development/tasks -name "*.md" | wc -l)
           echo "✅ Task definitions: $TASK_COUNT"
 
           # Check manifest generation time

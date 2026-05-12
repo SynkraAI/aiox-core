@@ -54,8 +54,8 @@ PATH_RULES = [
 # Paths que são sempre válidos (não avisar)
 ALWAYS_VALID_PATHS = [
     ".claude/",
-    ".aios-core/",
-    ".aios-upstream/",
+    ".aiox-core/",
+    ".aiox-upstream/",
     "squads/",
     "node_modules/",
     ".git/",

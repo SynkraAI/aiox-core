@@ -27,12 +27,12 @@ const {
   listServers,
   getAvailableTemplates,
   getServerTemplate,
-} = require('../../../.aios-core/core/mcp/global-config-manager');
+} = require('../../../.aiox-core/core/mcp/global-config-manager');
 
 describe('Global Config Manager', () => {
   const mockHomeDir = '/mock/home';
-  const mockAiosDir = path.join(mockHomeDir, '.aios');
-  const mockMcpDir = path.join(mockAiosDir, 'mcp');
+  const mockAioxDir = path.join(mockHomeDir, '.aiox');
+  const mockMcpDir = path.join(mockAioxDir, 'mcp');
   const mockConfigPath = path.join(mockMcpDir, 'global-config.json');
 
   beforeEach(() => {

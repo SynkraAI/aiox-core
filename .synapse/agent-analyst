@@ -1,6 +1,6 @@
 # SYNAPSE Agent Domain: @analyst (Alex)
 # Layer 2: Agent-scoped rules
-# Source: .claude/rules/agent-authority.md, .aios-core/development/agents/analyst.md
+# Source: .claude/rules/agent-authority.md, .aiox-core/development/agents/analyst.md
 
 # Authority Boundaries
 AGENT_ANALYST_AUTH_0=ALLOWED: Research and analysis tasks

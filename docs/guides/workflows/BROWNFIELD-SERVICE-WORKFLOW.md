@@ -399,7 +399,7 @@ Arrastar a task `shard-doc` + `docs/prd.md` para o chat.
 | **Acao** | Projeto completo |
 | **Notas** | Todas as stories implementadas e revisadas! Fase de desenvolvimento do projeto completa. |
 
-**Referencia:** `.aios-core/data/aios-kb.md#IDE Development Workflow`
+**Referencia:** `.aiox-core/data/aiox-kb.md#IDE Development Workflow`
 
 ---
 
@@ -491,7 +491,7 @@ graph LR
 
 2. **Ambiente Configurado**
    - Git configurado e funcional
-   - Acesso aos templates AIOS
+   - Acesso aos templates AIOX
    - Ferramentas de desenvolvimento instaladas
 
 3. **Contexto do Projeto**
@@ -500,14 +500,14 @@ graph LR
    - Stakeholders identificados
 
 4. **Templates Disponiveis**
-   - `.aios-core/development/templates/brownfield-prd-tmpl.yaml`
-   - `.aios-core/development/templates/brownfield-architecture-tmpl.yaml`
-   - `.aios-core/development/templates/story-tmpl.yaml`
+   - `.aiox-core/development/templates/brownfield-prd-tmpl.yaml`
+   - `.aiox-core/development/templates/brownfield-architecture-tmpl.yaml`
+   - `.aiox-core/development/templates/story-tmpl.yaml`
 
 5. **Checklists Disponiveis**
-   - `.aios-core/development/checklists/po-master-checklist.md`
-   - `.aios-core/development/checklists/story-draft-checklist.md`
-   - `.aios-core/development/checklists/story-dod-checklist.md`
+   - `.aiox-core/development/checklists/po-master-checklist.md`
+   - `.aiox-core/development/checklists/story-draft-checklist.md`
+   - `.aiox-core/development/checklists/story-dod-checklist.md`
 
 ---
 
@@ -773,31 +773,31 @@ Os handoff prompts facilitam a transicao entre agentes:
 
 | Arquivo | Descricao | Caminho |
 |---------|-----------|---------|
-| Workflow Definition | Definicao YAML do workflow | `.aios-core/development/workflows/brownfield-service.yaml` |
-| PRD Template | Template para brownfield PRD | `.aios-core/development/templates/brownfield-prd-tmpl.yaml` |
-| Architecture Template | Template para arquitetura | `.aios-core/development/templates/brownfield-architecture-tmpl.yaml` |
-| Story Template | Template para stories | `.aios-core/development/templates/story-tmpl.yaml` |
-| PO Master Checklist | Checklist de validacao | `.aios-core/development/checklists/po-master-checklist.md` |
-| Story Draft Checklist | Checklist de story | `.aios-core/development/checklists/story-draft-checklist.md` |
-| Story DoD Checklist | Definition of Done | `.aios-core/development/checklists/story-dod-checklist.md` |
+| Workflow Definition | Definicao YAML do workflow | `.aiox-core/development/workflows/brownfield-service.yaml` |
+| PRD Template | Template para brownfield PRD | `.aiox-core/development/templates/brownfield-prd-tmpl.yaml` |
+| Architecture Template | Template para arquitetura | `.aiox-core/development/templates/brownfield-architecture-tmpl.yaml` |
+| Story Template | Template para stories | `.aiox-core/development/templates/story-tmpl.yaml` |
+| PO Master Checklist | Checklist de validacao | `.aiox-core/development/checklists/po-master-checklist.md` |
+| Story Draft Checklist | Checklist de story | `.aiox-core/development/checklists/story-draft-checklist.md` |
+| Story DoD Checklist | Definition of Done | `.aiox-core/development/checklists/story-dod-checklist.md` |
 
 ### Agentes
 
 | Agente | Arquivo | Caminho |
 |--------|---------|---------|
-| @architect | Aria | `.aios-core/development/agents/architect.md` |
-| @pm | Morgan | `.aios-core/development/agents/pm.md` |
-| @po | Pax | `.aios-core/development/agents/po.md` |
-| @sm | River | `.aios-core/development/agents/sm.md` |
-| @analyst | Atlas | `.aios-core/development/agents/analyst.md` |
-| @dev | Dex | `.aios-core/development/agents/dev.md` |
-| @qa | Quinn | `.aios-core/development/agents/qa.md` |
+| @architect | Aria | `.aiox-core/development/agents/architect.md` |
+| @pm | Morgan | `.aiox-core/development/agents/pm.md` |
+| @po | Pax | `.aiox-core/development/agents/po.md` |
+| @sm | River | `.aiox-core/development/agents/sm.md` |
+| @analyst | Atlas | `.aiox-core/development/agents/analyst.md` |
+| @dev | Dex | `.aiox-core/development/agents/dev.md` |
+| @qa | Quinn | `.aiox-core/development/agents/qa.md` |
 
 ### Documentacao Relacionada
 
-- [AIOS Knowledge Base](../../../.aios-core/data/aios-kb.md) - Base de conhecimento do framework
-- [Technical Preferences](../../../.aios-core/development/data/technical-preferences.md) - Preferencias tecnicas do projeto
-- [IDE Development Workflow](../../../.aios-core/data/aios-kb.md#IDE-Development-Workflow) - Fluxo de desenvolvimento no IDE
+- [AIOX Knowledge Base](../../../.aiox-core/data/aiox-kb.md) - Base de conhecimento do framework
+- [Technical Preferences](../../../.aiox-core/development/data/technical-preferences.md) - Preferencias tecnicas do projeto
+- [IDE Development Workflow](../../../.aiox-core/data/aiox-kb.md#IDE-Development-Workflow) - Fluxo de desenvolvimento no IDE
 
 ---
 
@@ -809,4 +809,4 @@ Os handoff prompts facilitam a transicao entre agentes:
 
 ---
 
-*Documento gerado a partir do workflow `brownfield-service.yaml` - AIOS Framework v2.2*
+*Documento gerado a partir do workflow `brownfield-service.yaml` - AIOX Framework v2.2*

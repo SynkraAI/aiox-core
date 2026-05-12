@@ -28,14 +28,14 @@ describe('detectProjectType', () => {
       fs.existsSync.mockImplementation((checkPath) => {
         // Directory exists, but no markers
         if (checkPath === path.resolve('/test/empty')) return true;
-        return false; // No .aios-core, package.json, or .git
+        return false; // No .aiox-core, package.json, or .git
       });
       fs.readdirSync.mockReturnValue([]); // Empty directory
       
       const result = detectProjectType('/test/empty');
       
       expect(result).toBe('GREENFIELD');
-      expect(fs.existsSync).toHaveBeenCalledWith(expect.stringContaining('.aios-core'));
+      expect(fs.existsSync).toHaveBeenCalledWith(expect.stringContaining('.aiox-core'));
       expect(fs.readdirSync).toHaveBeenCalledTimes(1);
     });
 
@@ -64,7 +64,7 @@ describe('detectProjectType', () => {
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/brownfield')) return true;
         if (checkPath.endsWith('package.json')) return true; // package.json exists
-        return false; // No .aios-core or .git
+        return false; // No .aiox-core or .git
       });
       fs.readdirSync.mockReturnValue(['package.json', 'src', 'README.md']);
       
@@ -79,7 +79,7 @@ describe('detectProjectType', () => {
         if (checkPath === path.resolve('/test/node-project')) return true;
         if (checkPath.endsWith('package.json')) return true;
         if (checkPath.endsWith('.git')) return false;
-        if (checkPath.endsWith('.aios-core')) return false;
+        if (checkPath.endsWith('.aiox-core')) return false;
         return false;
       });
       fs.readdirSync.mockReturnValue(['package.json', 'index.js']);
@@ -99,7 +99,7 @@ describe('detectProjectType', () => {
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/brownfield-git')) return true;
         if (checkPath.endsWith('.git')) return true; // .git exists
-        return false; // No .aios-core or package.json
+        return false; // No .aiox-core or package.json
       });
       fs.readdirSync.mockReturnValue(['.git', 'README.md', 'src']);
       
@@ -114,7 +114,7 @@ describe('detectProjectType', () => {
         if (checkPath === path.resolve('/test/full-project')) return true;
         if (checkPath.endsWith('package.json')) return true;
         if (checkPath.endsWith('.git')) return true;
-        if (checkPath.endsWith('.aios-core')) return false;
+        if (checkPath.endsWith('.aiox-core')) return false;
         return false;
       });
       fs.readdirSync.mockReturnValue(['.git', 'package.json', 'src', 'README.md']);
@@ -126,39 +126,39 @@ describe('detectProjectType', () => {
   });
 
   // ============================================================================
-  // AC #4: .aios-core Exists → EXISTING_AIOS
+  // AC #4: .aiox-core Exists → EXISTING_AIOX
   // ============================================================================
-  describe('AC #4: EXISTING_AIOS detection', () => {
-    test('detects EXISTING_AIOS when .aios-core exists', () => {
+  describe('AC #4: EXISTING_AIOX detection', () => {
+    test('detects EXISTING_AIOX when .aiox-core exists', () => {
       // Setup
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/existing')) return true;
-        if (checkPath.endsWith('.aios-core')) return true; // .aios-core exists
+        if (checkPath.endsWith('.aiox-core')) return true; // .aiox-core exists
         return true; // Other files may exist too
       });
-      fs.readdirSync.mockReturnValue(['.aios-core', 'package.json', '.git', 'src']);
+      fs.readdirSync.mockReturnValue(['.aiox-core', 'package.json', '.git', 'src']);
       
       const result = detectProjectType('/test/existing');
       
-      expect(result).toBe('EXISTING_AIOS');
+      expect(result).toBe('EXISTING_AIOX');
     });
 
-    test('EXISTING_AIOS takes priority over BROWNFIELD markers', () => {
-      // Setup: All markers present, but EXISTING_AIOS should win
+    test('EXISTING_AIOX takes priority over BROWNFIELD markers', () => {
+      // Setup: All markers present, but EXISTING_AIOX should win
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/priority-test')) return true;
         // All markers present
-        if (checkPath.endsWith('.aios-core')) return true;
+        if (checkPath.endsWith('.aiox-core')) return true;
         if (checkPath.endsWith('package.json')) return true;
         if (checkPath.endsWith('.git')) return true;
         return false;
       });
-      fs.readdirSync.mockReturnValue(['.aios-core', 'package.json', '.git', 'src']);
+      fs.readdirSync.mockReturnValue(['.aiox-core', 'package.json', '.git', 'src']);
       
       const result = detectProjectType('/test/priority-test');
       
-      // EXISTING_AIOS has highest priority
-      expect(result).toBe('EXISTING_AIOS');
+      // EXISTING_AIOX has highest priority
+      expect(result).toBe('EXISTING_AIOX');
     });
   });
 
@@ -167,7 +167,7 @@ describe('detectProjectType', () => {
   // ============================================================================
   describe('Edge Case: UNKNOWN detection', () => {
     test('returns UNKNOWN when directory has files but no recognized markers', () => {
-      // Setup: Files exist but no package.json, .git, or .aios-core
+      // Setup: Files exist but no package.json, .git, or .aiox-core
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/unknown')) return true;
         // No recognized markers
@@ -216,7 +216,7 @@ describe('detectProjectType', () => {
       
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/denied')) return true;
-        if (checkPath.endsWith('.aios-core')) {
+        if (checkPath.endsWith('.aiox-core')) {
           throw permissionError;
         }
         return false;
@@ -262,18 +262,18 @@ describe('detectProjectType', () => {
   // Priority Order Verification
   // ============================================================================
   describe('Detection Priority Order', () => {
-    test('priority: EXISTING_AIOS > GREENFIELD', () => {
-      // Even if directory appears empty, .aios-core presence should win
+    test('priority: EXISTING_AIOX > GREENFIELD', () => {
+      // Even if directory appears empty, .aiox-core presence should win
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/priority1')) return true;
-        if (checkPath.endsWith('.aios-core')) return true;
+        if (checkPath.endsWith('.aiox-core')) return true;
         return false;
       });
-      fs.readdirSync.mockReturnValue(['.aios-core']); // Only .aios-core
+      fs.readdirSync.mockReturnValue(['.aiox-core']); // Only .aiox-core
       
       const result = detectProjectType('/test/priority1');
       
-      expect(result).toBe('EXISTING_AIOS');
+      expect(result).toBe('EXISTING_AIOX');
     });
 
     test('priority: GREENFIELD > BROWNFIELD when directory is empty', () => {
@@ -294,7 +294,7 @@ describe('detectProjectType', () => {
       fs.existsSync.mockImplementation((checkPath) => {
         if (checkPath === path.resolve('/test/priority3')) return true;
         if (checkPath.endsWith('package.json')) return true;
-        if (checkPath.endsWith('.aios-core')) return false;
+        if (checkPath.endsWith('.aiox-core')) return false;
         if (checkPath.endsWith('.git')) return false;
         return false;
       });

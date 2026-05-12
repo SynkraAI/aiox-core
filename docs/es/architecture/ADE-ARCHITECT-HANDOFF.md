@@ -3,13 +3,13 @@
 > **De:** Quinn (@qa) - QA Agent
 > **Para:** Sage (@architect) - Solution Architect
 > **Fecha:** 2026-01-28
-> **Proyecto:** AIOS Autonomous Development Engine (ADE)
+> **Proyecto:** AIOX Autonomous Development Engine (ADE)
 
 ---
 
 ## Resumen Ejecutivo
 
-El ADE es un proyecto de **Prompt Engineering + Infraestructura** para habilitar ejecución autónoma de desarrollo en AIOS. Aproximadamente **60% del trabajo es creación de tasks .md, workflows .yaml y templates** - no código tradicional.
+El ADE es un proyecto de **Prompt Engineering + Infraestructura** para habilitar ejecución autónoma de desarrollo en AIOX. Aproximadamente **60% del trabajo es creación de tasks .md, workflows .yaml y templates** - no código tradicional.
 
 **Usted es el líder técnico de este proyecto.** @dev será convocado únicamente para scripts JS específicos.
 
@@ -256,20 +256,20 @@ Semana 9-10: Epic 7 (Memory Layer)
 
 ### PRD
 
-- `docs/prd/aios-autonomous-development-engine.md`
+- `docs/prd/aiox-autonomous-development-engine.md`
 
 ### Stories
 
-- `docs/stories/aios-core-ade/` (7 archivos de epic + README)
+- `docs/stories/aiox-core-ade/` (7 archivos de epic + README)
 
 ### Quality Gates
 
-- `docs/qa/gates/aios-core-ade/` (7 archivos de gate + README)
+- `docs/qa/gates/aiox-core-ade/` (7 archivos de gate + README)
 
 ### Referencia
 
 - `docs/architecture/AUTO-CLAUDE-ANALYSIS-COMPLETE.md` (patrones del Auto-Claude)
-- `.aios-core/core-config.yaml` (configuración central)
+- `.aiox-core/core-config.yaml` (configuración central)
 
 ---
 
@@ -319,7 +319,7 @@ No hay dependencia del Dashboard para que el ADE funcione.
 
 ## Primeros Pasos Recomendados
 
-1. **Leer el PRD completo** - `docs/prd/aios-autonomous-development-engine.md`
+1. **Leer el PRD completo** - `docs/prd/aiox-autonomous-development-engine.md`
 2. **Leer el Auto-Claude Analysis** - `docs/architecture/AUTO-CLAUDE-ANALYSIS-COMPLETE.md`
 3. **Iniciar Epic 1.1** - worktree-manager.js (delegar a @dev)
 4. **En paralelo, diseñar los schemas V3** (Epic 2.3)

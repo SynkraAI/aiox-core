@@ -864,27 +864,27 @@ flowchart TD
 
 | Arquivo | Localizacao |
 |---------|-------------|
-| Definicao do Workflow | `.aios-core/development/workflows/brownfield-discovery.yaml` |
-| Task: brownfield-create-epic | `.aios-core/development/tasks/brownfield-create-epic.md` |
-| Task: brownfield-create-story | `.aios-core/development/tasks/brownfield-create-story.md` |
-| Task: db-schema-audit | `.aios-core/development/tasks/db-schema-audit.md` |
-| Task: security-audit | `.aios-core/development/tasks/security-audit.md` |
+| Definicao do Workflow | `.aiox-core/development/workflows/brownfield-discovery.yaml` |
+| Task: brownfield-create-epic | `.aiox-core/development/tasks/brownfield-create-epic.md` |
+| Task: brownfield-create-story | `.aiox-core/development/tasks/brownfield-create-story.md` |
+| Task: db-schema-audit | `.aiox-core/development/tasks/db-schema-audit.md` |
+| Task: security-audit | `.aiox-core/development/tasks/security-audit.md` |
 
 ### Agentes
 
 | Agente | Localizacao |
 |--------|-------------|
-| @architect | `.aios-core/development/agents/architect.md` |
-| @data-engineer | `.aios-core/development/agents/data-engineer.md` |
-| @ux-design-expert | `.aios-core/development/agents/ux-design-expert.md` |
-| @qa | `.aios-core/development/agents/qa.md` |
-| @analyst | `.aios-core/development/agents/analyst.md` |
-| @pm | `.aios-core/development/agents/pm.md` |
+| @architect | `.aiox-core/development/agents/architect.md` |
+| @data-engineer | `.aiox-core/development/agents/data-engineer.md` |
+| @ux-design-expert | `.aiox-core/development/agents/ux-design-expert.md` |
+| @qa | `.aiox-core/development/agents/qa.md` |
+| @analyst | `.aiox-core/development/agents/analyst.md` |
+| @pm | `.aiox-core/development/agents/pm.md` |
 
 ### Documentacao Relacionada
 
 - [ADR-025: Estrutura de Documentacao](../../architecture/ADR-025-DOCUMENTATION-STRUCTURE.md)
-- [Guia de Workflows AIOS](../AIOS-WORKFLOWS-GUIDE.md)
+- [Guia de Workflows AIOX](../AIOX-WORKFLOWS-GUIDE.md)
 - [Padrao de Stories](../templates/STORY-TEMPLATE.md)
 
 ---

@@ -16,7 +16,7 @@ const {
   writeLicenseCache,
   readLicenseCache,
   getCachePath,
-  getAiosDir,
+  getAioxDir,
 } = require('../../pro/license/license-cache');
 const {
   generateMachineId,
@@ -29,7 +29,7 @@ describe('Security Tests (AC-9, AC-10)', () => {
   let testDir;
 
   beforeEach(() => {
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-security-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-security-test-'));
   });
 
   afterEach(() => {
@@ -150,7 +150,7 @@ describe('Security Tests (AC-9, AC-10)', () => {
       const content1 = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
 
       // Write again to new dir
-      const testDir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-security-test2-'));
+      const testDir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-security-test2-'));
       try {
         writeLicenseCache(data, testDir2);
         const content2 = JSON.parse(fs.readFileSync(getCachePath(testDir2), 'utf8'));
@@ -434,7 +434,7 @@ describe('Security Tests (AC-9, AC-10)', () => {
       writeLicenseCache(data, testDir);
       const content1 = JSON.parse(fs.readFileSync(getCachePath(testDir), 'utf8'));
 
-      const testDir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-enc-test-'));
+      const testDir2 = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-enc-test-'));
       try {
         writeLicenseCache(data, testDir2);
         const content2 = JSON.parse(fs.readFileSync(getCachePath(testDir2), 'utf8'));

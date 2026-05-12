@@ -1,10 +1,10 @@
-# Synkra AIOS Security Best Practices
+# Synkra AIOX Security Best Practices
 
 > 🌐 **EN** | [PT](./pt/security-best-practices.md) | [ES](./es/security-best-practices.md)
 
 ---
 
-This guide provides comprehensive security recommendations for deploying and maintaining Synkra AIOS in production environments.
+This guide provides comprehensive security recommendations for deploying and maintaining Synkra AIOX in production environments.
 
 ## Table of Contents
 
@@ -21,7 +21,7 @@ This guide provides comprehensive security recommendations for deploying and mai
 
 ## Security Architecture Overview
 
-Synkra AIOS implements a multi-layered security approach:
+Synkra AIOX implements a multi-layered security approach:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -217,7 +217,7 @@ CORS_ORIGIN=https://yourdomain.com
 # Audit logging
 AUDIT_LOG_ENABLED=true
 AUDIT_LOG_LEVEL=info
-AUDIT_LOG_FILE=/var/log/aios/audit.log
+AUDIT_LOG_FILE=/var/log/aiox/audit.log
 ```
 
 ### File Permissions
@@ -225,10 +225,10 @@ AUDIT_LOG_FILE=/var/log/aios/audit.log
 ```bash
 # Secure file permissions
 chmod 600 .env
-chmod 600 .aios/config.json
-chmod 600 .aios/users.json
-chmod 600 .aios/sessions.json
-chmod 700 .aios/
+chmod 600 .aiox/config.json
+chmod 600 .aiox/users.json
+chmod 600 .aiox/sessions.json
+chmod 700 .aiox/
 chmod 700 security/
 ```
 
@@ -604,4 +604,4 @@ const emergencyConfig = {
 
 **Remember**: Security is not a one-time implementation but an ongoing process. Regular reviews, updates, and improvements are essential for maintaining a secure system.
 
-For questions or security concerns, contact: security@synkra/aios-core.dev
+For questions or security concerns, open an issue at: https://github.com/SynkraAI/aiox-core/issues

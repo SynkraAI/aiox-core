@@ -10,7 +10,7 @@
 
 ## Descripción General
 
-AIOS-Core utiliza GitHub Actions para integración continua y despliegue. Este documento describe la arquitectura de flujos de trabajo optimizada implementada en la Historia 6.1.
+AIOX-Core utiliza GitHub Actions para integración continua y despliegue. Este documento describe la arquitectura de flujos de trabajo optimizada implementada en la Historia 6.1.
 
 ## Jerarquía de Flujos de Trabajo
 
@@ -64,7 +64,7 @@ Los flujos de trabajo omiten ejecuciones innecesarias para cambios solo de docum
 paths-ignore:
   - 'docs/**'
   - '*.md'
-  - '.aios/**'
+  - '.aiox/**'
   - 'squads/**'
   - 'LICENSE'
   - '.gitignore'

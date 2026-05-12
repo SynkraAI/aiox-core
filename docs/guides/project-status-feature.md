@@ -13,7 +13,7 @@
 
 ## Overview
 
-The Project Status feature automatically displays your current work context when any AIOS agent activates. This includes:
+The Project Status feature automatically displays your current work context when any AIOX agent activates. This includes:
 
 - **Git branch** you're currently on
 - **Modified files** in your working directory
@@ -46,7 +46,7 @@ Type *help to see available commands!
 ### Prerequisites
 
 - **Git repository** - Project must be initialized with `git init`
-- **AIOS-FullStack** framework installed
+- **AIOX-FullStack** framework installed
 - **Node.js 18+** with required packages
 
 ### Initial Setup
@@ -61,7 +61,7 @@ Run the initialization command via @devops agent:
 This will:
 1. Detect your git repository
 2. Enable `projectStatus` in `core-config.yaml`
-3. Create `.aios/project-status.yaml` cache file
+3. Create `.aiox/project-status.yaml` cache file
 4. Add cache file to `.gitignore`
 5. Test the status display
 
@@ -69,7 +69,7 @@ This will:
 
 If you prefer manual configuration:
 
-1. Edit `.aios-core/core-config.yaml`:
+1. Edit `.aiox-core/core-config.yaml`:
    ```yaml
    projectStatus:
      enabled: true
@@ -78,14 +78,14 @@ If you prefer manual configuration:
      cacheTimeSeconds: 60
    ```
 
-2. Create `.aios/` directory:
+2. Create `.aiox/` directory:
    ```bash
-   mkdir .aios
+   mkdir .aiox
    ```
 
 3. Add to `.gitignore`:
    ```gitignore
-   .aios/project-status.yaml
+   .aiox/project-status.yaml
    ```
 
 ---
@@ -94,7 +94,7 @@ If you prefer manual configuration:
 
 ### Full Configuration Options
 
-Location: `.aios-core/core-config.yaml`
+Location: `.aiox-core/core-config.yaml`
 
 ```yaml
 projectStatus:
@@ -108,7 +108,7 @@ projectStatus:
     recentWork: true                 # Show recent commits
     currentEpic: true                # Show current epic
     currentStory: true               # Show current story
-  statusFile: .aios/project-status.yaml  # Cache file location
+  statusFile: .aiox/project-status.yaml  # Cache file location
   maxModifiedFiles: 5                # Limit modified files shown
   maxRecentCommits: 2                # Limit commits shown
 ```
@@ -148,7 +148,7 @@ projectStatus:
 
 When an agent activates, the system:
 
-1. **Checks cache** - Looks for `.aios/project-status.yaml`
+1. **Checks cache** - Looks for `.aiox/project-status.yaml`
 2. **Validates TTL** - Is cache < 60 seconds old?
 3. **Returns cached** - If valid, use cached status (fast)
 4. **Generates fresh** - If expired, run git commands and scan stories
@@ -200,7 +200,7 @@ Only shows stories with status: `InProgress` or `In Progress`.
 ### Cache Strategy
 
 - **Cache TTL:** 60 seconds (configurable)
-- **Cache Location:** `.aios/project-status.yaml`
+- **Cache Location:** `.aiox/project-status.yaml`
 - **Cache Format:** YAML with status object + timestamp
 - **Invalidation:** Automatic after TTL expires
 
@@ -213,7 +213,7 @@ Only shows stories with status: `InProgress` or `In Progress`.
 
 ## Affected Agents
 
-All 11 AIOS agents display project status:
+All 11 AIOX agents display project status:
 
 1. **@dev** (Dex - Builder)
 2. **@po** (Pax - Balancer)
@@ -225,7 +225,7 @@ All 11 AIOS agents display project status:
 8. **@devops** (Gage - Operator)
 9. **@data-engineer** (Dara - Sage)
 10. **@ux-design-expert** (Uma - Empathizer)
-11. **@aios-master** (Orion - Orchestrator)
+11. **@aiox-master** (Orion - Orchestrator)
 
 ---
 
@@ -238,7 +238,7 @@ All 11 AIOS agents display project status:
 **Check:**
 1. Is `projectStatus.enabled: true` in core-config.yaml?
 2. Is this a git repository? (`git rev-parse --is-inside-work-tree`)
-3. Does `.aios-core/infrastructure/scripts/project-status-loader.js` exist?
+3. Does `.aiox-core/infrastructure/scripts/project-status-loader.js` exist?
 4. Any errors in agent activation output?
 
 **Solution:**
@@ -257,7 +257,7 @@ All 11 AIOS agents display project status:
 **Solution:**
 ```bash
 # Manually clear cache
-rm .aios/project-status.yaml
+rm .aiox/project-status.yaml
 
 # Or restart agent session
 ```
@@ -326,7 +326,7 @@ Don't forget to update `.gitignore`.
 ### Programmatic Access
 
 ```javascript
-const { loadProjectStatus, formatStatusDisplay } = require('./.aios-core/infrastructure/scripts/project-status-loader.js');
+const { loadProjectStatus, formatStatusDisplay } = require('./.aiox-core/infrastructure/scripts/project-status-loader.js');
 
 // Get raw status object
 const status = await loadProjectStatus();
@@ -337,7 +337,7 @@ const display = formatStatusDisplay(status);
 console.log(display);
 
 // Clear cache manually
-const { clearCache } = require('./.aios-core/infrastructure/scripts/project-status-loader.js');
+const { clearCache } = require('./.aiox-core/infrastructure/scripts/project-status-loader.js');
 await clearCache();
 ```
 
@@ -355,7 +355,7 @@ await clearCache();
 
 2. **Clear cache:**
    ```bash
-   rm .aios/project-status.yaml
+   rm .aiox/project-status.yaml
    ```
 
 3. **Restart agents** - New activations won't show status
@@ -366,16 +366,16 @@ To fully remove the feature:
 
 ```bash
 # Remove script
-rm .aios-core/infrastructure/scripts/project-status-loader.js
+rm .aiox-core/infrastructure/scripts/project-status-loader.js
 
 # Remove task
-rm .aios-core/tasks/init-project-status.md
+rm .aiox-core/tasks/init-project-status.md
 
 # Remove cache
-rm .aios/project-status.yaml
+rm .aiox/project-status.yaml
 
 # Remove tests
-rm .aios-core/infrastructure/scripts/__tests__/project-status-loader.test.js
+rm .aiox-core/infrastructure/scripts/__tests__/project-status-loader.test.js
 
 # Remove config section from core-config.yaml
 # (manually edit file)
@@ -448,17 +448,17 @@ A: Yes, tested on all platforms.
 A: Not yet. The format is fixed in `project-status-loader.js:formatStatusDisplay()`.
 
 **Q: Is cache shared between agents?**
-A: Yes, all agents use the same cache file (`.aios/project-status.yaml`).
+A: Yes, all agents use the same cache file (`.aiox/project-status.yaml`).
 
 ---
 
 ## Related Documentation
 
-- **Story:** `docs/stories/aios migration/story-6.1.2.4-project-status-context.md`
-- **Config:** `.aios-core/core-config.yaml` (projectStatus section)
-- **Script:** `.aios-core/infrastructure/scripts/project-status-loader.js`
-- **Init Task:** `.aios-core/tasks/init-project-status.md`
-- **Tests:** `.aios-core/infrastructure/scripts/__tests__/project-status-loader.test.js`
+- **Story:** `docs/stories/aiox migration/story-6.1.2.4-project-status-context.md`
+- **Config:** `.aiox-core/core-config.yaml` (projectStatus section)
+- **Script:** `.aiox-core/infrastructure/scripts/project-status-loader.js`
+- **Init Task:** `.aiox-core/tasks/init-project-status.md`
+- **Tests:** `.aiox-core/infrastructure/scripts/__tests__/project-status-loader.test.js`
 
 ---
 

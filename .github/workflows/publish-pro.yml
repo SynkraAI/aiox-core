@@ -1,11 +1,11 @@
-# GitHub Actions workflow for publishing @aios-fullstack/pro to npm
+# GitHub Actions workflow for publishing @aiox-fullstack/pro to npm
 #
-# This workflow publishes the AIOS Pro package to the public npm registry.
+# This workflow publishes the AIOX Pro package to the public npm registry.
 # Features are license-gated (activation required), not install-gated.
 #
 # @see Story PRO-6 - License Key & Feature Gating System
 
-name: Publish AIOS Pro
+name: Publish AIOX Pro
 
 on:
   # Manual trigger with version input
@@ -25,6 +25,9 @@ on:
   push:
     tags:
       - 'pro-v*'
+
+permissions:
+  contents: read
 
 jobs:
   # ─────────────────────────────────────────────────────────────────────────────
@@ -109,13 +112,13 @@ jobs:
           script: |
             const version = '${{ github.ref_name }}'.replace('pro-v', '');
             const body = `
-            ## AIOS Pro ${version}
+            ## AIOX Pro ${version}
 
             ### Installation
 
             \`\`\`bash
-            npm install @aios-fullstack/pro
-            aios pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
+            npm install @aiox-fullstack/pro
+            aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
             \`\`\`
 
             ### Features
@@ -124,14 +127,14 @@ jobs:
             - Machine-specific encrypted cache
             - Graceful degradation to core features
 
-            See [Install Guide](https://github.com/SynkraAI/aios-core/blob/main/docs/guides/pro/install-gate-setup.md) for detailed setup instructions.
+            See [Install Guide](https://github.com/SynkraAI/aiox-core/blob/main/docs/guides/pro/install-gate-setup.md) for detailed setup instructions.
             `;
 
             await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: '${{ github.ref_name }}',
-              name: `AIOS Pro ${version}`,
+              name: `AIOX Pro ${version}`,
               body: body,
               prerelease: ${{ github.event.inputs.prerelease || false }}
             });
@@ -150,11 +153,11 @@ jobs:
           node-version: '20'
 
       - name: Verify package is accessible
-        run: npm view @aios-fullstack/pro
+        run: npm view @aiox-fullstack/pro
 
       - name: Test installation
         run: |
           mkdir test-install && cd test-install
           npm init -y
-          npm install @aios-fullstack/pro
+          npm install @aiox-fullstack/pro
           echo "✅ Package installed successfully"

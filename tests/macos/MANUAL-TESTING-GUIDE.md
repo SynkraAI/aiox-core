@@ -2,7 +2,7 @@
 
 **Story 1.10b - macOS Testing & Validation**
 
-This guide provides step-by-step instructions for manually testing AIOS on macOS (Intel and Apple Silicon).
+This guide provides step-by-step instructions for manually testing AIOX on macOS (Intel and Apple Silicon).
 
 ---
 
@@ -61,19 +61,19 @@ file $(which node)
 ### 1. Clean Environment Preparation
 
 ```bash
-# Backup existing AIOS installation (if any)
-if [ -d "$HOME/.aios" ]; then
-    mv "$HOME/.aios" "$HOME/.aios.backup.$(date +%Y%m%d-%H%M%S)"
+# Backup existing AIOX installation (if any)
+if [ -d "$HOME/.aiox" ]; then
+    mv "$HOME/.aiox" "$HOME/.aiox.backup.$(date +%Y%m%d-%H%M%S)"
 fi
 
 # Verify backup
-ls -la "$HOME/.aios.backup"*
+ls -la "$HOME/.aiox.backup"*
 ```
 
 ### 2. Navigate to Test Directory
 
 ```bash
-cd path/to/@synkra/aios-core/tests/macos
+cd path/to/aiox-core/tests/macos
 chmod +x *.sh
 ```
 
@@ -97,7 +97,7 @@ uname -m
 #### 2. Run Installer
 
 ```bash
-npx @synkraai/aios@latest init
+npx @synkraai/aiox@latest init
 ```
 
 **Follow the wizard prompts:**
@@ -109,15 +109,15 @@ npx @synkraai/aios@latest init
 #### 3. Verify Installation
 
 ```bash
-# Check AIOS command availability
-which aios
-# Expected: /usr/local/bin/aios or similar
+# Check AIOX command availability
+which aiox
+# Expected: /usr/local/bin/aiox or similar
 
 # Verify version
-aios --version
+aiox --version
 
 # Run health check
-aios health
+aiox health
 ```
 
 **Expected Health Check Output:**
@@ -140,7 +140,7 @@ file $(which node)
 
 - [ ] Installation completes without errors
 - [ ] All 4 MCPs show as healthy
-- [ ] `aios` command works
+- [ ] `aiox` command works
 - [ ] Running on correct architecture (x86_64)
 
 ---
@@ -167,7 +167,7 @@ sysctl -n machdep.cpu.brand_string
 #### 2. Run Installer
 
 ```bash
-npx @synkraai/aios@latest init
+npx @synkraai/aiox@latest init
 ```
 
 #### 3. Verify Native ARM Execution
@@ -195,7 +195,7 @@ If running under Rosetta:
 #### 5. Run Health Check
 
 ```bash
-aios health
+aiox health
 ```
 
 ### ✅ Pass Criteria
@@ -222,10 +222,10 @@ echo $SHELL
 # Expected: /bin/zsh
 
 # Check if .zshrc was updated
-cat ~/.zshrc | grep -i aios
+cat ~/.zshrc | grep -i aiox
 
 # Open new terminal window
-# Run: aios --version
+# Run: aiox --version
 # Should work without errors
 ```
 
@@ -236,11 +236,11 @@ cat ~/.zshrc | grep -i aios
 bash
 
 # Check if profile was updated
-cat ~/.bashrc | grep -i aios
+cat ~/.bashrc | grep -i aiox
 # Or check ~/.bash_profile
 
-# Run AIOS command
-aios --version
+# Run AIOX command
+aiox --version
 
 # Exit bash
 exit
@@ -251,7 +251,7 @@ exit
 ```bash
 # Close terminal completely
 # Open new terminal
-# Run: aios --version
+# Run: aiox --version
 # Should work immediately without sourcing profiles
 ```
 
@@ -274,26 +274,26 @@ exit
 #### 1. Verify Forward Slashes
 
 ```bash
-# Check AIOS installation path
-which aios
-# Should use forward slashes: /usr/local/bin/aios
-# NOT backslashes: \usr\local\bin\aios
+# Check AIOX installation path
+which aiox
+# Should use forward slashes: /usr/local/bin/aiox
+# NOT backslashes: \usr\local\bin\aiox
 ```
 
 #### 2. Test Tilde Expansion
 
 ```bash
 # Navigate using ~
-cd ~/.aios
+cd ~/.aiox
 pwd
-# Should show full path: /Users/username/.aios
+# Should show full path: /Users/username/.aiox
 ```
 
 #### 3. Test Symlinks
 
 ```bash
-# Check if aios command is a symlink
-ls -la $(which aios)
+# Check if aiox command is a symlink
+ls -la $(which aiox)
 # Note if it points to another location
 ```
 
@@ -316,13 +316,13 @@ ls -la $(which aios)
 #### 1. Check Generated Files
 
 ```bash
-# Check line endings of AIOS config
-file ~/.aios/config.json
+# Check line endings of AIOX config
+file ~/.aiox/config.json
 # Should show: ASCII text (LF line endings)
 # NOT: ASCII text, with CRLF line endings
 
 # Check for carriage returns
-grep -r $'\r' ~/.aios/ || echo "No CRLF found - PASS"
+grep -r $'\r' ~/.aiox/ || echo "No CRLF found - PASS"
 ```
 
 #### 2. Verify Git Configuration
@@ -351,11 +351,11 @@ git config --get core.autocrlf
 
 ```bash
 # List scripts with permissions
-ls -la ~/.aios/bin/*.sh 2>/dev/null
+ls -la ~/.aiox/bin/*.sh 2>/dev/null
 # Should show: -rwxr-xr-x (executable)
 
 # Try running a script without chmod
-~/.aios/bin/some-script.sh
+~/.aiox/bin/some-script.sh
 # Should execute without "Permission denied"
 ```
 
@@ -363,7 +363,7 @@ ls -la ~/.aios/bin/*.sh 2>/dev/null
 
 ```bash
 # Check config permissions
-ls -l ~/.aios/config.json
+ls -l ~/.aiox/config.json
 # Should be: -rw-r--r-- (644) or -rw------- (600)
 ```
 
@@ -371,7 +371,7 @@ ls -l ~/.aios/config.json
 
 ```bash
 # Check ownership
-ls -ld ~/.aios
+ls -ld ~/.aiox
 # Should show your username as owner
 
 # Test npm without sudo
@@ -383,7 +383,7 @@ npm list -g --depth=0
 
 - [ ] Scripts are executable
 - [ ] Config files have correct permissions
-- [ ] User owns all AIOS files
+- [ ] User owns all AIOX files
 - [ ] No sudo required
 
 ---
@@ -451,7 +451,7 @@ pnpm --version
 
 ```bash
 # Time the full installation
-time npx @synkraai/aios@latest init
+time npx @synkraai/aiox@latest init
 # Target: < 5 minutes (300 seconds)
 ```
 
@@ -464,7 +464,7 @@ time npx @synkraai/aios@latest init
 
 ```bash
 # Time health check
-time aios health
+time aiox health
 # Target: < 10 seconds
 ```
 
@@ -472,9 +472,9 @@ time aios health
 
 ```bash
 # Multiple runs for average
-time aios --version
-time aios --version
-time aios --version
+time aiox --version
+time aiox --version
+time aiox --version
 # Should be instant (< 1 second)
 ```
 
@@ -524,7 +524,7 @@ csrutil status
 During installation and normal use, verify:
 
 - [ ] No unexpected security prompts
-- [ ] No "unidentified developer" warnings for AIOS
+- [ ] No "unidentified developer" warnings for AIOX
 - [ ] No permission requests beyond expected
 
 #### 3. Check Code Signing (if applicable)
@@ -555,28 +555,28 @@ codesign -v $(which node)
 
 ```bash
 # Create backup
-cp -r ~/.aios ~/.aios.backup
+cp -r ~/.aiox ~/.aiox.backup
 
 # Simulate corruption
-echo "corrupted" > ~/.aios/config.json
+echo "corrupted" > ~/.aiox/config.json
 
 # Try to recover
-mv ~/.aios ~/.aios.broken
-mv ~/.aios.backup ~/.aios
+mv ~/.aiox ~/.aiox.broken
+mv ~/.aiox.backup ~/.aiox
 
 # Verify recovery
-aios health
+aiox health
 ```
 
 #### 2. Test Partial Installation Recovery
 
 ```bash
 # Interrupt installation (Ctrl+C mid-install)
-npx @synkraai/aios@latest init
+npx @synkraai/aiox@latest init
 # Press Ctrl+C after a few seconds
 
 # Re-run installation
-npx @synkraai/aios@latest init
+npx @synkraai/aiox@latest init
 # Should detect partial state and resume/cleanup
 ```
 
@@ -585,7 +585,7 @@ npx @synkraai/aios@latest init
 Intentionally trigger errors:
 
 - Missing Node.js: Uninstall Node temporarily
-- Permission denied: `chmod 000 ~/.aios`
+- Permission denied: `chmod 000 ~/.aiox`
 - Network timeout: Disconnect internet
 
 **Check that error messages are:**
@@ -621,27 +621,27 @@ node --version  # Should be 18+
 npm ping
 
 # Try with verbose logging
-npx @synkraai/aios@latest init --verbose
+npx @synkraai/aiox@latest init --verbose
 ```
 
 #### Command Not Found
 
-**Symptom:** `bash: aios: command not found`
+**Symptom:** `bash: aiox: command not found`
 
 **Solution:**
 
 ```bash
 # Check if installed
-ls -la ~/.aios
+ls -la ~/.aiox
 
 # Source shell profile
 source ~/.zshrc  # or ~/.bashrc
 
 # Check PATH
-echo $PATH | grep -o '/[^:]*aios[^:]*'
+echo $PATH | grep -o '/[^:]*aiox[^:]*'
 
 # Manually add to PATH if needed
-export PATH="$HOME/.aios/bin:$PATH"
+export PATH="$HOME/.aiox/bin:$PATH"
 ```
 
 #### Permission Denied
@@ -652,10 +652,10 @@ export PATH="$HOME/.aios/bin:$PATH"
 
 ```bash
 # Fix script permissions
-chmod +x ~/.aios/bin/*.sh
+chmod +x ~/.aiox/bin/*.sh
 
 # Fix ownership
-sudo chown -R $(whoami) ~/.aios
+sudo chown -R $(whoami) ~/.aiox
 
 # Reset npm permissions
 npm config set prefix ~/.npm-global
@@ -664,16 +664,16 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 #### MCP Health Check Fails
 
-**Symptom:** `aios health` shows unhealthy MCPs
+**Symptom:** `aiox health` shows unhealthy MCPs
 
 **Solution:**
 
 ```bash
 # Reinstall specific MCP
-aios mcp reinstall <mcp-name>
+aiox mcp reinstall <mcp-name>
 
 # Check logs
-aios logs
+aiox logs
 
 # Verify network connectivity
 ping npmjs.com
@@ -697,7 +697,7 @@ When reporting test failures, include:
    ```
 
 2. **Test Logs:**
-   - All files from `/tmp/aios-test-*.log`
+   - All files from `/tmp/aiox-test-*.log`
    - Screenshot of error messages
 
 3. **Steps to Reproduce:**
@@ -740,11 +740,11 @@ cd tests/macos
 ### Clean Test Environment
 
 ```bash
-# Remove AIOS
-rm -rf ~/.aios
+# Remove AIOX
+rm -rf ~/.aiox
 
 # Restore backup
-mv ~/.aios.backup ~/.aios
+mv ~/.aiox.backup ~/.aiox
 ```
 
 ---

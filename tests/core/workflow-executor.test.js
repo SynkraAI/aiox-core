@@ -20,7 +20,7 @@ const {
   executeDevelopmentCycle,
   PhaseStatus,
   CheckpointDecision,
-} = require('../../.aios-core/core/orchestration/workflow-executor');
+} = require('../../.aiox-core/core/orchestration/workflow-executor');
 
 describe('WorkflowExecutor', () => {
   const projectRoot = path.join(__dirname, '../..');
@@ -622,7 +622,7 @@ Some footer text
   // ============================================
   describe('Integration with Orchestration Index', () => {
     test('should be exported from orchestration index', () => {
-      const orchestration = require('../../.aios-core/core/orchestration');
+      const orchestration = require('../../.aiox-core/core/orchestration');
 
       expect(orchestration.WorkflowExecutor).toBeDefined();
       expect(orchestration.createWorkflowExecutor).toBeDefined();
@@ -642,7 +642,7 @@ describe('development-cycle.yaml', () => {
 
   test('should be valid YAML', async () => {
     const content = await fs.readFile(
-      path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
+      path.join(projectRoot, '.aiox-core/development/workflows/development-cycle.yaml'),
       'utf8',
     );
 
@@ -651,7 +651,7 @@ describe('development-cycle.yaml', () => {
 
   test('should have required workflow structure', async () => {
     const content = await fs.readFile(
-      path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
+      path.join(projectRoot, '.aiox-core/development/workflows/development-cycle.yaml'),
       'utf8',
     );
     const workflow = yaml.load(content);
@@ -665,7 +665,7 @@ describe('development-cycle.yaml', () => {
 
   test('should have all 6 phases', async () => {
     const content = await fs.readFile(
-      path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
+      path.join(projectRoot, '.aiox-core/development/workflows/development-cycle.yaml'),
       'utf8',
     );
     const workflow = yaml.load(content);
@@ -681,7 +681,7 @@ describe('development-cycle.yaml', () => {
 
   test('checkpoint phase should have elicit: true', async () => {
     const content = await fs.readFile(
-      path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
+      path.join(projectRoot, '.aiox-core/development/workflows/development-cycle.yaml'),
       'utf8',
     );
     const workflow = yaml.load(content);
@@ -691,7 +691,7 @@ describe('development-cycle.yaml', () => {
 
   test('self_healing phase should have condition', async () => {
     const content = await fs.readFile(
-      path.join(projectRoot, '.aios-core/development/workflows/development-cycle.yaml'),
+      path.join(projectRoot, '.aiox-core/development/workflows/development-cycle.yaml'),
       'utf8',
     );
     const workflow = yaml.load(content);

@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         ## 💡 Share Your Idea
-        Thanks for taking the time to suggest an improvement! Your ideas help make AIOS better for everyone.
+        Thanks for taking the time to suggest an improvement! Your ideas help make AIOX better for everyone.
 
   - type: dropdown
     id: repo-scope
@@ -15,8 +15,8 @@ body:
       label: Which repository does this idea relate to?
       description: Select the repository this idea is most relevant to
       options:
-        - aios-core (Core Framework)
-        - aios-squads (AIOS Squads - ETL, Creator, MMOS)
+        - aiox-core (Core Framework)
+        - aiox-squads (AIOX Squads - ETL, Creator, MMOS)
         - mcp-ecosystem (MCP Tools & Docker MCP Toolkit)
         - Multiple / Cross-repo
     validations:
@@ -26,7 +26,7 @@ body:
     id: description
     attributes:
       label: Describe your idea
-      description: What would you like to see in AIOS?
+      description: What would you like to see in AIOX?
       placeholder: |
         A clear and concise description of your idea...
 

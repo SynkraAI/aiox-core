@@ -10,17 +10,17 @@
 
 ---
 
-Este documento lista todas las variables de entorno utilizadas por Synkra AIOS y sus componentes.
+Este documento lista todas las variables de entorno utilizadas por Synkra AIOX y sus componentes.
 
 ## Descripción General
 
-Synkra AIOS utiliza variables de entorno para configuración, claves API e información sensible. **Nunca haga commit de variables de entorno al repositorio.**
+Synkra AIOX utiliza variables de entorno para configuración, claves API e información sensible. **Nunca haga commit de variables de entorno al repositorio.**
 
 ## Variables de Entorno Requeridas
 
 ### Framework Central
 
-Actualmente, Synkra AIOS no requiere ninguna variable de entorno obligatoria para operación básica. Toda la configuración se realiza a través de `core-config.yaml` y archivos de configuración de Squad.
+Actualmente, Synkra AIOX no requiere ninguna variable de entorno obligatoria para operación básica. Toda la configuración se realiza a través de `core-config.yaml` y archivos de configuración de Squad.
 
 ## Variables de Entorno Opcionales
 
@@ -49,7 +49,7 @@ TWITTER_API_KEY=your_twitter_api_key
 
 #### Squads Privados
 
-Los Squads privados (en el repositorio `aios-Squads`) pueden requerir variables de entorno adicionales. Consulte la documentación de cada pack.
+Los Squads privados (en el repositorio `aiox-Squads`) pueden requerir variables de entorno adicionales. Consulte la documentación de cada pack.
 
 ## Configuración del Archivo de Entorno
 
@@ -74,7 +74,7 @@ Los Squads privados (en el repositorio `aios-Squads`) pueden requerir variables 
 
 ### Cargando Variables de Entorno
 
-Synkra AIOS usa `dotenv` (si está instalado) o el soporte nativo de variables de entorno de Node.js. Las variables de entorno se cargan automáticamente desde archivos `.env` en la raíz del proyecto.
+Synkra AIOX usa `dotenv` (si está instalado) o el soporte nativo de variables de entorno de Node.js. Las variables de entorno se cargan automáticamente desde archivos `.env` en la raíz del proyecto.
 
 **Importante:** El archivo `.env` está en gitignore y nunca se hará commit al repositorio.
 

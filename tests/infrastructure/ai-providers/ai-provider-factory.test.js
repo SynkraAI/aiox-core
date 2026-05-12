@@ -13,7 +13,7 @@ const {
   getProvidersStatus,
   ClaudeProvider,
   GeminiProvider,
-} = require('../../../.aios-core/infrastructure/integrations/ai-providers/ai-provider-factory');
+} = require('../../../.aiox-core/infrastructure/integrations/ai-providers/ai-provider-factory');
 
 describe('AI Provider Factory', () => {
   describe('Provider Classes', () => {

@@ -1,4 +1,4 @@
-# Sistema UX-Design-Expert AIOS
+# Sistema UX-Design-Expert AIOX
 
 > **Versao:** 1.0.0
 > **Criado:** 2026-02-04
@@ -9,7 +9,7 @@
 
 ## Visao Geral
 
-Este documento descreve o sistema completo do agente **UX-Design Expert (Uma)**, incluindo todos os arquivos envolvidos, fluxos de trabalho, comandos disponiveis, integracoes com outros agentes e workflows AIOS.
+Este documento descreve o sistema completo do agente **UX-Design Expert (Uma)**, incluindo todos os arquivos envolvidos, fluxos de trabalho, comandos disponiveis, integracoes com outros agentes e workflows AIOX.
 
 O UX-Design Expert e um agente hibrido que combina:
 - **Sally's UX Principles** - Empatia, pesquisa de usuario, design centrado no usuario
@@ -87,8 +87,8 @@ flowchart TB
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/agents/ux-design-expert.md` | Definicao completa do agente (persona, comandos, workflows) |
-| `.claude/commands/AIOS/agents/ux-design-expert.md` | Comando Claude Code para ativar @ux-design-expert |
+| `.aiox-core/development/agents/ux-design-expert.md` | Definicao completa do agente (persona, comandos, workflows) |
+| `.claude/commands/AIOX/agents/ux-design-expert.md` | Comando Claude Code para ativar @ux-design-expert |
 
 ### Tasks por Fase
 
@@ -96,97 +96,97 @@ flowchart TB
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/ux-user-research.md` | `*research` | Conduzir pesquisa de usuario, criar personas e jornadas |
-| `.aios-core/development/tasks/ux-create-wireframe.md` | `*wireframe` | Criar wireframes low/mid/high fidelity |
-| `.aios-core/development/tasks/generate-ai-frontend-prompt.md` | `*generate-ui-prompt` | Gerar prompts para v0.dev, Lovable.ai |
-| `.aios-core/development/tasks/create-doc.md` | `*create-front-end-spec` | Criar especificacao frontend detalhada |
+| `.aiox-core/development/tasks/ux-user-research.md` | `*research` | Conduzir pesquisa de usuario, criar personas e jornadas |
+| `.aiox-core/development/tasks/ux-create-wireframe.md` | `*wireframe` | Criar wireframes low/mid/high fidelity |
+| `.aiox-core/development/tasks/generate-ai-frontend-prompt.md` | `*generate-ui-prompt` | Gerar prompts para v0.dev, Lovable.ai |
+| `.aiox-core/development/tasks/create-doc.md` | `*create-front-end-spec` | Criar especificacao frontend detalhada |
 
 #### Fase 2: Design System Audit (3 tasks)
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/audit-codebase.md` | `*audit {path}` | Escanear codebase para redundancias UI |
-| `.aios-core/development/tasks/consolidate-patterns.md` | `*consolidate` | Reduzir redundancia com clustering HSL |
-| `.aios-core/development/tasks/generate-shock-report.md` | `*shock-report` | Gerar relatorio visual HTML |
+| `.aiox-core/development/tasks/audit-codebase.md` | `*audit {path}` | Escanear codebase para redundancias UI |
+| `.aiox-core/development/tasks/consolidate-patterns.md` | `*consolidate` | Reduzir redundancia com clustering HSL |
+| `.aiox-core/development/tasks/generate-shock-report.md` | `*shock-report` | Gerar relatorio visual HTML |
 
 #### Fase 3: Design Tokens & Setup (7 tasks)
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/extract-tokens.md` | `*tokenize` | Extrair design tokens (YAML, JSON, CSS, DTCG) |
-| `.aios-core/development/tasks/setup-design-system.md` | `*setup` | Inicializar estrutura do design system |
-| `.aios-core/development/tasks/generate-migration-strategy.md` | `*migrate` | Gerar estrategia de migracao em 4 fases |
-| `.aios-core/development/tasks/tailwind-upgrade.md` | `*upgrade-tailwind` | Upgrade para Tailwind CSS v4 |
-| `.aios-core/development/tasks/audit-tailwind-config.md` | `*audit-tailwind-config` | Validar configuracao Tailwind |
-| `.aios-core/development/tasks/export-design-tokens-dtcg.md` | `*export-dtcg` | Exportar tokens W3C DTCG |
-| `.aios-core/development/tasks/bootstrap-shadcn-library.md` | `*bootstrap-shadcn` | Instalar Shadcn/Radix UI |
+| `.aiox-core/development/tasks/extract-tokens.md` | `*tokenize` | Extrair design tokens (YAML, JSON, CSS, DTCG) |
+| `.aiox-core/development/tasks/setup-design-system.md` | `*setup` | Inicializar estrutura do design system |
+| `.aiox-core/development/tasks/generate-migration-strategy.md` | `*migrate` | Gerar estrategia de migracao em 4 fases |
+| `.aiox-core/development/tasks/tailwind-upgrade.md` | `*upgrade-tailwind` | Upgrade para Tailwind CSS v4 |
+| `.aiox-core/development/tasks/audit-tailwind-config.md` | `*audit-tailwind-config` | Validar configuracao Tailwind |
+| `.aiox-core/development/tasks/export-design-tokens-dtcg.md` | `*export-dtcg` | Exportar tokens W3C DTCG |
+| `.aiox-core/development/tasks/bootstrap-shadcn-library.md` | `*bootstrap-shadcn` | Instalar Shadcn/Radix UI |
 
 #### Fase 4: Atomic Component Building (3 tasks)
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/build-component.md` | `*build {component}` | Construir componente atomico (React + TypeScript) |
-| `.aios-core/development/tasks/compose-molecule.md` | `*compose {molecule}` | Compor molecule de atoms existentes |
-| `.aios-core/development/tasks/extend-pattern.md` | `*extend {component}` | Adicionar variante a componente existente |
+| `.aiox-core/development/tasks/build-component.md` | `*build {component}` | Construir componente atomico (React + TypeScript) |
+| `.aiox-core/development/tasks/compose-molecule.md` | `*compose {molecule}` | Compor molecule de atoms existentes |
+| `.aiox-core/development/tasks/extend-pattern.md` | `*extend {component}` | Adicionar variante a componente existente |
 
 #### Fase 5: Quality & Documentation (3 tasks)
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/generate-documentation.md` | `*document` | Gerar documentacao do pattern library |
-| `.aios-core/development/tasks/calculate-roi.md` | `*calculate-roi` | Calcular ROI e cost savings |
-| `.aios-core/development/checklists/accessibility-wcag-checklist.md` | `*a11y-check` | Auditoria de acessibilidade WCAG |
+| `.aiox-core/development/tasks/generate-documentation.md` | `*document` | Gerar documentacao do pattern library |
+| `.aiox-core/development/tasks/calculate-roi.md` | `*calculate-roi` | Calcular ROI e cost savings |
+| `.aiox-core/development/checklists/accessibility-wcag-checklist.md` | `*a11y-check` | Auditoria de acessibilidade WCAG |
 
 #### Tasks Universais (2 tasks)
 
 | Arquivo | Comando | Proposito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/ux-ds-scan-artifact.md` | `*scan {path\|url}` | Analisar HTML/React para extrair padroes |
-| `.aios-core/development/tasks/integrate-Squad.md` | `*integrate {pack}` | Conectar com expansion pack |
+| `.aiox-core/development/tasks/ux-ds-scan-artifact.md` | `*scan {path\|url}` | Analisar HTML/React para extrair padroes |
+| `.aiox-core/development/tasks/integrate-Squad.md` | `*integrate {squad}` | Conectar com expansion squad |
 
 ### Templates
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/templates/front-end-spec-tmpl.yaml` | Template de especificacao frontend |
-| `.aios-core/development/templates/tokens-schema-tmpl.yaml` | Schema de design tokens |
-| `.aios-core/development/templates/component-react-tmpl.tsx` | Template de componente React |
-| `.aios-core/development/templates/state-persistence-tmpl.yaml` | Template de persistencia de estado |
-| `.aios-core/development/templates/shock-report-tmpl.html` | Template de shock report HTML |
-| `.aios-core/development/templates/migration-strategy-tmpl.md` | Template de estrategia de migracao |
-| `.aios-core/development/templates/token-exports-css-tmpl.css` | Template de export CSS |
-| `.aios-core/development/templates/token-exports-tailwind-tmpl.js` | Template de export Tailwind |
-| `.aios-core/development/templates/ds-artifact-analysis.md` | Template de analise de artefato |
+| `.aiox-core/development/templates/front-end-spec-tmpl.yaml` | Template de especificacao frontend |
+| `.aiox-core/development/templates/tokens-schema-tmpl.yaml` | Schema de design tokens |
+| `.aiox-core/development/templates/component-react-tmpl.tsx` | Template de componente React |
+| `.aiox-core/development/templates/state-persistence-tmpl.yaml` | Template de persistencia de estado |
+| `.aiox-core/development/templates/shock-report-tmpl.html` | Template de shock report HTML |
+| `.aiox-core/development/templates/migration-strategy-tmpl.md` | Template de estrategia de migracao |
+| `.aiox-core/development/templates/token-exports-css-tmpl.css` | Template de export CSS |
+| `.aiox-core/development/templates/token-exports-tailwind-tmpl.js` | Template de export Tailwind |
+| `.aiox-core/development/templates/ds-artifact-analysis.md` | Template de analise de artefato |
 
 ### Checklists
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/checklists/pattern-audit-checklist.md` | Checklist de auditoria de padroes |
-| `.aios-core/development/checklists/component-quality-checklist.md` | Checklist de qualidade de componente |
-| `.aios-core/development/checklists/accessibility-wcag-checklist.md` | Checklist WCAG AA/AAA |
-| `.aios-core/development/checklists/migration-readiness-checklist.md` | Checklist de readiness para migracao |
+| `.aiox-core/development/checklists/pattern-audit-checklist.md` | Checklist de auditoria de padroes |
+| `.aiox-core/development/checklists/component-quality-checklist.md` | Checklist de qualidade de componente |
+| `.aiox-core/development/checklists/accessibility-wcag-checklist.md` | Checklist WCAG AA/AAA |
+| `.aiox-core/development/checklists/migration-readiness-checklist.md` | Checklist de readiness para migracao |
 
 ### Data Files
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/data/technical-preferences.md` | Preferencias tecnicas padrao |
-| `.aios-core/development/data/atomic-design-principles.md` | Principios Atomic Design |
-| `.aios-core/development/data/design-token-best-practices.md` | Best practices de design tokens |
-| `.aios-core/development/data/consolidation-algorithms.md` | Algoritmos de consolidacao |
-| `.aios-core/development/data/roi-calculation-guide.md` | Guia de calculo de ROI |
-| `.aios-core/development/data/integration-patterns.md` | Padroes de integracao |
-| `.aios-core/development/data/wcag-compliance-guide.md` | Guia de conformidade WCAG |
+| `.aiox-core/development/data/technical-preferences.md` | Preferencias tecnicas padrao |
+| `.aiox-core/development/data/atomic-design-principles.md` | Principios Atomic Design |
+| `.aiox-core/development/data/design-token-best-practices.md` | Best practices de design tokens |
+| `.aiox-core/development/data/consolidation-algorithms.md` | Algoritmos de consolidacao |
+| `.aiox-core/development/data/roi-calculation-guide.md` | Guia de calculo de ROI |
+| `.aiox-core/development/data/integration-patterns.md` | Padroes de integracao |
+| `.aiox-core/development/data/wcag-compliance-guide.md` | Guia de conformidade WCAG |
 
 ### Workflows Relacionados
 
 | Arquivo | Proposito |
 |---------|-----------|
-| `.aios-core/development/workflows/design-system-build-quality.yaml` | Pipeline pos-migracao (build, docs, a11y, ROI) |
-| `.aios-core/development/workflows/brownfield-ui.yaml` | Workflow para UI brownfield |
-| `.aios-core/development/workflows/brownfield-discovery.yaml` | Discovery para projetos existentes |
-| `.aios-core/development/workflows/greenfield-ui.yaml` | Workflow para UI greenfield |
+| `.aiox-core/development/workflows/design-system-build-quality.yaml` | Pipeline pos-migracao (build, docs, a11y, ROI) |
+| `.aiox-core/development/workflows/brownfield-ui.yaml` | Workflow para UI brownfield |
+| `.aiox-core/development/workflows/brownfield-discovery.yaml` | Discovery para projetos existentes |
+| `.aiox-core/development/workflows/greenfield-ui.yaml` | Workflow para UI greenfield |
 
 ### Arquivos de Output
 
@@ -394,7 +394,7 @@ flowchart TB
 | Comando | Task File | Entrada | Saida |
 |---------|-----------|---------|-------|
 | `*scan {path\|url}` | `ux-ds-scan-artifact.md` | Artifact | scan-summary.md, design-tokens.yaml |
-| `*integrate {pack}` | `integrate-Squad.md` | Pack name | Integration config |
+| `*integrate {squad}` | `integrate-Squad.md` | Squad name | Integration config |
 | `*help` | N/A | N/A | Lista de comandos por fase |
 | `*status` | N/A | N/A | Estado atual do workflow |
 | `*guide` | N/A | N/A | Guia completo do agente |
@@ -779,22 +779,22 @@ flowchart BT
 
 ### Arquivos de Task
 
-- [ux-user-research.md](../../.aios-core/development/tasks/ux-user-research.md)
-- [ux-create-wireframe.md](../../.aios-core/development/tasks/ux-create-wireframe.md)
-- [audit-codebase.md](../../.aios-core/development/tasks/audit-codebase.md)
-- [consolidate-patterns.md](../../.aios-core/development/tasks/consolidate-patterns.md)
-- [extract-tokens.md](../../.aios-core/development/tasks/extract-tokens.md)
-- [build-component.md](../../.aios-core/development/tasks/build-component.md)
-- [calculate-roi.md](../../.aios-core/development/tasks/calculate-roi.md)
+- [ux-user-research.md](../../.aiox-core/development/tasks/ux-user-research.md)
+- [ux-create-wireframe.md](../../.aiox-core/development/tasks/ux-create-wireframe.md)
+- [audit-codebase.md](../../.aiox-core/development/tasks/audit-codebase.md)
+- [consolidate-patterns.md](../../.aiox-core/development/tasks/consolidate-patterns.md)
+- [extract-tokens.md](../../.aiox-core/development/tasks/extract-tokens.md)
+- [build-component.md](../../.aiox-core/development/tasks/build-component.md)
+- [calculate-roi.md](../../.aiox-core/development/tasks/calculate-roi.md)
 
 ### Arquivos de Workflow
 
-- [design-system-build-quality.yaml](../../.aios-core/development/workflows/design-system-build-quality.yaml)
-- [brownfield-ui.yaml](../../.aios-core/development/workflows/brownfield-ui.yaml)
+- [design-system-build-quality.yaml](../../.aiox-core/development/workflows/design-system-build-quality.yaml)
+- [brownfield-ui.yaml](../../.aiox-core/development/workflows/brownfield-ui.yaml)
 
 ### Definicao do Agente
 
-- [ux-design-expert.md](../../.aios-core/development/agents/ux-design-expert.md)
+- [ux-design-expert.md](../../.aiox-core/development/agents/ux-design-expert.md)
 
 ### Recursos Externos
 

@@ -5,7 +5,7 @@
  * 1. All agent dependencies point to existing files
  * 2. All task references are valid
  * 3. All workflow references are valid
- * 4. No {root} placeholders remain (should be replaced with .aios-core)
+ * 4. No {root} placeholders remain (should be replaced with .aiox-core)
  *
  * @module tests/installer/v21-path-validation
  */
@@ -16,8 +16,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 
-// Path to .aios-core directory
-const AIOS_CORE_PATH = path.join(__dirname, '..', '..', '.aios-core');
+// Path to .aiox-core directory
+const AIOX_CORE_PATH = path.join(__dirname, '..', '..', '.aiox-core');
 
 // v2.1 Module mapping for dependency resolution
 const MODULE_MAPPING = {
@@ -116,9 +116,9 @@ function resolveDependencyPath(type, filename) {
   const modulePath = MODULE_MAPPING[type];
   if (!modulePath) {
     // Fallback to development/{type}
-    return path.join(AIOS_CORE_PATH, 'development', type, filename);
+    return path.join(AIOX_CORE_PATH, 'development', type, filename);
   }
-  return path.join(AIOS_CORE_PATH, modulePath, filename);
+  return path.join(AIOX_CORE_PATH, modulePath, filename);
 }
 
 describe('v2.1 Path Validation', () => {
@@ -129,14 +129,14 @@ describe('v2.1 Path Validation', () => {
 
   before(async () => {
     // Load all agents
-    const agentDir = path.join(AIOS_CORE_PATH, 'development', 'agents');
+    const agentDir = path.join(AIOX_CORE_PATH, 'development', 'agents');
     if (await fs.pathExists(agentDir)) {
       const agentFiles = await getFilesRecursive(agentDir);
       for (const file of agentFiles) {
         const content = await fs.readFile(file, 'utf8');
         const parsed = extractYamlFromMarkdown(content);
         agents.push({
-          file: path.relative(AIOS_CORE_PATH, file),
+          file: path.relative(AIOX_CORE_PATH, file),
           name: path.basename(file, '.md'),
           content,
           yaml: parsed,
@@ -145,14 +145,14 @@ describe('v2.1 Path Validation', () => {
     }
 
     // Load all tasks
-    const taskDir = path.join(AIOS_CORE_PATH, 'development', 'tasks');
+    const taskDir = path.join(AIOX_CORE_PATH, 'development', 'tasks');
     if (await fs.pathExists(taskDir)) {
       const taskFiles = await getFilesRecursive(taskDir);
       for (const file of taskFiles) {
         const content = await fs.readFile(file, 'utf8');
         const parsed = extractYamlFromMarkdown(content);
         tasks.push({
-          file: path.relative(AIOS_CORE_PATH, file),
+          file: path.relative(AIOX_CORE_PATH, file),
           name: path.basename(file, '.md'),
           content,
           yaml: parsed,
@@ -161,14 +161,14 @@ describe('v2.1 Path Validation', () => {
     }
 
     // Load all workflows
-    const workflowDir = path.join(AIOS_CORE_PATH, 'development', 'workflows');
+    const workflowDir = path.join(AIOX_CORE_PATH, 'development', 'workflows');
     if (await fs.pathExists(workflowDir)) {
       const workflowFiles = await getFilesRecursive(workflowDir);
       for (const file of workflowFiles) {
         const content = await fs.readFile(file, 'utf8');
         const parsed = extractYamlFromMarkdown(content);
         workflows.push({
-          file: path.relative(AIOS_CORE_PATH, file),
+          file: path.relative(AIOX_CORE_PATH, file),
           name: path.basename(file, '.md'),
           content,
           yaml: parsed,
@@ -177,7 +177,7 @@ describe('v2.1 Path Validation', () => {
     }
 
     // Get all files for {root} placeholder check
-    allFiles = await getFilesRecursive(AIOS_CORE_PATH);
+    allFiles = await getFilesRecursive(AIOX_CORE_PATH);
   });
 
   describe('Agent Dependency Validation', () => {
@@ -199,7 +199,7 @@ describe('v2.1 Path Validation', () => {
               agent: agent.name,
               type: 'tasks',
               dependency: task,
-              expectedPath: path.relative(AIOS_CORE_PATH, taskPath),
+              expectedPath: path.relative(AIOX_CORE_PATH, taskPath),
             });
           }
         }
@@ -231,7 +231,7 @@ describe('v2.1 Path Validation', () => {
               agent: agent.name,
               type: 'checklists',
               dependency: checklist,
-              expectedPath: path.relative(AIOS_CORE_PATH, checklistPath),
+              expectedPath: path.relative(AIOX_CORE_PATH, checklistPath),
             });
           }
         }
@@ -263,7 +263,7 @@ describe('v2.1 Path Validation', () => {
               agent: agent.name,
               type: 'templates',
               dependency: template,
-              expectedPath: path.relative(AIOS_CORE_PATH, templatePath),
+              expectedPath: path.relative(AIOX_CORE_PATH, templatePath),
             });
           }
         }
@@ -308,7 +308,7 @@ describe('v2.1 Path Validation', () => {
                 task: task.name,
                 type,
                 dependency: dep,
-                expectedPath: path.relative(AIOS_CORE_PATH, depPath),
+                expectedPath: path.relative(AIOX_CORE_PATH, depPath),
               });
             }
           }
@@ -349,7 +349,7 @@ describe('v2.1 Path Validation', () => {
                 workflow: workflow.name,
                 stepType: 'agent',
                 reference: step.agent,
-                expectedPath: path.relative(AIOS_CORE_PATH, agentPath),
+                expectedPath: path.relative(AIOX_CORE_PATH, agentPath),
               });
             }
           }
@@ -362,7 +362,7 @@ describe('v2.1 Path Validation', () => {
                 workflow: workflow.name,
                 stepType: 'task',
                 reference: step.task,
-                expectedPath: path.relative(AIOS_CORE_PATH, taskPath),
+                expectedPath: path.relative(AIOX_CORE_PATH, taskPath),
               });
             }
           }
@@ -397,7 +397,7 @@ describe('v2.1 Path Validation', () => {
         if (content.includes('{root}')) {
           const matches = content.match(/\{root\}/g);
           filesWithRoot.push({
-            file: path.relative(AIOS_CORE_PATH, file),
+            file: path.relative(AIOX_CORE_PATH, file),
             count: matches ? matches.length : 0,
           });
         }
@@ -417,51 +417,51 @@ describe('v2.1 Path Validation', () => {
 
   describe('v2.1 Module Structure Validation', () => {
     it('should have core module directory', async () => {
-      const coreDir = path.join(AIOS_CORE_PATH, 'core');
+      const coreDir = path.join(AIOX_CORE_PATH, 'core');
       const exists = await fs.pathExists(coreDir);
       assert.ok(exists, 'core/ directory should exist');
     });
 
     it('should have development module directory', async () => {
-      const devDir = path.join(AIOS_CORE_PATH, 'development');
+      const devDir = path.join(AIOX_CORE_PATH, 'development');
       const exists = await fs.pathExists(devDir);
       assert.ok(exists, 'development/ directory should exist');
     });
 
     it('should have product module directory', async () => {
-      const productDir = path.join(AIOS_CORE_PATH, 'product');
+      const productDir = path.join(AIOX_CORE_PATH, 'product');
       const exists = await fs.pathExists(productDir);
       assert.ok(exists, 'product/ directory should exist');
     });
 
     it('should have infrastructure module directory', async () => {
-      const infraDir = path.join(AIOS_CORE_PATH, 'infrastructure');
+      const infraDir = path.join(AIOX_CORE_PATH, 'infrastructure');
       const exists = await fs.pathExists(infraDir);
       assert.ok(exists, 'infrastructure/ directory should exist');
     });
 
     it('should have agents in development/agents/', async () => {
-      const agentsDir = path.join(AIOS_CORE_PATH, 'development', 'agents');
+      const agentsDir = path.join(AIOX_CORE_PATH, 'development', 'agents');
       const files = await getFilesRecursive(agentsDir);
       assert.ok(files.length > 0, 'development/agents/ should have agent files');
       console.log(`   Found ${files.length} agent(s)`);
     });
 
     it('should have tasks in development/tasks/', async () => {
-      const tasksDir = path.join(AIOS_CORE_PATH, 'development', 'tasks');
+      const tasksDir = path.join(AIOX_CORE_PATH, 'development', 'tasks');
       const files = await getFilesRecursive(tasksDir);
       assert.ok(files.length > 0, 'development/tasks/ should have task files');
       console.log(`   Found ${files.length} task(s)`);
     });
 
     it('should have templates in product/templates/', async () => {
-      const templatesDir = path.join(AIOS_CORE_PATH, 'product', 'templates');
+      const templatesDir = path.join(AIOX_CORE_PATH, 'product', 'templates');
       const files = await getFilesRecursive(templatesDir);
       console.log(`   Found ${files.length} template(s)`);
     });
 
     it('should have checklists in product/checklists/', async () => {
-      const checklistsDir = path.join(AIOS_CORE_PATH, 'product', 'checklists');
+      const checklistsDir = path.join(AIOX_CORE_PATH, 'product', 'checklists');
       const files = await getFilesRecursive(checklistsDir);
       console.log(`   Found ${files.length} checklist(s)`);
     });
@@ -483,10 +483,10 @@ async function generateValidationReport() {
   };
 
   // Check modules exist
-  report.modules.core = await fs.pathExists(path.join(AIOS_CORE_PATH, 'core'));
-  report.modules.development = await fs.pathExists(path.join(AIOS_CORE_PATH, 'development'));
-  report.modules.product = await fs.pathExists(path.join(AIOS_CORE_PATH, 'product'));
-  report.modules.infrastructure = await fs.pathExists(path.join(AIOS_CORE_PATH, 'infrastructure'));
+  report.modules.core = await fs.pathExists(path.join(AIOX_CORE_PATH, 'core'));
+  report.modules.development = await fs.pathExists(path.join(AIOX_CORE_PATH, 'development'));
+  report.modules.product = await fs.pathExists(path.join(AIOX_CORE_PATH, 'product'));
+  report.modules.infrastructure = await fs.pathExists(path.join(AIOX_CORE_PATH, 'infrastructure'));
 
   console.log('\nModule Structure:');
   console.log(`  core/:           ${report.modules.core ? '✅' : '❌'}`);
@@ -495,14 +495,14 @@ async function generateValidationReport() {
   console.log(`  infrastructure/: ${report.modules.infrastructure ? '✅' : '❌'}`);
 
   // Count agents
-  const agentDir = path.join(AIOS_CORE_PATH, 'development', 'agents');
+  const agentDir = path.join(AIOX_CORE_PATH, 'development', 'agents');
   if (await fs.pathExists(agentDir)) {
     const agents = await getFilesRecursive(agentDir);
     report.agents.total = agents.length;
   }
 
   // Count tasks
-  const taskDir = path.join(AIOS_CORE_PATH, 'development', 'tasks');
+  const taskDir = path.join(AIOX_CORE_PATH, 'development', 'tasks');
   if (await fs.pathExists(taskDir)) {
     const tasks = await getFilesRecursive(taskDir);
     report.tasks.total = tasks.length;

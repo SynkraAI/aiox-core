@@ -1,7 +1,7 @@
 # @po (Pax) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/po.md`
+> Agent definition: `.aiox-core/development/agents/po.md`
 
 ## 1. Activation Trace
 
@@ -9,13 +9,13 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/po.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, prd, storyBacklog, templatesLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/product/data/elicitation-methods.md` | AgentConfigLoader.loadFile() | Elicitation methods (always loaded, 5KB) |
-| 6 | `.aios/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
-| 7 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/po.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: devStoryLocation, prd, storyBacklog, templatesLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/product/data/elicitation-methods.md` | AgentConfigLoader.loadFile() | Elicitation methods (always loaded, 5KB) |
+| 6 | `.aiox/session-state.json` | ContextDetector._detectFromFile() | Session type detection (if no conversation history) |
+| 7 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -74,7 +74,7 @@ po:
     - storyBacklog
     - templatesLocation
   files_loaded:
-    - path: .aios-core/product/data/elicitation-methods.md
+    - path: .aiox-core/product/data/elicitation-methods.md
       lazy: false
       size: 5KB
   lazy_loading:
@@ -124,13 +124,13 @@ po:
 
 ### `*backlog-add`
 
-**Task file:** `.aios-core/development/tasks/po-backlog-add.md`
+**Task file:** `.aiox-core/development/tasks/po-backlog-add.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `po-backlog-add.md` | Task | EXISTS |
-| `.aios-core/product/data/elicitation-methods.md` | Data | EXISTS (pre-loaded) |
+| `.aiox-core/product/data/elicitation-methods.md` | Data | EXISTS (pre-loaded) |
 | `docs/stories/backlog.yaml` | Data | Dynamically loaded |
 
 **Execution flow:**
@@ -151,7 +151,7 @@ flowchart TD
 
 ### `*backlog-review`
 
-**Task file:** `.aios-core/development/tasks/po-manage-story-backlog.md`
+**Task file:** `.aiox-core/development/tasks/po-manage-story-backlog.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -179,7 +179,7 @@ flowchart TD
 
 ### `*backlog-summary`
 
-**Task file:** `.aios-core/development/tasks/po-manage-story-backlog.md`
+**Task file:** `.aiox-core/development/tasks/po-manage-story-backlog.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -203,7 +203,7 @@ flowchart TD
 
 ### `*backlog-prioritize`
 
-**Task file:** `.aios-core/development/tasks/po-manage-story-backlog.md`
+**Task file:** `.aiox-core/development/tasks/po-manage-story-backlog.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -229,7 +229,7 @@ flowchart TD
 
 ### `*backlog-schedule`
 
-**Task file:** `.aios-core/development/tasks/po-manage-story-backlog.md`
+**Task file:** `.aiox-core/development/tasks/po-manage-story-backlog.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -254,7 +254,7 @@ flowchart TD
 
 ### `*stories-index`
 
-**Task file:** `.aios-core/development/tasks/po-stories-index.md`
+**Task file:** `.aiox-core/development/tasks/po-stories-index.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -280,14 +280,14 @@ flowchart TD
 
 ### `*validate-story-draft`
 
-**Task file:** `.aios-core/development/tasks/validate-next-story.md`
+**Task file:** `.aiox-core/development/tasks/validate-next-story.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `validate-next-story.md` | Task | EXISTS |
-| `.aios-core/product/templates/story-tmpl.yaml` | Template | EXISTS |
-| `.aios-core/product/checklists/po-master-checklist.md` | Checklist | EXISTS |
+| `.aiox-core/product/templates/story-tmpl.yaml` | Template | EXISTS |
+| `.aiox-core/product/checklists/po-master-checklist.md` | Checklist | EXISTS |
 
 **Execution flow:**
 
@@ -311,7 +311,7 @@ flowchart TD
 
 ### `*sync-story`
 
-**Task file:** `.aios-core/development/tasks/po-sync-story.md`
+**Task file:** `.aiox-core/development/tasks/po-sync-story.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -331,7 +331,7 @@ flowchart TD
     E -->|GitHub Projects| G[Sync to GitHub issue via gh CLI]
     E -->|Jira| H[Sync to Jira issue via API]
     E -->|Local-only| I[Validate YAML only<br/>no external sync]
-    E -->|None configured| J[Prompt: run aios init]
+    E -->|None configured| J[Prompt: run aiox init]
     F --> K[Output: sync confirmation with link]
     G --> K
     H --> K
@@ -346,7 +346,7 @@ flowchart TD
 
 ### `*pull-story`
 
-**Task file:** `.aios-core/development/tasks/po-pull-story.md`
+**Task file:** `.aiox-core/development/tasks/po-pull-story.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -379,14 +379,14 @@ flowchart TD
 
 ### `*execute-checklist-po`
 
-**Task file:** `.aios-core/development/tasks/execute-checklist.md`
+**Task file:** `.aiox-core/development/tasks/execute-checklist.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `execute-checklist.md` | Task | EXISTS |
-| `.aios-core/product/checklists/po-master-checklist.md` | Checklist | EXISTS |
-| `.aios-core/scripts/execute-task.js` | Script | Referenced |
+| `.aiox-core/product/checklists/po-master-checklist.md` | Checklist | EXISTS |
+| `.aiox-core/scripts/execute-task.js` | Script | Referenced |
 
 **Execution flow:**
 
@@ -407,7 +407,7 @@ flowchart TD
 
 ### `*shard-doc`
 
-**Task file:** `.aios-core/development/tasks/shard-doc.md`
+**Task file:** `.aiox-core/development/tasks/shard-doc.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -539,7 +539,7 @@ graph TD
 | @pm -> @po | Provides | Strategic direction, PRDs, requirements |
 | @po -> @sm | Delegate | Story creation via `*draft` |
 | @po -> @pm | Delegate | Epic creation via `*create-epic` |
-| @po -> @aios-master | Escalate | Course corrections via `*correct-course` |
+| @po -> @aiox-master | Escalate | Course corrections via `*correct-course` |
 | @po -> @analyst | Delegate | Research via `*research` |
 | @po -> @devops | Delegate | Git push operations, PR creation |
 | @pm -> @po | Receives | Story validation requests via `*validate-story-draft` |
@@ -556,7 +556,7 @@ graph TD
 - Epic creation is needed (uses `*create-epic` command)
 - Strategic direction or PRD creation is required
 
-**Delegates to @aios-master when:**
+**Delegates to @aiox-master when:**
 - Course corrections are needed (uses `*correct-course` command)
 - Systemic issues require orchestrator-level intervention
 
@@ -597,4 +597,4 @@ graph TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

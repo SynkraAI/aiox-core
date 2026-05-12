@@ -4,13 +4,13 @@
   Ultima sincronizacion: 2026-01-29
 -->
 
-# Guia de Usuario AIOS
+# Guia de Usuario AIOX
 
 > **ES** | [EN](../../guides/user-guide.md)
 
 ---
 
-Guia completa para usar Synkra AIOS - el Sistema Orquestado por IA para Desarrollo Full Stack.
+Guia completa para usar Synkra AIOX - el Sistema Orquestado por IA para Desarrollo Full Stack.
 
 **Version:** 2.1.0
 **Ultima Actualizacion:** 2026-01-28
@@ -21,7 +21,7 @@ Guia completa para usar Synkra AIOS - el Sistema Orquestado por IA para Desarrol
 
 ### Prerrequisitos
 
-Antes de usar AIOS, asegurate de tener:
+Antes de usar AIOX, asegurate de tener:
 
 - **Node.js** version 18.0.0 o superior
 - **npm** version 8.0.0 o superior
@@ -32,11 +32,11 @@ Antes de usar AIOS, asegurate de tener:
 
 ```bash
 # Nuevo proyecto (Greenfield)
-npx @synkra/aios-core init my-project
+npx aiox-core init my-project
 
 # Proyecto existente (Brownfield)
 cd existing-project
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ### Primeros Pasos
@@ -46,7 +46,7 @@ npx @synkra/aios-core install
 cd my-project
 
 # Listar agentes disponibles
-aios agents list
+aiox agents list
 
 # Activar un agente
 @dev
@@ -63,14 +63,14 @@ aios agents list
 
 > **"La Estructura es Sagrada. El Tono es Flexible."**
 
-AIOS proporciona estructura orquestada mientras permite flexibilidad en la comunicacion. Esto significa:
+AIOX proporciona estructura orquestada mientras permite flexibilidad en la comunicacion. Esto significa:
 
 - **Fijo:** Posiciones de plantillas, orden de secciones, formatos de metricas, estructura de archivos, workflows
 - **Flexible:** Mensajes de estado, eleccion de vocabulario, uso de emojis, personalidad, tono
 
-### La Diferencia AIOS
+### La Diferencia AIOX
 
-| Desarrollo IA Tradicional       | AIOS                                       |
+| Desarrollo IA Tradicional       | AIOX                                       |
 | ------------------------------- | ------------------------------------------ |
 | Agentes no coordinados          | 11 agentes especializados con roles claros |
 | Resultados inconsistentes       | Workflows estructurados con quality gates  |
@@ -81,7 +81,7 @@ AIOS proporciona estructura orquestada mientras permite flexibilidad en la comun
 
 ## Agentes
 
-AIOS incluye 11 agentes especializados, cada uno con un rol y personalidad distintos:
+AIOX incluye 11 agentes especializados, cada uno con un rol y personalidad distintos:
 
 | Agente    | ID               | Arquetipo    | Responsabilidad            |
 | --------- | ---------------- | ------------ | -------------------------- |
@@ -95,7 +95,7 @@ AIOS incluye 11 agentes especializados, cada uno con un rol y personalidad disti
 | **Dara**  | `@data-engineer` | Arquitecto   | Ingenieria de datos        |
 | **Felix** | `@devops`        | Optimizador  | CI/CD y operaciones        |
 | **Uma**   | `@ux-expert`     | Creador      | Experiencia de usuario     |
-| **Pax**   | `@aios-master`   | Orquestador  | Orquestacion del framework |
+| **Pax**   | `@aiox-master`   | Orquestador  | Orquestacion del framework |
 
 ### Activacion de Agentes
 
@@ -104,7 +104,7 @@ AIOS incluye 11 agentes especializados, cada uno con un rol y personalidad disti
 @dev                # Activar Dex (Desarrollador)
 @qa                 # Activar Quinn (QA)
 @architect          # Activar Aria (Arquitecto)
-@aios-master        # Activar Pax (Orquestador)
+@aiox-master        # Activar Pax (Orquestador)
 
 # Comandos de agentes usan prefijo *
 *help               # Mostrar comandos disponibles
@@ -124,7 +124,7 @@ Cuando un agente esta activo:
 
 ## Tasks
 
-Las Tasks son el punto de entrada principal en AIOS. Todo es una task.
+Las Tasks son el punto de entrada principal en AIOX. Todo es una task.
 
 ### Arquitectura Task-First
 
@@ -141,7 +141,7 @@ User Request --> Task --> Agent Execution --> Output
 *task develop-story --story=1.1
 
 # Listar tasks disponibles
-aios tasks list
+aiox tasks list
 
 # Obtener ayuda de task
 *task --help
@@ -167,7 +167,7 @@ Los workflows orquestan multiples tasks y agentes para operaciones complejas.
 | Workflow                 | Caso de Uso                    | Agentes Involucrados |
 | ------------------------ | ------------------------------ | -------------------- |
 | `greenfield-fullstack`   | Nuevo proyecto full-stack      | Todos los agentes    |
-| `brownfield-integration` | Agregar AIOS a existente       | dev, architect       |
+| `brownfield-integration` | Agregar AIOX a existente       | dev, architect       |
 | `fork-join`              | Ejecucion de tasks en paralelo | Multiples            |
 | `organizer-worker`       | Ejecucion delegada             | po, dev              |
 | `data-pipeline`          | Workflows ETL                  | data-engineer, qa    |
@@ -176,17 +176,17 @@ Los workflows orquestan multiples tasks y agentes para operaciones complejas.
 
 ```bash
 # Iniciar un workflow
-aios workflow greenfield-fullstack
+aiox workflow greenfield-fullstack
 
 # Con parametros
-aios workflow brownfield-integration --target=./existing-project
+aiox workflow brownfield-integration --target=./existing-project
 ```
 
 ---
 
 ## Squads
 
-Los Squads son equipos modulares de agentes IA que extienden la funcionalidad de AIOS.
+Los Squads son equipos modulares de agentes IA que extienden la funcionalidad de AIOX.
 
 ### Que es un Squad?
 
@@ -205,7 +205,7 @@ Un squad es un paquete autocontenido que contiene:
 
 ```
 Nivel 1: LOCAL        --> ./squads/           (Privado)
-Nivel 2: AIOS-SQUADS  --> github.com/SynkraAI (Publico/Gratis)
+Nivel 2: AIOX-SQUADS  --> github.com/SynkraAI (Publico/Gratis)
 Nivel 3: SYNKRA API   --> api.synkra.dev      (Marketplace)
 ```
 
@@ -213,10 +213,10 @@ Nivel 3: SYNKRA API   --> api.synkra.dev      (Marketplace)
 
 ```bash
 # Listar squads disponibles
-aios squads list
+aiox squads list
 
 # Descargar un squad
-aios squads download etl-squad
+aiox squads download etl-squad
 
 # Crear tu propio squad
 @squad-creator
@@ -238,7 +238,7 @@ aios squads download etl-squad
 
 ```
 my-project/
-├── .aios-core/                # Configuracion del framework
+├── .aiox-core/                # Configuracion del framework
 │   ├── development/agents/    # Definiciones de agentes
 │   ├── development/tasks/     # Workflows de tasks
 │   ├── product/templates/     # Plantillas de documentos
@@ -254,7 +254,7 @@ my-project/
 ### Comandos Comunes
 
 ```bash
-# Comandos de AIOS Master
+# Comandos de AIOX Master
 *help                # Mostrar comandos disponibles
 *create-story        # Crear nueva story
 *task {name}         # Ejecutar task especifica
@@ -281,10 +281,10 @@ npm run build        # Construir proyecto
 
 ### Archivo de Configuracion Principal
 
-La configuracion principal esta en `.aios-core/core/config/`:
+La configuracion principal esta en `.aiox-core/core/config/`:
 
 ```yaml
-# aios.config.yaml
+# aiox.config.yaml
 version: 2.1.0
 projectName: my-project
 
@@ -312,22 +312,20 @@ OPENAI_API_KEY=your-openai-api-key
 
 # Configuraciones del Framework
 NODE_ENV=development
-AIOS_DEBUG=false
+AIOX_DEBUG=false
 ```
 
 ### Integracion con IDE
 
-AIOS soporta multiples IDEs. La configuracion se sincroniza a traves de:
+AIOX soporta multiples IDEs. La configuracion se sincroniza a traves de:
 
 - Claude Code (`.claude/`)
 - Cursor (`.cursor/`)
-- Windsurf (`.windsurf/`)
-- Cline (`.cline/`)
 - VS Code (`.vscode/`)
 
 ```bash
 # Sincronizar agentes a tu IDE
-npm run sync:agents
+npm run sync:ide
 ```
 
 ---
@@ -340,17 +338,17 @@ npm run sync:agents
 
 ```bash
 # Verificar que el agente existe
-ls .aios-core/development/agents/
+ls .aiox-core/development/agents/
 
 # Verificar configuracion
-aios doctor
+aiox doctor
 ```
 
 **La ejecucion de task falla**
 
 ```bash
 # Verificar definicion de task
-cat .aios-core/development/tasks/{task-name}.md
+cat .aiox-core/development/tasks/{task-name}.md
 
 # Ejecutar con salida detallada
 *task {name} --verbose
@@ -360,16 +358,16 @@ cat .aios-core/development/tasks/{task-name}.md
 
 ```bash
 # Limpiar cache
-rm -rf .aios-core/core/cache/*
+rm -rf .aiox-core/core/cache/*
 
 # Reconstruir indice
-aios rebuild
+aiox rebuild
 ```
 
 ### Obteniendo Ayuda
 
-- **GitHub Discussions**: [github.com/SynkraAI/aios-core/discussions](https://github.com/SynkraAI/aios-core/discussions)
-- **Issue Tracker**: [github.com/SynkraAI/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **GitHub Discussions**: [github.com/SynkraAI/aiox-core/discussions](https://github.com/SynkraAI/aiox-core/discussions)
+- **Issue Tracker**: [github.com/SynkraAI/aiox-core/issues](https://github.com/SynkraAI/aiox-core/issues)
 - **Discord**: [Unete a nuestro servidor](https://discord.gg/gk8jAdXWmj)
 
 ---
@@ -399,7 +397,7 @@ aios rebuild
 Siempre crear una story antes de implementar funcionalidades:
 
 ```bash
-@aios-master
+@aiox-master
 *create-story
 ```
 
@@ -416,7 +414,7 @@ Elegir el agente apropiado para cada task:
 
 ### 3. Seguir Quality Gates
 
-AIOS implementa quality gates de 3 capas:
+AIOX implementa quality gates de 3 capas:
 
 1. **Capa 1 (Local)**: Pre-commit hooks, linting, verificacion de tipos
 2. **Capa 2 (CI/CD)**: Tests automatizados, review de CodeRabbit
@@ -435,7 +433,7 @@ Mantener contexto a traves de sesiones mediante:
 No reinventar la rueda - verificar squads existentes:
 
 ```bash
-aios squads search {keyword}
+aiox squads search {keyword}
 ```
 
 ---
@@ -451,4 +449,4 @@ aios squads search {keyword}
 
 ---
 
-_Guia de Usuario Synkra AIOS v2.1.0_
+_Guia de Usuario Synkra AIOX v4.0_

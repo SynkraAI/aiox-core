@@ -32,9 +32,9 @@ Read `.claude/commands/Tools/agents/tools-orchestrator.md` and adopt the persona
 Before starting your mission, load:
 
 1. **Git Status**: `git status --short` + `git log --oneline -5`
-2. **Gotchas**: Read `.aios/gotchas.json` (filter for Tools-relevant: Framework, Methodology, Tool, Process)
-3. **Technical Preferences**: Read `.aios-core/data/technical-preferences.md`
-4. **Project Config**: Read `.aios-core/core-config.yaml`
+2. **Gotchas**: Read `.aiox/gotchas.json` (filter for Tools-relevant: Framework, Methodology, Tool, Process)
+3. **Technical Preferences**: Read `.aiox-core/data/technical-preferences.md`
+4. **Project Config**: Read `.aiox-core/core-config.yaml`
 
 Do NOT display context loading — just absorb and proceed.
 
@@ -89,7 +89,7 @@ Parse `## Mission:` from your spawn prompt and match:
 | `route` | Analyze and route to correct specialist |
 
 **Path resolution**:
-- Tasks at `squads/tools/tasks/` or `.aios-core/development/tasks/`
+- Tasks at `squads/tools/tasks/` or `.aiox-core/development/tasks/`
 - Data at `squads/tools/data/`
 - Domain knowledge at `squads/tools/data/domain-knowledge/`
 

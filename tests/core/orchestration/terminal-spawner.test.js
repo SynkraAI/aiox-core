@@ -31,10 +31,10 @@ const {
   DEFAULT_TIMEOUT_MS,
   POLL_INTERVAL_MS,
   MAX_RETRIES,
-} = require('../../../.aios-core/core/orchestration/terminal-spawner');
+} = require('../../../.aiox-core/core/orchestration/terminal-spawner');
 
 // Test fixtures
-const TEST_OUTPUT_DIR = path.join(os.tmpdir(), 'aios-terminal-spawner-test');
+const TEST_OUTPUT_DIR = path.join(os.tmpdir(), 'aiox-terminal-spawner-test');
 
 describe('Terminal Spawner (Story 12.10)', () => {
   // Store original env vars
@@ -459,7 +459,7 @@ describe('Terminal Spawner (Story 12.10)', () => {
   describe('Timeout handling (Task 3.2)', () => {
     it('should timeout if lock file persists', async () => {
       // Given
-      const outputFile = path.join(TEST_OUTPUT_DIR, 'aios-output-timeout-test.md');
+      const outputFile = path.join(TEST_OUTPUT_DIR, 'aiox-output-timeout-test.md');
       const lockFile = outputFile.replace('output', 'lock');
       await fs.writeFile(lockFile, 'locked');
       await fs.writeFile(outputFile, 'test output');
@@ -474,7 +474,7 @@ describe('Terminal Spawner (Story 12.10)', () => {
 
     it('should return output when lock is removed', async () => {
       // Given
-      const outputFile = path.join(TEST_OUTPUT_DIR, 'aios-output-success-test.md');
+      const outputFile = path.join(TEST_OUTPUT_DIR, 'aiox-output-success-test.md');
       const lockFile = outputFile.replace('output', 'lock');
       await fs.writeFile(outputFile, 'test output content');
       // No lock file - simulates completed process
@@ -519,7 +519,7 @@ describe('Terminal Spawner (Story 12.10)', () => {
 
     it('should cleanup old files', async () => {
       // Given - create old file
-      const oldFile = path.join(TEST_OUTPUT_DIR, 'aios-output-old.md');
+      const oldFile = path.join(TEST_OUTPUT_DIR, 'aiox-output-old.md');
       await fs.writeFile(oldFile, 'old content');
 
       // Manually set mtime to past

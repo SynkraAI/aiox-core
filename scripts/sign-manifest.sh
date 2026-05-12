@@ -3,7 +3,7 @@
 # sign-manifest.sh - Helper script to sign the install manifest
 #
 # Usage:
-#   ./scripts/sign-manifest.sh /path/to/aios-core.key
+#   ./scripts/sign-manifest.sh /path/to/aiox-core.key
 #
 # Prerequisites:
 #   - minisign installed (brew install minisign / apt install minisign)
@@ -21,11 +21,11 @@ NC='\033[0m' # No Color
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-MANIFEST_PATH="$PROJECT_ROOT/.aios-core/install-manifest.yaml"
+MANIFEST_PATH="$PROJECT_ROOT/.aiox-core/install-manifest.yaml"
 SIGNATURE_PATH="$MANIFEST_PATH.minisig"
 
 echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
-echo -e "${YELLOW}  AIOS-Core Manifest Signing Tool${NC}"
+echo -e "${YELLOW}  AIOX-Core Manifest Signing Tool${NC}"
 echo -e "${YELLOW}═══════════════════════════════════════════════════════════${NC}"
 echo ""
 
@@ -43,10 +43,10 @@ fi
 if [ -z "$1" ]; then
     echo -e "${RED}Error: Secret key path required${NC}"
     echo ""
-    echo "Usage: $0 /path/to/aios-core.key"
+    echo "Usage: $0 /path/to/aiox-core.key"
     echo ""
     echo "To generate a new key pair:"
-    echo "  minisign -G -p aios-core.pub -s aios-core.key"
+    echo "  minisign -G -p aiox-core.pub -s aiox-core.key"
     exit 1
 fi
 
@@ -63,7 +63,7 @@ if [ ! -f "$MANIFEST_PATH" ]; then
     echo -e "${RED}Error: Manifest not found: $MANIFEST_PATH${NC}"
     echo ""
     echo "Generate manifest first with:"
-    echo "  node bin/aios.js manifest:generate"
+    echo "  node bin/aiox.js manifest:generate"
     exit 1
 fi
 
@@ -85,7 +85,7 @@ fi
 echo -e "${GREEN}Signing manifest...${NC}"
 echo ""
 
-cd "$PROJECT_ROOT/.aios-core"
+cd "$PROJECT_ROOT/.aiox-core"
 minisign -Sm install-manifest.yaml -s "$SECRET_KEY"
 
 # Verify the signature
@@ -114,7 +114,7 @@ echo ""
 echo "Created: $SIGNATURE_PATH"
 echo ""
 echo "Next steps:"
-echo "  1. git add .aios-core/install-manifest.yaml.minisig"
+echo "  1. git add .aiox-core/install-manifest.yaml.minisig"
 echo "  2. git commit -m 'chore: sign manifest for release'"
 echo "  3. npm publish"
 echo ""

@@ -134,10 +134,10 @@ describe('brownfield-upgrader', () => {
     });
 
     it('should identify modified files', () => {
-      const aiosCoreDir = path.join(targetDir, '.aios-core');
-      fs.ensureDirSync(aiosCoreDir);
-      fs.writeFileSync(path.join(aiosCoreDir, 'changed.md'), 'original');
-      const originalHash = `sha256:${hashFile(path.join(aiosCoreDir, 'changed.md'))}`;
+      const aioxCoreDir = path.join(targetDir, '.aiox-core');
+      fs.ensureDirSync(aioxCoreDir);
+      fs.writeFileSync(path.join(aioxCoreDir, 'changed.md'), 'original');
+      const originalHash = `sha256:${hashFile(path.join(aioxCoreDir, 'changed.md'))}`;
 
       const sourceManifest = {
         version: '2.1.0',
@@ -154,9 +154,9 @@ describe('brownfield-upgrader', () => {
     });
 
     it('should identify user-modified files', () => {
-      const aiosCoreDir = path.join(targetDir, '.aios-core');
-      fs.ensureDirSync(aiosCoreDir);
-      fs.writeFileSync(path.join(aiosCoreDir, 'user-changed.md'), 'user modified content');
+      const aioxCoreDir = path.join(targetDir, '.aiox-core');
+      fs.ensureDirSync(aioxCoreDir);
+      fs.writeFileSync(path.join(aioxCoreDir, 'user-changed.md'), 'user modified content');
 
       const sourceManifest = {
         version: '2.1.0',
@@ -226,7 +226,7 @@ describe('brownfield-upgrader', () => {
 
       expect(result.success).toBe(true);
       expect(result.filesInstalled).toHaveLength(1);
-      expect(fs.existsSync(path.join(targetDir, '.aios-core', 'new-file.md'))).toBe(true);
+      expect(fs.existsSync(path.join(targetDir, '.aiox-core', 'new-file.md'))).toBe(true);
     });
 
     it('should update modified files when includeModified is true', async () => {
@@ -267,7 +267,7 @@ describe('brownfield-upgrader', () => {
       const result = await applyUpgrade(report, sourceDir, targetDir, { dryRun: true });
 
       expect(result.filesInstalled).toHaveLength(1);
-      expect(fs.existsSync(path.join(targetDir, '.aios-core', 'new-file.md'))).toBe(false);
+      expect(fs.existsSync(path.join(targetDir, '.aiox-core', 'new-file.md'))).toBe(false);
     });
   });
 
@@ -278,15 +278,15 @@ describe('brownfield-upgrader', () => {
         files: [{ path: 'test.md', hash: 'sha256:abc' }],
       };
 
-      fs.ensureDirSync(path.join(targetDir, '.aios-core'));
-      updateInstalledManifest(targetDir, sourceManifest, 'aios-core@2.1.0');
+      fs.ensureDirSync(path.join(targetDir, '.aiox-core'));
+      updateInstalledManifest(targetDir, sourceManifest, 'aiox-core@2.1.0');
 
-      const installedPath = path.join(targetDir, '.aios-core', '.installed-manifest.yaml');
+      const installedPath = path.join(targetDir, '.aiox-core', '.installed-manifest.yaml');
       expect(fs.existsSync(installedPath)).toBe(true);
 
       const content = yaml.load(fs.readFileSync(installedPath, 'utf8'));
       expect(content.installed_version).toBe('2.1.0');
-      expect(content.installed_from).toBe('aios-core@2.1.0');
+      expect(content.installed_from).toBe('aiox-core@2.1.0');
     });
   });
 

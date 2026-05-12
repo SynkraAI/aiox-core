@@ -1,5 +1,5 @@
 /**
- * InstallTransaction - Transaction manager for AIOS installer
+ * InstallTransaction - Transaction manager for AIOX installer
  *
  * Provides atomic installation operations with automatic rollback on failure.
  * Backs up files before modification and restores them if installation fails.
@@ -37,8 +37,8 @@ class InstallTransaction {
    * @param {string} [options.logFile] - Custom log file path
    */
   constructor(options = {}) {
-    this.backupDir = options.backupDir || path.join(process.cwd(), '.aios-backup', this._generateTimestamp());
-    this.logFile = options.logFile || path.join(process.cwd(), '.aios-install.log');
+    this.backupDir = options.backupDir || path.join(process.cwd(), '.aiox-backup', this._generateTimestamp());
+    this.logFile = options.logFile || path.join(process.cwd(), '.aiox-install.log');
     this.backups = [];  // [{original, backup, hash, isDirectory}]
     this.operations = [];  // [{timestamp, level, message}]
     this.isCommitted = false;
@@ -119,7 +119,7 @@ class InstallTransaction {
    * @throws {Error} If backup operation fails
    *
    * @example
-   * await transaction.backupDirectory('.aios-core/');
+   * await transaction.backupDirectory('.aiox-core/');
    */
   async backupDirectory(dirPath) {
     const originalPath = path.resolve(dirPath);
@@ -204,7 +204,7 @@ class InstallTransaction {
    *
    * @example
    * try {
-   *   await installAIOS();
+   *   await installAIOX();
    * } catch (error) {
    *   await transaction.rollback();
    * }

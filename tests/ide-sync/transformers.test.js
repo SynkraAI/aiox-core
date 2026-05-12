@@ -3,10 +3,9 @@
  * @story 6.19 - IDE Command Auto-Sync System
  */
 
-const claudeCode = require('../../.aios-core/infrastructure/scripts/ide-sync/transformers/claude-code');
-const cursor = require('../../.aios-core/infrastructure/scripts/ide-sync/transformers/cursor');
-const windsurf = require('../../.aios-core/infrastructure/scripts/ide-sync/transformers/windsurf');
-const antigravity = require('../../.aios-core/infrastructure/scripts/ide-sync/transformers/antigravity');
+const claudeCode = require('../../.aiox-core/infrastructure/scripts/ide-sync/transformers/claude-code');
+const cursor = require('../../.aiox-core/infrastructure/scripts/ide-sync/transformers/cursor');
+const antigravity = require('../../.aiox-core/infrastructure/scripts/ide-sync/transformers/antigravity');
 
 describe('IDE Transformers', () => {
   // Sample agent data for testing
@@ -74,7 +73,7 @@ describe('IDE Transformers', () => {
 
     it('should add sync footer if not present', () => {
       const result = claudeCode.transform(sampleAgent);
-      expect(result).toContain('Synced from .aios-core/development/agents/dev.md');
+      expect(result).toContain('Synced from .aiox-core/development/agents/dev.md');
     });
 
     it('should not duplicate sync footer', () => {
@@ -82,7 +81,7 @@ describe('IDE Transformers', () => {
         ...sampleAgent,
         raw:
           sampleAgent.raw +
-          '\n---\n*AIOS Agent - Synced from .aios-core/development/agents/dev.md*',
+          '\n---\n*AIOX Agent - Synced from .aiox-core/development/agents/dev.md*',
       };
       const result = claudeCode.transform(agentWithFooter);
       const footerCount = (result.match(/Synced from/g) || []).length;
@@ -141,52 +140,6 @@ describe('IDE Transformers', () => {
     });
   });
 
-  describe('windsurf transformer', () => {
-    it('should generate XML-tagged format', () => {
-      const result = windsurf.transform(sampleAgent);
-      expect(result).toContain('<agent-identity>');
-      expect(result).toContain('</agent-identity>');
-      expect(result).toContain('<commands>');
-      expect(result).toContain('</commands>');
-    });
-
-    it('should include agent info in identity tag', () => {
-      const result = windsurf.transform(sampleAgent);
-      expect(result).toContain('💻 **Dex**');
-      expect(result).toContain('ID: @dev');
-    });
-
-    it('should include whenToUse in when-to-use tag', () => {
-      const result = windsurf.transform(sampleAgent);
-      expect(result).toContain('<when-to-use>');
-      expect(result).toContain('Use for code implementation');
-      expect(result).toContain('</when-to-use>');
-    });
-
-    it('should list all commands', () => {
-      const result = windsurf.transform(sampleAgent);
-      expect(result).toContain('*help');
-      expect(result).toContain('*develop');
-      expect(result).toContain('*debug');
-    });
-
-    it('should mark quick commands', () => {
-      const result = windsurf.transform(sampleAgent);
-      expect(result).toMatch(/\*help.*\(quick\)/);
-    });
-
-    it('should include dependencies', () => {
-      const result = windsurf.transform(sampleAgent);
-      expect(result).toContain('<dependencies>');
-      expect(result).toContain('git');
-      expect(result).toContain('context7');
-    });
-
-    it('should have correct format identifier', () => {
-      expect(windsurf.format).toBe('xml-tagged-markdown');
-    });
-  });
-
   describe('antigravity transformer', () => {
     it('should generate cursor-style format', () => {
       const result = antigravity.transform(sampleAgent);
@@ -211,7 +164,7 @@ describe('IDE Transformers', () => {
   });
 
   describe('all transformers', () => {
-    const transformers = [claudeCode, cursor, windsurf, antigravity];
+    const transformers = [claudeCode, cursor, antigravity];
 
     it('should handle agent with minimal data', () => {
       const minimal = {

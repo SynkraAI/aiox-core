@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         ## 🙏 Ask a Question
-        Have a question about AIOS? Ask here and the community will help!
+        Have a question about AIOX? Ask here and the community will help!
 
         **Before posting:**
         - Check existing discussions and documentation
@@ -19,8 +19,8 @@ body:
       label: Which repository is this about?
       description: Select the repository your question relates to
       options:
-        - aios-core (Core Framework, Agents, Tasks)
-        - aios-squads (ETL Squad, Creator Squad)
+        - aiox-core (Core Framework, Agents, Tasks)
+        - aiox-squads (ETL Squad, Creator Squad)
         - mcp-ecosystem (Docker MCP Toolkit, IDE Configs, Presets)
         - General / Multiple repos
     validations:
@@ -63,7 +63,7 @@ body:
       render: javascript
       placeholder: |
         // Your code here
-        const { AIOS } = require('@synkra/aios-core/workspace');
+        const { AIOX } = require('aiox-core/workspace');
 
         // ...
 
@@ -75,7 +75,7 @@ body:
       placeholder: |
         - OS: Windows/macOS/Linux
         - Node.js version:
-        - AIOS version:
+        - AIOX version:
         - IDE: VS Code/Cursor/Other
 
   - type: markdown

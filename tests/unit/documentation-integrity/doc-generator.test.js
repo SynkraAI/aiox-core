@@ -17,13 +17,13 @@ const {
   generateDoc,
   TemplateFiles,
   OutputFiles,
-} = require('../../../.aios-core/infrastructure/scripts/documentation-integrity/doc-generator');
+} = require('../../../.aiox-core/infrastructure/scripts/documentation-integrity/doc-generator');
 
 describe('Documentation Generator', () => {
   let tempDir;
 
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-docgen-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-docgen-test-'));
   });
 
   afterEach(() => {
@@ -131,11 +131,11 @@ describe('Documentation Generator', () => {
 
     it('should handle multiple variables', () => {
       const template = '{{greeting}} {{name}}, welcome to {{place}}!';
-      const context = { greeting: 'Hello', name: 'User', place: 'AIOS' };
+      const context = { greeting: 'Hello', name: 'User', place: 'AIOX' };
 
       const result = renderTemplate(template, context);
 
-      expect(result).toBe('Hello User, welcome to AIOS!');
+      expect(result).toBe('Hello User, welcome to AIOX!');
     });
 
     it('should process if blocks with true condition', () => {

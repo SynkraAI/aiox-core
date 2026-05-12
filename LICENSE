@@ -1,27 +1,12 @@
-Commons Clause License Condition v1.0
-
-The Software is provided to you by the Licensor under the License,
-as defined below, subject to the following condition.
-
-Without limiting other conditions in the License, the grant of rights
-under the License will not include, and the License does not grant to
-you, the right to Sell the Software.
-
-For purposes of the foregoing, "Sell" means practicing any or all of
-the rights granted to you under the License to provide to third parties,
-for a fee or other consideration (including without limitation fees for
-hosting or consulting/support services related to the Software), a
-product or service whose value derives, entirely or substantially, from
-the functionality of the Software.
-
-Any license notice or attribution required by the License must also
-include this Commons Clause License Condition notice.
-
----
-
 MIT License
 
-Copyright (c) 2025 SynkraAI Inc. - AIOS Framework
+Copyright (c) 2025 BMad Code, LLC (BMad Method - original work)
+Copyright (c) 2025 SynkraAI Inc. (AIOX Framework - derivative work)
+
+This project was originally derived from the BMad Method
+(https://github.com/bmad-code-org/BMAD-METHOD), created by Brian Madison.
+Synkra AIOX is NOT affiliated with, endorsed by, or sanctioned by the
+BMad Method or BMad Code, LLC.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,8 +26,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
-
-Software: Synkra AIOS (AI-Orchestrated System for Full Stack Development)
-License: MIT
-Licensor: SynkraAI Inc.
+TRADEMARK NOTICE:
+BMad, BMad Method, and BMad Core are trademarks of BMad Code, LLC.
+These trademarks are NOT licensed under the MIT License. See the BMad Method
+TRADEMARK.md (https://github.com/bmad-code-org/BMAD-METHOD/blob/main/TRADEMARK.md)
+for detailed guidelines on trademark usage.

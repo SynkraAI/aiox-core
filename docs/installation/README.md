@@ -1,4 +1,4 @@
-# Synkra AIOS Installation Documentation
+# Synkra AIOX Installation Documentation
 
 > 🌐 **EN** | [PT](../pt/installation/README.md) | [ES](../es/installation/README.md)
 
@@ -9,7 +9,7 @@
 
 ## Overview
 
-This directory contains comprehensive installation and setup documentation for Synkra AIOS.
+This directory contains comprehensive installation and setup documentation for Synkra AIOX.
 
 ---
 
@@ -27,7 +27,7 @@ This directory contains comprehensive installation and setup documentation for S
 
 | Document                                    | Description                 | Audience  |
 | ------------------------------------------- | --------------------------- | --------- |
-| [Quick Start (v2.1)](./v2.1-quick-start.md) | Fast setup for new users    | Beginners |
+| [Quick Start (v4)](./v4-quick-start.md) | Fast setup for new users    | Beginners |
 | [Troubleshooting](./troubleshooting.md)     | Common issues and solutions | All users |
 | [FAQ](./faq.md)                             | Frequently asked questions  | All users |
 
@@ -38,20 +38,20 @@ This directory contains comprehensive installation and setup documentation for S
 ### New Installation
 
 ```bash
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ### Upgrading
 
 ```bash
-npx @synkra/aios-core install --force-upgrade
+npx aiox-core install --force-upgrade
 ```
 
 ### Having Issues?
 
 1. Check [Troubleshooting Guide](./troubleshooting.md)
 2. Search [FAQ](./faq.md)
-3. Open a [GitHub Issue](https://github.com/SynkraAI/aios-core/issues)
+3. Open a [GitHub Issue](https://github.com/SynkraAI/aiox-core/issues)
 
 ---
 
@@ -80,10 +80,6 @@ npx @synkra/aios-core install --force-upgrade
 | -------------- | ------------------- |
 | Claude Code    | `/dev`, `/qa`, etc. |
 | Cursor         | `@dev`, `@qa`, etc. |
-| Windsurf       | `@dev`, `@qa`, etc. |
-| Trae           | `@dev`, `@qa`, etc. |
-| Roo Code       | Mode selector       |
-| Cline          | `@dev`, `@qa`, etc. |
 | Gemini CLI     | Mention in prompt   |
 | GitHub Copilot | Chat modes          |
 
@@ -100,5 +96,5 @@ npx @synkra/aios-core install --force-upgrade
 
 ## Support
 
-- **GitHub Issues**: [@synkra/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **GitHub Issues**: [aiox-core/issues](https://github.com/SynkraAI/aiox-core/issues)
 - **Documentation**: [docs/](../)

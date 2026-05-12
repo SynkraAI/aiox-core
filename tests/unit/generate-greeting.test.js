@@ -34,7 +34,7 @@ describe('generate-greeting.js', () => {
       
       // Verify agent file exists
       const fs = require('fs').promises;
-      const agentPath = path.join(process.cwd(), '.aios-core', 'development', 'agents', `${agentId}.md`);
+      const agentPath = path.join(process.cwd(), '.aiox-core', 'development', 'agents', `${agentId}.md`);
       
       try {
         await fs.access(agentPath);
@@ -147,7 +147,7 @@ if (require.main === module) {
       name: 'Agent file exists',
       fn: async () => {
         const fs = require('fs').promises;
-        const agentPath = path.join(process.cwd(), '.aios-core', 'agents', 'qa.md');
+        const agentPath = path.join(process.cwd(), '.aiox-core', 'agents', 'qa.md');
         await fs.access(agentPath);
         return true;
       },

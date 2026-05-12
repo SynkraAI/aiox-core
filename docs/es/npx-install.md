@@ -12,20 +12,20 @@
 
 ## Descripción General
 
-Synkra AIOS puede instalarse via NPX para una configuración rápida sin instalación global. Esta guía cubre el uso correcto y la resolución de problemas para instalaciones basadas en NPX.
+Synkra AIOX puede instalarse via NPX para una configuración rápida sin instalación global. Esta guía cubre el uso correcto y la resolución de problemas para instalaciones basadas en NPX.
 
 ## Inicio Rápido
 
 ### Uso Correcto
 
-Siempre ejecute `npx @synkra/aios-core install` **desde el directorio de su proyecto**:
+Siempre ejecute `npx aiox-core install` **desde el directorio de su proyecto**:
 
 ```bash
 # Navegue primero a su proyecto
 cd /path/to/your/project
 
 # Luego ejecute el instalador
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ### ⚠️ Error Común
@@ -35,16 +35,16 @@ npx @synkra/aios-core install
 ```bash
 # ❌ INCORRECTO - Fallará con error de directorio temporal NPX
 cd ~
-npx @synkra/aios-core install
+npx aiox-core install
 
 # ✅ CORRECTO - Navegue al proyecto primero
 cd ~/my-project
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ## Por Qué Esto Importa
 
-NPX ejecuta paquetes en **directorios temporales** (por ejemplo, `/private/var/folders/.../npx-xxx/` en macOS). Cuando Synkra AIOS se ejecuta desde estas ubicaciones temporales, no puede:
+NPX ejecuta paquetes en **directorios temporales** (por ejemplo, `/private/var/folders/.../npx-xxx/` en macOS). Cuando Synkra AIOX se ejecuta desde estas ubicaciones temporales, no puede:
 
 - Detectar correctamente la configuración de su IDE
 - Instalar archivos en el directorio correcto del proyecto
@@ -52,19 +52,19 @@ NPX ejecuta paquetes en **directorios temporales** (por ejemplo, `/private/var/f
 
 ## Detección de Directorio Temporal NPX
 
-A partir de la versión 4.31.1, Synkra AIOS detecta automáticamente cuando está ejecutándose desde un directorio temporal NPX y muestra un mensaje de error útil:
+A partir de la versión 4.31.1, Synkra AIOX detecta automáticamente cuando está ejecutándose desde un directorio temporal NPX y muestra un mensaje de error útil:
 
 ```
 ⚠️  NPX Temporary Directory Detected
 
 NPX executes in a temporary directory, which prevents
-AIOS from detecting your IDE correctly.
+AIOX from detecting your IDE correctly.
 
 Solution:
   cd /path/to/your/project
-  npx @synkra/aios-core install
+  npx aiox-core install
 
-See: https://@synkra/aios-core.dev/docs/npx-install
+See: https://aiox-core.dev/docs/npx-install
 ```
 
 ## Pasos de Instalación
@@ -78,12 +78,11 @@ cd /path/to/your/project
 Su directorio de proyecto debería contener:
 - Archivos de gestión de paquetes (`package.json`, etc.)
 - Directorios de código fuente
-- Carpetas de configuración del IDE (`.cursor`, `.windsurf`, `.claude`, etc.)
 
 ### Paso 2: Ejecute el Instalador
 
 ```bash
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ### Paso 3: Siga los Prompts Interactivos
@@ -102,7 +101,7 @@ Los directorios temporales de NPX típicamente aparecen en:
 - `/private/var/folders/[hash]/T/npx-[random]/`
 - `/Users/[user]/.npm/_npx/[hash]/`
 
-Synkra AIOS detecta estos patrones y previene instalaciones incorrectas.
+Synkra AIOX detecta estos patrones y previene instalaciones incorrectas.
 
 ### Linux
 
@@ -129,7 +128,7 @@ Los usuarios de Windows típicamente no encuentran este problema, pero patrones 
    ```
 2. Vuelva a ejecutar el instalador:
    ```bash
-   npx @synkra/aios-core install
+   npx aiox-core install
    ```
 
 ### Directorio de Instalación Incorrecto
@@ -143,7 +142,6 @@ Si el instalador pide una ruta de directorio:
 
 Si su IDE no es detectado después de la instalación:
 1. Verifique que ejecutó el instalador desde el directorio correcto del proyecto
-2. Verifique que existen las carpetas de configuración del IDE (`.cursor`, `.windsurf`, etc.)
 3. Vuelva a ejecutar el instalador y seleccione manualmente su IDE
 
 ## Alternativa: Instalación Global
@@ -151,23 +149,23 @@ Si su IDE no es detectado después de la instalación:
 Si prefiere no usar NPX, puede instalar globalmente:
 
 ```bash
-npm install -g @synkra/aios-core
+npm install -g aiox-core
 cd /path/to/your/project
-@synkra/aios-core install
+aiox-core install
 ```
 
 ## Detalles Técnicos
 
 ### Arquitectura de Defensa en Profundidad
 
-Synkra AIOS v4.31.1+ implementa detección de dos capas:
+Synkra AIOX v4.31.1+ implementa detección de dos capas:
 
-1. **Capa PRIMARIA** (`tools/aios-npx-wrapper.js`):
+1. **Capa PRIMARIA** (`tools/aiox-npx-wrapper.js`):
    - Verifica `__dirname` (donde NPX extrae el paquete)
    - Usa patrones regex para rutas temporales de macOS
    - Salida temprana antes de delegación al CLI
 
-2. **Capa SECUNDARIA** (`tools/installer/bin/aios.js`):
+2. **Capa SECUNDARIA** (`tools/installer/bin/aiox.js`):
    - Verificación de respaldo usando `process.cwd()`
    - Valida al inicio del comando install
    - Proporciona redundancia si el wrapper es bypasseado
@@ -184,8 +182,8 @@ const patterns = [
 ## Soporte
 
 Para ayuda adicional:
-- GitHub Issues: https://github.com/SynkraAIinc/@synkra/aios-core/issues
-- Documentación: https://@synkra/aios-core.dev/docs
+- GitHub Issues: https://github.com/SynkraAIinc/aiox-core/issues
+- Documentación: https://aiox-core.dev/docs
 - Referencia de Story: 2.3 - NPX Installation Context Detection
 
 ---

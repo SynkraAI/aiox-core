@@ -34,7 +34,7 @@
  * @typedef {Object} MergeOptions
  * @property {boolean} [preview] - If true, don't actually write changes
  * @property {boolean} [verbose] - If true, include detailed change info
- * @property {string} [projectType] - 'BROWNFIELD' | 'GREENFIELD' | 'EXISTING_AIOS'
+ * @property {string} [projectType] - 'BROWNFIELD' | 'GREENFIELD' | 'EXISTING_AIOX'
  */
 
 /**

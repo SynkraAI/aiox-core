@@ -1,0 +1,932 @@
+workflow:
+  id: brownfield-discovery
+  name: Brownfield Discovery - Complete Technical Debt Assessment
+  version: "2.0"
+  description: >-
+    Comprehensive multi-agent discovery workflow for existing projects.
+    Includes specialist validation cycles and executive awareness report.
+    Designed for projects migrating from Lovable, v0.dev, or legacy codebases.
+  type: brownfield
+  project_types:
+    - technical-debt-resolution
+    - legacy-modernization
+    - project-migration
+    - codebase-audit
+    - lovable-migration
+
+  metadata:
+    elicit: true
+    confirmation_required: true
+    action_types:
+      task-reference: "Action references an existing task file in .aiox-core/development/tasks/"
+      agent-command: "Action references an agent-level command (e.g., *create-front-end-spec)"
+      workflow-action: "Action is a workflow orchestration step executed via manual prompt"
+
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+  #                              WORKFLOW SEQUENCE
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+
+  sequence:
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # FASE 1-3: COLETA DE DADOS (pode ser paralelo)
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - step: system_documentation
+      phase: 1
+      phase_name: "Coleta: Sistema"
+      agent: architect
+      action: document-project
+      creates: docs/architecture/system-architecture.md
+      elicit: true
+      duration_estimate: "30-60 min"
+      notes: |
+        @architect analisa e documenta o sistema completo:
+
+        ANÁLISE:
+        - Stack tecnológico (React, Vite, Tailwind, etc.)
+        - Estrutura de pastas e componentes
+        - Dependências e versões
+        - Padrões de código existentes
+        - Pontos de integração
+        - Configurações (env, build, deploy)
+
+        DÉBITOS IDENTIFICADOS (nível sistema):
+        - Dependências desatualizadas
+        - Código duplicado
+        - Falta de testes
+        - Configurações hardcoded
+        - Acoplamento excessivo
+
+        COMANDO: @architect → *document-project
+
+        OUTPUT: docs/architecture/system-architecture.md
+
+    - step: database_documentation
+      phase: 2
+      phase_name: "Coleta: Database"
+      agent: data-engineer
+      action: db-schema-audit  # task-reference: db-schema-audit.md + security-audit.md
+      creates:
+        - supabase/docs/SCHEMA.md
+        - supabase/docs/DB-AUDIT.md
+      condition: project_has_database
+      elicit: true
+      duration_estimate: "20-40 min"
+      notes: |
+        @data-engineer analisa o banco de dados:
+
+        ANÁLISE:
+        - Schema completo (tabelas, colunas, tipos)
+        - Relacionamentos e foreign keys
+        - Índices existentes e faltantes
+        - RLS policies (cobertura e qualidade)
+        - Views e functions
+        - Performance (queries lentas conhecidas)
+
+        DÉBITOS IDENTIFICADOS (nível dados):
+        - Tabelas sem RLS
+        - Índices faltantes
+        - Normalização inadequada
+        - Constraints ausentes
+        - Migrations não versionadas
+        - Dados órfãos
+
+        COMANDOS:
+        @data-engineer → *db-schema-audit
+        @data-engineer → *security-audit
+
+        Se não houver banco, pular para FASE 3.
+
+        OUTPUT:
+        - supabase/docs/SCHEMA.md
+        - supabase/docs/DB-AUDIT.md
+
+    - step: frontend_documentation
+      phase: 3
+      phase_name: "Coleta: Frontend/UX"
+      agent: ux-design-expert
+      action: create-front-end-spec  # agent-command: @ux-design-expert → *create-front-end-spec
+      creates: docs/frontend/frontend-spec.md
+      elicit: true
+      duration_estimate: "30-45 min"
+      notes: |
+        @ux-design-expert analisa o frontend:
+
+        ANÁLISE:
+        - Componentes UI existentes
+        - Design system/tokens utilizados
+        - Padrões de layout
+        - Fluxos de usuário
+        - Responsividade
+        - Acessibilidade (a11y)
+        - Consistência visual
+        - Performance percebida
+
+        DÉBITOS IDENTIFICADOS (nível UX/UI):
+        - Inconsistências visuais
+        - Componentes duplicados
+        - Falta de design system
+        - Problemas de acessibilidade
+        - Mobile não otimizado
+        - Estados de loading/error faltando
+        - Feedback de usuário ausente
+
+        COMANDO: @ux-design-expert → *create-front-end-spec
+
+        OUTPUT: docs/frontend/frontend-spec.md
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # FASE 4: CONSOLIDAÇÃO INICIAL (DRAFT)
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - step: initial_consolidation
+      phase: 4
+      phase_name: "Consolidação Inicial"
+      agent: architect
+      action: consolidate_findings_draft  # workflow-action: manual prompt
+      creates: docs/prd/technical-debt-DRAFT.md
+      requires:
+        - docs/architecture/system-architecture.md
+        - supabase/docs/SCHEMA.md (if exists)
+        - supabase/docs/DB-AUDIT.md (if exists)
+        - docs/frontend/frontend-spec.md
+      elicit: true
+      duration_estimate: "30-45 min"
+      notes: |
+        @architect consolida TODOS os débitos identificados em DRAFT:
+
+        ESTRUTURA DO DRAFT:
+        ```markdown
+        # Technical Debt Assessment - DRAFT
+        ## Para Revisão dos Especialistas
+
+        ### 1. Débitos de Sistema
+        [Lista do system-architecture.md]
+
+        ### 2. Débitos de Database
+        [Lista do DB-AUDIT.md]
+        ⚠️ PENDENTE: Revisão do @data-engineer
+
+        ### 3. Débitos de Frontend/UX
+        [Lista do frontend-spec.md]
+        ⚠️ PENDENTE: Revisão do @ux-design-expert
+
+        ### 4. Matriz Preliminar
+        | ID | Débito | Área | Impacto | Esforço | Prioridade |
+        |----|--------|------|---------|---------|------------|
+
+        ### 5. Perguntas para Especialistas
+        - @data-engineer: [perguntas sobre DB]
+        - @ux-design-expert: [perguntas sobre UX]
+        ```
+
+        COMANDO: @architect (prompt manual)
+
+        PROMPT:
+        ```
+        Leia os documentos gerados nas fases anteriores:
+        1. docs/architecture/system-architecture.md
+        2. supabase/docs/SCHEMA.md
+        3. supabase/docs/DB-AUDIT.md
+        4. docs/frontend/frontend-spec.md
+
+        Crie um DRAFT consolidando todos os débitos técnicos.
+        Marque claramente as seções que precisam de revisão dos especialistas.
+        Adicione perguntas específicas para @data-engineer e @ux-design-expert.
+
+        Salve em: docs/prd/technical-debt-DRAFT.md
+        ```
+
+        OUTPUT: docs/prd/technical-debt-DRAFT.md
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # FASE 5-7: VALIDAÇÃO DOS ESPECIALISTAS
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - step: database_specialist_review
+      phase: 5
+      phase_name: "Validação: Database"
+      agent: data-engineer
+      action: review_and_validate  # workflow-action: manual prompt
+      creates: docs/reviews/db-specialist-review.md
+      requires: docs/prd/technical-debt-DRAFT.md
+      elicit: true
+      duration_estimate: "20-30 min"
+      notes: |
+        @data-engineer revisa a seção de Database do DRAFT:
+
+        RESPONSABILIDADES:
+        1. VALIDAR débitos identificados
+           - Confirma se são realmente problemas
+           - Ajusta severidade se necessário
+           - Adiciona débitos não identificados
+
+        2. ESTIMAR CUSTOS
+           - Horas para resolver cada débito
+           - Complexidade (simples/médio/complexo)
+           - Dependências técnicas
+
+        3. PRIORIZAR (perspectiva DB)
+           - Risco de segurança
+           - Impacto em performance
+           - Dívida de manutenção
+
+        4. RESPONDER PERGUNTAS
+           - Responde perguntas do @architect
+           - Esclarece pontos técnicos
+
+        COMANDO: @data-engineer (prompt manual)
+
+        PROMPT:
+        ```
+        Leia o DRAFT em: docs/prd/technical-debt-DRAFT.md
+
+        Como especialista em Database, revise a seção de débitos de dados:
+
+        1. Valide cada débito (confirma/ajusta/remove)
+        2. Adicione débitos que faltaram
+        3. Estime horas para resolver cada um
+        4. Priorize do ponto de vista de dados
+        5. Responda as perguntas do architect
+
+        Crie seu review em: docs/reviews/db-specialist-review.md
+
+        Formato:
+        ## Database Specialist Review
+
+        ### Débitos Validados
+        | ID | Débito | Severidade | Horas | Prioridade | Notas |
+
+        ### Débitos Adicionados
+        [novos débitos identificados]
+
+        ### Respostas ao Architect
+        [respostas às perguntas]
+
+        ### Recomendações
+        [ordem de resolução recomendada]
+        ```
+
+        OUTPUT: docs/reviews/db-specialist-review.md
+
+    - step: ux_specialist_review
+      phase: 6
+      phase_name: "Validação: UX/Frontend"
+      agent: ux-design-expert
+      action: review_and_validate  # workflow-action: manual prompt
+      creates: docs/reviews/ux-specialist-review.md
+      requires: docs/prd/technical-debt-DRAFT.md
+      elicit: true
+      duration_estimate: "20-30 min"
+      notes: |
+        @ux-design-expert revisa a seção de Frontend/UX do DRAFT:
+
+        RESPONSABILIDADES:
+        1. VALIDAR débitos identificados
+           - Confirma se afetam UX
+           - Ajusta severidade se necessário
+           - Adiciona débitos não identificados
+
+        2. ESTIMAR CUSTOS
+           - Horas para resolver cada débito
+           - Impacto visual vs funcional
+           - Necessidade de design review
+
+        3. PRIORIZAR (perspectiva UX)
+           - Impacto na experiência do usuário
+           - Problemas de acessibilidade
+           - Consistência visual
+
+        4. RESPONDER PERGUNTAS
+           - Responde perguntas do @architect
+           - Sugere soluções de design
+
+        COMANDO: @ux-design-expert (prompt manual)
+
+        PROMPT:
+        ```
+        Leia o DRAFT em: docs/prd/technical-debt-DRAFT.md
+
+        Como especialista em UX/Frontend, revise a seção de débitos de UI:
+
+        1. Valide cada débito (confirma/ajusta/remove)
+        2. Adicione débitos que faltaram
+        3. Estime horas para resolver cada um
+        4. Priorize do ponto de vista de UX
+        5. Responda as perguntas do architect
+
+        Crie seu review em: docs/reviews/ux-specialist-review.md
+
+        Formato:
+        ## UX Specialist Review
+
+        ### Débitos Validados
+        | ID | Débito | Severidade | Horas | Prioridade | Impacto UX |
+
+        ### Débitos Adicionados
+        [novos débitos identificados]
+
+        ### Respostas ao Architect
+        [respostas às perguntas]
+
+        ### Recomendações de Design
+        [soluções sugeridas]
+        ```
+
+        OUTPUT: docs/reviews/ux-specialist-review.md
+
+    - step: qa_general_review
+      phase: 7
+      phase_name: "Validação: QA Review"
+      agent: qa
+      action: review_assessment  # workflow-action: manual prompt
+      creates: docs/reviews/qa-review.md
+      requires:
+        - docs/prd/technical-debt-DRAFT.md
+        - docs/reviews/db-specialist-review.md
+        - docs/reviews/ux-specialist-review.md
+      elicit: true
+      duration_estimate: "30-45 min"
+      notes: |
+        @qa faz review geral de qualidade do assessment:
+
+        RESPONSABILIDADES:
+        1. IDENTIFICAR GAPS
+           - Débitos não cobertos
+           - Áreas não analisadas
+           - Riscos cruzados
+
+        2. AVALIAR RISCOS
+           - Riscos de segurança
+           - Riscos de regressão
+           - Riscos de integração
+
+        3. VALIDAR DEPENDÊNCIAS
+           - Ordem de resolução faz sentido?
+           - Dependências entre débitos
+           - Bloqueios potenciais
+
+        4. SUGERIR TESTES
+           - Testes necessários pós-resolução
+           - Critérios de aceite para débitos
+           - Métricas de qualidade
+
+        5. QUALITY GATE
+           - O assessment está completo?
+           - Pode seguir para planning?
+
+        COMANDO: @qa (prompt manual)
+
+        PROMPT:
+        ```
+        Leia todos os documentos:
+        1. docs/prd/technical-debt-DRAFT.md
+        2. docs/reviews/db-specialist-review.md
+        3. docs/reviews/ux-specialist-review.md
+
+        Como QA, faça review geral:
+
+        1. Identifique gaps no assessment
+        2. Avalie riscos cruzados entre áreas
+        3. Valide se dependências fazem sentido
+        4. Sugira testes para validar resolução
+        5. Dê parecer: APPROVED / NEEDS WORK
+
+        Crie seu review em: docs/reviews/qa-review.md
+
+        Formato:
+        ## QA Review - Technical Debt Assessment
+
+        ### Gate Status: [APPROVED / NEEDS WORK]
+
+        ### Gaps Identificados
+        [áreas não cobertas]
+
+        ### Riscos Cruzados
+        | Risco | Áreas Afetadas | Mitigação |
+
+        ### Dependências Validadas
+        [ordem correta? bloqueios?]
+
+        ### Testes Requeridos
+        [testes pós-resolução]
+
+        ### Parecer Final
+        [comentários gerais]
+        ```
+
+        OUTPUT: docs/reviews/qa-review.md
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # FASE 8: ASSESSMENT FINAL CONSOLIDADO
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - step: final_assessment
+      phase: 8
+      phase_name: "Assessment Final"
+      agent: architect
+      action: finalize_assessment  # workflow-action: manual prompt
+      creates: docs/prd/technical-debt-assessment.md
+      requires:
+        - docs/prd/technical-debt-DRAFT.md
+        - docs/reviews/db-specialist-review.md
+        - docs/reviews/ux-specialist-review.md
+        - docs/reviews/qa-review.md
+      condition: qa_review_approved
+      elicit: true
+      duration_estimate: "30-45 min"
+      notes: |
+        @architect finaliza o assessment incorporando TODOS os inputs:
+
+        CONSOLIDAÇÃO FINAL:
+        1. Incorpora ajustes do @data-engineer
+        2. Incorpora ajustes do @ux-design-expert
+        3. Endereça gaps do @qa
+        4. Recalcula prioridades com inputs dos especialistas
+        5. Define ordem final de resolução
+
+        ESTRUTURA FINAL:
+        ```markdown
+        # Technical Debt Assessment - FINAL
+
+        ## Executive Summary
+        - Total de débitos: X
+        - Críticos: Y | Altos: Z | Médios: W
+        - Esforço total estimado: XXX horas
+
+        ## Inventário Completo de Débitos
+
+        ### Sistema (validado por @architect)
+        | ID | Débito | Severidade | Horas | Prioridade |
+
+        ### Database (validado por @data-engineer)
+        | ID | Débito | Severidade | Horas | Prioridade |
+
+        ### Frontend/UX (validado por @ux-design-expert)
+        | ID | Débito | Severidade | Horas | Prioridade |
+
+        ## Matriz de Priorização Final
+        [consolidada com inputs de todos]
+
+        ## Plano de Resolução
+        [ordem, dependências, timeline]
+
+        ## Riscos e Mitigações
+        [do QA review]
+
+        ## Critérios de Sucesso
+        [métricas, testes]
+        ```
+
+        COMANDO: @architect (prompt manual)
+
+        OUTPUT: docs/prd/technical-debt-assessment.md
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # FASE 9: RELATÓRIO EXECUTIVO DE AWARENESS
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - step: executive_awareness_report
+      phase: 9
+      phase_name: "Relatório Executivo"
+      agent: analyst
+      action: create_awareness_report  # workflow-action: manual prompt
+      creates: docs/reports/TECHNICAL-DEBT-REPORT.md
+      requires: docs/prd/technical-debt-assessment.md
+      elicit: true
+      duration_estimate: "30-45 min"
+      notes: |
+        @analyst cria relatório executivo para awareness:
+
+        OBJETIVO:
+        Documento para stakeholders entenderem o CUSTO e IMPACTO
+        dos débitos técnicos identificados.
+
+        ESTRUTURA DO RELATÓRIO:
+        ```markdown
+        # 📊 Relatório de Débito Técnico
+        **Projeto:** [nome]
+        **Data:** [data]
+        **Versão:** 1.0
+
+        ---
+
+        ## 🎯 Executive Summary (1 página)
+
+        ### Situação Atual
+        [resumo em 3 parágrafos]
+
+        ### Números Chave
+        | Métrica | Valor |
+        |---------|-------|
+        | Total de Débitos | X |
+        | Débitos Críticos | Y |
+        | Esforço Total | Z horas |
+        | Custo Estimado | R$ XX.XXX |
+
+        ### Recomendação
+        [ação recomendada em 1 parágrafo]
+
+        ---
+
+        ## 💰 Análise de Custos
+
+        ### Custo de RESOLVER
+        | Categoria | Horas | Custo (R$150/h) |
+        |-----------|-------|-----------------|
+        | Sistema | XX | R$ X.XXX |
+        | Database | XX | R$ X.XXX |
+        | Frontend | XX | R$ X.XXX |
+        | **TOTAL** | **XXX** | **R$ XX.XXX** |
+
+        ### Custo de NÃO RESOLVER (Risco Acumulado)
+        | Risco | Probabilidade | Impacto | Custo Potencial |
+        |-------|---------------|---------|-----------------|
+        | Breach de segurança | Alta | Crítico | R$ XXX.XXX |
+        | Perda de performance | Média | Alto | R$ XX.XXX |
+        | Churn de usuários | Média | Alto | R$ XX.XXX |
+
+        **Custo potencial de não agir: R$ XXX.XXX**
+
+        ---
+
+        ## 📈 Impacto no Negócio
+
+        ### Performance
+        - Tempo de carregamento atual: X segundos
+        - Meta após resolução: Y segundos
+        - Impacto: +Z% conversão estimada
+
+        ### Segurança
+        - Vulnerabilidades identificadas: X
+        - Risco de compliance: [baixo/médio/alto]
+        - Impacto: proteção de dados de X usuários
+
+        ### Experiência do Usuário
+        - Problemas de UX: X
+        - Taxa de abandono estimada: Y%
+        - Impacto: redução de Z% no churn
+
+        ### Manutenibilidade
+        - Tempo médio para novo feature: X dias
+        - Após resolução: Y dias
+        - Impacto: +Z% velocidade de entrega
+
+        ---
+
+        ## ⏱️ Timeline Recomendado
+
+        ### Fase 1: Quick Wins (1-2 semanas)
+        - [débitos de baixo esforço/alto impacto]
+        - Custo: R$ X.XXX
+        - ROI imediato
+
+        ### Fase 2: Fundação (2-4 semanas)
+        - [débitos estruturais críticos]
+        - Custo: R$ X.XXX
+        - Habilita features futuras
+
+        ### Fase 3: Otimização (4-6 semanas)
+        - [débitos de médio prazo]
+        - Custo: R$ X.XXX
+        - Melhoria contínua
+
+        ---
+
+        ## 📊 ROI da Resolução
+
+        | Investimento | Retorno Esperado |
+        |--------------|------------------|
+        | R$ XX.XXX (resolução) | R$ XXX.XXX (riscos evitados) |
+        | XXX horas | +Y% velocidade de dev |
+        | 6-8 semanas | Produto sustentável |
+
+        **ROI Estimado: X:1**
+
+        ---
+
+        ## ✅ Próximos Passos
+
+        1. [ ] Aprovar orçamento de R$ XX.XXX
+        2. [ ] Definir sprint de resolução
+        3. [ ] Alocar time técnico
+        4. [ ] Iniciar Fase 1 (Quick Wins)
+
+        ---
+
+        ## 📎 Anexos
+        - [Link para Assessment Técnico Completo]
+        - [Link para Epic de Resolução]
+        - [Link para Stories Detalhadas]
+        ```
+
+        COMANDO: @analyst (prompt manual)
+
+        PROMPT:
+        ```
+        Leia: docs/prd/technical-debt-assessment.md
+
+        Crie um relatório executivo de awareness para stakeholders.
+
+        Foco em:
+        1. Custos claros (resolver vs não resolver)
+        2. Impacto no negócio (não técnico)
+        3. Timeline realista
+        4. ROI da resolução
+
+        Use linguagem de negócio, não técnica.
+        Valores em R$ (considere R$150/hora como base).
+
+        Salve em: docs/reports/TECHNICAL-DEBT-REPORT.md
+        ```
+
+        OUTPUT: docs/reports/TECHNICAL-DEBT-REPORT.md
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # FASE 10: PLANNING (Epic + Stories)
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - step: epic_creation
+      phase: 10
+      phase_name: "Planning: Epic"
+      agent: pm
+      action: brownfield-create-epic  # task-reference: brownfield-create-epic.md
+      creates: docs/stories/epic-technical-debt.md
+      requires:
+        - docs/prd/technical-debt-assessment.md
+        - docs/reports/TECHNICAL-DEBT-REPORT.md
+      elicit: true
+      duration_estimate: "20-30 min"
+      notes: |
+        @pm cria epic baseado no assessment validado:
+
+        EPIC: "Resolução de Débitos Técnicos - [Nome do Projeto]"
+
+        Estrutura:
+        - Objetivo do epic
+        - Escopo (quais débitos)
+        - Critérios de sucesso
+        - Timeline (do relatório)
+        - Budget aprovado
+        - Lista de stories
+
+        COMANDO: @pm → *create-epic
+
+        OUTPUT: docs/stories/epic-technical-debt.md
+
+    - step: story_creation
+      phase: 10
+      phase_name: "Planning: Stories"
+      agent: pm
+      action: brownfield-create-story  # task-reference: brownfield-create-story.md
+      creates: docs/stories/story-X.X-*.md
+      requires: docs/stories/epic-technical-debt.md
+      repeats: for_each_prioritized_debt
+      elicit: true
+      duration_estimate: "15-20 min por story"
+      notes: |
+        @pm cria stories para cada débito/grupo de débitos:
+
+        Para cada item priorizado:
+        - Story com tasks claras
+        - Critérios de aceite específicos
+        - Testes requeridos (do QA review)
+        - Estimativa validada pelos especialistas
+        - Definition of Done
+
+        COMANDO: @pm → *create-story (repetir)
+
+        OUTPUT:
+        - docs/stories/story-1.1-fix-security-rls.md
+        - docs/stories/story-1.2-add-missing-indexes.md
+        - docs/stories/story-1.3-implement-design-system.md
+        - ...
+
+    # ═════════════════════════════════════════════════════════════════════════════════════
+    # WORKFLOW COMPLETE
+    # ═════════════════════════════════════════════════════════════════════════════════════
+
+    - meta: end
+      action: discovery_complete
+      notes: |
+        ✅ DISCOVERY COMPLETO!
+
+        Artefatos gerados:
+        ```
+        docs/
+        ├── architecture/
+        │   └── system-architecture.md         [FASE 1]
+        ├── frontend/
+        │   └── frontend-spec.md               [FASE 3]
+        ├── reviews/
+        │   ├── db-specialist-review.md        [FASE 5]
+        │   ├── ux-specialist-review.md        [FASE 6]
+        │   └── qa-review.md                   [FASE 7]
+        ├── prd/
+        │   ├── technical-debt-DRAFT.md        [FASE 4]
+        │   └── technical-debt-assessment.md   [FASE 8]
+        ├── reports/
+        │   └── TECHNICAL-DEBT-REPORT.md       [FASE 9] ⭐
+        └── stories/
+            ├── epic-technical-debt.md         [FASE 10]
+            ├── story-1.1-*.md
+            └── story-1.2-*.md
+
+        supabase/
+        └── docs/
+            ├── SCHEMA.md                      [FASE 2]
+            └── DB-AUDIT.md                    [FASE 2]
+        ```
+
+        PRÓXIMOS PASSOS:
+        1. Apresentar TECHNICAL-DEBT-REPORT.md para stakeholders
+        2. Obter aprovação de budget
+        3. Iniciar desenvolvimento: @dev → story-1.1
+
+        TEMPO TOTAL ESTIMADO: 4-6 horas
+
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+  #                              FLOW DIAGRAM
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        subgraph PHASE_1_3["PHASES 1-3: Data Collection"]
+            A[Start: Brownfield Discovery] --> B[architect: system documentation]
+            B --> C{Project has database?}
+            C -->|Yes| D[data-engineer: schema + audit]
+            C -->|No| E[ux-design-expert: frontend spec]
+            D --> E
+        end
+
+        subgraph PHASE_4["PHASE 4: Initial Consolidation"]
+            E --> F[architect: consolidate DRAFT]
+        end
+
+        subgraph PHASE_5_7["PHASES 5-7: Specialist Validation"]
+            F --> G[data-engineer: validate DB section]
+            G --> H[ux-design-expert: validate UX section]
+            H --> I[qa: quality gate review]
+            I --> J{QA Gate?}
+            J -->|NEEDS WORK| K[Rework: apply fixes to DRAFT]
+            K -->|Re-consolidate| F
+        end
+
+        subgraph PHASE_8_9["PHASES 8-9: Final Reports"]
+            J -->|APPROVED| L[architect: final assessment]
+            L --> M[analyst: executive report]
+        end
+
+        subgraph PHASE_10["PHASE 10: Planning"]
+            M --> N[pm: create epic]
+            N --> O[pm: create stories]
+            O --> P[Discovery Complete]
+        end
+
+        style P fill:#90EE90
+        style B fill:#FFE4B5
+        style D fill:#FFE4B5
+        style E fill:#FFE4B5
+        style F fill:#ADD8E6
+        style L fill:#ADD8E6
+        style G fill:#F0E68C
+        style H fill:#F0E68C
+        style I fill:#F0E68C
+        style M fill:#DDA0DD
+        style N fill:#DDA0DD
+        style O fill:#DDA0DD
+    ```
+
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+  #                              QUICK REFERENCE
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+
+  quick_reference:
+    fase_1:
+      name: "Coleta: Sistema"
+      agent: "@architect"
+      command: "*document-project"
+      output: "docs/architecture/system-architecture.md"
+      duration: "30-60 min"
+    fase_2:
+      name: "Coleta: Database"
+      agent: "@data-engineer"
+      command: "*db-schema-audit + *security-audit"
+      output: "supabase/docs/SCHEMA.md, DB-AUDIT.md"
+      duration: "20-40 min"
+    fase_3:
+      name: "Coleta: Frontend"
+      agent: "@ux-design-expert"
+      command: "*create-front-end-spec"
+      output: "docs/frontend/frontend-spec.md"
+      duration: "30-45 min"
+    fase_4:
+      name: "Consolidação Inicial"
+      agent: "@architect"
+      command: "(manual prompt)"
+      output: "docs/prd/technical-debt-DRAFT.md"
+      duration: "30-45 min"
+    fase_5:
+      name: "Validação DB"
+      agent: "@data-engineer"
+      command: "(manual review)"
+      output: "docs/reviews/db-specialist-review.md"
+      duration: "20-30 min"
+    fase_6:
+      name: "Validação UX"
+      agent: "@ux-design-expert"
+      command: "(manual review)"
+      output: "docs/reviews/ux-specialist-review.md"
+      duration: "20-30 min"
+    fase_7:
+      name: "QA Review"
+      agent: "@qa"
+      command: "(manual review)"
+      output: "docs/reviews/qa-review.md"
+      duration: "30-45 min"
+    fase_8:
+      name: "Assessment Final"
+      agent: "@architect"
+      command: "(manual consolidation)"
+      output: "docs/prd/technical-debt-assessment.md"
+      duration: "30-45 min"
+    fase_9:
+      name: "Relatório Executivo"
+      agent: "@analyst"
+      command: "(manual report)"
+      output: "docs/reports/TECHNICAL-DEBT-REPORT.md"
+      duration: "30-45 min"
+    fase_10:
+      name: "Planning"
+      agent: "@pm"
+      command: "*brownfield-create-epic + *brownfield-create-story"
+      output: "docs/stories/epic-*.md, story-*.md"
+      duration: "30-60 min"
+
+  time_estimate:
+    minimum: "4 horas"
+    typical: "5-6 horas"
+    complex_project: "8 horas"
+
+  decision_guidance:
+    when_to_use:
+      - Migrando projeto de Lovable/v0.dev
+      - Auditoria completa de codebase
+      - Planejamento de modernização
+      - Assessment antes de investimento
+      - Onboarding em projeto legado
+      - Due diligence técnica
+    when_not_to_use:
+      - New project development from scratch (use greenfield-* workflows)
+      - Small enhancement to existing project (use brownfield-service, brownfield-ui, or brownfield-fullstack)
+      - Single story fix or bug (use brownfield-create-story task directly)
+      - Project already has comprehensive documentation (skip to brownfield-* workflow)
+
+  handoff_prompts:
+    coleta_complete: |
+      Fases 1-3 completas. Documentação coletada:
+      - Sistema: docs/architecture/system-architecture.md
+      - Database: supabase/docs/SCHEMA.md
+      - Frontend: docs/frontend/frontend-spec.md
+
+      Próximo: @architect para consolidação inicial (FASE 4)
+
+    draft_complete: |
+      DRAFT criado: docs/prd/technical-debt-DRAFT.md
+
+      Próximo: Validação dos especialistas (FASES 5-7)
+      - @data-engineer: revisar seção de Database
+      - @ux-design-expert: revisar seção de Frontend
+      - @qa: review geral
+
+    validation_complete: |
+      Validações completas:
+      - docs/reviews/db-specialist-review.md ✅
+      - docs/reviews/ux-specialist-review.md ✅
+      - docs/reviews/qa-review.md ✅
+
+      Próximo: @architect para assessment final (FASE 8)
+
+    assessment_complete: |
+      Assessment final: docs/prd/technical-debt-assessment.md
+
+      Próximo: @analyst para relatório executivo (FASE 9)
+
+    report_complete: |
+      Relatório executivo: docs/reports/TECHNICAL-DEBT-REPORT.md
+
+      Próximo: @pm para criar epic e stories (FASE 10)
+
+    workflow_complete: |
+      ✅ DISCOVERY COMPLETO!
+
+      Documentos para stakeholders:
+      - docs/reports/TECHNICAL-DEBT-REPORT.md (executivo)
+
+      Documentos para desenvolvimento:
+      - docs/stories/epic-technical-debt.md
+      - docs/stories/story-*.md
+
+      Pronto para: @dev implementar stories

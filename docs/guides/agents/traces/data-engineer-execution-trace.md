@@ -1,7 +1,7 @@
 # @data-engineer (Dara) - Execution Trace
 
 > Traced from source code, not documentation.
-> Agent definition: `.aios-core/development/agents/data-engineer.md`
+> Agent definition: `.aiox-core/development/agents/data-engineer.md`
 
 ## 1. Activation Trace
 
@@ -9,13 +9,13 @@
 
 | Order | File | Loader | Purpose |
 |-------|------|--------|---------|
-| 1 | `.aios-core/development/agents/data-engineer.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
-| 2 | `.aios-core/core-config.yaml` | generate-greeting.js (CLI wrapper) | Core configuration |
-| 3 | `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, etlLocation |
-| 4 | `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
-| 5 | `.aios-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
-| 6 | `.aios/session-state.json` | SessionContextLoader.loadContext() | Session type detection (CLI wrapper pre-loads) |
-| 7 | `.aios/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
+| 1 | `.aiox-core/development/agents/data-engineer.md` | AgentConfigLoader.loadAgentDefinition() | Agent definition (YAML block) |
+| 2 | `.aiox-core/core-config.yaml` | generate-greeting.js (CLI wrapper) | Core configuration |
+| 3 | `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Config sections: dataLocation, etlLocation |
+| 4 | `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| 5 | `.aiox-core/data/technical-preferences.md` | AgentConfigLoader.loadFile() | Technical preferences (always loaded, 15KB) |
+| 6 | `.aiox/session-state.json` | SessionContextLoader.loadContext() | Session type detection (CLI wrapper pre-loads) |
+| 7 | `.aiox/project-status.yaml` | ProjectStatusLoader.loadCache() | Cached project status (60s TTL) |
 
 ### 1.2 Greeting Construction
 
@@ -24,7 +24,7 @@
 > NOTE: Unlike agents that use direct invocation (STEP 3 calling GreetingBuilder directly),
 > @data-engineer uses the CLI wrapper path via `generate-greeting.js`. This script orchestrates
 > parallel loading of agent config, session context, and project status before delegating
-> to GreetingBuilder. See `.aios-core/development/scripts/generate-greeting.js`.
+> to GreetingBuilder. See `.aiox-core/development/scripts/generate-greeting.js`.
 
 ```mermaid
 sequenceDiagram
@@ -92,7 +92,7 @@ data-engineer:
     - dataLocation
     - etlLocation
   files_loaded:
-    - path: .aios-core/data/technical-preferences.md
+    - path: .aiox-core/data/technical-preferences.md
       lazy: false
       size: 15KB
   lazy_loading: {}
@@ -160,15 +160,15 @@ data-engineer:
 
 ### `*create-schema`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/schema-design-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/schema-design-tmpl.yaml` (MISSING)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
 | `create-doc.md` | Task | EXISTS |
 | `schema-design-tmpl.yaml` | Template | MISSING |
-| `.aios-core/data/technical-preferences.md` | Data | Loaded at activation |
+| `.aiox-core/data/technical-preferences.md` | Data | Loaded at activation |
 
 **Execution flow:**
 
@@ -191,8 +191,8 @@ flowchart TD
 
 ### `*create-rls-policies`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/rls-policies-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/rls-policies-tmpl.yaml` (MISSING)
 
 Same flow as `*create-schema` with RLS-specific template for policy design.
 
@@ -200,8 +200,8 @@ Same flow as `*create-schema` with RLS-specific template for policy design.
 
 ### `*create-migration-plan`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/migration-plan-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/migration-plan-tmpl.yaml` (MISSING)
 
 Same flow as `*create-schema` with migration-plan-specific template.
 
@@ -209,8 +209,8 @@ Same flow as `*create-schema` with migration-plan-specific template.
 
 ### `*design-indexes`
 
-**Task file:** `.aios-core/development/tasks/create-doc.md`
-**Template:** `.aios-core/development/templates/index-strategy-tmpl.yaml` (MISSING)
+**Task file:** `.aiox-core/development/tasks/create-doc.md`
+**Template:** `.aiox-core/development/templates/index-strategy-tmpl.yaml` (MISSING)
 
 Same flow as `*create-schema` with indexing-strategy-specific template.
 
@@ -218,7 +218,7 @@ Same flow as `*create-schema` with indexing-strategy-specific template.
 
 ### `*model-domain`
 
-**Task file:** `.aios-core/development/tasks/db-domain-modeling.md`
+**Task file:** `.aiox-core/development/tasks/db-domain-modeling.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -245,7 +245,7 @@ flowchart TD
 
 ### `*env-check`
 
-**Task file:** `.aios-core/development/tasks/db-env-check.md`
+**Task file:** `.aiox-core/development/tasks/db-env-check.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -273,7 +273,7 @@ flowchart TD
 
 ### `*bootstrap`
 
-**Task file:** `.aios-core/development/tasks/db-bootstrap.md`
+**Task file:** `.aiox-core/development/tasks/db-bootstrap.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -299,7 +299,7 @@ flowchart TD
 
 ### `*apply-migration {path}`
 
-**Task file:** `.aios-core/development/tasks/db-apply-migration.md`
+**Task file:** `.aiox-core/development/tasks/db-apply-migration.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -331,7 +331,7 @@ flowchart TD
 
 ### `*dry-run {path}`
 
-**Task file:** `.aios-core/development/tasks/db-dry-run.md`
+**Task file:** `.aiox-core/development/tasks/db-dry-run.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -357,7 +357,7 @@ flowchart TD
 
 ### `*seed {path}`
 
-**Task file:** `.aios-core/development/tasks/db-seed.md`
+**Task file:** `.aiox-core/development/tasks/db-seed.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -382,7 +382,7 @@ flowchart TD
 
 ### `*snapshot {label}`
 
-**Task file:** `.aios-core/development/tasks/db-snapshot.md`
+**Task file:** `.aiox-core/development/tasks/db-snapshot.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -406,7 +406,7 @@ flowchart TD
 
 ### `*rollback {snapshot_or_file}`
 
-**Task file:** `.aios-core/development/tasks/db-rollback.md`
+**Task file:** `.aiox-core/development/tasks/db-rollback.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -438,7 +438,7 @@ flowchart TD
 
 ### `*smoke-test {version}`
 
-**Task file:** `.aios-core/development/tasks/db-smoke-test.md`
+**Task file:** `.aiox-core/development/tasks/db-smoke-test.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -466,7 +466,7 @@ flowchart TD
 
 ### `*security-audit {scope}`
 
-**Task file:** `.aios-core/development/tasks/security-audit.md`
+**Task file:** `.aiox-core/development/tasks/security-audit.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -505,7 +505,7 @@ flowchart TD
 
 ### `*analyze-performance {type} [query]`
 
-**Task file:** `.aios-core/development/tasks/analyze-performance.md`
+**Task file:** `.aiox-core/development/tasks/analyze-performance.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -541,7 +541,7 @@ flowchart TD
 
 ### `*policy-apply {table} {mode}`
 
-**Task file:** `.aios-core/development/tasks/db-policy-apply.md`
+**Task file:** `.aiox-core/development/tasks/db-policy-apply.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -572,7 +572,7 @@ flowchart TD
 
 ### `*test-as-user {user_id}`
 
-**Task file:** `.aios-core/development/tasks/test-as-user.md`
+**Task file:** `.aiox-core/development/tasks/test-as-user.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -600,7 +600,7 @@ flowchart TD
 
 ### `*verify-order {path}`
 
-**Task file:** `.aios-core/development/tasks/db-verify-order.md`
+**Task file:** `.aiox-core/development/tasks/db-verify-order.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -623,7 +623,7 @@ flowchart TD
 
 ### `*load-csv {table} {file}`
 
-**Task file:** `.aios-core/development/tasks/db-load-csv.md`
+**Task file:** `.aiox-core/development/tasks/db-load-csv.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -651,7 +651,7 @@ flowchart TD
 
 ### `*run-sql {file_or_inline}`
 
-**Task file:** `.aios-core/development/tasks/db-run-sql.md`
+**Task file:** `.aiox-core/development/tasks/db-run-sql.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -682,7 +682,7 @@ flowchart TD
 
 ### `*setup-database [type]`
 
-**Task file:** `.aios-core/development/tasks/setup-database.md`
+**Task file:** `.aiox-core/development/tasks/setup-database.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -715,7 +715,7 @@ flowchart TD
 
 ### `*execute-checklist {checklist}`
 
-**Task file:** `.aios-core/development/tasks/execute-checklist.md`
+**Task file:** `.aiox-core/development/tasks/execute-checklist.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -730,7 +730,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     A["*execute-checklist {name}"] --> B[Load execute-checklist.md task]
-    B --> C[Resolve checklist from .aios-core/development/checklists/]
+    B --> C[Resolve checklist from .aiox-core/development/checklists/]
     C --> D{Checklist exists?}
     D -->|yes| E[Parse checklist items]
     D -->|no| F[Error: checklist not found]
@@ -746,7 +746,7 @@ flowchart TD
 
 ### `*research {topic}`
 
-**Task file:** `.aios-core/development/tasks/create-deep-research-prompt.md`
+**Task file:** `.aiox-core/development/tasks/create-deep-research-prompt.md`
 
 **Dependencies loaded:**
 | File | Type | Status |
@@ -1051,4 +1051,4 @@ graph TD
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*

@@ -10,7 +10,7 @@
  * - Rollback information generation
  * - Error handling and edge cases
  *
- * @see .aios-core/scripts/decision-log-generator.js
+ * @see .aiox-core/scripts/decision-log-generator.js
  */
 
 const {
@@ -20,7 +20,7 @@ const {
   generateFilesList,
   generateTestsList,
   generateRollbackFilesList,
-} = require('../../.aios-core/development/scripts/decision-log-generator');
+} = require('../../.aiox-core/development/scripts/decision-log-generator');
 
 const fs = require('fs').promises;
 const path = require('path');

@@ -1,5 +1,5 @@
 /**
- * AIOS Interactive Wizard - Main Entry Point
+ * AIOX Interactive Wizard - Main Entry Point
  *
  * Story 1.2: Interactive Wizard Foundation
  * Provides core wizard functionality with visual feedback and navigation
@@ -10,6 +10,8 @@
 const inquirer = require('inquirer');
 const path = require('path');
 const fse = require('fs-extra');
+const { execSync } = require('child_process');
+const { colors } = require('../utils/aiox-colors');
 const {
   getLanguageQuestion,
   getUserProfileQuestion,
@@ -20,17 +22,18 @@ const {
 const { setLanguage, t } = require('./i18n');
 const yaml = require('js-yaml');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
-const { generateIDEConfigs, showSuccessSummary } = require('./ide-config-generator');
+const { generateIDEConfigs, showSuccessSummary, copySkillFiles, copyExtraCommandFiles } = require('./ide-config-generator');
 const {
   configureEnvironment,
 } = require('../config/configure-environment');
 const {
   installDependencies,
 } = require('../installer/dependency-installer');
+const { commandSync, commandValidate } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/index');
 const {
-  installAiosCore,
+  installAioxCore,
   hasPackageJson,
-} = require('../installer/aios-core-installer');
+} = require('../installer/aiox-core-installer');
 const {
   validateInstallation,
   displayValidationReport,
@@ -39,13 +42,13 @@ const {
 const {
   installLLMRouting,
   isLLMRoutingInstalled,
-} = require('../../../../.aios-core/infrastructure/scripts/llm-routing/install-llm-routing');
+} = require('../../../../.aiox-core/infrastructure/scripts/llm-routing/install-llm-routing');
 
-// DISABLED: Squads replaced expansion-packs (OSR-8)
+// DISABLED: Legacy installation block superseded by squads flow (OSR-8)
 // /**
-//  * Generate AntiGravity workflow content for expansion pack agents
+//  * Generate AntiGravity workflow content for squad agents
 //  * @param {string} agentName - Agent name (e.g., 'data-collector')
-//  * @param {string} packName - Expansion pack name (e.g., 'etl')
+//  * @param {string} packName - Starter squad name (e.g., 'etl')
 //  * @returns {string} Workflow file content
 //  */
 // function generateExpansionPackWorkflow(agentName, packName) {
@@ -57,7 +60,7 @@ const {
 //
 // # Ativação do Agente ${displayName}
 //
-// **Expansion Pack:** ${packName}
+// **Squad:** ${packName}
 //
 // **INSTRUÇÕES CRÍTICAS PARA O ANTIGRAVITY:**
 //
@@ -81,7 +84,7 @@ const {
  * @returns {Promise<string|null>} Existing user profile or null
  */
 async function getExistingUserProfile(targetDir = process.cwd()) {
-  const coreConfigPath = path.join(targetDir, '.aios-core', 'core-config.yaml');
+  const coreConfigPath = path.join(targetDir, '.aiox-core', 'core-config.yaml');
 
   try {
     if (await fse.pathExists(coreConfigPath)) {
@@ -118,7 +121,7 @@ const LANGUAGE_MAP = {
 /**
  * Write language preference to Claude Code's native settings.json (Story ACT-12)
  * Replaces the old approach of storing language in core-config.yaml.
- * Claude Code v2.1.0+ natively supports a `language` field in settings.json
+ * Claude Code v4.0.4+ natively supports a `language` field in settings.json
  * that is automatically injected into the system prompt.
  *
  * @param {string} language - Language code from wizard (en|pt|es)
@@ -244,7 +247,7 @@ async function runWizard(options = {}) {
     // Setup graceful cancellation
     setupCancellationHandler();
 
-    // Show welcome message with AIOS branding
+    // Show welcome message with AIOX branding
     if (!options.quiet) {
       showWelcome();
     }
@@ -326,35 +329,35 @@ async function runWizard(options = {}) {
       }
     }
 
-    // Story 1.4: Install AIOS core framework (agents, tasks, workflows, templates)
-    console.log('\n📦 Installing AIOS core framework...');
-    let aiosCoreResult = null;
+    // Story 1.4: Install AIOX core framework (agents, tasks, workflows, templates)
+    console.log('\n📦 Installing AIOX core framework...');
+    let aioxCoreResult = null;
     try {
-      aiosCoreResult = await installAiosCore({
+      aioxCoreResult = await installAioxCore({
         targetDir: process.cwd(),
         onProgress: (_status) => {
           // Silent progress - spinner handles feedback
         },
       });
 
-      if (aiosCoreResult.success) {
-        console.log(`✅ AIOS core installed (${aiosCoreResult.installedFolders.length} folders)`);
+      if (aioxCoreResult.success) {
+        console.log(`✅ AIOX core installed (${aioxCoreResult.installedFolders.length} folders)`);
         console.log(
-          `   - Agents: ${aiosCoreResult.installedFolders.includes('agents') ? '✓' : '⨉'}`,
+          `   - Agents: ${aioxCoreResult.installedFolders.includes('agents') ? '✓' : '⨉'}`,
         );
-        console.log(`   - Tasks: ${aiosCoreResult.installedFolders.includes('tasks') ? '✓' : '⨉'}`);
+        console.log(`   - Tasks: ${aioxCoreResult.installedFolders.includes('tasks') ? '✓' : '⨉'}`);
         console.log(
-          `   - Workflows: ${aiosCoreResult.installedFolders.includes('workflows') ? '✓' : '⨉'}`,
+          `   - Workflows: ${aioxCoreResult.installedFolders.includes('workflows') ? '✓' : '⨉'}`,
         );
         console.log(
-          `   - Templates: ${aiosCoreResult.installedFolders.includes('templates') ? '✓' : '⨉'}`,
+          `   - Templates: ${aioxCoreResult.installedFolders.includes('templates') ? '✓' : '⨉'}`,
         );
       }
-      answers.aiosCoreInstalled = true;
-      answers.aiosCoreResult = aiosCoreResult;
+      answers.aioxCoreInstalled = true;
+      answers.aioxCoreResult = aioxCoreResult;
     } catch (error) {
-      console.error('\n⚠️  AIOS core installation failed:', error.message);
-      answers.aiosCoreInstalled = false;
+      console.error('\n⚠️  AIOX core installation failed:', error.message);
+      answers.aioxCoreInstalled = false;
     }
 
     // Install Tech Preset if selected
@@ -364,8 +367,8 @@ async function runWizard(options = {}) {
       try {
         // Find tech-presets source directory
         const possiblePresetDirs = [
-          path.join(__dirname, '..', '..', '.aios-core', 'data', 'tech-presets'),
-          path.join(process.cwd(), '.aios-core', 'data', 'tech-presets'),
+          path.join(__dirname, '..', '..', '.aiox-core', 'data', 'tech-presets'),
+          path.join(process.cwd(), '.aiox-core', 'data', 'tech-presets'),
         ];
 
         let sourcePresetDir = null;
@@ -380,11 +383,11 @@ async function runWizard(options = {}) {
           const presetFile = path.join(sourcePresetDir, `${answers.selectedTechPreset}.md`);
 
           if (fse.existsSync(presetFile)) {
-            // Copy preset to project's .aios-core/data/tech-presets/
-            const targetPresetDir = path.join(process.cwd(), '.aios-core', 'data', 'tech-presets');
+            // Copy preset to project's .aiox-core/data/tech-presets/
+            const targetPresetDir = path.join(process.cwd(), '.aiox-core', 'data', 'tech-presets');
             await fse.ensureDir(targetPresetDir);
 
-            // BUG-5 fix (INS-1): Guard against source === dest (e.g., running inside aios-core repo)
+            // BUG-5 fix (INS-1): Guard against source === dest (e.g., running inside aiox-core repo)
             const targetPresetFile = path.join(targetPresetDir, `${answers.selectedTechPreset}.md`);
             const sourceResolved = path.resolve(presetFile);
             const targetResolved = path.resolve(targetPresetFile);
@@ -407,7 +410,7 @@ async function runWizard(options = {}) {
               // Update technical-preferences.md to mark the selected preset
               const techPrefsFile = path.join(
                 process.cwd(),
-                '.aios-core',
+                '.aiox-core',
                 'data',
                 'technical-preferences.md',
               );
@@ -439,7 +442,7 @@ async function runWizard(options = {}) {
 
             console.log(`   ✅ Tech Preset: ${answers.selectedTechPreset}`);
             console.log(
-              `   📁 Location: .aios-core/data/tech-presets/${answers.selectedTechPreset}.md`,
+              `   📁 Location: .aiox-core/data/tech-presets/${answers.selectedTechPreset}.md`,
             );
             answers.techPresetInstalled = true;
             answers.techPresetResult = { preset: answers.selectedTechPreset, success: true };
@@ -460,67 +463,7 @@ async function runWizard(options = {}) {
       answers.techPresetResult = { preset: 'none', success: true };
     }
 
-    // DISABLED: Squads replaced expansion-packs (OSR-8)
-    // Install Expansion Packs if selected
-    // if (answers.selectedExpansionPacks && answers.selectedExpansionPacks.length > 0) {
-    //   console.log('\n🎁 Installing Expansion Packs...');
-    //
-    //   // Detect source expansion-packs directory (npm package location)
-    //   const possibleSourceDirs = [
-    //     path.join(__dirname, '..', '..', 'expansion-packs'),
-    //     path.join(__dirname, '..', '..', '..', 'expansion-packs'),
-    //     path.join(process.cwd(), 'node_modules', '@synkra/aios-core', 'expansion-packs'),
-    //   ];
-    //
-    //   let sourceExpansionDir = null;
-    //   for (const dir of possibleSourceDirs) {
-    //     if (fse.existsSync(dir)) {
-    //       sourceExpansionDir = dir;
-    //       break;
-    //     }
-    //   }
-    //
-    //   if (sourceExpansionDir) {
-    //     const targetExpansionDir = path.join(process.cwd(), 'expansion-packs');
-    //     await fse.ensureDir(targetExpansionDir);
-    //
-    //     const installedPacks = [];
-    //     const failedPacks = [];
-    //
-    //     for (const pack of answers.selectedExpansionPacks) {
-    //       const sourcePack = path.join(sourceExpansionDir, pack);
-    //       const targetPack = path.join(targetExpansionDir, pack);
-    //
-    //       try {
-    //         if (fse.existsSync(sourcePack)) {
-    //           await fse.copy(sourcePack, targetPack);
-    //           installedPacks.push(pack);
-    //           console.log(`   ✅ ${pack}`);
-    //         } else {
-    //           failedPacks.push({ pack, reason: 'not found' });
-    //           console.log(`   ⚠️  ${pack} - not found in source`);
-    //         }
-    //       } catch (packError) {
-    //         failedPacks.push({ pack, reason: packError.message });
-    //         console.log(`   ⚠️  ${pack} - ${packError.message}`);
-    //       }
-    //     }
-    //
-    //     answers.expansionPacksInstalled = installedPacks.length > 0;
-    //     answers.expansionPacksResult = {
-    //       installed: installedPacks,
-    //       failed: failedPacks,
-    //       targetDir: targetExpansionDir,
-    //     };
-    //
-    //     if (installedPacks.length > 0) {
-    //       console.log(`\n✅ Expansion Packs installed (${installedPacks.length}/${answers.selectedExpansionPacks.length})`);
-    //     }
-    //   } else {
-    //     console.log('   ⚠️  Expansion packs source directory not found');
-    //     answers.expansionPacksInstalled = false;
-    //   }
-    // }
+    // Legacy squad installation path removed; unified squads flow is now the only supported path.
 
     // Story 1.4: Generate IDE configs if IDEs were selected
     let ideConfigResult = null;
@@ -544,63 +487,138 @@ async function runWizard(options = {}) {
         }
       }
 
-      // DISABLED: Squads replaced expansion-packs (OSR-8)
-      // Install expansion pack agents to each selected IDE
-      // if (answers.expansionPacksResult && answers.expansionPacksResult.installed.length > 0) {
-      //   console.log('\n📦 Installing expansion pack agents to IDEs...');
-      //
-      //   for (const packName of answers.expansionPacksResult.installed) {
-      //     const packAgentsDir = path.join(answers.expansionPacksResult.targetDir, packName, 'agents');
-      //
-      //     if (await fse.pathExists(packAgentsDir)) {
-      //       const agentFiles = (await fse.readdir(packAgentsDir)).filter(f => f.endsWith('.md'));
-      //
-      //       if (agentFiles.length > 0) {
-      //         for (const ideKey of answers.selectedIDEs) {
-      //           const ideConfig = getIDEConfig(ideKey);
-      //           if (!ideConfig || !ideConfig.agentFolder) continue;
-      //
-      //           const isAntiGravity = ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
-      //
-      //           // Determine target folder for this expansion pack
-      //           let targetFolder;
-      //           if (isAntiGravity) {
-      //             // AntiGravity: workflows go to .agent/workflows/{packName}/
-      //             targetFolder = path.join(process.cwd(), ideConfig.agentFolder, packName);
-      //             // Also need to copy actual agents to .antigravity/agents/{packName}/
-      //             const agentsTargetFolder = path.join(process.cwd(), ideConfig.specialConfig.agentsFolder, packName);
-      //             await fse.ensureDir(agentsTargetFolder);
-      //
-      //             for (const agentFile of agentFiles) {
-      //               const sourcePath = path.join(packAgentsDir, agentFile);
-      //               const agentName = agentFile.replace('.md', '');
-      //
-      //               // Create workflow file
-      //               const workflowContent = generateExpansionPackWorkflow(agentName, packName);
-      //               await fse.ensureDir(targetFolder);
-      //               await fse.writeFile(path.join(targetFolder, agentFile), workflowContent, 'utf8');
-      //
-      //               // Copy actual agent
-      //               await fse.copy(sourcePath, path.join(agentsTargetFolder, agentFile));
-      //             }
-      //           } else {
-      //             // Other IDEs: copy directly to agentFolder/{packName}/
-      //             targetFolder = path.join(process.cwd(), ideConfig.agentFolder, packName);
-      //             await fse.ensureDir(targetFolder);
-      //
-      //             for (const agentFile of agentFiles) {
-      //               await fse.copy(
-      //                 path.join(packAgentsDir, agentFile),
-      //                 path.join(targetFolder, agentFile),
-      //               );
-      //             }
-      //           }
-      //         }
-      //         console.log(`   ✅ ${packName}: ${agentFiles.length} agents installed to ${answers.selectedIDEs.length} IDE(s)`);
-      //       }
-      //     }
-      //   }
-      // }
+      // Legacy per-squad IDE copy path removed; sync pipeline handles IDE propagation.
+    }
+
+    // Story INS-4.3: Wire settings.json boundary generator after .aiox-core/ copy
+    console.log('\n🔒 Generating boundary rules...');
+    try {
+      const settingsGenerator = require('../../../../.aiox-core/infrastructure/scripts/generate-settings-json');
+      settingsGenerator.generate(process.cwd());
+      const settingsContent = await fse.readFile(path.join(process.cwd(), '.claude', 'settings.json'), 'utf8').catch(() => '{}');
+      const settingsParsed = JSON.parse(settingsContent);
+      const denyCount = (settingsParsed.permissions && settingsParsed.permissions.deny) ? settingsParsed.permissions.deny.length : 0;
+      console.log(`✅ settings.json: generated (${denyCount} deny rules)`);
+      answers.settingsGenerated = true;
+      answers.settingsDenyCount = denyCount;
+    } catch (error) {
+      console.warn(`⚠️  settings.json generation failed: ${error.message} — run 'aiox doctor --fix' post-install`);
+      answers.settingsGenerated = false;
+    }
+
+    // Story INS-4.3: Copy skills (Gap #11)
+    console.log('\n📚 Copying skills...');
+    try {
+      const skillsResult = await copySkillFiles(process.cwd());
+      if (skillsResult.skipped) {
+        console.log('   ℹ️  Skills: source not found (skipped)');
+      } else {
+        console.log(`✅ Skills: ${skillsResult.count} copied`);
+      }
+      answers.skillsCopied = skillsResult.count;
+      answers.skillsSkipped = skillsResult.skipped;
+    } catch (error) {
+      console.warn(`⚠️  Skills copy failed: ${error.message}`);
+      answers.skillsCopied = 0;
+    }
+
+    // Story INS-4.3: Copy extra commands (Gap #12)
+    console.log('\n📋 Copying extra commands...');
+    try {
+      const commandsResult = await copyExtraCommandFiles(process.cwd());
+      if (commandsResult.skipped) {
+        console.log('   ℹ️  Extra commands: source not found (skipped)');
+      } else {
+        console.log(`✅ Commands: ${commandsResult.count} extras copied`);
+      }
+      answers.extraCommandsCopied = commandsResult.count;
+      answers.extraCommandsSkipped = commandsResult.skipped;
+    } catch (error) {
+      console.warn(`⚠️  Extra commands copy failed: ${error.message}`);
+      answers.extraCommandsCopied = 0;
+    }
+
+    // Story INS-4.5: IDE Sync — transform agents/skills/commands for each configured IDE
+    console.log('\n🔄 Running IDE sync...');
+    const targetProjectRoot = process.cwd();
+    const savedCwd = process.cwd();
+    try {
+      process.chdir(targetProjectRoot);
+      await commandSync({ quiet: true });
+      answers.ideSyncStatus = 'synced';
+      console.log('✅ IDE sync: synced');
+
+      // Validate sync output (commandValidate does not support quiet — suppress its console output)
+      const _origLog = console.log;
+      console.log = () => {};
+      try {
+        await commandValidate({ quiet: true });
+        answers.ideSyncValidation = 'pass';
+      } catch (validateError) {
+        answers.ideSyncValidation = 'drift';
+      } finally {
+        console.log = _origLog;
+      }
+      if (answers.ideSyncValidation === 'drift') {
+        console.warn('⚠️  IDE sync validation: drift detected — run \'aiox doctor --fix\' post-install');
+      }
+    } catch (syncError) {
+      console.warn(`⚠️  IDE sync failed: ${syncError.message} — run 'aiox doctor --fix' post-install`);
+      answers.ideSyncStatus = 'failed';
+      answers.ideSyncValidation = 'skipped';
+    } finally {
+      process.chdir(savedCwd);
+    }
+
+    // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
+    // Story INS-4.12: Fix module resolution + bootstrap timing
+    // Bootstrap runs AFTER .aiox-core deps are installed (aiox-core-installer.js:324-345)
+    // NODE_PATH ensures spawned scripts can resolve packages from .aiox-core/node_modules/
+    console.log('\n📇 Bootstrapping entity registry...');
+    try {
+      const registryScript = path.join(process.cwd(), '.aiox-core', 'development', 'scripts', 'populate-entity-registry.js');
+      if (fse.existsSync(registryScript)) {
+        // INS-4.12 AC3: Guard — skip bootstrap if .aiox-core deps are not installed
+        const aioxCoreNodeModules = path.join(process.cwd(), '.aiox-core', 'node_modules');
+        if (!fse.existsSync(aioxCoreNodeModules)) {
+          console.warn('⚠️  .aiox-core/node_modules/ not found — skipping entity registry bootstrap');
+          console.warn('   Run: cd .aiox-core && npm install --production');
+          answers.entityRegistryStatus = 'skipped-no-deps';
+        } else {
+        // INS-4.12 AC2: Set NODE_PATH so spawned scripts resolve deps from .aiox-core/node_modules/
+          const parentNodeModules = path.join(process.cwd(), 'node_modules');
+          const nodePath = [aioxCoreNodeModules, parentNodeModules].join(path.delimiter);
+          const startMs = Date.now();
+          execSync(`node "${registryScript}"`, {
+            cwd: process.cwd(),
+            encoding: 'utf8',
+            timeout: 30000,
+            stdio: 'pipe',
+            env: { ...process.env, NODE_PATH: nodePath },
+          });
+          const elapsedMs = Date.now() - startMs;
+
+          // Read entity count from generated registry
+          const registryPath = path.join(process.cwd(), '.aiox-core', 'data', 'entity-registry.yaml');
+          let entityCount = 0;
+          if (fse.existsSync(registryPath)) {
+            const registryContent = fse.readFileSync(registryPath, 'utf8');
+            const countMatch = registryContent.match(/entityCount:\s*(\d+)/);
+            entityCount = countMatch ? parseInt(countMatch[1], 10) : 0;
+          }
+
+          console.log(`✅ Entity registry: populated (${entityCount} entities, ${(elapsedMs / 1000).toFixed(1)}s)`);
+          answers.entityRegistryStatus = 'populated';
+          answers.entityRegistryCount = entityCount;
+          answers.entityRegistryMs = elapsedMs;
+        } // end else (deps exist)
+      } else {
+        console.log('   ℹ️  Entity registry script not found (skipped)');
+        answers.entityRegistryStatus = 'skipped';
+      }
+    } catch (error) {
+      console.warn(`⚠️  Entity registry bootstrap failed: ${error.message} — run 'aiox doctor' post-install`);
+      answers.entityRegistryStatus = 'failed';
     }
 
     // Story 1.6: Environment Configuration
@@ -632,7 +650,7 @@ async function runWizard(options = {}) {
         console.log('\n✅ Environment configuration complete!');
         console.log('  - .env file created');
         console.log('  - .env.example file created');
-        console.log('  - .aios-core/core-config.yaml created');
+        console.log('  - .aiox-core/core-config.yaml created');
         if (envResult.gitignoreUpdated) {
           console.log('  - .gitignore updated');
         }
@@ -771,7 +789,7 @@ async function runWizard(options = {}) {
     //     } else {
     //       console.error('\n⚠️  Some MCPs failed to install:');
     //       mcpResult.errors.forEach(err => console.error(`  - ${err}`));
-    //       console.log('\n💡 Check .aios/install-errors.log for details');
+    //       console.log('\n💡 Check .aiox/install-errors.log for details');
     //     }
     //
     //     // Store MCP result for validation
@@ -818,6 +836,76 @@ async function runWizard(options = {}) {
       answers.llmRoutingInstalled = false;
     }
 
+    // Story INS-3.2: Pro Installation Wizard (optional phase)
+    if (!options.skipPro) {
+      try {
+        const { runProWizard } = require('./pro-setup');
+        const isCI = process.env.CI === 'true' || !process.stdout.isTTY;
+        const hasProKey = !!process.env.AIOX_PRO_KEY;
+
+        const proOptions = { targetDir: process.cwd() };
+
+        if (isCI && hasProKey) {
+          // CI mode: auto-run if AIOX_PRO_KEY is set
+          console.log('\n🔑 Pro license key detected, running Pro setup...');
+          const proResult = await runProWizard({ ...proOptions, quiet: true });
+          answers.proInstalled = proResult.success;
+          answers.proResult = proResult;
+        } else if (!isCI && !options.quiet) {
+          // Interactive mode: ask which edition to install
+          const { edition } = await inquirer.prompt([
+            {
+              type: 'list',
+              name: 'edition',
+              message: colors.primary('Which edition do you want to install?'),
+              choices: [
+                {
+                  name: 'Community (free) — agents, workflows, squads, full CLI',
+                  value: 'community',
+                },
+                {
+                  name: 'Pro (requires account) — premium squads, minds, priority support',
+                  value: 'pro',
+                },
+              ],
+              default: 'community',
+            },
+          ]);
+
+          if (edition === 'pro') {
+            const proResult = await runProWizard(proOptions);
+            answers.proInstalled = proResult.success;
+            answers.proResult = proResult;
+
+            if (!proResult.success && proResult.error) {
+              console.error(`\n⚠️  Pro activation failed: ${proResult.error}`);
+
+              const { fallback } = await inquirer.prompt([
+                {
+                  type: 'confirm',
+                  name: 'fallback',
+                  message: colors.primary('Continue with Community (free) edition instead?'),
+                  default: true,
+                },
+              ]);
+
+              if (!fallback) {
+                console.log('\n👋 Installation cancelled. Run again when ready.');
+                return answers;
+              }
+
+              console.log('\n📦 Continuing with Community edition...\n');
+            }
+          } else {
+            answers.proInstalled = false;
+          }
+        }
+      } catch (error) {
+        console.error(`\n⚠️  Pro setup error: ${error.message}`);
+        answers.proInstalled = false;
+      }
+    }
+
     // Story 1.8: Installation Validation
     console.log('\n🔍 Validating installation...\n');
 
@@ -827,13 +915,13 @@ async function runWizard(options = {}) {
           files: {
             ideConfigs: ideConfigResult?.files || [],
             env: '.env',
-            coreConfig: '.aios-core/core-config.yaml',
+            coreConfig: '.aiox-core/core-config.yaml',
             mcpConfig: '.mcp.json',
           },
           configs: {
             env: answers.envResult,
             mcps: answers.mcpResult,
-            coreConfig: '.aios-core/core-config.yaml',
+            coreConfig: '.aiox-core/core-config.yaml',
           },
           mcps: answers.mcpResult,
           dependencies: answers.depsResult,
@@ -855,7 +943,7 @@ async function runWizard(options = {}) {
       answers.validationResult = validation;
     } catch (error) {
       console.error('\n⚠️  Validation failed:', error.message);
-      console.log('Installation may be incomplete. Check logs in .aios/ directory.');
+      console.log('Installation may be incomplete. Check logs in .aiox/ directory.');
     }
 
     // Show completion

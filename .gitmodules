@@ -1,4 +1,5 @@
 [submodule "pro"]
 	path = pro
-	url = https://github.com/SynkraAI/aios-pro.git
+	url = https://github.com/SynkraAI/aiox-pro.git
 	branch = main
+	ignore = dirty

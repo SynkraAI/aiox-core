@@ -183,7 +183,7 @@ jobs:
           AUTHOR: ${{ github.actor }}
         run: |
           node -e "
-            const { recordPRReviewMetrics } = require('./.aios-core/quality/metrics-hook');
+            const { recordPRReviewMetrics } = require('./.aiox-core/quality/metrics-hook');
             (async () => {
               const passed = process.env.COVERAGE_RESULT === 'success';
               await recordPRReviewMetrics({
@@ -210,11 +210,11 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
           # Check if metrics file exists and is not gitignored
-          if [ -f .aios/data/quality-metrics.json ]; then
-            if git check-ignore -q .aios/data/quality-metrics.json 2>/dev/null; then
+          if [ -f .aiox/data/quality-metrics.json ]; then
+            if git check-ignore -q .aiox/data/quality-metrics.json 2>/dev/null; then
               echo "ℹ️ Metrics file is gitignored - skipping commit"
             else
-              git add .aios/data/quality-metrics.json
+              git add .aiox/data/quality-metrics.json
             fi
           fi
 

@@ -3,7 +3,7 @@
 **Documento:** GREENFIELD-SERVICE-WORKFLOW.md
 **Versao:** 1.0
 **Criado:** 2026-02-04
-**Fonte:** `.aios-core/development/workflows/greenfield-service.yaml`
+**Fonte:** `.aiox-core/development/workflows/greenfield-service.yaml`
 
 ---
 
@@ -419,7 +419,7 @@ Apos conclusao do epic:
 **Descricao:**
 Todas as stories implementadas e revisadas! Fase de desenvolvimento do servico completa.
 
-**Referencia:** `.aios-core/data/aios-kb.md#IDE Development Workflow`
+**Referencia:** `.aiox-core/data/aiox-kb.md#IDE Development Workflow`
 
 ---
 
@@ -506,7 +506,7 @@ graph LR
 
 | Arquivo | Descricao |
 |---------|-----------|
-| `.aios-core/core-config.yaml` | Configuracao do framework |
+| `.aiox-core/core-config.yaml` | Configuracao do framework |
 | `.env` | Variaveis de ambiente |
 | `projects/{Name}/.project.yaml` | Configuracoes especificas do projeto |
 
@@ -514,11 +514,11 @@ graph LR
 
 | Template | Localizacao | Agente |
 |----------|-------------|--------|
-| `project-brief-tmpl.yaml` | `.aios-core/development/templates/` | analyst |
-| `prd-tmpl.yaml` | `.aios-core/development/templates/` | pm |
-| `architecture-tmpl.yaml` | `.aios-core/development/templates/` | architect |
-| `story-tmpl.yaml` | `.aios-core/development/templates/` | sm |
-| `qa-gate-tmpl.yaml` | `.aios-core/development/templates/` | qa |
+| `project-brief-tmpl.yaml` | `.aiox-core/development/templates/` | analyst |
+| `prd-tmpl.yaml` | `.aiox-core/development/templates/` | pm |
+| `architecture-tmpl.yaml` | `.aiox-core/development/templates/` | architect |
+| `story-tmpl.yaml` | `.aiox-core/development/templates/` | sm |
+| `qa-gate-tmpl.yaml` | `.aiox-core/development/templates/` | qa |
 
 ### Checklists
 
@@ -698,8 +698,8 @@ Mensagens padronizadas para transicoes entre agentes:
 
 | Tipo | Localizacao |
 |------|-------------|
-| Logs do agente | `.aios/logs/agent.log` |
-| Status do projeto | `.aios/project-registry.yaml` |
+| Logs do agente | `.aiox/logs/agent.log` |
+| Status do projeto | `.aiox/project-registry.yaml` |
 | Decision logs | `.ai/decision-log-{story-id}.md` |
 | QA reports | `docs/qa/gates/` |
 
@@ -707,16 +707,16 @@ Mensagens padronizadas para transicoes entre agentes:
 
 ```bash
 # Verificar status do projeto
-cat .aios/project-status.yaml
+cat .aiox/project-status.yaml
 
 # Listar stories em progresso
 ls docs/stories/epic-*/
 
 # Verificar logs do agente
-tail -f .aios/logs/agent.log
+tail -f .aiox/logs/agent.log
 
 # Habilitar modo debug
-export AIOS_DEBUG=true
+export AIOX_DEBUG=true
 ```
 
 ---
@@ -727,49 +727,49 @@ export AIOS_DEBUG=true
 
 | Arquivo | Descricao |
 |---------|-----------|
-| `.aios-core/development/workflows/greenfield-service.yaml` | Definicao do workflow |
-| `.aios-core/data/aios-kb.md` | Knowledge base do AIOS |
+| `.aiox-core/development/workflows/greenfield-service.yaml` | Definicao do workflow |
+| `.aiox-core/data/aiox-kb.md` | Knowledge base do AIOX |
 
 ### Agentes
 
 | Arquivo | Agente |
 |---------|--------|
-| `.aios-core/development/agents/analyst.md` | Atlas (Analyst) |
-| `.aios-core/development/agents/pm.md` | Morgan (PM) |
-| `.aios-core/development/agents/architect.md` | Aria (Architect) |
-| `.aios-core/development/agents/po.md` | Pax (PO) |
-| `.aios-core/development/agents/sm.md` | River (SM) |
-| `.aios-core/development/agents/dev.md` | Dex (Dev) |
-| `.aios-core/development/agents/qa.md` | Quinn (QA) |
+| `.aiox-core/development/agents/analyst.md` | Atlas (Analyst) |
+| `.aiox-core/development/agents/pm.md` | Morgan (PM) |
+| `.aiox-core/development/agents/architect.md` | Aria (Architect) |
+| `.aiox-core/development/agents/po.md` | Pax (PO) |
+| `.aiox-core/development/agents/sm.md` | River (SM) |
+| `.aiox-core/development/agents/dev.md` | Dex (Dev) |
+| `.aiox-core/development/agents/qa.md` | Quinn (QA) |
 
 ### Tasks Principais
 
 | Arquivo | Task |
 |---------|------|
-| `.aios-core/development/tasks/create-doc.md` | Criacao de documentos |
-| `.aios-core/development/tasks/shard-doc.md` | Fragmentacao de documentos |
-| `.aios-core/development/tasks/sm-create-next-story.md` | Criacao de stories |
-| `.aios-core/development/tasks/dev-develop-story.md` | Implementacao de stories |
-| `.aios-core/development/tasks/qa-review-story.md` | Revisao de implementacao |
-| `.aios-core/development/tasks/execute-checklist.md` | Execucao de checklists |
+| `.aiox-core/development/tasks/create-doc.md` | Criacao de documentos |
+| `.aiox-core/development/tasks/shard-doc.md` | Fragmentacao de documentos |
+| `.aiox-core/development/tasks/sm-create-next-story.md` | Criacao de stories |
+| `.aiox-core/development/tasks/dev-develop-story.md` | Implementacao de stories |
+| `.aiox-core/development/tasks/qa-review-story.md` | Revisao de implementacao |
+| `.aiox-core/development/tasks/execute-checklist.md` | Execucao de checklists |
 
 ### Templates
 
 | Arquivo | Template |
 |---------|----------|
-| `.aios-core/development/templates/project-brief-tmpl.yaml` | Project Brief |
-| `.aios-core/development/templates/prd-tmpl.yaml` | PRD |
-| `.aios-core/development/templates/architecture-tmpl.yaml` | Arquitetura |
-| `.aios-core/development/templates/story-tmpl.yaml` | User Story |
-| `.aios-core/development/templates/qa-gate-tmpl.yaml` | QA Gate |
+| `.aiox-core/development/templates/project-brief-tmpl.yaml` | Project Brief |
+| `.aiox-core/development/templates/prd-tmpl.yaml` | PRD |
+| `.aiox-core/development/templates/architecture-tmpl.yaml` | Arquitetura |
+| `.aiox-core/development/templates/story-tmpl.yaml` | User Story |
+| `.aiox-core/development/templates/qa-gate-tmpl.yaml` | QA Gate |
 
 ### Checklists
 
 | Arquivo | Checklist |
 |---------|-----------|
-| `.aios-core/development/checklists/po-master-checklist.md` | Validacao PO |
-| `.aios-core/development/checklists/story-draft-checklist.md` | Validacao Story Draft |
-| `.aios-core/development/checklists/story-dod-checklist.md` | Definition of Done |
+| `.aiox-core/development/checklists/po-master-checklist.md` | Validacao PO |
+| `.aiox-core/development/checklists/story-draft-checklist.md` | Validacao Story Draft |
+| `.aiox-core/development/checklists/story-dod-checklist.md` | Definition of Done |
 
 ---
 
@@ -781,4 +781,4 @@ export AIOS_DEBUG=true
 
 ---
 
-*Documentacao gerada automaticamente a partir de `.aios-core/development/workflows/greenfield-service.yaml`*
+*Documentacao gerada automaticamente a partir de `.aiox-core/development/workflows/greenfield-service.yaml`*

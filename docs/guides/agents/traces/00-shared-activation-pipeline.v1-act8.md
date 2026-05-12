@@ -1,12 +1,12 @@
 # Shared Activation Pipeline - Common Agent Activation Chain
 
 > Traced from source code, not documentation.
-> Source: `.aios-core/development/scripts/unified-activation-pipeline.js` (Story ACT-6)
-> Previous source: `.aios-core/development/scripts/greeting-builder.js` (949 lines)
+> Source: `.aiox-core/development/scripts/unified-activation-pipeline.js` (Story ACT-6)
+> Previous source: `.aiox-core/development/scripts/greeting-builder.js` (949 lines)
 
 ## Overview
 
-Every AIOS agent goes through a **single unified activation pipeline** before presenting its greeting. As of Story ACT-6, the previous two-path architecture (Path A: direct GreetingBuilder invocation, Path B: generate-greeting.js CLI wrapper) has been consolidated into one entry point.
+Every AIOX agent goes through a **single unified activation pipeline** before presenting its greeting. As of Story ACT-6, the previous two-path architecture (Path A: direct GreetingBuilder invocation, Path B: generate-greeting.js CLI wrapper) has been consolidated into one entry point.
 
 | Component | Role |
 |-----------|------|
@@ -91,7 +91,7 @@ Before the activation pipeline begins, Claude Code loads and parses the agent de
 ### 1.1 File Location
 
 ```
-.aios-core/development/agents/{agent-id}.md
+.aiox-core/development/agents/{agent-id}.md
 ```
 
 ### 1.2 Parsing Flow (via `AgentConfigLoader.loadAgentDefinition()`)
@@ -111,7 +111,7 @@ sequenceDiagram
     alt Cache hit
         ACL-->>CC: Return cached definition
     else Cache miss
-        ACL->>FS: readFile(.aios-core/development/agents/{id}.md)
+        ACL->>FS: readFile(.aiox-core/development/agents/{id}.md)
         FS-->>ACL: Raw markdown content
         ACL->>ACL: Extract YAML block (regex: /```ya?ml\n([\s\S]*?)\n```/)
         ACL->>YAML: yaml.load(yamlContent)
@@ -153,7 +153,7 @@ All 12 agents use the same activation path. The `UnifiedActivationPipeline.activ
 
 1. **Phase 1 (Parallel):** Loads 5 subsystems concurrently via `Promise.all()`:
    - `AgentConfigLoader.loadComplete(coreConfig)` -- Agent definition + config sections
-   - `SessionContextLoader.loadContext(agentId)` -- Session state from `.aios/session-state.json`
+   - `SessionContextLoader.loadContext(agentId)` -- Session state from `.aiox/session-state.json`
    - `ProjectStatusLoader.loadProjectStatus()` -- Git branch, modified files, commits, story
    - `GitConfigDetector.get()` -- Git remote type and branch (cached 5min)
    - `PermissionMode.load() + getBadge()` -- Permission mode and badge string
@@ -377,7 +377,7 @@ flowchart TD
 | `currentEpic` | Extracted from story file metadata | 60s |
 | `worktrees` | Via WorktreeManager | 60s |
 
-**Cache file:** `.aios/project-status.yaml`
+**Cache file:** `.aiox/project-status.yaml`
 
 ---
 
@@ -385,7 +385,7 @@ flowchart TD
 
 **Source:** `greeting-preference-manager.js:18-146`
 
-Reads from `.aios-core/core-config.yaml` path `agentIdentity.greeting.preference`.
+Reads from `.aiox-core/core-config.yaml` path `agentIdentity.greeting.preference`.
 
 | Value | Behavior |
 |-------|----------|
@@ -418,7 +418,7 @@ The badge is loaded during greeting assembly (Section 3, step 1) via `_safeGetPe
 
 ```javascript
 const mode = new PermissionMode();
-await mode.load();  // Reads .aios/config.yaml -> permissions.mode
+await mode.load();  // Reads .aiox/config.yaml -> permissions.mode
 return mode.getBadge();  // Returns "[icon Name]"
 ```
 
@@ -450,7 +450,7 @@ Tool Call → classifyOperation(tool, params) → canPerform(operation) → allo
 Available in all 12 agents. Cycles the mode: `ask` -> `auto` -> `explore` -> `ask`.
 
 **Implementation:** Calls `PermissionMode.cycleMode()` which:
-1. Reads current mode from `.aios/config.yaml`
+1. Reads current mode from `.aiox/config.yaml`
 2. Advances to next mode in `MODE_CYCLE` array
 3. Writes new mode back to config
 4. Returns updated mode info with badge
@@ -460,7 +460,7 @@ Available in all 12 agents. Cycles the mode: `ask` -> `auto` -> `explore` -> `as
 The `enforcePermission()` function provides a clean API for permission enforcement:
 
 ```javascript
-const { enforcePermission } = require('./.aios-core/core/permissions');
+const { enforcePermission } = require('./.aiox-core/core/permissions');
 
 const result = await enforcePermission('Write', { file_path: '/file.js' });
 // result.action: 'allow' | 'prompt' | 'deny'
@@ -469,7 +469,7 @@ const result = await enforcePermission('Write', { file_path: '/file.js' });
 
 ### 8.6 Config Initialization
 
-The `environment-bootstrap` task initializes `.aios/config.yaml` with `permissions.mode: ask` as the default. If the config file is missing or the field is absent, the system defaults to `ask` mode.
+The `environment-bootstrap` task initializes `.aiox/config.yaml` with `permissions.mode: ask` as the default. If the config file is missing or the field is absent, the system defaults to `ask` mode.
 
 ---
 
@@ -477,11 +477,11 @@ The `environment-bootstrap` task initializes `.aios/config.yaml` with `permissio
 
 **Source:** `agent-config-loader.js:49-160` + `agent-config-requirements.yaml`
 
-Each agent has specific config requirements defined in `.aios-core/data/agent-config-requirements.yaml`:
+Each agent has specific config requirements defined in `.aiox-core/data/agent-config-requirements.yaml`:
 
 | Agent | Config Sections | Files Loaded | Performance Target |
 |-------|----------------|--------------|-------------------|
-| `aios-master` | dataLocation, registry | aios-kb.md (lazy) | <30ms |
+| `aiox-master` | dataLocation, registry | aiox-kb.md (lazy) | <30ms |
 | `dev` | devLoadAlwaysFiles, devStoryLocation, dataLocation | coding-standards.md, tech-stack.md, source-tree.md, technical-preferences.md | <50ms |
 | `qa` | qaLocation, dataLocation, storyBacklog | technical-preferences.md, test-levels-framework.md, test-priorities-matrix.md | <50ms |
 | `devops` | dataLocation, cicdLocation | technical-preferences.md | <50ms |
@@ -492,7 +492,7 @@ Each agent has specific config requirements defined in `.aios-core/data/agent-co
 | `pm` | devStoryLocation, storyBacklog | coding-standards.md, tech-stack.md | <100ms |
 | `analyst` | dataLocation, analyticsLocation | brainstorming-techniques.md, tech-stack.md, source-tree.md | <100ms |
 | `ux-design-expert` | dataLocation, uxLocation | tech-stack.md, coding-standards.md | <100ms |
-| `squad-creator` | dataLocation, squadsTemplateLocation | (none, lazy: agent_registry, expansion_pack_manifest) | <150ms |
+| `squad-creator` | dataLocation, squadsTemplateLocation | (none, lazy: agent_registry, squad_manifest) | <150ms |
 
 > **Story ACT-8 changes:** Enriched pm (+2 files), ux-design-expert (+2 files), analyst (+2 files), sm (+1 file), squad-creator (explicit entry with lazy loading). All within performance targets.
 
@@ -504,17 +504,17 @@ Each agent has specific config requirements defined in `.aios-core/data/agent-co
 
 | File | Loader | Purpose |
 |------|--------|---------|
-| `.aios-core/development/agents/{agent-id}.md` | AgentConfigLoader | Agent definition |
-| `.aios-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
-| `.aios-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Per-agent config needs |
-| `.aios-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
+| `.aiox-core/development/agents/{agent-id}.md` | AgentConfigLoader | Agent definition |
+| `.aiox-core/core-config.yaml` | GreetingBuilder._loadConfig() | Core configuration |
+| `.aiox-core/data/agent-config-requirements.yaml` | AgentConfigLoader.loadRequirements() | Per-agent config needs |
+| `.aiox-core/data/workflow-patterns.yaml` | WorkflowNavigator._loadPatterns() | Workflow state detection |
 
 ### Loaded conditionally
 
 | File | Condition | Loader |
 |------|-----------|--------|
-| `.aios/session-state.json` | Path B (CLI wrapper) or file-based session detection | ContextDetector / SessionContextLoader |
-| `.aios/project-status.yaml` | Cache check (60s TTL) | ProjectStatusLoader |
+| `.aiox/session-state.json` | Path B (CLI wrapper) or file-based session detection | ContextDetector / SessionContextLoader |
+| `.aiox/project-status.yaml` | Cache check (60s TTL) | ProjectStatusLoader |
 | `docs/stories/**/*.md` | When scanning for InProgress story | ProjectStatusLoader.getCurrentStoryInfo() |
 | Agent-specific data files | Per agent-config-requirements.yaml | AgentConfigLoader.loadFile() |
 
@@ -581,13 +581,13 @@ graph TD
     ACL --> AD[Agent .md definition]
     ACL --> GCC[globalConfigCache]
 
-    SCL --> SSF[.aios/session-state.json]
+    SCL --> SSF[.aiox/session-state.json]
     PSL --> GIT[git CLI commands]
     PSL --> STORIES[docs/stories/**/*.md]
     PSL --> WTM[WorktreeManager]
-    PSL --> PSC[.aios/project-status.yaml]
+    PSL --> PSC[.aiox/project-status.yaml]
     GCD_R --> GIT
-    WN --> WP[.aios-core/data/workflow-patterns.yaml]
+    WN --> WP[.aiox-core/data/workflow-patterns.yaml]
     GPM --> CC
 ```
 
@@ -595,7 +595,7 @@ graph TD
 
 ## 13. `user_profile` Impact Matrix (Story ACT-2)
 
-The `user_profile` setting (`bob` or `advanced`) affects behavior across the entire AIOS pipeline. This section documents every file that references `user_profile`/`userProfile` and the behavioral difference between modes.
+The `user_profile` setting (`bob` or `advanced`) affects behavior across the entire AIOX pipeline. This section documents every file that references `user_profile`/`userProfile` and the behavioral difference between modes.
 
 ### 13.1 Bob Mode Flow
 
@@ -613,24 +613,24 @@ Activation → loadUserProfile() → validateUserProfile() → resolveConfig(L5 
 
 | # | File | Category | `bob` Behavior | `advanced` Behavior |
 |---|------|----------|----------------|---------------------|
-| 1 | `.aios-core/core-config.yaml` | Config | `user_profile: bob` | `user_profile: advanced` |
-| 2 | `.aios-core/development/scripts/greeting-builder.js` | Greeting | Redirects non-PM agents to @pm; hides role/status sections; returns empty commands for non-PM | Full contextual greeting with all sections and commands |
-| 3 | `.aios-core/development/scripts/generate-greeting.js` | Greeting | Uses GreetingBuilder, same bob restrictions | Uses GreetingBuilder, full features |
-| 4 | `.aios-core/development/scripts/greeting-preference-manager.js` | Greeting | Forces preference to `minimal` or `named`; overrides `auto`/`archetypal` | All 4 preferences available (`auto`, `minimal`, `named`, `archetypal`) |
-| 5 | `.aios-core/infrastructure/scripts/validate-user-profile.js` | Validation | Validates `bob` as legal value; normalizes case | Validates `advanced` as legal value; normalizes case |
-| 6 | `.aios-core/core/config/config-resolver.js` | Config | `toggleUserProfile()` switches bob<->advanced; L5 user layer has priority | Same toggle; resolveConfig merges layers |
-| 7 | `.aios-core/core/config/migrate-config.js` | Config | Categorizes `user_profile` as USER_FIELD during migration | Same categorization |
-| 8 | `.aios-core/core/config/schemas/user-config.schema.json` | Schema | `enum: ["bob", "advanced"]` validation | Same validation |
-| 9 | `.aios-core/core/config/templates/user-config.yaml` | Template | Default template value: `bob` | N/A (template default is bob) |
-| 10 | `.aios-core/development/agents/pm.md` | Agent | PM becomes sole orchestrator; bob mode session detection; orchestrates other agents internally | PM operates as normal PM with standard workflow |
+| 1 | `.aiox-core/core-config.yaml` | Config | `user_profile: bob` | `user_profile: advanced` |
+| 2 | `.aiox-core/development/scripts/greeting-builder.js` | Greeting | Redirects non-PM agents to @pm; hides role/status sections; returns empty commands for non-PM | Full contextual greeting with all sections and commands |
+| 3 | `.aiox-core/development/scripts/generate-greeting.js` | Greeting | Uses GreetingBuilder, same bob restrictions | Uses GreetingBuilder, full features |
+| 4 | `.aiox-core/development/scripts/greeting-preference-manager.js` | Greeting | Forces preference to `minimal` or `named`; overrides `auto`/`archetypal` | All 4 preferences available (`auto`, `minimal`, `named`, `archetypal`) |
+| 5 | `.aiox-core/infrastructure/scripts/validate-user-profile.js` | Validation | Validates `bob` as legal value; normalizes case | Validates `advanced` as legal value; normalizes case |
+| 6 | `.aiox-core/core/config/config-resolver.js` | Config | `toggleUserProfile()` switches bob<->advanced; L5 user layer has priority | Same toggle; resolveConfig merges layers |
+| 7 | `.aiox-core/core/config/migrate-config.js` | Config | Categorizes `user_profile` as USER_FIELD during migration | Same categorization |
+| 8 | `.aiox-core/core/config/schemas/user-config.schema.json` | Schema | `enum: ["bob", "advanced"]` validation | Same validation |
+| 9 | `.aiox-core/core/config/templates/user-config.yaml` | Template | Default template value: `bob` | N/A (template default is bob) |
+| 10 | `.aiox-core/development/agents/pm.md` | Agent | PM becomes sole orchestrator; bob mode session detection; orchestrates other agents internally | PM operates as normal PM with standard workflow |
 | 11 | `packages/installer/src/wizard/questions.js` | Install | Presents bob/advanced choice during setup | Same prompt |
 | 12 | `packages/installer/src/wizard/index.js` | Install | Writes `user_profile: bob`; idempotent on re-install | Writes `user_profile: advanced` |
 | 13 | `packages/installer/src/wizard/i18n.js` | Install | Translated "Assisted Mode" text (en/pt/es) | Translated "Advanced Mode" text |
 | 14 | `packages/installer/src/config/templates/core-config-template.js` | Install | Generates config with `user_profile: bob` | Generates config with `user_profile: advanced` |
 | 15 | `packages/installer/src/config/configure-environment.js` | Install | Passes `userProfile: 'bob'` to config generation | Passes `userProfile: 'advanced'` |
-| 16 | `packages/aios-install/src/installer.js` | Install | Sets `config.user_profile = 'bob'` in YAML | Sets `config.user_profile = 'advanced'` |
-| 17 | `.aios-core/development/tasks/environment-bootstrap.md` | Task | Documents bob selection flow | Documents advanced selection flow |
-| 18 | `docs/aios-workflows/bob-orchestrator-workflow.md` | Docs | Full bob orchestrator workflow documentation | N/A (bob-specific doc) |
+| 16 | `packages/aiox-install/src/installer.js` | Install | Sets `config.user_profile = 'bob'` in YAML | Sets `config.user_profile = 'advanced'` |
+| 17 | `.aiox-core/development/tasks/environment-bootstrap.md` | Task | Documents bob selection flow | Documents advanced selection flow |
+| 18 | `docs/aiox-workflows/bob-orchestrator-workflow.md` | Docs | Full bob orchestrator workflow documentation | N/A (bob-specific doc) |
 
 ### 13.3 Impact Matrix: Agent Command Visibility
 
@@ -649,9 +649,9 @@ In `bob` mode, non-PM agents return **empty command lists** (redirect to @pm sho
 | `@devops` | 0 (no visibility metadata) | Empty (redirect to @pm) | Fallback: first 12 commands |
 | `@ux-design-expert` | 0 (no visibility metadata) | Empty (redirect to @pm) | Fallback: first 12 commands |
 | `@squad-creator` | 7 (most have `key`) | Empty (redirect to @pm) | Full visibility commands |
-| `@aios-master` | 0 (uses string visibility) | Empty (redirect to @pm) | Fallback: first 12 commands |
+| `@aiox-master` | 0 (uses string visibility) | Empty (redirect to @pm) | Fallback: first 12 commands |
 
-**Note:** Agents with 0 `key` commands (`qa`, `data-engineer`, `devops`, `ux-design-expert`, `aios-master`) lack `visibility` array metadata on their commands. In `advanced` mode `workflow` sessions, they fall back to showing first 12 commands. This is a known gap tracked for future improvement.
+**Note:** Agents with 0 `key` commands (`qa`, `data-engineer`, `devops`, `ux-design-expert`, `aiox-master`) lack `visibility` array metadata on their commands. In `advanced` mode `workflow` sessions, they fall back to showing first 12 commands. This is a known gap tracked for future improvement.
 
 ### 13.4 Validation Pipeline Integration
 
@@ -685,7 +685,7 @@ In `bob` mode, non-PM agents return **empty command lists** (redirect to @pm sho
 
 ---
 
-*Traced from source on 2026-02-05 | Story AIOS-TRACE-001*
+*Traced from source on 2026-02-05 | Story AIOX-TRACE-001*
 *Updated on 2026-02-06 | Story ACT-2 - user_profile impact matrix added*
 *Updated on 2026-02-06 | Story ACT-6 - Unified Activation Pipeline (Path A/B merged)*
 *Updated on 2026-02-06 | Story ACT-8 - Config governance: enriched pm, ux-design-expert, analyst, sm, squad-creator*

@@ -13,7 +13,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const os = require('os');
 const yaml = require('js-yaml');
-const { SquadMigrator, SquadValidator } = require('../../../.aios-core/development/scripts/squad');
+const { SquadMigrator, SquadValidator } = require('../../../.aiox-core/development/scripts/squad');
 
 // Test fixtures path (reuse from unit tests)
 const FIXTURES_PATH = path.join(__dirname, '../../unit/squad/fixtures');
@@ -70,8 +70,8 @@ describe('Squad Migration Integration Tests', () => {
       // Verify fields added
       const content = await fs.readFile(path.join(testPath, 'squad.yaml'), 'utf-8');
       const manifest = yaml.load(content);
-      expect(manifest.aios?.type).toBe('squad');
-      expect(manifest.aios?.minVersion).toBe('2.1.0');
+      expect(manifest.aiox?.type).toBe('squad');
+      expect(manifest.aiox?.minVersion).toBe('2.1.0');
 
       // Verify backup exists and contains original files
       expect(await pathExists(result.backupPath)).toBe(true);

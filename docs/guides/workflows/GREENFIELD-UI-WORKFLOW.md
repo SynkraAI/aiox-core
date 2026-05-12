@@ -568,7 +568,7 @@ sequenceDiagram
 
 **Descricao:** Todas as stories implementadas e revisadas. Fase de desenvolvimento do projeto concluida.
 
-**Referencia:** `.aios-core/data/aios-kb.md#IDE Development Workflow`
+**Referencia:** `.aiox-core/data/aiox-kb.md#IDE Development Workflow`
 
 ---
 
@@ -670,10 +670,10 @@ graph LR
    - Git configurado
    - Gerenciador de pacotes (npm/yarn/pnpm)
 
-2. **AIOS-Core Disponivel**
-   - Templates em `.aios-core/development/templates/`
-   - Tasks em `.aios-core/development/tasks/`
-   - Checklists em `.aios-core/development/checklists/`
+2. **AIOX-Core Disponivel**
+   - Templates em `.aiox-core/development/templates/`
+   - Tasks em `.aiox-core/development/tasks/`
+   - Checklists em `.aiox-core/development/checklists/`
 
 3. **Estrutura de Projeto**
    - Diretorio `docs/` criado
@@ -836,7 +836,7 @@ flowchart TD
 
 | Problema | Causa Provavel | Solucao |
 |----------|----------------|---------|
-| Templates nao encontrados | Path incorreto | Verificar `.aios-core/development/templates/` |
+| Templates nao encontrados | Path incorreto | Verificar `.aiox-core/development/templates/` |
 | Agente nao ativa | YAML malformado | Validar sintaxe do arquivo de agente |
 | Checklists falham | Dependencias faltando | Verificar `dependencies` no agente |
 
@@ -870,43 +870,43 @@ flowchart TD
 
 | Arquivo | Caminho |
 |---------|---------|
-| Definicao do Workflow | `.aios-core/development/workflows/greenfield-ui.yaml` |
-| Knowledge Base | `.aios-core/data/aios-kb.md` |
+| Definicao do Workflow | `.aiox-core/development/workflows/greenfield-ui.yaml` |
+| Knowledge Base | `.aiox-core/data/aiox-kb.md` |
 
 ### Agentes
 
 | Agente | Caminho |
 |--------|---------|
-| @analyst | `.aios-core/development/agents/analyst.md` |
-| @pm | `.aios-core/development/agents/pm.md` |
-| @ux-expert | `.aios-core/development/agents/ux-design-expert.md` |
-| @architect | `.aios-core/development/agents/architect.md` |
-| @po | `.aios-core/development/agents/po.md` |
-| @sm | `.aios-core/development/agents/sm.md` |
-| @dev | `.aios-core/development/agents/dev.md` |
-| @qa | `.aios-core/development/agents/qa.md` |
+| @analyst | `.aiox-core/development/agents/analyst.md` |
+| @pm | `.aiox-core/development/agents/pm.md` |
+| @ux-expert | `.aiox-core/development/agents/ux-design-expert.md` |
+| @architect | `.aiox-core/development/agents/architect.md` |
+| @po | `.aiox-core/development/agents/po.md` |
+| @sm | `.aiox-core/development/agents/sm.md` |
+| @dev | `.aiox-core/development/agents/dev.md` |
+| @qa | `.aiox-core/development/agents/qa.md` |
 
 ### Templates Principais
 
 | Template | Caminho |
 |----------|---------|
-| Project Brief | `.aios-core/development/templates/project-brief-tmpl.yaml` |
-| PRD | `.aios-core/development/templates/prd-tmpl.yaml` |
-| Frontend Spec | `.aios-core/development/templates/front-end-spec-tmpl.yaml` |
-| Frontend Architecture | `.aios-core/development/templates/front-end-architecture-tmpl.yaml` |
-| Story | `.aios-core/development/templates/story-tmpl.yaml` |
+| Project Brief | `.aiox-core/development/templates/project-brief-tmpl.yaml` |
+| PRD | `.aiox-core/development/templates/prd-tmpl.yaml` |
+| Frontend Spec | `.aiox-core/development/templates/front-end-spec-tmpl.yaml` |
+| Frontend Architecture | `.aiox-core/development/templates/front-end-architecture-tmpl.yaml` |
+| Story | `.aiox-core/development/templates/story-tmpl.yaml` |
 
 ### Checklists
 
 | Checklist | Caminho |
 |-----------|---------|
-| PO Master | `.aios-core/development/checklists/po-master-checklist.md` |
-| Story Draft | `.aios-core/development/checklists/story-draft-checklist.md` |
-| Story DoD | `.aios-core/development/checklists/story-dod-checklist.md` |
+| PO Master | `.aiox-core/development/checklists/po-master-checklist.md` |
+| Story Draft | `.aiox-core/development/checklists/story-draft-checklist.md` |
+| Story DoD | `.aiox-core/development/checklists/story-dod-checklist.md` |
 
 ### Documentacao Relacionada
 
-- [AIOS Knowledge Base](.aios-core/data/aios-kb.md) - Base de conhecimento central
+- [AIOX Knowledge Base](.aiox-core/data/aiox-kb.md) - Base de conhecimento central
 - [Brownfield Workflow](./BROWNFIELD-WORKFLOW.md) - Workflow para projetos existentes (se disponivel)
 
 ---
@@ -919,4 +919,4 @@ flowchart TD
 
 ---
 
-*Documento gerado automaticamente a partir de `.aios-core/development/workflows/greenfield-ui.yaml`*
+*Documento gerado automaticamente a partir de `.aiox-core/development/workflows/greenfield-ui.yaml`*

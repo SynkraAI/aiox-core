@@ -21,7 +21,7 @@
 
 ## Visao Geral
 
-O agente `@devops` (Gage) e o especialista em infraestrutura e operacoes do framework AIOS. Ele e responsavel por:
+O agente `@devops` (Gage) e o especialista em infraestrutura e operacoes do framework AIOX. Ele e responsavel por:
 
 - **Governanca MCP**: Gerenciamento exclusivo de servidores MCP (Model Context Protocol)
 - **CI/CD**: Configuracao e manutencao de pipelines de integracao e entrega continua
@@ -51,24 +51,24 @@ Filosofia: "Automatize tudo que pode ser automatizado"
 
 | Arquivo | Caminho | Descricao |
 |---------|---------|-----------|
-| Definicao do Agente | `.aios-core/development/agents/devops.md` | Persona, comandos e comportamentos |
+| Definicao do Agente | `.aiox-core/development/agents/devops.md` | Persona, comandos e comportamentos |
 
 ### Arquivos de Tasks
 
 | Task | Caminho | Comando |
 |------|---------|---------|
-| Pre-Push Quality Gate | `.aios-core/development/tasks/github-devops-pre-push-quality-gate.md` | `*push` |
-| Version Management | `.aios-core/development/tasks/github-devops-version-management.md` | `*version-check` |
-| Repository Cleanup | `.aios-core/development/tasks/github-devops-repository-cleanup.md` | `*cleanup` |
-| CI/CD Configuration | `.aios-core/development/tasks/ci-cd-configuration.md` | `*ci-cd` |
-| Release Management | `.aios-core/development/tasks/release-management.md` | `*release` |
-| Environment Bootstrap | `.aios-core/development/tasks/environment-bootstrap.md` | `*environment-bootstrap` |
-| Search MCP | `.aios-core/development/tasks/search-mcp.md` | `*search-mcp` |
-| Add MCP | `.aios-core/development/tasks/add-mcp.md` | `*add-mcp` |
-| Setup MCP Docker | `.aios-core/development/tasks/setup-mcp-docker.md` | `*setup-mcp-docker` |
-| Setup GitHub | `.aios-core/development/tasks/setup-github.md` | `*setup-github` |
-| Security Audit | `.aios-core/development/tasks/security-audit.md` | `*security-audit` |
-| Security Scan | `.aios-core/development/tasks/security-scan.md` | `*security-scan` |
+| Pre-Push Quality Gate | `.aiox-core/development/tasks/github-devops-pre-push-quality-gate.md` | `*push` |
+| Version Management | `.aiox-core/development/tasks/github-devops-version-management.md` | `*version-check` |
+| Repository Cleanup | `.aiox-core/development/tasks/github-devops-repository-cleanup.md` | `*cleanup` |
+| CI/CD Configuration | `.aiox-core/development/tasks/ci-cd-configuration.md` | `*ci-cd` |
+| Release Management | `.aiox-core/development/tasks/release-management.md` | `*release` |
+| Environment Bootstrap | `.aiox-core/development/tasks/environment-bootstrap.md` | `*environment-bootstrap` |
+| Search MCP | `.aiox-core/development/tasks/search-mcp.md` | `*search-mcp` |
+| Add MCP | `.aiox-core/development/tasks/add-mcp.md` | `*add-mcp` |
+| Setup MCP Docker | `.aiox-core/development/tasks/setup-mcp-docker.md` | `*setup-mcp-docker` |
+| Setup GitHub | `.aiox-core/development/tasks/setup-github.md` | `*setup-github` |
+| Security Audit | `.aiox-core/development/tasks/security-audit.md` | `*security-audit` |
+| Security Scan | `.aiox-core/development/tasks/security-scan.md` | `*security-scan` |
 
 ### Arquivos de Configuracao e Regras
 
@@ -252,7 +252,7 @@ flowchart TD
     STRUCTURE --> DIR1["apps/"]
     STRUCTURE --> DIR2["packages/"]
     STRUCTURE --> DIR3["docs/"]
-    STRUCTURE --> DIR4[".aios-core/"]
+    STRUCTURE --> DIR4[".aiox-core/"]
 
     DIR1 & DIR2 & DIR3 & DIR4 --> TEMPLATES["Aplicar Templates"]
     TEMPLATES --> DEPS["Instalar Dependencias"]
@@ -574,7 +574,7 @@ npm audit --ignore-advisories=ADVISORY_ID
 
 ## Referencias
 
-### Documentacao AIOS
+### Documentacao AIOX
 
 - [Regras de Uso MCP](../../.claude/rules/mcp-usage.md)
 - [Operacoes N8N](../../.claude/rules/n8n-operations.md)
@@ -591,11 +591,11 @@ npm audit --ignore-advisories=ADVISORY_ID
 
 | Task | Descricao |
 |------|-----------|
-| [Pre-Push Quality Gate](.aios-core/development/tasks/github-devops-pre-push-quality-gate.md) | Validacao antes do push |
-| [Version Management](.aios-core/development/tasks/github-devops-version-management.md) | Gerenciamento de versoes |
-| [CI/CD Configuration](.aios-core/development/tasks/ci-cd-configuration.md) | Configuracao de pipelines |
-| [Release Management](.aios-core/development/tasks/release-management.md) | Gerenciamento de releases |
-| [Environment Bootstrap](.aios-core/development/tasks/environment-bootstrap.md) | Bootstrap de ambientes |
+| [Pre-Push Quality Gate](.aiox-core/development/tasks/github-devops-pre-push-quality-gate.md) | Validacao antes do push |
+| [Version Management](.aiox-core/development/tasks/github-devops-version-management.md) | Gerenciamento de versoes |
+| [CI/CD Configuration](.aiox-core/development/tasks/ci-cd-configuration.md) | Configuracao de pipelines |
+| [Release Management](.aiox-core/development/tasks/release-management.md) | Gerenciamento de releases |
+| [Environment Bootstrap](.aiox-core/development/tasks/environment-bootstrap.md) | Bootstrap de ambientes |
 
 ---
 
@@ -633,5 +633,5 @@ npm audit --ignore-advisories=ADVISORY_ID
 
 ---
 
-*Documento gerado pelo Sistema AIOS - 2026-02-04*
+*Documento gerado pelo Sistema AIOX - 2026-02-04*
 *Mantido por: @devops*

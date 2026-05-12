@@ -2,7 +2,7 @@
  * Integration Test Suite: Utility Scripts Integration - Part 1
  * 
  * Story: 3.4 - Utility Script Integration Part 1
- * Purpose: Validate integration of 23 utility scripts into AIOS framework
+ * Purpose: Validate integration of 23 utility scripts into AIOX framework
  * 
  * Tests:
  * 1. Load all 23 utilities successfully (no errors)
@@ -18,8 +18,8 @@ const { execSync } = require('child_process');
 
 // Test configuration
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
-const UTILS_PATH = path.join(ROOT_PATH, 'aios-core', 'utils');
-const AGENTS_PATH = path.join(ROOT_PATH, 'aios-core', 'agents');
+const UTILS_PATH = path.join(ROOT_PATH, 'aiox-core', 'utils');
+const AGENTS_PATH = path.join(ROOT_PATH, 'aiox-core', 'agents');
 const COMMON_UTILS_PATH = path.join(ROOT_PATH, 'common', 'utils');
 
 // 23 utilities to test (from Story 3.4)

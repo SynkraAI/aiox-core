@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         ## 🙌 Show and Tell
-        Built something cool with AIOS? Share it with the community!
+        Built something cool with AIOX? Share it with the community!
 
         We love seeing what you've created. Your project might inspire others!
 
@@ -16,7 +16,7 @@ body:
     attributes:
       label: Project Name
       description: What's your project called?
-      placeholder: My Awesome AIOS Project
+      placeholder: My Awesome AIOX Project
     validations:
       required: true
 
@@ -33,14 +33,14 @@ body:
       required: true
 
   - type: dropdown
-    id: aios-components
+    id: aiox-components
     attributes:
-      label: AIOS Components Used
-      description: Which parts of AIOS does your project use?
+      label: AIOX Components Used
+      description: Which parts of AIOX does your project use?
       multiple: true
       options:
-        - aios-core (Core Framework)
-        - aios-squads (AIOS Squads)
+        - aiox-core (Core Framework)
+        - aiox-squads (AIOX Squads)
         - ETL Squad
         - Creator Squad
         - Docker MCP Toolkit
@@ -99,4 +99,4 @@ body:
     attributes:
       value: |
         ---
-        **Thank you for sharing!** Your contribution helps grow the AIOS community. 🎉
+        **Thank you for sharing!** Your contribution helps grow the AIOX community. 🎉

@@ -9,7 +9,7 @@ const os = require('os');
 const { execSync, spawn } = require('child_process');
 
 describe('MCP Setup Integration', () => {
-  const cliIndexPath = path.join(__dirname, '../../.aios-core/cli/index.js');
+  const cliIndexPath = path.join(__dirname, '../../.aiox-core/cli/index.js');
   let tempDir;
   let originalHome;
 
@@ -29,37 +29,37 @@ describe('MCP Setup Integration', () => {
   describe('CLI Module Loading', () => {
     it('should load mcp command module without errors', () => {
       expect(() => {
-        require('../../.aios-core/cli/commands/mcp');
+        require('../../.aiox-core/cli/commands/mcp');
       }).not.toThrow();
     });
 
     it('should export createMcpCommand function', () => {
-      const mcpModule = require('../../.aios-core/cli/commands/mcp');
+      const mcpModule = require('../../.aiox-core/cli/commands/mcp');
       expect(typeof mcpModule.createMcpCommand).toBe('function');
     });
 
     it('should load all mcp subcommand modules', () => {
       expect(() => {
-        require('../../.aios-core/cli/commands/mcp/setup');
-        require('../../.aios-core/cli/commands/mcp/link');
-        require('../../.aios-core/cli/commands/mcp/status');
-        require('../../.aios-core/cli/commands/mcp/add');
+        require('../../.aiox-core/cli/commands/mcp/setup');
+        require('../../.aiox-core/cli/commands/mcp/link');
+        require('../../.aiox-core/cli/commands/mcp/status');
+        require('../../.aiox-core/cli/commands/mcp/add');
       }).not.toThrow();
     });
   });
 
   describe('Core Module Loading', () => {
     it('should load os-detector module', () => {
-      const osDetector = require('../../.aios-core/core/mcp/os-detector');
+      const osDetector = require('../../.aiox-core/core/mcp/os-detector');
 
       expect(osDetector.detectOS).toBeDefined();
       expect(osDetector.isWindows).toBeDefined();
-      expect(osDetector.getGlobalAiosDir).toBeDefined();
+      expect(osDetector.getGlobalAioxDir).toBeDefined();
       expect(osDetector.getGlobalMcpDir).toBeDefined();
     });
 
     it('should load global-config-manager module', () => {
-      const configManager = require('../../.aios-core/core/mcp/global-config-manager');
+      const configManager = require('../../.aiox-core/core/mcp/global-config-manager');
 
       expect(configManager.createGlobalStructure).toBeDefined();
       expect(configManager.createGlobalConfig).toBeDefined();
@@ -68,7 +68,7 @@ describe('MCP Setup Integration', () => {
     });
 
     it('should load symlink-manager module', () => {
-      const symlinkManager = require('../../.aios-core/core/mcp/symlink-manager');
+      const symlinkManager = require('../../.aiox-core/core/mcp/symlink-manager');
 
       expect(symlinkManager.createLink).toBeDefined();
       expect(symlinkManager.removeLink).toBeDefined();
@@ -76,7 +76,7 @@ describe('MCP Setup Integration', () => {
     });
 
     it('should load config-migrator module', () => {
-      const configMigrator = require('../../.aios-core/core/mcp/config-migrator');
+      const configMigrator = require('../../.aiox-core/core/mcp/config-migrator');
 
       expect(configMigrator.detectProjectConfig).toBeDefined();
       expect(configMigrator.analyzeMigration).toBeDefined();
@@ -84,7 +84,7 @@ describe('MCP Setup Integration', () => {
     });
 
     it('should load mcp index module with all exports', () => {
-      const mcp = require('../../.aios-core/core/mcp');
+      const mcp = require('../../.aiox-core/core/mcp');
 
       // OS Detector exports
       expect(mcp.detectOS).toBeDefined();
@@ -104,7 +104,7 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('OS Detection', () => {
-    const { detectOS, isWindows, isMacOS, isLinux, getOSInfo } = require('../../.aios-core/core/mcp/os-detector');
+    const { detectOS, isWindows, isMacOS, isLinux, getOSInfo } = require('../../.aiox-core/core/mcp/os-detector');
 
     it('should detect current OS correctly', () => {
       const osType = detectOS();
@@ -133,7 +133,7 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('Server Templates', () => {
-    const { getAvailableTemplates, getServerTemplate, SERVER_TEMPLATES } = require('../../.aios-core/core/mcp/global-config-manager');
+    const { getAvailableTemplates, getServerTemplate, SERVER_TEMPLATES } = require('../../.aiox-core/core/mcp/global-config-manager');
 
     it('should have standard server templates', () => {
       const templates = getAvailableTemplates();
@@ -169,25 +169,25 @@ describe('MCP Setup Integration', () => {
 
   describe('Path Generation', () => {
     const {
-      getGlobalAiosDir,
+      getGlobalAioxDir,
       getGlobalMcpDir,
       getGlobalConfigPath,
       getServersDir,
       getCacheDir,
       getCredentialsDir,
-    } = require('../../.aios-core/core/mcp/os-detector');
+    } = require('../../.aiox-core/core/mcp/os-detector');
 
-    it('should generate correct global AIOS directory path', () => {
-      const aiosDir = getGlobalAiosDir();
+    it('should generate correct global AIOX directory path', () => {
+      const aioxDir = getGlobalAioxDir();
 
-      expect(aiosDir).toContain('.aios');
-      expect(path.isAbsolute(aiosDir)).toBe(true);
+      expect(aioxDir).toContain('.aiox');
+      expect(path.isAbsolute(aioxDir)).toBe(true);
     });
 
     it('should generate correct MCP directory path', () => {
       const mcpDir = getGlobalMcpDir();
 
-      expect(mcpDir).toContain('.aios');
+      expect(mcpDir).toContain('.aiox');
       expect(mcpDir).toContain('mcp');
     });
 
@@ -217,7 +217,7 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('Link Status Constants', () => {
-    const { LINK_STATUS } = require('../../.aios-core/core/mcp/symlink-manager');
+    const { LINK_STATUS } = require('../../.aiox-core/core/mcp/symlink-manager');
 
     it('should have all required status values', () => {
       expect(LINK_STATUS).toHaveProperty('LINKED', 'linked');
@@ -229,7 +229,7 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('Migration Options Constants', () => {
-    const { MIGRATION_OPTION } = require('../../.aios-core/core/mcp/config-migrator');
+    const { MIGRATION_OPTION } = require('../../.aiox-core/core/mcp/config-migrator');
 
     it('should have all required migration options', () => {
       expect(MIGRATION_OPTION).toHaveProperty('MIGRATE', 'migrate');
@@ -239,7 +239,7 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('Default Config Structure', () => {
-    const { DEFAULT_CONFIG } = require('../../.aios-core/core/mcp/global-config-manager');
+    const { DEFAULT_CONFIG } = require('../../.aiox-core/core/mcp/global-config-manager');
 
     it('should have correct version', () => {
       expect(DEFAULT_CONFIG.version).toBe('1.0');
@@ -258,7 +258,7 @@ describe('MCP Setup Integration', () => {
   });
 
   describe('CLI Help Output', () => {
-    const { createMcpCommand } = require('../../.aios-core/cli/commands/mcp');
+    const { createMcpCommand } = require('../../.aiox-core/cli/commands/mcp');
 
     it('should create command with proper structure', () => {
       const mcpCommand = createMcpCommand();
@@ -281,7 +281,7 @@ describe('MCP Setup Integration', () => {
 
 describe('MCP CLI Command Registration', () => {
   it('should have mcp command in main CLI', () => {
-    const { createProgram } = require('../../.aios-core/cli/index');
+    const { createProgram } = require('../../.aiox-core/cli/index');
     const program = createProgram();
 
     const commandNames = program.commands.map(cmd => cmd.name());
@@ -289,7 +289,7 @@ describe('MCP CLI Command Registration', () => {
   });
 
   it('should include mcp in help text', () => {
-    const { createProgram } = require('../../.aios-core/cli/index');
+    const { createProgram } = require('../../.aiox-core/cli/index');
     const program = createProgram();
 
     const helpInfo = program.helpInformation();

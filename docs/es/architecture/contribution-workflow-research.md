@@ -15,7 +15,7 @@
 
 ## Resumen Ejecutivo
 
-Este documento consolida los hallazgos de investigación sobre mejores prácticas para flujos de trabajo de contribuidores externos en proyectos de código abierto, específicamente para habilitar contribuciones seguras de la comunidad a agentes y tareas de AIOS.
+Este documento consolida los hallazgos de investigación sobre mejores prácticas para flujos de trabajo de contribuidores externos en proyectos de código abierto, específicamente para habilitar contribuciones seguras de la comunidad a agentes y tareas de AIOX.
 
 ---
 
@@ -126,7 +126,7 @@ auto_title_instructions: |
   Título debe ser <= 80 caracteres
 ```
 
-### 2.3 Recomendaciones Específicas para AIOS
+### 2.3 Recomendaciones Específicas para AIOX
 
 Para contribuciones de agentes/tareas, CodeRabbit debe validar:
 
@@ -172,17 +172,17 @@ Dockerfile @org/devops-team
 /security/ @org/security-team
 ```
 
-### 3.3 Estructura Específica de AIOS
+### 3.3 Estructura Específica de AIOX
 
 ```codeowners
 # Por defecto - requiere revisión de maintainer
 * @SynkraAI/maintainers
 
 # Definiciones de agentes - requiere equipo core
-.aios-core/development/agents/ @SynkraAI/core-team
+.aiox-core/development/agents/ @SynkraAI/core-team
 
 # Definiciones de tareas - requiere equipo core
-.aios-core/development/tasks/ @SynkraAI/core-team
+.aiox-core/development/tasks/ @SynkraAI/core-team
 
 # CI/CD - requiere aprobación devops
 .github/ @SynkraAI/devops
@@ -192,7 +192,7 @@ docs/ @SynkraAI/maintainers
 
 # Plantillas - requiere revisión de arquitecto
 templates/ @SynkraAI/core-team
-.aios-core/product/templates/ @SynkraAI/core-team
+.aiox-core/product/templates/ @SynkraAI/core-team
 ```
 
 ---
@@ -313,7 +313,7 @@ De [Prisma CONTRIBUTING.md](https://github.com/prisma/prisma/blob/main/CONTRIBUT
 
 ---
 
-## 7. Recomendaciones para AIOS
+## 7. Recomendaciones para AIOX
 
 ### 7.1 Acciones Inmediatas (CRÍTICO)
 
@@ -323,7 +323,7 @@ De [Prisma CONTRIBUTING.md](https://github.com/prisma/prisma/blob/main/CONTRIBUT
 
 ### 7.2 Acciones a Corto Plazo (ALTO)
 
-1. **Crear `.coderabbit.yaml`** con instrucciones de ruta específicas de AIOS
+1. **Crear `.coderabbit.yaml`** con instrucciones de ruta específicas de AIOX
 2. **Actualizar CODEOWNERS** con propiedad granular
 3. **Habilitar resolución de conversación requerida**
 

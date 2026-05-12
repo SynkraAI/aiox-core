@@ -24,13 +24,13 @@ const MANIFEST_PATH = path.join(SYNAPSE_PATH, 'manifest');
 const synapseExists = fs.existsSync(SYNAPSE_PATH) && fs.existsSync(MANIFEST_PATH);
 
 const { SynapseEngine } = require(
-  path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js'),
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js'),
 );
 const { parseManifest } = require(
-  path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js'),
 );
 const { loadSession } = require(
-  path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'session', 'session-manager.js'),
+  path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'session', 'session-manager.js'),
 );
 
 const ITERATIONS = 50;

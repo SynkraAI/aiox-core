@@ -2,7 +2,7 @@
  * Pro Content Scaffolder
  *
  * Copies premium content (squads, configs, feature registry) from
- * node_modules/@aios-fullstack/pro/ into the user's project after
+ * node_modules/@aiox-fullstack/pro/ into the user's project after
  * license activation.
  *
  * @module packages/installer/src/pro/pro-scaffolder
@@ -15,6 +15,13 @@ const fs = require('fs-extra');
 const path = require('path');
 const yaml = require('js-yaml');
 const { hashFileAsync, hashFilesMatchAsync } = require('../installer/file-hasher');
+
+/**
+ * Directories excluded from scaffolding (private/internal squads).
+ */
+const SCAFFOLD_EXCLUDES = [
+  'mmos-squad',
+];
 
 /**
  * Items to scaffold from pro package into user project.
@@ -31,14 +38,14 @@ const SCAFFOLD_ITEMS = [
   {
     type: 'file',
     source: 'pro-config.yaml',
-    dest: path.join('.aios-core', 'pro-config.yaml'),
+    dest: path.join('.aiox-core', 'pro-config.yaml'),
     description: 'Pro configuration',
     required: true,
   },
   {
     type: 'file',
     source: 'feature-registry.yaml',
-    dest: path.join('.aios-core', 'feature-registry.yaml'),
+    dest: path.join('.aiox-core', 'feature-registry.yaml'),
     description: 'Feature registry',
     required: false,
   },
@@ -48,7 +55,7 @@ const SCAFFOLD_ITEMS = [
  * Scaffold pro content into user project.
  *
  * @param {string} targetDir - Project root directory
- * @param {string} proSourceDir - Path to pro package content (node_modules/@aios-fullstack/pro)
+ * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-fullstack/pro)
  * @param {Object} [options={}] - Scaffold options
  * @param {Function} [options.onProgress] - Progress callback ({item, status, message})
  * @param {boolean} [options.force=false] - Force overwrite even if content exists
@@ -73,7 +80,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
   // Validate pro source exists
   if (!await fs.pathExists(proSourceDir)) {
     result.errors.push(
-      `Pro package not found at ${proSourceDir}. Run "npm install @aios-fullstack/pro" first.`
+      `Pro package not found at ${proSourceDir}. Run "npm install @aiox-fullstack/pro" first.`
     );
     return result;
   }
@@ -111,6 +118,22 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
 
       if (onProgress) {
         onProgress({ item: item.source, status: 'done', message: `${item.description} scaffolded` });
+      }
+    }
+
+    // Merge pro-config into core-config
+    const merged = await mergeProConfig(targetDir);
+    if (merged && onProgress) {
+      onProgress({ item: 'pro-config', status: 'done', message: 'Pro config merged into core-config.yaml' });
+    }
+
+    // Install squad agent commands to IDEs
+    const commandsResult = await installSquadCommands(targetDir);
+    if (commandsResult.installed > 0) {
+      result.copiedFiles.push(...commandsResult.files);
+      if (onProgress) {
+        onProgress({ item: 'squad-commands', status: 'done',
+          message: `${commandsResult.installed} squad agent commands installed` });
       }
     }
 
@@ -162,6 +185,11 @@ async function scaffoldDirectory(sourceDir, destDir, options = {}) {
   const items = await fs.readdir(sourceDir, { withFileTypes: true });
 
   for (const item of items) {
+    // Skip excluded directories (e.g. private squads)
+    if (SCAFFOLD_EXCLUDES.includes(item.name)) {
+      continue;
+    }
+
     const sourcePath = path.join(sourceDir, item.name);
     const destPath = path.join(destDir, item.name);
 
@@ -324,6 +352,89 @@ async function rollbackScaffold(rollbackFiles) {
   return { removed, errors };
 }
 
+/**
+ * Merge pro-config.yaml sections into core-config.yaml.
+ * Deep merges top-level keys (pro, memory, metrics, integrations, squads).
+ *
+ * @param {string} targetDir - Project root directory
+ * @returns {Promise<boolean>} True if merge was performed
+ */
+async function mergeProConfig(targetDir) {
+  const coreConfigPath = path.join(targetDir, '.aiox-core', 'core-config.yaml');
+  const proConfigPath = path.join(targetDir, '.aiox-core', 'pro-config.yaml');
+
+  if (!await fs.pathExists(proConfigPath) || !await fs.pathExists(coreConfigPath)) {
+    return false;
+  }
+
+  const coreConfig = yaml.load(await fs.readFile(coreConfigPath, 'utf8')) || {};
+  const proConfig = yaml.load(await fs.readFile(proConfigPath, 'utf8')) || {};
+
+  for (const [key, value] of Object.entries(proConfig)) {
+    if (coreConfig[key] && typeof coreConfig[key] === 'object' && typeof value === 'object' && !Array.isArray(value)) {
+      coreConfig[key] = { ...coreConfig[key], ...value };
+    } else {
+      coreConfig[key] = value;
+    }
+  }
+
+  await fs.writeFile(coreConfigPath, yaml.dump(coreConfig, { lineWidth: -1 }), 'utf8');
+  return true;
+}
+
+/**
+ * Install squad agent commands into active IDE directories.
+ * Detects which IDEs are configured and copies agent .md files accordingly.
+ *
+ * @param {string} targetDir - Project root directory
+ * @returns {Promise<Object>} Result with installed count and file list
+ */
+async function installSquadCommands(targetDir) {
+  const squadsDir = path.join(targetDir, 'squads');
+  if (!await fs.pathExists(squadsDir)) return { installed: 0, files: [] };
+
+  const ideTargets = [
+    { check: path.join('.claude', 'commands'), dest: (squad) => path.join('.claude', 'commands', squad) },
+    { check: path.join('.codex', 'agents'), dest: () => path.join('.codex', 'agents') },
+    { check: path.join('.gemini', 'rules'), dest: (squad) => path.join('.gemini', 'rules', squad) },
+    { check: path.join('.cursor', 'rules'), dest: () => path.join('.cursor', 'rules') },
+  ];
+
+  const activeIDEs = [];
+  for (const ide of ideTargets) {
+    if (await fs.pathExists(path.join(targetDir, ide.check))) {
+      activeIDEs.push(ide);
+    }
+  }
+  if (activeIDEs.length === 0) return { installed: 0, files: [] };
+
+  const files = [];
+  const items = await fs.readdir(squadsDir, { withFileTypes: true });
+
+  for (const item of items) {
+    if (!item.isDirectory()) continue;
+    const agentsDir = path.join(squadsDir, item.name, 'agents');
+    if (!await fs.pathExists(agentsDir)) continue;
+
+    const agentFiles = (await fs.readdir(agentsDir))
+      .filter(f => f.endsWith('.md') && !f.startsWith('test-'));
+
+    for (const ide of activeIDEs) {
+      const destDir = path.join(targetDir, ide.dest(item.name));
+      await fs.ensureDir(destDir);
+      for (const agentFile of agentFiles) {
+        await fs.copy(
+          path.join(agentsDir, agentFile),
+          path.join(destDir, agentFile)
+        );
+        files.push(path.relative(targetDir, path.join(destDir, agentFile)).replace(/\\/g, '/'));
+      }
+    }
+  }
+
+  return { installed: files.length, files };
+}
+
 module.exports = {
   scaffoldProContent,
   scaffoldDirectory,
@@ -331,5 +442,8 @@ module.exports = {
   generateProVersionJson,
   generateInstalledManifest,
   rollbackScaffold,
+  mergeProConfig,
+  installSquadCommands,
   SCAFFOLD_ITEMS,
+  SCAFFOLD_EXCLUDES,
 };

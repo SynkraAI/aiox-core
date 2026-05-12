@@ -25,7 +25,7 @@ const {
   clearPendingDeactivation,
   cacheExists,
   getCachePath,
-  getAiosDir,
+  getAioxDir,
   _CONFIG,
 } = require('../../pro/license/license-cache');
 
@@ -34,7 +34,7 @@ describe('license-cache', () => {
 
   // Create a fresh test directory for each test
   beforeEach(() => {
-    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aios-license-test-'));
+    testDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-license-test-'));
   });
 
   // Cleanup after each test
@@ -69,15 +69,15 @@ describe('license-cache', () => {
       expect(fs.existsSync(getCachePath(testDir))).toBe(true);
     });
 
-    it('should create .aios directory if not exists', () => {
+    it('should create .aiox directory if not exists', () => {
       const data = createTestCacheData();
-      const aiosDir = getAiosDir(testDir);
+      const aioxDir = getAioxDir(testDir);
 
-      expect(fs.existsSync(aiosDir)).toBe(false);
+      expect(fs.existsSync(aioxDir)).toBe(false);
 
       writeLicenseCache(data, testDir);
 
-      expect(fs.existsSync(aiosDir)).toBe(true);
+      expect(fs.existsSync(aioxDir)).toBe(true);
     });
 
     it('should write encrypted content', () => {
@@ -102,8 +102,8 @@ describe('license-cache', () => {
       const data = createTestCacheData();
       writeLicenseCache(data, testDir);
 
-      const aiosDir = getAiosDir(testDir);
-      const files = fs.readdirSync(aiosDir);
+      const aioxDir = getAioxDir(testDir);
+      const files = fs.readdirSync(aioxDir);
 
       expect(files).toContain('license.cache');
       expect(files.filter((f) => f.includes('.tmp'))).toHaveLength(0);
@@ -151,7 +151,7 @@ describe('license-cache', () => {
 
     it('should return null for corrupted JSON', () => {
       const cachePath = getCachePath(testDir);
-      fs.mkdirSync(getAiosDir(testDir), { recursive: true });
+      fs.mkdirSync(getAioxDir(testDir), { recursive: true });
       fs.writeFileSync(cachePath, 'not valid json', 'utf8');
 
       const cache = readLicenseCache(testDir);
@@ -191,7 +191,7 @@ describe('license-cache', () => {
 
     it('should return null for missing required fields', () => {
       const cachePath = getCachePath(testDir);
-      fs.mkdirSync(getAiosDir(testDir), { recursive: true });
+      fs.mkdirSync(getAioxDir(testDir), { recursive: true });
       fs.writeFileSync(cachePath, JSON.stringify({ partial: 'data' }), 'utf8');
 
       const cache = readLicenseCache(testDir);
@@ -477,7 +477,7 @@ describe('license-cache', () => {
         setPendingDeactivation('PRO-TEST-KEY', testDir);
         markPendingDeactivationSynced(testDir);
 
-        const filePath = path.join(getAiosDir(testDir), 'pending-deactivation.json');
+        const filePath = path.join(getAioxDir(testDir), 'pending-deactivation.json');
         const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
         expect(content.synced).toBe(true);

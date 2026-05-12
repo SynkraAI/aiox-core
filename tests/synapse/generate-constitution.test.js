@@ -17,8 +17,8 @@ const {
   cleanText,
   main,
   ROMAN_TO_ARABIC,
-} = require('../../.aios-core/core/synapse/scripts/generate-constitution');
-const { parseManifest, loadDomainFile } = require('../../.aios-core/core/synapse/domain/domain-loader');
+} = require('../../.aiox-core/core/synapse/scripts/generate-constitution');
+const { parseManifest, loadDomainFile } = require('../../.aiox-core/core/synapse/domain/domain-loader');
 
 // Set timeout for all tests
 jest.setTimeout(30000);
@@ -73,7 +73,7 @@ Amendment process here.
 /**
  * Fixture: full 6-article constitution matching real format
  */
-const FULL_CONSTITUTION = `# Synkra AIOS Constitution
+const FULL_CONSTITUTION = `# Synkra AIOX Constitution
 
 > **Version:** 1.0.0
 
@@ -331,7 +331,7 @@ describe('generateConstitution', () => {
     const output = generateConstitution(articles);
 
     expect(output).toContain('# SYNAPSE Constitution Domain (L0)');
-    expect(output).toContain('# Auto-generated from .aios-core/constitution.md');
+    expect(output).toContain('# Auto-generated from .aiox-core/constitution.md');
     expect(output).toContain('# DO NOT EDIT MANUALLY');
   });
 
@@ -470,7 +470,7 @@ describe('main', () => {
 });
 
 describe('integration: real constitution.md', () => {
-  const realConstitutionPath = path.join(__dirname, '..', '..', '.aios-core', 'constitution.md');
+  const realConstitutionPath = path.join(__dirname, '..', '..', '.aiox-core', 'constitution.md');
 
   test('should parse real constitution.md with 6 articles', () => {
     // Skip if constitution.md doesn't exist (CI environment)

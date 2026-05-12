@@ -13,7 +13,7 @@
 
 ## Resumo Executivo
 
-**@docs (Ajax)** e um agente de IA especializado em criar **documentacao educacional** para o AIOS. Diferente da documentacao tecnica (JSDoc/Typedoc), Ajax foca em **tutoriais, guias de onboarding, explicadores visuais e materiais de treinamento para parceiros**.
+**@docs (Ajax)** e um agente de IA especializado em criar **documentacao educacional** para o AIOX. Diferente da documentacao tecnica (JSDoc/Typedoc), Ajax foca em **tutoriais, guias de onboarding, explicadores visuais e materiais de treinamento para parceiros**.
 
 ### Objetivos Principais
 
@@ -91,7 +91,7 @@ agent:
 whenToUse: |
   Ative @docs quando precisar de:
   - Guias de onboarding para novos usuarios ou parceiros
-  - Tutoriais explicando como usar recursos do AIOS
+  - Tutoriais explicando como usar recursos do AIOX
   - Diagramas Mermaid visualizando fluxos de trabalho do sistema
   - Materiais de treinamento para parceiros (Wave 4)
   - Atualizacoes de conteudo educacional apos mudancas de codigo
@@ -355,7 +355,7 @@ Entrada:
     tipo: string
     origem: user_input | auto-detect
     obrigatorio: false
-    example: "expansion-packs/aios/agents/dev/agent.yaml"
+    example: "squads/aiox/agents/dev/agent.yaml"
 
   - campo: include_task_examples
     tipo: boolean
@@ -466,7 +466,7 @@ Entrada:
     tipo: string
     origem: user_input
     obrigatorio: true
-    example: "agent-collaboration-workflow", "expansion-pack-installation"
+    example: "agent-collaboration-workflow", "squad-installation"
 
   - campo: source_context
     tipo: string | code_snippet
@@ -505,7 +505,7 @@ Checklist:
     - check: "Diagrama e legivel (nao muito poluido)"
       blocker: false
 
-    - check: "Usa estilo consistente (paleta de cores AIOS)"
+    - check: "Usa estilo consistente (paleta de cores AIOX)"
       blocker: false
 
 Template: docs/templates/mermaid-diagram-template.mmd
@@ -660,7 +660,7 @@ atomic_layer: Content
 
 whenToUse: |
   - Onboarding de parceiros Wave 4 (Epic 14, 15, 16)
-  - Novo parceiro entra no ecossistema AIOS
+  - Novo parceiro entra no ecossistema AIOX
   - Materiais de treinamento de parceiros precisam de atualizacao
   - Criando cursos de certificacao
 
@@ -681,7 +681,7 @@ Entrada:
     tipo: string
     origem: user_input
     obrigatorio: true
-    example: "expansion-pack-creation", "partner-os-usage", "revenue-sharing"
+    example: "squad-creation", "partner-os-usage", "revenue-sharing"
 
   - campo: include_video_script
     tipo: boolean
@@ -749,7 +749,7 @@ Checklist:
     - check: "Tem secao 'Erros Comuns'"
       blocker: false
 
-    - check: "Links para documentacao AIOS relevante"
+    - check: "Links para documentacao AIOX relevante"
       blocker: false
 
     - check: "Inclui informacoes de contato de suporte"
@@ -1071,7 +1071,7 @@ Agora que voce aprendeu [recurso], voce pode:
 
 **Precisa de Ajuda?**
 - Pergunte no [canal Discord/Slack]
-- Email [support@aios.dev]
+- Email [support@aiox.dev]
 - Reportar bugs: [GitHub Issues]
 
 ---
@@ -1098,7 +1098,7 @@ Localizacao: `docs/templates/agent-documentation-template.md`
 
 ## Visao Geral
 
-[Nome do Agente] e o agente de [funcao] do AIOS, especializado em [expertise principal].
+[Nome do Agente] e o agente de [funcao] do AIOX, especializado em [expertise principal].
 
 **Quando usar @[nome-agente]:**
 - [Caso de uso 1]
@@ -1310,7 +1310,7 @@ Ao completar este treinamento, voce sera capaz de:
 ## Suporte e Recursos
 
 **Equipe de Sucesso do Parceiro:**
-- Email: partners@aios.dev
+- Email: partners@aiox.dev
 - Slack: #partner-support
 - Horario de Atendimento: [Link do agendamento]
 
@@ -1359,7 +1359,7 @@ flowchart TD
 ```
 
 **Notas do Template:**
-- Use paleta de cores AIOS (Azul primario, Roxo secundario, Rosa terciario)
+- Use paleta de cores AIOX (Azul primario, Roxo secundario, Rosa terciario)
 - Mantenha diagramas focados (max 10-12 nos)
 - Use rotulos claros e orientados a acao
 - Inclua legenda se usar simbolos personalizados
@@ -1462,7 +1462,7 @@ Localizacao: `docs/templates/qa-report-template.md`
 
 ```bash
 #!/bin/bash
-# Hook de Auto-Atualizacao @docs do AIOS
+# Hook de Auto-Atualizacao @docs do AIOX
 # Aciona @docs quando mudancas de codigo sao mergeadas
 
 echo "Verificando atualizacoes de documentacao necessarias..."
@@ -1471,11 +1471,11 @@ echo "Verificando atualizacoes de documentacao necessarias..."
 changed_files=$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)
 
 # Verificar se codigo fonte mudou
-if echo "$changed_files" | grep -qE "^(src/|aios-core/)"; then
+if echo "$changed_files" | grep -qE "^(src/|aiox-core/)"; then
   echo "Mudancas de codigo detectadas. Analisando impacto na documentacao..."
 
   # Invocar tarefa de atualizacao @docs
-  aios agent invoke @docs --task update-educational-docs \
+  aiox agent invoke @docs --task update-educational-docs \
     --files "$changed_files" \
     --mode interactive
 
@@ -1503,8 +1503,8 @@ on:
   pull_request:
     paths:
       - 'src/**'
-      - 'aios-core/**'
-      - 'expansion-packs/**'
+      - 'aiox-core/**'
+      - 'squads/**'
 
 jobs:
   check-docs:
@@ -1521,8 +1521,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Instalar AIOS CLI
-        run: npm install -g @aios/core
+      - name: Instalar AIOX CLI
+        run: npm install -g @aiox/core
 
       - name: Analisar mudancas do PR
         id: analyze
@@ -1531,7 +1531,7 @@ jobs:
           files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
 
           # Invocar @docs para sugerir atualizacoes de documentacao
-          aios agent invoke @docs --task update-educational-docs \
+          aiox agent invoke @docs --task update-educational-docs \
             --files "$files" \
             --mode preflight \
             --output .ai/docs-suggestions.json
@@ -1586,13 +1586,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
 
-      - name: Instalar AIOS CLI
-        run: npm install -g @aios/core
+      - name: Instalar AIOX CLI
+        run: npm install -g @aiox/core
 
       - name: Executar QA de Documentacao
         id: qa
         run: |
-          aios agent invoke @docs --task qa-documentation \
+          aiox agent invoke @docs --task qa-documentation \
             --paths "docs/**/*.md" \
             --validation-level comprehensive \
             --output .ai/qa-report.md
@@ -1707,7 +1707,7 @@ dashboard:
 ### Fase 1: Construcao do Agente (Semana 1)
 
 **Dias 1-2: Fundacao do Agente**
-- [ ] Criar `expansion-packs/aios/agents/docs/agent.yaml`
+- [ ] Criar `squads/aiox/agents/docs/agent.yaml`
 - [ ] Definir persona Ajax (arquetipo Aries, cor Azul)
 - [ ] Escrever prompt de sistema base
 - [ ] Configurar padroes de colaboracao com outros agentes
@@ -1748,7 +1748,7 @@ dashboard:
 
 **Dias 8-10: Materiais de Treinamento de Parceiros (Epic 14)**
 - [ ] Gerar guia de onboarding de parceiro fundador
-- [ ] Criar tutorial de criacao de expansion pack
+- [ ] Criar tutorial de criacao de squad
 - [ ] Desenvolver templates de check-in semanal
 - [ ] Construir playbook de sucesso do parceiro
 
@@ -1908,7 +1908,7 @@ dashboard:
 
 - [ ] **Amor do Usuario:** Documentacao entre top 3 recursos mais amados
 
-- [ ] **Reconhecimento da Industria:** Docs do AIOS citados como "melhor no espaco de agentes de IA"
+- [ ] **Reconhecimento da Industria:** Docs do AIOX citados como "melhor no espaco de agentes de IA"
 
 **Meta:** $16.400+ valor total (combina com trajetoria de ROI de 3 anos)
 
@@ -2050,7 +2050,7 @@ dashboard:
 
 ### Referencias Internas
 
-**Documentacao AIOS:**
+**Documentacao AIOX:**
 - Epics Wave 4: `docs/epics/epic-14-partners-onboarding.md`, `epic-15-partner-os-mvp.md`, `epic-16-scale-100-partners.md`
 - Arquitetura de agentes: `docs/architecture/agent-system.md`
 - Estrutura de tarefas: `docs/WORKFLOW-COMPLETE-CONSOLIDATED-V3.md`
@@ -2081,7 +2081,7 @@ Esta especificacao segue a estrutura **WORKFLOW-V3.0** para todas as tarefas:
 
 ## Apendice B: Atualizacao do Roster de Agentes
 
-Com a adicao do @docs (Ajax), AIOS agora tem **13 agentes nomeados**:
+Com a adicao do @docs (Ajax), AIOX agora tem **13 agentes nomeados**:
 
 | # | Agente | Nome | Funcao | Arquetipo | Cor |
 |---|--------|------|--------|-----------|-----|
@@ -2097,7 +2097,7 @@ Com a adicao do @docs (Ajax), AIOS agora tem **13 agentes nomeados**:
 | 10 | @devops | Gage | Automator | Taurus | Green |
 | 11 | **@docs** | **Ajax** | **Estrategista de Conteudo** | **Aries** | **Blue** |
 | 12 | ~~@security~~ | ~~Apex~~ | ~~Conductor~~ | ~~Leo~~ | ~~Red~~ (CANCELADO) |
-| 13 | @aios-master | Orion | Commander | Aries | Cyan |
+| 13 | @aiox-master | Orion | Commander | Aries | Cyan |
 
 **Status:** 13/13 agentes definidos (100% completo para Wave 1)
 

@@ -6,8 +6,8 @@
  * Target: ≥80% coverage
  */
 
-const PersonalizedOutputFormatter = require('../../.aios-core/infrastructure/scripts/output-formatter');
-const OutputPatternValidator = require('../../.aios-core/infrastructure/scripts/validate-output-pattern');
+const PersonalizedOutputFormatter = require('../../.aiox-core/infrastructure/scripts/output-formatter');
+const OutputPatternValidator = require('../../.aiox-core/infrastructure/scripts/validate-output-pattern');
 const fs = require('fs');
 const path = require('path');
 
@@ -259,7 +259,7 @@ persona_profile:
       { id: 'ux-design-expert', name: 'Uma', archetype: 'Empathizer', tone: 'empathetic' },
       { id: 'data-engineer', name: 'Dara', archetype: 'Engineer', tone: 'pragmatic' },
       { id: 'devops', name: 'Gage', archetype: 'Operator', tone: 'pragmatic' },
-      { id: 'aios-master', name: 'Orion', archetype: 'Orchestrator', tone: 'collaborative' },
+      { id: 'aiox-master', name: 'Orion', archetype: 'Orchestrator', tone: 'collaborative' },
     ];
 
     agents.forEach(agent => {

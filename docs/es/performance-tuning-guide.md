@@ -4,7 +4,7 @@
   Última sincronización: 2026-01-26
 -->
 
-# Guía de Optimización de Rendimiento de Synkra AIOS
+# Guía de Optimización de Rendimiento de Synkra AIOX
 
 > 🌐 [EN](../performance-tuning-guide.md) | [PT](../pt/performance-tuning-guide.md) | **ES**
 
@@ -12,7 +12,7 @@
 
 ## Descripción General
 
-Esta guía completa proporciona estrategias, herramientas y mejores prácticas para optimizar el rendimiento de Synkra AIOS en todos los componentes críticos.
+Esta guía completa proporciona estrategias, herramientas y mejores prácticas para optimizar el rendimiento de Synkra AIOX en todos los componentes críticos.
 
 ## Objetivos de Rendimiento
 
@@ -37,7 +37,7 @@ const { PerformanceProfiler } = require('./performance/profiler');
 
 const profiler = new PerformanceProfiler({
   enabled: true,
-  reportPath: '.aios/reports/performance.json'
+  reportPath: '.aiox/reports/performance.json'
 });
 
 // Perfilar cualquier operación

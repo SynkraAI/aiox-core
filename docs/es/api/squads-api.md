@@ -68,7 +68,7 @@ curl -X POST https://api.synkra.ai/api/squads/sync \
       "name": "mi-squad",
       "version": "1.0.0",
       "description": "Mi squad increible",
-      "aios": {
+      "aiox": {
         "minVersion": "2.1.0",
         "type": "squad"
       },
@@ -352,7 +352,7 @@ curl https://api.synkra.ai/api/squads/550e8400-e29b-41d4-a716-446655440000
     "manifest": {
       "name": "devops-squad",
       "version": "2.1.0",
-      "aios": {
+      "aiox": {
         "minVersion": "2.1.0",
         "type": "squad"
       },
@@ -497,7 +497,7 @@ curl -X POST https://api.synkra.ai/api/squads/validate \
   "data": {
     "valid": true,
     "errors": [],
-    "warnings": ["Falta campo recomendado: description", "Falta campo aios.minVersion"]
+    "warnings": ["Falta campo recomendado: description", "Falta campo aiox.minVersion"]
   }
 }
 ```
@@ -625,7 +625,7 @@ Importa esta coleccion en Postman o Insomnia:
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"squadData\": {\n    \"name\": \"mi-squad\",\n    \"version\": \"1.0.0\",\n    \"description\": \"Mi squad\",\n    \"aios\": {\n      \"minVersion\": \"2.1.0\",\n      \"type\": \"squad\"\n    }\n  },\n  \"isPublic\": false\n}"
+              "raw": "{\n  \"squadData\": {\n    \"name\": \"mi-squad\",\n    \"version\": \"1.0.0\",\n    \"description\": \"Mi squad\",\n    \"aiox\": {\n      \"minVersion\": \"2.1.0\",\n      \"type\": \"squad\"\n    }\n  },\n  \"isPublic\": false\n}"
             }
           }
         },
@@ -746,7 +746,7 @@ Guarda el JSON anterior como `synkra-squads-api.postman_collection.json` e impor
 
 - [Guia de Desarrollo de Squads](../guides/squads-guide.md)
 - [Contribuir Squads](../guides/contributing-squads.md)
-- [Agente @squad-creator](../../../.aios-core/development/agents/squad-creator.md)
+- [Agente @squad-creator](../../../.aiox-core/development/agents/squad-creator.md)
 
 ---
 

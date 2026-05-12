@@ -3,7 +3,7 @@
 
 // Set test environment variables
 process.env.NODE_ENV = 'test';
-process.env.AIOS_DEBUG = 'false';
+process.env.AIOX_DEBUG = 'false';
 
 // Skip integration tests by default (require external services)
 // Set SKIP_INTEGRATION_TESTS=false to run them

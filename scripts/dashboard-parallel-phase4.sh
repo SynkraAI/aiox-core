@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# AIOS Dashboard Parallel Dev - Phase 4 (5 workers - MAX)
+# AIOX Dashboard Parallel Dev - Phase 4 (5 workers - MAX)
 # =============================================================================
 # Prerequisites: Phase 3 complete
 # =============================================================================
@@ -9,7 +9,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-SESSION_NAME="aios-dash-p4"
+SESSION_NAME="aiox-dash-p4"
 
 # Colors
 GREEN='\033[0;32m'
@@ -24,11 +24,11 @@ NC='\033[0m'
 # =============================================================================
 
 declare -a STORIES=(
-    "1.3|Drag & Drop|docs/stories/aios-dashboard/epic-1-story-board.md|apps/dashboard/src/components/kanban/|Add @dnd-kit to KanbanBoard, enable drag between columns, persist order"
-    "2.1|Terminal|docs/prd/aios-dashboard.md|apps/dashboard/src/components/terminal/|Create Terminal.tsx read-only output with ANSI colors"
-    "3.1|Roadmap|docs/prd/aios-dashboard.md|apps/dashboard/src/app/(dashboard)/roadmap/|Create timeline view showing epics and milestones"
-    "3.2|Context|docs/prd/aios-dashboard.md|apps/dashboard/src/app/(dashboard)/context/|Create file browser for project context files"
-    "4.1|GitHub|docs/prd/aios-dashboard.md|apps/dashboard/src/app/(dashboard)/github/|Create GitHub view listing issues and PRs"
+    "1.3|Drag & Drop|docs/stories/aiox-dashboard/epic-1-story-board.md|apps/dashboard/src/components/kanban/|Add @dnd-kit to KanbanBoard, enable drag between columns, persist order"
+    "2.1|Terminal|docs/prd/aiox-dashboard.md|apps/dashboard/src/components/terminal/|Create Terminal.tsx read-only output with ANSI colors"
+    "3.1|Roadmap|docs/prd/aiox-dashboard.md|apps/dashboard/src/app/(dashboard)/roadmap/|Create timeline view showing epics and milestones"
+    "3.2|Context|docs/prd/aiox-dashboard.md|apps/dashboard/src/app/(dashboard)/context/|Create file browser for project context files"
+    "4.1|GitHub|docs/prd/aiox-dashboard.md|apps/dashboard/src/app/(dashboard)/github/|Create GitHub view listing issues and PRs"
 )
 
 NUM_WORKERS=${#STORIES[@]}
@@ -48,7 +48,7 @@ tmux kill-session -t "$SESSION_NAME" 2>/dev/null || true
 
 echo ""
 echo -e "${CYAN}╔═══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║     ${YELLOW}AIOS Dashboard Phase 4 (MAX PARALLELISM)${NC}             ${CYAN}║${NC}"
+echo -e "${CYAN}║     ${YELLOW}AIOX Dashboard Phase 4 (MAX PARALLELISM)${NC}             ${CYAN}║${NC}"
 echo -e "${CYAN}╠═══════════════════════════════════════════════════════════╣${NC}"
 echo -e "${CYAN}║${NC}  Phase:      ${GREEN}4 - Advanced Features${NC}                       ${CYAN}║${NC}"
 echo -e "${CYAN}║${NC}  Workers:    ${GREEN}$NUM_WORKERS${NC}                                            ${CYAN}║${NC}"

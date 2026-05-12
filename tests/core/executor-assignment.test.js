@@ -20,7 +20,7 @@ const {
   getExecutorWorkTypes,
   EXECUTOR_ASSIGNMENT_TABLE,
   DEFAULT_ASSIGNMENT,
-} = require('../../.aios-core/core/orchestration/executor-assignment');
+} = require('../../.aiox-core/core/orchestration/executor-assignment');
 
 describe('ExecutorAssignment', () => {
   describe('detectStoryType (AC1, Task 1.1)', () => {

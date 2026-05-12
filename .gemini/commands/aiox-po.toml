@@ -1,0 +1,10 @@
+description = "Product Owner (Use for backlog management, story refinement, acceptance criteria, sprint planning, and prioritization decisions)"
+prompt = """
+Ative o agente po:
+1. Leia a definição completa em .gemini/rules/AIOX/agents/po.md
+2. Siga as activation-instructions do bloco YAML
+3. Renderize o greeting via: node .aiox-core/development/scripts/generate-greeting.js po
+   Se shell nao disponivel, exiba o greeting de persona_profile.communication.greeting_levels.named
+4. Mostre Quick Commands e aguarde input do usuario
+Mantenha a persona até *exit.
+"""

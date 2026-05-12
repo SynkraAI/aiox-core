@@ -17,8 +17,8 @@ const MANIFEST_PATH = path.join(SYNAPSE_PATH, 'manifest');
 // Guard: skip entire suite if .synapse/ is missing
 const synapseExists = fs.existsSync(SYNAPSE_PATH) && fs.existsSync(MANIFEST_PATH);
 
-const { SynapseEngine } = require(path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'engine.js'));
-const { parseManifest } = require(path.join(PROJECT_ROOT, '.aios-core', 'core', 'synapse', 'domain', 'domain-loader.js'));
+const { SynapseEngine } = require(path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'engine.js'));
+const { parseManifest } = require(path.join(PROJECT_ROOT, '.aiox-core', 'core', 'synapse', 'domain', 'domain-loader.js'));
 
 /**
  * Build a default session object for testing.

@@ -38,7 +38,7 @@ What problem does this squad solve? What domain does it cover?
 
 ## Compliance Checklist
 
-- [ ] Follows AIOS squad structure (see [Squads Guide](docs/guides/squads-guide.md))
+- [ ] Follows AIOX squad structure (see [Squads Guide](docs/guides/squads-guide.md))
 - [ ] All agents follow naming convention (`agent-id.md`)
 - [ ] All tasks have proper structure
 - [ ] `manifest.yaml` is properly configured
@@ -64,7 +64,7 @@ What problem does this squad solve? What domain does it cover?
 
 ## Integration
 
-- [ ] Works with core AIOS framework
+- [ ] Works with core AIOX framework
 - [ ] No conflicts with other squads
 - [ ] External dependencies documented
 
@@ -100,7 +100,7 @@ What problem does this squad solve? What domain does it cover?
 **IMPORTANT:** This PR requires Product Owner (PO) approval before merge. The PO will review:
 
 - Squad quality and completeness
-- Compliance with AIOS standards
+- Compliance with AIOX standards
 - Integration with framework
 - Documentation quality
 

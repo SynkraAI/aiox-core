@@ -10,7 +10,7 @@
 
 ---
 
-Este documento explica cómo proponer nuevas características para AIOS.
+Este documento explica cómo proponer nuevas características para AIOX.
 
 ## Ideas Rápidas
 

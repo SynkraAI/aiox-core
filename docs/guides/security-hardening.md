@@ -1,10 +1,10 @@
-# AIOS Security Hardening Guide
+# AIOX Security Hardening Guide
 
 > **EN** | [PT](../pt/guides/security-hardening.md) | [ES](../es/guides/security-hardening.md)
 
 ---
 
-> Complete guide to hardening security for Synkra AIOS deployments - from development to production.
+> Complete guide to hardening security for Synkra AIOX deployments - from development to production.
 
 **Version:** 2.1.0
 **Last Updated:** 2026-01-29
@@ -29,7 +29,7 @@
 
 ## Security Overview
 
-Synkra AIOS operates at a privileged layer between AI models and your system. This guide covers hardening strategies specific to AI-orchestrated development environments.
+Synkra AIOX operates at a privileged layer between AI models and your system. This guide covers hardening strategies specific to AI-orchestrated development environments.
 
 ### Security Architecture
 
@@ -49,7 +49,7 @@ Synkra AIOS operates at a privileged layer between AI models and your system. Th
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### AIOS-Specific Security Concerns
+### AIOX-Specific Security Concerns
 
 | Concern                  | Risk Level | Mitigation                        |
 | ------------------------ | ---------- | --------------------------------- |
@@ -62,7 +62,7 @@ Synkra AIOS operates at a privileged layer between AI models and your system. Th
 
 ### Defense in Depth
 
-AIOS implements multiple layers of protection:
+AIOX implements multiple layers of protection:
 
 1. **Permission Modes** - Control agent autonomy (Explore/Ask/Auto)
 2. **Claude Hooks** - Pre-execution validation (read-protection, sql-governance)
@@ -74,7 +74,7 @@ AIOS implements multiple layers of protection:
 
 ## API Key Management
 
-API keys are the most critical secrets in AIOS. Compromised keys can lead to unauthorized usage, data breaches, and significant financial impact.
+API keys are the most critical secrets in AIOX. Compromised keys can lead to unauthorized usage, data breaches, and significant financial impact.
 
 ### Storage Hierarchy
 
@@ -124,7 +124,7 @@ JWT_SECRET=your-256-bit-cryptographically-secure-random-key
 // Load secrets from secure vault
 const secrets = await SecretManager.loadSecrets({
   provider: 'aws-secrets-manager', // or 'hashicorp-vault', 'gcp-secrets'
-  secretName: 'aios/production/api-keys',
+  secretName: 'aiox/production/api-keys',
   region: process.env.AWS_REGION,
 });
 
@@ -145,7 +145,7 @@ process.env.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
 ### Key Validation on Startup
 
 ```javascript
-// .aios-core/core/security/key-validator.js
+// .aiox-core/core/security/key-validator.js
 const requiredKeys = [
   { name: 'ANTHROPIC_API_KEY', pattern: /^sk-ant-[a-zA-Z0-9_-]+$/ },
   { name: 'JWT_SECRET', minLength: 32 },
@@ -185,7 +185,7 @@ function validateApiKeys() {
 
 ```bash
 # ============================================================
-# AIOS ENVIRONMENT CONFIGURATION
+# AIOX ENVIRONMENT CONFIGURATION
 # ============================================================
 # SECURITY: This file must NEVER be committed to version control
 # Add to .gitignore: .env, .env.local, .env.*.local
@@ -195,7 +195,7 @@ function validateApiKeys() {
 # ENVIRONMENT
 # ------------------------------------------------------------
 NODE_ENV=development
-AIOS_DEBUG=false
+AIOX_DEBUG=false
 LOG_LEVEL=info
 
 # ------------------------------------------------------------
@@ -256,7 +256,7 @@ CSP_ENABLED=true
 # AUDIT & LOGGING
 # ------------------------------------------------------------
 AUDIT_LOG_ENABLED=true
-AUDIT_LOG_PATH=/var/log/aios/audit.log
+AUDIT_LOG_PATH=/var/log/aiox/audit.log
 AUDIT_LOG_RETENTION_DAYS=90
 ```
 
@@ -264,17 +264,17 @@ AUDIT_LOG_RETENTION_DAYS=90
 
 ```bash
 # Create secure directory for secrets
-mkdir -p ~/.aios/secrets
-chmod 700 ~/.aios/secrets
+mkdir -p ~/.aiox/secrets
+chmod 700 ~/.aiox/secrets
 
 # Create encrypted secrets file
 # Never store plaintext secrets
 openssl enc -aes-256-cbc -salt -pbkdf2 \
   -in secrets.txt \
-  -out ~/.aios/secrets/encrypted.dat
+  -out ~/.aiox/secrets/encrypted.dat
 
 # Set proper permissions
-chmod 600 ~/.aios/secrets/*
+chmod 600 ~/.aiox/secrets/*
 
 # Verify no secrets in git history
 git log -p --all -S "API_KEY" -- .
@@ -294,7 +294,7 @@ function validateEnvironment() {
 
   // Ensure debug mode is off in production
   if (process.env.NODE_ENV === 'production') {
-    if (process.env.AIOS_DEBUG === 'true') {
+    if (process.env.AIOX_DEBUG === 'true') {
       console.warn('WARNING: Debug mode enabled in production');
     }
   }
@@ -305,7 +305,7 @@ function validateEnvironment() {
 
 ## File and Directory Permissions
 
-### AIOS Directory Structure Permissions
+### AIOX Directory Structure Permissions
 
 ```bash
 # ============================================================
@@ -315,39 +315,39 @@ function validateEnvironment() {
 # Project root (standard)
 chmod 755 /path/to/project
 
-# AIOS configuration directories
-chmod 700 .aios/              # Only owner can access
-chmod 700 .aios-core/         # Framework source
+# AIOX configuration directories
+chmod 700 .aiox/              # Only owner can access
+chmod 700 .aiox-core/         # Framework source
 chmod 700 .claude/            # Claude configuration
 
 # Sensitive configuration files
 chmod 600 .env                # Environment variables
-chmod 600 .aios/config.yaml   # Main config
-chmod 600 .aios/users.json    # User database
-chmod 600 .aios/sessions.json # Active sessions
+chmod 600 .aiox/config.yaml   # Main config
+chmod 600 .aiox/users.json    # User database
+chmod 600 .aiox/sessions.json # Active sessions
 
 # Secrets directory
-chmod 700 ~/.aios/secrets/
-chmod 600 ~/.aios/secrets/*
+chmod 700 ~/.aiox/secrets/
+chmod 600 ~/.aiox/secrets/*
 
 # Log files
 chmod 640 logs/*.log          # Owner read/write, group read
 chmod 750 logs/               # Owner full, group read/execute
 
 # Temporary files
-chmod 700 .aios/temp/
-chmod 600 .aios/temp/*
+chmod 700 .aiox/temp/
+chmod 600 .aiox/temp/*
 ```
 
 ### Directory Access Control
 
 ```yaml
-# .aios/config.yaml - Allowed directories configuration
+# .aiox/config.yaml - Allowed directories configuration
 security:
   allowedDirectories:
     read:
       - '${PROJECT_ROOT}'
-      - '${HOME}/.aios'
+      - '${HOME}/.aiox'
     write:
       - '${PROJECT_ROOT}/src'
       - '${PROJECT_ROOT}/docs'
@@ -371,7 +371,7 @@ security:
 #!/bin/bash
 # scripts/check-permissions.sh
 
-echo "AIOS Security Permission Check"
+echo "AIOX Security Permission Check"
 echo "=============================="
 
 # Check critical files
@@ -391,8 +391,8 @@ check_permission() {
 
 # Check critical files
 check_permission ".env" "600"
-check_permission ".aios" "700"
-check_permission ".aios/config.yaml" "600"
+check_permission ".aiox" "700"
+check_permission ".aiox/config.yaml" "600"
 
 # Check for world-readable sensitive files
 find . -name "*.key" -o -name "*.pem" -o -name "*.env*" | while read f; do
@@ -412,7 +412,7 @@ echo "Permission check complete."
 
 ### Docker MCP Isolation
 
-AIOS uses Docker containers to isolate MCP servers from the host system:
+AIOX uses Docker containers to isolate MCP servers from the host system:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -474,7 +474,7 @@ networks:
 
 ```javascript
 // Permission mode enforcement
-const { OperationGuard } = require('./.aios-core/core/permissions');
+const { OperationGuard } = require('./.aiox-core/core/permissions');
 
 async function executeWithIsolation(operation, context) {
   const guard = new OperationGuard();
@@ -552,7 +552,7 @@ const resourceLimits = {
 ### Input Sanitizer Implementation
 
 ```javascript
-// .aios-core/core/security/input-sanitizer.js
+// .aiox-core/core/security/input-sanitizer.js
 
 class InputSanitizer {
   /**
@@ -779,7 +779,7 @@ function safeMarkdownInterpolation(template, data) {
 PROTECTED_FILES = [
     '.claude/CLAUDE.md',
     '.claude/rules/*.md',
-    '.aios-core/development/agents/*.md',
+    '.aiox-core/development/agents/*.md',
     'package.json',
     'tsconfig.json'
 ]
@@ -835,7 +835,7 @@ function safeObjectMerge(target, source) {
 ### Audit Log Configuration
 
 ```yaml
-# .aios/config.yaml - Audit configuration
+# .aiox/config.yaml - Audit configuration
 audit:
   enabled: true
   level: info # debug, info, warn, error
@@ -855,7 +855,7 @@ audit:
   output:
     file:
       enabled: true
-      path: .aios/logs/audit.log
+      path: .aiox/logs/audit.log
       maxSize: 10M
       maxFiles: 10
       compress: true
@@ -868,7 +868,7 @@ audit:
   # Retention
   retention:
     days: 90
-    archivePath: .aios/logs/archive
+    archivePath: .aiox/logs/archive
 ```
 
 ### Audit Log Format
@@ -908,7 +908,7 @@ audit:
 ### Audit Logger Implementation
 
 ```javascript
-// .aios-core/core/security/audit-logger.js
+// .aiox-core/core/security/audit-logger.js
 
 const winston = require('winston');
 const { format } = winston;
@@ -1047,7 +1047,7 @@ function loadSecurityConfig() {
 
 | Setting                | Development       | Production       |
 | ---------------------- | ----------------- | ---------------- |
-| **AIOS_DEBUG**         | `true`            | `false`          |
+| **AIOX_DEBUG**         | `true`            | `false`          |
 | **LOG_LEVEL**          | `debug`           | `info`           |
 | **Permission Mode**    | `auto`            | `ask`            |
 | **Rate Limiting**      | Relaxed           | Strict           |
@@ -1061,7 +1061,7 @@ function loadSecurityConfig() {
 ### Development Configuration
 
 ```yaml
-# .aios/config.development.yaml
+# .aiox/config.development.yaml
 security:
   debug: true
 
@@ -1092,7 +1092,7 @@ security:
 ### Production Configuration
 
 ```yaml
-# .aios/config.production.yaml
+# .aiox/config.production.yaml
 security:
   debug: false
 
@@ -1159,8 +1159,8 @@ function validateProductionSecurity() {
   }
 
   // Debug must be off
-  if (process.env.AIOS_DEBUG === 'true') {
-    errors.push('AIOS_DEBUG must be false in production');
+  if (process.env.AIOX_DEBUG === 'true') {
+    errors.push('AIOX_DEBUG must be false in production');
   }
 
   // TLS must be enabled (check for cert files)
@@ -1283,12 +1283,12 @@ function validateProductionSecurity() {
 
 ### Responsible Disclosure Policy
 
-If you discover a security vulnerability in Synkra AIOS, please follow responsible disclosure practices:
+If you discover a security vulnerability in Synkra AIOX, please follow responsible disclosure practices:
 
 ### Reporting Process
 
 1. **DO NOT** create a public GitHub issue for security vulnerabilities
-2. Email security concerns to: **security@synkra.ai**
+2. Report security concerns via [GitHub Security Advisories](https://github.com/SynkraAI/aiox-core/security/advisories)
 3. Include the following in your report:
    - Description of the vulnerability
    - Steps to reproduce
@@ -1306,7 +1306,7 @@ If you discover a security vulnerability in Synkra AIOS, please follow responsib
 
 **Affected Component:** [e.g., InputSanitizer, AuthSystem, MCP Gateway]
 
-**AIOS Version:** [e.g., 2.1.0]
+**AIOX Version:** [e.g., 2.1.0]
 
 **Description:**
 [Detailed description of the vulnerability]
@@ -1343,7 +1343,7 @@ Contributors who responsibly disclose vulnerabilities are recognized in our Secu
 
 ### Bug Bounty Program
 
-Currently, Synkra AIOS does not have a formal bug bounty program. However, significant security contributions are recognized and may receive AIOS Pro licenses or other recognition.
+Currently, Synkra AIOX does not have a formal bug bounty program. However, significant security contributions are recognized and may receive AIOX Pro licenses or other recognition.
 
 ---
 
@@ -1356,4 +1356,4 @@ Currently, Synkra AIOS does not have a formal bug bounty program. However, signi
 
 ---
 
-_Synkra AIOS Security Hardening Guide v2.1.0_
+_Synkra AIOX Security Hardening Guide v4.0.4_

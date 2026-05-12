@@ -1,0 +1,156 @@
+# Workflow Chains — Greeting Suggestion Data
+# Source of truth: .claude/rules/workflow-execution.md
+# Used by: Native agent greeting (STEP 3, step 5.5) to suggest next command
+# Story: WIS-16
+
+workflows:
+  # 1. Story Development Cycle (SDC) — PRIMARY
+  - id: sdc
+    name: Story Development Cycle
+    description: Full 4-phase workflow for all development work
+    chain:
+      - step: 1
+        agent: "@sm"
+        command: "*draft"
+        task: create-next-story.md
+        output: Story file (Draft)
+        condition: Epic context available
+      - step: 2
+        agent: "@po"
+        command: "*validate-story-draft {story-id}"
+        task: validate-next-story.md
+        output: GO/NO-GO decision
+        condition: Story status is Draft
+      - step: 3
+        agent: "@dev"
+        command: "*develop {story-id}"
+        task: dev-develop-story.md
+        output: Implementation complete
+        condition: Story status is Approved
+        alternatives:
+          - agent: "@dev"
+            command: "*develop-yolo {story-id}"
+            condition: Simple story, autonomous mode preferred
+      - step: 4
+        agent: "@qa"
+        command: "*review {story-id}"
+        task: qa-gate.md
+        output: PASS/CONCERNS/FAIL/WAIVED
+        condition: Story status is Ready for Review
+        alternatives:
+          - agent: "@qa"
+            command: "*gate {story-id}"
+            condition: Quick gate decision needed
+      - step: 5
+        agent: "@devops"
+        command: "*push"
+        task: github-devops-pre-push-quality-gate.md
+        output: Code pushed to remote
+        condition: QA gate PASS
+
+  # 2. QA Loop — ITERATIVE REVIEW
+  - id: qa-loop
+    name: QA Loop
+    description: Automated review-fix cycle after initial QA gate
+    max_iterations: 5
+    chain:
+      - step: 1
+        agent: "@qa"
+        command: "*review {story-id}"
+        task: qa-review-story.md
+        output: APPROVE/REJECT/BLOCKED verdict
+        condition: Story has code changes to review
+      - step: 2
+        agent: "@dev"
+        command: "*apply-qa-fixes"
+        task: apply-qa-fixes.md
+        output: Fixes applied
+        condition: QA verdict is REJECT
+        alternatives:
+          - agent: "@dev"
+            command: "*fix-qa-issues"
+            condition: Structured fix from QA_FIX_REQUEST.md
+      - step: 3
+        agent: "@qa"
+        command: "*review {story-id}"
+        task: qa-review-story.md
+        output: Re-review verdict
+        condition: Fixes applied, re-review needed
+
+  # 3. Spec Pipeline — PRE-IMPLEMENTATION
+  - id: spec-pipeline
+    name: Spec Pipeline
+    description: Transform informal requirements into executable spec
+    chain:
+      - step: 1
+        agent: "@pm"
+        command: "*gather-requirements"
+        task: spec-gather-requirements.md
+        output: requirements.json
+        condition: New feature or complex change
+      - step: 2
+        agent: "@architect"
+        command: "*analyze-impact"
+        task: architect-analyze-impact.md
+        output: complexity.json
+        condition: Complexity assessment needed (skip if SIMPLE)
+      - step: 3
+        agent: "@analyst"
+        command: "*research {topic}"
+        task: create-deep-research-prompt.md
+        output: research.json
+        condition: STANDARD or COMPLEX class (skip if SIMPLE)
+      - step: 4
+        agent: "@pm"
+        command: "*write-spec"
+        task: spec-write-spec.md
+        output: spec.md
+        condition: Requirements gathered
+      - step: 5
+        agent: "@qa"
+        command: "*critique-spec {story-id}"
+        task: spec-critique.md
+        output: APPROVED/NEEDS_REVISION/BLOCKED
+        condition: Spec written
+      - step: 6
+        agent: "@architect"
+        command: "*plan"
+        task: architect-analyze-impact.md
+        output: implementation.yaml
+        condition: Critique verdict is APPROVED
+
+  # 4. Brownfield Discovery — LEGACY ASSESSMENT
+  - id: brownfield
+    name: Brownfield Discovery
+    description: 10-phase technical debt assessment for existing codebases
+    chain:
+      - step: 1
+        agent: "@architect"
+        command: "*analyze-brownfield"
+        task: analyze-brownfield.md
+        output: system-architecture.md
+        condition: Existing codebase to assess
+      - step: 2
+        agent: "@data-engineer"
+        command: "*db-schema-audit"
+        task: db-schema-audit.md
+        output: SCHEMA.md + DB-AUDIT.md
+        condition: Database exists in project
+      - step: 3
+        agent: "@ux-design-expert"
+        command: "*audit-frontend"
+        task: audit-codebase.md
+        output: frontend-spec.md
+        condition: Frontend exists in project
+      - step: 4
+        agent: "@qa"
+        command: "*review"
+        task: qa-review-story.md
+        output: APPROVED/NEEDS WORK
+        condition: All specialist reviews complete
+      - step: 5
+        agent: "@pm"
+        command: "*create-epic"
+        task: brownfield-create-epic.md
+        output: Epic + stories ready for development
+        condition: QA gate APPROVED

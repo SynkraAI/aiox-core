@@ -1,14 +1,14 @@
 # Pro Integration Tests
 #
-# Separate workflow for tests that require the aios-pro submodule.
-# aios-core CI runs standalone (ADR-PRO-001). This workflow validates
+# Separate workflow for tests that require the aiox-pro submodule.
+# aiox-core CI runs standalone (ADR-PRO-001). This workflow validates
 # the integration boundary between core and pro.
 #
-# Requires PRO_SUBMODULE_TOKEN secret (PAT with repo scope for SynkraAI/aios-pro).
+# Requires PRO_SUBMODULE_TOKEN secret (PAT with repo scope for SynkraAI/aiox-pro).
 #
 # Tests covered:
-#   - tests/pro/**          (integration tests in aios-core)
-#   - pro/**/__tests__/**   (unit tests inside aios-pro submodule)
+#   - tests/pro/**          (integration tests in aiox-core)
+#   - pro/**/__tests__/**   (unit tests inside aiox-pro submodule)
 
 name: Pro Integration
 
@@ -111,15 +111,15 @@ jobs:
       - name: Run core→pro integration tests
         if: steps.token-check.outputs.skip != 'true'
         run: |
-          echo "=== Running tests/pro/ (integration tests in aios-core) ==="
+          echo "=== Running tests/pro/ (integration tests in aiox-core) ==="
           npx jest tests/pro/ --no-coverage --verbose
 
       - name: Run pro internal tests
         if: steps.token-check.outputs.skip != 'true'
         continue-on-error: true
         run: |
-          echo "=== Running pro/**/__tests__/ (unit tests in aios-pro) ==="
-          echo "Note: failures here are informational — fix in aios-pro repo"
+          echo "=== Running pro/**/__tests__/ (unit tests in aiox-pro) ==="
+          echo "Note: failures here are informational — fix in aiox-pro repo"
           npx jest --roots pro/ --no-coverage --verbose
 
       - name: Summary

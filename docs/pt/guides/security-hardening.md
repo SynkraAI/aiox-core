@@ -1,10 +1,10 @@
-# Guia de Hardening de Segurança do AIOS
+# Guia de Hardening de Segurança do AIOX
 
 > [EN](../../guides/security-hardening.md) | **PT** | [ES](../../es/guides/security-hardening.md)
 
 ---
 
-> Guia completo para fortalecer a segurança de implantações do Synkra AIOS - do desenvolvimento à produção.
+> Guia completo para fortalecer a segurança de implantações do Synkra AIOX - do desenvolvimento à produção.
 
 **Versão:** 2.1.0
 **Última Atualização:** 2026-01-29
@@ -29,7 +29,7 @@
 
 ## Visão Geral de Segurança
 
-O Synkra AIOS opera em uma camada privilegiada entre modelos de IA e seu sistema. Este guia cobre estratégias de hardening específicas para ambientes de desenvolvimento orquestrados por IA.
+O Synkra AIOX opera em uma camada privilegiada entre modelos de IA e seu sistema. Este guia cobre estratégias de hardening específicas para ambientes de desenvolvimento orquestrados por IA.
 
 ### Arquitetura de Segurança
 
@@ -49,7 +49,7 @@ O Synkra AIOS opera em uma camada privilegiada entre modelos de IA e seu sistema
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Preocupações de Segurança Específicas do AIOS
+### Preocupações de Segurança Específicas do AIOX
 
 | Preocupação                | Nível de Risco | Mitigação                         |
 | -------------------------- | -------------- | --------------------------------- |
@@ -62,7 +62,7 @@ O Synkra AIOS opera em uma camada privilegiada entre modelos de IA e seu sistema
 
 ### Defesa em Profundidade
 
-O AIOS implementa múltiplas camadas de proteção:
+O AIOX implementa múltiplas camadas de proteção:
 
 1. **Permission Modes** - Controle da autonomia do agente (Explore/Ask/Auto)
 2. **Claude Hooks** - Validação pré-execução (read-protection, sql-governance)
@@ -74,7 +74,7 @@ O AIOS implementa múltiplas camadas de proteção:
 
 ## Gerenciamento de Chaves de API
 
-Chaves de API são os segredos mais críticos no AIOS. Chaves comprometidas podem levar a uso não autorizado, violações de dados e impacto financeiro significativo.
+Chaves de API são os segredos mais críticos no AIOX. Chaves comprometidas podem levar a uso não autorizado, violações de dados e impacto financeiro significativo.
 
 ### Hierarquia de Armazenamento
 
@@ -124,7 +124,7 @@ JWT_SECRET=your-256-bit-cryptographically-secure-random-key
 // Carrega segredos do vault seguro
 const secrets = await SecretManager.loadSecrets({
   provider: 'aws-secrets-manager', // ou 'hashicorp-vault', 'gcp-secrets'
-  secretName: 'aios/production/api-keys',
+  secretName: 'aiox/production/api-keys',
   region: process.env.AWS_REGION,
 });
 
@@ -145,7 +145,7 @@ process.env.OPENAI_API_KEY = secrets.OPENAI_API_KEY;
 ### Validação de Chave na Inicialização
 
 ```javascript
-// .aios-core/core/security/key-validator.js
+// .aiox-core/core/security/key-validator.js
 const requiredKeys = [
   { name: 'ANTHROPIC_API_KEY', pattern: /^sk-ant-[a-zA-Z0-9_-]+$/ },
   { name: 'JWT_SECRET', minLength: 32 },
@@ -185,7 +185,7 @@ function validateApiKeys() {
 
 ```bash
 # ============================================================
-# CONFIGURAÇÃO DE AMBIENTE DO AIOS
+# CONFIGURAÇÃO DE AMBIENTE DO AIOX
 # ============================================================
 # SEGURANÇA: Este arquivo NUNCA deve ser commitado no controle de versão
 # Adicione ao .gitignore: .env, .env.local, .env.*.local
@@ -195,7 +195,7 @@ function validateApiKeys() {
 # AMBIENTE
 # ------------------------------------------------------------
 NODE_ENV=development
-AIOS_DEBUG=false
+AIOX_DEBUG=false
 LOG_LEVEL=info
 
 # ------------------------------------------------------------
@@ -256,7 +256,7 @@ CSP_ENABLED=true
 # AUDITORIA & LOGGING
 # ------------------------------------------------------------
 AUDIT_LOG_ENABLED=true
-AUDIT_LOG_PATH=/var/log/aios/audit.log
+AUDIT_LOG_PATH=/var/log/aiox/audit.log
 AUDIT_LOG_RETENTION_DAYS=90
 ```
 
@@ -264,17 +264,17 @@ AUDIT_LOG_RETENTION_DAYS=90
 
 ```bash
 # Crie diretório seguro para segredos
-mkdir -p ~/.aios/secrets
-chmod 700 ~/.aios/secrets
+mkdir -p ~/.aiox/secrets
+chmod 700 ~/.aiox/secrets
 
 # Crie arquivo de segredos criptografado
 # Nunca armazene segredos em texto plano
 openssl enc -aes-256-cbc -salt -pbkdf2 \
   -in secrets.txt \
-  -out ~/.aios/secrets/encrypted.dat
+  -out ~/.aiox/secrets/encrypted.dat
 
 # Defina permissões adequadas
-chmod 600 ~/.aios/secrets/*
+chmod 600 ~/.aiox/secrets/*
 
 # Verifique se não há segredos no histórico do git
 git log -p --all -S "API_KEY" -- .
@@ -294,7 +294,7 @@ function validateEnvironment() {
 
   // Garanta que modo debug está desligado em produção
   if (process.env.NODE_ENV === 'production') {
-    if (process.env.AIOS_DEBUG === 'true') {
+    if (process.env.AIOX_DEBUG === 'true') {
       console.warn('AVISO: Modo debug habilitado em produção');
     }
   }
@@ -305,7 +305,7 @@ function validateEnvironment() {
 
 ## Permissões de Arquivos e Diretórios
 
-### Permissões da Estrutura de Diretórios do AIOS
+### Permissões da Estrutura de Diretórios do AIOX
 
 ```bash
 # ============================================================
@@ -315,39 +315,39 @@ function validateEnvironment() {
 # Raiz do projeto (padrão)
 chmod 755 /path/to/project
 
-# Diretórios de configuração do AIOS
-chmod 700 .aios/              # Apenas o proprietário pode acessar
-chmod 700 .aios-core/         # Fonte do framework
+# Diretórios de configuração do AIOX
+chmod 700 .aiox/              # Apenas o proprietário pode acessar
+chmod 700 .aiox-core/         # Fonte do framework
 chmod 700 .claude/            # Configuração do Claude
 
 # Arquivos de configuração sensíveis
 chmod 600 .env                # Variáveis de ambiente
-chmod 600 .aios/config.yaml   # Configuração principal
-chmod 600 .aios/users.json    # Banco de dados de usuários
-chmod 600 .aios/sessions.json # Sessões ativas
+chmod 600 .aiox/config.yaml   # Configuração principal
+chmod 600 .aiox/users.json    # Banco de dados de usuários
+chmod 600 .aiox/sessions.json # Sessões ativas
 
 # Diretório de segredos
-chmod 700 ~/.aios/secrets/
-chmod 600 ~/.aios/secrets/*
+chmod 700 ~/.aiox/secrets/
+chmod 600 ~/.aiox/secrets/*
 
 # Arquivos de log
 chmod 640 logs/*.log          # Proprietário leitura/escrita, grupo leitura
 chmod 750 logs/               # Proprietário total, grupo leitura/execução
 
 # Arquivos temporários
-chmod 700 .aios/temp/
-chmod 600 .aios/temp/*
+chmod 700 .aiox/temp/
+chmod 600 .aiox/temp/*
 ```
 
 ### Controle de Acesso a Diretórios
 
 ```yaml
-# .aios/config.yaml - Configuração de diretórios permitidos
+# .aiox/config.yaml - Configuração de diretórios permitidos
 security:
   allowedDirectories:
     read:
       - '${PROJECT_ROOT}'
-      - '${HOME}/.aios'
+      - '${HOME}/.aiox'
     write:
       - '${PROJECT_ROOT}/src'
       - '${PROJECT_ROOT}/docs'
@@ -371,7 +371,7 @@ security:
 #!/bin/bash
 # scripts/check-permissions.sh
 
-echo "Verificação de Permissões de Segurança do AIOS"
+echo "Verificação de Permissões de Segurança do AIOX"
 echo "==============================================="
 
 # Verifica arquivos críticos
@@ -391,8 +391,8 @@ check_permission() {
 
 # Verifica arquivos críticos
 check_permission ".env" "600"
-check_permission ".aios" "700"
-check_permission ".aios/config.yaml" "600"
+check_permission ".aiox" "700"
+check_permission ".aiox/config.yaml" "600"
 
 # Verifica arquivos sensíveis legíveis por todos
 find . -name "*.key" -o -name "*.pem" -o -name "*.env*" | while read f; do
@@ -412,7 +412,7 @@ echo "Verificação de permissões concluída."
 
 ### Isolamento MCP via Docker
 
-O AIOS usa containers Docker para isolar servidores MCP do sistema host:
+O AIOX usa containers Docker para isolar servidores MCP do sistema host:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -474,7 +474,7 @@ networks:
 
 ```javascript
 // Aplicação de permission mode
-const { OperationGuard } = require('./.aios-core/core/permissions');
+const { OperationGuard } = require('./.aiox-core/core/permissions');
 
 async function executeWithIsolation(operation, context) {
   const guard = new OperationGuard();
@@ -552,7 +552,7 @@ const resourceLimits = {
 ### Implementação do Sanitizador de Entrada
 
 ```javascript
-// .aios-core/core/security/input-sanitizer.js
+// .aiox-core/core/security/input-sanitizer.js
 
 class InputSanitizer {
   /**
@@ -779,7 +779,7 @@ function safeMarkdownInterpolation(template, data) {
 PROTECTED_FILES = [
     '.claude/CLAUDE.md',
     '.claude/rules/*.md',
-    '.aios-core/development/agents/*.md',
+    '.aiox-core/development/agents/*.md',
     'package.json',
     'tsconfig.json'
 ]
@@ -835,7 +835,7 @@ function safeObjectMerge(target, source) {
 ### Configuração de Audit Log
 
 ```yaml
-# .aios/config.yaml - Configuração de auditoria
+# .aiox/config.yaml - Configuração de auditoria
 audit:
   enabled: true
   level: info # debug, info, warn, error
@@ -855,7 +855,7 @@ audit:
   output:
     file:
       enabled: true
-      path: .aios/logs/audit.log
+      path: .aiox/logs/audit.log
       maxSize: 10M
       maxFiles: 10
       compress: true
@@ -868,7 +868,7 @@ audit:
   # Retenção
   retention:
     days: 90
-    archivePath: .aios/logs/archive
+    archivePath: .aiox/logs/archive
 ```
 
 ### Formato do Audit Log
@@ -908,7 +908,7 @@ audit:
 ### Implementação do Audit Logger
 
 ```javascript
-// .aios-core/core/security/audit-logger.js
+// .aiox-core/core/security/audit-logger.js
 
 const winston = require('winston');
 const { format } = winston;
@@ -1047,7 +1047,7 @@ function loadSecurityConfig() {
 
 | Configuração         | Desenvolvimento       | Produção         |
 | -------------------- | --------------------- | ---------------- |
-| **AIOS_DEBUG**       | `true`                | `false`          |
+| **AIOX_DEBUG**       | `true`                | `false`          |
 | **LOG_LEVEL**        | `debug`               | `info`           |
 | **Permission Mode**  | `auto`                | `ask`            |
 | **Rate Limiting**    | Relaxado              | Estrito          |
@@ -1061,7 +1061,7 @@ function loadSecurityConfig() {
 ### Configuração de Desenvolvimento
 
 ```yaml
-# .aios/config.development.yaml
+# .aiox/config.development.yaml
 security:
   debug: true
 
@@ -1092,7 +1092,7 @@ security:
 ### Configuração de Produção
 
 ```yaml
-# .aios/config.production.yaml
+# .aiox/config.production.yaml
 security:
   debug: false
 
@@ -1159,8 +1159,8 @@ function validateProductionSecurity() {
   }
 
   // Debug deve estar desligado
-  if (process.env.AIOS_DEBUG === 'true') {
-    errors.push('AIOS_DEBUG deve ser false em produção');
+  if (process.env.AIOX_DEBUG === 'true') {
+    errors.push('AIOX_DEBUG deve ser false em produção');
   }
 
   // TLS deve estar habilitado (verifica arquivos de certificado)
@@ -1283,12 +1283,12 @@ function validateProductionSecurity() {
 
 ### Política de Divulgação Responsável
 
-Se você descobrir uma vulnerabilidade de segurança no Synkra AIOS, por favor siga práticas de divulgação responsável:
+Se você descobrir uma vulnerabilidade de segurança no Synkra AIOX, por favor siga práticas de divulgação responsável:
 
 ### Processo de Relatório
 
 1. **NÃO** crie uma issue pública no GitHub para vulnerabilidades de segurança
-2. Envie preocupações de segurança para: **security@synkra.ai**
+2. Reporte preocupações de segurança via [GitHub Security Advisories](https://github.com/SynkraAI/aiox-core/security/advisories)
 3. Inclua o seguinte no seu relatório:
    - Descrição da vulnerabilidade
    - Passos para reproduzir
@@ -1306,7 +1306,7 @@ Se você descobrir uma vulnerabilidade de segurança no Synkra AIOS, por favor s
 
 **Componente Afetado:** [ex: InputSanitizer, AuthSystem, MCP Gateway]
 
-**Versão do AIOS:** [ex: 2.1.0]
+**Versão do AIOX:** [ex: 2.1.0]
 
 **Descrição:**
 [Descrição detalhada da vulnerabilidade]
@@ -1343,7 +1343,7 @@ Contribuidores que divulgam vulnerabilidades de forma responsável são reconhec
 
 ### Programa de Bug Bounty
 
-Atualmente, o Synkra AIOS não possui um programa formal de bug bounty. No entanto, contribuições significativas de segurança são reconhecidas e podem receber licenças AIOS Pro ou outro reconhecimento.
+Atualmente, o Synkra AIOX não possui um programa formal de bug bounty. No entanto, contribuições significativas de segurança são reconhecidas e podem receber licenças AIOX Pro ou outro reconhecimento.
 
 ---
 
@@ -1356,4 +1356,4 @@ Atualmente, o Synkra AIOS não possui um programa formal de bug bounty. No entan
 
 ---
 
-_Guia de Hardening de Segurança do Synkra AIOS v2.1.0_
+_Guia de Hardening de Segurança do Synkra AIOX v4.0_

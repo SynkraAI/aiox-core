@@ -787,12 +787,12 @@ Artefatos disponiveis em outputs/design-system/
 
 | Documento | Caminho |
 |-----------|---------|
-| Definicao do Workflow | `.aios-core/development/workflows/design-system-build-quality.yaml` |
-| Agente UX-Design Expert | `.aios-core/development/agents/ux-design-expert.md` |
-| Task: Build Component | `.aios-core/development/tasks/build-component.md` |
-| Task: Generate Documentation | `.aios-core/development/tasks/generate-documentation.md` |
-| Checklist: WCAG A11y | `.aios-core/development/checklists/accessibility-wcag-checklist.md` |
-| Task: Calculate ROI | `.aios-core/development/tasks/calculate-roi.md` |
+| Definicao do Workflow | `.aiox-core/development/workflows/design-system-build-quality.yaml` |
+| Agente UX-Design Expert | `.aiox-core/development/agents/ux-design-expert.md` |
+| Task: Build Component | `.aiox-core/development/tasks/build-component.md` |
+| Task: Generate Documentation | `.aiox-core/development/tasks/generate-documentation.md` |
+| Checklist: WCAG A11y | `.aiox-core/development/checklists/accessibility-wcag-checklist.md` |
+| Task: Calculate ROI | `.aiox-core/development/tasks/calculate-roi.md` |
 
 ### Referencias Externas
 
@@ -817,7 +817,7 @@ Artefatos disponiveis em outputs/design-system/
 
 | Versao | Data | Autor | Mudancas |
 |--------|------|-------|----------|
-| 1.0.0 | 2025-01-30 | Orion (AIOS Master) | Versao inicial do workflow |
+| 1.0.0 | 2025-01-30 | Orion (AIOX Master) | Versao inicial do workflow |
 
 ---
 
@@ -827,7 +827,7 @@ Artefatos disponiveis em outputs/design-system/
 workflow_id: design-system-build-quality
 version: 1.0.0
 type: brownfield
-author: Orion (AIOS Master)
+author: Orion (AIOX Master)
 created_date: 2025-01-30
 documentation_created: 2026-02-04
 tags:
@@ -842,4 +842,4 @@ tags:
 ---
 
 *Documentacao gerada por Technical Documentation Specialist*
-*AIOS-FULLSTACK Framework v2.2*
+*AIOX-FULLSTACK Framework v2.2*

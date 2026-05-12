@@ -182,7 +182,7 @@ Assim como a Netflix tem um catálogo com metadados de cada filme (gênero, dura
 entities:
   tasks:
     create-story:
-      path: ".aios-core/development/tasks/create-story.md"
+      path: ".aiox-core/development/tasks/create-story.md"
       type: "task"
       purpose: "Gera stories de desenvolvimento a partir de requisitos"
       keywords: ["story", "create", "development", "agile"]
@@ -540,7 +540,7 @@ CREATE mínimo - só coisas realmente novas
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    AIOS IDS DASHBOARD                           │
+│                    AIOX IDS DASHBOARD                           │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  REGISTRY HEALTH          DECISION METRICS                      │
@@ -686,22 +686,22 @@ Resultado:
 
 ```bash
 # Consultar o registry
-aios ids:query "deploy automático"
+aiox ids:query "deploy automático"
 
 # Ver estatísticas
-aios ids:stats
+aiox ids:stats
 
 # Verificar saúde
-aios ids:health
+aiox ids:health
 
 # Corrigir problemas simples
-aios ids:health --fix
+aiox ids:health --fix
 
 # Backup do registry
-aios ids:backup
+aiox ids:backup
 
 # Forçar sync completo
-aios ids:sync
+aiox ids:sync
 ```
 
 ---

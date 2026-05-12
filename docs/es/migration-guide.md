@@ -4,13 +4,13 @@
   Ultima sincronizacion: 2026-01-26
 -->
 
-# Guia de Actualizacion de Synkra AIOS
+# Guia de Actualizacion de Synkra AIOX
 
 > 🌐 [EN](../migration-guide.md) | [PT](../pt/migration-guide.md) | **ES**
 
 ---
 
-Esta guia te ayuda a actualizar entre versiones de Synkra AIOS.
+Esta guia te ayuda a actualizar entre versiones de Synkra AIOX.
 
 ## Tabla de Contenidos
 
@@ -26,15 +26,15 @@ Esta guia te ayuda a actualizar entre versiones de Synkra AIOS.
 
 ### Version Actual
 
-**Synkra AIOS v4.4.0** (Version Estable Actual)
+**Synkra AIOX v4.2.11** (Version Actual del Repositorio)
 
 ### Rutas de Actualizacion
 
 | Desde Version | A Version | Tipo de Actualizacion | Dificultad |
 |---------------|-----------|----------------------|------------|
-| v4.3.x | v4.4.0 | Menor | Baja |
-| v4.0-4.2 | v4.4.0 | Menor | Media |
-| v3.x | v4.4.0 | Mayor | Alta |
+| v4.3.x | v4.2.11 | Menor | Baja |
+| v4.0-4.2 | v4.2.11 | Menor | Media |
+| v3.x | v4.2.11 | Mayor | Alta |
 
 ### Requisitos del Sistema
 
@@ -61,34 +61,34 @@ Antes de actualizar, asegurate de tener:
 
 ```bash
 # Crear respaldo con fecha y hora
-tar -czf aios-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
+tar -czf aiox-backup-$(date +%Y%m%d-%H%M%S).tar.gz \
   --exclude=node_modules \
   --exclude=.git \
   .
 
 # Mover a ubicacion segura
-mv aios-backup-*.tar.gz ../backups/
+mv aiox-backup-*.tar.gz ../backups/
 ```
 
 ### 2. Exportar Configuracion
 
 ```bash
 # Guardar configuracion actual
-cp .aios-core/config.json ../backups/config-backup.json
+cp .aiox-core/config.json ../backups/config-backup.json
 
 # Guardar componentes personalizados
-cp -r .aios-core/agents/custom ../backups/custom-agents/
-cp -r .aios-core/tasks/custom ../backups/custom-tasks/
+cp -r .aiox-core/agents/custom ../backups/custom-agents/
+cp -r .aiox-core/tasks/custom ../backups/custom-tasks/
 ```
 
 ### 3. Documentar Estado Actual
 
 ```bash
 # Registrar version actual
-npm list @synkra/aios-core/core > ../backups/version-info.txt
+npm list aiox-core/core > ../backups/version-info.txt
 
 # Listar archivos personalizados
-find .aios-core -name "*.custom.*" -type f > ../backups/custom-files.txt
+find .aiox-core -name "*.custom.*" -type f > ../backups/custom-files.txt
 ```
 
 ## Proceso de Actualizacion
@@ -100,30 +100,30 @@ find .aios-core -name "*.custom.*" -type f > ../backups/custom-files.txt
 # Cerrar todas las integraciones de IDE y agentes activos
 
 # 2. Actualizar a la ultima version
-npm install -g @synkra/aios-core@latest
+npm install -g aiox-core@latest
 
 # 3. Ejecutar comando de actualizacion
-aios upgrade
+aiox upgrade
 
 # 4. Verificar instalacion
-aios --version
+aiox --version
 ```
 
 ### Opcion 2: Instalacion Limpia
 
 ```bash
 # 1. Eliminar instalacion anterior
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aiox-core
 
 # 2. Limpiar cache
 npm cache clean --force
 
 # 3. Instalar ultima version
-npm install -g @synkra/aios-core@latest
+npm install -g aiox-core@latest
 
 # 4. Reinicializar proyecto
 cd your-project
-aios init --upgrade
+aiox init --upgrade
 ```
 
 ### Opcion 3: Actualizacion Especifica del Proyecto
@@ -131,13 +131,13 @@ aios init --upgrade
 ```bash
 # Actualizar dependencias del proyecto
 cd your-project
-npm update @synkra/aios-core/core
+npm update aiox-core/core
 
 # Reinstalar dependencias
 npm install
 
 # Verificar actualizacion
-npm list @synkra/aios-core/core
+npm list aiox-core/core
 ```
 
 ## Verificacion Post-Actualizacion
@@ -146,46 +146,46 @@ npm list @synkra/aios-core/core
 
 ```bash
 # Verificar version
-aios --version
+aiox --version
 
 # Verificar componentes principales
-aios verify --components
+aiox verify --components
 
 # Probar funcionalidad basica
-aios test --quick
+aiox test --quick
 ```
 
 ### 2. Probar Agentes
 
 ```bash
 # Listar agentes disponibles
-aios list agents
+aiox list agents
 
 # Probar activacion de agente
-aios test agent aios-developer
+aiox test agent aiox-developer
 
 # Verificar dependencias de agentes
-aios verify --agents
+aiox verify --agents
 ```
 
 ### 3. Verificar Configuracion
 
 ```bash
 # Validar configuracion
-aios config validate
+aiox config validate
 
 # Revisar log de actualizacion
-cat .aios-core/logs/upgrade.log
+cat .aiox-core/logs/upgrade.log
 ```
 
 ### 4. Probar Workflows
 
 ```bash
 # Listar workflows
-aios list workflows
+aiox list workflows
 
 # Probar ejecucion de workflow
-aios test workflow basic-dev-cycle
+aiox test workflow basic-dev-cycle
 ```
 
 ## Procedimientos de Rollback
@@ -198,21 +198,21 @@ Si encuentras problemas despues de actualizar:
 # Restaurar desde respaldo
 cd ..
 rm -rf current-project
-tar -xzf backups/aios-backup-YYYYMMDD-HHMMSS.tar.gz
+tar -xzf backups/aiox-backup-YYYYMMDD-HHMMSS.tar.gz
 
 # Reinstalar version anterior
-npm install -g @synkra/aios-core@<previous-version>
+npm install -g aiox-core@<previous-version>
 
 # Verificar rollback
-aios --version
+aiox --version
 ```
 
 ### Rollback Selectivo
 
 ```bash
 # Restaurar componentes especificos
-cp ../backups/config-backup.json .aios-core/config.json
-cp -r ../backups/custom-agents/* .aios-core/agents/custom/
+cp ../backups/config-backup.json .aiox-core/config.json
+cp -r ../backups/custom-agents/* .aiox-core/agents/custom/
 
 # Reinstalar dependencias
 npm install
@@ -229,7 +229,7 @@ npm install
 npm cache clean --force
 
 # Intentar con logging detallado
-npm install -g @synkra/aios-core@latest --verbose
+npm install -g aiox-core@latest --verbose
 
 # Verificar permisos de npm
 npm config get prefix
@@ -239,53 +239,53 @@ npm config get prefix
 
 ```bash
 # Reconstruir manifiestos de agentes
-aios rebuild --manifests
+aiox rebuild --manifests
 
 # Verificar dependencias de agentes
-aios verify --agents --verbose
+aiox verify --agents --verbose
 
 # Verificar sintaxis de agentes
-aios validate agents
+aiox validate agents
 ```
 
 #### Errores de Configuracion
 
 ```bash
 # Validar configuracion
-aios config validate --verbose
+aiox config validate --verbose
 
 # Restablecer a valores por defecto (cuidado!)
-aios config reset --backup
+aiox config reset --backup
 
 # Reparar configuracion
-aios config repair
+aiox config repair
 ```
 
 #### Problemas de Capa de Memoria
 
 ```bash
 # Reconstruir indices de memoria
-aios memory rebuild
+aiox memory rebuild
 
 # Verificar integridad de memoria
-aios memory verify
+aiox memory verify
 
 # Limpiar y reinicializar
-aios memory reset
+aiox memory reset
 ```
 
 ### Obtener Ayuda
 
 Si encuentras problemas no cubiertos aqui:
 
-1. **Verificar Logs**: Revisar `.aios-core/logs/upgrade.log`
-2. **GitHub Issues**: [github.com/SynkraAI/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+1. **Verificar Logs**: Revisar `.aiox-core/logs/upgrade.log`
+2. **GitHub Issues**: [github.com/SynkraAI/aiox-core/issues](https://github.com/SynkraAI/aiox-core/issues)
 3. **Comunidad Discord**: [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
 4. **Documentacion**: [directorio docs](./getting-started.md)
 
 ## Notas Especificas de Version
 
-### Actualizando a v4.4.0
+### Actualizando a v4.2
 
 **Cambios Clave:**
 - Capacidades mejoradas del meta-agente
@@ -297,7 +297,7 @@ Si encuentras problemas no cubiertos aqui:
 - Ninguno (compatible hacia atras con v4.0+)
 
 **Nuevas Funcionalidades:**
-- Mejoras del meta-agente `aios-developer`
+- Mejoras del meta-agente `aiox-developer`
 - Asistente de instalacion interactivo
 - Herramientas de monitoreo de rendimiento
 
@@ -307,4 +307,4 @@ Si encuentras problemas no cubiertos aqui:
 ---
 
 **Ultima Actualizacion:** 2025-08-01
-**Version Actual:** v4.4.0
+**Version Actual:** v4.2.11

@@ -61,4 +61,4 @@ Cada ejemplo incluye comentarios explicando:
 
 ---
 
-_AIOS Squads: Equipos de agentes de IA trabajando contigo_ 🤖
+_AIOX Squads: Equipos de agentes de IA trabajando contigo_ 🤖

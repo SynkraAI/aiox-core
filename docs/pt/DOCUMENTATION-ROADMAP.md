@@ -4,7 +4,7 @@
   Última sincronização: 2026-01-28
 -->
 
-# Roadmap de Documentação AIOS
+# Roadmap de Documentação AIOX
 
 > 🌐 [EN](../DOCUMENTATION-ROADMAP.md) | **PT** | [ES](../es/DOCUMENTATION-ROADMAP.md)
 
@@ -49,7 +49,7 @@ Após análise, eles são categorizados em:
 
 | Documento             | Localização             | Complexidade | Descrição                                 |
 | --------------------- | ----------------------- | ------------ | ----------------------------------------- |
-| `v2.1-quick-start.md` | `docs/en/installation/` | Simples      | Guia de início rápido para novos usuários |
+| `v4-quick-start.md` | `docs/en/installation/` | Simples      | Guia de início rápido para novos usuários |
 
 **Esboço do conteúdo:**
 
@@ -103,14 +103,14 @@ Estes documentos devem ser **mesclados na documentação existente**:
 
 | Documento Faltante                                | Mesclar Em                                   | Ação                                |
 | ------------------------------------------------- | -------------------------------------------- | ----------------------------------- |
-| `installation/migration-v2.0-to-v2.1.md`          | `migration-guide.md`                         | Adicionar seção v2.0→v2.1           |
-| `migration-v2.0-to-v2.1.md`                       | `migration-guide.md`                         | Mesmo que acima                     |
+| `installation/migration-migration-guide.md`          | `migration-guide.md`                         | Adicionar seção v2.0→v4.0.4           |
+| `migration-migration-guide.md`                       | `migration-guide.md`                         | Mesmo que acima                     |
 | `coderabbit-integration-decisions.md`             | `architecture/adr/`                          | Criar novo ADR                      |
 | `technical-review-greeting-system-unification.md` | `guides/contextual-greeting-system-guide.md` | Adicionar seção técnica             |
 | `hybrid-ops-pv-mind-integration.md`               | `architecture/high-level-architecture.md`    | Adicionar seção de integração       |
 | `repository-migration-plan.md`                    | `migration-guide.md`                         | Adicionar seção de migração de repo |
-| `internal-tools-analysis.md`                      | `.aios-core/infrastructure/tools/README.md`  | Referenciar existente               |
-| `.aios-core/core/registry/README.md`              | **JÁ EXISTE**                                | Nenhuma ação necessária             |
+| `internal-tools-analysis.md`                      | `.aiox-core/infrastructure/tools/README.md`  | Referenciar existente               |
+| `.aiox-core/core/registry/README.md`              | **JÁ EXISTE**                                | Nenhuma ação necessária             |
 
 ---
 
@@ -141,7 +141,7 @@ Estes documentos são **obsoletos ou redundantes** e NÃO devem ser criados:
 ```
 Semana 1 (Fase 1)
 ├── Dia 1-2: mcp-api-keys-management.md
-└── Dia 3-4: v2.1-quick-start.md
+└── Dia 3-4: v4-quick-start.md
 
 Semana 2-3 (Fase 2)
 ├── Dia 1-3: agent-tool-integration-guide.md
@@ -188,7 +188,7 @@ Todos os novos documentos devem ser criados em **3 idiomas**:
 ### Fase 1
 
 - [ ] `mcp-api-keys-management.md` (EN/PT-BR/ES)
-- [ ] `v2.1-quick-start.md` (EN/PT-BR/ES)
+- [ ] `v4-quick-start.md` (EN/PT-BR/ES)
 
 ### Fase 2
 
@@ -206,7 +206,7 @@ Todos os novos documentos devem ser criados em **3 idiomas**:
 
 ### Consolidação
 
-- [ ] Seção de guia de migração v2.0→v2.1 adicionada
+- [ ] Seção de guia de migração v2.0→v4.0.4 adicionada
 - [ ] ADR para decisões do CodeRabbit criado
 - [ ] Seção técnica do guia do sistema de saudação adicionada
 

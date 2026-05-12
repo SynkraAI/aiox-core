@@ -21,9 +21,9 @@ const {
 // Mock WaveAnalyzer module to prevent constructor error in WaveExecutor
 // The wave-executor.js does try { require('../../workflow-intelligence/engine/wave-analyzer') }
 // which succeeds but exports a non-constructor. We force it to null via jest.mock.
-jest.mock('../../.aios-core/workflow-intelligence/engine/wave-analyzer', () => null);
+jest.mock('../../.aiox-core/workflow-intelligence/engine/wave-analyzer', () => null);
 
-const WaveExecutor = require('../../.aios-core/core/execution/wave-executor');
+const WaveExecutor = require('../../.aiox-core/core/execution/wave-executor');
 
 // Null-safe analyzer for tests that need one
 const NOOP_ANALYZER = { analyze: jest.fn().mockReturnValue({ waves: [] }) };

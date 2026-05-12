@@ -2,7 +2,7 @@
  * Installation Error Messages - User-friendly error communication
  *
  * Provides classified error messages with recovery suggestions
- * for AIOS installer failures.
+ * for AIOX installer failures.
  *
  * @module bin/utils/install-errors
  * @see Story 1.9 - Error Handling & Rollback
@@ -161,7 +161,7 @@ const ERROR_MESSAGES = {
     title: 'Unknown Installation Error',
     description: 'Installation failed due to an unexpected error.',
     recovery: [
-      'Check the installation log: .aios-install.log',
+      'Check the installation log: .aiox-install.log',
       'Review error details in the log file',
       'Report the issue if problem persists',
       'Try running installer again',
@@ -210,7 +210,7 @@ function formatErrorMessage(error, errorCode = null) {
     lines.push(chalk.gray(`  Message: ${error.message}`));
   }
   lines.push('');
-  lines.push(chalk.gray('Installation log: .aios-install.log'));
+  lines.push(chalk.gray('Installation log: .aiox-install.log'));
   lines.push('');
 
   return lines.join('\n');
@@ -251,9 +251,9 @@ function formatRollbackMessage(success, failedFiles = []) {
 
     lines.push('');
     lines.push(chalk.cyan('Recovery Steps:'));
-    lines.push(chalk.cyan('  1. Check backup directory: .aios-backup/'));
+    lines.push(chalk.cyan('  1. Check backup directory: .aiox-backup/'));
     lines.push(chalk.cyan('  2. Manually restore failed files from backups'));
-    lines.push(chalk.cyan('  3. Review installation log: .aios-install.log'));
+    lines.push(chalk.cyan('  3. Review installation log: .aiox-install.log'));
   }
 
   lines.push('');
@@ -272,12 +272,12 @@ function formatSuccessMessage() {
   lines.push(chalk.green('✅  Installation Completed Successfully'));
   lines.push(chalk.green('═══════════════════════════════════════════════════════'));
   lines.push('');
-  lines.push(chalk.white('AIOS has been installed and configured.'));
+  lines.push(chalk.white('AIOX has been installed and configured.'));
   lines.push('');
   lines.push(chalk.cyan.bold('Next Steps:'));
-  lines.push(chalk.cyan('  1. Review installation log: .aios-install.log'));
-  lines.push(chalk.cyan('  2. Verify configuration: aios config --check'));
-  lines.push(chalk.cyan('  3. Run validation: aios validate'));
+  lines.push(chalk.cyan('  1. Review installation log: .aiox-install.log'));
+  lines.push(chalk.cyan('  2. Verify configuration: aiox config --check'));
+  lines.push(chalk.cyan('  3. Run validation: aiox validate'));
   lines.push('');
   return lines.join('\n');
 }

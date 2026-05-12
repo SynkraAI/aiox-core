@@ -4,7 +4,7 @@
   Última sincronização: 2026-02-01
 -->
 
-# Documentação de Instalação do Synkra AIOS
+# Documentação de Instalação do Synkra AIOX
 
 > 🌐 [EN](../../installation/README.md) | **PT** | [ES](../../es/installation/README.md)
 
@@ -17,7 +17,7 @@
 
 ## Visão Geral
 
-Este diretório contém documentação abrangente de instalação e configuração para o Synkra AIOS.
+Este diretório contém documentação abrangente de instalação e configuração para o Synkra AIOX.
 
 ---
 
@@ -35,7 +35,7 @@ Este diretório contém documentação abrangente de instalação e configuraç�
 
 | Documento                                    | Descrição                               | Público-alvo      |
 | -------------------------------------------- | --------------------------------------- | ----------------- |
-| [Quick Start (v2.1)](./v2.1-quick-start.md)  | Configuração rápida para novos usuários | Iniciantes        |
+| [Quick Start (v4)](./v4-quick-start.md)  | Configuração rápida para novos usuários | Iniciantes        |
 | [Solução de Problemas](./troubleshooting.md) | Problemas comuns e soluções             | Todos os usuários |
 | [FAQ](./faq.md)                              | Perguntas frequentes                    | Todos os usuários |
 
@@ -46,20 +46,20 @@ Este diretório contém documentação abrangente de instalação e configuraç�
 ### Nova Instalação
 
 ```bash
-npx @synkra/aios-core install
+npx aiox-core install
 ```
 
 ### Atualização
 
 ```bash
-npx @synkra/aios-core install --force-upgrade
+npx aiox-core install --force-upgrade
 ```
 
 ### Está com Problemas?
 
 1. Consulte o [Guia de Solução de Problemas](./troubleshooting.md)
 2. Pesquise no [FAQ](./faq.md)
-3. Abra uma [Issue no GitHub](https://github.com/SynkraAI/aios-core/issues)
+3. Abra uma [Issue no GitHub](https://github.com/SynkraAI/aiox-core/issues)
 
 ---
 
@@ -88,10 +88,6 @@ npx @synkra/aios-core install --force-upgrade
 | -------------- | ------------------- |
 | Claude Code    | `/dev`, `/qa`, etc. |
 | Cursor         | `@dev`, `@qa`, etc. |
-| Windsurf       | `@dev`, `@qa`, etc. |
-| Trae           | `@dev`, `@qa`, etc. |
-| Roo Code       | Seletor de modo     |
-| Cline          | `@dev`, `@qa`, etc. |
 | Gemini CLI     | Menção no prompt    |
 | GitHub Copilot | Modos de chat       |
 
@@ -108,5 +104,5 @@ npx @synkra/aios-core install --force-upgrade
 
 ## Suporte
 
-- **Issues no GitHub**: [@synkra/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **Issues no GitHub**: [aiox-core/issues](https://github.com/SynkraAI/aiox-core/issues)
 - **Documentação**: [docs/](../)

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://geminicli.com/schemas/extension.json",
+  "name": "aiox",
+  "displayName": "Synkra AIOX",
+  "version": "1.0.0",
+  "description": "Multi-agent orchestration system for CLI-first development. Brings AIOX agents, hooks, and workflows to Gemini CLI.",
+  "author": "Synkra",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/synkra/aiox-core"
+  },
+  "engines": {
+    "gemini-cli": ">=0.26.0"
+  },
+  "capabilities": {
+    "hooks": true,
+    "skills": true,
+    "commands": true,
+    "mcp": false
+  },
+  "activation": {
+    "onStartup": true,
+    "conditions": [
+      {
+        "type": "fileExists",
+        "path": ".aiox-core"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "name": "aiox-status",
+      "description": "Show AIOX system status and provider info",
+      "script": "commands/aiox-status.js"
+    },
+    {
+      "name": "aiox-agents",
+      "description": "List available AIOX agents",
+      "script": "commands/aiox-agents.js"
+    },
+    {
+      "name": "aiox-validate",
+      "description": "Validate AIOX installation and skills",
+      "script": "commands/aiox-validate.js"
+    },
+    {
+      "name": "aiox-menu",
+      "description": "Show AIOX quick agent menu for Gemini",
+      "script": "commands/aiox-menu.js"
+    },
+    {
+      "name": "aiox-agent",
+      "description": "Prepare activation prompt for a specific AIOX agent (/aiox-agent <id>)",
+      "script": "commands/aiox-agent.js"
+    },
+    {
+      "name": "aiox-master",
+      "description": "Quick launch aiox-master agent",
+      "script": "commands/aiox-master.js"
+    },
+    {
+      "name": "aiox-analyst",
+      "description": "Quick launch analyst agent",
+      "script": "commands/aiox-analyst.js"
+    },
+    {
+      "name": "aiox-architect",
+      "description": "Quick launch architect agent",
+      "script": "commands/aiox-architect.js"
+    },
+    {
+      "name": "aiox-data-engineer",
+      "description": "Quick launch data-engineer agent",
+      "script": "commands/aiox-data-engineer.js"
+    },
+    {
+      "name": "aiox-dev",
+      "description": "Quick launch dev agent",
+      "script": "commands/aiox-dev.js"
+    },
+    {
+      "name": "aiox-devops",
+      "description": "Quick launch devops agent",
+      "script": "commands/aiox-devops.js"
+    },
+    {
+      "name": "aiox-pm",
+      "description": "Quick launch pm agent",
+      "script": "commands/aiox-pm.js"
+    },
+    {
+      "name": "aiox-po",
+      "description": "Quick launch po agent",
+      "script": "commands/aiox-po.js"
+    },
+    {
+      "name": "aiox-qa",
+      "description": "Quick launch qa agent",
+      "script": "commands/aiox-qa.js"
+    },
+    {
+      "name": "aiox-sm",
+      "description": "Quick launch sm agent",
+      "script": "commands/aiox-sm.js"
+    },
+    {
+      "name": "aiox-squad-creator",
+      "description": "Quick launch squad-creator agent",
+      "script": "commands/aiox-squad-creator.js"
+    },
+    {
+      "name": "aiox-ux-design-expert",
+      "description": "Quick launch ux-design-expert agent",
+      "script": "commands/aiox-ux-design-expert.js"
+    }
+  ],
+  "skills": [
+    {
+      "name": "dev",
+      "path": "skills/dev.md",
+      "description": "Developer agent - code implementation"
+    },
+    {
+      "name": "architect",
+      "path": "skills/architect.md",
+      "description": "Architect agent - system design"
+    },
+    {
+      "name": "qa",
+      "path": "skills/qa.md",
+      "description": "QA agent - testing and quality"
+    }
+  ],
+  "hooks": {
+    "configPath": "hooks/hooks.json"
+  },
+  "keywords": [
+    "aiox",
+    "agents",
+    "orchestration",
+    "development",
+    "ai",
+    "claude",
+    "multi-agent"
+  ]
+}

@@ -1,0 +1,314 @@
+# Claude Code Quick Reference Card
+# Squad: claude-code-mastery
+# Last updated: 2026-03-02
+
+version: "1.0.0"
+claude_code_version: "1.0.x"
+
+# ---------------------------------------------------------------------------
+# INTERNAL TOOLS (16+)
+# ---------------------------------------------------------------------------
+tools:
+  file_operations:
+    - name: Read
+      description: "Read file contents with optional line range"
+      supports: "text, images, PDFs (page ranges), Jupyter notebooks"
+    - name: Write
+      description: "Create new files or complete rewrites"
+      note: "Must Read file first if it exists"
+    - name: Edit
+      description: "Exact string replacement in existing files"
+      note: "old_string must be unique; use replace_all for bulk"
+    - name: MultiEdit
+      description: "Multiple edits in a single file atomically"
+
+  search:
+    - name: Glob
+      description: "Fast file pattern matching (e.g., **/*.ts)"
+      returns: "File paths sorted by modification time"
+    - name: Grep
+      description: "Content search using ripgrep regex"
+      modes: [content, files_with_matches, count]
+
+  execution:
+    - name: Bash
+      description: "Execute shell commands with timeout control"
+      max_timeout_ms: 600000
+      supports: "background execution via run_in_background"
+    - name: Agent
+      description: "Spawn subagent for complex multi-step tasks"
+      types: [Explore, Plan, general-purpose, custom]
+
+  web:
+    - name: WebSearch
+      description: "Search the web for current information"
+    - name: WebFetch
+      description: "Fetch content from a specific URL"
+
+  context:
+    - name: TodoRead
+      description: "Read current todo/task list"
+    - name: TodoWrite
+      description: "Update todo/task list items"
+    - name: TaskOutput
+      description: "Read output from background tasks"
+
+  mcp_tools:
+    description: "Tools from connected MCP servers (mcp__server__tool)"
+    pattern: "mcp__{server_name}__{tool_name}"
+
+# ---------------------------------------------------------------------------
+# PERMISSION MODES
+# ---------------------------------------------------------------------------
+permission_modes:
+  - name: askAlways
+    description: "Prompt before every tool use"
+    badge: "[Ask]"
+    use_case: "Maximum control, learning, auditing"
+
+  - name: acceptEdits
+    description: "Auto-approve reads/searches, ask for writes/executions"
+    badge: "[Edits]"
+    use_case: "Balanced safety for daily development"
+
+  - name: autoApprove
+    description: "Auto-approve all tool uses"
+    badge: "[Auto]"
+    use_case: "YOLO mode, trusted automated workflows"
+    cli_flag: "--dangerously-skip-permissions"
+
+  - name: plan
+    description: "Read-only exploration, no modifications allowed"
+    badge: "[Plan]"
+    use_case: "Architecture review, codebase exploration"
+
+# ---------------------------------------------------------------------------
+# HOOK EVENTS (17)
+# ---------------------------------------------------------------------------
+hook_events:
+  tool_lifecycle:
+    - event: PreToolUse
+      description: "Before any tool execution"
+      use_cases: [damage-control, security-gate, logging]
+      matcher_fields: [tool_name, tool_input]
+
+    - event: PostToolUse
+      description: "After tool execution completes"
+      use_cases: [auto-lint, metrics, notification]
+      matcher_fields: [tool_name, tool_input, tool_output]
+
+  session_lifecycle:
+    - event: Stop
+      description: "When the agent turn ends"
+      use_cases: [cost-tracking, summary-generation, cleanup]
+
+    - event: SubagentStart
+      description: "When a subagent is spawned"
+      use_cases: [logging, resource-tracking]
+
+    - event: SubagentStop
+      description: "When a subagent completes"
+      use_cases: [result-aggregation, cleanup]
+
+  context_management:
+    - event: PreCompact
+      description: "Before context window compaction"
+      use_cases: [state-preservation, important-context-save]
+
+    - event: UserPromptSubmit
+      description: "When user submits a prompt"
+      use_cases: [input-validation, routing, logging]
+
+    - event: Notification
+      description: "When a notification is triggered"
+      use_cases: [slack-integration, email-alerts, desktop-notify]
+
+  advanced_events:
+    - event: PreToolUse (Bash)
+      description: "Matcher for Bash tool specifically"
+      example_matcher: "tool_name == 'Bash'"
+
+    - event: PreToolUse (Write)
+      description: "Matcher for Write tool specifically"
+      example_matcher: "tool_name == 'Write'"
+
+    - event: PostToolUse (Edit)
+      description: "After Edit tool completes"
+      example_matcher: "tool_name == 'Edit'"
+
+  hook_config_format:
+    location: "~/.claude/settings.json or .claude/settings.json"
+    structure: |
+      {
+        "hooks": {
+          "PreToolUse": [{ "matcher": "...", "hooks": [{ "type": "command", "command": "..." }] }],
+          "PostToolUse": [{ "matcher": "", "hooks": [{ "type": "command", "command": "..." }] }],
+          "Stop": [{ "matcher": "", "hooks": [{ "type": "command", "command": "..." }] }]
+        }
+      }
+
+# ---------------------------------------------------------------------------
+# SUBAGENT TYPES
+# ---------------------------------------------------------------------------
+subagent_types:
+  builtin:
+    - name: Explore
+      description: "Read-only exploration subagent"
+      permissions: "Can read files, search, but cannot write"
+      use_case: "Safe codebase exploration and analysis"
+
+    - name: Plan
+      description: "Planning subagent that creates execution plans"
+      permissions: "Read-only, outputs structured plan"
+      use_case: "Architecture decisions, implementation planning"
+
+  custom:
+    - name: general-purpose
+      description: "Full-capability subagent"
+      permissions: "Inherits parent permissions"
+      use_case: "Delegated implementation tasks"
+
+    - name: custom-agents
+      location: ".claude/agents/*.md"
+      description: "User-defined agent personas with custom instructions"
+      activation: "claude --agent agents/my-agent.md"
+
+# ---------------------------------------------------------------------------
+# SETTINGS HIERARCHY (highest to lowest priority)
+# ---------------------------------------------------------------------------
+settings_hierarchy:
+  - level: 1
+    name: "Managed Policy"
+    file: "~/.claude/policies/*.md"
+    description: "Enterprise/org-level policies, cannot be overridden"
+    scope: global
+
+  - level: 2
+    name: "CLI Flags"
+    description: "Runtime flags (--dangerously-skip-permissions, --model)"
+    scope: session
+
+  - level: 3
+    name: "Project Local"
+    file: ".claude/settings.local.json"
+    description: "Per-project settings, gitignored"
+    scope: project
+
+  - level: 4
+    name: "Project Shared"
+    file: ".claude/settings.json"
+    description: "Shared project settings, committed to git"
+    scope: project
+
+  - level: 5
+    name: "User Global"
+    file: "~/.claude/settings.json"
+    description: "User-level defaults across all projects"
+    scope: global
+
+# ---------------------------------------------------------------------------
+# MCP TRANSPORTS
+# ---------------------------------------------------------------------------
+mcp_transports:
+  - name: stdio
+    description: "Standard I/O communication (most common)"
+    config_key: "command"
+    example: '{"command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem"]}'
+    use_case: "Local MCP servers, npm packages"
+
+  - name: http_streamable
+    description: "HTTP Streamable transport (newer, recommended for remote)"
+    config_key: "url"
+    example: '{"url": "https://mcp.example.com/sse"}'
+    use_case: "Remote MCP servers, cloud services"
+
+  - name: sse
+    description: "Server-Sent Events (legacy, being replaced by HTTP Streamable)"
+    config_key: "url"
+    example: '{"url": "http://localhost:3001/sse"}'
+    use_case: "Legacy remote MCP servers"
+
+# ---------------------------------------------------------------------------
+# MEMORY SYSTEM
+# ---------------------------------------------------------------------------
+memory_system:
+  project_instructions:
+    - file: "CLAUDE.md"
+      location: "project root"
+      description: "Primary project instructions, always loaded"
+      priority: highest
+
+    - file: ".claude/CLAUDE.md"
+      location: ".claude directory"
+      description: "Additional project instructions"
+      priority: high
+
+    - file: "~/.claude/CLAUDE.md"
+      location: "user home"
+      description: "Global user instructions across all projects"
+      priority: medium
+
+  rules:
+    location: ".claude/rules/*.md"
+    description: "Contextual rules loaded based on file path patterns"
+    frontmatter_key: "paths"
+    example: "paths: ['src/**/*.ts'] loads only when editing TypeScript files"
+
+  auto_memory:
+    description: "Claude Code can auto-generate memory from conversations"
+    storage: ".claude/memory/"
+    behavior: "Persists learnings across sessions"
+
+  subagent_memory:
+    description: "Subagents inherit parent context but have isolated memory"
+    pattern: "Parent CLAUDE.md + agent-specific .md file"
+
+# ---------------------------------------------------------------------------
+# KEYBOARD SHORTCUTS
+# ---------------------------------------------------------------------------
+keyboard_shortcuts:
+  - key: "Ctrl+C"
+    action: "Cancel current operation / clear input"
+  - key: "Ctrl+R"
+    action: "Resume last conversation"
+  - key: "Escape"
+    action: "Clear current input line"
+  - key: "Up/Down"
+    action: "Navigate command history"
+  - key: "Tab"
+    action: "Accept autocomplete suggestion"
+  - key: "Ctrl+L"
+    action: "Clear terminal screen"
+  - key: "/"
+    action: "Open slash command menu"
+  - key: "#"
+    action: "File reference autocomplete"
+  - key: "@"
+    action: "Agent/mention autocomplete"
+
+# ---------------------------------------------------------------------------
+# CLI FLAGS (common)
+# ---------------------------------------------------------------------------
+cli_flags:
+  - flag: "--model"
+    description: "Override model (e.g., claude-sonnet-4-20250514)"
+  - flag: "--agent"
+    description: "Load custom agent from .md file"
+  - flag: "--resume"
+    description: "Resume a previous conversation"
+  - flag: "--print / -p"
+    description: "Headless mode, output to stdout (for CI/CD)"
+  - flag: "--output-format"
+    values: [text, json, stream-json]
+    description: "Output format for headless mode"
+  - flag: "--dangerously-skip-permissions"
+    description: "Auto-approve all tool uses (YOLO)"
+  - flag: "--allowedTools"
+    description: "Restrict which tools the agent can use"
+  - flag: "--max-turns"
+    description: "Limit agent turns in headless mode"
+  - flag: "--add-dir"
+    description: "Add additional directory to context"
+  - flag: "--permission-mode"
+    values: [default, plan, autoApprove]
+    description: "Set permission mode for session"
