@@ -88,10 +88,13 @@ jobs:
           PRO_SUBMODULE_TOKEN: ${{ secrets.PRO_SUBMODULE_TOKEN }}
         run: |
           echo "::add-mask::$PRO_SUBMODULE_TOKEN"
-          git config --global url."https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/".insteadOf "https://github.com/SynkraAI/"
+          cleanup_pro_submodule_token() {
+            git config --local --unset-all url."https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/".insteadOf || true
+          }
+          trap cleanup_pro_submodule_token EXIT
+          git config --local url."https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/".insteadOf "https://github.com/SynkraAI/"
           git submodule sync --recursive
           git submodule update --init --recursive
-          git config --global --unset-all url."https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/".insteadOf || true
 
       - name: Setup Node.js
         if: steps.token-check.outputs.skip != 'true'

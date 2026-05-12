@@ -53,8 +53,8 @@ afterEach(() => {
 
 // ─── Helper to get module ───────────────────────────────────────────────────
 
-const proSetup = require('../packages/installer/src/wizard/pro-setup');
-const wizardI18n = require('../packages/installer/src/wizard/i18n');
+const proSetup = require('packages/installer/src/wizard/pro-setup');
+const wizardI18n = require('packages/installer/src/wizard/i18n');
 
 const CORE_PRO_SETUP_COMMAND = 'npx -y -p @aiox-squads/core@latest aiox pro setup';
 const SCOPED_PRO_RECOVER_COMMAND = 'npx -y @aiox-squads/aiox-pro-cli@latest recover';

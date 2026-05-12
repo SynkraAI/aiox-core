@@ -466,6 +466,7 @@ Expected implementation touchpoints:
 - 2026-05-12: Student install incident triage confirmed the unscoped `npx aiox-pro recover/install/setup` path is invalid for fresh machines; installer and docs now point recovery to `npx -y @aiox-squads/aiox-pro-cli@latest recover` and setup to `npx -y -p @aiox-squads/core@latest aiox pro setup`.
 - 2026-05-12: `@aiox-squads/installer` bumped to `3.3.2` and `@aiox-squads/aiox-pro-cli` bumped to `0.2.1` so @devops can publish the signed-artifact installer and scoped CLI command fix.
 - 2026-05-12: GitHub Pro Integration checkout fixed to use `GITHUB_TOKEN` for the `aiox-core` PR merge ref and reserve `PRO_SUBMODULE_TOKEN` for private Pro submodule initialization only.
+- 2026-05-12: CodeRabbit PR follow-up applied: Pro Integration now stores the credentialized submodule URL in repo-local git config with `trap` cleanup, and Pro wizard tests use repository-absolute package imports.
 - Validation evidence:
   - `node -c packages/installer/src/wizard/pro-setup.js && node -c packages/aiox-pro-cli/bin/aiox-pro.js && node -c bin/utils/validate-publish.js`
   - `node -c packages/installer/src/pro/pro-scaffolder.js && node -c pro/license/license-api.js && node -c .aiox-core/cli/commands/pro/index.js`
@@ -479,6 +480,8 @@ Expected implementation touchpoints:
   - `npm pack --workspace @aiox-squads/installer --dry-run --json`
   - `npm run validate:publish`
   - `npx yaml-lint .github/workflows/pro-integration.yml`
+  - `npm test -- --runInBand tests/pro-wizard.test.js`
+  - `npx eslint tests/pro-wizard.test.js`
   - `npx jest --runInBand tests/license/license-api.test.js --testPathIgnorePatterns='node_modules'`
   - full smoke matrix saved in `outputs/qa/2026-05-pro-13-5-smoke.json`
   - Pro artifact upload evidence saved in `outputs/qa/2026-05-pro-13-5-pro-artifact-0.4.1.json`
