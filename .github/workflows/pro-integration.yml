@@ -88,11 +88,9 @@ jobs:
           PRO_SUBMODULE_TOKEN: ${{ secrets.PRO_SUBMODULE_TOKEN }}
         run: |
           echo "::add-mask::$PRO_SUBMODULE_TOKEN"
-          cleanup_pro_submodule_token() {
-            git config --local --unset-all url."https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/".insteadOf || true
-          }
-          trap cleanup_pro_submodule_token EXIT
-          git config --local url."https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/".insteadOf "https://github.com/SynkraAI/"
+          export GIT_CONFIG_COUNT=1
+          export GIT_CONFIG_KEY_0="url.https://x-access-token:${PRO_SUBMODULE_TOKEN}@github.com/SynkraAI/.insteadOf"
+          export GIT_CONFIG_VALUE_0="https://github.com/SynkraAI/"
           git submodule sync --recursive
           git submodule update --init --recursive
 
