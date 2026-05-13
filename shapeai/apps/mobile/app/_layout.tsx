@@ -31,10 +31,31 @@ export default function RootLayout() {
   // Handler global de deep links OAuth — registrado antes de qualquer rota renderizar
   useEffect(() => {
     const handleUrl = async (url: string) => {
-      const match = url.match(/[?&]code=([^&#]+)/)
-      if (match) {
-        const code = decodeURIComponent(match[1])
-        await supabase.auth.exchangeCodeForSession(code).catch(() => {})
+      if (!url.includes('auth-callback') && !url.includes('code=') && !url.includes('access_token')) return
+      console.log('[OAuth] deep link received:', url)
+      // PKCE flow: ?code=xxx (Supabase v2 padrão)
+      const codeMatch = url.match(/[?&]code=([^&#]+)/)
+      if (codeMatch) {
+        const code = decodeURIComponent(codeMatch[1])
+        console.log('[OAuth] exchanging PKCE code...')
+        const { error } = await supabase.auth.exchangeCodeForSession(code).catch((e: unknown) => ({ error: e, data: null }))
+        if (error) console.error('[OAuth] exchangeCodeForSession failed:', error)
+        else console.log('[OAuth] session established via PKCE')
+        return
+      }
+      // Implicit flow fallback: #access_token=xxx&refresh_token=xxx
+      const fragment = url.split('#')[1]
+      if (fragment) {
+        const params = new URLSearchParams(fragment)
+        const accessToken = params.get('access_token')
+        const refreshToken = params.get('refresh_token')
+        if (accessToken && refreshToken) {
+          console.log('[OAuth] setting session via implicit flow...')
+          await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken }).catch((e: unknown) => console.error('[OAuth] setSession failed:', e))
+        } else {
+          const errorParam = params.get('error_description') || params.get('error')
+          if (errorParam) console.error('[OAuth] error in redirect:', errorParam)
+        }
       }
     }
     const sub = Linking.addEventListener('url', (e) => handleUrl(e.url))
