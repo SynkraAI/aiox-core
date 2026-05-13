@@ -418,8 +418,9 @@ jobs:
             if npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public; then
               publish_status=0
               break
+            else
+              publish_status=$?
             fi
-            publish_status=$?
           done
           rm -f .npmrc
           if [ "$publish_status" -ne 0 ]; then
