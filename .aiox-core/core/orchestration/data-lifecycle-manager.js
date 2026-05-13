@@ -39,16 +39,22 @@ const SNAPSHOTS_INDEX = 'index.json';
  */
 
 /**
- * DataLifecycleManager - Manages data cleanup and archival
+ * DataLifecycleManager - Manages data cleanup and archival.
+ *
+ * Runs startup hygiene for Bob orchestration by delegating stale lock cleanup,
+ * archiving old session state, removing old snapshots, and recording removed
+ * snapshot references for auditability.
  */
 class DataLifecycleManager {
   /**
-   * Creates a new DataLifecycleManager instance
+   * Creates a new DataLifecycleManager instance.
+   *
    * @param {string} projectRoot - Project root directory
    * @param {Object} [options] - Manager options
    * @param {boolean} [options.debug=false] - Enable debug logging
    * @param {number} [options.staleSessionDays=30] - Days before session is stale
    * @param {number} [options.staleSnapshotDays=90] - Days before snapshot is stale
+   * @throws {Error} If projectRoot is missing or not a string.
    */
   constructor(projectRoot, options = {}) {
     if (!projectRoot || typeof projectRoot !== 'string') {
@@ -253,8 +259,15 @@ class DataLifecycleManager {
   }
 
   /**
-   * Updates snapshots index.json with removed snapshot references
+   * Updates snapshots index.json with removed snapshot references.
+   *
    * @param {Object[]} removedSnapshots - Array of removed snapshot info
+   * @param {string} removedSnapshots[].filename - Removed snapshot filename
+   * @param {string} removedSnapshots[].removed_at - ISO timestamp of removal
+   * @param {string} removedSnapshots[].original_created - Original snapshot timestamp
+   * @param {number} removedSnapshots[].age_days - Snapshot age in days
+   * @param {string} removedSnapshots[].epic_id - Associated epic ID or unknown
+   * @param {string} removedSnapshots[].story_id - Associated story ID or unknown
    * @returns {Promise<void>}
    * @private
    */

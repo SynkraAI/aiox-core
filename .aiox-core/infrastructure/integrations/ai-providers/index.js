@@ -10,6 +10,7 @@
 const { AIProvider } = require('./ai-provider');
 const { ClaudeProvider } = require('./claude-provider');
 const { GeminiProvider } = require('./gemini-provider');
+const { OpenAICompatibleProvider } = require('./openai-compatible-provider');
 const {
   getProvider,
   getPrimaryProvider,
@@ -29,6 +30,7 @@ module.exports = {
   // Provider implementations
   ClaudeProvider,
   GeminiProvider,
+  OpenAICompatibleProvider,
 
   // Factory functions
   getProvider,

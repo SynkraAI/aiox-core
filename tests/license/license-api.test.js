@@ -98,7 +98,7 @@ describe('license-api', () => {
 
       await createMockServer((req, res) => {
         expect(req.method).toBe('POST');
-        expect(req.url).toBe('/v1/license/activate');
+        expect(req.url).toBe('/api/v1/license/activate');
 
         let body = '';
         req.on('data', (chunk) => (body += chunk));
@@ -258,7 +258,7 @@ describe('license-api', () => {
 
       await createMockServer((req, res) => {
         expect(req.method).toBe('POST');
-        expect(req.url).toBe('/v1/license/validate');
+        expect(req.url).toBe('/api/v1/license/validate');
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(mockResponse));
@@ -290,7 +290,7 @@ describe('license-api', () => {
     it('should successfully deactivate license', async () => {
       await createMockServer((req, res) => {
         expect(req.method).toBe('POST');
-        expect(req.url).toBe('/v1/license/deactivate');
+        expect(req.url).toBe('/api/v1/license/deactivate');
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(
@@ -331,7 +331,7 @@ describe('license-api', () => {
       expect(hasPendingDeactivation(testDir).pending).toBe(true);
 
       await createMockServer((req, res) => {
-        expect(req.url).toBe('/v1/license/deactivate');
+        expect(req.url).toBe('/api/v1/license/deactivate');
 
         let body = '';
         req.on('data', (chunk) => (body += chunk));

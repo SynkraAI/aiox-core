@@ -36,6 +36,12 @@ const { ServiceRegistry, getRegistry, loadRegistry } = require('./registry/regis
 // Health Check System
 const healthCheck = require('./health-check');
 
+// External executor delegation
+const externalExecutors = require('./external-executors');
+
+// Resilience primitives
+const resilience = require('./resilience');
+
 /**
  * Core module exports
  */
@@ -81,6 +87,12 @@ module.exports = {
   CheckStatus: healthCheck.CheckStatus,
   CheckRegistry: healthCheck.CheckRegistry,
   healthCheck,
+
+  // External executors
+  externalExecutors,
+
+  // Resilience
+  resilience,
 
   // Version info
   version: '2.0.0',

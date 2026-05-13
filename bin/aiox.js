@@ -8,8 +8,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const { execSync } = require('child_process');
-
 // Read package.json for version
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -20,6 +18,16 @@ const command = args[0];
 
 // Helper: Run initialization wizard
 async function runWizard(options = {}) {
+  if (options.force || options.yes || options.ci) {
+    process.env.AIOX_INSTALL_FORCE = '1';
+  }
+  if (options.quiet || options.ci) {
+    process.env.AIOX_INSTALL_QUIET = '1';
+  }
+  if (options.dryRun) {
+    process.env.AIOX_INSTALL_DRY_RUN = '1';
+  }
+
   // Use the v4 wizard from packages/installer/src/wizard/index.js
   const wizardPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'wizard', 'index.js');
 
@@ -66,6 +74,9 @@ USAGE:
   npx aiox-core@latest validate     # Validate installation integrity
   npx aiox-core@latest info         # Show system info
   npx aiox-core@latest doctor       # Run diagnostics
+  aiox-delegate codex -t <slug>     # Delegate implementation to external executor
+  npx aiox-core@latest enterprise upgrade --target . --dry-run --enterprise-source <path>
+                                       # Plan Pro to Enterprise upgrade
   npx aiox-core@latest --version    # Show version
   npx aiox-core@latest --version -d # Show detailed version info
   npx aiox-core@latest --help       # Show this help
@@ -96,6 +107,14 @@ SERVICE DISCOVERY:
   aiox workers search "json" --category=data
   aiox workers search "transform" --tags=etl,data
   aiox workers search "api" --format=json
+
+EXTERNAL EXECUTION:
+  aiox-delegate codex -t story-4.3 -f prompt.md
+  aiox-delegate codex -t story-4.3 -p "Implement AC1" --dry-run
+
+ENTERPRISE:
+  aiox enterprise upgrade --target . --enterprise-source /path/to/AIOX-enterprise --dry-run
+  aiox enterprise upgrade --target . --enterprise-source /path/to/AIOX-enterprise --dry-run --plan outputs/enterprise-upgrade-plan.yaml
 
 EXAMPLES:
   # Install in current directory
@@ -342,6 +361,37 @@ async function runUpdate() {
         process.exit(1);
       }
     }
+
+    // --include-pro: also update Pro after core (Story 122.5)
+    if (updateArgs.includes('--include-pro')) {
+      try {
+        const proUpdaterPath = path.join(__dirname, '..', '.aiox-core', 'core', 'pro', 'pro-updater');
+        const { updatePro, formatUpdateResult: formatProResult } = require(proUpdaterPath);
+
+        console.log('\n🔄 Updating AIOX Pro...\n');
+
+        const proResult = await updatePro(process.cwd(), {
+          check: isCheck,
+          dryRun: isDryRun,
+          force: isForce,
+          onProgress: (phase, message) => {
+            if (isVerbose) console.log(`[pro:${phase}] ${message}`);
+          },
+        });
+
+        console.log(formatProResult(proResult));
+
+        if (!proResult.success) {
+          process.exit(1);
+        }
+      } catch (proError) {
+        console.error(`❌ Pro update failed: ${proError.message}`);
+        if (proError.stack) {
+          console.error(proError.stack);
+        }
+        process.exit(1);
+      }
+    }
   } catch (error) {
     console.error(`❌ Update error: ${error.message}`);
     if (args.includes('--verbose') || args.includes('-v')) {
@@ -367,6 +417,35 @@ async function runDoctor(options = {}) {
 
   // Exit with code 1 if any FAIL results
   if (result.data && result.data.summary && result.data.summary.fail > 0) {
+    process.exit(1);
+  }
+}
+
+// Helper: Run Enterprise commands
+async function runEnterprise() {
+  const enterpriseArgs = args.slice(1);
+  const enterprisePath = path.join(
+    __dirname,
+    '..',
+    'packages',
+    'installer',
+    'src',
+    'enterprise',
+    'enterprise-upgrade-plan.js',
+  );
+
+  try {
+    const { runEnterpriseUpgradeCli } = require(enterprisePath);
+    const exitCode = await runEnterpriseUpgradeCli(enterpriseArgs, {
+      stdout: process.stdout,
+      stderr: process.stderr,
+    });
+
+    if (exitCode !== 0) {
+      process.exit(exitCode);
+    }
+  } catch (error) {
+    console.error(`❌ Enterprise command error: ${error.message}`);
     process.exit(1);
   }
 }
@@ -640,8 +719,11 @@ Install AIOX in the current directory.
 
 Options:
   --force      Overwrite existing AIOX installation
+  --yes, -y    Accept safe defaults and overwrite existing AIOX installation
+  --ci         Non-interactive CI mode (--quiet --force)
   --quiet      Minimal output (no banner, no prompts) - ideal for CI/CD
   --dry-run    Simulate installation without modifying files
+  --ide <ide>  Configure a specific IDE during quiet/CI install
   --merge      Auto-merge existing config files (brownfield mode)
   --no-merge   Disable merge option, use legacy overwrite behavior
   -h, --help   Show this help message
@@ -669,6 +751,9 @@ Examples:
 
   # Silent install for CI/CD
   npx aiox-core install --quiet --force
+
+  # Explicit CI install with Claude Code files materialized
+  npx aiox-core install --ci --yes --ide claude-code
 
   # Preview what would be installed
   npx aiox-core install --dry-run
@@ -834,6 +919,11 @@ async function main() {
       }
       break;
 
+    case 'enterprise':
+      // AIOX Enterprise Upgrade Planning - Story PEM.1
+      await runEnterprise();
+      break;
+
     case 'install': {
       // Install in current project with flag support
       const installArgs = args.slice(1);
@@ -841,12 +931,18 @@ async function main() {
         showInstallHelp();
         break;
       }
+      const isCi = installArgs.includes('--ci');
+      const isYes = installArgs.includes('--yes') || installArgs.includes('-y');
+      const ideIndex = installArgs.indexOf('--ide');
       const installOptions = {
-        force: installArgs.includes('--force'),
-        quiet: installArgs.includes('--quiet'),
+        force: installArgs.includes('--force') || isYes || isCi,
+        yes: isYes,
+        ci: isCi,
+        quiet: installArgs.includes('--quiet') || isCi,
         dryRun: installArgs.includes('--dry-run'),
         forceMerge: installArgs.includes('--merge'),
         noMerge: installArgs.includes('--no-merge'),
+        ide: ideIndex >= 0 ? installArgs[ideIndex + 1] : null,
       };
       if (!installOptions.quiet) {
         console.log('AIOX-FullStack Installation\n');

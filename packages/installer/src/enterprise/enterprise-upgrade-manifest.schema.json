@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aiox.local/schemas/enterprise-upgrade-manifest.schema.json",
+  "title": "AIOX Enterprise Upgrade Manifest",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "entitlement", "groups", "blockedPaths", "allowlist"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "kind": {
+      "const": "aiox.enterprise.upgrade-manifest"
+    },
+    "entitlement": {
+      "type": "object",
+      "required": ["required", "envVar", "testFixtureEnvVar"],
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean" },
+        "envVar": { "type": "string", "minLength": 1 },
+        "testFixtureEnvVar": { "type": "string", "minLength": 1 },
+        "status": { "type": "string" }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "defaultPolicy"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "config",
+              "ide-surfaces",
+              "workspace-templates",
+              "workspace-scripts",
+              "services",
+              "squads",
+              "governance",
+              "docs"
+            ]
+          },
+          "description": { "type": "string", "minLength": 1 },
+          "defaultPolicy": {
+            "type": "string",
+            "enum": ["copy-if-missing", "merge-yaml", "hash-overwrite-with-backup", "preserve", "deny"]
+          }
+        }
+      }
+    },
+    "blockedPaths": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["pattern", "action", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "pattern": { "type": "string", "minLength": 1 },
+          "action": {
+            "type": "string",
+            "enum": ["preserve", "deny"]
+          },
+          "reason": { "type": "string", "minLength": 1 },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          }
+        }
+      }
+    },
+    "allowlist": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "group", "policy", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "group": {
+            "type": "string",
+            "enum": [
+              "config",
+              "ide-surfaces",
+              "workspace-templates",
+              "workspace-scripts",
+              "services",
+              "squads",
+              "governance",
+              "docs"
+            ]
+          },
+          "policy": {
+            "type": "string",
+            "enum": ["copy-if-missing", "merge-yaml", "hash-overwrite-with-backup", "preserve", "deny"]
+          },
+          "reason": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

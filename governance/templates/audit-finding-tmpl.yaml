@@ -1,0 +1,46 @@
+# AIOX AuditFinding Template
+# See: aiox-core/governance/evolution-pipeline.md
+#
+# Usage:
+#   1. Copy this file to <project>/docs/audits/AF-<YYYYMMDD>-<slug>.yaml
+#   2. Fill all fields. Mark framework_candidate honestly.
+#   3. If framework_candidate: true → after triage, copy to aiox-core/audits/promoted/
+#   4. If framework_candidate: false → leave in project; archive when scope-bound work completes
+
+audit_finding:
+  version: "1.0"
+  id: ""                              # AF-<YYYYMMDD>-<slug> e.g., AF-20260507-vocabulary-contract-failure
+  date: ""                            # ISO 8601, e.g., 2026-05-07T18:30:00Z
+  auditor: ""                         # agent id or "eliel"
+  source_session: ""                  # one-line summary of the session that discovered
+
+  context:
+    project: ""                       # e.g., business-ai-first
+    epic: ""                          # e.g., EPIC-MVP-CDM-CADASTRO
+    triggered_by: ""                  # event that exposed the finding
+
+  finding:
+    summary: ""                       # one-sentence finding
+    evidence:
+      - ""                            # concrete evidence 1
+      # - ""                          # concrete evidence 2
+    impact_observed:
+      blast_radius: ""                # low | medium | high | critical
+      affected_artifacts: []          # ["<list>"]
+      cost: ""                        # tokens, time, prod incidents, etc.
+
+  framework_candidate: false          # true if this finding could affect any future AIOX project
+  framework_candidate_rationale: |
+    Explain why this is or isn't a framework concern. Be honest — not every
+    finding belongs in the framework. False is healthy when scope-bound.
+
+  references:
+    # Allowed kind values: ADR | code | hook | governance-doc | existing-pattern-source |
+    # voice-clone-finding | voice-clone-personas | handoff-contract | audit | proposal
+    - kind: ADR
+      path: ""                        # e.g., docs/decisions/ADR-...md
+    # - kind: code
+    #   path: ""
+
+  proposed_disposition:
+    - ""                              # short disposition, e.g., "add hook", "extend agent triage", "create rule"

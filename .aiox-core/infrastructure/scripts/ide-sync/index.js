@@ -31,6 +31,7 @@ const claudeCodeTransformer = require('./transformers/claude-code');
 const cursorTransformer = require('./transformers/cursor');
 const antigravityTransformer = require('./transformers/antigravity');
 const githubCopilotTransformer = require('./transformers/github-copilot');
+const kimiTransformer = require(path.resolve(__dirname, 'transformers', 'kimi'));
 
 // ANSI colors for output
 const colors = {
@@ -60,6 +61,7 @@ function loadConfig(projectRoot) {
       'claude-code': {
         enabled: true,
         path: '.claude/commands/AIOX/agents',
+        skillsPath: '.claude/skills',
         format: 'full-markdown-yaml',
       },
       codex: {
@@ -86,6 +88,12 @@ function loadConfig(projectRoot) {
         enabled: true,
         path: '.antigravity/rules/agents',
         format: 'cursor-style',
+      },
+      kimi: {
+        enabled: true,
+        path: '.kimi/skills',
+        format: 'kimi-skill',
+        fallbackSources: ['.codex/agents'],
       },
     },
     redirects: {
@@ -128,9 +136,26 @@ function getTransformer(format) {
     'condensed-rules': cursorTransformer,
     'cursor-style': antigravityTransformer,
     'github-copilot': githubCopilotTransformer,
+    'kimi-skill': kimiTransformer,
   };
 
   return transformers[format] || claudeCodeTransformer;
+}
+
+function transformPrimaryContent(transformer, agent, ideName) {
+  if (ideName === 'claude-code' && typeof transformer.transformCommand === 'function') {
+    return transformer.transformCommand(agent);
+  }
+
+  return transformer.transform(agent);
+}
+
+function isPathInside(rootDir, candidatePath) {
+  const relativePath = path.relative(rootDir, candidatePath);
+  return relativePath !== '' &&
+    relativePath !== '..' &&
+    !relativePath.startsWith(`..${path.sep}`) &&
+    !path.isAbsolute(relativePath);
 }
 
 /**
@@ -146,7 +171,9 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
   const result = {
     ide: ideName,
     targetDir: path.join(projectRoot, ideConfig.path),
+    skillRootDir: ideConfig.skillsPath ? path.join(projectRoot, ideConfig.skillsPath) : null,
     files: [],
+    skillFiles: [],
     errors: [],
   };
 
@@ -181,9 +208,27 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
     }
 
     try {
-      const content = transformer.transform(agent);
+      const content = transformPrimaryContent(transformer, agent, ideName);
       const filename = transformer.getFilename(agent);
-      const targetPath = path.join(result.targetDir, filename);
+
+      // Kimi format uses subdirectories per skill: <skill-id>/SKILL.md
+      let targetPath;
+      if (ideConfig.format === 'kimi-skill' && transformer.getDirname) {
+        const targetRoot = path.resolve(result.targetDir);
+        const dirname = transformer.getDirname(agent);
+        const skillDir = path.resolve(targetRoot, dirname);
+        targetPath = path.resolve(skillDir, filename);
+
+        if (!isPathInside(targetRoot, skillDir) || !isPathInside(targetRoot, targetPath)) {
+          throw new Error(`Unsafe Kimi output path for agent '${agent.id}'`);
+        }
+
+        if (!options.dryRun) {
+          fs.ensureDirSync(skillDir);
+        }
+      } else {
+        targetPath = path.join(result.targetDir, filename);
+      }
 
       if (!options.dryRun) {
         fs.writeFileSync(targetPath, content, 'utf8');
@@ -195,6 +240,25 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
         path: targetPath,
         content,
       });
+
+      if (ideName === 'claude-code' && typeof transformer.transformSkill === 'function') {
+        const skillContent = transformer.transformSkill(agent);
+        const skillRelativePath = transformer.getSkillRelativePath(agent);
+        const skillRootDir = result.skillRootDir || path.join(projectRoot, '.claude', 'skills');
+        const skillPath = path.join(skillRootDir, skillRelativePath);
+
+        if (!options.dryRun) {
+          fs.ensureDirSync(path.dirname(skillPath));
+          fs.writeFileSync(skillPath, skillContent, 'utf8');
+        }
+
+        result.skillFiles.push({
+          agent: agent.id,
+          filename: skillRelativePath,
+          path: skillPath,
+          content: skillContent,
+        });
+      }
     } catch (error) {
       result.errors.push({
         agent: agent.id,
@@ -211,7 +275,7 @@ function syncIde(agents, ideConfig, ideName, projectRoot, options) {
  * @param {object} options - Command options
  */
 async function commandSync(options) {
-  const projectRoot = process.cwd();
+  const projectRoot = options.projectRoot || process.cwd();
   const config = loadConfig(projectRoot);
 
   if (!config.enabled) {
@@ -284,6 +348,7 @@ async function commandSync(options) {
     }
 
     const agentCount = result.files.length;
+    const skillCount = (result.skillFiles || []).length;
     const commandCount = (result.commandFiles || []).length;
     const redirectCount = redirectResult.written.length;
     const errorCount = result.errors.length;
@@ -295,7 +360,7 @@ async function commandSync(options) {
       }
 
       console.log(
-        `   ${status} ${agentCount} agents${commandCount > 0 ? `, ${commandCount} commands` : ''}, ${redirectCount} redirects${errorCount > 0 ? `, ${errorCount} errors` : ''}`
+        `   ${status} ${agentCount} agents${skillCount > 0 ? `, ${skillCount} skills` : ''}${commandCount > 0 ? `, ${commandCount} commands` : ''}, ${redirectCount} redirects${errorCount > 0 ? `, ${errorCount} errors` : ''}`
       );
 
       if (options.verbose && result.errors.length > 0) {
@@ -307,7 +372,10 @@ async function commandSync(options) {
   }
 
   // Summary
-  const totalFiles = results.reduce((sum, r) => sum + r.files.length + (r.commandFiles || []).length, 0);
+  const totalFiles = results.reduce(
+    (sum, r) => sum + r.files.length + (r.skillFiles || []).length + (r.commandFiles || []).length,
+    0
+  );
   const totalRedirects =
     Object.keys(config.redirects).length * targetIdes.filter(([, c]) => c.enabled).length;
   const totalErrors = results.reduce((sum, r) => sum + r.errors.length, 0);
@@ -317,11 +385,11 @@ async function commandSync(options) {
 
     if (options.dryRun) {
       console.log(
-        `${colors.yellow}Dry run: ${totalFiles} agents + ${totalRedirects} redirects would be written${colors.reset}`
+        `${colors.yellow}Dry run: ${totalFiles} files + ${totalRedirects} redirects would be written${colors.reset}`
       );
     } else {
       console.log(
-        `${colors.green}✅ Sync complete: ${totalFiles} agents + ${totalRedirects} redirects${colors.reset}`
+        `${colors.green}✅ Sync complete: ${totalFiles} files + ${totalRedirects} redirects${colors.reset}`
       );
     }
 
@@ -373,9 +441,13 @@ async function commandValidate(options) {
       if (agent.error) continue;
 
       try {
-        const content = transformer.transform(agent);
+        const content = transformPrimaryContent(transformer, agent, ideName);
         const filename = transformer.getFilename(agent);
-        expectedFiles.push({ filename, content });
+        // Kimi format stores each skill in <skill-id>/SKILL.md — record nested path
+        const relPath = ideConfig.format === 'kimi-skill' && transformer.getDirname
+          ? path.join(transformer.getDirname(agent), filename)
+          : filename;
+        expectedFiles.push({ filename: relPath, content });
       } catch (error) {
         // Skip agents that fail to transform
       }
@@ -398,6 +470,7 @@ async function commandValidate(options) {
     ideConfigs[ideName] = {
       expectedFiles,
       targetDir: path.join(projectRoot, ideConfig.path),
+      format: ideConfig.format,
     };
 
     // Gemini CLI command launcher files are synced under .gemini/commands/*.toml
@@ -409,6 +482,31 @@ async function commandValidate(options) {
       ideConfigs['gemini-commands'] = {
         expectedFiles: commandFiles,
         targetDir: path.join(projectRoot, '.gemini', 'commands'),
+      };
+    }
+
+    if (ideName === 'claude-code' && typeof transformer.transformSkill === 'function') {
+      const skillNamespace = path.posix.join('AIOX', 'agents') + '/';
+      const expectedSkillFiles = [];
+
+      for (const agent of agents) {
+        if (agent.error) continue;
+
+        try {
+          const skillContent = transformer.transformSkill(agent);
+          const skillRelativePath = transformer.getSkillRelativePath(agent);
+          const filename = skillRelativePath.startsWith(skillNamespace)
+            ? skillRelativePath.slice(skillNamespace.length)
+            : skillRelativePath;
+          expectedSkillFiles.push({ filename, content: skillContent });
+        } catch (error) {
+          // Skip agents that fail to transform
+        }
+      }
+
+      ideConfigs['claude-code-skills'] = {
+        expectedFiles: expectedSkillFiles,
+        targetDir: path.join(projectRoot, ideConfig.skillsPath || '.claude/skills', 'AIOX', 'agents'),
       };
     }
   }
@@ -534,6 +632,7 @@ if (require.main === module) {
 module.exports = {
   loadConfig,
   getTransformer,
+  transformPrimaryContent,
   syncIde,
   commandSync,
   commandValidate,

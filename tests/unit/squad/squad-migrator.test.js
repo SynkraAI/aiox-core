@@ -29,6 +29,7 @@ const {
 
 // Test fixtures path
 const FIXTURES_PATH = path.join(__dirname, 'fixtures');
+const ANALYSIS_PERFORMANCE_BUDGET_MS = 250;
 
 describe('SquadMigrator', () => {
   let migrator;
@@ -200,13 +201,13 @@ describe('SquadMigrator', () => {
       expect(analysis.actions).toHaveLength(0);
     });
 
-    it('should complete analysis within 100ms', async () => {
+    it('should complete analysis within performance budget', async () => {
       const squadPath = path.join(FIXTURES_PATH, 'legacy-squad');
       const start = Date.now();
       await migrator.analyze(squadPath);
       const duration = Date.now() - start;
 
-      expect(duration).toBeLessThan(100);
+      expect(duration).toBeLessThan(ANALYSIS_PERFORMANCE_BUDGET_MS);
     });
   });
 

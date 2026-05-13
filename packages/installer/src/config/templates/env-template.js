@@ -7,8 +7,7 @@
  * @module env-template
  */
 
-const path = require('path');
-const fs = require('fs');
+const { getAioxCoreVersion } = require('../../utils/package-paths');
 
 /**
  * Get the current AIOX version from package.json
@@ -16,12 +15,7 @@ const fs = require('fs');
  */
 function getAioxVersion() {
   try {
-    // Try to find the root package.json
-    const rootPkgPath = path.resolve(__dirname, '../../../../package.json');
-    if (fs.existsSync(rootPkgPath)) {
-      const pkg = JSON.parse(fs.readFileSync(rootPkgPath, 'utf8'));
-      return pkg.version || '2.2.0';
-    }
+    return getAioxCoreVersion() || '2.2.0';
   } catch {
     // Ignore errors
   }

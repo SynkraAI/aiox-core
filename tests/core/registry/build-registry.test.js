@@ -207,7 +207,7 @@ describe('buildRegistry', () => {
         return [];
       });
       fs.readFile.mockResolvedValue(
-        '/**\n * @description Loads configuration from YAML files\n * @version 1.0\n */'
+        '/**\n * @description Loads configuration from YAML files\n * @version 1.0\n */',
       );
 
       const registry = await buildRegistry('/fake');
@@ -221,7 +221,7 @@ describe('buildRegistry', () => {
         return [];
       });
       fs.readFile.mockResolvedValue(
-        '/**\n * Validates YAML configuration files\n *\n * @module validator\n */'
+        '/**\n * Validates YAML configuration files\n *\n * @module validator\n */',
       );
 
       const registry = await buildRegistry('/fake');
@@ -963,7 +963,7 @@ describe('saveRegistry', () => {
     expect(fs.writeFile).toHaveBeenCalledWith(
       '/output/registry.json',
       JSON.stringify(registry, null, 2),
-      'utf8'
+      'utf8',
     );
   });
 

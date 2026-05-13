@@ -23,6 +23,11 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const {
+  normalizeError,
+  sanitizeValue: sanitizeErrorValue,
+  serializeError,
+} = require('../errors');
 
 // Optional dependencies with graceful fallback
 let chalk;
@@ -86,6 +91,66 @@ const NotificationType = {
   STUCK: 'stuck',
   ABANDONED: 'abandoned',
 };
+
+/**
+ * Converts arbitrary values into stable, JSON-safe log data.
+ *
+ * @param {*} value - Value to sanitize.
+ * @param {WeakSet<object>} [seen=new WeakSet()] - Objects in the current path.
+ * @returns {*} Data-only representation that JSON.stringify can serialize.
+ */
+function sanitizeLogValue(value, seen = new WeakSet()) {
+  return sanitizeErrorValue(value, seen, {
+    includeStack: shouldExposeLogErrorStack(),
+  });
+}
+
+/**
+ * Checks whether persisted attempt logs may include raw error stack traces.
+ *
+ * @returns {boolean} True when stack trace logging is explicitly enabled.
+ */
+function shouldExposeLogErrorStack() {
+  const stackFlag = process.env.DEBUG_ERROR_STACKS || process.env.DEBUG_STACKS || '';
+  return ['1', 'true', 'yes', 'on'].includes(String(stackFlag).toLowerCase());
+}
+
+/**
+ * Stringifies attempt log details without allowing log formatting to throw.
+ *
+ * @param {*} value - Value to stringify.
+ * @returns {string} JSON string or a fallback marker.
+ */
+function stringifyLogDetails(value) {
+  try {
+    return JSON.stringify(sanitizeLogValue(value));
+  } catch (error) {
+    return JSON.stringify(`[Unserializable: ${error.message}]`);
+  }
+}
+
+/**
+ * Normalize a failed build attempt into legacy message plus canonical details.
+ *
+ * @param {*} error - Raw failure error/value.
+ * @param {object} context - Build/subtask context for metadata.
+ * @returns {{ message: string, details: object }} Normalized failure payload.
+ */
+function normalizeFailureError(error, context = {}) {
+  const normalized = normalizeError(error || 'Unknown error', {
+    code: 'AIOX_EXECUTION_FAILED',
+    metadata: {
+      buildState: context,
+    },
+  });
+
+  return {
+    message: normalized.message,
+    details: serializeError(normalized, {
+      includeStack: shouldExposeLogErrorStack(),
+    }),
+  };
+}
 
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              SCHEMA VALIDATION
@@ -185,6 +250,8 @@ class BuildStateManager {
     // Internal state
     this._state = null;
     this._logBuffer = [];
+    this._persistenceAvailable = true;
+    this._persistenceError = null;
   }
 
   // ─────────────────────────────────────────────────────────────────────────────────
@@ -244,14 +311,24 @@ class BuildStateManager {
    * @returns {Object|null} Loaded state or null if not exists
    */
   loadState() {
+    if (!this._persistenceAvailable) {
+      return this._state;
+    }
+
     if (!fs.existsSync(this.stateFilePath)) {
       return null;
     }
 
+    let content;
     try {
-      const content = fs.readFileSync(this.stateFilePath, 'utf-8');
-      const state = JSON.parse(content);
+      content = fs.readFileSync(this.stateFilePath, 'utf-8');
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
+      return this._state;
+    }
 
+    try {
+      const state = JSON.parse(content);
       // Validate
       const validation = validateBuildState(state);
       if (!validation.valid) {
@@ -277,11 +354,6 @@ class BuildStateManager {
       throw new Error('No state to save. Call createState() or loadState() first.');
     }
 
-    // Ensure directory exists
-    if (!fs.existsSync(this.planDir)) {
-      fs.mkdirSync(this.planDir, { recursive: true });
-    }
-
     // Only update timestamp if explicitly requested (via saveCheckpoint)
     if (options.updateCheckpoint) {
       this._state.lastCheckpoint = new Date().toISOString();
@@ -293,11 +365,24 @@ class BuildStateManager {
       throw new Error(`Invalid state: ${validation.errors.join(', ')}`);
     }
 
-    // Write state file
-    fs.writeFileSync(this.stateFilePath, JSON.stringify(this._state, null, 2), 'utf-8');
+    if (!this._persistenceAvailable) {
+      return this._state;
+    }
 
-    // Flush log buffer
-    this._flushLogBuffer();
+    try {
+      // Ensure directory exists
+      if (!fs.existsSync(this.planDir)) {
+        fs.mkdirSync(this.planDir, { recursive: true });
+      }
+
+      // Write state file
+      fs.writeFileSync(this.stateFilePath, JSON.stringify(this._state, null, 2), 'utf-8');
+
+      // Flush log buffer
+      this._flushLogBuffer();
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
+    }
 
     return this._state;
   }
@@ -341,11 +426,6 @@ class BuildStateManager {
       throw new Error('No state loaded');
     }
 
-    // Ensure checkpoint directory exists
-    if (!fs.existsSync(this.checkpointDir)) {
-      fs.mkdirSync(this.checkpointDir, { recursive: true });
-    }
-
     const checkpointId = this._generateCheckpointId();
     const now = new Date().toISOString();
 
@@ -376,8 +456,19 @@ class BuildStateManager {
     this._updateMetrics(checkpoint);
 
     // Save checkpoint file
-    const checkpointPath = path.join(this.checkpointDir, `${checkpointId}.json`);
-    fs.writeFileSync(checkpointPath, JSON.stringify(checkpoint, null, 2), 'utf-8');
+    if (this._persistenceAvailable) {
+      try {
+        // Ensure checkpoint directory exists
+        if (!fs.existsSync(this.checkpointDir)) {
+          fs.mkdirSync(this.checkpointDir, { recursive: true });
+        }
+
+        const checkpointPath = path.join(this.checkpointDir, `${checkpointId}.json`);
+        fs.writeFileSync(checkpointPath, JSON.stringify(checkpoint, null, 2), 'utf-8');
+      } catch (error) {
+        this._markPersistenceUnavailable(error);
+      }
+    }
 
     // Save main state with checkpoint timestamp update
     this.saveState({ updateCheckpoint: true });
@@ -781,12 +872,21 @@ class BuildStateManager {
       throw new Error('No state loaded');
     }
 
+    const attempt =
+      options.attempt ||
+      this._state.failedAttempts.filter((f) => f.subtaskId === subtaskId).length + 1;
+
+    const normalizedFailure = normalizeFailureError(options.error, {
+      storyId: this.storyId,
+      subtaskId,
+      attempt,
+    });
+
     const failure = {
       subtaskId,
-      attempt:
-        options.attempt ||
-        this._state.failedAttempts.filter((f) => f.subtaskId === subtaskId).length + 1,
-      error: options.error || 'Unknown error',
+      attempt,
+      error: normalizedFailure.message,
+      errorDetails: normalizedFailure.details,
       timestamp: new Date().toISOString(),
       approach: options.approach || null,
       duration: options.duration || null,
@@ -808,6 +908,7 @@ class BuildStateManager {
     this._logAttempt(subtaskId, 'failure', {
       attempt: failure.attempt,
       error: failure.error,
+      errorDetails: failure.errorDetails,
       isStuck: isStuck.stuck,
     });
 
@@ -918,6 +1019,8 @@ class BuildStateManager {
    * @private
    */
   _logAttempt(subtaskId, action, details = {}) {
+    if (!this._persistenceAvailable) return;
+
     const entry = {
       timestamp: new Date().toISOString(),
       storyId: this.storyId,
@@ -927,7 +1030,7 @@ class BuildStateManager {
     };
 
     // Format log line
-    const logLine = `[${entry.timestamp}] [${this.storyId}] [${subtaskId}] ${action}: ${JSON.stringify(details)}\n`;
+    const logLine = `[${entry.timestamp}] [${this.storyId}] [${subtaskId}] ${action}: ${stringifyLogDetails(details)}\n`;
 
     this._logBuffer.push(logLine);
 
@@ -943,15 +1046,20 @@ class BuildStateManager {
    */
   _flushLogBuffer() {
     if (this._logBuffer.length === 0) return;
+    if (!this._persistenceAvailable) return;
 
-    // Ensure directory exists
-    if (!fs.existsSync(this.planDir)) {
-      fs.mkdirSync(this.planDir, { recursive: true });
+    try {
+      // Ensure directory exists
+      if (!fs.existsSync(this.planDir)) {
+        fs.mkdirSync(this.planDir, { recursive: true });
+      }
+
+      // Append to log file
+      fs.appendFileSync(this.logFilePath, this._logBuffer.join(''), 'utf-8');
+      this._logBuffer = [];
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
     }
-
-    // Append to log file
-    fs.appendFileSync(this.logFilePath, this._logBuffer.join(''), 'utf-8');
-    this._logBuffer = [];
   }
 
   /**
@@ -961,11 +1069,22 @@ class BuildStateManager {
    * @returns {string[]} Log lines
    */
   getAttemptLog(options = {}) {
+    if (!this._persistenceAvailable) {
+      return [];
+    }
+
     if (!fs.existsSync(this.logFilePath)) {
       return [];
     }
 
-    const content = fs.readFileSync(this.logFilePath, 'utf-8');
+    let content;
+    try {
+      content = fs.readFileSync(this.logFilePath, 'utf-8');
+    } catch (error) {
+      this._markPersistenceUnavailable(error);
+      return [];
+    }
+
     let lines = content.split('\n').filter((l) => l.trim());
 
     // Filter by subtask if specified
@@ -1141,6 +1260,39 @@ class BuildStateManager {
    */
   _log(_message) {
     // Silent by default - can be overridden
+  }
+
+  /**
+   * Check if file-backed persistence is still available.
+   *
+   * @returns {boolean} True when state/checkpoint/log writes are available.
+   */
+  isPersistenceAvailable() {
+    return this._persistenceAvailable;
+  }
+
+  /**
+   * Get the first persistence error that disabled file-backed writes.
+   *
+   * @returns {Error|null} Persistence error or null when persistence is available.
+   */
+  getPersistenceError() {
+    return this._persistenceError;
+  }
+
+  /**
+   * Disable file-backed persistence after an I/O failure.
+   *
+   * @param {Error} error - Underlying persistence error.
+   * @private
+   */
+  _markPersistenceUnavailable(error) {
+    if (!this._persistenceAvailable) return;
+
+    this._persistenceAvailable = false;
+    this._persistenceError = error instanceof Error ? error : new Error(String(error));
+    this._logBuffer = [];
+    this._log(`Persistence unavailable: ${this._persistenceError.message}`);
   }
 
   // ─────────────────────────────────────────────────────────────────────────────────

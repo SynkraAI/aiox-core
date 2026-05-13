@@ -92,4 +92,29 @@ describe('Path Validator', () => {
     expect(result.errors.some(error => error.includes('missing canonical source path'))).toBe(true);
     expect(result.errors.some(error => error.includes('missing canonical greeting script path'))).toBe(true);
   });
+
+  it('accepts generated squad-chief skills with squad source paths', () => {
+    write(path.join(tmpRoot, 'AGENTS.md'), '# Agents\n');
+    write(path.join(tmpRoot, '.aiox-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'), '# codex\n');
+    write(
+      path.join(skillsDir, 'aiox-demo-chief', 'SKILL.md'),
+      [
+        '# Demo Chief',
+        '<!-- AIOX-CODEX-LOCAL-SKILLS: generated -->',
+        'Load `squads/demo/agents/demo-chief.md` before adopting this skill.',
+      ].join('\n'),
+    );
+
+    const result = validatePaths({
+      projectRoot: tmpRoot,
+      skillsDir,
+      requiredFiles: [
+        path.join(tmpRoot, 'AGENTS.md'),
+        path.join(tmpRoot, '.aiox-core', 'product', 'templates', 'ide-rules', 'codex-rules.md'),
+      ],
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.errors).toEqual([]);
+  });
 });

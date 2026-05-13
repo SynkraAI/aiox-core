@@ -144,7 +144,7 @@ class GitWrapper {
    */
   async commit(message, options = {}) {
     const {
-      author = 'aiox-developer <aiox-developer@aiox-fullstack.local>',
+      author = 'aiox-developer <aiox-developer@aiox-squads.local>',
       signoff = true
     } = options;
 
@@ -181,7 +181,7 @@ class GitWrapper {
     if (metadata.componentType && metadata.componentName) {
       fullMessage = `${metadata.componentType}(${metadata.componentName}): ${message}`;
     }
-    
+
     if (metadata.breakingChange) {
       fullMessage += '\n\nBREAKING CHANGE: ' + metadata.breakingChange;
     }
@@ -224,7 +224,7 @@ class GitWrapper {
         else if (status === '??') files.untracked.push(filename);
       }
     }
-    
+
     return {
       branch,
       clean: porcelainStatus === '',

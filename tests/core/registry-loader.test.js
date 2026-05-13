@@ -20,7 +20,11 @@ jest.mock('fs', () => ({
 }));
 
 const fs = require('fs').promises;
-const { ServiceRegistry, getRegistry } = require('../../.aiox-core/core/registry/registry-loader');
+const {
+  ServiceRegistry,
+  getDefaultRegistryPaths,
+  getRegistry,
+} = require('../../.aiox-core/core/registry/registry-loader');
 
 // Set timeout for all tests
 jest.setTimeout(30000);
@@ -94,6 +98,7 @@ describe('ServiceRegistry', () => {
 
       expect(reg).toBeDefined();
       expect(reg.registryPath).toBeNull();
+      expect(reg.resolvedRegistryPath).toBeNull();
       expect(reg.cache).toBeNull();
       expect(reg.cacheTimestamp).toBe(0);
     });
@@ -155,6 +160,41 @@ describe('ServiceRegistry', () => {
       fs.readFile.mockRejectedValue(new Error('File not found'));
 
       await expect(registry.load()).rejects.toThrow('Failed to load registry');
+    });
+
+    it('should fall back to the package registry when cwd registry is missing', async () => {
+      const cwdSpy = jest
+        .spyOn(process, 'cwd')
+        .mockReturnValue(path.join(path.sep, 'tmp', 'project-without-registry'));
+      const defaultPaths = getDefaultRegistryPaths();
+      const fallbackRegistry = new ServiceRegistry();
+
+      fs.readFile.mockImplementation(async (registryPath) => {
+        if (registryPath === defaultPaths[0]) {
+          throw new Error('File not found');
+        }
+        return JSON.stringify(mockData);
+      });
+
+      try {
+        const data = await fallbackRegistry.load();
+
+        expect(data).toEqual(mockData);
+        expect(fs.readFile).toHaveBeenNthCalledWith(1, defaultPaths[0], 'utf8');
+        expect(fs.readFile).toHaveBeenNthCalledWith(2, defaultPaths[1], 'utf8');
+        expect(fallbackRegistry.resolvedRegistryPath).toBe(defaultPaths[1]);
+      } finally {
+        cwdSpy.mockRestore();
+      }
+    });
+
+    it('should not fall back when an explicit registry path is provided', async () => {
+      fs.readFile.mockRejectedValue(new Error('File not found'));
+
+      await expect(registry.load()).rejects.toThrow('Failed to load registry');
+
+      expect(fs.readFile).toHaveBeenCalledTimes(1);
+      expect(fs.readFile).toHaveBeenCalledWith('/mock/path.json', 'utf8');
     });
   });
 
@@ -354,6 +394,7 @@ describe('ServiceRegistry', () => {
 
       expect(registry.cache).toBeNull();
       expect(registry.cacheTimestamp).toBe(0);
+      expect(registry.resolvedRegistryPath).toBeNull();
       expect(registry._byId.size).toBe(0);
       expect(registry._byCategory.size).toBe(0);
     });

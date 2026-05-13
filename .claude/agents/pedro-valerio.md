@@ -3,17 +3,14 @@ name: pedro-valerio
 description: |
   Process absolutist. Validates workflows for zero wrong paths.
   Audits veto conditions, unidirectional flow, and checkpoint coverage.
-
 model: opus
-
 tools:
   - Read
   - Grep
   - Glob
-
 permissionMode: default
-
 memory: project
+color: yellow
 ---
 
 # 🔍 @pedro-valerio - Process Absolutist

@@ -24,6 +24,68 @@ const {
 } = require('./validation/config-validator');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
 
+function isBrownfieldProjectType(projectType) {
+  const normalized = String(projectType || '').toLowerCase();
+  return normalized === 'brownfield' || normalized === 'existing_aiox' || normalized === 'existing-aiox';
+}
+
+async function resolveFileAction(filePath, options = {}) {
+  const {
+    skipPrompts = false,
+    forceMerge = false,
+    noMerge = false,
+    projectType = 'greenfield',
+    message,
+  } = options;
+
+  const exists = await fs.pathExists(filePath);
+  if (!exists) {
+    return 'create';
+  }
+
+  const isBrownfield = isBrownfieldProjectType(projectType);
+  const canMerge = !noMerge && hasMergeStrategy(filePath);
+
+  if (forceMerge && canMerge) {
+    return 'merge';
+  }
+
+  if (skipPrompts) {
+    return isBrownfield && canMerge ? 'merge' : 'overwrite';
+  }
+
+  const choices = [];
+
+  if (canMerge) {
+    choices.push({
+      value: 'merge',
+      label: 'Merge (preserve existing customizations)',
+      hint: isBrownfield ? 'recommended' : '',
+    });
+  }
+
+  choices.push(
+    { value: 'backup', label: 'Backup and overwrite' },
+    { value: 'overwrite', label: 'Overwrite completely' },
+    { value: 'skip', label: 'Skip (keep existing)' },
+  );
+
+  let action = await select({
+    message,
+    options: choices,
+    initialValue: isBrownfield && canMerge ? 'merge' : 'backup',
+  });
+
+  if (action === 'backup') {
+    const backupPath = `${filePath}.backup.${Date.now()}`;
+    await fs.copy(filePath, backupPath);
+    console.log(`✅ Backup created: ${backupPath}`);
+    action = 'overwrite';
+  }
+
+  return action;
+}
+
 /**
  * Configure environment files (.env and core-config.yaml)
  *
@@ -62,50 +124,16 @@ async function configureEnvironment(options = {}) {
     // Step 1: Check for existing .env and handle with merge/backup/overwrite
     const envPath = path.join(targetDir, '.env');
     const envExists = await fs.pathExists(envPath);
-    let envAction = 'create'; // 'create', 'merge', 'overwrite', 'skip'
-    const isBrownfield = projectType === 'BROWNFIELD' || projectType === 'EXISTING_AIOX';
-    const canMerge = !noMerge && hasMergeStrategy(envPath);
+    const envAction = await resolveFileAction(envPath, {
+      skipPrompts,
+      forceMerge,
+      noMerge,
+      projectType,
+      message: 'Found existing .env file. What would you like to do?',
+    });
 
-    if (envExists) {
-      // Story 9.4: Handle CLI flags for merge behavior
-      if (forceMerge && canMerge) {
-        // --merge flag: Force merge without prompting
-        envAction = 'merge';
-        console.log('🔀 Using merge mode (--merge flag)');
-      } else if (skipPrompts) {
-        // Quiet mode: default to merge for brownfield, overwrite for greenfield
-        envAction = isBrownfield && canMerge ? 'merge' : 'overwrite';
-      } else {
-        // Interactive mode: Offer merge option for brownfield projects
-        const choices = [];
-
-        if (canMerge) {
-          choices.push({
-            value: 'merge',
-            label: 'Merge (add new variables, keep existing)',
-            hint: isBrownfield ? 'recommended' : '',
-          });
-        }
-
-        choices.push(
-          { value: 'backup', label: 'Backup and overwrite' },
-          { value: 'overwrite', label: 'Overwrite completely' },
-          { value: 'skip', label: 'Skip (keep existing)' },
-        );
-
-        envAction = await select({
-          message: 'Found existing .env file. What would you like to do?',
-          options: choices,
-          initialValue: isBrownfield && canMerge ? 'merge' : 'backup',
-        });
-
-        if (envAction === 'backup') {
-          const backupPath = path.join(targetDir, `.env.backup.${Date.now()}`);
-          await fs.copy(envPath, backupPath);
-          console.log(`✅ Backup created: ${backupPath}`);
-          envAction = 'overwrite';
-        }
-      }
+    if (envAction === 'merge' && envExists && forceMerge) {
+      console.log('🔀 Using merge mode (--merge flag)');
     }
 
     // Step 2: API keys are configured later via .env or aiox-master
@@ -158,9 +186,29 @@ async function configureEnvironment(options = {}) {
     // Step 4: Generate and write .env.example
     const envExamplePath = path.join(targetDir, '.env.example');
     const envExampleContent = generateEnvExample();
-    await fs.writeFile(envExamplePath, envExampleContent, { encoding: 'utf8' });
-    results.envExampleCreated = true;
-    console.log('✅ Created .env.example file');
+    const envExampleAction = await resolveFileAction(envExamplePath, {
+      skipPrompts,
+      forceMerge,
+      noMerge,
+      projectType,
+      message: 'Found existing .env.example file. What would you like to do?',
+    });
+
+    if (envExampleAction === 'skip') {
+      console.log('⏭️  Skipped .env.example file (keeping existing)');
+    } else if (envExampleAction === 'merge' && await fs.pathExists(envExamplePath)) {
+      const existingContent = await fs.readFile(envExamplePath, 'utf8');
+      const merger = getMergeStrategy(envExamplePath);
+      const mergeResult = await merger.merge(existingContent, envExampleContent);
+
+      await fs.writeFile(envExamplePath, mergeResult.content, { encoding: 'utf8' });
+      results.envExampleCreated = true;
+      console.log('✅ Merged .env.example file');
+    } else {
+      await fs.writeFile(envExamplePath, envExampleContent, { encoding: 'utf8' });
+      results.envExampleCreated = true;
+      console.log('✅ Created .env.example file');
+    }
 
     // Step 5: Update .gitignore
     await updateGitignore(targetDir);
@@ -194,9 +242,29 @@ async function configureEnvironment(options = {}) {
     }
 
     const coreConfigPath = path.join(coreConfigDir, 'core-config.yaml');
-    await fs.writeFile(coreConfigPath, coreConfigContent, { encoding: 'utf8' });
-    results.coreConfigCreated = true;
-    console.log('✅ Created .aiox-core/core-config.yaml');
+    const coreConfigAction = await resolveFileAction(coreConfigPath, {
+      skipPrompts,
+      forceMerge,
+      noMerge,
+      projectType,
+      message: 'Found existing .aiox-core/core-config.yaml. What would you like to do?',
+    });
+
+    if (coreConfigAction === 'skip') {
+      console.log('⏭️  Skipped .aiox-core/core-config.yaml (keeping existing)');
+    } else if (coreConfigAction === 'merge' && await fs.pathExists(coreConfigPath)) {
+      const existingContent = await fs.readFile(coreConfigPath, 'utf8');
+      const merger = getMergeStrategy(coreConfigPath);
+      const mergeResult = await merger.merge(coreConfigContent, existingContent);
+
+      await fs.writeFile(coreConfigPath, mergeResult.content, { encoding: 'utf8' });
+      results.coreConfigCreated = true;
+      console.log('✅ Merged .aiox-core/core-config.yaml');
+    } else {
+      await fs.writeFile(coreConfigPath, coreConfigContent, { encoding: 'utf8' });
+      results.coreConfigCreated = true;
+      console.log('✅ Created .aiox-core/core-config.yaml');
+    }
 
     return results;
   } catch (error) {

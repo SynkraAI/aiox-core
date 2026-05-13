@@ -133,6 +133,61 @@ describe('brownfield-upgrader', () => {
       expect(report.newFiles[0].path).toBe('new-file.md');
     });
 
+    it('should preserve local files missing from installed manifest when they already exist on disk', () => {
+      const aioxCoreDir = path.join(targetDir, '.aiox-core');
+      fs.ensureDirSync(aioxCoreDir);
+      fs.ensureDirSync(path.join(aioxCoreDir, 'development', 'agents', 'dev'));
+      fs.writeFileSync(
+        path.join(aioxCoreDir, 'development', 'agents', 'dev', 'MEMORY.md'),
+        'custom memory content',
+      );
+
+      const sourceManifest = {
+        version: '2.1.0',
+        files: [
+          {
+            path: 'development/agents/dev/MEMORY.md',
+            hash: 'sha256:source_hash',
+            type: 'memory',
+          },
+        ],
+      };
+      const installedManifest = {
+        installed_version: '2.0.0',
+        files: [],
+      };
+
+      const report = generateUpgradeReport(sourceManifest, installedManifest, targetDir);
+
+      expect(report.newFiles).toHaveLength(0);
+      expect(report.userModifiedFiles).toHaveLength(1);
+      expect(report.userModifiedFiles[0].path).toBe('development/agents/dev/MEMORY.md');
+      expect(report.userModifiedFiles[0].reason).toContain('not tracked by installed manifest');
+    });
+
+    it('should treat untracked local files as unchanged when they already match source', () => {
+      const aioxCoreDir = path.join(targetDir, '.aiox-core');
+      fs.ensureDirSync(aioxCoreDir);
+      const filePath = path.join(aioxCoreDir, 'already-there.md');
+      fs.writeFileSync(filePath, 'same content');
+      const sourceHash = `sha256:${hashFile(filePath)}`;
+
+      const sourceManifest = {
+        version: '2.1.0',
+        files: [{ path: 'already-there.md', hash: sourceHash, type: 'agent' }],
+      };
+      const installedManifest = {
+        installed_version: '2.0.0',
+        files: [],
+      };
+
+      const report = generateUpgradeReport(sourceManifest, installedManifest, targetDir);
+
+      expect(report.newFiles).toHaveLength(0);
+      expect(report.userModifiedFiles).toHaveLength(0);
+      expect(report.unchangedFiles).toBe(1);
+    });
+
     it('should identify modified files', () => {
       const aioxCoreDir = path.join(targetDir, '.aiox-core');
       fs.ensureDirSync(aioxCoreDir);
@@ -287,6 +342,31 @@ describe('brownfield-upgrader', () => {
       const content = yaml.load(fs.readFileSync(installedPath, 'utf8'));
       expect(content.installed_version).toBe('2.1.0');
       expect(content.installed_from).toBe('aiox-core@2.1.0');
+    });
+
+    it('should load installed manifest from version.json when explicit manifest is missing', () => {
+      fs.ensureDirSync(path.join(targetDir, '.aiox-core'));
+      fs.writeJsonSync(path.join(targetDir, '.aiox-core', 'version.json'), {
+        version: '5.0.4',
+        fileHashes: {
+          'core/config.yaml': 'sha256:abc123',
+          'development/agents/dev/MEMORY.md': 'sha256:def456',
+        },
+      });
+
+      const loaded = require('../../packages/installer/src/installer/brownfield-upgrader')
+        .loadInstalledManifest(targetDir);
+
+      expect(loaded.installed_version).toBe('5.0.4');
+      expect(loaded.files).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ path: 'core/config.yaml', hash: 'sha256:abc123' }),
+          expect.objectContaining({
+            path: 'development/agents/dev/MEMORY.md',
+            hash: 'sha256:def456',
+          }),
+        ]),
+      );
     });
   });
 

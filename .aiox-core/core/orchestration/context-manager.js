@@ -16,6 +16,31 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const { isPlainObject } = require('../config/merge-utils');
+
+function mergeMetadata(target, source) {
+  const base = isPlainObject(target) ? target : {};
+
+  if (!isPlainObject(source)) {
+    return { ...base };
+  }
+
+  const result = { ...base };
+
+  for (const [key, value] of Object.entries(source)) {
+    result[key] = isPlainObject(value) && isPlainObject(result[key])
+      ? mergeMetadata(result[key], value)
+      : value;
+  }
+
+  return result;
+}
+
+function describeMetadataInput(value) {
+  if (value === null) return 'null';
+  if (Array.isArray(value)) return 'array';
+  return typeof value;
+}
 
 /**
  * Manages workflow execution context and state persistence
@@ -224,8 +249,14 @@ class ContextManager {
    * @param {Object} metadata - Metadata to merge
    */
   async updateMetadata(metadata) {
+    if (!isPlainObject(metadata)) {
+      throw new TypeError(
+        `updateMetadata expects a plain object, received: ${describeMetadataInput(metadata)}`,
+      );
+    }
+
     const state = await this.loadState();
-    state.metadata = { ...state.metadata, ...metadata };
+    state.metadata = mergeMetadata(state.metadata, metadata);
     this._stateCache = state;
     await this._saveState();
   }

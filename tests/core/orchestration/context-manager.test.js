@@ -567,6 +567,58 @@ describe('ContextManager', () => {
       expect(manager._stateCache.metadata.projectRoot).toBe('/outro/caminho');
     });
 
+    test('preserva metadados aninhados ao aplicar merge profundo', async () => {
+      await manager.updateMetadata({
+        observability: {
+          attempts: {
+            total: 1,
+            lastPhase: 'planning',
+          },
+          tags: ['initial'],
+          nullable: 'keep',
+        },
+      });
+
+      await manager.updateMetadata({
+        observability: {
+          attempts: {
+            failed: 1,
+          },
+          lastError: {
+            code: 'EACCES',
+          },
+          tags: ['latest'],
+          nullable: null,
+        },
+      });
+
+      expect(manager._stateCache.metadata.observability).toEqual({
+        attempts: {
+          total: 1,
+          lastPhase: 'planning',
+          failed: 1,
+        },
+        lastError: {
+          code: 'EACCES',
+        },
+        tags: ['latest'],
+        nullable: null,
+      });
+    });
+
+    test.each([
+      ['null', null],
+      ['undefined', undefined],
+      ['array', []],
+      ['string', 'metadata'],
+    ])('rejeita metadata inválido: %s', async (_label, invalidMetadata) => {
+      await expect(manager.updateMetadata(invalidMetadata)).rejects.toThrow(
+        'updateMetadata expects a plain object',
+      );
+
+      expect(fs.writeJson).not.toHaveBeenCalled();
+    });
+
     test('persiste estado no disco', async () => {
       await manager.updateMetadata({ foo: 'bar' });
 

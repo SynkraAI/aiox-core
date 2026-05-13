@@ -9,7 +9,7 @@
  *   aiox pro deactivate               Deactivate the current license
  *   aiox pro features                 List all pro features
  *   aiox pro validate                 Force online revalidation
- *   aiox pro setup                    Configure GitHub Packages access (AC-12)
+ *   aiox pro setup                    Install or verify the AIOX Pro package
  *
  * @module cli/commands/pro
  * @version 1.1.0
@@ -22,10 +22,12 @@ const { Command } = require('commander');
 const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
+const { createBuyerCommand } = require('./buyer');
+const PRO_PACKAGE = '@aiox-squads/pro';
 
 // BUG-6 fix (INS-1): Dynamic licensePath resolution
 // In framework-dev: __dirname = aiox-core/.aiox-core/cli/commands/pro → ../../../../pro/license
-// In project-dev: pro is installed via npm as @aiox-fullstack/pro
+// In project-dev: pro is installed via npm as @aiox-squads/pro
 function resolveLicensePath() {
   // 1. Try relative path (framework-dev mode)
   const relativePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
@@ -33,21 +35,21 @@ function resolveLicensePath() {
     return relativePath;
   }
 
-  // 2. Try node_modules/@aiox-fullstack/pro/license (project-dev mode)
+  // 2. Try npm package
   try {
-    const proPkg = require.resolve('@aiox-fullstack/pro/package.json');
+    const proPkg = require.resolve(`${PRO_PACKAGE}/package.json`);
     const proDir = path.dirname(proPkg);
     const npmPath = path.join(proDir, 'license');
     if (fs.existsSync(npmPath)) {
       return npmPath;
     }
   } catch {
-    // @aiox-fullstack/pro not installed via npm
+    // package not installed
   }
 
-  // 3. Try project root node_modules (fallback)
+  // 3. Try project root node_modules
   const projectRoot = process.cwd();
-  const cwdPath = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'license');
+  const cwdPath = path.join(projectRoot, 'node_modules', '@aiox-squads', 'pro', 'license');
   if (fs.existsSync(cwdPath)) {
     return cwdPath;
   }
@@ -73,11 +75,9 @@ function loadLicenseModules() {
       setPendingDeactivation,
       clearPendingDeactivation,
     } = require(path.join(licensePath, 'license-cache'));
-    const {
-      generateMachineId,
-      maskKey,
-      validateKeyFormat,
-    } = require(path.join(licensePath, 'license-crypto'));
+    const { generateMachineId, maskKey, validateKeyFormat } = require(
+      path.join(licensePath, 'license-crypto')
+    );
     const { ProFeatureError, LicenseActivationError } = require(path.join(licensePath, 'errors'));
 
     return {
@@ -97,7 +97,8 @@ function loadLicenseModules() {
     };
   } catch (error) {
     console.error('AIOX Pro license module not available.');
-    console.error('Install AIOX Pro: npm install @aiox-fullstack/pro');
+    console.error('Install AIOX Pro: aiox pro setup');
+    console.error('Or via wrapper: npx aiox-pro install');
     process.exit(1);
   }
 }
@@ -217,7 +218,7 @@ async function activateAction(options) {
     // Scaffold pro content into project (Story INS-3.1)
     // Lazy-load to avoid crashing if pro-scaffolder or js-yaml is unavailable
     const projectRoot = path.resolve(__dirname, '..', '..', '..', '..');
-    const proSourceDir = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro');
+    const proSourceDir = path.join(projectRoot, 'node_modules', '@aiox-squads', 'pro');
 
     if (fs.existsSync(proSourceDir)) {
       let scaffoldProContent;
@@ -243,7 +244,9 @@ async function activateAction(options) {
         if (scaffoldResult.success) {
           console.log(`\nPro content installed (${scaffoldResult.copiedFiles.length} files)`);
           if (scaffoldResult.skippedFiles.length > 0) {
-            console.log(`  ${scaffoldResult.skippedFiles.length} files unchanged (already up to date)`);
+            console.log(
+              `  ${scaffoldResult.skippedFiles.length} files unchanged (already up to date)`
+            );
           }
           if (scaffoldResult.warnings.length > 0) {
             for (const warning of scaffoldResult.warnings) {
@@ -261,11 +264,10 @@ async function activateAction(options) {
         console.log('');
       }
     } else {
-      console.log('Note: @aiox-fullstack/pro package not found in node_modules.');
+      console.log('Note: AIOX Pro package not found in node_modules.');
       console.log('Pro content will be scaffolded when the package is installed.');
       console.log('');
     }
-
   } catch (error) {
     if (error instanceof LicenseActivationError) {
       console.error(`\nActivation failed: ${error.message}`);
@@ -285,12 +287,7 @@ async function activateAction(options) {
 // ---------------------------------------------------------------------------
 
 function statusAction() {
-  const {
-    featureGate,
-    readLicenseCache,
-    maskKey,
-    hasPendingDeactivation,
-  } = loadLicenseModules();
+  const { featureGate, readLicenseCache, maskKey, hasPendingDeactivation } = loadLicenseModules();
 
   console.log('\nAIOX Pro License Status\n');
 
@@ -300,9 +297,9 @@ function statusAction() {
 
   // State display
   const stateEmoji = {
-    'Active': '\u2705',     // Green check
-    'Grace': '\u26A0\uFE0F', // Warning
-    'Expired': '\u274C',    // Red X
+    Active: '\u2705', // Green check
+    Grace: '\u26A0\uFE0F', // Warning
+    Expired: '\u274C', // Red X
     'Not Activated': '\u2796', // Minus
   };
 
@@ -337,7 +334,9 @@ function statusAction() {
     const daysRemaining = Math.ceil((expiryDate.getTime() - Date.now()) / (24 * 60 * 60 * 1000));
 
     if (daysRemaining > 0) {
-      console.log(`  Cache:         Valid until ${formatDate(expiryDate)} (${daysRemaining} days remaining)`);
+      console.log(
+        `  Cache:         Valid until ${formatDate(expiryDate)} (${daysRemaining} days remaining)`
+      );
     } else {
       console.log(`  Cache:         Expired ${formatDate(expiryDate)}`);
     }
@@ -359,7 +358,9 @@ function statusAction() {
   }
 
   // Next validation
-  console.log(`\n  Next validation: ${state === 'Active' ? 'Background (when online)' : 'Required'}`);
+  console.log(
+    `\n  Next validation: ${state === 'Active' ? 'Background (when online)' : 'Required'}`
+  );
   console.log('');
 }
 
@@ -444,7 +445,6 @@ async function deactivateAction(options) {
     console.log('');
     console.log('To reactivate: aiox pro activate --key <KEY>');
     console.log('');
-
   } catch (error) {
     console.error(`\nDeactivation error: ${error.message}`);
     process.exit(1);
@@ -470,7 +470,7 @@ function featuresAction() {
 
     for (const feature of features) {
       const status = feature.available
-        ? '\u2705'  // Green check
+        ? '\u2705' // Green check
         : '\u274C'; // Red X
 
       console.log(`  ${status} ${feature.name}`);
@@ -554,7 +554,6 @@ async function validateAction() {
     console.log(`  Valid until:  ${formatDate(result.expiresAt)}`);
     console.log(`  Cache:        Refreshed for ${result.cacheValidDays} days`);
     console.log('');
-
   } catch (error) {
     if (error instanceof LicenseActivationError) {
       console.error(`\nValidation failed: ${error.message}`);
@@ -570,12 +569,22 @@ async function validateAction() {
 // aiox pro setup (AC-12: Install-gate)
 // ---------------------------------------------------------------------------
 
+function loadProSetupWizard() {
+  try {
+    try {
+      return require('@aiox-squads/installer/pro-setup');
+    } catch {
+      return require('../../../../packages/installer/src/wizard/pro-setup');
+    }
+  } catch (error) {
+    console.error('❌ Pro setup wizard module not found.');
+    console.error(error.message);
+    process.exit(1);
+  }
+}
+
 /**
- * Setup and verify @aiox-fullstack/pro installation.
- *
- * Since @aiox-fullstack/pro is published on the public npm registry,
- * no special token or .npmrc configuration is needed. This command
- * installs the package and verifies it's working.
+ * Setup and verify AIOX Pro installation.
  *
  * @param {object} options - Command options
  * @param {boolean} options.verify - Only verify without installing
@@ -584,64 +593,124 @@ async function setupAction(options) {
   console.log('\nAIOX Pro - Setup\n');
 
   if (options.verify) {
-    // Verify-only mode
-    console.log('Verifying @aiox-fullstack/pro installation...\n');
+    console.log('Verifying AIOX Pro installation...\n');
 
     try {
-      const { execSync } = require('child_process');
-      const result = execSync('npm ls @aiox-fullstack/pro --json', {
-        stdio: 'pipe',
-        timeout: 15000,
-      });
-      const parsed = JSON.parse(result.toString());
-      const deps = parsed.dependencies || {};
-      if (deps['@aiox-fullstack/pro']) {
-        console.log(`✅ @aiox-fullstack/pro@${deps['@aiox-fullstack/pro'].version} is installed`);
-      } else {
-        console.log('❌ @aiox-fullstack/pro is not installed');
+      const manifestPath = path.join(process.cwd(), 'pro-installed-manifest.yaml');
+      const versionPath = path.join(process.cwd(), 'pro-version.json');
+      const packagePath = path.join(
+        process.cwd(),
+        'node_modules',
+        '@aiox-squads',
+        'pro',
+        'package.json'
+      );
+      const found = fs.existsSync(manifestPath) || fs.existsSync(versionPath) || fs.existsSync(packagePath);
+      if (found) {
+        console.log('✅ AIOX Pro content is installed');
+      }
+      if (!found) {
+        console.log('❌ AIOX Pro is not installed');
         console.log('');
         console.log('Install with:');
-        console.log('  npm install @aiox-fullstack/pro');
+        console.log('  aiox pro setup');
+        console.log('  # or npx aiox-pro install');
       }
     } catch {
-      console.log('❌ @aiox-fullstack/pro is not installed');
+      console.log('❌ AIOX Pro is not installed');
       console.log('');
       console.log('Install with:');
-      console.log('  npm install @aiox-fullstack/pro');
+      console.log('  aiox pro setup');
+      console.log('  # or npx aiox-pro install');
     }
     return;
   }
 
-  // Install mode
-  console.log('@aiox-fullstack/pro is available on the public npm registry.');
-  console.log('No special tokens or configuration needed.\n');
+  const proSetup = loadProSetupWizard();
 
-  console.log('Installing @aiox-fullstack/pro...\n');
+  const result = await proSetup.runProWizard({
+    key: options.key,
+    targetDir: process.cwd(),
+  });
+
+  if (!result.success) {
+    process.exit(1);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// aiox pro update (Story 122.3)
+// ---------------------------------------------------------------------------
+
+async function updateAction(options) {
+  const proUpdaterPath = path.resolve(__dirname, '..', '..', '..', 'core', 'pro', 'pro-updater');
+  let resolveInstalledPro;
 
   try {
-    const { execSync } = require('child_process');
-    execSync('npm install @aiox-fullstack/pro', {
-      stdio: 'inherit',
-      timeout: 120000,
-    });
-    console.log('\n✅ @aiox-fullstack/pro installed successfully!');
-  } catch (error) {
-    console.error(`\n❌ Installation failed: ${error.message}`);
-    console.log('\nTry manually:');
-    console.log('  npm install @aiox-fullstack/pro');
+    ({ resolveInstalledPro } = require(proUpdaterPath));
+  } catch {
+    console.error('❌ Pro updater module not found.');
+    console.error('Please ensure aiox-core is installed correctly.');
     process.exit(1);
   }
 
-  console.log('\n--- Setup Complete ---');
-  console.log('');
-  console.log('To activate your license:');
-  console.log('  aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX');
-  console.log('');
-  console.log('To check license status:');
-  console.log('  aiox pro status');
-  console.log('');
-  console.log('Documentation: https://synkra.ai/pro/docs');
-  console.log('');
+  const projectRoot = process.cwd();
+  const proSetup = loadProSetupWizard();
+  const installed = resolveInstalledPro(projectRoot);
+  const targetVersion =
+    proSetup._testing && typeof proSetup._testing.getProArtifactVersion === 'function'
+      ? proSetup._testing.getProArtifactVersion()
+      : 'latest';
+
+  if (options.check || options.dryRun) {
+    if (!installed) {
+      console.log('\n  ❌ AIOX Pro is not installed. Run: aiox pro setup\n');
+      process.exit(1);
+    }
+
+    if (options.dryRun) {
+      console.log('\n  📋 AIOX Pro Update Plan');
+      console.log('  ───────────────────────');
+      console.log(`  Installed:    v${installed.version}`);
+      console.log(`  Target:       v${targetVersion}`);
+      console.log('  Channel:      authenticated license-server artifact');
+      console.log('  Actions:      validate license, download signed artifact, verify sha256, install package, scaffold assets');
+      console.log('');
+      return;
+    }
+
+    if (installed.version === targetVersion) {
+      console.log(`\n  ✅ AIOX Pro is up to date (v${installed.version})\n`);
+      return;
+    }
+
+    console.log('\n  🔄 AIOX Pro update available');
+    console.log(`  Installed:    v${installed.version}`);
+    console.log(`  Target:       v${targetVersion}`);
+    console.log('  Run:          aiox pro update');
+    console.log('');
+    return;
+  }
+
+  if (options.includeCore) {
+    console.log('Note: --include-core is handled by updating @aiox-squads/core first, then rerunning aiox pro update.');
+  }
+
+  if (options.skipScaffold) {
+    console.log('Note: --skip-scaffold is not supported by the authenticated artifact updater.');
+  }
+
+  const result = await proSetup.runProWizard({
+    targetDir: projectRoot,
+    force: options.force || false,
+    refreshArtifact: true,
+  });
+
+  if (!result.success) {
+    process.exit(1);
+  }
+
+  console.log('\n  ✅ AIOX Pro update complete\n');
 }
 
 // ---------------------------------------------------------------------------
@@ -653,8 +722,7 @@ async function setupAction(options) {
  * @returns {Command}
  */
 function createProCommand() {
-  const proCmd = new Command('pro')
-    .description('AIOX Pro license management');
+  const proCmd = new Command('pro').description('AIOX Pro license management');
 
   // aiox pro activate
   proCmd
@@ -664,10 +732,7 @@ function createProCommand() {
     .action(activateAction);
 
   // aiox pro status
-  proCmd
-    .command('status')
-    .description('Show current license status')
-    .action(statusAction);
+  proCmd.command('status').description('Show current license status').action(statusAction);
 
   // aiox pro deactivate
   proCmd
@@ -691,9 +756,24 @@ function createProCommand() {
   // aiox pro setup (AC-12: Install-gate)
   proCmd
     .command('setup')
-    .description('Install and verify @aiox-fullstack/pro')
+    .description('Authenticate and install AIOX Pro')
     .option('--verify', 'Only verify installation without installing')
+    .option('-k, --key <key>', 'License key for legacy activation flow')
     .action(setupAction);
+
+  // aiox pro update (Story 122.3)
+  proCmd
+    .command('update')
+    .description('Update AIOX Pro to latest version and sync assets')
+    .option('--check', 'Check for updates without applying')
+    .option('--dry-run', 'Show update plan without executing')
+    .option('-f, --force', 'Force reinstall even if up-to-date')
+    .option('--include-core', 'Also update aiox-core')
+    .option('--skip-scaffold', 'Skip re-scaffolding assets after update')
+    .action(updateAction);
+
+  // aiox pro buyer — Cohort admin operations (Story 123.8)
+  proCmd.addCommand(createBuyerCommand());
 
   return proCmd;
 }

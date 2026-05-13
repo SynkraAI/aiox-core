@@ -138,8 +138,9 @@ Each IDE has a specific format for agent files:
 | Codex CLI   | Full markdown with YAML | `.md`     |
 | Gemini CLI  | Full markdown with YAML | `.md`     |
 | GitHub Copilot | Full markdown with YAML | `.md`   |
-| Cursor      | Condensed rules         | `.md`     |
+| Cursor      | Condensed MDC rules     | `.mdc`    |
 | Antigravity | Cursor-style            | `.md`     |
+| Kimi        | Skill directory         | `SKILL.md` |
 
 Platform-specific checks:
 
@@ -158,10 +159,15 @@ Deprecated or renamed agents are handled via redirects. When an old agent name i
 
 Example redirect file:
 
-```markdown
+```mdc
+---
+description: 'AIOX redirect from @aiox-developer to @aiox-master'
+alwaysApply: false
+---
+
 # Agent Redirect: aiox-developer -> aiox-master
 
-This agent has been renamed. Use `aiox-master` instead.
+> This agent has been renamed. Use `@aiox-master` instead.
 ```
 
 ## File Structure
@@ -176,7 +182,9 @@ This agent has been renamed. Use `aiox-master` instead.
 └── transformers/
     ├── claude-code.js       # Claude Code format
     ├── cursor.js            # Cursor format
-    └── antigravity.js       # Antigravity format
+    ├── antigravity.js       # Antigravity format
+    ├── github-copilot.js    # GitHub Copilot format
+    └── kimi.js              # Kimi skill format
 ```
 
 ## Performance

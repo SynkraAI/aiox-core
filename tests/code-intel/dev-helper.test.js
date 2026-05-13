@@ -347,7 +347,7 @@ describe('DevHelper', () => {
     it('should format with both duplicates and refs', () => {
       const msg = _formatSuggestion(
         { matches: [{ file: 'a.js', line: 1 }] },
-        [{ file: 'b.js', line: 2 }]
+        [{ file: 'b.js', line: 2 }],
       );
 
       expect(msg).toContain('1 similar match');
@@ -359,7 +359,7 @@ describe('DevHelper', () => {
     it('should format with only duplicates', () => {
       const msg = _formatSuggestion(
         { matches: [{ file: 'a.js' }] },
-        null
+        null,
       );
 
       expect(msg).toContain('1 similar match');

@@ -46,6 +46,22 @@ performance_defaults:
     show_config_warning: true
     cache_time_seconds: 300
 
+# --- Development Execution Defaults (Section 6.5) ---
+dev:
+  execution_mode: native # native | delegate
+  delegate_to: codex
+  auto_review: true
+  fast_path:
+    enabled: true
+    min_confidence: 0.58
+    min_batch_items: 3
+    external_executor_threshold: 0.78
+
+external_executors:
+  enabled: false
+  default_sandbox: workspace-write # read-only | workspace-write | full-auto | danger-full-access
+  run_dir: .aiox/external-runs
+
 # --- Utility Scripts Registry (Section 11) ---
 utility_scripts_registry:
   # Agent Helper utilities (28) — Used directly by agents
@@ -122,6 +138,7 @@ ide_sync_system:
     claude-code:
       enabled: true
       path: ".claude/commands/AIOX/agents"
+      skillsPath: ".claude/skills"
       format: "full-markdown-yaml"
     codex:
       enabled: true
@@ -143,6 +160,12 @@ ide_sync_system:
       enabled: true
       path: ".antigravity/rules/agents"
       format: "cursor-style"
+    kimi:
+      enabled: true
+      path: ".kimi/skills"
+      format: "kimi-skill"
+      fallbackSources:
+        - ".codex/agents"
   redirects: {}
   validation:
     strict_mode: true

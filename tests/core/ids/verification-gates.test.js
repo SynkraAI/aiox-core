@@ -189,6 +189,41 @@ describe('CircuitBreaker', () => {
       expect(cb.getState()).toBe(STATE_HALF_OPEN);
     });
 
+    it('preserves the original recovery timeout when failures continue while open', () => {
+      let now = 1000;
+      const nowSpy = jest.spyOn(Date, 'now').mockImplementation(() => now);
+
+      try {
+        const breaker = new CircuitBreaker({
+          failureThreshold: 2,
+          successThreshold: 1,
+          resetTimeoutMs: 1000,
+        });
+
+        breaker.recordFailure();
+        now = 1100;
+        breaker.recordFailure();
+
+        expect(breaker.getState()).toBe(STATE_OPEN);
+        expect(breaker.getStats().lastFailureTime).toBe(1100);
+
+        now = 1500;
+        breaker.recordFailure();
+
+        expect(breaker.getStats().failureCount).toBe(3);
+        expect(breaker.getStats().lastFailureTime).toBe(1100);
+
+        now = 2099;
+        expect(breaker.isAllowed()).toBe(false);
+
+        now = 2100;
+        expect(breaker.isAllowed()).toBe(true);
+        expect(breaker.getState()).toBe(STATE_HALF_OPEN);
+      } finally {
+        nowSpy.mockRestore();
+      }
+    });
+
     it('reports correct stats', () => {
       const stats = cb.getStats();
       expect(stats.state).toBe(STATE_OPEN);

@@ -151,6 +151,22 @@ describe('Wizard Integration - Story 1.7', () => {
         projectPath: process.cwd(),
       });
     });
+
+    it('should short-circuit in dry-run mode before any filesystem writes', async () => {
+      const preview = await runWizard({ dryRun: true, quiet: true });
+
+      expect(preview).toEqual(
+        expect.objectContaining({
+          dryRun: true,
+          projectType: 'brownfield',
+          steps: expect.arrayContaining(['install-aiox-core', 'configure-environment']),
+        }),
+      );
+      expect(installAioxCore).not.toHaveBeenCalled();
+      expect(generateIDEConfigs).not.toHaveBeenCalled();
+      expect(configureEnvironment).not.toHaveBeenCalled();
+      expect(installDependencies).not.toHaveBeenCalled();
+    });
   });
 
   describe('Package Manager Auto-Detection (AC1)', () => {

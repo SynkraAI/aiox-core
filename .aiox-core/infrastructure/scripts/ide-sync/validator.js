@@ -29,6 +29,29 @@ function fileExists(filePath) {
 }
 
 /**
+ * Recursively collect markdown-like sync files under root, returned as paths relative to base.
+ * Used for IDE targets with nested layouts (e.g. Kimi: <skill-id>/SKILL.md).
+ */
+function walkSyncFiles(root, base) {
+  const out = [];
+  let entries;
+  try {
+    entries = fs.readdirSync(root, { withFileTypes: true });
+  } catch (e) {
+    return out;
+  }
+  for (const entry of entries) {
+    const full = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      out.push(...walkSyncFiles(full, base));
+    } else if (entry.isFile() && (entry.name.endsWith('.md') || entry.name.endsWith('.mdc'))) {
+      out.push(path.relative(base, full));
+    }
+  }
+  return out;
+}
+
+/**
  * Read file content if it exists
  * @param {string} filePath - Path to read
  * @returns {string|null} - File content or null
@@ -49,9 +72,10 @@ function readFileIfExists(filePath) {
  * @param {object[]} expectedFiles - Array of {filename, content} expected
  * @param {string} targetDir - Target directory to check
  * @param {object} redirectsConfig - Redirects configuration
+ * @param {string} format - IDE format
  * @returns {object} - Validation result
  */
-function validateIdeSync(expectedFiles, targetDir, redirectsConfig) {
+function validateIdeSync(expectedFiles, targetDir, redirectsConfig, format) {
   const result = {
     targetDir,
     missing: [],
@@ -71,7 +95,7 @@ function validateIdeSync(expectedFiles, targetDir, redirectsConfig) {
   const expectedFilenames = new Set(expectedFiles.map(f => f.filename));
 
   // Add redirect filenames to expected
-  const redirectFilenames = getRedirectFilenames(redirectsConfig);
+  const redirectFilenames = getRedirectFilenames(redirectsConfig, format);
   for (const rf of redirectFilenames) {
     expectedFilenames.add(rf);
   }
@@ -113,22 +137,19 @@ function validateIdeSync(expectedFiles, targetDir, redirectsConfig) {
     }
   }
 
-  // Check for orphaned files (files in target not in expected)
+  // Check for orphaned files (files in target not in expected).
+  // Recursive walk so nested layouts like Kimi's <skill-id>/SKILL.md are handled.
   if (fs.existsSync(targetDir)) {
-    try {
-      const actualFiles = fs.readdirSync(targetDir).filter(f => f.endsWith('.md'));
+    const actualFiles = walkSyncFiles(targetDir, targetDir);
 
-      for (const file of actualFiles) {
-        if (!expectedFilenames.has(file)) {
-          result.orphaned.push({
-            filename: file,
-            path: path.join(targetDir, file),
-          });
-          result.total.orphaned++;
-        }
+    for (const file of actualFiles) {
+      if (!expectedFilenames.has(file)) {
+        result.orphaned.push({
+          filename: file,
+          path: path.join(targetDir, file),
+        });
+        result.total.orphaned++;
       }
-    } catch (error) {
-      // Ignore directory read errors
     }
   }
 
@@ -158,7 +179,8 @@ function validateAllIdes(ideConfigs, redirectsConfig) {
     const ideResult = validateIdeSync(
       config.expectedFiles,
       config.targetDir,
-      redirectsConfig
+      redirectsConfig,
+      config.format
     );
 
     results.ides[ideName] = ideResult;

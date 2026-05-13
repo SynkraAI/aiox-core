@@ -1,0 +1,76 @@
+framework_proposal:
+  version: "1.0"
+  id: "PROP-20260507-squad-routing-strategy"
+  date: "2026-05-07T19:00:00Z"
+  proposer: "@aiox-master (Orion)"
+  source_finding: "AF-20260507-aiox-master-routing-gap"
+
+  target:
+    layer: "L1"
+    artifact_type: "agent | rule | hook | governance"
+    artifact_path: |
+      Multiple coordinated changes:
+      - aiox-core/.aiox-core/development/agents/aiox-master.md (MODIFY — add triage.routing_matrix)
+      - aiox-core/.antigravity/rules/agents/aiox-master.md (MIRROR)
+      - aiox-core/.claude/commands/AIOX/agents/aiox-master.md (MIRROR)
+      - aiox-core/.codex/agents/aiox-master.md (MIRROR)
+      - aiox-core/.cursor/rules/agents/aiox-master.md (MIRROR)
+      - aiox-core/.claude/rules/squad-activation.md (NEW — operational rule synthesizing strategy)
+      - aiox-core/hooks/squad-suggestion-advisor.cjs (NEW — UserPromptSubmit hook)
+      - aiox-core/governance/squad-activation-strategy.md (ALREADY CREATED in this session — formalize via PR)
+      - aiox-core/governance/patterns/squad-activation.md (NEW pattern doc, created on APPROVED)
+    operation: "modify + create"
+
+  generalization:
+    pattern_name: "Squad Activation Routing"
+    when_to_apply: |
+      Any orchestrator agent that delegates work across multiple specialized
+      domains and currently does NOT have a triage matrix. Specifically:
+      - @aiox-master (root orchestrator) — primary target
+      - Future project-level orchestrators (if any project wraps @aiox-master)
+    examples_from_other_domains:
+      - "claude-mastery-chief already has squad-internal triage.routing_matrix — proves pattern works"
+      - "OpenAI Swarm pattern: handoff-based routing"
+      - "LangChain agent executor: tool-selection by description matching"
+
+  migration_path:
+    breaking_change: false
+    affected_consumers:
+      - "All consumers of @aiox-master (every AIOX project)"
+    rollout_plan: |
+      1. PR adds triage block to all 5 aiox-master.md mirror locations
+      2. PR adds rule + hook + pattern doc
+      3. business-ai-first pulls aiox-core update
+      4. First-session validation: invoke @aiox-master with various keywords; confirm correct routing suggestions
+      5. Iterate keyword list based on observed misses (additional findings → additional proposals)
+
+  deprecation_plan:
+    deprecates: []                    # nothing to deprecate; purely additive
+    sunset_window: "n/a"
+
+  cost_benefit:
+    cost: |
+      Engineering: ~4-5h to write the routing matrix, hook, rule, and validation
+      Token: ~25K tokens for full documentation + code
+      Complexity: medium — requires careful keyword tuning to avoid noise
+    benefit: |
+      Estimated 30-50% token reduction per multi-domain session.
+      Voice-clones squad utilization rises from ~0% to expected 20-30% in relevant sessions.
+      claude-code-mastery squad becomes useful (currently dormant from outside).
+      Closes Eliel-stated gap: "todos os plans cogitaram em nenhum momento a perfeita integração desses squads".
+      Compounds: every new squad created becomes immediately discoverable via routing.
+    risk: |
+      medium — wrong keyword matches could route to irrelevant squads.
+      Mitigation: advisory mode (suggests, doesn't auto-spawn); user can skip;
+      iterative tuning after rollout.
+
+  approval:
+    eliel_decision: "APPROVED"
+    eliel_decision_at: "2026-05-07T19:15:00Z"
+    eliel_decision_rationale: "Fecha gap declarado de integração de squads (voice-clones, claude-code-mastery, audience-engine, db-inventory). Advisory-only mitiga risco de false-positives. ROI alto: 30-50% token savings em sessões multi-domínio compostam ao longo do tempo. Ordem natural: implementar APÓS vocabulary-contract para que routing matrix referencie a Article VII recém-formalizada."
+    revision_request: []
+
+  implementation:
+    pr_url: ""
+    merged_at: ""
+    distributed_to: []

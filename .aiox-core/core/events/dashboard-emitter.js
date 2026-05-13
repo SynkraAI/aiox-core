@@ -22,11 +22,27 @@ const MONITOR_SERVER_URL = process.env.AIOX_MONITOR_URL || 'http://localhost:400
 const EMIT_TIMEOUT_MS = 500;
 
 /**
- * DashboardEmitter - Singleton for emitting events to monitor-server
+ * DashboardEmitter - Singleton for emitting events to monitor-server.
+ *
+ * Sends high-level CLI events such as agent activation, command execution,
+ * story status changes, session lifecycle, and Bob orchestration events via
+ * non-blocking HTTP POST requests. Falls back to JSONL file writes when the
+ * monitor server is unavailable.
+ *
+ * @example
+ * const emitter = DashboardEmitter.getInstance();
+ * emitter.setAgent('dev');
+ * await emitter.emitCommandStart('*develop', ['--story', '3.1']);
  */
 class DashboardEmitter {
   static instance = null;
 
+  /**
+   * Creates a dashboard emitter instance.
+   *
+   * Uses CLAUDE_CODE_SESSION_ID when available; otherwise generates a UUID for
+   * session tracking. The emitter disables itself automatically in test runs.
+   */
   constructor() {
     this.sessionId = process.env.CLAUDE_CODE_SESSION_ID || randomUUID();
     this.projectRoot = process.cwd();
@@ -42,8 +58,9 @@ class DashboardEmitter {
   }
 
   /**
-   * Get singleton instance
-   * @returns {DashboardEmitter}
+   * Gets the singleton DashboardEmitter instance.
+   *
+   * @returns {DashboardEmitter} Shared dashboard emitter instance.
    */
   static getInstance() {
     if (!DashboardEmitter.instance) {
@@ -53,42 +70,54 @@ class DashboardEmitter {
   }
 
   /**
-   * Set current agent context
-   * @param {string|null} agentId
+   * Sets the current agent context attached to future events.
+   *
+   * @param {string|null} agentId - Current agent ID, or null to clear agent context.
+   * @returns {void}
    */
   setAgent(agentId) {
     this.currentAgent = agentId;
   }
 
   /**
-   * Set current story context
-   * @param {string|null} storyId
+   * Sets the current story context attached to future events.
+   *
+   * @param {string|null} storyId - Current story ID, or null to clear story context.
+   * @returns {void}
    */
   setStoryId(storyId) {
     this.currentStoryId = storyId;
   }
 
   /**
-   * Set session ID
-   * @param {string} sessionId
+   * Sets the session ID attached to future events.
+   *
+   * @param {string} sessionId - Session identifier.
+   * @returns {void}
    */
   setSessionId(sessionId) {
     this.sessionId = sessionId;
   }
 
   /**
-   * Enable/disable emitter
-   * @param {boolean} enabled
+   * Enables or disables event emission.
+   *
+   * @param {boolean} enabled - Whether the emitter should send events.
+   * @returns {void}
    */
   setEnabled(enabled) {
     this.enabled = enabled;
   }
 
   /**
-   * Emit an event to monitor-server
-   * Non-blocking, silent failure
+   * Emits an event to the monitor server.
+   *
+   * Emission is non-blocking for the CLI caller. HTTP failures fall back to a
+   * local JSONL file and never throw to the command path.
+   *
    * @param {string} type - Event type
    * @param {Object} data - Event data
+   * @returns {Promise<void>}
    */
   async emit(type, data = {}) {
     if (!this.enabled) return;
@@ -303,9 +332,12 @@ class DashboardEmitter {
   }
 
   /**
-   * POST event to monitor-server with timeout
+   * Posts an event to the monitor server with a short timeout.
+   *
+   * @param {Object} event - Normalized dashboard event payload.
+   * @returns {Promise<void>}
+   * @throws {Error} If the HTTP request fails or returns a non-2xx status.
    * @private
-   * @param {Object} event
    */
   async _postEvent(event) {
     const controller = new AbortController();
@@ -339,9 +371,11 @@ class DashboardEmitter {
   }
 
   /**
-   * Write event to fallback file
+   * Writes an event to the local JSONL fallback file.
+   *
+   * @param {Object} event - Normalized dashboard event payload.
+   * @returns {Promise<void>}
    * @private
-   * @param {Object} event
    */
   async _writeToFile(event) {
     try {
@@ -355,8 +389,9 @@ class DashboardEmitter {
 }
 
 /**
- * Get singleton emitter instance
- * @returns {DashboardEmitter}
+ * Gets the singleton dashboard emitter instance.
+ *
+ * @returns {DashboardEmitter} Shared dashboard emitter instance.
  */
 function getDashboardEmitter() {
   return DashboardEmitter.getInstance();

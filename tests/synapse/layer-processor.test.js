@@ -104,10 +104,41 @@ describe('LayerProcessor', () => {
       const result = processor._safeProcess({});
 
       expect(result).toBeNull();
+      expect(processor.getLastError()).toBeInstanceOf(Error);
+      expect(processor.getLastError().message).toBe('Something went wrong');
       expect(warnSpy).toHaveBeenCalledWith(
         '[synapse:error-test] Error: Something went wrong',
       );
       warnSpy.mockRestore();
+    });
+
+    test('should clear last error after a successful retry', () => {
+      class FlakyProcessor extends LayerProcessor {
+        constructor() {
+          super({ name: 'flaky', layer: 0 });
+          this.shouldFail = true;
+        }
+        process() {
+          if (this.shouldFail) {
+            this.shouldFail = false;
+            throw new Error('First attempt failed');
+          }
+          return { rules: ['recovered'], metadata: { layer: 0 } };
+        }
+      }
+
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+      const processor = new FlakyProcessor();
+
+      try {
+        expect(processor._safeProcess({})).toBeNull();
+        expect(processor.getLastError().message).toBe('First attempt failed');
+
+        expect(processor._safeProcess({})).toEqual({ rules: ['recovered'], metadata: { layer: 0 } });
+        expect(processor.getLastError()).toBeNull();
+      } finally {
+        warnSpy.mockRestore();
+      }
     });
 
     test('should warn when timeout exceeded but still return result', () => {

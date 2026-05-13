@@ -7,7 +7,9 @@ const os = require('os');
 const {
   copySkillFiles,
   copyExtraCommandFiles,
+  copyClaudeHooksFolder,
   createClaudeSettingsLocal,
+  shouldCopyProHooks,
   HOOK_EVENT_MAP,
   DEFAULT_HOOK_CONFIG,
 } = require('../../../../../packages/installer/src/wizard/ide-config-generator');
@@ -18,6 +20,15 @@ function createTempDir() {
 
 function cleanup(dir) {
   fs.rmSync(dir, { recursive: true, force: true });
+}
+
+function expectedAvailableHooks(...fileNames) {
+  const hooksDir = path.join(__dirname, '../../../../../.claude/hooks');
+  if (!fs.existsSync(hooksDir)) {
+    throw new Error(`Expected Claude hooks source directory at ${hooksDir}`);
+  }
+  const available = new Set(fs.readdirSync(hooksDir));
+  return fileNames.filter(file => available.has(file)).sort();
 }
 
 describe('artifact-copy-pipeline (Story INS-4.3)', () => {
@@ -94,7 +105,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         expect(result.count).toBe(1);
         const content = fs.readFileSync(
           path.join(targetRoot, '.claude', 'skills', 'test-skill', 'SKILL.md'),
-          'utf8'
+          'utf8',
         );
         expect(content).toBe('# v2');
       } finally {
@@ -168,6 +179,88 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
     });
   });
 
+  describe('copyClaudeHooksFolder tier selection (Issue #544)', () => {
+    test('free tier copies only free hooks and does not register PreCompact', async () => {
+      const targetRoot = createTempDir();
+
+      try {
+        const copied = await copyClaudeHooksFolder(targetRoot, { tier: 'free' });
+        const fileNames = copied.map(file => path.basename(file)).sort();
+
+        expect(fileNames).toEqual(expectedAvailableHooks(
+          'README.md',
+          'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
+          'synapse-engine.cjs',
+        ));
+
+        const settingsPath = await createClaudeSettingsLocal(targetRoot);
+        expect(settingsPath).toEqual(expect.any(String));
+        const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+
+        expect(settings.hooks.UserPromptSubmit).toHaveLength(1);
+        const preToolUseHookCount = [
+          'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
+        ].filter(file => fileNames.includes(file)).length;
+        if (preToolUseHookCount > 0) {
+          expect(settings.hooks.PreToolUse).toHaveLength(preToolUseHookCount);
+        } else {
+          expect(settings.hooks.PreToolUse).toBeUndefined();
+        }
+        expect(settings.hooks.PreCompact).toBeUndefined();
+      } finally {
+        cleanup(targetRoot);
+      }
+    });
+
+    test('pro tier copies free hooks plus PreCompact session digest hook', async () => {
+      const targetRoot = createTempDir();
+
+      try {
+        const copied = await copyClaudeHooksFolder(targetRoot, { tier: 'pro' });
+        const fileNames = copied.map(file => path.basename(file)).sort();
+
+        expect(fileNames).toEqual(expectedAvailableHooks(
+          'README.md',
+          'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
+          'precompact-session-digest.cjs',
+          'synapse-engine.cjs',
+        ));
+
+        const settingsPath = await createClaudeSettingsLocal(targetRoot);
+        expect(settingsPath).toEqual(expect.any(String));
+        const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+
+        expect(settings.hooks.UserPromptSubmit).toHaveLength(1);
+        const preToolUseHookCount = [
+          'code-intel-pretool.cjs',
+          'enforce-git-push-authority.cjs',
+        ].filter(file => fileNames.includes(file)).length;
+        if (preToolUseHookCount > 0) {
+          expect(settings.hooks.PreToolUse).toHaveLength(preToolUseHookCount);
+        } else {
+          expect(settings.hooks.PreToolUse).toBeUndefined();
+        }
+        expect(settings.hooks.PreCompact).toHaveLength(1);
+      } finally {
+        cleanup(targetRoot);
+      }
+    });
+
+    test('explicit wizard tier controls Pro hook selection', () => {
+      expect(shouldCopyProHooks({ tier: 'pro' })).toBe(true);
+      expect(shouldCopyProHooks({ tier: 'free' })).toBe(false);
+      expect(shouldCopyProHooks({ tier: 'community' })).toBe(false);
+      expect(shouldCopyProHooks({ tier: 'core' })).toBe(false);
+      expect(shouldCopyProHooks({ proTier: 'pro' })).toBe(true);
+      expect(shouldCopyProHooks({ tier: 'free', proTier: 'pro' })).toBe(false);
+      expect(shouldCopyProHooks({ pro: { enabled: true } })).toBe(true);
+      expect(shouldCopyProHooks({ pro: { enabled: false } })).toBe(false);
+    });
+  });
+
   describe('HOOK_EVENT_MAP (Story MIS-3.1)', () => {
     test('maps synapse-engine.cjs to UserPromptSubmit', () => {
       const config = HOOK_EVENT_MAP['synapse-engine.cjs'];
@@ -185,6 +278,14 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
       expect(config.timeout).toBe(10);
     });
 
+    test('maps enforce-git-push-authority.cjs to PreToolUse with Bash matcher', () => {
+      const config = HOOK_EVENT_MAP['enforce-git-push-authority.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('PreToolUse');
+      expect(config.matcher).toBe('Bash');
+      expect(config.timeout).toBe(10);
+    });
+
     test('maps precompact-session-digest.cjs to PreCompact', () => {
       const config = HOOK_EVENT_MAP['precompact-session-digest.cjs'];
       expect(config).toBeDefined();
@@ -193,11 +294,12 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
       expect(config.timeout).toBe(10);
     });
 
-    test('covers all 3 known hooks', () => {
+    test('covers all 4 known hooks', () => {
       const keys = Object.keys(HOOK_EVENT_MAP);
-      expect(keys).toHaveLength(3);
+      expect(keys).toHaveLength(4);
       expect(keys).toContain('synapse-engine.cjs');
       expect(keys).toContain('code-intel-pretool.cjs');
+      expect(keys).toContain('enforce-git-push-authority.cjs');
       expect(keys).toContain('precompact-session-digest.cjs');
     });
 

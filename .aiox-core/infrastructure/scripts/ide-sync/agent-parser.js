@@ -119,8 +119,12 @@ function extractAgentInfoFallback(content) {
  * @returns {object} - Parsed agent data
  */
 function parseAgentFile(filePath) {
+  const relativeSourcePath = path.relative(process.cwd(), filePath);
   const result = {
     path: filePath,
+    sourcePath: relativeSourcePath && !relativeSourcePath.startsWith('..') && !path.isAbsolute(relativeSourcePath)
+      ? relativeSourcePath.split(path.sep).join('/')
+      : null,
     filename: path.basename(filePath),
     id: path.basename(filePath, '.md'),
     raw: null,

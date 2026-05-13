@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-05-09T01:41:18.000Z",
+  "package": "@aiox-squads/pro",
+  "version": "0.4.2",
+  "objectPath": "@aiox-squads/pro/0.4.2/aiox-squads-pro-0.4.2.tgz",
+  "sha256": "a5565e693838aca2b0e3e5fc38af274d0fb6efc84c507de48375b516bd1efd41",
+  "sizeBytes": 6685182,
+  "tarballName": "aiox-squads-pro-0.4.2.tgz",
+  "npmAccess": "private",
+  "npmPeerDependencies": {
+    "@aiox-squads/core": ">=5.1.0"
+  },
+  "licenseServerDeploymentId": "dpl_EBiFzRXEhqhLBU3ZpfuF5NZ2DhXg",
+  "liveSmoke": {
+    "missingBearerStatus": 401,
+    "verifiedNonProStatus": 403,
+    "verifiedProStatus": 200,
+    "downloadStatus": 200,
+    "sha256Matches": true,
+    "sizeMatches": true
+  }
+}

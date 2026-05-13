@@ -3,7 +3,7 @@
  * Validate Package Completeness for npm Publishing
  *
  * Ensures the npm tarball contains all critical files and excludes
- * private content before publishing. Runs as prepublishOnly hook.
+ * local/private development content before publishing.
  *
  * @script scripts/validate-package-completeness.js
  * @story INS-2 - Release Pipeline: Preview to Latest
@@ -34,6 +34,8 @@ const REQUIRED_PATHS = [
   // Hooks (critical - these were missing in v4.0.0)
   '.claude/hooks/synapse-engine.cjs',
   '.claude/hooks/precompact-session-digest.cjs',
+  // Claude Code project settings
+  '.claude/settings.json',
   // Rules
   '.claude/rules/',
   // CLI binaries
@@ -44,13 +46,14 @@ const REQUIRED_PATHS = [
   '.aiox-core/constitution.md',
   '.aiox-core/development/agents/',
   '.aiox-core/development/tasks/',
+  // Pro entitlement runtime is intentionally shipped with core.
+  'pro/license/license-api.js',
 ];
 
 /**
  * Paths that MUST NOT appear in the tarball (leak prevention).
  */
 const EXCLUDED_PATHS = [
-  'pro/',
   '.env',
   '.git/',
   'node_modules/',
@@ -63,6 +66,7 @@ const EXCLUDED_PATHS = [
  */
 const REQUIRED_FILES_ENTRIES = [
   '.claude/hooks/',
+  '.claude/settings.json',
   '.claude/rules/',
   '.aiox-core/',
   'bin/',
@@ -71,7 +75,7 @@ const REQUIRED_FILES_ENTRIES = [
 /**
  * Bin entries that must point to existing files.
  */
-const REQUIRED_BIN_ENTRIES = ['aiox', 'aiox-core'];
+const REQUIRED_BIN_ENTRIES = ['aiox', 'aiox-core', 'aiox-delegate'];
 
 /**
  * Runtime dependencies that must be present.
@@ -185,20 +189,20 @@ function validateTarballContents(tarballFiles) {
     check(
       `Required: ${required}`,
       found,
-      found ? undefined : `Not found in tarball (${tarballFiles.length} files scanned)`
+      found ? undefined : `Not found in tarball (${tarballFiles.length} files scanned)`,
     );
   }
 
   // Check excluded paths do NOT exist
   for (const excluded of EXCLUDED_PATHS) {
     const leaked = tarballFiles.filter(
-      (f) => f.startsWith(excluded) || f.startsWith(`package/${excluded}`)
+      (f) => f.startsWith(excluded) || f.startsWith(`package/${excluded}`),
     );
 
     check(
       `Excluded: ${excluded} not in tarball`,
       leaked.length === 0,
-      leaked.length > 0 ? `LEAK DETECTED: ${leaked.slice(0, 3).join(', ')}` : undefined
+      leaked.length > 0 ? `LEAK DETECTED: ${leaked.slice(0, 3).join(', ')}` : undefined,
     );
   }
 }
@@ -210,11 +214,16 @@ function validatePackageJson(pkg) {
   const filesArray = pkg.files || [];
 
   for (const entry of REQUIRED_FILES_ENTRIES) {
-    const found = filesArray.some((f) => f === entry || f.startsWith(entry));
+    const found = filesArray.some((f) => {
+      if (entry.endsWith('/')) {
+        return f === entry || f.startsWith(entry);
+      }
+      return f === entry;
+    });
     check(
       `files[] includes "${entry}"`,
       found,
-      found ? undefined : `Add "${entry}" to package.json "files" array`
+      found ? undefined : `Add "${entry}" to package.json "files" array`,
     );
   }
 
@@ -232,7 +241,7 @@ function validatePackageJson(pkg) {
     check(
       `bin.${name} -> ${binPath} exists`,
       exists,
-      exists ? undefined : `File not found: ${fullPath}`
+      exists ? undefined : `File not found: ${fullPath}`,
     );
   }
 
@@ -242,7 +251,7 @@ function validatePackageJson(pkg) {
     check(
       `dependency: ${dep}`,
       dep in deps,
-      dep in deps ? undefined : `Missing runtime dependency "${dep}"`
+      dep in deps ? undefined : `Missing runtime dependency "${dep}"`,
     );
   }
 }
@@ -267,7 +276,7 @@ function validateBinScripts() {
     check(
       `${name} (${binPath}) has correct shebang`,
       hasShebang,
-      hasShebang ? undefined : `Expected "#!/usr/bin/env node", got "${firstLine.substring(0, 40)}"`
+      hasShebang ? undefined : `Expected "#!/usr/bin/env node", got "${firstLine.substring(0, 40)}"`,
     );
   }
 }

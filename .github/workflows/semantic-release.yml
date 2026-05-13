@@ -55,7 +55,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '22'
           cache: 'npm'
@@ -78,7 +78,7 @@ jobs:
       - name: Verify NPM authentication
         run: npm whoami
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
 
       - name: Pre-flight Tag Validation
         id: preflight
@@ -138,8 +138,8 @@ jobs:
         if: inputs.dry_run != true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
         run: |
           echo "🔍 Running dry-run to preview release..."
           echo ""
@@ -163,8 +163,8 @@ jobs:
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
         run: |
           if [ "${{ inputs.dry_run }}" == "true" ]; then
             npx semantic-release --dry-run

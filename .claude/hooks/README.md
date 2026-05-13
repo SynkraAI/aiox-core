@@ -16,6 +16,7 @@ PreToolUse Hooks
 │                 → code-intel-pretool.cjs
 └── Bash          → sql-governance.py
                   → slug-validation.py
+                  → enforce-git-push-authority.cjs
 
 PreCompact Hooks
 └── (manual+auto)  → precompact-session-digest.cjs
@@ -104,6 +105,19 @@ Impede criação de mind clones sem DNA extraído previamente.
 1. Execute o pipeline de extração de DNA: `/squad-creator` → `*collect-sources` → `*extract-voice-dna` → `*extract-thinking-dna`
 2. OU se é agent funcional, renomeie com sufixo apropriado
 
+### 7. enforce-git-push-authority.cjs
+**Trigger:** `Bash`
+**Comportamento:** BLOQUEIA via `permissionDecision: deny`
+
+Impede operações remotas que são exclusivas do `@devops`:
+- `git push`
+- `gh pr create`
+- `gh pr merge`
+
+**Exceções permitidas:**
+- Sessões/comandos com `AIOX_ACTIVE_AGENT=devops`
+- Alias compatíveis: `github-devops`, `aiox-devops`
+
 ## Exit Codes
 
 | Code | Significado |
@@ -150,6 +164,7 @@ Hooks são registrados em `.claude/settings.json` (framework, commitado) ou `.cl
 |------|--------|---------|-----------|
 | `synapse-engine.cjs` | `UserPromptSubmit` | — | SYNAPSE context engine |
 | `code-intel-pretool.cjs` | `PreToolUse` | `Write\|Edit` | Code intelligence injection |
+| `enforce-git-push-authority.cjs` | `PreToolUse` | `Bash` | Agent Authority para operações remotas |
 | `precompact-session-digest.cjs` | `PreCompact` | — | Session digest capture |
 
 ### Exemplo de Configuração

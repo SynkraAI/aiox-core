@@ -21,7 +21,7 @@ jest.mock('../../../../../.aiox-core/infrastructure/scripts/ide-sync/index', () 
 // We need to verify that the wizard source code has the correct integration
 const fs = require('fs');
 const WIZARD_PATH = path.join(
-  __dirname, '..', '..', '..', 'src', 'wizard', 'index.js'
+  __dirname, '..', '..', '..', 'src', 'wizard', 'index.js',
 );
 
 describe('IDE Sync Integration (Story INS-4.5)', () => {
@@ -32,9 +32,13 @@ describe('IDE Sync Integration (Story INS-4.5)', () => {
   });
 
   describe('AC1: IDE sync called via adapter pattern', () => {
-    test('wizard imports commandSync and commandValidate from ide-sync', () => {
+    test('wizard loads commandSync and commandValidate from the core package resolver', () => {
+      expect(wizardSource).toContain('function loadIdeSync()');
       expect(wizardSource).toContain(
-        "const { commandSync, commandValidate } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/index')"
+        "return requireAioxCoreModule('.aiox-core', 'infrastructure', 'scripts', 'ide-sync', 'index')",
+      );
+      expect(wizardSource).toContain(
+        'const { commandSync, commandValidate } = loadIdeSync()',
       );
     });
 
@@ -61,7 +65,7 @@ describe('IDE Sync Integration (Story INS-4.5)', () => {
     });
 
     test('commandSync called with { quiet: true }', () => {
-      expect(wizardSource).toContain("await commandSync({ quiet: true })");
+      expect(wizardSource).toContain('await commandSync({ quiet: true })');
     });
 
     test('does NOT pass projectRoot or ides as parameters to commandSync', () => {
@@ -78,7 +82,7 @@ describe('IDE Sync Integration (Story INS-4.5)', () => {
     });
 
     test('failure message suggests aiox doctor --fix', () => {
-      expect(wizardSource).toContain("aiox doctor --fix");
+      expect(wizardSource).toContain('aiox doctor --fix');
     });
 
     test('install summary includes sync status on success', () => {

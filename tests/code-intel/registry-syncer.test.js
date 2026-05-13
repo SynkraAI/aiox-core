@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const codeIntel = require('../../.aiox-core/core/code-intel');
 const { RegistrySyncer, inferRole, ROLE_MAP } = require('../../.aiox-core/core/code-intel/registry-syncer');
 
 // Mock fs module for controlled testing
@@ -87,6 +88,8 @@ function createSyncer(options = {}) {
 describe('RegistrySyncer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    codeIntel.getClient.mockReset();
+    codeIntel.isCodeIntelAvailable.mockReset().mockReturnValue(false);
     // Default fs mocks
     fs.existsSync.mockReturnValue(true);
     fs.writeFileSync.mockImplementation(() => {});
@@ -115,7 +118,7 @@ describe('RegistrySyncer', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         expect.stringContaining('.tmp'),
         expect.any(String),
-        'utf8'
+        'utf8',
       );
       expect(fs.renameSync).toHaveBeenCalled();
     });
@@ -160,7 +163,7 @@ describe('RegistrySyncer', () => {
       const result = await syncer.syncEntity(
         { id: 'test-entity', category: 'tasks', data: entities.tasks['test-entity'] },
         entities,
-        true
+        true,
       );
 
       expect(result).toBe(true);
@@ -280,11 +283,11 @@ describe('RegistrySyncer', () => {
       await syncer.syncEntity(
         { id: 'test-entity', category: 'tasks', data: entities.tasks['test-entity'] },
         entities,
-        true
+        true,
       );
 
       expect(entities.tasks['test-entity'].codeIntelMetadata.callerCount).toBe(
-        entities.tasks['test-entity'].usedBy.length
+        entities.tasks['test-entity'].usedBy.length,
       );
     });
 
@@ -304,6 +307,30 @@ describe('RegistrySyncer', () => {
 
   // T5: Fallback sem provider (AC5)
   describe('Fallback without provider (T5 — AC5)', () => {
+    it('should bootstrap default client before checking module-level provider availability', async () => {
+      const logger = jest.fn();
+      const mockClient = createMockClient();
+
+      codeIntel.getClient.mockReturnValue(mockClient);
+      codeIntel.isCodeIntelAvailable.mockImplementation(
+        () => codeIntel.getClient.mock.calls.length > 0,
+      );
+
+      const syncer = new RegistrySyncer({
+        registryPath: '/mock/entity-registry.yaml',
+        repoRoot: '/mock/repo',
+        client: null,
+        logger,
+      });
+
+      const stats = await syncer.sync({ full: true });
+
+      expect(codeIntel.getClient).toHaveBeenCalled();
+      expect(stats.aborted).toBeUndefined();
+      expect(stats.processed).toBe(3);
+      expect(fs.writeFileSync).toHaveBeenCalled();
+    });
+
     it('should skip enrichment and log message when no provider available', async () => {
       const logger = jest.fn();
       const syncer = new RegistrySyncer({
@@ -318,7 +345,7 @@ describe('RegistrySyncer', () => {
       expect(stats.aborted).toBe(true);
       expect(stats.processed).toBe(0);
       expect(logger).toHaveBeenCalledWith(
-        expect.stringContaining('No code intelligence provider available')
+        expect.stringContaining('No code intelligence provider available'),
       );
       // Registry should NOT be written
       expect(fs.writeFileSync).not.toHaveBeenCalled();
@@ -424,7 +451,7 @@ describe('RegistrySyncer', () => {
       // renameSync should be called to replace original
       expect(fs.renameSync).toHaveBeenCalledWith(
         expect.stringContaining('.tmp'),
-        '/mock/entity-registry.yaml'
+        '/mock/entity-registry.yaml',
       );
     });
 

@@ -12,7 +12,10 @@ const {
   validateConfigContent,
   generateTemplateVariables,
   generateIDEConfigs,
+  generateCodexSkills,
+  createCursorMdcFallbackContent,
   linkGeminiExtension,
+  HOOK_EVENT_MAP,
 } = require('../../../packages/installer/src/wizard/ide-config-generator');
 
 describe('IDE Config Generator', () => {
@@ -55,6 +58,15 @@ describe('IDE Config Generator', () => {
       const result = renderTemplate(template, variables);
 
       expect(result).toBe('Hello {{name}}!');
+    });
+  });
+
+  describe('createCursorMdcFallbackContent', () => {
+    it('should wrap raw agent markdown in valid Cursor MDC frontmatter', () => {
+      const result = createCursorMdcFallbackContent("dev'ops\nlead", '# Raw agent');
+
+      expect(result).toMatch(/^---\ndescription: 'AIOX agent @dev''ops lead'\nalwaysApply: false\n---/);
+      expect(result).toContain('# Raw agent');
     });
   });
 
@@ -163,13 +175,17 @@ describe('IDE Config Generator', () => {
       // Now includes config file + agent files
       expect(result.files.length).toBeGreaterThanOrEqual(1);
 
-      // v2.1: Cursor uses .cursor/rules.md (not .cursorrules)
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      // Cursor uses project rules in .mdc format.
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       expect(await fs.pathExists(configPath)).toBe(true);
 
       // Agent folder should also exist
-      const agentFolder = path.join(testDir, '.cursor', 'rules');
+      const agentFolder = path.join(testDir, '.cursor', 'rules', 'agents');
       expect(await fs.pathExists(agentFolder)).toBe(true);
+      expect(await fs.pathExists(path.join(agentFolder, 'dev.mdc'))).toBe(true);
+
+      const agentContent = await fs.readFile(path.join(agentFolder, 'dev.mdc'), 'utf8');
+      expect(agentContent).toContain('alwaysApply: false');
     });
 
     it('should create config files for multiple IDEs', async () => {
@@ -184,13 +200,38 @@ describe('IDE Config Generator', () => {
       // Now includes config files + agent files for each IDE
       expect(result.files.length).toBeGreaterThanOrEqual(2);
 
-      // v2.1: Cursor and Gemini use directory-based rules files
-      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules.md'))).toBe(true);
+      // Cursor and Gemini use directory-based rules files
+      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules.md'))).toBe(true);
 
       // Agent folders should also exist
-      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules'))).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.cursor', 'rules', 'agents'))).toBe(true);
       expect(await fs.pathExists(path.join(testDir, '.gemini', 'rules', 'AIOX', 'agents'))).toBe(true);
+    });
+
+    it('should install Claude Code native subagents and authority hook registration', async () => {
+      const selectedIDEs = ['claude-code'];
+      const wizardState = { projectName: 'test', projectType: 'greenfield' };
+
+      const result = await generateIDEConfigs(selectedIDEs, wizardState, {
+        projectRoot: testDir,
+      });
+
+      expect(result.success).toBe(true);
+      expect(await fs.pathExists(path.join(testDir, '.claude', 'agents', 'aiox-dev.md'))).toBe(true);
+      expect(await fs.pathExists(
+        path.join(testDir, '.claude', 'hooks', 'enforce-git-push-authority.cjs'),
+      )).toBe(true);
+
+      const settingsPath = path.join(testDir, '.claude', 'settings.local.json');
+      const settings = JSON.parse(await fs.readFile(settingsPath, 'utf8'));
+
+      expect(JSON.stringify(settings.hooks.PreToolUse)).toContain('enforce-git-push-authority.cjs');
+      expect(settings.hooks.PreToolUse.some(entry => entry.matcher === 'Bash')).toBe(true);
+      expect(HOOK_EVENT_MAP['enforce-git-push-authority.cjs']).toMatchObject({
+        event: 'PreToolUse',
+        matcher: 'Bash',
+      });
     });
 
     it('should create directory for IDEs that require it', async () => {
@@ -216,14 +257,15 @@ describe('IDE Config Generator', () => {
         projectRoot: testDir,
       });
 
-      // v2.1: Cursor uses .cursor/rules.md (not .cursorrules)
-      const configPath = path.join(testDir, '.cursor', 'rules.md');
+      // Cursor uses .cursor/rules/aiox-global.mdc.
+      const configPath = path.join(testDir, '.cursor', 'rules', 'aiox-global.mdc');
       const content = await fs.readFile(configPath, 'utf8');
 
       // v2.1 templates use static content from .aiox-core/templates/ide-rules/
       // They contain Synkra AIOX standard rules
       expect(content).toContain('Synkra AIOX');
       expect(content).toContain('Development Rules');
+      expect(content).toContain('alwaysApply: true');
     });
 
     it('should create github-copilot config in .github directory', async () => {
@@ -323,6 +365,42 @@ describe('IDE Config Generator', () => {
     it('should skip when extension directory does not exist', async () => {
       const result = await linkGeminiExtension(testDir);
       expect(result).toEqual({ status: 'skipped', reason: 'extension-dir-not-found' });
+    });
+  });
+
+  describe('generateCodexSkills', () => {
+    const testDir = path.join(__dirname, '..', '..', '..', '.test-temp-codex-skills');
+
+    beforeEach(async () => {
+      await fs.ensureDir(path.join(testDir, '.aiox-core', 'development', 'agents'));
+      await fs.copy(
+        path.join(process.cwd(), '.aiox-core', 'development', 'agents'),
+        path.join(testDir, '.aiox-core', 'development', 'agents'),
+      );
+    });
+
+    afterEach(async () => {
+      await fs.remove(testDir);
+    });
+
+    it('should generate local Codex skills from canonical agents', async () => {
+      const result = generateCodexSkills(testDir);
+
+      expect(result.skipped).toBe(false);
+      expect(result.count).toBeGreaterThan(0);
+
+      const skillPath = path.join(testDir, '.codex', 'skills', 'aiox-architect', 'SKILL.md');
+      expect(await fs.pathExists(skillPath)).toBe(true);
+
+      const content = await fs.readFile(skillPath, 'utf8');
+      expect(content).toContain('name: aiox-architect');
+      expect(content).toContain('Activation Protocol');
+    });
+
+    it('should skip when canonical agent source is not present', () => {
+      const emptyDir = path.join(testDir, 'missing-source');
+      const result = generateCodexSkills(emptyDir);
+      expect(result).toEqual({ count: 0, skipped: true });
     });
   });
 });

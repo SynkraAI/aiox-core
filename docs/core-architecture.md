@@ -84,6 +84,7 @@ The `aiox-core` directory contains all the definitions and resources that give t
 
 - **Purpose**: Workflows are YAML files (e.g., `greenfield-fullstack.yaml`) that define a prescribed sequence of steps and agent interactions for a specific project type. They act as a strategic guide for the user and the `aiox-orchestrator` agent.
 - **Structure**: A workflow defines sequences for both complex and simple projects, lists the agents involved at each step, the artifacts they create, and the conditions for moving from one step to the next. It often includes a Mermaid diagram for visualization.
+- **Orchestration hierarchy**: See [Orchestration Hierarchy](./architecture/orchestration-hierarchy.md) for the boundary between `BobOrchestrator`, `MasterOrchestrator`, `WorkflowOrchestrator`, `WorkflowNavigator`, `SessionState`, and the deprecated `workflow-state-manager`.
 
 ### 3.4. Reusable Resources (`templates`, `tasks`, `checklists`, `data`)
 

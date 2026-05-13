@@ -40,9 +40,11 @@ describe('schema-validation — enriched schemas', () => {
   // AC1: Framework schema enriched with all L1 keys
   describe('framework-config.schema.json (L1)', () => {
     let schema;
+    let frameworkConfig;
 
     beforeAll(() => {
       schema = loadSchema('framework-config.schema.json');
+      frameworkConfig = loadYaml('framework-config.yaml');
     });
 
     test('schema is valid JSON Schema draft-07', () => {
@@ -56,6 +58,8 @@ describe('schema-validation — enriched schemas', () => {
         'markdownExploder',
         'resource_locations',
         'performance_defaults',
+        'dev',
+        'external_executors',
         'utility_scripts_registry',
         'ide_sync_system',
         'template_overrides',
@@ -69,12 +73,19 @@ describe('schema-validation — enriched schemas', () => {
       expect(schema.additionalProperties).toBe(false);
     });
 
+    test('ide sync target schema accepts skills-first IDE target options', () => {
+      const targetSchema = schema.properties.ide_sync_system.properties.targets.additionalProperties;
+      expect(targetSchema.properties).toHaveProperty('skillsPath');
+      expect(targetSchema.properties).toHaveProperty('fallbackSources');
+      expect(targetSchema.properties).toHaveProperty('format');
+      expect(targetSchema.properties.format.enum).toContain('kimi-skill');
+    });
+
     test('validates real framework-config.yaml without errors', () => {
-      const data = loadYaml('framework-config.yaml');
       const validate = ajv.compile(schema);
-      const isValid = validate(data);
+      const isValid = validate(frameworkConfig);
       if (!isValid) {
-        // eslint-disable-next-line no-console
+         
         console.log('Validation errors:', validate.errors);
       }
       expect(isValid).toBe(true);
@@ -101,6 +112,19 @@ describe('schema-validation — enriched schemas', () => {
       expect(tmpl.type).toBe('object');
       expect(tmpl.properties.story.properties).toHaveProperty('sections_order');
       expect(tmpl.properties.story.properties).toHaveProperty('optional_sections');
+    });
+
+    test('external executor schema keeps delegation opt-in and sandboxed by default', () => {
+      expect(schema.properties.dev.properties.execution_mode.enum).toEqual(['native', 'delegate']);
+      expect(schema.properties.external_executors.properties.default_sandbox.enum).toContain('full-auto');
+
+      expect(frameworkConfig.dev.execution_mode).toBe('native');
+      expect(frameworkConfig.dev.fast_path.enabled).toBe(true);
+      expect(frameworkConfig.dev.fast_path.min_confidence).toBe(0.58);
+      expect(frameworkConfig.dev.fast_path.min_batch_items).toBe(3);
+      expect(frameworkConfig.dev.fast_path.external_executor_threshold).toBe(0.78);
+      expect(frameworkConfig.external_executors.enabled).toBe(false);
+      expect(frameworkConfig.external_executors.default_sandbox).toBe('workspace-write');
     });
   });
 
@@ -141,7 +165,7 @@ describe('schema-validation — enriched schemas', () => {
       const validate = ajv.compile(schema);
       const isValid = validate(data);
       if (!isValid) {
-        // eslint-disable-next-line no-console
+         
         console.log('Validation errors:', validate.errors);
       }
       expect(isValid).toBe(true);
@@ -191,7 +215,7 @@ describe('schema-validation — enriched schemas', () => {
       const isValid = validate(data);
       expect(isValid).toBe(false);
       const fieldError = validate.errors.find(
-        (e) => e.instancePath === '/boundary/frameworkProtection'
+        (e) => e.instancePath === '/boundary/frameworkProtection',
       );
       expect(fieldError).toBeDefined();
       expect(fieldError.message).toContain('boolean');
@@ -207,7 +231,7 @@ describe('schema-validation — enriched schemas', () => {
       const isValid = validate(data);
       expect(isValid).toBe(false);
       expect(
-        validate.errors.some((e) => e.params?.missingProperty === 'frameworkProtection')
+        validate.errors.some((e) => e.params?.missingProperty === 'frameworkProtection'),
       ).toBe(true);
     });
   });

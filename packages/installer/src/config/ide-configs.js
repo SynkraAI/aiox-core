@@ -43,6 +43,7 @@ const IDE_CONFIGS = {
     format: 'text',
     recommended: true,
     agentFolder: path.join('.claude', 'commands', 'AIOX', 'agents'),
+    nativeAgentFolder: path.join('.claude', 'agents'),
   },
   codex: {
     name: 'Codex CLI',
@@ -66,11 +67,11 @@ const IDE_CONFIGS = {
   cursor: {
     name: 'Cursor',
     description: '',
-    configFile: path.join('.cursor', 'rules.md'),
+    configFile: path.join('.cursor', 'rules', 'aiox-global.mdc'),
     template: 'ide-rules/cursor-rules.md',
     requiresDirectory: true,
     format: 'text',
-    agentFolder: path.join('.cursor', 'rules'),
+    agentFolder: path.join('.cursor', 'rules', 'agents'),
   },
   'github-copilot': {
     name: 'GitHub Copilot',

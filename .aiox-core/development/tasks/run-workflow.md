@@ -155,6 +155,7 @@ acceptance-criteria:
 
 - **Tool:** workflow-state-manager
   - **Purpose:** Create, load, save, and query workflow state
+  - **Lifecycle:** Legacy guided workflow state only; new story/epic lifecycle flows use `.aiox-core/core/orchestration/session-state.js`
   - **Implementation:** AI agent reads/writes `.aiox/{instance-id}-state.yaml` files directly
 
 - **Tool:** workflow-validator

@@ -8,6 +8,8 @@
  * - Claude Code, Codex CLI, Gemini CLI, Cursor, GitHub Copilot, AntiGravity
  */
 
+const path = require('path');
+
 const {
   IDE_CONFIGS,
   getIDEKeys,
@@ -80,7 +82,7 @@ describe('IDE Configs', () => {
       expect(IDE_CONFIGS['claude-code'].configFile).toContain('.claude');
       expect(IDE_CONFIGS.codex.configFile).toBe('AGENTS.md');
       expect(IDE_CONFIGS.gemini.configFile).toContain('.gemini');
-      expect(IDE_CONFIGS.cursor.configFile).toContain('.cursor');
+      expect(IDE_CONFIGS.cursor.configFile).toBe(path.join('.cursor', 'rules', 'aiox-global.mdc'));
       expect(IDE_CONFIGS['github-copilot'].configFile).toContain('.github');
       expect(IDE_CONFIGS.antigravity.configFile).toContain('.antigravity');
     });
@@ -103,8 +105,7 @@ describe('IDE Configs', () => {
       expect(IDE_CONFIGS.codex.agentFolder).toContain('agents');
       expect(IDE_CONFIGS.gemini.agentFolder).toContain('.gemini');
       expect(IDE_CONFIGS.gemini.agentFolder).toContain('agents');
-      expect(IDE_CONFIGS.cursor.agentFolder).toContain('.cursor');
-      expect(IDE_CONFIGS.cursor.agentFolder).toContain('rules');
+      expect(IDE_CONFIGS.cursor.agentFolder).toBe(path.join('.cursor', 'rules', 'agents'));
       expect(IDE_CONFIGS['github-copilot'].agentFolder).toContain('.github');
       expect(IDE_CONFIGS['github-copilot'].agentFolder).toContain('agents');
       // AntiGravity uses .agent/workflows instead of .antigravity/agents

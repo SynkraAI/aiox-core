@@ -1,0 +1,56 @@
+# AIOX FrameworkProposal Template
+# See: aiox-core/governance/evolution-pipeline.md
+#
+# Usage:
+#   1. Copy this file to aiox-core/governance/proposals/PROP-<YYYYMMDD>-<slug>.yaml
+#   2. Fill all fields. Reference source AuditFinding by ID.
+#   3. Submit to Eliel for approval.
+#   4. On APPROVED: implementer opens PR in aiox-core; fill implementation.* fields.
+#   5. On REJECTED: move to proposals/archive/.
+#   6. On NEEDS_REVISION: address revision_request, resubmit.
+
+framework_proposal:
+  version: "1.0"
+  id: ""                              # PROP-<YYYYMMDD>-<slug>
+  date: ""                            # ISO 8601
+  proposer: ""                        # agent id
+  source_finding: ""                  # AF-<YYYYMMDD>-<slug>
+
+  target:
+    layer: ""                         # L1 (Core) | L2 (Templates) | L3 (Project Config)
+    artifact_type: ""                 # agent | rule | hook | task | template | governance | workflow
+    artifact_path: ""                 # intended path in aiox-core
+    operation: ""                     # create | modify | deprecate
+
+  generalization:
+    pattern_name: ""                  # e.g., "Vocabulary Contract Store"
+    when_to_apply: |
+      <Conditions under which any future AIOX project should apply this pattern.>
+    examples_from_other_domains:
+      - ""                            # demonstrate generalizability beyond source project
+
+  migration_path:
+    breaking_change: false
+    affected_consumers: []            # ["<list of projects/agents that need updating>"]
+    rollout_plan: |
+      <Steps to apply the change without breaking existing consumers.>
+
+  deprecation_plan:
+    deprecates: []                    # artifacts being replaced
+    sunset_window: ""                 # e.g., "2 weeks after merge"
+
+  cost_benefit:
+    cost: ""                          # engineering effort, token cost, complexity added
+    benefit: ""                       # problems prevented, tokens saved, audit improved
+    risk: ""                          # low | medium | high — what could go wrong
+
+  approval:
+    eliel_decision: "PENDING"         # PENDING | APPROVED | REJECTED | NEEDS_REVISION
+    eliel_decision_at: null           # ISO 8601 timestamp when decided
+    eliel_decision_rationale: ""      # reasoning, especially if reject or needs-revision
+    revision_request: []              # filled if NEEDS_REVISION
+
+  implementation:
+    pr_url: ""                        # filled when PR opens against aiox-core
+    merged_at: ""                     # ISO 8601 when shipped
+    distributed_to: []                # projects that pulled the change after release

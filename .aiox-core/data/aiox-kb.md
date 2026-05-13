@@ -151,7 +151,7 @@ npx aiox-core install
 
 **About aiox-master and aiox-orchestrator**:
 
-- **aiox-master**: CAN do any task without switching agents, BUT...
+- **aiox-master**: orchestrates across agents and governs framework work, but delegates specialized tasks by default
 - **Still use specialized agents for planning**: PM, Architect, and UX Expert have tuned personas that produce better results
 - **Why specialization matters**: Each agent's personality and focus creates higher quality outputs
 - **If using aiox-master/orchestrator**: Fine for planning phases, but...
@@ -284,7 +284,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 | Agent               | Role             | Primary Functions                     | When to Use                       |
 | ------------------- | ---------------- | ------------------------------------- | --------------------------------- |
 | `aiox-orchestrator` | Team Coordinator | Multi-agent workflows, role switching | Complex multi-role tasks          |
-| `aiox-master`       | Universal Expert | All capabilities without switching    | Single-session comprehensive work |
+| `aiox-master`       | Master Orchestrator | Framework governance, routing, meta-operations | Multi-agent coordination and framework work |
 
 ### Agent Interaction Commands
 

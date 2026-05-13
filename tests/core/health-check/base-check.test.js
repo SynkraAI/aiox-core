@@ -67,7 +67,7 @@ describe('base-check', () => {
   describe('constructor', () => {
     test('throws when instantiated directly', () => {
       expect(() => new BaseCheck({
-        id: 'test', name: 'Test', domain: 'project', severity: 'HIGH'
+        id: 'test', name: 'Test', domain: 'project', severity: 'HIGH',
       })).toThrow('BaseCheck is abstract');
     });
 

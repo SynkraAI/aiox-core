@@ -171,6 +171,8 @@ class MasterOrchestrator extends EventEmitter {
     this._state = OrchestratorState.INITIALIZED;
     this._previousState = null;
     this._inFullPipeline = false; // Flag for gate evaluation during full pipeline
+    this._persistenceAvailable = true;
+    this._persistenceError = null;
 
     // Execution state
     this.executionState = {
@@ -934,13 +936,27 @@ class MasterOrchestrator extends EventEmitter {
 
   /**
    * Start dashboard monitoring (Story 0.8 - AC1)
+   *
+   * Begins periodic state updates to the dashboard integration layer. Must be
+   * called after initialization to enable real-time orchestration observability.
+   *
+   * @returns {Promise<void>}
    */
   async startDashboard() {
-    await this.dashboardIntegration.start();
+    try {
+      await this.dashboardIntegration.start();
+    } catch (error) {
+      this._log(`Dashboard start failed (non-blocking): ${error.message}`, { level: 'warn' });
+    }
   }
 
   /**
    * Stop dashboard monitoring (Story 0.8)
+   *
+   * Stops periodic dashboard updates and clears dashboard integration timers.
+   * Safe to call multiple times.
+   *
+   * @returns {void}
    */
   stopDashboard() {
     this.dashboardIntegration.stop();
@@ -1060,12 +1076,20 @@ class MasterOrchestrator extends EventEmitter {
 
   /**
    * Save current state to disk (AC1, AC3)
-   * Called after each epic completion and state transition
-   * @returns {Promise<boolean>} Success status
+   *
+   * Persists epic progress, timestamps, tech-stack profile, recovery tracking,
+   * errors, and collected insights. Called after epic completion and state
+   * transitions.
+   *
+   * @returns {Promise<boolean>} True if state was saved successfully, false on failure.
    */
   async saveState() {
     try {
       await fs.ensureDir(path.dirname(this.statePath));
+      const persistedHealth = {
+        available: true,
+        lastError: null,
+      };
 
       // Build comprehensive state object (AC2, AC6, AC7)
       const stateToSave = {
@@ -1110,17 +1134,22 @@ class MasterOrchestrator extends EventEmitter {
         // Errors and insights
         errors: this.executionState.errors,
         insights: this.executionState.insights,
+        persistence: persistedHealth,
 
         // Session insights
         sessionInsights: this._collectSessionInsights(),
       };
 
       await fs.writeJson(this.statePath, stateToSave, { spaces: 2 });
+      this._persistenceAvailable = persistedHealth.available;
+      this._persistenceError = persistedHealth.lastError;
       this._log('State saved successfully', { path: this.statePath });
 
       return true;
     } catch (error) {
-      this._log(`Failed to save state: ${error.message}`, { level: 'warn' });
+      this._persistenceAvailable = false;
+      this._persistenceError = error && error.message ? error.message : String(error);
+      this._log(`Failed to save state: ${this._persistenceError}`, { level: 'warn' });
       return false;
     }
   }
@@ -1287,8 +1316,12 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Clear saved state for current story
-   * @returns {Promise<boolean>} Success status
+   * Clears saved state for the current story.
+   *
+   * Removes the persisted state file so the next orchestration run starts fresh
+   * instead of resuming previous progress.
+   *
+   * @returns {Promise<boolean>} True if state file was deleted, false if not found or on error.
    */
   async clearState() {
     try {
@@ -1304,8 +1337,12 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * List all saved states
-   * @returns {Promise<Array>} List of state summaries
+   * Lists all saved orchestration states.
+   *
+   * Scans the master-orchestrator state directory and returns summaries sorted
+   * by most recently updated first.
+   *
+   * @returns {Promise<Array<{storyId: string, workflowId: string, status: string, progress: number, updatedAt: string, resumable: boolean}>>} List of state summaries.
    */
   async listSavedStates() {
     const stateDir = path.join(this.projectRoot, '.aiox', 'master-orchestrator');
@@ -1355,9 +1392,11 @@ class MasterOrchestrator extends EventEmitter {
     if (!state.epics) return 0;
 
     const totalEpics = Object.keys(EPIC_CONFIG).filter((num) => !EPIC_CONFIG[num].onDemand).length;
+    if (totalEpics === 0) return 0;
 
-    const completedEpics = Object.values(state.epics).filter(
-      (epic) => epic.status === EpicStatus.COMPLETED,
+    const completedEpics = Object.entries(state.epics).filter(
+      ([num, epic]) =>
+        epic.status === EpicStatus.COMPLETED && EPIC_CONFIG[num] && !EPIC_CONFIG[num].onDemand,
     ).length;
 
     return Math.round((completedEpics / totalEpics) * 100);
@@ -1369,8 +1408,17 @@ class MasterOrchestrator extends EventEmitter {
 
   /**
    * Finalize pipeline execution and generate summary
-   * @param {Object} pipelineResult - Raw pipeline result
-   * @returns {Object} Finalized result
+   *
+   * Produces a comprehensive result object with human-readable duration,
+   * tech-stack summary, epic execution details, and accumulated insights.
+   *
+   * @param {Object} [pipelineResult={}] - Raw pipeline result from executeFullPipeline.
+   * @param {boolean} [pipelineResult.success] - Whether the pipeline succeeded.
+   * @param {number[]} [pipelineResult.epicsExecuted] - Epic numbers that executed.
+   * @param {number[]} [pipelineResult.epicsFailed] - Epic numbers that failed.
+   * @param {number[]} [pipelineResult.epicsSkipped] - Epic numbers that were skipped.
+   * @param {number} [pipelineResult.duration] - Duration in milliseconds.
+   * @returns {Object} Finalized result with workflowId, status, duration, and epic breakdown.
    */
   finalize(pipelineResult = {}) {
     const duration =
@@ -1397,6 +1445,10 @@ class MasterOrchestrator extends EventEmitter {
       },
       errors: this.executionState.errors,
       insights: this.executionState.insights,
+      persistence: {
+        available: this._persistenceAvailable,
+        error: this._persistenceError,
+      },
       state: this.executionState,
     };
   }
@@ -1411,9 +1463,11 @@ class MasterOrchestrator extends EventEmitter {
    */
   getProgressPercentage() {
     const totalEpics = Object.keys(EPIC_CONFIG).filter((num) => !EPIC_CONFIG[num].onDemand).length;
+    if (totalEpics === 0) return 0;
 
-    const completedEpics = Object.values(this.executionState.epics).filter(
-      (epic) => epic.status === EpicStatus.COMPLETED,
+    const completedEpics = Object.entries(this.executionState.epics).filter(
+      ([num, epic]) =>
+        epic.status === EpicStatus.COMPLETED && EPIC_CONFIG[num] && !EPIC_CONFIG[num].onDemand,
     ).length;
 
     return Math.round((completedEpics / totalEpics) * 100);
@@ -1436,7 +1490,29 @@ class MasterOrchestrator extends EventEmitter {
         ]),
       ),
       errors: this.executionState.errors.length,
+      persistence: {
+        available: this._persistenceAvailable,
+        error: this._persistenceError,
+      },
     };
+  }
+
+  /**
+   * Whether the last state persistence operation succeeded.
+   *
+   * @returns {boolean} True when persistence is available.
+   */
+  isPersistenceAvailable() {
+    return this._persistenceAvailable;
+  }
+
+  /**
+   * Return the last state persistence error message, if any.
+   *
+   * @returns {string|null} Last persistence error message.
+   */
+  getPersistenceError() {
+    return this._persistenceError;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════════
@@ -1508,15 +1584,30 @@ class MasterOrchestrator extends EventEmitter {
 
 /**
  * Stub Epic Executor - placeholder for Story 0.3
- * Real executors will be implemented in Story 0.3
+ *
+ * Provides a no-op executor for epics that do not yet have a real
+ * implementation. Returns a minimal success result so the pipeline can
+ * continue during development.
  */
 class StubEpicExecutor {
+  /**
+   * Creates a new StubEpicExecutor.
+   *
+   * @param {MasterOrchestrator} orchestrator - Parent orchestrator instance.
+   * @param {number} epicNum - Epic number handled by this stub.
+   */
   constructor(orchestrator, epicNum) {
     this.orchestrator = orchestrator;
     this.epicNum = epicNum;
     this.config = EPIC_CONFIG[epicNum];
   }
 
+  /**
+   * Executes the stub epic.
+   *
+   * @param {Object} _context - Execution context ignored by the stub.
+   * @returns {Promise<Object>} Minimal result with status 'stub'.
+   */
   async execute(_context) {
     console.log(chalk.yellow(`   ⚠️  Using stub executor for Epic ${this.epicNum}`));
     console.log(chalk.gray(`      Real executor (${this.config.executor}) not yet implemented`));

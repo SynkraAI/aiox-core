@@ -21,15 +21,32 @@ try {
 }
 
 // Import dependencies with fallbacks
+const GOTCHAS_MEMORY_MODULE = '../memory/gotchas-memory';
 let MemoryQuery, GotchasMemory;
+let gotchasMemoryLoadError = null;
 try {
   MemoryQuery = require('../memory/memory-query');
 } catch {
   MemoryQuery = null;
 }
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
-} catch {
+  const gotchasMemoryModule = require(GOTCHAS_MEMORY_MODULE);
+  if (!gotchasMemoryModule || typeof gotchasMemoryModule.GotchasMemory === 'undefined') {
+    throw new Error(`Missing named export GotchasMemory from ${GOTCHAS_MEMORY_MODULE}`);
+  }
+  if (typeof gotchasMemoryModule.GotchasMemory !== 'function') {
+    throw new Error(
+      `Expected GotchasMemory from ${GOTCHAS_MEMORY_MODULE} to be constructible; got ${typeof gotchasMemoryModule.GotchasMemory}`,
+    );
+  }
+  GotchasMemory = gotchasMemoryModule.GotchasMemory;
+} catch (error) {
+  gotchasMemoryLoadError = error;
+  if (process.env.AIOX_DEBUG) {
+    console.warn(
+      `[subagent-dispatcher] Optional dependency '${GOTCHAS_MEMORY_MODULE}' failed to load: ${error.stack || error.message}`,
+    );
+  }
   GotchasMemory = null;
 }
 
@@ -93,6 +110,7 @@ class SubagentDispatcher extends EventEmitter {
     // Retry configuration
     this.maxRetries = config.maxRetries || 2;
     this.retryDelay = config.retryDelay || 2000;
+    this.claudeTimeout = config.claudeTimeout || 10 * 60 * 1000;
 
     // Dependencies
     this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
@@ -304,6 +322,37 @@ class SubagentDispatcher extends EventEmitter {
   }
 
   /**
+   * Resolve fallback provider from configuration before using the legacy pair.
+   * @param {string} providerName - Current provider name
+   * @returns {string|null} Fallback provider name
+   */
+  getFallbackProviderName(providerName) {
+    if (AIProviderFactory?.getConfig) {
+      const config = AIProviderFactory.getConfig();
+      const configuredFallback = config.ai_providers?.fallback;
+      const configuredPrimary = config.ai_providers?.primary;
+
+      if (configuredFallback && configuredFallback !== providerName) {
+        return configuredFallback;
+      }
+
+      if (configuredPrimary && configuredPrimary !== providerName) {
+        return configuredPrimary;
+      }
+    }
+
+    if (providerName === 'claude') {
+      return 'gemini';
+    }
+
+    if (providerName === 'gemini') {
+      return 'claude';
+    }
+
+    return null;
+  }
+
+  /**
    * Enrich context with memory and gotchas
    * @param {Object} task - Task being dispatched
    * @param {Object} context - Base context
@@ -414,8 +463,6 @@ class SubagentDispatcher extends EventEmitter {
    * @returns {Promise<Object>} - Execution result
    */
   async executeWithProvider(prompt, providerName, task) {
-    const startTime = Date.now();
-
     // Get primary provider
     const provider = this.getAIProvider(providerName);
 
@@ -432,8 +479,8 @@ class SubagentDispatcher extends EventEmitter {
       this.log('provider_not_available', { provider: providerName });
 
       // Try fallback provider
-      const fallbackName = providerName === 'claude' ? 'gemini' : 'claude';
-      const fallback = this.getAIProvider(fallbackName);
+      const fallbackName = this.getFallbackProviderName(providerName);
+      const fallback = fallbackName ? this.getAIProvider(fallbackName) : null;
 
       if (fallback && (await fallback.checkAvailability())) {
         this.log('using_fallback_provider', { original: providerName, fallback: fallbackName });
@@ -545,10 +592,10 @@ class SubagentDispatcher extends EventEmitter {
    * Select result from parallel execution based on mode
    * @param {Object|null} claudeResult - Claude result
    * @param {Object|null} geminiResult - Gemini result
-   * @param {Object} task - Original task
+   * @param {Object} _task - Original task
    * @returns {Object} - Selected result
    */
-  selectParallelResult(claudeResult, geminiResult, task) {
+  selectParallelResult(claudeResult, geminiResult, _task) {
     switch (this.parallelMode) {
       case 'race':
         // Return first successful result
@@ -642,24 +689,72 @@ class SubagentDispatcher extends EventEmitter {
   }
 
   /**
-   * Execute prompt via Claude CLI
+   * Execute prompt via Claude CLI using stdin.
    * @param {string} prompt - Prompt to execute
    * @returns {Promise<Object>} - Execution result
    */
   executeClaude(prompt) {
+    if (!prompt || typeof prompt !== 'string') {
+      return Promise.reject(new Error('executeClaude requires a non-empty string prompt'));
+    }
+
     return new Promise((resolve, reject) => {
       const args = ['--print', '--dangerously-skip-permissions'];
-      const escapedPrompt = prompt.replace(/'/g, "'\\''");
-      const fullCommand = `echo '${escapedPrompt}' | claude ${args.join(' ')}`;
 
-      const child = spawn('sh', ['-c', fullCommand], {
+      const child = spawn('claude', args, {
         cwd: this.rootPath,
         env: { ...process.env },
         stdio: ['pipe', 'pipe', 'pipe'],
+        timeout: this.claudeTimeout,
       });
 
       let stdout = '';
       let stderr = '';
+      let stdinError = null;
+      let settled = false;
+
+      const resolveOnce = (result) => {
+        if (settled) return;
+        settled = true;
+        resolve(result);
+      };
+
+      const rejectOnce = (error) => {
+        if (settled) return;
+        settled = true;
+        reject(error);
+      };
+
+      child.on('error', rejectOnce);
+
+      if (
+        !child.stdin ||
+        typeof child.stdin.write !== 'function' ||
+        typeof child.stdin.end !== 'function'
+      ) {
+        rejectOnce(new Error('Claude CLI stdin is not available'));
+        return;
+      }
+
+      child.stdin.on('error', (error) => {
+        stdinError = error;
+        this.log('stdin_write_error', { error: error.message, code: error.code });
+      });
+
+      if (child.stdin.writable === false) {
+        child.kill?.();
+        rejectOnce(new Error('Claude CLI stdin is not writable'));
+        return;
+      }
+
+      try {
+        child.stdin.write(prompt);
+        child.stdin.end();
+      } catch (error) {
+        child.kill?.();
+        rejectOnce(new Error(`Claude CLI stdin write failed: ${error.message}`));
+        return;
+      }
 
       child.stdout.on('data', (data) => {
         stdout += data.toString();
@@ -669,20 +764,20 @@ class SubagentDispatcher extends EventEmitter {
         stderr += data.toString();
       });
 
-      child.on('close', (code) => {
-        if (code === 0) {
-          resolve({
+      child.on('close', (code, signal) => {
+        if (stdinError) {
+          rejectOnce(new Error(`Claude CLI stdin write failed: ${stdinError.message}`));
+        } else if (code === 0) {
+          resolveOnce({
             success: true,
             output: stdout,
             filesModified: this.extractModifiedFiles(stdout),
           });
+        } else if (signal) {
+          rejectOnce(new Error(`Claude CLI killed by signal ${signal}: ${stderr || stdout}`));
         } else {
-          reject(new Error(`Claude CLI exited with code ${code}: ${stderr || stdout}`));
+          rejectOnce(new Error(`Claude CLI exited with code ${code}: ${stderr || stdout}`));
         }
-      });
-
-      child.on('error', (error) => {
-        reject(error);
       });
     });
   }
@@ -844,3 +939,4 @@ class SubagentDispatcher extends EventEmitter {
 
 module.exports = SubagentDispatcher;
 module.exports.SubagentDispatcher = SubagentDispatcher;
+module.exports.gotchasMemoryLoadError = gotchasMemoryLoadError;

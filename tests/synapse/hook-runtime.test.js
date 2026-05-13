@@ -70,7 +70,7 @@ describe('hook-runtime', () => {
       fs.mkdirSync(path.join(cwd, '.synapse', 'sessions'), { recursive: true });
 
       // Mock session-manager with prompt_count: 0 and trackable cleanStaleSessions
-      let cleanupCalled = false;
+      const cleanupCalled = false;
       writeFile(
         path.join(cwd, '.aiox-core/core/synapse/session/session-manager.js'),
         [

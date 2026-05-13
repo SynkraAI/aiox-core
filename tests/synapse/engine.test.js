@@ -163,6 +163,12 @@ describe('PipelineMetrics', () => {
     metrics.errorLayer('keyword', new Error('File not found'));
     expect(metrics.layers.keyword.status).toBe('error');
     expect(metrics.layers.keyword.error).toBe('File not found');
+    expect(metrics.layers.keyword.errorDetails).toEqual(expect.objectContaining({
+      name: 'AIOXError',
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      category: 'synapse',
+      stack: '[redacted]',
+    }));
   });
 
   test('errorLayer() should record duration if startLayer() was called', () => {
@@ -176,6 +182,41 @@ describe('PipelineMetrics', () => {
   test('errorLayer() should handle non-Error objects', () => {
     metrics.errorLayer('test', 'string error');
     expect(metrics.layers.test.error).toBe('string error');
+    expect(metrics.layers.test.errorDetails).toEqual(expect.objectContaining({
+      name: 'AIOXError',
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      message: 'string error',
+    }));
+  });
+
+  test('errorLayer() should preserve canonical metadata without changing legacy message', () => {
+    const error = new TypeError('Layer typed failure');
+    error.layerPhase = 'parse';
+
+    metrics.errorLayer('workflow', error);
+
+    expect(metrics.layers.workflow.error).toBe('Layer typed failure');
+    expect(metrics.layers.workflow.errorDetails).toEqual(expect.objectContaining({
+      name: 'AIOXError',
+      message: 'Layer typed failure',
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      category: 'synapse',
+      metadata: expect.objectContaining({
+        synapse: { layer: 'workflow' },
+        originalError: expect.objectContaining({
+          name: 'TypeError',
+          properties: expect.objectContaining({
+            layerPhase: 'parse',
+          }),
+        }),
+      }),
+      cause: expect.objectContaining({
+        name: 'TypeError',
+        message: 'Layer typed failure',
+        stack: '[redacted]',
+        layerPhase: 'parse',
+      }),
+    }));
   });
 
   test('getSummary() should return correct totals', () => {
@@ -241,13 +282,21 @@ describe('SynapseEngine', () => {
     });
 
     test('should instantiate available layers', () => {
-      // L0, L1, L2, L3 are mocked as available; L4-L7 throw
+      // The engine must always load the core bracket layers and may also load
+      // optional layers when they exist in the repository/runtime.
       expect(engine.layers.length).toBeGreaterThanOrEqual(3);
     });
 
-    test('should handle all layer modules failing gracefully', () => {
-      // This is tested implicitly — L4-L7 throw, engine still works
-      expect(engine.layers.length).toBeLessThanOrEqual(4);
+    test('should remain resilient as optional layer availability evolves', () => {
+      // Optional layers may exist or not depending on the current Synapse
+      // rollout. The constructor should never instantiate more than L0-L7.
+      expect(engine.layers.length).toBeLessThanOrEqual(8);
+    });
+
+    test('should only instantiate known pipeline layers', () => {
+      const layerIds = engine.layers.map(layer => layer.layer);
+      expect(layerIds).toEqual(expect.arrayContaining([0, 1, 2]));
+      expect(layerIds.every(layerId => layerId >= 0 && layerId <= 7)).toBe(true);
     });
   });
 
@@ -386,6 +435,51 @@ describe('SynapseEngine', () => {
       for (let i = 1; i < calls.length; i++) {
         expect(calls[i].prevCount).toBeGreaterThanOrEqual(calls[i - 1].prevCount);
       }
+    });
+
+    test('should record captured layer processing errors in metrics', async () => {
+      const layer = engine.layers[0];
+      layer._safeProcess = jest.fn(() => null);
+      layer.getLastError = jest.fn(() => new Error('Layer processing failed'));
+
+      const result = await engine.process('test', {});
+
+      expect(result.metrics.per_layer[layer.name]).toEqual(expect.objectContaining({
+        status: 'error',
+        error: 'Layer processing failed',
+      }));
+      expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
+    });
+
+    test('should record direct _safeProcess exceptions in metrics', async () => {
+      const layer = engine.layers[0];
+      layer._safeProcess = jest.fn(() => {
+        throw new Error('Unsafe layer crash');
+      });
+
+      const result = await engine.process('test', {});
+
+      expect(result.metrics.per_layer[layer.name]).toEqual(expect.objectContaining({
+        status: 'error',
+        error: 'Unsafe layer crash',
+      }));
+      expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
+    });
+
+    test('should record getLastError accessor failures in metrics', async () => {
+      const layer = engine.layers[0];
+      layer._safeProcess = jest.fn(() => null);
+      layer.getLastError = jest.fn(() => {
+        throw new Error('Last error unavailable');
+      });
+
+      const result = await engine.process('test', {});
+
+      expect(result.metrics.per_layer[layer.name]).toEqual(expect.objectContaining({
+        status: 'error',
+        error: 'Last error unavailable',
+      }));
+      expect(result.metrics.layers_errored).toBeGreaterThanOrEqual(1);
     });
   });
 

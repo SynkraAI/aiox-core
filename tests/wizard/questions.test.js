@@ -10,6 +10,7 @@ const {
   getUserProfileQuestion,
   getIDEQuestions,
   getMCPQuestions,
+  getTechPresetQuestion,
   getEnvironmentQuestions,
   buildQuestionSequence,
   getQuestionById,
@@ -126,9 +127,27 @@ describeIntegration('questions', () => {
       expect(Array.isArray(questions)).toBe(true);
     });
 
-    test('currently returns empty array', () => {
+    test('returns one optional MCP selection question', () => {
       const questions = getMCPQuestions();
-      expect(questions).toHaveLength(0);
+      expect(questions).toHaveLength(1);
+      expect(questions[0]).toHaveProperty('name', 'selectedMCPs');
+      expect(questions[0]).toHaveProperty('type', 'checkbox');
+    });
+  });
+
+  describeIntegration('getTechPresetQuestion', () => {
+    test('returns one tech preset selection question', () => {
+      const questions = getTechPresetQuestion();
+      expect(questions).toHaveLength(1);
+      expect(questions[0]).toHaveProperty('name', 'selectedTechPreset');
+      expect(questions[0]).toHaveProperty('type', 'list');
+    });
+
+    test('includes Angular NestJS preset choice', () => {
+      const [question] = getTechPresetQuestion();
+      const values = question.choices.map((choice) => choice.value);
+
+      expect(values).toContain('angular-nestjs');
     });
   });
 
@@ -152,8 +171,13 @@ describeIntegration('questions', () => {
 
     test('includes project type question', () => {
       const questions = buildQuestionSequence();
-      expect(questions).toHaveLength(2); // Story 1.2 (projectType) + Story 1.4 (IDE)
-      expect(questions[0]).toHaveProperty('name', 'projectType');
+      expect(questions).toHaveLength(4);
+      expect(questions.map((question) => question.name)).toEqual([
+        'language',
+        'projectType',
+        'selectedIDEs',
+        'selectedTechPreset',
+      ]);
     });
 
     test('accepts context parameter', () => {
@@ -168,9 +192,9 @@ describeIntegration('questions', () => {
       const contextGreenfield = { projectType: 'greenfield' };
       const contextBrownfield = { projectType: 'brownfield' };
 
-      // Currently same length (Stories 1.2 + 1.4 implemented)
-      expect(buildQuestionSequence(contextGreenfield)).toHaveLength(2);
-      expect(buildQuestionSequence(contextBrownfield)).toHaveLength(2);
+      // Currently same length; tech preset is always selected explicitly.
+      expect(buildQuestionSequence(contextGreenfield)).toHaveLength(4);
+      expect(buildQuestionSequence(contextBrownfield)).toHaveLength(4);
 
       // Future: lengths may differ based on project type
       // expect(buildQuestionSequence(contextGreenfield).length).not.toBe(
@@ -220,4 +244,3 @@ describeIntegration('questions', () => {
     });
   });
 });
-

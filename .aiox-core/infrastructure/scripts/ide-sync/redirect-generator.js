@@ -5,6 +5,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const { escapeFrontmatterString } = require('./transformers/cursor');
 
 /**
  * Default redirects configuration
@@ -16,6 +17,38 @@ const DEFAULT_REDIRECTS = {
   'db-sage': 'data-engineer',
   'github-devops': 'devops',
 };
+
+function getRedirectExtension(format) {
+  return format === 'condensed-rules' ? '.mdc' : '.md';
+}
+
+function sanitizeRedirectId(id) {
+  const safeId = String(id ?? '')
+    .replace(/\0/g, '')
+    .replace(/[\\/]+/g, '-')
+    .replace(/\.\.+/g, '-')
+    .replace(/[:*?"<>|]/g, '-')
+    .trim()
+    .replace(/^-+|-+$/g, '');
+
+  if (!safeId) {
+    throw new Error(`Invalid redirect id for filename: ${id}`);
+  }
+
+  return safeId;
+}
+
+function resolveRedirectPath(targetDir, filename) {
+  const resolvedTargetDir = path.resolve(targetDir);
+  const resolvedPath = path.resolve(resolvedTargetDir, filename);
+  const relativePath = path.relative(resolvedTargetDir, resolvedPath);
+
+  if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    throw new Error(`Redirect path escapes target directory: ${filename}`);
+  }
+
+  return resolvedPath;
+}
 
 /**
  * Generate redirect content for a specific IDE format
@@ -73,7 +106,24 @@ ${baseContent.instruction}
 *AIOX Redirect - Synced automatically*
 `;
 
-    case 'condensed-rules':
+    case 'condensed-rules': {
+      const safeOldId = escapeFrontmatterString(oldId);
+      const safeNewId = escapeFrontmatterString(newId);
+
+      return `---
+description: 'AIOX redirect from @${safeOldId} to @${safeNewId}'
+alwaysApply: false
+---
+
+${baseContent.header}
+
+> ${baseContent.notice} ${baseContent.instruction}
+
+---
+*AIOX Redirect - Synced automatically*
+`;
+    }
+
     case 'cursor-style':
     default:
       // Cursor/Antigravity format
@@ -96,8 +146,8 @@ ${baseContent.instruction}
  * @returns {object} - Result with path and content
  */
 function generateRedirect(oldId, newId, targetDir, format) {
-  const filename = `${oldId}.md`;
-  const filePath = path.join(targetDir, filename);
+  const filename = `${sanitizeRedirectId(oldId)}${getRedirectExtension(format)}`;
+  const filePath = resolveRedirectPath(targetDir, filename);
   const content = generateRedirectContent(oldId, newId, format);
 
   return {
@@ -163,16 +213,19 @@ function writeRedirects(redirects, dryRun = false) {
  * @param {object} redirectsConfig - Redirects configuration
  * @returns {string[]} - Array of filenames
  */
-function getRedirectFilenames(redirectsConfig) {
+function getRedirectFilenames(redirectsConfig, format) {
   const redirects = redirectsConfig || DEFAULT_REDIRECTS;
-  return Object.keys(redirects).map(id => `${id}.md`);
+  const extension = getRedirectExtension(format);
+  return Object.keys(redirects).map(id => `${sanitizeRedirectId(id)}${extension}`);
 }
 
 module.exports = {
   DEFAULT_REDIRECTS,
+  sanitizeRedirectId,
   generateRedirectContent,
   generateRedirect,
   generateAllRedirects,
   writeRedirects,
   getRedirectFilenames,
+  getRedirectExtension,
 };

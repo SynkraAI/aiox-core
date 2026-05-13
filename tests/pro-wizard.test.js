@@ -53,7 +53,11 @@ afterEach(() => {
 
 // ─── Helper to get module ───────────────────────────────────────────────────
 
-const proSetup = require('../packages/installer/src/wizard/pro-setup');
+const proSetup = require('packages/installer/src/wizard/pro-setup');
+const wizardI18n = require('packages/installer/src/wizard/i18n');
+
+const CORE_PRO_SETUP_COMMAND = 'npx -y -p @aiox-squads/core@latest aiox pro setup';
+const SCOPED_PRO_RECOVER_COMMAND = 'npx -y @aiox-squads/aiox-pro-cli@latest recover';
 
 // ─── maskLicenseKey ──────────────────────────────────────────────────────────
 
@@ -146,6 +150,23 @@ describe('showProHeader', () => {
   });
 });
 
+// ─── recovery/install command hints ─────────────────────────────────────────
+
+describe('Pro command hints', () => {
+  afterEach(() => {
+    wizardI18n.setLanguage('en');
+  });
+
+  test.each(['en', 'pt', 'es'])('uses published scoped npx commands in %s', (language) => {
+    wizardI18n.setLanguage(language);
+
+    expect(wizardI18n.t('proNeedHelp')).toContain(SCOPED_PRO_RECOVER_COMMAND);
+    expect(wizardI18n.t('proNeedHelp')).not.toContain('npx aiox-pro');
+    expect(wizardI18n.t('proModuleNotAvailable')).toContain(CORE_PRO_SETUP_COMMAND);
+    expect(wizardI18n.t('proScaffolderNotAvailable')).toContain(CORE_PRO_SETUP_COMMAND);
+  });
+});
+
 // ─── stepLicenseGate ─────────────────────────────────────────────────────────
 
 describe('stepLicenseGate', () => {
@@ -199,7 +220,27 @@ describe('stepLicenseGate', () => {
       return Promise.resolve({ licenseKey: 'PRO-AAAA-BBBB-CCCC-DDDD' });
     });
 
-    const result = await proSetup.stepLicenseGate();
+    const originalLoadLicenseApi = proSetup._testing.loadLicenseApi;
+    proSetup._testing.loadLicenseApi = () => ({
+      LicenseApiClient: class {
+        async isOnline() {
+          return true;
+        }
+
+        async activate() {
+          const error = new Error('Invalid');
+          error.code = 'INVALID_KEY';
+          throw error;
+        }
+      },
+    });
+
+    let result;
+    try {
+      result = await proSetup.stepLicenseGate();
+    } finally {
+      proSetup._testing.loadLicenseApi = originalLoadLicenseApi;
+    }
 
     // 1 for method choice + 3 for max retries = 4 total calls
     expect(callCount).toBe(4);
@@ -215,29 +256,97 @@ describe('stepLicenseGate', () => {
 // ─── stepInstallScaffold ─────────────────────────────────────────────────────
 
 describe('stepInstallScaffold', () => {
-  test('resolves pro source from bundled dir or fails gracefully', async () => {
+  test('scaffolds from an explicit pro source fixture', async () => {
     const os = require('os');
     const fs = require('fs');
     const path = require('path');
 
-    // Use a real temp dir so fs-extra operations don't hang on nonexistent paths
-    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-test-'));
+    const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-test-'));
+    const targetDir = path.join(tmpRoot, 'target');
+    const proSourceDir = path.join(tmpRoot, 'pro-source');
+
+    fs.mkdirSync(path.join(proSourceDir, 'squads', 'premium-squad', 'agents'), {
+      recursive: true,
+    });
+    fs.writeFileSync(
+      path.join(proSourceDir, 'squads', 'premium-squad', 'agents', 'agent.md'),
+      '# Premium Agent\n',
+    );
+    fs.writeFileSync(path.join(proSourceDir, 'pro-config.yaml'), 'pro:\n  enabled: true\n');
+    fs.writeFileSync(
+      path.join(proSourceDir, 'package.json'),
+      JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-test' }, null, 2),
+    );
 
     try {
-      const result = await proSetup.stepInstallScaffold(tmpDir);
+      const result = await proSetup.stepInstallScaffold(targetDir, { proSourceDir });
 
-      // In dev/test context, bundled pro/ exists relative to __dirname,
-      // so scaffold may succeed. In clean installs without pro/, it fails.
-      // Either outcome is valid — the key is it doesn't throw or hang.
-      expect(typeof result.success).toBe('boolean');
-      if (!result.success) {
-        expect(result.error).toBeDefined();
-      }
+      expect(result.success).toBe(true);
+      expect(result.scaffoldResult.copiedFiles).toContain('squads/premium-squad/agents/agent.md');
+      expect(result.scaffoldResult.copiedFiles).toContain('pro-version.json');
     } finally {
-      // Cleanup temp dir
-      fs.rmSync(tmpDir, { recursive: true, force: true });
+      fs.rmSync(tmpRoot, { recursive: true, force: true });
     }
-  }, 30000);
+  });
+
+  test('acquires Pro artifact source after license validation when no local source exists', async () => {
+    const os = require('os');
+    const fs = require('fs');
+    const path = require('path');
+
+    const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-pro-artifact-test-'));
+    const targetDir = path.join(tmpRoot, 'target');
+    const proSourceDir = path.join(tmpRoot, 'artifact-source');
+    const originalResolver = proSetup._testing.resolveProSourceDir;
+    const originalAcquirer = proSetup._testing.acquireProArtifactSourceDir;
+
+    fs.mkdirSync(path.join(proSourceDir, 'squads', 'artifact-squad', 'agents'), {
+      recursive: true,
+    });
+    fs.mkdirSync(path.join(proSourceDir, 'license'), { recursive: true });
+    fs.writeFileSync(
+      path.join(proSourceDir, 'squads', 'artifact-squad', 'agents', 'agent.md'),
+      '# Artifact Agent\n',
+    );
+    fs.writeFileSync(
+      path.join(proSourceDir, 'license', 'license-cache.js'),
+      'module.exports = { writeLicenseCache: () => ({ success: true }) };\n',
+    );
+    fs.writeFileSync(path.join(proSourceDir, 'pro-config.yaml'), 'pro:\n  enabled: true\n');
+    fs.writeFileSync(
+      path.join(proSourceDir, 'package.json'),
+      JSON.stringify({ name: '@aiox-squads/pro', version: '0.4.0' }, null, 2),
+    );
+
+    proSetup._testing.resolveProSourceDir = jest.fn(() => ({ proSourceDir: null }));
+    proSetup._testing.acquireProArtifactSourceDir = jest.fn(async () => ({
+      success: true,
+      proSourceDir,
+      tempRoot: null,
+    }));
+
+    try {
+      const licenseResult = {
+        sessionToken: 'session-token',
+        machineId: 'm'.repeat(64),
+        key: 'PRO-ABCD-EFGH-IJKL-MNOP',
+        activationResult: { key: 'PRO-ABCD-EFGH-IJKL-MNOP', features: ['pro'] },
+      };
+      const result = await proSetup.stepInstallScaffold(targetDir, { licenseResult });
+
+      expect(proSetup._testing.acquireProArtifactSourceDir).toHaveBeenCalledWith(
+        targetDir,
+        licenseResult,
+        expect.objectContaining({ licenseResult }),
+      );
+      expect(result.success).toBe(true);
+      expect(result.scaffoldResult.copiedFiles).toContain('squads/artifact-squad/agents/agent.md');
+    } finally {
+      proSetup._testing.resolveProSourceDir = originalResolver;
+      proSetup._testing.acquireProArtifactSourceDir = originalAcquirer;
+      fs.rmSync(tmpRoot, { recursive: true, force: true });
+    }
+  });
 });
 
 // ─── stepVerify ──────────────────────────────────────────────────────────────
@@ -262,10 +371,7 @@ describe('stepVerify', () => {
       'squads/premium-squad/readme.md',
     ]);
     // .yaml and .json files
-    expect(result.configs).toEqual([
-      '.aiox-core/pro-config.yaml',
-      'pro-version.json',
-    ]);
+    expect(result.configs).toEqual(['.aiox-core/pro-config.yaml', 'pro-version.json']);
   });
 
   test('handles null scaffoldResult', async () => {
@@ -374,6 +480,16 @@ describe('Lazy Import', () => {
 // ─── API Offline / Error Handling ────────────────────────────────────────────
 
 describe('API Error Handling', () => {
+  let originalLoadLicenseApi;
+
+  beforeEach(() => {
+    originalLoadLicenseApi = proSetup._testing.loadLicenseApi;
+  });
+
+  afterEach(() => {
+    proSetup._testing.loadLicenseApi = originalLoadLicenseApi;
+  });
+
   test('validateKeyWithApi handles missing license module gracefully', async () => {
     // When loadLicenseApi returns null (module not installed),
     // getLicenseClient() falls back to InlineLicenseClient which
@@ -399,7 +515,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return false; }
+        async isOnline() {
+          return false;
+        }
       },
     });
 
@@ -416,7 +534,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Network error');
           err.code = 'NETWORK_ERROR';
@@ -438,7 +558,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Invalid');
           err.code = 'INVALID_KEY';
@@ -460,7 +582,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Expired');
           err.code = 'EXPIRED_KEY';
@@ -482,7 +606,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Rate limited');
           err.code = 'RATE_LIMITED';
@@ -504,7 +630,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           const err = new Error('Seats');
           err.code = 'SEAT_LIMIT_EXCEEDED';
@@ -526,7 +654,9 @@ describe('API Error Handling', () => {
 
     proSetup._testing.loadLicenseApi = () => ({
       LicenseApiClient: class {
-        async isOnline() { return true; }
+        async isOnline() {
+          return true;
+        }
         async activate() {
           return {
             key: 'PRO-AAAA-BBBB-CCCC-DDDD',

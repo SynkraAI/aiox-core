@@ -27,7 +27,9 @@ const yaml = require('js-yaml');
 // ═══════════════════════════════════════════════════════════════════════════════════
 
 /**
- * Gate verdict enum
+ * Gate verdict enum.
+ *
+ * @enum {string}
  */
 const GateVerdict = {
   /** Output meets all quality criteria */
@@ -39,7 +41,9 @@ const GateVerdict = {
 };
 
 /**
- * Default gate configurations
+ * Default gate configurations used when core-config.yaml does not override them.
+ *
+ * @constant {Object<string, Object>}
  */
 const DEFAULT_GATE_CONFIG = {
   // Epic 3 -> Epic 4 gate
@@ -83,7 +87,9 @@ class GateEvaluator {
   }
 
   /**
-   * Load gate configuration from core-config.yaml (AC5)
+   * Loads gate configuration from core-config.yaml (AC5).
+   *
+   * @returns {Promise<Object<string, Object>>} Gate configuration keyed by transition.
    * @private
    */
   async _loadConfig() {
@@ -109,7 +115,11 @@ class GateEvaluator {
   }
 
   /**
-   * Get gate key for transition
+   * Gets the config key for an epic transition.
+   *
+   * @param {number} fromEpic - Source epic number.
+   * @param {number} toEpic - Target epic number.
+   * @returns {string} Gate key in the form epic{from}_to_epic{to}.
    * @private
    */
   _getGateKey(fromEpic, toEpic) {
@@ -459,7 +469,12 @@ class GateEvaluator {
   }
 
   /**
-   * Clear all results
+   * Clears all stored gate results and logs.
+   *
+   * Resets the evaluator to its initial state, removing all previously
+   * recorded gate evaluations and log entries.
+   *
+   * @returns {void}
    */
   clear() {
     this.results = [];
@@ -467,7 +482,11 @@ class GateEvaluator {
   }
 
   /**
-   * Log message
+   * Records a gate evaluator log message.
+   *
+   * @param {string} message - Log message.
+   * @param {string} [level='info'] - Log level.
+   * @returns {void}
    * @private
    */
   _log(message, level = 'info') {
@@ -476,7 +495,9 @@ class GateEvaluator {
   }
 
   /**
-   * Get logs
+   * Gets all evaluation logs.
+   *
+   * @returns {Array<{timestamp: string, level: string, message: string}>} Copy of all log entries.
    */
   getLogs() {
     return [...this.logs];

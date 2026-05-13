@@ -41,6 +41,8 @@ describe('BuildStateManager', () => {
   });
 
   afterEach(() => {
+    jest.restoreAllMocks();
+
     // Cleanup temp directory
     if (testDir && fs.existsSync(testDir)) {
       fs.rmSync(testDir, { recursive: true, force: true });
@@ -157,6 +159,20 @@ describe('BuildStateManager', () => {
       expect(state2.metrics.totalSubtasks).toBe(7); // Should be original value
     });
 
+    test('should keep state in memory when persistence fails during save', () => {
+      manager.createState({ totalSubtasks: 3 });
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+        throw new Error('EACCES: permission denied');
+      });
+
+      expect(() => manager.saveState()).not.toThrow();
+
+      expect(manager.isPersistenceAvailable()).toBe(false);
+      expect(manager.getPersistenceError().message).toContain('EACCES');
+      expect(manager.getState().metrics.totalSubtasks).toBe(3);
+      expect(fs.existsSync(path.join(testDir, 'plan', 'build-state.json'))).toBe(false);
+    });
+
     test('should throw when storyId not provided', () => {
       expect(() => new BuildStateManager(null)).toThrow('storyId is required');
     });
@@ -229,6 +245,25 @@ describe('BuildStateManager', () => {
       const state = manager.getState();
       expect(state.completedSubtasks).toEqual(['1.1']);
       expect(state.checkpoints).toHaveLength(2); // Still records checkpoint
+    });
+
+    test('should keep checkpoint state in memory when checkpoint persistence fails', () => {
+      const originalWriteFileSync = fs.writeFileSync;
+      jest.spyOn(fs, 'writeFileSync').mockImplementation((filePath, ...args) => {
+        if (String(filePath).includes('checkpoints')) {
+          throw new Error('ENOSPC: no space left on device');
+        }
+        return originalWriteFileSync.call(fs, filePath, ...args);
+      });
+
+      expect(() => manager.saveCheckpoint('1.persistence')).not.toThrow();
+
+      const state = manager.getState();
+      expect(manager.isPersistenceAvailable()).toBe(false);
+      expect(manager.getPersistenceError().message).toContain('ENOSPC');
+      expect(state.checkpoints).toHaveLength(1);
+      expect(state.completedSubtasks).toContain('1.persistence');
+      expect(state.metrics.completedSubtasks).toBe(1);
     });
   });
 
@@ -466,10 +501,59 @@ describe('BuildStateManager', () => {
 
       expect(result.failure.subtaskId).toBe('1.1');
       expect(result.failure.error).toBe('Test error');
+      expect(result.failure.errorDetails).toEqual(expect.objectContaining({
+        name: 'AIOXError',
+        code: 'AIOX_EXECUTION_FAILED',
+        stack: '[redacted]',
+      }));
 
       const state = manager.getState();
       expect(state.failedAttempts).toHaveLength(1);
       expect(state.metrics.totalFailures).toBe(1);
+    });
+
+    test('should preserve structured failure metadata for Error inputs', () => {
+      const cause = new Error('root cause');
+      const error = new TypeError('Typed failure');
+      error.cause = cause;
+      error.exitCode = 2;
+
+      const result = manager.recordFailure('1.structured', {
+        error,
+        attempt: 1,
+      });
+
+      expect(result.failure.error).toBe('Typed failure');
+      expect(result.failure.errorDetails).toEqual(expect.objectContaining({
+        name: 'AIOXError',
+        message: 'Typed failure',
+        code: 'AIOX_EXECUTION_FAILED',
+        category: 'execution',
+        stack: '[redacted]',
+        metadata: expect.objectContaining({
+          buildState: expect.objectContaining({
+            storyId: testStoryId,
+            subtaskId: '1.structured',
+            attempt: 1,
+          }),
+          originalError: expect.objectContaining({
+            name: 'TypeError',
+            properties: expect.objectContaining({
+              exitCode: 2,
+            }),
+          }),
+        }),
+        cause: expect.objectContaining({
+          name: 'TypeError',
+          message: 'Typed failure',
+          stack: '[redacted]',
+          cause: expect.objectContaining({
+            name: 'Error',
+            message: 'root cause',
+            stack: '[redacted]',
+          }),
+        }),
+      }));
     });
 
     test('should track multiple failures', () => {
@@ -553,6 +637,45 @@ describe('BuildStateManager', () => {
       const logs = manager.getAttemptLog({ limit: 3 });
 
       expect(logs.length).toBe(3);
+    });
+
+    test('should serialize circular log details without throwing', () => {
+      const details = { step: 'circular-log' };
+      details.self = details;
+
+      expect(() => {
+        manager._logAttempt('1.circular', 'debug', details);
+        manager.saveState();
+      }).not.toThrow();
+
+      const content = fs.readFileSync(path.join(testDir, 'plan', 'build-attempts.log'), 'utf-8');
+      expect(content).toContain('1.circular');
+      expect(content).toContain('"self":"[Circular]"');
+    });
+
+    test('should serialize non-JSON log values into stable data shapes', () => {
+      const cause = new Error('nested cause');
+      const error = new TypeError('boom');
+      error.cause = cause;
+      error.details = new Map([['attempt', 3n]]);
+
+      expect(() => {
+        manager._logAttempt('1.non-json', 'debug', {
+          error,
+          set: new Set([2n]),
+          callback: () => 'ignored',
+        });
+        manager.saveState();
+      }).not.toThrow();
+
+      const content = fs.readFileSync(path.join(testDir, 'plan', 'build-attempts.log'), 'utf-8');
+      expect(content).toContain('"name":"TypeError"');
+      expect(content).toContain('"message":"boom"');
+      expect(content).toContain('"stack":"[redacted]"');
+      expect(content).toContain('"cause":{"name":"Error","message":"nested cause","stack":"[redacted]"}');
+      expect(content).toContain('[["attempt","3"]]');
+      expect(content).toContain('"set":["2"]');
+      expect(content).toMatch(/"callback":"[^"]*ignored[^"]*"/);
     });
   });
 

@@ -52,6 +52,12 @@ describe('validate-aiox-core-deps.js (INS-4.12)', () => {
     expect(pkg.dependencies).toHaveProperty('tar');
   });
 
+  test('.aiox-core/package.json includes proper-lockfile for IDS registry updater', () => {
+    const pkgPath = path.join(PROJECT_ROOT, '.aiox-core', 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    expect(pkg.dependencies).toHaveProperty('proper-lockfile');
+  });
+
   test('allowlisted packages (eslint, @babel/*) are not in deps', () => {
     const pkgPath = path.join(PROJECT_ROOT, '.aiox-core', 'package.json');
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));

@@ -23,7 +23,9 @@ agent:
   whenToUse: |
     Use para verificar se um email e de um comprador do Cohort Legendario Master,
     ou para registrar novos compradores na base.
-    Usa as tools MCP cohort_validate_buyer e cohort_register_buyer.
+    Wave 1 (validate, validate-batch) usa a CLI nativa `aiox pro buyer` via Bash tool.
+    Wave 2 (register) ainda depende de tools MCP enquanto endpoint cross-repo
+    em aiox-license-server nao existe (Story 123.8 — em progresso).
   customization: null
 
 persona_profile:
@@ -67,15 +69,20 @@ persona:
       - Registrar novos compradores (write, com confirmacao)
       - Validacao em batch de multiplos emails
 
-    tools_mcp:
-      - cohort_validate_buyer: "Verificar buyer por email e CPF opcional"
-      - cohort_register_buyer: "Cadastrar novo buyer (REQUER CONFIRMACAO)"
+    tooling:
+      cli_wave1_active:
+        - "aiox pro buyer validate --email <E> --json"
+        - "aiox pro buyer validate-batch --file <F> --json"
+      mcp_wave2_pending_until_endpoint_lands:
+        - cohort_register_buyer: "Cadastrar novo buyer (REQUER CONFIRMACAO) — usado apenas ate `aiox pro buyer register` ser entregue"
 
     security:
       - NUNCA expor a p_api_key em outputs
       - NUNCA listar ou buscar dados de buyers existentes
       - SEMPRE confirmar antes de executar register_buyer
       - Este squad NUNCA deve ser commitado ao repositorio
+      - AIOX_BUYER_ADMIN_KEY e lida do environment; nunca exibida em transcript nem output (Story 123.8)
+      - CLI nativa `aiox pro buyer` substitui MCP tools (Wave 1 entregue em Story 123.8)
 
 commands:
   - name: help
@@ -99,8 +106,7 @@ dependencies:
     - validate-buyer.md
     - register-buyer.md
   tools:
-    - cohort_validate_buyer  # MCP tool (read-only)
-    - cohort_register_buyer  # MCP tool (write)
+    - bash  # Invoca `aiox pro buyer` CLI (Story 123.8 — migrado de MCP para CLI nativa)
 ```
 
 ---
@@ -116,19 +122,24 @@ dependencies:
 
 ## Workflow Padrao
 
-### Validar Buyer
-```
-*validate → informar email → cohort_validate_buyer → resultado
+> **Story 123.8 (2026-04-22):** migrado de MCP para CLI nativa. Agente invoca
+> `aiox pro buyer` via Bash tool em vez de tools MCP.
+
+### Validar Buyer — Wave 1 (ativo)
+```text
+*validate → informar email → Bash("aiox pro buyer validate --email <E> --json") → parse JSON → resultado
 ```
 
-### Registrar Buyer
-```
-*register → informar nome + email + cpf? → confirmar dados → cohort_register_buyer → resultado
+### Batch Validate — Wave 1 (ativo)
+```text
+*validate-batch → lista de emails em arquivo → Bash("aiox pro buyer validate-batch --file <F> --json") → tabela de resultados
 ```
 
-### Batch Validate
-```
-*validate-batch → lista de emails → cohort_validate_buyer (loop) → tabela de resultados
+### Registrar Buyer — Wave 2 (pendente)
+```text
+*register → pendente: endpoint POST /api/v1/admin/buyers/register em aiox-license-server ainda não existe.
+         → Quando implementado: Bash("AIOX_BUYER_ADMIN_KEY=*** aiox pro buyer register --email <E> --name <N> --yes")
+         → Ver Story 123.8 para roadmap.
 ```
 
 ---

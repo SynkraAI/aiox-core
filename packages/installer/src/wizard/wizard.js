@@ -1,10 +1,58 @@
 const { detectProjectType } = require('../detection/detect-project-type');
+const { requireAioxCoreModule } = require('../utils/package-paths');
+
+const FALLBACK_INSTALLATION_MODE = {
+  GREENFIELD: 'GREENFIELD',
+  BROWNFIELD: 'BROWNFIELD',
+  EXISTING_AIOX: 'EXISTING_AIOX',
+  FRAMEWORK_DEV: 'FRAMEWORK_DEV',
+  UNKNOWN: 'UNKNOWN',
+};
+
+function loadModeDetector() {
+  try {
+    return requireAioxCoreModule(
+      '.aiox-core',
+      'infrastructure',
+      'scripts',
+      'documentation-integrity',
+      'mode-detector',
+    );
+  } catch {
+    return {
+      InstallationMode: FALLBACK_INSTALLATION_MODE,
+      detectInstallationMode(targetDir) {
+        const legacyType = detectProjectType(targetDir);
+        return {
+          mode: legacyType,
+          legacyType,
+          reason: legacyType === 'EXISTING_AIOX'
+            ? 'brownfield project (existing AIOX)'
+            : `${legacyType.toLowerCase()} project`,
+        };
+      },
+      getModeOptions(detected) {
+        return [
+          {
+            value: detected.mode,
+            label: detected.mode,
+            hint: detected.reason || '',
+          },
+        ];
+      },
+      validateModeSelection() {
+        return { warnings: [] };
+      },
+    };
+  }
+}
+
 const {
   detectInstallationMode,
   getModeOptions,
   validateModeSelection,
   InstallationMode,
-} = require('../../../../.aiox-core/infrastructure/scripts/documentation-integrity/mode-detector');
+} = loadModeDetector();
 
 /**
  * Interactive Wizard for AIOX Installation
@@ -241,4 +289,3 @@ module.exports = {
   getProjectType,
   InstallationMode,
 };
-

@@ -128,7 +128,12 @@ class GreenfieldHandler extends EventEmitter {
   //                              LAZY DEPENDENCY LOADING
   // ═══════════════════════════════════════════════════════════════════════════════════
 
-  /** @private */
+  /**
+   * Gets or lazily creates the WorkflowExecutor dependency.
+   *
+   * @returns {Object|null} WorkflowExecutor instance, or null when unavailable.
+   * @private
+   */
   _getWorkflowExecutor() {
     if (!this._workflowExecutor) {
       try {
@@ -143,7 +148,12 @@ class GreenfieldHandler extends EventEmitter {
     return this._workflowExecutor;
   }
 
-  /** @private */
+  /**
+   * Gets or lazily creates the SurfaceChecker dependency.
+   *
+   * @returns {Object|null} SurfaceChecker instance, or null when unavailable.
+   * @private
+   */
   _getSurfaceChecker() {
     if (!this._surfaceChecker) {
       try {
@@ -156,7 +166,12 @@ class GreenfieldHandler extends EventEmitter {
     return this._surfaceChecker;
   }
 
-  /** @private */
+  /**
+   * Gets or lazily creates the SessionState dependency.
+   *
+   * @returns {Object|null} SessionState instance, or null when unavailable.
+   * @private
+   */
   _getSessionState() {
     if (!this._sessionState) {
       try {

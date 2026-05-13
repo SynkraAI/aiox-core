@@ -9,6 +9,7 @@ const FORBIDDEN_ABSOLUTE_PATTERNS = [
   /\/home\/[^\s/'"]+/g,
   /[A-Za-z]:\\Users\\[^\s\\'"]+/g,
 ];
+const GENERATED_SKILL_MARKER = '<!-- AIOX-CODEX-LOCAL-SKILLS: generated -->';
 
 function getDefaultOptions() {
   const projectRoot = process.cwd();
@@ -56,6 +57,12 @@ function collectAbsolutePathViolations(content, filePath) {
 
 function validateSkillPathConventions(content, filePath) {
   const errors = [];
+  const generatedSquadSource = extractGeneratedSquadSource(content);
+
+  if (content.includes(GENERATED_SKILL_MARKER) && generatedSquadSource) {
+    return errors;
+  }
+
   if (!content.includes('.aiox-core/development/agents/')) {
     errors.push(`${filePath} missing canonical source path ".aiox-core/development/agents/"`);
   }
@@ -63,6 +70,11 @@ function validateSkillPathConventions(content, filePath) {
     errors.push(`${filePath} missing canonical greeting script path`);
   }
   return errors;
+}
+
+function extractGeneratedSquadSource(content) {
+  const match = String(content || '').match(/`(squads\/[^`]+\/agents\/[^`]+\.md)`/);
+  return match ? match[1] : '';
 }
 
 function validatePaths(options = {}) {
@@ -139,4 +151,5 @@ module.exports = {
   listSkillFiles,
   collectAbsolutePathViolations,
   validateSkillPathConventions,
+  extractGeneratedSquadSource,
 };

@@ -188,7 +188,7 @@ describe('RegistryUpdater', () => {
       expect(entity.keywords).toEqual(expect.arrayContaining(['deploy', 'automation']));
     });
 
-    it('detects dependencies from require statements', async () => {
+    it('classifies unresolved require dependencies as planned dependencies', async () => {
       const updater = createUpdater();
       const filePath = createTempFile(
         '.aiox-core/development/scripts/consumer.js',
@@ -200,7 +200,8 @@ describe('RegistryUpdater', () => {
       const registry = readRegistry();
       const entity = registry.entities.scripts.consumer;
       expect(entity).toBeDefined();
-      expect(entity.dependencies).toContain('helper');
+      expect(entity.dependencies).not.toContain('helper');
+      expect(entity.plannedDeps).toContain('helper');
     });
 
     it('creates category if it does not exist', async () => {
@@ -220,6 +221,40 @@ describe('RegistryUpdater', () => {
       const registry = readRegistry();
       expect(registry.entities.modules).toBeDefined();
       expect(registry.entities.modules['new-module']).toBeDefined();
+    });
+
+    it('does not overwrite an existing basename entity when adding a same-name file in another directory', async () => {
+      const baseReg = getBaseRegistry();
+      baseReg.entities.modules = {
+        index: {
+          path: '.aiox-core/core/index.js',
+          type: 'module',
+          purpose: 'Root core barrel',
+          keywords: ['index'],
+          usedBy: [],
+          dependencies: ['config-loader'],
+          adaptability: { score: 0.4, constraints: [], extensionPoints: [] },
+          checksum: 'sha256:3333333333333333333333333333333333333333333333333333333333333333',
+          lastVerified: '2026-02-08T00:00:00Z',
+        },
+      };
+      createTempRegistry(baseReg);
+
+      const updater = createUpdater();
+      const filePath = createTempFile(
+        '.aiox-core/core/errors/index.js',
+        "const constants = require('./constants');\nmodule.exports = { constants };\n",
+      );
+
+      const result = await updater.processChanges([{ action: 'add', filePath }]);
+
+      expect(result.updated).toBe(1);
+
+      const registry = readRegistry();
+      expect(registry.entities.modules.index.path).toBe('.aiox-core/core/index.js');
+      expect(registry.entities.modules.index.purpose).toBe('Root core barrel');
+      expect(registry.entities.modules['errors-index']).toBeDefined();
+      expect(registry.entities.modules['errors-index'].path).toBe('.aiox-core/core/errors/index.js');
     });
   });
 
@@ -702,6 +737,61 @@ describe('RegistryUpdater', () => {
       // Registry should not be corrupted
       expect(registry.entities).toBeDefined();
       expect(registry.entities.tasks).toBeDefined();
+    });
+
+    it('drains watcher updates queued while a batch is processing', async () => {
+      jest.useFakeTimers();
+
+      try {
+        const updater = createUpdater({ debounceMs: 10 });
+        const batches = [];
+        let releaseFirstBatch;
+        const firstBatchGate = new Promise((resolve) => {
+          releaseFirstBatch = resolve;
+        });
+
+        updater._executeBatch = jest.fn(async (batch) => {
+          batches.push(batch.map((item) => path.basename(item.filePath)));
+          updater._isProcessing = true;
+
+          try {
+            if (batches.length === 1) {
+              await firstBatchGate;
+            }
+            return { updated: batch.length, errors: [] };
+          } finally {
+            updater._isProcessing = false;
+          }
+        });
+
+        const firstFile = createTempFile(
+          '.aiox-core/development/tasks/queued-a.md',
+          '# Queued A\n\n## Purpose\nFirst queued update.\n',
+        );
+        updater._queueUpdate('add', firstFile);
+        await jest.advanceTimersByTimeAsync(10);
+
+        expect(batches).toEqual([['queued-a.md']]);
+
+        const secondFile = createTempFile(
+          '.aiox-core/development/tasks/queued-b.md',
+          '# Queued B\n\n## Purpose\nSecond queued update.\n',
+        );
+        updater._queueUpdate('add', secondFile);
+        await jest.advanceTimersByTimeAsync(10);
+
+        expect(updater.getStats().pendingUpdates).toBe(1);
+
+        releaseFirstBatch();
+        await Promise.resolve();
+        await jest.advanceTimersByTimeAsync(10);
+
+        expect(updater._executeBatch).toHaveBeenCalledTimes(2);
+        expect(batches).toEqual([['queued-a.md'], ['queued-b.md']]);
+        expect(updater.getStats().pendingUpdates).toBe(0);
+      } finally {
+        jest.useRealTimers();
+      }
     });
   });
 

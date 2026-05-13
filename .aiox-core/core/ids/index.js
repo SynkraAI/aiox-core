@@ -84,6 +84,10 @@ const { G1EpicCreationGate } = require('./gates/g1-epic-creation');
 const { G2StoryCreationGate } = require('./gates/g2-story-creation');
 const { G3StoryValidationGate } = require('./gates/g3-story-validation');
 const { G4DevContextGate, G4_DEFAULT_TIMEOUT_MS } = require('./gates/g4-dev-context');
+const {
+  G5SemanticHandshakeGate,
+  G5_DEFAULT_TIMEOUT_MS,
+} = require('./gates/g5-semantic-handshake');
 
 // IDS-7: Framework Governor (aiox-master integration)
 const {
@@ -142,12 +146,14 @@ module.exports = {
   createGateResult,
   DEFAULT_TIMEOUT_MS,
 
-  // IDS-5a: Gates G1-G4
+  // IDS-5a/5b: Gates G1-G5
   G1EpicCreationGate,
   G2StoryCreationGate,
   G3StoryValidationGate,
   G4DevContextGate,
   G4_DEFAULT_TIMEOUT_MS,
+  G5SemanticHandshakeGate,
+  G5_DEFAULT_TIMEOUT_MS,
 
   // IDS-7: Framework Governor
   FrameworkGovernor,

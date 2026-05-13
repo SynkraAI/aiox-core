@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { normalizeError, serializeError } = require('../errors');
 
 const {
   estimateContextPercent,
@@ -131,10 +132,20 @@ class PipelineMetrics {
       existing.end = endTime;
       existing.duration = Number(endTime - existing.start) / 1e6;
     }
+    const normalizedError = normalizeError(error, {
+      code: 'AIOX_SYNAPSE_LAYER_FAILED',
+      metadata: {
+        synapse: {
+          layer: name,
+        },
+      },
+    });
+
     this.layers[name] = {
       ...existing,
       status: 'error',
-      error: error && error.message ? error.message : String(error),
+      error: normalizedError.message,
+      errorDetails: serializeError(normalizedError),
     };
   }
 
@@ -179,6 +190,24 @@ const PIPELINE_TIMEOUT_MS = 100;
  */
 const DEFAULT_ACTIVE_LAYERS = [0, 1, 2];
 const LEGACY_MODE = process.env.SYNAPSE_LEGACY_MODE === 'true';
+
+/**
+ * Safely read the last processing error exposed by a layer.
+ *
+ * @param {object} layer - Synapse layer instance.
+ * @returns {Error|null} Last layer error, or the accessor failure as an Error.
+ */
+function getLayerError(layer) {
+  if (!layer) return null;
+  if (typeof layer.getLastError === 'function') {
+    try {
+      return layer.getLastError();
+    } catch (error) {
+      return error instanceof Error ? error : new Error(String(error));
+    }
+  }
+  return null;
+}
 
 /**
  * Orchestrates the 8-layer SYNAPSE context injection pipeline.
@@ -298,14 +327,25 @@ class SynapseEngine {
         previousLayers,
       });
 
-      const result = layer._safeProcess(context);
+      let result;
+      try {
+        result = layer._safeProcess(context);
+      } catch (error) {
+        metrics.errorLayer(layer.name, error);
+        continue;
+      }
 
       if (result && Array.isArray(result.rules)) {
         metrics.endLayer(layer.name, result.rules.length);
         results.push(result);
         previousLayers.push(result);
       } else if (result === null || result === undefined) {
-        metrics.skipLayer(layer.name, 'Returned null');
+        const layerError = getLayerError(layer);
+        if (layerError) {
+          metrics.errorLayer(layer.name, layerError);
+        } else {
+          metrics.skipLayer(layer.name, 'Returned null');
+        }
       } else {
         metrics.skipLayer(layer.name, 'Invalid result format');
       }

@@ -130,6 +130,30 @@ describe('validator', () => {
       expect(result.orphaned[0].filename).toBe('orphan.md');
     });
 
+    it('should detect orphaned Cursor mdc files', () => {
+      fs.writeFileSync(path.join(targetDir, 'expected.mdc'), 'content');
+      fs.writeFileSync(path.join(targetDir, 'orphan.mdc'), 'orphan');
+
+      const expected = [{ filename: 'expected.mdc', content: 'content' }];
+      const result = validateIdeSync(expected, targetDir, {}, 'condensed-rules');
+
+      expect(result.orphaned).toHaveLength(1);
+      expect(result.orphaned[0].filename).toBe('orphan.mdc');
+    });
+
+    it('should detect orphaned files in nested Kimi skill directories', () => {
+      fs.ensureDirSync(path.join(targetDir, 'aiox-dev'));
+      fs.ensureDirSync(path.join(targetDir, 'aiox-qa'));
+      fs.writeFileSync(path.join(targetDir, 'aiox-dev', 'SKILL.md'), 'content');
+      fs.writeFileSync(path.join(targetDir, 'aiox-qa', 'SKILL.md'), 'orphan');
+
+      const expected = [{ filename: path.join('aiox-dev', 'SKILL.md'), content: 'content' }];
+      const result = validateIdeSync(expected, targetDir, {}, 'kimi-skill');
+
+      expect(result.orphaned).toHaveLength(1);
+      expect(result.orphaned[0].filename).toBe(path.join('aiox-qa', 'SKILL.md'));
+    });
+
     it('should not count redirect files as orphaned', () => {
       fs.writeFileSync(path.join(targetDir, 'agent.md'), 'content');
       fs.writeFileSync(path.join(targetDir, 'aiox-developer.md'), 'redirect');
@@ -137,6 +161,17 @@ describe('validator', () => {
       const expected = [{ filename: 'agent.md', content: 'content' }];
       const redirects = { 'aiox-developer': 'aiox-master' };
       const result = validateIdeSync(expected, targetDir, redirects);
+
+      expect(result.orphaned).toHaveLength(0);
+    });
+
+    it('should not count Cursor mdc redirect files as orphaned', () => {
+      fs.writeFileSync(path.join(targetDir, 'agent.mdc'), 'content');
+      fs.writeFileSync(path.join(targetDir, 'aiox-developer.mdc'), 'redirect');
+
+      const expected = [{ filename: 'agent.mdc', content: 'content' }];
+      const redirects = { 'aiox-developer': 'aiox-master' };
+      const result = validateIdeSync(expected, targetDir, redirects, 'condensed-rules');
 
       expect(result.orphaned).toHaveLength(0);
     });
@@ -168,12 +203,13 @@ describe('validator', () => {
 
       fs.ensureDirSync(cursorDir);
 
-      fs.writeFileSync(path.join(cursorDir, 'agent.md'), 'cursor content');
+      fs.writeFileSync(path.join(cursorDir, 'agent.mdc'), 'cursor content');
 
       const ideConfigs = {
         cursor: {
-          expectedFiles: [{ filename: 'agent.md', content: 'cursor content' }],
+          expectedFiles: [{ filename: 'agent.mdc', content: 'cursor content' }],
           targetDir: cursorDir,
+          format: 'condensed-rules',
         },
       };
 

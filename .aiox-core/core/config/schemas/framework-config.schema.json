@@ -80,6 +80,75 @@
       },
       "additionalProperties": false
     },
+    "dev": {
+      "type": "object",
+      "description": "Development execution defaults",
+      "properties": {
+        "execution_mode": {
+          "type": "string",
+          "enum": ["native", "delegate"],
+          "default": "native"
+        },
+        "delegate_to": {
+          "type": "string",
+          "description": "Default external executor provider when execution_mode=delegate"
+        },
+        "auto_review": {
+          "type": "boolean",
+          "description": "Require orchestrator review before story state mutation",
+          "default": true
+        },
+        "fast_path": {
+          "type": "object",
+          "description": "Fast-path gate defaults for mechanical, batchable, or parallelizable tasks",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "min_confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.58
+            },
+            "min_batch_items": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 3
+            },
+            "external_executor_threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.78
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "external_executors": {
+      "type": "object",
+      "description": "External executor provider defaults",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "default_sandbox": {
+          "type": "string",
+          "enum": ["read-only", "workspace-write", "full-auto", "danger-full-access"],
+          "default": "workspace-write"
+        },
+        "run_dir": {
+          "type": "string",
+          "default": ".aiox/external-runs"
+        }
+      },
+      "additionalProperties": false
+    },
     "utility_scripts_registry": {
       "type": "object",
       "description": "Registry of utility scripts by category",
@@ -116,7 +185,16 @@
             "properties": {
               "enabled": { "type": "boolean" },
               "path": { "type": "string" },
-              "format": { "type": "string", "enum": ["full-markdown-yaml", "condensed-rules", "cursor-style"] }
+              "skillsPath": { "type": "string" },
+              "fallbackSources": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Fallback source directories used when the primary IDE sync source has no matching definitions"
+              },
+              "format": {
+                "type": "string",
+                "enum": ["full-markdown-yaml", "condensed-rules", "cursor-style", "kimi-skill"]
+              }
             },
             "additionalProperties": false
           }

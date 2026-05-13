@@ -37,19 +37,19 @@ beforeEach(async () => {
   await fs.ensureDir(path.join(proSourceDir, 'squads', 'devops-squad'));
   await fs.writeFile(
     path.join(proSourceDir, 'squads', 'devops-squad', 'squad.yaml'),
-    yaml.dump({ name: 'devops-squad', version: '1.0.0' })
+    yaml.dump({ name: 'devops-squad', version: '1.0.0' }),
   );
   await fs.writeFile(
     path.join(proSourceDir, 'pro-config.yaml'),
-    yaml.dump({ pro: { enabled: true, tier: 'standard' } })
+    yaml.dump({ pro: { enabled: true, tier: 'standard' } }),
   );
   await fs.writeFile(
     path.join(proSourceDir, 'feature-registry.yaml'),
-    yaml.dump({ features: [{ id: 'squads-pro', enabled: true }] })
+    yaml.dump({ features: [{ id: 'squads-pro', enabled: true }] }),
   );
   await fs.writeJson(
     path.join(proSourceDir, 'package.json'),
-    { name: '@aiox-fullstack/pro', version: '2.0.0' }
+    { name: '@aiox-squads/pro', version: '2.0.0' },
   );
 });
 
@@ -67,17 +67,17 @@ describe('scaffoldProContent', () => {
 
     // AC1: squads exist
     expect(await fs.pathExists(
-      path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml')
+      path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml'),
     )).toBe(true);
 
     // AC2: pro-config.yaml exists in .aiox-core/
     expect(await fs.pathExists(
-      path.join(targetDir, '.aiox-core', 'pro-config.yaml')
+      path.join(targetDir, '.aiox-core', 'pro-config.yaml'),
     )).toBe(true);
 
     // AC3: feature-registry.yaml exists in .aiox-core/
     expect(await fs.pathExists(
-      path.join(targetDir, '.aiox-core', 'feature-registry.yaml')
+      path.join(targetDir, '.aiox-core', 'feature-registry.yaml'),
     )).toBe(true);
   });
 
@@ -119,7 +119,7 @@ describe('scaffoldProContent', () => {
 
     // Verify file content is still correct (not corrupted)
     const configContent = yaml.load(
-      await fs.readFile(path.join(targetDir, '.aiox-core', 'pro-config.yaml'), 'utf8')
+      await fs.readFile(path.join(targetDir, '.aiox-core', 'pro-config.yaml'), 'utf8'),
     );
     expect(configContent.pro.enabled).toBe(true);
   });
@@ -138,7 +138,7 @@ describe('scaffoldProContent', () => {
 
     // Verify rollback: squads copied before failure should be cleaned up
     expect(await fs.pathExists(
-      path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml')
+      path.join(targetDir, 'squads', 'devops-squad', 'squad.yaml'),
     )).toBe(false);
 
     // pro-version.json and pro-installed-manifest.yaml should not exist
@@ -207,6 +207,32 @@ describe('scaffoldProContent', () => {
     expect(progress.length).toBeGreaterThan(0);
     expect(progress.some(p => p.status === 'done')).toBe(true);
   });
+
+  it('should link framework dependencies so copied squad scripts resolve js-yaml', async () => {
+    await fs.ensureDir(path.join(targetDir, '.aiox-core', 'node_modules', 'js-yaml'));
+    await fs.writeFile(
+      path.join(targetDir, '.aiox-core', 'node_modules', 'js-yaml', 'index.js'),
+      'module.exports = { ok: true };\n',
+    );
+    await fs.ensureDir(path.join(proSourceDir, 'squads', 'devops-squad', 'scripts'));
+    await fs.writeFile(
+      path.join(proSourceDir, 'squads', 'devops-squad', 'scripts', 'uses-yaml.js'),
+      "require('js-yaml');\n",
+    );
+
+    const result = await scaffoldProContent(targetDir, proSourceDir);
+
+    expect(result.success).toBe(true);
+    expect(result.dependencyResolution.linked).toBe(true);
+    expect(await fs.realpath(path.join(targetDir, 'node_modules'))).toBe(
+      await fs.realpath(path.join(targetDir, '.aiox-core', 'node_modules')),
+    );
+
+    const resolved = require.resolve('js-yaml', {
+      paths: [path.join(targetDir, 'squads', 'devops-squad', 'scripts')],
+    });
+    expect(resolved).toContain(path.join('js-yaml', 'index.js'));
+  });
 });
 
 describe('rollbackScaffold', () => {
@@ -240,7 +266,7 @@ describe('generateProVersionJson', () => {
     const versionInfo = await generateProVersionJson(
       targetDir,
       proSourceDir,
-      ['test.yaml']
+      ['test.yaml'],
     );
 
     expect(versionInfo.proVersion).toBe('2.0.0');
@@ -256,7 +282,7 @@ describe('generateInstalledManifest', () => {
 
     const manifest = await generateInstalledManifest(
       targetDir,
-      ['manifest-test.yaml']
+      ['manifest-test.yaml'],
     );
 
     expect(manifest.totalFiles).toBe(1);

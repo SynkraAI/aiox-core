@@ -3,9 +3,12 @@
 
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 const { parseAllAgents } = require('../ide-sync/agent-parser');
-const { getSkillId } = require('./index');
+const { getSkillId, getLegacySkillId } = require('./index');
+
+const GENERATED_MARKER = '<!-- AIOX-CODEX-LOCAL-SKILLS: generated -->';
 
 function getDefaultOptions() {
   const projectRoot = process.cwd();
@@ -14,6 +17,8 @@ function getDefaultOptions() {
     sourceDir: path.join(projectRoot, '.aiox-core', 'development', 'agents'),
     skillsDir: path.join(projectRoot, '.codex', 'skills'),
     strict: false,
+    allowOrphaned: false,
+    selfTest: false,
     quiet: false,
     json: false,
   };
@@ -25,6 +30,7 @@ function parseArgs(argv = process.argv.slice(2)) {
     strict: args.has('--strict'),
     quiet: args.has('--quiet') || args.has('-q'),
     json: args.has('--json'),
+    selfTest: args.has('--self-test'),
   };
 }
 
@@ -59,14 +65,351 @@ function validateSkillContent(content, expected) {
   return issues;
 }
 
+/**
+ * Parses a generated Codex skill frontmatter block without reading external files.
+ */
+function parseSkillFrontmatter(content) {
+  const match = String(content || '').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) {
+    return { data: null, error: 'missing YAML frontmatter' };
+  }
+
+  try {
+    const data = yaml.load(match[1]) || {};
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error: `invalid YAML frontmatter (${error.message})` };
+  }
+}
+
+/**
+ * Builds the deterministic Skill tool payload used by validator self-tests.
+ */
+function createSkillToolSelfTestPayload(skillId, prompt = 'AIOX skill self-test') {
+  return {
+    type: 'tool_use',
+    name: 'Skill',
+    input: {
+      skill: skillId,
+      prompt,
+    },
+  };
+}
+
+/**
+ * Extracts a skill id from the payload shapes used by Skill tool invocations.
+ */
+function normalizeSkillToolTarget(payload) {
+  if (typeof payload === 'string') {
+    return payload.trim().replace(/^\$/, '');
+  }
+
+  if (!payload || typeof payload !== 'object') {
+    return '';
+  }
+
+  const input = payload.input && typeof payload.input === 'object' ? payload.input : {};
+  const candidates = [
+    input.skill,
+    input.skillId,
+    input.skill_id,
+    input.name,
+    input.id,
+    payload.skill,
+    payload.skillId,
+    payload.skill_id,
+    payload.id,
+    payload.name && payload.name !== 'Skill' ? payload.name : '',
+  ];
+
+  const target = candidates.find((candidate) => typeof candidate === 'string' && candidate.trim());
+  return target ? target.trim().replace(/^\$/, '') : '';
+}
+
+/**
+ * Finds the canonical AIOX agent path declared in a generated skill stub.
+ */
+function extractCanonicalAgentPath(content) {
+  const match = String(content || '').match(/`(\.aiox-core\/development\/agents\/[^`]+\.md)`/);
+  return match ? match[1] : '';
+}
+
+/**
+ * Runs structural self-tests for generated Codex skills without invoking live tools.
+ */
+function runSkillSelfTests(options = {}) {
+  const projectRoot = options.projectRoot || process.cwd();
+  const resolved = {
+    projectRoot,
+    skillsDir: options.skillsDir || path.join(projectRoot, '.codex', 'skills'),
+    expected: options.expected || [],
+  };
+  const expectedIds = new Set(resolved.expected.map(item => item.skillId));
+  const results = [];
+
+  for (const item of resolved.expected) {
+    const skillPath = path.join(resolved.skillsDir, item.skillId, 'SKILL.md');
+    const relativeSkillPath = path.relative(resolved.projectRoot, skillPath);
+    const errors = [];
+
+    let content = '';
+    try {
+      content = fs.readFileSync(skillPath, 'utf8');
+    } catch (error) {
+      results.push({
+        skillId: item.skillId,
+        ok: false,
+        errors: [`self-test unable to read ${relativeSkillPath} (${error.message})`],
+      });
+      continue;
+    }
+
+    const frontmatter = parseSkillFrontmatter(content);
+    let declaredSkillId = '';
+    let canRoundtripSkillPayload = false;
+    if (frontmatter.error) {
+      errors.push(`self-test ${frontmatter.error}`);
+    } else {
+      declaredSkillId = String(frontmatter.data.name || '').trim();
+      if (declaredSkillId !== item.skillId) {
+        errors.push(`self-test frontmatter name mismatch: expected "${item.skillId}"`);
+      } else {
+        canRoundtripSkillPayload = true;
+      }
+      if (!String(frontmatter.data.description || '').trim()) {
+        errors.push('self-test missing frontmatter description');
+      }
+    }
+
+    const canonicalAgentPath = extractCanonicalAgentPath(content);
+    if (!canonicalAgentPath) {
+      errors.push('self-test missing canonical source path');
+    } else {
+      const expectedCanonicalPath = `.aiox-core/development/agents/${item.filename}`;
+      if (canonicalAgentPath !== expectedCanonicalPath) {
+        errors.push(
+          `self-test canonical source path mismatch: expected "${expectedCanonicalPath}", got "${canonicalAgentPath}"`,
+        );
+      }
+      const absoluteAgentPath = path.join(resolved.projectRoot, canonicalAgentPath);
+      if (!fs.existsSync(absoluteAgentPath)) {
+        errors.push(`self-test source file not found: ${canonicalAgentPath}`);
+      }
+    }
+
+    if (canRoundtripSkillPayload) {
+      const payload = createSkillToolSelfTestPayload(declaredSkillId);
+      const target = normalizeSkillToolTarget(payload);
+      if (!expectedIds.has(target)) {
+        errors.push(`self-test Skill payload target is not a generated skill: ${target || '<empty>'}`);
+      } else if (target !== item.skillId) {
+        errors.push(`self-test Skill payload target mismatch: expected "${item.skillId}", got "${target}"`);
+      }
+    }
+
+    results.push({
+      skillId: item.skillId,
+      ok: errors.length === 0,
+      errors,
+    });
+  }
+
+  return results;
+}
+
+function extractGeneratedSquadSource(content) {
+  const value = String(content || '');
+  const patterns = [
+    /`(squads\/[^`]+\/agents\/[^`]+\.md)`/,
+    /<!--\s*Source:\s*(squads\/[^>\s]+\/agents\/[^>\s]+\.md)\s*-->/,
+    /<!--\s*(squads\/[^>\s]+\/agents\/[^>\s]+\.md)\s*-->/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = value.match(pattern);
+    if (match) return match[1];
+  }
+
+  return '';
+}
+
+function isGeneratedSquadSkill(content, projectRoot) {
+  if (!String(content || '').includes(GENERATED_MARKER)) {
+    return false;
+  }
+
+  const sourcePath = extractGeneratedSquadSource(content);
+  if (!sourcePath) {
+    return false;
+  }
+
+  return fs.existsSync(path.join(projectRoot, sourcePath));
+}
+
+function readTextIfExists(filePath) {
+  try {
+    return fs.readFileSync(filePath, 'utf8');
+  } catch (_error) {
+    return '';
+  }
+}
+
+function hasFullActivationPayload(content) {
+  const value = String(content || '');
+  if (!value.trim()) {
+    return false;
+  }
+
+  const frontmatter = parseSkillFrontmatter(value);
+  if (frontmatter.error) {
+    return false;
+  }
+
+  const canonicalAgentPath = extractCanonicalAgentPath(value);
+  if (!canonicalAgentPath) {
+    return false;
+  }
+
+  return (
+    value.includes('## Activation Protocol') ||
+    value.includes('generate-greeting.js') ||
+    value.includes('source of truth')
+  );
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function hasLegacyAliasIntent(content, canonicalSkillId) {
+  const value = String(content || '');
+  const normalized = value.toLowerCase();
+  return (
+    value.includes('AIOX-CODEX-LEGACY-ALIAS') ||
+    (
+      normalized.includes('legacy alias') &&
+      normalized.includes('canonical') &&
+      value.includes(canonicalSkillId)
+    )
+  );
+}
+
+function getThinLegacyRedirectIssues(content, canonicalSkillId, legacySkillId) {
+  const lines = String(content || '')
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean);
+  const canonical = escapeRegExp(canonicalSkillId);
+  const legacy = escapeRegExp(legacySkillId);
+  const allowedLinePatterns = [
+    /^<!--\s*AIOX-CODEX-LEGACY-ALIAS:\s*redirect\s*-->$/,
+    new RegExp(`^#\\s+${legacy}$`),
+    new RegExp(`^This legacy alias redirects to canonical skill \`${canonical}\`\\.$`),
+    new RegExp(`^Use \`\\$?${canonical}\` instead\\.$`),
+  ];
+  const issues = [];
+
+  if (!lines.some(line => /^<!--\s*AIOX-CODEX-LEGACY-ALIAS:\s*redirect\s*-->$/.test(line))) {
+    issues.push('missing exact legacy redirect marker');
+  }
+
+  if (!lines.some(line => new RegExp(`^This legacy alias redirects to canonical skill \`${canonical}\`\\.$`).test(line))) {
+    issues.push(`missing exact canonical redirect sentence for "${canonicalSkillId}"`);
+  }
+
+  const invalidLines = lines.filter(line => !allowedLinePatterns.some(pattern => pattern.test(line)));
+  if (invalidLines.length > 0) {
+    issues.push('contains non-redirect content');
+  }
+
+  return issues;
+}
+
+function isIntentionalLegacyAlias(content, canonicalSkillId, legacySkillId) {
+  return getThinLegacyRedirectIssues(content, canonicalSkillId, legacySkillId).length === 0;
+}
+
+function classifyLegacySkillAlias(content, item, relativeSkillPath) {
+  if (!String(content || '').trim()) {
+    return {
+      dir: item.legacySkillId,
+      canonicalSkillId: item.skillId,
+      classification: 'missing-skill-file',
+      fatal: true,
+      message: `Legacy skill alias directory missing SKILL.md: ${relativeSkillPath}`,
+    };
+  }
+
+  if (hasFullActivationPayload(content)) {
+    const canonicalAgentPath = extractCanonicalAgentPath(content);
+    return {
+      dir: item.legacySkillId,
+      canonicalSkillId: item.skillId,
+      classification: 'duplicate-full-payload',
+      fatal: true,
+      message: `Legacy skill alias duplicates full activation payload: ${relativeSkillPath} -> ${item.skillId} (${canonicalAgentPath})`,
+    };
+  }
+
+  if (isIntentionalLegacyAlias(content, item.skillId, item.legacySkillId)) {
+    return {
+      dir: item.legacySkillId,
+      canonicalSkillId: item.skillId,
+      classification: 'intentional-redirect',
+      fatal: false,
+      message: `Intentional legacy skill alias directory: ${relativeSkillPath} -> ${item.skillId}`,
+    };
+  }
+
+  if (hasLegacyAliasIntent(content, item.skillId)) {
+    const issues = getThinLegacyRedirectIssues(content, item.skillId, item.legacySkillId);
+    return {
+      dir: item.legacySkillId,
+      canonicalSkillId: item.skillId,
+      classification: 'non-thin-legacy-alias',
+      fatal: true,
+      message: `Legacy skill alias is not a thin redirect: ${relativeSkillPath} -> ${item.skillId} (${issues.join('; ')})`,
+    };
+  }
+
+  return {
+    dir: item.legacySkillId,
+    canonicalSkillId: item.skillId,
+    classification: 'unclassified-legacy-alias',
+    fatal: true,
+    message: `Unclassified legacy skill alias directory: ${relativeSkillPath}`,
+  };
+}
+
 function validateCodexSkills(options = {}) {
-  const resolved = { ...getDefaultOptions(), ...options };
+  const defaults = getDefaultOptions();
+  const projectRoot = options.projectRoot || defaults.projectRoot;
+  const resolved = {
+    ...defaults,
+    ...options,
+    projectRoot,
+    sourceDir: options.sourceDir || path.join(projectRoot, '.aiox-core', 'development', 'agents'),
+    skillsDir: options.skillsDir || path.join(projectRoot, '.codex', 'skills'),
+  };
   const errors = [];
   const warnings = [];
 
   if (!fs.existsSync(resolved.skillsDir)) {
     errors.push(`Skills directory not found: ${resolved.skillsDir}`);
-    return { ok: false, checked: 0, expected: 0, errors, warnings, missing: [], orphaned: [] };
+    return {
+      ok: false,
+      checked: 0,
+      expected: 0,
+      errors,
+      warnings,
+      missing: [],
+      orphaned: [],
+      legacy: [],
+      legacyAliases: [],
+      duplicatePayloads: [],
+      ignored: [],
+      selfTests: [],
+    };
   }
 
   const agents = parseAllAgents(resolved.sourceDir).filter(isParsableAgent);
@@ -74,6 +417,7 @@ function validateCodexSkills(options = {}) {
     agentId: agent.id,
     filename: agent.filename,
     skillId: getSkillId(agent.id),
+    legacySkillId: getLegacySkillId(agent.id),
   }));
 
   const missing = [];
@@ -99,13 +443,68 @@ function validateCodexSkills(options = {}) {
   }
 
   const expectedIds = new Set(expected.map(item => item.skillId));
+  const legacyIds = new Set(expected.map(item => item.legacySkillId));
+  const expectedByLegacyId = new Map(expected.map(item => [item.legacySkillId, item]));
+  const expectedByCanonicalPath = new Map(expected.map(item => [
+    `.aiox-core/development/agents/${item.filename}`,
+    item,
+  ]));
   const orphaned = [];
+  const legacy = [];
+  const legacyAliases = [];
+  const duplicatePayloads = [];
+  const ignored = [];
   if (resolved.strict) {
     const dirs = fs.readdirSync(resolved.skillsDir, { withFileTypes: true })
-      .filter(entry => entry.isDirectory() && entry.name.startsWith('aiox-'))
+      .filter(entry => entry.isDirectory() && (entry.name.startsWith('aiox-') || entry.name.startsWith('aios-')))
       .map(entry => entry.name);
     for (const dir of dirs) {
-      if (!expectedIds.has(dir)) {
+      if (legacyIds.has(dir)) {
+        const item = expectedByLegacyId.get(dir);
+        const skillPath = path.join(resolved.skillsDir, dir, 'SKILL.md');
+        const relativeSkillPath = path.join(path.relative(resolved.projectRoot, resolved.skillsDir), dir, 'SKILL.md');
+        const classification = classifyLegacySkillAlias(readTextIfExists(skillPath), item, relativeSkillPath);
+
+        legacy.push(dir);
+        legacyAliases.push(classification);
+        if (classification.fatal) {
+          errors.push(classification.message);
+        } else {
+          warnings.push(classification.message);
+        }
+        continue;
+      }
+      if (dir.startsWith('aiox-') && !expectedIds.has(dir)) {
+        if (resolved.allowOrphaned) {
+          continue;
+        }
+        const skillPath = path.join(resolved.skillsDir, dir, 'SKILL.md');
+        let content = '';
+        try {
+          content = fs.readFileSync(skillPath, 'utf8');
+        } catch (_error) {
+          content = '';
+        }
+
+        const canonicalAgentPath = extractCanonicalAgentPath(content);
+        const duplicateOf = canonicalAgentPath ? expectedByCanonicalPath.get(canonicalAgentPath) : null;
+        if (duplicateOf && hasFullActivationPayload(content)) {
+          duplicatePayloads.push({
+            dir,
+            canonicalSkillId: duplicateOf.skillId,
+            canonicalAgentPath,
+          });
+          errors.push(
+            `Duplicate full skill payload: ${path.join(path.relative(resolved.projectRoot, resolved.skillsDir), dir, 'SKILL.md')} -> ${duplicateOf.skillId} (${canonicalAgentPath})`,
+          );
+          continue;
+        }
+
+        if (isGeneratedSquadSkill(content, resolved.projectRoot)) {
+          ignored.push(dir);
+          continue;
+        }
+
         orphaned.push(dir);
         errors.push(`Orphaned skill directory: ${path.join(path.relative(resolved.projectRoot, resolved.skillsDir), dir)}`);
       }
@@ -116,6 +515,20 @@ function validateCodexSkills(options = {}) {
     warnings.push('No parseable agents found in sourceDir');
   }
 
+  const selfTests = resolved.selfTest
+    ? runSkillSelfTests({
+      projectRoot: resolved.projectRoot,
+      skillsDir: resolved.skillsDir,
+      expected,
+    })
+    : [];
+
+  for (const test of selfTests) {
+    for (const error of test.errors) {
+      errors.push(`${test.skillId}: ${error}`);
+    }
+  }
+
   return {
     ok: errors.length === 0,
     checked: expected.length,
@@ -124,12 +537,20 @@ function validateCodexSkills(options = {}) {
     warnings,
     missing,
     orphaned,
+    legacy,
+    legacyAliases,
+    duplicatePayloads,
+    ignored,
+    selfTests,
   };
 }
 
 function formatHumanReport(result) {
   if (result.ok) {
-    return `✅ Codex skills validation passed (${result.checked} skills checked)`;
+    const suffix = result.selfTests && result.selfTests.length > 0
+      ? `, ${result.selfTests.length} self-test(s) passed`
+      : '';
+    return `✅ Codex skills validation passed (${result.checked} skills checked${suffix})`;
   }
 
   const lines = [
@@ -167,6 +588,17 @@ if (require.main === module) {
 module.exports = {
   validateCodexSkills,
   validateSkillContent,
+  parseSkillFrontmatter,
+  createSkillToolSelfTestPayload,
+  normalizeSkillToolTarget,
+  runSkillSelfTests,
+  extractGeneratedSquadSource,
+  isGeneratedSquadSkill,
+  hasFullActivationPayload,
+  hasLegacyAliasIntent,
+  getThinLegacyRedirectIssues,
+  isIntentionalLegacyAlias,
+  classifyLegacySkillAlias,
   parseArgs,
   getDefaultOptions,
 };

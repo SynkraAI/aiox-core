@@ -141,9 +141,10 @@ class GreetingBuilder {
       // Check user preference (Story 6.1.4), now profile-aware (Story ACT-2)
       // Story ACT-2: PM agent bypasses bob mode preference restriction because
       // PM is the primary interface in bob mode and needs the full contextual greeting.
-      const preference = (userProfile === 'bob' && agent.id === 'pm')
-        ? this.preferenceManager.getPreference('advanced')
-        : this.preferenceManager.getPreference(userProfile);
+      const preference =
+        userProfile === 'bob' && agent.id === 'pm'
+          ? this.preferenceManager.getPreference('advanced')
+          : this.preferenceManager.getPreference(userProfile);
 
       if (preference !== 'auto') {
         // Override with fixed level
@@ -154,7 +155,7 @@ class GreetingBuilder {
       // Story ACT-2: Pass pre-loaded userProfile to avoid double loadUserProfile() call
       const greetingPromise = this._buildContextualGreeting(agent, context, userProfile);
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Greeting timeout')), GREETING_TIMEOUT),
+        setTimeout(() => reject(new Error('Greeting timeout')), GREETING_TIMEOUT)
       );
 
       return await Promise.race([greetingPromise, timeoutPromise]);
@@ -239,7 +240,7 @@ class GreetingBuilder {
       // 4. Context section (intelligent contextualization + recommendations)
       // Story ACT-7 AC5: References previous agent handoff intelligently
       this._safeBuildSection(() =>
-        this.buildContextSection(agent, context, sessionType, projectStatus, sectionContext),
+        this.buildContextSection(agent, context, sessionType, projectStatus, sectionContext)
       ),
       // 5. Workflow suggestions (Story ACT-5: relaxed trigger + fixed method call)
       this._safeBuildSection(() => {
@@ -302,6 +303,11 @@ class GreetingBuilder {
    */
   buildFixedLevelGreeting(agent, level) {
     const profile = agent.persona_profile;
+    const fallbackLabel = this._formatAgentLabel(agent);
+    const fallbackIdLabel = this._formatAgentLabel({
+      icon: agent.icon,
+      name: agent.id || agent.name,
+    });
 
     if (!profile || !profile.greeting_levels) {
       return this.buildSimpleGreeting(agent);
@@ -311,18 +317,18 @@ class GreetingBuilder {
     let greetingText;
     switch (level) {
       case 'minimal':
-        greetingText = profile.greeting_levels.minimal || `${agent.icon} ${agent.id} Agent ready`;
+        greetingText = profile.greeting_levels.minimal || `${fallbackIdLabel} Agent ready`;
         break;
       case 'named':
-        greetingText = profile.greeting_levels.named || `${agent.icon} ${agent.name} ready`;
+        greetingText = profile.greeting_levels.named || `${fallbackLabel} ready`;
         break;
       case 'archetypal':
         greetingText =
           profile.greeting_levels.archetypal ||
-          `${agent.icon} ${agent.name} the ${profile.archetype} ready`;
+          `${fallbackLabel}${profile.archetype ? ` the ${profile.archetype}` : ''} ready`;
         break;
       default:
-        greetingText = profile.greeting_levels.named || `${agent.icon} ${agent.name} ready`;
+        greetingText = profile.greeting_levels.named || `${fallbackLabel} ready`;
     }
 
     return `${greetingText}\n\nType \`*help\` to see available commands.`;
@@ -338,8 +344,14 @@ class GreetingBuilder {
     const greetingLevels =
       agent.persona_profile?.communication?.greeting_levels ||
       agent.persona_profile?.greeting_levels;
-    const greeting = greetingLevels?.named || `${agent.icon} ${agent.name} ready`;
+    const greeting = greetingLevels?.named || `${this._formatAgentLabel(agent)} ready`;
     return `${greeting}\n\nType \`*help\` to see available commands.`;
+  }
+
+  _formatAgentLabel(agent) {
+    const icon = agent.icon ? `${agent.icon} ` : '';
+    const name = agent.name || agent.id || 'Agent';
+    return `${icon}${name}`;
   }
 
   /**
@@ -361,7 +373,7 @@ class GreetingBuilder {
     const greetingLevels = profile?.communication?.greeting_levels || profile?.greeting_levels;
 
     if (!greetingLevels) {
-      const base = `${agent.icon} ${agent.name} ready`;
+      const base = `${this._formatAgentLabel(agent)} ready`;
       return permissionBadge ? `${base} ${permissionBadge}` : base;
     }
 
@@ -371,7 +383,7 @@ class GreetingBuilder {
 
     if (sessionType === 'existing' && sectionContext) {
       // Existing session: brief welcome back
-      const namedGreeting = greetingLevels.named || `${agent.icon} ${agent.name} ready`;
+      const namedGreeting = greetingLevels.named || `${this._formatAgentLabel(agent)} ready`;
       const storyRef = sectionContext.sessionStory || sectionContext.projectStatus?.currentStory;
       if (storyRef) {
         greeting = `${namedGreeting} -- continuing ${storyRef}`;
@@ -380,8 +392,9 @@ class GreetingBuilder {
       }
     } else if (sessionType === 'workflow' && sectionContext) {
       // Workflow session: focused on current workflow
-      const namedGreeting = greetingLevels.named || `${agent.icon} ${agent.name} ready`;
-      const workflowPhase = sectionContext.workflowState?.currentPhase || sectionContext.workflowActive;
+      const namedGreeting = greetingLevels.named || `${this._formatAgentLabel(agent)} ready`;
+      const workflowPhase =
+        sectionContext.workflowState?.currentPhase || sectionContext.workflowActive;
       if (workflowPhase) {
         greeting = `${namedGreeting} -- workflow active`;
       } else {
@@ -390,7 +403,9 @@ class GreetingBuilder {
     } else {
       // New session or no context: full archetypal greeting
       greeting =
-        greetingLevels.archetypal || greetingLevels.named || `${agent.icon} ${agent.name} ready`;
+        greetingLevels.archetypal ||
+        greetingLevels.named ||
+        `${this._formatAgentLabel(agent)} ready`;
     }
 
     // Append permission badge if available
@@ -492,10 +507,12 @@ class GreetingBuilder {
     // Recent commits as brief reference
     if (status.recentCommits && status.recentCommits.length > 0) {
       const lastCommit = status.recentCommits[0];
-      const commitMsg = typeof lastCommit === 'string' ? lastCommit : lastCommit.message || lastCommit;
-      const shortMsg = String(commitMsg).length > 60
-        ? String(commitMsg).substring(0, 57) + '...'
-        : String(commitMsg);
+      const commitMsg =
+        typeof lastCommit === 'string' ? lastCommit : lastCommit.message || lastCommit;
+      const shortMsg =
+        String(commitMsg).length > 60
+          ? String(commitMsg).substring(0, 57) + '...'
+          : String(commitMsg);
       sentences.push(`Last commit: "${shortMsg}"`);
     }
 

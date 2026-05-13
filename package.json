@@ -1,12 +1,13 @@
 {
-  "name": "aiox-core",
-  "version": "5.0.3",
+  "name": "@aiox-squads/core",
+  "version": "5.2.2",
   "description": "Synkra AIOX: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
     "aiox": "bin/aiox.js",
     "aiox-core": "bin/aiox.js",
     "aiox-minimal": "bin/aiox-minimal.js",
-    "aiox-graph": "bin/aiox-graph.js"
+    "aiox-graph": "bin/aiox-graph.js",
+    "aiox-delegate": "bin/aiox-delegate.js"
   },
   "preferGlobal": false,
   "workspaces": [
@@ -18,14 +19,12 @@
     "packages/",
     ".aiox-core/",
     ".claude/CLAUDE.md",
+    ".claude/settings.json",
+    ".claude/agents/",
+    ".claude/commands/",
+    ".claude/skills/",
     ".claude/rules/",
     ".claude/hooks/",
-    "pro/license/",
-    "pro/squads/",
-    "pro/pro-config.yaml",
-    "pro/feature-registry.yaml",
-    "pro/package.json",
-    "pro/README.md",
     "docs/guides/",
     "docs/installation/",
     "docs/examples/",
@@ -43,11 +42,27 @@
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    "./resilience": "./.aiox-core/core/resilience/index.js",
+    "./resilience/agent-immortality": "./.aiox-core/core/resilience/agent-immortality.js",
+    "./installer/aiox-core-installer": "./packages/installer/src/installer/aiox-core-installer.js",
+    "./installer/enterprise-detector": "./packages/installer/src/enterprise/enterprise-detector.js",
+    "./installer/enterprise-errors": "./packages/installer/src/enterprise/enterprise-errors.js",
+    "./installer/enterprise-manifest-loader": "./packages/installer/src/enterprise/enterprise-manifest-loader.js",
+    "./installer/enterprise-rollback": "./packages/installer/src/enterprise/enterprise-rollback.js",
+    "./installer/enterprise-upgrader": "./packages/installer/src/enterprise/enterprise-upgrader.js",
+    "./installer/enterprise-upgrade-plan": "./packages/installer/src/enterprise/enterprise-upgrade-plan.js",
+    "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
     "test": "jest",
+    "test:ci": "jest --runInBand --forceExit",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:e2e:installed-skills": "node scripts/e2e/installed-skills-smoke.js",
+    "test:e2e:pro-enterprise-upgrade": "node scripts/e2e/pro-to-enterprise-upgrade-smoke.js",
     "test:health-check": "mocha tests/health-check/**/*.test.js --timeout 30000",
     "lint": "eslint . --cache --cache-location .eslintcache",
     "typecheck": "tsc --noEmit",
@@ -75,7 +90,11 @@
     "validate:gemini-integration": "node .aiox-core/infrastructure/scripts/validate-gemini-integration.js",
     "sync:skills:codex": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js",
     "sync:skills:codex:global": "node .aiox-core/infrastructure/scripts/codex-skills-sync/index.js --global --global-only",
+    "setup:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js",
+    "setup:codex-skills:dry": "node .aiox-core/infrastructure/scripts/codex-skills-sync/bootstrap.js --dry-run",
     "validate:codex-skills": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict",
+    "validate:codex-skills:self-test": "node .aiox-core/infrastructure/scripts/codex-skills-sync/validate.js --strict --self-test",
+    "repair:agent-references": "node .aiox-core/infrastructure/scripts/repair-agent-references.js",
     "validate:paths": "node .aiox-core/infrastructure/scripts/validate-paths.js",
     "validate:parity": "node .aiox-core/infrastructure/scripts/validate-parity.js",
     "validate:semantic-lint": "node scripts/semantic-lint.js",
@@ -103,6 +122,7 @@
     "handlebars": "^4.7.8",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
+    "node-machine-id": "^1.1.12",
     "ora": "^5.4.1",
     "picocolors": "^1.1.1",
     "proper-lockfile": "^4.1.2",
@@ -171,6 +191,9 @@
   },
   "overrides": {
     "tar": "^7.5.7",
-    "diff": "^8.0.3"
+    "diff": "^8.0.3",
+    "fast-uri": "^3.1.2",
+    "serialize-javascript": "^7.0.5",
+    "test-exclude": "^7.0.1"
   }
 }

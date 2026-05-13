@@ -5,7 +5,9 @@
 Suggest next commands based on current workflow context using the Workflow Intelligence System (WIS). Helps users navigate workflows efficiently without memorizing command sequences.
 
 AIOX 4.0.4 runtime-first mode adds deterministic next-step recommendation from
-execution signals (story/qa/ci/diff) via `workflow-state-manager`.
+execution signals (story/qa/ci/diff) via `workflow-state-manager`. That module
+is a legacy compatibility helper for `*next`; new persistent story/epic state
+belongs in `.aiox-core/core/orchestration/session-state.js`.
 
 ## Task Definition (AIOX Task Format V1.0)
 

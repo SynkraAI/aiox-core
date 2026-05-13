@@ -5,6 +5,10 @@
  * @story SYN-3 - Context Bracket Tracker
  */
 
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
 const {
   calculateBracket,
   estimateContextPercent,
@@ -12,6 +16,8 @@ const {
   getActiveLayers,
   needsHandoffWarning,
   needsMemoryHints,
+  getModelConfig,
+  resetModelConfigCache,
   BRACKETS,
   TOKEN_BUDGETS,
   DEFAULTS,
@@ -361,6 +367,125 @@ describe('DEFAULTS constant', () => {
   test('should have maxContext = 200000', () => {
     expect(DEFAULTS.maxContext).toBe(200000);
   });
+
+  test('should be immutable', () => {
+    expect(Object.isFrozen(DEFAULTS)).toBe(true);
+  });
+});
+
+// =============================================================================
+// getModelConfig
+// =============================================================================
+
+describe('getModelConfig', () => {
+  beforeEach(() => {
+    resetModelConfigCache();
+  });
+
+  afterEach(() => {
+    resetModelConfigCache();
+  });
+
+  function createProjectConfig(contents) {
+    const projectDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-context-tracker-'));
+    const configDir = path.join(projectDir, '.aiox-core');
+    fs.mkdirSync(configDir, { recursive: true });
+    fs.writeFileSync(path.join(configDir, 'core-config.yaml'), contents, 'utf8');
+    return projectDir;
+  }
+
+  test('reads active model context window from core-config.yaml', () => {
+    const projectDir = createProjectConfig(`
+models:
+  active: claude-opus-4-6
+  registry:
+    claude-opus-4-6:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 1500
+`);
+
+    expect(getModelConfig(projectDir)).toEqual({
+      maxContext: 1000000,
+      avgTokensPerPrompt: 1500,
+    });
+  });
+
+  test('falls back to DEFAULTS when models section is missing', () => {
+    const projectDir = createProjectConfig('boundary:\n  frameworkProtection: true\n');
+
+    expect(getModelConfig(projectDir)).toEqual(DEFAULTS);
+    expect(getModelConfig(projectDir)).not.toBe(DEFAULTS);
+  });
+
+  test('falls back to DEFAULTS when active model context window is invalid', () => {
+    const projectDir = createProjectConfig(`
+models:
+  active: invalid-model
+  registry:
+    invalid-model:
+      contextWindow: 0
+      avgTokensPerPrompt: 1500
+`);
+
+    expect(getModelConfig(projectDir)).toEqual(DEFAULTS);
+  });
+
+  test('returns copies so callers cannot mutate cached defaults', () => {
+    const projectDir = createProjectConfig('boundary:\n  frameworkProtection: true\n');
+    const fallbackConfig = getModelConfig(projectDir);
+
+    fallbackConfig.maxContext = 1;
+    fallbackConfig.avgTokensPerPrompt = 1;
+
+    expect(getModelConfig(projectDir)).toEqual(DEFAULTS);
+  });
+
+  test('uses default average tokens when active model omits avgTokensPerPrompt', () => {
+    const projectDir = createProjectConfig(`
+models:
+  active: custom-model
+  registry:
+    custom-model:
+      contextWindow: 750000
+`);
+
+    expect(getModelConfig(projectDir)).toEqual({
+      maxContext: 750000,
+      avgTokensPerPrompt: DEFAULTS.avgTokensPerPrompt,
+    });
+  });
+
+  test('caches model config separately per project root', () => {
+    const opusDir = createProjectConfig(`
+models:
+  active: claude-opus-4-6
+  registry:
+    claude-opus-4-6:
+      contextWindow: 1000000
+      avgTokensPerPrompt: 1500
+`);
+    const smallDir = createProjectConfig(`
+models:
+  active: local-test-model
+  registry:
+    local-test-model:
+      contextWindow: 50000
+      avgTokensPerPrompt: 1000
+`);
+
+    expect(getModelConfig(opusDir)).toEqual({
+      maxContext: 1000000,
+      avgTokensPerPrompt: 1500,
+    });
+    expect(getModelConfig(smallDir)).toEqual({
+      maxContext: 50000,
+      avgTokensPerPrompt: 1000,
+    });
+    expect(getModelConfig(opusDir)).toEqual({
+      maxContext: 1000000,
+      avgTokensPerPrompt: 1500,
+    });
+  });
 });
 
 // =============================================================================
@@ -447,19 +572,17 @@ describe('XML_SAFETY_MULTIPLIER (QW-3)', () => {
 });
 
 // =============================================================================
-// AC8: Zero External Dependencies
+// AC8: Dynamic Configuration
 // =============================================================================
 
-describe('AC8: zero external dependencies', () => {
-  test('module source should not contain require statements', () => {
-    const fs = require('fs');
-    const path = require('path');
+describe('AC8: dynamic configuration', () => {
+  test('module source should expose config loading and cache reset helpers', () => {
     const source = fs.readFileSync(
       path.join(__dirname, '../../.aiox-core/core/synapse/context/context-tracker.js'),
       'utf8',
     );
-    // Should not have any require() calls (only module.exports)
-    const requireMatches = source.match(/\brequire\s*\(/g);
-    expect(requireMatches).toBeNull();
+    expect(source).toContain('function getModelConfig');
+    expect(source).toContain('function resetModelConfigCache');
+    expect(source).toContain('core-config.yaml');
   });
 });

@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-03-11T00:48:55.982Z'
-  entityCount: 745
+  lastUpdated: '2026-05-10T16:26:31.587Z'
+  entityCount: 757
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -5600,8 +5600,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:58023a5108ee66b16f93c82ee8a7c0414852f7c887257a8ff9040f060b140746
-      lastVerified: '2026-03-11T00:48:55.851Z'
+      checksum: sha256:14efe89e4be87326f621b1ff2a03c928806566ec134e74b191ff24156d5a0140
+      lastVerified: '2026-05-08T21:25:19.323Z'
     architecture-tmpl:
       path: .aiox-core/product/templates/architecture-tmpl.yaml
       layer: L2
@@ -7214,8 +7214,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:cb3abc56f9c001a80f18766d949b0d8916eb91d4644c0ee2d642ac62a03a73d3
-      lastVerified: '2026-03-11T00:48:55.861Z'
+      checksum: sha256:ca880db21647162725bbc5bcd4a01613ad2cc4911aa829a9b9242a05bb62283a
+      lastVerified: '2026-05-06T22:00:40.770Z'
     greeting-builder:
       path: .aiox-core/development/scripts/greeting-builder.js
       layer: L2
@@ -7233,6 +7233,7 @@ entities:
         - workflow-navigator
         - greeting-preference-manager
         - project-status-loader
+        - permissions
         - config-resolver
         - validate-user-profile
         - session-state
@@ -7245,8 +7246,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:6f7aad3bd400c77463af5665cec45e0256350671a113d2fcad83a6adfa5dbbac
-      lastVerified: '2026-03-11T00:48:55.861Z'
+      checksum: sha256:dd0c50dc690a44fdddd9cf8adde609ea0ef2aa6916a78b9fcc971195ddff5656
+      lastVerified: '2026-05-06T20:38:53.200Z'
     greeting-config-cli:
       path: .aiox-core/development/scripts/greeting-config-cli.js
       layer: L2
@@ -7452,8 +7453,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:3021b425f334c63d6462e64f6316f8b4036bd77b0b49ae419f20695fe3d1a89d
-      lastVerified: '2026-03-11T00:48:55.862Z'
+      checksum: sha256:418fcbf6ca3a6259f8d13e3290e8e49d6a16917b304039a6470264c5fdece89e
+      lastVerified: '2026-05-08T14:34:39.788Z'
     refactoring-suggester:
       path: .aiox-core/development/scripts/refactoring-suggester.js
       layer: L2
@@ -7737,10 +7738,12 @@ entities:
         - context-loader
         - project-status-loader
         - git-config-detector
+        - permissions
         - greeting-preference-manager
         - context-detector
         - workflow-navigator
         - atomic-write
+        - pro-detector
       externalDeps: []
       plannedDeps:
         - permissions
@@ -7750,8 +7753,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:de2d4a10b01da32d31c1f810feed429804da6869bb958d5a5ebe626589d0a2f6
-      lastVerified: '2026-03-11T00:48:55.864Z'
+      checksum: sha256:6910a7f6b0cef65a0886e0b29bbcb0ee401ca4fb444eb255a7a368cb67327aa7
+      lastVerified: '2026-05-06T23:18:07.594Z'
     usage-tracker:
       path: .aiox-core/development/scripts/usage-tracker.js
       layer: L2
@@ -8230,16 +8233,19 @@ entities:
         - output-formatter
         - yaml-validator
         - registry-loader
+        - resilience-index
       externalDeps: []
       plannedDeps:
+        - health-check-index
+        - external-executors-index
         - health-check
       lifecycle: experimental
       adaptability:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:970b617b0e723e8248065f698eca2298a5a0b72e3e43ee820ea85294555736e2
-      lastVerified: '2026-03-11T00:48:55.872Z'
+      checksum: sha256:b09d5546bdb1507c60ddc5dc9b48760b55e4e6a4ccc8fdcb63e168e8ea334b13
+      lastVerified: '2026-05-09T07:56:57.018Z'
     code-intel-client:
       path: .aiox-core/core/code-intel/code-intel-client.js
       layer: L1
@@ -8313,17 +8319,17 @@ entities:
       usedBy:
         - sync-registry-intel
       dependencies:
-        - code-intel
         - registry-loader
       externalDeps: []
-      plannedDeps: []
+      plannedDeps:
+        - code-intel-index
       lifecycle: production
       adaptability:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:701102a519457938d5b9187b75a1f97d85cb5466cef23bce5edfb48b34c69ab8
-      lastVerified: '2026-03-11T00:48:55.875Z'
+      checksum: sha256:0fc20a7f90fc1ac2078878267db64517fd2ae75d8d2a81101d0cac77d1bf6458
+      lastVerified: '2026-05-10T16:26:31.572Z'
     config-cache:
       path: .aiox-core/core/config/config-cache.js
       layer: L1
@@ -8708,6 +8714,7 @@ entities:
         - build-orchestrator
         - dev
       dependencies:
+        - errors-index
         - stuck-detector
         - recovery-tracker
       externalDeps: []
@@ -8717,8 +8724,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:595523caf6db26624e7a483489345b9498ae15d99c2568073a2c0c45d5b46a54
-      lastVerified: '2026-03-11T00:48:55.878Z'
+      checksum: sha256:02bafb4a29e7f769ae775fbc4e571ad34882569665f61ebc28eb87f7043eafc8
+      lastVerified: '2026-05-08T14:34:39.786Z'
     context-injector:
       path: .aiox-core/core/execution/context-injector.js
       layer: L1
@@ -8729,7 +8736,8 @@ entities:
         - injector
       usedBy: []
       dependencies:
-        - gotchas-memory
+        - memory-query
+        - session-memory
       externalDeps: []
       plannedDeps:
         - memory-query
@@ -8739,8 +8747,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:a183255eb4831f701086f23f371f94a9ce10c46ea18c8369ec0fd756777f042f
-      lastVerified: '2026-03-11T00:48:55.878Z'
+      checksum: sha256:7654f6e6c3d555f3963369e71edf84b15c0fdec53bd161800b71782f78275244
+      lastVerified: '2026-05-07T14:31:05.474Z'
     parallel-executor:
       path: .aiox-core/core/execution/parallel-executor.js
       layer: L1
@@ -8818,8 +8826,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:fc662bbc649bf704a8f6e70d0203fab389c664a6b4b2932510f84c251ae26610
-      lastVerified: '2026-03-11T00:48:55.878Z'
+      checksum: sha256:bcd102ca46e74d61af151aa7877921807c9bf5aba45bfba73f9f5c8cf714d8e2
+      lastVerified: '2026-05-07T15:02:59.785Z'
     semantic-merge-engine:
       path: .aiox-core/core/execution/semantic-merge-engine.js
       layer: L1
@@ -8850,8 +8858,7 @@ entities:
         - subagent
         - dispatcher
       usedBy: []
-      dependencies:
-        - gotchas-memory
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - ai-providers
@@ -8861,8 +8868,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:7affbc04de9be2bc53427670009a885f0b35e1cc183f82c2e044abf9611344b6
-      lastVerified: '2026-03-11T00:48:55.878Z'
+      checksum: sha256:fa8ce6aa5fdd85f7a06c3c560a85d904222658076158c35031ddae19bb63efe1
+      lastVerified: '2026-05-08T21:25:19.321Z'
     wave-executor:
       path: .aiox-core/core/execution/wave-executor.js
       layer: L1
@@ -9021,8 +9028,7 @@ entities:
         - ideation
         - engine
       usedBy: []
-      dependencies:
-        - gotchas-memory
+      dependencies: []
       externalDeps: []
       plannedDeps: []
       lifecycle: experimental
@@ -9030,8 +9036,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:d9108fa47ed7a9131703739befb214b97d5b8e546faf1b49d8ae9d083756c589
-      lastVerified: '2026-03-11T00:48:55.879Z'
+      checksum: sha256:a154a0ce92f6b39b358529a030025b9709e0e4e2b85f6af02bd474e15c1aeb83
+      lastVerified: '2026-05-07T14:31:05.479Z'
     circuit-breaker:
       path: .aiox-core/core/ids/circuit-breaker.js
       layer: L1
@@ -9050,8 +9056,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:1b35331ba71a6ce17869bab255e087fc540291243f9884fc21ed89f7efc122a4
-      lastVerified: '2026-03-11T00:48:55.879Z'
+      checksum: sha256:63be126f2e0d320daa60cb5b68b21df93cad4c19d1f959e06a6ac776213f8eba
+      lastVerified: '2026-05-07T13:24:28.323Z'
     framework-governor:
       path: .aiox-core/core/ids/framework-governor.js
       layer: L1
@@ -9177,8 +9183,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:4873507324efab32ba59e1ade70aaa79f318f9c5d689bdb747d8721effba38d1
-      lastVerified: '2026-03-11T00:48:55.880Z'
+      checksum: sha256:00ae2e78486a9e7b3c8bf8e9ca0e9e955211ee4ae795c630e7f2934840d5596d
+      lastVerified: '2026-05-08T14:34:39.787Z'
     verification-gate:
       path: .aiox-core/core/ids/verification-gate.js
       layer: L1
@@ -9334,9 +9340,6 @@ entities:
         - gotcha
         - gotchas
         - build-orchestrator
-        - context-injector
-        - subagent-dispatcher
-        - ideation-engine
         - active-modules.verify
         - dev
       dependencies: []
@@ -9731,6 +9734,7 @@ entities:
         - cli-commands
       dependencies:
         - tech-stack-detector
+        - executors
         - recovery-handler
         - gate-evaluator
         - agent-invoker
@@ -9743,8 +9747,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:61b874d74fae62e9307861b02b7505538f1c94362fe638fc3941b0665dcbbdf6
-      lastVerified: '2026-03-11T00:48:55.885Z'
+      checksum: sha256:88238a9e0ef7d058efe0ca2fe7a9d0e34202bff7e409fd1a97886b0a8ccdce97
+      lastVerified: '2026-05-08T06:26:24.445Z'
     message-formatter:
       path: .aiox-core/core/orchestration/message-formatter.js
       layer: L1
@@ -10669,7 +10673,6 @@ entities:
         - github-devops-pre-push-quality-gate
         - plan-create-context
         - plan-create-implementation
-        - registry-syncer
         - code-intel-source
         - metrics-source
       dependencies: []
@@ -11453,7 +11456,9 @@ entities:
       keywords:
         - context
         - builder
-      usedBy: []
+      usedBy:
+        - synapse-engine
+        - synapse-context-index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -11474,6 +11479,8 @@ entities:
         - tracker
       usedBy:
         - pipeline-collector
+        - synapse-engine
+        - synapse-context-index
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -11761,7 +11768,8 @@ entities:
       keywords:
         - memory
         - bridge
-      usedBy: []
+      usedBy:
+        - synapse-engine
       dependencies:
         - tokens
         - synapse-memory-provider
@@ -11804,7 +11812,8 @@ entities:
       purpose: Entity at .aiox-core/core/synapse/output/formatter.js
       keywords:
         - formatter
-      usedBy: []
+      usedBy:
+        - synapse-engine
       dependencies:
         - tokens
       externalDeps: []
@@ -11885,6 +11894,7 @@ entities:
         - memory-bridge
         - synapse-memory-provider
         - formatter
+        - hierarchical-context-manager
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -12778,6 +12788,251 @@ entities:
         extensionPoints: []
       checksum: sha256:dd025894f8f0d3bd22a147dbc0debef8b83e96f3c59483653404b3cd5a01d5aa
       lastVerified: '2026-03-11T00:48:55.903Z'
+    pro-updater:
+      path: .aiox-core/core/pro/pro-updater.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/pro/pro-updater.js
+      keywords:
+        - pro
+        - updater
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:30ea78b8ab088e695936ae662057697410856751f463eeb649e00b67dcc31531
+      lastVerified: '2026-05-08T21:44:50.553Z'
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+    aiox-error:
+      path: .aiox-core/core/errors/aiox-error.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/aiox-error.js
+      keywords:
+        - aiox
+        - error
+      usedBy:
+        - errors-index
+      dependencies:
+        - constants
+        - error-registry
+        - serializer
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:6734641df389f921f1d139c129ec007d15b3a08114a15fe9faf792ed1036d0c8
+      lastVerified: '2026-05-08T10:11:41.092Z'
+    constants:
+      path: .aiox-core/core/errors/constants.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/constants.js
+      keywords:
+        - constants
+      usedBy:
+        - aiox-error
+        - error-registry
+        - errors-index
+        - serializer
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:9f6fa0b1a9b8538d321674ac43628f42452ce2ac770d0433c1ab84b55b1e56dd
+      lastVerified: '2026-05-08T10:11:41.094Z'
+    error-registry:
+      path: .aiox-core/core/errors/error-registry.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/error-registry.js
+      keywords:
+        - error
+        - registry
+      usedBy:
+        - aiox-error
+        - errors-index
+      dependencies:
+        - constants
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:7ba8dffa725860a285618593b8ed47b05c4fa488fdedf1282c2e214881c370bc
+      lastVerified: '2026-05-08T10:11:41.094Z'
+    errors-index:
+      path: .aiox-core/core/errors/index.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/index.js
+      keywords:
+        - index
+      usedBy:
+        - build-state-manager
+        - synapse-engine
+      dependencies:
+        - constants
+        - error-registry
+        - aiox-error
+        - serializer
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:462d0aed6f57f2e4b9d51bcb20467451473c927e0d182b5c3ad43f352f44122c
+      lastVerified: '2026-05-08T10:11:41.095Z'
+    serializer:
+      path: .aiox-core/core/errors/serializer.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/serializer.js
+      keywords:
+        - serializer
+      usedBy:
+        - aiox-error
+        - errors-index
+      dependencies:
+        - constants
+        - utils
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:7144adaf3a245afd732aef16e2cdb61f08246badb6b90ac1a7f4b73705ff3ce8
+      lastVerified: '2026-05-08T10:11:41.096Z'
+    utils:
+      path: .aiox-core/core/errors/utils.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/errors/utils.js
+      keywords:
+        - utils
+      usedBy:
+        - aiox-error
+        - error-registry
+        - errors-index
+        - serializer
+      dependencies: []
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:24b8ff80e98efc2b562843262490b7ac537ee77565715b644f212652192ced62
+      lastVerified: '2026-05-08T10:11:41.096Z'
+    synapse-engine:
+      path: .aiox-core/core/synapse/engine.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/synapse/engine.js
+      keywords:
+        - engine
+      usedBy: []
+      dependencies:
+        - errors-index
+        - context-tracker
+        - context-builder
+        - formatter
+        - memory-bridge
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:1b65523b2fec6a44ab380298c4d98f0569209dec8b50be3922479ffcd6548df0
+      lastVerified: '2026-05-08T14:34:39.788Z'
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: experimental
+    hierarchical-context-manager:
+      path: .aiox-core/core/synapse/context/hierarchical-context-manager.js
+      layer: L1
+      type: module
+      purpose: this._longTermSummaries.map(message => message.content).join('\n\n'),
+      keywords:
+        - hierarchical
+        - context
+        - manager
+      usedBy:
+        - synapse-context-index
+      dependencies:
+        - tokens
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:34f5b9e64c46880138ad684d64e7006f63c16211a219afa81a2c1b6236748af5
+      lastVerified: '2026-05-08T19:13:43.506Z'
+    synapse-context-index:
+      path: .aiox-core/core/synapse/context/index.js
+      layer: L1
+      type: module
+      purpose: Exports SYNAPSE context runtime helpers and the hierarchical context manager
+      keywords:
+        - index
+      usedBy: []
+      dependencies:
+        - context-tracker
+        - context-builder
+        - hierarchical-context-manager
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: experimental
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:a67e843cf61e823e0c1b73efdb2d67d268a798fc0c25505a199c1da130d4fe36
+      lastVerified: '2026-05-08T19:10:54.503Z'
+    agent-immortality:
+      path: .aiox-core/core/resilience/agent-immortality.js
+      layer: L1
+      type: module
+      purpose: truncate(summary, options.maxLegacyChars ?? DEFAULT_CONFIG.maxLegacyChars),
+      keywords:
+        - agent
+        - immortality
+      usedBy:
+        - resilience-index
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d1612c672e91a802924c4a61d8beade66d5740487ca0a244950a2c8249a70962
+      lastVerified: '2026-05-09T07:56:57.020Z'
+    resilience-index:
+      path: .aiox-core/core/resilience/index.js
+      layer: L1
+      type: module
+      purpose: Entity at .aiox-core/core/resilience/index.js
+      keywords:
+        - index
+      usedBy:
+        - index
+      dependencies:
+        - agent-immortality
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: production
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:5acbb55fbbf25fc052c0ee2eac5f35d30228144e9f426083b89aabc9e54d084f
+      lastVerified: '2026-05-09T07:56:57.021Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md
@@ -16358,8 +16613,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:0fbc1baff25f20e3a37d3e4be51d146a75254d5ed638b3438d9f1bf0e587c997
-      lastVerified: '2026-03-11T00:48:55.955Z'
+      checksum: sha256:5b8cb91ddcfda2b6b66328c12129e71665e4e1cb6f13b1792746e9d761d1ebcf
+      lastVerified: '2026-05-07T21:02:02.645Z'
     brownfield-analyzer:
       path: .aiox-core/infrastructure/scripts/documentation-integrity/brownfield-analyzer.js
       layer: L2
