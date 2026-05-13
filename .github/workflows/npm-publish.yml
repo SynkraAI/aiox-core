@@ -357,6 +357,8 @@ jobs:
     needs: [test, build]
     if: ${{ contains(format(',{0},', needs.build.outputs.packages), ',aiox-core,') }}
     runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.should-publish.outputs.should_publish }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -485,7 +487,7 @@ jobs:
             fi
           fi
 
-          if [ "${{ needs.publish_legacy_aiox_core.result }}" = "success" ]; then
+          if [ "${{ needs.publish_legacy_aiox_core.outputs.published }}" = "true" ]; then
             if [ -n "$PUBLISHED_PACKAGES" ]; then
               PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, aiox-core legacy wrapper"
             else
@@ -506,7 +508,7 @@ jobs:
 
   create-release-notes:
     needs: [build, publish, publish_workspace_packages, publish_legacy_aiox_core]
-    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish_workspace_packages.result == 'success' || needs.publish_legacy_aiox_core.result == 'success')
+    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish_workspace_packages.result == 'success' || needs.publish_legacy_aiox_core.outputs.published == 'true')
     runs-on: ubuntu-latest
     permissions:
       contents: write
