@@ -143,6 +143,45 @@ describe('Dependency Validator', () => {
     );
   });
 
+  it('does not fail greenfield validation when Pro creates node_modules without package.json', async () => {
+    const projectPath = '/tmp/aiox-greenfield-pro';
+
+    fs.existsSync.mockImplementation((targetPath) => (
+      samePath(targetPath, projectFile(projectPath, 'node_modules'))
+    ));
+    fs.readdirSync.mockReturnValue(['@aiox-squads', '.bin']);
+
+    const result = await validateDependencies({
+      success: true,
+      skipped: true,
+      reason: 'no-package-json',
+      packageManager: 'npm',
+      projectPath,
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.errors).toEqual([]);
+    expect(result.checks).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          component: 'Dependencies',
+          status: 'success',
+        }),
+        expect.objectContaining({
+          component: 'Package Manifest',
+          status: 'skipped',
+          message: 'No package.json found (greenfield project)',
+        }),
+        expect.objectContaining({
+          component: 'Security Audit',
+          status: 'skipped',
+          message: 'No package.json found (greenfield project)',
+        }),
+      ]),
+    );
+    expect(childProcess.exec).not.toHaveBeenCalled();
+  });
+
   it('fails when package.json declares dependencies but node_modules is missing', async () => {
     const projectPath = '/tmp/aiox-broken';
 

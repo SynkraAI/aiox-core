@@ -46,10 +46,15 @@ async function validateDependencies(depsContext = {}) {
     // Check node_modules existence
     const nodeModulesPath = path.join(projectRoot, 'node_modules');
     const packageJsonPath = path.join(projectRoot, 'package.json');
+    const packageJsonExists = fs.existsSync(packageJsonPath);
+    const isGreenfieldNoPackageJson =
+      depsContext.skipped === true &&
+      depsContext.reason === 'no-package-json' &&
+      !packageJsonExists;
 
     // For greenfield projects, check if package.json has dependencies
     let hasDependencies = false;
-    if (fs.existsSync(packageJsonPath)) {
+    if (packageJsonExists) {
       try {
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         hasDependencies = !!(
@@ -92,14 +97,31 @@ async function validateDependencies(depsContext = {}) {
       message: 'Directory exists',
     });
 
-    // Validate package.json integrity
-    await validatePackageJson(results, projectRoot);
+    if (isGreenfieldNoPackageJson) {
+      results.checks.push({
+        component: 'Package Manifest',
+        file: packageJsonPath,
+        status: 'skipped',
+        message: 'No package.json found (greenfield project)',
+      });
+    } else {
+      // Validate package.json integrity
+      await validatePackageJson(results, projectRoot);
+    }
 
     // Validate any explicit dependency contract supplied by the caller.
     await checkRequiredDependencies(results, projectRoot, depsContext.requiredDependencies);
 
-    // Run npm audit (non-blocking - warnings only)
-    await runSecurityAudit(results, depsContext.packageManager, projectRoot);
+    if (isGreenfieldNoPackageJson) {
+      results.checks.push({
+        component: 'Security Audit',
+        status: 'skipped',
+        message: 'No package.json found (greenfield project)',
+      });
+    } else {
+      // Run npm audit (non-blocking - warnings only)
+      await runSecurityAudit(results, depsContext.packageManager, projectRoot);
+    }
 
     // Count installed packages
     await countInstalledPackages(results, nodeModulesPath);
