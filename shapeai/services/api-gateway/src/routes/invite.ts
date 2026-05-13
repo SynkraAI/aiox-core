@@ -10,15 +10,27 @@ function generateCode(): string {
 }
 
 export async function inviteRoutes(app: FastifyInstance) {
-  // Gerar códigos — apenas o admin (hardcoded por email)
+  // Gerar códigos — INTERNAL_SECRET (server-to-server) ou JWT + email admin
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const adminOrInternalAuth = async (request: any, reply: any) => {
+    const internalSecret = process.env.INTERNAL_SECRET
+    if (internalSecret && request.headers['x-internal-secret'] === internalSecret) return
+    await requireAuth(request, reply)
+  }
+
   app.post<{ Body: { quantity?: number } }>(
     '/invite/generate',
-    { preHandler: requireAuth },
+    { preHandler: adminOrInternalAuth },
     async (request, reply) => {
-      const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim())
-      const { rows: user } = await pool.query('SELECT email FROM users WHERE id = $1', [request.authUser.id])
-      if (!adminEmails.includes(user[0]?.email)) {
-        return reply.status(403).send({ error: 'Acesso restrito' })
+      const internalSecret = process.env.INTERNAL_SECRET
+      const isInternal = internalSecret && request.headers['x-internal-secret'] === internalSecret
+
+      if (!isInternal) {
+        const adminEmails = (process.env.ADMIN_EMAILS ?? '').split(',').map((e) => e.trim())
+        const { rows: user } = await pool.query('SELECT email FROM users WHERE id = $1', [request.authUser.id])
+        if (!adminEmails.includes(user[0]?.email)) {
+          return reply.status(403).send({ error: 'Acesso restrito' })
+        }
       }
 
       const quantity = Math.min(request.body?.quantity ?? 1, 50)
