@@ -291,8 +291,8 @@ function FutureEvolutionCard({ imageUrl, isPro }: { imageUrl: string; isPro: boo
         {!isPro && (
           <View style={fes.lockOverlay}>
             <Text style={fes.lockIcon}>🔒</Text>
-            <Text style={fes.lockTitle}>Desbloqueie seu shape dos sonhos</Text>
-            <Text style={fes.lockSub}>Veja como seu corpo pode se transformar com treino e alimentação consistentes</Text>
+            <Text style={fes.lockTitle}>Ver shape dos sonhos</Text>
+            <Text style={fes.lockSub}>Descubra como seu corpo vai ficar com treino e alimentação consistentes</Text>
             <TouchableOpacity style={fes.upgradeBtn} onPress={() => router.push('/(app)/paywall')}>
               <Text style={fes.upgradeBtnText}>Assinar Pro</Text>
             </TouchableOpacity>
