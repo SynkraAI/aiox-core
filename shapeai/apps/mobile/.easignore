@@ -1,0 +1,16 @@
+# Ignora serviços e arquivos não necessários para o build mobile
+../../services/
+../../docs/
+../../packages/
+../../.claude/
+../../.aiox-core/
+../../node_modules/
+**/debug_*.jpg
+**/debug_*.png
+**/debug_*.py
+**/debug_*.js
+**/debug_*.cjs
+**/*.m4a
+**/*.mp4
+**/*.pdf
+**/*.vtt
