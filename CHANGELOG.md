@@ -5,6 +5,22 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2026-05-13
+
+### Added
+
+- `project-status` task for accurate `*status` command output (#559).
+
+### Fixed
+
+- `ConfigCache.has()` stat inflation and hook system errors (#582).
+- CI: use `pull_request_target` for fork PR labeling (#585).
+- `cacheHitRate` overflow, null depth count, and checkpoint `TypeError` (#581).
+
+### Changed
+
+- Rebranded documentation to AIOX Squad with new tagline and domain (#553).
+
 ## [4.2.11] - 2026-02-16
 
 ### Added
