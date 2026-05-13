@@ -8,6 +8,7 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@src/*": ["src/*"],
       "@modules/*": ["src/modules/*"],
       "@common/*": ["src/common/*"]
