@@ -1,11 +1,30 @@
 import { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Platform } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Platform, Image } from 'react-native'
 import { router } from 'expo-router'
 import * as WebBrowser from 'expo-web-browser'
 import * as AuthSession from 'expo-auth-session'
 import * as AppleAuthentication from 'expo-apple-authentication'
+import Svg, { Path, G, ClipPath, Rect, Defs } from 'react-native-svg'
 import { useAuthStore } from '../../src/stores/auth.store'
 import { supabase } from '../../src/services/supabase.client'
+
+function GoogleIcon() {
+  return (
+    <Svg width={20} height={20} viewBox="0 0 48 48">
+      <Defs>
+        <ClipPath id="g">
+          <Path d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" />
+        </ClipPath>
+      </Defs>
+      <G clipPath="url(#g)">
+        <Path d="M0 37V11l17 13z" fill="#FBBC05" />
+        <Path d="M0 11l17 13 7-6.1L48 14V0H0z" fill="#EA4335" />
+        <Path d="M0 37l30-23 7.9 1L48 0v48H0z" fill="#34A853" />
+        <Path d="M48 48L17 24l-4-3 35-10z" fill="#4285F4" />
+      </G>
+    </Svg>
+  )
+}
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -33,7 +52,7 @@ export default function LoginScreen() {
     setOauthLoading(true)
     try {
       const redirectTo = AuthSession.makeRedirectUri({ scheme: 'shapeai', path: 'auth/callback' })
-      const { data, error } = await supabase.auth.signInWithOAuth({
+const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo, skipBrowserRedirect: true },
       })
@@ -42,10 +61,10 @@ export default function LoginScreen() {
       const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo)
       if (result.type === 'success' && result.url) {
         const url = new URL(result.url)
-        const accessToken = url.searchParams.get('access_token')
-        const refreshToken = url.searchParams.get('refresh_token')
-        if (accessToken && refreshToken) {
-          await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
+        const code = url.searchParams.get('code')
+        if (code) {
+          const { error: sessionError } = await supabase.auth.exchangeCodeForSession(code)
+          if (sessionError) throw sessionError
         }
       }
     } catch {
@@ -82,8 +101,12 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ShapeAI</Text>
-      <Text style={styles.subtitle}>Análise corporal com IA</Text>
+      <Image
+        source={require('../../assets/splash-icon.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      <Text style={styles.subtitle}>Seu personal inteligente</Text>
 
       <TextInput
         style={styles.input}
@@ -122,7 +145,8 @@ export default function LoginScreen() {
       </View>
 
       <TouchableOpacity style={styles.oauthButton} onPress={handleGoogleSignIn} disabled={busy}>
-        <Text style={styles.oauthText}>{oauthLoading ? 'Aguarde...' : '🌐  Continuar com Google'}</Text>
+        {!oauthLoading && <GoogleIcon />}
+        <Text style={styles.oauthText}>{oauthLoading ? 'Aguarde...' : 'Continuar com Google'}</Text>
       </TouchableOpacity>
 
       {Platform.OS === 'ios' && (
@@ -151,7 +175,7 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0A0A0A', justifyContent: 'center', padding: 24 },
-  title: { fontSize: 36, fontWeight: 'bold', color: '#fff', textAlign: 'center', marginBottom: 8 },
+  logo: { width: 140, height: 140, alignSelf: 'center', marginBottom: 4 },
   subtitle: { fontSize: 16, color: '#888', textAlign: 'center', marginBottom: 40 },
   input: {
     backgroundColor: '#1A1A1A',
@@ -172,7 +196,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#1A1A1A',
     borderRadius: 12,
     padding: 16,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
     borderWidth: 1,
     borderColor: '#333',
     marginBottom: 12,
