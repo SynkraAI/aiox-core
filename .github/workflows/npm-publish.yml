@@ -27,6 +27,7 @@ on:
         options:
           - all
           - core
+          - aiox-core
           - aiox-install
           - aiox-pro-cli
           - installer
@@ -99,9 +100,9 @@ jobs:
 
           # Default to all packages on release/tag events
           if [ -z "$SELECTED" ] || [ "$SELECTED" = "all" ]; then
-            PACKAGES="core,aiox-install,aiox-pro-cli,installer"
+            PACKAGES="core,aiox-core,aiox-install,aiox-pro-cli,installer"
           elif [ "$SELECTED" = "aiox-core" ]; then
-            PACKAGES="core"
+            PACKAGES="aiox-core"
           else
             PACKAGES="$SELECTED"
           fi
@@ -147,7 +148,7 @@ jobs:
 
   publish:
     needs: [test, build]
-    if: ${{ contains(needs.build.outputs.packages, 'core') }}
+    if: ${{ contains(format(',{0},', needs.build.outputs.packages), ',core,') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -233,7 +234,7 @@ jobs:
 
   publish_workspace_packages:
     needs: [test, build]
-    if: ${{ contains(needs.build.outputs.packages, 'aiox-install') || contains(needs.build.outputs.packages, 'aiox-pro-cli') || contains(needs.build.outputs.packages, 'installer') }}
+    if: ${{ contains(format(',{0},', needs.build.outputs.packages), ',aiox-install,') || contains(format(',{0},', needs.build.outputs.packages), ',aiox-pro-cli,') || contains(format(',{0},', needs.build.outputs.packages), ',installer,') }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -352,19 +353,119 @@ jobs:
           echo "❌ Smoke test timeout for ${{ steps.pkg.outputs.name }}"
           exit 1
 
+  publish_legacy_aiox_core:
+    needs: [test, build]
+    if: ${{ contains(format(',{0},', needs.build.outputs.packages), ',aiox-core,') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.NPM_REGISTRY }}
+
+      - name: Get legacy package metadata
+        id: pkg
+        run: |
+          PACKAGE_JSON="./compat/aiox-core/package.json"
+          NAME=$(node -p "require('${PACKAGE_JSON}').name")
+          VERSION=$(node -p "require('${PACKAGE_JSON}').version")
+          echo "name=$NAME" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          if [ "$NAME" != "aiox-core" ]; then
+            echo "::error::Expected legacy package name aiox-core, got $NAME"
+            exit 1
+          fi
+
+      - name: Set publishing tag
+        id: publish-tag
+        run: |
+          if [ "${{ github.event.inputs.publish_mode }}" = "stable" ] || [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "push" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.publish_mode }}" = "beta" ]; then
+            echo "tag=beta" >> $GITHUB_OUTPUT
+          else
+            echo "tag=preview" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if already published
+        id: should-publish
+        run: |
+          PKG_NAME="${{ steps.pkg.outputs.name }}"
+          VERSION="${{ steps.pkg.outputs.version }}"
+
+          if npm view "${PKG_NAME}@${VERSION}" version > /dev/null 2>&1; then
+            echo "Version ${VERSION} already exists for ${PKG_NAME}"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Package ${PKG_NAME}@${VERSION} not found in registry"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish legacy aiox-core wrapper
+        if: steps.should-publish.outputs.should_publish == 'true'
+        working-directory: compat/aiox-core
+        run: |
+          publish_status=1
+          for token in "$NPM_TOKEN_AIOX_SQUADS" "$NPM_TOKEN"; do
+            if [ -z "$token" ]; then
+              continue
+            fi
+            echo "//registry.npmjs.org/:_authToken=${token}" > .npmrc
+            if npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public; then
+              publish_status=0
+              break
+            fi
+            publish_status=$?
+          done
+          rm -f .npmrc
+          if [ "$publish_status" -ne 0 ]; then
+            echo "::error::Unable to publish aiox-core. Refresh NPM_TOKEN with owner access to the legacy package."
+            exit "$publish_status"
+          fi
+          echo "✅ Published aiox-core@${{ steps.pkg.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN_AIOX_SQUADS: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
+
+      - name: Smoke test legacy npx
+        if: steps.should-publish.outputs.should_publish == 'true'
+        env:
+          PKG_SPEC: aiox-core@${{ steps.pkg.outputs.version }}
+        run: |
+          for i in 1 2 3 4 5 6; do
+            sleep 15
+            if npm view "${PKG_SPEC}" version > /dev/null 2>&1; then
+              SMOKE_DIR=$(mktemp -d)
+              if (cd "${SMOKE_DIR}" && npx --yes "${PKG_SPEC}" --version >/dev/null 2>&1); then
+                rm -rf "${SMOKE_DIR}"
+                echo "✅ Smoke test passed: npx --yes ${PKG_SPEC} --version works"
+                exit 0
+              fi
+              rm -rf "${SMOKE_DIR}"
+            fi
+            echo "⏳ Waiting for npm propagation... (attempt $i/6)"
+          done
+          echo "❌ Smoke test timeout for ${PKG_SPEC}"
+          exit 1
+
   notify:
-    needs: [build, publish, publish_workspace_packages]
+    needs: [build, publish, publish_workspace_packages, publish_legacy_aiox_core]
     if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Notify completion
         run: |
-          if [ "${{ needs.publish.result }}" = "failure" ] || [ "${{ needs.publish_workspace_packages.result }}" = "failure" ]; then
+          if [ "${{ needs.publish.result }}" = "failure" ] || [ "${{ needs.publish_workspace_packages.result }}" = "failure" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "failure" ]; then
             echo "❌ Publishing failed"
             exit 1
           fi
 
-          if [ "${{ needs.publish.result }}" = "cancelled" ] || [ "${{ needs.publish_workspace_packages.result }}" = "cancelled" ]; then
+          if [ "${{ needs.publish.result }}" = "cancelled" ] || [ "${{ needs.publish_workspace_packages.result }}" = "cancelled" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "cancelled" ]; then
             echo "❌ Publishing was cancelled"
             exit 1
           fi
@@ -383,11 +484,19 @@ jobs:
             fi
           fi
 
+          if [ "${{ needs.publish_legacy_aiox_core.result }}" = "success" ]; then
+            if [ -n "$PUBLISHED_PACKAGES" ]; then
+              PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, aiox-core legacy wrapper"
+            else
+              PUBLISHED_PACKAGES="aiox-core legacy wrapper"
+            fi
+          fi
+
           if [ -n "$PUBLISHED_PACKAGES" ]; then
             echo "🎉 Successfully published to NPM:"
             echo "   Packages: $PUBLISHED_PACKAGES"
             echo "   Registry: ${{ env.NPM_REGISTRY }}"
-          elif [ "${{ needs.publish.result }}" = "skipped" ] && [ "${{ needs.publish_workspace_packages.result }}" = "skipped" ]; then
+          elif [ "${{ needs.publish.result }}" = "skipped" ] && [ "${{ needs.publish_workspace_packages.result }}" = "skipped" ] && [ "${{ needs.publish_legacy_aiox_core.result }}" = "skipped" ]; then
             echo "⏭️ No packages needed publishing (already up-to-date)"
           else
             echo "❌ Publishing failed"
@@ -395,8 +504,8 @@ jobs:
           fi
 
   create-release-notes:
-    needs: [build, publish, publish_workspace_packages]
-    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish_workspace_packages.result == 'success')
+    needs: [build, publish, publish_workspace_packages, publish_legacy_aiox_core]
+    if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish_workspace_packages.result == 'success' || needs.publish_legacy_aiox_core.result == 'success')
     runs-on: ubuntu-latest
     permissions:
       contents: write

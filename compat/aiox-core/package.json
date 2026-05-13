@@ -1,0 +1,36 @@
+{
+  "name": "aiox-core",
+  "version": "5.2.2",
+  "description": "Compatibility wrapper for @aiox-squads/core.",
+  "license": "MIT",
+  "bin": {
+    "aiox": "bin/aiox-core.js",
+    "aiox-core": "bin/aiox-core.js",
+    "aiox-minimal": "bin/aiox-core.js",
+    "aiox-graph": "bin/aiox-core.js",
+    "aiox-delegate": "bin/aiox-core.js"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "dependencies": {
+    "@aiox-squads/core": "5.2.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SynkraAI/aiox-core.git",
+    "directory": "compat/aiox-core"
+  },
+  "bugs": {
+    "url": "https://github.com/SynkraAI/aiox-core/issues"
+  },
+  "homepage": "https://github.com/SynkraAI/aiox-core#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
