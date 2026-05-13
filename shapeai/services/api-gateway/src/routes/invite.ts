@@ -34,6 +34,7 @@ export async function inviteRoutes(app: FastifyInstance) {
       }
 
       const quantity = Math.min(request.body?.quantity ?? 1, 50)
+      const createdBy = (request as { authUser?: { id: string } }).authUser?.id ?? null
       const codes: string[] = []
 
       for (let i = 0; i < quantity; i++) {
@@ -43,7 +44,7 @@ export async function inviteRoutes(app: FastifyInstance) {
           try {
             await pool.query(
               'INSERT INTO invite_codes (code, created_by) VALUES ($1, $2)',
-              [code, request.authUser.id]
+              [code, createdBy]
             )
             codes.push(code)
             break
