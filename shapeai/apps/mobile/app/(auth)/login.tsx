@@ -51,7 +51,7 @@ export default function LoginScreen() {
   const handleGoogleSignIn = async () => {
     setOauthLoading(true)
     try {
-      const redirectTo = AuthSession.makeRedirectUri({ scheme: 'shapeai', path: 'auth/callback' })
+      const redirectTo = AuthSession.makeRedirectUri({ scheme: 'shapeai', path: 'auth-callback' })
 const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo, skipBrowserRedirect: true },
