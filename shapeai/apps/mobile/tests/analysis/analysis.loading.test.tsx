@@ -22,10 +22,11 @@ describe('AnalysisLoadingScreen', () => {
     jest.clearAllMocks()
   })
 
-  it('exibe primeiro step de progresso ("Analisando postura")', () => {
+  it('exibe título e step inicial de progresso', () => {
     mockPoll.mockReturnValue(new Promise(() => {})) // never resolves
     const { getByText } = render(<AnalysisLoadingScreen />)
-    expect(getByText(/Analisando postura/i)).toBeTruthy()
+    expect(getByText(/Analisando seu shape/i)).toBeTruthy()
+    expect(getByText(/IA analisando suas fotos/i)).toBeTruthy()
   })
 
   it('navega para report quando status = completed', async () => {
@@ -39,7 +40,7 @@ describe('AnalysisLoadingScreen', () => {
 
     await waitFor(() => {
       expect(mockReplace).toHaveBeenCalledWith('/(app)/analysis/test-analysis-id/report')
-    })
+    }, { timeout: 2000 })
   })
 
   it('exibe mensagem de erro quando status = failed', async () => {

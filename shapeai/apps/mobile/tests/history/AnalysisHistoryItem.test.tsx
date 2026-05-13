@@ -28,10 +28,10 @@ describe('AnalysisHistoryItem', () => {
     expect(queryByText('Atual')).toBeNull()
   })
 
-  it('exibe top_development_areas', () => {
+  it('exibe top_development_areas como chips', () => {
     const { getByText } = render(<AnalysisHistoryItem item={base} isLatest={false} />)
-    expect(getByText('• Costas')).toBeTruthy()
-    expect(getByText('• Core')).toBeTruthy()
+    expect(getByText('Costas')).toBeTruthy()
+    expect(getByText('Core')).toBeTruthy()
   })
 
   it('exibe badge "Processando" para status processing', () => {

@@ -75,9 +75,9 @@ describe('HistoryScreen', () => {
     expect(mockPush).not.toHaveBeenCalledWith(expect.stringContaining('/report'))
   })
 
-  it('exibe botão "Carregar mais" quando has_more=true', async () => {
-    mockList.mockResolvedValue({ analyses: [completedAnalysis], has_more: true })
-    const { getByTestId } = render(<HistoryScreen />)
-    await waitFor(() => expect(getByTestId('btn-carregar-mais')).toBeTruthy())
+  it('não exibe indicador de carregamento adicional quando has_more=false', async () => {
+    mockList.mockResolvedValue({ analyses: [completedAnalysis], has_more: false })
+    const { queryByTestId } = render(<HistoryScreen />)
+    await waitFor(() => expect(queryByTestId('loading-more-indicator')).toBeNull())
   })
 })

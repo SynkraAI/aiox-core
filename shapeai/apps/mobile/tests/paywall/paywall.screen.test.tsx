@@ -32,7 +32,7 @@ describe('PaywallScreen', () => {
     const { getByText } = render(<PaywallScreen />)
     expect(getByText('Free')).toBeTruthy()
     expect(getByText('1 análise de shape')).toBeTruthy()
-    expect(getByText('Histórico limitado')).toBeTruthy()
+    expect(getByText('Avaliações limitadas')).toBeTruthy()
     expect(getByText('Sem notificações de progresso')).toBeTruthy()
   })
 
@@ -40,7 +40,7 @@ describe('PaywallScreen', () => {
     const { getByText } = render(<PaywallScreen />)
     expect(getByText('Pro')).toBeTruthy()
     expect(getByText('Análises ilimitadas')).toBeTruthy()
-    expect(getByText('Histórico completo')).toBeTruthy()
+    expect(getByText('Avaliações ilimitadas')).toBeTruthy()
     expect(getByText('Notificações de progresso')).toBeTruthy()
     expect(getByText('Comparativo de evolução')).toBeTruthy()
   })

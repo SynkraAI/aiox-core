@@ -12,6 +12,11 @@ jest.mock('expo-file-system', () => ({
 
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), replace: jest.fn() },
+  useFocusEffect: (cb: () => void) => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { useEffect } = require('react')
+    useEffect(cb, [])
+  },
 }))
 
 jest.mock('../../src/services/analysis.service', () => ({

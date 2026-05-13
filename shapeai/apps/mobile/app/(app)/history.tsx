@@ -4,7 +4,12 @@ import { router } from 'expo-router'
 import { listAnalyses } from '../../src/services/analysis.service'
 import { AnalysisHistoryItem } from '../../src/components/history/AnalysisHistoryItem'
 import type { AnalysisSummary } from '@shapeai/shared'
+import { calculateOverallScore, getScoreColor } from '@shapeai/shared'
 import { useFocusEffect } from 'expo-router'
+
+function daysBetween(isoEarlier: string, isoLater: string): number {
+  return Math.floor((new Date(isoLater).getTime() - new Date(isoEarlier).getTime()) / (1000 * 60 * 60 * 24))
+}
 
 export default function HistoryScreen() {
   const [analyses, setAnalyses] = useState<AnalysisSummary[]>([])
@@ -84,6 +89,21 @@ export default function HistoryScreen() {
 
   const latestCompletedId = analyses.find((a) => a.status === 'completed')?.id
 
+  // analyses chegam newest-first; completedWithScores segue a mesma ordem
+  const completedWithScores = analyses.filter((a) => a.status === 'completed' && a.scores != null)
+  const latestCompleted = completedWithScores[0]
+  const earliestCompleted = completedWithScores[completedWithScores.length - 1]
+  const latestScore = latestCompleted ? calculateOverallScore(latestCompleted.scores!) : null
+  const earliestScore =
+    earliestCompleted && earliestCompleted.id !== latestCompleted?.id
+      ? calculateOverallScore(earliestCompleted.scores!)
+      : null
+  const evolution = latestScore != null && earliestScore != null ? latestScore - earliestScore : null
+  const daysSinceFirst =
+    earliestCompleted
+      ? daysBetween(earliestCompleted.created_at, new Date().toISOString())
+      : null
+
   if (isLoading) {
     return (
       <View style={styles.centered}>
@@ -104,6 +124,38 @@ export default function HistoryScreen() {
       </View>
     )
   }
+
+  const summaryBlock = completedWithScores.length > 0 ? (
+    <View style={styles.summaryCard}>
+      <Text style={styles.summaryTitle}>Sua jornada</Text>
+      <View style={styles.summaryRow}>
+        <View style={styles.summaryMetric}>
+          <Text style={styles.summaryValue}>{analyses.length}{hasMore ? '+' : ''}</Text>
+          <Text style={styles.summaryLabel}>avaliações</Text>
+        </View>
+        {daysSinceFirst != null && (
+          <View style={styles.summaryMetric}>
+            <Text style={styles.summaryValue}>{daysSinceFirst}</Text>
+            <Text style={styles.summaryLabel}>dias</Text>
+          </View>
+        )}
+        {latestScore != null && (
+          <View style={styles.summaryMetric}>
+            <Text style={[styles.summaryValue, { color: getScoreColor(latestScore) }]}>{latestScore}</Text>
+            <Text style={styles.summaryLabel}>score atual</Text>
+          </View>
+        )}
+        {evolution != null && (
+          <View style={styles.summaryMetric}>
+            <Text style={[styles.summaryValue, { color: evolution >= 0 ? '#4CAF50' : '#F44336' }]}>
+              {evolution >= 0 ? '+' : ''}{evolution}
+            </Text>
+            <Text style={styles.summaryLabel}>evolução</Text>
+          </View>
+        )}
+      </View>
+    </View>
+  ) : null
 
   return (
     <View style={styles.container}>
@@ -133,33 +185,38 @@ export default function HistoryScreen() {
       <FlatList
         data={analyses}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <AnalysisHistoryItem
-            item={item}
-            isLatest={item.id === latestCompletedId}
-            isSelectMode={isSelectMode}
-            isSelected={selectedIds.includes(item.id)}
-            onSelect={() => toggleSelect(item.id)}
-            onPress={
-              item.status === 'completed'
-                ? () => router.push(`/(app)/analysis/${item.id}/report` as never)
-                : undefined
-            }
-          />
-        )}
+        renderItem={({ item, index }) => {
+          // analyses são newest-first: o item anterior no tempo é o próximo no array
+          const prev = analyses[index + 1]
+          const previousScore = prev?.scores ? calculateOverallScore(prev.scores) : null
+          return (
+            <AnalysisHistoryItem
+              item={item}
+              isLatest={item.id === latestCompletedId}
+              previousScore={previousScore}
+              isSelectMode={isSelectMode}
+              isSelected={selectedIds.includes(item.id)}
+              onSelect={() => toggleSelect(item.id)}
+              onPress={
+                item.status === 'completed'
+                  ? () => router.push(`/(app)/analysis/${item.id}/report` as never)
+                  : undefined
+              }
+            />
+          )
+        }}
+        ListHeaderComponent={summaryBlock}
         contentContainerStyle={styles.list}
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} tintColor="#4CAF50" />
         }
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.3}
         ListFooterComponent={
-          hasMore ? (
-            <TouchableOpacity style={styles.loadMoreButton} onPress={handleLoadMore} disabled={isLoadingMore} testID="btn-carregar-mais">
-              {isLoadingMore ? (
-                <ActivityIndicator color="#4CAF50" />
-              ) : (
-                <Text style={styles.loadMoreText}>Carregar mais</Text>
-              )}
-            </TouchableOpacity>
+          isLoadingMore ? (
+            <View style={styles.loadingMore} testID="loading-more-indicator">
+              <ActivityIndicator color="#4CAF50" size="small" />
+            </View>
           ) : null
         }
       />
@@ -179,11 +236,23 @@ const styles = StyleSheet.create({
   compareButtonText: { color: '#fff', fontSize: 13, fontWeight: '700' },
   cancelText: { color: '#888', fontSize: 14 },
   list: { paddingHorizontal: 16, paddingBottom: 32 },
+  summaryCard: {
+    backgroundColor: '#111',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#222',
+  },
+  summaryTitle: { fontSize: 12, fontWeight: '600', color: '#555', marginBottom: 12, textTransform: 'uppercase', letterSpacing: 0.8 },
+  summaryRow: { flexDirection: 'row', justifyContent: 'space-between' },
+  summaryMetric: { alignItems: 'center' },
+  summaryValue: { fontSize: 22, fontWeight: '800', color: '#fff' },
+  summaryLabel: { fontSize: 11, color: '#555', marginTop: 2 },
   emptyIcon: { fontSize: 48, marginBottom: 16 },
   emptyTitle: { fontSize: 18, fontWeight: '600', color: '#fff', textAlign: 'center', marginBottom: 8 },
   emptySubtitle: { fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 32 },
   startButton: { backgroundColor: '#4CAF50', borderRadius: 16, paddingVertical: 14, paddingHorizontal: 32 },
   startButtonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
-  loadMoreButton: { alignItems: 'center', paddingVertical: 20 },
-  loadMoreText: { color: '#4CAF50', fontSize: 15, fontWeight: '600' },
+  loadingMore: { alignItems: 'center', paddingVertical: 20 },
 })

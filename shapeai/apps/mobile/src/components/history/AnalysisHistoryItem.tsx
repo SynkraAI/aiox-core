@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import type { AnalysisSummary } from '@shapeai/shared'
+import { getScoreColor, calculateOverallScore } from '@shapeai/shared'
 
 interface Props {
   item: AnalysisSummary
   isLatest: boolean
+  previousScore?: number | null
   onPress?: () => void
   isSelectMode?: boolean
   isSelected?: boolean
@@ -18,9 +20,13 @@ function formatDate(iso: string): string {
   return `${dd}/${mm}/${yyyy}`
 }
 
-export function AnalysisHistoryItem({ item, isLatest, onPress, isSelectMode, isSelected, onSelect }: Props) {
+export function AnalysisHistoryItem({ item, isLatest, previousScore, onPress, isSelectMode, isSelected, onSelect }: Props) {
   const isClickable = !isSelectMode && item.status === 'completed' && !!onPress
   const isSelectable = isSelectMode && item.status === 'completed'
+  const score = item.scores ? calculateOverallScore(item.scores) : null
+  const bodyFat = item.scores?.body_fat_estimate_pct ?? null
+  const scoreColor = score != null ? getScoreColor(score) : '#555'
+  const delta = score != null && previousScore != null ? score - previousScore : null
 
   const handlePress = () => {
     if (isSelectable && onSelect) onSelect()
@@ -59,16 +65,47 @@ export function AnalysisHistoryItem({ item, isLatest, onPress, isSelectMode, isS
         </View>
       </View>
 
-      {item.top_development_areas.length > 0 ? (
+      {score != null ? (
+        <>
+          <View style={styles.metricsRow}>
+            <View style={styles.metricBlock}>
+              <Text style={[styles.scoreValue, { color: scoreColor }]}>{score}</Text>
+              <Text style={styles.metricLabel}>score</Text>
+            </View>
+            {bodyFat != null && (
+              <View style={styles.metricBlock}>
+                <Text style={styles.metricValue}>{bodyFat.toFixed(1)}%</Text>
+                <Text style={styles.metricLabel}>gordura</Text>
+              </View>
+            )}
+            {delta != null && (
+              <View style={styles.metricBlock}>
+                <Text style={[styles.deltaValue, { color: delta >= 0 ? '#4CAF50' : '#F44336' }]}>
+                  {delta >= 0 ? '▲' : '▼'} {Math.abs(delta)} pts
+                </Text>
+                <Text style={styles.metricLabel}>vs anterior</Text>
+              </View>
+            )}
+          </View>
+
+          <View style={styles.barBg}>
+            <View style={[styles.barFill, { width: `${score}%` as any, backgroundColor: scoreColor }]} />
+          </View>
+        </>
+      ) : (
+        <Text style={styles.pending}>
+          {item.status === 'processing' ? 'Aguardando análise...' : 'Análise não concluída'}
+        </Text>
+      )}
+
+      {item.top_development_areas.length > 0 && (
         <View style={styles.areas}>
-          {item.top_development_areas.map((area, i) => (
-            <Text key={i} style={styles.area} numberOfLines={1}>• {area}</Text>
+          {item.top_development_areas.slice(0, 3).map((area, i) => (
+            <View key={i} style={styles.areaChip}>
+              <Text style={styles.areaChipText}>{area}</Text>
+            </View>
           ))}
         </View>
-      ) : (
-        <Text style={styles.noAreas}>
-          {item.status === 'completed' ? 'Relatório disponível' : 'Aguardando análise...'}
-        </Text>
       )}
     </TouchableOpacity>
   )
@@ -84,9 +121,9 @@ const styles = StyleSheet.create({
     borderColor: '#222',
   },
   containerSelected: { borderColor: '#4CAF50', backgroundColor: '#0D1F0D' },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
   dateRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  date: { fontSize: 15, fontWeight: '600', color: '#fff' },
+  date: { fontSize: 14, fontWeight: '600', color: '#aaa' },
   checkbox: { width: 20, height: 20, borderRadius: 10, borderWidth: 2, borderColor: '#555', justifyContent: 'center', alignItems: 'center' },
   checkboxSelected: { backgroundColor: '#4CAF50', borderColor: '#4CAF50' },
   checkmark: { color: '#fff', fontSize: 12, fontWeight: '700' },
@@ -97,7 +134,16 @@ const styles = StyleSheet.create({
   badgeProcessing: { backgroundColor: '#FF9800' },
   badgeFailed: { backgroundColor: '#F44336' },
   badgeStatusText: { color: '#fff', fontSize: 11, fontWeight: '600' },
-  areas: { gap: 4 },
-  area: { fontSize: 13, color: '#aaa', lineHeight: 18 },
-  noAreas: { fontSize: 13, color: '#555', fontStyle: 'italic' },
+  metricsRow: { flexDirection: 'row', gap: 24, marginBottom: 12, alignItems: 'flex-end' },
+  metricBlock: { alignItems: 'flex-start' },
+  scoreValue: { fontSize: 36, fontWeight: '800', lineHeight: 40 },
+  metricValue: { fontSize: 20, fontWeight: '700', color: '#fff' },
+  deltaValue: { fontSize: 16, fontWeight: '700' },
+  metricLabel: { fontSize: 11, color: '#555', marginTop: 2, fontWeight: '500' },
+  barBg: { height: 6, backgroundColor: '#222', borderRadius: 3, marginBottom: 14, overflow: 'hidden' },
+  barFill: { height: 6, borderRadius: 3 },
+  areas: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  areaChip: { backgroundColor: '#1A1A1A', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 4, borderWidth: 1, borderColor: '#333' },
+  areaChipText: { color: '#888', fontSize: 12 },
+  pending: { fontSize: 13, color: '#555', fontStyle: 'italic', marginVertical: 8 },
 })
