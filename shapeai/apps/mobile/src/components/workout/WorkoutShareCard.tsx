@@ -14,11 +14,11 @@ interface Props {
   onClose: () => void
   session: WorkoutSession
   weekNumber: number
-  score: number | null
+  totalWeeks: number
   duration: number
 }
 
-export function WorkoutShareCard({ visible, onClose, session, weekNumber, score, duration }: Props) {
+export function WorkoutShareCard({ visible, onClose, session, weekNumber, totalWeeks, duration }: Props) {
   const viewShotRef = useRef<ViewShot>(null)
   const [saving, setSaving] = useState(false)
 
@@ -75,11 +75,9 @@ export function WorkoutShareCard({ visible, onClose, session, weekNumber, score,
               {/* Topo */}
               <View style={s.cardHeader}>
                 <Text style={s.brand}>ShapeAI</Text>
-                {score !== null && (
-                  <View style={s.scoreBadge}>
-                    <Text style={s.scoreText}>Score {score}</Text>
-                  </View>
-                )}
+                <View style={s.weekBadge}>
+                  <Text style={s.weekBadgeText}>Sem. {weekNumber} de {totalWeeks}</Text>
+                </View>
               </View>
 
               {/* Título */}
@@ -185,7 +183,7 @@ const s = StyleSheet.create({
     alignItems: 'center',
   },
   brand: { color: '#4CAF50', fontSize: 13, fontWeight: '800', letterSpacing: 1.5 },
-  scoreBadge: {
+  weekBadge: {
     backgroundColor: '#1B3A1B',
     borderRadius: 20,
     paddingHorizontal: 10,
@@ -193,7 +191,7 @@ const s = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#4CAF5044',
   },
-  scoreText: { color: '#4CAF50', fontSize: 12, fontWeight: '700' },
+  weekBadgeText: { color: '#4CAF50', fontSize: 12, fontWeight: '700' },
 
   focus: { color: '#fff', fontSize: 28, fontWeight: '800', lineHeight: 34 },
   week: { color: '#444', fontSize: 13, marginTop: -8 },

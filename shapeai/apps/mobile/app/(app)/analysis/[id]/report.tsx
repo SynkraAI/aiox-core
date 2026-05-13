@@ -66,10 +66,10 @@ function scoreColor(score: number) {
 }
 
 function scoreLabel(score: number) {
-  if (score >= 80) return 'Elite'
-  if (score >= 65) return 'Intermediário'
-  if (score >= 50) return 'Em progresso'
-  return 'Iniciante'
+  if (score >= 75) return 'Acima da média'
+  if (score >= 50) return 'Na média'
+  if (score >= 30) return 'Abaixo da média'
+  return 'Bem abaixo da média'
 }
 
 function formatDate(iso: string) {

@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  ActivityIndicator, Image, ScrollView, TextInput, Share, ImageBackground,
+  ActivityIndicator, Image, ScrollView, TextInput, Share, ImageBackground, Animated, Easing,
 } from 'react-native'
+import { BlurView } from 'expo-blur'
+import MaskedView from '@react-native-masked-view/masked-view'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as ImagePicker from 'expo-image-picker'
-import Svg, { Circle } from 'react-native-svg'
-import { router } from 'expo-router'
+import Svg, { Circle, Rect, Defs, LinearGradient as SvgGradient, Stop } from 'react-native-svg'
+import { router, useFocusEffect } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useAuthStore } from '../../src/stores/auth.store'
 import { PHOTO_TIP_STORAGE_KEY } from './photo-tip'
@@ -46,6 +49,13 @@ const QUOTES: { text: string; photo: string }[] = [
   { text: 'Você já chegou até aqui. Não para agora.',                                      photo: '1506629082955-511b1aa562c8' },
 ]
 
+function getGreeting() {
+  const h = new Date().getHours()
+  if (h < 12) return 'Bom dia'
+  if (h < 18) return 'Boa tarde'
+  return 'Boa noite'
+}
+
 function getDailyQuote() {
   const now = new Date()
   const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86_400_000)
@@ -72,7 +82,7 @@ function DailyQuoteCard() {
       >
         <Text style={qStyles.quoteText}>{text}</Text>
         <View style={qStyles.footer}>
-          <Text style={qStyles.label}>Frase do dia</Text>
+          <Text style={qStyles.label}>Motivação</Text>
           <TouchableOpacity style={qStyles.shareBtn} onPress={handleShare}>
             <Ionicons name="share-outline" size={13} color="#aaa" />
             <Text style={qStyles.shareBtnText}>Compartilhar</Text>
@@ -147,6 +157,19 @@ export default function HomeScreen() {
   const [editingName, setEditingName] = useState(false)
   const [nameInput, setNameInput] = useState('')
   const [shareVisible, setShareVisible] = useState(false)
+  const [planTotalWeeks, setPlanTotalWeeks] = useState(4)
+  const [headerHeight, setHeaderHeight] = useState(0)
+  const sweepAnim = useRef(new Animated.Value(-160)).current
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.delay(4000),
+        Animated.timing(sweepAnim, { toValue: 400, duration: 1800, useNativeDriver: true, easing: Easing.inOut(Easing.sin) }),
+        Animated.timing(sweepAnim, { toValue: -160, duration: 0, useNativeDriver: true }),
+      ])
+    ).start()
+  }, [])
 
   useEffect(() => {
     async function loadAvatar() {
@@ -194,7 +217,7 @@ export default function HomeScreen() {
     }
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     async function load() {
       // Profile + análises em paralelo
       const [profileRes, analysesRes] = await Promise.allSettled([
@@ -220,6 +243,7 @@ export default function HomeScreen() {
 
       const result = await getAnalysisResult(last.id)
       const weeks = result.workout_plan.weeks as any[]
+      setPlanTotalWeeks(weeks.length)
       const raw = await AsyncStorage.getItem(storageKey(last.id))
       const completedArr: string[] = raw ? JSON.parse(raw) : []
       const completedSet = new Set(completedArr)
@@ -245,7 +269,22 @@ export default function HomeScreen() {
     }
 
     load().catch(() => setLastAnalysis(null))
-  }, [])
+  }, []))
+
+  async function toggleTodaySession() {
+    if (todayWorkout?.kind !== 'session') return
+    const { analysisId, weekNumber, session: s, isCompleted } = todayWorkout
+    const key = sessionKey(weekNumber, s.day)
+    const raw = await AsyncStorage.getItem(storageKey(analysisId))
+    const set = new Set<string>(raw ? JSON.parse(raw) : [])
+    isCompleted ? set.delete(key) : set.add(key)
+    await AsyncStorage.setItem(storageKey(analysisId), JSON.stringify([...set]))
+    const result = await getAnalysisResult(analysisId)
+    const weeks = result.workout_plan.weeks as any[]
+    const total = weeks.reduce((acc: number, w: any) => acc + w.sessions.length, 0)
+    setPlanPct(total > 0 ? Math.round((set.size / total) * 100) : 0)
+    setTodayWorkout({ ...todayWorkout, isCompleted: !isCompleted })
+  }
 
   const name = displayName ?? session?.user?.email?.split('@')[0] ?? 'atleta'
   const initial = name.charAt(0).toUpperCase()
@@ -254,62 +293,17 @@ export default function HomeScreen() {
   const hasAnalysis = lastAnalysis != null && lastAnalysis !== undefined
 
   return (
-    <ScrollView
-      style={styles.scroll}
-      contentContainerStyle={[styles.container, { paddingTop: insets.top + 20 }]}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* ── Header ── */}
-      <View style={styles.header}>
-        <View style={styles.avatarRow}>
-          <TouchableOpacity onPress={pickAvatar} style={styles.avatar} activeOpacity={0.8}>
-            {avatarUri ? (
-              <Image source={{ uri: avatarUri }} style={styles.avatarImage} />
-            ) : (
-              <Text style={styles.avatarText}>{initial}</Text>
-            )}
-          </TouchableOpacity>
-          <View>
-            {editingName ? (
-              <TextInput
-                style={styles.nameInput}
-                value={nameInput}
-                onChangeText={setNameInput}
-                onBlur={saveName}
-                onSubmitEditing={saveName}
-                autoFocus
-                returnKeyType="done"
-                maxLength={24}
-              />
-            ) : (
-              <TouchableOpacity onPress={() => startEditingName(name)} activeOpacity={0.7}>
-                <Text style={styles.greeting}>Olá, {name} 👋</Text>
-              </TouchableOpacity>
-            )}
-            <Text style={styles.tagline}>Foque. Treine. Evolua.</Text>
-          </View>
-        </View>
-        {isPro ? (
-          <LinearGradient
-            colors={['#B8860B', '#FFD700', '#B8860B']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.badgePro}
-          >
-            <Text style={styles.badgeProIcon}>✦</Text>
-            <Text style={styles.badgeProText}>Pro</Text>
-          </LinearGradient>
-        ) : (
-          <View style={styles.badgeFree}>
-            <Text style={styles.badgeFreeText}>Free</Text>
-          </View>
-        )}
-      </View>
+    <View style={styles.root}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={[styles.container, { paddingTop: headerHeight }]}
+        showsVerticalScrollIndicator={false}
+      >
 
       {/* ── Hero: imagem + fade + texto sobreposto ── */}
       <View style={styles.heroWrapper}>
         <Image
-          source={require('../../assets/before-after.png')}
+          source={require('../../assets/hero-image.png')}
           style={styles.heroImage}
           resizeMode="cover"
         />
@@ -343,12 +337,31 @@ export default function HomeScreen() {
           </View>
           <Ionicons name="chevron-forward" size={18} color="#444" />
         </View>
-        <TouchableOpacity style={styles.evalBtn} onPress={async () => {
+        <TouchableOpacity onPress={async () => {
           const skip = await AsyncStorage.getItem(PHOTO_TIP_STORAGE_KEY)
           router.push((skip === 'true' ? '/(app)/camera' : '/(app)/photo-tip') as never)
-        }}>
-          <Ionicons name="scan" size={18} color="#fff" />
-          <Text style={styles.evalBtnText}>Nova Avaliação</Text>
+        }} activeOpacity={0.85}>
+          <LinearGradient
+            colors={['#00FF85', '#00FF85', '#2E7D32']}
+            locations={[0, 0.45, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.evalBtn}
+          >
+            <View style={[StyleSheet.absoluteFill, styles.sweepClip]}>
+              <Animated.View style={[styles.sweepOverlay, { transform: [{ translateX: sweepAnim }] }]}>
+                <LinearGradient
+                  colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0.14)', 'rgba(255,255,255,0.14)', 'rgba(255,255,255,0)']}
+                  locations={[0, 0.15, 0.85, 1]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={{ width: 260, height: '100%' }}
+                />
+              </Animated.View>
+            </View>
+            <Ionicons name="scan" size={18} color="#0A0A0A" />
+            <Text style={[styles.evalBtnText, { color: '#0A0A0A' }]}>{hasAnalysis ? 'Nova Avaliação' : 'Começar Agora'}</Text>
+          </LinearGradient>
         </TouchableOpacity>
       </View>
 
@@ -400,23 +413,13 @@ export default function HomeScreen() {
           onPress={() => router.push(`/(app)/analysis/${todayWorkout.analysisId}/workout`)}
           activeOpacity={0.85}
         >
-          <View style={styles.planHeader}>
-            <Text style={styles.planLabel}>Treino do Dia</Text>
-            <TouchableOpacity onPress={() => router.push(`/(app)/analysis/${todayWorkout.analysisId}/workout`)}>
-              <Text style={styles.planLink}>Ver plano completo</Text>
-            </TouchableOpacity>
-          </View>
           <View style={styles.planBody}>
             <View style={styles.planInfo}>
+              <Text style={styles.planLabel}>Hoje é dia de</Text>
               <Text style={styles.planFocus}>{todayWorkout.session.focus}</Text>
               <Text style={styles.planMeta}>
                 {todayWorkout.session.exercises.length} exercícios · ~{estimateDuration(todayWorkout.session.exercises)} min · Sem. {todayWorkout.weekNumber}
               </Text>
-              {todayWorkout.isCompleted && (
-                <View style={styles.planDoneBadge}>
-                  <Text style={styles.planDoneText}>Concluído ✓</Text>
-                </View>
-              )}
             </View>
             <View style={styles.planRing}>
               <Ring pct={planPct} size={60} />
@@ -436,12 +439,28 @@ export default function HomeScreen() {
             )}
           </View>
 
-          {todayWorkout.isCompleted && (
-            <TouchableOpacity style={styles.shareWorkoutBtn} onPress={() => setShareVisible(true)}>
-              <Ionicons name="share-outline" size={15} color="#4CAF50" />
-              <Text style={styles.shareWorkoutText}>Compartilhar treino</Text>
+          <TouchableOpacity
+            style={[styles.completedBtn, todayWorkout.isCompleted && styles.completedBtnDone]}
+            onPress={toggleTodaySession}
+            activeOpacity={0.8}
+          >
+            <Ionicons name={todayWorkout.isCompleted ? 'checkmark-circle' : 'checkmark-circle-outline'} size={18} color={todayWorkout.isCompleted ? '#4CAF50' : '#fff'} />
+            <Text style={[styles.completedBtnText, todayWorkout.isCompleted && styles.completedBtnTextDone]}>
+              {todayWorkout.isCompleted ? 'Concluído ✓' : 'Marcar como concluído'}
+            </Text>
+          </TouchableOpacity>
+
+          <View style={styles.planFooterRow}>
+            <TouchableOpacity onPress={() => router.push(`/(app)/analysis/${todayWorkout.analysisId}/workout`)}>
+              <Text style={styles.planLink}>Ver plano completo</Text>
             </TouchableOpacity>
-          )}
+            {todayWorkout.isCompleted && (
+              <TouchableOpacity style={styles.shareWorkoutBtn} onPress={() => setShareVisible(true)}>
+                <Ionicons name="share-outline" size={14} color="#aaa" />
+                <Text style={styles.shareWorkoutText}>Compartilhar treino</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </TouchableOpacity>
       )}
 
@@ -451,7 +470,7 @@ export default function HomeScreen() {
           onClose={() => setShareVisible(false)}
           session={todayWorkout.session}
           weekNumber={todayWorkout.weekNumber}
-          score={score}
+          totalWeeks={planTotalWeeks}
           duration={estimateDuration(todayWorkout.session.exercises)}
         />
       )}
@@ -465,44 +484,123 @@ export default function HomeScreen() {
 
       <DailyQuoteCard />
     </ScrollView>
+
+      {/* ── Glass Header ── */}
+      <BlurView intensity={85} tint="dark" style={[styles.glassHeader, { paddingTop: insets.top + 14 }]} onLayout={(e) => setHeaderHeight(e.nativeEvent.layout.height)}>
+        <View style={styles.header}>
+          <View style={styles.avatarRow}>
+            <LinearGradient
+              colors={['#00FF85', '#FFE500']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.avatarRing}
+            >
+              <TouchableOpacity onPress={pickAvatar} style={styles.avatar} activeOpacity={0.8}>
+                {avatarUri ? (
+                  <Image source={{ uri: avatarUri }} style={styles.avatarImage} />
+                ) : (
+                  <Text style={styles.avatarText}>{initial}</Text>
+                )}
+              </TouchableOpacity>
+            </LinearGradient>
+            <View>
+              <Text style={styles.greetingTime}>{getGreeting()},</Text>
+              {editingName ? (
+                <TextInput
+                  style={styles.nameInput}
+                  value={nameInput}
+                  onChangeText={setNameInput}
+                  onBlur={saveName}
+                  onSubmitEditing={saveName}
+                  autoFocus
+                  returnKeyType="done"
+                  maxLength={24}
+                />
+              ) : (
+                <TouchableOpacity onPress={() => startEditingName(name)} activeOpacity={0.7}>
+                  <Text style={styles.greeting}>{name} 🔥</Text>
+                </TouchableOpacity>
+              )}
+              <Text style={styles.tagline}>Foque. Treine. Evolua.</Text>
+            </View>
+          </View>
+          {isPro ? (
+            <LinearGradient
+              colors={['#00FF85', '#FFE500']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.badgeProGradient}
+            >
+              <View style={styles.badgePro}>
+                <MaskedView maskElement={<View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}><MaterialCommunityIcons name="crown" size={11} color="#fff" /><Text style={styles.badgeProText}>PRO</Text></View>}>
+                  <LinearGradient colors={['#00FF85', '#FFE500']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}><MaterialCommunityIcons name="crown" size={11} color="#fff" style={{ opacity: 0 }} /><Text style={[styles.badgeProText, { opacity: 0 }]}>PRO</Text></View>
+                  </LinearGradient>
+                </MaskedView>
+              </View>
+            </LinearGradient>
+          ) : (
+            <View style={styles.badgeFree}>
+              <Text style={styles.badgeFreeText}>Free</Text>
+            </View>
+          )}
+        </View>
+      </BlurView>
+    </View>
   )
 }
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  scroll: { flex: 1, backgroundColor: '#0A0A0A' },
+  root: { flex: 1, backgroundColor: '#0A0A0A' },
+  scroll: { flex: 1 },
   container: { paddingHorizontal: 20, paddingBottom: 48, gap: 20 },
 
-  // Header
+  // Glass Header
+  glassHeader: {
+    position: 'absolute',
+    top: 0, left: 0, right: 0,
+    paddingHorizontal: 20,
+    paddingBottom: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'rgba(255,255,255,0.08)',
+  },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  avatarRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  avatarRow: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  avatarRing: {
+    borderRadius: 27.5,
+    padding: 1.5,
+  },
   avatar: {
-    width: 42, height: 42, borderRadius: 21,
+    width: 52, height: 52, borderRadius: 26,
     backgroundColor: '#1B3A1B',
     alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
   },
-  avatarImage: { width: 42, height: 42, borderRadius: 21 },
-  avatarText: { color: '#4CAF50', fontSize: 17, fontWeight: '800' },
-  greeting: { color: '#fff', fontSize: 16, fontWeight: '700' },
+  avatarImage: { width: 52, height: 52, borderRadius: 26 },
+  avatarText: { color: '#4CAF50', fontSize: 20, fontWeight: '800' },
+  greetingTime: { color: '#777', fontSize: 13, fontWeight: '500', marginBottom: 1 },
+  greeting: { color: '#fff', fontSize: 17, fontWeight: '700' },
   nameInput: {
-    color: '#fff', fontSize: 16, fontWeight: '700',
+    color: '#fff', fontSize: 17, fontWeight: '700',
     borderBottomWidth: 1, borderBottomColor: '#4CAF50',
     paddingVertical: 0, minWidth: 80,
   },
-  tagline: { color: '#444', fontSize: 12, marginTop: 1 },
+  tagline: { color: '#666', fontSize: 12, marginTop: 3 },
   badgeFree: {
     paddingHorizontal: 12, paddingVertical: 4, borderRadius: 12,
     backgroundColor: '#1A1A1A',
   },
   badgeFreeText: { color: '#555', fontSize: 12, fontWeight: '600' },
-  badgePro: {
-    flexDirection: 'row', alignItems: 'center', gap: 4,
-    paddingHorizontal: 12, paddingVertical: 5, borderRadius: 12,
-    borderWidth: 1, borderColor: 'rgba(255,215,0,0.5)',
+  badgeProGradient: {
+    borderRadius: 12,
+    padding: 1,
   },
-  badgeProIcon: { color: 'rgba(0,0,0,0.6)', fontSize: 9 },
-  badgeProText: { color: '#1A1000', fontSize: 12, fontWeight: '800', letterSpacing: 0.5 },
+  badgePro: {
+    paddingHorizontal: 11, paddingVertical: 5, borderRadius: 11,
+    backgroundColor: '#0A0A0A',
+  },
+  badgeProText: { color: '#fff', fontSize: 12, fontWeight: '800', letterSpacing: 1 },
 
   // Hero
   heroWrapper: {
@@ -554,6 +652,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', justifyContent: 'center', gap: 8,
   },
   evalBtnText: { color: '#fff', fontSize: 15, fontWeight: '700' },
+  sweepClip: { borderRadius: 12, overflow: 'hidden' },
+  sweepOverlay: { position: 'absolute', top: 0, bottom: 0, width: 260 },
 
   // First step card (no analysis yet)
   firstStepCard: {
@@ -587,7 +687,7 @@ const styles = StyleSheet.create({
   },
   planHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   planLabel: { color: '#444', fontSize: 11, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
-  planLink: { color: '#4CAF50', fontSize: 12, fontWeight: '600' },
+  planLink: { color: '#4CAF50', fontSize: 13, fontWeight: '600' },
   planBody: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   planInfo: { flex: 1, gap: 6 },
   planFocus: { color: '#fff', fontSize: 20, fontWeight: '800' },
@@ -616,16 +716,41 @@ const styles = StyleSheet.create({
   exerciseSets: { color: '#444', fontSize: 12 },
   exerciseMore: { color: '#333', fontSize: 12, marginTop: 2 },
 
+  completedBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    borderRadius: 12,
+    paddingVertical: 13,
+    borderWidth: 1,
+    borderColor: '#2A2A2A',
+    backgroundColor: '#1A1A1A',
+  },
+  completedBtnDone: {
+    borderColor: '#2A2A2A',
+    backgroundColor: '#1A1A1A',
+  },
+  completedBtnText: { color: '#888', fontSize: 14, fontWeight: '600' },
+  completedBtnTextDone: { color: '#4CAF50' },
+
+  planFooterRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#1A1A1A',
+    paddingTop: 12,
+  },
+
   shareWorkoutBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    borderTopWidth: 1,
-    borderTopColor: '#1A1A1A',
-    paddingTop: 12,
+    paddingVertical: 4,
   },
-  shareWorkoutText: { color: '#4CAF50', fontSize: 13, fontWeight: '600' },
+  shareWorkoutText: { color: '#aaa', fontSize: 13, fontWeight: '600' },
 
   restText: { color: '#555', fontSize: 14, lineHeight: 22 },
 })

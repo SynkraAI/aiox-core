@@ -1,20 +1,24 @@
 import { useState, useCallback } from 'react'
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  ActivityIndicator, ScrollView, Modal, Pressable,
+  ActivityIndicator, ScrollView, Modal, Pressable, Linking,
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router, useFocusEffect } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
-import { type WorkoutWeek, type PrimaryGoal, GOAL_LABEL } from '@shapeai/shared'
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons'
+import { type WorkoutWeek, type WorkoutSession, type PrimaryGoal, GOAL_LABEL } from '@shapeai/shared'
 import type { AnalysisSummary } from '@shapeai/shared'
 import { listAnalyses, getAnalysisResult } from '../../src/services/analysis.service'
 import { getUserProfile } from '../../src/services/profile.service'
 import WorkoutDayCard from '../../src/components/workout/WorkoutDayCard'
+import { WorkoutShareCard } from '../../src/components/workout/WorkoutShareCard'
 import { PHOTO_TIP_STORAGE_KEY } from './photo-tip'
 
 function storageKey(id: string) { return `workout_progress_${id}` }
+function estimateDuration(exercises: WorkoutSession['exercises']) {
+  return exercises.reduce((sum, ex) => sum + (ex.sets * 2), 0)
+}
 function sessionKey(w: number, d: string) { return `${w}_${d}` }
 function elapsedWeek(completedAt: string, total: number) {
   const days = Math.floor((Date.now() - new Date(completedAt).getTime()) / 86_400_000)
@@ -35,6 +39,7 @@ export default function TreinoTab() {
   const [goal, setGoal] = useState<PrimaryGoal | null>(null)
   const [selectedWeek, setSelectedWeek] = useState(0)
   const [completed, setCompleted] = useState<Set<string>>(new Set())
+  const [shareTarget, setShareTarget] = useState<{ session: WorkoutSession; weekNumber: number } | null>(null)
 
   const loadWorkout = useCallback(async (analysis: AnalysisSummary, isInitial = false) => {
     if (!isInitial) setLoadingWorkout(true)
@@ -88,6 +93,13 @@ export default function TreinoTab() {
       return next
     })
   }, [completedAnalyses, selectedIndex])
+
+  const openSpotify = async () => {
+    const deepLink = 'spotify:playlist:37i9dQZF1DX76Wlfdnj7AP'
+    const webLink = 'https://open.spotify.com/playlist/37i9dQZF1DX76Wlfdnj7AP'
+    const canOpen = await Linking.canOpenURL(deepLink)
+    await Linking.openURL(canOpen ? deepLink : webLink)
+  }
 
   const handleNewAnalysis = async () => {
     const skip = await AsyncStorage.getItem(PHOTO_TIP_STORAGE_KEY)
@@ -194,6 +206,15 @@ export default function TreinoTab() {
             <View style={[styles.progressFill, { width: progressWidth }]} />
           </View>
         </View>
+
+        <TouchableOpacity style={styles.spotifyBtn} onPress={openSpotify} activeOpacity={0.75}>
+          <FontAwesome5 name="spotify" size={26} color="#1DB954" />
+          <View style={styles.spotifyTextWrap}>
+            <Text style={styles.spotifyLabel}>SPOTIFY</Text>
+            <Text style={styles.spotifyBtnText}>Abrir playlist</Text>
+          </View>
+          <Ionicons name="open-outline" size={14} color="#333" />
+        </TouchableOpacity>
       </View>
 
       <ScrollView
@@ -224,9 +245,21 @@ export default function TreinoTab() {
             session={session}
             isCompleted={completed.has(sessionKey(currentWeek.week_number, session.day))}
             onToggle={() => toggleSession(currentWeek.week_number, session.day)}
+            onShare={() => setShareTarget({ session, weekNumber: currentWeek.week_number })}
           />
         ))}
       </ScrollView>
+
+      {shareTarget && (
+        <WorkoutShareCard
+          visible={shareTarget !== null}
+          onClose={() => setShareTarget(null)}
+          session={shareTarget.session}
+          weekNumber={shareTarget.weekNumber}
+          totalWeeks={weeks.length}
+          duration={estimateDuration(shareTarget.session.exercises)}
+        />
+      )}
     </View>
   )
 }
@@ -276,6 +309,21 @@ const styles = StyleSheet.create({
   progressCount: { color: '#4CAF50', fontSize: 12, fontWeight: '700' },
   progressTrack: { height: 6, backgroundColor: '#1A1A1A', borderRadius: 3, overflow: 'hidden' },
   progressFill: { height: 6, borderRadius: 3, backgroundColor: '#4CAF50' },
+
+  spotifyBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    backgroundColor: '#111',
+    borderWidth: 1,
+    borderColor: '#1A1A1A',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+  },
+  spotifyTextWrap: { flex: 1, gap: 1 },
+  spotifyLabel: { color: '#1DB954', fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  spotifyBtnText: { color: '#aaa', fontSize: 13 },
 
   tabsScroll: { maxHeight: 56, marginTop: 8 },
   tabsContent: { paddingHorizontal: 20, paddingVertical: 8, gap: 8, alignItems: 'center' },

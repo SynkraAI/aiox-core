@@ -35,6 +35,12 @@ function getStrongestMuscle(scores: Record<string, number>): string | null {
   return MUSCLE_PT[best] ?? best
 }
 
+function scoreLabel(score: number): { text: string; color: string } {
+  if (score >= 70) return { text: 'Excelente', color: '#4CAF50' }
+  if (score >= 40) return { text: 'Ótimo', color: '#8BC34A' }
+  return { text: 'Regular', color: '#FF9800' }
+}
+
 function formatDate(iso: string): string {
   const d = new Date(iso)
   return d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -169,11 +175,6 @@ export function AnalysisHistoryItem({ item, isLatest, index, total, onPress, onW
                 <Text style={[styles.evalNumber, { color: scoreColor }]}>#{evalNumber}</Text>
                 <Text style={styles.compactLabel}>avaliação</Text>
               </View>
-              <View style={styles.metricDivider} />
-              <View style={styles.compactMetric}>
-                <Text style={styles.compactValue}>{score}</Text>
-                <Text style={styles.compactLabel}>Score</Text>
-              </View>
               {bodyFat != null && (
                 <>
                   <View style={styles.metricDivider} />
@@ -183,6 +184,11 @@ export function AnalysisHistoryItem({ item, isLatest, index, total, onPress, onW
                   </View>
                 </>
               )}
+              <View style={styles.metricDivider} />
+              <View style={styles.compactMetric}>
+                <Text style={styles.compactValue}>{scoreLabel(score).text}</Text>
+                <Text style={styles.compactLabel}>Resultado</Text>
+              </View>
             </View>
           ) : (
             <Text style={styles.pending}>Aguardando análise...</Text>

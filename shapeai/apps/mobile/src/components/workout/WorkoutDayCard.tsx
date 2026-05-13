@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import type { WorkoutSession } from '@shapeai/shared'
 import ExerciseItem from './ExerciseItem'
 
@@ -15,9 +16,10 @@ interface WorkoutDayCardProps {
   session: WorkoutSession
   isCompleted: boolean
   onToggle: () => void
+  onShare?: () => void
 }
 
-export default function WorkoutDayCard({ session, isCompleted, onToggle }: WorkoutDayCardProps) {
+export default function WorkoutDayCard({ session, isCompleted, onToggle, onShare }: WorkoutDayCardProps) {
   return (
     <View style={[styles.container, isCompleted && styles.containerDone]}>
       <View style={styles.header}>
@@ -33,15 +35,22 @@ export default function WorkoutDayCard({ session, isCompleted, onToggle }: Worko
           <ExerciseItem key={index} exercise={exercise} />
         ))}
       </View>
-      <TouchableOpacity
-        style={[styles.doneBtn, isCompleted && styles.doneBtnActive]}
-        onPress={onToggle}
-        activeOpacity={0.7}
-      >
-        <Text style={[styles.doneBtnText, isCompleted && styles.doneBtnTextActive]}>
-          {isCompleted ? 'Concluída ✓' : 'Marcar como feito →'}
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.actionsRow}>
+        <TouchableOpacity
+          style={[styles.doneBtn, isCompleted && styles.doneBtnActive]}
+          onPress={onToggle}
+          activeOpacity={0.7}
+        >
+          <Text style={[styles.doneBtnText, isCompleted && styles.doneBtnTextActive]}>
+            {isCompleted ? 'Concluída ✓' : 'Marcar como feito →'}
+          </Text>
+        </TouchableOpacity>
+        {isCompleted && (
+          <TouchableOpacity style={styles.shareBtn} onPress={onShare} activeOpacity={0.7}>
+            <Ionicons name="share-outline" size={18} color="#4CAF50" />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   )
 }
@@ -77,8 +86,13 @@ const styles = StyleSheet.create({
   doneTag: { color: '#4CAF50', fontSize: 16, fontWeight: '800' },
   divider: { height: 1, backgroundColor: '#1A1A1A', marginBottom: 12 },
   exercisesDimmed: { opacity: 0.4 },
-  doneBtn: {
+  actionsRow: {
+    flexDirection: 'row',
+    gap: 10,
     marginTop: 14,
+  },
+  doneBtn: {
+    flex: 1,
     borderRadius: 10,
     paddingVertical: 11,
     alignItems: 'center',
@@ -91,4 +105,13 @@ const styles = StyleSheet.create({
   },
   doneBtnText: { color: '#0A0A0A', fontSize: 14, fontWeight: '700' },
   doneBtnTextActive: { color: '#4CAF50', fontSize: 14, fontWeight: '700' },
+  shareBtn: {
+    width: 44,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#1A1A1A',
+    borderWidth: 1,
+    borderColor: '#2A2A2A',
+  },
 })

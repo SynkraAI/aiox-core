@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-native-masked-view/masked-view": "0.3.2",
     "@supabase/supabase-js": "^2.105.1",
     "expo": "~54.0.33",
     "expo-apple-authentication": "~8.0.8",
     "expo-auth-session": "~7.0.11",
+    "expo-blur": "~15.0.8",
     "expo-camera": "~17.0.10",
     "expo-file-system": "~19.0.22",
     "expo-image-picker": "~17.0.11",
@@ -41,6 +43,7 @@
     "@types/react": "~19.1.0",
     "jest": "^30.3.0",
     "jest-expo": "^55.0.16",
+    "sharp": "^0.34.5",
     "typescript": "~5.9.2"
   },
   "private": true

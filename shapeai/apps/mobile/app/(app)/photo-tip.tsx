@@ -4,6 +4,22 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import Svg, { Rect, Circle } from 'react-native-svg'
+
+function CameraIllustration() {
+  return (
+    <Svg width={96} height={96} viewBox="0 0 96 96" fill="none">
+      <Rect x="8" y="28" width="80" height="52" rx="10" fill="#1B3A1B" stroke="#4CAF50" strokeWidth="2" />
+      <Rect x="30" y="18" width="36" height="14" rx="6" fill="#1B3A1B" stroke="#4CAF50" strokeWidth="2" />
+      <Circle cx="48" cy="54" r="18" fill="#111" stroke="#4CAF50" strokeWidth="2" />
+      <Circle cx="48" cy="54" r="11" fill="#0A0A0A" stroke="#2E7D32" strokeWidth="1.5" />
+      <Circle cx="48" cy="54" r="6" fill="#1B3A1B" />
+      <Circle cx="44" cy="50" r="2" fill="#4CAF50" opacity={0.5} />
+      <Rect x="16" y="36" width="10" height="7" rx="3" fill="#4CAF50" opacity={0.7} />
+      <Circle cx="74" cy="34" r="5" fill="#4CAF50" opacity={0.5} />
+    </Svg>
+  )
+}
 
 const TIPS: { icon: string; text: string }[] = [
   { icon: 'sunny-outline',           text: 'Local bem iluminado — prefira luz natural ou ambiente claro' },
@@ -34,7 +50,9 @@ export default function PhotoTipScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Text style={styles.emoji}>📸</Text>
+        <View style={styles.svgWrapper}>
+          <CameraIllustration />
+        </View>
         <Text style={styles.title}>Como tirar uma boa foto</Text>
         <Text style={styles.subtitle}>
           O resultado da análise depende diretamente da qualidade da foto. Siga as dicas abaixo.
@@ -89,7 +107,7 @@ const styles = StyleSheet.create({
 
   content: { padding: 24, paddingBottom: 48, gap: 20 },
 
-  emoji: { fontSize: 48, textAlign: 'center' },
+  svgWrapper: { alignItems: 'center' },
   title: { color: '#fff', fontSize: 26, fontWeight: '800', textAlign: 'center' },
   subtitle: { color: '#888', fontSize: 14, textAlign: 'center', lineHeight: 20 },
 
