@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput,
   Modal,
+  Alert,
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
@@ -16,6 +17,7 @@ import { useAuthStore } from '../../src/stores/auth.store'
 import { useSubscription } from '../../src/hooks/useSubscription'
 import { getUserProfile, updateUserProfile } from '../../src/services/profile.service'
 import { getReminderConfig, saveReminderConfig, type ReminderConfig } from '../../src/services/workout-reminder.service'
+import { apiPost } from '../../src/services/api.client'
 import type { UserProfile } from '@shapeai/shared'
 
 const GOAL_LABEL: Record<string, string> = {
@@ -60,6 +62,8 @@ export default function ProfileScreen() {
   const [fieldInput, setFieldInput] = useState('')
   const [reminder, setReminder] = useState<ReminderConfig>({ enabled: false, hour: 18, minute: 0 })
   const [showTimePicker, setShowTimePicker] = useState(false)
+  const [inviteCode, setInviteCode] = useState('')
+  const [isRedeeming, setIsRedeeming] = useState(false)
 
   useEffect(() => {
     getUserProfile()
@@ -71,6 +75,20 @@ export default function ProfileScreen() {
       .finally(() => setIsLoading(false))
     getReminderConfig().then(setReminder).catch(() => {})
   }, [])
+
+  const handleRedeemCode = async () => {
+    if (!inviteCode.trim()) return
+    setIsRedeeming(true)
+    try {
+      const res = await apiPost<{ message: string }>('/invite/redeem', { code: inviteCode.trim() })
+      Alert.alert('Sucesso!', res.message)
+      setInviteCode('')
+    } catch (e: unknown) {
+      Alert.alert('Erro', e instanceof Error ? e.message : 'Código inválido')
+    } finally {
+      setIsRedeeming(false)
+    }
+  }
 
   const handleReminderToggle = async (value: boolean) => {
     const updated = { ...reminder, enabled: value }
@@ -327,6 +345,32 @@ export default function ProfileScreen() {
         </View>
       </View>
 
+      {/* Código de convite — só para usuários free */}
+      {!isPro && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Código de Convite</Text>
+          <View style={styles.inviteRow}>
+            <TextInput
+              style={styles.inviteInput}
+              placeholder="Ex: SHAPE-XKQT7"
+              placeholderTextColor="#444"
+              value={inviteCode}
+              onChangeText={(t) => setInviteCode(t.toUpperCase())}
+              autoCapitalize="characters"
+              autoCorrect={false}
+              maxLength={12}
+            />
+            <TouchableOpacity
+              style={[styles.inviteBtn, isRedeeming && { opacity: 0.5 }]}
+              onPress={handleRedeemCode}
+              disabled={isRedeeming}
+            >
+              <Text style={styles.inviteBtnText}>{isRedeeming ? '...' : 'Ativar'}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
       {/* Sair */}
       <TouchableOpacity style={styles.signOutButton} onPress={signOut}>
         <Text style={styles.signOutText}>Sair da conta</Text>
@@ -407,6 +451,18 @@ const styles = StyleSheet.create({
   rowDesc: { color: '#666', fontSize: 13, lineHeight: 18 },
   signOutButton: { marginTop: 16, alignItems: 'center', padding: 14 },
   signOutText: { color: '#555', fontSize: 15 },
+
+  inviteRow: { flexDirection: 'row', gap: 10 },
+  inviteInput: {
+    flex: 1, backgroundColor: '#111', borderRadius: 12,
+    padding: 14, color: '#fff', fontSize: 15,
+    borderWidth: 1, borderColor: '#222', letterSpacing: 1,
+  },
+  inviteBtn: {
+    backgroundColor: '#4CAF50', borderRadius: 12,
+    paddingHorizontal: 20, justifyContent: 'center', alignItems: 'center',
+  },
+  inviteBtnText: { color: '#000', fontWeight: '700', fontSize: 14 },
 
   timeRow: {
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
