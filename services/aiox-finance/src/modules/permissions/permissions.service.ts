@@ -61,7 +61,11 @@ export class PermissionsService {
     }
 
     try {
-      const { data: user } = await this.supabase.from('users').select('role').eq('id', userId).single();
+      const { data: user } = await this.supabase
+        .from('users')
+        .select('role')
+        .eq('id', userId)
+        .single();
 
       if (!user) {
         throw new Error('User not found');
@@ -90,7 +94,11 @@ export class PermissionsService {
     }
 
     try {
-      const { data: user } = await this.supabase.from('users').select('role').eq('id', userId).single();
+      const { data: user } = await this.supabase
+        .from('users')
+        .select('role')
+        .eq('id', userId)
+        .single();
 
       if (!user) {
         throw new Error('User not found');

@@ -117,7 +117,9 @@ export class AuthService {
 
     try {
       // Authenticate user using regular auth API (not admin)
-      const { data: authData, error: authError } = await (this.supabase.auth as any).signInWithPassword({
+      const { data: authData, error: authError } = await (
+        this.supabase.auth as any
+      ).signInWithPassword({
         email: dto.email,
         password: dto.password,
       });

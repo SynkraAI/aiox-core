@@ -15,7 +15,8 @@ describe('RLS Isolation Tests', () => {
       // Users should be able to read only their own row or if they are ADMIN
       const policy = {
         allow: 'authenticated',
-        using: "(auth.uid()::text = id::text OR (SELECT role FROM public.users WHERE id = auth.uid()) = 'ADMIN')",
+        using:
+          "(auth.uid()::text = id::text OR (SELECT role FROM public.users WHERE id = auth.uid()) = 'ADMIN')",
       };
       expect(policy.using).toContain('auth.uid()');
       expect(policy.using).toContain('ADMIN');
@@ -36,14 +37,14 @@ describe('RLS Isolation Tests', () => {
           "(SELECT role FROM public.users WHERE id = auth.uid()) = 'ADMIN' OR " +
           "(SELECT role FROM public.users WHERE id = auth.uid()) = 'FINANCEIRO' OR " +
           "(SELECT role FROM public.users WHERE id = auth.uid()) = 'GESTOR' OR " +
-          "auth.uid() = seller_id",
+          'auth.uid() = seller_id',
       };
       expect(policy.using).toContain('ADMIN');
       expect(policy.using).toContain('FINANCEIRO');
     });
 
     it('should allow COMERCIAL to see only their own sales', async () => {
-      const policy = "auth.uid() = seller_id";
+      const policy = 'auth.uid() = seller_id';
       expect(policy).toContain('seller_id');
     });
 
@@ -57,8 +58,7 @@ describe('RLS Isolation Tests', () => {
     it('should restrict accounts to ADMIN/FINANCEIRO only', async () => {
       const policy = {
         allow: 'authenticated',
-        using:
-          "(SELECT role FROM public.users WHERE id = auth.uid()) IN ('ADMIN', 'FINANCEIRO')",
+        using: "(SELECT role FROM public.users WHERE id = auth.uid()) IN ('ADMIN', 'FINANCEIRO')",
       };
       expect(policy.using).toContain('ADMIN');
       expect(policy.using).toContain('FINANCEIRO');
@@ -87,8 +87,7 @@ describe('RLS Isolation Tests', () => {
     it('should restrict movements to ADMIN/FINANCEIRO', async () => {
       const policy = {
         allow: 'authenticated',
-        using:
-          "(SELECT role FROM public.users WHERE id = auth.uid()) IN ('ADMIN', 'FINANCEIRO')",
+        using: "(SELECT role FROM public.users WHERE id = auth.uid()) IN ('ADMIN', 'FINANCEIRO')",
       };
       expect(policy.using).toContain('FINANCEIRO');
     });

@@ -1,0 +1,59 @@
+storyId: "3.3"
+title: "Auto Commission Calculation"
+validator: "@po (Pax)"
+date: "2026-05-13"
+
+validation_checklist:
+  - criterion: "Clear and objective title"
+    status: "✓ PASS"
+    notes: "Auto Commission Calculation - precise purpose"
+
+  - criterion: "Complete description"
+    status: "✓ PASS"
+    notes: "Story Statement explains: auto-calc commissions from sales, create records, audit trail"
+
+  - criterion: "Testable acceptance criteria"
+    status: "✓ PASS"
+    notes: "14 AC covering calculation (AC1), formula (AC4), triggers (AC6), audit (AC8), tests (AC13)"
+
+  - criterion: "Well-defined scope"
+    status: "✓ PASS"
+    notes: "IN: Commission auto-calc on APPROVED sales, audit log. OUT: Payment processing, approvals"
+
+  - criterion: "Dependencies mapped"
+    status: "✓ PASS"
+    notes: "Story 1.1 (Auth) ✓, 1.3 (Roles) ✓, 3.1 (Sales) ✓. No blockers"
+
+  - criterion: "Complexity estimate"
+    status: "✓ PASS"
+    notes: "13 points, 32 hours - reasonable for 10 tasks (calculator, service, trigger, tests)"
+
+  - criterion: "Business value clear"
+    status: "✓ PASS"
+    notes: "Auto-generate commissions, no manual work, audit trail for compliance"
+
+  - criterion: "Risks documented"
+    status: "✓ PASS"
+    notes: "Critical rules documented: only APPROVED sales, live percentage fetching, no duplicates"
+
+  - criterion: "Criteria of Done complete"
+    status: "✓ PASS"
+    notes: "14 items covering implementation, testing, quality gates"
+
+  - criterion: "Alignment with PRD/Epic"
+    status: "✓ PASS"
+    notes: "Epic: 'AIOX Finance Commission - Sprint 3'. Critical path for commission workflow"
+
+validation_score: "10/10"
+overall_verdict: "GO ✓"
+recommendation: |
+  Story 3.3 is **APPROVED FOR DEVELOPMENT**.
+
+  All 10 validation criteria met. Well-scoped complex story with clear
+  business rules and dependencies. Depends on 3.1 (sales) which is Done.
+
+  Ready for @dev implementation. Estimated 2-3 days.
+
+next_action: "@dev begins implementation"
+conditional_go: false
+fixes_required: 0

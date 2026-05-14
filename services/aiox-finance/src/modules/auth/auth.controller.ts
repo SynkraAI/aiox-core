@@ -1,7 +1,10 @@
 import { Controller, Post, Body, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { AuthService, SignUpResponse, SignInResponse } from './auth.service';
 import { JwtAuthGuard } from '@src/guards/jwt.guard';
-import { CurrentUser, type CurrentUser as CurrentUserType } from '@src/decorators/current-user.decorator';
+import {
+  CurrentUser,
+  type CurrentUser as CurrentUserType,
+} from '@src/decorators/current-user.decorator';
 import { z } from 'zod';
 
 const SignUpSchema = z.object({
@@ -80,7 +83,9 @@ export class AuthController {
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  async logout(@CurrentUser() user: CurrentUserType): Promise<{ success: boolean; message: string }> {
+  async logout(
+    @CurrentUser() user: CurrentUserType
+  ): Promise<{ success: boolean; message: string }> {
     await this.authService.logout(user.id);
     return {
       success: true,

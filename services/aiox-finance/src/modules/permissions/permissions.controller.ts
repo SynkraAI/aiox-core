@@ -39,10 +39,7 @@ export class PermissionsController {
   @Post('grant')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  async grantPermission(
-    @Body() body: any,
-    @CurrentUser() user: JwtPayload,
-  ) {
+  async grantPermission(@Body() body: any, @CurrentUser() user: JwtPayload) {
     try {
       const result = GrantPermissionSchema.safeParse(body);
       if (!result.success) {
@@ -59,7 +56,11 @@ export class PermissionsController {
         };
       }
 
-      await this.permissionsService.grantPermission(user.sub, result.data.resource, result.data.action);
+      await this.permissionsService.grantPermission(
+        user.sub,
+        result.data.resource,
+        result.data.action
+      );
 
       return {
         success: true,
@@ -77,10 +78,7 @@ export class PermissionsController {
   @Delete('revoke')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  async revokePermission(
-    @Body() body: any,
-    @CurrentUser() user: JwtPayload,
-  ) {
+  async revokePermission(@Body() body: any, @CurrentUser() user: JwtPayload) {
     try {
       const result = RevokePermissionSchema.safeParse(body);
       if (!result.success) {
@@ -97,7 +95,11 @@ export class PermissionsController {
         };
       }
 
-      await this.permissionsService.revokePermission(user.sub, result.data.resource, result.data.action);
+      await this.permissionsService.revokePermission(
+        user.sub,
+        result.data.resource,
+        result.data.action
+      );
 
       return {
         success: true,

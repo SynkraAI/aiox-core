@@ -6,7 +6,7 @@ import { PermissionsService } from '@src/modules/permissions/permissions.service
 export class PermissionGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-    private permissionsService: PermissionsService,
+    private permissionsService: PermissionsService
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

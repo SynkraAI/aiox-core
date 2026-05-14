@@ -7,6 +7,7 @@ Guia completo para configurar webhooks do ClickUp e deixar o dashboard atualizad
 ## ⚡ O Que São Webhooks?
 
 Webhooks são notificações automáticas que o ClickUp envia quando algo muda:
+
 - ✅ Venda criada/atualizada → Sincroniza imediatamente
 - ✅ Cliente modificado → Atualiza no dashboard em < 1 segundo
 - ✅ Deal recebido → Taxa de recebimento atualiza em tempo real
@@ -29,6 +30,7 @@ Webhooks são notificações automáticas que o ClickUp envia quando algo muda:
 ## 📋 Passo 1: Preparar URL Pública
 
 ### Opção A: Ngrok (Desenvolvimento)
+
 ```bash
 # Instalar ngrok
 # Download em: https://ngrok.com/download
@@ -44,6 +46,7 @@ ngrok http 3001
 **URL Webhook:** `https://abc123.ngrok.io/api/webhooks`
 
 ### Opção B: Cloudflare Tunnel (Gratuito)
+
 ```bash
 # Instalar Cloudflare Tunnel
 npm install -g @cloudflare/wrangler
@@ -58,6 +61,7 @@ wrangler tunnel --url http://localhost:3001
 **URL Webhook:** `https://xxx-yyy-zzz.cfargotunnels.com/api/webhooks`
 
 ### Opção C: Production (AWS/Heroku/DigitalOcean)
+
 ```
 URL Webhook: https://seu-dominio.com/api/webhooks
 ```
@@ -90,6 +94,7 @@ curl -H "Authorization: pk_YOUR_CLICKUP_API_KEY" \
 ## 🔐 Passo 3: Gerar Webhook no ClickUp
 
 ### Via ClickUp API
+
 ```bash
 # Variáveis
 CLICKUP_API_KEY="pk_sua_chave_aqui"
@@ -122,6 +127,7 @@ curl -X POST \
 ```
 
 ### Via ClickUp UI (Alternativa)
+
 1. Abra ClickUp → Settings
 2. Vá para: Integrations → Webhooks
 3. Clique em "Create Webhook"
@@ -151,6 +157,7 @@ CLICKUP_WEBHOOK_SECRET=seu_webhook_secret_opcional
 ## 🧪 Passo 5: Testar Webhook
 
 ### Teste 1: Verificar Endpoint
+
 ```bash
 # O endpoint deve estar acessível
 curl -I https://abc123.ngrok.io/api/webhooks
@@ -159,6 +166,7 @@ curl -I https://abc123.ngrok.io/api/webhooks
 ```
 
 ### Teste 2: Simular Webhook
+
 ```bash
 # Enviar webhook simulado
 curl -X POST \
@@ -178,6 +186,7 @@ curl -X POST \
 ```
 
 ### Teste 3: Provocar Evento Real
+
 ```bash
 # No ClickUp, faça uma ação real:
 1. Abra um task da lista CRM-VENDAS
@@ -194,6 +203,7 @@ curl -X POST \
 ## 📊 Passo 6: Monitorar Webhooks
 
 ### Ver Status do Webhook (API)
+
 ```bash
 CLICKUP_API_KEY="pk_..."
 TEAM_ID="..."
@@ -204,6 +214,7 @@ curl -H "Authorization: $CLICKUP_API_KEY" \
 ```
 
 ### Ver Logs no App
+
 ```bash
 # Os logs aparecem em:
 # 1. Console do terminal (npm run start)
@@ -235,6 +246,7 @@ Configure estes eventos no ClickUp:
 ```
 
 ### Mínimo Recomendado
+
 ```json
 "events": [
   "taskUpdated",
@@ -248,6 +260,7 @@ Configure estes eventos no ClickUp:
 ## ⏱️ Debounce (Prevenção de Duplicatas)
 
 O sistema implementa **debounce automático**:
+
 - Múltiplos webhooks em < 10 segundos = 1 sync
 - Evita sobrecarga e requisições desnecessárias
 
@@ -264,6 +277,7 @@ SYNC EXECUTA uma única vez com todos os dados
 ## 🚨 Troubleshooting
 
 ### Webhook não é acionado
+
 ```
 1. ✓ URL está acessível? (curl -I url)
 2. ✓ API Key tem permissão?
@@ -272,6 +286,7 @@ SYNC EXECUTA uma única vez com todos os dados
 ```
 
 ### Dashboard não atualiza
+
 ```
 1. ✓ Console mostra "[Webhook] Evento recebido"?
 2. ✓ data/sync-log.json tem novos eventos?
@@ -280,6 +295,7 @@ SYNC EXECUTA uma única vez com todos os dados
 ```
 
 ### Muitos syncs simultâneos
+
 ```
 Aumentar MIN_SYNC_INTERVAL em webhook-receiver.js:
 this.MIN_SYNC_INTERVAL = 30 * 1000; // 30 segundos
@@ -289,13 +305,13 @@ this.MIN_SYNC_INTERVAL = 30 * 1000; // 30 segundos
 
 ## 🔄 Comparação: Com vs Sem Webhooks
 
-| Métrica | Sem Webhooks | Com Webhooks |
-|---------|--------------|--------------|
-| Frequência de sync | 5 minutos | Instantânea |
-| Delay de atualização | até 5 min | < 1 segundo |
-| Requisições/hora | ~12 | ~100 (com eventos) |
-| Uso de CPU | Baixo | Médio |
-| Custo API ClickUp | Baixo | Médio |
+| Métrica              | Sem Webhooks | Com Webhooks       |
+| -------------------- | ------------ | ------------------ |
+| Frequência de sync   | 5 minutos    | Instantânea        |
+| Delay de atualização | até 5 min    | < 1 segundo        |
+| Requisições/hora     | ~12          | ~100 (com eventos) |
+| Uso de CPU           | Baixo        | Médio              |
+| Custo API ClickUp    | Baixo        | Médio              |
 
 ---
 
@@ -304,17 +320,20 @@ this.MIN_SYNC_INTERVAL = 30 * 1000; // 30 segundos
 ### Setup Rápido (10 minutos)
 
 1. **Terminal 1:** Instalar e rodar ngrok
+
 ```bash
 ngrok http 3001
 # Copie: https://abc123.ngrok.io
 ```
 
 2. **Terminal 2:** Rodar Financial Sync
+
 ```bash
 npm run start
 ```
 
 3. **Terminal 3:** Criar webhook
+
 ```bash
 # Use o curl command acima
 curl -X POST https://api.clickup.com/api/v2/team/$TEAM_ID/webhook \
@@ -323,11 +342,13 @@ curl -X POST https://api.clickup.com/api/v2/team/$TEAM_ID/webhook \
 ```
 
 4. **Navegador:** Abrir Dashboard
+
 ```
 http://localhost:3001
 ```
 
 5. **ClickUp:** Fazer uma alteração em qualquer task
+
 ```
 Dashboard atualiza em < 1 segundo ⚡
 ```
@@ -337,13 +358,16 @@ Dashboard atualiza em < 1 segundo ⚡
 ## 📞 Suporte
 
 ### Documentação Oficial
+
 - ClickUp Webhooks: https://clickup.com/api/v2/docs#webhooks
 - ClickUp Team API: https://clickup.com/api/v2/docs#teams
 
 ### Ngrok Documentation
+
 - https://ngrok.com/docs
 
 ### Seu Dashboard
+
 ```
 http://localhost:3001 → Aba "Logs" mostra histórico de webhooks
 ```
