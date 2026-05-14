@@ -1,6 +1,6 @@
 {
   "name": "aiox-core",
-  "version": "5.2.3",
+  "version": "5.2.4",
   "description": "Compatibility wrapper for @aiox-squads/core.",
   "license": "MIT",
   "bin": {
@@ -15,7 +15,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@aiox-squads/core": "5.2.3"
+    "@aiox-squads/core": "5.2.4"
   },
   "engines": {
     "node": ">=18"

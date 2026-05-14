@@ -169,6 +169,53 @@ describe('pro-setup backward compatibility (AC-7)', () => {
   });
 });
 
+describe('pro-setup npm invocation', () => {
+  it('uses node + npm-cli.js on Windows when npm_execpath is available', () => {
+    const invocation = proSetup._testing.resolveNpmInvocation({
+      platform: 'win32',
+      execPath: 'C:\\Program Files\\nodejs\\node.exe',
+      env: {
+        npm_execpath: 'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+      },
+      fileExists: () => true,
+    });
+
+    expect(invocation).toEqual({
+      command: 'C:\\Program Files\\nodejs\\node.exe',
+      prefixArgs: ['C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js'],
+      execOptions: {},
+    });
+  });
+
+  it('falls back to shell execution for npm.cmd on Windows', () => {
+    const invocation = proSetup._testing.resolveNpmInvocation({
+      platform: 'win32',
+      env: {},
+      fileExists: () => false,
+    });
+
+    expect(invocation).toEqual({
+      command: 'npm.cmd',
+      prefixArgs: [],
+      execOptions: { shell: true },
+    });
+  });
+
+  it('uses npm directly on POSIX platforms', () => {
+    const invocation = proSetup._testing.resolveNpmInvocation({
+      platform: 'darwin',
+      env: {},
+      fileExists: () => false,
+    });
+
+    expect(invocation).toEqual({
+      command: 'npm',
+      prefixArgs: [],
+      execOptions: {},
+    });
+  });
+});
+
 describe('pro-setup interactive email fallback', () => {
   afterEach(() => {
     proSetup._testing.loadLicenseApi = undefined;

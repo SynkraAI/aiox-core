@@ -28,6 +28,46 @@ const { t, tf } = require('./i18n');
 
 const execFileAsync = promisify(execFile);
 
+function stripWrappingQuotes(value) {
+  return String(value || '').trim().replace(/^"(.*)"$/, '$1');
+}
+
+function resolveNpmInvocation(options = {}) {
+  const platform = options.platform || process.platform;
+  const env = options.env || process.env;
+  const execPath = options.execPath || process.execPath;
+  const fileExists = options.fileExists || fs.existsSync;
+  const npmExecPath = stripWrappingQuotes(env.npm_execpath);
+
+  if (npmExecPath && /\.js$/i.test(npmExecPath) && fileExists(npmExecPath)) {
+    return {
+      command: execPath,
+      prefixArgs: [npmExecPath],
+      execOptions: {},
+    };
+  }
+
+  return {
+    command: platform === 'win32' ? 'npm.cmd' : 'npm',
+    prefixArgs: [],
+    execOptions: platform === 'win32' ? { shell: true } : {},
+  };
+}
+
+async function runNpm(args, options = {}) {
+  const invocation = resolveNpmInvocation();
+
+  return execFileAsync(
+    invocation.command,
+    [...invocation.prefixArgs, ...args],
+    {
+      ...options,
+      ...invocation.execOptions,
+      windowsHide: true,
+    },
+  );
+}
+
 /**
  * Gold color for Pro branding.
  * Falls back gracefully if chalk hex is unavailable.
@@ -749,10 +789,8 @@ async function extractProArtifactToTemp(artifactPath, tempRoot) {
     dependencies: {},
   });
 
-  const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   try {
-    await execFileAsync(
-      npmBin,
+    await runNpm(
       ['install', artifactPath, '--ignore-scripts', '--no-audit', '--no-fund', '--no-save', '--silent'],
       {
         cwd: installRoot,
@@ -776,10 +814,8 @@ async function extractProArtifactToTemp(artifactPath, tempRoot) {
 async function installProArtifactIntoTarget(artifactPath, targetDir) {
   await fs.ensureDir(targetDir);
 
-  const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   try {
-    await execFileAsync(
-      npmBin,
+    await runNpm(
       [
         'install',
         artifactPath,
@@ -2163,6 +2199,7 @@ module.exports = {
     generateMachineId,
     persistLicenseCache,
     resolveLicenseServerUrl,
+    resolveNpmInvocation,
     ensureKeyValidationParity,
     acquireProArtifactSourceDir,
     downloadArtifactFile,
