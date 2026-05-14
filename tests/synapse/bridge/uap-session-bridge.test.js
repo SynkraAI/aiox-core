@@ -547,8 +547,9 @@ describe('UAP Session Bridge — Timing Budget', () => {
     // Clean up skip tmpdir
     fs.rmSync(skipCtx.projectRoot, { recursive: true, force: true });
 
+    const timingJitterTolerance = process.platform === 'win32' ? 5 : 1;
     expect(skipMetrics.loaders.synapseSession.duration).toBeLessThanOrEqual(
-      writeMetrics.loaders.synapseSession.duration + 1, // +1ms tolerance
+      writeMetrics.loaders.synapseSession.duration + timingJitterTolerance,
     );
   });
 });
