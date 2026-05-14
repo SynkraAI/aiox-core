@@ -15,15 +15,16 @@ Estabelecer a base segura e autenticada para o sistema AIOX Finance Commission. 
 
 ## 📋 Sprint 1 Stories (5 stories, 85 horas)
 
-| Story | Título | Horas | Status |
-|-------|--------|-------|--------|
-| 1.1 | Supabase Auth + JWT | 20h | 🔵 Pending |
-| 1.2 | RLS Policies | 25h | 🔵 Pending |
-| 1.3 | Roles & Permissions | 15h | 🔵 Pending |
-| 1.4 | NestJS + TypeScript Setup | 20h | 🔵 Pending |
-| 1.5 | Health Check + Deploy | 5h | 🔵 Pending |
+| Story | Título                    | Horas | Status     |
+| ----- | ------------------------- | ----- | ---------- |
+| 1.1   | Supabase Auth + JWT       | 20h   | 🔵 Pending |
+| 1.2   | RLS Policies              | 25h   | 🔵 Pending |
+| 1.3   | Roles & Permissions       | 15h   | 🔵 Pending |
+| 1.4   | NestJS + TypeScript Setup | 20h   | 🔵 Pending |
+| 1.5   | Health Check + Deploy     | 5h    | 🔵 Pending |
 
 **Execution Order:**
+
 1. Story 1.4 (NestJS setup) — foundation
 2. Story 1.1 (Auth) — unlocks everything
 3. Story 1.2 (RLS) — security
@@ -35,6 +36,7 @@ Estabelecer a base segura e autenticada para o sistema AIOX Finance Commission. 
 ## 🏗️ Architecture
 
 ### Tech Stack
+
 - **Backend:** NestJS 10+, TypeScript 5+
 - **Database:** PostgreSQL (Supabase)
 - **Auth:** Supabase Auth (JWT)
@@ -42,6 +44,7 @@ Estabelecer a base segura e autenticada para o sistema AIOX Finance Commission. 
 - **Quality:** ESLint, Prettier, TypeScript strict
 
 ### Core Domains
+
 1. **Auth** - User authentication and session management
 2. **Users & Permissions** - Role-based access control (RBAC)
 3. **Customers** - Customer management
@@ -143,16 +146,19 @@ npm run dev
 ## 📚 Reference Documents
 
 **Specification:** `docs/SPRINT-1-SPECIFICATION.md`
+
 - Complete story breakdowns
 - Acceptance criteria
 - Implementation details
 
 **Commission Engine:** `docs/commission-engine-reference.ts`
+
 - 7 commission types (Strategy Pattern)
 - Validation logic
 - Calculation examples
 
 **Database Schema:** `docs/supabase-schema-reference.sql`
+
 - 8 migrations
 - RLS policies
 - Seed data (permissions matrix)

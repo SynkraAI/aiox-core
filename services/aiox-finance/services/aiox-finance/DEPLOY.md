@@ -22,11 +22,13 @@ NODE_ENV=production
 ### Vercel
 
 1. **Install Vercel CLI:**
+
    ```bash
    npm install -g vercel
    ```
 
 2. **Deploy:**
+
    ```bash
    vercel --prod
    ```
@@ -39,26 +41,25 @@ NODE_ENV=production
    ```
 
 **Config file (vercel.json):**
+
 ```json
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "env": [
-    "SUPABASE_URL",
-    "SUPABASE_SERVICE_ROLE_KEY",
-    "FRONTEND_URL"
-  ]
+  "env": ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "FRONTEND_URL"]
 }
 ```
 
 ### Railway
 
 1. **Install Railway CLI:**
+
    ```bash
    npm install -g @railway/cli
    ```
 
 2. **Login & Deploy:**
+
    ```bash
    railway login
    railway init
@@ -72,15 +73,12 @@ NODE_ENV=production
    - PORT (optional, defaults to 3000)
 
 **Config file (railway.json):**
+
 ```json
 {
   "build": "npm run build",
   "start": "node dist/main.js",
-  "env": [
-    "SUPABASE_URL",
-    "SUPABASE_SERVICE_ROLE_KEY",
-    "FRONTEND_URL"
-  ]
+  "env": ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "FRONTEND_URL"]
 }
 ```
 
@@ -103,12 +101,14 @@ NODE_ENV=production
 ### Endpoints
 
 **Health Status:**
+
 ```bash
 curl http://localhost:3000/health
 # Returns: { status: 'ok' }
 ```
 
 **Full Status (with DB):**
+
 ```bash
 curl http://localhost:3000/api/status
 # Returns: { status: 'ok', database: 'connected' }
@@ -154,6 +154,7 @@ npm run build
 ## Monitoring
 
 The API logs all requests with:
+
 - Method
 - Endpoint
 - Status code
@@ -165,6 +166,7 @@ Errors (5xx) are logged with full error details and requestId for tracking.
 ## Graceful Shutdown
 
 The server handles `SIGTERM` and `SIGINT` signals with a 10-second timeout:
+
 1. Stop accepting new requests
 2. Wait for in-flight requests to complete
 3. Close database connections

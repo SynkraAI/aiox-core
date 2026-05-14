@@ -6,6 +6,7 @@ Dashboard completo com API, Database, Cron automático e CLI.
 ## 🚀 Quick Start (3 passos)
 
 ### 1️⃣ Configuração
+
 ```bash
 cp .env.example .env
 # ✏️ Edite .env com suas credenciais ClickUp:
@@ -16,6 +17,7 @@ cp .env.example .env
 ```
 
 ### 2️⃣ Iniciar Sistema (API + Dashboard + Cron)
+
 ```bash
 npm run start
 # ou
@@ -23,6 +25,7 @@ npm run dev
 ```
 
 ### 3️⃣ Abrir Dashboard
+
 ```
 http://localhost:3001
 ```
@@ -30,17 +33,20 @@ http://localhost:3001
 ## 📋 Comandos Disponíveis
 
 ### Sistema Completo (API + Scheduler + Dashboard)
+
 ```bash
 npm run start          # Inicia API Server + Cron Scheduler + Dashboard
 npm run dev            # Alias para start
 ```
 
 ### API Isolada
+
 ```bash
 npm run api            # Apenas API Server (porta 3001)
 ```
 
 ### CLI (Sincronização Manual)
+
 ```bash
 npm run sync           # Sincronizar tudo (ClickUp → Database)
 npm run sync:sales     # Apenas relatório de vendas
@@ -81,22 +87,26 @@ services/financial-sync/
 ## 📊 Funcionalidades Implementadas
 
 ### ✅ CLI-First Architecture
+
 - Sincronização 100% via CLI
 - Independente de UI
 - Funciona sem dependências externas pesadas
 
 ### ✅ ClickUp Integration
+
 - Cliente HTTPS nativo (sem SDK)
 - Fetch de 2 listas: CRM-OFICIAL (clientes) + CRM-VENDAS (vendas)
 - Parsing automático de custom fields
 - Error handling com retry logic
 
 ### ✅ Data Mapping & Transformation
+
 - Mappers automáticos (ClickUp → Schema local)
 - Extração de: Deal Value, Paid Amount, Payment Method, Status
 - Cálculo automático de: Faturado, Recebido, Em Aberto
 
 ### ✅ Financial Metrics
+
 ```
 📊 Métricas Calculadas:
 ├── Faturado Total (sum de Deal Value)
@@ -109,6 +119,7 @@ services/financial-sync/
 ```
 
 ### ✅ API REST (HTTP nativo)
+
 ```
 📡 Endpoints:
 ├── GET  /                      Dashboard HTML
@@ -122,17 +133,20 @@ services/financial-sync/
 ```
 
 ### ✅ Database Persistence
+
 - JSON file-based (sem dependências externas)
 - Sincronização automática após cada sync
 - Query access via Database class
 
 ### ✅ Cron Scheduler
+
 - Sincronização automática a cada 6 horas
 - Run imediato ao iniciar
 - Next-run reporting
 - Duplicate execution prevention
 
 ### ✅ Dashboard UI
+
 - Métricas em tempo real (com gráficos de progresso)
 - Tabelas de vendas com filtros
 - Tabelas de clientes com análise de risco
@@ -171,6 +185,7 @@ Dashboard UI (Visualização em tempo real)
 ## 🚀 Deployment
 
 ### Local Development
+
 ```bash
 npm run start
 # API: http://localhost:3001
@@ -178,6 +193,7 @@ npm run start
 ```
 
 ### Production
+
 ```bash
 node index.js
 # Configure em .env:
@@ -198,11 +214,13 @@ node index.js
 ## 🐛 Troubleshooting
 
 ### "Cannot find module"
+
 ```bash
 npm install  # Apenas Node.js stdlib necessário
 ```
 
 ### "ClickUp API Error: 401"
+
 ```
 ✏️ Verificar .env:
 - CLICKUP_API_KEY válida?
@@ -212,6 +230,7 @@ npm install  # Apenas Node.js stdlib necessário
 ```
 
 ### Dashboard mostra "Erro ao conectar com API"
+
 ```bash
 # Verificar se API Server está rodando
 npm run api

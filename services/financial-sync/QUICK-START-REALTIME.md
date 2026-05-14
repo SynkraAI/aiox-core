@@ -31,6 +31,7 @@ nano .env
 ```
 
 **Preencher:**
+
 ```env
 CLICKUP_API_KEY=seu_api_key_aqui
 CLICKUP_TEAM_ID=seu_team_id
@@ -50,6 +51,7 @@ npm run start
 ```
 
 **Output esperado:**
+
 ```
 🚀 Iniciando Scheduler de Sincronização Automática
 ⏰ Intervalo: 5 minutos
@@ -76,6 +78,7 @@ http://localhost:3001
 #### Passo 1: Expor API para a Internet
 
 **Opção A: Ngrok (Recomendado)**
+
 ```bash
 # Download: https://ngrok.com/download
 
@@ -89,6 +92,7 @@ ngrok http 3001
 ```
 
 **Opção B: Cloudflare Tunnel**
+
 ```bash
 npm install -g @cloudflare/wrangler
 wrangler tunnel --url http://localhost:3001
@@ -144,6 +148,7 @@ CLICKUP_WEBHOOK_SECRET=opcional
 ### Seções Principais
 
 **1. Métricas (topo)**
+
 ```
 💵 Faturado Total        → Total em negociação
 ✅ Recebido Total         → Dinheiro que já entrou
@@ -156,6 +161,7 @@ CLICKUP_WEBHOOK_SECRET=opcional
 ```
 
 **2. Abas (abaixo das métricas)**
+
 ```
 📊 Vendas
 ├── ID, Cliente, Faturado, Recebido
@@ -174,6 +180,7 @@ CLICKUP_WEBHOOK_SECRET=opcional
 ```
 
 **3. Botões**
+
 ```
 🔄 Sincronizar Agora  → Força sync imediato
 🔃 Recarregar          → Atualiza página
@@ -206,12 +213,14 @@ COM WEBHOOKS (instantâneo):
 ## 📈 Monitorar Sincronizações
 
 ### Via Console
+
 ```bash
 # Ver logs em tempo real
 tail -f data/sync-log.json
 ```
 
 ### Via Dashboard
+
 ```
 Aba "Logs de Sincronização" mostra:
 ├── Operação
@@ -221,6 +230,7 @@ Aba "Logs de Sincronização" mostra:
 ```
 
 ### Via API
+
 ```bash
 # Ver últimos 50 logs
 curl http://localhost:3001/api/logs?limit=50
@@ -250,7 +260,7 @@ SYNC_INTERVAL_MS=300000
 setInterval(() => loadDashboard(), 10 * 1000); // 10 segundos
 
 // Mudar para:
-setInterval(() => loadDashboard(), 5 * 1000);  // 5 segundos
+setInterval(() => loadDashboard(), 5 * 1000); // 5 segundos
 ```
 
 ### Webhook Debounce
@@ -313,13 +323,16 @@ this.MIN_SYNC_INTERVAL = 30 * 1000; // 30 segundos (mais conservador)
 ## 🎯 Próximos Passos
 
 ### Dashboard funcionando?
+
 - ✅ Parabéns! Você tem sincronização a cada 5 minutos
 
 ### Quer tempo real?
+
 - 📖 Leia: `WEBHOOKS-SETUP.md` (guia completo)
 - 🔌 Configure webhooks ClickUp
 
 ### Quer mais funcionalidades?
+
 - 📊 Gráficos avançados
 - 📧 Alertas por email/Slack
 - 📈 Relatórios PDF
@@ -330,18 +343,21 @@ this.MIN_SYNC_INTERVAL = 30 * 1000; // 30 segundos (mais conservador)
 ## 💡 Dicas Profissionais
 
 1. **Mantenha ngrok rodando** em um terminal
+
    ```bash
    # Terminal dedicado para ngrok
    ngrok http 3001
    ```
 
 2. **Monitore data/sync-log.json**
+
    ```bash
    # Ver logs em tempo real
    tail -f data/sync-log.json
    ```
 
 3. **Use Cloudflare Tunnel em produção**
+
    ```bash
    # Melhor que ngrok para longo prazo
    wrangler tunnel --url http://localhost:3001
@@ -381,6 +397,7 @@ Fallback seguro: funciona sem webhooks
 **Sistema pronto para rodar! 🚀**
 
 Qualquer dúvida, veja os arquivos:
+
 - `README.md` - Documentação completa
 - `WEBHOOKS-SETUP.md` - Setup detalhado de webhooks
 - `IMPLEMENTATION-SUMMARY.md` - Detalhes técnicos
