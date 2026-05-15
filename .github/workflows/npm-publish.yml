@@ -456,19 +456,74 @@ jobs:
           echo "❌ Smoke test timeout for ${PKG_SPEC}"
           exit 1
 
+  smoke_test_exports:
+    # Issue #734 regression guard: validates that @aiox-squads/core exposes
+    # bin/* via package exports. The npx smoke above does NOT detect this
+    # because npm bin shims resolve internally without triggering Node's
+    # package-exports gate. This job forces require() resolution from an
+    # external context across Node 20/22/24 — the matrix that revealed
+    # ERR_PACKAGE_PATH_NOT_EXPORTED affected v5.2.2/.3/.4.
+    needs: [build, publish, publish_legacy_aiox_core]
+    if: ${{ needs.publish.result == 'success' || needs.publish_legacy_aiox_core.result == 'success' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20', '22', '24']
+    steps:
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: ${{ env.NPM_REGISTRY }}
+
+      - name: Wait for npm propagation
+        env:
+          CORE_SPEC: '@aiox-squads/core@${{ needs.build.outputs.version }}'
+        run: |
+          for i in 1 2 3 4 5 6; do
+            if npm view "${CORE_SPEC}" version > /dev/null 2>&1; then
+              echo "✅ ${CORE_SPEC} available on npm"
+              exit 0
+            fi
+            echo "⏳ Waiting for ${CORE_SPEC} propagation... (attempt $i/6)"
+            sleep 15
+          done
+          echo "❌ ${CORE_SPEC} not visible after 90s — cannot run exports smoke"
+          exit 1
+
+      - name: Force require() resolution to trigger exports gate
+        env:
+          CORE_SPEC: '@aiox-squads/core@${{ needs.build.outputs.version }}'
+        run: |
+          SMOKE_DIR=$(mktemp -d)
+          cd "${SMOKE_DIR}"
+          npm init -y >/dev/null 2>&1
+          npm install "${CORE_SPEC}" 2>&1 | tail -3
+          # External require() forces Node's package-exports gate. If bin/*
+          # is not declared in exports, this fails with ERR_PACKAGE_PATH_NOT_EXPORTED.
+          if node -e "require('@aiox-squads/core/bin/aiox.js')" 2>&1 | head -20; then
+            echo "✅ require('@aiox-squads/core/bin/aiox.js') succeeds on Node ${{ matrix.node }}"
+          else
+            echo "❌ REGRESSION: require() blocked by exports field on Node ${{ matrix.node }}"
+            echo "❌ Issue #734 has returned — check exports field in package.json"
+            exit 1
+          fi
+          rm -rf "${SMOKE_DIR}"
+
   notify:
-    needs: [build, publish, publish_workspace_packages, publish_legacy_aiox_core]
+    needs: [build, publish, publish_workspace_packages, publish_legacy_aiox_core, smoke_test_exports]
     if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Notify completion
         run: |
-          if [ "${{ needs.publish.result }}" = "failure" ] || [ "${{ needs.publish_workspace_packages.result }}" = "failure" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "failure" ]; then
+          if [ "${{ needs.publish.result }}" = "failure" ] || [ "${{ needs.publish_workspace_packages.result }}" = "failure" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "failure" ] || [ "${{ needs.smoke_test_exports.result }}" = "failure" ]; then
             echo "❌ Publishing failed"
             exit 1
           fi
 
-          if [ "${{ needs.publish.result }}" = "cancelled" ] || [ "${{ needs.publish_workspace_packages.result }}" = "cancelled" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "cancelled" ]; then
+          if [ "${{ needs.publish.result }}" = "cancelled" ] || [ "${{ needs.publish_workspace_packages.result }}" = "cancelled" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "cancelled" ] || [ "${{ needs.smoke_test_exports.result }}" = "cancelled" ]; then
             echo "❌ Publishing was cancelled"
             exit 1
           fi
