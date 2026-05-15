@@ -38,7 +38,7 @@ so that every published patch release after the `@aiox-squads` scope migration r
 - `package.json`
 - `compat/aiox-core/package.json`
 - `.github/workflows/npm-publish.yml`
-- `docs/stories/epic-124-aiox-squads-scope-migration/STORY-124.9-fix-issue-734-exports-bin.md`
+- `docs/stories/epic-124-aiox-squads-scope-migration/STORY-124.13-fix-issue-734-exports-bin.md`
 
 ## Dev Notes
 

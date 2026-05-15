@@ -496,12 +496,14 @@ jobs:
         env:
           CORE_SPEC: '@aiox-squads/core@${{ needs.build.outputs.version }}'
         run: |
+          set -o pipefail
           SMOKE_DIR=$(mktemp -d)
           cd "${SMOKE_DIR}"
           npm init -y >/dev/null 2>&1
           npm install "${CORE_SPEC}" 2>&1 | tail -3
           # External require() forces Node's package-exports gate. If bin/*
           # is not declared in exports, this fails with ERR_PACKAGE_PATH_NOT_EXPORTED.
+          # set -o pipefail above ensures node's exit status survives the head pipe.
           if node -e "require('@aiox-squads/core/bin/aiox.js')" 2>&1 | head -20; then
             echo "✅ require('@aiox-squads/core/bin/aiox.js') succeeds on Node ${{ matrix.node }}"
           else
