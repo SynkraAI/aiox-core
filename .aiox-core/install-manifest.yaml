@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.6
-generated_at: "2026-05-17T10:06:35.754Z"
+generated_at: "2026-05-17T12:08:48.951Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -1433,9 +1433,9 @@ files:
     type: agent
     size: 2486
   - path: development/agents/devops.md
-    hash: sha256:260b04cc608c1ddcd9ed2cf210e5d22f045002a4c0059f8220abcd3dc67a1cd8
+    hash: sha256:6f29e5e8897a2cafb6128b6c31dc6aecb9b596bb4314c936859152072cf66d5e
     type: agent
-    size: 25385
+    size: 26785
   - path: development/agents/devops/MEMORY.md
     hash: sha256:eb2ee887047c94db3441126cd0198cac44cec779026d7842a3a1c7eba936027f
     type: agent
@@ -2373,9 +2373,9 @@ files:
     type: task
     size: 23884
   - path: development/tasks/publish-npm.md
-    hash: sha256:d69f833690fd01256c9b99cc7bd7bb67704f5894ffa9171af7cb94253ecd98cd
+    hash: sha256:89a0dfae836670a875afee2f3c02a7ab5ddf71efd40a87d393a098b09dc94eb1
     type: task
-    size: 6473
+    size: 2802
   - path: development/tasks/qa-after-creation.md
     hash: sha256:e9f6ceff7a0bc00d4fc035e890b7f1178c6ea43f447d135774b46a00713450e6
     type: task
@@ -2457,9 +2457,9 @@ files:
     type: task
     size: 11411
   - path: development/tasks/release-management.md
-    hash: sha256:80a9a1ead93c66bfe59cb75215661052e7b4abccc483cd9d01a07034fca2311c
+    hash: sha256:6c974d586a9ae204c7c3779a961efd3cec9fe7fa42bd3b3e4c2ea4ef43f78455
     type: task
-    size: 18947
+    size: 3970
   - path: development/tasks/remove-mcp.md
     hash: sha256:3f4bf3f8d4d651109dc783e95598ab21569447295f22a7b868d3973f0848aa4c
     type: task
