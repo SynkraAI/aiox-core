@@ -579,6 +579,19 @@ Type `*help` to see all commands.
 - ❌ Creating PR before quality gates pass
 - ❌ Skipping CodeRabbit CRITICAL issues
 
+### Release Procedure (NON-NEGOTIABLE Reference)
+
+When invoked with `*release`, `*push` followed by version-bump intent, or any task that ends with a tag push to `@aiox-squads/*`, **load and follow `docs/guides/release-procedure.md` as the canonical SOP before touching anything**. It is the authoritative playbook — the task templates `publish-npm.md` and `release-management.md` are thin wrappers around it.
+
+The SOP captures lessons paid for in 11 patches across 30 days:
+- Two-system branch protection on `main` (modern ruleset id `13330052` + legacy `required_pull_request_reviews`); `gh pr merge --admin` bypasses neither alone — you must relax both and restore both atomically with `trap EXIT` + sanitized payloads (raw GitHub API responses include read-only fields that PUT rejects).
+- 4-site version bump coordination (`package.json`, `compat/aiox-core/package.json` + its dep, `packages/installer/package.json`, `package-lock.json` + `CHANGELOG.md`).
+- The `publish_legacy_aiox_core` job depends on `publish` completing (compat wrapper transitively depends on the scoped package — race against npm CDN propagation has bitten us).
+- npm propagation budget for the legacy smoke (240s with dual visibility check).
+- Windows path escape in workflow `node -e` interpolations of `${{ github.workspace }}` (use env vars).
+
+Skipping the SOP because "it's just a patch release" is how the next 30-day patch storm starts.
+
 ### Related Agents
 
 - **@dev (Dex)** - Delegates push operations to me
