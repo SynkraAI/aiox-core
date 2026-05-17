@@ -519,13 +519,19 @@ async function runWizard(options = {}) {
     // Story 1.4: Generate IDE configs if IDEs were selected
     let ideConfigResult = null;
     if (answers.selectedIDEs && answers.selectedIDEs.length > 0) {
-      // Pass merge options from CLI to IDE config generator (Story 9.4)
+      // generateIDEConfigs signature: (selectedIDEs, wizardState, options)
+      // - wizardState: answers from the wizard (templateVars source)
+      // - options: CLI flags (forceMerge/noMerge from Story 9.4 + ci/yes/skipPrompts
+      //   for #739 Bug 1 — so the merge prompt auto-accepts defaults instead of
+      //   hanging on keyboard input in CI/CD pipelines)
       const ideOptions = {
-        ...answers,
         forceMerge: options.forceMerge,
         noMerge: options.noMerge,
+        ci: options.ci,
+        yes: options.yes,
+        skipPrompts: options.skipPrompts,
       };
-      ideConfigResult = await generateIDEConfigs(answers.selectedIDEs, ideOptions);
+      ideConfigResult = await generateIDEConfigs(answers.selectedIDEs, answers, ideOptions);
 
       if (ideConfigResult.success) {
         showSuccessSummary(ideConfigResult);

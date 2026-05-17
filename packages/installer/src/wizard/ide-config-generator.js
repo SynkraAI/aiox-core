@@ -95,12 +95,37 @@ async function backupFile(filePath) {
 }
 
 /**
+ * Detects non-interactive environments where prompting would hang.
+ * Honored explicit flags first, then env vars, then TTY check.
+ * @param {Object} options - Options forwarded by caller
+ * @returns {boolean} true when prompts must be skipped
+ */
+function isNonInteractive(options = {}) {
+  if (options.ci === true || options.yes === true || options.skipPrompts === true) {
+    return true;
+  }
+  if (process.env.CI === 'true' || process.env.CI === '1') {
+    return true;
+  }
+  if (process.env.AIOX_NON_INTERACTIVE === 'true' || process.env.AIOX_NON_INTERACTIVE === '1') {
+    return true;
+  }
+  if (!process.stdout.isTTY) {
+    return true;
+  }
+  return false;
+}
+
+/**
  * Prompt user for action when file exists
  * @param {string} filePath - Path to existing file
  * @param {Object} options - Options
  * @param {string} options.projectType - 'BROWNFIELD' | 'GREENFIELD' | 'EXISTING_AIOX'
  * @param {boolean} options.forceMerge - If true, auto-select merge without prompting
  * @param {boolean} options.noMerge - If true, don't offer merge option
+ * @param {boolean} options.ci - If true (or CI env detected), skip prompt and use default
+ * @param {boolean} options.yes - Alias for `ci` — auto-accept the default choice
+ * @param {boolean} options.skipPrompts - Alias for `ci` — used by some test paths
  * @returns {Promise<string>} Action: 'merge', 'overwrite', 'skip', or 'backup'
  */
 async function promptFileExists(filePath, options = {}) {
@@ -115,6 +140,18 @@ async function promptFileExists(filePath, options = {}) {
   // If force merge is set and merge is available, return merge directly
   if (forceMerge && canMerge) {
     return 'merge';
+  }
+
+  // Default to merge for brownfield if available, otherwise backup
+  const defaultChoice = isBrownfield && canMerge ? 'merge' : 'backup';
+
+  // Non-interactive mode (--ci, --yes, CI=true, no TTY): pick the default
+  // without prompting. Honors the same precedence as the interactive flow:
+  // brownfield + can-merge → merge, otherwise → backup.
+  // Fixes issue #739 Bug 1 where `--ci --yes` was ignored at this prompt
+  // and the installer would block waiting for keyboard input in CI/CD.
+  if (isNonInteractive(options)) {
+    return defaultChoice;
   }
 
   // Build choices based on available options
@@ -132,9 +169,6 @@ async function promptFileExists(filePath, options = {}) {
     { name: 'Create backup and overwrite', value: 'backup' },
     { name: 'Skip', value: 'skip' },
   );
-
-  // Default to merge for brownfield if available, otherwise backup
-  const defaultChoice = isBrownfield && canMerge ? 'merge' : 'backup';
 
   const { action } = await inquirer.prompt([
     {
@@ -522,6 +556,13 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
             projectType: wizardState.projectType,
             forceMerge: options.forceMerge,
             noMerge: options.noMerge,
+            // Forward CI/non-interactive flags so the prompt auto-accepts the
+            // default choice without blocking on keyboard input. Fixes #739
+            // Bug 1 — `aiox install --ci --yes --merge --ide claude-code` was
+            // hanging here even with both flags set.
+            ci: options.ci,
+            yes: options.yes,
+            skipPrompts: options.skipPrompts,
           });
 
           if (userAction === 'skip') {
@@ -1372,4 +1413,8 @@ module.exports = {
   linkGeminiExtension,
   HOOK_EVENT_MAP,
   DEFAULT_HOOK_CONFIG,
+  // Internal helpers exported for testing
+  _testing: {
+    isNonInteractive,
+  },
 };
