@@ -155,10 +155,22 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       expect(purpose).toBe('This is the purpose line.');
     });
 
-    it('extracts from description field', () => {
-      const content = 'description: My awesome description here';
+    it('extracts from YAML frontmatter `description:` field', () => {
+      const content = '---\ndescription: My awesome description here\nversion: 1.0\n---\n\n# Title';
       const purpose = extractPurpose(content, '/test.md');
       expect(purpose).toBe('My awesome description here');
+    });
+
+    it('handles quoted YAML frontmatter description', () => {
+      const content = '---\ndescription: "A quoted description"\n---\n\n# Title';
+      const purpose = extractPurpose(content, '/test.md');
+      expect(purpose).toBe('A quoted description');
+    });
+
+    it('falls back to ## Overview when no Purpose section', () => {
+      const content = '# Title\n\n## Overview\n\nThis guide walks you through X.\n\n## Other';
+      const purpose = extractPurpose(content, '/test.md');
+      expect(purpose).toBe('This guide walks you through X.');
     });
 
     it('falls back to header', () => {
@@ -176,6 +188,40 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       const longPurpose = '## Purpose\n\n' + 'x'.repeat(300);
       const purpose = extractPurpose(longPurpose, '/test.md');
       expect(purpose.length).toBeLessThanOrEqual(200);
+    });
+
+    // Regression test for the bug that motivated the priority-chain refactor:
+    // a body-level `description:` line inside example output or a code block
+    // used to be matched and treated as the doc's purpose. That was the source
+    // of `component-creation-guide.md` getting "Analyzes provided dataset" as
+    // its purpose (which was example installer transcript output, not a real
+    // description of the guide).
+    it('does NOT match body-level `description:` outside frontmatter', () => {
+      const content = [
+        '# Component Creation Guide',
+        '',
+        '## Overview',
+        '',
+        'This guide walks you through creating components.',
+        '',
+        '## Example Output',
+        '',
+        '```',
+        '? Task description: Analyzes provided dataset to identify patterns',
+        '```',
+      ].join('\n');
+      const purpose = extractPurpose(content, '/test.md');
+      // Should pick up Overview section, NOT the body-level "description:"
+      expect(purpose).toBe('This guide walks you through creating components.');
+      expect(purpose).not.toContain('Analyzes');
+    });
+
+    it('does NOT extract from `description:` lines without YAML frontmatter delimiters', () => {
+      const content = 'description: This should not be matched\n\n# Title';
+      const purpose = extractPurpose(content, '/test.md');
+      // No `---` delimiters → not frontmatter → falls through to `# Title`
+      expect(purpose).toBe('Title');
+      expect(purpose).not.toContain('This should not');
     });
   });
 
