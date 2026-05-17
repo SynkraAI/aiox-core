@@ -1,34 +1,11 @@
 {
-  "name": "@aiox-fullstack/core",
-  "version": "4.31.1",
-  "description": "AIOX-FullStack Core - Meta-agent and component generation system",
+  "name": "@aiox-squads/core-internal",
+  "version": "5.2.6",
+  "description": "Internal package manifest for AIOX framework — declares runtime dependencies consumed by scripts under .aiox-core/. This is NOT published independently; it ships inside @aiox-squads/core (the top-level package). Kept name-distinct from the parent (`-internal` suffix) to avoid npm registry confusion. Version follows the parent package.",
+  "private": true,
   "main": "index.js",
-  "module": "index.esm.js",
-  "types": "index.d.ts",
-  "bin": {
-    "aiox-core": "bin/aiox-core.js"
-  },
-  "files": [
-    "lib/",
-    "bin/",
-    "templates/",
-    "utils/",
-    "tasks/",
-    "docs/",
-    "elicitation/",
-    "index.js",
-    "index.esm.js",
-    "index.d.ts",
-    "README.md",
-    "LICENSE"
-  ],
   "scripts": {
-    "build": "node ../tools/build-core.js",
-    "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "jest tests/unit",
-    "test:integration": "jest tests/integration",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "test": "echo 'Use parent package test scripts'"
   },
   "dependencies": {
     "ajv": "^8.17.1",
@@ -47,39 +24,19 @@
     "tar": "^7.5.7",
     "validator": "^13.15.15"
   },
-  "peerDependencies": {
-    "@aiox-fullstack/memory": "^4.31.0",
-    "@aiox-fullstack/security": "^4.31.0",
-    "@aiox-fullstack/performance": "^4.31.0",
-    "@aiox-fullstack/telemetry": "^4.31.0"
-  },
-  "peerDependenciesMeta": {
-    "@aiox-fullstack/memory": {
-      "optional": true
-    },
-    "@aiox-fullstack/security": {
-      "optional": true
-    },
-    "@aiox-fullstack/performance": {
-      "optional": true
-    },
-    "@aiox-fullstack/telemetry": {
-      "optional": true
-    }
-  },
   "keywords": [
     "aiox",
-    "meta-agent",
-    "component-generation",
+    "aiox-squads",
+    "framework",
     "ai-orchestration",
-    "fullstack",
-    "development-tools"
+    "internal-manifest"
   ],
-  "author": "AIOX Fullstack Team",
+  "author": "AIOX Squads",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SynkraAI/aiox-core.git"
+    "url": "git+https://github.com/SynkraAI/aiox-core.git",
+    "directory": ".aiox-core"
   },
   "bugs": {
     "url": "https://github.com/SynkraAI/aiox-core/issues"
@@ -88,21 +45,5 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.esm.js",
-      "require": "./index.js"
-    },
-    "./templates": "./templates/",
-    "./utils": "./utils/",
-    "./tasks": "./tasks/",
-    "./docs": "./docs/",
-    "./elicitation": "./elicitation/"
   }
 }

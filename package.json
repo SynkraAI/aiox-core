@@ -103,7 +103,8 @@
     "sync:ide:cursor": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
     "validate:publish": "node bin/utils/validate-publish.js",
     "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "validate:aiox-core-namespace": "node scripts/validate-aiox-core-namespace.js"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
