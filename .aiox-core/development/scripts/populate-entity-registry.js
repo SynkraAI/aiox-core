@@ -165,16 +165,42 @@ function extractKeywords(filePath, content) {
 }
 
 function extractPurpose(content, filePath) {
+  // Strategy 1: YAML frontmatter — most reliable when present.
+  // Looks for `description:` (and aliases) ONLY inside the frontmatter block
+  // delimited by `---` at the top of the file. Avoids matching example output
+  // or body text that happens to contain the same words.
+  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (frontmatterMatch) {
+    const fm = frontmatterMatch[1];
+    const fmDescMatch = fm.match(/^(?:description|purpose|summary)\s*:\s*(.+)$/im);
+    if (fmDescMatch) {
+      const cleaned = fmDescMatch[1].trim().replace(/^["']|["']$/g, '');
+      if (cleaned) return cleaned.substring(0, 200);
+    }
+  }
+
+  // Strategy 2: `## Purpose` section — first non-empty line.
   const purposeMatch = content.match(/^##\s*Purpose\s*\n+([\s\S]*?)(?=\n##|\n---|\n$)/im);
   if (purposeMatch) {
-    return purposeMatch[1].trim().split('\n')[0].substring(0, 200);
+    const firstLine = purposeMatch[1].trim().split('\n')[0];
+    if (firstLine) return firstLine.substring(0, 200);
   }
 
-  const descMatch = content.match(/(?:description|purpose|summary)[:]\s*(.+)/i);
-  if (descMatch) {
-    return descMatch[1].trim().substring(0, 200);
+  // Strategy 3: `## Overview` section — same shape as Purpose. Many guides
+  // use Overview instead of Purpose (e.g. component-creation-guide.md).
+  const overviewMatch = content.match(/^##\s*Overview\s*\n+([\s\S]*?)(?=\n##|\n---|\n$)/im);
+  if (overviewMatch) {
+    const firstLine = overviewMatch[1].trim().split('\n')[0];
+    if (firstLine) return firstLine.substring(0, 200);
   }
 
+  // Strategy 4: First `# Title` heading — the document's name.
+  // Note: we used to fall back to a body-level regex matching ANY
+  // `description:` / `purpose:` / `summary:` occurrence here, but that
+  // matched example output inside fenced code blocks and installer
+  // transcripts, producing nonsense purposes like "Analyzes provided
+  // dataset to identify patterns and insights" for a component creation
+  // guide. The body fallback was removed deliberately.
   const headerMatch = content.match(/^#\s+(.+)/m);
   if (headerMatch) {
     return headerMatch[1].trim().substring(0, 200);
@@ -650,10 +676,11 @@ function populate(options = {}) {
     basePath: c.basePath,
   }));
 
+  const lastUpdated = new Date().toISOString();
   const registry = {
     metadata: {
       version: '1.0.0',
-      lastUpdated: new Date().toISOString(),
+      lastUpdated,
       entityCount: totalCount,
       checksumAlgorithm: 'sha256',
       resolutionRate: rate,
@@ -661,6 +688,17 @@ function populate(options = {}) {
     entities: allEntities,
     categories,
   };
+
+  // Sync the self-entry for `.aiox-core/data/entity-registry.yaml` so the
+  // file's registry metadata reflects the regen. `lastVerified` mirrors
+  // `metadata.lastUpdated` exactly (single source of truth for this regen
+  // event). `checksum` is intentionally set to a sentinel value because
+  // hashing the registry file from inside the file itself is circular —
+  // any hash we compute would invalidate itself as soon as it's written.
+  // Downstream validators recognize the sentinel and skip the checksum
+  // comparison for self-references.
+  const SELF_CHECKSUM_SENTINEL = 'sha256:<self-reference>';
+  syncSelfRegistryEntry(registry, lastUpdated, SELF_CHECKSUM_SENTINEL);
 
   const yamlContent = yaml.dump(registry, {
     lineWidth: 120,
@@ -677,6 +715,41 @@ function populate(options = {}) {
   console.log(`[IDS] Total entities: ${totalCount}`);
 
   return registry;
+}
+
+/**
+ * Sync the self-entry for `.aiox-core/data/entity-registry.yaml`.
+ *
+ * The registry contains a record for itself (under `entities.data.entity-registry`)
+ * because the data layer scan picks up every `.yaml` it finds. That record's
+ * `lastVerified` was previously stuck at whatever value the last scan happened to
+ * write — never matching the actual regen timestamp. This function syncs it.
+ *
+ * `checksum` is set to a sentinel (`sha256:<self-reference>`) because hashing
+ * the file from inside the file is circular: any computed hash invalidates
+ * itself the moment it's written. The sentinel signals "skip this comparison"
+ * to downstream validators.
+ *
+ * @param {object} registry - The assembled registry (mutated in place)
+ * @param {string} lastUpdated - ISO timestamp of this regen (same as metadata.lastUpdated)
+ * @param {string} sentinelChecksum - Sentinel value for the self-entry checksum
+ */
+function syncSelfRegistryEntry(registry, lastUpdated, sentinelChecksum) {
+  const dataEntities = registry?.entities?.data;
+  if (!dataEntities) return;
+
+  const selfEntry = dataEntities['entity-registry'];
+  if (!selfEntry) return;
+
+  // Only sync if the entry actually points to the registry yaml file we
+  // just wrote — the `.js` module at .aiox-core/core/doctor/checks/entity-registry.js
+  // gets its own legitimate entry under `entities.modules` (or wherever
+  // the modules scan places it) and is not self-referential.
+  const expectedPath = '.aiox-core/data/entity-registry.yaml';
+  if (selfEntry.path !== expectedPath) return;
+
+  selfEntry.lastVerified = lastUpdated;
+  selfEntry.checksum = sentinelChecksum;
 }
 
 function getCategoryDescription(category) {
