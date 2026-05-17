@@ -853,6 +853,7 @@ module.exports = {
   extractKeywords,
   extractPurpose,
   looksLikePlaceholder,
+  syncSelfRegistryEntry,
   detectDependencies,
   extractYamlDependencies,
   extractMarkdownCrossReferences,

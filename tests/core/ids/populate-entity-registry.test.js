@@ -7,6 +7,7 @@ const {
   extractKeywords,
   extractPurpose,
   looksLikePlaceholder,
+  syncSelfRegistryEntry,
   detectDependencies,
   extractYamlDependencies,
   extractMarkdownCrossReferences,
@@ -302,6 +303,77 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
         looksLikePlaceholder('Generate user stories from product requirements documents'),
       ).toBe(false);
       expect(looksLikePlaceholder('Validation summary')).toBe(false);
+    });
+  });
+
+  describe('syncSelfRegistryEntry()', () => {
+    const SELF_PATH = '.aiox-core/data/entity-registry.yaml';
+    const SENTINEL = 'sha256:<self-reference>';
+
+    it('updates lastVerified and checksum on the self-entry when path matches', () => {
+      const registry = {
+        entities: {
+          data: {
+            'entity-registry': {
+              path: SELF_PATH,
+              checksum: 'sha256:stale-old-hash-1234567890abcdef',
+              lastVerified: '2026-01-01T00:00:00.000Z',
+              purpose: 'Entity at .aiox-core/data/entity-registry.yaml',
+            },
+          },
+        },
+      };
+      const newTimestamp = '2026-05-17T15:00:00.000Z';
+
+      syncSelfRegistryEntry(registry, newTimestamp, SENTINEL);
+
+      expect(registry.entities.data['entity-registry'].lastVerified).toBe(newTimestamp);
+      expect(registry.entities.data['entity-registry'].checksum).toBe(SENTINEL);
+    });
+
+    it('does NOT mutate entries whose path is different (other entity-registry pointing to .js module)', () => {
+      const registry = {
+        entities: {
+          data: {
+            'entity-registry': {
+              path: '.aiox-core/core/doctor/checks/entity-registry.js',
+              checksum: 'sha256:legitimate-js-module-hash-do-not-touch',
+              lastVerified: '2026-01-01T00:00:00.000Z',
+            },
+          },
+        },
+      };
+      const newTimestamp = '2026-05-17T15:00:00.000Z';
+
+      syncSelfRegistryEntry(registry, newTimestamp, SENTINEL);
+
+      expect(registry.entities.data['entity-registry'].checksum).toBe(
+        'sha256:legitimate-js-module-hash-do-not-touch',
+      );
+      expect(registry.entities.data['entity-registry'].lastVerified).toBe('2026-01-01T00:00:00.000Z');
+    });
+
+    it('is a no-op when entities.data does not exist', () => {
+      const registry = { entities: { agents: { foo: { path: 'irrelevant' } } } };
+      expect(() => syncSelfRegistryEntry(registry, '2026-05-17T15:00:00.000Z', SENTINEL)).not.toThrow();
+    });
+
+    it('is a no-op when self-entry is missing', () => {
+      const registry = {
+        entities: {
+          data: {
+            'some-other-data': { path: '.aiox-core/data/something.yaml', checksum: 'sha256:keep' },
+          },
+        },
+      };
+      syncSelfRegistryEntry(registry, '2026-05-17T15:00:00.000Z', SENTINEL);
+      // Other entries unchanged
+      expect(registry.entities.data['some-other-data'].checksum).toBe('sha256:keep');
+    });
+
+    it('is a no-op when registry is malformed (missing entities)', () => {
+      expect(() => syncSelfRegistryEntry({}, '2026-05-17T15:00:00.000Z', SENTINEL)).not.toThrow();
+      expect(() => syncSelfRegistryEntry(null, '2026-05-17T15:00:00.000Z', SENTINEL)).not.toThrow();
     });
   });
 

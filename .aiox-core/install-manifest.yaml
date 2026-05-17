@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.6
-generated_at: "2026-05-17T15:12:58.541Z"
+generated_at: "2026-05-17T19:14:46.622Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -1669,9 +1669,9 @@ files:
     type: script
     size: 23410
   - path: development/scripts/populate-entity-registry.js
-    hash: sha256:65cc968e9fa82bb18390ee0ed7063082b5341a441b83a9778638f1ce4064ab23
+    hash: sha256:67a64f3bf0118eaa58401f4450e04f99643a33903d6b57d433929604b9061315
     type: script
-    size: 31446
+    size: 31471
   - path: development/scripts/refactoring-suggester.js
     hash: sha256:d50ea6b609c9cf8385979386fee4b4385d11ebcde15460260f66d04c705f6cd9
     type: script
