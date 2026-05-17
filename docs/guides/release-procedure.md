@@ -73,49 +73,84 @@ The repo has **TWO** independent branch protection systems on `main`:
 2. **Legacy branch protection** — `repos/SynkraAI/aiox-core/branches/main/protection`
 
 Both enforce `require_code_owner_reviews: true`. `gh pr merge --admin` does
-**not** bypass either alone. You must relax both, merge, and restore both.
+**not** bypass either alone. You must relax both, merge, and restore both —
+the restore is non-negotiable.
 
-Snapshot both before touching them:
+### Snapshot + sanitize payloads
+
+Raw API responses contain read-only fields (`id`, `node_id`, `created_at`,
+`updated_at`, `_links`, `url`) that GitHub **rejects on PUT/PATCH** with a 422.
+You must sanitize them before reusing as input bodies. The raw snapshot stays
+on disk only for diff verification at the end.
 
 ```bash
-gh api repos/SynkraAI/aiox-core/rulesets/13330052 > /tmp/aiox-core-ruleset-original.json
-gh api repos/SynkraAI/aiox-core/branches/main/protection > /tmp/aiox-core-branch-protection-original.json
-```
+# Raw snapshots — diff baseline, never sent back to the API as-is.
+gh api repos/SynkraAI/aiox-core/rulesets/13330052 \
+  > /tmp/aiox-core-ruleset-original.json
+gh api repos/SynkraAI/aiox-core/branches/main/protection \
+  > /tmp/aiox-core-branch-protection-original.json
 
-Build the bypass payloads:
+# Sanitized restore payload for the ruleset (only writable fields):
+jq '{name, target, enforcement, conditions, bypass_actors, rules}' \
+  /tmp/aiox-core-ruleset-original.json \
+  > /tmp/aiox-core-ruleset-restore.json
 
-```bash
+# Bypass payload (same writable surface, with the pull_request rule relaxed):
 jq '{name, target, enforcement, conditions, bypass_actors,
      rules: (.rules | map(if .type=="pull_request"
        then .parameters.require_code_owner_review=false
             | .parameters.required_approving_review_count=0
-       else . end))}' /tmp/aiox-core-ruleset-original.json > /tmp/aiox-core-ruleset-bypass.json
+       else . end))}' /tmp/aiox-core-ruleset-original.json \
+  > /tmp/aiox-core-ruleset-bypass.json
 
+# Required-PR-reviews restore payload (only the four writable fields):
 jq '.required_pull_request_reviews | {dismiss_stale_reviews, require_code_owner_reviews,
      require_last_push_approval, required_approving_review_count}' \
-   /tmp/aiox-core-branch-protection-original.json > /tmp/aiox-core-prr-restore.json
+   /tmp/aiox-core-branch-protection-original.json \
+   > /tmp/aiox-core-prr-restore.json
 ```
 
-Execute bypass → merge → restore as **one atomic shell block** so a merge
-failure does not leave protection relaxed in production:
+### Atomic bypass → merge → guaranteed restore
+
+Use `set -e` for early-exit and a `trap '... restore ...' EXIT` so that ANY
+failure (network, merge conflict, hook crash, Ctrl-C, even a syntax error)
+runs the restore before the shell exits. This is the load-bearing piece —
+without the trap, a mid-script crash can leave production unprotected.
 
 ```bash
-# 1. Bypass ruleset
-gh api -X PUT repos/SynkraAI/aiox-core/rulesets/13330052 --input /tmp/aiox-core-ruleset-bypass.json
+set -e
 
-# 2. Bypass legacy
+# 1. Capture state (run only if not already captured this session).
+test -s /tmp/aiox-core-ruleset-restore.json || { echo "Sanitize payloads first."; exit 1; }
+test -s /tmp/aiox-core-prr-restore.json     || { echo "Sanitize payloads first."; exit 1; }
+
+# 2. Define the restore. Idempotent: re-applying the original state is safe.
+restore_protections() {
+  local exit_code=$?
+  echo "→ Restoring branch protections (exit_code=$exit_code)..."
+  gh api -X PUT repos/SynkraAI/aiox-core/rulesets/13330052 \
+    --input /tmp/aiox-core-ruleset-restore.json > /dev/null \
+    || echo "::error::Ruleset restore FAILED — manual recovery required."
+  gh api -X PATCH repos/SynkraAI/aiox-core/branches/main/protection/required_pull_request_reviews \
+    --input /tmp/aiox-core-prr-restore.json > /dev/null \
+    || echo "::error::Legacy PRR restore FAILED — manual recovery required."
+  echo "→ Restore attempted. Verify with the diff block below."
+  return $exit_code
+}
+trap restore_protections EXIT
+
+# 3. Bypass both systems.
+gh api -X PUT repos/SynkraAI/aiox-core/rulesets/13330052 \
+  --input /tmp/aiox-core-ruleset-bypass.json > /dev/null
 gh api -X DELETE repos/SynkraAI/aiox-core/branches/main/protection/required_pull_request_reviews
 
-# 3. Merge
-AIOX_ACTIVE_AGENT=devops gh pr merge <PR#> --squash --admin --delete-branch
+# 4. Merge. If this fails, the EXIT trap restores anyway.
+AIOX_ACTIVE_AGENT=devops gh pr merge "$PR_NUMBER" --squash --admin --delete-branch
 
-# 4. ALWAYS restore — even if merge failed
-gh api -X PUT repos/SynkraAI/aiox-core/rulesets/13330052 --input /tmp/aiox-core-ruleset-original.json
-gh api -X PATCH repos/SynkraAI/aiox-core/branches/main/protection/required_pull_request_reviews \
-  --input /tmp/aiox-core-prr-restore.json
+# 5. Falling off the script triggers the EXIT trap → restore runs.
 ```
 
-Verify restore matches snapshot (diff exit must be 0):
+### Verify restore matches snapshot (diff exit MUST be 0)
 
 ```bash
 diff <(jq -S '.rules[0].parameters' /tmp/aiox-core-ruleset-original.json) \
@@ -124,6 +159,9 @@ diff <(jq -S '.rules[0].parameters' /tmp/aiox-core-ruleset-original.json) \
 diff <(jq -S '.required_pull_request_reviews | {dismiss_stale_reviews, require_code_owner_reviews, require_last_push_approval, required_approving_review_count}' /tmp/aiox-core-branch-protection-original.json) \
      <(gh api repos/SynkraAI/aiox-core/branches/main/protection | jq -S '.required_pull_request_reviews | {dismiss_stale_reviews, require_code_owner_reviews, require_last_push_approval, required_approving_review_count}')
 ```
+
+If either diff is non-empty, the restore is incomplete — **stop and recover
+manually before walking away**. The repo is currently in a degraded state.
 
 ## Tag + push (triggers npm-publish.yml)
 

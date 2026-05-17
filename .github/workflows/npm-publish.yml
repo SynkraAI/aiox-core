@@ -578,7 +578,10 @@ jobs:
             WARNINGS+=("smoke_test_exports failed — possible regression of issue #734 (ERR_PACKAGE_PATH_NOT_EXPORTED)")
           fi
 
-          PUBLISHED=("@aiox-squads/core@${VERSION}")
+          PUBLISHED=()
+          if [ "$PUBLISH_RESULT" = "success" ]; then
+            PUBLISHED+=("@aiox-squads/core@${VERSION}")
+          fi
           if [ "$WORKSPACE_RESULT" = "success" ]; then
             PUBLISHED+=("selected @aiox-squads workspace packages")
           fi
@@ -586,11 +589,15 @@ jobs:
             PUBLISHED+=("aiox-core@${VERSION} (legacy wrapper)")
           fi
 
-          if [ "$PUBLISH_RESULT" = "success" ] || [ "$PUBLISH_RESULT" = "skipped" ]; then
+          if [ ${#PUBLISHED[@]} -gt 0 ]; then
             echo "🎉 Successfully published to npmjs.org:"
             for pkg in "${PUBLISHED[@]}"; do
               echo "   - $pkg"
             done
+          elif [ "$PUBLISH_RESULT" = "skipped" ] && [ "$WORKSPACE_RESULT" = "skipped" ] && [ "$LEGACY_RESULT" = "skipped" ]; then
+            echo "⏭️  No packages needed publishing (version selector skipped them all — already up-to-date or excluded)."
+          else
+            echo "⚠️  No packages were actually published. Check job results above."
           fi
 
           if [ ${#WARNINGS[@]} -gt 0 ]; then
