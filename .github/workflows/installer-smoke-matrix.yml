@@ -1,0 +1,230 @@
+# Installer Smoke Matrix
+#
+# Validates the Pro installer pipeline across the npm versions and ancestor
+# directory topologies that cohort students hit in the wild. Without this
+# matrix, fixes to the installer were landing as one-off patches per reported
+# error (11 fixes to pro-setup.js in a 30-day window) instead of being
+# guaranteed across the install surface.
+#
+# Scope:
+#   - Node 18, 20, 22 (current LTS spread mirrored from pro-integration.yml)
+#   - npm 8 (legacy), 10 (default for Node 20), 11 (default for Node 22)
+#   - Empty target dir + ancestor with workspaces + ancestor with plain
+#     package.json (regression scenarios — see pro-setup-target-install.test.js)
+#
+# Why this exists (root cause):
+#   npm 10+ walks the directory tree looking for the first ancestor with a
+#   package.json. Without `--prefix=<targetDir> --workspaces=false` the Pro
+#   tarball ends up in the wrong node_modules and the post-install integrity
+#   check fails with "Installed Pro artifact did not create node_modules/
+#   @aiox-squads/pro" even though npm exited 0.
+
+name: Installer Smoke Matrix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/installer/**'
+      - 'tests/installer/**'
+      - '.github/workflows/installer-smoke-matrix.yml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - 'packages/installer/**'
+      - 'tests/installer/**'
+      - '.github/workflows/installer-smoke-matrix.yml'
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 7 * * 1'
+
+concurrency:
+  group: installer-smoke-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  installer-smoke:
+    name: Installer (Node ${{ matrix.node }} / npm ${{ matrix.npm }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: ['18', '20', '22']
+        npm: ['10', '11']
+        include:
+          - os: ubuntu-latest
+            node: '20'
+            npm: '8'
+          - os: windows-latest
+            node: '20'
+            npm: '10'
+          - os: windows-latest
+            node: '22'
+            npm: '11'
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: false
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Pin npm to ${{ matrix.npm }}
+        shell: bash
+        run: |
+          npm install --global "npm@${{ matrix.npm }}"
+          echo "=== npm/node versions ==="
+          node --version
+          npm --version
+
+      - name: Install core dependencies
+        run: npm ci
+
+      - name: Run target-install regression tests
+        shell: bash
+        run: |
+          echo "=== Regression: installProArtifactIntoTarget across ancestor topologies ==="
+          npx jest tests/installer/pro-setup-target-install.test.js --no-coverage --verbose
+
+      - name: Run pro-setup auth tests
+        shell: bash
+        run: |
+          echo "=== Backstop: pro-setup auth + invocation surface ==="
+          npx jest tests/installer/pro-setup-auth.test.js --no-coverage --verbose
+
+      - name: Smoke install (empty target, no ancestors)
+        shell: bash
+        run: |
+          set -e
+          WORKDIR=$(mktemp -d)
+          cd "$WORKDIR"
+          echo "Smoke target: $WORKDIR"
+          node -e "
+            const proSetup = require('${{ github.workspace }}/packages/installer/src/wizard/pro-setup');
+            (async () => {
+              const fs = require('fs');
+              const path = require('path');
+              const os = require('os');
+              const { execFileSync } = require('child_process');
+
+              const fixtureDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-smoke-'));
+              fs.writeFileSync(path.join(fixtureDir, 'package.json'),
+                JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-smoke', private: false }));
+              fs.mkdirSync(path.join(fixtureDir, 'squads'));
+              fs.writeFileSync(path.join(fixtureDir, 'squads', 'index.js'), 'module.exports = {};');
+              const pack = JSON.parse(execFileSync('npm', ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8' }))[0];
+              const tarball = path.join(fixtureDir, pack.filename);
+
+              const proSourceDir = await proSetup._testing.installProArtifactIntoTarget(tarball, process.cwd());
+              if (!fs.existsSync(path.join(proSourceDir, 'package.json'))) {
+                throw new Error('smoke failed: ' + proSourceDir + ' missing');
+              }
+              console.log('Smoke OK at:', proSourceDir);
+            })().catch((err) => { console.error(err); process.exit(1); });
+          "
+
+      - name: Smoke install (target nested inside an ancestor workspace)
+        shell: bash
+        run: |
+          set -e
+          WS_ROOT=$(mktemp -d)
+          mkdir -p "$WS_ROOT/projects/aiox-install"
+          cat > "$WS_ROOT/package.json" <<'JSON'
+          {"name":"smoke-workspace","private":true,"workspaces":["projects/*"]}
+          JSON
+          cd "$WS_ROOT/projects/aiox-install"
+          echo "Smoke target: $(pwd)"
+          node -e "
+            const proSetup = require('${{ github.workspace }}/packages/installer/src/wizard/pro-setup');
+            (async () => {
+              const fs = require('fs');
+              const path = require('path');
+              const os = require('os');
+              const { execFileSync } = require('child_process');
+
+              const fixtureDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-smoke-ws-'));
+              fs.writeFileSync(path.join(fixtureDir, 'package.json'),
+                JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-smoke', private: false }));
+              fs.mkdirSync(path.join(fixtureDir, 'squads'));
+              fs.writeFileSync(path.join(fixtureDir, 'squads', 'index.js'), 'module.exports = {};');
+              const pack = JSON.parse(execFileSync('npm', ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8' }))[0];
+              const tarball = path.join(fixtureDir, pack.filename);
+
+              const proSourceDir = await proSetup._testing.installProArtifactIntoTarget(tarball, process.cwd());
+              if (!fs.existsSync(path.join(proSourceDir, 'package.json'))) {
+                throw new Error('smoke failed: ' + proSourceDir + ' missing');
+              }
+
+              const wsRootHit = path.join(path.dirname(path.dirname(process.cwd())), 'node_modules', '@aiox-squads', 'pro', 'package.json');
+              if (fs.existsSync(wsRootHit)) {
+                throw new Error('npm escaped to workspace root: ' + wsRootHit);
+              }
+
+              console.log('Smoke OK at:', proSourceDir, '(workspace root clean)');
+            })().catch((err) => { console.error(err); process.exit(1); });
+          "
+
+      - name: Smoke install (target nested under plain package.json ancestor)
+        shell: bash
+        run: |
+          set -e
+          PARENT_ROOT=$(mktemp -d)
+          mkdir -p "$PARENT_ROOT/subdir"
+          cat > "$PARENT_ROOT/package.json" <<'JSON'
+          {"name":"unrelated-parent","version":"1.0.0","dependencies":{"left-pad":"^1.0.0"}}
+          JSON
+          cd "$PARENT_ROOT/subdir"
+          echo "Smoke target: $(pwd)"
+          node -e "
+            const proSetup = require('${{ github.workspace }}/packages/installer/src/wizard/pro-setup');
+            (async () => {
+              const fs = require('fs');
+              const path = require('path');
+              const os = require('os');
+              const { execFileSync } = require('child_process');
+
+              const fixtureDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aiox-smoke-parent-'));
+              fs.writeFileSync(path.join(fixtureDir, 'package.json'),
+                JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-smoke', private: false }));
+              fs.mkdirSync(path.join(fixtureDir, 'squads'));
+              fs.writeFileSync(path.join(fixtureDir, 'squads', 'index.js'), 'module.exports = {};');
+              const pack = JSON.parse(execFileSync('npm', ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8' }))[0];
+              const tarball = path.join(fixtureDir, pack.filename);
+
+              const proSourceDir = await proSetup._testing.installProArtifactIntoTarget(tarball, process.cwd());
+              if (!fs.existsSync(path.join(proSourceDir, 'package.json'))) {
+                throw new Error('smoke failed: ' + proSourceDir + ' missing');
+              }
+
+              const parentHit = path.join(path.dirname(process.cwd()), 'node_modules', '@aiox-squads', 'pro', 'package.json');
+              if (fs.existsSync(parentHit)) {
+                throw new Error('npm escaped to parent: ' + parentHit);
+              }
+
+              console.log('Smoke OK at:', proSourceDir, '(parent clean)');
+            })().catch((err) => { console.error(err); process.exit(1); });
+          "
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "=== Installer Smoke Matrix Summary ==="
+          echo "OS:   ${{ matrix.os }}"
+          echo "Node: ${{ matrix.node }}"
+          echo "npm:  ${{ matrix.npm }}"
+          echo "Status: ${{ job.status }}"

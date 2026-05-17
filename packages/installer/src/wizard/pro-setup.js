@@ -791,7 +791,19 @@ async function extractProArtifactToTemp(artifactPath, tempRoot) {
 
   try {
     await runNpm(
-      ['install', artifactPath, '--ignore-scripts', '--no-audit', '--no-fund', '--no-save', '--silent'],
+      [
+        'install',
+        artifactPath,
+        '--prefix',
+        installRoot,
+        '--workspaces=false',
+        '--include-workspace-root=false',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--no-save',
+        '--silent',
+      ],
       {
         cwd: installRoot,
         timeout: PRO_ARTIFACT_INSTALL_TIMEOUT_MS,
@@ -814,11 +826,29 @@ async function extractProArtifactToTemp(artifactPath, tempRoot) {
 async function installProArtifactIntoTarget(artifactPath, targetDir) {
   await fs.ensureDir(targetDir);
 
+  // Ensure npm anchors the install at targetDir, even when an ancestor directory
+  // declares workspaces or a package.json. Without --prefix + --workspaces=false,
+  // npm 10+ walks up the directory tree and installs in the first ancestor it
+  // finds with a package.json, leaving targetDir/node_modules empty. The local
+  // anchor package.json gives npm a valid root regardless of ancestors.
+  const anchorPackageJsonPath = path.join(targetDir, 'package.json');
+  const anchorCreated = !(await fs.pathExists(anchorPackageJsonPath));
+  if (anchorCreated) {
+    await fs.writeJson(anchorPackageJsonPath, {
+      private: true,
+      dependencies: {},
+    });
+  }
+
   try {
     await runNpm(
       [
         'install',
         artifactPath,
+        '--prefix',
+        targetDir,
+        '--workspaces=false',
+        '--include-workspace-root=false',
         '--ignore-scripts',
         '--no-audit',
         '--no-fund',
@@ -833,16 +863,50 @@ async function installProArtifactIntoTarget(artifactPath, targetDir) {
       },
     );
   } catch (error) {
+    if (anchorCreated) {
+      await fs.remove(anchorPackageJsonPath).catch(() => {});
+    }
     const details = error.stderr || error.stdout || error.message;
     throw new Error(`Failed to install Pro artifact into project: ${String(details).trim()}`);
+  } finally {
+    if (anchorCreated) {
+      await fs.remove(anchorPackageJsonPath).catch(() => {});
+    }
   }
 
   const proSourceDir = path.join(targetDir, 'node_modules', '@aiox-squads', 'pro');
   if (!(await fs.pathExists(path.join(proSourceDir, 'package.json')))) {
-    throw new Error('Installed Pro artifact did not create node_modules/@aiox-squads/pro.');
+    const ancestorHit = await findAncestorNodeModulesPro(targetDir);
+    const diagnosis = ancestorHit
+      ? ` npm appears to have installed it at ${ancestorHit} instead (likely because an ancestor directory declares a package.json or workspaces).`
+      : ' Verify the target directory is writable and no parent directory hijacks npm install resolution.';
+    const error = new Error(
+      `Installed Pro artifact did not create ${proSourceDir}.${diagnosis} Run \`aiox install\` from a fresh empty directory (e.g. \`mkdir ~/aiox-pro && cd ~/aiox-pro\`) to bypass this. See https://github.com/SynkraAI/aiox-core/issues for tracking.`,
+    );
+    error.code = 'PRO_INSTALL_TARGET_HIJACKED';
+    error.targetDir = targetDir;
+    error.expectedPath = proSourceDir;
+    error.ancestorHit = ancestorHit || null;
+    throw error;
   }
 
   return proSourceDir;
+}
+
+async function findAncestorNodeModulesPro(startDir) {
+  let current = path.resolve(startDir);
+  const root = path.parse(current).root;
+
+  // Walk up at most 8 levels to keep this bounded on deep trees.
+  for (let i = 0; i < 8 && current !== root; i += 1) {
+    current = path.dirname(current);
+    const candidate = path.join(current, 'node_modules', '@aiox-squads', 'pro', 'package.json');
+    if (await fs.pathExists(candidate)) {
+      return path.dirname(candidate);
+    }
+  }
+
+  return null;
 }
 
 async function acquireProArtifactSourceDir(targetDir, licenseResult, options = {}) {
@@ -894,13 +958,27 @@ async function acquireProArtifactSourceDir(targetDir, licenseResult, options = {
         ? module.exports._testing.installProArtifactIntoTarget
         : installProArtifactIntoTarget;
     const extractedProSourceDir = await extractProArtifactToTemp(artifactPath, tempRoot);
-    const installedProSourceDir = await targetInstaller(artifactPath, targetDir);
+
+    // The Pro content is already extracted and integrity-verified at this point.
+    // Installing into targetDir is a convenience so post-install Pro commands can
+    // resolve @aiox-squads/pro from the project's node_modules — it is NOT required
+    // for the scaffold step, which copies files directly from extractedProSourceDir.
+    // If the target install fails (e.g. PRO_INSTALL_TARGET_HIJACKED), warn but
+    // continue with the temp source so the user can still complete the install.
+    let installedProSourceDir = null;
+    let targetInstallWarning = null;
+    try {
+      installedProSourceDir = await targetInstaller(artifactPath, targetDir);
+    } catch (installError) {
+      targetInstallWarning = installError.message;
+    }
 
     return {
       success: true,
       proSourceDir: installedProSourceDir || extractedProSourceDir,
       installedProSourceDir: installedProSourceDir || null,
       tempRoot,
+      targetInstallWarning,
       artifact: {
         package: artifact.package,
         version: artifact.version,
@@ -1938,6 +2016,13 @@ async function stepInstallScaffold(targetDir, options = {}) {
     resolvedProSourceDir = acquisition.proSourceDir;
     tempProSourceRoot = acquisition.tempRoot || null;
     installedArtifactProSourceDir = acquisition.installedProSourceDir || null;
+
+    if (acquisition.targetInstallWarning) {
+      const expectedProDir = path.join(targetDir, 'node_modules', '@aiox-squads', 'pro');
+      showWarning(
+        `Pro module could not be cached at ${expectedProDir}: ${acquisition.targetInstallWarning} This install will still complete using the verified Pro artifact from a temporary cache, but the cache is wiped at the end of this command — every future run of \`aiox install\` in this directory will re-download the Pro artifact until you run it from a fresh empty directory (e.g. \`mkdir ~/aiox-pro && cd ~/aiox-pro && npx -y -p @aiox-squads/core@latest aiox install\`).`,
+      );
+    }
   }
 
   if (!resolvedProSourceDir) {
@@ -2205,6 +2290,7 @@ module.exports = {
     downloadArtifactFile,
     extractProArtifactToTemp,
     installProArtifactIntoTarget,
+    findAncestorNodeModulesPro,
     getProArtifactVersion,
     getLicenseResultAccessToken,
     LICENSE_SERVER_URL,
