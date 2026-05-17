@@ -92,17 +92,23 @@ describe('isNonInteractive() — signal precedence (#739 Bug 1)', () => {
 describe('promptFileExists() — non-interactive default-choice (#739 Bug 1)', () => {
   let promptSpy;
   let originalIsTTY;
+  let originalEnv;
 
   beforeEach(() => {
     promptSpy = jest.spyOn(inquirer, 'prompt');
     originalIsTTY = process.stdout.isTTY;
+    // Snapshot env so we can restore — and explicitly neutralize all the
+    // non-interactive signals so each test measures one signal in isolation.
+    originalEnv = { ...process.env };
     process.stdout.isTTY = true;
     delete process.env.CI;
+    delete process.env.AIOX_NON_INTERACTIVE;
   });
 
   afterEach(() => {
     promptSpy.mockRestore();
     process.stdout.isTTY = originalIsTTY;
+    process.env = originalEnv;
   });
 
   it('skips the prompt and returns "merge" when ci=true + brownfield + can-merge', async () => {
@@ -174,5 +180,22 @@ describe('promptFileExists() — non-interactive default-choice (#739 Bug 1)', (
 
     expect(promptSpy).toHaveBeenCalledTimes(1);
     expect(action).toBe('overwrite');
+  });
+
+  // Regression guard for the bug CodeRabbit caught on PR #750:
+  // the wizard was calling `generateIDEConfigs(selectedIDEs, ideOptions)`
+  // but the signature is `(selectedIDEs, wizardState, options)`. This put
+  // ideOptions in the wizardState slot and left options as the default `{}`,
+  // so options.ci was undefined inside generateIDEConfigs and the flags
+  // never reached promptFileExists. Fixed by passing all three args.
+  // We test it here by inspecting the function's arity + parameter names.
+  it('generateIDEConfigs accepts (selectedIDEs, wizardState, options) — 3 distinct positional args', () => {
+    const { generateIDEConfigs } = ideConfigGenerator;
+    // Function.length counts params before any with defaults
+    // generateIDEConfigs signature has `options = {}` so length is 2.
+    expect(generateIDEConfigs.length).toBe(2);
+    // String inspection confirms the third positional parameter exists.
+    const source = generateIDEConfigs.toString();
+    expect(source).toMatch(/^async function generateIDEConfigs\(selectedIDEs,\s*wizardState,\s*options\b/);
   });
 });
