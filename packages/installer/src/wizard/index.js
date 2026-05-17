@@ -520,10 +520,15 @@ async function runWizard(options = {}) {
     let ideConfigResult = null;
     if (answers.selectedIDEs && answers.selectedIDEs.length > 0) {
       // Pass merge options from CLI to IDE config generator (Story 9.4)
+      // Plus CI/non-interactive flags so the merge prompt auto-accepts
+      // defaults instead of hanging on keyboard input (issue #739 Bug 1).
       const ideOptions = {
         ...answers,
         forceMerge: options.forceMerge,
         noMerge: options.noMerge,
+        ci: options.ci,
+        yes: options.yes,
+        skipPrompts: options.skipPrompts,
       };
       ideConfigResult = await generateIDEConfigs(answers.selectedIDEs, ideOptions);
 
