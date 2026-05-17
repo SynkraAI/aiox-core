@@ -54,22 +54,40 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
 
+    # Matrix coverage notes:
+    #   - npm 11 requires Node >= 20.17 (Node 18 is incompatible — excluded).
+    #   - Node 22 already ships with npm 11, so re-pinning npm 11 conflicts; we
+    #     leave Node 22 with its bundled npm (10 or 11 depending on minor).
+    #   - npm 8 is too old to honor `--workspaces=false` reliably; excluded.
+    #   - Windows is covered for the most common combo (Node 20 + npm 10).
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        node: ['18', '20', '22']
-        npm: ['10', '11']
         include:
           - os: ubuntu-latest
+            node: '18'
+            npm: '10'
+          - os: ubuntu-latest
             node: '20'
-            npm: '8'
+            npm: '10'
+          - os: ubuntu-latest
+            node: '20'
+            npm: '11'
+          - os: ubuntu-latest
+            node: '22'
+            npm: 'bundled'
+          - os: macos-latest
+            node: '20'
+            npm: '11'
+          - os: macos-latest
+            node: '22'
+            npm: 'bundled'
           - os: windows-latest
             node: '20'
             npm: '10'
           - os: windows-latest
             node: '22'
-            npm: '11'
+            npm: 'bundled'
 
     steps:
       - uses: actions/checkout@v6
@@ -84,10 +102,19 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Pin npm to ${{ matrix.npm }}
+        if: matrix.npm != 'bundled'
         shell: bash
         run: |
           npm install --global "npm@${{ matrix.npm }}"
-          echo "=== npm/node versions ==="
+          echo "=== npm/node versions (pinned to ${{ matrix.npm }}) ==="
+          node --version
+          npm --version
+
+      - name: Report bundled npm version
+        if: matrix.npm == 'bundled'
+        shell: bash
+        run: |
+          echo "=== npm/node versions (bundled with Node ${{ matrix.node }}) ==="
           node --version
           npm --version
 
@@ -126,7 +153,8 @@ jobs:
                 JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-smoke', private: false }));
               fs.mkdirSync(path.join(fixtureDir, 'squads'));
               fs.writeFileSync(path.join(fixtureDir, 'squads', 'index.js'), 'module.exports = {};');
-              const pack = JSON.parse(execFileSync('npm', ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8' }))[0];
+              const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+              const pack = JSON.parse(execFileSync(npmBin, ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8', shell: process.platform === 'win32' }))[0];
               const tarball = path.join(fixtureDir, pack.filename);
 
               const proSourceDir = await proSetup._testing.installProArtifactIntoTarget(tarball, process.cwd());
@@ -161,7 +189,8 @@ jobs:
                 JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-smoke', private: false }));
               fs.mkdirSync(path.join(fixtureDir, 'squads'));
               fs.writeFileSync(path.join(fixtureDir, 'squads', 'index.js'), 'module.exports = {};');
-              const pack = JSON.parse(execFileSync('npm', ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8' }))[0];
+              const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+              const pack = JSON.parse(execFileSync(npmBin, ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8', shell: process.platform === 'win32' }))[0];
               const tarball = path.join(fixtureDir, pack.filename);
 
               const proSourceDir = await proSetup._testing.installProArtifactIntoTarget(tarball, process.cwd());
@@ -202,7 +231,8 @@ jobs:
                 JSON.stringify({ name: '@aiox-squads/pro', version: '0.0.0-smoke', private: false }));
               fs.mkdirSync(path.join(fixtureDir, 'squads'));
               fs.writeFileSync(path.join(fixtureDir, 'squads', 'index.js'), 'module.exports = {};');
-              const pack = JSON.parse(execFileSync('npm', ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8' }))[0];
+              const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+              const pack = JSON.parse(execFileSync(npmBin, ['pack', '--json'], { cwd: fixtureDir, encoding: 'utf8', shell: process.platform === 'win32' }))[0];
               const tarball = path.join(fixtureDir, pack.filename);
 
               const proSourceDir = await proSetup._testing.installProArtifactIntoTarget(tarball, process.cwd());

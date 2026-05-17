@@ -86,10 +86,12 @@ function buildFixtureTarball() {
     'module.exports = { writeLicenseCache: () => ({ success: true }) };\n',
   );
 
-  const packOutput = execFileSync('npm', ['pack', '--json'], {
+  const npmBin = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  const packOutput = execFileSync(npmBin, ['pack', '--json'], {
     cwd: buildDir,
     timeout: NPM_INSTALL_TIMEOUT_MS,
     encoding: 'utf8',
+    shell: process.platform === 'win32',
   });
 
   const packed = JSON.parse(packOutput)[0];
