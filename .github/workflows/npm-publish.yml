@@ -354,8 +354,13 @@ jobs:
           exit 1
 
   publish_legacy_aiox_core:
-    needs: [test, build]
-    if: ${{ contains(format(',{0},', needs.build.outputs.packages), ',aiox-core,') }}
+    # MUST wait for `publish` because compat/aiox-core declares
+    # `@aiox-squads/core@<version>` as a runtime dependency. If this job runs
+    # in parallel, the legacy smoke test races against npm propagation of the
+    # scoped package and times out — making the workflow appear failed even
+    # though both packages were published successfully.
+    needs: [test, build, publish]
+    if: ${{ contains(format(',{0},', needs.build.outputs.packages), ',aiox-core,') && (needs.publish.result == 'success' || needs.publish.result == 'skipped') }}
     runs-on: ubuntu-latest
     outputs:
       published: ${{ steps.should-publish.outputs.should_publish }}
@@ -439,21 +444,35 @@ jobs:
         if: steps.should-publish.outputs.should_publish == 'true'
         env:
           PKG_SPEC: aiox-core@${{ steps.pkg.outputs.version }}
+          SCOPED_SPEC: '@aiox-squads/core@${{ steps.pkg.outputs.version }}'
         run: |
-          for i in 1 2 3 4 5 6; do
+          # Two phases: (1) wait for both packages to be visible in npm
+          # registry, (2) actually exercise npx. Total budget: 16 × 15s = 240s
+          # to accommodate slow CDN propagation (the legacy compat wraps the
+          # scoped package, so BOTH must be resolvable before npx works).
+          last_err=""
+          for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16; do
             sleep 15
-            if npm view "${PKG_SPEC}" version > /dev/null 2>&1; then
-              SMOKE_DIR=$(mktemp -d)
-              if (cd "${SMOKE_DIR}" && npx --yes "${PKG_SPEC}" --version >/dev/null 2>&1); then
-                rm -rf "${SMOKE_DIR}"
-                echo "✅ Smoke test passed: npx --yes ${PKG_SPEC} --version works"
-                exit 0
-              fi
-              rm -rf "${SMOKE_DIR}"
+            if ! npm view "${PKG_SPEC}" version > /dev/null 2>&1; then
+              echo "⏳ Waiting for ${PKG_SPEC} propagation... (attempt $i/16)"
+              continue
             fi
-            echo "⏳ Waiting for npm propagation... (attempt $i/6)"
+            if ! npm view "${SCOPED_SPEC}" version > /dev/null 2>&1; then
+              echo "⏳ ${PKG_SPEC} visible but ${SCOPED_SPEC} not yet... (attempt $i/16)"
+              continue
+            fi
+            SMOKE_DIR=$(mktemp -d)
+            if last_err=$(cd "${SMOKE_DIR}" && npx --yes "${PKG_SPEC}" --version 2>&1); then
+              rm -rf "${SMOKE_DIR}"
+              echo "✅ Smoke test passed: npx --yes ${PKG_SPEC} --version works"
+              exit 0
+            fi
+            rm -rf "${SMOKE_DIR}"
+            echo "⏳ npx attempt failed, retrying... (attempt $i/16)"
+            echo "    last npx stderr: $(echo "$last_err" | tail -3)"
           done
-          echo "❌ Smoke test timeout for ${PKG_SPEC}"
+          echo "❌ Smoke test timeout for ${PKG_SPEC} after 240s"
+          echo "   Last npx stderr: $last_err"
           exit 1
 
   smoke_test_exports:
@@ -519,48 +538,67 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify completion
+        env:
+          VERSION: ${{ needs.build.outputs.version }}
+          PUBLISH_RESULT: ${{ needs.publish.result }}
+          WORKSPACE_RESULT: ${{ needs.publish_workspace_packages.result }}
+          LEGACY_RESULT: ${{ needs.publish_legacy_aiox_core.result }}
+          LEGACY_PUBLISHED: ${{ needs.publish_legacy_aiox_core.outputs.published }}
+          EXPORTS_RESULT: ${{ needs.smoke_test_exports.result }}
         run: |
-          if [ "${{ needs.publish.result }}" = "failure" ] || [ "${{ needs.publish_workspace_packages.result }}" = "failure" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "failure" ] || [ "${{ needs.smoke_test_exports.result }}" = "failure" ]; then
-            echo "❌ Publishing failed"
+          echo "=== Release pipeline summary for v${VERSION} ==="
+          echo ""
+          echo "Job results:"
+          printf "  %-32s %s\n" "publish (@aiox-squads/core)"   "$PUBLISH_RESULT"
+          printf "  %-32s %s\n" "publish_workspace_packages"    "$WORKSPACE_RESULT"
+          printf "  %-32s %s\n" "publish_legacy_aiox_core"      "$LEGACY_RESULT (published=$LEGACY_PUBLISHED)"
+          printf "  %-32s %s\n" "smoke_test_exports"            "$EXPORTS_RESULT"
+          echo ""
+
+          # Hard failure: the scoped @aiox-squads/core publish IS THE release.
+          # Workspace packages and legacy compat wrapper are advisory — they
+          # can be republished out-of-band. Smoke tests are validation; if they
+          # fail but publish succeeded, log a regression warning but don't
+          # break the release signal (the artifact is still in the registry).
+          if [ "$PUBLISH_RESULT" = "failure" ] || [ "$PUBLISH_RESULT" = "cancelled" ]; then
+            echo "❌ HARD FAIL: scoped @aiox-squads/core@${VERSION} did not publish."
+            echo "   The release did NOT reach npmjs.org."
             exit 1
           fi
 
-          if [ "${{ needs.publish.result }}" = "cancelled" ] || [ "${{ needs.publish_workspace_packages.result }}" = "cancelled" ] || [ "${{ needs.publish_legacy_aiox_core.result }}" = "cancelled" ] || [ "${{ needs.smoke_test_exports.result }}" = "cancelled" ]; then
-            echo "❌ Publishing was cancelled"
-            exit 1
+          # Soft warnings on partial failures.
+          WARNINGS=()
+          if [ "$WORKSPACE_RESULT" = "failure" ] || [ "$WORKSPACE_RESULT" = "cancelled" ]; then
+            WARNINGS+=("workspace packages did not publish — investigate publish_workspace_packages")
+          fi
+          if [ "$LEGACY_RESULT" = "failure" ] || [ "$LEGACY_RESULT" = "cancelled" ]; then
+            WARNINGS+=("legacy aiox-core wrapper did not publish — check NPM_TOKEN with owner access to legacy package")
+          fi
+          if [ "$EXPORTS_RESULT" = "failure" ]; then
+            WARNINGS+=("smoke_test_exports failed — possible regression of issue #734 (ERR_PACKAGE_PATH_NOT_EXPORTED)")
           fi
 
-          PUBLISHED_PACKAGES=""
-
-          if [ "${{ needs.publish.result }}" = "success" ]; then
-            PUBLISHED_PACKAGES="@aiox-squads/core"
+          PUBLISHED=("@aiox-squads/core@${VERSION}")
+          if [ "$WORKSPACE_RESULT" = "success" ]; then
+            PUBLISHED+=("selected @aiox-squads workspace packages")
+          fi
+          if [ "$LEGACY_PUBLISHED" = "true" ]; then
+            PUBLISHED+=("aiox-core@${VERSION} (legacy wrapper)")
           fi
 
-          if [ "${{ needs.publish_workspace_packages.result }}" = "success" ]; then
-            if [ -n "$PUBLISHED_PACKAGES" ]; then
-              PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, selected @aiox-squads workspace packages"
-            else
-              PUBLISHED_PACKAGES="selected @aiox-squads workspace packages"
-            fi
+          if [ "$PUBLISH_RESULT" = "success" ] || [ "$PUBLISH_RESULT" = "skipped" ]; then
+            echo "🎉 Successfully published to npmjs.org:"
+            for pkg in "${PUBLISHED[@]}"; do
+              echo "   - $pkg"
+            done
           fi
 
-          if [ "${{ needs.publish_legacy_aiox_core.outputs.published }}" = "true" ]; then
-            if [ -n "$PUBLISHED_PACKAGES" ]; then
-              PUBLISHED_PACKAGES="$PUBLISHED_PACKAGES, aiox-core legacy wrapper"
-            else
-              PUBLISHED_PACKAGES="aiox-core legacy wrapper"
-            fi
-          fi
-
-          if [ -n "$PUBLISHED_PACKAGES" ]; then
-            echo "🎉 Successfully published to NPM:"
-            echo "   Packages: $PUBLISHED_PACKAGES"
-            echo "   Registry: ${{ env.NPM_REGISTRY }}"
-          elif [ "${{ needs.publish.result }}" = "skipped" ] && [ "${{ needs.publish_workspace_packages.result }}" = "skipped" ] && [ "${{ needs.publish_legacy_aiox_core.result }}" = "skipped" ]; then
-            echo "⏭️ No packages needed publishing (already up-to-date)"
-          else
-            echo "❌ Publishing failed"
-            exit 1
+          if [ ${#WARNINGS[@]} -gt 0 ]; then
+            echo ""
+            echo "⚠️  Soft warnings (release shipped but follow-up needed):"
+            for w in "${WARNINGS[@]}"; do
+              echo "   - $w"
+            done
           fi
 
   create-release-notes:

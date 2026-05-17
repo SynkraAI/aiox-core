@@ -135,13 +135,19 @@ jobs:
 
       - name: Smoke install (empty target, no ancestors)
         shell: bash
+        env:
+          # Pass workspace via env to avoid backslash escape mangling on Windows
+          # (interpolating ${{ github.workspace }} inside node -e on Git Bash for
+          # Windows turns `D:\a\aiox-core\aiox-core` into `D:aaiox-coreaiox-core`
+          # because \a, \aiox are interpreted as escape sequences).
+          WORKSPACE_DIR: ${{ github.workspace }}
         run: |
           set -e
           WORKDIR=$(mktemp -d)
           cd "$WORKDIR"
           echo "Smoke target: $WORKDIR"
           node -e "
-            const proSetup = require('${{ github.workspace }}/packages/installer/src/wizard/pro-setup');
+            const proSetup = require(process.env.WORKSPACE_DIR + '/packages/installer/src/wizard/pro-setup');
             (async () => {
               const fs = require('fs');
               const path = require('path');
@@ -167,6 +173,8 @@ jobs:
 
       - name: Smoke install (target nested inside an ancestor workspace)
         shell: bash
+        env:
+          WORKSPACE_DIR: ${{ github.workspace }}
         run: |
           set -e
           WS_ROOT=$(mktemp -d)
@@ -177,7 +185,7 @@ jobs:
           cd "$WS_ROOT/projects/aiox-install"
           echo "Smoke target: $(pwd)"
           node -e "
-            const proSetup = require('${{ github.workspace }}/packages/installer/src/wizard/pro-setup');
+            const proSetup = require(process.env.WORKSPACE_DIR + '/packages/installer/src/wizard/pro-setup');
             (async () => {
               const fs = require('fs');
               const path = require('path');
@@ -209,6 +217,8 @@ jobs:
 
       - name: Smoke install (target nested under plain package.json ancestor)
         shell: bash
+        env:
+          WORKSPACE_DIR: ${{ github.workspace }}
         run: |
           set -e
           PARENT_ROOT=$(mktemp -d)
@@ -219,7 +229,7 @@ jobs:
           cd "$PARENT_ROOT/subdir"
           echo "Smoke target: $(pwd)"
           node -e "
-            const proSetup = require('${{ github.workspace }}/packages/installer/src/wizard/pro-setup');
+            const proSetup = require(process.env.WORKSPACE_DIR + '/packages/installer/src/wizard/pro-setup');
             (async () => {
               const fs = require('fs');
               const path = require('path');
