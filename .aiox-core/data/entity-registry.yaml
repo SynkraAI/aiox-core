@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-17T10:02:45.444Z'
+  lastUpdated: '2026-05-17T12:22:53.099Z'
   entityCount: 815
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -16,8 +16,7 @@ entities:
         - mcp
         - server
         - task
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - analyst
       externalDeps: []
@@ -601,8 +600,7 @@ entities:
         - docs
         - links
         - check-docs-links
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -627,8 +625,7 @@ entities:
         - configure
         - ci/cd
         - pipeline
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -681,7 +678,6 @@ entities:
       usedBy:
         - list-worktrees
         - remove-worktree
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -1093,7 +1089,6 @@ entities:
         - list-worktrees
         - remove-worktree
         - dev
-        - devops
         - auto-worktree
       dependencies:
         - worktree-manager
@@ -1881,8 +1876,7 @@ entities:
         - access
         - grant
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1904,8 +1898,7 @@ entities:
         - pro
         - activate
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1928,8 +1921,7 @@ entities:
         - check
         - access
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1952,8 +1944,7 @@ entities:
         - request
         - reset
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1976,8 +1967,7 @@ entities:
         - resend
         - verification
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2000,8 +1990,7 @@ entities:
         - reset
         - password
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2024,8 +2013,7 @@ entities:
         - validate
         - login
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2048,8 +2036,7 @@ entities:
         - verify
         - status
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2132,7 +2119,6 @@ entities:
         - environment-bootstrap
       usedBy:
         - setup-github
-        - devops
       dependencies:
         - config-resolver
         - github-cli.yaml
@@ -2492,7 +2478,6 @@ entities:
         - github-pr-automation.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - repository-detector
         - devops-helper
@@ -2526,9 +2511,7 @@ entities:
         - gate
         - pre-push-quality-gate.md
       usedBy:
-        - publish-npm
         - resolve-github-issue
-        - devops
       dependencies:
         - repository-detector
         - devops-helper
@@ -2555,8 +2538,7 @@ entities:
         - repository
         - cleanup
         - repository-cleanup.md
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -2581,8 +2563,7 @@ entities:
         - version
         - management
         - version-management.md
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - repository-detector
       externalDeps: []
@@ -2920,8 +2901,7 @@ entities:
         - list
         - mcps
         - list-mcps
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -2945,7 +2925,6 @@ entities:
         - create-worktree
         - remove-worktree
         - dev
-        - devops
       dependencies:
         - worktree-manager
         - create-worktree
@@ -2994,7 +2973,6 @@ entities:
         - merge-worktree
       usedBy:
         - create-worktree
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3628,28 +3606,23 @@ entities:
       path: .aiox-core/development/tasks/publish-npm.md
       layer: L2
       type: task
-      purpose: 'Safe, validated npm publishing using a two-phase release strategy:'
+      purpose: npm Publishing Pipeline
       keywords:
         - publish
         - npm
         - publishing
-        - 'pipeline:'
-        - preview
-        - latest
+        - pipeline
       usedBy: []
-      dependencies:
-        - release-management
-        - github-devops-pre-push-quality-gate
-        - release-checklist
+      dependencies: []
       externalDeps: []
       plannedDeps: []
-      lifecycle: experimental
+      lifecycle: orphan
       adaptability:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:d69f833690fd01256c9b99cc7bd7bb67704f5894ffa9171af7cb94253ecd98cd
-      lastVerified: '2026-05-17T10:02:45.143Z'
+      checksum: sha256:60ce8f90fbe932294dd103f507240413ad75bc2ea9be01a6224de65a9e282f54
+      lastVerified: '2026-05-17T12:22:53.093Z'
     qa-after-creation:
       path: .aiox-core/development/tasks/qa-after-creation.md
       layer: L2
@@ -4191,31 +4164,27 @@ entities:
       path: .aiox-core/development/tasks/release-management.md
       layer: L2
       type: task
-      purpose: 'To automate the complete software release process, including:'
+      purpose: Manage Software Releases
       keywords:
         - release
         - management
         - manage
         - software
         - releases
-      usedBy:
-        - publish-npm
-        - devops
-      dependencies:
-        - po
-        - devops
+      usedBy: []
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - package
         - github-devops-checklist
         - execute-task.js
-      lifecycle: production
+      lifecycle: experimental
       adaptability:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:80a9a1ead93c66bfe59cb75215661052e7b4abccc483cd9d01a07034fca2311c
-      lastVerified: '2026-05-17T10:02:45.153Z'
+      checksum: sha256:fc4dd795b0ebc886a0de09452a70764eab5958eae894da639ae2df1829c9dd50
+      lastVerified: '2026-05-17T12:22:53.093Z'
     remove-mcp:
       path: .aiox-core/development/tasks/remove-mcp.md
       layer: L2
@@ -4225,8 +4194,7 @@ entities:
         - remove
         - mcp
         - remove-mcp
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4250,7 +4218,6 @@ entities:
         - create-worktree
         - list-worktrees
         - dev
-        - devops
       dependencies:
         - worktree-manager
         - create-worktree
@@ -4278,7 +4245,6 @@ entities:
         - resolve-github-issue.md
       usedBy:
         - triage-github-issues
-        - devops
       dependencies:
         - triage-github-issues
         - github-devops-pre-push-quality-gate
@@ -4408,8 +4374,7 @@ entities:
         - mcp
         - catalog
         - task
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4548,8 +4513,7 @@ entities:
         - setup
         - github
         - setup-github
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - environment-bootstrap
         - github-cli.yaml
@@ -4602,8 +4566,7 @@ entities:
         - mcp
         - docker
         - toolkit
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -5295,7 +5258,6 @@ entities:
         - triage-github-issues.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - resolve-github-issue
         - devops
@@ -5986,8 +5948,7 @@ entities:
       keywords:
         - changelog
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6193,8 +6154,7 @@ entities:
         - actions
         - cd
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6215,8 +6175,7 @@ entities:
         - actions
         - ci
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6238,8 +6197,7 @@ entities:
         - template
         - pull
         - request
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -14575,7 +14533,6 @@ entities:
         - list-worktrees
         - qa-gate
         - qa-review-story
-        - release-management
         - remove-worktree
         - resolve-github-issue
         - setup-github
@@ -14588,46 +14545,7 @@ entities:
         - codex-rules
         - memory-audit-checklist
         - greenfield-fullstack
-      dependencies:
-        - environment-bootstrap
-        - setup-github
-        - github-devops-version-management
-        - github-devops-pre-push-quality-gate
-        - github-devops-github-pr-automation
-        - ci-cd-configuration
-        - github-devops-repository-cleanup
-        - release-management
-        - search-mcp
-        - add-mcp
-        - list-mcps
-        - remove-mcp
-        - setup-mcp-docker
-        - check-docs-links
-        - triage-github-issues
-        - resolve-github-issue
-        - devops-pro-access-grant
-        - devops-pro-check-access
-        - devops-pro-request-reset
-        - devops-pro-resend-verification
-        - devops-pro-reset-password
-        - devops-pro-validate-login
-        - devops-pro-verify-status
-        - devops-pro-activate
-        - create-worktree
-        - list-worktrees
-        - remove-worktree
-        - cleanup-worktrees
-        - merge-worktree
-        - github-pr-template
-        - github-actions-ci.yml
-        - github-actions-cd.yml
-        - changelog-template
-        - pre-push-checklist
-        - release-checklist
-        - github-cli
-        - asset-inventory.js
-        - path-analyzer.js
-        - migrate-agent.js
+      dependencies: []
       externalDeps:
         - coderabbit
         - git
@@ -14639,8 +14557,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:260b04cc608c1ddcd9ed2cf210e5d22f045002a4c0059f8220abcd3dc67a1cd8
-      lastVerified: '2026-05-17T10:02:45.316Z'
+      checksum: sha256:5c52cc74f923ac381fa92fb969607b80a35f34b958c02d2d1edd1115f7690d35
+      lastVerified: '2026-05-17T12:22:53.091Z'
     pm:
       path: .aiox-core/development/agents/pm.md
       layer: L2
@@ -14723,7 +14641,6 @@ entities:
         - qa-backlog-add-followup
         - qa-fix-issues
         - qa-gate
-        - release-management
         - story-checkpoint
         - validate-next-story
         - design-story-tmpl
@@ -16184,8 +16101,7 @@ entities:
       keywords:
         - asset
         - inventory
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16896,8 +16812,7 @@ entities:
       keywords:
         - migrate
         - agent
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16983,8 +16898,7 @@ entities:
       keywords:
         - path
         - analyzer
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18499,7 +18413,6 @@ entities:
         - environment-bootstrap
         - setup-github
         - health-check-checks-services-index
-        - devops
         - po
       dependencies: []
       externalDeps: []
@@ -19068,8 +18981,7 @@ entities:
         - pre-push
         - quality
         - gate
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -19088,9 +19000,7 @@ entities:
       keywords:
         - release
         - checklist
-      usedBy:
-        - publish-npm
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []

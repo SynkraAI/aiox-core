@@ -397,8 +397,8 @@ This shows:
 
 ### Getting Help
 
-1. **Check component examples**: `aiox-core/agents/examples/`
-2. **Review templates**: `aiox-core/templates/`
+1. **Check component examples**: `.aiox-core/development/agents/examples/`
+2. **Review templates**: `.aiox-core/product/templates/`
 3. **Run validation**: `*validate-component`
 4. **Ask meta-agent**: `*help create-agent`
 
@@ -406,7 +406,7 @@ This shows:
 
 ### Custom Templates
 
-Create custom templates in `aiox-core/templates/custom/`:
+Create custom templates in `.aiox-core/product/templates/custom/`:
 
 ```yaml
 # custom-agent-template.yaml

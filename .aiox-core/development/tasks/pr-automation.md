@@ -39,7 +39,7 @@ To help users contribute to the AIOX open-source project (`aiox-core`) by automa
 
 - **contribution_path**: `string`
   - **Description**: Path to new/modified files
-  - **Example**: `"Squads/my-new-pack/"` or `"aiox-core/agents/improved-agent.md"`
+  - **Example**: `"Squads/my-new-pack/"` or `".aiox-core/development/agents/improved-agent.md"`
   - **Validation**: Path must exist locally
 
 ### Optional Parameters
@@ -109,8 +109,8 @@ To help users contribute to the AIOX open-source project (`aiox-core`) by automa
 3. **Detect Contribution Type** (if not provided)
    - Scan modified files:
      - `Squads/*` → "Squad"
-     - `aiox-core/agents/*` → "agent"
-     - `aiox-core/tasks/*` → "task"
+     - `.aiox-core/development/agents/*` → "agent"
+     - `.aiox-core/development/tasks/*` → "task"
      - `aiox-core/tools/*` → "tool"
      - `*.md` in docs → "documentation"
      - `*.test.js` or bug fixes → "bug-fix"
@@ -649,7 +649,7 @@ aiox pr create \
 ```bash
 aiox pr create \
   --type="agent" \
-  --path="aiox-core/agents/improved-po.md" \
+  --path=".aiox-core/development/agents/improved-po.md" \
   --title="feat(agent): enhance PO agent with story validation"
 ```
 
@@ -660,7 +660,7 @@ aiox pr create \
 ```bash
 aiox pr create \
   --type="bug-fix" \
-  --path="aiox-core/tasks/create-next-story.md" \
+  --path=".aiox-core/development/tasks/create-next-story.md" \
   --title="fix(task): correct file path validation in create-next-story"
 ```
 

@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.6
-generated_at: "2026-05-17T12:22:51.608Z"
+generated_at: "2026-05-17T13:08:28.080Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -1289,15 +1289,15 @@ files:
     type: data
     size: 10938
   - path: data/aiox-kb.md
-    hash: sha256:958065f2d734189edf2868aae322114b16546502e213b9a948547af4e8c178f9
+    hash: sha256:7ceaab838b4586a5314f0edea431f09fbc4dd82eb386f89db4442d1212add352
     type: data
-    size: 34306
+    size: 34390
   - path: data/capability-detection.js
     hash: sha256:317d1b51b5cda2e35ac6d468e33e05c0948e6d7f05f51d750d7ce6ff5a58535a
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:7a1dc65b0661069cdccf8babb7c3320320281f10a8e5258a3cba26b8953df5ad
+    hash: sha256:910cf52ea4d999bccf255c431db5648663d2de5a871a18068fc443adaab3379c
     type: data
     size: 572193
   - path: data/learned-patterns.yaml
@@ -1845,9 +1845,9 @@ files:
     type: task
     size: 9106
   - path: development/tasks/architect-analyze-impact.md
-    hash: sha256:251d2c073b917f0285672568f074ec0c77372e110e234b42f043c605e438d9ee
+    hash: sha256:73ad65e2263dac7a5a3aa64736d2c803c8a532c269b83fb98a61cb5729b689db
     type: task
-    size: 26656
+    size: 26708
   - path: development/tasks/audit-codebase.md
     hash: sha256:11a136d6e7cd6d5238a06a9298eff28d381799667612aa7668d923cc40c74ff7
     type: task
@@ -1965,9 +1965,9 @@ files:
     type: task
     size: 10334
   - path: development/tasks/create-next-story.md
-    hash: sha256:0705fe3750d229b47fe194109d3ec398cb90adfdfe1a6d7cf80ca8bdf73b6ad0
+    hash: sha256:4c8ce97f47ad9b0fb316bee47eae46fe7c9fbacb897f3062eaedd8a925511afc
     type: task
-    size: 30564
+    size: 30599
   - path: development/tasks/create-service.md
     hash: sha256:dd9467f3e646ca4058f0cc524f99ae102c91750fa70f412f41f50f89d8f4b4e9
     type: task
@@ -2101,9 +2101,9 @@ files:
     type: task
     size: 24669
   - path: development/tasks/dev-validate-next-story.md
-    hash: sha256:6dda51884ce7a5dd814d026aab3f2125d399e89b468b2125673c19ade9091ace
+    hash: sha256:b3c533f925077c73d18d8c9b4b69783493f1c690fd562df9546f9169f82bbe14
     type: task
-    size: 11364
+    size: 11382
   - path: development/tasks/devops-pro-access-grant.md
     hash: sha256:11d2b342a39a95acfbd5dbb7abe9c25a9511035b9ca46abac86ec40f60d6a011
     type: task
@@ -2281,13 +2281,13 @@ files:
     type: task
     size: 930
   - path: development/tasks/modify-agent.md
-    hash: sha256:74e6ef74967508f8a05cfc629bac7d5ffd5bd67c7d598cc623fd426442049824
+    hash: sha256:31d7d543b8994605e10fbbdce3ca52d5d6d0938832f053baa5a0ca50238f7e33
     type: task
-    size: 9846
+    size: 9885
   - path: development/tasks/modify-task.md
-    hash: sha256:e81346cb686226a2bca0657e9c6367adcbf76d6cbd5d81cc892702c3a655d96a
+    hash: sha256:b02ca96a6ffebac281a6f0640228c39a62d723414a50481bf6ef8ad05c92cfd3
     type: task
-    size: 10877
+    size: 10916
   - path: development/tasks/modify-workflow.md
     hash: sha256:7cbfc3488912240b0782d116b27c5410d724c7822f94efe6cd64df954c3b4b50
     type: task
@@ -2361,9 +2361,9 @@ files:
     type: task
     size: 6896
   - path: development/tasks/pr-automation.md
-    hash: sha256:90bba47136ccc37c74454a4537728b958955fd487e46e3b8dca869b994c8d1c1
+    hash: sha256:956147dfb7f42983b249041173b85fd75419f71b9018f9991f2b3aa7e59e3885
     type: task
-    size: 19031
+    size: 19096
   - path: development/tasks/project-status.md
     hash: sha256:3cb76eeb42b7e0b46a06ce0827bc68d2f507a7f4021174b1bd9e68d82463e5e6
     type: task
@@ -2533,9 +2533,9 @@ files:
     type: task
     size: 14707
   - path: development/tasks/sm-create-next-story.md
-    hash: sha256:86ee70cbe6ac6812dd9bbacc6e591046a9def3455efba19581155258173f91ba
+    hash: sha256:e5ee6bc856fba12867557c0684d566d520516b4ff0c96e9df91f260786106bd0
     type: task
-    size: 18062
+    size: 18097
   - path: development/tasks/spec-assess-complexity.md
     hash: sha256:860d6c4641282a426840ccea8bed766c8eddeb9806e4e0a806a330f70e5b6eca
     type: task
@@ -2661,9 +2661,9 @@ files:
     type: task
     size: 3595
   - path: development/tasks/validate-next-story.md
-    hash: sha256:f121211b1fbe915e181399d10bd30c435aec55c0af9b49d99c533473574a4907
+    hash: sha256:277faba94cba30ac3773159d641fc2b8a345efd70dcfef6bae15f8a6280128ea
     type: task
-    size: 18848
+    size: 18866
   - path: development/tasks/validate-tech-preset.md
     hash: sha256:50a65289c223c1a79b0bebe4120f3f703df45d42522309e658f6d0f5c9fdb54e
     type: task
@@ -4441,9 +4441,9 @@ files:
     type: script
     size: 1708
   - path: user-guide.md
-    hash: sha256:7da0c760ea094eed7ce04a1f12fa977f29f90e8e7a9b8824c671cdfc9ddede6e
+    hash: sha256:aa0b56817c7e438d732fd7f37a2c11ca64c9d9907ada3f31cb088b7b4c498ac7
     type: documentation
-    size: 38240
+    size: 38249
   - path: workflow-intelligence/__tests__/confidence-scorer.test.js
     hash: sha256:237216842d3eb710ae33f3aba6c7b2a6a353cccc1dea6d4b927d8d063d9cb635
     type: workflow-intelligence

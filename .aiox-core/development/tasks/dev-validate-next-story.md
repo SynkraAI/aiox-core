@@ -225,11 +225,11 @@ To comprehensively validate a story draft before implementation begins, ensuring
   - **Story file**: The drafted story to validate (provided by user or discovered in `devStoryLocation`)
   - **Parent epic**: The epic containing this story's requirements
   - **Architecture documents**: Based on configuration (sharded or monolithic)
-  - **Story template**: `aiox-core/templates/story-tmpl.yaml` for completeness validation
+  - **Story template**: `.aiox-core/product/templates/story-tmpl.yaml` for completeness validation
 
 ### 1. Template Completeness Validation
 
-- Load `aiox-core/templates/story-tmpl.yaml` and extract all section headings from the template
+- Load `.aiox-core/product/templates/story-tmpl.yaml` and extract all section headings from the template
 - **Missing sections check**: Compare story sections against template sections to verify all required sections are present
 - **Placeholder validation**: Ensure no template placeholders remain unfilled (e.g., `{{EpicNum}}`, `{{role}}`, `_TBD_`)
 - **Agent section verification**: Confirm all sections from template exist for future agent use

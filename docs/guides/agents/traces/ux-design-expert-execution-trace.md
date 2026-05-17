@@ -929,14 +929,14 @@ graph TD
 
 ### Notes on Dependency Locations
 
-The agent definition references dependencies using short names (e.g., `aiox-core/tasks/...`). The actual resolution paths are:
+The agent definition references dependencies using short names (e.g., `.aiox-core/development/tasks/...`). The actual resolution paths are:
 
 | Dependency Type | Agent Definition Path | Actual Disk Location |
 |-----------------|----------------------|---------------------|
-| Tasks | `aiox-core/tasks/{name}` | `.aiox-core/development/tasks/{name}` |
-| Templates | `aiox-core/templates/{name}` | `.aiox-core/product/templates/{name}` |
-| Checklists | `aiox-core/checklists/{name}` | `.aiox-core/product/checklists/{name}` |
-| Data | `aiox-core/data/{name}` | `.aiox-core/data/{name}` or `.aiox-core/product/data/{name}` |
+| Tasks | `.aiox-core/development/tasks/{name}` | `.aiox-core/development/tasks/{name}` |
+| Templates | `.aiox-core/product/templates/{name}` | `.aiox-core/product/templates/{name}` |
+| Checklists | `.aiox-core/product/checklists/{name}` | `.aiox-core/product/checklists/{name}` |
+| Data | `.aiox-core/data/{name}` | `.aiox-core/data/{name}` or `.aiox-core/product/data/{name}` |
 
 All 9 templates, all 4 checklists, and all 7 data files resolve correctly to files in `product/` directories. The `development/data/` directory does not exist; data files live under `.aiox-core/data/` and `.aiox-core/product/data/`.
 

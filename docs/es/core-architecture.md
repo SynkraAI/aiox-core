@@ -73,7 +73,7 @@ graph TD
 
 El directorio `aiox-core` contiene todas las definiciones y recursos que dan a los agentes sus capacidades.
 
-### 3.1. Agentes (`aiox-core/agents/`)
+### 3.1. Agentes (`.aiox-core/development/agents/`)
 
 - **Propósito**: Estos son los bloques de construcción fundamentales del sistema. Cada archivo markdown (por ejemplo, `aiox-master.md`, `pm.md`, `dev.md`) define la persona, capacidades y dependencias de un único agente de IA.
 - **Estructura**: Un archivo de agente contiene un encabezado YAML que especifica su rol, persona, dependencias e instrucciones de inicio. Estas dependencias son listas de tareas, plantillas, checklists y archivos de datos que el agente tiene permitido usar.
@@ -81,12 +81,12 @@ El directorio `aiox-core` contiene todas las definiciones y recursos que dan a l
 - **Integración de Documentos**: Los agentes pueden referenciar y cargar documentos desde la carpeta `docs/` del proyecto como parte de tareas, flujos de trabajo o secuencias de inicio. Los usuarios también pueden arrastrar documentos directamente a las interfaces de chat para proporcionar contexto adicional.
 - **Ejemplo**: El agente `aiox-master` lista sus dependencias, lo que indica a la herramienta de construcción qué archivos incluir en un paquete web e informa al agente de sus propias capacidades.
 
-### 3.2. Equipos de Agentes (`aiox-core/agent-teams/`)
+### 3.2. Equipos de Agentes (`.aiox-core/development/agent-teams/`)
 
 - **Propósito**: Los archivos de equipo (por ejemplo, `team-all.yaml`) definen colecciones de agentes y flujos de trabajo que se empaquetan juntos para un propósito específico, como "desarrollo full-stack" o "solo backend". Esto crea un contexto pre-empaquetado más grande para entornos de UI web.
 - **Estructura**: Un archivo de equipo lista los agentes a incluir. Puede usar comodines, como `"*"` para incluir todos los agentes. Esto permite la creación de paquetes completos como `team-all`.
 
-### 3.3. Flujos de Trabajo (`aiox-core/workflows/`)
+### 3.3. Flujos de Trabajo (`.aiox-core/development/workflows/`)
 
 - **Propósito**: Los flujos de trabajo son archivos YAML (por ejemplo, `greenfield-fullstack.yaml`) que definen una secuencia prescrita de pasos e interacciones de agentes para un tipo de proyecto específico. Actúan como una guía estratégica para el usuario y el agente `aiox-orchestrator`.
 - **Estructura**: Un flujo de trabajo define secuencias tanto para proyectos complejos como simples, lista los agentes involucrados en cada paso, los artefactos que crean y las condiciones para pasar de un paso al siguiente. A menudo incluye un diagrama Mermaid para visualización.
@@ -107,15 +107,15 @@ El framework AIOX emplea un sistema sofisticado de procesamiento de plantillas o
 
 - **`template-format.md`** (`aiox-core/utils/`): Define el lenguaje de marcado fundamental usado en todas las plantillas de AIOX. Esta especificación establece reglas de sintaxis para sustitución de variables (`{{placeholders}}`), directivas de procesamiento solo para IA (`[[LLM: instructions]]`) y bloques de lógica condicional. Las plantillas siguen este formato para asegurar un procesamiento consistente en todo el sistema.
 
-- **`create-doc.md`** (`aiox-core/tasks/`): Actúa como el motor de orquestación que gestiona todo el flujo de trabajo de generación de documentos. Esta tarea coordina la selección de plantillas, gestiona los modos de interacción del usuario (generación incremental vs. rápida), aplica las reglas de procesamiento de template-format y maneja la validación. Sirve como la interfaz principal entre usuarios y el sistema de plantillas.
+- **`create-doc.md`** (`.aiox-core/development/tasks/`): Actúa como el motor de orquestación que gestiona todo el flujo de trabajo de generación de documentos. Esta tarea coordina la selección de plantillas, gestiona los modos de interacción del usuario (generación incremental vs. rápida), aplica las reglas de procesamiento de template-format y maneja la validación. Sirve como la interfaz principal entre usuarios y el sistema de plantillas.
 
-- **`advanced-elicitation.md`** (`aiox-core/tasks/`): Proporciona una capa de refinamiento interactivo que puede ser incorporada dentro de plantillas a través de bloques `[[LLM: instructions]]`. Este componente ofrece 10 acciones estructuradas de lluvia de ideas, capacidades de revisión sección por sección y flujos de trabajo de mejora iterativa para mejorar la calidad del contenido.
+- **`advanced-elicitation.md`** (`.aiox-core/development/tasks/`): Proporciona una capa de refinamiento interactivo que puede ser incorporada dentro de plantillas a través de bloques `[[LLM: instructions]]`. Este componente ofrece 10 acciones estructuradas de lluvia de ideas, capacidades de revisión sección por sección y flujos de trabajo de mejora iterativa para mejorar la calidad del contenido.
 
 El sistema mantiene una clara separación de responsabilidades: el marcado de plantillas es procesado internamente por agentes de IA pero nunca se expone a los usuarios, mientras proporciona capacidades sofisticadas de procesamiento de IA a través de inteligencia incorporada dentro de las propias plantillas.
 
 #### 3.4.2. Sistema de Preferencias Técnicas
 
-AIOX incluye una capa de personalización a través del archivo `technical-preferences.md` en `aiox-core/data/`. Este archivo sirve como un perfil técnico persistente que influye en el comportamiento de los agentes en todos los proyectos.
+AIOX incluye una capa de personalización a través del archivo `technical-preferences.md` en `.aiox-core/data/`. Este archivo sirve como un perfil técnico persistente que influye en el comportamiento de los agentes en todos los proyectos.
 
 **Propósito y Beneficios:**
 
@@ -152,7 +152,7 @@ El framework está diseñado para dos entornos principales: IDEs locales e inter
 
 ### 4.2. Uso Específico por Entorno
 
-- **Para IDEs**: Los usuarios interactúan con los agentes directamente a través de sus archivos markdown en `aiox-core/agents/`. La integración del IDE (para Cursor, Claude Code, etc.) sabe cómo llamar a estos agentes.
+- **Para IDEs**: Los usuarios interactúan con los agentes directamente a través de sus archivos markdown en `.aiox-core/development/agents/`. La integración del IDE (para Cursor, Claude Code, etc.) sabe cómo llamar a estos agentes.
 - **Para UIs Web**: Los usuarios suben un paquete pre-construido desde `dist`. Este único archivo proporciona a la IA el contexto de todo el equipo y todas sus herramientas y conocimientos requeridos.
 
 ## 5. Flujos de Trabajo de AIOX

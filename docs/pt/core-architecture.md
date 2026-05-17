@@ -73,7 +73,7 @@ graph TD
 
 O diretório `aiox-core` contém todas as definições e recursos que dão aos agentes suas capacidades.
 
-### 3.1. Agentes (`aiox-core/agents/`)
+### 3.1. Agentes (`.aiox-core/development/agents/`)
 
 - **Propósito**: Estes são os blocos fundamentais do sistema. Cada arquivo markdown (ex: `aiox-master.md`, `pm.md`, `dev.md`) define a persona, capacidades e dependências de um único agente de IA.
 - **Estrutura**: Um arquivo de agente contém um cabeçalho YAML que especifica seu papel, persona, dependências e instruções de inicialização. Estas dependências são listas de tasks, templates, checklists e arquivos de dados que o agente tem permissão para usar.
@@ -81,12 +81,12 @@ O diretório `aiox-core` contém todas as definições e recursos que dão aos a
 - **Integração de Documentos**: Agentes podem referenciar e carregar documentos da pasta `docs/` do projeto como parte de tasks, workflows ou sequências de inicialização. Os usuários também podem arrastar documentos diretamente para interfaces de chat para fornecer contexto adicional.
 - **Exemplo**: O agente `aiox-master` lista suas dependências, o que informa à ferramenta de build quais arquivos incluir em um bundle web e informa ao agente sobre suas próprias capacidades.
 
-### 3.2. Times de Agentes (`aiox-core/agent-teams/`)
+### 3.2. Times de Agentes (`.aiox-core/development/agent-teams/`)
 
 - **Propósito**: Arquivos de time (ex: `team-all.yaml`) definem coleções de agentes e workflows que são agrupados para um propósito específico, como "desenvolvimento full-stack" ou "apenas backend". Isso cria um contexto maior e pré-empacotado para ambientes de UI web.
 - **Estrutura**: Um arquivo de time lista os agentes a serem incluídos. Pode usar wildcards, como `"*"` para incluir todos os agentes. Isso permite a criação de bundles abrangentes como `team-all`.
 
-### 3.3. Workflows (`aiox-core/workflows/`)
+### 3.3. Workflows (`.aiox-core/development/workflows/`)
 
 - **Propósito**: Workflows são arquivos YAML (ex: `greenfield-fullstack.yaml`) que definem uma sequência prescrita de etapas e interações de agentes para um tipo específico de projeto. Eles atuam como um guia estratégico para o usuário e o agente `aiox-orchestrator`.
 - **Estrutura**: Um workflow define sequências para projetos complexos e simples, lista os agentes envolvidos em cada etapa, os artefatos que eles criam e as condições para passar de uma etapa para a próxima. Frequentemente inclui um diagrama Mermaid para visualização.
@@ -107,15 +107,15 @@ O framework AIOX emprega um sistema sofisticado de processamento de templates or
 
 - **`template-format.md`** (`aiox-core/utils/`): Define a linguagem de marcação fundamental usada em todos os templates do AIOX. Esta especificação estabelece regras de sintaxe para substituição de variáveis (`{{placeholders}}`), diretivas de processamento exclusivas para IA (`[[LLM: instructions]]`) e blocos de lógica condicional. Templates seguem este formato para garantir processamento consistente em todo o sistema.
 
-- **`create-doc.md`** (`aiox-core/tasks/`): Atua como o motor de orquestração que gerencia todo o workflow de geração de documentos. Esta task coordena a seleção de templates, gerencia modos de interação com o usuário (geração incremental vs. rápida), aplica regras de processamento de template-format e lida com validação. Serve como a interface principal entre usuários e o sistema de templates.
+- **`create-doc.md`** (`.aiox-core/development/tasks/`): Atua como o motor de orquestração que gerencia todo o workflow de geração de documentos. Esta task coordena a seleção de templates, gerencia modos de interação com o usuário (geração incremental vs. rápida), aplica regras de processamento de template-format e lida com validação. Serve como a interface principal entre usuários e o sistema de templates.
 
-- **`advanced-elicitation.md`** (`aiox-core/tasks/`): Fornece uma camada de refinamento interativo que pode ser incorporada dentro de templates através de blocos `[[LLM: instructions]]`. Este componente oferece 10 ações estruturadas de brainstorming, capacidades de revisão seção por seção e workflows de melhoria iterativa para aprimorar a qualidade do conteúdo.
+- **`advanced-elicitation.md`** (`.aiox-core/development/tasks/`): Fornece uma camada de refinamento interativo que pode ser incorporada dentro de templates através de blocos `[[LLM: instructions]]`. Este componente oferece 10 ações estruturadas de brainstorming, capacidades de revisão seção por seção e workflows de melhoria iterativa para aprimorar a qualidade do conteúdo.
 
 O sistema mantém uma clara separação de responsabilidades: a marcação de template é processada internamente por agentes de IA mas nunca exposta aos usuários, enquanto fornece capacidades sofisticadas de processamento de IA através de inteligência incorporada nos próprios templates.
 
 #### 3.4.2. Sistema de Preferências Técnicas
 
-O AIOX inclui uma camada de personalização através do arquivo `technical-preferences.md` em `aiox-core/data/`. Este arquivo serve como um perfil técnico persistente que influencia o comportamento dos agentes em todos os projetos.
+O AIOX inclui uma camada de personalização através do arquivo `technical-preferences.md` em `.aiox-core/data/`. Este arquivo serve como um perfil técnico persistente que influencia o comportamento dos agentes em todos os projetos.
 
 **Propósito e Benefícios:**
 
@@ -152,7 +152,7 @@ O framework é projetado para dois ambientes principais: IDEs locais e interface
 
 ### 4.2. Uso Específico por Ambiente
 
-- **Para IDEs**: Usuários interagem com os agentes diretamente via seus arquivos markdown em `aiox-core/agents/`. A integração do IDE (para Cursor, Claude Code, etc.) sabe como chamar estes agentes.
+- **Para IDEs**: Usuários interagem com os agentes diretamente via seus arquivos markdown em `.aiox-core/development/agents/`. A integração do IDE (para Cursor, Claude Code, etc.) sabe como chamar estes agentes.
 - **Para UIs Web**: Usuários fazem upload de um bundle pré-construído de `dist`. Este único arquivo fornece à IA o contexto de todo o time e todas as suas ferramentas e conhecimento necessários.
 
 ## 5. Workflows do AIOX

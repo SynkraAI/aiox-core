@@ -229,7 +229,7 @@ To safely modify existing agent definitions while preserving their structure, ma
 
 ## Prerequisites
 
-- Target agent must exist in `aiox-core/agents/`
+- Target agent must exist in `.aiox-core/development/agents/`
 - User must provide modification intent or specific changes
 - Backup system must be available for rollback
 - Git must be initialized for version tracking
@@ -238,9 +238,9 @@ To safely modify existing agent definitions while preserving their structure, ma
 
 ### 1. Agent Analysis and Backup
 
-- Load target agent from `aiox-core/agents/{agent-name}.md`
+- Load target agent from `.aiox-core/development/agents/{agent-name}.md`
 - Parse YAML header and markdown content separately
-- Create timestamped backup: `aiox-core/agents/.backups/{agent-name}.md.{timestamp}`
+- Create timestamped backup: `.aiox-core/development/agents/.backups/{agent-name}.md.{timestamp}`
 - Extract current structure:
   - Agent metadata (name, id, title, icon, whenToUse)
   - Dependencies (tasks, templates, checklists, data)

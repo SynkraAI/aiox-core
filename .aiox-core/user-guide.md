@@ -1325,7 +1325,7 @@ Workflows: data-analysis.yml, ml-model.yml
 
 ### Criar Templates Customizados
 
-Adicione templates próprios em `aiox-core/templates/`:
+Adicione templates próprios em `.aiox-core/product/templates/`:
 
 ```markdown
 ---

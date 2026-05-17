@@ -67,7 +67,7 @@ graph TD
 
 The `aiox-core` directory contains all the definitions and resources that give the agents their capabilities.
 
-### 3.1. Agents (`aiox-core/agents/`)
+### 3.1. Agents (`.aiox-core/development/agents/`)
 
 - **Purpose**: These are the foundational building blocks of the system. Each markdown file (e.g., `aiox-master.md`, `pm.md`, `dev.md`) defines the persona, capabilities, and dependencies of a single AI agent.
 - **Structure**: An agent file contains a YAML header that specifies its role, persona, dependencies, and startup instructions. These dependencies are lists of tasks, templates, checklists, and data files that the agent is allowed to use.
@@ -75,12 +75,12 @@ The `aiox-core` directory contains all the definitions and resources that give t
 - **Document Integration**: Agents can reference and load documents from the project's `docs/` folder as part of tasks, workflows, or startup sequences. Users can also drag documents directly into chat interfaces to provide additional context.
 - **Example**: The `aiox-master` agent lists its dependencies, which tells the build tool which files to include in a web bundle and informs the agent of its own capabilities.
 
-### 3.2. Agent Teams (`aiox-core/agent-teams/`)
+### 3.2. Agent Teams (`.aiox-core/development/agent-teams/`)
 
 - **Purpose**: Team files (e.g., `team-all.yaml`) define collections of agents and workflows that are bundled together for a specific purpose, like "full-stack development" or "backend-only". This creates a larger, pre-packaged context for web UI environments.
 - **Structure**: A team file lists the agents to include. It can use wildcards, such as `"*"` to include all agents. This allows for the creation of comprehensive bundles like `team-all`.
 
-### 3.3. Workflows (`aiox-core/workflows/`)
+### 3.3. Workflows (`.aiox-core/development/workflows/`)
 
 - **Purpose**: Workflows are YAML files (e.g., `greenfield-fullstack.yaml`) that define a prescribed sequence of steps and agent interactions for a specific project type. They act as a strategic guide for the user and the `aiox-orchestrator` agent.
 - **Structure**: A workflow defines sequences for both complex and simple projects, lists the agents involved at each step, the artifacts they create, and the conditions for moving from one step to the next. It often includes a Mermaid diagram for visualization.
@@ -102,15 +102,15 @@ The AIOX framework employs a sophisticated template processing system orchestrat
 
 - **`template-format.md`** (`aiox-core/utils/`): Defines the foundational markup language used throughout all AIOX templates. This specification establishes syntax rules for variable substitution (`{{placeholders}}`), AI-only processing directives (`[[LLM: instructions]]`), and conditional logic blocks. Templates follow this format to ensure consistent processing across the system.
 
-- **`create-doc.md`** (`aiox-core/tasks/`): Acts as the orchestration engine that manages the entire document generation workflow. This task coordinates template selection, manages user interaction modes (incremental vs. rapid generation), enforces template-format processing rules, and handles validation. It serves as the primary interface between users and the template system.
+- **`create-doc.md`** (`.aiox-core/development/tasks/`): Acts as the orchestration engine that manages the entire document generation workflow. This task coordinates template selection, manages user interaction modes (incremental vs. rapid generation), enforces template-format processing rules, and handles validation. It serves as the primary interface between users and the template system.
 
-- **`advanced-elicitation.md`** (`aiox-core/tasks/`): Provides an interactive refinement layer that can be embedded within templates through `[[LLM: instructions]]` blocks. This component offers 10 structured brainstorming actions, section-by-section review capabilities, and iterative improvement workflows to enhance content quality.
+- **`advanced-elicitation.md`** (`.aiox-core/development/tasks/`): Provides an interactive refinement layer that can be embedded within templates through `[[LLM: instructions]]` blocks. This component offers 10 structured brainstorming actions, section-by-section review capabilities, and iterative improvement workflows to enhance content quality.
 
 The system maintains a clean separation of concerns: template markup is processed internally by AI agents but never exposed to users, while providing sophisticated AI processing capabilities through embedded intelligence within the templates themselves.
 
 #### 3.4.2. Technical Preferences System
 
-AIOX includes a personalization layer through the `technical-preferences.md` file in `aiox-core/data/`. This file serves as a persistent technical profile that influences agent behavior across all projects.
+AIOX includes a personalization layer through the `technical-preferences.md` file in `.aiox-core/data/`. This file serves as a persistent technical profile that influences agent behavior across all projects.
 
 **Purpose and Benefits:**
 
@@ -147,7 +147,7 @@ The framework is designed for two primary environments: local IDEs and web-based
 
 ### 4.2. Environment-Specific Usage
 
-- **For IDEs**: Users interact with the agents directly via their markdown files in `aiox-core/agents/`. The IDE integration (for Cursor, Claude Code, etc.) knows how to call these agents.
+- **For IDEs**: Users interact with the agents directly via their markdown files in `.aiox-core/development/agents/`. The IDE integration (for Cursor, Claude Code, etc.) knows how to call these agents.
 - **For Web UIs**: Users upload a pre-built bundle from `dist`. This single file provides the AI with the context of the entire team and all their required tools and knowledge.
 
 ## 5. AIOX Workflows

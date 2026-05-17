@@ -227,16 +227,16 @@ Analyze the potential impact of proposed component modifications on the broader 
 ## Examples
 ```bash
 # Analyze impact of modifying an agent
-*analyze-impact modify aiox-core/agents/weather-agent.md --depth deep --include-tests
+*analyze-impact modify .aiox-core/development/agents/weather-agent.md --depth deep --include-tests
 
 # Analyze deprecation impact with visual output
 *analyze-impact deprecate aiox-core/scripts/old-helper.js --output-format visual --save-report reports/deprecation-impact.html
 
 # Quick impact check for refactoring
-*analyze-impact refactor aiox-core/tasks/process-data.md --depth shallow --risk-threshold medium
+*analyze-impact refactor .aiox-core/development/tasks/process-data.md --depth shallow --risk-threshold medium
 
 # Analyze removal with approval workflow
-*analyze-impact remove aiox-core/workflows/legacy-workflow.yaml --depth deep --save-report reports/removal-impact.json
+*analyze-impact remove .aiox-core/development/workflows/legacy-workflow.yaml --depth deep --save-report reports/removal-impact.json
 ```
 
 ## Implementation
@@ -792,7 +792,7 @@ module.exports = AnalyzeImpactTask;
 ```json
 {
   "success": true,
-  "targetComponent": "aiox-core/agents/weather-agent.md",
+  "targetComponent": ".aiox-core/development/agents/weather-agent.md",
   "riskLevel": "medium",
   "affectedComponents": 12,
   "propagationDepth": 3,

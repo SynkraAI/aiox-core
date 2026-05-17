@@ -349,20 +349,20 @@ The AIOX-Method is built around a modular architecture centered on the `aiox-cor
 
 ### Key Architectural Components
 
-#### 1. Agents (`aiox-core/agents/`)
+#### 1. Agents (`.aiox-core/development/agents/`)
 
 - **Purpose**: Each markdown file defines a specialized AI agent for a specific Agile role (PM, Dev, Architect, etc.)
 - **Structure**: Contains YAML headers specifying the agent's persona, capabilities, and dependencies
 - **Dependencies**: Lists of tasks, templates, checklists, and data files the agent can use
 - **Startup Instructions**: Can load project-specific documentation for immediate context
 
-#### 2. Agent Teams (`aiox-core/agent-teams/`)
+#### 2. Agent Teams (`.aiox-core/development/agent-teams/`)
 
 - **Purpose**: Define collections of agents bundled together for specific purposes
 - **Examples**: `team-all.yaml` (comprehensive bundle), `team-fullstack.yaml` (full-stack development)
 - **Usage**: Creates pre-packaged contexts for web UI environments
 
-#### 3. Workflows (`aiox-core/workflows/`)
+#### 3. Workflows (`.aiox-core/development/workflows/`)
 
 - **Purpose**: YAML files defining prescribed sequences of steps for specific project types
 - **Types**: Greenfield (new projects) and Brownfield (existing projects) for UI, service, and fullstack development
@@ -370,10 +370,10 @@ The AIOX-Method is built around a modular architecture centered on the `aiox-cor
 
 #### 4. Reusable Resources
 
-- **Templates** (`aiox-core/templates/`): Markdown templates for PRDs, architecture specs, user stories
-- **Tasks** (`aiox-core/tasks/`): Instructions for specific repeatable actions like "shard-doc" or "create-next-story"
-- **Checklists** (`aiox-core/checklists/`): Quality assurance checklists for validation and review
-- **Data** (`aiox-core/data/`): Core knowledge base and technical preferences
+- **Templates** (`.aiox-core/product/templates/`): Markdown templates for PRDs, architecture specs, user stories
+- **Tasks** (`.aiox-core/development/tasks/`): Instructions for specific repeatable actions like "shard-doc" or "create-next-story"
+- **Checklists** (`.aiox-core/product/checklists/`): Quality assurance checklists for validation and review
+- **Data** (`.aiox-core/data/`): Core knowledge base and technical preferences
 
 ### Dual Environment Architecture
 
@@ -756,7 +756,7 @@ custom_fields:
 
 **Where to find examples:**
 - Complete workflow: `aiox-core/tools/mcp/clickup.yaml` (story_creation_workflow section)
-- Task instructions: `aiox-core/tasks/create-next-story.md` (sections 5.1 and 5.3)
+- Task instructions: `.aiox-core/development/tasks/create-next-story.md` (sections 5.1 and 5.3)
 - Validators: `aiox-core/tools/mcp/clickup.yaml` (executable_knowledge section)
 
 **Response Handling:**
