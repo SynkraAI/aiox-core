@@ -16,7 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 
 const PROJECT_ROOT = path.join(__dirname, '..', '..');
 const MIN_FILE_COUNT = 50;
@@ -116,7 +116,7 @@ console.log('--- Dependency Completeness (INS-4.12) ---\n');
 try {
   const depValidatorPath = path.join(PROJECT_ROOT, 'scripts', 'validate-aiox-core-deps.js');
   if (fs.existsSync(depValidatorPath)) {
-    execSync(`node "${depValidatorPath}"`, {
+    execFileSync('node', [depValidatorPath], {
       encoding: 'utf8',
       cwd: PROJECT_ROOT,
       timeout: 30000,
@@ -133,24 +133,31 @@ try {
 }
 
 // Check 5 (#739 Bug 2 follow-up): .aiox-core/package.json namespace + version sync
+//
+// Fail-closed: this validator is required, not optional. If it's missing
+// from the working tree we ABORT the publish — historically the silent-skip
+// pattern is what let the namespace drift ship in the first place.
 console.log('');
 console.log('--- Internal Manifest Namespace Sync (Issue #739) ---\n');
-try {
-  const nsValidatorPath = path.join(PROJECT_ROOT, 'scripts', 'validate-aiox-core-namespace.js');
-  if (fs.existsSync(nsValidatorPath)) {
-    execSync(`node "${nsValidatorPath}"`, {
+const nsValidatorPath = path.join(PROJECT_ROOT, 'scripts', 'validate-aiox-core-namespace.js');
+if (!fs.existsSync(nsValidatorPath)) {
+  console.error('FAIL: scripts/validate-aiox-core-namespace.js is required but not found');
+  console.error('  This validator was introduced for Issue #739 Bug 2 and is mandatory.');
+  console.error('  Restore the file or revert the deletion that removed it.');
+  passed = false;
+} else {
+  try {
+    execFileSync('node', [nsValidatorPath], {
       encoding: 'utf8',
       cwd: PROJECT_ROOT,
       timeout: 10000,
       stdio: 'inherit',
     });
-  } else {
-    console.log('SKIP: scripts/validate-aiox-core-namespace.js not found');
+  } catch (_nsErr) {
+    console.error('FAIL: .aiox-core/package.json namespace/version drift detected');
+    console.error('  Fix: Run "node scripts/validate-aiox-core-namespace.js" to see details');
+    passed = false;
   }
-} catch (_nsErr) {
-  console.error('FAIL: .aiox-core/package.json namespace/version drift detected');
-  console.error('  Fix: Run "node scripts/validate-aiox-core-namespace.js" to see details');
-  passed = false;
 }
 
 // Summary

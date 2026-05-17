@@ -54,6 +54,13 @@ function main() {
   if (!internal.name) {
     fail('.aiox-core/package.json missing `name` field');
   }
+  const EXPECTED_SCOPE = '@aiox-squads/';
+  if (!internal.name.startsWith(EXPECTED_SCOPE)) {
+    fail(
+      `.aiox-core/package.json name "${internal.name}" must start with "${EXPECTED_SCOPE}" ` +
+        '(current org scope — names like `@aiox-fullstack/*` are legacy, see Story #739)',
+    );
+  }
   if (!internal.name.endsWith('-internal')) {
     fail(
       `.aiox-core/package.json name "${internal.name}" must end with "-internal" ` +
