@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-17T12:22:53.099Z'
-  entityCount: 815
+  lastUpdated: '2026-05-17T13:08:28.431Z'
+  entityCount: 816
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -261,8 +261,6 @@ entities:
         - modification-risk-assessment
         - visual-impact-generator
         - approval-workflow
-        - analyst
-        - pm
       externalDeps: []
       plannedDeps:
         - change-propagation-predictor
@@ -274,8 +272,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:251d2c073b917f0285672568f074ec0c77372e110e234b42f043c605e438d9ee
-      lastVerified: '2026-05-17T10:02:45.089Z'
+      checksum: sha256:73ad65e2263dac7a5a3aa64736d2c803c8a532c269b83fb98a61cb5729b689db
+      lastVerified: '2026-05-17T13:08:28.424Z'
     audit-codebase:
       path: .aiox-core/development/tasks/audit-codebase.md
       layer: L2
@@ -935,13 +933,7 @@ entities:
         - task
       usedBy:
         - sm
-      dependencies:
-        - po-master-checklist
-        - component-generator.js
-        - dev
-        - architect
-        - qa
-        - po
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - tech-stack
@@ -961,8 +953,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:0705fe3750d229b47fe194109d3ec398cb90adfdfe1a6d7cf80ca8bdf73b6ad0
-      lastVerified: '2026-05-17T10:02:45.103Z'
+      checksum: sha256:4c8ce97f47ad9b0fb316bee47eae46fe7c9fbacb897f3062eaedd8a925511afc
+      lastVerified: '2026-05-17T13:08:28.424Z'
     create-service:
       path: .aiox-core/development/tasks/create-service.md
       layer: L2
@@ -1849,8 +1841,7 @@ entities:
         - story
         - task
       usedBy: []
-      dependencies:
-        - po-master-checklist
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - task-runner.js
@@ -1861,8 +1852,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:6dda51884ce7a5dd814d026aab3f2125d399e89b468b2125673c19ade9091ace
-      lastVerified: '2026-05-17T10:02:45.118Z'
+      checksum: sha256:b3c533f925077c73d18d8c9b4b69783493f1c690fd562df9546f9169f82bbe14
+      lastVerified: '2026-05-17T13:08:28.425Z'
     devops-pro-access-grant:
       path: .aiox-core/development/tasks/devops-pro-access-grant.md
       layer: L2
@@ -2996,8 +2987,7 @@ entities:
         - task
       usedBy:
         - aiox-master
-      dependencies:
-        - change-checklist
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - existing-task
@@ -3009,8 +2999,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:74e6ef74967508f8a05cfc629bac7d5ffd5bd67c7d598cc623fd426442049824
-      lastVerified: '2026-05-17T10:02:45.134Z'
+      checksum: sha256:31d7d543b8994605e10fbbdce3ca52d5d6d0938832f053baa5a0ca50238f7e33
+      lastVerified: '2026-05-17T13:08:28.425Z'
     modify-task:
       path: .aiox-core/development/tasks/modify-task.md
       layer: L2
@@ -3023,8 +3013,7 @@ entities:
         - task
       usedBy:
         - aiox-master
-      dependencies:
-        - change-checklist
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - Node.js
@@ -3035,8 +3024,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:e81346cb686226a2bca0657e9c6367adcbf76d6cbd5d81cc892702c3a655d96a
-      lastVerified: '2026-05-17T10:02:45.134Z'
+      checksum: sha256:b02ca96a6ffebac281a6f0640228c39a62d723414a50481bf6ef8ad05c92cfd3
+      lastVerified: '2026-05-17T13:08:28.425Z'
     modify-workflow:
       path: .aiox-core/development/tasks/modify-workflow.md
       layer: L2
@@ -3543,8 +3532,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:90bba47136ccc37c74454a4537728b958955fd487e46e3b8dca869b994c8d1c1
-      lastVerified: '2026-05-17T10:02:45.141Z'
+      checksum: sha256:956147dfb7f42983b249041173b85fd75419f71b9018f9991f2b3aa7e59e3885
+      lastVerified: '2026-05-17T13:08:28.425Z'
     project-status:
       path: .aiox-core/development/tasks/project-status.md
       layer: L2
@@ -4658,8 +4647,7 @@ entities:
         - story
         - task
       usedBy: []
-      dependencies:
-        - po-master-checklist
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - tech-stack
@@ -4680,8 +4668,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:86ee70cbe6ac6812dd9bbacc6e591046a9def3455efba19581155258173f91ba
-      lastVerified: '2026-05-17T10:02:45.161Z'
+      checksum: sha256:e5ee6bc856fba12867557c0684d566d520516b4ff0c96e9df91f260786106bd0
+      lastVerified: '2026-05-17T13:08:28.426Z'
     spec-assess-complexity:
       path: .aiox-core/development/tasks/spec-assess-complexity.md
       layer: L2
@@ -5486,18 +5474,7 @@ entities:
         - po-close-story
         - dev
         - po
-      dependencies:
-        - po-master-checklist
-        - dev
-        - data-engineer
-        - devops
-        - ux-design-expert
-        - analyst
-        - architect
-        - pm
-        - qa
-        - po
-        - sm
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - validation-engine.js
@@ -5507,8 +5484,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:f121211b1fbe915e181399d10bd30c435aec55c0af9b49d99c533473574a4907
-      lastVerified: '2026-05-17T10:02:45.172Z'
+      checksum: sha256:277faba94cba30ac3773159d641fc2b8a345efd70dcfef6bae15f8a6280128ea
+      lastVerified: '2026-05-17T13:08:28.426Z'
     validate-tech-preset:
       path: .aiox-core/development/tasks/validate-tech-preset.md
       layer: L2
@@ -14120,6 +14097,26 @@ entities:
         extensionPoints: []
       checksum: sha256:dd025894f8f0d3bd22a147dbc0debef8b83e96f3c59483653404b3cd5a01d5aa
       lastVerified: '2026-05-17T10:02:45.300Z'
+    component-creation-guide:
+      path: .aiox-core/core/docs/component-creation-guide.md
+      layer: L1
+      type: module
+      purpose: Analyzes provided dataset to identify patterns and insights
+      keywords:
+        - component
+        - creation
+        - guide
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:b94ec24369c9c5a3b747307b14b425c4877de0ec3f5664e000d1f61fc3c61e27
+      lastVerified: '2026-05-17T13:08:28.420Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md
@@ -14208,11 +14205,9 @@ entities:
         - analyst
       usedBy:
         - add-mcp
-        - architect-analyze-impact
         - brownfield-create-epic
         - environment-bootstrap
         - spec-research-dependencies
-        - validate-next-story
         - brownfield-risk-report-tmpl
         - design-story-tmpl
         - story-tmpl
@@ -14263,7 +14258,6 @@ entities:
         - brownfield-create-epic
         - create-brownfield-story
         - create-deep-research-prompt
-        - create-next-story
         - execute-epic-plan
         - plan-create-context
         - plan-create-implementation
@@ -14273,7 +14267,6 @@ entities:
         - spec-gather-requirements
         - spec-research-dependencies
         - spec-write-spec
-        - validate-next-story
         - validate-tech-preset
         - verify-subtask
         - design-story-tmpl
@@ -14337,7 +14330,6 @@ entities:
       usedBy:
         - analyze-project-structure
         - brownfield-create-epic
-        - validate-next-story
         - story-tmpl
         - claude-rules
         - codex-rules
@@ -14409,7 +14401,6 @@ entities:
         - build
         - cleanup-utilities
         - create-brownfield-story
-        - create-next-story
         - create-service
         - create-suite
         - delegate-to-external-executor
@@ -14436,7 +14427,6 @@ entities:
         - qa-run-tests
         - setup-llm-routing
         - story-checkpoint
-        - validate-next-story
         - verify-subtask
         - waves
         - story-tmpl
@@ -14539,7 +14529,6 @@ entities:
         - setup-mcp-docker
         - triage-github-issues
         - update-aiox
-        - validate-next-story
         - story-tmpl
         - claude-rules
         - codex-rules
@@ -14567,7 +14556,6 @@ entities:
       keywords:
         - pm
       usedBy:
-        - architect-analyze-impact
         - brownfield-create-epic
         - create-deep-research-prompt
         - environment-bootstrap
@@ -14576,7 +14564,6 @@ entities:
         - spec-critique
         - spec-gather-requirements
         - spec-write-spec
-        - validate-next-story
         - command-rationalization-matrix
         - design-story-tmpl
         - story-tmpl
@@ -14629,7 +14616,6 @@ entities:
       usedBy:
         - brownfield-create-story
         - cleanup-utilities
-        - create-next-story
         - dev-backlog-debt
         - dev-develop-story
         - execute-epic-plan
@@ -14642,7 +14628,6 @@ entities:
         - qa-fix-issues
         - qa-gate
         - story-checkpoint
-        - validate-next-story
         - design-story-tmpl
         - antigravity-rules
         - claude-rules
@@ -14695,7 +14680,6 @@ entities:
         - apply-qa-fixes
         - build-autonomous
         - cleanup-utilities
-        - create-next-story
         - create-suite
         - dev-develop-story
         - execute-checklist
@@ -14713,7 +14697,6 @@ entities:
         - security-scan
         - spec-critique
         - spec-write-spec
-        - validate-next-story
         - design-story-tmpl
         - story-tmpl
         - antigravity-rules
@@ -14780,7 +14763,6 @@ entities:
         - dev-develop-story
         - po-close-story
         - project-status
-        - validate-next-story
         - design-story-tmpl
         - antigravity-rules
         - claude-rules
@@ -14863,7 +14845,6 @@ entities:
       usedBy:
         - brownfield-create-epic
         - run-design-system-pipeline
-        - validate-next-story
         - design-story-tmpl
         - story-tmpl
         - claude-rules
@@ -15280,8 +15261,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:958065f2d734189edf2868aae322114b16546502e213b9a948547af4e8c178f9
-      lastVerified: '2026-05-17T10:02:45.331Z'
+      checksum: sha256:7ceaab838b4586a5314f0edea431f09fbc4dd82eb386f89db4442d1212add352
+      lastVerified: '2026-05-17T13:08:28.422Z'
     entity-registry:
       path: .aiox-core/data/entity-registry.yaml
       layer: L3
@@ -16374,7 +16355,6 @@ entities:
         - create-brownfield-story
         - create-deep-research-prompt
         - create-doc
-        - create-next-story
         - create-suite
         - create-task
         - create-workflow
@@ -18762,8 +18742,6 @@ entities:
       usedBy:
         - brownfield-create-epic
         - correct-course
-        - modify-agent
-        - modify-task
         - modify-workflow
         - propose-modification
         - qa-review-proposal
@@ -18950,13 +18928,9 @@ entities:
         - brownfield-create-epic
         - brownfield-create-story
         - create-brownfield-story
-        - create-next-story
-        - dev-validate-next-story
         - po-pull-story-from-clickup
         - po-sync-story-to-clickup
         - qa-trace-requirements
-        - sm-create-next-story
-        - validate-next-story
         - aiox-master
         - po
       dependencies: []
