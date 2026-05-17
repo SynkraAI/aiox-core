@@ -253,6 +253,81 @@ npx --ignore-existing aiox-core@latest
 npx aiox-core@2.2.0
 ```
 
+### Issue 10: "Pro activation failed: Installed Pro artifact did not create node_modules/@aiox-squads/pro"
+
+**Symptom:** The installer reaches Step 2 (Pro Content Installation), successfully authenticates the buyer email, downloads the Pro tarball — and then prints:
+
+```text
+⚠️  Pro activation failed: Installed Pro artifact did not create node_modules/@aiox-squads/pro.
+Continue with Community (free) edition instead? (Y/n)
+```
+
+**Root cause:** The bug was in installer versions `5.2.5` and earlier. `npm install <tarball>` walked up the directory tree looking for the first ancestor with a `package.json`, then installed `@aiox-squads/pro` there instead of in your chosen target directory. The post-install integrity check then failed because the artifact landed in the wrong place — even though `npm` had exited 0.
+
+This is **fully fixed in `@aiox-squads/core@5.2.6` and above**. The installer now passes `--prefix` + `--workspaces=false` to `npm install`, which anchors the install to the target directory regardless of ancestor `package.json`/`workspaces` declarations.
+
+**Solution (most users — works on any OS):**
+
+```bash
+# Update to the fixed version (the -p flag is critical — it forces latest resolution)
+npx -y -p @aiox-squads/core@latest aiox install
+```
+
+**Solution (if you previously hit the error and the fix above still misbehaves — residual state from old attempts):**
+
+*macOS / Linux (bash/zsh):*
+
+```bash
+# 1. Remove any stray @aiox-squads/pro that the buggy installer left in an ancestor dir
+find . -maxdepth 5 -path "*/node_modules/@aiox-squads/pro" -type d 2>/dev/null \
+  -exec rm -rf {} + 2>/dev/null
+
+# 2. Clear the npx cache so it doesn't serve the old buggy version
+rm -rf ~/.npm/_npx 2>/dev/null
+
+# 3. Retry the install with -p forcing the latest published version
+npx -y -p @aiox-squads/core@latest aiox install
+```
+
+*Windows (PowerShell):*
+
+```powershell
+# 1. Remove any stray @aiox-squads/pro that the buggy installer left in an ancestor dir
+Get-ChildItem -Recurse -Depth 5 -Directory -ErrorAction SilentlyContinue `
+  | Where-Object { $_.FullName -match '\\node_modules\\@aiox-squads\\pro$' } `
+  | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+
+# 2. Clear the npx cache so it doesn't serve the old buggy version
+Remove-Item -Recurse -Force "$env:USERPROFILE\.npm\_npx" -ErrorAction SilentlyContinue
+
+# 3. Retry the install with -p forcing the latest published version
+npx -y -p @aiox-squads/core@latest aiox install
+```
+
+*Windows (Command Prompt / cmd.exe):*
+
+```bat
+:: 1. Remove any stray @aiox-squads/pro that the buggy installer left behind
+for /f "delims=" %i in ('dir /b /s /ad "node_modules\@aiox-squads\pro" 2^>nul') do rd /s /q "%i"
+
+:: 2. Clear the npx cache
+rd /s /q "%USERPROFILE%\.npm\_npx" 2>nul
+
+:: 3. Retry the install
+npx -y -p @aiox-squads/core@latest aiox install
+```
+
+**You do NOT need:**
+- `npm cache clean --force` — does not affect version resolution
+- `rm -rf node_modules` from random directories — only matters if step 1 above found a stray Pro install in that location
+
+**If it still fails after both solutions**, share with support:
+- `pwd && node --version && npm --version`
+- The full installer output (not just the error line)
+- Output of: `find . -maxdepth 5 -name package.json 2>/dev/null | head -10`
+
+Reference: [release-procedure.md](release-procedure.md) (operator playbook), PR #742 (the fix).
+
 ---
 
 ## Environment Verification Checklist

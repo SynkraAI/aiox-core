@@ -167,7 +167,7 @@ manually before walking away**. The repo is currently in a degraded state.
 
 ```bash
 git fetch origin --quiet
-AIOX_ACTIVE_AGENT=devops git tag -a vX.Y.Z origin/main -m "<release notes>"
+AIOX_ACTIVE_AGENT=devops git tag -a -m "<release notes>" vX.Y.Z origin/main
 AIOX_ACTIVE_AGENT=devops git push origin vX.Y.Z
 ```
 

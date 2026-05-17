@@ -82,5 +82,6 @@ Se o email comprado não for reconhecido, ou se a conta existir mas a ativação
 - `AIOX Pro is not installed.`: rode `npx -y -p @aiox-squads/core@latest aiox pro setup` antes de status/validate.
 - `Invalid key format`: a chave legada precisa seguir o formato `PRO-XXXX-XXXX-XXXX-XXXX`.
 - Falha em CI sem prompt interativo: defina `AIOX_PRO_EMAIL` + `AIOX_PRO_PASSWORD` ou `AIOX_PRO_KEY`.
+- `Pro activation failed: Installed Pro artifact did not create node_modules/@aiox-squads/pro.`: bug em versões `5.2.5` e anteriores — corrigido a partir de `@aiox-squads/core@5.2.6`. Atualize com `npx -y -p @aiox-squads/core@latest aiox install`. Se persistir, veja [installation-troubleshooting.md → Issue 10](installation-troubleshooting.md#issue-10-pro-activation-failed-installed-pro-artifact-did-not-create-node_modulesaiox-squadspro) para o kit de recuperação completo.
 
 Nunca compartilhe senha, token ou license key completa em issues públicas. Para suporte, envie apenas o email e o sintoma.
