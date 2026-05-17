@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.6
-generated_at: "2026-05-17T12:22:51.608Z"
+generated_at: "2026-05-17T12:58:14.317Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -1297,7 +1297,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:7a1dc65b0661069cdccf8babb7c3320320281f10a8e5258a3cba26b8953df5ad
+    hash: sha256:910cf52ea4d999bccf255c431db5648663d2de5a871a18068fc443adaab3379c
     type: data
     size: 572193
   - path: data/learned-patterns.yaml
@@ -3697,9 +3697,9 @@ files:
     type: monitor
     size: 818
   - path: package.json
-    hash: sha256:049326a853153ea930a49c1d083d5fa9a5eb5d05c3198f0322dbd831fe151b2e
+    hash: sha256:d1cc33f580e68ec3c3e5dfb95f152852d587472d086d55fa643e8aabd0c29f77
     type: other
-    size: 2529
+    size: 1445
   - path: product/checklists/accessibility-wcag-checklist.md
     hash: sha256:56126182b25e9b7bdde43f75315e33167eb49b1f9a9cb0e9a37bc068af40aeab
     type: checklist

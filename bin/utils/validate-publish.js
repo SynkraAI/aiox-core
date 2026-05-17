@@ -132,6 +132,27 @@ try {
   passed = false;
 }
 
+// Check 5 (#739 Bug 2 follow-up): .aiox-core/package.json namespace + version sync
+console.log('');
+console.log('--- Internal Manifest Namespace Sync (Issue #739) ---\n');
+try {
+  const nsValidatorPath = path.join(PROJECT_ROOT, 'scripts', 'validate-aiox-core-namespace.js');
+  if (fs.existsSync(nsValidatorPath)) {
+    execSync(`node "${nsValidatorPath}"`, {
+      encoding: 'utf8',
+      cwd: PROJECT_ROOT,
+      timeout: 10000,
+      stdio: 'inherit',
+    });
+  } else {
+    console.log('SKIP: scripts/validate-aiox-core-namespace.js not found');
+  }
+} catch (_nsErr) {
+  console.error('FAIL: .aiox-core/package.json namespace/version drift detected');
+  console.error('  Fix: Run "node scripts/validate-aiox-core-namespace.js" to see details');
+  passed = false;
+}
+
 // Summary
 console.log('');
 if (passed) {
