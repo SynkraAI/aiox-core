@@ -5,6 +5,24 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.6] - 2026-05-17
+
+### Fixed
+
+- Pro installer no longer fails with `Installed Pro artifact did not create node_modules/@aiox-squads/pro` when `aiox install` runs in a directory that sits beneath an ancestor with a `package.json` or a declared `workspaces:` array (#742).
+  - Root cause: `npm install <tgz>` walked the directory tree and resolved to the ancestor instead of the chosen target.
+  - Fix: pass `--prefix=<targetDir> --workspaces=false --include-workspace-root=false`; create a synthetic anchor `package.json` when the target is empty and clean it up afterwards; fall back to the sha256-verified Pro source from the temp cache if the target install still fails, with an explicit user-facing warning.
+- Improved diagnostic when an installer failure does occur: the error message now reports where npm actually placed the artifact (when detectable) so students can recover quickly.
+
+### Added
+
+- `tests/installer/pro-setup-target-install.test.js` — 8 regression tests covering the four real install topologies (empty target, ancestor with `workspaces:`, ancestor with plain `package.json`, target with its own `package.json`), the synthetic anchor cleanup, the diagnostic helper, and the graceful-fallback contract.
+- `.github/workflows/installer-smoke-matrix.yml` — pre-publish CI matrix (Ubuntu/macOS/Windows × Node 18/20/22 × npm 10/11/bundled) running the regression suite plus three end-to-end smoke installs.
+
+### Notes
+
+- Students hit by the original error can update via `npx -y -p @aiox-squads/core@latest aiox install`. The fresh-directory workaround (`mkdir ~/aiox-pro && cd ~/aiox-pro`) is no longer required.
+
 ## [5.1.0] - 2026-05-06
 
 ### Changed
