@@ -164,6 +164,56 @@ function extractKeywords(filePath, content) {
   return [...new Set(parts.map((p) => p.toLowerCase()))];
 }
 
+/**
+ * Detects whether a candidate purpose string is actually a template placeholder
+ * or unfilled literal, rather than a real description.
+ *
+ * Examples of garbage purposes seen in registry pre-fix:
+ *   - `{Brief description of what this task does and when to use it}`
+ *   - `{One-line description}`
+ *   - `{{TASK_TITLE}}`
+ *   - `*${taskName.replace(/-/g, '-')}`
+ *   - `${context.componentName}`
+ *   - `Generated: ${new Date().toISOString()}`
+ *   - `Spec: {{story-title}}`
+ *
+ * These slip in because the source files (templates, generators) contain
+ * literal handlebars/JS interpolation that was meant to be filled at use-time,
+ * not at scan-time. The extractor was happily pulling those raw.
+ *
+ * The check is conservative: a purpose with one or two `${var}` mentions but
+ * still describing something useful (e.g. `Hello ${name}, welcome!`) is kept.
+ * Only when the placeholder dominates do we discard the candidate.
+ *
+ * @param {string} candidate - The purpose string from a higher-priority strategy
+ * @returns {boolean} true if the string looks like an unfilled placeholder
+ */
+function looksLikePlaceholder(candidate) {
+  if (!candidate || typeof candidate !== 'string') return false;
+  const s = candidate.trim();
+  if (!s) return false;
+
+  // Whole string is a single placeholder: `{...}`, `{{...}}`, or `${...}`.
+  if (/^\{[A-Za-z][^}]*\}$/.test(s)) return true;
+  if (/^\{\{[^}]+\}\}$/.test(s)) return true;
+  if (/^\$\{[^}]+\}$/.test(s)) return true;
+
+  // Starts with a literal placeholder followed by anything: `*${name}foo`,
+  // `${ctx.x} bar baz`, `{Brief} extra`. The leading token is the literal.
+  if (/^[*]?\$\{/.test(s)) return true;
+  if (/^\{[A-Za-z][^}]*\}/.test(s) && s.length < 80) return true;
+
+  // Dominant placeholder load — more than 30% of the string is `${...}` or
+  // `{{...}}` interpolation. Catches cases like
+  //   `${icon} @${id} — ${name}${archetype !== 'Specialist' ? ...} | ${title}`
+  // where the whole string is a JS template literal that escaped.
+  const interpolationMatches = s.match(/\$\{[^}]+\}|\{\{[^}]+\}\}/g) || [];
+  const interpolationLength = interpolationMatches.reduce((sum, m) => sum + m.length, 0);
+  if (interpolationLength > 0 && interpolationLength / s.length > 0.3) return true;
+
+  return false;
+}
+
 function extractPurpose(content, filePath) {
   // Strategy 1: YAML frontmatter — most reliable when present.
   // Looks for `description:` (and aliases) ONLY inside the frontmatter block
@@ -175,7 +225,9 @@ function extractPurpose(content, filePath) {
     const fmDescMatch = fm.match(/^(?:description|purpose|summary)\s*:\s*(.+)$/im);
     if (fmDescMatch) {
       const cleaned = fmDescMatch[1].trim().replace(/^["']|["']$/g, '');
-      if (cleaned) return cleaned.substring(0, 200);
+      if (cleaned && !looksLikePlaceholder(cleaned)) {
+        return cleaned.substring(0, 200);
+      }
     }
   }
 
@@ -183,7 +235,9 @@ function extractPurpose(content, filePath) {
   const purposeMatch = content.match(/^##\s*Purpose\s*\n+([\s\S]*?)(?=\n##|\n---|\n$)/im);
   if (purposeMatch) {
     const firstLine = purposeMatch[1].trim().split('\n')[0];
-    if (firstLine) return firstLine.substring(0, 200);
+    if (firstLine && !looksLikePlaceholder(firstLine)) {
+      return firstLine.substring(0, 200);
+    }
   }
 
   // Strategy 3: `## Overview` section — same shape as Purpose. Many guides
@@ -191,7 +245,9 @@ function extractPurpose(content, filePath) {
   const overviewMatch = content.match(/^##\s*Overview\s*\n+([\s\S]*?)(?=\n##|\n---|\n$)/im);
   if (overviewMatch) {
     const firstLine = overviewMatch[1].trim().split('\n')[0];
-    if (firstLine) return firstLine.substring(0, 200);
+    if (firstLine && !looksLikePlaceholder(firstLine)) {
+      return firstLine.substring(0, 200);
+    }
   }
 
   // Strategy 4: First `# Title` heading — the document's name.
@@ -203,7 +259,10 @@ function extractPurpose(content, filePath) {
   // guide. The body fallback was removed deliberately.
   const headerMatch = content.match(/^#\s+(.+)/m);
   if (headerMatch) {
-    return headerMatch[1].trim().substring(0, 200);
+    const candidate = headerMatch[1].trim();
+    if (!looksLikePlaceholder(candidate)) {
+      return candidate.substring(0, 200);
+    }
   }
 
   return `Entity at ${path.relative(REPO_ROOT, filePath)}`;
@@ -793,6 +852,7 @@ module.exports = {
   resolveRelativeDependencyId,
   extractKeywords,
   extractPurpose,
+  looksLikePlaceholder,
   detectDependencies,
   extractYamlDependencies,
   extractMarkdownCrossReferences,
