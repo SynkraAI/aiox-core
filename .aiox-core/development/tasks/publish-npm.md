@@ -29,7 +29,7 @@ checklists:
 1. **Pre-flight:** lint, full test suite, `gh secret list` for `NPM_TOKEN_AIOX_SQUADS`, working tree clean, local main synced with origin.
 2. **Bump version in 4 places:** `package.json`, `compat/aiox-core/package.json` (both `version` and the `@aiox-squads/core` dep), `packages/installer/package.json`, then refresh `package-lock.json` via `npm install --package-lock-only`. Add a `CHANGELOG.md` entry.
 3. **Branch + PR + bypass + merge:** `chore/release-X.Y.Z` → PR to main → atomic bypass→merge→restore (the SOP's `trap EXIT` block is mandatory; do not skip).
-4. **Tag + push:** `git tag -a vX.Y.Z origin/main` then `git push origin vX.Y.Z`. The tag triggers `.github/workflows/npm-publish.yml`.
+4. **Tag + push:** `git tag -a -m "<notes>" vX.Y.Z origin/main` then `git push origin vX.Y.Z`. (Options before tag name, `origin/main` is the ref being tagged.) The tag triggers `.github/workflows/npm-publish.yml`.
 5. **Post-publish:** verify `npm view @aiox-squads/core version` returns the new version on `dist-tags.latest`; pull the published tarball with `npm pack @aiox-squads/core@X.Y.Z` and grep for the fix to confirm code presence; run an E2E in the worst-case install topology if the release fixes installer behavior.
 
 ## Historical context

@@ -40,7 +40,7 @@ Both delegate to the same `docs/guides/release-procedure.md`. The split is prese
 2. **Pre-flight:** lint, full test suite, registry tokens fresh (`gh secret list -R SynkraAI/aiox-core` — `NPM_TOKEN_AIOX_SQUADS` and `NPM_TOKEN`).
 3. **Coordinate version across 4 sites** (root `package.json`, `compat/aiox-core/package.json` and its `@aiox-squads/core` dep, `packages/installer/package.json`, refresh `package-lock.json`) + `CHANGELOG.md` entry under `## [X.Y.Z] - YYYY-MM-DD` (Keep-a-Changelog).
 4. **Branch + PR + bypass + merge** following the SOP's atomic block (snapshot ruleset + legacy protection, sanitize payloads via jq, `set -e` + `trap EXIT` to guarantee restore even on failure, merge with `--admin`, validate diff=0 vs original snapshots).
-5. **Tag + push** triggers `.github/workflows/npm-publish.yml` — `git tag -a vX.Y.Z origin/main -m "<notes>"` then `git push origin vX.Y.Z`.
+5. **Tag + push** triggers `.github/workflows/npm-publish.yml` — `git tag -a -m "<notes>" vX.Y.Z origin/main` then `git push origin vX.Y.Z`. (Options before the tag name; `origin/main` is the ref being tagged.)
 6. **Post-publish verification** — every package visible at the expected version, `dist-tags.latest` updated, artifact integrity confirmed by `npm pack` + grep for the fix.
 7. **Rollback ready** — deprecate (don't unpublish) + `npm dist-tag add` previous version as latest, then open incident and follow the SOP from the top for the corrective fix.
 

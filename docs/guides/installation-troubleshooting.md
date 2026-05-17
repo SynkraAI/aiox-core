@@ -257,7 +257,7 @@ npx aiox-core@2.2.0
 
 **Symptom:** The installer reaches Step 2 (Pro Content Installation), successfully authenticates the buyer email, downloads the Pro tarball — and then prints:
 
-```
+```text
 ⚠️  Pro activation failed: Installed Pro artifact did not create node_modules/@aiox-squads/pro.
 Continue with Community (free) edition instead? (Y/n)
 ```
@@ -266,14 +266,16 @@ Continue with Community (free) edition instead? (Y/n)
 
 This is **fully fixed in `@aiox-squads/core@5.2.6` and above**. The installer now passes `--prefix` + `--workspaces=false` to `npm install`, which anchors the install to the target directory regardless of ancestor `package.json`/`workspaces` declarations.
 
-**Solution (most users):**
+**Solution (most users — works on any OS):**
 
 ```bash
-# 1. Update to the fixed version (the -p flag is critical — it forces latest resolution)
+# Update to the fixed version (the -p flag is critical — it forces latest resolution)
 npx -y -p @aiox-squads/core@latest aiox install
 ```
 
 **Solution (if you previously hit the error and the fix above still misbehaves — residual state from old attempts):**
+
+*macOS / Linux (bash/zsh):*
 
 ```bash
 # 1. Remove any stray @aiox-squads/pro that the buggy installer left in an ancestor dir
@@ -284,6 +286,34 @@ find . -maxdepth 5 -path "*/node_modules/@aiox-squads/pro" -type d 2>/dev/null \
 rm -rf ~/.npm/_npx 2>/dev/null
 
 # 3. Retry the install with -p forcing the latest published version
+npx -y -p @aiox-squads/core@latest aiox install
+```
+
+*Windows (PowerShell):*
+
+```powershell
+# 1. Remove any stray @aiox-squads/pro that the buggy installer left in an ancestor dir
+Get-ChildItem -Recurse -Depth 5 -Directory -ErrorAction SilentlyContinue `
+  | Where-Object { $_.FullName -match '\\node_modules\\@aiox-squads\\pro$' } `
+  | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+
+# 2. Clear the npx cache so it doesn't serve the old buggy version
+Remove-Item -Recurse -Force "$env:USERPROFILE\.npm\_npx" -ErrorAction SilentlyContinue
+
+# 3. Retry the install with -p forcing the latest published version
+npx -y -p @aiox-squads/core@latest aiox install
+```
+
+*Windows (Command Prompt / cmd.exe):*
+
+```bat
+:: 1. Remove any stray @aiox-squads/pro that the buggy installer left behind
+for /f "delims=" %i in ('dir /b /s /ad "node_modules\@aiox-squads\pro" 2^>nul') do rd /s /q "%i"
+
+:: 2. Clear the npx cache
+rd /s /q "%USERPROFILE%\.npm\_npx" 2>nul
+
+:: 3. Retry the install
 npx -y -p @aiox-squads/core@latest aiox install
 ```
 

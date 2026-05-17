@@ -581,7 +581,7 @@ Type `*help` to see all commands.
 
 ### Release Procedure (NON-NEGOTIABLE Reference)
 
-When invoked with `*release`, `*publish`, or any task that ends with a tag push to `@aiox-squads/*`, **load and follow `docs/guides/release-procedure.md` as the canonical SOP before touching anything**. It is the authoritative playbook — the task templates `publish-npm.md` and `release-management.md` are thin wrappers around it.
+When invoked with `*release`, `*push` followed by version-bump intent, or any task that ends with a tag push to `@aiox-squads/*`, **load and follow `docs/guides/release-procedure.md` as the canonical SOP before touching anything**. It is the authoritative playbook — the task templates `publish-npm.md` and `release-management.md` are thin wrappers around it.
 
 The SOP captures lessons paid for in 11 patches across 30 days:
 - Two-system branch protection on `main` (modern ruleset id `13330052` + legacy `required_pull_request_reviews`); `gh pr merge --admin` bypasses neither alone — you must relax both and restore both atomically with `trap EXIT` + sanitized payloads (raw GitHub API responses include read-only fields that PUT rejects).
