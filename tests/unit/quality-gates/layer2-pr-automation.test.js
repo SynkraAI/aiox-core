@@ -127,6 +127,22 @@ describe('Layer2PRAutomation', () => {
       expect(result.skipped).toBe(true);
       expect(result.message).toContain('not installed');
     });
+
+    it('should fail when CodeRabbit exits non-zero even without output', async () => {
+      layer.runCommand = jest.fn().mockResolvedValue({
+        exitCode: 137,
+        stdout: '',
+        stderr: '',
+        duration: 100,
+      });
+
+      const result = await layer.runCodeRabbit();
+
+      expect(result.pass).toBe(false);
+      expect(result.error).toMatch(/CodeRabbit CLI exited with code 137/);
+      expect(result.error).toContain('stdout:');
+      expect(result.error).toContain('stderr:');
+    });
   });
 
   describe('runQuinnReview', () => {

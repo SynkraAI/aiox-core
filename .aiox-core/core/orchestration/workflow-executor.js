@@ -804,7 +804,7 @@ class WorkflowExecutor {
               '`wsl --install` (https://learn.microsoft.com/windows/wsl/install), ' +
               'then install the CodeRabbit CLI inside the WSL distribution. ' +
               'See docs/guides/installation-troubleshooting.md Issue 10. ' +
-              `To bypass this check, set coderabbit.installation_mode='native' in your config.`
+              'To bypass this check, set coderabbit.installation_mode=\'native\' in your config.',
           );
         }
         const wslPath = this.projectRoot
@@ -829,7 +829,7 @@ class WorkflowExecutor {
       });
 
       // Parse CodeRabbit output to extract issues
-      const issues = this.parseCodeRabbitOutput(stdout);
+      const issues = this.parseCodeRabbitOutput([stdout || '', stderr || ''].join('\n'));
 
       return {
         success: true,
@@ -842,6 +842,16 @@ class WorkflowExecutor {
         return {
           success: false,
           error: 'CodeRabbit CLI not installed',
+          issues: [],
+        };
+      }
+      if (error.code !== undefined && error.code !== 0) {
+        return {
+          success: false,
+          error:
+            `CodeRabbit CLI exited with code ${error.code}. ` +
+            `stdout: ${(error.stdout || '').slice(0, 200)}, ` +
+            `stderr: ${(error.stderr || '').slice(0, 200)}`,
           issues: [],
         };
       }

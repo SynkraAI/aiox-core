@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.7
-generated_at: "2026-05-18T11:40:45.332Z"
+generated_at: "2026-05-18T15:42:34.055Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -989,9 +989,9 @@ files:
     type: core
     size: 31469
   - path: core/orchestration/workflow-executor.js
-    hash: sha256:5bc1c72b7565f3ae5794d4d379d2090c605ca6c383ebbb94a042c5f96b2b9102
+    hash: sha256:8c56facc975f0452d686183d25ab1c19211afd127814b2ade963b4950352872f
     type: core
-    size: 38289
+    size: 38673
   - path: core/orchestration/workflow-orchestrator.js
     hash: sha256:82816bd5e6fecc9bbb77292444e53254c72bf93e5c04260784743354c6a58627
     type: core
@@ -1037,9 +1037,9 @@ files:
     type: core
     size: 9393
   - path: core/quality-gates/layer2-pr-automation.js
-    hash: sha256:19e52369efe5cf0df9d0b6a9675dd555fdd46c1ab19cf6dc45d9173ad6e6524e
+    hash: sha256:40a7b03d6294c79741e9313ae91a8d6a30797dca1df4e3ca406edfe2911b4322
     type: core
-    size: 11907
+    size: 12213
   - path: core/quality-gates/layer3-human-review.js
     hash: sha256:9bf79d5adfddae55d7dddfda777cd2775aa76f82204ddd0f660f6edbd093b16b
     type: core

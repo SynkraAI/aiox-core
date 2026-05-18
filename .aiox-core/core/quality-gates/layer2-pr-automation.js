@@ -147,6 +147,13 @@ class Layer2PRAutomation extends BaseLayer {
       }
 
       const result = await this.runCommand(command, timeout);
+      if (result.exitCode !== undefined && result.exitCode !== 0) {
+        throw new Error(
+          `CodeRabbit CLI exited with code ${result.exitCode}. ` +
+            `stdout: ${(result.stdout || '').slice(0, 200)}, ` +
+            `stderr: ${(result.stderr || '').slice(0, 200)}`,
+        );
+      }
 
       // Parse CodeRabbit output for issues
       const issues = this.parseCodeRabbitOutput(result.stdout + result.stderr);
