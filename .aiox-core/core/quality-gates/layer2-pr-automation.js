@@ -12,6 +12,7 @@
 
 const { spawn } = require('child_process');
 const fs = require('fs').promises;
+const os = require('os');
 const path = require('path');
 const { BaseLayer } = require('./base-layer');
 
@@ -100,18 +101,29 @@ class Layer2PRAutomation extends BaseLayer {
       // - this.coderabbit.command: explicit string wins (backward compat with old configs).
       // - this.coderabbit.installation_mode: 'wsl' | 'native' lets ops override platform detection.
       // - Default: Windows hosts wrap via WSL, macOS/Linux run the binary directly.
+      // - Tilde and ${PROJECT_ROOT} are resolved programmatically — `child_process.spawn`
+      //   with `shell: true` does shell expansion, but we cannot rely on PROJECT_ROOT
+      //   being set in the env at call sites, so substitute it here.
       let command;
       if (this.coderabbit.command) {
         command = this.coderabbit.command;
       } else {
-        const cliPath = this.coderabbit.cli_path || '~/.local/bin/coderabbit';
+        const rawCliPath = this.coderabbit.cli_path || '~/.local/bin/coderabbit';
+        const cliPath = rawCliPath.startsWith('~')
+          ? path.join(os.homedir(), rawCliPath.slice(1))
+          : rawCliPath;
         const mode =
           this.coderabbit.installation_mode ||
           (process.platform === 'win32' ? 'wsl' : 'native');
-        command =
-          mode === 'wsl'
-            ? `wsl bash -c 'cd \${PROJECT_ROOT} && ${cliPath} --prompt-only -t uncommitted'`
-            : `${cliPath} --prompt-only -t uncommitted`;
+        if (mode === 'wsl') {
+          const projectRoot = this.coderabbit.projectRoot || process.cwd();
+          const wslProjectPath = projectRoot
+            .replace(/\\/g, '/')
+            .replace(/^([A-Z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`);
+          command = `wsl bash -c 'cd "${wslProjectPath}" && ${cliPath} --prompt-only -t uncommitted'`;
+        } else {
+          command = `${cliPath} --prompt-only -t uncommitted`;
+        }
       }
 
       const result = await this.runCommand(command, timeout);

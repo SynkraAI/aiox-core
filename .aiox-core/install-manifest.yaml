@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.7
-generated_at: "2026-05-18T04:56:53.126Z"
+generated_at: "2026-05-18T05:08:22.848Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -989,9 +989,9 @@ files:
     type: core
     size: 31469
   - path: core/orchestration/workflow-executor.js
-    hash: sha256:b09934e53f7aba651d18a963b6dc09f8511c02db7eaf8ce6c16c4d2b8e7824a9
+    hash: sha256:d1e1fab010e0bda1d1c472e527323a3b1a136ad58717aec55a32a087a5e1fe31
     type: core
-    size: 36797
+    size: 37279
   - path: core/orchestration/workflow-orchestrator.js
     hash: sha256:82816bd5e6fecc9bbb77292444e53254c72bf93e5c04260784743354c6a58627
     type: core
@@ -1037,9 +1037,9 @@ files:
     type: core
     size: 9393
   - path: core/quality-gates/layer2-pr-automation.js
-    hash: sha256:c41825460c79011f7da5c4be796930c5a94b7b24f4ce735699552a30761cf48d
+    hash: sha256:9aea4203a59a9a5e753b997dfcdb5826ad0b784fab84a5474bb6a68eca8958f0
     type: core
-    size: 9861
+    size: 10536
   - path: core/quality-gates/layer3-human-review.js
     hash: sha256:9bf79d5adfddae55d7dddfda777cd2775aa76f82204ddd0f660f6edbd093b16b
     type: core
@@ -2201,9 +2201,9 @@ files:
     type: task
     size: 19476
   - path: development/tasks/github-devops-pre-push-quality-gate.md
-    hash: sha256:99d9dc2ca637866e7ed80897a8b9c57b216b6f1851ee8a1f5865637a4ff8f56e
+    hash: sha256:bf52fb1ec4f6bcb3e04444828dc32b9b76709f3dd3313559de2287a372272d4d
     type: task
-    size: 24451
+    size: 24811
   - path: development/tasks/github-devops-repository-cleanup.md
     hash: sha256:34135e86820be5218daf7031f4daa115d6ef9a727c7c0cb3a6f28c59f8e694c1
     type: task

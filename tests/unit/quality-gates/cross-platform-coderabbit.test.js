@@ -15,15 +15,22 @@
  * @issue #731
  */
 
+const os = require('os');
+const path = require('path');
+
 const { Layer2PRAutomation } = require('../../../.aiox-core/core/quality-gates/layer2-pr-automation');
+
+const expectedDefaultCliPath = path.join(os.homedir(), '/.local/bin/coderabbit');
 
 describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
   let originalPlatform;
+  let originalCwd;
   let layer;
   let capturedCommand;
 
   beforeEach(() => {
     originalPlatform = process.platform;
+    originalCwd = process.cwd;
     capturedCommand = null;
     layer = new Layer2PRAutomation({
       enabled: true,
@@ -39,6 +46,7 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
 
   afterEach(() => {
     Object.defineProperty(process, 'platform', { value: originalPlatform });
+    process.cwd = originalCwd;
   });
 
   const setPlatform = (value) => {
@@ -48,14 +56,14 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
   it('builds a native command on macOS (darwin)', async () => {
     setPlatform('darwin');
     await layer.runCodeRabbit();
-    expect(capturedCommand).toBe('~/.local/bin/coderabbit --prompt-only -t uncommitted');
+    expect(capturedCommand).toBe(`${expectedDefaultCliPath} --prompt-only -t uncommitted`);
     expect(capturedCommand).not.toMatch(/wsl bash -c/);
   });
 
   it('builds a native command on Linux', async () => {
     setPlatform('linux');
     await layer.runCodeRabbit();
-    expect(capturedCommand).toBe('~/.local/bin/coderabbit --prompt-only -t uncommitted');
+    expect(capturedCommand).toBe(`${expectedDefaultCliPath} --prompt-only -t uncommitted`);
     expect(capturedCommand).not.toMatch(/wsl bash -c/);
   });
 
@@ -63,14 +71,21 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     setPlatform('win32');
     await layer.runCodeRabbit();
     expect(capturedCommand).toMatch(/^wsl bash -c '/);
-    expect(capturedCommand).toContain('~/.local/bin/coderabbit --prompt-only -t uncommitted');
+    expect(capturedCommand).toContain(`${expectedDefaultCliPath} --prompt-only -t uncommitted`);
+  });
+
+  it('converts Windows project root to /mnt/<drive>/... inside wsl command', async () => {
+    setPlatform('win32');
+    process.cwd = () => 'C:\\Users\\dev\\project';
+    await layer.runCodeRabbit();
+    expect(capturedCommand).toMatch(/cd "\/mnt\/c\/Users\/dev\/project"/);
   });
 
   it('honors an explicit installation_mode override (native on Windows)', async () => {
     setPlatform('win32');
     layer.coderabbit.installation_mode = 'native';
     await layer.runCodeRabbit();
-    expect(capturedCommand).toBe('~/.local/bin/coderabbit --prompt-only -t uncommitted');
+    expect(capturedCommand).toBe(`${expectedDefaultCliPath} --prompt-only -t uncommitted`);
     expect(capturedCommand).not.toMatch(/wsl bash -c/);
   });
 
@@ -101,5 +116,13 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     await layer.runCodeRabbit();
     expect(capturedCommand).toContain('/usr/local/bin/coderabbit-custom --prompt-only -t uncommitted');
     expect(capturedCommand).toMatch(/^wsl bash -c '/);
+  });
+
+  it('expands tilde (~) in cli_path via os.homedir() — defensive', async () => {
+    setPlatform('darwin');
+    layer.coderabbit.cli_path = '~/custom/coderabbit';
+    await layer.runCodeRabbit();
+    expect(capturedCommand).toBe(`${path.join(os.homedir(), '/custom/coderabbit')} --prompt-only -t uncommitted`);
+    expect(capturedCommand).not.toContain('~/custom');
   });
 });

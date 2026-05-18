@@ -20,6 +20,7 @@
 
 const fs = require('fs').promises;
 const fsSync = require('fs');
+const os = require('os');
 const path = require('path');
 const yaml = require('js-yaml');
 
@@ -782,7 +783,14 @@ class WorkflowExecutor {
       // - Explicit installation_mode: 'wsl' | 'native' wins (lets ops override).
       // - Default: Windows hosts wrap via WSL, macOS/Linux run the binary directly.
       // - cli_path defaults to ~/.local/bin/coderabbit (matches the CodeRabbit CLI installer default).
-      const cliPath = coderabbitConfig.cli_path || '~/.local/bin/coderabbit';
+      //   We expand leading "~" with os.homedir() defensively — `child_process.exec`
+      //   under a shell expands it, but the native code path goes through `execAsync`
+      //   which calls /bin/sh -c, and on Windows the host shell behavior is less
+      //   predictable. Programmatic expansion removes the ambiguity.
+      const rawCliPath = coderabbitConfig.cli_path || '~/.local/bin/coderabbit';
+      const cliPath = rawCliPath.startsWith('~')
+        ? path.join(os.homedir(), rawCliPath.slice(1))
+        : rawCliPath;
       const mode =
         coderabbitConfig.installation_mode ||
         (process.platform === 'win32' ? 'wsl' : 'native');

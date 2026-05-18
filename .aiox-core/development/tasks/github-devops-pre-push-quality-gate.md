@@ -369,14 +369,21 @@ function runCodeRabbitReview(projectRoot) {
     // Build the command for the current platform (Issue #731).
     // - macOS/Linux: run cli_path directly from project root.
     // - Windows: wrap with `wsl bash -c` and rewrite the project path to /mnt/<drive>/...
-    const cliPath = '~/.local/bin/coderabbit';
+    // Expand leading "~" via os.homedir() defensively — execSync goes through a shell
+    // but spawn-style callers do not, so the resolved path is the safer default.
+    const os = require('os');
+    const path = require('path');
+    const rawCliPath = '~/.local/bin/coderabbit';
+    const cliPath = rawCliPath.startsWith('~')
+      ? path.join(os.homedir(), rawCliPath.slice(1))
+      : rawCliPath;
     const isWindows = process.platform === 'win32';
     const coderabbitCommand = isWindows
       ? (() => {
           const wslProjectPath = projectRoot
             .replace(/\\/g, '/')
             .replace(/^([A-Z]):/, (match, drive) => `/mnt/${drive.toLowerCase()}`);
-          return `wsl bash -c 'cd ${wslProjectPath} && ${cliPath} --prompt-only -t uncommitted'`;
+          return `wsl bash -c 'cd "${wslProjectPath}" && ${cliPath} --prompt-only -t uncommitted'`;
         })()
       : `${cliPath} --prompt-only -t uncommitted`;
 
