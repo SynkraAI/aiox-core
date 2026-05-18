@@ -318,6 +318,33 @@ jobs:
       - name: Validate install manifest
         run: npm run validate:manifest
 
+  registry-determinism:
+    name: Entity Registry Determinism
+    needs: changes
+    if: ${{ needs.changes.outputs.code == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate registry determinism
+        # Re-runs populate-entity-registry.js and compares output against the
+        # committed entity-registry.yaml. Catches the category of drift that
+        # produced #754 (regen against partially-edited working tree). See #758.
+        run: npm run validate:registry-determinism
+
   ide-sync-validation:
     name: IDE Command Sync Validation
     needs: changes

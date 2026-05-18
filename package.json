@@ -71,6 +71,7 @@
     "release:test": "semantic-release --dry-run --no-ci || echo 'Config test complete - authentication errors are expected locally'",
     "generate:manifest": "node scripts/generate-install-manifest.js",
     "validate:manifest": "node scripts/validate-manifest.js",
+    "validate:registry-determinism": "node scripts/validate-registry-determinism.js",
     "validate:structure": "node .aiox-core/infrastructure/scripts/source-tree-guardian/index.js",
     "validate:agents": "node .aiox-core/infrastructure/scripts/validate-agents.js",
     "sync:ide": "node .aiox-core/infrastructure/scripts/ide-sync/index.js sync",
