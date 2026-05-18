@@ -26,6 +26,13 @@ const SCAN_CONFIG = [
   { category: 'infra-tools', basePath: '.aiox-core/infrastructure/tools', glob: '**/*.{yaml,yml,md}', type: 'tool' },
   { category: 'product-checklists', basePath: '.aiox-core/product/checklists', glob: '**/*.md', type: 'checklist' },
   { category: 'product-data', basePath: '.aiox-core/product/data', glob: '**/*.{yaml,yml,md}', type: 'data' },
+  // Framework documentation under `.aiox-core/core/docs/` is reference material
+  // consumed by @dev/@architect/@qa during execution (component-creation guide,
+  // template syntax, troubleshooting, shard translation, session-update pattern).
+  // The `modules` scan above only covers .js/.mjs, so these markdown guides would
+  // otherwise sit outside the registry. Tracking them as `docs` entities makes
+  // them discoverable through IDS impact analysis (PR #748 follow-up).
+  { category: 'core-docs', basePath: '.aiox-core/core/docs', glob: '**/*.md', type: 'docs' },
 ];
 
 const ADAPTABILITY_DEFAULTS = {
@@ -34,6 +41,7 @@ const ADAPTABILITY_DEFAULTS = {
   template: 0.5,
   checklist: 0.6,
   data: 0.5,
+  docs: 0.5, // Reference material — mutable as the project evolves but rarely per-mission.
   script: 0.7,
   task: 0.8,
   workflow: 0.4,
