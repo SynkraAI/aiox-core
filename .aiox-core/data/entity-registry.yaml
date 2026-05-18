@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-18T04:51:58.010Z'
+  lastUpdated: '2026-05-18T05:18:17.136Z'
   entityCount: 816
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -2479,8 +2479,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:99d9dc2ca637866e7ed80897a8b9c57b216b6f1851ee8a1f5865637a4ff8f56e
-      lastVerified: '2026-05-18T04:51:58.003Z'
+      checksum: sha256:529b4366c0e4b4b3568d95ae02ddf28974a5f34faf1d7b23d99caddbfa3e2db7
+      lastVerified: '2026-05-18T05:18:17.130Z'
     github-devops-repository-cleanup:
       path: .aiox-core/development/tasks/github-devops-repository-cleanup.md
       layer: L2
@@ -10581,8 +10581,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:b09934e53f7aba651d18a963b6dc09f8511c02db7eaf8ce6c16c4d2b8e7824a9
-      lastVerified: '2026-05-18T04:51:57.990Z'
+      checksum: sha256:ddc880683df489ec7203ab7ecd8e066a08e2f72b011fe0dfe578d31155eb513b
+      lastVerified: '2026-05-18T05:18:17.128Z'
     workflow-orchestrator:
       path: .aiox-core/core/orchestration/workflow-orchestrator.js
       layer: L1
@@ -10824,8 +10824,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c41825460c79011f7da5c4be796930c5a94b7b24f4ce735699552a30761cf48d
-      lastVerified: '2026-05-18T04:51:57.996Z'
+      checksum: sha256:53e1f05e3ece4731848ad818f13a97ce18f553327b6f2e385e4d299492cc890a
+      lastVerified: '2026-05-18T05:18:17.129Z'
     layer3-human-review:
       path: .aiox-core/core/quality-gates/layer3-human-review.js
       layer: L1
