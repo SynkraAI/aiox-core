@@ -496,8 +496,8 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
   });
 
   describe('SCAN_CONFIG (NOG-16A AC1)', () => {
-    it('has 14 categories (10 existing + 4 new)', () => {
-      expect(SCAN_CONFIG).toHaveLength(14);
+    it('has 15 categories (10 existing + 4 NOG-16A + 1 core-docs)', () => {
+      expect(SCAN_CONFIG).toHaveLength(15);
       const categories = SCAN_CONFIG.map((c) => c.category);
       expect(categories).toContain('workflows');
       expect(categories).toContain('utils');
@@ -506,6 +506,7 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
       expect(categories).toContain('infra-tools');
       expect(categories).toContain('product-checklists');
       expect(categories).toContain('product-data');
+      expect(categories).toContain('core-docs');
     });
 
     it('preserves all 10 original categories', () => {
@@ -529,6 +530,11 @@ describe('populate-entity-registry (AC: 3, 4, 12)', () => {
 
       const productData = SCAN_CONFIG.find((c) => c.category === 'product-data');
       expect(productData.type).toBe('data');
+
+      const coreDocs = SCAN_CONFIG.find((c) => c.category === 'core-docs');
+      expect(coreDocs.type).toBe('docs');
+      expect(coreDocs.basePath).toContain('core/docs');
+      expect(coreDocs.glob).toBe('**/*.md');
     });
   });
 
