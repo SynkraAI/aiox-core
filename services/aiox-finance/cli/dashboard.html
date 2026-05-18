@@ -461,6 +461,27 @@
 
       <div id="sales" class="tab-content active">
         <h2>Vendas Lançadas</h2>
+
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; align-items: flex-end;">
+            <div>
+              <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #555; font-weight: 500;">Data Inicial</label>
+              <input type="date" id="filterDateFrom" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #555; font-weight: 500;">Data Final</label>
+              <input type="date" id="filterDateTo" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #555; font-weight: 500;">Filtrar por Vendedor</label>
+              <select id="filterSellerId" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">-- Todos --</option>
+              </select>
+            </div>
+            <button onclick="applyFilters()" style="padding: 8px 16px; background: #000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Filtrar</button>
+          </div>
+        </div>
+
         <div id="salesTable"></div>
       </div>
 
@@ -528,6 +549,7 @@
 
         if (error) throw error;
 
+        // Populate the main seller dropdown
         const select = document.getElementById('sellerId');
         const currentValue = select.value;
 
@@ -540,6 +562,20 @@
         });
 
         if (currentValue) select.value = currentValue;
+
+        // Populate the filter dropdown
+        const filterSelect = document.getElementById('filterSellerId');
+        const filterCurrentValue = filterSelect.value;
+
+        filterSelect.innerHTML = '<option value="">-- Todos --</option>';
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.id;
+          option.textContent = user.name;
+          filterSelect.appendChild(option);
+        });
+
+        if (filterCurrentValue) filterSelect.value = filterCurrentValue;
       } catch (err) {
         console.error('Erro ao carregar vendedores:', err);
       }
@@ -789,6 +825,45 @@
         showMessage(`❌ Erro ao aprovar: ${err.message}`, 'error');
         btn.disabled = false;
         btn.innerHTML = '✓ Aprovar';
+      }
+    }
+
+    async function applyFilters() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      const dateFrom = document.getElementById('filterDateFrom').value;
+      const dateTo = document.getElementById('filterDateTo').value;
+      const sellerId = document.getElementById('filterSellerId').value;
+
+      try {
+        let query = client
+          .from('sales')
+          .select('id, seller_id, customer_id, net_amount, payment_method, status, created_at')
+          .order('created_at', { ascending: false });
+
+        if (dateFrom) {
+          query = query.gte('created_at', `${dateFrom}T00:00:00Z`);
+        }
+
+        if (dateTo) {
+          query = query.lte('created_at', `${dateTo}T23:59:59Z`);
+        }
+
+        if (sellerId) {
+          query = query.eq('seller_id', sellerId);
+        }
+
+        const { data: sales, error } = await query;
+
+        if (error) throw error;
+
+        const count = sales?.length || 0;
+        renderSales(sales || []);
+        showMessage(`✅ Filtro aplicado: ${count} venda${count !== 1 ? 's' : ''} encontrada${count !== 1 ? 's' : ''}`, 'success');
+
+      } catch (err) {
+        showMessage(`❌ Erro ao filtrar: ${err.message}`, 'error');
       }
     }
   </script>
