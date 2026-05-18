@@ -1,6 +1,6 @@
 {
   "name": "@aiox-squads/core-internal",
-  "version": "5.2.6",
+  "version": "5.2.7",
   "description": "Internal package manifest for AIOX framework — declares runtime dependencies consumed by scripts under .aiox-core/. This is NOT published independently; it ships inside @aiox-squads/core (the top-level package). Kept name-distinct from the parent (`-internal` suffix) to avoid npm registry confusion. Version follows the parent package.",
   "private": true,
   "main": "index.js",

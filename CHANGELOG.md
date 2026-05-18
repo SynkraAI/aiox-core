@@ -5,6 +5,45 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.7] - 2026-05-18
+
+### Fixed
+
+- **Installer respects `--ci` / `--yes` / `--skipPrompts` flags at the CLAUDE.md merge prompt** — non-interactive runs no longer block waiting for keyboard input (#739 Bug 1, #750).
+  - Root cause: `generateIDEConfigs()` callsite never forwarded CI flags down to `promptFileExists()`. The wizard parsed the flags but the prompt layer never saw them.
+  - Fix: new `isNonInteractive(options)` helper checks (in precedence order) explicit options → CI env → `AIOX_NON_INTERACTIVE` env → `!stdout.isTTY`. Plumbing added at `index.js → generateIDEConfigs() → promptFileExists()`. Default choice when non-interactive matches the interactive flow's landing default (brownfield + canMerge → `merge`; else → `backup`).
+  - Regression coverage: 16 new tests in `tests/installer/ide-config-generator-ci-flags.test.js`. Full installer suite: 275/275 pass.
+- **Legacy path references aligned with current `.aiox-core/` directory layout** — `@po *validate-story-draft` and downstream story-flow tasks no longer reference paths that don't exist (#741, #747).
+  - 70 substitutions across 17 authored files mapping `aiox-core/{templates,checklists,agents,tasks,workflows,agent-teams}/<X>` → `.aiox-core/{product/templates,product/checklists,development/agents,development/tasks,development/workflows,development/agent-teams}/<X>`. Negative-lookbehind regex `(?<![\.])` preserved already-dotted references.
+- **IDS `extractPurpose()` priority chain rewritten** — registry purpose fields no longer pick up garbage from body text or example transcripts (#748).
+  - Removed body-level regex that matched any `description:`/`purpose:`/`summary:` occurrence (false-positive on installer example output).
+  - New strict priority: frontmatter `description:` → `## Purpose` → `## Overview` → `# Title` → generic `Entity at <path>` fallback. Each strategy anchored to its respective markdown construct.
+  - Added `syncSelfRegistryEntry()` writing sentinel `sha256:<self-reference>` for the registry's own record (avoids circular hash) and using `metadata.lastUpdated` as single source for `lastVerified`.
+- **IDS placeholder filter (`looksLikePlaceholder()`)** — 16 garbage purposes (`{Brief description...}`, `{{TASK_TITLE}}`, `${context.componentName}`, etc) no longer appear in `entity-registry.yaml` (#749).
+  - Detects whole-string single placeholders, leading-token placeholders, and dominant-interpolation (>30%) cases. Conservative on real prose containing legitimate `{}` syntax.
+  - Wired into all 4 strategies in the priority chain; falls through to `Entity at <path>` when every strategy yields a placeholder. 12 new unit tests covering positive + negative cases.
+- **Internal `.aiox-core/package.json` rebranded** — `@aiox-fullstack/core@4.31.1` → `@aiox-squads/core-internal@5.2.7` (`private: true`; phantom peerDependencies dropped) (#739 Bug 2, #746).
+  - The `-internal` suffix is defensive disambiguation: keeps the internal manifest name-distinct from the surface package for tooling that resolves by name (`npm ls`, lockfile resolution, dependency graphs).
+  - New `scripts/validate-aiox-core-namespace.js` (5-rule gate: file exists, name ends with `-internal`, `private: true`, version matches root, no `@aiox-fullstack/*` peers) wired into `validate:publish` so future drift is blocked before tag push.
+
+### Added
+
+- `docs/guides/installation-troubleshooting.md` **Issue 10** — install-side troubleshooting for `Installed Pro artifact did not create node_modules/@aiox-squads/pro`, with 3 OS variants (macOS/Linux/Windows). Two-tier recovery: simple retry first, then cache cleanup + residual install removal if state is fouled (#745).
+- `docs/guides/aiox-pro-access.md` — explicit entry in "Erros comuns" linking to Issue 10 (#745).
+- `.aiox-core/development/tasks/publish-npm.md` + `.aiox-core/development/tasks/release-management.md` converted to slim wrappers pointing at canonical `docs/guides/release-procedure.md` SOP (net −979/+108 lines; single source of truth) (#745).
+- `.aiox-core/development/agents/devops.md` — "Release Procedure (NON-NEGOTIABLE Reference)" section directs release/push/publish invocations to the SOP (#745).
+- `scripts/validate-aiox-core-namespace.js` — 5-rule namespace drift gate enforcing `-internal` suffix, `private: true`, version-match-root, no `@aiox-fullstack/*` peers, manifest exists. Wired into `validate:publish` (which `prepublishOnly` chains) (#746).
+
+### Changed
+
+- `docs/guides/release-procedure.md` — Version bump section now lists **5 sites** (was 4): root `package.json`, `compat/aiox-core/package.json` (version + dep), `packages/installer/package.json` (when installer src changed), `.aiox-core/package.json` (lockstep with root per `validate-aiox-core-namespace.js`), `package-lock.json` refresh. The 5th site became mandatory in 5.2.7 — first release publishing under the new namespace-drift gate.
+
+### Notes
+
+- Pipeline hardening from PR #744 (race condition fix between `publish_legacy_aiox_core` and `publish`, smoke timeout 90s→240s with dual visibility check, structured notify summary distinguishing hard vs soft fails, Windows path escape via `WORKSPACE_DIR` env var in `installer-smoke-matrix.yml`) is already in production since 5.2.6 — this release does not change those workflows.
+- The `--ci`/`--yes` fix (Bug 1) directly benefits students running `npx aiox-core@latest install --ci --yes --merge --ide claude-code` in CI/CD pipelines. The `printf '\n\n\n' | npx ...` workaround is no longer required.
+- `@aiox-squads/installer@3.3.6` ships alongside this release (PR #750 touched `packages/installer/src/wizard/`). `@aiox-squads/aiox-install` and `@aiox-squads/aiox-pro-cli` are unchanged.
+
 ## [5.2.6] - 2026-05-17
 
 ### Fixed

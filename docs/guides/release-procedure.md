@@ -33,16 +33,18 @@ Block the release if any of these are red.
 
 ## Version bump (T-5 minutes)
 
-Bump **all four** version sites in lockstep. Mismatches cause silent publish
-failures that only show up in the smoke tests.
+Bump **all five** version sites in lockstep. Mismatches cause silent publish
+failures that only show up in the smoke tests OR are caught by
+`validate-aiox-core-namespace.js` (which is wired into `validate:publish`).
 
 | File | What to bump |
 |---|---|
-| `package.json` | `version` (scoped `@aiox-squads/core`) |
+| `package.json` | `version` (scoped `@aiox-squads/core`) — single source of truth |
 | `compat/aiox-core/package.json` | `version` AND `dependencies["@aiox-squads/core"]` (must equal `version`) |
 | `packages/installer/package.json` | `version` (patch bump if installer changed; otherwise leave) |
+| `.aiox-core/package.json` | `version` MUST match root `package.json` version (lockstep per `scripts/validate-aiox-core-namespace.js` rule 4 — added in 5.2.7 after the namespace drift incident, Story #739 Bug 2). The internal manifest is not separately published but ships inside the parent surface |
 | `package-lock.json` | Refresh via `npm install --package-lock-only --ignore-scripts` |
-| `CHANGELOG.md` | New entry at top under `## [X.Y.Z] - YYYY-MM-DD` using Keep-a-Changelog sections (`### Fixed`, `### Added`, `### Notes`) |
+| `CHANGELOG.md` | New entry at top under `## [X.Y.Z] - YYYY-MM-DD` using Keep-a-Changelog sections (`### Fixed`, `### Added`, `### Changed`, `### Notes`) |
 
 If `entity-registry.yaml` or `install-manifest.yaml` change during the commit
 hook run, include them — they are SOT files and the pre-commit hook
