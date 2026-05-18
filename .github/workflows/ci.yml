@@ -549,7 +549,7 @@ jobs:
 
   # SYNAPSE context engine benchmarks + E2E tests (Story SYN-12)
   synapse-benchmark:
-    name: SYNAPSE Benchmark (Node ${{ matrix.node }})
+    name: SYNAPSE Benchmark
     needs: changes
     if: github.event_name == 'pull_request' && (needs.changes.outputs.code == 'true' || needs.changes.outputs.tests == 'true')
     runs-on: ubuntu-latest
@@ -583,7 +583,7 @@ jobs:
   # Cross-platform testing - ONLY on main branch push
   # Moved from cross-platform-tests.yml (Story 6.1)
   cross-platform:
-    name: Cross-Platform (${{ matrix.os }}, Node ${{ matrix.node }})
+    name: Cross-Platform Tests
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [changes, lint, typecheck, test]
     strategy:
