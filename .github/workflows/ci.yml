@@ -436,6 +436,7 @@ jobs:
         test,
         story-validation,
         manifest-validation,
+        registry-determinism,
         ide-sync-validation,
         installer-smoke-test,
         compatibility-parity-gate,
@@ -462,6 +463,7 @@ jobs:
           echo "  Tests: ${{ needs.test.result }}"
           echo "  Story Validation: ${{ needs.story-validation.result }}"
           echo "  Manifest Validation: ${{ needs.manifest-validation.result }}"
+          echo "  Registry Determinism: ${{ needs.registry-determinism.result }}"
           echo "  IDE Sync Validation: ${{ needs.ide-sync-validation.result }}"
           echo "  Installer Smoke Test: ${{ needs.installer-smoke-test.result }}"
           echo "  Dependency Validation: ${{ needs.dependency-validation.result }}"
@@ -504,6 +506,12 @@ jobs:
           # Manifest Validation: fail if ran and didn't succeed
           if [ "${{ needs.manifest-validation.result }}" == "failure" ]; then
             echo "❌ Manifest validation failed"
+            FAILED=true
+          fi
+
+          # Registry Determinism: fail if ran and didn't succeed
+          if [ "${{ needs.registry-determinism.result }}" == "failure" ]; then
+            echo "❌ Entity registry determinism check failed — regen drift detected"
             FAILED=true
           fi
 
