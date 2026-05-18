@@ -511,7 +511,7 @@ jobs:
           echo "❌ ${CORE_SPEC} not visible after 90s — cannot run exports smoke"
           exit 1
 
-      - name: Force require() resolution to trigger exports gate
+      - name: Force require.resolve() to trigger exports gate
         env:
           CORE_SPEC: '@aiox-squads/core@${{ needs.build.outputs.version }}'
         run: |
@@ -520,13 +520,16 @@ jobs:
           cd "${SMOKE_DIR}"
           npm init -y >/dev/null 2>&1
           npm install "${CORE_SPEC}" 2>&1 | tail -3
-          # External require() forces Node's package-exports gate. If bin/*
-          # is not declared in exports, this fails with ERR_PACKAGE_PATH_NOT_EXPORTED.
+          # External require.resolve() forces Node's package-exports gate. If
+          # bin/* is not declared in exports, this fails with ERR_PACKAGE_PATH_NOT_EXPORTED.
+          # Uses resolve() instead of require() to avoid loading the CLI's wizard
+          # in non-TTY runners (Node 24 surfaced ERR_USE_AFTER_CLOSE on readline
+          # close in non-interactive contexts — false positive, not exports drift).
           # set -o pipefail above ensures node's exit status survives the head pipe.
-          if node -e "require('@aiox-squads/core/bin/aiox.js')" 2>&1 | head -20; then
-            echo "✅ require('@aiox-squads/core/bin/aiox.js') succeeds on Node ${{ matrix.node }}"
+          if node -e "require.resolve('@aiox-squads/core/bin/aiox.js')" 2>&1 | head -20; then
+            echo "✅ require.resolve('@aiox-squads/core/bin/aiox.js') succeeds on Node ${{ matrix.node }}"
           else
-            echo "❌ REGRESSION: require() blocked by exports field on Node ${{ matrix.node }}"
+            echo "❌ REGRESSION: require.resolve() blocked by exports field on Node ${{ matrix.node }}"
             echo "❌ Issue #734 has returned — check exports field in package.json"
             exit 1
           fi
