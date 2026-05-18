@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.7
-generated_at: "2026-05-18T05:08:22.848Z"
+generated_at: "2026-05-18T05:18:15.595Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -989,9 +989,9 @@ files:
     type: core
     size: 31469
   - path: core/orchestration/workflow-executor.js
-    hash: sha256:d1e1fab010e0bda1d1c472e527323a3b1a136ad58717aec55a32a087a5e1fe31
+    hash: sha256:ddc880683df489ec7203ab7ecd8e066a08e2f72b011fe0dfe578d31155eb513b
     type: core
-    size: 37279
+    size: 37348
   - path: core/orchestration/workflow-orchestrator.js
     hash: sha256:82816bd5e6fecc9bbb77292444e53254c72bf93e5c04260784743354c6a58627
     type: core
@@ -1037,9 +1037,9 @@ files:
     type: core
     size: 9393
   - path: core/quality-gates/layer2-pr-automation.js
-    hash: sha256:9aea4203a59a9a5e753b997dfcdb5826ad0b784fab84a5474bb6a68eca8958f0
+    hash: sha256:53e1f05e3ece4731848ad818f13a97ce18f553327b6f2e385e4d299492cc890a
     type: core
-    size: 10536
+    size: 10923
   - path: core/quality-gates/layer3-human-review.js
     hash: sha256:9bf79d5adfddae55d7dddfda777cd2775aa76f82204ddd0f660f6edbd093b16b
     type: core
@@ -1297,7 +1297,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:8c6bfc8f41c9966d9bb6f1cc60caffc1e3b0371160320abcdc97b9ce4ca48f79
+    hash: sha256:2ca53dbaae4d0c749bcbd762c6ced7864ec54399bebb34dd63dfcb8aa3082b6d
     type: data
     size: 568920
   - path: data/learned-patterns.yaml
@@ -2201,9 +2201,9 @@ files:
     type: task
     size: 19476
   - path: development/tasks/github-devops-pre-push-quality-gate.md
-    hash: sha256:bf52fb1ec4f6bcb3e04444828dc32b9b76709f3dd3313559de2287a372272d4d
+    hash: sha256:529b4366c0e4b4b3568d95ae02ddf28974a5f34faf1d7b23d99caddbfa3e2db7
     type: task
-    size: 24811
+    size: 24903
   - path: development/tasks/github-devops-repository-cleanup.md
     hash: sha256:34135e86820be5218daf7031f4daa115d6ef9a727c7c0cb3a6f28c59f8e694c1
     type: task

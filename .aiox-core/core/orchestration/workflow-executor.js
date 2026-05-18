@@ -783,24 +783,25 @@ class WorkflowExecutor {
       // - Explicit installation_mode: 'wsl' | 'native' wins (lets ops override).
       // - Default: Windows hosts wrap via WSL, macOS/Linux run the binary directly.
       // - cli_path defaults to ~/.local/bin/coderabbit (matches the CodeRabbit CLI installer default).
-      //   We expand leading "~" with os.homedir() defensively — `child_process.exec`
-      //   under a shell expands it, but the native code path goes through `execAsync`
-      //   which calls /bin/sh -c, and on Windows the host shell behavior is less
-      //   predictable. Programmatic expansion removes the ambiguity.
+      // - Tilde handling differs per mode: native expands via os.homedir() so the
+      //   resolved absolute path is shell-agnostic; WSL mode keeps the literal `~`
+      //   so the WSL distribution's own bash expands it (the host's HOME would point
+      //   at a Windows path that WSL cannot resolve).
       const rawCliPath = coderabbitConfig.cli_path || '~/.local/bin/coderabbit';
-      const cliPath = rawCliPath.startsWith('~')
-        ? path.join(os.homedir(), rawCliPath.slice(1))
-        : rawCliPath;
       const mode =
         coderabbitConfig.installation_mode ||
         (process.platform === 'win32' ? 'wsl' : 'native');
       let command;
       if (mode === 'wsl') {
         const wslPath = this.projectRoot
-          .replace(/^([A-Z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`)
+          .replace(/^([A-Za-z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`)
           .replace(/\\/g, '/');
-        command = `wsl bash -c 'cd "${wslPath}" && ${cliPath} --prompt-only -t uncommitted 2>&1'`;
+        // Keep literal `~` — WSL bash expands it to the WSL user's HOME.
+        command = `wsl bash -c 'cd "${wslPath}" && ${rawCliPath} --prompt-only -t uncommitted 2>&1'`;
       } else {
+        const cliPath = rawCliPath.startsWith('~')
+          ? path.join(os.homedir(), rawCliPath.slice(1))
+          : rawCliPath;
         command = `${cliPath} --prompt-only -t uncommitted`;
       }
 

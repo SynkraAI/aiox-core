@@ -101,17 +101,18 @@ class Layer2PRAutomation extends BaseLayer {
       // - this.coderabbit.command: explicit string wins (backward compat with old configs).
       // - this.coderabbit.installation_mode: 'wsl' | 'native' lets ops override platform detection.
       // - Default: Windows hosts wrap via WSL, macOS/Linux run the binary directly.
-      // - Tilde and ${PROJECT_ROOT} are resolved programmatically — `child_process.spawn`
-      //   with `shell: true` does shell expansion, but we cannot rely on PROJECT_ROOT
+      // - ${PROJECT_ROOT} is resolved programmatically — `child_process.spawn` with
+      //   `shell: true` does shell expansion, but we cannot rely on PROJECT_ROOT
       //   being set in the env at call sites, so substitute it here.
+      // - Tilde handling differs per mode: native expands via os.homedir() so the
+      //   resolved absolute path is shell-agnostic; WSL mode keeps the literal `~`
+      //   so the WSL distribution's own bash expands it (the host's HOME would point
+      //   at a Windows path that WSL cannot resolve).
       let command;
       if (this.coderabbit.command) {
         command = this.coderabbit.command;
       } else {
         const rawCliPath = this.coderabbit.cli_path || '~/.local/bin/coderabbit';
-        const cliPath = rawCliPath.startsWith('~')
-          ? path.join(os.homedir(), rawCliPath.slice(1))
-          : rawCliPath;
         const mode =
           this.coderabbit.installation_mode ||
           (process.platform === 'win32' ? 'wsl' : 'native');
@@ -119,9 +120,13 @@ class Layer2PRAutomation extends BaseLayer {
           const projectRoot = this.coderabbit.projectRoot || process.cwd();
           const wslProjectPath = projectRoot
             .replace(/\\/g, '/')
-            .replace(/^([A-Z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`);
-          command = `wsl bash -c 'cd "${wslProjectPath}" && ${cliPath} --prompt-only -t uncommitted'`;
+            .replace(/^([A-Za-z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`);
+          // Keep literal `~` — WSL bash expands it to the WSL user's HOME.
+          command = `wsl bash -c 'cd "${wslProjectPath}" && ${rawCliPath} --prompt-only -t uncommitted'`;
         } else {
+          const cliPath = rawCliPath.startsWith('~')
+            ? path.join(os.homedir(), rawCliPath.slice(1))
+            : rawCliPath;
           command = `${cliPath} --prompt-only -t uncommitted`;
         }
       }

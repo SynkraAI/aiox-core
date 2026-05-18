@@ -67,11 +67,16 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     expect(capturedCommand).not.toMatch(/wsl bash -c/);
   });
 
-  it('wraps the command with `wsl bash -c` on Windows (win32)', async () => {
+  it('wraps the command with `wsl bash -c` on Windows (win32) — keeps `~` literal for WSL bash to expand', async () => {
     setPlatform('win32');
     await layer.runCodeRabbit();
     expect(capturedCommand).toMatch(/^wsl bash -c '/);
-    expect(capturedCommand).toContain(`${expectedDefaultCliPath} --prompt-only -t uncommitted`);
+    // WSL mode keeps the literal `~/.local/bin/coderabbit` so the WSL distribution's
+    // bash expands it (host HOME points at a Windows path that WSL cannot resolve).
+    expect(capturedCommand).toContain('~/.local/bin/coderabbit --prompt-only -t uncommitted');
+    // Crucially, the cli_path itself must NOT have been pre-expanded to the host's
+    // home dir — that would put a Windows path inside the WSL command.
+    expect(capturedCommand).not.toContain(`${expectedDefaultCliPath} --prompt-only`);
   });
 
   it('converts Windows project root to /mnt/<drive>/... inside wsl command', async () => {
@@ -79,6 +84,13 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     process.cwd = () => 'C:\\Users\\dev\\project';
     await layer.runCodeRabbit();
     expect(capturedCommand).toMatch(/cd "\/mnt\/c\/Users\/dev\/project"/);
+  });
+
+  it('handles lowercase drive letters when converting to /mnt/<drive>/...', async () => {
+    setPlatform('win32');
+    process.cwd = () => 'd:\\workspace\\project';
+    await layer.runCodeRabbit();
+    expect(capturedCommand).toMatch(/cd "\/mnt\/d\/workspace\/project"/);
   });
 
   it('honors an explicit installation_mode override (native on Windows)', async () => {
@@ -110,7 +122,7 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     expect(capturedCommand).toBe('/opt/homebrew/bin/coderabbit --prompt-only -t uncommitted');
   });
 
-  it('respects a custom cli_path when building wsl command', async () => {
+  it('respects a custom cli_path when building wsl command (absolute path, no tilde expansion needed)', async () => {
     setPlatform('win32');
     layer.coderabbit.cli_path = '/usr/local/bin/coderabbit-custom';
     await layer.runCodeRabbit();
@@ -118,11 +130,22 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     expect(capturedCommand).toMatch(/^wsl bash -c '/);
   });
 
-  it('expands tilde (~) in cli_path via os.homedir() — defensive', async () => {
+  it('expands tilde (~) in cli_path via os.homedir() in NATIVE mode — defensive', async () => {
     setPlatform('darwin');
     layer.coderabbit.cli_path = '~/custom/coderabbit';
     await layer.runCodeRabbit();
     expect(capturedCommand).toBe(`${path.join(os.homedir(), '/custom/coderabbit')} --prompt-only -t uncommitted`);
     expect(capturedCommand).not.toContain('~/custom');
+  });
+
+  it('keeps tilde (~) literal in cli_path in WSL mode — bash expands it inside WSL', async () => {
+    setPlatform('darwin');
+    layer.coderabbit.installation_mode = 'wsl';
+    layer.coderabbit.cli_path = '~/custom/coderabbit';
+    await layer.runCodeRabbit();
+    // WSL mode preserves the literal `~` (the WSL bash, not the host shell,
+    // is what expands it). Host's os.homedir() would yield a Windows path
+    // that WSL cannot resolve.
+    expect(capturedCommand).toContain('~/custom/coderabbit --prompt-only -t uncommitted');
   });
 });

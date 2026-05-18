@@ -367,25 +367,28 @@ function runCodeRabbitReview(projectRoot) {
 
   try {
     // Build the command for the current platform (Issue #731).
-    // - macOS/Linux: run cli_path directly from project root.
-    // - Windows: wrap with `wsl bash -c` and rewrite the project path to /mnt/<drive>/...
-    // Expand leading "~" via os.homedir() defensively — execSync goes through a shell
-    // but spawn-style callers do not, so the resolved path is the safer default.
+    // - macOS/Linux: run cli_path directly. Expand `~` via os.homedir() so the
+    //   final command is shell-agnostic.
+    // - Windows: wrap with `wsl bash -c`, rewrite the project path to /mnt/<drive>/...
+    //   Keep `~` literal so the WSL distribution's bash expands it (host HOME
+    //   would point at C:\Users\... which WSL cannot resolve).
     const os = require('os');
     const path = require('path');
     const rawCliPath = '~/.local/bin/coderabbit';
-    const cliPath = rawCliPath.startsWith('~')
-      ? path.join(os.homedir(), rawCliPath.slice(1))
-      : rawCliPath;
     const isWindows = process.platform === 'win32';
     const coderabbitCommand = isWindows
       ? (() => {
           const wslProjectPath = projectRoot
             .replace(/\\/g, '/')
-            .replace(/^([A-Z]):/, (match, drive) => `/mnt/${drive.toLowerCase()}`);
-          return `wsl bash -c 'cd "${wslProjectPath}" && ${cliPath} --prompt-only -t uncommitted'`;
+            .replace(/^([A-Za-z]):/, (match, drive) => `/mnt/${drive.toLowerCase()}`);
+          return `wsl bash -c 'cd "${wslProjectPath}" && ${rawCliPath} --prompt-only -t uncommitted'`;
         })()
-      : `${cliPath} --prompt-only -t uncommitted`;
+      : (() => {
+          const cliPath = rawCliPath.startsWith('~')
+            ? path.join(os.homedir(), rawCliPath.slice(1))
+            : rawCliPath;
+          return `${cliPath} --prompt-only -t uncommitted`;
+        })();
 
     console.log(`Executing: ${coderabbitCommand}\n`);
 
