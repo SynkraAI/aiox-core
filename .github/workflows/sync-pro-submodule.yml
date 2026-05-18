@@ -62,7 +62,8 @@ jobs:
         run: |
           TARGET_SHA="$INPUT_SHA"
           if [ -z "$TARGET_SHA" ]; then
-            TARGET_SHA=$(git ls-remote "$PRO_REPO_URL" refs/heads/main | awk '{print $1}')
+            TARGET_SHA=$(git -c http.https://github.com/.extraheader= \
+              ls-remote "$PRO_REPO_URL" refs/heads/main | awk '{print $1}')
           fi
 
           CURRENT_SHA=$(git ls-tree HEAD pro | awk '{print $3}')
@@ -115,7 +116,7 @@ jobs:
       - name: Create or update PR
         if: steps.resolve.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           SHORT_SHA: ${{ steps.resolve.outputs.short_sha }}
           TARGET_SHA: ${{ steps.resolve.outputs.target_sha }}
           CURRENT_SHA: ${{ steps.resolve.outputs.current_sha }}
