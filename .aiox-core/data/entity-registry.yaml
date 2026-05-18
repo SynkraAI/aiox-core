@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-18T05:34:46.620Z'
+  lastUpdated: '2026-05-18T16:26:51.453Z'
   entityCount: 820
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -15511,8 +15511,8 @@ entities:
         score: 0.5
         constraints: []
         extensionPoints: []
-      checksum: sha256:0e90d71ce0cc218d8710c1f195f74a24d3aa7513f5728f5e65da9220612c3617
-      lastVerified: '2026-05-18T05:34:46.480Z'
+      checksum: sha256:a8ca099258eef7744315ae575cfdc3b7ebf2a3942d182ee6293b3661414260c3
+      lastVerified: '2026-05-18T16:26:51.443Z'
     workflow-state-schema:
       path: .aiox-core/data/workflow-state-schema.yaml
       layer: L3

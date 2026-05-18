@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.2.7
-generated_at: "2026-05-18T15:42:34.055Z"
+generated_at: "2026-05-18T16:27:23.965Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1128
 files:
@@ -1297,7 +1297,7 @@ files:
     type: data
     size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:2196d36637457245daf242bb209277f03407245fb95f014cb63dd7c8b62ed717
+    hash: sha256:986a8c998bb0ca11980f0bf11882f2d661cf53885e56317fef684fb872037b30
     type: data
     size: 579527
   - path: data/learned-patterns.yaml
@@ -1369,9 +1369,9 @@ files:
     type: data
     size: 5055
   - path: data/workflow-patterns.yaml
-    hash: sha256:0e90d71ce0cc218d8710c1f195f74a24d3aa7513f5728f5e65da9220612c3617
+    hash: sha256:a8ca099258eef7744315ae575cfdc3b7ebf2a3942d182ee6293b3661414260c3
     type: data
-    size: 28054
+    size: 27228
   - path: data/workflow-state-schema.yaml
     hash: sha256:d80a645a9c48b8ab8168ddbe36279662d72de4fb5cd8953a6685e5d1bd9968db
     type: data
@@ -4449,9 +4449,9 @@ files:
     type: workflow-intelligence
     size: 10679
   - path: workflow-intelligence/__tests__/integration.test.js
-    hash: sha256:8f7eb4cff6d36493b49322b3221231db6d6b4259aaa2da4a2c5cdd6d61effded
+    hash: sha256:8efad6313702dff2f76e9a102ebe642c4429afd5d8351a8c547ed1dfb78bc44b
     type: workflow-intelligence
-    size: 11101
+    size: 11214
   - path: workflow-intelligence/__tests__/suggestion-engine.test.js
     hash: sha256:993741ed68c63db9bb50e58133b47159dd9fb1c4844e2fc99a5e618adb8fa12f
     type: workflow-intelligence
@@ -4461,9 +4461,9 @@ files:
     type: workflow-intelligence
     size: 15055
   - path: workflow-intelligence/__tests__/workflow-registry.test.js
-    hash: sha256:fee70788995d95180f647eea86a012d1f90d8157405c9abf3d8004e1e347a424
+    hash: sha256:759b36fb6ea30c9f6dcee9b5d8c06986f90f0fc51158d53be2dd1cc86b427fbf
     type: workflow-intelligence
-    size: 9967
+    size: 10255
   - path: workflow-intelligence/engine/confidence-scorer.js
     hash: sha256:6ab69ac846e0f3b49fd7d76a720ab1dc305f402b54518bbcf8ce876f269d0c18
     type: workflow-intelligence

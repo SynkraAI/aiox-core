@@ -57,8 +57,6 @@ module.exports = {
     'tests/integration/install-transaction.test.js',
     // License tests require network/crypto resources unavailable in CI (pre-existing)
     'tests/license/',
-    // Workflow intelligence tests - assertion count mismatches (pre-existing)
-    '.aiox-core/workflow-intelligence/__tests__/',
   ],
 
   // Coverage collection (Story TD-3: Updated paths)
