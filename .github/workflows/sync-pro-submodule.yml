@@ -116,7 +116,7 @@ jobs:
       - name: Create or update PR
         if: steps.resolve.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.PRO_SUBMODULE_TOKEN }}
+          GH_TOKEN: ${{ secrets.PRO_PR_TOKEN }}
           SHORT_SHA: ${{ steps.resolve.outputs.short_sha }}
           TARGET_SHA: ${{ steps.resolve.outputs.target_sha }}
           CURRENT_SHA: ${{ steps.resolve.outputs.current_sha }}
