@@ -251,10 +251,13 @@ Execute CodeRabbit self-healing **FIRST** before manual review:
 │                                                                   │
 │  WHILE iteration < max_iterations:                                │
 │    ┌─────────────────────────────────────────────────────────┐   │
-│    │ 1. Run CodeRabbit CLI                                   │   │
-│    │    wsl bash -c 'cd /mnt/c/.../aiox-core &&         │   │
-│    │    ~/.local/bin/coderabbit --prompt-only                │   │
-│    │    -t committed --base main'                            │   │
+│    │ 1. Run CodeRabbit CLI (runtime picks the shape for      │   │
+│    │    process.platform — see Issue #731):                  │   │
+│    │    macOS/Linux: ~/.local/bin/coderabbit --prompt-only   │   │
+│    │                 -t committed --base main                │   │
+│    │    Windows:     wsl bash -c 'cd /mnt/<drive>/<path> &&  │   │
+│    │                 ~/.local/bin/coderabbit --prompt-only   │   │
+│    │                 -t committed --base main'               │   │
 │    │                                                          │   │
 │    │ 2. Parse output for all severity levels                 │   │
 │    └─────────────────────────────────────────────────────────┘   │

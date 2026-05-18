@@ -357,11 +357,13 @@ dependencies:
 
   coderabbit_integration:
     enabled: true
-    installation_mode: wsl
-    wsl_config:
-      distribution: Ubuntu
-      installation_path: ~/.local/bin/coderabbit
-      working_directory: ${PROJECT_ROOT}
+    # Cross-platform CodeRabbit CLI (Issue #731).
+    # Runtime resolves the actual command from cli_path + host OS detection.
+    # See `.aiox-core/core/quality-gates/quality-gate-config.yaml` for canonical config.
+    cli_path: ~/.local/bin/coderabbit
+    platform_notes:
+      macos_linux: "Run cli_path directly from project root (no wrapper)."
+      windows: "Wrap with 'wsl bash -c' and rewrite project paths to /mnt/<drive>/..."
     usage:
       - Pre-PR quality gate - run before creating pull requests
       - Pre-push validation - verify code quality before push
@@ -373,23 +375,34 @@ dependencies:
       MEDIUM: Document in PR description, create follow-up issue
       LOW: Optional improvements, note in comments
     commands:
-      pre_push_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
-      pre_pr_against_main: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only --base ${DEFAULT_BRANCH:-main}'"
-      pre_commit_committed: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed'"
+      # Templates — runtime selects the right shape for the host OS.
+      pre_push_uncommitted_native: "${CLI_PATH} --prompt-only -t uncommitted"
+      pre_push_uncommitted_wsl: "wsl bash -c 'cd ${PROJECT_ROOT} && ${CLI_PATH} --prompt-only -t uncommitted'"
+      pre_pr_against_main_native: "${CLI_PATH} --prompt-only --base ${DEFAULT_BRANCH:-main}"
+      pre_pr_against_main_wsl: "wsl bash -c 'cd ${PROJECT_ROOT} && ${CLI_PATH} --prompt-only --base ${DEFAULT_BRANCH:-main}'"
+      pre_commit_committed_native: "${CLI_PATH} --prompt-only -t committed"
+      pre_commit_committed_wsl: "wsl bash -c 'cd ${PROJECT_ROOT} && ${CLI_PATH} --prompt-only -t committed'"
     execution_guidelines: |
-      CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
+      CodeRabbit CLI runs natively on macOS/Linux from `~/.local/bin/coderabbit`.
+      On Windows it is invoked through WSL via `wsl bash -c '...'`. The runtime
+      detects `process.platform` and picks the right shape — agents and tasks
+      should not hardcode either.
 
       **How to Execute:**
-      1. Use 'wsl bash -c' wrapper for all commands
-      2. Navigate to project directory in WSL path format (/mnt/c/...)
-      3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
+      - macOS/Linux: run `cli_path` directly. Bash tool sets cwd to project root.
+      - Windows: wrap with `wsl bash -c 'cd /mnt/<drive>/<path> && ...'`.
+      - Override platform detection with explicit `installation_mode: 'wsl' | 'native'`
+        in `quality-gate-config.yaml` only when host detection is wrong.
 
       **Timeout:** 15 minutes (900000ms) - CodeRabbit reviews take 7-30 min
 
       **Error Handling:**
-      - If "coderabbit: command not found" → verify wsl_config.installation_path
-      - If timeout → increase timeout, review is still processing
-      - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
+      - If `coderabbit: command not found` → verify `cli_path` and that the
+        binary is installed (macOS/Linux: PATH or manual install to
+        `~/.local/bin`; Windows: install inside the WSL distribution).
+      - If timeout → increase timeout, review is still processing.
+      - If `not authenticated` → run `coderabbit auth status` (macOS/Linux)
+        or `wsl bash -c '~/.local/bin/coderabbit auth status'` (Windows).
     report_location: docs/qa/coderabbit-reports/
     integration_point: 'Runs automatically in *pre-push and *create-pr workflows'
 

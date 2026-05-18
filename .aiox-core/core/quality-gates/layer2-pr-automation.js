@@ -96,10 +96,23 @@ class Layer2PRAutomation extends BaseLayer {
     }
 
     try {
-      // Check if CodeRabbit is available
-      const command =
-        this.coderabbit.command ||
-        "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'";
+      // Build command for current platform when no explicit override is present.
+      // - this.coderabbit.command: explicit string wins (backward compat with old configs).
+      // - this.coderabbit.installation_mode: 'wsl' | 'native' lets ops override platform detection.
+      // - Default: Windows hosts wrap via WSL, macOS/Linux run the binary directly.
+      let command;
+      if (this.coderabbit.command) {
+        command = this.coderabbit.command;
+      } else {
+        const cliPath = this.coderabbit.cli_path || '~/.local/bin/coderabbit';
+        const mode =
+          this.coderabbit.installation_mode ||
+          (process.platform === 'win32' ? 'wsl' : 'native');
+        command =
+          mode === 'wsl'
+            ? `wsl bash -c 'cd \${PROJECT_ROOT} && ${cliPath} --prompt-only -t uncommitted'`
+            : `${cliPath} --prompt-only -t uncommitted`;
+      }
 
       const result = await this.runCommand(command, timeout);
 

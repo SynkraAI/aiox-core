@@ -34,7 +34,16 @@ layer2:
   enabled: true
   coderabbit:
     enabled: true
-    command: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+    # Cross-platform CodeRabbit CLI invocation (Issue #731).
+    # Runtime resolves the command from cli_path + platform detection:
+    #   - macOS/Linux: run cli_path directly from project root.
+    #   - Windows: wrap with 'wsl bash -c' and rewrite project paths to /mnt/<drive>/...
+    # Set installation_mode explicitly ('wsl' | 'native') to override platform detection.
+    # Set command: "<raw shell string>" to bypass detection entirely (back-compat).
+    cli_path: ~/.local/bin/coderabbit
+    platform_notes:
+      macos_linux: "Run binary directly from project root (PATH or cli_path)."
+      windows: "Wrap with 'wsl bash -c' and use /mnt/<drive>/... project paths."
     timeout: 900000  # 15 minutes
     blockOn:
       - CRITICAL

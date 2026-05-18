@@ -366,12 +366,19 @@ function runCodeRabbitReview(projectRoot) {
   console.log('⏱️  This may take 7-30 minutes. Please wait...\n');
 
   try {
-    // Construct WSL command with proper paths
-    const wslProjectPath = projectRoot
-      .replace(/\\/g, '/')
-      .replace(/^([A-Z]):/, (match, drive) => `/mnt/${drive.toLowerCase()}`);
-
-    const coderabbitCommand = `wsl bash -c 'cd ${wslProjectPath} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'`;
+    // Build the command for the current platform (Issue #731).
+    // - macOS/Linux: run cli_path directly from project root.
+    // - Windows: wrap with `wsl bash -c` and rewrite the project path to /mnt/<drive>/...
+    const cliPath = '~/.local/bin/coderabbit';
+    const isWindows = process.platform === 'win32';
+    const coderabbitCommand = isWindows
+      ? (() => {
+          const wslProjectPath = projectRoot
+            .replace(/\\/g, '/')
+            .replace(/^([A-Z]):/, (match, drive) => `/mnt/${drive.toLowerCase()}`);
+          return `wsl bash -c 'cd ${wslProjectPath} && ${cliPath} --prompt-only -t uncommitted'`;
+        })()
+      : `${cliPath} --prompt-only -t uncommitted`;
 
     console.log(`Executing: ${coderabbitCommand}\n`);
 
@@ -408,15 +415,23 @@ function runCodeRabbitReview(projectRoot) {
     // Handle authentication errors
     if (error.stderr && error.stderr.includes('not authenticated')) {
       console.error('❌ CodeRabbit not authenticated');
-      console.error('   Run: wsl bash -c "~/.local/bin/coderabbit auth status"');
+      console.error(
+        process.platform === 'win32'
+          ? '   Run: wsl bash -c "~/.local/bin/coderabbit auth status"'
+          : '   Run: ~/.local/bin/coderabbit auth status',
+      );
       return { gateImpact: 'FAIL', error: 'Not authenticated' };
     }
 
     // Handle command not found
     if (error.stderr && error.stderr.includes('command not found')) {
-      console.error('❌ CodeRabbit CLI not found in WSL');
+      console.error('❌ CodeRabbit CLI not found');
       console.error('   Expected location: ~/.local/bin/coderabbit');
-      console.error('   Verify: wsl bash -c "~/.local/bin/coderabbit --version"');
+      console.error(
+        process.platform === 'win32'
+          ? '   Verify: wsl bash -c "~/.local/bin/coderabbit --version"'
+          : '   Verify: ~/.local/bin/coderabbit --version',
+      );
       return { gateImpact: 'FAIL', error: 'Not installed' };
     }
 

@@ -325,8 +325,11 @@ coderabbit_integration:
       focus: SQL style, readability
 
   workflow: |
-    When reviewing database changes:
-    1. BEFORE migration: Run wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted' on migration files
+    When reviewing database changes — invoke the platform-aware command
+    resolved by the runtime (see `quality-gate-config.yaml` → `layer2.coderabbit`):
+    1. BEFORE migration, on migration files:
+       - macOS/Linux: `~/.local/bin/coderabbit --prompt-only -t uncommitted`
+       - Windows:     `wsl bash -c 'cd /mnt/<drive>/<path> && ~/.local/bin/coderabbit --prompt-only -t uncommitted'`
     2. Focus review on:
        - Security: SQL injection, RLS bypass, data exposure
        - Performance: Missing indexes, inefficient queries
@@ -338,19 +341,23 @@ coderabbit_integration:
     6. Update database-best-practices.md with patterns found
 
   execution_guidelines: |
-    CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
+    CodeRabbit CLI runs natively on macOS/Linux from `~/.local/bin/coderabbit`.
+    On Windows it is invoked through WSL. Runtime detects `process.platform`
+    and picks the right shape — do not hardcode either form.
 
     **How to Execute:**
-    1. Use 'wsl bash -c' wrapper for all commands
-    2. Navigate to project directory in WSL path format (/mnt/c/...)
-    3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
+    - macOS/Linux: run the binary directly. Bash tool sets cwd to project root.
+    - Windows: wrap with `wsl bash -c 'cd /mnt/<drive>/<path> && ...'`.
 
     **Timeout:** 15 minutes (900000ms) - CodeRabbit reviews take 7-30 min
 
     **Error Handling:**
-    - If "coderabbit: command not found" → verify installation in WSL
-    - If timeout → increase timeout, review is still processing
-    - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
+    - If `coderabbit: command not found` → verify the binary is installed
+      on the host (macOS/Linux: PATH or `~/.local/bin/coderabbit`;
+      Windows: install inside the WSL distribution).
+    - If timeout → increase timeout, review is still processing.
+    - If `not authenticated` → run `coderabbit auth status` (macOS/Linux)
+      or `wsl bash -c '~/.local/bin/coderabbit auth status'` (Windows).
 
   database_patterns_to_check:
     security:

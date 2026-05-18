@@ -778,13 +778,22 @@ class WorkflowExecutor {
       const { promisify } = require('util');
       const execAsync = promisify(exec);
 
-      // Build command based on installation mode
+      // Build command for current platform.
+      // - Explicit installation_mode: 'wsl' | 'native' wins (lets ops override).
+      // - Default: Windows hosts wrap via WSL, macOS/Linux run the binary directly.
+      // - cli_path defaults to ~/.local/bin/coderabbit (matches the CodeRabbit CLI installer default).
+      const cliPath = coderabbitConfig.cli_path || '~/.local/bin/coderabbit';
+      const mode =
+        coderabbitConfig.installation_mode ||
+        (process.platform === 'win32' ? 'wsl' : 'native');
       let command;
-      if (coderabbitConfig.installation_mode === 'wsl') {
-        const wslPath = this.projectRoot.replace(/^([A-Z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`).replace(/\\/g, '/');
-        command = `wsl bash -c 'cd "${wslPath}" && ~/.local/bin/coderabbit --prompt-only -t uncommitted 2>&1'`;
+      if (mode === 'wsl') {
+        const wslPath = this.projectRoot
+          .replace(/^([A-Z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`)
+          .replace(/\\/g, '/');
+        command = `wsl bash -c 'cd "${wslPath}" && ${cliPath} --prompt-only -t uncommitted 2>&1'`;
       } else {
-        command = 'coderabbit --prompt-only -t uncommitted';
+        command = `${cliPath} --prompt-only -t uncommitted`;
       }
 
       if (this.options.debug) {

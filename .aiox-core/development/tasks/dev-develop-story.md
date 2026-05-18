@@ -558,10 +558,13 @@ Execute **AFTER** all tasks are complete but **BEFORE** running the DOD checklis
 │                                                              │
 │  WHILE iteration < max_iterations:                           │
 │    ┌────────────────────────────────────────────────────┐   │
-│    │ 1. Run CodeRabbit CLI                              │   │
-│    │    wsl bash -c 'cd /mnt/c/.../aiox-core &&    │   │
-│    │    ~/.local/bin/coderabbit --prompt-only           │   │
-│    │    -t uncommitted'                                  │   │
+│    │ 1. Run CodeRabbit CLI (runtime picks the shape      │   │
+│    │    for process.platform — see Issue #731):          │   │
+│    │    macOS/Linux: ~/.local/bin/coderabbit             │   │
+│    │                 --prompt-only -t uncommitted        │   │
+│    │    Windows:     wsl bash -c 'cd /mnt/<drive>/...    │   │
+│    │                 ~/.local/bin/coderabbit             │   │
+│    │                 --prompt-only -t uncommitted'       │   │
 │    │                                                     │   │
 │    │ 2. Parse output for severity levels                │   │
 │    └────────────────────────────────────────────────────┘   │
@@ -664,7 +667,11 @@ try {
   await runCodeRabbitSelfHealing(storyPath);
 } catch (error) {
   if (error.message.includes('command not found')) {
-    console.warn('⚠️  CodeRabbit not installed in WSL');
+    console.warn(
+      process.platform === 'win32'
+        ? '⚠️  CodeRabbit not found in WSL — install inside the WSL distribution.'
+        : '⚠️  CodeRabbit not found on PATH — install ~/.local/bin/coderabbit.',
+    );
     console.warn('   Skipping self-healing. Manual review required.');
     return; // Continue without self-healing
   }

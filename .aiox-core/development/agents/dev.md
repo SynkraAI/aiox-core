@@ -298,11 +298,13 @@ dependencies:
 
   coderabbit_integration:
     enabled: true
-    installation_mode: wsl
-    wsl_config:
-      distribution: Ubuntu
-      installation_path: ~/.local/bin/coderabbit
-      working_directory: ${PROJECT_ROOT}
+    # Cross-platform CodeRabbit CLI (Issue #731).
+    # Runtime resolves the actual command from cli_path + host OS detection.
+    # See `.aiox-core/core/quality-gates/quality-gate-config.yaml` for canonical config.
+    cli_path: ~/.local/bin/coderabbit
+    platform_notes:
+      macos_linux: "Run cli_path directly from project root (no wrapper)."
+      windows: "Wrap with 'wsl bash -c' and rewrite project paths to /mnt/<drive>/..."
     usage:
       - Pre-commit quality check - run before marking story complete
       - Catch issues early - find bugs, security issues, code smells during development
@@ -331,7 +333,9 @@ dependencies:
       max_iterations = 2
 
       WHILE iteration < max_iterations:
-        1. Run: wsl bash -c 'cd /mnt/c/.../aiox-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+        1. Run the platform-aware command resolved by the runtime:
+           - macOS/Linux: `~/.local/bin/coderabbit --prompt-only -t uncommitted`
+           - Windows:     `wsl bash -c 'cd /mnt/<drive>/<path> && ~/.local/bin/coderabbit --prompt-only -t uncommitted'`
         2. Parse output for CRITICAL issues
 
         IF no CRITICAL issues:
@@ -350,23 +354,33 @@ dependencies:
         - DO NOT mark story complete
 
     commands:
-      dev_pre_commit_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+      # Templates — runtime selects the right shape for the host OS.
+      dev_pre_commit_uncommitted_native: "${CLI_PATH} --prompt-only -t uncommitted"
+      dev_pre_commit_uncommitted_wsl: "wsl bash -c 'cd ${PROJECT_ROOT} && ${CLI_PATH} --prompt-only -t uncommitted'"
     execution_guidelines: |
-      CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
+      CodeRabbit CLI runs natively on macOS/Linux from `~/.local/bin/coderabbit`.
+      On Windows it is invoked through WSL via `wsl bash -c '...'`. The runtime
+      detects `process.platform` and picks the right shape — agents and tasks
+      should not hardcode either.
 
       **How to Execute:**
-      1. Use 'wsl bash -c' wrapper for all commands
-      2. Navigate to project directory in WSL path format (/mnt/c/...)
-      3. Use full path to coderabbit binary (~/.local/bin/coderabbit)
+      - macOS/Linux: run `cli_path` directly. Bash tool sets cwd to project root.
+      - Windows: wrap with `wsl bash -c 'cd /mnt/<drive>/<path> && ...'`.
+      - Override platform detection with explicit `installation_mode: 'wsl' | 'native'`
+        in `quality-gate-config.yaml` only when host detection is wrong.
 
       **Timeout:** 15 minutes (900000ms) - CodeRabbit reviews take 7-30 min
 
       **Self-Healing:** Max 2 iterations for CRITICAL issues only
 
       **Error Handling:**
-      - If "coderabbit: command not found" → verify wsl_config.installation_path
-      - If timeout → increase timeout, review is still processing
-      - If "not authenticated" → user needs to run: wsl bash -c '~/.local/bin/coderabbit auth status'
+      - If `coderabbit: command not found` → verify `cli_path` and that the
+        binary is installed (macOS/Linux: `brew install coderabbit-cli` or
+        manual install to `~/.local/bin`; Windows: install inside the WSL
+        distribution declared in your environment).
+      - If timeout → increase timeout, review is still processing.
+      - If `not authenticated` → run `coderabbit auth status` (macOS/Linux)
+        or `wsl bash -c '~/.local/bin/coderabbit auth status'` (Windows).
     report_location: docs/qa/coderabbit-reports/
     integration_point: 'Part of story completion workflow in develop-story.md'
 

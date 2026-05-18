@@ -521,10 +521,16 @@ cli_checks:
         macos: 'curl -fsSL https://coderabbit.ai/install.sh | bash'
         linux: 'curl -fsSL https://coderabbit.ai/install.sh | bash'
       note: |
-        WINDOWS USERS: CodeRabbit CLI runs in WSL, not native Windows.
-        - Requires WSL with Ubuntu/Debian distribution
-        - Binary located at ~/.local/bin/coderabbit (inside WSL)
-        - All coderabbit commands must use: wsl bash -c 'command'
+        Cross-platform CodeRabbit CLI (Issue #731):
+        - macOS/Linux: CodeRabbit runs natively. Binary at ~/.local/bin/coderabbit
+          or anywhere on PATH. Invoke directly — no wrapper needed.
+        - Windows: CodeRabbit runs through WSL (no native Windows binary today).
+          Requires WSL with Ubuntu/Debian; binary at ~/.local/bin/coderabbit
+          inside WSL; commands wrapped as `wsl bash -c '...'`.
+        - The aiox-core runtime auto-detects the host (`process.platform`) and
+          builds the right command shape. Override with `installation_mode:
+          'wsl' | 'native'` in `quality-gate-config.yaml` only if detection
+          is wrong.
         - See: docs/guides/coderabbit/README.md for full setup guide
       verification:
         windows: "wsl bash -c '~/.local/bin/coderabbit --version'"
