@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-05-18T04:12:17.473Z'
-  entityCount: 815
+  lastUpdated: '2026-05-18T04:51:58.010Z'
+  entityCount: 816
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -16,8 +16,7 @@ entities:
         - mcp
         - server
         - task
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - analyst
       externalDeps: []
@@ -173,8 +172,7 @@ entities:
         - analyze
         - performance
         - 'task:'
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -197,8 +195,7 @@ entities:
         - analyze
         - project
         - structure
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - code-intel
         - planning-helper
@@ -227,8 +224,7 @@ entities:
         - apply
         - qa
         - fixes
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - qa
         - dev
@@ -253,8 +249,7 @@ entities:
         - architect
         - analyze
         - impact
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - dependency-impact-analyzer
         - modification-risk-assessment
@@ -454,8 +449,7 @@ entities:
         - build
         - autonomous
         - 'task:'
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - autonomous-build-loop.js
         - plan-execute-subtask
@@ -505,8 +499,7 @@ entities:
         - build
         - resume
         - 'task:'
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - dev
       externalDeps: []
@@ -528,8 +521,7 @@ entities:
         - build
         - status
         - 'task:'
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - dev
       externalDeps: []
@@ -599,8 +591,7 @@ entities:
         - docs
         - links
         - check-docs-links
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -625,8 +616,7 @@ entities:
         - configure
         - ci/cd
         - pipeline
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -679,7 +669,6 @@ entities:
       usedBy:
         - list-worktrees
         - remove-worktree
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -701,8 +690,7 @@ entities:
         - collaborative
         - edit
         - collaborative-edit
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -870,8 +858,6 @@ entities:
       usedBy:
         - aiox-master
         - analyst
-        - architect
-        - data-engineer
         - pm
       dependencies:
         - component-generator.js
@@ -904,8 +890,6 @@ entities:
       usedBy:
         - aiox-master
         - analyst
-        - architect
-        - data-engineer
         - pm
         - ux-design-expert
       dependencies:
@@ -975,8 +959,7 @@ entities:
       keywords:
         - create
         - service
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - code-intel
         - dev-helper
@@ -1002,8 +985,7 @@ entities:
         - test-suite-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - component-generator.js
         - dev
@@ -1090,8 +1072,6 @@ entities:
       usedBy:
         - list-worktrees
         - remove-worktree
-        - dev
-        - devops
         - auto-worktree
       dependencies:
         - worktree-manager
@@ -1147,8 +1127,7 @@ entities:
         - 'task:'
         - (with
         - snapshot
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1172,8 +1151,7 @@ entities:
         - 'task:'
         - supabase
         - project
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1199,8 +1177,7 @@ entities:
         - modeling
         - 'task:'
         - session
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1225,8 +1202,7 @@ entities:
         - 'task:'
         - migration
         - dry-run
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1249,8 +1225,7 @@ entities:
         - env
         - check
         - 'task:'
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1324,8 +1299,7 @@ entities:
         - 'task:'
         - data
         - safely
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1350,8 +1324,7 @@ entities:
         - 'task:'
         - rls
         - template
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1397,8 +1370,7 @@ entities:
         - rollback
         - 'task:'
         - database
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1421,8 +1393,7 @@ entities:
         - run
         - sql
         - 'task:'
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1469,8 +1440,7 @@ entities:
         - 'task:'
         - apply
         - data
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1493,8 +1463,7 @@ entities:
         - smoke
         - test
         - 'task:'
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1518,8 +1487,7 @@ entities:
         - 'task:'
         - create
         - database
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1595,8 +1563,7 @@ entities:
         - 'task:'
         - ddl
         - ordering
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -1729,24 +1696,19 @@ entities:
         - develop
         - story
         - task
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - decision-recorder
-        - sm
-        - po
-        - dev
-        - qa
       externalDeps: []
       plannedDeps:
         - execute-task.js
-      lifecycle: production
+      lifecycle: experimental
       adaptability:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:be8924aa0de759ca92a177b0ea12a5b076a3095ee2a9f530b74b3de19e996954
-      lastVerified: '2026-05-18T04:12:16.609Z'
+      checksum: sha256:bc48d7f8211a25b500a65632de011a178203c53c1e1f6b2ed4f58fd7431a04f6
+      lastVerified: '2026-05-18T04:51:58.001Z'
     dev-improve-code-quality:
       path: .aiox-core/development/tasks/dev-improve-code-quality.md
       layer: L2
@@ -1764,8 +1726,7 @@ entities:
         - task
         - performs
         - automated
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - code-quality-improver
       externalDeps: []
@@ -1794,8 +1755,7 @@ entities:
         - aiox
         - developer
         - task
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - performance-optimizer
       externalDeps: []
@@ -1825,8 +1785,7 @@ entities:
         - aiox
         - developer
         - task
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - refactoring-suggester
       externalDeps: []
@@ -1883,8 +1842,7 @@ entities:
         - access
         - grant
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1906,8 +1864,7 @@ entities:
         - pro
         - activate
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1930,8 +1887,7 @@ entities:
         - check
         - access
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1954,8 +1910,7 @@ entities:
         - request
         - reset
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -1978,8 +1933,7 @@ entities:
         - resend
         - verification
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2002,8 +1956,7 @@ entities:
         - reset
         - password
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2026,8 +1979,7 @@ entities:
         - validate
         - login
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2050,8 +2002,7 @@ entities:
         - verify
         - status
         - 'task:'
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -2107,7 +2058,6 @@ entities:
       usedBy:
         - aiox-master
         - analyst
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -2134,18 +2084,11 @@ entities:
         - environment-bootstrap
       usedBy:
         - setup-github
-        - devops
       dependencies:
         - config-resolver
         - github-cli.yaml
         - supabase-cli.yaml
         - railway-cli.yaml
-        - greenfield-fullstack
-        - README
-        - devops
-        - analyst
-        - pm
-        - aiox-master
       externalDeps:
         - coderabbit
       plannedDeps:
@@ -2157,8 +2100,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:02ed701bea38ee11ad7e83a310ad55b3d84f36f37a344fda6b252fe3230d50cb
-      lastVerified: '2026-05-18T04:12:16.624Z'
+      checksum: sha256:fb177443e6b7ae7246ba52873c3a06c938f411179af8a7446909775446c5fd6c
+      lastVerified: '2026-05-18T04:51:58.002Z'
     execute-checklist:
       path: .aiox-core/development/tasks/execute-checklist.md
       layer: L2
@@ -2174,9 +2117,6 @@ entities:
         - existing
       usedBy:
         - aiox-master
-        - architect
-        - data-engineer
-        - dev
         - pm
         - po
         - sm
@@ -2494,7 +2434,6 @@ entities:
         - github-pr-automation.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - repository-detector
         - devops-helper
@@ -2529,13 +2468,10 @@ entities:
         - pre-push-quality-gate.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - repository-detector
         - devops-helper
         - code-intel
-        - devops
-        - dev
       externalDeps: []
       plannedDeps: []
       lifecycle: production
@@ -2543,8 +2479,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:3709049cefce2dc03f54a16830114e67fa6b4cf37f0f999638d5d1521f0979d8
-      lastVerified: '2026-05-18T04:12:16.638Z'
+      checksum: sha256:99d9dc2ca637866e7ed80897a8b9c57b216b6f1851ee8a1f5865637a4ff8f56e
+      lastVerified: '2026-05-18T04:51:58.003Z'
     github-devops-repository-cleanup:
       path: .aiox-core/development/tasks/github-devops-repository-cleanup.md
       layer: L2
@@ -2556,8 +2492,7 @@ entities:
         - repository
         - cleanup
         - repository-cleanup.md
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -2582,8 +2517,7 @@ entities:
         - version
         - management
         - version-management.md
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - repository-detector
       externalDeps: []
@@ -2628,8 +2562,7 @@ entities:
         - gotcha
         - 'task:'
         - add
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - gotchas-memory.js
         - gotchas
@@ -2656,7 +2589,6 @@ entities:
       usedBy:
         - document-gotchas
         - gotcha
-        - dev
       dependencies:
         - gotchas-memory.js
         - dev
@@ -2923,8 +2855,7 @@ entities:
         - list
         - mcps
         - list-mcps
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -2947,8 +2878,6 @@ entities:
       usedBy:
         - create-worktree
         - remove-worktree
-        - dev
-        - devops
       dependencies:
         - worktree-manager
         - create-worktree
@@ -2997,7 +2926,6 @@ entities:
         - merge-worktree
       usedBy:
         - create-worktree
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3234,8 +3162,7 @@ entities:
         - create
         - context
         - 'pipeline:'
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - code-intel
         - planning-helper
@@ -3266,8 +3193,7 @@ entities:
         - implementation
         - execution
         - 'pipeline:'
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - code-intel
         - planning-helper
@@ -3297,7 +3223,6 @@ entities:
         - agent)
       usedBy:
         - build-autonomous
-        - dev
       dependencies:
         - plan-tracker
         - dev
@@ -3380,7 +3305,6 @@ entities:
         - backlog
         - manage-story-backlog
       usedBy:
-        - dev
         - po
       dependencies: []
       externalDeps: []
@@ -3709,8 +3633,7 @@ entities:
         - console
         - check
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3733,7 +3656,6 @@ entities:
         - request
         - task
       usedBy:
-        - qa
         - qa-loop
       dependencies:
         - qa-review-story
@@ -3760,8 +3682,7 @@ entities:
         - evidence
         - requirements
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
       externalDeps: []
@@ -3784,8 +3705,7 @@ entities:
         - positive
         - detection
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
       externalDeps: []
@@ -3811,8 +3731,7 @@ entities:
         - issue
         - fixer
         - task
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - plan-tracker
         - dev
@@ -3838,8 +3757,7 @@ entities:
         - qa
         - gate
         - qa-gate
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
         - devops
@@ -3873,8 +3791,7 @@ entities:
         - test-generation-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - test-generator
         - coverage-analyzer
@@ -3902,8 +3819,7 @@ entities:
         - library
         - validation
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - context7
       externalDeps: []
@@ -3925,8 +3841,7 @@ entities:
         - migration
         - validation
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3947,8 +3862,7 @@ entities:
         - nfr
         - assess
         - nfr-assess
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3977,8 +3891,7 @@ entities:
         - 10-phase
         - quality
         - assurance
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
         - dev
@@ -4004,8 +3917,7 @@ entities:
         - aiox
         - developer
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - dependency-impact-analyzer
         - diff-generator
@@ -4035,12 +3947,8 @@ entities:
         - review-story
       usedBy:
         - qa-create-fix-request
-        - qa
         - qa-loop
-      dependencies:
-        - qa
-        - dev
-        - devops
+      dependencies: []
       externalDeps: []
       plannedDeps:
         - qa-master-checklist
@@ -4051,8 +3959,8 @@ entities:
         score: 0.8
         constraints: []
         extensionPoints: []
-      checksum: sha256:cc3e189824c656ff6ed2db04bd0a2a03d6293bccbec7e9b7a321daf64b9f1563
-      lastVerified: '2026-05-18T04:12:16.699Z'
+      checksum: sha256:dc9b998aa64c4dd950bb0e8cbce29bba10c7b72b128f13fe8294e70eb608e7d9
+      lastVerified: '2026-05-18T04:51:58.003Z'
     qa-risk-profile:
       path: .aiox-core/development/tasks/qa-risk-profile.md
       layer: L2
@@ -4065,8 +3973,7 @@ entities:
         - risk
         - profile
         - risk-profile
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -4092,8 +3999,7 @@ entities:
         - (with
         - code
         - quality
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - dev
         - qa
@@ -4118,8 +4024,7 @@ entities:
         - security
         - checklist
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4142,8 +4047,7 @@ entities:
         - test
         - design
         - test-design
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -4169,8 +4073,7 @@ entities:
         - trace
         - requirements
         - trace-requirements
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - po-master-checklist
       externalDeps: []
@@ -4195,8 +4098,7 @@ entities:
         - manage
         - software
         - releases
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -4219,8 +4121,7 @@ entities:
         - remove
         - mcp
         - remove-mcp
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4243,8 +4144,6 @@ entities:
       usedBy:
         - create-worktree
         - list-worktrees
-        - dev
-        - devops
       dependencies:
         - worktree-manager
         - create-worktree
@@ -4272,7 +4171,6 @@ entities:
         - resolve-github-issue.md
       usedBy:
         - triage-github-issues
-        - devops
       dependencies:
         - triage-github-issues
         - github-devops-pre-push-quality-gate
@@ -4402,8 +4300,7 @@ entities:
         - mcp
         - catalog
         - task
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -4423,8 +4320,7 @@ entities:
         - security
         - audit
         - 'task:'
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -4491,8 +4387,7 @@ entities:
         - setup
         - database
         - 'task:'
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -4542,8 +4437,7 @@ entities:
         - setup
         - github
         - setup-github
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - environment-bootstrap
         - github-cli.yaml
@@ -4596,8 +4490,7 @@ entities:
         - mcp
         - docker
         - toolkit
-      usedBy:
-        - devops
+      usedBy: []
       dependencies:
         - devops
       externalDeps: []
@@ -4726,7 +4619,6 @@ entities:
         - complexity
         - 'pipeline:'
       usedBy:
-        - architect
         - spec-pipeline
       dependencies:
         - architect
@@ -4752,7 +4644,6 @@ entities:
         - 'pipeline:'
         - specification
       usedBy:
-        - qa
         - spec-pipeline
       dependencies:
         - qa
@@ -5166,8 +5057,7 @@ entities:
         - sync
         - documentation
         - sync-documentation
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - documentation-synchronizer
       externalDeps: []
@@ -5240,8 +5130,7 @@ entities:
         - 'task:'
         - (rls
         - testing)
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -5289,7 +5178,6 @@ entities:
         - triage-github-issues.md
       usedBy:
         - resolve-github-issue
-        - devops
       dependencies:
         - resolve-github-issue
         - devops
@@ -5516,7 +5404,6 @@ entities:
         - task
       usedBy:
         - po-close-story
-        - dev
         - po
       dependencies:
         - po-master-checklist
@@ -5551,8 +5438,7 @@ entities:
         - tech
         - preset
         - \*validate-tech-preset
-      usedBy:
-        - architect
+      usedBy: []
       dependencies:
         - architect
       externalDeps: []
@@ -5599,8 +5485,7 @@ entities:
       keywords:
         - verify
         - subtask
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - dev
         - architect
@@ -5626,8 +5511,7 @@ entities:
         - '`*waves`'
         - wave
         - analysis
-      usedBy:
-        - dev
+      usedBy: []
       dependencies:
         - dev
       externalDeps: []
@@ -5879,7 +5763,6 @@ entities:
         - tmpl
       usedBy:
         - aiox-master
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5922,7 +5805,6 @@ entities:
         - tmpl
       usedBy:
         - aiox-master
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -5986,8 +5868,7 @@ entities:
       keywords:
         - changelog
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6127,7 +6008,6 @@ entities:
         - tmpl
       usedBy:
         - aiox-master
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6172,7 +6052,6 @@ entities:
         - tmpl
       usedBy:
         - aiox-master
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6193,8 +6072,7 @@ entities:
         - actions
         - cd
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6215,8 +6093,7 @@ entities:
         - actions
         - ci
         - template
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6238,8 +6115,7 @@ entities:
         - template
         - pull
         - request
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6281,8 +6157,7 @@ entities:
         - index
         - strategy
         - tmpl
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6324,8 +6199,7 @@ entities:
         - migration
         - plan
         - tmpl
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6548,8 +6422,7 @@ entities:
         - qa
         - gate
         - tmpl
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6591,8 +6464,7 @@ entities:
         - rls
         - policies
         - tmpl
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6612,8 +6484,7 @@ entities:
         - schema
         - design
         - tmpl
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6680,7 +6551,6 @@ entities:
       usedBy:
         - aiox-master
         - po
-        - qa
         - sm
       dependencies:
         - dev
@@ -9137,7 +9007,6 @@ entities:
       usedBy:
         - build-autonomous
         - build-orchestrator
-        - dev
       dependencies:
         - build-state-manager
         - recovery-tracker
@@ -9161,7 +9030,6 @@ entities:
         - orchestrator
       usedBy:
         - build
-        - dev
       dependencies:
         - autonomous-build-loop
         - build-state-manager
@@ -9188,7 +9056,6 @@ entities:
       usedBy:
         - autonomous-build-loop
         - build-orchestrator
-        - dev
       dependencies:
         - errors-index
         - stuck-detector
@@ -9971,7 +9838,6 @@ entities:
         - gotchas
         - build-orchestrator
         - active-modules.verify
-        - dev
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -10715,8 +10581,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:49372791e5729fd7987c80efe1400168e8d59eac000a009b88d9fde6735cf4db
-      lastVerified: '2026-05-18T04:12:17.057Z'
+      checksum: sha256:b09934e53f7aba651d18a963b6dc09f8511c02db7eaf8ce6c16c4d2b8e7824a9
+      lastVerified: '2026-05-18T04:51:57.990Z'
     workflow-orchestrator:
       path: .aiox-core/core/orchestration/workflow-orchestrator.js
       layer: L1
@@ -10958,8 +10824,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:af31e7ac60b74b52ee983d0fcff7457042eea553b6127538cab41eb94eaee8e0
-      lastVerified: '2026-05-18T04:12:17.066Z'
+      checksum: sha256:c41825460c79011f7da5c4be796930c5a94b7b24f4ce735699552a30761cf48d
+      lastVerified: '2026-05-18T04:51:57.996Z'
     layer3-human-review:
       path: .aiox-core/core/quality-gates/layer3-human-review.js
       layer: L1
@@ -14162,6 +14028,27 @@ entities:
         extensionPoints: []
       checksum: sha256:dd025894f8f0d3bd22a147dbc0debef8b83e96f3c59483653404b3cd5a01d5aa
       lastVerified: '2026-05-18T04:12:17.221Z'
+    quality-gate-config:
+      path: .aiox-core/core/quality-gates/quality-gate-config.yaml
+      layer: L1
+      type: module
+      purpose: Quality Gate Configuration
+      keywords:
+        - quality
+        - gate
+        - config
+        - configuration
+      usedBy: []
+      dependencies: []
+      externalDeps: []
+      plannedDeps: []
+      lifecycle: orphan
+      adaptability:
+        score: 0.4
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:979b60cbf77d0478f8a894a3190299d74c2aa0924bbefe964d2aa402adc3eb33
+      lastVerified: '2026-05-18T04:51:57.997Z'
   agents:
     aiox-master:
       path: .aiox-core/development/agents/aiox-master.md
@@ -14173,7 +14060,6 @@ entities:
         - master
         - aiox-master
       usedBy:
-        - environment-bootstrap
         - ids-governor
         - project-status
         - run-workflow-engine
@@ -14252,7 +14138,6 @@ entities:
         - add-mcp
         - architect-analyze-impact
         - brownfield-create-epic
-        - environment-bootstrap
         - spec-research-dependencies
         - validate-next-story
         - brownfield-risk-report-tmpl
@@ -14334,28 +14219,7 @@ entities:
         - greenfield-ui
         - spec-pipeline
         - story-draft-checklist
-      dependencies:
-        - analyze-project-structure
-        - architect-analyze-impact
-        - collaborative-edit
-        - create-deep-research-prompt
-        - create-doc
-        - document-project
-        - execute-checklist
-        - validate-tech-preset
-        - spec-assess-complexity
-        - plan-create-implementation
-        - plan-create-context
-        - architecture-tmpl.yaml
-        - front-end-architecture-tmpl.yaml
-        - fullstack-architecture-tmpl.yaml
-        - brownfield-architecture-tmpl.yaml
-        - architect-checklist
-        - exa
-        - context7
-        - supabase-cli
-        - railway-cli
-        - codebase-mapper.js
+      dependencies: []
       externalDeps:
         - git
         - coderabbit
@@ -14365,8 +14229,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:1b89e95048df940056570ecb6589f18a9a6114b96ca1b9fde130fb7bdb2ded8f
-      lastVerified: '2026-05-18T04:12:17.239Z'
+      checksum: sha256:c45b1e71af39b5da34a832dcc3d1c9b41b6270de61f79d4bada3c27b46be19df
+      lastVerified: '2026-05-18T04:51:57.997Z'
     data-engineer:
       path: .aiox-core/development/agents/data-engineer.md
       layer: L2
@@ -14384,35 +14248,7 @@ entities:
         - claude-rules
         - codex-rules
         - brownfield-discovery
-      dependencies:
-        - create-doc
-        - db-domain-modeling
-        - setup-database
-        - db-env-check
-        - db-bootstrap
-        - db-apply-migration
-        - db-dry-run
-        - db-seed
-        - db-snapshot
-        - db-rollback
-        - db-smoke-test
-        - security-audit
-        - analyze-performance
-        - db-policy-apply
-        - test-as-user
-        - db-verify-order
-        - db-load-csv
-        - db-run-sql
-        - execute-checklist
-        - create-deep-research-prompt
-        - schema-design-tmpl.yaml
-        - rls-policies-tmpl.yaml
-        - migration-plan-tmpl.yaml
-        - index-strategy-tmpl.yaml
-        - dba-predeploy-checklist
-        - dba-rollback-checklist
-        - database-design-checklist
-        - supabase-cli
+      dependencies: []
       externalDeps:
         - coderabbit
       plannedDeps:
@@ -14432,8 +14268,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:41c791fbdf43f700f2e78418c8af18197d1135741bc7845d03013f726b125f6f
-      lastVerified: '2026-05-18T04:12:17.245Z'
+      checksum: sha256:4b921018c23721c6f71a5d23b6495d254f260cd85406db5915f034a90d17c845
+      lastVerified: '2026-05-18T04:51:57.998Z'
     dev:
       path: .aiox-core/development/agents/dev.md
       layer: L2
@@ -14456,12 +14292,10 @@ entities:
         - create-suite
         - delegate-to-external-executor
         - dev-backlog-debt
-        - dev-develop-story
         - execute-checklist
         - execute-epic-plan
         - extract-patterns
         - github-devops-github-pr-automation
-        - github-devops-pre-push-quality-gate
         - gotcha
         - gotchas
         - ids-governor
@@ -14474,7 +14308,6 @@ entities:
         - qa-fix-issues
         - qa-gate
         - qa-review-build
-        - qa-review-story
         - qa-run-tests
         - setup-llm-routing
         - story-checkpoint
@@ -14499,44 +14332,6 @@ entities:
         - story-draft-checklist
       dependencies:
         - decision-log-generator
-        - apply-qa-fixes
-        - qa-fix-issues
-        - create-service
-        - dev-develop-story
-        - execute-checklist
-        - plan-execute-subtask
-        - verify-subtask
-        - dev-improve-code-quality
-        - po-manage-story-backlog
-        - dev-optimize-performance
-        - dev-suggest-refactoring
-        - sync-documentation
-        - validate-next-story
-        - waves
-        - build-resume
-        - build-status
-        - build-autonomous
-        - gotcha
-        - gotchas
-        - create-worktree
-        - list-worktrees
-        - remove-worktree
-        - story-dod-checklist
-        - self-critique-checklist
-        - context7
-        - supabase
-        - n8n
-        - browser
-        - ffmpeg
-        - recovery-tracker.js
-        - stuck-detector.js
-        - approach-manager.js
-        - rollback-manager.js
-        - build-state-manager.js
-        - autonomous-build-loop.js
-        - build-orchestrator.js
-        - gotchas-memory.js
-        - worktree-manager.js
       externalDeps:
         - coderabbit
         - git
@@ -14546,8 +14341,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:eaaec824273f02b9ccbe6768d9e9147a5ad0d7faa9483b9730b1f02a71ef2769
-      lastVerified: '2026-05-18T04:12:17.247Z'
+      checksum: sha256:91a63332b1cc19af47b3cd2811b5e00635b72a747b5858efc09ce3aa7826d1b7
+      lastVerified: '2026-05-18T04:51:57.999Z'
     devops:
       path: .aiox-core/development/agents/devops.md
       layer: L2
@@ -14567,15 +14362,12 @@ entities:
         - devops-pro-reset-password
         - devops-pro-validate-login
         - devops-pro-verify-status
-        - environment-bootstrap
         - execute-epic-plan
-        - github-devops-pre-push-quality-gate
         - github-issue-triage
         - init-project-status
         - list-worktrees
         - publish-npm
         - qa-gate
-        - qa-review-story
         - release-management
         - remove-worktree
         - resolve-github-issue
@@ -14589,46 +14381,7 @@ entities:
         - codex-rules
         - memory-audit-checklist
         - greenfield-fullstack
-      dependencies:
-        - environment-bootstrap
-        - setup-github
-        - github-devops-version-management
-        - github-devops-pre-push-quality-gate
-        - github-devops-github-pr-automation
-        - ci-cd-configuration
-        - github-devops-repository-cleanup
-        - release-management
-        - search-mcp
-        - add-mcp
-        - list-mcps
-        - remove-mcp
-        - setup-mcp-docker
-        - check-docs-links
-        - triage-github-issues
-        - resolve-github-issue
-        - devops-pro-access-grant
-        - devops-pro-check-access
-        - devops-pro-request-reset
-        - devops-pro-resend-verification
-        - devops-pro-reset-password
-        - devops-pro-validate-login
-        - devops-pro-verify-status
-        - devops-pro-activate
-        - create-worktree
-        - list-worktrees
-        - remove-worktree
-        - cleanup-worktrees
-        - merge-worktree
-        - github-pr-template
-        - github-actions-ci.yml
-        - github-actions-cd.yml
-        - changelog-template
-        - pre-push-checklist
-        - release-checklist
-        - github-cli
-        - asset-inventory.js
-        - path-analyzer.js
-        - migrate-agent.js
+      dependencies: []
       externalDeps:
         - coderabbit
         - git
@@ -14640,8 +14393,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:5c52cc74f923ac381fa92fb969607b80a35f34b958c02d2d1edd1115f7690d35
-      lastVerified: '2026-05-18T04:12:17.249Z'
+      checksum: sha256:fb4555b484be4b93e11ed1e974b3e904ba7cddecb01ce44ac26828c7e8a8e382
+      lastVerified: '2026-05-18T04:51:57.999Z'
     pm:
       path: .aiox-core/development/agents/pm.md
       layer: L2
@@ -14653,7 +14406,6 @@ entities:
         - architect-analyze-impact
         - brownfield-create-epic
         - create-deep-research-prompt
-        - environment-bootstrap
         - execute-epic-plan
         - po-close-story
         - spec-critique
@@ -14714,7 +14466,6 @@ entities:
         - cleanup-utilities
         - create-next-story
         - dev-backlog-debt
-        - dev-develop-story
         - execute-epic-plan
         - github-devops-github-pr-automation
         - po-backlog-add
@@ -14780,7 +14531,6 @@ entities:
         - cleanup-utilities
         - create-next-story
         - create-suite
-        - dev-develop-story
         - execute-checklist
         - execute-epic-plan
         - github-devops-github-pr-automation
@@ -14791,7 +14541,6 @@ entities:
         - qa-fix-issues
         - qa-gate
         - qa-review-build
-        - qa-review-story
         - qa-run-tests
         - security-scan
         - spec-critique
@@ -14814,31 +14563,7 @@ entities:
         - spec-pipeline
         - story-development-cycle
         - story-draft-checklist
-      dependencies:
-        - qa-create-fix-request
-        - qa-generate-tests
-        - qa-nfr-assess
-        - qa-gate
-        - qa-review-build
-        - qa-review-proposal
-        - qa-review-story
-        - qa-risk-profile
-        - qa-run-tests
-        - qa-test-design
-        - qa-trace-requirements
-        - create-suite
-        - spec-critique
-        - qa-library-validation
-        - qa-security-checklist
-        - qa-migration-validation
-        - qa-evidence-requirements
-        - qa-false-positive-detection
-        - qa-browser-console-check
-        - qa-gate-tmpl.yaml
-        - story-tmpl.yaml
-        - browser
-        - context7
-        - supabase
+      dependencies: []
       externalDeps:
         - coderabbit
         - git
@@ -14849,8 +14574,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:cf4a8f473067a9d2909072215bce7b13917c779442e6f858681bd8b9f0b0c3c0
-      lastVerified: '2026-05-18T04:12:17.261Z'
+      checksum: sha256:506a44a6828ce6e0bc2fc89aaaced9df54fefea293525e5c1ce2e3bc37661c90
+      lastVerified: '2026-05-18T04:51:58.000Z'
     sm:
       path: .aiox-core/development/agents/sm.md
       layer: L2
@@ -14860,7 +14585,6 @@ entities:
         - sm
       usedBy:
         - brownfield-create-story
-        - dev-develop-story
         - po-close-story
         - project-status
         - validate-next-story
@@ -15902,8 +15626,7 @@ entities:
       keywords:
         - greenfield
         - fullstack
-      usedBy:
-        - environment-bootstrap
+      usedBy: []
       dependencies:
         - devops
         - analyst
@@ -16140,8 +15863,7 @@ entities:
       keywords:
         - approach
         - manager
-      usedBy:
-        - dev
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16180,8 +15902,7 @@ entities:
       keywords:
         - asset
         - inventory
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16386,8 +16107,7 @@ entities:
       keywords:
         - codebase
         - mapper
-      usedBy:
-        - architect
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16890,8 +16610,7 @@ entities:
       keywords:
         - migrate
         - agent
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -16977,8 +16696,7 @@ entities:
       keywords:
         - path
         - analyzer
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -17256,7 +16974,6 @@ entities:
         - autonomous-build-loop
         - build-state-manager
         - recovery-handler
-        - dev
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -17343,7 +17060,6 @@ entities:
       usedBy:
         - recovery-handler
         - epic-5-executor
-        - dev
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -17471,7 +17187,6 @@ entities:
         - build-state-manager
         - recovery-handler
         - epic-5-executor
-        - dev
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -17911,7 +17626,6 @@ entities:
         - remove-worktree
         - autonomous-build-loop
         - build-orchestrator
-        - dev
         - auto-worktree
         - project-status-loader
         - story-worktree-hooks
@@ -18467,7 +18181,6 @@ entities:
         - directory
       usedBy:
         - db-supabase-setup
-        - environment-bootstrap
       dependencies:
         - tool-resolver
       externalDeps: []
@@ -18491,7 +18204,6 @@ entities:
         - environment-bootstrap
         - setup-github
         - health-check-checks-services-index
-        - devops
         - po
       dependencies: []
       externalDeps: []
@@ -18535,7 +18247,6 @@ entities:
         - cli
       usedBy:
         - environment-bootstrap
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18556,8 +18267,6 @@ entities:
         - cli
       usedBy:
         - environment-bootstrap
-        - architect
-        - data-engineer
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18575,8 +18284,7 @@ entities:
       purpose: Entity at .aiox-core/infrastructure/tools/local/ffmpeg.yaml
       keywords:
         - ffmpeg
-      usedBy:
-        - dev
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18616,8 +18324,6 @@ entities:
       keywords:
         - browser
       usedBy:
-        - dev
-        - qa
         - ux-design-expert
       dependencies: []
       externalDeps: []
@@ -18658,10 +18364,7 @@ entities:
       usedBy:
         - qa-library-validation
         - analyst
-        - architect
-        - dev
         - po
-        - qa
         - sm
         - squad-creator
       dependencies: []
@@ -18702,7 +18405,6 @@ entities:
         - exa
       usedBy:
         - analyst
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18740,8 +18442,7 @@ entities:
       purpose: Entity at .aiox-core/infrastructure/tools/mcp/n8n.yaml
       keywords:
         - n8n
-      usedBy:
-        - dev
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18759,9 +18460,7 @@ entities:
       purpose: Entity at .aiox-core/infrastructure/tools/mcp/supabase.yaml
       keywords:
         - supabase
-      usedBy:
-        - dev
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18806,7 +18505,6 @@ entities:
         - validation
       usedBy:
         - aiox-master
-        - architect
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18878,8 +18576,7 @@ entities:
         - database
         - design
         - checklist
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18900,8 +18597,7 @@ entities:
         - predeploy
         - checklist
         - pre-deploy
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -18921,8 +18617,7 @@ entities:
         - dba
         - rollback
         - checklist
-      usedBy:
-        - data-engineer
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -19048,8 +18743,7 @@ entities:
         - pre-push
         - quality
         - gate
-      usedBy:
-        - devops
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -19070,7 +18764,6 @@ entities:
         - checklist
       usedBy:
         - publish-npm
-        - devops
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -19093,7 +18786,6 @@ entities:
         - self-critique
       usedBy:
         - build-autonomous
-        - dev
       dependencies:
         - dev
       externalDeps: []
@@ -19119,7 +18811,6 @@ entities:
         - (dod)
       usedBy:
         - aiox-master
-        - dev
       dependencies: []
       externalDeps: []
       plannedDeps: []
