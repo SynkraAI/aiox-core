@@ -33,9 +33,12 @@ Block the release if any of these are red.
 
 ## Version bump (T-5 minutes)
 
-Bump **all five** version sites in lockstep. Mismatches cause silent publish
-failures that only show up in the smoke tests OR are caught by
-`validate-aiox-core-namespace.js` (which is wired into `validate:publish`).
+Review **all five** version sites during release prep. The root surface, the
+internal manifest, and the compat wrapper MUST stay in lockstep at the same
+version. `packages/installer/package.json` is bumped **only** when installer
+source changed — not on every release. Mismatches cause silent publish failures
+that show up in the smoke tests OR are caught by
+`validate-aiox-core-namespace.js` (wired into `validate:publish`).
 
 | File | What to bump |
 |---|---|
