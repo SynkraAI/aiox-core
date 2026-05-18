@@ -13,7 +13,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #f5f5f5;
       min-height: 100vh;
       padding: 20px;
     }
@@ -24,19 +24,46 @@
     }
 
     header {
-      text-align: center;
-      color: white;
-      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: #000;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+      font-size: 1.8em;
+    }
+
+    .header-text h1 {
+      font-size: 2em;
+      color: #000;
+      margin: 0;
+      margin-bottom: 5px;
     }
 
     .subtitle {
-      font-size: 1.1em;
-      opacity: 0.9;
+      font-size: 0.95em;
+      color: #666;
+      margin: 0;
     }
 
     .grid {
@@ -60,10 +87,10 @@
     }
 
     .card h2 {
-      color: #333;
+      color: #000;
       margin-bottom: 20px;
       font-size: 1.5em;
-      border-bottom: 3px solid #667eea;
+      border-bottom: 3px solid #000;
       padding-bottom: 10px;
     }
 
@@ -90,7 +117,7 @@
 
     input:focus, select:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: #000;
       background: #f8f9ff;
     }
 
@@ -101,7 +128,7 @@
     }
 
     button {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #000;
       color: white;
       padding: 12px 25px;
       border: none;
@@ -115,7 +142,8 @@
 
     button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      background: #1a1a1a;
     }
 
     button:active {
@@ -127,7 +155,7 @@
       padding: 15px;
       border-radius: 8px;
       margin-top: 20px;
-      border-left: 4px solid #667eea;
+      border-left: 4px solid #000;
     }
 
     .calc-row {
@@ -140,7 +168,7 @@
     .calc-row.net {
       font-weight: bold;
       font-size: 1.1em;
-      color: #667eea;
+      color: #000;
       padding-top: 10px;
       border-top: 2px solid #e0e0e0;
       margin-top: 10px;
@@ -195,7 +223,7 @@
     .money {
       font-family: 'Courier New', monospace;
       font-weight: 600;
-      color: #667eea;
+      color: #000;
     }
 
     .message {
@@ -228,7 +256,7 @@
       width: 20px;
       height: 20px;
       border: 3px solid #f3f3f3;
-      border-top: 3px solid #667eea;
+      border-top: 3px solid #000;
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
@@ -252,7 +280,7 @@
     }
 
     .stat-box {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #000;
       color: white;
       padding: 20px;
       border-radius: 8px;
@@ -290,8 +318,8 @@
     }
 
     .tab.active {
-      color: #667eea;
-      border-bottom-color: #667eea;
+      color: #000;
+      border-bottom-color: #000;
     }
 
     .tab-content {
@@ -306,8 +334,13 @@
 <body>
   <div class="container">
     <header>
-      <h1>💰 AIOX Sales & Commission</h1>
-      <p class="subtitle">Lançamento de Vendas + Comissão Automática</p>
+      <div class="logo-section">
+        <div class="logo">GPSX</div>
+        <div class="header-text">
+          <h1>💰 AIOX Sales & Commission</h1>
+          <p class="subtitle">Lançamento de Vendas + Comissão Automática</p>
+        </div>
+      </div>
     </header>
 
     <div id="message"></div>
@@ -344,20 +377,16 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label>Valor Bruto (BRL) *</label>
-              <input type="number" id="grossAmount" placeholder="1000" step="0.01" required>
+              <label>Valor Líquido (BRL) *</label>
+              <input type="number" id="netAmount" placeholder="850.00" step="0.01" required>
             </div>
             <div class="form-group">
-              <label>Taxa (BRL)</label>
-              <input type="number" id="taxAmount" placeholder="0" step="0.01" value="0">
+              <label>Percentual de Comissão (%)</label>
+              <input type="number" id="commissionPercentage" placeholder="10" min="0" max="100" step="0.01" value="10">
             </div>
           </div>
 
           <div class="form-row">
-            <div class="form-group">
-              <label>Desconto (BRL)</label>
-              <input type="number" id="discountAmount" placeholder="0" step="0.01" value="0">
-            </div>
             <div class="form-group">
               <label>Método de Pagamento</label>
               <select id="paymentMethod">
@@ -369,24 +398,20 @@
                 <option>OTHER</option>
               </select>
             </div>
+            <div class="form-group">
+              <label>Notas (opcional)</label>
+              <input type="text" id="notes" placeholder="Observações sobre a venda">
+            </div>
           </div>
 
           <div class="calculation-box">
-            <div class="calc-row">
-              <span>Bruto:</span>
-              <span id="calcGross">R$ 0.00</span>
-            </div>
-            <div class="calc-row">
-              <span>Taxa:</span>
-              <span id="calcTax">R$ 0.00</span>
-            </div>
-            <div class="calc-row">
-              <span>Desconto:</span>
-              <span id="calcDiscount">R$ 0.00</span>
-            </div>
             <div class="calc-row net">
               <span>💵 VALOR LÍQUIDO:</span>
               <span id="calcNet">R$ 0.00</span>
+            </div>
+            <div class="calc-row">
+              <span>📊 Comissão (em tempo real):</span>
+              <span id="calcCommission">R$ 0.00</span>
             </div>
           </div>
 
@@ -409,10 +434,10 @@
 
         <button onclick="testConnection()" style="margin-bottom: 15px;">🔗 Testar Conexão</button>
 
-        <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea;">
+        <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #000;">
           <p style="font-size: 0.9em; color: #555; line-height: 1.6;">
             <strong>Como configurar:</strong><br>
-            1. Acesse <a href="https://supabase.com" target="_blank" style="color: #667eea;">supabase.com</a><br>
+            1. Acesse <a href="https://supabase.com" target="_blank" style="color: #000;">supabase.com</a><br>
             2. Crie um projeto ou use um existente<br>
             3. Copie a URL e Anon Key<br>
             4. Cole nos campos acima<br>
@@ -447,9 +472,8 @@
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('saleForm').addEventListener('submit', handleSaleSubmit);
-      document.getElementById('grossAmount').addEventListener('input', updateCalculation);
-      document.getElementById('taxAmount').addEventListener('input', updateCalculation);
-      document.getElementById('discountAmount').addEventListener('input', updateCalculation);
+      document.getElementById('netAmount').addEventListener('input', updateCalculation);
+      document.getElementById('commissionPercentage').addEventListener('input', updateCalculation);
 
       loadData();
     });
@@ -484,15 +508,12 @@
     }
 
     function updateCalculation() {
-      const gross = parseFloat(document.getElementById('grossAmount').value) || 0;
-      const tax = parseFloat(document.getElementById('taxAmount').value) || 0;
-      const discount = parseFloat(document.getElementById('discountAmount').value) || 0;
-      const net = gross - tax - discount;
+      const net = parseFloat(document.getElementById('netAmount').value) || 0;
+      const percentage = parseFloat(document.getElementById('commissionPercentage').value) || 0;
+      const commission = (net * percentage) / 100;
 
-      document.getElementById('calcGross').textContent = 'R$ ' + gross.toFixed(2);
-      document.getElementById('calcTax').textContent = 'R$ ' + tax.toFixed(2);
-      document.getElementById('calcDiscount').textContent = 'R$ ' + discount.toFixed(2);
-      document.getElementById('calcNet').textContent = 'R$ ' + Math.max(0, net).toFixed(2);
+      document.getElementById('calcNet').textContent = 'R$ ' + net.toFixed(2);
+      document.getElementById('calcCommission').textContent = 'R$ ' + commission.toFixed(2);
     }
 
     async function handleSaleSubmit(e) {
@@ -507,20 +528,19 @@
 
       const sellerId = document.getElementById('sellerId').value;
       const customerId = document.getElementById('customerId').value;
-      const gross = parseFloat(document.getElementById('grossAmount').value);
-      const tax = parseFloat(document.getElementById('taxAmount').value) || 0;
-      const discount = parseFloat(document.getElementById('discountAmount').value) || 0;
-      const net = gross - tax - discount;
+      const netAmount = parseFloat(document.getElementById('netAmount').value);
+      const commissionPercentage = parseFloat(document.getElementById('commissionPercentage').value) || 10;
 
       try {
         const { data, error } = await client.from('sales').insert({
           seller_id: sellerId,
           customer_id: customerId,
-          gross_amount: gross,
-          net_amount: net,
-          tax_amount: tax,
-          discount_amount: discount,
+          gross_amount: netAmount,
+          net_amount: netAmount,
+          tax_amount: 0,
+          discount_amount: 0,
           payment_method: document.getElementById('paymentMethod').value,
+          notes: document.getElementById('notes').value || null,
           status: 'PENDING',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
@@ -528,7 +548,7 @@
 
         if (error) throw error;
 
-        showMessage(`✅ Venda lançada! ID: ${data.id.substring(0, 8)}...`, 'success');
+        showMessage(`✅ Venda lançada! ID: ${data.id.substring(0, 8)}... | Comissão: R$ ${((netAmount * commissionPercentage) / 100).toFixed(2)}`, 'success');
         document.getElementById('saleForm').reset();
         updateCalculation();
         setTimeout(loadData, 1000);
