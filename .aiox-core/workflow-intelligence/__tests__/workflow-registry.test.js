@@ -48,10 +48,10 @@ describe('WorkflowRegistry', () => {
       expect(typeof workflows).toBe('object');
     });
 
-    it('should return 10 workflows', () => {
+    it('should return 11 workflows', () => {
       const workflows = registry.loadWorkflows();
       const names = Object.keys(workflows);
-      expect(names.length).toBe(10);
+      expect(names.length).toBe(11);
     });
 
     it('should include story_development workflow', () => {
@@ -62,6 +62,11 @@ describe('WorkflowRegistry', () => {
     it('should include epic_creation workflow', () => {
       const workflows = registry.loadWorkflows();
       expect(workflows.epic_creation).toBeDefined();
+    });
+
+    it('should not include redundant agent_handoff workflow', () => {
+      const workflows = registry.loadWorkflows();
+      expect(workflows.agent_handoff).toBeUndefined();
     });
 
     it('should cache loaded workflows', () => {
@@ -99,7 +104,7 @@ describe('WorkflowRegistry', () => {
     it('should return array of workflow names', () => {
       const names = registry.getWorkflowNames();
       expect(Array.isArray(names)).toBe(true);
-      expect(names.length).toBe(10);
+      expect(names.length).toBe(11);
     });
 
     it('should include expected workflows', () => {
@@ -114,6 +119,8 @@ describe('WorkflowRegistry', () => {
       expect(names).toContain('documentation_workflow');
       expect(names).toContain('ux_workflow');
       expect(names).toContain('research_workflow');
+      expect(names).toContain('bob_orchestration');
+      expect(names).not.toContain('agent_handoff');
     });
   });
 
@@ -268,8 +275,8 @@ describe('WorkflowRegistry', () => {
     it('should return registry statistics', () => {
       const stats = registry.getStats();
 
-      expect(stats.totalWorkflows).toBe(10);
-      expect(stats.workflowsWithTransitions).toBe(10);
+      expect(stats.totalWorkflows).toBe(11);
+      expect(stats.workflowsWithTransitions).toBe(11);
       expect(stats.totalTransitions).toBeGreaterThan(0);
     });
 

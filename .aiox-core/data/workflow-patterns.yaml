@@ -30,6 +30,8 @@ workflows:
       - develop-preflight
       - review-qa
       - apply-qa-fixes
+      - fix-qa-issues
+      - run-tests
       - pre-push-quality-gate
       - github-pr-automation
     trigger_threshold: 2
@@ -79,9 +81,39 @@ workflows:
             args_template: ""
             description: "Apply QA feedback and fixes"
             priority: 1
+          - command: fix-qa-issues
+            args_template: ""
+            description: "Resolve structured QA fix requests"
+            priority: 2
           - command: pre-push-quality-gate
             args_template: ""
             description: "Run final quality checks before push"
+            priority: 3
+      fixes_applied:
+        trigger: "apply-qa-fixes completed"
+        confidence: 0.85
+        greeting_message: "QA fixes applied. Ready for final verification."
+        next_steps:
+          - command: run-tests
+            args_template: ""
+            description: "Verify fixes with tests"
+            priority: 1
+          - command: pre-push-quality-gate
+            args_template: ""
+            description: "Run final quality gate"
+            priority: 2
+      qa_fix_request_resolved:
+        trigger: "fix-qa-issues completed"
+        confidence: 0.85
+        greeting_message: "QA fix request resolved. Ready for final verification."
+        next_steps:
+          - command: run-tests
+            args_template: ""
+            description: "Verify fixes with tests"
+            priority: 1
+          - command: pre-push-quality-gate
+            args_template: ""
+            description: "Run final quality gate"
             priority: 2
 
   # Epic Creation Workflow
@@ -679,69 +711,6 @@ workflows:
           - command: build-status
             args_template: "--all"
             description: "Check all build statuses"
-            priority: 2
-
-  # Cross-Agent Handoff Workflow (Story ACT-5)
-  agent_handoff:
-    description: "Handoff between agents during multi-agent story execution"
-    agent_sequence:
-      - dev        # Development
-      - qa         # Review
-      - dev        # Fix issues
-      - devops     # Push
-    key_commands:
-      - develop
-      - develop-yolo
-      - review-qa
-      - apply-qa-fixes
-      - fix-qa-issues
-      - run-tests
-      - pre-push-quality-gate
-    trigger_threshold: 2
-    typical_duration: "0.5-2 days"
-    success_indicators:
-      - "Development complete"
-      - "QA passed"
-      - "Ready for push"
-    transitions:
-      dev_complete:
-        trigger: "develop completed"
-        confidence: 0.90
-        greeting_message: "Development complete. Handing off to QA."
-        next_steps:
-          - command: review-qa
-            args_template: "${story_path}"
-            description: "Run QA review"
-            priority: 1
-          - command: run-tests
-            args_template: ""
-            description: "Run test suite"
-            priority: 2
-      qa_issues_found:
-        trigger: "review-qa completed"
-        confidence: 0.85
-        greeting_message: "QA review complete. Issues to address."
-        next_steps:
-          - command: fix-qa-issues
-            args_template: ""
-            description: "Fix QA issues from review"
-            priority: 1
-          - command: apply-qa-fixes
-            args_template: ""
-            description: "Apply QA feedback"
-            priority: 2
-      fixes_applied:
-        trigger: "fix-qa-issues completed"
-        confidence: 0.85
-        greeting_message: "Fixes applied. Ready for quality gate."
-        next_steps:
-          - command: run-tests
-            args_template: ""
-            description: "Verify fixes with tests"
-            priority: 1
-          - command: pre-push-quality-gate
-            args_template: ""
-            description: "Run final quality gate"
             priority: 2
 
 # ============================================================

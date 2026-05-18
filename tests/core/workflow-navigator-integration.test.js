@@ -555,22 +555,22 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       }
     });
 
-    test('agent_handoff workflow exists for cross-agent transitions', () => {
-      expect(patterns.workflows.agent_handoff).toBeDefined();
+    test('story_development owns cross-agent handoff commands', () => {
+      expect(patterns.workflows.agent_handoff).toBeUndefined();
 
-      const handoffWorkflow = patterns.workflows.agent_handoff;
-      expect(handoffWorkflow.agent_sequence).toContain('dev');
-      expect(handoffWorkflow.agent_sequence).toContain('qa');
-      expect(handoffWorkflow.key_commands).toContain('fix-qa-issues');
-      expect(handoffWorkflow.key_commands).toContain('apply-qa-fixes');
+      const storyWorkflow = patterns.workflows.story_development;
+      expect(storyWorkflow.agent_sequence).toContain('dev');
+      expect(storyWorkflow.agent_sequence).toContain('qa');
+      expect(storyWorkflow.key_commands).toContain('fix-qa-issues');
+      expect(storyWorkflow.key_commands).toContain('run-tests');
+      expect(storyWorkflow.key_commands).toContain('apply-qa-fixes');
     });
 
-    test('agent_handoff has dev_complete and qa_issues_found transitions', () => {
-      const transitions = patterns.workflows.agent_handoff.transitions;
+    test('story_development has QA fix and final-verification transitions', () => {
+      const transitions = patterns.workflows.story_development.transitions;
 
-      expect(transitions.dev_complete).toBeDefined();
-      expect(transitions.qa_issues_found).toBeDefined();
       expect(transitions.fixes_applied).toBeDefined();
+      expect(transitions.qa_fix_request_resolved).toBeDefined();
     });
   });
 
@@ -768,7 +768,7 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       expect(state.state).toBe('epic_started');
     });
 
-    test('detects agent_handoff from develop completed', () => {
+    test('detects story_development from develop completed', () => {
       const navigator = new WorkflowNavigator();
 
       const state = navigator.detectWorkflowState(
@@ -777,10 +777,21 @@ describe('WorkflowNavigator Integration (Story ACT-5)', () => {
       );
 
       expect(state).not.toBeNull();
-      // Could match story_development in_development OR agent_handoff dev_complete
-      // The first matching workflow wins
-      expect(state).toHaveProperty('workflow');
-      expect(state).toHaveProperty('state');
+      expect(state.workflow).toBe('story_development');
+      expect(state.state).toBe('in_development');
+    });
+
+    test('detects story_development final verification from fix-qa-issues completed', () => {
+      const navigator = new WorkflowNavigator();
+
+      const state = navigator.detectWorkflowState(
+        ['fix-qa-issues completed'],
+        {},
+      );
+
+      expect(state).not.toBeNull();
+      expect(state.workflow).toBe('story_development');
+      expect(state.state).toBe('qa_fix_request_resolved');
     });
 
     test('returns null for unrecognized commands', () => {

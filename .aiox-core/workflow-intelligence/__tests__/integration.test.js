@@ -221,7 +221,9 @@ describe('Workflow Intelligence System Integration', () => {
 
     it('should expose getWorkflowNames function', () => {
       const names = wis.getWorkflowNames();
-      expect(names.length).toBe(10);
+      expect(names.length).toBe(11);
+      expect(names).toContain('bob_orchestration');
+      expect(names).not.toContain('agent_handoff');
     });
 
     it('should expose getWorkflowsByAgent function', () => {
@@ -236,8 +238,8 @@ describe('Workflow Intelligence System Integration', () => {
 
     it('should expose getStats function', () => {
       const stats = wis.getStats();
-      expect(stats.totalWorkflows).toBe(10);
-      expect(stats.workflowsWithTransitions).toBe(10);
+      expect(stats.totalWorkflows).toBe(11);
+      expect(stats.workflowsWithTransitions).toBe(11);
     });
 
     it('should expose factory functions', () => {
@@ -295,7 +297,7 @@ describe('Workflow Intelligence System Integration', () => {
     });
   });
 
-  describe('All 10 workflows have transitions', () => {
+  describe('All 10 WIS core workflows have transitions', () => {
     const workflows = [
       'story_development',
       'epic_creation',
