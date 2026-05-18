@@ -429,6 +429,20 @@
         <h2>⚙️ Configuração</h2>
 
         <div class="form-group">
+          <label>Login do Usuário</label>
+          <select id="currentUser" onchange="handleUserChange()" style="margin-bottom: 15px;">
+            <option value="">-- Selecionar Usuário --</option>
+          </select>
+          <button onclick="loadUsersList()" style="padding: 10px 15px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9em;">↻ Recarregar Usuários</button>
+          <div id="userInfo" style="margin-top: 15px; padding: 12px; background: #f0f0f0; border-radius: 6px; font-size: 0.9em; display: none;">
+            <strong>Logado como:</strong> <span id="userInfoName"></span><br>
+            <strong>Perfil:</strong> <span id="userInfoRole"></span>
+          </div>
+        </div>
+
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+
+        <div class="form-group">
           <label>URL do Supabase</label>
           <input type="text" id="supabaseUrl" placeholder="https://seu-projeto.supabase.co" value="https://your-project.supabase.co">
         </div>
@@ -517,6 +531,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script>
     let supabase = null;
+    let currentUserId = null;
+    let currentUserRole = null;
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
@@ -524,8 +540,48 @@
       document.getElementById('netAmount').addEventListener('input', updateCalculation);
       document.getElementById('commissionPercentage').addEventListener('input', updateCalculation);
 
+      const saved = sessionStorage.getItem('currentUser');
+      if (saved) {
+        const { id, role, name } = JSON.parse(saved);
+        currentUserId = id;
+        currentUserRole = role;
+        document.getElementById('currentUser').value = id;
+        showUserInfo(name, role);
+      }
+
       loadData();
     });
+
+    function showUserInfo(name, role) {
+      const userInfo = document.getElementById('userInfo');
+      document.getElementById('userInfoName').textContent = name;
+      document.getElementById('userInfoRole').textContent = role === 'ADMIN' ? 'Administrador (vê tudo)' : role;
+      userInfo.style.display = 'block';
+    }
+
+    function handleUserChange() {
+      const select = document.getElementById('currentUser');
+      const selectedId = select.value;
+
+      if (!selectedId) {
+        currentUserId = null;
+        currentUserRole = null;
+        sessionStorage.removeItem('currentUser');
+        document.getElementById('userInfo').style.display = 'none';
+        loadData();
+        return;
+      }
+
+      const option = select.options[select.selectedIndex];
+      const name = option.textContent.split('(')[0].trim();
+      const role = option.dataset.role;
+
+      currentUserId = selectedId;
+      currentUserRole = role;
+      sessionStorage.setItem('currentUser', JSON.stringify({ id: selectedId, role, name }));
+      showUserInfo(name, role);
+      loadData();
+    }
 
     function getSupabaseClient() {
       const url = document.getElementById('supabaseUrl').value;
@@ -570,6 +626,21 @@
           .order('name');
 
         if (error) throw error;
+
+        // Populate the login user dropdown
+        const loginSelect = document.getElementById('currentUser');
+        const loginCurrentValue = loginSelect.value;
+
+        loginSelect.innerHTML = '<option value="">-- Selecionar Usuário --</option>';
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.id;
+          option.textContent = `${user.name} (${user.role})`;
+          option.dataset.role = user.role;
+          loginSelect.appendChild(option);
+        });
+
+        if (loginCurrentValue) loginSelect.value = loginCurrentValue;
 
         // Populate the main seller dropdown
         const select = document.getElementById('sellerId');
@@ -698,17 +769,26 @@
       if (!client) return;
 
       try {
-        const { data: sales, error: salesError } = await client
+        let salesQuery = client
           .from('sales')
           .select('id, seller_id, customer_id, net_amount, payment_method, status, created_at')
           .order('created_at', { ascending: false })
           .limit(10);
 
-        const { data: commissions, error: commError } = await client
+        let commissionsQuery = client
           .from('commissions')
           .select('id, seller_id, amount, percentage, status, created_at')
           .order('created_at', { ascending: false })
           .limit(10);
+
+        // Filter by seller_id if not ADMIN
+        if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId) {
+          salesQuery = salesQuery.eq('seller_id', currentUserId);
+          commissionsQuery = commissionsQuery.eq('seller_id', currentUserId);
+        }
+
+        const { data: sales, error: salesError } = await salesQuery;
+        const { data: commissions, error: commError } = await commissionsQuery;
 
         if (salesError) throw salesError;
         if (commError) throw commError;
@@ -728,15 +808,24 @@
       if (!client) return;
 
       try {
-        const { data: sales, error: salesError } = await client
+        let salesQuery = client
           .from('sales')
           .select('net_amount, created_at')
           .order('created_at', { ascending: true });
 
-        const { data: commissions, error: commError } = await client
+        let commissionsQuery = client
           .from('commissions')
           .select('amount, created_at')
           .order('created_at', { ascending: true });
+
+        // Filter by seller_id if not ADMIN
+        if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId) {
+          salesQuery = salesQuery.eq('seller_id', currentUserId);
+          commissionsQuery = commissionsQuery.eq('seller_id', currentUserId);
+        }
+
+        const { data: sales, error: salesError } = await salesQuery;
+        const { data: commissions, error: commError } = await commissionsQuery;
 
         if (salesError) throw salesError;
         if (commError) throw commError;
@@ -897,7 +986,12 @@
         return;
       }
 
-      let html = '<div class="table-wrapper"><table>';
+      let html = '';
+      if (currentUserRole && currentUserRole !== 'ADMIN') {
+        html += '<div style="background: #e7f3ff; border: 1px solid #b3d9ff; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9em; color: #004085;">ℹ️ Você está vendo apenas suas próprias vendas</div>';
+      }
+
+      html += '<div class="table-wrapper"><table>';
       html += '<tr><th>ID</th><th>Vendedor</th><th>Cliente</th><th>Líquido</th><th>Método</th><th>Horário</th><th>Status</th><th>Ação</th></tr>';
 
       sales.forEach(sale => {
@@ -917,7 +1011,8 @@
           timeStyle: 'short'
         });
 
-        const actionBtn = sale.status === 'PENDING'
+        const canApprove = currentUserRole === 'ADMIN' || (currentUserRole && sale.seller_id === currentUserId);
+        const actionBtn = sale.status === 'PENDING' && canApprove
           ? `<button onclick="approveSaleFromDashboard('${sale.id}')" style="padding: 6px 12px; font-size: 0.85em; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">✓ Aprovar</button>`
           : '<span style="color: #999;">-</span>';
 
@@ -945,7 +1040,12 @@
         return;
       }
 
-      let html = '<div class="table-wrapper"><table>';
+      let html = '';
+      if (currentUserRole && currentUserRole !== 'ADMIN') {
+        html += '<div style="background: #e7f3ff; border: 1px solid #b3d9ff; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9em; color: #004085;">ℹ️ Você está vendo apenas suas próprias comissões</div>';
+      }
+
+      html += '<div class="table-wrapper"><table>';
       html += '<tr><th>ID</th><th>Vendedor</th><th>Comissão</th><th>%</th><th>Status</th></tr>';
 
       commissions.forEach(comm => {
@@ -1031,16 +1131,27 @@
           .select('id, seller_id, customer_id, net_amount, payment_method, status, created_at')
           .order('created_at', { ascending: false });
 
+        // If not ADMIN and no seller selected, filter by own ID
+        if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId && !sellerId) {
+          query = query.eq('seller_id', currentUserId);
+        } else if (sellerId) {
+          // If ADMIN and seller is selected, filter by that seller
+          // If not ADMIN but trying to filter by another seller, show only own
+          if (currentUserRole && currentUserRole !== 'ADMIN' && sellerId !== currentUserId) {
+            query = query.eq('seller_id', currentUserId);
+          } else {
+            query = query.eq('seller_id', sellerId);
+          }
+        } else if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId) {
+          query = query.eq('seller_id', currentUserId);
+        }
+
         if (dateFrom) {
           query = query.gte('created_at', `${dateFrom}T00:00:00Z`);
         }
 
         if (dateTo) {
           query = query.lte('created_at', `${dateTo}T23:59:59Z`);
-        }
-
-        if (sellerId) {
-          query = query.eq('seller_id', sellerId);
         }
 
         const { data: sales, error } = await query;
