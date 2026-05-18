@@ -775,9 +775,9 @@ class WorkflowExecutor {
    */
   async runCodeRabbitAnalysis(coderabbitConfig) {
     try {
-      const { exec } = require('child_process');
+      const childProcess = require('child_process');
       const { promisify } = require('util');
-      const execAsync = promisify(exec);
+      const execAsync = promisify(childProcess.exec);
 
       // Build command for current platform.
       // - Explicit installation_mode: 'wsl' | 'native' wins (lets ops override).
@@ -793,6 +793,20 @@ class WorkflowExecutor {
         (process.platform === 'win32' ? 'wsl' : 'native');
       let command;
       if (mode === 'wsl') {
+        // Probe WSL availability before building the command. Gives a clearer
+        // diagnostic than cmd.exe's generic "'wsl' is not recognized" when WSL
+        // is not installed. ENOENT (binary missing) and non-zero exit (WSL
+        // feature present but no distribution installed) both fail this check.
+        const wslProbe = childProcess.spawnSync('wsl', ['-l'], { encoding: 'utf8' });
+        if (wslProbe.error || wslProbe.status !== 0) {
+          throw new Error(
+            'CodeRabbit CLI requires WSL on Windows hosts. Install WSL via ' +
+              '`wsl --install` (https://learn.microsoft.com/windows/wsl/install), ' +
+              'then install the CodeRabbit CLI inside the WSL distribution. ' +
+              'See docs/guides/installation-troubleshooting.md Issue 10. ' +
+              `To bypass this check, set coderabbit.installation_mode='native' in your config.`
+          );
+        }
         const wslPath = this.projectRoot
           .replace(/^([A-Za-z]):/, (_, drive) => `/mnt/${drive.toLowerCase()}`)
           .replace(/\\/g, '/');

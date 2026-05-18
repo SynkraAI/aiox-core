@@ -17,6 +17,7 @@
 
 const os = require('os');
 const path = require('path');
+const childProcess = require('child_process');
 
 const { Layer2PRAutomation } = require('../../../.aiox-core/core/quality-gates/layer2-pr-automation');
 
@@ -27,11 +28,21 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
   let originalCwd;
   let layer;
   let capturedCommand;
+  let spawnSyncSpy;
 
   beforeEach(() => {
     originalPlatform = process.platform;
     originalCwd = process.cwd;
     capturedCommand = null;
+    // Mock the WSL availability probe added for #757 so legacy command-shape
+    // tests don't fail on macOS/Linux dev boxes where `wsl` isn't installed.
+    // Tests covering the probe failure path override this on a per-test basis.
+    spawnSyncSpy = jest.spyOn(childProcess, 'spawnSync').mockImplementation((cmd) => {
+      if (cmd === 'wsl') {
+        return { status: 0, stdout: 'Ubuntu\n', stderr: '' };
+      }
+      return { status: 0, stdout: '', stderr: '' };
+    });
     layer = new Layer2PRAutomation({
       enabled: true,
       coderabbit: { enabled: true },
@@ -47,6 +58,7 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
   afterEach(() => {
     Object.defineProperty(process, 'platform', { value: originalPlatform });
     process.cwd = originalCwd;
+    spawnSyncSpy.mockRestore();
   });
 
   const setPlatform = (value) => {
@@ -147,5 +159,54 @@ describe('Cross-platform CodeRabbit invocation (Issue #731)', () => {
     // is what expands it). Host's os.homedir() would yield a Windows path
     // that WSL cannot resolve.
     expect(capturedCommand).toContain('~/custom/coderabbit --prompt-only -t uncommitted');
+  });
+
+  // Issue #757 — WSL availability probe before invoking CodeRabbit on Windows
+  describe('WSL availability probe (Issue #757)', () => {
+    it('surfaces a clear error when WSL binary is missing (ENOENT)', async () => {
+      setPlatform('win32');
+      spawnSyncSpy.mockImplementation((cmd) => {
+        if (cmd === 'wsl') {
+          return { error: Object.assign(new Error('ENOENT'), { code: 'ENOENT' }), status: null };
+        }
+        return { status: 0, stdout: '', stderr: '' };
+      });
+      const result = await layer.runCodeRabbit();
+      expect(spawnSyncSpy).toHaveBeenCalledWith('wsl', ['-l'], expect.any(Object));
+      expect(result.pass).toBe(false);
+      expect(result.error).toMatch(/CodeRabbit CLI requires WSL/);
+      expect(result.error).toMatch(/wsl --install/);
+      expect(result.error).toMatch(/installation-troubleshooting/);
+    });
+
+    it('surfaces a clear error when WSL is installed but has no distribution (exit != 0)', async () => {
+      setPlatform('win32');
+      spawnSyncSpy.mockImplementation((cmd) => {
+        if (cmd === 'wsl') {
+          return { status: 1, stdout: '', stderr: 'no distros\n' };
+        }
+        return { status: 0, stdout: '', stderr: '' };
+      });
+      const result = await layer.runCodeRabbit();
+      expect(spawnSyncSpy).toHaveBeenCalledWith('wsl', ['-l'], expect.any(Object));
+      expect(result.pass).toBe(false);
+      expect(result.error).toMatch(/CodeRabbit CLI requires WSL/);
+    });
+
+    it('does NOT probe WSL when installation_mode=native on Windows', async () => {
+      setPlatform('win32');
+      layer.coderabbit.installation_mode = 'native';
+      await layer.runCodeRabbit();
+      // The probe MUST NOT have been called when native mode is explicit.
+      const wslProbeCalls = spawnSyncSpy.mock.calls.filter((c) => c[0] === 'wsl');
+      expect(wslProbeCalls).toHaveLength(0);
+    });
+
+    it('does NOT probe WSL on macOS native invocation', async () => {
+      setPlatform('darwin');
+      await layer.runCodeRabbit();
+      const wslProbeCalls = spawnSyncSpy.mock.calls.filter((c) => c[0] === 'wsl');
+      expect(wslProbeCalls).toHaveLength(0);
+    });
   });
 });

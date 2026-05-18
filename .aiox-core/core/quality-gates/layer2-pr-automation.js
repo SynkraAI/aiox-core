@@ -10,7 +10,7 @@
  * @story 2.10 - Quality Gate Manager
  */
 
-const { spawn } = require('child_process');
+const childProcess = require('child_process');
 const fs = require('fs').promises;
 const os = require('os');
 const path = require('path');
@@ -117,6 +117,21 @@ class Layer2PRAutomation extends BaseLayer {
           this.coderabbit.installation_mode ||
           (process.platform === 'win32' ? 'wsl' : 'native');
         if (mode === 'wsl') {
+          // Probe WSL availability before building the command. Gives a clearer
+          // diagnostic than cmd.exe's generic "'wsl' is not recognized" when
+          // WSL is not installed. ENOENT (binary missing) and non-zero exit
+          // (WSL feature present but no distribution installed) both fail this
+          // check.
+          const wslProbe = childProcess.spawnSync('wsl', ['-l'], { encoding: 'utf8' });
+          if (wslProbe.error || wslProbe.status !== 0) {
+            throw new Error(
+              'CodeRabbit CLI requires WSL on Windows hosts. Install WSL via ' +
+                '`wsl --install` (https://learn.microsoft.com/windows/wsl/install), ' +
+                'then install the CodeRabbit CLI inside the WSL distribution. ' +
+                'See docs/guides/installation-troubleshooting.md Issue 10. ' +
+                'To bypass this check, set coderabbit.installation_mode=\'native\' in your config.',
+            );
+          }
           const projectRoot = this.coderabbit.projectRoot || process.cwd();
           const wslProjectPath = projectRoot
             .replace(/\\/g, '/')
@@ -322,7 +337,7 @@ class Layer2PRAutomation extends BaseLayer {
         env: { ...process.env },
       };
 
-      const child = spawn(command, [], options);
+      const child = childProcess.spawn(command, [], options);
 
       let stdout = '';
       let stderr = '';
