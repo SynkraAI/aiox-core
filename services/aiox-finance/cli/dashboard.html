@@ -472,6 +472,7 @@
         <button class="tab active" onclick="switchTab('sales')">📊 Vendas</button>
         <button class="tab" onclick="switchTab('commissions')">💰 Comissões</button>
         <button class="tab" onclick="switchTab('dashboard')">📈 Dashboard Mensal</button>
+        <button class="tab" onclick="switchTab('users')">👥 Usuários</button>
       </div>
 
       <div id="sales" class="tab-content active">
@@ -523,6 +524,23 @@
           <h3 style="margin-bottom: 15px; color: #000;">Resumo Mensal</h3>
           <div id="monthlyTable"></div>
         </div>
+      </div>
+
+      <div id="users" class="tab-content">
+        <h2>Gestão de Usuários</h2>
+
+        <div style="background: #f0f8ff; border: 1px solid #b3d9ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <strong style="color: #004085;">ℹ️ Observação</strong><br>
+          <span style="font-size: 0.9em; color: #004085;">Este é um painel de visualização. Para criar, editar ou deletar usuários, use o CLI:</span>
+          <pre style="background: white; padding: 10px; border-radius: 4px; margin-top: 10px; font-size: 0.85em; overflow-x: auto;"><code>node manage-users.js list
+node manage-users.js create --name "Nome" --email "email@example.com" --role COMERCIAL --commission-percentage 10
+node manage-users.js edit --id [user-id] --commission-percentage 15
+node manage-users.js delete --id [user-id]</code></pre>
+        </div>
+
+        <button onclick="loadAllUsers()" style="margin-bottom: 15px; padding: 10px 20px; background: #000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">↻ Recarregar Usuários</button>
+
+        <div id="usersTable"></div>
       </div>
     </div>
   </div>
@@ -972,6 +990,65 @@
 
         prevSales = sales > 0 ? sales : prevSales;
         prevCommissions = commissions > 0 ? commissions : prevCommissions;
+      });
+
+      html += '</table></div>';
+      container.innerHTML = html;
+    }
+
+    async function loadAllUsers() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      try {
+        const { data: users, error } = await client
+          .from('users')
+          .select('id, name, email, role, commission_percentage, created_at')
+          .order('created_at', { ascending: true });
+
+        if (error) throw error;
+
+        renderUsers(users || []);
+        showMessage(`✅ ${(users || []).length} usuário(s) carregado(s)`, 'success');
+
+      } catch (err) {
+        showMessage(`❌ Erro ao carregar: ${err.message}`, 'error');
+      }
+    }
+
+    function renderUsers(users) {
+      const container = document.getElementById('usersTable');
+
+      if (!users.length) {
+        container.innerHTML = '<div class="empty-state">Nenhum usuário cadastrado</div>';
+        return;
+      }
+
+      let html = '<div class="table-wrapper"><table>';
+      html += '<tr><th>ID</th><th>Nome</th><th>Email</th><th>Função</th><th>Comissão</th><th>Data Criação</th></tr>';
+
+      users.forEach(user => {
+        const dateTime = new Date(user.created_at);
+        const dataCriacao = dateTime.toLocaleString('pt-BR', {
+          dateStyle: 'short',
+          timeStyle: 'short'
+        });
+
+        const roleLabel = {
+          'ADMIN': '👑 Administrador',
+          'COMERCIAL': '💼 Comercial',
+          'VENDEDOR': '🧑‍💼 Vendedor',
+          'GERENTE': '📋 Gerente',
+        }[user.role] || user.role;
+
+        html += `<tr>
+          <td><code style="font-size: 0.85em;">${user.id.substring(0, 8)}</code></td>
+          <td>${user.name || '-'}</td>
+          <td style="font-size: 0.9em;">${user.email || '-'}</td>
+          <td>${roleLabel}</td>
+          <td style="text-align: center; font-weight: 600;">${user.commission_percentage}%</td>
+          <td style="font-size: 0.85em;">${dataCriacao}</td>
+        </tr>`;
       });
 
       html += '</table></div>';
