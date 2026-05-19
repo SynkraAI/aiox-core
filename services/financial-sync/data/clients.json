@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-04-14T19:03:17.400Z",
+  "clients": [
+    {
+      "clickup_id": "client-001",
+      "name": "ABC Consultoria LTDA",
+      "email": "contato@abc.com",
+      "phone": "11 3000-0000",
+      "company_size": "Média",
+      "industry": "Consultoria",
+      "credit_risk": "Baixo",
+      "last_payment_at": "2024-04-01T00:00:00.000Z",
+      "synced_at": "2026-04-14T19:03:17.383Z",
+      "raw_data": "{\"id\":\"client-001\",\"name\":\"ABC Consultoria LTDA\",\"custom_fields\":[{\"name\":\"Email\",\"value\":\"contato@abc.com\"},{\"name\":\"Phone\",\"value\":\"11 3000-0000\"},{\"name\":\"Company Size\",\"value\":\"Média\"},{\"name\":\"Industry\",\"value\":\"Consultoria\"},{\"name\":\"Risk Score\",\"value\":\"Baixo\"},{\"name\":\"Last Payment Date\",\"value\":\"2024-04-01\"}]}"
+    },
+    {
+      "clickup_id": "client-002",
+      "name": "XYZ Serviços e Soluções",
+      "email": "vendas@xyz.com",
+      "phone": "11 3001-0000",
+      "company_size": "Grande",
+      "industry": "Tecnologia",
+      "credit_risk": "Médio",
+      "last_payment_at": "2024-04-10T00:00:00.000Z",
+      "synced_at": "2026-04-14T19:03:17.383Z",
+      "raw_data": "{\"id\":\"client-002\",\"name\":\"XYZ Serviços e Soluções\",\"custom_fields\":[{\"name\":\"Email\",\"value\":\"vendas@xyz.com\"},{\"name\":\"Phone\",\"value\":\"11 3001-0000\"},{\"name\":\"Company Size\",\"value\":\"Grande\"},{\"name\":\"Industry\",\"value\":\"Tecnologia\"},{\"name\":\"Risk Score\",\"value\":\"Médio\"},{\"name\":\"Last Payment Date\",\"value\":\"2024-04-10\"}]}"
+    },
+    {
+      "clickup_id": "client-003",
+      "name": "DEF Manufatura Brasil",
+      "email": "compras@def.com.br",
+      "phone": "21 3010-0000",
+      "company_size": "Grande",
+      "industry": "Manufatura",
+      "credit_risk": "Alto",
+      "last_payment_at": null,
+      "synced_at": "2026-04-14T19:03:17.383Z",
+      "raw_data": "{\"id\":\"client-003\",\"name\":\"DEF Manufatura Brasil\",\"custom_fields\":[{\"name\":\"Email\",\"value\":\"compras@def.com.br\"},{\"name\":\"Phone\",\"value\":\"21 3010-0000\"},{\"name\":\"Company Size\",\"value\":\"Grande\"},{\"name\":\"Industry\",\"value\":\"Manufatura\"},{\"name\":\"Risk Score\",\"value\":\"Alto\"},{\"name\":\"Last Payment Date\",\"value\":null}]}"
+    },
+    {
+      "clickup_id": "client-004",
+      "name": "GHI Indústria e Comércio",
+      "email": "financeiro@ghi.com",
+      "phone": "31 3020-0000",
+      "company_size": "Média",
+      "industry": "Indústria",
+      "credit_risk": "Baixo",
+      "last_payment_at": "2024-03-25T00:00:00.000Z",
+      "synced_at": "2026-04-14T19:03:17.383Z",
+      "raw_data": "{\"id\":\"client-004\",\"name\":\"GHI Indústria e Comércio\",\"custom_fields\":[{\"name\":\"Email\",\"value\":\"financeiro@ghi.com\"},{\"name\":\"Phone\",\"value\":\"31 3020-0000\"},{\"name\":\"Company Size\",\"value\":\"Média\"},{\"name\":\"Industry\",\"value\":\"Indústria\"},{\"name\":\"Risk Score\",\"value\":\"Baixo\"},{\"name\":\"Last Payment Date\",\"value\":\"2024-03-25\"}]}"
+    },
+    {
+      "clickup_id": "client-005",
+      "name": "JKL Comércio Eletrônico",
+      "email": "suporte@jkl.com.br",
+      "phone": "85 3030-0000",
+      "company_size": "Pequena",
+      "industry": "E-commerce",
+      "credit_risk": "Médio",
+      "last_payment_at": "2024-04-05T00:00:00.000Z",
+      "synced_at": "2026-04-14T19:03:17.383Z",
+      "raw_data": "{\"id\":\"client-005\",\"name\":\"JKL Comércio Eletrônico\",\"custom_fields\":[{\"name\":\"Email\",\"value\":\"suporte@jkl.com.br\"},{\"name\":\"Phone\",\"value\":\"85 3030-0000\"},{\"name\":\"Company Size\",\"value\":\"Pequena\"},{\"name\":\"Industry\",\"value\":\"E-commerce\"},{\"name\":\"Risk Score\",\"value\":\"Médio\"},{\"name\":\"Last Payment Date\",\"value\":\"2024-04-05\"}]}"
+    }
+  ],
+  "count": 5
+}

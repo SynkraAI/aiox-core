@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💰 Financial Dashboard Pro</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1d4ed8;
+      --success: #15803d;
+      --danger: #b91c1c;
+      --warning: #92400e;
+      --info: #0284c7;
+      --light: #f1f5f9;
+      --dark: #0f172a;
+      --border: #e2e8f0;
+      --text: #334155;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      color: var(--text);
+      line-height: 1.6;
+      font-weight: 500;
+      padding-top: 60px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 36px;
+    }
+
+    /* Header - 60px fixed */
+    .header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .header-content {
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .header-info {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .status-badge {
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge.online {
+      background: rgba(21, 128, 61, 0.1);
+      color: var(--success);
+    }
+
+    .status-badge.offline {
+      background: rgba(185, 28, 28, 0.1);
+      color: var(--danger);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .status-dot.online {
+      background: var(--success);
+    }
+
+    .status-dot.offline {
+      background: var(--danger);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.3px;
+    }
+
+    button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    button.primary:hover {
+      background: #1e40af;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
+    }
+
+    button.secondary {
+      background: var(--light);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    button.secondary:hover {
+      background: var(--border);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Grid Layout - 3 columns */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+      margin-top: 36px;
+    }
+
+    /* Metric Card */
+    .metric-card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+      border: 1px solid var(--border);
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+
+    .metric-card.dragging {
+      opacity: 0.7;
+      cursor: grabbing;
+    }
+
+    .metric-label {
+      color: #64748b;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .metric-icon {
+      font-size: 16px;
+    }
+
+    .metric-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+
+    .metric-change {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+
+    .metric-change.positive {
+      color: var(--success);
+    }
+
+    .metric-change.negative {
+      color: var(--danger);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--light);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #3b82f6);
+      transition: width 0.3s;
+    }
+
+    /* Tabs - 52px sticky */
+    .tabs {
+      display: flex;
+      gap: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 60px;
+      z-index: 50;
+      height: 52px;
+      border-radius: 0;
+    }
+
+    .tab-button {
+      background: transparent;
+      color: #64748b;
+      border: none;
+      padding: 0 24px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.3px;
+    }
+
+    .tab-button.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-button:hover {
+      color: var(--primary);
+      background: var(--light);
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 24px;
+      margin-top: 24px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-content h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th {
+      background: var(--light);
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    tr:hover {
+      background: var(--light);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge.success {
+      background: rgba(21, 128, 61, 0.15);
+      color: var(--success);
+    }
+
+    .badge.warning {
+      background: rgba(146, 64, 14, 0.15);
+      color: var(--warning);
+    }
+
+    .badge.danger {
+      background: rgba(185, 28, 28, 0.15);
+      color: var(--danger);
+    }
+
+    .badge.info {
+      background: rgba(2, 132, 199, 0.15);
+      color: var(--info);
+    }
+
+    .badge.baixo {
+      background: rgba(21, 128, 61, 0.15);
+      color: var(--success);
+    }
+
+    .badge.médio {
+      background: rgba(146, 64, 14, 0.15);
+      color: var(--warning);
+    }
+
+    .badge.alto {
+      background: rgba(185, 28, 28, 0.15);
+      color: var(--danger);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 20px 0 20px 30px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -16px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .timeline-time {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .timeline-text {
+      margin-top: 6px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      font-weight: 500;
+      background: white;
+    }
+
+    /* Loading */
+    .spinner {
+      border: 4px solid var(--light);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #94a3b8;
+    }
+
+    .empty-state-icon {
+      font-size: 4em;
+      margin-bottom: 20px;
+    }
+
+    /* Responsive - 3 cols → 1 col */
+    @media (max-width: 1024px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 0 20px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .header-info {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .tabs {
+        flex-wrap: wrap;
+        height: auto;
+      }
+
+      .tab-button {
+        padding: 12px 16px;
+        height: auto;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      td, th {
+        padding: 10px 12px;
+      }
+
+      .metric-value {
+        font-size: 24px;
+      }
+
+      .metric-label {
+        font-size: 9px;
+      }
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .metric-card, .tab-content {
+      animation: slideIn 0.3s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <h1>💰 Financial Dashboard Pro</h1>
+      <div class="header-info">
+        <div id="statusIndicator" class="status-badge online">
+          <span class="status-dot online"></span>
+          <span>Online</span>
+        </div>
+        <span id="lastUpdate" style="color: #666; font-size: 0.9em;"></span>
+        <div class="controls">
+          <button class="primary" onclick="syncNow()" id="syncBtn">
+            🔄 Sincronizar Agora
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Métricas -->
+    <div id="metricsContainer" class="metrics-grid">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Abas -->
+    <div class="tabs">
+      <button class="tab-button active" onclick="showTab('vendas')">📊 Vendas em Funil</button>
+      <button class="tab-button" onclick="showTab('clientes')">👥 Saúde de Clientes</button>
+      <button class="tab-button" onclick="showTab('timeline')">📋 Timeline de Eventos</button>
+      <button class="tab-button" onclick="showTab('detalhes')">⚙️ Detalhes & Logs</button>
+    </div>
+
+    <!-- TAB: Vendas -->
+    <div id="vendas" class="tab-content active">
+      <h2>📊 Funil de Vendas</h2>
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Status:</span>
+          <select onchange="filterSales()">
+            <option value="">Todos</option>
+            <option value="completed">Recebidas</option>
+            <option value="open">Pendentes</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Ordenar:</span>
+          <select onchange="sortSales()">
+            <option value="value">Por Valor</option>
+            <option value="date">Por Data</option>
+            <option value="status">Por Status</option>
+          </select>
+        </div>
+      </div>
+      <div id="salesContent">
+        <div class="spinner"></div>
+      </div>
+      <div id="saleDetailModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15, 23, 42, 0.4); z-index:1000; padding:20px; backdrop-filter:blur(2px);">
+        <div style="background:white; max-width:600px; margin:100px auto; border-radius:14px; padding:32px; max-height:80vh; overflow-y:auto; box-shadow:0 20px 25px rgba(0,0,0,0.15); border:1px solid #e2e8f0;">
+          <h3 id="detailTitle" style="margin-bottom:24px; font-size:18px; font-weight:800; color:#0f172a; letter-spacing:-0.5px;">Detalhes da Venda</h3>
+          <div id="detailContent" style="color:#334155; line-height:1.8;"></div>
+          <button onclick="closeSaleDetail()" style="margin-top:24px; padding:10px 20px; background:#1d4ed8; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600; font-family:'Inter', sans-serif; letter-spacing:-0.3px;">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Clientes -->
+    <div id="clientes" class="tab-content">
+      <h2>👥 Saúde de Clientes</h2>
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Risco:</span>
+          <select onchange="filterClients()">
+            <option value="">Todos</option>
+            <option value="Baixo">Baixo</option>
+            <option value="Médio">Médio</option>
+            <option value="Alto">Alto</option>
+          </select>
+        </div>
+      </div>
+      <div id="clientsContent">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- TAB: Timeline -->
+    <div id="timeline" class="tab-content">
+      <h2>📋 Timeline de Eventos</h2>
+      <div id="timelineContent">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- TAB: Detalhes -->
+    <div id="detalhes" class="tab-content">
+      <h2>⚙️ Logs & Sistema</h2>
+      <div id="detalhesContent">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = `http://${window.location.hostname}:3001/api`;
+    let allSales = [];
+    let allClients = [];
+    let currentSalesFilter = '';
+    let eventSource = null;
+
+    // Conectar SSE
+    function connectSSE() {
+      if (eventSource) eventSource.close();
+      eventSource = new EventSource(`${API_URL}/events`);
+      eventSource.onmessage = () => loadDashboard();
+      eventSource.onerror = () => {
+        document.getElementById('statusIndicator').className = 'status-badge offline';
+        document.getElementById('statusIndicator').innerHTML = '<span class="status-dot offline"></span><span>Offline</span>';
+      };
+    }
+
+    // Carregar Dashboard
+    async function loadDashboard() {
+      try {
+        const response = await fetch(`${API_URL}/dashboard`);
+        const data = await response.json();
+
+        document.getElementById('statusIndicator').className = 'status-badge online';
+        document.getElementById('statusIndicator').innerHTML = '<span class="status-dot online"></span><span>Online</span>';
+
+        renderMetrics(data);
+        renderSales(data.sales);
+        renderClients(data.clients);
+        renderTimeline(data.recentLogs);
+        updateLastSync(data.lastSync);
+      } catch (error) {
+        console.error('Erro:', error);
+        document.getElementById('statusIndicator').className = 'status-badge offline';
+      }
+    }
+
+    // Renderizar Métricas
+    function renderMetrics(data) {
+      const metrics = data.metrics;
+      if (!metrics) {
+        document.getElementById('metricsContainer').innerHTML = '<p style="grid-column: 1/-1;">Nenhum dado disponível</p>';
+        return;
+      }
+
+      const cards = [
+        { icon: '💵', label: 'Faturado Total', value: `R$ ${(metrics.total_negotiated / 100).toFixed(2)}`, change: '+5.2%' },
+        { icon: '✅', label: 'Recebido Total', value: `R$ ${(metrics.total_received / 100).toFixed(2)}`, change: '+2.1%' },
+        { icon: '⏳', label: 'Em Aberto', value: `R$ ${(metrics.total_pending / 100).toFixed(2)}`, change: '-1.3%' },
+        { icon: '📊', label: 'Taxa de Recebimento', value: `${metrics.completion_rate}%`, change: 'stable' },
+        { icon: '⏱️', label: 'DSO', value: `${metrics.average_days_to_receive} dias`, change: '-0.5 dias' },
+        { icon: '⚠️', label: 'Inadimplência', value: `${metrics.default_rate}%`, change: '+0.1%' },
+        { icon: '📈', label: 'Total de Vendas', value: metrics.total_sales, change: '+2 deals' },
+        { icon: '👥', label: 'Total de Clientes', value: data.clients.length, change: '+1 cliente' }
+      ];
+
+      document.getElementById('metricsContainer').innerHTML = cards.map((card, idx) => `
+        <div class="metric-card">
+          <div class="metric-label">
+            <span class="metric-icon">${card.icon}</span>
+            ${card.label}
+          </div>
+          <div class="metric-value">${card.value}</div>
+          <div class="metric-change ${card.change.includes('-') ? 'negative' : 'positive'}">
+            ${card.change.includes('-') ? '📉' : '📈'} ${card.change}
+          </div>
+          ${card.label.includes('Taxa') ? `
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${metrics.completion_rate}%"></div>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    // Renderizar Vendas (Funil)
+    function renderSales(sales) {
+      if (!sales || sales.length === 0) {
+        document.getElementById('salesContent').innerHTML = '<p>Nenhuma venda disponível</p>';
+        return;
+      }
+
+      allSales = sales;
+      const filtered = filterSalesByStatus(sales, currentSalesFilter);
+
+      const html = `
+        <table>
+          <thead>
+            <tr>
+              <th>📌 ID</th>
+              <th>👤 Cliente</th>
+              <th>💵 Faturado</th>
+              <th>✅ Recebido</th>
+              <th>⏳ Restante</th>
+              <th>📊 Taxa</th>
+              <th>🎯 Status</th>
+              <th>🔍</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filtered.map((sale, idx) => {
+              const taxa = (sale.value_received / sale.value_negotiated * 100).toFixed(0);
+              const statusClass = sale.status === 'completed' ? 'success' : 'warning';
+              return `
+                <tr>
+                  <td><code style="background:#f0f0f0; padding:4px 8px; border-radius:3px;">${(idx + 1)}</code></td>
+                  <td><strong>${sale.client_name || sale.client_id || 'N/A'}</strong></td>
+                  <td><strong>R$ ${(sale.value_negotiated / 100).toFixed(2)}</strong></td>
+                  <td>R$ ${(sale.value_received / 100).toFixed(2)}</td>
+                  <td>R$ ${((sale.value_negotiated - sale.value_received) / 100).toFixed(2)}</td>
+                  <td><div class="progress-bar"><div class="progress-fill" style="width: ${taxa}%"></div></div>${taxa}%</td>
+                  <td><span class="badge ${statusClass}">${sale.status}</span></td>
+                  <td><button onclick="showSaleDetail(${idx})" style="background:#667eea; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer;">Ver</button></td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('salesContent').innerHTML = html;
+    }
+
+    // Mostrar detalhes da venda
+    function showSaleDetail(idx) {
+      const sale = allSales[idx];
+      if (!sale) return;
+
+      const daysOverdue = sale.due_date
+        ? Math.floor((new Date() - new Date(sale.due_date)) / (1000 * 60 * 60 * 24))
+        : 0;
+
+      const detailHtml = `
+        <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-bottom:20px; border-left:4px solid #1d4ed8;">
+          <h4 style="color:#1d4ed8; margin-top:0; font-size:14px; font-weight:700; letter-spacing:-0.3px;">📌 Informações da Venda</h4>
+          <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">ID da Venda:</td>
+              <td style="padding:10px 0; text-align:right;"><code style="background:white; padding:4px 8px; border-radius:6px; border:1px solid #e2e8f0; font-size:12px;">${sale.id}</code></td>
+            </tr>
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Cliente:</td>
+              <td style="padding:10px 0; text-align:right; font-weight:700; color:#0f172a;">${sale.client_name || sale.client_id || 'N/A'}</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Vendedor:</td>
+              <td style="padding:10px 0; text-align:right;">${sale.seller_name || 'N/A'}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-bottom:20px; border-left:4px solid #15803d;">
+          <h4 style="color:#15803d; margin-top:0; font-size:14px; font-weight:700; letter-spacing:-0.3px;">💰 Dados Financeiros</h4>
+          <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Faturado (Deal Value):</td>
+              <td style="padding:10px 0; text-align:right; font-weight:700; color:#15803d;">R$ ${(sale.value_negotiated / 100).toFixed(2)}</td>
+            </tr>
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Recebido (Paid Amount):</td>
+              <td style="padding:10px 0; text-align:right; font-weight:700; color:#0284c7;">R$ ${(sale.value_received / 100).toFixed(2)}</td>
+            </tr>
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Em Aberto:</td>
+              <td style="padding:10px 0; text-align:right; font-weight:700; color:#92400e;">R$ ${((sale.value_negotiated - sale.value_received) / 100).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Taxa de Recebimento:</td>
+              <td style="padding:10px 0; text-align:right; font-weight:700; color:#0f172a;">${(sale.value_received / sale.value_negotiated * 100).toFixed(1)}%</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-bottom:20px; border-left:4px solid #0284c7;">
+          <h4 style="color:#0284c7; margin-top:0; font-size:14px; font-weight:700; letter-spacing:-0.3px;">📅 Datas & Status</h4>
+          <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Status:</td>
+              <td style="padding:10px 0; text-align:right;">
+                <span class="badge ${sale.status === 'completed' ? 'success' : 'warning'}" style="padding:6px 12px;">
+                  ${sale.status === 'completed' ? '✅ Recebida' : '⏳ Pendente'}
+                </span>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Data de Vencimento:</td>
+              <td style="padding:10px 0; text-align:right;">${sale.due_date ? new Date(sale.due_date).toLocaleDateString('pt-BR') : 'N/A'}</td>
+            </tr>
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Data de Pagamento:</td>
+              <td style="padding:10px 0; text-align:right;">${sale.payment_date ? new Date(sale.payment_date).toLocaleDateString('pt-BR') : 'Não pago'}</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Dias em Atraso:</td>
+              <td style="padding:10px 0; text-align:right;">${daysOverdue > 0 ? `<span style="color:#b91c1c; font-weight:700;">${daysOverdue} dias</span>` : '<span style="color:#15803d; font-weight:700;">No prazo</span>'}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background:#f1f5f9; padding:16px; border-radius:10px; border-left:4px solid #64748b;">
+          <h4 style="color:#64748b; margin-top:0; font-size:14px; font-weight:700; letter-spacing:-0.3px;">🔧 Outros Dados</h4>
+          <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+            <tr style="border-bottom:1px solid #e2e8f0;">
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">Método de Pagamento:</td>
+              <td style="padding:10px 0; text-align:right;">${sale.payment_method || 'N/A'}</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 0; font-weight:600; color:#64748b; font-size:13px;">ID do Cliente:</td>
+              <td style="padding:10px 0; text-align:right;"><code style="background:white; padding:4px 8px; border-radius:6px; border:1px solid #e2e8f0; font-size:12px;">${sale.client_id || 'N/A'}</code></td>
+            </tr>
+          </table>
+        </div>
+      `;
+
+      document.getElementById('detailTitle').textContent = `📌 Detalhes da Venda - ${sale.client_name || 'Cliente'} (ID: ${idx + 1})`;
+      document.getElementById('detailContent').innerHTML = detailHtml;
+      document.getElementById('saleDetailModal').style.display = 'block';
+    }
+
+    function closeSaleDetail() {
+      document.getElementById('saleDetailModal').style.display = 'none';
+    }
+
+    // Renderizar Clientes
+    function renderClients(clients) {
+      if (!clients || clients.length === 0) {
+        document.getElementById('clientsContent').innerHTML = '<p>Nenhum cliente disponível</p>';
+        return;
+      }
+
+      allClients = clients;
+
+      const html = `
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Indústria</th>
+              <th>Risco</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${clients.map(client => {
+              const riskClass = client.credit_risk.toLowerCase();
+              return `
+                <tr>
+                  <td><strong>${client.name}</strong></td>
+                  <td>${client.email || '-'}</td>
+                  <td>${client.industry || '-'}</td>
+                  <td><span class="badge ${riskClass}">${client.credit_risk}</span></td>
+                  <td>${client.last_payment_date ? '✅ Ativo' : '⚠️ Inativo'}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('clientsContent').innerHTML = html;
+    }
+
+    // Renderizar Timeline
+    function renderTimeline(logs) {
+      if (!logs || logs.length === 0) {
+        document.getElementById('timelineContent').innerHTML = '<p>Nenhum evento</p>';
+        return;
+      }
+
+      const html = `<div class="timeline">
+        ${logs.map(log => `
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">${new Date(log.timestamp).toLocaleString('pt-BR')}</div>
+            <div class="timeline-text">
+              ${log.success ? '✅' : '❌'} ${log.operation}
+              ${log.salesCount ? ` (${log.salesCount} vendas)` : ''}
+              ${log.clientsCount ? ` (${log.clientsCount} clientes)` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+      document.getElementById('timelineContent').innerHTML = html;
+    }
+
+    // Funções auxiliares
+    function filterSalesByStatus(sales, status) {
+      return status ? sales.filter(s => s.status === status) : sales;
+    }
+
+    function filterSales() {
+      currentSalesFilter = event.target.value;
+      renderSales(allSales);
+    }
+
+    function filterClients() {
+      const risk = event.target.value;
+      const filtered = risk ? allClients.filter(c => c.credit_risk === risk) : allClients;
+      renderClients(filtered);
+    }
+
+    function sortSales() {
+      const type = event.target.value;
+      const sorted = [...allSales];
+      if (type === 'value') sorted.sort((a, b) => b.value_negotiated - a.value_negotiated);
+      if (type === 'status') sorted.sort((a, b) => a.status.localeCompare(b.status));
+      renderSales(sorted);
+    }
+
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function updateLastSync(timestamp) {
+      if (timestamp) {
+        const date = new Date(timestamp);
+        document.getElementById('lastUpdate').textContent = `Atualizado: ${date.toLocaleString('pt-BR')}`;
+      }
+    }
+
+    async function syncNow() {
+      const btn = document.getElementById('syncBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Sincronizando...';
+      try {
+        await fetch(`${API_URL}/sync`);
+        await new Promise(r => setTimeout(r, 1000));
+        await loadDashboard();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🔄 Sincronizar Agora';
+      }
+    }
+
+    // Inicialização
+    connectSSE();
+    loadDashboard();
+    setInterval(loadDashboard, 10000);
+  </script>
+</body>
+</html>

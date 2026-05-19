@@ -1,0 +1,173 @@
+[
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:25:46.073Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:15:45.405Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:05:44.736Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:55:43.395Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:45:42.530Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:35:41.534Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:25:40.603Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:17:34.193Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:13:09.837Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:05:34.044Z"
+  },
+  {
+    "operation": "demo_sync",
+    "success": true,
+    "salesCount": 5,
+    "clientsCount": 5,
+    "timestamp": "2026-04-14T19:03:17.404Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T18:55:31.711Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T18:45:28.239Z"
+  },
+  {
+    "operation": "demo_sync",
+    "success": true,
+    "salesCount": 5,
+    "clientsCount": 5,
+    "timestamp": "2026-04-14T18:35:27.778Z"
+  },
+  {
+    "operation": "demo_sync",
+    "success": true,
+    "salesCount": 5,
+    "clientsCount": 5,
+    "timestamp": "2026-04-14T18:39:33.438Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T18:50:28.613Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:00:32.107Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:05:17.418Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:10:38.908Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:15:39.198Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:20:39.515Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:30:40.975Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:40:41.892Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T19:50:42.959Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:00:43.691Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:10:45.028Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:20:45.684Z"
+  },
+  {
+    "operation": "full_sync",
+    "success": false,
+    "error": "ClickUp API error: 401 {\"err\":\"Oauth token not found\",\"ECODE\":\"OAUTH_019\"}",
+    "timestamp": "2026-04-14T20:30:46.451Z"
+  }
+]

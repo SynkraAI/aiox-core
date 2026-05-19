@@ -1,0 +1,33 @@
+{
+  "name": "financial-sync",
+  "version": "1.0.0",
+  "description": "Financial Dashboard with ClickUp Integration - CLI First Architecture",
+  "main": "cli/sync-service.js",
+  "bin": {
+    "financial-sync": "cli/sync-service.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "api": "node api/server.js",
+    "sync": "node cli/sync-service.js sync",
+    "sync:sales": "node cli/sync-service.js sales",
+    "sync:clients": "node cli/sync-service.js clients",
+    "sync:help": "node cli/sync-service.js help",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js"
+  },
+  "keywords": [
+    "financial",
+    "dashboard",
+    "clickup",
+    "sales",
+    "crm"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

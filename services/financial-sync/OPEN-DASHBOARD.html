@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💰 Financial Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 60px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .status {
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .status.loading {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+    .status.ready {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .status.error {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 600;
+      margin: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .button.secondary {
+      background: #666;
+    }
+
+    .button.secondary:hover {
+      background: #555;
+    }
+
+    .info {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      color: #1565c0;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .steps {
+      text-align: left;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .steps h3 {
+      color: #667eea;
+      margin-bottom: 15px;
+    }
+
+    .steps ol {
+      margin-left: 20px;
+      color: #666;
+    }
+
+    .steps li {
+      margin: 10px 0;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Financial Dashboard</h1>
+    <p class="subtitle">
+      Sincronização em Tempo Real com ClickUp<br>
+      <strong>Saúde Financeira + Funil de Vendas</strong>
+    </p>
+
+    <div class="status" id="status">
+      <div class="spinner"></div>
+      <p id="statusText">Verificando se o servidor está rodando...</p>
+    </div>
+
+    <div id="buttons">
+      <button class="button" onclick="openDashboard()">
+        ✨ Abrir Dashboard
+      </button>
+      <button class="button secondary" onclick="checkServer()">
+        🔍 Verificar Servidor
+      </button>
+    </div>
+
+    <div class="info">
+      <strong>📌 Como usar:</strong><br>
+      1. Abra o terminal<br>
+      2. Execute: <code>npm run start</code><br>
+      3. Clique em "Abrir Dashboard" abaixo<br>
+      4. Dashboard sincroniza automaticamente!
+    </div>
+
+    <div class="steps">
+      <h3>🚀 Quick Start</h3>
+      <ol>
+        <li>
+          <strong>Configurar ClickUp (opcional):</strong><br>
+          <code>nano .env</code> (adicionar credenciais)
+        </li>
+        <li>
+          <strong>Iniciar servidor:</strong><br>
+          <code>npm run start</code>
+        </li>
+        <li>
+          <strong>Abrir dashboard:</strong><br>
+          <code>http://localhost:3001</code>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3001/api';
+    const DASHBOARD_URL = 'http://localhost:3001';
+
+    async function checkServer() {
+      const statusDiv = document.getElementById('status');
+      const statusText = document.getElementById('statusText');
+
+      try {
+        const response = await fetch(`${API_URL}/health`);
+        if (response.ok) {
+          statusDiv.className = 'status ready';
+          statusText.innerHTML = '✅ Servidor está online!<br><strong>Clique em "Abrir Dashboard" para começar</strong>';
+        }
+      } catch (error) {
+        statusDiv.className = 'status error';
+        statusText.innerHTML = `
+          ❌ Servidor offline<br>
+          <strong>Rode:</strong> <code>npm run start</code>
+        `;
+      }
+    }
+
+    function openDashboard() {
+      window.location.href = DASHBOARD_URL;
+    }
+
+    // Verificar servidor ao carregar
+    window.addEventListener('load', checkServer);
+
+    // Verificar a cada 5 segundos
+    setInterval(checkServer, 5000);
+  </script>
+</body>
+</html>

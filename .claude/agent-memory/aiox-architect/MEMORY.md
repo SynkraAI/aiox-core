@@ -1,5 +1,8 @@
 # Architect Agent Memory
 
+## Active Projects
+- [Funil-GPS ERP SaaS](project_funil_gps_erp.md) — Brownfield ERP transformation, Supabase + Next.js + NestJS, multi-tenant with double-entry bookkeeping
+
 ## EPIC-ACT Wave 2 Quality Gate Review (2026-02-06)
 - Reviewed: ACT-6 (Unified Activation Pipeline, 67 tests, APPROVED)
 - Total EPIC-ACT: 255 tests pass across 4 test suites (0 regressions)

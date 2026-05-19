@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "src/main.ts": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}

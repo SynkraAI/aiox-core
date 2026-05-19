@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💰 Financial Dashboard - COMECE AQUI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+    .step {
+      background: #f9f9f9;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 4px solid #667eea;
+      border-radius: 4px;
+    }
+    .step-number {
+      background: #667eea;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    .step-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .step-content {
+      color: #555;
+      line-height: 1.6;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #d32f2f;
+      font-weight: bold;
+    }
+    .big-button {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px 40px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 30px 0;
+      width: 100%;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    .big-button:hover {
+      transform: scale(1.05);
+    }
+    .warning {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+      border-left: 4px solid #ffc107;
+      color: #856404;
+    }
+    .success {
+      background: #d4edda;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+      border-left: 4px solid #28a745;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Financial Dashboard</h1>
+    <p class="subtitle">Sistema de Saúde Financeira + Funil de Vendas</p>
+
+    <div class="success">
+      <strong>✅ TUDO PRONTO!</strong> Seu dashboard está 100% configurado e funcionando.
+    </div>
+
+    <h2 style="margin-top: 40px; margin-bottom: 20px;">🚀 3 Passos Para Começar</h2>
+
+    <!-- PASSO 1 -->
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-title">Abra o Terminal (CMD)</div>
+      <div class="step-content">
+        Pressione <code>Windows + R</code> e digite:
+        <div style="margin-top: 10px;"><code>cmd</code></div>
+      </div>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-title">Digite Este Comando</div>
+      <div class="step-content">
+        Cole no terminal e pressione ENTER:
+        <div style="margin-top: 10px; background: black; color: #0f0; padding: 15px; border-radius: 4px; font-family: monospace;">
+          cd c:/Users/venda/aiox-core/services/financial-sync && npm run start
+        </div>
+        <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
+          ⏳ Vai levar alguns segundos... aguarde até ver "API Server rodando"
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-title">Abra no Navegador</div>
+      <div class="step-content">
+        Clique abaixo ou copie na barra do navegador:
+      </div>
+      <button class="big-button" onclick="window.open('http://localhost:3001', '_blank')">
+        🌐 ABRIR DASHBOARD (http://localhost:3001)
+      </button>
+    </div>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+
+    <h2 style="margin-bottom: 20px;">❓ O Que Você Vai Ver?</h2>
+
+    <div class="step">
+      <div class="step-title">📊 8 Métricas Grandes</div>
+      <div class="step-content">
+        • Faturado Total (R$)<br>
+        • Recebido Total (R$)<br>
+        • Em Aberto (R$)<br>
+        • Taxa de Recebimento (%)<br>
+        • DSO - Dias Médios<br>
+        • Taxa de Inadimplência<br>
+        • Total de Vendas<br>
+        • Total de Clientes
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">📋 4 Abas Interativas</div>
+      <div class="step-content">
+        • <strong>📊 Vendas em Funil:</strong> Tabela com todas as vendas (clique "Ver" para detalhes)<br>
+        • <strong>👥 Saúde de Clientes:</strong> Lista de clientes com risco<br>
+        • <strong>📈 Timeline:</strong> Histórico de sincronizações<br>
+        • <strong>⚙️ Detalhes & Logs:</strong> Informações técnicas
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">🎯 Clique em "Ver" em Qualquer Venda</div>
+      <div class="step-content">
+        Aparece modal com:<br>
+        • Nome do cliente<br>
+        • Faturado / Recebido / Restante<br>
+        • Data de vencimento<br>
+        • Dias em atraso<br>
+        • Vendedor responsável<br>
+        • Método de pagamento
+      </div>
+    </div>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+
+    <h2 style="margin-bottom: 20px;">⚠️ Se Parar de Funcionar</h2>
+
+    <div class="warning">
+      <strong>Terminal fechou acidentalmente?</strong><br>
+      Abra novo terminal e digite:
+      <div style="margin-top: 10px;"><code>cd c:/Users/venda/aiox-core/services/financial-sync && npm run start</code></div>
+    </div>
+
+    <div class="warning">
+      <strong>Dashboard não carrega?</strong><br>
+      1. Verifique se o terminal está rodando<br>
+      2. Tente abrir em outro navegador<br>
+      3. Limpe o cache (Ctrl+F5)
+    </div>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+
+    <h2 style="margin-bottom: 20px;">📚 Próximos Passos (Depois)</h2>
+
+    <div class="step">
+      <div class="step-title">Quando Quiser Conectar ao ClickUp Real</div>
+      <div class="step-content">
+        Veja o arquivo: <code>.env</code> no diretório<br>
+        Preencha com suas credenciais ClickUp<br>
+        Reinicie com <code>npm run start</code>
+      </div>
+    </div>
+
+    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-top: 30px; text-align: center;">
+      <strong style="font-size: 1.1em; color: #667eea;">Pronto para começar? 🚀</strong><br><br>
+      <button class="big-button" onclick="window.open('http://localhost:3001', '_blank')">
+        ✨ ABRIR DASHBOARD AGORA
+      </button>
+    </div>
+  </div>
+</body>
+</html>

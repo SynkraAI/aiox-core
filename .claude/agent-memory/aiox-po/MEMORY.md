@@ -39,3 +39,8 @@
 ## Validation Anti-Patterns
 - Epic INDEX claiming file exists when it doesn't (index.js) -- always verify with Glob
 - Story pseudo-code may not match exact API signatures -- always grep for actual method names in source
+- Story tech stack (e.g., "Supabase Auth") may not match codebase (e.g., NestJS + custom JWT) -- always inspect target project before validating
+
+## Memory Index
+- [Finance Commission System project context](finance_commission_project.md) — NestJS/Prisma project at C:/Users/venda/finance-commission-system, Sprint 1 refinement reality (2026-05-12)
+- [Finance Sprint 2 story collision](finance_sprint2_story_collision.md) — Refusal pattern when spawn prompts ask for Supabase/RLS/raw-SQL/double-entry on this Prisma/service-auth project (2026-05-12)

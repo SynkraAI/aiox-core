@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-04-14T19:03:17.402Z",
+  "metrics": {
+    "total_negotiated": 405000,
+    "total_received": 247500,
+    "total_pending": 157500,
+    "completion_rate": 61.11,
+    "average_days_to_receive": -1.5,
+    "default_rate": 40,
+    "total_sales": 5
+  }
+}

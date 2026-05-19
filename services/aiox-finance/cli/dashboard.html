@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendas e Comissões - Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: #000;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+      font-size: 1.8em;
+    }
+
+    .header-text h1 {
+      font-size: 2em;
+      color: #000;
+      margin: 0;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 0.95em;
+      color: #666;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .card h2 {
+      color: #000;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      border-bottom: 3px solid #000;
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      font-weight: 500;
+      font-size: 0.9em;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 0.95em;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #000;
+      background: #f8f9ff;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    button {
+      background: #000;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      background: #1a1a1a;
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .calculation-box {
+      background: #f8f9ff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-left: 4px solid #000;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    .calc-row.net {
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #000;
+      padding-top: 10px;
+      border-top: 2px solid #e0e0e0;
+      margin-top: 10px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+
+    .status.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status.approved {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th {
+      background: #f5f5f5;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    tr:hover {
+      background: #f9f9f9;
+    }
+
+    .money {
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 0.95em;
+    }
+
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border-left: 4px solid #28a745;
+    }
+
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border-left: 4px solid #dc3545;
+    }
+
+    .message.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border-left: 4px solid #17a2b8;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #999;
+      padding: 30px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: #000;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 0.9em;
+      opacity: 0.9;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .tab {
+      padding: 12px 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 1em;
+      color: #999;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .tab.active {
+      color: #000;
+      border-bottom-color: #000;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-section">
+        <div class="logo">GPSX</div>
+        <div class="header-text">
+          <h1>Vendas e Comissões</h1>
+          <p class="subtitle">Lançamento de Vendas + Comissão Automática</p>
+        </div>
+      </div>
+    </header>
+
+    <div id="message"></div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <div class="stat-number" id="totalSales">0</div>
+        <div class="stat-label">Vendas Lançadas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="totalCommissions">0</div>
+        <div class="stat-label">Comissões Criadas</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" id="totalCommissionValue">R$ 0</div>
+        <div class="stat-label">Comissão Total</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>📝 Lançar Nova Venda</h2>
+        <form id="saleForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Vendedor *</label>
+              <select id="sellerId" required onchange="document.getElementById('sellerIdDisplay').value = this.value">
+                <option value="">-- Selecionar Vendedor --</option>
+              </select>
+              <input type="hidden" id="sellerIdDisplay">
+            </div>
+            <div class="form-group">
+              <label>Cliente *</label>
+              <select id="customerId" required onchange="document.getElementById('customerIdDisplay').value = this.value">
+                <option value="">-- Selecionar Cliente --</option>
+              </select>
+              <input type="hidden" id="customerIdDisplay">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Valor Líquido (R$) *</label>
+              <input type="number" id="netAmount" placeholder="850.00" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label>Percentual de Comissão (%)</label>
+              <input type="number" id="commissionPercentage" placeholder="10" min="0" max="100" step="0.01" value="10">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Método de Pagamento</label>
+              <select id="paymentMethod">
+                <option>PIX</option>
+                <option>CARTÃO_CRÉDITO</option>
+                <option>CARTÃO_DÉBITO</option>
+                <option>TRANSFERÊNCIA_BANCÁRIA</option>
+                <option>CHEQUE</option>
+                <option>OUTRO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Notas (opcional)</label>
+              <input type="text" id="notes" placeholder="Observações sobre a venda">
+            </div>
+          </div>
+
+          <div class="calculation-box">
+            <div class="calc-row net">
+              <span>💵 VALOR LÍQUIDO:</span>
+              <span id="calcNet">R$ 0.00</span>
+            </div>
+            <div class="calc-row">
+              <span>📊 Comissão (cálculo em tempo real):</span>
+              <span id="calcCommission">R$ 0.00</span>
+            </div>
+          </div>
+
+          <button type="submit" style="margin-top: 20px;">Lançar Venda</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>⚙️ Configuração</h2>
+
+        <div class="form-group">
+          <label>Login do Usuário</label>
+          <select id="currentUser" onchange="handleUserChange()" style="margin-bottom: 15px;">
+            <option value="">-- Selecionar Usuário --</option>
+          </select>
+          <button onclick="loadUsersList()" style="padding: 10px 15px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9em;">↻ Recarregar Usuários</button>
+          <div id="userInfo" style="margin-top: 15px; padding: 12px; background: #f0f0f0; border-radius: 6px; font-size: 0.9em; display: none;">
+            <strong>Logado como:</strong> <span id="userInfoName"></span><br>
+            <strong>Perfil:</strong> <span id="userInfoRole"></span>
+          </div>
+        </div>
+
+        <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+
+        <div class="form-group">
+          <label>URL do Supabase</label>
+          <input type="text" id="supabaseUrl" placeholder="https://seu-projeto.supabase.co" value="https://your-project.supabase.co">
+        </div>
+
+        <div class="form-group">
+          <label>Chave Anon do Supabase</label>
+          <input type="password" id="supabaseKey" placeholder="sua-chave-anonima" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+        </div>
+
+        <button onclick="testConnection()" style="margin-bottom: 15px;">🔗 Testar Conexão</button>
+
+        <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #000;">
+          <p style="font-size: 0.9em; color: #555; line-height: 1.6;">
+            <strong>Como configurar:</strong><br>
+            1. Acesse <a href="https://supabase.com" target="_blank" style="color: #000;">supabase.com</a><br>
+            2. Crie um projeto ou use um existente<br>
+            3. Copie a URL e Chave Anon<br>
+            4. Cole nos campos acima<br>
+            5. Clique em "Testar Conexão"
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('sales')">📊 Vendas</button>
+        <button class="tab" onclick="switchTab('commissions')">💰 Comissões</button>
+        <button class="tab" onclick="switchTab('dashboard')">📈 Dashboard Mensal</button>
+        <button class="tab" onclick="switchTab('users')">👥 Usuários</button>
+      </div>
+
+      <div id="sales" class="tab-content active">
+        <h2>Vendas Lançadas</h2>
+
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; align-items: flex-end;">
+            <div>
+              <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #555; font-weight: 500;">Data Inicial</label>
+              <input type="date" id="filterDateFrom" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #555; font-weight: 500;">Data Final</label>
+              <input type="date" id="filterDateTo" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <div>
+              <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #555; font-weight: 500;">Filtrar por Vendedor</label>
+              <select id="filterSellerId" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">-- Todos --</option>
+              </select>
+            </div>
+            <button onclick="applyFilters()" style="padding: 8px 16px; background: #000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Filtrar</button>
+          </div>
+        </div>
+
+        <div id="salesTable"></div>
+      </div>
+
+      <div id="commissions" class="tab-content">
+        <h2>Comissões Criadas Automaticamente</h2>
+        <div id="commissionsTable"></div>
+      </div>
+
+      <div id="dashboard" class="tab-content">
+        <h2>Dashboard Mensal</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+          <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h3 style="margin-bottom: 15px; color: #000;">Vendas por Mês</h3>
+            <canvas id="salesChart" style="max-height: 300px;"></canvas>
+          </div>
+          <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <h3 style="margin-bottom: 15px; color: #000;">Comissões por Mês</h3>
+            <canvas id="commissionsChart" style="max-height: 300px;"></canvas>
+          </div>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 15px; color: #000;">Resumo Mensal</h3>
+          <div id="monthlyTable"></div>
+        </div>
+      </div>
+
+      <div id="users" class="tab-content">
+        <h2>Gestão de Usuários</h2>
+
+        <div style="background: #f0f8ff; border: 1px solid #b3d9ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <strong style="color: #004085;">ℹ️ Observação</strong><br>
+          <span style="font-size: 0.9em; color: #004085;">Este é um painel de visualização. Para criar, editar ou deletar usuários, use o CLI:</span>
+          <pre style="background: white; padding: 10px; border-radius: 4px; margin-top: 10px; font-size: 0.85em; overflow-x: auto;"><code>node manage-users.js list
+node manage-users.js create --name "Nome" --email "email@example.com" --role COMERCIAL --commission-percentage 10
+node manage-users.js edit --id [user-id] --commission-percentage 15
+node manage-users.js delete --id [user-id]</code></pre>
+        </div>
+
+        <button onclick="loadAllUsers()" style="margin-bottom: 15px; padding: 10px 20px; background: #000; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">↻ Recarregar Usuários</button>
+
+        <div id="usersTable"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>
+    let supabase = null;
+    let currentUserId = null;
+    let currentUserRole = null;
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('saleForm').addEventListener('submit', handleSaleSubmit);
+      document.getElementById('netAmount').addEventListener('input', updateCalculation);
+      document.getElementById('commissionPercentage').addEventListener('input', updateCalculation);
+
+      const saved = sessionStorage.getItem('currentUser');
+      if (saved) {
+        const { id, role, name } = JSON.parse(saved);
+        currentUserId = id;
+        currentUserRole = role;
+        document.getElementById('currentUser').value = id;
+        showUserInfo(name, role);
+      }
+
+      loadData();
+    });
+
+    function showUserInfo(name, role) {
+      const userInfo = document.getElementById('userInfo');
+      document.getElementById('userInfoName').textContent = name;
+      document.getElementById('userInfoRole').textContent = role === 'ADMIN' ? 'Administrador (vê tudo)' : role;
+      userInfo.style.display = 'block';
+    }
+
+    function handleUserChange() {
+      const select = document.getElementById('currentUser');
+      const selectedId = select.value;
+
+      if (!selectedId) {
+        currentUserId = null;
+        currentUserRole = null;
+        sessionStorage.removeItem('currentUser');
+        document.getElementById('userInfo').style.display = 'none';
+        loadData();
+        return;
+      }
+
+      const option = select.options[select.selectedIndex];
+      const name = option.textContent.split('(')[0].trim();
+      const role = option.dataset.role;
+
+      currentUserId = selectedId;
+      currentUserRole = role;
+      sessionStorage.setItem('currentUser', JSON.stringify({ id: selectedId, role, name }));
+      showUserInfo(name, role);
+      loadData();
+    }
+
+    function getSupabaseClient() {
+      const url = document.getElementById('supabaseUrl').value;
+      const key = document.getElementById('supabaseKey').value;
+
+      if (!url || !key || url === 'https://your-project.supabase.co') {
+        showMessage('Configure a URL do Supabase e a Chave Anon primeiro', 'error');
+        return null;
+      }
+
+      return window.supabase.createClient(url, key);
+    }
+
+    function testConnection() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      showMessage('Testando conexão...', 'info');
+
+      client.from('sales').select('count', { count: 'exact', head: true })
+        .then(({ count, error }) => {
+          if (error) {
+            showMessage('❌ Erro na conexão: ' + error.message, 'error');
+          } else {
+            showMessage('✅ Conexão bem-sucedida! Vendas no banco: ' + count, 'success');
+            loadUsersList();
+            loadCustomersList();
+            loadData();
+          }
+        });
+    }
+
+    async function loadUsersList() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      try {
+        const { data: users, error } = await client
+          .from('users')
+          .select('id, name, role')
+          .in('role', ['COMERCIAL', 'VENDEDOR', 'ADMIN'])
+          .order('name');
+
+        if (error) throw error;
+
+        // Populate the login user dropdown
+        const loginSelect = document.getElementById('currentUser');
+        const loginCurrentValue = loginSelect.value;
+
+        loginSelect.innerHTML = '<option value="">-- Selecionar Usuário --</option>';
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.id;
+          option.textContent = `${user.name} (${user.role})`;
+          option.dataset.role = user.role;
+          loginSelect.appendChild(option);
+        });
+
+        if (loginCurrentValue) loginSelect.value = loginCurrentValue;
+
+        // Populate the main seller dropdown
+        const select = document.getElementById('sellerId');
+        const currentValue = select.value;
+
+        select.innerHTML = '<option value="">-- Selecionar Vendedor --</option>';
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.id;
+          option.textContent = `${user.name} (${user.role})`;
+          select.appendChild(option);
+        });
+
+        if (currentValue) select.value = currentValue;
+
+        // Populate the filter dropdown
+        const filterSelect = document.getElementById('filterSellerId');
+        const filterCurrentValue = filterSelect.value;
+
+        filterSelect.innerHTML = '<option value="">-- Todos --</option>';
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.id;
+          option.textContent = user.name;
+          filterSelect.appendChild(option);
+        });
+
+        if (filterCurrentValue) filterSelect.value = filterCurrentValue;
+      } catch (err) {
+        console.error('Erro ao carregar vendedores:', err);
+      }
+    }
+
+    async function loadCustomersList() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      try {
+        const { data: customers, error } = await client
+          .from('customers')
+          .select('id, name')
+          .order('name');
+
+        if (error) throw error;
+
+        const select = document.getElementById('customerId');
+        const currentValue = select.value;
+
+        select.innerHTML = '<option value="">-- Selecionar Cliente --</option>';
+        customers.forEach(customer => {
+          const option = document.createElement('option');
+          option.value = customer.id;
+          option.textContent = customer.name;
+          select.appendChild(option);
+        });
+
+        if (currentValue) select.value = currentValue;
+      } catch (err) {
+        console.error('Erro ao carregar clientes:', err);
+      }
+    }
+
+    function updateCalculation() {
+      const net = parseFloat(document.getElementById('netAmount').value) || 0;
+      const percentage = parseFloat(document.getElementById('commissionPercentage').value) || 0;
+      const commission = (net * percentage) / 100;
+
+      document.getElementById('calcNet').textContent = 'R$ ' + net.toFixed(2);
+      document.getElementById('calcCommission').textContent = 'R$ ' + commission.toFixed(2);
+    }
+
+    async function handleSaleSubmit(e) {
+      e.preventDefault();
+
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      const btn = e.target.querySelector('button');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Lançando...';
+
+      const sellerId = document.getElementById('sellerIdDisplay').value || document.getElementById('sellerId').value;
+      const customerId = document.getElementById('customerIdDisplay').value || document.getElementById('customerId').value;
+
+      if (!sellerId || !customerId) {
+        showMessage('❌ Selecione vendedor e cliente', 'error');
+        btn.disabled = false;
+        btn.innerHTML = 'Lançar Venda';
+        return;
+      }
+      const netAmount = parseFloat(document.getElementById('netAmount').value);
+      const commissionPercentage = parseFloat(document.getElementById('commissionPercentage').value) || 10;
+
+      try {
+        const { data, error } = await client.from('sales').insert({
+          seller_id: sellerId,
+          customer_id: customerId,
+          gross_amount: netAmount,
+          net_amount: netAmount,
+          tax_amount: 0,
+          discount_amount: 0,
+          payment_method: document.getElementById('paymentMethod').value,
+          notes: document.getElementById('notes').value || null,
+          status: 'PENDING',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }).select().single();
+
+        if (error) throw error;
+
+        showMessage(`✅ Venda lançada! ID: ${data.id.substring(0, 8)}... | Comissão: R$ ${((netAmount * commissionPercentage) / 100).toFixed(2)}`, 'success');
+        document.getElementById('saleForm').reset();
+        updateCalculation();
+        setTimeout(loadData, 1000);
+
+      } catch (err) {
+        showMessage(`❌ Erro: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Lançar Venda';
+      }
+    }
+
+    async function loadData() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      try {
+        let salesQuery = client
+          .from('sales')
+          .select('id, seller_id, customer_id, net_amount, payment_method, status, created_at')
+          .order('created_at', { ascending: false })
+          .limit(10);
+
+        let commissionsQuery = client
+          .from('commissions')
+          .select('id, seller_id, amount, percentage, status, created_at')
+          .order('created_at', { ascending: false })
+          .limit(10);
+
+        // Filter by seller_id if not ADMIN
+        if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId) {
+          salesQuery = salesQuery.eq('seller_id', currentUserId);
+          commissionsQuery = commissionsQuery.eq('seller_id', currentUserId);
+        }
+
+        const { data: sales, error: salesError } = await salesQuery;
+        const { data: commissions, error: commError } = await commissionsQuery;
+
+        if (salesError) throw salesError;
+        if (commError) throw commError;
+
+        renderSales(sales || []);
+        renderCommissions(commissions || []);
+        updateStats(sales || [], commissions || []);
+        loadMonthlyDashboard();
+
+      } catch (err) {
+        console.error('Erro ao carregar:', err);
+      }
+    }
+
+    async function loadMonthlyDashboard() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      try {
+        let salesQuery = client
+          .from('sales')
+          .select('net_amount, created_at')
+          .order('created_at', { ascending: true });
+
+        let commissionsQuery = client
+          .from('commissions')
+          .select('amount, created_at')
+          .order('created_at', { ascending: true });
+
+        // Filter by seller_id if not ADMIN
+        if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId) {
+          salesQuery = salesQuery.eq('seller_id', currentUserId);
+          commissionsQuery = commissionsQuery.eq('seller_id', currentUserId);
+        }
+
+        const { data: sales, error: salesError } = await salesQuery;
+        const { data: commissions, error: commError } = await commissionsQuery;
+
+        if (salesError) throw salesError;
+        if (commError) throw commError;
+
+        const monthlyData = aggregateMonthlyData(sales || [], commissions || []);
+        renderMonthlyCharts(monthlyData);
+        renderMonthlySummary(monthlyData);
+
+      } catch (err) {
+        console.error('Erro ao carregar dashboard mensal:', err);
+      }
+    }
+
+    function aggregateMonthlyData(sales, commissions) {
+      const months = {};
+      const now = new Date();
+
+      for (let i = 11; i >= 0; i--) {
+        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        const key = date.toLocaleString('pt-BR', { month: 'short', year: 'numeric' });
+        months[key] = { sales: 0, commissions: 0, date };
+      }
+
+      sales.forEach(sale => {
+        const date = new Date(sale.created_at);
+        const key = date.toLocaleString('pt-BR', { month: 'short', year: 'numeric' });
+        if (months[key]) {
+          months[key].sales += parseFloat(sale.net_amount || 0);
+        }
+      });
+
+      commissions.forEach(comm => {
+        const date = new Date(comm.created_at);
+        const key = date.toLocaleString('pt-BR', { month: 'short', year: 'numeric' });
+        if (months[key]) {
+          months[key].commissions += parseFloat(comm.amount || 0);
+        }
+      });
+
+      return months;
+    }
+
+    function renderMonthlyCharts(monthlyData) {
+      const labels = Object.keys(monthlyData);
+      const salesData = labels.map(label => monthlyData[label].sales);
+      const commissionsData = labels.map(label => monthlyData[label].commissions);
+
+      const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      };
+
+      // Sales Chart
+      const salesCtx = document.getElementById('salesChart').getContext('2d');
+      if (window.salesChartInstance) window.salesChartInstance.destroy();
+      window.salesChartInstance = new Chart(salesCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Vendas (R$)',
+            data: salesData,
+            borderColor: '#000',
+            backgroundColor: 'rgba(0, 0, 0, 0.05)',
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true,
+            pointRadius: 5,
+            pointBackgroundColor: '#000',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
+          }]
+        },
+        options: chartOptions
+      });
+
+      // Commissions Chart
+      const commissionsCtx = document.getElementById('commissionsChart').getContext('2d');
+      if (window.commissionsChartInstance) window.commissionsChartInstance.destroy();
+      window.commissionsChartInstance = new Chart(commissionsCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Comissões (R$)',
+            data: commissionsData,
+            borderColor: '#333',
+            backgroundColor: 'rgba(51, 51, 51, 0.05)',
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true,
+            pointRadius: 5,
+            pointBackgroundColor: '#333',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
+          }]
+        },
+        options: chartOptions
+      });
+    }
+
+    function renderMonthlySummary(monthlyData) {
+      const labels = Object.keys(monthlyData);
+      const container = document.getElementById('monthlyTable');
+
+      let html = '<div class="table-wrapper"><table>';
+      html += '<tr><th>Mês</th><th>Vendas (R$)</th><th>Variação %</th><th>Comissões (R$)</th><th>Variação %</th></tr>';
+
+      let prevSales = null;
+      let prevCommissions = null;
+
+      labels.forEach((label, index) => {
+        const data = monthlyData[label];
+        const sales = data.sales;
+        const commissions = data.commissions;
+
+        const salesVariation = prevSales !== null && prevSales > 0
+          ? (((sales - prevSales) / prevSales) * 100).toFixed(1)
+          : '-';
+        const commissionsVariation = prevCommissions !== null && prevCommissions > 0
+          ? (((commissions - prevCommissions) / prevCommissions) * 100).toFixed(1)
+          : '-';
+
+        const salesColor = salesVariation === '-' ? '#999' : (salesVariation >= 0 ? '#28a745' : '#dc3545');
+        const commissionColor = commissionsVariation === '-' ? '#999' : (commissionsVariation >= 0 ? '#28a745' : '#dc3545');
+
+        html += `<tr>
+          <td style="font-weight: 600;">${label}</td>
+          <td class="money">R$ ${sales.toFixed(2)}</td>
+          <td style="color: ${salesColor}; font-weight: 600;">${salesVariation === '-' ? '-' : (salesVariation >= 0 ? '+' : '') + salesVariation + '%'}</td>
+          <td class="money">R$ ${commissions.toFixed(2)}</td>
+          <td style="color: ${commissionColor}; font-weight: 600;">${commissionsVariation === '-' ? '-' : (commissionsVariation >= 0 ? '+' : '') + commissionsVariation + '%'}</td>
+        </tr>`;
+
+        prevSales = sales > 0 ? sales : prevSales;
+        prevCommissions = commissions > 0 ? commissions : prevCommissions;
+      });
+
+      html += '</table></div>';
+      container.innerHTML = html;
+    }
+
+    async function loadAllUsers() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      try {
+        const { data: users, error } = await client
+          .from('users')
+          .select('id, name, email, role, commission_percentage, created_at')
+          .order('created_at', { ascending: true });
+
+        if (error) throw error;
+
+        renderUsers(users || []);
+        showMessage(`✅ ${(users || []).length} usuário(s) carregado(s)`, 'success');
+
+      } catch (err) {
+        showMessage(`❌ Erro ao carregar: ${err.message}`, 'error');
+      }
+    }
+
+    function renderUsers(users) {
+      const container = document.getElementById('usersTable');
+
+      if (!users.length) {
+        container.innerHTML = '<div class="empty-state">Nenhum usuário cadastrado</div>';
+        return;
+      }
+
+      let html = '<div class="table-wrapper"><table>';
+      html += '<tr><th>ID</th><th>Nome</th><th>Email</th><th>Função</th><th>Comissão</th><th>Data Criação</th></tr>';
+
+      users.forEach(user => {
+        const dateTime = new Date(user.created_at);
+        const dataCriacao = dateTime.toLocaleString('pt-BR', {
+          dateStyle: 'short',
+          timeStyle: 'short'
+        });
+
+        const roleLabel = {
+          'ADMIN': '👑 Administrador',
+          'COMERCIAL': '💼 Comercial',
+          'VENDEDOR': '🧑‍💼 Vendedor',
+          'GERENTE': '📋 Gerente',
+        }[user.role] || user.role;
+
+        html += `<tr>
+          <td><code style="font-size: 0.85em;">${user.id.substring(0, 8)}</code></td>
+          <td>${user.name || '-'}</td>
+          <td style="font-size: 0.9em;">${user.email || '-'}</td>
+          <td>${roleLabel}</td>
+          <td style="text-align: center; font-weight: 600;">${user.commission_percentage}%</td>
+          <td style="font-size: 0.85em;">${dataCriacao}</td>
+        </tr>`;
+      });
+
+      html += '</table></div>';
+      container.innerHTML = html;
+    }
+
+    function renderSales(sales) {
+      const container = document.getElementById('salesTable');
+
+      if (!sales.length) {
+        container.innerHTML = '<div class="empty-state">Nenhuma venda lançada ainda</div>';
+        return;
+      }
+
+      let html = '';
+      if (currentUserRole && currentUserRole !== 'ADMIN') {
+        html += '<div style="background: #e7f3ff; border: 1px solid #b3d9ff; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9em; color: #004085;">ℹ️ Você está vendo apenas suas próprias vendas</div>';
+      }
+
+      html += '<div class="table-wrapper"><table>';
+      html += '<tr><th>ID</th><th>Vendedor</th><th>Cliente</th><th>Líquido</th><th>Método</th><th>Horário</th><th>Status</th><th>Ação</th></tr>';
+
+      sales.forEach(sale => {
+        const statusLabel = sale.status === 'PENDING' ? 'PENDENTE' : sale.status === 'APPROVED' ? 'APROVADA' : sale.status;
+        const methodLabel = {
+          'PIX': 'PIX',
+          'CREDIT_CARD': 'Crédito',
+          'DEBIT_CARD': 'Débito',
+          'BANK_TRANSFER': 'Transfer.',
+          'CHECK': 'Cheque',
+          'OTHER': 'Outro'
+        }[sale.payment_method] || sale.payment_method;
+
+        const dateTime = new Date(sale.created_at);
+        const horario = dateTime.toLocaleString('pt-BR', {
+          dateStyle: 'short',
+          timeStyle: 'short'
+        });
+
+        const canApprove = currentUserRole === 'ADMIN';
+        const actionBtn = sale.status === 'PENDING' && canApprove
+          ? `<button onclick="approveSaleFromDashboard('${sale.id}')" style="padding: 6px 12px; font-size: 0.85em; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">✓ Aprovar</button>`
+          : '<span style="color: #999;">-</span>';
+
+        html += `<tr>
+          <td><code style="font-size: 0.85em;">${sale.id.substring(0, 8)}</code></td>
+          <td><code style="font-size: 0.85em;">${sale.seller_id.substring(0, 8)}</code></td>
+          <td><code style="font-size: 0.85em;">${sale.customer_id.substring(0, 8)}</code></td>
+          <td class="money">R$ ${parseFloat(sale.net_amount).toFixed(2)}</td>
+          <td style="font-size: 0.9em;">${methodLabel}</td>
+          <td style="font-size: 0.85em;">${horario}</td>
+          <td><span class="status ${sale.status.toLowerCase()}">${statusLabel}</span></td>
+          <td>${actionBtn}</td>
+        </tr>`;
+      });
+
+      html += '</table></div>';
+      container.innerHTML = html;
+    }
+
+    function renderCommissions(commissions) {
+      const container = document.getElementById('commissionsTable');
+
+      if (!commissions.length) {
+        container.innerHTML = '<div class="empty-state">Nenhuma comissão criada ainda</div>';
+        return;
+      }
+
+      let html = '';
+      if (currentUserRole && currentUserRole !== 'ADMIN') {
+        html += '<div style="background: #e7f3ff; border: 1px solid #b3d9ff; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9em; color: #004085;">ℹ️ Você está vendo apenas suas próprias comissões</div>';
+      }
+
+      html += '<div class="table-wrapper"><table>';
+      html += '<tr><th>ID</th><th>Vendedor</th><th>Comissão</th><th>%</th><th>Status</th></tr>';
+
+      commissions.forEach(comm => {
+        const statusLabel = comm.status === 'PENDING' ? 'PENDENTE' : comm.status === 'APPROVED' ? 'APROVADA' : comm.status === 'PAID' ? 'PAGA' : comm.status;
+        html += `<tr>
+          <td><code style="font-size: 0.85em;">${comm.id.substring(0, 8)}</code></td>
+          <td><code style="font-size: 0.85em;">${comm.seller_id.substring(0, 8)}</code></td>
+          <td class="money">R$ ${parseFloat(comm.amount).toFixed(2)}</td>
+          <td>${comm.percentage}%</td>
+          <td><span class="status ${comm.status.toLowerCase()}">${statusLabel}</span></td>
+        </tr>`;
+      });
+
+      html += '</table></div>';
+      container.innerHTML = html;
+    }
+
+    function updateStats(sales, commissions) {
+      document.getElementById('totalSales').textContent = sales.length;
+      document.getElementById('totalCommissions').textContent = commissions.length;
+
+      const totalValue = commissions.reduce((sum, c) => sum + parseFloat(c.amount || 0), 0);
+      document.getElementById('totalCommissionValue').textContent = 'R$ ' + totalValue.toFixed(2);
+    }
+
+    function showMessage(text, type) {
+      const container = document.getElementById('message');
+      container.innerHTML = `<div class="message ${type}">${text}</div>`;
+
+      if (type !== 'error') {
+        setTimeout(() => container.innerHTML = '', 5000);
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+
+      document.getElementById(tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    async function approveSaleFromDashboard(saleId) {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      // Validação: apenas ADMIN pode aprovar
+      if (currentUserRole !== 'ADMIN') {
+        showMessage('❌ Apenas administradores podem aprovar vendas', 'error');
+        return;
+      }
+
+      const btn = event.target;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span>';
+
+      try {
+        const { error } = await client
+          .from('sales')
+          .update({ status: 'APPROVED', updated_at: new Date().toISOString() })
+          .eq('id', saleId);
+
+        if (error) throw error;
+
+        showMessage('✅ Venda aprovada! Comissão será criada automaticamente...', 'success');
+
+        setTimeout(() => {
+          loadData();
+        }, 1000);
+
+      } catch (err) {
+        showMessage(`❌ Erro ao aprovar: ${err.message}`, 'error');
+        btn.disabled = false;
+        btn.innerHTML = '✓ Aprovar';
+      }
+    }
+
+    async function applyFilters() {
+      const client = getSupabaseClient();
+      if (!client) return;
+
+      const dateFrom = document.getElementById('filterDateFrom').value;
+      const dateTo = document.getElementById('filterDateTo').value;
+      const sellerId = document.getElementById('filterSellerId').value;
+
+      try {
+        let query = client
+          .from('sales')
+          .select('id, seller_id, customer_id, net_amount, payment_method, status, created_at')
+          .order('created_at', { ascending: false });
+
+        // If not ADMIN and no seller selected, filter by own ID
+        if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId && !sellerId) {
+          query = query.eq('seller_id', currentUserId);
+        } else if (sellerId) {
+          // If ADMIN and seller is selected, filter by that seller
+          // If not ADMIN but trying to filter by another seller, show only own
+          if (currentUserRole && currentUserRole !== 'ADMIN' && sellerId !== currentUserId) {
+            query = query.eq('seller_id', currentUserId);
+          } else {
+            query = query.eq('seller_id', sellerId);
+          }
+        } else if (currentUserRole && currentUserRole !== 'ADMIN' && currentUserId) {
+          query = query.eq('seller_id', currentUserId);
+        }
+
+        if (dateFrom) {
+          query = query.gte('created_at', `${dateFrom}T00:00:00Z`);
+        }
+
+        if (dateTo) {
+          query = query.lte('created_at', `${dateTo}T23:59:59Z`);
+        }
+
+        const { data: sales, error } = await query;
+
+        if (error) throw error;
+
+        const count = sales?.length || 0;
+        renderSales(sales || []);
+        showMessage(`✅ Filtro aplicado: ${count} venda${count !== 1 ? 's' : ''} encontrada${count !== 1 ? 's' : ''}`, 'success');
+
+      } catch (err) {
+        showMessage(`❌ Erro ao filtrar: ${err.message}`, 'error');
+      }
+    }
+  </script>
+</body>
+</html>

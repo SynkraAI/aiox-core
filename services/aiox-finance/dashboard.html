@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPSX - Vendas & Comissões</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f5f5f5; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .header { background: #000; color: #fff; padding: 20px; text-align: center; margin-bottom: 20px; border-radius: 4px; }
+    .header h1 { font-size: 28px; margin-bottom: 5px; }
+    .header .subtitle { font-size: 14px; color: #ccc; }
+
+    .tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+    .tab-btn { flex: 1; padding: 15px; background: #f0f0f0; border: none; cursor: pointer; font-size: 14px; font-weight: 500; text-align: center; transition: all 0.3s; }
+    .tab-btn:hover { background: #e0e0e0; }
+    .tab-btn.active { background: #000; color: #fff; border-bottom: 3px solid #000; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .card { background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px; }
+    input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+    textarea { resize: vertical; min-height: 80px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #000; box-shadow: 0 0 0 3px rgba(0,0,0,0.1); }
+
+    .btn { padding: 10px 20px; border: none; border-radius: 4px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+    .btn-primary { background: #000; color: #fff; }
+    .btn-primary:hover { background: #333; }
+    .btn-secondary { background: #e0e0e0; color: #333; }
+    .btn-secondary:hover { background: #d0d0d0; }
+    .btn-danger { background: #dc3545; color: #fff; }
+    .btn-danger:hover { background: #c82333; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #f0f0f0; padding: 12px; text-align: left; font-weight: 600; font-size: 13px; }
+    td { padding: 12px; border-bottom: 1px solid #eee; font-size: 13px; }
+    tr:hover { background: #fafafa; }
+
+    .alert { padding: 15px; border-radius: 4px; margin-bottom: 15px; font-size: 14px; }
+    .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    .stat-box { background: #000; color: #fff; padding: 20px; border-radius: 4px; text-align: center; }
+    .stat-value { font-size: 32px; font-weight: bold; margin: 10px 0; }
+    .stat-label { font-size: 12px; color: #ccc; text-transform: uppercase; }
+
+    .loading { text-align: center; padding: 40px; color: #666; }
+    .loading::after { content: ' ...'; animation: dots 1.5s steps(4, end) infinite; }
+    @keyframes dots { 0%, 20% { content: ' '; } 40% { content: ' .'; } 60% { content: ' ..'; } 80%, 100% { content: ' ...'; } }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .form-full { grid-column: 1 / -1; }
+
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .badge-success { background: #d4edda; color: #155724; }
+    .badge-pending { background: #fff3cd; color: #856404; }
+    .badge-danger { background: #f8d7da; color: #721c24; }
+
+    .mini-chart { margin-top: 30px; }
+    .trend { font-size: 14px; margin-top: 10px; }
+    .trend.up { color: #28a745; }
+    .trend.down { color: #dc3545; }
+
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .modal-content { background: #fff; padding: 30px; border-radius: 4px; max-width: 500px; width: 90%; }
+    .modal-close { float: right; font-size: 28px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>GPSX Vendas & Comissões</h1>
+      <div class="subtitle">Sistema de Gestão de Vendas e Cálculo Automático de Comissões</div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">🛍️ Lançar Venda</button>
+      <button class="tab-btn" onclick="switchTab(1)">📋 Vendas</button>
+      <button class="tab-btn" onclick="switchTab(2)">💵 Comissões</button>
+      <button class="tab-btn" onclick="switchTab(3)">📈 Dashboard Mensal</button>
+      <button class="tab-btn" onclick="switchTab(4)">👤 Usuários</button>
+      <button class="tab-btn" onclick="switchTab(5)">⚙️ Configuração</button>
+    </div>
+
+    <!-- TAB 0: Lançar Nova Venda -->
+    <div class="tab-content active">
+      <div class="card">
+        <h2>Lançar Nova Venda</h2>
+        <div id="launchAlert"></div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Vendedor</label>
+            <select id="sellerId" required>
+              <option value="">Selecione um vendedor...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Cliente</label>
+            <select id="customerId" required>
+              <option value="">Selecione um cliente...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Valor Bruto (R$)</label>
+            <input type="number" id="grossAmount" placeholder="10000.00" step="0.01" min="0" required>
+          </div>
+          <div class="form-group">
+            <label>Imposto (R$)</label>
+            <input type="number" id="taxAmount" placeholder="1000.00" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label>Desconto (R$)</label>
+            <input type="number" id="discountAmount" placeholder="500.00" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label>Método de Pagamento</label>
+            <select id="paymentMethod">
+              <option>PIX</option>
+              <option>Cartão Crédito</option>
+              <option>Cartão Débito</option>
+              <option>Boleto</option>
+              <option>Cheque</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label>Observações</label>
+            <textarea id="notes" placeholder="Notas sobre a venda..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="launchSale()">Lançar Venda</button>
+      </div>
+    </div>
+
+    <!-- TAB 1: Vendas -->
+    <div class="tab-content">
+      <div class="card">
+        <h2>Lista de Vendas</h2>
+        <div id="salesAlert"></div>
+        <table id="salesTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Vendedor</th>
+              <th>Cliente</th>
+              <th>Valor Bruto</th>
+              <th>Valor Líquido</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="salesBody">
+            <tr><td colspan="8" class="loading">Carregando vendas</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: Comissões -->
+    <div class="tab-content">
+      <div class="card">
+        <h2>Comissões Calculadas</h2>
+        <div id="commissionsAlert"></div>
+        <table id="commissionsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Vendedor</th>
+              <th>Venda</th>
+              <th>Valor Líquido da Venda</th>
+              <th>% Comissão</th>
+              <th>Valor Comissão</th>
+              <th>Status</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody id="commissionsBody">
+            <tr><td colspan="8" class="loading">Carregando comissões</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 3: Dashboard Mensal -->
+    <div class="tab-content">
+      <div class="grid-3">
+        <div class="stat-box">
+          <div class="stat-label">Total de Vendas (Mês)</div>
+          <div class="stat-value" id="totalSalesMonth">R$ 0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total de Comissões (Mês)</div>
+          <div class="stat-value" id="totalCommissionsMonth">R$ 0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Quantidade de Vendas</div>
+          <div class="stat-value" id="salesCountMonth">0</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Vendas por Vendedor</h2>
+        <table id="sellerStatsTable">
+          <thead>
+            <tr>
+              <th>Vendedor</th>
+              <th>Comissão %</th>
+              <th>Total Vendido</th>
+              <th>Total Comissões</th>
+              <th>Tickets</th>
+              <th>Ticket Médio</th>
+            </tr>
+          </thead>
+          <tbody id="sellerStatsBody">
+            <tr><td colspan="6" class="loading">Carregando dados</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Gráfico de Vendas (Últimos 7 dias)</h2>
+        <div style="position: relative; height: 300px;">
+          <canvas id="salesChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Usuários -->
+    <div class="tab-content">
+      <div class="card">
+        <h2>Gestão de Usuários</h2>
+        <div id="usersAlert"></div>
+        <button class="btn btn-primary" onclick="showCreateUserModal()">+ Novo Usuário</button>
+        <table id="usersTable" style="margin-top: 20px;">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Comissão %</th>
+              <th>Data Criação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody">
+            <tr><td colspan="6" class="loading">Carregando usuários</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 5: Configuração -->
+    <div class="tab-content">
+      <div class="card">
+        <h2>⚙️ Configuração Supabase</h2>
+        <div class="form-group">
+          <label>URL do Supabase</label>
+          <input type="text" id="supabaseUrl" placeholder="https://seu-projeto.supabase.co">
+        </div>
+        <div class="form-group">
+          <label>Chave Anônima (Anon Key)</label>
+          <input type="password" id="supabaseKey" placeholder="Sua anon key">
+          <small style="color: #666; margin-top: 5px; display: block;">Obtenha em: Supabase → Settings → API</small>
+        </div>
+        <button class="btn btn-primary" onclick="saveConfig()">Salvar Configuração</button>
+        <button class="btn btn-secondary" onclick="testConnection()" style="margin-left: 10px;">Testar Conexão</button>
+        <div id="configAlert" style="margin-top: 15px;"></div>
+      </div>
+
+      <div class="card">
+        <h2>Informações do Sistema</h2>
+        <p><strong>Versão:</strong> 1.0.0</p>
+        <p><strong>Banco de Dados:</strong> Supabase Cloud (PostgreSQL)</p>
+        <p><strong>Status:</strong> <span id="connectionStatus" class="badge badge-pending">Desconectado</span></p>
+        <p><strong>Usuário Logado:</strong> <span id="currentUser">-</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Novo Usuário -->
+  <div class="modal" id="userModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">×</span>
+      <h2>Novo Usuário</h2>
+      <div id="userModalAlert"></div>
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" id="newUserName">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="newUserEmail">
+      </div>
+      <div class="form-group">
+        <label>Rol</label>
+        <select id="newUserRole">
+          <option value="ADMIN">ADMIN (0% comissão)</option>
+          <option value="GERENTE">GERENTE (5% comissão)</option>
+          <option value="VENDEDOR">VENDEDOR (15% comissão)</option>
+          <option value="COMERCIAL">COMERCIAL (10% comissão)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Comissão %</label>
+        <input type="number" id="newUserCommission" step="0.01" min="0" max="100">
+      </div>
+      <button class="btn btn-primary" onclick="createUser()" style="width: 100%;">Criar Usuário</button>
+    </div>
+  </div>
+
+  <script>
+    let supabase = null;
+    let currentTab = 0;
+    let chartInstance = null;
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const config = loadConfig();
+      if (config.url && config.key) {
+        initializeSupabase(config.url, config.key);
+        loadAllData();
+      } else {
+        switchTab(5); // Go to config tab
+        showAlert('configAlert', 'Preencha as credenciais do Supabase para começar', 'info');
+      }
+    });
+
+    function loadConfig() {
+      const stored = localStorage.getItem('supabaseConfig');
+      return stored ? JSON.parse(stored) : {};
+    }
+
+    function saveConfig() {
+      const url = document.getElementById('supabaseUrl').value;
+      const key = document.getElementById('supabaseKey').value;
+      if (!url || !key) {
+        showAlert('configAlert', 'Preencha URL e chave', 'error');
+        return;
+      }
+      localStorage.setItem('supabaseConfig', JSON.stringify({ url, key }));
+      initializeSupabase(url, key);
+      showAlert('configAlert', 'Configuração salva com sucesso', 'success');
+    }
+
+    function initializeSupabase(url, key) {
+      const { createClient } = window.supabase;
+      supabase = createClient(url, key);
+      document.getElementById('connectionStatus').textContent = 'Conectado';
+      document.getElementById('connectionStatus').className = 'badge badge-success';
+    }
+
+    async function testConnection() {
+      if (!supabase) {
+        showAlert('configAlert', 'Supabase não inicializado', 'error');
+        return;
+      }
+      try {
+        const { data, error } = await supabase.from('users').select('count').limit(1);
+        if (error) throw error;
+        showAlert('configAlert', 'Conexão bem-sucedida!', 'success');
+      } catch (e) {
+        showAlert('configAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    function switchTab(index) {
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.tab-content').forEach((content, i) => {
+        content.classList.toggle('active', i === index);
+      });
+      currentTab = index;
+      if (index === 3) loadDashboardData();
+    }
+
+    async function launchSale() {
+      if (!supabase) { showAlert('launchAlert', 'Supabase não configurado', 'error'); return; }
+      const sellerId = document.getElementById('sellerId').value;
+      const customerId = document.getElementById('customerId').value;
+      const grossAmount = parseFloat(document.getElementById('grossAmount').value);
+      const taxAmount = parseFloat(document.getElementById('taxAmount').value) || 0;
+      const discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
+      const paymentMethod = document.getElementById('paymentMethod').value;
+      const notes = document.getElementById('notes').value;
+
+      if (!sellerId || !customerId || !grossAmount) {
+        showAlert('launchAlert', 'Preencha todos os campos obrigatórios', 'error');
+        return;
+      }
+
+      const netAmount = grossAmount - taxAmount - discountAmount;
+      try {
+        const { data, error } = await supabase.from('sales').insert([{
+          seller_id: sellerId,
+          customer_id: customerId,
+          gross_amount: grossAmount,
+          tax_amount: taxAmount,
+          discount_amount: discountAmount,
+          net_amount: netAmount,
+          payment_method: paymentMethod,
+          notes: notes,
+          status: 'PENDING'
+        }]).select();
+
+        if (error) throw error;
+        showAlert('launchAlert', `Venda lançada! ID: ${data[0].id}`, 'success');
+        document.querySelector('form').reset();
+        loadSalesData();
+      } catch (e) {
+        showAlert('launchAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    async function approveSale(saleId) {
+      if (!supabase) { showAlert('salesAlert', 'Supabase não configurado', 'error'); return; }
+      try {
+        const { error } = await supabase.from('sales').update({ status: 'APPROVED' }).eq('id', saleId);
+        if (error) throw error;
+        showAlert('salesAlert', 'Venda aprovada!', 'success');
+        loadSalesData();
+        loadCommissionsData();
+      } catch (e) {
+        showAlert('salesAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    async function loadSalesData() {
+      if (!supabase) return;
+      try {
+        const { data: sales, error: salesError } = await supabase.from('sales').select('*').order('created_at', { ascending: false });
+        const { data: users } = await supabase.from('users').select('id, name');
+        const { data: customers } = await supabase.from('customers').select('id, name');
+
+        if (salesError) throw salesError;
+
+        const tbody = document.getElementById('salesBody');
+        tbody.innerHTML = sales.map(s => {
+          const seller = users?.find(u => u.id === s.seller_id)?.name || 'N/A';
+          const customer = customers?.find(c => c.id === s.customer_id)?.name || 'N/A';
+          const date = new Date(s.created_at).toLocaleDateString('pt-BR');
+          const approve = s.status === 'PENDING' ? `<button class="btn btn-primary" onclick="approveSale('${s.id}')" style="padding: 5px 10px; font-size: 12px;">Aprovar</button>` : '';
+          return `<tr>
+            <td>${s.id.substring(0, 8)}</td>
+            <td>${seller}</td>
+            <td>${customer}</td>
+            <td>R$ ${s.gross_amount.toFixed(2)}</td>
+            <td>R$ ${s.net_amount.toFixed(2)}</td>
+            <td><span class="badge badge-${s.status === 'APPROVED' ? 'success' : 'pending'}">${s.status}</span></td>
+            <td>${date}</td>
+            <td>${approve}</td>
+          </tr>`;
+        }).join('');
+      } catch (e) {
+        showAlert('salesAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    async function loadCommissionsData() {
+      if (!supabase) return;
+      try {
+        const { data: commissions, error } = await supabase.from('commissions').select('*').order('created_at', { ascending: false });
+        const { data: users } = await supabase.from('users').select('id, name');
+        const { data: sales } = await supabase.from('sales').select('id, net_amount');
+
+        if (error) throw error;
+
+        const tbody = document.getElementById('commissionsBody');
+        tbody.innerHTML = commissions.map(c => {
+          const seller = users?.find(u => u.id === c.seller_id)?.name || 'N/A';
+          const netAmount = sales?.find(s => s.id === c.sale_id)?.net_amount || 0;
+          const date = new Date(c.created_at).toLocaleDateString('pt-BR');
+          return `<tr>
+            <td>${c.id.substring(0, 8)}</td>
+            <td>${seller}</td>
+            <td>${c.sale_id.substring(0, 8)}</td>
+            <td>R$ ${netAmount.toFixed(2)}</td>
+            <td>${c.percentage}%</td>
+            <td>R$ ${c.amount.toFixed(2)}</td>
+            <td><span class="badge badge-${c.status === 'PENDING' ? 'pending' : 'success'}">${c.status}</span></td>
+            <td>${date}</td>
+          </tr>`;
+        }).join('');
+      } catch (e) {
+        showAlert('commissionsAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    async function loadDashboardData() {
+      if (!supabase) return;
+      try {
+        const now = new Date();
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+        const { data: monthlySales } = await supabase.from('sales')
+          .select('*')
+          .gte('created_at', monthStart.toISOString())
+          .eq('status', 'APPROVED');
+
+        const { data: monthlyCommissions } = await supabase.from('commissions')
+          .select('*')
+          .gte('created_at', monthStart.toISOString());
+
+        const { data: sevenDaysSales } = await supabase.from('sales')
+          .select('*')
+          .gte('created_at', sevenDaysAgo.toISOString())
+          .eq('status', 'APPROVED');
+
+        const { data: users } = await supabase.from('users').select('*');
+        const { data: allSales } = await supabase.from('sales').select('*').eq('status', 'APPROVED');
+        const { data: allCommissions } = await supabase.from('commissions').select('*');
+
+        // Update stats
+        const totalSalesMonth = monthlySales?.reduce((sum, s) => sum + s.gross_amount, 0) || 0;
+        const totalCommissionsMonth = monthlyCommissions?.reduce((sum, c) => sum + c.amount, 0) || 0;
+        const salesCountMonth = monthlySales?.length || 0;
+
+        document.getElementById('totalSalesMonth').textContent = `R$ ${totalSalesMonth.toFixed(2)}`;
+        document.getElementById('totalCommissionsMonth').textContent = `R$ ${totalCommissionsMonth.toFixed(2)}`;
+        document.getElementById('salesCountMonth').textContent = salesCountMonth;
+
+        // Seller stats
+        const sellerStats = {};
+        users?.forEach(u => {
+          const sellerSales = allSales?.filter(s => s.seller_id === u.id) || [];
+          const sellerCommissions = allCommissions?.filter(c => c.seller_id === u.id) || [];
+          const totalSold = sellerSales.reduce((sum, s) => sum + s.gross_amount, 0);
+          const totalComm = sellerCommissions.reduce((sum, c) => sum + c.amount, 0);
+          sellerStats[u.id] = { name: u.name, commission: u.commission_percentage, totalSold, totalComm, count: sellerSales.length };
+        });
+
+        const tbody = document.getElementById('sellerStatsBody');
+        tbody.innerHTML = Object.values(sellerStats).map(s => `
+          <tr>
+            <td>${s.name}</td>
+            <td>${s.commission}%</td>
+            <td>R$ ${s.totalSold.toFixed(2)}</td>
+            <td>R$ ${s.totalComm.toFixed(2)}</td>
+            <td>${s.count}</td>
+            <td>R$ ${s.count > 0 ? (s.totalSold / s.count).toFixed(2) : '0.00'}</td>
+          </tr>
+        `).join('');
+
+        // Chart
+        loadChart(sevenDaysSales || []);
+      } catch (e) {
+        console.error('Erro ao carregar dashboard:', e);
+      }
+    }
+
+    function loadChart(data) {
+      const canvas = document.getElementById('salesChart');
+      if (!canvas) return;
+
+      const labels = [];
+      const values = [];
+      const dayMap = {};
+
+      data.forEach(s => {
+        const date = new Date(s.created_at).toLocaleDateString('pt-BR');
+        dayMap[date] = (dayMap[date] || 0) + s.gross_amount;
+      });
+
+      Object.keys(dayMap).sort().forEach(date => {
+        labels.push(date);
+        values.push(dayMap[date]);
+      });
+
+      if (chartInstance) chartInstance.destroy();
+      chartInstance = new Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Vendas (R$)',
+            data: values,
+            backgroundColor: '#000',
+            borderColor: '#333',
+            borderWidth: 1
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true } } }
+      });
+    }
+
+    async function loadUsersData() {
+      if (!supabase) return;
+      try {
+        const { data: users, error } = await supabase.from('users').select('*').order('created_at');
+        if (error) throw error;
+
+        const tbody = document.getElementById('usersBody');
+        tbody.innerHTML = users.map(u => {
+          const date = new Date(u.created_at).toLocaleDateString('pt-BR');
+          return `<tr>
+            <td>${u.name}</td>
+            <td>${u.email}</td>
+            <td>${u.role}</td>
+            <td>${u.commission_percentage}%</td>
+            <td>${date}</td>
+            <td><button class="btn btn-danger" onclick="deleteUser('${u.id}')" style="padding: 5px 10px; font-size: 12px;">Deletar</button></td>
+          </tr>`;
+        }).join('');
+      } catch (e) {
+        showAlert('usersAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    async function createUser() {
+      if (!supabase) { showAlert('userModalAlert', 'Supabase não configurado', 'error'); return; }
+      const name = document.getElementById('newUserName').value;
+      const email = document.getElementById('newUserEmail').value;
+      const role = document.getElementById('newUserRole').value;
+      const commission = parseFloat(document.getElementById('newUserCommission').value) || 0;
+
+      if (!name || !email) {
+        showAlert('userModalAlert', 'Preencha nome e email', 'error');
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase.from('users').insert([{
+          name, email, role, commission_percentage: commission
+        }]).select();
+
+        if (error) throw error;
+        showAlert('userModalAlert', 'Usuário criado!', 'success');
+        setTimeout(() => { closeModal(); loadUsersData(); }, 1000);
+      } catch (e) {
+        showAlert('userModalAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    async function deleteUser(userId) {
+      if (!confirm('Tem certeza?')) return;
+      try {
+        const { error } = await supabase.from('users').delete().eq('id', userId);
+        if (error) throw error;
+        showAlert('usersAlert', 'Usuário deletado', 'success');
+        loadUsersData();
+      } catch (e) {
+        showAlert('usersAlert', 'Erro: ' + e.message, 'error');
+      }
+    }
+
+    function showCreateUserModal() {
+      document.getElementById('userModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('userModal').classList.remove('active');
+      document.getElementById('newUserName').value = '';
+      document.getElementById('newUserEmail').value = '';
+      document.getElementById('newUserRole').value = 'VENDEDOR';
+      document.getElementById('newUserCommission').value = '15';
+    }
+
+    function showAlert(elementId, message, type) {
+      const element = document.getElementById(elementId);
+      element.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+      setTimeout(() => { element.innerHTML = ''; }, 5000);
+    }
+
+    async function loadAllData() {
+      if (!supabase) return;
+      try {
+        // Load selectors
+        const { data: users } = await supabase.from('users').select('id, name, role, commission_percentage');
+        const { data: customers } = await supabase.from('customers').select('id, name');
+
+        const sellerSelect = document.getElementById('sellerId');
+        sellerSelect.innerHTML = '<option value="">Selecione um vendedor...</option>' +
+          users?.map(u => `<option value="${u.id}">${u.name} (${u.role})</option>`).join('') || '';
+
+        const customerSelect = document.getElementById('customerId');
+        customerSelect.innerHTML = '<option value="">Selecione um cliente...</option>' +
+          customers?.map(c => `<option value="${c.id}">${c.name}</option>`).join('') || '';
+
+        // Load data
+        loadSalesData();
+        loadCommissionsData();
+        loadUsersData();
+      } catch (e) {
+        console.error('Erro ao carregar dados:', e);
+      }
+    }
+
+    // Reload data periodically
+    setInterval(() => {
+      if (supabase && currentTab !== 3) loadAllData();
+      if (supabase && currentTab === 3) loadDashboardData();
+    }, 10000);
+  </script>
+</body>
+</html>
