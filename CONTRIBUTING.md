@@ -1,6 +1,6 @@
 # Contributing to Synkra AIOX
 
-> **[Versao em Portugues](docs/pt/contributing.md)**
+> **[Versão em Português](docs/pt/contributing.md)**
 
 Welcome to AIOX! Thank you for your interest in contributing. This guide will help you understand our development workflow, contribution process, and how to submit your changes.
 
