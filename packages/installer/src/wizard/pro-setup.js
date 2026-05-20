@@ -162,8 +162,24 @@ class InlineLicenseClient {
           try {
             const parsed = JSON.parse(data);
             if (res.statusCode >= 400) {
-              const err = new Error(parsed.message || `HTTP ${res.statusCode}`);
-              err.code = parsed.code;
+              // PRO-16/PRO-UX: the structured envelope nests fields under
+              // `error` ({ error: { code, message, message_pt, recovery_hint,
+              // support_code } }). Older shapes put them at the root. Read the
+              // nested body first (this is the root cause of the "HTTP 403"
+              // opaque message — the old code read parsed.message at the root,
+              // which is undefined for the structured envelope).
+              const errorBody =
+                parsed && parsed.error && typeof parsed.error === 'object'
+                  ? parsed.error
+                  : parsed;
+              const err = new Error(
+                (errorBody && errorBody.message) || parsed.message || `HTTP ${res.statusCode}`,
+              );
+              err.code = (errorBody && errorBody.code) || parsed.code;
+              err.httpStatus = res.statusCode;
+              if (parsed && parsed.error) {
+                err.envelope = parsed; // full envelope for parseEnvelopeToAIOXError
+              }
               reject(err);
             } else {
               resolve(parsed);
