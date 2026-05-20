@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.2.7
-generated_at: "2026-05-18T16:27:23.965Z"
+generated_at: "2026-05-20T17:25:50.566Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1128
+file_count: 1129
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -404,6 +404,10 @@ files:
     hash: sha256:462d0aed6f57f2e4b9d51bcb20467451473c927e0d182b5c3ad43f352f44122c
     type: core
     size: 744
+  - path: core/errors/pro-error-registry.js
+    hash: sha256:17aa9830cb745cb7865105d1dffd336fefb8e752d1b8baaf2357509e023d2018
+    type: core
+    size: 3228
   - path: core/errors/serializer.js
     hash: sha256:7144adaf3a245afd732aef16e2cdb61f08246badb6b90ac1a7f4b73705ff3ce8
     type: core
