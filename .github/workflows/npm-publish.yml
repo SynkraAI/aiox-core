@@ -203,17 +203,34 @@ jobs:
       - name: Publish core to NPM
         if: steps.should-publish.outputs.should_publish == 'true'
         run: |
-          # Create npmrc for authentication
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN_AIOX_SQUADS }}" > .npmrc
+          publish_status=1
+          for token in "$NPM_TOKEN_AIOX_SQUADS" "$NPM_TOKEN"; do
+            if [ -z "$token" ]; then
+              continue
+            fi
+            echo "//registry.npmjs.org/:_authToken=${token}" > .npmrc
+            if npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public; then
+              publish_status=0
+              break
+            else
+              publish_status=$?
+            fi
+          done
 
-          # Publish with appropriate tag
-          npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
+          if [ "$publish_status" -ne 0 ]; then
+            rm -f .npmrc
+            echo "::error::Unable to publish scoped core package. Refresh NPM_TOKEN_AIOX_SQUADS or NPM_TOKEN with owner access to @aiox-squads/core."
+            exit "$publish_status"
+          fi
 
           PKG_NAME=$(node -p "require('./package.json').name")
           npm access set status=public "${PKG_NAME}" --registry="${NPM_REGISTRY}"
+          rm -f .npmrc
           echo "✅ Published ${PKG_NAME}@${{ needs.build.outputs.version }} with tag ${{ steps.publish-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN_AIOX_SQUADS: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
 
       - name: Verify publication
         if: steps.should-publish.outputs.should_publish == 'true'
@@ -323,12 +340,33 @@ jobs:
         if: steps.should-publish.outputs.should_publish == 'true'
         working-directory: ${{ matrix.path }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN_AIOX_SQUADS }}" > .npmrc
-          npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public
+          publish_status=1
+          for token in "$NPM_TOKEN_AIOX_SQUADS" "$NPM_TOKEN"; do
+            if [ -z "$token" ]; then
+              continue
+            fi
+            echo "//registry.npmjs.org/:_authToken=${token}" > .npmrc
+            if npm publish --tag ${{ steps.publish-tag.outputs.tag }} --access public; then
+              publish_status=0
+              break
+            else
+              publish_status=$?
+            fi
+          done
+
+          if [ "$publish_status" -ne 0 ]; then
+            rm -f .npmrc
+            echo "::error::Unable to publish ${{ steps.pkg.outputs.name }}. Refresh NPM_TOKEN_AIOX_SQUADS or NPM_TOKEN with owner access to the @aiox-squads scope."
+            exit "$publish_status"
+          fi
+
           npm access set status=public "${{ steps.pkg.outputs.name }}" --registry="${NPM_REGISTRY}"
+          rm -f .npmrc
           echo "✅ Published ${{ steps.pkg.outputs.name }}@${{ steps.pkg.outputs.version }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN_AIOX_SQUADS: ${{ secrets.NPM_TOKEN_AIOX_SQUADS }}
 
       - name: Smoke test - verify npx works
         if: steps.should-publish.outputs.should_publish == 'true'
