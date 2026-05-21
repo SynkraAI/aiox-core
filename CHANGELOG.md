@@ -5,6 +5,27 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.8] - 2026-05-21
+
+### Fixed
+
+- **Pro activation errors now surface the real license-server cause instead of opaque `HTTP 403`** (#775).
+  - Root cause: the installer read `parsed.message` / `parsed.code` at the response root while the license-server returns the PRO-16 structured envelope under `error`.
+  - Fix: `InlineLicenseClient` now reads nested `error.message` / `error.code` first, preserves the full envelope, and keeps legacy root-shaped responses compatible.
+  - This restores typed handling for `NOT_A_BUYER`, `SEAT_LIMIT_EXCEEDED`, `REVOKED_KEY`, and related Pro activation failures.
+- **Pro CLI error rendering is resilient to raw, null, and malformed errors** (#775).
+  - Added safe normalization before rendering user-facing messages.
+  - Added OS-aware recovery commands so Windows users receive PowerShell-compatible cleanup steps.
+
+### Changed
+
+- `@aiox-squads/installer` bumped to `3.3.7` to ship the activation-envelope parser fix.
+- `@aiox-squads/aiox-pro-cli` bumped to `0.2.2` to ship the Pro CLI error UX bridge.
+
+### Notes
+
+- This release targets the user-visible install failure where login succeeds, buyer access is confirmed, and activation then prints only `HTTP 403`.
+
 ## [5.2.7] - 2026-05-18
 
 ### Fixed
