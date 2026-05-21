@@ -187,6 +187,39 @@ describe('pro-setup npm invocation', () => {
     });
   });
 
+  it('derives npm-cli.js when invoked through npx-cli.js', () => {
+    const invocation = proSetup._testing.resolveNpmInvocation({
+      platform: 'linux',
+      execPath: '/usr/bin/node',
+      env: {
+        npm_execpath: '/usr/lib/node_modules/npm/bin/npx-cli.js',
+      },
+      fileExists: (candidate) => candidate.endsWith('/npm-cli.js'),
+    });
+
+    expect(invocation).toEqual({
+      command: '/usr/bin/node',
+      prefixArgs: ['/usr/lib/node_modules/npm/bin/npm-cli.js'],
+      execOptions: {},
+    });
+  });
+
+  it('does not execute npx-cli.js as npm when npm-cli.js cannot be found', () => {
+    const invocation = proSetup._testing.resolveNpmInvocation({
+      platform: 'linux',
+      env: {
+        npm_execpath: '/usr/lib/node_modules/npm/bin/npx-cli.js',
+      },
+      fileExists: () => false,
+    });
+
+    expect(invocation).toEqual({
+      command: 'npm',
+      prefixArgs: [],
+      execOptions: {},
+    });
+  });
+
   it('falls back to shell execution for npm.cmd on Windows', () => {
     const invocation = proSetup._testing.resolveNpmInvocation({
       platform: 'win32',

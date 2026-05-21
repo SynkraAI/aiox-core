@@ -5,6 +5,19 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.2.9] - 2026-05-21
+
+### Fixed
+
+- **Pro artifact install no longer invokes `npx install` when the installer itself runs through `npx`**.
+  - Root cause: `npm_execpath` can point at `npx-cli.js` during `npx -p @aiox-squads/core aiox install`.
+  - Fix: the installer now derives the sibling `npm-cli.js` when available and otherwise falls back to `npm`, so Pro artifact extraction keeps running `npm install <tgz> --prefix <target>`.
+  - This targets Linux installs that authenticated and activated Pro successfully, then failed at content installation with `unexpected argument '--prefix' found`.
+
+### Changed
+
+- `@aiox-squads/installer` bumped to `3.3.8` to ship the Pro artifact extraction fix.
+
 ## [5.2.8] - 2026-05-21
 
 ### Fixed

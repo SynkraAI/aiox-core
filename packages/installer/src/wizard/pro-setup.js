@@ -32,17 +32,39 @@ function stripWrappingQuotes(value) {
   return String(value || '').trim().replace(/^"(.*)"$/, '$1');
 }
 
+function resolveNpmExecPath(npmExecPath, fileExists = fs.existsSync) {
+  if (!npmExecPath || !/\.js$/i.test(npmExecPath)) {
+    return null;
+  }
+
+  const pathApi = npmExecPath.includes('\\') ? path.win32 : path.posix;
+  const basename = pathApi.basename(npmExecPath).toLowerCase();
+  if (basename === 'npm-cli.js' && fileExists(npmExecPath)) {
+    return npmExecPath;
+  }
+
+  if (basename === 'npx-cli.js') {
+    const npmCliPath = pathApi.join(pathApi.dirname(npmExecPath), 'npm-cli.js');
+    if (fileExists(npmCliPath)) {
+      return npmCliPath;
+    }
+  }
+
+  return null;
+}
+
 function resolveNpmInvocation(options = {}) {
   const platform = options.platform || process.platform;
   const env = options.env || process.env;
   const execPath = options.execPath || process.execPath;
   const fileExists = options.fileExists || fs.existsSync;
   const npmExecPath = stripWrappingQuotes(env.npm_execpath);
+  const npmCliPath = resolveNpmExecPath(npmExecPath, fileExists);
 
-  if (npmExecPath && /\.js$/i.test(npmExecPath) && fileExists(npmExecPath)) {
+  if (npmCliPath) {
     return {
       command: execPath,
-      prefixArgs: [npmExecPath],
+      prefixArgs: [npmCliPath],
       execOptions: {},
     };
   }
