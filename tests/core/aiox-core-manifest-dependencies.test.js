@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const ts = require('typescript');
 
 const REPO_ROOT = path.join(__dirname, '..', '..');
 const CORE_DIR = path.join(REPO_ROOT, '.aiox-core');
@@ -55,39 +56,120 @@ describe('.aiox-core internal manifest dependency declarations', () => {
     return specifier.startsWith('@') ? parts.slice(0, 2).join('/') : parts[0];
   }
 
-  const REQUIRE_RE = /require\(\s*['"]([^'"]+)['"]\s*\)/g;
-
   /**
-   * A require inside a `catch` block is an optional fallback: the primary
-   * dependency is declared and resolves, and this path only runs if it somehow
-   * does not. Declaring such a package as a hard dependency would force every
-   * consumer to install a module the framework never loads in practice.
+   * Collect bare `require('pkg')` specifiers from a source file, skipping those
+   * inside a `catch` block.
    *
-   * Detected by scanning backwards for the nearest enclosing `catch (…) {` and
-   * checking the require sits inside that block's braces.
+   * A require inside `catch` is an optional fallback: the primary dependency is
+   * declared and resolves, and this path only runs if it somehow does not.
+   * Declaring such a package as a hard dependency would force every consumer to
+   * install a module the framework never loads in practice.
+   *
+   * Parsed via the TypeScript compiler's AST rather than scanned textually.
+   * Counting braces over raw text misreads any `{` or `}` that appears inside a
+   * string, comment, regex or template literal, so a require could be
+   * misclassified in either direction. The AST also rules out false matches like
+   * `foo.require('x')` or a dynamic `require(someVar)`, which are not static
+   * bare specifiers at all.
+   *
+   * @returns {string[]} bare specifiers required outside any catch block
    */
-  function isInsideCatchBlock(source, index) {
-    const catchRe = /catch\s*\([^)]*\)\s*\{/g;
+  function collectStaticRequires(source, fileName) {
+    const sourceFile = ts.createSourceFile(
+      fileName,
+      source,
+      ts.ScriptTarget.Latest,
+      /* setParentNodes */ true,
+      ts.ScriptKind.JS,
+    );
 
-    for (const match of source.matchAll(catchRe)) {
-      const blockStart = match.index + match[0].length;
-      if (blockStart > index) break;
+    const specifiers = [];
 
-      // Walk the braces to find where this catch block closes.
-      let depth = 1;
-      let i = blockStart;
-      while (i < source.length && depth > 0) {
-        const ch = source[i];
-        if (ch === '{') depth++;
-        else if (ch === '}') depth--;
-        i++;
+    /** True when any ancestor of `node` is the block of a catch clause. */
+    function insideCatch(node) {
+      for (let cur = node.parent; cur; cur = cur.parent) {
+        if (ts.isCatchClause(cur)) return true;
       }
-
-      if (index >= blockStart && index < i) return true;
+      return false;
     }
 
-    return false;
+    function visit(node) {
+      if (
+        ts.isCallExpression(node) &&
+        ts.isIdentifier(node.expression) &&
+        node.expression.text === 'require' &&
+        node.arguments.length === 1 &&
+        ts.isStringLiteral(node.arguments[0]) &&
+        !insideCatch(node)
+      ) {
+        specifiers.push(node.arguments[0].text);
+      }
+
+      ts.forEachChild(node, visit);
+    }
+
+    visit(sourceFile);
+    return specifiers;
   }
+
+  describe('collectStaticRequires', () => {
+    it('collects top-level bare requires', () => {
+      const src = "const a = require('alpha');\nconst b = require('@scope/beta');\n";
+
+      expect(collectStaticRequires(src, 'probe.js')).toEqual(['alpha', '@scope/beta']);
+    });
+
+    it('skips requires inside a catch block', () => {
+      const src = `
+        let mod;
+        try { mod = require('primary'); }
+        catch (e) { mod = require('fallback'); }
+      `;
+
+      expect(collectStaticRequires(src, 'probe.js')).toEqual(['primary']);
+    });
+
+    it('is not fooled by braces inside strings, comments, regexes or templates', () => {
+      // Brace counting over raw text miscounts every one of these and
+      // misclassifies the require that follows.
+      const src = `
+        const brace = '}';
+        // a stray } in a comment
+        /* and } another */
+        const re = /[{}]/g;
+        const tpl = \`\${brace} }\`;
+        const real = require('after-the-noise');
+      `;
+
+      expect(collectStaticRequires(src, 'probe.js')).toEqual(['after-the-noise']);
+    });
+
+    it('skips a catch-guarded require even when a string in the block holds a stray brace', () => {
+      // The case brace counting gets wrong: the `'}'` literal closes the block
+      // early for a text scanner, so the fallback leaks out as a hard dependency.
+      const src = "try { a = require('primary'); } catch (e) { const s = '}'; a = require('fallback'); }";
+
+      expect(collectStaticRequires(src, 'probe.js')).toEqual(['primary']);
+    });
+
+    it('ignores member-expression and dynamic requires', () => {
+      const src = `
+        const x = foo.require('not-a-real-require');
+        const y = require(someVariable);
+        const z = require(\`dynamic/\${name}\`);
+        const w = require('genuine');
+      `;
+
+      expect(collectStaticRequires(src, 'probe.js')).toEqual(['genuine']);
+    });
+
+    it('still collects a require nested in a try block', () => {
+      // Only `catch` marks an optional fallback; `try` does not.
+      const src = "try { const a = require('inside-try'); } catch { /* ignore */ }";
+
+      expect(collectStaticRequires(src, 'probe.js')).toEqual(['inside-try']);
+    });
+  });
 
   it('declares ajv-formats, which modules under .aiox-core/ require at runtime', () => {
     expect(declared.has('ajv-formats')).toBe(true);
@@ -120,16 +202,10 @@ describe('.aiox-core internal manifest dependency declarations', () => {
     for (const file of runtimeFiles) {
       const source = fs.readFileSync(file, 'utf-8');
 
-      for (const match of source.matchAll(REQUIRE_RE)) {
-        const specifier = match[1];
-
+      for (const specifier of collectStaticRequires(source, file)) {
         // Relative and absolute paths resolve within the tree, not via node_modules.
         if (specifier.startsWith('.') || specifier.startsWith('/')) continue;
         if (specifier.startsWith('node:')) continue;
-        // Dynamic specifiers built from template literals are not static imports.
-        if (specifier.includes('${')) continue;
-        // Optional fallbacks guarded by a catch are not hard dependencies.
-        if (isInsideCatchBlock(source, match.index)) continue;
 
         const pkg = packageNameOf(specifier);
         if (builtins.has(pkg)) continue;
