@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.4.1
-generated_at: "2026-09-12T16:45:57.260Z"
+generated_at: "2026-09-12T16:50:22.635Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1172
 files:
@@ -3865,9 +3865,9 @@ files:
     type: monitor
     size: 818
   - path: package.json
-    hash: sha256:c7089d52671c1b0d04c9a07a1bae3d8a0db2c6e423c4626899ebcc0556a5bb63
+    hash: sha256:207f65d6cfa49f24946f88059b72663032f490043e0583275bee46b81e35f999
     type: other
-    size: 1579
+    size: 1557
   - path: product/checklists/accessibility-wcag-checklist.md
     hash: sha256:56126182b25e9b7bdde43f75315e33167eb49b1f9a9cb0e9a37bc068af40aeab
     type: checklist

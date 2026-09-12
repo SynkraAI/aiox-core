@@ -57,8 +57,48 @@ describe('.aiox-core internal manifest dependency declarations', () => {
 
   const REQUIRE_RE = /require\(\s*['"]([^'"]+)['"]\s*\)/g;
 
+  /**
+   * A require inside a `catch` block is an optional fallback: the primary
+   * dependency is declared and resolves, and this path only runs if it somehow
+   * does not. Declaring such a package as a hard dependency would force every
+   * consumer to install a module the framework never loads in practice.
+   *
+   * Detected by scanning backwards for the nearest enclosing `catch (…) {` and
+   * checking the require sits inside that block's braces.
+   */
+  function isInsideCatchBlock(source, index) {
+    const catchRe = /catch\s*\([^)]*\)\s*\{/g;
+
+    for (const match of source.matchAll(catchRe)) {
+      const blockStart = match.index + match[0].length;
+      if (blockStart > index) break;
+
+      // Walk the braces to find where this catch block closes.
+      let depth = 1;
+      let i = blockStart;
+      while (i < source.length && depth > 0) {
+        const ch = source[i];
+        if (ch === '{') depth++;
+        else if (ch === '}') depth--;
+        i++;
+      }
+
+      if (index >= blockStart && index < i) return true;
+    }
+
+    return false;
+  }
+
   it('declares ajv-formats, which modules under .aiox-core/ require at runtime', () => {
     expect(declared.has('ajv-formats')).toBe(true);
+  });
+
+  it('does not declare `yaml`, which is only a catch-guarded fallback for js-yaml', () => {
+    // registry-provider.js requires js-yaml and falls back to `yaml` only if
+    // that throws. js-yaml is declared and resolves, so the fallback never runs
+    // — declaring `yaml` would add an install every consumer pays for unused.
+    expect(declared.has('js-yaml')).toBe(true);
+    expect(declared.has('yaml')).toBe(false);
   });
 
   // Runtime surface: modules the framework loads to do its job. Deliberately
@@ -88,6 +128,8 @@ describe('.aiox-core internal manifest dependency declarations', () => {
         if (specifier.startsWith('node:')) continue;
         // Dynamic specifiers built from template literals are not static imports.
         if (specifier.includes('${')) continue;
+        // Optional fallbacks guarded by a catch are not hard dependencies.
+        if (isInsideCatchBlock(source, match.index)) continue;
 
         const pkg = packageNameOf(specifier);
         if (builtins.has(pkg)) continue;
