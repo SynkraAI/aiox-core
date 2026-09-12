@@ -111,6 +111,27 @@ describe('doctor check: npm-packages resolution boundary', () => {
     expect(result.status).toBe('PASS');
   });
 
+  it('accepts a relative projectRoot', async () => {
+    // createRequire needs an absolute filename and the boundary comparison needs
+    // an absolute prefix. A caller passing '.' would otherwise see every valid
+    // dependency reported as unresolvable.
+    const { ancestor, projectRoot } = makeProject({
+      declared: ['alpha', 'beta'],
+      inCore: ['alpha', 'beta'],
+    });
+    tmpRoot = ancestor;
+
+    const originalCwd = process.cwd();
+    try {
+      process.chdir(projectRoot);
+      const result = await npmPackages.run({ projectRoot: '.' });
+
+      expect(result.status).toBe('PASS');
+    } finally {
+      process.chdir(originalCwd);
+    }
+  });
+
   it('FAILS when a declared dep resolves only from outside the project', async () => {
     // The regression: `gamma` is declared and loadable here, but lives above the
     // project root. `git clone && npm ci` on another machine has no such

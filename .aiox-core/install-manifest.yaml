@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.4.1
-generated_at: "2026-09-12T17:25:57.568Z"
+generated_at: "2026-09-12T17:39:19.897Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1172
 files:
@@ -353,9 +353,9 @@ files:
     type: core
     size: 674
   - path: core/doctor/checks/npm-packages.js
-    hash: sha256:58f81543dc5320a3b0404d4284534292b1c51084da129e7b8a76af6721a505e2
+    hash: sha256:de76aec8d82ad41fe339c28e447b1b6870ed7ed09fb14acd5c4a56851a94fd76
     type: core
-    size: 5109
+    size: 5360
   - path: core/doctor/checks/port-denylist.js
     hash: sha256:1d9adc2a4de1645734142b6de156be01336d8be98dffe47a41b187ffcf163991
     type: core

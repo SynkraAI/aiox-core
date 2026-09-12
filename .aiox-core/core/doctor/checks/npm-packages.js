@@ -68,7 +68,12 @@ function resolveWithinProject(dep, consumerPath, projectRoot) {
 }
 
 async function run(context) {
-  const nodeModulesPath = path.join(context.projectRoot, 'node_modules');
+  // createRequire needs an absolute filename, and the boundary comparison needs
+  // an absolute prefix. Callers may pass a relative root such as '.', so
+  // normalize once here and derive every path below from it.
+  const projectRoot = path.resolve(context.projectRoot);
+
+  const nodeModulesPath = path.join(projectRoot, 'node_modules');
   // Check 1: Project node_modules
   if (!fs.existsSync(nodeModulesPath)) {
     return {
@@ -80,7 +85,7 @@ async function run(context) {
   }
 
   // Check 2 (INS-4.12): .aiox-core/node_modules/ completeness
-  const aioxCoreDir = path.join(context.projectRoot, '.aiox-core');
+  const aioxCoreDir = path.join(projectRoot, '.aiox-core');
   const aioxCorePackageJson = path.join(aioxCoreDir, 'package.json');
   const aioxCoreNodeModules = path.join(aioxCoreDir, 'node_modules');
 
@@ -97,7 +102,7 @@ async function run(context) {
       const external = [];
 
       for (const dep of deps) {
-        const { status, resolved } = resolveWithinProject(dep, consumerPath, context.projectRoot);
+        const { status, resolved } = resolveWithinProject(dep, consumerPath, projectRoot);
         if (status === 'missing') {
           missing.push(dep);
         } else if (status === 'outside') {
