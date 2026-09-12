@@ -3,6 +3,9 @@ const path = require('path');
 const yaml = require('js-yaml');
 const chalk = require('chalk');
 
+/** @type {string} Directory holding the framework tree, relative to the project root. */
+const AIOX_CORE_DIRNAME = '.aiox-core';
+
 /**
  * Framework structure analyzer for Synkra AIOX
  * Discovers and catalogs all framework components
@@ -13,7 +16,7 @@ class FrameworkAnalyzer {
     // Framework artifacts live under the dot-prefixed `.aiox-core/` directory.
     // Agents, tasks, workflows and templates are nested one level deeper, under
     // `development/`; utils sit directly at the `.aiox-core/` root.
-    this.aioxCoreDir = path.join(this.rootPath, '.aiox-core');
+    this.aioxCoreDir = path.join(this.rootPath, AIOX_CORE_DIRNAME);
     this.developmentDir = path.join(this.aioxCoreDir, 'development');
     this.excludes = options.excludes || [
       'node_modules',
@@ -649,9 +652,14 @@ class FrameworkAnalyzer {
 
   // Helper methods
   isExcluded(name) {
-    return this.excludes.some(exclude => 
-      name === exclude || 
-      name.startsWith(exclude) || 
+    // The framework itself lives in a dot-prefixed directory, so the blanket
+    // "starts with a dot" rule would exclude the very tree being analyzed —
+    // directory_structure and its metrics would omit .aiox-core entirely.
+    if (name === AIOX_CORE_DIRNAME) return false;
+
+    return this.excludes.some(exclude =>
+      name === exclude ||
+      name.startsWith(exclude) ||
       name.startsWith('.'),
     );
   }

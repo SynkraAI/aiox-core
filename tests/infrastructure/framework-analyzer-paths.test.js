@@ -124,6 +124,28 @@ task:
     expect(result.workflows.length).toBeGreaterThan(0);
   });
 
+  it('does not exclude the framework directory from the directory walk', () => {
+    // isExcluded() drops every dot-prefixed name. Applied literally that covers
+    // `.aiox-core` itself, so the walk skips the very tree being analyzed and
+    // directory_structure reports on everything except the framework.
+    const analyzer = new FrameworkAnalyzer({ rootPath: fixtureRoot });
+
+    expect(analyzer.isExcluded('.aiox-core')).toBe(false);
+    // Other dot-prefixed names stay excluded.
+    expect(analyzer.isExcluded('.git')).toBe(true);
+    expect(analyzer.isExcluded('.next')).toBe(true);
+    expect(analyzer.isExcluded('node_modules')).toBe(true);
+  });
+
+  it('includes .aiox-core descendants in directory_structure', async () => {
+    const analyzer = new FrameworkAnalyzer({ rootPath: fixtureRoot });
+    const result = await analyzer.analyzeFrameworkStructure('full');
+
+    // The fixture's only directories live under .aiox-core; if the walk skipped
+    // it, the count would be zero.
+    expect(result.directory_structure.total_directories).toBeGreaterThan(0);
+  });
+
   it('still returns empty lists when the framework directory is genuinely absent', async () => {
     const emptyRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'aiox-analyzer-empty-'));
 

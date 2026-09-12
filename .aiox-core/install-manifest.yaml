@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.4.1
-generated_at: "2026-09-12T16:40:34.915Z"
+generated_at: "2026-09-12T17:33:07.420Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1172
 files:
@@ -3321,9 +3321,9 @@ files:
     type: script
     size: 18558
   - path: infrastructure/scripts/framework-analyzer.js
-    hash: sha256:b3f71eb051e002ff59eecb8bfeb12ee93e6efcc5058fba54ea704d76882273c8
+    hash: sha256:43f0d3a0a91628a1121b05c8f761773a0c6092cfce5be548c1be0bb3b77aaa2c
     type: script
-    size: 24576
+    size: 24992
   - path: infrastructure/scripts/generate-optimization-report.js
     hash: sha256:b57357bc4120529381b811fd7c1aab901d3b67dd765d043eefc61bb22f5b8df1
     type: script
