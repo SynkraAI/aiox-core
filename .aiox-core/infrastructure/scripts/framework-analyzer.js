@@ -10,7 +10,11 @@ const chalk = require('chalk');
 class FrameworkAnalyzer {
   constructor(options = {}) {
     this.rootPath = options.rootPath || process.cwd();
-    this.aioxCoreDir = path.join(this.rootPath, 'aiox-core');
+    // Framework artifacts live under the dot-prefixed `.aiox-core/` directory.
+    // Agents, tasks, workflows and templates are nested one level deeper, under
+    // `development/`; utils sit directly at the `.aiox-core/` root.
+    this.aioxCoreDir = path.join(this.rootPath, '.aiox-core');
+    this.developmentDir = path.join(this.aioxCoreDir, 'development');
     this.excludes = options.excludes || [
       'node_modules',
       '.git',
@@ -94,7 +98,7 @@ class FrameworkAnalyzer {
    */
   async discoverAgents() {
     const agents = [];
-    const agentsDir = path.join(this.aioxCoreDir, 'agents');
+    const agentsDir = path.join(this.developmentDir, 'agents');
 
     try {
       await fs.access(agentsDir);
@@ -121,7 +125,7 @@ class FrameworkAnalyzer {
    */
   async discoverTasks() {
     const tasks = [];
-    const tasksDir = path.join(this.aioxCoreDir, 'tasks');
+    const tasksDir = path.join(this.developmentDir, 'tasks');
 
     try {
       await fs.access(tasksDir);
@@ -148,7 +152,7 @@ class FrameworkAnalyzer {
    */
   async discoverWorkflows() {
     const workflows = [];
-    const workflowsDir = path.join(this.aioxCoreDir, 'workflows');
+    const workflowsDir = path.join(this.developmentDir, 'workflows');
 
     try {
       await fs.access(workflowsDir);
@@ -202,7 +206,7 @@ class FrameworkAnalyzer {
    */
   async discoverTemplates() {
     const templates = [];
-    const templatesDir = path.join(this.aioxCoreDir, 'templates');
+    const templatesDir = path.join(this.developmentDir, 'templates');
 
     try {
       await fs.access(templatesDir);
