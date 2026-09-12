@@ -34,17 +34,21 @@ describe('infrastructure layer boundary', () => {
 
   /**
    * Known upward imports from infrastructure/, as of AIOX 5.4.1.
-   * Key: path relative to .aiox-core/infrastructure/. Value: why it is here.
+   *
+   * Keyed by "<file> -> <target>" rather than by file alone: a file already on
+   * the list could otherwise grow a second upward import and go unnoticed.
+   * The value records what is pulled across the boundary.
    */
   const KNOWN_VIOLATIONS = {
-    'scripts/pre-dispatch-guard.js': 'core/permissions/dispatch-governance — assertDispatchGovernance',
-    'scripts/component-generator.js': 'core/elicitation/elicitation-engine — ElicitationEngine',
-    'scripts/batch-creator.js': 'core/elicitation/elicitation-engine — ElicitationEngine',
-    'scripts/framework-analyzer.js': 'development/scripts/workflow-validator — WorkflowValidator',
-    'scripts/framework-3way-diff.js': 'core/security/port-denylist — scanContent',
+    'scripts/pre-dispatch-guard.js -> core/permissions/dispatch-governance':
+      'assertDispatchGovernance',
+    'scripts/component-generator.js -> core/elicitation/elicitation-engine': 'ElicitationEngine',
+    'scripts/batch-creator.js -> core/elicitation/elicitation-engine': 'ElicitationEngine',
+    'scripts/framework-analyzer.js -> development/scripts/workflow-validator': 'WorkflowValidator',
+    'scripts/framework-3way-diff.js -> core/security/port-denylist': 'scanContent',
   };
 
-  const UPWARD_IMPORT_RE = /require\(\s*['"](?:\.\.\/)+(core|development|product)\/[^'"]*['"]\s*\)/;
+  const UPWARD_IMPORT_RE = /require\(\s*['"]((?:\.\.\/)+)(core|development|product)\/([^'"]*)['"]\s*\)/g;
 
   function collectJsFiles(dir, acc = []) {
     let entries;
@@ -66,18 +70,27 @@ describe('infrastructure layer boundary', () => {
     return acc;
   }
 
-  /** Files under infrastructure/ that import from core/, development/ or product/. */
+  /**
+   * Upward imports from infrastructure/, as "<file> -> <target>" pairs.
+   *
+   * Reporting the pair rather than the file means a new target inside an
+   * already-listed file is still a new violation.
+   */
   function findUpwardImports() {
-    const found = [];
+    const found = new Set();
 
     for (const file of collectJsFiles(INFRA_DIR)) {
       const source = fs.readFileSync(file, 'utf-8');
-      if (UPWARD_IMPORT_RE.test(source)) {
-        found.push(path.relative(INFRA_DIR, file).split(path.sep).join('/'));
+      const relFile = path.relative(INFRA_DIR, file).split(path.sep).join('/');
+
+      for (const [, , layer, rest] of source.matchAll(UPWARD_IMPORT_RE)) {
+        // Drop any trailing '/index' or extension so the target is stable.
+        const target = `${layer}/${rest}`.replace(/\.js$/, '').replace(/\/index$/, '');
+        found.add(`${relFile} -> ${target}`);
       }
     }
 
-    return found.sort();
+    return [...found].sort();
   }
 
   it('does not introduce new upward imports from infrastructure/', () => {
