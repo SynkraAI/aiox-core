@@ -150,6 +150,7 @@ aiox-core/*.map
 apps/*
 !apps/jack-portfolio
 !apps/orbis-hero
+!apps/skyelite-hero
 
 # External projects (separate repositories)
 aiox-guide-app/
