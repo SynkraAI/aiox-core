@@ -251,8 +251,8 @@ Expected:
 
 This story validated both paths below with:
 
-- email: `costa.wanderl@gmail.com`
-- password: `AioxPro2026!`
+- email: `<validated-customer-email>` (redacted: never record customer data in docs)
+- password: `<redacted>` (never record credentials in docs)
 - result: success in source install and packaged install
 
 #### 6.1 Source checkout path
@@ -303,7 +303,7 @@ Use the same wizard answers and expect the same success signals.
 
 ### Direct API smoke test
 
-Validated against production for `costa.wanderl@gmail.com`:
+Validated against production for `<validated-customer-email>`:
 
 - `check-email`: `isBuyer=true`, `hasAccount=true`
 - `login`: `200`, `accessToken` present, `emailVerified=true`
