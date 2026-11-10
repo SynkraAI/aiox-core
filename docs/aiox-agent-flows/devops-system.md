@@ -632,12 +632,12 @@ npm audit --ignore-advisories=ADVISORY_ID
 @devops *cleanup
 
 # AIOX Pro
-@devops *pro-access-grant costa.wanderl@gmail.com AioxPro2026!
-@devops *pro-check-access costa.wanderl@gmail.com
-@devops *pro-request-reset costa.wanderl@gmail.com
-@devops *pro-resend-verification costa.wanderl@gmail.com
-@devops *pro-reset-password costa.wanderl@gmail.com NovaSenhaForte2026!
-@devops *pro-validate-login costa.wanderl@gmail.com AioxPro2026!
+@devops *pro-access-grant <validated-customer-email> <redacted-password>
+@devops *pro-check-access <validated-customer-email>
+@devops *pro-request-reset <validated-customer-email>
+@devops *pro-resend-verification <validated-customer-email>
+@devops *pro-reset-password <validated-customer-email> <new-strong-password>
+@devops *pro-validate-login <validated-customer-email> <redacted-password>
 @devops *pro-verify-status ACCESS_TOKEN
 @devops *pro-activate ACCESS_TOKEN
 
